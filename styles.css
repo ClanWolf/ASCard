@@ -1,0 +1,276 @@
+@import url('https://fonts.googleapis.com/css?family=Russo+One:400');
+@import url('https://fonts.googleapis.com/css?family=Pathway+Gothic+One:400');
+
+* {
+	font-family: 'Russo One', sans-serif;
+	font-size: 24px;
+}
+/*
+@media only screen and (min-width: 0px) and (max-width: 800px) {
+	* {
+		font-size: 12px;
+	}
+}
+@media only screen and (min-width: 800px) and (max-width: 1600px) {
+	* {
+		font-size: 14px;
+	}
+}
+@media only screen and (min-width: 1600px) and (max-width: 2400px) {
+	* {
+		font-size: 22px;
+	}
+}
+*/
+html, body {
+	margin: 0;
+	padding: 0;
+	width: 100%;
+	height: 100%;
+	background-image: url('images/body-bg_1.png');
+	overflow: hidden;
+	background-size: cover;
+}
+img { 
+	border: 0px;
+}
+a {
+	color: #dcdcdc;
+	text-decoration: none;
+}
+a:hover {
+	text-decoration: underline;
+}
+
+.fa {
+  font-family: FontAwesome;
+  font-size: 30px;
+}
+.fa-fw { /* symbole mit fester Breite */
+  text-align: center;
+  width: 1em;
+}
+
+#header {
+	position: relative;
+	z-index: 5;
+	width: 100%;
+	//height: 140px;
+	//min-height: 140px;
+	//max-height: 140px;
+	margin: 0 0;
+	top: 0px;
+	text-align: center;
+}
+#pilotimage {
+	z-index: 3;
+	position: absolute;
+	padding: 0px;
+	top: 52;
+	left: 15;
+	border-style: solid;
+    border-width: 3px;
+}
+#mech_number {
+	z-index: 3;
+	position: absolute;
+	display: inline-block;
+	text-align: center;
+	vertical-align: middle;
+	padding: 0px;
+	background-image: url('images/mech_number.png');
+	background-size: cover;
+	width: 120px;
+	height: 120px;
+	line-height: 120px;
+	right: 185px;
+	color: #fff;
+}
+#topleft {
+	z-index: 3;
+	position: absolute;
+	padding: 20px;
+	top: 35;
+	left: 150;
+}
+#faction {
+	z-index: 3;
+	position: absolute;
+	border-style: solid;
+	border-width: 3px;
+	padding: 0px;
+	background: rgba(20,20,20,0.75);
+	top: 52px;
+	left: 85px;
+}
+#dice {
+	z-index: 3;
+	display: table-cell;
+	vertical-align: middle;
+	//border-radius: 5px;
+	//border-style: solid;
+	//border-width: 3px;
+	padding: 2px;
+	//background: rgba(20,20,20,0.75);
+	margin-top: 3px;
+	margin-bottom: 3px;
+	margin-left: 3px;
+	margin-right: 3px;
+	width: 150px;
+	height: 70px;
+}
+#topright {
+	z-index: 3;
+	position: absolute;
+	padding: 0px;
+	top: 40;
+	right: 0px;
+}
+#pv {
+	z-index: 4;
+	position: absolute;
+	padding: 0px;
+	top: 78;
+	right: 15px;
+}
+#bottomleft {
+	z-index: 3;
+	position: absolute;
+	bottom: 0px;
+	left: 0px;
+	text-align: left;
+	width: 400px;
+	padding: 0px
+}
+#bottomright {
+	z-index: 3;
+	position: absolute;
+	margin-right: auto 0;
+	bottom: 0px;
+	right: 0px;
+	text-align: right;
+}
+#mech {
+	z-index: 1;
+	position: absolute;
+	margin-right: auto 0;
+	bottom: 1px;
+	right: 45px;
+}
+#footer {
+	z-index: 2;
+	position: absolute;
+	width: 100%;
+	height: 90px;
+	min-height: 90px;
+	max-height: 90px;
+	margin: 0 0;
+	bottom: 0px;
+	text-align: center;
+	background-image: url('images/bottom-bg.png');
+	background-repeat: repeat-x;
+	background-position: bottom center;
+	background-size: 110px;
+}
+#version {
+	z-index: 12;
+	position: absolute;
+	color: #ffffff;
+	font-family: Arial, 'Arial Sans Unicode', sans-serif;
+	font-size: 14px;
+	font-weight: normal;
+	bottom: 30px;
+	right: 310px;
+}
+#settings {
+	font-family: FontAwesome;
+	z-index: 99;
+	position: absolute;
+	bottom: 40px;
+	width: 100%;
+}
+
+.mechselect_button_normal {
+	font-size: 100%;
+	padding: 5px;
+	background-color: #da8e25;
+	color: #000000;
+	text-align: center;
+}
+.mechselect_button_hovered {
+	font-size: 100%;
+	padding: 5px;
+	background-color: #da8e25;
+	color: #000000;
+	text-align: center;
+}
+.mechselect_button_active {
+	font-size: 100%;
+	padding: 5px;
+	background-color: #694007;
+	color: #ffffff;
+	text-align: center;
+}
+
+input.bigcheck {
+}
+label.bigcheck {
+}
+span.bigcheck-target {
+	font-family: FontAwesome;
+	font-weight: bold;
+	margin-left: -20px;
+	margin-right: 0px;
+	padding-left: -20px;
+	padding-right: 0px;
+	font-size: 100%;
+}
+input[type='checkbox'].bigcheck {     
+	position: relative;
+	left: -999em;
+	opacity: 0;
+	z-index: -10000;<
+}
+input[type='checkbox'].bigcheck + span.bigcheck-target:after {
+	content: "\f10c";
+}
+input[type='checkbox'].bigcheck:checked + span.bigcheck-target:after {
+	content: "\f111";
+}
+.datatable {
+	width: 100%;
+	position: absolute;
+	z-index: 10;
+	bottom: 90px;
+}
+.dataarea {
+    border-radius: 10px;
+	border-style: solid;
+    border-width: 4px;
+	padding: 3px;
+	background: rgba(70,70,70,0.85);
+	margin-top: 3px;
+	margin-bottom: 3px;
+	margin-left: 3px;
+	margin-right: 3px;
+}
+.datalabel {
+	font-family: 'Pathway Gothic One', sans-serif;
+	vertical-align: middle;
+	color: #999;
+	font-size: 100%;
+	padding-right: 5px;
+}
+.datavalue {
+	vertical-align: middle;
+	font-size: 100%;
+	color: #ccc;
+	text-transform: uppercase;
+}
+.datavalue_thin {
+	font-family: 'Pathway Gothic One', sans-serif;
+	vertical-align: middle;
+	font-size: 100%;
+	text-transform: uppercase;
+	color: #ccc;
+}

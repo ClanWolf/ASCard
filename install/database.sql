@@ -1,0 +1,21 @@
+CREATE TABLE IF NOT EXISTS `clanwolf`.`asc` (`id` int(1), `unitid` int(1), `mechid` int(1), `pilotid` int(1)) DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+INSERT INTO `clanwolf`.`asc` (`id`, `unitid`, `mechid`, `pilotid`) VALUES (1, 5, 1, 1),
+ (2, 5, 2, 2),
+ (3, 8, 3, 5),
+ (4, 5, 4, 3);
+ 
+ CREATE TABLE IF NOT EXISTS `clanwolf`.`asc_faction` (`factionid` int(1), `name` varchar(16), `factiontype` varchar(12), `faction_imageurl` varchar(10)) DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+ INSERT INTO `clanwolf`.`asc_faction` (`factionid`, `name`, `factiontype`, `faction_imageurl`) VALUES (1, 'Wolf', 'Clan', ''), (2, 'Lyran Alliance', 'Inner Sphere', ''), (3, 'ComStar', 'Inner Sphere', ''), (4, 'Draconis Combine', 'Inner Sphere', '');
+ 
+ CREATE TABLE IF NOT EXISTS `clanwolf`.`asc_mech` (`mechid` int(1), `mulid` int(4), `mech_tonnage` int(2), `custom_name` varchar(13), `as_name` varchar(3), `as_model` varchar(5), `as_pv` int(2), `as_tp` varchar(2), `as_sz` int(1), `as_tmm` int(1), `as_mv` int(2), `as_role` varchar(10), `as_skill` int(1), `as_short` int(1), `as_short_min` int(1), `as_medium` int(1), `as_medium_min` int(1), `as_long` int(1), `as_long_min` int(1), `as_extreme` int(1), `as_extreme_min` int(1), `as_ov` int(1), `as_armor` int(1), `as_structure` int(1), `as_threshold` int(1), `as_specials` varchar(22), `mech_imageurl` varchar(10)) DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+ INSERT INTO `clanwolf`.`asc_mech` (`mechid`, `mulid`, `mech_tonnage`, `custom_name`, `as_name`, `as_model`, `as_pv`, `as_tp`, `as_sz`, `as_tmm`, `as_mv`, `as_role`, `as_skill`, `as_short`, `as_short_min`, `as_medium`, `as_medium_min`, `as_long`, `as_long_min`, `as_extreme`, `as_extreme_min`, `as_ov`, `as_armor`, `as_structure`, `as_threshold`, `as_specials`, `mech_imageurl`) VALUES (1, 1985, 75, 'Meldrics Mech', 'TBR', 'PRIME', 49, 'BM', 3, 2, 10, 'Brawler', 4, 5, 0, 5, 0, 4, 0, 0, 0, 1, 8, 4, 0, 'CASE,IF2,LRM1/1/2,OMNI', ''), (2, 1985, 75, 'Kiaras Mech', 'TBR', 'PRIME', 49, 'BM', 3, 2, 10, 'Brawler', 4, 5, 0, 5, 0, 4, 0, 0, 0, 1, 8, 4, 0, 'CASE,IF2,LRM1/1/2,OMNI', ''), (3, 909, 60, 'Onais Mech', 'DRG', '1N', 30, 'BM', 3, 2, 10, 'Skirmisher', 4, 2, 0, 2, 0, 2, 0, 0, 0, 0, 5, 5, 0, 'IF1,REAR1/1/-', ''), (4, 2097, 85, 'Nimrods Mech', 'WHK', 'PRIME', 51, 'BM', 4, 1, 8, 'Sniper', 4, 5, 0, 5, 0, 5, 0, 0, 0, 3, 9, 5, 0, 'CASE,OMNI,OVL', '');
+ 
+ CREATE TABLE IF NOT EXISTS `clanwolf`.`asc_mechstatus` (`mechstatusid` int(1), `mechid` int(1), `heat` int(1), `armor` int(1), `structure` int(1), `crit_engine` int(1), `crit_fc` int(1), `crit_mp` int(1), `crit_weapons` int(1)) DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+ INSERT INTO `clanwolf`.`asc_mechstatus` (`mechstatusid`, `mechid`, `heat`, `armor`, `structure`, `crit_engine`, `crit_fc`, `crit_mp`, `crit_weapons`) VALUES (1, 1, 2, 1, 0, 0, 0, 0, 0), (2, 2, 0, 0, 0, 0, 0, 0, 0), (3, 3, 0, 0, 0, 0, 0, 0, 0), (4, 4, 0, 0, 0, 0, 0, 0, 0);
+ 
+ CREATE TABLE IF NOT EXISTS `clanwolf`.`asc_pilot` (`pilotid` int(1), `rank` varchar(6), `name` varchar(13), `callsign` varchar(10), `health` int(3), `pilot_imageurl` varchar(15)) DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+ INSERT INTO `clanwolf`.`asc_pilot` (`pilotid`, `rank`, `name`, `callsign`, `health`, `pilot_imageurl`) VALUES (1, 'Khan', 'Meldric WARD', 'Viking', 100, '000_noimage.gif'), (2, 'Scom', 'Kiara', 'Strongwind', 100, '000_noimage.gif'), (3, 'SCpt', 'Aurelius', 'Nimrod', 100, '000_noimage.gif'), (4, 'SCom', 'Andreas', 'Maddog', 100, '000_noimage.gif'), (5, 'Chu-Sa', 'Onai Tekimata', 'Oni', 100, '000_noimage.gif');
+ 
+ CREATE TABLE IF NOT EXISTS `clanwolf`.`asc_unit` (`unitid` int(1), `factionid` int(1), `forcename` varchar(20), `parentforceid` varchar(4), `unit_imageurl` varchar(10), `playable` int(1)) DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+ INSERT INTO `clanwolf`.`asc_unit` (`unitid`, `factionid`, `forcename`, `parentforceid`, `unit_imageurl`, `playable`) VALUES (1, 1, 'Touman', 'null', '', 0), (2, 1, 'Gamma Galaxy', '1', '', 0), (3, 1, '7th BC', '2', '', 0), (4, 1, 'Trinary Command', '3', '', 0), (5, 1, 'Alpha Command Star', '4', '', 1), (6, 4, 'DCMS', 'null', '', 0), (7, 4, '36th Dieron Regulars', '6', '', 0), (8, 4, 'Firelance', '7', '', 1);
+ 

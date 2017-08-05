@@ -1,0 +1,9 @@
+unitid;factionid;forcename;parentforceid;unit_imageurl;playable
+1;1;Touman;null;;0
+2;1;Gamma Galaxy;1;;0
+3;1;7th BC;2;;0
+4;1;Trinary Command;3;;0
+5;1;Alpha Command Star;4;;1
+6;4;DCMS;null;;0
+7;4;36th Dieron Regulars;6;;0
+8;4;Firelance;7;;1
