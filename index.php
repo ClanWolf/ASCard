@@ -3,6 +3,7 @@
 	$version = substr($file, 26, -12);
 
 	$unitid = 5;
+	$choosenMechIndex = 1;
 	require_once('./db_getdata.php');
 ?>
 
@@ -55,23 +56,23 @@
 </div>
 
 <div id="pilotimage">
-	<?php echo "<img src=\"images/pilots/".$array_PILOT_IMG_URL[1]."\" width=\"60px\" height=\"60px\">" ?>
+	<?php echo "<img src=\"images/pilots/".$array_PILOT_IMG_URL[$choosenMechIndex]."\" width=\"60px\" height=\"60px\">" ?>
 </div>
 <div id="faction" align="center">
 	<?php echo "<img src=\"images/factions/".$FACTION_IMG_URL."\" width=\"60px\" height=\"60px\">" ?>
 </div>
 <div id="mech_number" align="center">123</div>
 <div id="mech">
-	<?php echo "<img id=\"mechimage\" src=\"images/mechs/".$array_MECH_IMG_URL[1]."\">" ?>
+	<?php echo "<img id=\"mechimage\" src=\"images/mechs/".$array_MECH_IMG_URL[$choosenMechIndex]."\">" ?>
 </div>
 
 <div id="topleft">
 	<span style="font-size: 20px; color: #aaaaaa;">
-		<?php echo "$array_MECH[1]" ?>-<?php echo "$array_MECH_MODEL[1]" ?>&nbsp;<?php echo "\"$array_MECH_CUSTOM_NAME[1]\"" ?>
+		<?php echo "$array_MECH[$choosenMechIndex]" ?>-<?php echo "$array_MECH_MODEL[$choosenMechIndex]" ?>&nbsp;<?php echo "\"$array_MECH_CUSTOM_NAME[$choosenMechIndex]\"" ?>
 	</span>
 	<br>
 	<span style="font-size: 30px; color: #da8e25;">
-		<?php echo "$array_PILOT[1]"; ?>
+		<?php echo "$array_PILOT[$choosenMechIndex]"; ?>
 	</span>
 </div>
 
@@ -82,7 +83,7 @@
 <div id="pv">
 	<span style="font-size: 22px; color: #aaaaaa; vertical-align: middle;">PV:&nbsp;&nbsp;</span>
 	<span style="font-size: 48px; color: #da8e25; vertical-align: middle;">
-		<?php echo "$array_PV[1]"; ?>
+		<?php echo "$array_PV[$choosenMechIndex]"; ?>
 	</span>
 </div>
 
@@ -95,26 +96,26 @@
 					<table width="100%">
 						<tr>
 							<td nowrap class="datalabel" width="12%">TP:</td>
-							<td nowrap class="datavalue" width="13%"><?php echo "$array_TP[1]"; ?></td>
+							<td nowrap class="datavalue" width="13%"><?php echo "$array_TP[$choosenMechIndex]"; ?></td>
 							<td nowrap class="datalabel" width="12%">SZ:</td>
-							<td nowrap class="datavalue" width="13%"><?php echo "$array_SZ[1]"; ?></td>
+							<td nowrap class="datavalue" width="13%"><?php echo "$array_SZ[$choosenMechIndex]"; ?></td>
 							<td nowrap class="datalabel" width="12%">TMM:</td>
-							<td nowrap class="datavalue" width="13%"><?php echo "$array_TMM[1]"; ?></td>
+							<td nowrap class="datavalue" width="13%"><?php echo "$array_TMM[$choosenMechIndex]"; ?></td>
 							<td nowrap class="datalabel" width="12%">MV:</td>
 							<td nowrap class="datalabel" width="13%" style="color:#fff;">
 								<?php
-									echo "$array_MV[1]&rdquo;";
-									if ($array_MVJ[1] != null) {
-										echo "/$array_MVJ[1]&rdquo;&nbsp;j";
+									echo "$array_MV[$choosenMechIndex]&rdquo;";
+									if ($array_MVJ[$choosenMechIndex] != null) {
+										echo "/$array_MVJ[$choosenMechIndex]&rdquo;&nbsp;j";
 									}
 								?>
 							</td>
 						</tr>
 						<tr>
 							<td nowrap class="datalabel" width="12%" colspan="1">ROLE:</td>
-							<td nowrap class="datavalue_thin" width="38%" colspan="3"><?php echo "$array_ROLE[1]"; ?></td>
+							<td nowrap class="datavalue_thin" width="38%" colspan="3"><?php echo "$array_ROLE[$choosenMechIndex]"; ?></td>
 							<td nowrap class="datalabel" width="12%" colspan="1">SKILL:</td>
-							<td nowrap class="datavalue" width="38%" colspan="3"><?php echo "$array_SKILL[1]"; ?></td>
+							<td nowrap class="datavalue" width="38%" colspan="3"><?php echo "$array_SKILL[$choosenMechIndex]"; ?></td>
 						</tr>
 					</table>
 				</div>
@@ -124,11 +125,11 @@
 						<tr>
 							<td nowrap class="datalabel" width="10%" style="text-align: left;">DMG:</td>
 							<td nowrap class="datalabel" width="15%" style="text-align: center;">S (+0):</td>
-							<td nowrap class="datavalue" width="15%" style="text-align: center;"><?php echo "$array_DMG_SHORT[1]"; ?></td>
+							<td nowrap class="datavalue" width="15%" style="text-align: center;"><?php echo "$array_DMG_SHORT[$choosenMechIndex]"; ?></td>
 							<td nowrap class="datalabel" width="15%" style="text-align: center;">M (+2):</td>
-							<td nowrap class="datavalue" width="15%" style="text-align: center;"><?php echo "$array_DMG_MEDIUM[1]"; ?></td>
+							<td nowrap class="datavalue" width="15%" style="text-align: center;"><?php echo "$array_DMG_MEDIUM[$choosenMechIndex]"; ?></td>
 							<td nowrap class="datalabel" width="15%" style="text-align: center;">L (+4):</td>
-							<td nowrap class="datavalue" width="15%" style="text-align: center;"><?php echo "$array_DMG_LONG[1]"; ?></td>
+							<td nowrap class="datavalue" width="15%" style="text-align: center;"><?php echo "$array_DMG_LONG[$choosenMechIndex]"; ?></td>
 						</tr>
 					</table>
 				</div>
@@ -137,7 +138,7 @@
 					<table width="100%">
 						<tr>
 							<td nowrap class="datalabel" width="5%">OV:</td>
-							<td nowrap class="datavalue" width="20%" style="text-align: center;"><?php echo "$array_OV[1]"; ?></td>
+							<td nowrap class="datavalue" width="20%" style="text-align: center;"><?php echo "$array_OV[$choosenMechIndex]"; ?></td>
 							<td nowrap class="datalabel" width="10%" style="text-align: right;">&nbsp;&nbsp;&nbsp;HT:</td>
 							<td nowrap width="60%" style="text-align: right;">
 								<label class="bigcheck"><input onchange="readCircles();" type="checkbox" class="bigcheck" name="H1" value="yes"/><span class="bigcheck-target"></span></label>
@@ -156,7 +157,7 @@
 							<td nowrap width="5%" class="datalabel">A:</td>
 							<td nowrap width="95%" style="color: #222;">
 							<?php
-								for ($i1 = 1; $i1 <= $array_A_MAX[1]; $i1++) {
+								for ($i1 = 1; $i1 <= $array_A_MAX[$choosenMechIndex]; $i1++) {
 									echo "<label class='bigcheck'><input onchange='readCircles();' type='checkbox' class='bigcheck' name='A".$i1."' value='yes'/><span class='bigcheck-target'></span></label>&nbsp;";
 								}
 							?>
@@ -166,7 +167,7 @@
 							<td nowrap width="5%" class="datalabel">S:</td>
 							<td nowrap width="95%" style="color: #aaa;">
 							<?php
-								for ($i2 = 1; $i2 <= $array_S_MAX[1]; $i2++) {
+								for ($i2 = 1; $i2 <= $array_S_MAX[$choosenMechIndex]; $i2++) {
 									echo "<label class='bigcheck'><input onchange='readCircles();' type='checkbox' class='bigcheck' name='S".$i2."' value='yes'/><span class='bigcheck-target'></span></label>&nbsp;";
 								}
 							?>
@@ -179,7 +180,7 @@
 					<table width="100%">
 						<tr>
 							<td width="10%" nowrap class="datalabel" width="100%">SPCL:</td>
-							<td width="90%" class="datavalue_thin" style="text-align: left;"><?php echo "$array_SPCL[1]"; ?></td>
+							<td width="90%" class="datavalue_thin" style="text-align: left;"><?php echo "$array_SPCL[$choosenMechIndex]"; ?></td>
 						</tr>
 					</table>
 				</div>
