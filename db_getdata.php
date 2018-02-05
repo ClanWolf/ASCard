@@ -17,8 +17,9 @@
 	$array_PILOT = array();
 	$array_PILOT_IMG_URL = array();
 
-	$array_MECH_NUMBER = 0;
-	$array_MECH_CUSTOM_NAME = "";
+	$array_MECH_DBID = array();
+	$array_MECH_NUMBER = array();
+	$array_MECH_CUSTOM_NAME = array();
 
 	$array_MECH = array();
 	$array_MECH_IMG_URL = array();
@@ -119,6 +120,7 @@
 				if (mysqli_num_rows($result_asc_mech) > 0) {
 					while($row = mysqli_fetch_assoc($result_asc_mech)) {
 						if ($row["mechid"] == $mechid) {
+							$array_MECH_DBID[$mechcount] = $row["mechid"];
 							$array_MECH_NUMBER[$mechcount] = $row["mech_number"];
 							$array_MECH_CUSTOM_NAME[$mechcount] = $row["custom_name"];
 							$array_MECH[$mechcount] = $row["as_name"];
@@ -139,6 +141,9 @@
 							$array_SPCL[$mechcount] = $row["as_specials"];
 							$array_A_MAX[$mechcount] = $row["as_armor"];
 							$array_S_MAX[$mechcount] = $row["as_structure"];
+							
+							echo $array_MECH_DBID[$mechcount];
+							echo $array_MECH_MODEL[$mechcount];
 						}
 					}
 				}
