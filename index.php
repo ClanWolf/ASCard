@@ -53,7 +53,7 @@
 			<?php
 				$size = sizeof($array_MECH);
 				for ($i4 = 1; $i4 <= $size; $i4++) {
-					echo "<td nowrap><div class='mechselect_button_active'><a href=''>#1</a></div></td>";
+					echo "<td nowrap><div class='mechselect_button_active'><a href=''>#" + $array_MECH_NUMBER[$choosenMechIndex] + "</a></div></td>";
 				}
 			?>
 			<!--
