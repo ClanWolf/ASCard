@@ -14,7 +14,7 @@ function setSize(name, value) {
 	});
 }
 
-function readCircles() {
+function readCircles(index) {
 	playTapSound();
 
 	var na = "";
@@ -41,6 +41,9 @@ function readCircles() {
 		}
 	});
 	// alert(h + " " + a + " " + s + " " + e + " " + fc + " " + mp + " " + w);
+
+    var url="https://www.clanwolf.net/ASCard/save.php?index="+index+"&h="+h+"&a="+a+"&s="+s+"&e="+e+"&fc="+fc+"&mp="+mp+"&w="+w;
+    window.frames['saveframe'].location.replace(url);
 }
 
 function textSize(dec) {
@@ -116,15 +119,15 @@ function rolldice() {
 	var die_02 = rand(1, 6);
 	var die_01_image = document.getElementById("die1");
 	var die_02_image = document.getElementById("die2");
-	die_01_image.src = "images/dice/d6_" + die_01 + ".png";
-	die_02_image.src = "images/dice/d6_" + die_02 + ".png";
+	die_01_image.src = "https://www.clanwolf.net/ASCard/images/dice/d6_" + die_01 + ".png";
+	die_02_image.src = "https://www.clanwolf.net/ASCard/images/dice/d6_" + die_02 + ".png";
 	rolling--;
 }
 
 function changeWallpaper() {
 	var wallpaperName = getCookie("wallpaper");
 	do {
-		var wallpaperNameRand = "images/body-bg_" + rand(1, 2) + ".png";
+		var wallpaperNameRand = "https://www.clanwolf.net/ASCard/images/body-bg_" + rand(1, 2) + ".png";
 	} while (wallpaperName === wallpaperNameRand);
 	document.body.style.backgroundImage = "url('" + wallpaperNameRand+ "')";
 	setCookie("wallpaper", wallpaperNameRand, 365);

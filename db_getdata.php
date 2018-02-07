@@ -142,8 +142,9 @@
 							$array_A_MAX[$mechcount] = $row["as_armor"];
 							$array_S_MAX[$mechcount] = $row["as_structure"];
 							
-							echo $array_MECH_DBID[$mechcount];
-							echo $array_MECH_MODEL[$mechcount];
+							// echo $array_MECH_DBID[$mechcount];
+							// echo $array_MECH[$mechcount];
+							// echo $array_MECH_MODEL[$mechcount];
 						}
 					}
 				}

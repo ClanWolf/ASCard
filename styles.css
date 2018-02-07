@@ -31,7 +31,19 @@ html, body {
 	overflow: hidden;
 	background-size: cover;
 }
-img { 
+iframe {
+    //visibility: hidden;
+    position: absolute;
+    background-color: red;
+    color: yellow;
+    left: 10;
+    top: 10;
+    height: 70px;
+    width: 200px;
+    border: none;
+    z-index: 999;
+}
+img {
 	border: 0px;
 }
 a {
