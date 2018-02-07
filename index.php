@@ -45,16 +45,24 @@
 <div id="header">
 	<table style="width: 100%;" cellspacing="0" cellpadding="0">
 		<tr>
-		    <!--
+			<!--
 			<td width="60px" style="background: rgba(50,50,50,1.0); text-align: center; vertical-align: middle;" nowrap>
 				<div><a style="color: #eee;" href="javascript:manage()"><i class="fa fa-bars" aria-hidden="true"></i></a></div>
 			</td>
 			-->
-			<td width="20%" nowrap><div class="mechselect_button_active"><a href=''>#1</a></div></td>
-			<td width="20%" nowrap><div class="mechselect_button_normal"><a href=''>#2</a></div></td>
-			<td width="20%" nowrap><div class="mechselect_button_normal"><a href=''>#3</a></div></td>
-			<td width="20%" nowrap><div class="mechselect_button_normal"><a href=''>#4</a></div></td>
-			<td width="20%" nowrap><div class="mechselect_button_normal"><a href=''>#5</a></div></td>
+			<?php
+				$size = sizeof($array_MECH);
+				for ($i4 = 1; $i4 <= $size; $i4++) {
+					echo "<td nowrap><div class='mechselect_button_active'><a href=''>#1</a></div></td>";
+				}
+			?>
+			<!--
+			<td nowrap><div class="mechselect_button_active"><a href=''>#1</a></div></td>
+			<td nowrap><div class="mechselect_button_normal"><a href=''>#2</a></div></td>
+			<td nowrap><div class="mechselect_button_normal"><a href=''>#3</a></div></td>
+			<td nowrap><div class="mechselect_button_normal"><a href=''>#4</a></div></td>
+			<td nowrap><div class="mechselect_button_normal"><a href=''>#5</a></div></td>
+			-->
 		</tr>
 	</table>
 </div>
