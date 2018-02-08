@@ -53,6 +53,11 @@
 				<div><a style="color: #eee;" href="javascript:manage()"><i class="fa fa-bars" aria-hidden="true"></i></a></div>
 			</td>
 			-->
+			
+			<!--
+			Ganze Zelle als Link nutzen:
+			<td onclick="location.href='yourpage.html'">go to yourpage</td>
+			-->
 			<?php
 				$size = sizeof($array_MECH);
 				for ($i4 = 1; $i4 <= $size; $i4++) {
