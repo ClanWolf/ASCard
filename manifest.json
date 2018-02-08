@@ -39,7 +39,7 @@
       "density": 4.0
     }
   ],
-  "start_url": "/ASCard/index.php",
+  "start_url": "/ASCard/index.html",
   "display": "standalone",
   "orientation": "landscape"
 }
