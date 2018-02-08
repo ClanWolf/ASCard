@@ -70,6 +70,10 @@ function textSize(dec) {
 	setCookie("savedBefore", "true", 365);
 }
 
+$(window).on('load', function() {
+	$("#cover").hide();
+});
+
 $(document).ready(function() {
 	if (getCookie("savedBefore") === "true") {
 		fontsizeLabel = parseInt(getCookie("fontsizeLabel"));
