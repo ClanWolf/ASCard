@@ -125,7 +125,7 @@ function rolldice() {
 function changeWallpaper() {
 	var wallpaperName = getCookie("wallpaper");
 	do {
-		var wallpaperNameRand = "https://www.clanwolf.net/ASCard/images/body-bg_" + rand(1, 2) + ".png";
+		var wallpaperNameRand = "https://www.clanwolf.net/ASCard/images/body-bg_" + rand(1, 4) + ".png";
 	} while (wallpaperName === wallpaperNameRand);
 	document.body.style.backgroundImage = "url('" + wallpaperNameRand+ "')";
 	setCookie("wallpaper", wallpaperNameRand, 365);
