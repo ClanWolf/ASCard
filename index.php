@@ -59,15 +59,14 @@
 	<table style="width: 100%;" cellspacing="0" cellpadding="0">
 		<tr>
 			<!--
-			<td width="60px" style="background: rgba(50,50,50,1.0); text-align: center; vertical-align: middle;" nowrap>
-				<div><a style="color: #eee;" href="javascript:manage()"><i class="fa fa-bars" aria-hidden="true"></i></a></div>
-			</td>
+				Ganze Zelle als Link nutzen:
+				<td onclick="location.href='yourpage.html'">go to yourpage</td>
 			-->
 			
-			<!--
-			Ganze Zelle als Link nutzen:
-			<td onclick="location.href='yourpage.html'">go to yourpage</td>
-			-->
+			<td onclick="location.href='https://www.clanwolf.net/ASCard/index.htm'" width="60px" style="background: rgba(50,50,50,1.0); text-align: center; vertical-align: middle;" nowrap>
+				<div><a style="color: #eee;" href="https://www.clanwolf.net/ASCard/index.htm"><i class="fa fa-bars" aria-hidden="true"></i></a></div>
+			</td>
+			
 			<?php
 				$size = sizeof($array_MECH);
 				for ($i4 = 1; $i4 <= $size; $i4++) {
