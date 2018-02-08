@@ -62,6 +62,16 @@ a:hover {
 	width: 1em;
 }
 
+#cover {
+	position: fixed;
+	height: 100%;
+	width: 100%;
+	top: 0;
+	left: 0;
+	background: #000;
+	z-index:9999;
+}
+
 #header {
 	position: relative;
 	z-index: 5;
