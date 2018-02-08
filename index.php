@@ -63,8 +63,8 @@
 				<td onclick="location.href='yourpage.html'">go to yourpage</td>
 			-->
 			
-			<td onclick="location.href='https://www.clanwolf.net/ASCard/index.htm'" width="60px" style="background: rgba(50,50,50,1.0); text-align: center; vertical-align: middle;" nowrap>
-				<div><a style="color: #eee;" href="https://www.clanwolf.net/ASCard/index.htm"><i class="fa fa-bars" aria-hidden="true"></i></a></div>
+			<td onclick="location.href='https://www.clanwolf.net/ASCard/index.html'" width="60px" style="background: rgba(50,50,50,1.0); text-align: center; vertical-align: middle;" nowrap>
+				<div><a style="color: #eee;" href="https://www.clanwolf.net/ASCard/index.html"><i class="fa fa-bars" aria-hidden="true"></i></a></div>
 			</td>
 			
 			<?php
