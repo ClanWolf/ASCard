@@ -18,6 +18,8 @@
 
 <html lang="en" manifest="./manifest.appcache.php">
 
+<!-- https://stackoverflow.com/questions/9550760/hide-page-until-everything-is-loaded-advanced -->
+
 <head>
 	<title>ClanWolf.net - AplhaStrike Cards</title>
 	<meta charset="utf-8">
@@ -50,6 +52,8 @@
 <body>
 
 <iframe name="saveframe" src="https://www.clanwolf.net/ASCard/save.php"></iframe>
+
+<div id="cover"></div>
 
 <div id="header">
 	<table style="width: 100%;" cellspacing="0" cellpadding="0">
