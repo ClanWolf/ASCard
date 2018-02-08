@@ -1,12 +1,18 @@
 <?php
 	$file = file_get_contents('./manifest.appcache.php', true);
 	$version = substr($file, 26, -12);
-	$unitid = 5;
 
+	// $unitid = 5;
+	$unitid = $_GET["unit"];
+	if (empty($unitid)) {
+		$unitid = 5;
+		// Open page to choose the unit to play with
+	}
 	$chosenMechIndex = $_GET["chosenmech"];
 	if (empty($chosenMechIndex)) {
 		$chosenMechIndex = 1;
 	}
+
 	require_once('./db_getdata.php');
 ?>
 
