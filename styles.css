@@ -32,16 +32,15 @@ html, body {
 	background-size: cover;
 }
 iframe {
-    //visibility: hidden;
-    position: absolute;
-    background-color: red;
-    color: yellow;
-    left: 10;
-    top: 10;
-    height: 70px;
-    width: 200px;
-    border: none;
-    z-index: 999;
+	visibility: hidden;
+	position: absolute;
+	background-color: red;
+	left: 80;
+	top: 80;
+	width: 800px;
+	height: 300px;
+	border: none;
+	z-index: 999;
 }
 img {
 	border: 0px;
@@ -51,16 +50,16 @@ a {
 	text-decoration: none;
 }
 a:hover {
-	text-decoration: underline;
+	text-decoration: none;
 }
 
 .fa {
-  font-family: FontAwesome;
-  font-size: 30px;
+	font-family: FontAwesome;
+	font-size: 30px;
 }
 .fa-fw { /* symbole mit fester Breite */
-  text-align: center;
-  width: 1em;
+	text-align: center;
+	width: 1em;
 }
 
 #header {
@@ -78,8 +77,8 @@ a:hover {
 	z-index: 3;
 	position: absolute;
 	padding: 0px;
-	top: 52;
-	left: 15;
+	top: 72px;
+	left: 15px;
 	border-style: solid;
     border-width: 3px;
 }
@@ -102,8 +101,8 @@ a:hover {
 	z-index: 3;
 	position: absolute;
 	padding: 20px;
-	top: 35;
-	left: 150;
+	top: 52px;
+	left: 180px;
 }
 #faction {
 	z-index: 3;
@@ -112,8 +111,8 @@ a:hover {
 	border-width: 3px;
 	padding: 0px;
 	background: rgba(20,20,20,0.75);
-	top: 52px;
-	left: 85px;
+	top: 72px;
+	left: 105px;
 }
 #dice {
 	z-index: 3;
@@ -135,14 +134,14 @@ a:hover {
 	z-index: 3;
 	position: absolute;
 	padding: 0px;
-	top: 40;
+	top: 60px;
 	right: 0px;
 }
 #pv {
 	z-index: 4;
 	position: absolute;
 	padding: 0px;
-	top: 78;
+	top: 98px;
 	right: 15px;
 }
 #bottomleft {

@@ -15,6 +15,7 @@
 
 	// Store in arrays to keep the mech- and pilotdata of the current unit
 	$array_PILOT = array();
+	$array_PILOT_CALLSIGN = array();
 	$array_PILOT_IMG_URL = array();
 
 	$array_MECH_DBID = array();
@@ -176,6 +177,7 @@
 				if (mysqli_num_rows($result_asc_pilot) > 0) {
 					while($row = mysqli_fetch_assoc($result_asc_pilot)) {
 						if ($row["pilotid"] == $pilotid) {
+							$array_PILOT_CALLSIGN[$mechcount] = $row["callsign"];
 							$array_PILOT[$mechcount] = $row["rank"]." ".$row["name"]." \"".$row["callsign"]."\"";
 							$array_PILOT_IMG_URL[$mechcount] = $row["pilot_imageurl"];
 						}

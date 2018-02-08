@@ -40,10 +40,8 @@ function readCircles(index) {
 			if (na.substring(0, 5) == "CD_W_" && el1.checked) { w++; }
 		}
 	});
-	// alert(h + " " + a + " " + s + " " + e + " " + fc + " " + mp + " " + w);
-
-    var url="https://www.clanwolf.net/ASCard/save.php?index="+index+"&h="+h+"&a="+a+"&s="+s+"&e="+e+"&fc="+fc+"&mp="+mp+"&w="+w;
-    window.frames['saveframe'].location.replace(url);
+	var url="https://www.clanwolf.net/ASCard/save.php?index="+index+"&h="+h+"&a="+a+"&s="+s+"&e="+e+"&fc="+fc+"&mp="+mp+"&w="+w;
+	window.frames['saveframe'].location.replace(url);
 }
 
 function textSize(dec) {
