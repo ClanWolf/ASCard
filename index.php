@@ -1,6 +1,6 @@
 <?php
 	$file = file_get_contents('./manifest.appcache.php', true);
-	$version = substr($file, 26, -12);
+	$version = substr($file, 24, 10);
 
 	if (!isset($_GET["unit"])) {
 		echo "<meta http-equiv='refresh' content='0;url=https://www.clanwolf.net/ASCard/index.html'> ";
@@ -276,7 +276,6 @@
 </div>
 
 <script type="text/javascript">
-	alert("setting");
 	setCircles(<?=$array_HT[$chosenMechIndex]?>,<?=$array_A[$chosenMechIndex]?>,<?=$array_S[$chosenMechIndex]?>,<?=$array_ENGN[$chosenMechIndex]?>,<?=$array_FRCTRL[$chosenMechIndex]?>,<?=$array_MP[$chosenMechIndex]?>,<?=$array_WPNS[$chosenMechIndex]?>);
 </script>
 
