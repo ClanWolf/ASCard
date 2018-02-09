@@ -1,29 +1,23 @@
 <?php
-
-	// ini_set('display_errors', 1);
-	// ini_set('display_startup_errors', 1);
-	// error_reporting(E_ALL);
-
 	$file = file_get_contents('./manifest.appcache.php', true);
 	$version = substr($file, 26, -12);
 
-	if (isset($_GET["unit"])) {
-		if (empty($_GET["unit"])) {
-			// Open page to choose the unit to play with
-			header('Location: https://www.clanwolf.net/ASCard/index.html');
-		} else {
-			$unitid = $_GET["unit"];
-		}
-	} else {
-		header('Location: https://www.clanwolf.net/ASCard/index.html');
+	if (!isset($_GET["unit"])) {
+		echo "<meta http-equiv='refresh' content='0;url=https://www.clanwolf.net/ASCard/index.html'> ";
+		die();
 	}
 
+	$unitid = $_GET["unit"];
+	if (empty($unitid)) {
+		echo "<meta http-equiv='refresh' content='0;url=https://www.clanwolf.net/ASCard/index.html'> ";
+		die();
+	}
 	$chosenMechIndex = $_GET["chosenmech"];
 	if (empty($chosenMechIndex)) {
 		$chosenMechIndex = 1;
 	}
 
-	require('./db_getdata.php');
+	require_once('./db_getdata.php');
 ?>
 
 <html lang="en" manifest="./manifest.appcache.php">

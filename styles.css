@@ -32,7 +32,7 @@ html, body {
 	background-size: cover;
 }
 iframe {
-	visibility: hidden;
+	//visibility: hidden;
 	position: absolute;
 	background-color: red;
 	left: 80;

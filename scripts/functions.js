@@ -45,7 +45,7 @@ function readCircles(index) {
 }
 
 function setCircles(h, a, s, e, fc, mp, w) {
-	var na = "";
+	var na1 = "";
 
 	var h_c = 0;
 	var a_c = 0;
@@ -54,20 +54,21 @@ function setCircles(h, a, s, e, fc, mp, w) {
 	var fc_c = 0;
 	var mp_c = 0;
 	var w_c = 0;
-
+/*
 	var list = document.getElementsByClassName("bigcheck");
 	[].forEach.call(list, function (el1) {
-		na = el1.name;
-		if (typeof na != 'undefined') {
-			if (na.substring(0, 1) == "H")      { h_c++;  if (h_c<=h)   { el1.checked = true; }}
-			if (na.substring(0, 1) == "A")      { a_c++;  if (a_c<=a)   { el1.checked = true; }}
-			if (na.substring(0, 1) == "S")      { s_c++;  if (s_c<=s)   { el1.checked = true; }}
-			if (na.substring(0, 5) == "CD_E_")  { e_c++;  if (e_c<=e)   { el1.checked = true; }}
-			if (na.substring(0, 6) == "CD_FC_") { fc_c++; if (fc_c<=fc) { el1.checked = true; }}
-			if (na.substring(0, 6) == "CD_MP_") { mp_c++; if (mp_c<=mp) { el1.checked = true; }}
-			if (na.substring(0, 5) == "CD_W_")  { w_c++;  if (w_c<=w)   { el1.checked = true; }}
+		na1 = el1.name;
+		if (typeof na1 != 'undefined') {
+			if (na1.substring(0, 1) == "H")      { h_c++;  if (h_c<=h)   { el1.checked = true; }}
+			if (na1.substring(0, 1) == "A")      { a_c++;  if (a_c<=a)   { el1.checked = true; }}
+			if (na1.substring(0, 1) == "S")      { s_c++;  if (s_c<=s)   { el1.checked = true; }}
+			if (na1.substring(0, 5) == "CD_E_")  { e_c++;  if (e_c<=e)   { el1.checked = true; }}
+			if (na1.substring(0, 6) == "CD_FC_") { fc_c++; if (fc_c<=fc) { el1.checked = true; }}
+			if (na1.substring(0, 6) == "CD_MP_") { mp_c++; if (mp_c<=mp) { el1.checked = true; }}
+			if (na1.substring(0, 5) == "CD_W_")  { w_c++;  if (w_c<=w)   { el1.checked = true; }}
 		}
 	});
+*/
 }
 
 function textSize(dec) {
