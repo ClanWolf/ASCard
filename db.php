@@ -2,7 +2,7 @@
 	require_once('./config.php');
 
 	// Create connection
-	$conn = new mysqli($db_host, $db_user, $db_pass);
+	$conn = mysqli_connect($db_host, $db_user, $db_pass);
 
 	// Check connection
 	if ($conn->connect_error) {

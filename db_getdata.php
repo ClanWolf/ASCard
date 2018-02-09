@@ -186,4 +186,5 @@
 			}
 		}
 	}
+	mysqli_close($conn);
 ?>

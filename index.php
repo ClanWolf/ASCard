@@ -17,7 +17,7 @@
 		$chosenMechIndex = 1;
 	}
 
-	require_once('./db_getdata.php');
+	require('./db_getdata.php');
 ?>
 
 <html lang="en" manifest="./manifest.appcache.php">
@@ -276,6 +276,7 @@
 </div>
 
 <script type="text/javascript">
+	alert("setting");
 	setCircles(<?=$array_HT[$chosenMechIndex]?>,<?=$array_A[$chosenMechIndex]?>,<?=$array_S[$chosenMechIndex]?>,<?=$array_ENGN[$chosenMechIndex]?>,<?=$array_FRCTRL[$chosenMechIndex]?>,<?=$array_MP[$chosenMechIndex]?>,<?=$array_WPNS[$chosenMechIndex]?>);
 </script>
 

@@ -54,7 +54,7 @@ function setCircles(h, a, s, e, fc, mp, w) {
 	var fc_c = 0;
 	var mp_c = 0;
 	var w_c = 0;
-/*
+
 	var list = document.getElementsByClassName("bigcheck");
 	[].forEach.call(list, function (el1) {
 		na1 = el1.name;
@@ -68,7 +68,6 @@ function setCircles(h, a, s, e, fc, mp, w) {
 			if (na1.substring(0, 5) == "CD_W_")  { w_c++;  if (w_c<=w)   { el1.checked = true; }}
 		}
 	});
-*/
 }
 
 function textSize(dec) {
