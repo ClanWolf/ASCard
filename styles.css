@@ -69,7 +69,8 @@ a:hover {
 	top: 0;
 	left: 0;
 	background: #000;
-	z-index:9999;
+	/* background-image: url('images/body-bg_1.png'); */
+	z-index:100;
 }
 
 #header {

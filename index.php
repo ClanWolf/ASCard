@@ -1,19 +1,29 @@
 <?php
+
+	// ini_set('display_errors', 1);
+	// ini_set('display_startup_errors', 1);
+	// error_reporting(E_ALL);
+
 	$file = file_get_contents('./manifest.appcache.php', true);
 	$version = substr($file, 26, -12);
 
-	// $unitid = 5;
-	$unitid = $_GET["unit"];
-	if (empty($unitid)) {
-		$unitid = 5;
-		// Open page to choose the unit to play with
+	if (isset($_GET["unit"])) {
+		if (empty($_GET["unit"])) {
+			// Open page to choose the unit to play with
+			header('Location: https://www.clanwolf.net/ASCard/index.html');
+		} else {
+			$unitid = $_GET["unit"];
+		}
+	} else {
+		header('Location: https://www.clanwolf.net/ASCard/index.html');
 	}
+
 	$chosenMechIndex = $_GET["chosenmech"];
 	if (empty($chosenMechIndex)) {
 		$chosenMechIndex = 1;
 	}
 
-	require_once('./db_getdata.php');
+	require('./db_getdata.php');
 ?>
 
 <html lang="en" manifest="./manifest.appcache.php">
@@ -70,10 +80,11 @@
 			<?php
 				$size = sizeof($array_MECH);
 				for ($i4 = 1; $i4 <= $size; $i4++) {
+					$meli="https://www.clanwolf.net/ASCard/index.php?unit=".$unitid."&chosenmech=".$i4;
 					if ($chosenMechIndex == $i4) {
-						echo "<td nowrap><div class='mechselect_button_active'><a href='https://www.clanwolf.net/ASCard/index.php?chosenmech=".$i4."'>#".$array_MECH_NUMBER[$i4]." ".$array_MECH[$i4]."</a><br><span style='font-size:16px;'>".$array_PILOT_CALLSIGN[$i4]."</span></div></td>";
+						echo "<td onclick=\"location.href='".$meli."'\" nowrap><div class='mechselect_button_active'><a href='".$meli."'>#".$array_MECH_NUMBER[$i4]." ".$array_MECH[$i4]."</a><br><span style='font-size:16px;'>".$array_PILOT_CALLSIGN[$i4]."</span></div></td>";
 					} else {
-						echo "<td nowrap><div class='mechselect_button_normal'><a href='https://www.clanwolf.net/ASCard/index.php?chosenmech=".$i4."'>#".$array_MECH_NUMBER[$i4]." ".$array_MECH[$i4]."</a><br><span style='font-size:16px;'>".$array_PILOT_CALLSIGN[$i4]."</span></div></td>";
+						echo "<td onclick=\"location.href='".$meli."'\" nowrap><div class='mechselect_button_normal'><a href='".$meli."'>#".$array_MECH_NUMBER[$i4]." ".$array_MECH[$i4]."</a><br><span style='font-size:16px;'>".$array_PILOT_CALLSIGN[$i4]."</span></div></td>";
 					}
 				}
 			?>
@@ -99,6 +110,10 @@
 	<br>
 	<span style="font-size: 30px; color: #da8e25;">
 		<?php echo "$array_PILOT[$chosenMechIndex]"; ?>
+	</span>
+	<br>
+	<span style="font-size: 24px; color: #eeeeee;">
+		<?php echo "$UNIT"; ?>
 	</span>
 </div>
 
@@ -167,10 +182,10 @@
 							<td nowrap class="datavalue" width="20%" style="text-align: center;"><?php echo "$array_OV[$chosenMechIndex]"; ?></td>
 							<td nowrap class="datalabel" width="10%" style="text-align: right;">&nbsp;&nbsp;&nbsp;HT:</td>
 							<td nowrap width="60%" style="text-align: right;">
-								<label class="bigcheck"><input onchange="readCircles(<?=$chosenMechIndex?>);" type="checkbox" class="bigcheck" name="H1" value="yes"/><span class="bigcheck-target"></span></label>
-								<label class="bigcheck"><input onchange="readCircles(<?=$chosenMechIndex?>);" type="checkbox" class="bigcheck" name="H2" value="yes"/><span class="bigcheck-target"></span></label>
-								<label class="bigcheck"><input onchange="readCircles(<?=$chosenMechIndex?>);" type="checkbox" class="bigcheck" name="H3" value="yes"/><span class="bigcheck-target"></span></label>
-								<label class="bigcheck"><input onchange="readCircles(<?=$chosenMechIndex?>);" type="checkbox" class="bigcheck" name="H4" value="yes"/><span class="bigcheck-target"></span></label>
+								<label class="bigcheck"><input onchange="readCircles(<?= $array_MECH_DBID[$chosenMechIndex] ?>);" type="checkbox" class="bigcheck" name="H1" value="yes"/><span class="bigcheck-target"></span></label>
+								<label class="bigcheck"><input onchange="readCircles(<?= $array_MECH_DBID[$chosenMechIndex] ?>);" type="checkbox" class="bigcheck" name="H2" value="yes"/><span class="bigcheck-target"></span></label>
+								<label class="bigcheck"><input onchange="readCircles(<?= $array_MECH_DBID[$chosenMechIndex] ?>);" type="checkbox" class="bigcheck" name="H3" value="yes"/><span class="bigcheck-target"></span></label>
+								<label class="bigcheck"><input onchange="readCircles(<?= $array_MECH_DBID[$chosenMechIndex] ?>);" type="checkbox" class="bigcheck" name="H4" value="yes"/><span class="bigcheck-target"></span></label>
 							</td>
 							<td class="datalabel" width="5%" style="text-align: right;">&nbsp;&nbsp;&nbsp;(SHDN)</td>
 						</tr>
@@ -184,7 +199,7 @@
 							<td nowrap width="95%" style="color: #222;">
 							<?php
 								for ($i1 = 1; $i1 <= $array_A_MAX[$chosenMechIndex]; $i1++) {
-									echo "<label class='bigcheck'><input onchange='readCircles($chosenMechIndex);' type='checkbox' class='bigcheck' name='A".$i1."' value='yes'/><span class='bigcheck-target'></span></label>&nbsp;";
+									echo "<label class='bigcheck'><input onchange='readCircles($array_MECH_DBID[$chosenMechIndex]);' type='checkbox' class='bigcheck' name='A".$i1."' value='yes'/><span class='bigcheck-target'></span></label>&nbsp;";
 								}
 							?>
 							</td>
@@ -194,7 +209,7 @@
 							<td nowrap width="95%" style="color: #aaa;">
 							<?php
 								for ($i2 = 1; $i2 <= $array_S_MAX[$chosenMechIndex]; $i2++) {
-									echo "<label class='bigcheck'><input onchange='readCircles($chosenMechIndex);' type='checkbox' class='bigcheck' name='S".$i2."' value='yes'/><span class='bigcheck-target'></span></label>&nbsp;";
+									echo "<label class='bigcheck'><input onchange='readCircles($array_MECH_DBID[$chosenMechIndex]);' type='checkbox' class='bigcheck' name='S".$i2."' value='yes'/><span class='bigcheck-target'></span></label>&nbsp;";
 								}
 							?>
 							</td>
@@ -224,37 +239,37 @@
 						<tr>
 							<td nowrap class="datalabel" width="5%" style="text-align: right;">ENGN:</td>
 							<td nowrap width="55%" style="text-align: left;">
-								<label class="bigcheck"><input onchange="readCircles(<?=$chosenMechIndex?>);" type="checkbox" class="bigcheck" name="CD_E_1" value="yes"/><span class="bigcheck-target"></span></label>
+								<label class="bigcheck"><input onchange="readCircles(<?= $array_MECH_DBID[$chosenMechIndex] ?>);" type="checkbox" class="bigcheck" name="CD_E_1" value="yes"/><span class="bigcheck-target"></span></label>
 							</td>
 							<td nowrap class="datalabel" width="5%" style="text-align: right;">+1 HT FIRING</td>
 						</tr>
 						<tr>
 							<td nowrap class="datalabel" width="5%" style="text-align: right;">FR-CTRL:</td>
 							<td nowrap width="90%" style="text-align: left;">
-								<label class="bigcheck"><input onchange="readCircles(<?=$chosenMechIndex?>);" type="checkbox" class="bigcheck" name="CD_FC_1" value="yes"/><span class="bigcheck-target"></span></label>
-								<label class="bigcheck"><input onchange="readCircles(<?=$chosenMechIndex?>);" type="checkbox" class="bigcheck" name="CD_FC_2" value="yes"/><span class="bigcheck-target"></span></label>
-								<label class="bigcheck"><input onchange="readCircles(<?=$chosenMechIndex?>);" type="checkbox" class="bigcheck" name="CD_FC_3" value="yes"/><span class="bigcheck-target"></span></label>
-								<label class="bigcheck"><input onchange="readCircles(<?=$chosenMechIndex?>);" type="checkbox" class="bigcheck" name="CD_FC_4" value="yes"/><span class="bigcheck-target"></span></label>
+								<label class="bigcheck"><input onchange="readCircles(<?= $array_MECH_DBID[$chosenMechIndex] ?>);" type="checkbox" class="bigcheck" name="CD_FC_1" value="yes"/><span class="bigcheck-target"></span></label>
+								<label class="bigcheck"><input onchange="readCircles(<?= $array_MECH_DBID[$chosenMechIndex] ?>);" type="checkbox" class="bigcheck" name="CD_FC_2" value="yes"/><span class="bigcheck-target"></span></label>
+								<label class="bigcheck"><input onchange="readCircles(<?= $array_MECH_DBID[$chosenMechIndex] ?>);" type="checkbox" class="bigcheck" name="CD_FC_3" value="yes"/><span class="bigcheck-target"></span></label>
+								<label class="bigcheck"><input onchange="readCircles(<?= $array_MECH_DBID[$chosenMechIndex] ?>);" type="checkbox" class="bigcheck" name="CD_FC_4" value="yes"/><span class="bigcheck-target"></span></label>
 							</td>
 							<td nowrap class="datalabel" width="5%" style="text-align: right;">+2 TO-HIT EA.</td>
 						</tr>
 						<tr>
 							<td nowrap class="datalabel" width="5%" style="text-align: right;">MP:</td>
 							<td nowrap width="55%" style="text-align: left;">
-								<label class="bigcheck"><input onchange="readCircles(<?=$chosenMechIndex?>);" type="checkbox" class="bigcheck" name="CD_MP_1" value="yes"/><span class="bigcheck-target"></span></label>
-								<label class="bigcheck"><input onchange="readCircles(<?=$chosenMechIndex?>);" type="checkbox" class="bigcheck" name="CD_MP_2" value="yes"/><span class="bigcheck-target"></span></label>
-								<label class="bigcheck"><input onchange="readCircles(<?=$chosenMechIndex?>);" type="checkbox" class="bigcheck" name="CD_MP_3" value="yes"/><span class="bigcheck-target"></span></label>
-								<label class="bigcheck"><input onchange="readCircles(<?=$chosenMechIndex?>);" type="checkbox" class="bigcheck" name="CD_MP_4" value="yes"/><span class="bigcheck-target"></span></label>
+								<label class="bigcheck"><input onchange="readCircles(<?= $array_MECH_DBID[$chosenMechIndex] ?>);" type="checkbox" class="bigcheck" name="CD_MP_1" value="yes"/><span class="bigcheck-target"></span></label>
+								<label class="bigcheck"><input onchange="readCircles(<?= $array_MECH_DBID[$chosenMechIndex] ?>);" type="checkbox" class="bigcheck" name="CD_MP_2" value="yes"/><span class="bigcheck-target"></span></label>
+								<label class="bigcheck"><input onchange="readCircles(<?= $array_MECH_DBID[$chosenMechIndex] ?>);" type="checkbox" class="bigcheck" name="CD_MP_3" value="yes"/><span class="bigcheck-target"></span></label>
+								<label class="bigcheck"><input onchange="readCircles(<?= $array_MECH_DBID[$chosenMechIndex] ?>);" type="checkbox" class="bigcheck" name="CD_MP_4" value="yes"/><span class="bigcheck-target"></span></label>
 							</td>
 							<td nowrap class="datalabel" width="5%" style="text-align: right;">1/2 MV EA.</td>
 						</tr>
 						<tr>
 							<td nowrap class="datalabel" width="5%" style="text-align: right;">WPNS:</td>
 							<td nowrap width="55%" style="text-align: left;">
-								<label class="bigcheck"><input onchange="readCircles(<?=$chosenMechIndex?>);" type="checkbox" class="bigcheck" name="CD_W_1" value="yes"/><span class="bigcheck-target"></span></label>
-								<label class="bigcheck"><input onchange="readCircles(<?=$chosenMechIndex?>);" type="checkbox" class="bigcheck" name="CD_W_2" value="yes"/><span class="bigcheck-target"></span></label>
-								<label class="bigcheck"><input onchange="readCircles(<?=$chosenMechIndex?>);" type="checkbox" class="bigcheck" name="CD_W_3" value="yes"/><span class="bigcheck-target"></span></label>
-								<label class="bigcheck"><input onchange="readCircles(<?=$chosenMechIndex?>);" type="checkbox" class="bigcheck" name="CD_W_4" value="yes"/><span class="bigcheck-target"></span></label>
+								<label class="bigcheck"><input onchange="readCircles(<?= $array_MECH_DBID[$chosenMechIndex] ?>);" type="checkbox" class="bigcheck" name="CD_W_1" value="yes"/><span class="bigcheck-target"></span></label>
+								<label class="bigcheck"><input onchange="readCircles(<?= $array_MECH_DBID[$chosenMechIndex] ?>);" type="checkbox" class="bigcheck" name="CD_W_2" value="yes"/><span class="bigcheck-target"></span></label>
+								<label class="bigcheck"><input onchange="readCircles(<?= $array_MECH_DBID[$chosenMechIndex] ?>);" type="checkbox" class="bigcheck" name="CD_W_3" value="yes"/><span class="bigcheck-target"></span></label>
+								<label class="bigcheck"><input onchange="readCircles(<?= $array_MECH_DBID[$chosenMechIndex] ?>);" type="checkbox" class="bigcheck" name="CD_W_4" value="yes"/><span class="bigcheck-target"></span></label>
 							</td>
 							<td nowrap class="datalabel" width="5%" style="text-align: right;">-1 DMG EA.</td>
 						</tr>
@@ -265,6 +280,10 @@
 		</tr>
 	</table>
 </div>
+
+<script type="text/javascript">
+	setCircles(<?=$array_HT[$chosenMechIndex]?>,<?=$array_A[$chosenMechIndex]?>,<?=$array_S[$chosenMechIndex]?>,<?=$array_ENGN[$chosenMechIndex]?>,<?=$array_FRCTRL[$chosenMechIndex]?>,<?=$array_MP[$chosenMechIndex]?>,<?=$array_WPNS[$chosenMechIndex]?>);
+</script>
 
 <div id="footer"></div>
 <div id="bottomleft"><img src="https://www.clanwolf.net/ASCard/images/bottom-left.png" width="280px"></div>

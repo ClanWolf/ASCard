@@ -31,17 +31,43 @@ function readCircles(index) {
 	[].forEach.call(list, function (el1) {
 		na = el1.name;
 		if (typeof na != 'undefined') {
-			if (na.substring(0, 1) == "H" && el1.checked) { h++; }
-			if (na.substring(0, 1) == "A" && el1.checked) { a++; }
-			if (na.substring(0, 1) == "S" && el1.checked) { s++; }
-			if (na.substring(0, 5) == "CD_E_" && el1.checked) { e++; }
+			if (na.substring(0, 1) == "H"      && el1.checked) { h++;  }
+			if (na.substring(0, 1) == "A"      && el1.checked) { a++;  }
+			if (na.substring(0, 1) == "S"      && el1.checked) { s++;  }
+			if (na.substring(0, 5) == "CD_E_"  && el1.checked) { e++;  }
 			if (na.substring(0, 6) == "CD_FC_" && el1.checked) { fc++; }
 			if (na.substring(0, 6) == "CD_MP_" && el1.checked) { mp++; }
-			if (na.substring(0, 5) == "CD_W_" && el1.checked) { w++; }
+			if (na.substring(0, 5) == "CD_W_"  && el1.checked) { w++;  }
 		}
 	});
 	var url="https://www.clanwolf.net/ASCard/save.php?index="+index+"&h="+h+"&a="+a+"&s="+s+"&e="+e+"&fc="+fc+"&mp="+mp+"&w="+w;
 	window.frames['saveframe'].location.replace(url);
+}
+
+function setCircles(h, a, s, e, fc, mp, w) {
+	var na = "";
+
+	var h_c = 0;
+	var a_c = 0;
+	var s_c = 0;
+	var e_c = 0;
+	var fc_c = 0;
+	var mp_c = 0;
+	var w_c = 0;
+
+	var list = document.getElementsByClassName("bigcheck");
+	[].forEach.call(list, function (el1) {
+		na = el1.name;
+		if (typeof na != 'undefined') {
+			if (na.substring(0, 1) == "H")      { h_c++;  if (h_c<=h)   { el1.checked = true; }}
+			if (na.substring(0, 1) == "A")      { a_c++;  if (a_c<=a)   { el1.checked = true; }}
+			if (na.substring(0, 1) == "S")      { s_c++;  if (s_c<=s)   { el1.checked = true; }}
+			if (na.substring(0, 5) == "CD_E_")  { e_c++;  if (e_c<=e)   { el1.checked = true; }}
+			if (na.substring(0, 6) == "CD_FC_") { fc_c++; if (fc_c<=fc) { el1.checked = true; }}
+			if (na.substring(0, 6) == "CD_MP_") { mp_c++; if (mp_c<=mp) { el1.checked = true; }}
+			if (na.substring(0, 5) == "CD_W_")  { w_c++;  if (w_c<=w)   { el1.checked = true; }}
+		}
+	});
 }
 
 function textSize(dec) {
@@ -69,10 +95,6 @@ function textSize(dec) {
 	setCookie("fontsizeCircle", fontsizeCircle, 365);
 	setCookie("savedBefore", "true", 365);
 }
-
-$(window).on('load', function() {
-	$("#cover").hide();
-});
 
 $(document).ready(function() {
 	if (getCookie("savedBefore") === "true") {
@@ -105,6 +127,8 @@ $(document).ready(function() {
 			}
 		}
 	});
+
+	$("#cover").fadeOut(400);
 });
 
 $(window).resize(function() {

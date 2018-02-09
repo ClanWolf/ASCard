@@ -28,13 +28,14 @@
 		$sql = "UPDATE clanwolf.asc_mechstatus SET heat=".$h.",armor=".$a.",structure=".$s.",crit_engine=".$e.",crit_fc=".$fc.",crit_mp=".$mp.",crit_weapons=".$w." WHERE mechid=".$index;
 		echo "UPDATE clanwolf.asc_mechstatus<br>SET heat=".$h.",armor=".$a.",structure=".$s.",crit_engine=".$e.",crit_fc=".$fc.",crit_mp=".$mp.",crit_weapons=".$w." WHERE mechid=".$index;
 
-		// if (mysqli_query($conn, $sql)) {
-			// echo "<br>";
-			// echo "Record updated successfully";
-		// } else {
-			// echo "<br>";
-			// echo "Error updating record: " . mysqli_error($conn);
-		// }
+		if (mysqli_query($conn, $sql)) {
+			echo "<br>";
+			echo "Record updated successfully";
+			mysqli_commit();
+		} else {
+			echo "<br>";
+			echo "Error updating record: " . mysqli_error($conn);
+		}
 	} else {
 		echo "WAITING FOR SAVE OPERATION...<br>";
 	}
