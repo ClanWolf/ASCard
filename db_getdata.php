@@ -197,4 +197,5 @@
 	mysqli_free_result($result_asc_pilot);
 
 	mysqli_close($conn);
+	mysqli_refresh();
 ?>
