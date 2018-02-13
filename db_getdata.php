@@ -195,6 +195,9 @@
 	}
 	mysqli_free_result($result_asc);
 
+	$thread_id = mysqli_thread_id($link);
+	mysqli_kill($link, $thread_id);
+
 	mysqli_close($conn);
 	mysqli_refresh();
 ?>
