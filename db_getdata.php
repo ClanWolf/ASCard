@@ -188,5 +188,13 @@
 			}
 		}
 	}
+
+	mysqli_free_result($result_asc_unit);
+	mysqli_free_result($result_asc_faction);
+	mysqli_free_result($result_asc);
+	mysqli_free_result($result_asc_mech);
+	mysqli_free_result($result_asc_mechstatus);
+	mysqli_free_result($result_asc_pilot);
+
 	mysqli_close($conn);
 ?>
