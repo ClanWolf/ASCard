@@ -106,7 +106,7 @@
 		<?php echo "$array_PILOT[$chosenMechIndex]"; ?>
 	</span>
 	<br>
-	<span style="font-size: 24px; color: #eeeeee;">
+	<span style="font-size: 18px; color: #eeeeee;">
 		<?php echo "$UNIT"; ?>
 	</span>
 </div>
