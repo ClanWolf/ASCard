@@ -4,7 +4,7 @@ echo "select unit";
 
 ?>
 
-<html>
+<html lang="en">
 
 <head>
 	<link rel="stylesheet" href="https://www.clanwolf.net/ASCard/styles.css" type="text/css">
