@@ -79,6 +79,7 @@
 			}
 		}
 	}
+	mysqli_free_result($result_asc_unit);
 
 	// Faction
 	// factionid; name; factiontype; faction_imageurl
@@ -94,6 +95,7 @@
 		}
 	}
 	$UNIT_PARENTS = $FACTION_TYPE." ".$FACTION.",<br>".$UNIT_PARENTS;
+	mysqli_free_result($result_asc_faction);
 
 	// Alpha Strike Cards
 	// id; unitid; mechid; pilotid
@@ -149,6 +151,7 @@
 						}
 					}
 				}
+				mysqli_free_result($result_asc_mech);
 
 				// Mechstatus
 				// mechstatusid; mechid; heat; armor; structure;
@@ -170,6 +173,7 @@
 						}
 					}
 				}
+				mysqli_free_result($result_asc_mechstatus);
 
 				// Pilot
 				// pilotid; rank; name; callsign; health;
@@ -185,16 +189,11 @@
 						}
 					}
 				}
+				mysqli_free_result($result_asc_pilot);
 			}
 		}
 	}
-
-	mysqli_free_result($result_asc_unit);
-	mysqli_free_result($result_asc_faction);
 	mysqli_free_result($result_asc);
-	mysqli_free_result($result_asc_mech);
-	mysqli_free_result($result_asc_mechstatus);
-	mysqli_free_result($result_asc_pilot);
 
 	mysqli_close($conn);
 	mysqli_refresh();
