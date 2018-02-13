@@ -128,7 +128,7 @@ $(document).ready(function() {
 		}
 	});
 
-	$("#cover").fadeOut(400);
+	$("#cover").fadeOut(200, "linear");
 });
 
 $(window).resize(function() {
