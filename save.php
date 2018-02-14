@@ -15,7 +15,7 @@
 	echo "<p style='font-family:Arial,sans-serif;font-size:14px;color:yellow;'>";
 
 	if (!empty($index)) {
-		echo "SAVING MECH DATA...<br>";
+		echo "SAVING DATA...<br>";
 
 		echo $index;
 		echo $h;
@@ -38,7 +38,8 @@
 			$haystack = file_get_contents($file);
 			$needle = substr($haystack, 37, 10);
 			$ts = substring(time(), -10);
-			echo "<br>";
+			echo "<br>";			
+			echo "UPDATING CACHE MANIFEST: ";
 			echo $needle;
 			echo "<br>";
 			// file_put_contents($file, str_replace($needle, $ts, file_get_contents($file)));
