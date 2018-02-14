@@ -1,3 +1,5 @@
+<html lang="en" manifest="./manifest.appcache.php">
+
 <?php
 	require_once('./db.php');
 
@@ -51,3 +53,5 @@
 
 	echo "</p>";
 ?>
+
+</html>
