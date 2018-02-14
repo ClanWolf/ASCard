@@ -27,7 +27,7 @@ html, body {
 	padding: 0;
 	width: 100%;
 	height: 100%;
-	background-image: url('images/body-bg_1.png');
+	background-image: url('../images/body-bg_1.png');
 	overflow: hidden;
 	background-size: cover;
 }
@@ -100,7 +100,7 @@ a:hover {
 	text-align: center;
 	vertical-align: middle;
 	padding: 0px;
-	background-image: url('images/mech_number.png');
+	background-image: url('../images/mech_number.png');
 	background-size: cover;
 	width: 120px;
 	height: 120px;
@@ -189,7 +189,7 @@ a:hover {
 	margin: 0 0;
 	bottom: 0px;
 	text-align: center;
-	background-image: url('images/bottom-bg.png');
+	background-image: url('../images/bottom-bg.png');
 	background-repeat: repeat-x;
 	background-position: bottom center;
 	background-size: 110px;
@@ -255,6 +255,7 @@ input[type='checkbox'].bigcheck {
 }
 input[type='checkbox'].bigcheck + span.bigcheck-target:after {
 	content: "\f10c";
+
 }
 input[type='checkbox'].bigcheck:checked + span.bigcheck-target:after {
 	content: "\f111";

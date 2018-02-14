@@ -4,8 +4,8 @@ var fontsizeCircle = 18;
 var rolling = 0;
 
 // http://goldfirestudios.com/blog/104/howler.js-Modern-Web-Audio-Javascript-Library
-var sound_dice = new Howl({ src: ['audio/dice.mp3', 'audio/dice.ogg'] });
-var sound_key = new Howl({ src: ['audio/key.mp3', 'audio/key.ogg'] });
+var sound_dice = new Howl({ src: ['./audio/dice.mp3', './audio/dice.ogg'] });
+var sound_key = new Howl({ src: ['./audio/key.mp3', './audio/key.ogg'] });
 
 function setSize(name, value) {
 	var list = document.getElementsByClassName(name);
@@ -40,7 +40,7 @@ function readCircles(index) {
 			if (na.substring(0, 5) == "CD_W_"  && el1.checked) { w++;  }
 		}
 	});
-	var url="https://www.clanwolf.net/ASCard/save.php?index="+index+"&h="+h+"&a="+a+"&s="+s+"&e="+e+"&fc="+fc+"&mp="+mp+"&w="+w;
+	var url="./save.php?index="+index+"&h="+h+"&a="+a+"&s="+s+"&e="+e+"&fc="+fc+"&mp="+mp+"&w="+w;
 	window.frames['saveframe'].location.replace(url);
 }
 
@@ -128,7 +128,7 @@ $(document).ready(function() {
 		}
 	});
 
-	$("#cover").fadeOut(200, "linear");
+	$("#cover").fadeOut(100, "linear");
 });
 
 $(window).resize(function() {
@@ -145,15 +145,15 @@ function rolldice() {
 	var die_02 = rand(1, 6);
 	var die_01_image = document.getElementById("die1");
 	var die_02_image = document.getElementById("die2");
-	die_01_image.src = "https://www.clanwolf.net/ASCard/images/dice/d6_" + die_01 + ".png";
-	die_02_image.src = "https://www.clanwolf.net/ASCard/images/dice/d6_" + die_02 + ".png";
+	die_01_image.src = "./images/dice/d6_" + die_01 + ".png";
+	die_02_image.src = "./images/dice/d6_" + die_02 + ".png";
 	rolling--;
 }
 
 function changeWallpaper() {
 	var wallpaperName = getCookie("wallpaper");
 	do {
-		var wallpaperNameRand = "https://www.clanwolf.net/ASCard/images/body-bg_" + rand(1, 4) + ".png";
+		var wallpaperNameRand = "./images/body-bg_" + rand(1, 4) + ".png";
 	} while (wallpaperName === wallpaperNameRand);
 	document.body.style.backgroundImage = "url('" + wallpaperNameRand+ "')";
 	setCookie("wallpaper", wallpaperNameRand, 365);

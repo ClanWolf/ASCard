@@ -1,17 +1,15 @@
+<html lang="en" manifest="./manifest.appcache.php">
+
 <?php
-
-echo "select unit";
-
+	// Get data on units from db
 ?>
 
-<html lang="en">
-
 <head>
-	<link rel="stylesheet" href="https://www.clanwolf.net/ASCard/styles.css" type="text/css">
-	<link rel="icon" href="https://www.clanwolf.net/ASCard/favicon.png" type="image/png">
+	<link rel="stylesheet" href="./styles/styles.css" type="text/css">
+	<link rel="icon" href="./favicon.png" type="image/png">
 	<style>
 		html, body {
-			background-image: url('images/body-bg_2.png');
+			background-image: url('./images/body-bg_2.png');
 		}
 		table {
 			margin-left: auto;
@@ -33,8 +31,8 @@ echo "select unit";
 <body>
 	<table class="box" cellspacing=10 cellpadding=10 border=0px>
 		<tr>
-			<td onclick="location.href='https://www.clanwolf.net/ASCard/index.php?unit=5'" class='mechselect_button_active'><a href="https://www.clanwolf.net/ASCard/index.php?unit=5">Meldric</a></td>
-			<td onclick="location.href='https://www.clanwolf.net/ASCard/index.php?unit=6'" class='mechselect_button_active'><a href="https://www.clanwolf.net/ASCard/index.php?unit=6">Nimrod</a></td>
+			<td onclick="location.href='./index.php?unit=5'" class='mechselect_button_active'><a href="./index.php?unit=5">Meldric</a></td>
+			<td onclick="location.href='./index.php?unit=6'" class='mechselect_button_active'><a href="./index.php?unit=6">Nimrod</a></td>
 		</tr>
 	</table>
 </body>
