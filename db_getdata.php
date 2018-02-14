@@ -145,7 +145,7 @@
 							$array_A_MAX[$mechcount] = $row["as_armor"];
 							$array_S_MAX[$mechcount] = $row["as_structure"];
 
-							echo "<script>console.log('".$array_MECH_DBID[$mechcount]."');</script>";
+							// echo "<script>console.log('".$array_MECH_DBID[$mechcount]."');</script>";
 							// echo $array_MECH_DBID[$mechcount];
 							// echo $array_MECH[$mechcount];
 							// echo $array_MECH_MODEL[$mechcount];
@@ -170,7 +170,7 @@
 							$array_MP[$mechcount] = $row["crit_mp"];
 							$array_WPNS[$mechcount] = $row["crit_weapons"];
 
-							echo "<script>console.log('".$sql_asc_mechstatus." --- ".$row["heat"]."');</script>";
+							// echo "<script>console.log('".$sql_asc_mechstatus." --- ".$row["heat"]."');</script>";
 						}
 					}
 				}
