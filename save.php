@@ -38,7 +38,7 @@
 			$haystack = file_get_contents($file);
 			$needle = substr($haystack, 37, 10);
 			$ts = substring(time(), -10);
-			echo "<br>";			
+			echo "<br><br>";			
 			echo "UPDATING CACHE MANIFEST: ";
 			echo $needle;
 			echo "<br>";
