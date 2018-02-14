@@ -1,10 +1,16 @@
+<?php
+	header("Cache-Control: no-cache, must-revalidate");
+?>
+
 <html lang="en" manifest="./manifest.appcache.php">
 
 <head>
 	<title>ClanWolf.net - AplhaStrike Cards</title>
 	<meta charset="utf-8">
+	<meta http-equiv="expires" content="0">
 	<meta name="description" content="Cards app for the AlphaStrike TableTop (BattleTech).">
 	<meta name="keywords" content="BattleTech, AlphaStrike, Mech">
+	<meta name="robots" content="noindex,nofollow">
 	<meta name="mobile-web-app-capable" content="yes">
 	<meta name="apple-mobile-web-app-capable" content="yes">
 	<!-- <meta name="viewport" content="width=1700px, initial-scale=1.0, user-scalable=no"> -->
