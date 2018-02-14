@@ -35,6 +35,7 @@
 			$file = './manifest.appcache.php';
 			$haystack = file_get_contents($file);
 			$needle = substr($haystack, 37, 10);
+			echo "<br>";
 			echo $needle;
 			echo "<br>";
 			// file_put_contents($file, str_replace($needle, time(), file_get_contents($file)));
