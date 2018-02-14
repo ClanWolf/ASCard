@@ -32,7 +32,7 @@ html, body {
 	background-size: cover;
 }
 iframe {
-	visibility: hidden;
+
 	position: absolute;
 	background-color: red;
 	left: 80;
@@ -40,7 +40,7 @@ iframe {
 	width: 800px;
 	height: 300px;
 	border: none;
-	z-index: 999;
+	z-index: 9999;
 }
 img {
 	border: 0px;

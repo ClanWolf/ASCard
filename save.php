@@ -33,7 +33,11 @@
 			echo "Record updated successfully";
 
 			$file = './manifest.appcache.php';
-			file_put_contents($file, str_replace('##', time(), file_get_contents($file)));
+			$haystack = file_get_contents($file);
+			$needle = substr($haystack, 37, 10);
+			echo $needle;
+			echo "<br>";
+			// file_put_contents($file, str_replace($needle, time(), file_get_contents($file)));
 
 			mysqli_commit();
 		} else {
