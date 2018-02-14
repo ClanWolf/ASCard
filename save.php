@@ -31,6 +31,10 @@
 		if (mysqli_query($conn, $sql)) {
 			echo "<br>";
 			echo "Record updated successfully";
+
+			$file = './manifest.appcache.php';
+			file_put_contents($file, str_replace('##', time(), file_get_contents($file)));
+
 			mysqli_commit();
 		} else {
 			echo "<br>";

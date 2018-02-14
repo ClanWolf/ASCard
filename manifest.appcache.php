@@ -1,6 +1,6 @@
 CACHE MANIFEST
-# VERSION 1.01.0061
-
+# VERSION 1.01.0064
+# 1518570744
 ./audio/ambience/hq.mp3
 ./audio/dice.mp3
 ./audio/dice.ogg
@@ -71,15 +71,18 @@ NETWORK:
 ./db.php
 ./db_getdata.php
 ./index.html
-./index.php
 ./manifest.appcache.php
 ./save.php
 ./unitselector.php
 https://fonts.googleapis.com/css?family=Russo+One:400
 https://fonts.googleapis.com/css?family=Pathway+Gothic+One:400
+https://fonts.gstatic.com/stats/Pathway+Gothic+One/normal/400
 https://fonts.gstatic.com/s/russoone/v6/Z9XUDmZRWg6M1LvRYsHOz8mJ.woff2
 https://fonts.gstatic.com/s/pathwaygothicone/v6/MwQrbgD32-KAvjkYGNUUxAtW7pEBwx-tS1Zf.woff2
 https://maxcdn.bootstrapcdn.com/favicon.ico
 https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css
 https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/fonts/fontawesome-webfont.woff?v=4.1.0
 https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/fonts/fontawesome-webfont.ttf?v=4.1.0
+
+FALLBACK:
+./index.php ./static.php
