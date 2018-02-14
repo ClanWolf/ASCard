@@ -71,7 +71,6 @@ NETWORK:
 ./db.php
 ./db_getdata.php
 ./index.html
-./manifest.appcache.php
 ./save.php
 ./unitselector.php
 https://fonts.googleapis.com/css?family=Russo+One:400
@@ -83,6 +82,4 @@ https://maxcdn.bootstrapcdn.com/favicon.ico
 https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css
 https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/fonts/fontawesome-webfont.woff?v=4.1.0
 https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/fonts/fontawesome-webfont.ttf?v=4.1.0
-
-FALLBACK:
-./index.php ./static.php
+*
