@@ -41,6 +41,15 @@ CACHE MANIFEST
 ./images/factions/WD.png
 ./images/mechs/TBR.png
 ./images/pilots/m_053.png
+./images/ranks/CW/01_Solahma.png
+./images/ranks/CW/02_Cadet.png
+./images/ranks/CW/03_PCom.png
+./images/ranks/CW/04_SCom.png
+./images/ranks/CW/05_SCapt.png
+./images/ranks/CW/06_SCol.png
+./images/ranks/CW/07_GCom.png
+./images/ranks/CW/08_Khan.png
+./images/ranks/CW/09_Lehrmeister.png
 ./images/body-bg_1.png
 ./images/body-bg_2.png
 ./images/body-bg_3.png
