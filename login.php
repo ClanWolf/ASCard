@@ -1,4 +1,6 @@
-<?php 
+https://www.php-einfach.de/php-tutorial/php-sessions/
+
+<?php
   if(isset($_GET['login'])) {
     $email = $_POST['email'];
     $passwort = $_POST['passwort'];
