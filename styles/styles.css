@@ -32,7 +32,8 @@ html, body {
 	background-size: cover;
 }
 iframe {
-
+	display: none;
+	visibility: hidden;
 	position: absolute;
 	background-color: red;
 	left: 80;
@@ -245,7 +246,7 @@ span.bigcheck-target {
 	margin-right: 0px;
 	padding-left: -20px;
 	padding-right: 0px;
-	font-size: 120%;
+	font-size: 100%;
 }
 input[type='checkbox'].bigcheck {     
 	position: relative;

@@ -1,16 +1,16 @@
-<html lang="en" manifest="./manifest.appcache.php">
-
 <?php
+	session_start();
+	ini_set("display_errors", 1); error_reporting(E_ALL);
 	require_once('./db.php');
 
-	$index = $_GET["index"];
-	$h     = $_GET["h"];
-	$a     = $_GET["a"];
-	$s     = $_GET["s"];
-	$e     = $_GET["e"];
-	$fc    = $_GET["fc"];
-	$mp    = $_GET["mp"];
-	$w     = $_GET["w"];
+	$index = isset($_GET["index"]) ? $_GET["index"] : "";
+	$h     = isset($_GET["h"]) ? $_GET["h"] : "";
+	$a     = isset($_GET["a"]) ? $_GET["a"] : "";
+	$s     = isset($_GET["s"]) ? $_GET["s"] : "";
+	$e     = isset($_GET["e"]) ? $_GET["e"] : "";
+	$fc    = isset($_GET["fc"]) ? $_GET["fc"] : "";
+	$mp    = isset($_GET["mp"]) ? $_GET["mp"] : "";
+	$w     = isset($_GET["w"]) ? $_GET["w"] : "";
 
 	echo "<p style='font-family:Arial,sans-serif;font-size:14px;color:yellow;'>";
 
@@ -34,17 +34,7 @@
 			echo "<br>";
 			echo "Record updated successfully";
 
-			$file = './manifest.appcache.php';
-			$haystack = file_get_contents($file);
-			$needle = substr($haystack, 37, 10);
-			$ts = substring(time(), -10);
-			echo "<br><br>";			
-			echo "UPDATING CACHE MANIFEST: ";
-			echo $needle;
-			echo "<br>";
-			// file_put_contents($file, str_replace($needle, $ts, file_get_contents($file)));
-
-			mysqli_commit();
+			mysqli_commit($conn);
 		} else {
 			echo "<br>";
 			echo "Error updating record: " . mysqli_error($conn);
@@ -55,5 +45,3 @@
 
 	echo "</p>";
 ?>
-
-</html>

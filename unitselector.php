@@ -1,8 +1,15 @@
-<html lang="en" manifest="./manifest.appcache.php">
-
 <?php
+	session_start();
+	if (!isset($_SESSION['userid'])) {
+		// if not logged in, redirect to the login page
+		//echo "<meta http-equiv='refresh' content='0;url=./login.php'> ";
+		//die();
+	}
 	// Get data on units from db
+
 ?>
+
+<html lang="en">
 
 <head>
 	<link rel="stylesheet" href="./styles/styles.css" type="text/css">
@@ -41,8 +48,8 @@
 <body>
 	<table class="box" cellspacing=10 cellpadding=10 border=0px>
 		<tr>
-			<td onclick="location.href='./index.php?unit=5'" class='mechselect_button_active'><a href="./index.php?unit=5">Meldric</a></td>
-			<td onclick="location.href='./index.php?unit=6'" class='mechselect_button_active'><a href="./index.php?unit=6">Nimrod</a></td>
+			<td onclick="location.href='./unit.php?unit=5'" class='mechselect_button_active'><a href="./unit.php?unit=5">Meldric</a></td>
+			<td onclick="location.href='./unit.php?unit=6'" class='mechselect_button_active'><a href="./unit.php?unit=6">Nimrod</a></td>
 		</tr>
 	</table>
 </body>

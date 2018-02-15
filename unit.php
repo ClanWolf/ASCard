@@ -1,8 +1,8 @@
 <?php
-	header("Cache-Control: no-cache, must-revalidate");
+	session_start();
 ?>
 
-<html lang="en" manifest="./manifest.appcache.php">
+<html lang="en">
 
 <head>
 	<title>ClanWolf.net - AplhaStrike Cards</title>
@@ -38,8 +38,8 @@
 <body>
 
 <?php
-	$file = file_get_contents('./manifest.appcache.php', true);
-	$version = substr($file, 24, 10);
+	$file = file_get_contents('./version.txt', true);
+	$version = $file;
 	if (!isset($_GET["unit"])) {
 		echo "<meta http-equiv='refresh' content='0;url=./index.html'> ";
 		die();
@@ -70,7 +70,7 @@
 			<?php
 				$size = sizeof($array_MECH);
 				for ($i4 = 1; $i4 <= $size; $i4++) {
-					$meli="./index.php?unit=".$unitid."&chosenmech=".$i4;
+					$meli="./unit.php?unit=".$unitid."&chosenmech=".$i4;
 					if ($chosenMechIndex == $i4) {
 						echo "<td onclick=\"location.href='".$meli."'\" nowrap><div class='mechselect_button_active'><a href='".$meli."'>#".$array_MECH_NUMBER[$i4]." ".$array_MECH[$i4]."</a><br><span style='font-size:16px;'>".$array_PILOT_CALLSIGN[$i4]."</span></div></td>";
 					} else {
