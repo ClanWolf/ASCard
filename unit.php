@@ -1,5 +1,7 @@
 <?php
-	session_start();
+session_start();
+// https://www.php-einfach.de/php-tutorial/php-sessions/
+
 ?>
 
 <html lang="en">
