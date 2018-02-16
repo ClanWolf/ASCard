@@ -1,23 +1,25 @@
 <?php
-	session_start();
-	// https://www.php-einfach.de/php-tutorial/php-sessions/
+session_start();
+// https://www.php-einfach.de/php-tutorial/php-sessions/
 
 	if(isset($_GET['login'])) {
 		$userid = -1;
 		$email = $_POST['email'];
 		$passwort = $_POST['password'];
 
-		$sql = "SELECT * FROM asc_player WHERE email = ".$email;
-		$result = mysqli_query($conn, $sql);
-		if (mysqli_num_rows($result) > 0) {
-			while($row = mysqli_fetch_assoc($result)) {
+		if (!($stmt = $mysqli->prepare("SELECT * FROM asc_player WHERE email = ?"))) {
+			echo "Prepare failed: (" . $mysqli->errno . ") " . $mysqli->error;
+		}
+		if ($stmt->execute($email)) {
+			while ($row = $stmt->fetch()) {
 				if ($row["email"] == $email) {
 					$password_db = $row["password"];
 					if (password_verify($passwort, $password_db)) {
-						$_SESSION['userid'] = $user['id'];
-						die('Login erfolgreich. Weiter zu <a href="geheim.php">internen Bereich</a>');
+						$_SESSION['playerid'] = $row['playerid'];
+   						header("Location: ./unitselector.php");
+						die('Login succeeded!<br>');
 					} else {
-						$errorMessage = "Invalid login!<br>";
+						$errorMessage = "Login failed!<br>";
 					}
 				}
 			}
@@ -34,7 +36,7 @@
 <body>
 	<?php
 		if(isset($errorMessage)) {
-            echo $errorMessage;
+			echo $errorMessage;
 		}
 	?>
 
