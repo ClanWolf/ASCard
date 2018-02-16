@@ -149,6 +149,13 @@ a:hover {
 	top: 60px;
 	right: 0px;
 }
+#player_image {
+	z-index: 2;
+	position: absolute;
+	padding: 0px;
+	top: 150px;
+	right: 0px;
+}
 #pv {
 	z-index: 4;
 	position: absolute;
