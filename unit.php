@@ -113,6 +113,10 @@ session_start();
 	<img src="./images/top-right.png" width="220px">
 </div>
 
+<div id="player_image">
+	<img src="./images/player/Meldric.png" width="150px">
+</div>
+
 <div id="pv">
 	<span style="font-size: 22px; color: #aaaaaa; vertical-align: middle;">PV:&nbsp;&nbsp;</span>
 	<span style="font-size: 48px; color: #da8e25; vertical-align: middle;">
