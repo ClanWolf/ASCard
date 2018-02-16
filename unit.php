@@ -7,7 +7,7 @@ session_start();
 <html lang="en">
 
 <head>
-	<title>ClanWolf.net - AplhaStrike Cards</title>
+	<title>ClanWolf.net: AplhaStrike Card App (ASCard)</title>
 	<meta charset="utf-8">
 	<meta http-equiv="expires" content="0">
 	<meta name="description" content="Cards app for the AlphaStrike TableTop (BattleTech).">
