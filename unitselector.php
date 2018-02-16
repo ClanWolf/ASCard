@@ -4,8 +4,8 @@ session_start();
 
 	if (!isset($_SESSION['playerid'])) {
 		// if not logged in, redirect to the login page
-		//echo "<meta http-equiv='refresh' content='0;url=./login.php'> ";
-		//die();
+		echo "<meta http-equiv='refresh' content='0;url=./login.php'> ";
+		die();
 	}
 	// Get data on units from db
 	//
