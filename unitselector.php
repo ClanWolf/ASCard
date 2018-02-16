@@ -50,6 +50,19 @@ session_start();
 </head>
 
 <body>
+	<div id="header">
+		<table style="width: 100%;" cellspacing="0" cellpadding="0">
+			<tr>
+				<td onclick="location.href='./logout.php'" width="60px" style="background: rgba(50,50,50,1.0); text-align: center; vertical-align: middle;" nowrap>
+					<div><a style="color: #eee;" href="./logout.php"><i class="fa fa-bars" aria-hidden="true"></i></a></div>
+				</td>
+				<td onclick=\"location.href='./logout.php'\" nowrap><div class='mechselect_button_active'><a href='./logout.php'>Logout</a><br><span style='font-size:16px;'>second line</span></div></td>
+				<td onclick=\"location.href='./logout.php'\" nowrap><div class='mechselect_button_active'><a href='./logout.php'>Logout</a><br><span style='font-size:16px;'>second line</span></div></td>
+				<td onclick=\"location.href='./logout.php'\" nowrap><div class='mechselect_button_active'><a href='./logout.php'>Logout</a><br><span style='font-size:16px;'>second line</span></div></td>
+			</tr>
+		</table>
+	</div>
+	
 	<table class="box" cellspacing=10 cellpadding=10 border=0px>
 		<tr>
 			<td onclick="location.href='./unit.php?unit=5'" class='mechselect_button_active'><a href="./unit.php?unit=5">Meldric</a></td>
