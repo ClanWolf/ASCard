@@ -15,6 +15,7 @@ session_start();
 <html lang="en">
 
 <head>
+	<title>Unit selector</title>
 	<link rel="stylesheet" href="./styles/styles.css" type="text/css">
 	<link rel="icon" href="./favicon.png" type="image/png">
 	<link rel="shortcut icon" href="./images/icon_196x196.png" type="image/png" sizes="196x196">
