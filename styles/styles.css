@@ -152,6 +152,8 @@ a:hover {
 #player_image {
 	z-index: 2;
 	position: absolute;
+	border-style: solid;
+	border-width: 3px;
 	padding: 0px;
 	top: 150px;
 	right: 0px;
