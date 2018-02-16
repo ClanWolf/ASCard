@@ -54,7 +54,7 @@ session_start();
 		<table style="width: 100%;" cellspacing="0" cellpadding="0">
 			<tr>
 				<td onclick="location.href='./logout.php'" width="60px" style="background: rgba(50,50,50,1.0); text-align: center; vertical-align: middle;" nowrap>
-					<div><a style="color: #eee;" href="./logout.php"><i class="fa fa-bars" aria-hidden="true"></i></a></div>
+					<div><a style="color: #eee;" href="./logout.php"><i class="fa fa-power-off" aria-hidden="true"></i></a></div>
 				</td>
 				<td onclick=\"location.href='./logout.php'\" nowrap><div class='mechselect_button_active'><a href='./logout.php'>Logout</a><br><span style='font-size:16px;'>second line</span></div></td>
 				<td onclick=\"location.href='./logout.php'\" nowrap><div class='mechselect_button_active'><a href='./logout.php'>Logout</a><br><span style='font-size:16px;'>second line</span></div></td>
