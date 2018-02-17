@@ -65,6 +65,7 @@
 				$UNIT_IMG_URL = $row["unit_imageurl"];
 				$parentunitid = $row["parentforceid"];
 				$factionid = $row["factionid"];
+				$unitplayerid = $row["playerid"];
 			}
 		}
 		$UNIT_PARENTS = $UNIT;

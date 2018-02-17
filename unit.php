@@ -120,9 +120,17 @@ session_start();
 	<img src="./images/top-right.png" width="220px">
 </div>
 
-<div id="player_image">
-	<img src="./images/player/<?php echo $pimage ?>" width="65px">
-</div>
+<?php
+	if ($pid == $unitplayerid) {
+		// Current Mech is playable by current user
+		echo "<div id='player_image'>";
+		echo "	<img src='./images/player/".$pimage."' width='65px''>";
+		echo "</div>";
+		$playable = true;
+	} else {
+		$playable = false;
+	}
+?>
 
 <div id="pv">
 	<span style="font-size: 22px; color: #aaaaaa; vertical-align: middle;">PV:&nbsp;&nbsp;</span>
