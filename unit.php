@@ -2,6 +2,13 @@
 session_start();
 // https://www.php-einfach.de/php-tutorial/php-sessions/
 
+	if (!isset($_SESSION['playerid'])) {
+		echo "Not logged in... redirecting.<br>";
+		echo "<meta http-equiv='refresh' content='0;url=./login.php'>";
+		die();
+	}
+	$pid = $_SESSION['playerid'];
+	$pimage = $_SESSION['playerimage'];
 ?>
 
 <html lang="en">
@@ -114,7 +121,7 @@ session_start();
 </div>
 
 <div id="player_image">
-	<img src="./images/player/Meldric.png" width="150px">
+	<img src="./images/player/<?php echo $pimage ?>" width="65px">
 </div>
 
 <div id="pv">
@@ -285,7 +292,7 @@ session_start();
 <div id="bottomleft"><img src="./images/bottom-left.png" width="280px"></div>
 
 <div align="center" id="settings">
-	<a href="javascript:changeWallpaper()"><i class="fa fa-fw fa-picture-o"></i></a>
+	<!-- <a href="javascript:changeWallpaper()"><i class="fa fa-fw fa-picture-o"></i></a> -->
 	<a href="#" onclick="javascript:window.location.reload(true)"><i class="fa fa-fw fa-refresh"></i></a>
 	<a href="javascript:textSize(0)"><i class="fa fa-fw fa-minus-square"></i></a>
 	<a href="javascript:textSize(1)"><i class="fa fa-fw fa-plus-square"></i></a>

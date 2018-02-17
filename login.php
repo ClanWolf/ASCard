@@ -1,21 +1,32 @@
 <?php
 session_start();
 // https://www.php-einfach.de/php-tutorial/php-sessions/
+	require('./db.php');
 
-	if(isset($_GET['login'])) {
-		$userid = -1;
-		$email = $_POST['email'];
-		$passwort = $_POST['password'];
+	ini_set("display_errors", 1); error_reporting(E_ALL);
+	$login = isset($_GET['login']) ? $_GET['login'] : "";
+	$playername = isset($_POST['playername']) ? $_POST['playername'] : "";
+	$password = isset($_POST['password']) ? $_POST['password'] : "";
 
-		if (!($stmt = $mysqli->prepare("SELECT * FROM asc_player WHERE email = ?"))) {
-			echo "Prepare failed: (" . $mysqli->errno . ") " . $mysqli->error;
+	if(!$login == "") {
+		if (!($stmt = $conn->prepare("SELECT * FROM asc_player WHERE name = ?"))) {
+			echo "Prepare failed: (" . $conn->errno . ") " . $conn->error;
 		}
-		if ($stmt->execute($email)) {
-			while ($row = $stmt->fetch()) {
-				if ($row["email"] == $email) {
-					$password_db = $row["password"];
-					if (password_verify($passwort, $password_db)) {
+		if (!$stmt->bind_param("s", $playername)) {
+			echo "Binding parameters failed: (" . $stmt->errno . ") " . $stmt->error;
+		}
+		if ($stmt->execute()) {
+			$res = $stmt->get_result();
+			while ($row = $res->fetch_assoc()) {
+				if ($row['name'] == $playername) {
+					$password_db = $row['password'];
+					var_dump($password_db);
+					if (password_verify($password, $password_db)) {
 						$_SESSION['playerid'] = $row['playerid'];
+						$_SESSION['name'] = $row['name'];
+						$_SESSION['email'] = $row['email'];
+						$_SESSION['factionid'] = $row['factionid'];
+						$_SESSION['playerimage'] = $row['image'];
    						header("Location: ./unitselector.php");
 						die('Login succeeded!<br>');
 					} else {
@@ -51,12 +62,17 @@ session_start();
 			margin-left: auto;
 			margin-right: auto;
 		}
+		input {
+			border: 0px;
+			padding: 5px;
+			margin: 5px;
+		}
 		.box {
-			width: 400px;
+			width: 500px;
 			height: 200px;
-			background-color :#transparent;
+			background-color: #694007;
 			position: fixed;
-			margin-left: -200px;
+			margin-left: -250px;
 			margin-top: -100px;
 			top: 50%;
 			left: 50%;
@@ -72,12 +88,20 @@ session_start();
 	?>
 
 	<form action="?login=1" method="post">
-		E-Mail:<br>
-		<input type="email" size="40" maxlength="250" name="email"><br><br>
-        Password:<br>
-		<input type="password" size="40"  maxlength="250" name="passwort"><br>
-        <input type="submit" value="Login">
+		<table class="box" cellspacing=10 cellpadding=10 border=0px>
+			<tr>
+				<td class='mechselect_button_active'>
+					<img src="./images/icon_144x144.png">
+				</td>
+				<td class='mechselect_button_active'>
+					<input type="text" size="20" maxlength="80" name="playername"><br>
+					<input type="password" size="20"  maxlength="32" name="password"><br>
+					<input type="submit" size="50" style="width:200px" value="LOGIN"><br>
+				</td>
+			</tr>
+		</table>
 	</form>
+
 </body>
 
 </html>

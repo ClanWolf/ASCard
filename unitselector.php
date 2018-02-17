@@ -3,20 +3,20 @@ session_start();
 // https://www.php-einfach.de/php-tutorial/php-sessions/
 
 	if (!isset($_SESSION['playerid'])) {
-		// if not logged in, redirect to the login page
 		echo "Not logged in... redirecting.<br>";
-		echo "<meta http-equiv='refresh' content='3;url=./login.php'>";
+		echo "<meta http-equiv='refresh' content='0;url=./login.php'>";
 		die();
 	}
 	// Get data on units from db
-	//
+	$pid = $_SESSION['playerid'];
 ?>
 
 <html lang="en">
 
 <head>
 	<title>Unit selector</title>
-	<link rel="stylesheet" href="./styles/styles.css" type="text/css">
+	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="./styles/styles.css">
 	<link rel="icon" href="./favicon.png" type="image/png">
 	<link rel="shortcut icon" href="./images/icon_196x196.png" type="image/png" sizes="196x196">
 	<link rel="apple-touch-icon" href="./images/icon_57x57.png" type="image/png" sizes="57x57">
@@ -56,9 +56,9 @@ session_start();
 				<td onclick="location.href='./logout.php'" width="60px" style="background: rgba(50,50,50,1.0); text-align: center; vertical-align: middle;" nowrap>
 					<div><a style="color: #eee;" href="./logout.php"><i class="fa fa-power-off" aria-hidden="true"></i></a></div>
 				</td>
-				<td onclick=\"location.href='./logout.php'\" nowrap><div class='mechselect_button_active'><a href='./logout.php'>Logout</a><br><span style='font-size:16px;'>second line</span></div></td>
-				<td onclick=\"location.href='./logout.php'\" nowrap><div class='mechselect_button_active'><a href='./logout.php'>Logout</a><br><span style='font-size:16px;'>second line</span></div></td>
-				<td onclick=\"location.href='./logout.php'\" nowrap><div class='mechselect_button_active'><a href='./logout.php'>Logout</a><br><span style='font-size:16px;'>second line</span></div></td>
+				<td onclick="location.href='./unitselector.php'" width="33%" nowrap><div class='mechselect_button_active'><a href='./unitselector.php'>SELECT UNIT</a><br><span style='font-size:16px;'>Choose a unit to play</span></div></td>
+				<td onclick="location.href='./createplayer.php'" width="34%" nowrap><div class='mechselect_button_normal'><a href='./createplayer.php'>CREATE PLAYER</a><br><span style='font-size:16px;'>Create a new player</span></div></td>
+				<td onclick="location.href='./createunit.php'" width="33%" nowrap><div class='mechselect_button_normal'><a href='./logout.php'>CREATE UNIT / PILOTS</a><br><span style='font-size:16px;'>Create a new unit and pilot</span></div></td>
 			</tr>
 		</table>
 	</div>

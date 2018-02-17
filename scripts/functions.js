@@ -110,13 +110,13 @@ $(document).ready(function() {
 	var mechimage = document.getElementById("mechimage");
 	mechimage.style.height="" + ($(document).height() * 0.8 + "px");
 
-	var wallpaperName = getCookie("wallpaper");
-	if ((wallpaperName !== null) && (typeof wallpaperName != 'undefined')) {
-		var res = wallpaperName.substr(-3);
-		if (res === "png") {
-			document.body.style.backgroundImage = "url('" + getCookie("wallpaper") + "')";
-		}
-	}
+	// var wallpaperName = getCookie("wallpaper");
+	// if ((wallpaperName !== null) && (typeof wallpaperName != 'undefined')) {
+	// 	var res = wallpaperName.substr(-3);
+	// 	if (res === "png") {
+	// 		document.body.style.backgroundImage = "url('" + getCookie("wallpaper") + "')";
+	// 	}
+	// }
 
 	$("#dice").click(function(event) {
 		if (rolling === 0) {
@@ -150,14 +150,14 @@ function rolldice() {
 	rolling--;
 }
 
-function changeWallpaper() {
-	var wallpaperName = getCookie("wallpaper");
-	do {
-		var wallpaperNameRand = "./images/body-bg_" + rand(1, 4) + ".png";
-	} while (wallpaperName === wallpaperNameRand);
-	document.body.style.backgroundImage = "url('" + wallpaperNameRand+ "')";
-	setCookie("wallpaper", wallpaperNameRand, 365);
-}
+// function changeWallpaper() {
+// 	var wallpaperName = getCookie("wallpaper");
+// 	do {
+// 		var wallpaperNameRand = "./images/body-bg_" + rand(1, 4) + ".png";
+// 	} while (wallpaperName === wallpaperNameRand);
+// 	document.body.style.backgroundImage = "url('" + wallpaperNameRand+ "')";
+// 	setCookie("wallpaper", wallpaperNameRand, 365);
+// }
 
 function playDiceSound() {
 	sound_dice.play();
