@@ -42,6 +42,16 @@ session_start();
 
 <head>
 	<title>Login</title>
+	<meta charset="utf-8">
+	<meta http-equiv="expires" content="0">
+	<meta name="description" content="Cards app for the AlphaStrike TableTop (BattleTech).">
+	<meta name="keywords" content="BattleTech, AlphaStrike, Mech">
+	<meta name="robots" content="noindex,nofollow">
+	<meta name="mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<!-- <meta name="viewport" content="width=1700px, initial-scale=1.0, user-scalable=no"> -->
+
+	<link rel="manifest" href="./manifest.json">
 	<link rel="stylesheet" href="./styles/styles.css" type="text/css">
 	<link rel="icon" href="./favicon.png" type="image/png">
 	<link rel="shortcut icon" href="./images/icon_196x196.png" type="image/png" sizes="196x196">
@@ -95,7 +105,7 @@ session_start();
 				</td>
 				<td class='mechselect_button_active'>
 					<input type="text" size="20" maxlength="80" name="playername"><br>
-					<input type="password" size="20"  maxlength="32" name="password"><br>
+					<input type="password" size="20"  maxlength="32" name="password"><br><br>
 					<input type="submit" size="50" style="width:200px" value="LOGIN"><br>
 				</td>
 			</tr>

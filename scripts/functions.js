@@ -128,7 +128,8 @@ $(document).ready(function() {
 		}
 	});
 
-	$("#cover").fadeOut(100, "linear");
+	$("#cover").hide();
+	//$("#cover").fadeOut(100, "linear");
 });
 
 $(window).resize(function() {

@@ -9,6 +9,7 @@ session_start();
 	}
 	$pid = $_SESSION['playerid'];
 	$pimage = $_SESSION['playerimage'];
+	$hideNotOwnedMech = $_SESSION['option1'];
 ?>
 
 <html lang="en">
@@ -129,6 +130,12 @@ session_start();
 		$playable = true;
 	} else {
 		$playable = false;
+	}
+
+	if (!$playable) {
+		if ($hideNotOwnedMech) {
+			echo "<div id='blockNotOwnedMechs'></div>";
+		}
 	}
 ?>
 

@@ -2,19 +2,54 @@
 session_start();
 // https://www.php-einfach.de/php-tutorial/php-sessions/
 
+	require('./db.php');
 	if (!isset($_SESSION['playerid'])) {
 		echo "Not logged in... redirecting.<br>";
 		echo "<meta http-equiv='refresh' content='0;url=./login.php'>";
 		die();
 	}
+
 	// Get data on units from db
 	$pid = $_SESSION['playerid'];
+
+	$opt1 = isset($_GET["opt1"]) ? $_GET["opt1"] : "";
+	$opt2 = isset($_GET["opt2"]) ? $_GET["opt2"] : "";
+
+	if ($opt1 == true || $opt2 == true) {
+		// storing changed options to database
+		$sql_update_options = "UPDATE asc_options SET OPTION1=".$opt1.", OPTION2=".$opt2." WHERE playerid = ".$pid;
+		$result_update_options = mysqli_query($conn, $sql_update_options);
+		echo "<meta http-equiv='refresh' content='0;url=./unitselector.php'>";
+		die();
+	} else {
+		// getting options from database
+		$sql_asc_options = "SELECT SQL_NO_CACHE * FROM clanwolf.asc_options where playerid = ".$pid;
+		$result_asc_options = mysqli_query($conn, $sql_asc_options);
+		if (mysqli_num_rows($result_asc_options) > 0) {
+			while($row = mysqli_fetch_assoc($result_asc_options)) {
+				$opt1 = $row["option1"];
+				$opt2 = $row["option2"];
+				$_SESSION['option1'] = $opt1;
+				$_SESSION['option2'] = $opt2;
+			}
+		}
+	}
 ?>
 
 <html lang="en">
 
 <head>
-	<title>Unit selector</title>
+	<title>ClanWolf.net: AplhaStrike Card App (ASCard): Unit selector</title>
+	<meta charset="utf-8">
+	<meta http-equiv="expires" content="0">
+	<meta name="description" content="Cards app for the AlphaStrike TableTop (BattleTech).">
+	<meta name="keywords" content="BattleTech, AlphaStrike, Mech">
+	<meta name="robots" content="noindex,nofollow">
+	<meta name="mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<!-- <meta name="viewport" content="width=1700px, initial-scale=1.0, user-scalable=no"> -->
+
+	<link rel="manifest" href="./manifest.json">
 	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
 	<link rel="stylesheet" type="text/css" href="./styles/styles.css">
 	<link rel="icon" href="./favicon.png" type="image/png">
@@ -27,6 +62,10 @@ session_start();
 	<link rel="apple-touch-icon" href="./images/icon_144x144.png" type="image/png" sizes="144x144">
 	<link rel="apple-touch-icon" href="./images/icon_152x152.png" type="image/png" sizes="152x152">
 	<link rel="apple-touch-icon" href="./images/icon_180x180.png" type="image/png" sizes="180x180">
+
+	<script type="text/javascript" src="./scripts/jquery-3.3.1.min.js"></script>
+	<script type="text/javascript" src="./scripts/howler.min.js"></script>
+	<script type="text/javascript" src="./scripts/cookies.js"></script>
 
 	<style>
 		html, body {
@@ -46,10 +85,63 @@ session_start();
 			top: 50%;
 			left: 50%;
 		}
+		.options {
+			z-index: 3;
+			position: absolute;
+			vertical-align: middle;
+			border-radius: 5px;
+			border-style: solid;
+			border-width: 3px;
+			padding: 25px;
+			background: rgba(60,60,60,0.75);
+			width: 300px;
+			height: 70px;
+			top: 80px;
+			right: 20px;
+			color: #ddd;
+			border-color: #aaa;
+		}
 	</style>
 </head>
 
 <body>
+	<script>
+		$(document).ready(function() {
+			$("#cover").hide();
+		});
+
+		function changeOption() {
+			var na = "";
+			var opt1 = 0;
+			var opt2 = 0;
+			var list = document.getElementsByClassName("bigcheck");
+			[].forEach.call(list, function (el1) {
+				na = el1.name;
+				if (typeof na != 'undefined') {
+					if (na.substring(0, 4) == "OPT1") { opt1 = el1.checked }
+					if (na.substring(0, 4) == "OPT2") { opt2 = el1.checked }
+				}
+			})
+			var url="./unitselector.php?opt1="+opt1+"&opt2="+opt2;
+			// alert (url);
+			window.location.href = url;
+		}
+
+		function setOptions() {
+			var na = "";
+			var list = document.getElementsByClassName("bigcheck");
+			[].forEach.call(list, function (el1) {
+			na = el1.name;
+				if (typeof na != 'undefined') {
+					if (na.substring(0, 4) == "OPT1") { el1.checked = <?php echo $opt1 ?> }
+					if (na.substring(0, 4) == "OPT2") { el1.checked = <?php echo $opt2 ?> }
+				}
+			})
+		}
+	</script>
+
+	<div id="cover"></div>
+
 	<div id="header">
 		<table style="width: 100%;" cellspacing="0" cellpadding="0">
 			<tr>
@@ -62,13 +154,38 @@ session_start();
 			</tr>
 		</table>
 	</div>
-	
+
 	<table class="box" cellspacing=10 cellpadding=10 border=0px>
 		<tr>
 			<td onclick="location.href='./unit.php?unit=5'" class='mechselect_button_active'><a href="./unit.php?unit=5">Meldric</a></td>
 			<td onclick="location.href='./unit.php?unit=6'" class='mechselect_button_active'><a href="./unit.php?unit=6">Nimrod</a></td>
 		</tr>
 	</table>
+
+	<div class="options">
+		<table>
+			<tr>
+				<td align="left" style="color: #aaa;">
+					<label class="bigcheck"><input onchange="changeOption();" type="checkbox" class="bigcheck" name="OPT1" value="yes"/><span class="bigcheck-target"></span></label>&nbsp;&nbsp;
+				</td>
+				<td align="left" class="datalabel">
+					Block other players units
+				</td>
+			</tr>
+			<tr>
+				<td align="left" style="color: #aaa;">
+					<label class="bigcheck"><input onchange="changeOption();" type="checkbox" class="bigcheck" name="OPT2" value="yes"/><span class="bigcheck-target"></span></label>&nbsp;&nbsp;
+				</td>
+				<td align="left" class="datalabel">
+					Auto crit rolls
+				</td>
+			</tr>
+		</table>
+	</div>
+
+	<script>
+		setOptions();
+	</script>
 </body>
 
 </html>
