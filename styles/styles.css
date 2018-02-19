@@ -166,8 +166,8 @@ a:hover {
 	left: 0px;
 	right: 0px;
 	//background: rgba(255,0,0,0.25);
-	background-image: url('../images/block.jpg');
-	opacity: 0.4;
+	background-image: url('../images/block.png');
+	opacity: 0.85;
 	background-size: cover;
 }
 #pv {

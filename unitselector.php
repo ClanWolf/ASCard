@@ -177,7 +177,7 @@ session_start();
 					<label class="bigcheck"><input onchange="changeOption();" type="checkbox" class="bigcheck" name="OPT2" value="yes"/><span class="bigcheck-target"></span></label>&nbsp;&nbsp;
 				</td>
 				<td align="left" class="datalabel">
-					Auto crit rolls
+					Auto crit rolls (tap dice)
 				</td>
 			</tr>
 		</table>
