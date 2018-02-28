@@ -50,7 +50,7 @@ session_start();
 	<!-- <meta name="viewport" content="width=1700px, initial-scale=1.0, user-scalable=no"> -->
 
 	<link rel="manifest" href="./manifest.json">
-	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
 	<link rel="stylesheet" type="text/css" href="./styles/styles.css">
 	<link rel="icon" href="./favicon.png" type="image/png">
 	<link rel="shortcut icon" href="./images/icon_196x196.png" type="image/png" sizes="196x196">
