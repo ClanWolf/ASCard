@@ -69,7 +69,7 @@ session_start();
 
 	<style>
 		html, body {
-			background-image: url('./images/body-bg_2.png');
+			background-image: url('./images/body-bg_2.jpg');
 		}
 		table {
 			margin-left: auto;

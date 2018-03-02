@@ -20,7 +20,7 @@ session_start();
 			while ($row = $res->fetch_assoc()) {
 				if ($row['name'] == $playername) {
 					$password_db = $row['password'];
-					var_dump($password_db);
+					// var_dump($password_db);
 					if (password_verify($password, $password_db)) {
 						$_SESSION['playerid'] = $row['playerid'];
 						$_SESSION['name'] = $row['name'];
@@ -30,7 +30,7 @@ session_start();
    						header("Location: ./unitselector.php");
 						die('Login succeeded!<br>');
 					} else {
-						$errorMessage = "Login failed!<br>";
+						$errorMessage = "LOGIN FAILED!<br>";
 					}
 				}
 			}
@@ -66,7 +66,7 @@ session_start();
 
 	<style>
 		html, body {
-			background-image: url('./images/body-bg_2.png');
+			background-image: url('./images/body-bg_2.jpg');
 		}
 		table {
 			margin-left: auto;
@@ -93,7 +93,11 @@ session_start();
 <body>
 	<?php
 		if(isset($errorMessage)) {
+			echo "<table cellspacing=10 cellpadding=10 border=0px><tr><td><br><br><br>";
+			echo "<span style='color:red; font-size: 42px;'>";
 			echo $errorMessage;
+			echo "</span>";
+			echo "</td></tr></table>";
 		}
 	?>
 

@@ -129,7 +129,7 @@ $(document).ready(function() {
 	});
 
 	$("#cover").hide();
-	//$("#cover").fadeOut(100, "linear");
+	//$("#cover").fadeOut(400, "linear");
 });
 
 $(window).resize(function() {
