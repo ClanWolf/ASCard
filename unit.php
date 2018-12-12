@@ -26,7 +26,7 @@ session_start();
 	<!-- <meta name="viewport" content="width=1700px, initial-scale=1.0, user-scalable=no"> -->
 
 	<link rel="manifest" href="./manifest.json">
-	<link rel="stylesheet" type="text/css" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
 	<link rel="stylesheet" type="text/css" href="./styles/styles.css">
 	<link rel="icon" href="./favicon.png" type="image/png">
 	<link rel="shortcut icon" href="./images/icon_196x196.png" type="image/png" sizes="196x196">
@@ -77,44 +77,33 @@ session_start();
 				<div><a style="color: #eee;" href="./index.html"><i class="fa fa-bars" aria-hidden="true"></i></a></div>
 			</td>
 
-			<?php
-				$size = sizeof($array_MECH);
-				for ($i4 = 1; $i4 <= $size; $i4++) {
-					$meli="./unit.php?unit=".$unitid."&chosenmech=".$i4;
-					if ($chosenMechIndex == $i4) {
-						echo "<td onclick=\"location.href='".$meli."'\" nowrap><div class='mechselect_button_active'><a href='".$meli."'>#".$array_MECH_NUMBER[$i4]." ".$array_MECH[$i4]."</a><br><span style='font-size:16px;'>".$array_PILOT_CALLSIGN[$i4]."</span></div></td>";
-					} else {
-						echo "<td onclick=\"location.href='".$meli."'\" nowrap><div class='mechselect_button_normal'><a href='".$meli."'>#".$array_MECH_NUMBER[$i4]." ".$array_MECH[$i4]."</a><br><span style='font-size:16px;'>".$array_PILOT_CALLSIGN[$i4]."</span></div></td>";
-					}
-				}
-			?>
+<?php
+	$size = sizeof($array_MECH);
+	for ($i4 = 1; $i4 <= $size; $i4++) {
+		$meli="./unit.php?unit=".$unitid."&chosenmech=".$i4;
+		if ($chosenMechIndex == $i4) {
+			echo "<td onclick=\"location.href='".$meli."'\" nowrap><div class='mechselect_button_active'><a href='".$meli."'>#".$array_MECH_NUMBER[$i4]." ".$array_MECH[$i4]."</a><br><span style='font-size:16px;'>".$array_PILOT_CALLSIGN[$i4]."</span></div></td>\r\n";
+		} else {
+			echo "<td onclick=\"location.href='".$meli."'\" nowrap><div class='mechselect_button_normal'><a href='".$meli."'>#".$array_MECH_NUMBER[$i4]." ".$array_MECH[$i4]."</a><br><span style='font-size:16px;'>".$array_PILOT_CALLSIGN[$i4]."</span></div></td>\r\n";
+		}
+	}
+?>
+
 		</tr>
 	</table>
 </div>
 
-<div id="pilotimage">
-	<?php echo "<img src='./images/pilots/".$array_PILOT_IMG_URL[$chosenMechIndex]."' width='100px' height='100px'>" ?>
-</div>
-<div id="faction" align="center">
-	<?php echo "<img src='./images/factions/".$FACTION_IMG_URL."' width='60px' height='60px'>" ?>
-</div>
+<div id="pilotimage"><?php echo "<img src='./images/pilots/".$array_PILOT_IMG_URL[$chosenMechIndex]."' width='100px' height='100px'>" ?></div>
+<div id="faction" align="center"><?php echo "<img src='./images/factions/".$FACTION_IMG_URL."' width='60px' height='60px'>" ?></div>
 <div id="mech_number" align="center"><?= $array_MECH_NUMBER[$chosenMechIndex] ?></div>
-<div id="mech">
-	<?php echo "<img id='mechimage' src='./images/mechs/".$array_MECH_IMG_URL[$chosenMechIndex]."'>" ?>
-</div>
+<div id="mech"><?php echo "<img id='mechimage' src='./images/mechs/".$array_MECH_IMG_URL[$chosenMechIndex]."'>" ?></div>
 
 <div id="topleft">
-	<span style="font-size: 20px; color: #aaaaaa;">
-		<?php echo "$array_MECH[$chosenMechIndex]" ?>-<?php echo "$array_MECH_MODEL[$chosenMechIndex]" ?>&nbsp;<?php echo "\"$array_MECH_CUSTOM_NAME[$chosenMechIndex]\"" ?>
-	</span>
+	<span style="font-size: 20px; color: #aaaaaa;"><?php echo "$array_MECH[$chosenMechIndex]" ?>-<?php echo "$array_MECH_MODEL[$chosenMechIndex]" ?>&nbsp;<?php echo "\"$array_MECH_CUSTOM_NAME[$chosenMechIndex]\"" ?></span>
 	<br>
-	<span style="font-size: 30px; color: #da8e25;">
-		<?php echo "$array_PILOT[$chosenMechIndex]"; ?>
-	</span>
+	<span style="font-size: 30px; color: #da8e25;"><?php echo "$array_PILOT[$chosenMechIndex]"; ?></span>
 	<br>
-	<span style="font-size: 18px; color: #eeeeee;">
-		<?php echo "$UNIT"; ?>
-	</span>
+	<span style="font-size: 18px; color: #eeeeee;"><?php echo "$UNIT"; ?></span>
 </div>
 
 <div id="topright">
@@ -141,9 +130,7 @@ session_start();
 
 <div id="pv">
 	<span style="font-size: 22px; color: #aaaaaa; vertical-align: middle;">PV:&nbsp;&nbsp;</span>
-	<span style="font-size: 48px; color: #da8e25; vertical-align: middle;">
-		<?php echo "$array_PV[$chosenMechIndex]"; ?>
-	</span>
+	<span style="font-size: 48px; color: #da8e25; vertical-align: middle;"><?php echo "$array_PV[$chosenMechIndex]"; ?></span>
 </div>
 
 <div class="datatable">
@@ -161,14 +148,10 @@ session_start();
 							<td nowrap class="datalabel" width="12%">TMM:</td>
 							<td nowrap class="datavalue" width="13%"><?php echo "$array_TMM[$chosenMechIndex]"; ?></td>
 							<td nowrap class="datalabel" width="12%">MV:</td>
-							<td nowrap class="datalabel" width="13%" style="color:#fff;">
-								<?php
-									echo "$array_MV[$chosenMechIndex]&rdquo;";
-									if ($array_MVJ[$chosenMechIndex] != null) {
-										echo "/$array_MVJ[$chosenMechIndex]&rdquo;&nbsp;j";
-									}
-								?>
-							</td>
+							<td nowrap class="datalabel" width="13%" style="color:#fff;"><?php echo "$array_MV[$chosenMechIndex]&rdquo;";
+							if ($array_MVJ[$chosenMechIndex] != null) {
+								echo "/$array_MVJ[$chosenMechIndex]&rdquo;&nbsp;j";
+							} ?></td>
 						</tr>
 						<tr>
 							<td nowrap class="datalabel" width="12%" colspan="1">ROLE:</td>
@@ -215,21 +198,25 @@ session_start();
 						<tr>
 							<td nowrap width="5%" class="datalabel">A:</td>
 							<td nowrap width="95%" style="color: #222;">
-							<?php
-								for ($i1 = 1; $i1 <= $array_A_MAX[$chosenMechIndex]; $i1++) {
-									echo "<label class='bigcheck'><input onchange='readCircles($array_MECH_DBID[$chosenMechIndex]);' type='checkbox' class='bigcheck' name='A".$i1."' value='yes'/><span class='bigcheck-target'></span></label>&nbsp;";
-								}
-							?>
+
+<?php
+	for ($i1 = 1; $i1 <= $array_A_MAX[$chosenMechIndex]; $i1++) {
+		echo "<label class='bigcheck'><input onchange='readCircles($array_MECH_DBID[$chosenMechIndex]);' type='checkbox' class='bigcheck' name='A".$i1."' value='yes'/><span class='bigcheck-target'></span></label>&nbsp;\r\n";
+	}
+?>
+
 							</td>
 						</tr>
 						<tr>
 							<td nowrap width="5%" class="datalabel">S:</td>
 							<td nowrap width="95%" style="color: #aaa;">
-							<?php
-								for ($i2 = 1; $i2 <= $array_S_MAX[$chosenMechIndex]; $i2++) {
-									echo "<label class='bigcheck'><input onchange='readCircles($array_MECH_DBID[$chosenMechIndex]);' type='checkbox' class='bigcheck' name='S".$i2."' value='yes'/><span class='bigcheck-target'></span></label>&nbsp;";
-								}
-							?>
+
+<?php
+	for ($i2 = 1; $i2 <= $array_S_MAX[$chosenMechIndex]; $i2++) {
+		echo "<label class='bigcheck'><input onchange='readCircles($array_MECH_DBID[$chosenMechIndex]);' type='checkbox' class='bigcheck' name='S".$i2."' value='yes'/><span class='bigcheck-target'></span></label>&nbsp;\r\n";
+	}
+?>
+
 							</td>
 						</tr>
 					</table>
