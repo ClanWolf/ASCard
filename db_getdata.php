@@ -56,7 +56,7 @@
 
 	// Unit
 	// unitid; factionid; forcename; parentforceid; unit_imageurl; playable
-	$sql_asc_unit = "SELECT SQL_NO_CACHE * FROM clanwolf.asc_unit;";
+	$sql_asc_unit = "SELECT SQL_NO_CACHE * FROM asc_unit;";
 	$result_asc_unit = mysqli_query($conn, $sql_asc_unit);
 	if (mysqli_num_rows($result_asc_unit) > 0) {
 		while($row = mysqli_fetch_assoc($result_asc_unit)) {
@@ -84,7 +84,7 @@
 
 	// Faction
 	// factionid; name; factiontype; faction_imageurl
-	$sql_asc_faction = "SELECT SQL_NO_CACHE * FROM clanwolf.asc_faction where factionid=".$factionid.";";
+	$sql_asc_faction = "SELECT SQL_NO_CACHE * FROM asc_faction where factionid=".$factionid.";";
 	$result_asc_faction = mysqli_query($conn, $sql_asc_faction);
 	if (mysqli_num_rows($result_asc_faction) > 0) {
 		while($row = mysqli_fetch_assoc($result_asc_faction)) {
@@ -101,7 +101,7 @@
 	// Alpha Strike Cards
 	// id; unitid; mechid; pilotid
 	$mechcount = 0;
-	$sql_asc = "SELECT SQL_NO_CACHE * FROM clanwolf.asc;";
+	$sql_asc = "SELECT SQL_NO_CACHE * FROM asc_assign;";
 	$result_asc = mysqli_query($conn, $sql_asc);
 	if (mysqli_num_rows($result_asc) > 0) {
 		while($row = mysqli_fetch_assoc($result_asc)) {
@@ -119,7 +119,7 @@
 				// as_long; as_long_min; as_extreme; as_extreme_min; 
 				// as_ov; as_armor; as_structure; as_threshold; as_specials;
 				// mech_imageurl
-				$sql_asc_mech = "SELECT SQL_NO_CACHE * FROM clanwolf.asc_mech where mechid=".$mechid.";";
+				$sql_asc_mech = "SELECT SQL_NO_CACHE * FROM asc_mech where mechid=".$mechid.";";
 				$result_asc_mech = mysqli_query($conn, $sql_asc_mech);
 				if (mysqli_num_rows($result_asc_mech) > 0) {
 					while($row = mysqli_fetch_assoc($result_asc_mech)) {
@@ -158,7 +158,7 @@
 				// Mechstatus
 				// mechstatusid; mechid; heat; armor; structure;
 				// crit_engine; crit_fc; crit_mp; crit_weapons
-				$sql_asc_mechstatus = "SELECT SQL_NO_CACHE * FROM clanwolf.asc_mechstatus where mechid=".$mechid.";";
+				$sql_asc_mechstatus = "SELECT SQL_NO_CACHE * FROM asc_mechstatus where mechid=".$mechid.";";
 				$result_asc_mechstatus = mysqli_query($conn, $sql_asc_mechstatus);
 				if (mysqli_num_rows($result_asc_mechstatus) > 0) {
 					while($row = mysqli_fetch_assoc($result_asc_mechstatus)) {
@@ -180,7 +180,7 @@
 				// Pilot
 				// pilotid; rank; name; callsign; health;
 				// pilot_imageurl
-				$sql_asc_pilot = "SELECT SQL_NO_CACHE * FROM clanwolf.asc_pilot where pilotid=".$pilotid.";";
+				$sql_asc_pilot = "SELECT SQL_NO_CACHE * FROM asc_pilot where pilotid=".$pilotid.";";
 				$result_asc_pilot = mysqli_query($conn, $sql_asc_pilot);
 				if (mysqli_num_rows($result_asc_pilot) > 0) {
 					while($row = mysqli_fetch_assoc($result_asc_pilot)) {
