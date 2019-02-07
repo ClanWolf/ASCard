@@ -160,6 +160,7 @@ session_start();
 				<td onclick="location.href='./unitselector.php'" width="33%" nowrap><div class='mechselect_button_active'><a href='./unitselector.php'>SELECT UNIT</a><br><span style='font-size:16px;'>Choose a unit to play</span></div></td>
 				<td onclick="location.href='./createplayer.php'" width="34%" nowrap><div class='mechselect_button_normal'><a href='./createplayer.php'>CREATE PLAYER</a><br><span style='font-size:16px;'>Create a new player</span></div></td>
 				<td onclick="location.href='./createunit.php'" width="33%" nowrap><div class='mechselect_button_normal'><a href='./createunit.php'>CREATE UNIT / PILOTS</a><br><span style='font-size:16px;'>Create a new unit and pilot</span></div></td>
+				<td width="60px" style="background: rgba(50,50,50,1.0); text-align: center; vertical-align: middle;" nowrap><div>User Image</div></td>
 			</tr>
 		</table>
 	</div>
