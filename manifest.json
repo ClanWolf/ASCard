@@ -40,6 +40,6 @@
     }
   ],
   "start_url": "/apps/ASCard/index.html",
-  "display": "standalone",
+  "display": "fullscreen",
   "orientation": "landscape"
 }
