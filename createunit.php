@@ -202,7 +202,6 @@ session_start();
 						<table width='100%' cellspacing=5 cellpadding=5>
 							<tr>
 								<td nowrap class="datalabel" style='text-align:left;' width='50%'>
-									Pilot<br><br>
 									<input style="width:120px" type="text" required id="PN" name="PN"> PilotName<br>
 									<input style="width:120px" type="text" required id="PCS" name="PCS"> PilotCallsign<br>
 									<input style="width:120px" type="text" required id="PR" name="PR"> PilotRank<br>
