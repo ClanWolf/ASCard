@@ -118,7 +118,7 @@ session_start();
 		</table>
 	</div>
 
-	<br><br>
+	<br>
 
 	<form>
 		<table class="options" cellspacing=10 cellpadding=10 border=0px>
