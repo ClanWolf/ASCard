@@ -141,6 +141,14 @@ session_start();
 		}
 	</script>
 
+<?php
+	if ($pid == $unitplayerid) {
+		echo "<div id='player_image'>";
+		echo "	<img src='./images/player/".$pimage."' width='65px''>";
+		echo "</div>";
+	}
+?>
+
 	<div id="cover"></div>
 
 	<div id="header">
@@ -162,14 +170,6 @@ session_start();
 			<td onclick="location.href='./unit.php?unit=6'" class='mechselect_button_active'><a href="./unit.php?unit=6">Nimrod</a></td>
 		</tr>
 	</table>
-
-<?php
-	if ($pid == $unitplayerid) {
-		echo "<div id='player_image'>";
-		echo "	<img src='./images/player/".$pimage."' width='65px''>";
-		echo "</div>";
-	}
-?>
 
 	<div class="options">
 		<table>
