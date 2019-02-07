@@ -1,8 +1,11 @@
-var corsproxyprefix = "https://cors-anywhere.herokuapp.com/";
+// Until the masterunitlist is served over https, a CORS proxy is used to access mul
+// in order to avoid security error messages and content blocking
+var corsproxyprefix1 = "https://cors-anywhere.herokuapp.com/";
+var corsproxyprefix2 = "https://cors.io/?";
 
 function getMechList(filter, tech, minTon, maxTon) {
 	var optionList = '';
-	var url = corsproxyprefix + 'https://www.masterunitlist.info/Unit/QuickList';
+	var url = corsproxyprefix2 + 'https://www.masterunitlist.info/Unit/QuickList';
 		url = url + '?Name='			+ filter;
 		url = url + '&HasBV=false';
 		url = url + '&MinTons='			+ minTon;
@@ -59,7 +62,7 @@ function getMechList(filter, tech, minTon, maxTon) {
 }
 
 function getMechDetails(id) {
-	var url = corsproxyprefix + 'https://www.masterunitlist.info/Unit/QuickDetails?id=' + id;
+	var url = corsproxyprefix2 + 'https://www.masterunitlist.info/Unit/QuickDetails?id=' + id;
 	$.getJSON(url, function (json) {
 		document.getElementById("TP").value=json.BFType;
 		document.getElementById("SZ").value=json.BFSize;
