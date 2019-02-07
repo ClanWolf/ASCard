@@ -40,6 +40,7 @@
     }
   ],
   "start_url": "/apps/ASCard/index.html",
+  "background_color": "#323232",
   "display": "fullscreen",
   "orientation": "landscape"
 }
