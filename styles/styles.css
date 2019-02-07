@@ -168,7 +168,7 @@ a:hover {
 	bottom: 0px;
 	left: 0px;
 	right: 0px;
-	//background: rgba(255,0,0,0.25);
+	// background: rgba(255,0,0,0.25);
 	background-image: url('../images/block.png');
 	opacity: 0.85;
 	background-size: cover;
@@ -214,19 +214,20 @@ a:hover {
 	margin: 0 0;
 	bottom: 0px;
 	text-align: center;
-	background-image: url('../images/bottom-bg.png');
-	background-repeat: repeat-x;
-	background-position: bottom center;
-	background-size: 110px;
+	background: rgba(20,20,20,1.0);
+	// background-image: url('../images/bottom-bg.png');
+	// background-repeat: repeat-x;
+	// background-position: bottom center;
+	// background-size: 110px;
 }
 #version {
 	z-index: 12;
 	position: absolute;
 	color: #ffffff;
 	font-family: Arial, 'Arial Sans Unicode', sans-serif;
-	font-size: 14px;
+	font-size: 12px;
 	font-weight: normal;
-	bottom: 30px;
+	bottom: 10px;
 	right: 310px;
 }
 #settings {
