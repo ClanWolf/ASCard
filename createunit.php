@@ -81,11 +81,17 @@ session_start();
 			vertical-align: middle;
 			color: #000;
 			border-width: 1px;
-            padding: 2px;
+			padding: 2px;
 			font-family: 'Pathway Gothic One', sans-serif;
 		}
 		select:focus, textarea:focus, input:focus {
 			outline: none;
+		}
+		input:invalid {
+			background: green;
+		}
+		input:valid {
+			background: blue;
 		}
 	</style>
 </head>
@@ -199,11 +205,11 @@ session_start();
 							<tr>
 								<td nowrap class="datalabel" style='text-align:left;' width='50%'>
 									Pilot<br><br>
-									<input style="width:120px" type="text" id="PN" name="PN"> PilotName<br>
-									<input style="width:120px" type="text" id="PCS" name="PCS"> PilotCallsign<br>
-									<input style="width:120px" type="text" id="PR" name="PR"> PilotRank<br>
-									<input style="width:120px" type="text" id="PI" name="PI"> PilotImage<br>
-									<input style="width:120px" type="text" id="SKILL" name="SKILL"> SKILL<br>
+									<input style="width:120px" type="text" required id="PN" name="PN"> PilotName<br>
+									<input style="width:120px" type="text" required id="PCS" name="PCS"> PilotCallsign<br>
+									<input style="width:120px" type="text" required id="PR" name="PR"> PilotRank<br>
+									<input style="width:120px" type="text" required id="PI" name="PI"> PilotImage<br>
+									<input style="width:120px" type="text" required id="SKILL" name="SKILL"> SKILL<br>
 
 									<input style="width:120px" type="text" id="UID" name="UID"> Unit (Unit ID)<br>
 
