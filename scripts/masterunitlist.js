@@ -20,32 +20,6 @@ function getMechList(filter, tech, minTon, maxTon) {
 		url = url + '&Types=18';
 		url = url + '&BookAuto=';
 		url = url + '&FactionAuto=';
-
-
-
-
-
-
-	$http.get(url).then(
-		function(response) {
-			var json = JSON.parse(jsonText); // ?
-			document.writeln(json);
-			
-			// ...
-			
-		}
-	).catch(
-		function(fallback) {
-			alert("There was an error retreiving from the MUL.");
-		}
-	)
-
-
-
-
-
-
-
 	$.getJSON(url, function (json) {
 		json.Units.sort(function(a, b) {
 		    if (a.Name < b.Name) return -1;
