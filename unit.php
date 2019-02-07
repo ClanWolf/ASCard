@@ -89,6 +89,9 @@ session_start();
 	}
 ?>
 
+			<td width="60px" style="background: rgba(50,50,50,1.0); text-align: center; vertical-align: middle;" nowrap>
+				<div>User Image</div>
+			</td>
 		</tr>
 	</table>
 </div>
