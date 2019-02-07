@@ -162,6 +162,14 @@ session_start();
 		</tr>
 	</table>
 
+<?php
+	if ($pid == $unitplayerid) {
+		echo "<div id='player_image'>";
+		echo "	<img src='./images/player/".$pimage."' width='65px''>";
+		echo "</div>";
+	}
+?>
+
 	<div class="options">
 		<table>
 			<tr>
