@@ -1,6 +1,8 @@
+var corsproxyprefix = "https://cors-anywhere.herokuapp.com/";
+
 function getMechList(filter, tech, minTon, maxTon) {
 	var optionList = '';
-	var url = 'https://www.masterunitlist.info/Unit/QuickList';
+	var url = corsproxyprefix + 'https://www.masterunitlist.info/Unit/QuickList';
 		url = url + '?Name='			+ filter;
 		url = url + '&HasBV=false';
 		url = url + '&MinTons='			+ minTon;
@@ -57,7 +59,7 @@ function getMechList(filter, tech, minTon, maxTon) {
 }
 
 function getMechDetails(id) {
-	var url = 'https://www.masterunitlist.info/Unit/QuickDetails?id=' + id;
+	var url = corsproxyprefix + 'https://www.masterunitlist.info/Unit/QuickDetails?id=' + id;
 	$.getJSON(url, function (json) {
 		document.getElementById("TP").value=json.BFType;
 		document.getElementById("SZ").value=json.BFSize;
