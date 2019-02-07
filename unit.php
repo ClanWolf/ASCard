@@ -304,7 +304,7 @@ session_start();
 	<?php echo "$version"; ?>
 </div>
 
-<div id="bottomright"><img src="./images/bt-logo.png" width="300px"></div>
+<div id="bottomright"><img src="./images/bt-logo2.png" width="300px"></div>
 
 </body>
 
