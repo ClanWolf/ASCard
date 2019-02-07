@@ -61,7 +61,7 @@ function getMechDetails(id) {
 	$.getJSON(url, function (json) {
 		document.getElementById("TP").value=json.BFType;
 		document.getElementById("SZ").value=json.BFSize;
-		document.getElementById("TMM").value=json.BFTmm;
+		document.getElementById("TMM").value=json.BFTMM;
 		document.getElementById("MV").value=json.BFMove;
 		document.getElementById("ROLE").value=json.Role.Name;
 		document.getElementById("SKILL").value=json.Skill;
