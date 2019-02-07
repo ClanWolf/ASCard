@@ -78,7 +78,7 @@ session_start();
 		.box {
 			width: 400px;
 			height: 200px;
-			background-color :#transparent;
+			background-color: #transparent;
 			position: fixed;
 			margin-left: -200px;
 			margin-top: -100px;
@@ -150,7 +150,7 @@ session_start();
 				</td>
 				<td onclick="location.href='./unitselector.php'" width="33%" nowrap><div class='mechselect_button_active'><a href='./unitselector.php'>SELECT UNIT</a><br><span style='font-size:16px;'>Choose a unit to play</span></div></td>
 				<td onclick="location.href='./createplayer.php'" width="34%" nowrap><div class='mechselect_button_normal'><a href='./createplayer.php'>CREATE PLAYER</a><br><span style='font-size:16px;'>Create a new player</span></div></td>
-				<td onclick="location.href='./createunit.php'" width="33%" nowrap><div class='mechselect_button_normal'><a href='./logout.php'>CREATE UNIT / PILOTS</a><br><span style='font-size:16px;'>Create a new unit and pilot</span></div></td>
+				<td onclick="location.href='./createunit.php'" width="33%" nowrap><div class='mechselect_button_normal'><a href='./createunit.php'>CREATE UNIT / PILOTS</a><br><span style='font-size:16px;'>Create a new unit and pilot</span></div></td>
 			</tr>
 		</table>
 	</div>
