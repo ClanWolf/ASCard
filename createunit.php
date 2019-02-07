@@ -68,18 +68,11 @@ session_start();
 			color: #ddd;
 			border-color: #aaa;
 		}
-		input {
+		input, select {
 			width: 100px;
 			vertical-align: middle;
 			color: #000;
-			border-width: 1px;
-			padding: 2px;
-			font-family: 'Pathway Gothic One', sans-serif;
-		}
-		select {
-			width: 100px;
-			vertical-align: middle;
-			color: #000;
+			background: rgba(60,60,60,0.75);
 			border-width: 1px;
 			padding: 2px;
 			font-family: 'Pathway Gothic One', sans-serif;
