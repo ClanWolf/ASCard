@@ -178,22 +178,20 @@ session_start();
 									<input type="text" id="TP" name="TP"> TP<br>
 									<input type="text" id="SZ" name="SZ"> SZ<br>
 									<input type="text" id="TMM" name="TMM"> TMM<br>
-									<input type="text" id="MV" name="MV"> MV<br>
-									<input type="text" id="ROLE" name="ROLE"> ROLE<br>
 								</td>
 								<td nowrap class="datalabel" style='text-align:left;' width='50%'>
-									<input type="text" id="DMGS" name="DMGS"> DMG Short<br>
-									<input type="text" id="DMGM" name="DMGM"> DMG Medium<br>
-									<input type="text" id="DMGL" name="DMGL"> DMG Long<br>
+									<input type="text" id="MV" name="MV"> MV<br>
+									<input type="text" id="ROLE" name="ROLE"> ROLE<br>
+									<input type="text" id="DMGS" name="DMGS"> DMG S<br>
+									<input type="text" id="DMGM" name="DMGM"> DMG M<br>
+									<input type="text" id="DMGL" name="DMGL"> DMG L<br>
+								</td>
+								<td nowrap class="datalabel" style='text-align:left;' width='50%'>
 									<input type="text" id="OV" name="OV"> OV<br>
 									<input type="text" id="A" name="A"> A<br>
 									<input type="text" id="S" name="S"> S<br>
 									<input type="text" id="PVA" name="PVA"> PV<br>
-								</td>
-							</tr>
-							<tr>
-								<td nowrap class="datalabel" style='text-align:left;' width='50%' colspan='2'>
-									<input type="text" id="SPCL" name="SPCL" style="width:350px"> SPCL<br>
+									<input type="text" id="SPCL" name="SPCL"> SPCL<br>
 								</td>
 							</tr>
 						</table>
