@@ -1,9 +1,12 @@
-/* @import url('//fonts.googleapis.com/css?family=Russo+One:400'); */
 @import url('//fonts.googleapis.com/css?family=Pathway+Gothic+One:400');
+/* @import url('//fonts.googleapis.com/css?family=Russo+One:400'); */
+/* @import url('//fonts.googleapis.com/css?family=Anton:400'); */
 
 * {
 	font-family: 'Pathway Gothic One', sans-serif;
 	/* font-family: 'Russo One', sans-serif; */
+	/* font-family: 'Anton', sans-serif; */
+
 	font-size: 26px;
 }
 /*
