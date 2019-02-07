@@ -11,6 +11,7 @@ session_start();
 
 	// Get data on units from db
 	$pid = $_SESSION['playerid'];
+	$pimage = $_SESSION['playerimage'];
 
 	$opt1 = isset($_GET["opt1"]) ? $_GET["opt1"] : "";
 	$opt2 = isset($_GET["opt2"]) ? $_GET["opt2"] : "";
