@@ -4,8 +4,8 @@ var fontsizeCircle = 18;
 var rolling = 0;
 
 // http://goldfirestudios.com/blog/104/howler.js-Modern-Web-Audio-Javascript-Library
-var sound_dice = new Howl({ src: ['./audio/dice.mp3', './audio/dice.ogg'] });
-var sound_key = new Howl({ src: ['./audio/key.mp3', './audio/key.ogg'] });
+var sound_dice = null;
+var sound_key = null;
 
 function setSize(name, value) {
 	var list = document.getElementsByClassName(name);
@@ -161,10 +161,16 @@ function rolldice() {
 // }
 
 function playDiceSound() {
+	if (sound_dice == null) {
+		sound_dice = new Howl({ src: ['./audio/dice.mp3', './audio/dice.ogg'] });
+	}
 	sound_dice.play();
 }
 
 function playTapSound() {
+	if (sound_key == null) {
+        sound_key = new Howl({ src: ['./audio/key.mp3', './audio/key.ogg'] });
+	}
 	sound_key.play();
 }
 

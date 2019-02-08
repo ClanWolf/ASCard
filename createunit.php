@@ -69,22 +69,21 @@ session_start();
 			border-color: #aaa;
 		}
 		input, select {
-			width: 100px;
+			width: 80px;
 			vertical-align: middle;
-			color: #000;
-			background: rgba(60,60,60,0.75);
-			border-width: 1px;
+			color: #ddd;
+			border-width: 0px;
 			padding: 2px;
 			font-family: 'Pathway Gothic One', sans-serif;
 		}
 		select:focus, textarea:focus, input:focus {
 			outline: none;
 		}
-		input:invalid {
-			background: green;
+		select:invalid, input:invalid {
+			background: rgba(40,40,40,0.75);;
 		}
-		input:valid {
-			background: blue;
+		select:valid, input:valid {
+			background: rgba(70,70,70,0.75);;
 		}
 	</style>
 </head>
@@ -93,21 +92,30 @@ session_start();
 	<script>
 		$(document).ready(function() {
 			$("#cover").hide();
+			fetchMechList();
+			document.getElementById("units").selectedIndex = "1";
 		});
 	</script>
+
+<?php
+	echo "<div id='player_image'>";
+	echo "	<img src='./images/player/".$pimage."' width='60px' height='60px'>";
+	echo "</div>";
+?>
 
 	<div id="cover"></div>
 
 	<div id="header">
-		<table style="width: 100%;" cellspacing="0" cellpadding="0">
+		<table style="width:100%;height:60px;border:none;border-collapse:collapse;background:rgba(50,50,50,1.0);" cellspacing="0" cellpadding="0">
 			<tr>
 				<td onclick="location.href='./logout.php'" width="60px" style="background: rgba(50,50,50,1.0); text-align: center; vertical-align: middle;" nowrap>
 					<div><a style="color: #eee;" href="./logout.php"><i class="fa fa-power-off" aria-hidden="true"></i></a></div>
 				</td>
-				<td onclick="location.href='./unitselector.php'" width="33%" nowrap><div class='mechselect_button_normal'><a href='./unitselector.php'>SELECT UNIT</a><br><span style='font-size:16px;'>Choose a unit to play</span></div></td>
-				<td onclick="location.href='./createplayer.php'" width="34%" nowrap><div class='mechselect_button_normal'><a href='./createplayer.php'>CREATE PLAYER</a><br><span style='font-size:16px;'>Create a new player</span></div></td>
-				<td onclick="location.href='./createunit.php'" width="33%" nowrap><div class='mechselect_button_active'><a href='./createunit.php'>CREATE UNIT / PILOTS</a><br><span style='font-size:16px;'>Create a new unit and pilot</span></div></td>
-				<td width="60px" style="background: rgba(50,50,50,1.0); text-align: center; vertical-align: middle;" nowrap><div>User Image</div></td>
+				<td onclick="location.href='./unitselector.php'" width="25%" nowrap><div class='mechselect_button_normal'><a href='./unitselector.php'>SELECT UNIT</a><br><span style='font-size:16px;'>Choose a unit to play</span></div></td>
+				<td onclick="location.href='./createplayer.php'" width="25%" nowrap><div class='mechselect_button_normal'><a href='./createplayer.php'>CREATE PLAYER</a><br><span style='font-size:16px;'>Create a new player</span></div></td>
+				<td onclick="location.href='./createunit.php'" width="25%" nowrap><div class='mechselect_button_active'><a href='./createunit.php'>CREATE MECH / PILOTS</a><br><span style='font-size:16px;'>Create a new unit and pilot</span></div></td>
+				<td onclick="location.href='./options.php'" width="25%" nowrap><div class='mechselect_button_normal'><a href='./options.php'>OPTIONS</a><br><span style='font-size:16px;'>Change options</span></div></td>
+				<td width="60px" style="background: rgba(50,50,50,1.0); text-align: center; vertical-align: middle;" nowrap><div id='loggedOnUser'></div></td>
 			</tr>
 		</table>
 	</div>
@@ -119,17 +127,15 @@ session_start();
 			<tr>
 				<td nowrap class="datalabel" style='text-align:left;'>
 					<div>
-						<table width='100%' cellspacing=5 cellpadding=5>
+						<table cellspacing=5 cellpadding=5>
 							<tr>
-								<td nowrap class="datalabel" style='text-align:left;' width='50%' colspan='2'>
-									Tech: <select name='tech' id='tech' size='1' onchange="fetchMechList();">
-										<option value="0" selected="selected"></option>
-										<option value="1">IS</option>
+								<td nowrap class="datalabel" style='text-align:left;' width='50%' colspan='3'>
+									Tech: <select required name='tech' id='tech' size='1' onchange="fetchMechList();">
 										<option value="2">Clan</option>
+										<option value="1">IS</option>
 									</select>
 
-									Tons: <select name='tonnage' id='tonnage' size='1' onchange="fetchMechList();">
-										<option value="0" selected="selected"></option>
+									Tons: <select required name='tonnage' id='tonnage' size='1' onchange="fetchMechList();">
 										<option value="20">20</option>
 										<option value="25">25</option>
 										<option value="30">30</option>
@@ -149,13 +155,13 @@ session_start();
 										<option value="100">100</option>
 									</select>
 
-									<input type="text" id="NameFilter" name="NameFilter" onchange="fetchMechList();" style="width:180px">
+									<input required type="text" id="NameFilter" name="NameFilter" onchange="fetchMechList();" style="width:100px">
 								</td>
 							</tr>
 							<tr>
-								<td nowrap class="datalabel" style='text-align:left;' width='50%' colspan='2'>
+								<td nowrap class="datalabel" style='text-align:left;' width='50%' colspan='3'>
 									<!-- will be filled by 'getMechList();' -->
-									<select name='units' id='units' size='1' onchange="mechSelected();" style="width:500px"></select>
+									<select required name='units' id='units' size='1' onchange="mechSelected();" style="width:300px"></select>
 								</td>
 							</tr>
 
@@ -167,25 +173,25 @@ session_start();
 
 							<tr>
 								<td nowrap class="datalabel" style='text-align:left;' width='50%'>
-									<input type="text" id="MNA" name="MNA"> MNA<br>
-									<input type="text" id="MNU" name="MNU"> MNU<br>
-									<input type="text" id="TP" name="TP"> TP<br>
-									<input type="text" id="SZ" name="SZ"> SZ<br>
-									<input type="text" id="TMM" name="TMM"> TMM<br>
+									<input required type="text" id="MNA" name="MNA"> MNA<br>
+									<input required type="text" id="MNU" name="MNU"> MNU<br>
+									<input required type="text" id="TP" name="TP"> TP<br>
+									<input required type="text" id="SZ" name="SZ"> SZ<br>
+									<input required type="text" id="TMM" name="TMM"> TMM<br>
 								</td>
 								<td nowrap class="datalabel" style='text-align:left;' width='50%'>
-									<input type="text" id="MV" name="MV"> MV<br>
-									<input type="text" id="ROLE" name="ROLE"> ROLE<br>
-									<input type="text" id="DMGS" name="DMGS"> DMG S<br>
-									<input type="text" id="DMGM" name="DMGM"> DMG M<br>
-									<input type="text" id="DMGL" name="DMGL"> DMG L<br>
+									<input required type="text" id="MV" name="MV"> MV<br>
+									<input required type="text" id="ROLE" name="ROLE"> ROLE<br>
+									<input required type="text" id="DMGS" name="DMGS"> DMG S<br>
+									<input required type="text" id="DMGM" name="DMGM"> DMG M<br>
+									<input required type="text" id="DMGL" name="DMGL"> DMG L<br>
 								</td>
 								<td nowrap class="datalabel" style='text-align:left;' width='50%'>
-									<input type="text" id="OV" name="OV"> OV<br>
-									<input type="text" id="A" name="A"> A<br>
-									<input type="text" id="S" name="S"> S<br>
-									<input type="text" id="PVA" name="PVA"> PV<br>
-									<input type="text" id="SPCL" name="SPCL"> SPCL<br>
+									<input required type="text" id="OV" name="OV"> OV<br>
+									<input required type="text" id="A" name="A"> A<br>
+									<input required type="text" id="S" name="S"> S<br>
+									<input required type="text" id="PVA" name="PVA"> PV<br>
+									<input required type="text" id="SPCL" name="SPCL"> SPCL<br>
 								</td>
 							</tr>
 						</table>
@@ -196,18 +202,22 @@ session_start();
 						<table width='100%' cellspacing=5 cellpadding=5>
 							<tr>
 								<td nowrap class="datalabel" style='text-align:left;' width='50%'>
-									<input style="width:120px" type="text" required id="PN" name="PN"> PilotName<br>
-									<input style="width:120px" type="text" required id="PCS" name="PCS"> PilotCallsign<br>
-									<input style="width:120px" type="text" required id="PR" name="PR"> PilotRank<br>
-									<input style="width:120px" type="text" required id="PI" name="PI"> PilotImage<br>
-									<input style="width:120px" type="text" required id="SKILL" name="SKILL"> SKILL<br>
-
-									<input style="width:120px" type="text" id="UID" name="UID"> Unit (Unit ID)<br>
+									<input type="text" required id="PN" name="PN"> PilotName<br>
+									<input type="text" required id="PCS" name="PCS"> PilotCallsign<br>
+									<input type="text" required id="PR" name="PR"> PilotRank<br>
+									<input type="text" required id="PI" name="PI"> PilotImage<br>
+									<input type="text" required id="SKILL" name="SKILL"> SKILL<br>
 
 									<br>
 
-									<select style="width:120px" name='MF' id='MF' size='1'">
-										<option value="0" selected="selected"></option>
+									<select required name='UID' id='UID' size='1'">
+										<option value="AlphaCommandStar">Alpha Command Star</option>
+										<option value="BravoCommandStar">Bravo Command Star</option>
+									</select> Unit
+
+									<br>
+
+									<select required name='MF' id='MF' size='1'">
 										<option value="C_Wolf">Clan Wolf</option>
 										<option value="CS_ComStar">ComStar</option>
 										<option value="CS_BlakesWord">Blakes Word</option>

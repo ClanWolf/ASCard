@@ -12,6 +12,29 @@ session_start();
 	// Get data on units from db
 	$pid = $_SESSION['playerid'];
 	$pimage = $_SESSION['playerimage'];
+
+	$opt1 = isset($_GET["opt1"]) ? $_GET["opt1"] : "";
+	$opt2 = isset($_GET["opt2"]) ? $_GET["opt2"] : "";
+
+	if ($opt1 == true || $opt2 == true) {
+		// storing changed options to database
+		$sql_update_options = "UPDATE asc_options SET OPTION1=".$opt1.", OPTION2=".$opt2." WHERE playerid = ".$pid;
+		$result_update_options = mysqli_query($conn, $sql_update_options);
+		echo "<meta http-equiv='refresh' content='0;url=./options.php'>";
+		die();
+	} else {
+		// getting options from database
+		$sql_asc_options = "SELECT SQL_NO_CACHE * FROM asc_options where playerid = ".$pid;
+		$result_asc_options = mysqli_query($conn, $sql_asc_options);
+		if (mysqli_num_rows($result_asc_options) > 0) {
+			while($row = mysqli_fetch_assoc($result_asc_options)) {
+				$opt1 = $row["option1"];
+				$opt2 = $row["option2"];
+				$_SESSION['option1'] = $opt1;
+				$_SESSION['option2'] = $opt2;
+			}
+		}
+	}
 ?>
 
 <html lang="en">
@@ -59,23 +82,16 @@ session_start();
 			background-color: #transparent;
 			position: fixed;
 			margin-left: -200px;
-			// margin-top: -100px;
-			// top: 50%;
+			margin-top: -100px;
+			top: 50%;
 			left: 50%;
 		}
 		.options {
-			z-index: 3;
-			position: absolute;
-			vertical-align: middle;
 			border-radius: 5px;
 			border-style: solid;
 			border-width: 3px;
-			padding: 25px;
+			padding: 5px;
 			background: rgba(60,60,60,0.75);
-			width: 300px;
-			height: 70px;
-			top: 80px;
-			right: 20px;
 			color: #ddd;
 			border-color: #aaa;
 		}
@@ -87,6 +103,35 @@ session_start();
 		$(document).ready(function() {
 			$("#cover").hide();
 		});
+
+		function changeOption() {
+			var na = "";
+			var opt1 = 0;
+			var opt2 = 0;
+			var list = document.getElementsByClassName("bigcheck");
+			[].forEach.call(list, function (el1) {
+				na = el1.name;
+				if (typeof na != 'undefined') {
+					if (na.substring(0, 4) == "OPT1") { opt1 = el1.checked }
+					if (na.substring(0, 4) == "OPT2") { opt2 = el1.checked }
+				}
+			})
+			var url="./options.php?opt1="+opt1+"&opt2="+opt2;
+			// alert (url);
+			window.location.href = url;
+		}
+
+		function setOptions() {
+			var na = "";
+			var list = document.getElementsByClassName("bigcheck");
+			[].forEach.call(list, function (el1) {
+			na = el1.name;
+				if (typeof na != 'undefined') {
+					if (na.substring(0, 4) == "OPT1") { el1.checked = <?php echo $opt1 ?> }
+					if (na.substring(0, 4) == "OPT2") { el1.checked = <?php echo $opt2 ?> }
+				}
+			})
+		}
 	</script>
 
 <?php
@@ -103,10 +148,10 @@ session_start();
 				<td onclick="location.href='./logout.php'" width="60px" style="background: rgba(50,50,50,1.0); text-align: center; vertical-align: middle;" nowrap>
 					<div><a style="color: #eee;" href="./logout.php"><i class="fa fa-power-off" aria-hidden="true"></i></a></div>
 				</td>
-				<td onclick="location.href='./unitselector.php'" width="25%" nowrap><div class='mechselect_button_active'><a href='./unitselector.php'>SELECT UNIT</a><br><span style='font-size:16px;'>Choose a unit to play</span></div></td>
+				<td onclick="location.href='./unitselector.php'" width="25%" nowrap><div class='mechselect_button_normal'><a href='./unitselector.php'>SELECT UNIT</a><br><span style='font-size:16px;'>Choose a unit to play</span></div></td>
 				<td onclick="location.href='./createplayer.php'" width="25%" nowrap><div class='mechselect_button_normal'><a href='./createplayer.php'>CREATE PLAYER</a><br><span style='font-size:16px;'>Create a new player</span></div></td>
 				<td onclick="location.href='./createunit.php'" width="25%" nowrap><div class='mechselect_button_normal'><a href='./createunit.php'>CREATE MECH / PILOTS</a><br><span style='font-size:16px;'>Create a new unit and pilot</span></div></td>
-				<td onclick="location.href='./options.php'" width="25%" nowrap><div class='mechselect_button_normal'><a href='./options.php'>OPTIONS</a><br><span style='font-size:16px;'>Change options</span></div></td>
+				<td onclick="location.href='./options.php'" width="25%" nowrap><div class='mechselect_button_active'><a href='./options.php'>OPTIONS</a><br><span style='font-size:16px;'>Change options</span></div></td>
 				<td width="60px" style="background: rgba(50,50,50,1.0); text-align: center; vertical-align: middle;" nowrap><div id='loggedOnUser'></div></td>
 			</tr>
 		</table>
@@ -114,12 +159,30 @@ session_start();
 
 	<br>
 
-	<table class="box" cellspacing=10 cellpadding=10 border=0px>
-		<tr>
-			<td onclick="location.href='./unit.php?unit=5'" class='mechselect_button_active'><a href="./unit.php?unit=5">Meldric</a></td>
-			<td onclick="location.href='./unit.php?unit=6'" class='mechselect_button_active'><a href="./unit.php?unit=6">Nimrod</a></td>
-		</tr>
-	</table>
+	<div>
+		<table class="options" cellspacing=10 cellpadding=10 border=0px>
+			<tr>
+				<td align="left" style="color: #aaa;">
+					<label class="bigcheck"><input onchange="changeOption();" type="checkbox" class="bigcheck" name="OPT1" value="yes"/><span class="bigcheck-target"></span></label>&nbsp;&nbsp;
+				</td>
+				<td align="left" class="datalabel">
+					Block other players units
+				</td>
+			</tr>
+			<tr>
+				<td align="left" style="color: #aaa;">
+					<label class="bigcheck"><input onchange="changeOption();" type="checkbox" class="bigcheck" name="OPT2" value="yes"/><span class="bigcheck-target"></span></label>&nbsp;&nbsp;
+				</td>
+				<td align="left" class="datalabel">
+					Auto crit rolls (tap dice)
+				</td>
+			</tr>
+		</table>
+	</div>
+
+	<script>
+		setOptions();
+	</script>
 </body>
 
 </html>

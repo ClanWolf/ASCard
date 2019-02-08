@@ -5,7 +5,9 @@ var corsproxyprefix2 = "https://cors.io/?";
 
 function getMechList(filter, tech, minTon, maxTon) {
 	var optionList = '';
-	var url = corsproxyprefix2 + 'https://www.masterunitlist.info/Unit/QuickList';
+	optionList = optionList + "<option><<< Select Mech >>></option>";
+
+	var url = corsproxyprefix2 + 'http://www.masterunitlist.info/Unit/QuickList';
 		url = url + '?Name='			+ filter;
 		url = url + '&HasBV=false';
 		url = url + '&MinTons='			+ minTon;
@@ -62,7 +64,27 @@ function getMechList(filter, tech, minTon, maxTon) {
 }
 
 function getMechDetails(id) {
-	var url = corsproxyprefix2 + 'https://www.masterunitlist.info/Unit/QuickDetails?id=' + id;
+	if (id == "<<< Select Mech >>>") {
+		document.getElementById("TP").value="";
+		document.getElementById("SZ").value="";
+		document.getElementById("TMM").value="";
+		document.getElementById("MV").value="";
+		document.getElementById("ROLE").value="";
+		document.getElementById("SKILL").value="";
+		document.getElementById("DMGS").value="";
+		document.getElementById("DMGM").value="";
+		document.getElementById("DMGL").value="";
+		document.getElementById("OV").value="";
+		document.getElementById("A").value="";
+		document.getElementById("S").value="";
+		document.getElementById("SPCL").value="";
+
+		document.getElementById("PVA").value=json="";
+
+		return;
+	}
+
+	var url = corsproxyprefix2 + 'http://www.masterunitlist.info/Unit/QuickDetails?id=' + id;
 	$.getJSON(url, function (json) {
 		document.getElementById("TP").value=json.BFType;
 		document.getElementById("SZ").value=json.BFSize;

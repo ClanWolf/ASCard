@@ -71,7 +71,7 @@ session_start();
 <div id="cover"></div>
 
 <div id="header">
-	<table style="width: 100%;" cellspacing="0" cellpadding="0">
+	<table style="width:100%;height:60px;border:none;border-collapse:collapse;background:rgba(50,50,50,1.0);" cellspacing="0" cellpadding="0">
 		<tr>
 			<td onclick="location.href='./index.html'" width="60px" style="background: rgba(50,50,50,1.0); text-align: center; vertical-align: middle;" nowrap>
 				<div><a style="color: #eee;" href="./index.html"><i class="fa fa-bars" aria-hidden="true"></i></a></div>
@@ -89,9 +89,7 @@ session_start();
 	}
 ?>
 
-			<td width="60px" style="background: rgba(50,50,50,1.0); text-align: center; vertical-align: middle;" nowrap>
-				<div>User Image</div>
-			</td>
+			<td width="60px" style="background: rgba(50,50,50,1.0); text-align: center; vertical-align: middle;" nowrap><div id='loggedOnUser'></div></td>
 		</tr>
 	</table>
 </div>
@@ -114,11 +112,11 @@ session_start();
 </div>
 
 <?php
+	echo "<div id='player_image'>";
+	echo "	<img src='./images/player/".$pimage."' width='60px' height='60px'>";
+	echo "</div>";
 	if ($pid == $unitplayerid) {
 		// Current Mech is playable by current user
-		echo "<div id='player_image'>";
-		echo "	<img src='./images/player/".$pimage."' width='65px''>";
-		echo "</div>";
 		$playable = true;
 	} else {
 		$playable = false;
@@ -294,12 +292,12 @@ session_start();
 </script>
 
 <div id="footer"></div>
-<div id="bottomleft"><img src="./images/bottom-left.png" width="280px"></div>
+<div id="bottomleft"><img src="./images/bottom-left.png" width="200px"></div>
 
 <div align="center" id="settings">
 	<!-- <a href="javascript:changeWallpaper()"><i class="fa fa-fw fa-picture-o"></i></a> -->
-	<a href="#" onclick="javascript:window.location.reload(true)"><i class="fa fa-fw fa-refresh"></i></a>
-	<a href="javascript:textSize(0)"><i class="fa fa-fw fa-minus-square"></i></a>
+	<a href="#" onclick="javascript:window.location.reload(true)"><i class="fa fa-fw fa-refresh"></i></a>&nbsp;&nbsp;&nbsp;
+	<a href="javascript:textSize(0)"><i class="fa fa-fw fa-minus-square"></i></a>&nbsp;&nbsp;&nbsp;
 	<a href="javascript:textSize(1)"><i class="fa fa-fw fa-plus-square"></i></a>
 </div>
 
@@ -307,7 +305,7 @@ session_start();
 	<?php echo "$version"; ?>
 </div>
 
-<div id="bottomright"><img src="./images/bt-logo2.png" width="300px"></div>
+<div id="bottomright"><img src="./images/bt-logo2.png" width="250px"></div>
 
 </body>
 

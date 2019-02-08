@@ -117,7 +117,7 @@ a:hover {
 	position: absolute;
 	padding: 20px;
 	top: 52px;
-	left: 180px;
+	left: 140px;
 }
 #faction {
 	z-index: 3;
@@ -127,7 +127,7 @@ a:hover {
 	padding: 0px;
 	background: rgba(20,20,20,0.75);
 	top: 72px;
-	left: 105px;
+	left: 90px;
 }
 #dice {
 	z-index: 3;
@@ -153,24 +153,26 @@ a:hover {
 	right: 0px;
 }
 #player_image {
-	z-index: 2;
+	z-index: 1250;
 	position: absolute;
 	border-style: solid;
-	border-width: 3px;
+	border-width: 0px;
 	padding: 0px;
-	top: 190px;
+	top: 0px;
 	right: 0px;
+	width: 60px;
+	height: 60px;
 }
 #blockNotOwnedMechs {
 	z-index: 700;
 	position: absolute;
 	top: 50px;
-	bottom: 0px;
+	bottom: 40px;
 	left: 0px;
 	right: 0px;
 	// background: rgba(255,0,0,0.25);
 	background-image: url('../images/block.png');
-	opacity: 0.85;
+	opacity: 1.00;
 	background-size: cover;
 }
 #pv {
@@ -208,9 +210,9 @@ a:hover {
 	z-index: 2;
 	position: absolute;
 	width: 100%;
-	height: 90px;
-	min-height: 90px;
-	max-height: 90px;
+	height: 40px;
+	min-height: 40px;
+	max-height: 40px;
 	margin: 0 0;
 	bottom: 0px;
 	text-align: center;
@@ -227,17 +229,16 @@ a:hover {
 	font-family: Arial, 'Arial Sans Unicode', sans-serif;
 	font-size: 12px;
 	font-weight: normal;
-	bottom: 10px;
-	right: 310px;
+	bottom: 3px;
+	right: 300px;
 }
 #settings {
 	font-family: FontAwesome;
 	z-index: 99;
 	position: absolute;
-	bottom: 40px;
+	bottom: 4px;
 	width: 100%;
 }
-
 .mechselect_button_normal {
 	font-size: 100%;
 	padding: 5px;
@@ -245,10 +246,10 @@ a:hover {
 	color: #000000;
 	text-align: center;
 }
-.mechselect_button_hovered {
+.mechselect_button_normal:hover {
 	font-size: 100%;
 	padding: 5px;
-	background-color: #da8e25;
+	background-color: #925a0a;
 	color: #000000;
 	text-align: center;
 }
@@ -290,7 +291,7 @@ input[type='checkbox'].bigcheck:checked + span.bigcheck-target:after {
 	width: 100%;
 	position: absolute;
 	z-index: 10;
-	bottom: 90px;
+	bottom: 45px;
 }
 .dataarea {
     border-radius: 10px;
