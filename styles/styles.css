@@ -109,7 +109,8 @@ a:hover {
 	width: 120px;
 	height: 120px;
 	line-height: 120px;
-	right: 185px;
+	right: 140px;
+	top: 65px;
 	color: #fff;
 }
 #topleft {
@@ -260,7 +261,20 @@ a:hover {
 	color: #ffffff;
 	text-align: center;
 }
-
+.unitselect_button_normal {
+	font-size: 100%;
+	padding: 5px;
+	background-color: #565656;
+	color: #000000;
+	text-align: center;
+}
+.unitselect_button_normal:hover {
+	font-size: 100%;
+	padding: 5px;
+	background-color: #656565;
+	color: #000000;
+	text-align: center;
+}
 input.bigcheck {
 }
 label.bigcheck {

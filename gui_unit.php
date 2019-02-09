@@ -73,23 +73,23 @@ session_start();
 <div id="header">
 	<table style="width:100%;height:60px;border:none;border-collapse:collapse;background:rgba(50,50,50,1.0);" cellspacing="0" cellpadding="0">
 		<tr>
-			<td onclick="location.href='./index.html'" width="60px" style="background: rgba(50,50,50,1.0); text-align: center; vertical-align: middle;" nowrap>
+			<td nowrap onclick="location.href='./index.html'" width="60px" style="background: rgba(50,50,50,1.0); text-align: center; vertical-align: middle;">
 				<div><a style="color: #eee;" href="./index.html"><i class="fa fa-bars" aria-hidden="true"></i></a></div>
 			</td>
 
 <?php
 	$size = sizeof($array_MECH);
 	for ($i4 = 1; $i4 <= $size; $i4++) {
-		$meli="./unit.php?unit=".$unitid."&chosenmech=".$i4;
+		$meli="./gui_unit.php?unit=".$unitid."&chosenmech=".$i4;
 		if ($chosenMechIndex == $i4) {
-			echo "<td onclick=\"location.href='".$meli."'\" nowrap><div class='mechselect_button_active'><a href='".$meli."'>#".$array_MECH_NUMBER[$i4]." ".$array_MECH[$i4]."</a><br><span style='font-size:16px;'>".$array_PILOT_CALLSIGN[$i4]."</span></div></td>\r\n";
+			echo "<td nowrap onclick=\"location.href='".$meli."'\"><div class='mechselect_button_active'><a href='".$meli."'>#".$array_MECH_NUMBER[$i4]." ".$array_MECH[$i4]."</a><br><span style='font-size:16px;'>".$array_PILOT_CALLSIGN[$i4]."</span></div></td>\r\n";
 		} else {
-			echo "<td onclick=\"location.href='".$meli."'\" nowrap><div class='mechselect_button_normal'><a href='".$meli."'>#".$array_MECH_NUMBER[$i4]." ".$array_MECH[$i4]."</a><br><span style='font-size:16px;'>".$array_PILOT_CALLSIGN[$i4]."</span></div></td>\r\n";
+			echo "<td nowrap onclick=\"location.href='".$meli."'\"><div class='mechselect_button_normal'><a href='".$meli."'>#".$array_MECH_NUMBER[$i4]." ".$array_MECH[$i4]."</a><br><span style='font-size:16px;'>".$array_PILOT_CALLSIGN[$i4]."</span></div></td>\r\n";
 		}
 	}
 ?>
 
-			<td width="60px" style="background: rgba(50,50,50,1.0); text-align: center; vertical-align: middle;" nowrap><div id='loggedOnUser'></div></td>
+			<td nowrap width="60px" style="background: rgba(50,50,50,1.0); text-align: center; vertical-align: middle;"><div id='loggedOnUser'></div></td>
 		</tr>
 	</table>
 </div>
@@ -108,7 +108,7 @@ session_start();
 </div>
 
 <div id="topright">
-	<img src="./images/top-right.png" width="220px">
+	<img src="./images/top-right.png" height="150px">
 </div>
 
 <?php
@@ -226,8 +226,8 @@ session_start();
 				<div class="dataarea">
 					<table width="100%">
 						<tr>
-							<td width="10%" nowrap class="datalabel" width="100%">SPCL:</td>
-							<td width="90%" class="datavalue_thin" style="text-align: left;"><?php echo "$array_SPCL[$chosenMechIndex]"; ?></td>
+							<td nowrap width="10%" class="datalabel" width="100%">SPCL:</td>
+							<td nowrap width="90%" class="datavalue_thin" style="text-align: left;"><?php echo "$array_SPCL[$chosenMechIndex]"; ?></td>
 						</tr>
 					</table>
 				</div>

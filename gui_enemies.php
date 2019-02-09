@@ -17,7 +17,7 @@ session_start();
 <html lang="en">
 
 <head>
-	<title>ClanWolf.net: AplhaStrike Card App (ASCard): Unit selector</title>
+	<title>ClanWolf.net: AplhaStrike Card App (ASCard): Enemies</title>
 	<meta charset="utf-8">
 	<meta http-equiv="expires" content="0">
 	<meta name="description" content="Cards app for the AlphaStrike TableTop (BattleTech).">
@@ -53,32 +53,6 @@ session_start();
 			margin-left: auto;
 			margin-right: auto;
 		}
-		.box {
-			width: 400px;
-			height: 200px;
-			background-color: #transparent;
-			position: fixed;
-			margin-left: -200px;
-			// margin-top: -100px;
-			// top: 50%;
-			left: 50%;
-		}
-		.options {
-			z-index: 3;
-			position: absolute;
-			vertical-align: middle;
-			border-radius: 5px;
-			border-style: solid;
-			border-width: 3px;
-			padding: 25px;
-			background: rgba(60,60,60,0.75);
-			width: 300px;
-			height: 70px;
-			top: 80px;
-			right: 20px;
-			color: #ddd;
-			border-color: #aaa;
-		}
 	</style>
 </head>
 
@@ -100,24 +74,45 @@ session_start();
 	<div id="header">
 		<table style="width:100%;height:60px;border:none;border-collapse:collapse;background:rgba(50,50,50,1.0);" cellspacing="0" cellpadding="0">
 			<tr>
-				<td onclick="location.href='./logout.php'" width="60px" style="background: rgba(50,50,50,1.0); text-align: center; vertical-align: middle;" nowrap>
+				<td nowrap onclick="location.href='./logout.php'" width="60px" style="background: rgba(50,50,50,1.0); text-align: center; vertical-align: middle;">
 					<div><a style="color: #eee;" href="./logout.php"><i class="fa fa-power-off" aria-hidden="true"></i></a></div>
 				</td>
-				<td onclick="location.href='./unitselector.php'" width="25%" nowrap><div class='mechselect_button_active'><a href='./unitselector.php'>UNITS</a><br><span style='font-size:16px;'>Choose a unit to play</span></div></td>
-				<td onclick="location.href='./createplayer.php'" width="25%" nowrap><div class='mechselect_button_normal'><a href='./createplayer.php'>CREATE PLAYER</a><br><span style='font-size:16px;'>Create a new player</span></div></td>
-				<td onclick="location.href='./createunit.php'" width="25%" nowrap><div class='mechselect_button_normal'><a href='./createunit.php'>CREATE MECH / PILOTS</a><br><span style='font-size:16px;'>Create a new unit and pilot</span></div></td>
-				<td onclick="location.href='./options.php'" width="25%" nowrap><div class='mechselect_button_normal'><a href='./options.php'>OPTIONS</a><br><span style='font-size:16px;'>Change options</span></div></td>
-				<td width="60px" style="background: rgba(50,50,50,1.0); text-align: center; vertical-align: middle;" nowrap><div id='loggedOnUser'></div></td>
+				<td nowrap onclick="location.href='./gui_selectunit.php'" width="20%"><div class='mechselect_button_normal'><a href='./gui_selectunit.php'>ROSTER</a><br><span style='font-size:16px;'>Choose a unit to play</span></div></td>
+				<td nowrap onclick="location.href='./gui_enemies.php'" width="20%"><div class='mechselect_button_active'><a href='./gui_enemies.php'>OPFOR</a><br><span style='font-size:16px;'>Enemy Mechs</span></div></td>
+				<td nowrap onclick="location.href='./createunit.php'" width="20%"><div class='mechselect_button_normal'><a href='./createunit.php'>ADD MECH</a><br><span style='font-size:16px;'>Create a new unit and pilot</span></div></td>
+				<td nowrap onclick="location.href='./createplayer.php'" width="20%"><div class='mechselect_button_normal'><a href='./createplayer.php'>ADD PLAYER</a><br><span style='font-size:16px;'>Create a new player</span></div></td>
+				<td nowrap onclick="location.href='./gui_options.php'" width="20%"><div class='mechselect_button_normal'><a href='./gui_options.php'>OPTIONS</a><br><span style='font-size:16px;'>Change options</span></div></td>
+				<td nowrap width="60px" style="background: rgba(50,50,50,1.0); text-align: center; vertical-align: middle;"><div id='loggedOnUser'></div></td>
 			</tr>
 		</table>
 	</div>
 
 	<br>
 
-	<table class="box" cellspacing=10 cellpadding=10 border=0px>
+	<table align="center" cellspacing=2 cellpadding=2 border=0px>
 		<tr>
-			<td onclick="location.href='./unit.php?unit=5'" class='mechselect_button_active'><a href="./unit.php?unit=5">Meldric</a></td>
-			<td onclick="location.href='./unit.php?unit=6'" class='mechselect_button_active'><a href="./unit.php?unit=6">Nimrod</a></td>
+			<td nowrap style="width:200px;height:70px;" class='mechselect_button_active'>Nimrod</td>
+			<td nowrap style="width:200px;height:70px;" onclick="location.href='./gui_unit.php?unit=5'" class='unitselect_button_normal'>
+				<a href="./gui_unit.php?unit=5">Alpha Command Star</a>
+			</td>
+			<td nowrap style="width:200px;height:70px;" onclick="location.href='./gui_unit.php?unit=5'" class='unitselect_button_normal'>
+				<a href="./gui_unit.php?unit=5">Alpha Command Star</a>
+			</td>
+			<td nowrap style="width:200px;height:70px;" onclick="location.href='./gui_unit.php?unit=5'" class='unitselect_button_normal'>
+				<a href="./gui_unit.php?unit=5">Alpha Command Star</a>
+			</td>
+		</tr>
+		<tr>
+			<td nowrap style="width:200px;height:70px;" class='mechselect_button_active'>Rabatzbaer</td>
+			<td nowrap style="width:200px;height:70px;" onclick="location.href='./gui_unit.php?unit=5'" class='unitselect_button_normal'>
+				<a href="./gui_unit.php?unit=5">Alpha Command Star</a>
+			</td>
+			<td nowrap style="width:200px;height:70px;" onclick="location.href='./gui_unit.php?unit=5'" class='unitselect_button_normal'>
+				<a href="./gui_unit.php?unit=5">Alpha Command Star</a>
+			</td>
+			<td nowrap style="width:200px;height:70px;" onclick="location.href='./gui_unit.php?unit=5'" class='unitselect_button_normal'>
+				<a href="./gui_unit.php?unit=5">Alpha Command Star</a>
+			</td>
 		</tr>
 	</table>
 </body>
