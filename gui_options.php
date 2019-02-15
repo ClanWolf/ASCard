@@ -150,8 +150,8 @@ session_start();
 				</td>
 				<td nowrap onclick="location.href='./gui_selectunit.php'" width="20%"><div class='mechselect_button_normal'><a href='./gui_selectunit.php'>ROSTER</a><br><span style='font-size:16px;'>Choose a unit to play</span></div></td>
 				<td nowrap onclick="location.href='./gui_enemies.php'" width="20%"><div class='mechselect_button_normal'><a href='./gui_enemies.php'>OPFOR</a><br><span style='font-size:16px;'>Enemy Mechs</span></div></td>
-				<td nowrap onclick="location.href='./createunit.php'" width="20%"><div class='mechselect_button_normal'><a href='./createunit.php'>ADD MECH</a><br><span style='font-size:16px;'>Create a new unit and pilot</span></div></td>
-				<td nowrap onclick="location.href='./createplayer.php'" width="20%"><div class='mechselect_button_normal'><a href='./createplayer.php'>ADD PLAYER</a><br><span style='font-size:16px;'>Create a new player</span></div></td>
+				<td nowrap onclick="location.href='./gui_createunit.php'" width="20%"><div class='mechselect_button_normal'><a href='./gui_createunit.php'>ADD MECH</a><br><span style='font-size:16px;'>Create a new unit and pilot</span></div></td>
+				<td nowrap onclick="location.href='./gui_createplayer.php'" width="20%"><div class='mechselect_button_normal'><a href='./gui_createplayer.php'>ADD PLAYER</a><br><span style='font-size:16px;'>Create a new player</span></div></td>
 				<td nowrap onclick="location.href='./gui_options.php'" width="20%"><div class='mechselect_button_active'><a href='./gui_options.php'>OPTIONS</a><br><span style='font-size:16px;'>Change options</span></div></td>
 				<td nowrap width="60px" style="background: rgba(50,50,50,1.0); text-align: center; vertical-align: middle;"><div id='loggedOnUser'></div></td>
 			</tr>

@@ -52,30 +52,36 @@ session_start();
 			margin-right: auto;
 		}
 		.box {
-			width: 400px;
-			height: 200px;
-			background-color: #transparent;
-			position: fixed;
-			margin-left: -200px;
-			// margin-top: -100px;
-			// top: 50%;
+			width: 80%;
+			background-color :#transparent;
+			top: 50%;
 			left: 50%;
 		}
 		.options {
-			z-index: 3;
-			position: absolute;
-			vertical-align: middle;
 			border-radius: 5px;
 			border-style: solid;
 			border-width: 3px;
-			padding: 25px;
+			padding: 5px;
 			background: rgba(60,60,60,0.75);
-			width: 300px;
-			height: 70px;
-			top: 80px;
-			right: 20px;
 			color: #ddd;
 			border-color: #aaa;
+		}
+		input, select {
+			width: 80px;
+			vertical-align: middle;
+			color: #ddd;
+			border-width: 0px;
+			padding: 2px;
+			font-family: 'Pathway Gothic One', sans-serif;
+		}
+		select:focus, textarea:focus, input:focus {
+			outline: none;
+		}
+		select:invalid, input:invalid {
+			background: rgba(40,40,40,0.75);;
+		}
+		select:valid, input:valid {
+			background: rgba(70,70,70,0.75);;
 		}
 	</style>
 </head>
@@ -103,13 +109,59 @@ session_start();
 				</td>
 				<td nowrap onclick="location.href='./gui_selectunit.php'" width="20%"><div class='mechselect_button_normal'><a href='./gui_selectunit.php'>ROSTER</a><br><span style='font-size:16px;'>Choose a unit to play</span></div></td>
 				<td nowrap onclick="location.href='./gui_enemies.php'" width="20%"><div class='mechselect_button_normal'><a href='./gui_enemies.php'>OPFOR</a><br><span style='font-size:16px;'>Enemy Mechs</span></div></td>
-				<td nowrap onclick="location.href='./createunit.php'" width="20%"><div class='mechselect_button_normal'><a href='./createunit.php'>ADD MECH</a><br><span style='font-size:16px;'>Create a new unit and pilot</span></div></td>
-				<td nowrap onclick="location.href='./createplayer.php'" width="20%"><div class='mechselect_button_active'><a href='./createplayer.php'>ADD PLAYER</a><br><span style='font-size:16px;'>Create a new player</span></div></td>
+				<td nowrap onclick="location.href='./gui_createunit.php'" width="20%"><div class='mechselect_button_normal'><a href='./gui_createunit.php'>ADD MECH</a><br><span style='font-size:16px;'>Create a new unit and pilot</span></div></td>
+				<td nowrap onclick="location.href='./gui_createplayer.php'" width="20%"><div class='mechselect_button_active'><a href='./gui_createplayer.php'>ADD PLAYER</a><br><span style='font-size:16px;'>Create a new player</span></div></td>
 				<td nowrap onclick="location.href='./gui_options.php'" width="20%"><div class='mechselect_button_normal'><a href='./gui_options.php'>OPTIONS</a><br><span style='font-size:16px;'>Change options</span></div></td>
 				<td nowrap width="60px" style="background: rgba(50,50,50,1.0); text-align: center; vertical-align: middle;"><div id='loggedOnUser'></div></td>
 			</tr>
 		</table>
 	</div>
+
+	<br>
+
+	<form>
+		<table class="options" cellspacing=10 cellpadding=10 border=0px>
+
+<?php
+	if (!($stmt = $conn->prepare("SELECT SQL_NO_CACHE * FROM asc_player ORDER BY factionid, playerid"))) {
+		echo "Prepare failed: (" . $conn->errno . ") " . $conn->error;
+	}
+
+	if ($stmt->execute()) {
+		$res = $stmt->get_result();
+		while ($row = $res->fetch_assoc()) {
+			echo "<tr>";
+			echo "	<td nowrap class='datalabel' style='text-align:left;';>" . $row['playerid'] . "</td>";
+			echo "	<td nowrap class='datalabel' style='text-align:left;vertical-align:middle;' valign='middle'>";
+
+			$sql_asc_faction = "SELECT SQL_NO_CACHE * FROM asc_faction where factionid=".$row['factionid'].";";
+			$result_asc_faction = mysqli_query($conn, $sql_asc_faction);
+			if (mysqli_num_rows($result_asc_faction) > 0) {
+				while($row1 = mysqli_fetch_assoc($result_asc_faction)) {
+					$FACTION_IMG_URL = $row1["faction_imageurl"];
+						echo "		<img src='./images/factions/".$FACTION_IMG_URL."' width='30px' height='30px'>&nbsp;&nbsp;";
+				}
+			}
+
+			echo "		<img src='./images/player/".$row['image']."' width='30px' height='30px'>";
+			echo "	</td>";
+
+			echo "	<td nowrap class='datalabel' style='text-align:left;';>" . $row['name'] . "</td>";
+			echo "	<td nowrap class='datalabel' style='text-align:left;';>" . $row['email'] . "</td>";
+			echo "	<td nowrap class='datalabel' style='text-align:left;';>";
+			echo "	<td width='10px'>";
+			echo "		<span style='font-size:16px;'>";
+			echo "			<a href=''><i class='fa fa-fw fa-minus-square'></i></a>";
+			echo "		</span>";
+			echo "	</td>";
+			echo "</tr>";
+		}
+	}
+?>
+
+		</table>
+	</form>
+
 </body>
 
 </html>
