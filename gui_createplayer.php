@@ -91,6 +91,17 @@ session_start();
 		$(document).ready(function() {
 			$("#cover").hide();
 		});
+
+		function saveNewPlayer(id) {
+			if (id==0) {
+				// Create new player
+				alert("Saving new player: " + id);
+			} else {
+				// Delete existing player
+				alert("Delete existing player: " + id);
+			}
+			var url = "./gui_createplayer.php?s=1&newplayername=";
+		}
 	</script>
 
 <?php
@@ -120,10 +131,41 @@ session_start();
 	<br>
 
 	<form>
-		<table class="options" cellspacing=10 cellpadding=10 border=0px>
+		<table class="options" cellspacing=10 cellpadding=5 border=0px>
+			<tr>
+				<td colspan="2" align="right">New player:</td>
+				<td>
+					<input required type="text" id="NewPlayerName" name="NewPlayerName"><br>
+				</td>
+				<td>
+					<input required type="text" id="NewPlayerEMail" name="NewPlayerEMail" style="width: 220px;"><br>
+				</td>
+				<td width='10px'>
+					<span style='font-size:16px;'>
+						<a href="#" onClick="saveNewPlayer(0);"><i class="fa fa-fw fa-plus-square"></i></a>
+					</span>
+				</td>
+			</tr>
+			<tr>
+				<td></td>
+				<td colspan="2" align="right">Password:</td>
+				<td>
+					<input required type="password" id="NewPlayerPassword" name="NewPlayerPassword" style="width: 220px;"><br>
+				</td>
+				<td width='10px'></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td colspan="2" align="right">Confirm:</td>
+				<td>
+					<input required type="password" id="NewPlayerPasswordConfirm" name="NewPlayerPasswordConfirm" style="width: 220px;"><br>
+				</td>
+				<td width='10px'></td>
+			</tr>
+			<tr><td colspan="6"><hr></td></tr>
 
 <?php
-	if (!($stmt = $conn->prepare("SELECT SQL_NO_CACHE * FROM asc_player ORDER BY factionid, playerid"))) {
+	if (!($stmt = $conn->prepare("SELECT SQL_NO_CACHE * FROM asc_player ORDER BY playerid"))) {
 		echo "Prepare failed: (" . $conn->errno . ") " . $conn->error;
 	}
 
@@ -133,25 +175,13 @@ session_start();
 			echo "<tr>";
 			echo "	<td nowrap class='datalabel' style='text-align:left;';>" . $row['playerid'] . "</td>";
 			echo "	<td nowrap class='datalabel' style='text-align:left;vertical-align:middle;' valign='middle'>";
-
-			$sql_asc_faction = "SELECT SQL_NO_CACHE * FROM asc_faction where factionid=".$row['factionid'].";";
-			$result_asc_faction = mysqli_query($conn, $sql_asc_faction);
-			if (mysqli_num_rows($result_asc_faction) > 0) {
-				while($row1 = mysqli_fetch_assoc($result_asc_faction)) {
-					$FACTION_IMG_URL = $row1["faction_imageurl"];
-						echo "		<img src='./images/factions/".$FACTION_IMG_URL."' width='30px' height='30px'>&nbsp;&nbsp;";
-				}
-			}
-
 			echo "		<img src='./images/player/".$row['image']."' width='30px' height='30px'>";
 			echo "	</td>";
-
 			echo "	<td nowrap class='datalabel' style='text-align:left;';>" . $row['name'] . "</td>";
 			echo "	<td nowrap class='datalabel' style='text-align:left;';>" . $row['email'] . "</td>";
-			echo "	<td nowrap class='datalabel' style='text-align:left;';>";
 			echo "	<td width='10px'>";
 			echo "		<span style='font-size:16px;'>";
-			echo "			<a href=''><i class='fa fa-fw fa-minus-square'></i></a>";
+			echo "			<a href='#' onClick='saveNewPlayer(".$row['playerid'].");'><i class='fa fa-fw fa-minus-square'></i></a>";
 			echo "		</span>";
 			echo "	</td>";
 			echo "</tr>";

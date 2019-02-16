@@ -25,7 +25,6 @@ session_start();
 						$_SESSION['playerid'] = $row['playerid'];
 						$_SESSION['name'] = $row['name'];
 						$_SESSION['email'] = $row['email'];
-						$_SESSION['factionid'] = $row['factionid'];
 						$_SESSION['playerimage'] = $row['image'];
    						header("Location: ./gui_selectunit.php");
 						die('Login succeeded!<br>');

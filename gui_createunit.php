@@ -124,7 +124,7 @@ session_start();
 	<br>
 
 	<form>
-		<table class="options" cellspacing=10 cellpadding=10 border=0px>
+		<table class="options" cellspacing=10 cellpadding=5 border=0px>
 			<tr>
 				<td nowrap class="datalabel" style='text-align:left;'>
 					<div>
