@@ -43,19 +43,8 @@ session_start();
 		$sqldelete = "DELETE FROM asc_player WHERE playerid = ".$deleteplayerid;
 		if (mysqli_query($conn, $sqldelete)) {
 			// Success
-
-
-
-
-
-
 			// delete avatar file
-
-
-
-
-
-
+			unlink("./images/player/".$playerimagetodelete);
 			echo "<meta http-equiv='refresh' content='0;url=./gui_createplayer.php'>";
 		} else {
 			// Error
@@ -166,7 +155,7 @@ session_start();
 				}
 			} else {
 				// Delete existing player
-				// alert("Delete existing player: " + id);
+				alert(playerimagetodelete);
 				var url = "./gui_createplayer.php?d=1&deleteplayerid=" + id + "&playerimagetodelete=" + playerimagetodelete;
 				window.location = url;
 			}
@@ -264,7 +253,7 @@ session_start();
 			if ($row['playerid'] != "1") {
 				echo "	<td width='10px'>";
 				echo "		<span style='font-size:16px;'>";
-				echo "			<a href='#' onClick='saveNewPlayer(".$row['playerid'].",".$row['image'].");'><i class='fa fa-fw fa-minus-square'></i></a>";
+				echo "			<a href='#' onClick='saveNewPlayer(".$row['playerid'].",\"".$row['image']."\");'><i class='fa fa-fw fa-minus-square'></i></a>";
 				echo "		</span>";
 				echo "	</td>";
 			} else {
