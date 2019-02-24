@@ -38,10 +38,24 @@ session_start();
 	} else if ($d=="1") {
 		// delete existing user
 		$deleteplayerid = isset($_GET["deleteplayerid"]) ? $_GET["deleteplayerid"] : "";
+		$playerimagetodelete = isset($_GET["playerimagetodelete"]) ? $_GET["playerimagetodelete"] : "";
 
 		$sqldelete = "DELETE FROM asc_player WHERE playerid = ".$deleteplayerid;
 		if (mysqli_query($conn, $sqldelete)) {
 			// Success
+
+
+
+
+
+
+			// delete avatar file
+
+
+
+
+
+
 			echo "<meta http-equiv='refresh' content='0;url=./gui_createplayer.php'>";
 		} else {
 			// Error
@@ -130,7 +144,7 @@ session_start();
 			$("#cover").hide();
 		});
 
-		function saveNewPlayer(id) {
+		function saveNewPlayer(id, playerimagetodelete) {
 			if (id==0) {
 				// Create new player
 				var NewPlayerName = document.getElementById('NewPlayerName').value;
@@ -153,7 +167,7 @@ session_start();
 			} else {
 				// Delete existing player
 				// alert("Delete existing player: " + id);
-				var url = "./gui_createplayer.php?d=1&deleteplayerid=" + id;
+				var url = "./gui_createplayer.php?d=1&deleteplayerid=" + id + "&playerimagetodelete=" + playerimagetodelete;
 				window.location = url;
 			}
 		}
@@ -195,7 +209,7 @@ session_start();
 				</td>
 				<td width='10px'>
 					<span style='font-size:16px;'>
-						<a href="#" onClick="saveNewPlayer(0);"><i class="fa fa-fw fa-plus-square"></i></a>
+						<a href="#" onClick="saveNewPlayer(0, 'none');"><i class="fa fa-fw fa-plus-square"></i></a>
 					</span>
 				</td>
 			</tr>
@@ -242,6 +256,7 @@ session_start();
 				echo "		<img src='./images/player/".$row['image']."' width='30px' height='30px'>";
 			} else {
 				echo "		<img src='./images/pilots/000_no_avatar.png' width='30px' height='30px'>";
+				copy("./images/pilots/000_no_avatar.png", "./images/player/".$row['image']);
 			}
 			echo "	</td>";
 			echo "	<td nowrap class='datalabel' style='text-align:left;';>" . $row['name'] . "</td>";
@@ -249,7 +264,7 @@ session_start();
 			if ($row['playerid'] != "1") {
 				echo "	<td width='10px'>";
 				echo "		<span style='font-size:16px;'>";
-				echo "			<a href='#' onClick='saveNewPlayer(".$row['playerid'].");'><i class='fa fa-fw fa-minus-square'></i></a>";
+				echo "			<a href='#' onClick='saveNewPlayer(".$row['playerid'].",".$row['image'].");'><i class='fa fa-fw fa-minus-square'></i></a>";
 				echo "		</span>";
 				echo "	</td>";
 			} else {
