@@ -10,6 +10,44 @@ session_start();
 	// Get data on units from db
 	$pid = $_SESSION['playerid'];
 	$pimage = $_SESSION['playerimage'];
+
+	$s = isset($_GET["s"]) ? $_GET["s"] : "";
+	$d = isset($_GET["d"]) ? $_GET["d"] : "";
+
+	if ($s=="1") {
+		// save new user
+		$newplayername = isset($_GET["newplayername"]) ? $_GET["newplayername"] : "";
+		$newplayeremail = isset($_GET["newplayeremail"]) ? $_GET["newplayeremail"] : "";
+		$newplayerpassword = isset($_GET["newplayerpassword"]) ? $_GET["newplayerpassword"] : "";
+
+		$sql_asc_checkusername = "SELECT SQL_NO_CACHE * FROM asc_player where username=".$newplayername.";";
+		$result_asc_checkusername = mysqli_query($conn, $sql_asc_checkusername);
+		if (mysqli_num_rows($result_asc_checkusername) > 0) {
+			// a user with that name already exists
+		} else {
+			// new user can be inserted
+			$sql = "INSERT INTO asc_player (name, email, password, image) VALUES ('".$newplayername."', '".$newplayeremail."', '".$newplayerpassword."', '".$newplayername.".png')";
+			if (mysqli_query($conn, $sql)) {
+				// Success
+				echo "<meta http-equiv='refresh' content='0;url=./gui_createplayer.php'>";
+			} else {
+				// Error
+				echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+			}
+		}
+	} else if ($d=="1") {
+		// delete existing user
+		$deleteplayerid = isset($_GET["deleteplayerid"]) ? $_GET["deleteplayerid"] : "";
+
+		$sqldelete = "DELETE FROM asc_player WHERE playerid = ".$deleteplayerid;
+		if (mysqli_query($conn, $sqldelete)) {
+			// Success
+			echo "<meta http-equiv='refresh' content='0;url=./gui_createplayer.php'>";
+		} else {
+			// Error
+			echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+		}
+	}
 ?>
 
 <html lang="en">
@@ -95,12 +133,29 @@ session_start();
 		function saveNewPlayer(id) {
 			if (id==0) {
 				// Create new player
-				alert("Saving new player: " + id);
+				var NewPlayerName = document.getElementById('NewPlayerName').value;
+				var NewPlayerEMail = document.getElementById('NewPlayerEMail').value;
+				var NewPlayerPassword = document.getElementById('NewPlayerPassword').value;
+				var NewPlayerPasswordConfirm = document.getElementById('NewPlayerPasswordConfirm').value;
+
+				if ("" == NewPlayerName) {
+					alert("Name may not be empty!");
+				}
+				if (NewPlayerPassword == NewPlayerPasswordConfirm) {
+					// alert("Saving new player: " + id + " (" + NewPlayerName + ")");
+					var url = "./gui_createplayer.php?s=1&newplayername=" + NewPlayerName;
+					url = url + "&newplayeremail=" + NewPlayerEMail;
+					url = url + "&newplayerpassword=" + NewPlayerPassword;
+					window.location = url;
+				} else {
+					alert("Passwords do not match!");
+				}
 			} else {
 				// Delete existing player
-				alert("Delete existing player: " + id);
+				// alert("Delete existing player: " + id);
+				var url = "./gui_createplayer.php?d=1&deleteplayerid=" + id;
+				window.location = url;
 			}
-			var url = "./gui_createplayer.php?s=1&newplayername=";
 		}
 	</script>
 
@@ -133,12 +188,10 @@ session_start();
 	<form>
 		<table class="options" cellspacing=10 cellpadding=5 border=0px>
 			<tr>
-				<td colspan="2" align="right">New player:</td>
-				<td>
-					<input required type="text" id="NewPlayerName" name="NewPlayerName"><br>
-				</td>
-				<td>
-					<input required type="text" id="NewPlayerEMail" name="NewPlayerEMail" style="width: 220px;"><br>
+				<td colspan="2" nowrap align="left">New player</td>
+				<td colspan="1" align="right">Name:</td>
+				<td colspan="1">
+					<input required type="text" id="NewPlayerName" name="NewPlayerName" style="width: 220px;"><br>
 				</td>
 				<td width='10px'>
 					<span style='font-size:16px;'>
@@ -147,17 +200,25 @@ session_start();
 				</td>
 			</tr>
 			<tr>
-				<td></td>
-				<td colspan="2" align="right">Password:</td>
-				<td>
+				<td width='10px' colspan="2" rowspan="3" valign="top" align="left">
+					<img src='./images/pilots/000_no_avatar.png' width='60px' height='60px'>
+				</td>
+				<td colspan="1" align="right">Email:</td>
+				<td colspan="1">
+					<input required type="text" id="NewPlayerEMail" name="NewPlayerEMail" style="width: 220px;"><br>
+				</td>
+				<td width='10px'></td>
+			</tr>
+			<tr>
+				<td colspan="1" align="right">Password:</td>
+				<td colspan="1">
 					<input required type="password" id="NewPlayerPassword" name="NewPlayerPassword" style="width: 220px;"><br>
 				</td>
 				<td width='10px'></td>
 			</tr>
 			<tr>
-				<td></td>
-				<td colspan="2" align="right">Confirm:</td>
-				<td>
+				<td colspan="1" align="right">Confirm:</td>
+				<td colspan="1">
 					<input required type="password" id="NewPlayerPasswordConfirm" name="NewPlayerPasswordConfirm" style="width: 220px;"><br>
 				</td>
 				<td width='10px'></td>
@@ -172,18 +233,28 @@ session_start();
 	if ($stmt->execute()) {
 		$res = $stmt->get_result();
 		while ($row = $res->fetch_assoc()) {
+			$filename = "./images/player/".$row['image'];
+
 			echo "<tr>";
 			echo "	<td nowrap class='datalabel' style='text-align:left;';>" . $row['playerid'] . "</td>";
 			echo "	<td nowrap class='datalabel' style='text-align:left;vertical-align:middle;' valign='middle'>";
-			echo "		<img src='./images/player/".$row['image']."' width='30px' height='30px'>";
+			if (file_exists($filename)) {
+				echo "		<img src='./images/player/".$row['image']."' width='30px' height='30px'>";
+			} else {
+				echo "		<img src='./images/pilots/000_no_avatar.png' width='30px' height='30px'>";
+			}
 			echo "	</td>";
 			echo "	<td nowrap class='datalabel' style='text-align:left;';>" . $row['name'] . "</td>";
 			echo "	<td nowrap class='datalabel' style='text-align:left;';>" . $row['email'] . "</td>";
-			echo "	<td width='10px'>";
-			echo "		<span style='font-size:16px;'>";
-			echo "			<a href='#' onClick='saveNewPlayer(".$row['playerid'].");'><i class='fa fa-fw fa-minus-square'></i></a>";
-			echo "		</span>";
-			echo "	</td>";
+			if ($row['playerid'] != "1") {
+				echo "	<td width='10px'>";
+				echo "		<span style='font-size:16px;'>";
+				echo "			<a href='#' onClick='saveNewPlayer(".$row['playerid'].");'><i class='fa fa-fw fa-minus-square'></i></a>";
+				echo "		</span>";
+				echo "	</td>";
+			} else {
+				echo "	<td width='10%'></td>";
+			}
 			echo "</tr>";
 		}
 	}
