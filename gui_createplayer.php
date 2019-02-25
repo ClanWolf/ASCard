@@ -155,7 +155,7 @@ session_start();
 				}
 			} else {
 				// Delete existing player
-				alert(playerimagetodelete);
+				// alert(playerimagetodelete);
 				var url = "./gui_createplayer.php?d=1&deleteplayerid=" + id + "&playerimagetodelete=" + playerimagetodelete;
 				window.location = url;
 			}
