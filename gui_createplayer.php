@@ -16,9 +16,9 @@ session_start();
 
 	if ($s=="1") {
 		// save new user
-		$newplayername = isset($_GET["newplayername"]) ? $_GET["newplayername"] : "";
-		$newplayeremail = isset($_GET["newplayeremail"]) ? $_GET["newplayeremail"] : "";
-		$newplayerpassword = isset($_GET["newplayerpassword"]) ? $_GET["newplayerpassword"] : "";
+		$newplayername = isset($_GET["npn"]) ? $_GET["npn"] : "";
+		$newplayeremail = isset($_GET["npe"]) ? $_GET["npe"] : "";
+		$newplayerpassword = isset($_GET["npp"]) ? $_GET["npp"] : "";
 
 		$sql_asc_checkusername = "SELECT SQL_NO_CACHE * FROM asc_player where username=".$newplayername.";";
 		$result_asc_checkusername = mysqli_query($conn, $sql_asc_checkusername);
@@ -136,19 +136,19 @@ session_start();
 		function saveNewPlayer(id, playerimagetodelete) {
 			if (id==0) {
 				// Create new player
-				var NewPlayerName = document.getElementById('NewPlayerName').value;
-				var NewPlayerEMail = document.getElementById('NewPlayerEMail').value;
-				var NewPlayerPassword = document.getElementById('NewPlayerPassword').value;
-				var NewPlayerPasswordConfirm = document.getElementById('NewPlayerPasswordConfirm').value;
+				var npn = document.getElementById('NewPlayerName').value;
+				var npe = document.getElementById('NewPlayerEMail').value;
+				var npp = document.getElementById('NewPlayerPassword').value;
+				var nppc = document.getElementById('NewPlayerPasswordConfirm').value;
 
-				if ("" == NewPlayerName) {
+				if ("" == npn) {
 					alert("Name may not be empty!");
 				}
-				if (NewPlayerPassword == NewPlayerPasswordConfirm) {
+				if (npp == nppc) {
 					// alert("Saving new player: " + id + " (" + NewPlayerName + ")");
-					var url = "./gui_createplayer.php?s=1&newplayername=" + NewPlayerName;
-					url = url + "&newplayeremail=" + NewPlayerEMail;
-					url = url + "&newplayerpassword=" + NewPlayerPassword;
+					var url = "./gui_createplayer.php?s=1&npn=" + npn;
+					url = url + "&npe=" + npe;
+					url = url + "&npp=" + npp;
 					window.location = url;
 				} else {
 					alert("Passwords do not match!");
