@@ -50,6 +50,9 @@ session_start();
 			// Error
 			echo "Error: " . $sql . "<br>" . mysqli_error($conn);
 		}
+		// TODO: Delete units of this player
+		// TODO: Delete mechs belonging to those units
+		// TODO: Delete pilots belonging to those mechs
 	}
 ?>
 
