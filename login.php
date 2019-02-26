@@ -5,8 +5,8 @@ session_start();
 
 	ini_set("display_errors", 1); error_reporting(E_ALL);
 	$login = isset($_GET['login']) ? $_GET['login'] : "";
-	$playername = isset($_POST['playername']) ? $_POST['playername'] : "";
-	$password = isset($_POST['password']) ? $_POST['password'] : "";
+	$playername = isset($_POST['pn']) ? $_POST['pn'] : "";
+	$password = isset($_POST['pw']) ? $_POST['pw'] : "";
 
 	if(!$login == "") {
 		if (!($stmt = $conn->prepare("SELECT * FROM asc_player WHERE name = ?"))) {
@@ -107,8 +107,8 @@ session_start();
 					<img src="./images/icon_144x144.png">
 				</td>
 				<td class='mechselect_button_active'>
-					<input type="text" size="20" maxlength="80" name="playername"><br>
-					<input type="password" size="20"  maxlength="32" name="password"><br><br>
+					<input type="text" size="20" maxlength="80" id="pn" name="pn"><br>
+					<input type="password" size="20"  maxlength="32" id="pw" name="pw"><br><br>
 					<input type="submit" size="50" style="width:200px" value="LOGIN"><br>
 				</td>
 			</tr>
