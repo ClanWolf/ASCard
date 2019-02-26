@@ -82,9 +82,14 @@ session_start();
 	for ($i4 = 1; $i4 <= $size; $i4++) {
 		$meli="./gui_unit.php?unit=".$unitid."&chosenmech=".$i4;
 		if ($chosenMechIndex == $i4) {
-			echo "<td nowrap onclick=\"location.href='".$meli."'\"><div><img src='./images/DD_01.png' width='50px'></div><div class='mechselect_button_active'><a href='".$meli."'>#".$array_MECH_NUMBER[$i4]." ".$array_MECH[$i4]."</a><br><span style='font-size:16px;'>".$array_PILOT_CALLSIGN[$i4]."</span></div></td>\r\n";
+			// echo "<td nowrap onclick=\"location.href='".$meli."'\"><div><img src='./images/DD_01.png' width='50px'></div><div class='mechselect_button_active'><a href='".$meli."'>#".$array_MECH_NUMBER[$i4]." ".$array_MECH[$i4]."</a><br><span style='font-size:16px;'>".$array_PILOT_CALLSIGN[$i4]."</span></div></td>\r\n";
+			
+			echo "<td nowrap onclick=\"location.href='".$meli."'\"><table><tr><td align='right'><img src='./images/DD_01.png' width='50px'></td><td><div class='mechselect_button_active'><a href='".$meli."'>#".$array_MECH_NUMBER[$i4]." ".$array_MECH[$i4]."</a><br><span style='font-size:16px;'>".$array_PILOT_CALLSIGN[$i4]."</span></div></td></tr></table></td>\r\n";
+			
 		} else {
-			echo "<td nowrap onclick=\"location.href='".$meli."'\"><div><img src='./images/DD_01.png' width='50px'></div><div class='mechselect_button_normal'><a href='".$meli."'>#".$array_MECH_NUMBER[$i4]." ".$array_MECH[$i4]."</a><br><span style='font-size:16px;'>".$array_PILOT_CALLSIGN[$i4]."</span></div></td>\r\n";
+			// echo "<td nowrap onclick=\"location.href='".$meli."'\"><div><img src='./images/DD_01.png' width='50px'></div><div class='mechselect_button_normal'><a href='".$meli."'>#".$array_MECH_NUMBER[$i4]." ".$array_MECH[$i4]."</a><br><span style='font-size:16px;'>".$array_PILOT_CALLSIGN[$i4]."</span></div></td>\r\n";
+			
+			echo "<td nowrap onclick=\"location.href='".$meli."'\"><table><tr><td align='right'><img src='./images/DD_01.png' width='50px'></td><td><div class='mechselect_button_normal'><a href='".$meli."'>#".$array_MECH_NUMBER[$i4]." ".$array_MECH[$i4]."</a><br><span style='font-size:16px;'>".$array_PILOT_CALLSIGN[$i4]."</span></div></td></tr></table></td>\r\n";
 		}
 	}
 ?>
