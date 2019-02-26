@@ -197,6 +197,10 @@ session_start();
 				<td colspan="2" nowrap align="left">New player</td>
 				<td colspan="1" align="right">Name:</td>
 				<td colspan="1">
+					
+					<!-- autocomplete deactivate hints -->
+					<!-- https://gist.github.com/runspired/b9fdf1fa74fc9fb4554418dea35718fe -->
+					
 					<!-- <input autocomplete="off" required type="text" id="NewPlayerName" name="NewPlayerName" style="width: 220px;"><br> -->
 					<input autocomplete="off" required type="text" id="NewPlayerName" style="width: 220px;"><br>
 					<!-- <input autocomplete="nope" required type="text" id="NewPlayerName" style="width: 220px;"><br> -->
