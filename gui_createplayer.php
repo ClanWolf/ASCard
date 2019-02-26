@@ -20,15 +20,29 @@ session_start();
 		$newplayeremail = isset($_GET["npe"]) ? $_GET["npe"] : "";
 		$newplayerpassword = isset($_GET["npp"]) ? $_GET["npp"] : "";
 
+		$hashedpw = password_hash($newplayerpassword, PASSWORD_DEFAULT);
+
 		$sql_asc_checkusername = "SELECT SQL_NO_CACHE * FROM asc_player where username=".$newplayername.";";
 		$result_asc_checkusername = mysqli_query($conn, $sql_asc_checkusername);
 		if (mysqli_num_rows($result_asc_checkusername) > 0) {
 			// a user with that name already exists
 		} else {
 			// new user can be inserted
-			$sql = "INSERT INTO asc_player (name, email, password, image) VALUES ('".$newplayername."', '".$newplayeremail."', '".$newplayerpassword."', '".$newplayername.".png')";
+			$sql = "INSERT INTO asc_player (name, email, password, image) VALUES ('".$newplayername."', '".$newplayeremail."', '".$hashedpw."', '".$newplayername.".png')";
 			if (mysqli_query($conn, $sql)) {
 				// Success
+				$newplayerid = mysqli_insert_id($conn);
+
+				$sqlinsertunit = "INSERT INTO asc_unit (factionid, forcename, playerid) VALUES ";
+				$sqlinsertunit = $sqlinsertunit . "(1, 'Alpha', ".$newplayerid."), ";
+				$sqlinsertunit = $sqlinsertunit . "(1, 'Bravo', ".$newplayerid."), ";
+				$sqlinsertunit = $sqlinsertunit . "(1, 'Charlie', ".$newplayerid.")";
+				if (mysqli_query($conn, $sqlinsertunit)) {
+					// Success inserting units for new player
+				} else {
+					// Error
+					echo "Error: " . $sqlinsertunit . "<br>" . mysqli_error($conn);
+				}
 				echo "<meta http-equiv='refresh' content='0;url=./gui_createplayer.php'>";
 			} else {
 				// Error
@@ -48,8 +62,17 @@ session_start();
 			echo "<meta http-equiv='refresh' content='0;url=./gui_createplayer.php'>";
 		} else {
 			// Error
-			echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+			echo "Error: " . $sqldelete . "<br>" . mysqli_error($conn);
 		}
+
+		$sqldeleteunits = "DELETE FROM asc_unit WHERE playerid = ".$deleteplayerid;
+		if (mysqli_query($conn, $sqldeleteunits)) {
+			// Success
+		} else {
+			// Error
+			echo "Error: " . $sqldeleteunits . "<br>" . mysqli_error($conn);
+		}
+
 		// TODO: Delete units of this player
 		// TODO: Delete mechs belonging to those units
 		// TODO: Delete pilots belonging to those mechs
@@ -182,7 +205,7 @@ session_start();
 				<td nowrap onclick="location.href='./gui_selectunit.php'" width="20%"><div class='mechselect_button_normal'><a href='./gui_selectunit.php'>ROSTER</a><br><span style='font-size:16px;'>Choose a unit to play</span></div></td>
 				<td nowrap onclick="location.href='./gui_enemies.php'" width="20%"><div class='mechselect_button_normal'><a href='./gui_enemies.php'>OPFOR</a><br><span style='font-size:16px;'>Enemy Mechs</span></div></td>
 				<td nowrap onclick="location.href='./gui_createunit.php'" width="20%"><div class='mechselect_button_normal'><a href='./gui_createunit.php'>ADD MECH</a><br><span style='font-size:16px;'>Create a new unit and pilot</span></div></td>
-				<td nowrap onclick="location.href='./gui_createplayer.php'" width="20%"><div class='mechselect_button_active'><a href='./gui_createplayer.php'>ADD PLAYER</a><br><span style='font-size:16px;'>Create a new player</span></div></td>
+				<td nowrap onclick="location.href='./gui_createplayer.php'" width="20%"><div class='mechselect_button_active'><a href='./gui_createplayer.php'>PLAYER</a><br><span style='font-size:16px;'>Manage players</span></div></td>
 				<td nowrap onclick="location.href='./gui_options.php'" width="20%"><div class='mechselect_button_normal'><a href='./gui_options.php'>OPTIONS</a><br><span style='font-size:16px;'>Change options</span></div></td>
 				<td nowrap width="60px" style="background: rgba(50,50,50,1.0); text-align: center; vertical-align: middle;"><div id='loggedOnUser'></div></td>
 			</tr>
@@ -200,10 +223,10 @@ session_start();
 					
 					<!-- autocomplete deactivate hints -->
 					<!-- https://gist.github.com/runspired/b9fdf1fa74fc9fb4554418dea35718fe -->
-					
 					<!-- <input autocomplete="off" required type="text" id="NewPlayerName" name="NewPlayerName" style="width: 220px;"><br> -->
-					<input autocomplete="off" required type="text" id="NewPlayerName" style="width: 220px;"><br>
 					<!-- <input autocomplete="nope" required type="text" id="NewPlayerName" style="width: 220px;"><br> -->
+
+					<input autocomplete="off" required type="text" id="NewPlayerName" style="width: 220px;"><br>
 				</td>
 				<td width='10px'>
 					<span style='font-size:16px;'>
@@ -259,7 +282,7 @@ session_start();
 			echo "	</td>";
 			echo "	<td nowrap class='datalabel' style='text-align:left;';>" . $row['name'] . "</td>";
 			echo "	<td nowrap class='datalabel' style='text-align:left;';>" . $row['email'] . "</td>";
-			if ($row['playerid'] != "1") {
+			if ($row['playerid'] != "1" && $row['playerid'] != "2") {
 				echo "	<td width='10px'>";
 				echo "		<span style='font-size:16px;'>";
 				echo "			<a href='#' onClick='saveNewPlayer(".$row['playerid'].",\"".$row['image']."\");'><i class='fa fa-fw fa-minus-square'></i></a>";

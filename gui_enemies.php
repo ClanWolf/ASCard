@@ -80,7 +80,7 @@ session_start();
 				<td nowrap onclick="location.href='./gui_selectunit.php'" width="20%"><div class='mechselect_button_normal'><a href='./gui_selectunit.php'>ROSTER</a><br><span style='font-size:16px;'>Choose a unit to play</span></div></td>
 				<td nowrap onclick="location.href='./gui_enemies.php'" width="20%"><div class='mechselect_button_active'><a href='./gui_enemies.php'>OPFOR</a><br><span style='font-size:16px;'>Enemy Mechs</span></div></td>
 				<td nowrap onclick="location.href='./gui_createunit.php'" width="20%"><div class='mechselect_button_normal'><a href='./gui_createunit.php'>ADD MECH</a><br><span style='font-size:16px;'>Create a new unit and pilot</span></div></td>
-				<td nowrap onclick="location.href='./gui_createplayer.php'" width="20%"><div class='mechselect_button_normal'><a href='./gui_createplayer.php'>ADD PLAYER</a><br><span style='font-size:16px;'>Create a new player</span></div></td>
+				<td nowrap onclick="location.href='./gui_createplayer.php'" width="20%"><div class='mechselect_button_normal'><a href='./gui_createplayer.php'>PLAYER</a><br><span style='font-size:16px;'>Manage players</span></div></td>
 				<td nowrap onclick="location.href='./gui_options.php'" width="20%"><div class='mechselect_button_normal'><a href='./gui_options.php'>OPTIONS</a><br><span style='font-size:16px;'>Change options</span></div></td>
 				<td nowrap width="60px" style="background: rgba(50,50,50,1.0); text-align: center; vertical-align: middle;"><div id='loggedOnUser'></div></td>
 			</tr>
@@ -90,36 +90,50 @@ session_start();
 	<br>
 
 	<table align="center" cellspacing=2 cellpadding=2 border=0px>
-		<tr>
-			<td nowrap style="width:200px;height:70px;" class='mechselect_button_active'>Nimrod</td>
-			<td nowrap style="width:200px;height:70px;" onclick="location.href='./gui_unit.php?unit=5'" class='unitselect_button_normal'>
-				<a href="./gui_unit.php?unit=5">Alpha Command Star</a><br>
-				<span style='font-size:16px;'>Tap to inspect</span>
-			</td>
-			<td nowrap style="width:200px;height:70px;" onclick="location.href='./gui_unit.php?unit=5'" class='unitselect_button_normal'>
-				<a href="./gui_unit.php?unit=5">Alpha Command Star</a><br>
-				<span style='font-size:16px;'>Tap to inspect</span>
-			</td>
-			<td nowrap style="width:200px;height:70px;" onclick="location.href='./gui_unit.php?unit=5'" class='unitselect_button_normal'>
-				<a href="./gui_unit.php?unit=5">Alpha Command Star</a><br>
-				<span style='font-size:16px;'>Tap to inspect</span>
-			</td>
-		</tr>
-		<tr>
-			<td nowrap style="width:200px;height:70px;" class='mechselect_button_active'>Rabatzbaer</td>
-			<td nowrap style="width:200px;height:70px;" onclick="location.href='./gui_unit.php?unit=5'" class='unitselect_button_normal'>
-				<a href="./gui_unit.php?unit=5">Alpha Command Star</a><br>
-				<span style='font-size:16px;'>Tap to inspect</span>
-			</td>
-			<td nowrap style="width:200px;height:70px;" onclick="location.href='./gui_unit.php?unit=5'" class='unitselect_button_normal'>
-				<a href="./gui_unit.php?unit=5">Alpha Command Star</a><br>
-				<span style='font-size:16px;'>Tap to inspect</span>
-			</td>
-			<td nowrap style="width:200px;height:70px;" onclick="location.href='./gui_unit.php?unit=5'" class='unitselect_button_normal'>
-				<a href="./gui_unit.php?unit=5">Alpha Command Star</a><br>
-				<span style='font-size:16px;'>Tap to inspect</span>
-			</td>
-		</tr>
+
+<?php
+	if (!($stmt = $conn->prepare("SELECT SQL_NO_CACHE * FROM asc_player where playerid != ".$pid." ORDER BY playerid;"))) {
+		echo "Prepare failed: (" . $conn->errno . ") " . $conn->error;
+	}
+	if ($stmt->execute()) {
+		$res = $stmt->get_result();
+		while ($row = $res->fetch_assoc()) {
+			$playerid = $row['playerid'];
+			$playername = $row['name'];
+
+			echo "<tr><td nowrap style='width:200px;height:70px;' class='mechselect_button_active'>".$playername."</td>";
+
+			// Select units for this player
+			if (!($stmtUnits = $conn->prepare("SELECT SQL_NO_CACHE * FROM asc_unit where playerid = ".$playerid." ORDER BY unitid;"))) {
+				echo "Prepare failed: (" . $conn->errno . ")" . $conn->error;
+			}
+			if ($stmtUnits->execute()) {
+				$resUnits = $stmtUnits->get_result();
+				while ($rowUnit = $resUnits->fetch_assoc()) {
+					$unitidSelected = $rowUnit['unitid'];
+					$factionidSelected = $rowUnit['factionid'];
+					$forcenameSelected = $rowUnit['forcename'];
+
+					$sql_asc_checkunitassignments = "SELECT SQL_NO_CACHE * FROM asc_assign where unitid=".$unitidSelected.";";
+					$result_asc_checkunitassignments = mysqli_query($conn, $sql_asc_checkunitassignments);
+					if (mysqli_num_rows($result_asc_checkunitassignments) > 0) {
+						echo "<td nowrap style='width:200px;height:70px;' onclick='location.href=\"gui_unit.php?unit=".$unitidSelected."\"' class='unitselect_button_normal'>";
+						echo "<a href='gui_unit.php?unit=".$unitidSelected."'>".$forcenameSelected."</a><br>";
+						echo "<span style='font-size:16px;'>Tap to inspect</span>";
+						echo "</td>";
+					} else {
+						echo "<td nowrap style='background-color:#444444;width:200px;height:70px;' class='mechselect_button_active'>";
+						echo $forcenameSelected."<br>";
+						echo "<span style='font-size:16px;'>Empty</span>";
+						echo "</td>";
+					}
+				}
+			}
+			echo "</tr>";
+		}
+	}
+?>
+
 	</table>
 </body>
 

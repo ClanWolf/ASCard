@@ -254,6 +254,20 @@ a:hover {
 	color: #000000;
 	text-align: center;
 }
+.mechselect_button_normal_left {
+	font-size: 100%;
+	padding: 5px;
+	background-color: #da8e25;
+	color: #000000;
+	text-align: left;
+}
+.mechselect_button_normal_left:hover {
+	font-size: 100%;
+	padding: 5px;
+	background-color: #925a0a;
+	color: #000000;
+	text-align: left;
+}
 .mechselect_button_active {
 	font-size: 100%;
 	padding: 5px;
@@ -261,19 +275,40 @@ a:hover {
 	color: #ffffff;
 	text-align: center;
 }
-.unitselect_button_normal {
+.mechselect_button_active_left {
 	font-size: 100%;
 	padding: 5px;
-	background-color: #565656;
-	color: #000000;
-	text-align: center;
+	background-color: #694007;
+	color: #ffffff;
+	text-align: left;
 }
-.unitselect_button_normal:hover {
+.unitselect_button_normal {
+ 	font-size: 100%;
+ 	padding: 5px;
+ 	background-color: #565656;
+ 	color: #000000;
+ 	text-align: center;
+ }
+ .unitselect_button_normal:hover {
+ 	font-size: 100%;
+ 	padding: 5px;
+ 	background-color: #656565;
+ 	color: #000000;
+ 	text-align: center;
+ }
+ .unitselect_button_normal_left {
+ 	font-size: 100%;
+ 	padding: 5px;
+ 	background-color: #565656;
+ 	color: #000000;
+ 	text-align: left;
+ }
+.unitselect_button_normal_left:hover {
 	font-size: 100%;
 	padding: 5px;
 	background-color: #656565;
 	color: #000000;
-	text-align: center;
+	text-align: left;
 }
 input.bigcheck {
 }

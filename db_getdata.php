@@ -1,16 +1,16 @@
 <?php
 	require('./db.php');
 
-	$parentunitid = 0;
+//	$parentunitid = 0;
 	$factionid = 0;
 	$mechid = 0;
 	$pilotid = 0;
 
 	$FACTION = "DEFAULT";
 	$FACTION_IMG_URL = "...";
-	$FACTION_TYPE = "...";
+//	$FACTION_TYPE = "...";
 	$UNIT = "DEFAULT";
-	$UNIT_PARENTS = "";
+//	$UNIT_PARENTS = "";
 	$UNIT_IMG_URL = "...";
 
 	// Store in arrays to keep the mech- and pilotdata of the current unit
@@ -55,7 +55,7 @@
 	$array_FRCTRL_MOD = array();
 
 	// Unit
-	// unitid; factionid; forcename; parentforceid; unit_imageurl; playable
+	// unitid; factionid; forcename; --parentforceid--; unit_imageurl; playable
 	$sql_asc_unit = "SELECT SQL_NO_CACHE * FROM asc_unit;";
 	$result_asc_unit = mysqli_query($conn, $sql_asc_unit);
 	if (mysqli_num_rows($result_asc_unit) > 0) {
@@ -63,27 +63,27 @@
 			if ($row["unitid"] == $unitid) {
 				$UNIT = $row["forcename"];
 				$UNIT_IMG_URL = $row["unit_imageurl"];
-				$parentunitid = $row["parentforceid"];
+//				$parentunitid = $row["parentforceid"];
 				$factionid = $row["factionid"];
 				$unitplayerid = $row["playerid"];
 			}
 		}
-		$UNIT_PARENTS = $UNIT;
-		while($parentunitid !== "null") {
-			mysqli_data_seek($result_asc_unit, 0);
-			while($row = mysqli_fetch_assoc($result_asc_unit)) {
-				if ($row["unitid"] == $parentunitid) {
-					$name = $row["forcename"];
-					$UNIT_PARENTS = $name.",<br>".$UNIT_PARENTS;
-					$parentunitid = $row["parentforceid"];
-				}
-			}
-		}
+//		$UNIT_PARENTS = $UNIT;
+//		while($parentunitid !== "null") {
+//			mysqli_data_seek($result_asc_unit, 0);
+//			while($row = mysqli_fetch_assoc($result_asc_unit)) {
+//				if ($row["unitid"] == $parentunitid) {
+//					$name = $row["forcename"];
+//					$UNIT_PARENTS = $name.",<br>".$UNIT_PARENTS;
+//					$parentunitid = $row["parentforceid"];
+//				}
+//			}
+//		}
 	}
 	mysqli_free_result($result_asc_unit);
 
 	// Faction
-	// factionid; name; factiontype; faction_imageurl
+	// factionid; name; --factiontype--; faction_imageurl
 	$sql_asc_faction = "SELECT SQL_NO_CACHE * FROM asc_faction where factionid=".$factionid.";";
 	$result_asc_faction = mysqli_query($conn, $sql_asc_faction);
 	if (mysqli_num_rows($result_asc_faction) > 0) {
@@ -91,11 +91,11 @@
 			if ($row["factionid"] == $factionid) {
 				$FACTION = $row["name"];
 				$FACTION_IMG_URL = $row["faction_imageurl"];
-				$FACTION_TYPE = $row["factiontype"];
+//				$FACTION_TYPE = $row["factiontype"];
 			}
 		}
 	}
-	$UNIT_PARENTS = $FACTION_TYPE." ".$FACTION.",<br>".$UNIT_PARENTS;
+//	$UNIT_PARENTS = $FACTION_TYPE." ".$FACTION.",<br>".$UNIT_PARENTS;
 	mysqli_free_result($result_asc_faction);
 
 	// Alpha Strike Cards
@@ -178,7 +178,7 @@
 				mysqli_free_result($result_asc_mechstatus);
 
 				// Pilot
-				// pilotid; rank; name; callsign; health;
+				// pilotid; rank; name; callsign; --health--;
 				// pilot_imageurl
 				$sql_asc_pilot = "SELECT SQL_NO_CACHE * FROM asc_pilot where pilotid=".$pilotid.";";
 				$result_asc_pilot = mysqli_query($conn, $sql_asc_pilot);
