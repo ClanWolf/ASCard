@@ -197,7 +197,9 @@ session_start();
 				<td colspan="2" nowrap align="left">New player</td>
 				<td colspan="1" align="right">Name:</td>
 				<td colspan="1">
-					<input autocomplete="off" required type="text" id="NewPlayerName" name="NewPlayerName" style="width: 220px;"><br>
+					<!-- <input autocomplete="off" required type="text" id="NewPlayerName" name="NewPlayerName" style="width: 220px;"><br> -->
+					<input autocomplete="off" required type="text" id="NewPlayerName" style="width: 220px;"><br>
+					<!-- <input autocomplete="nope" required type="text" id="NewPlayerName" style="width: 220px;"><br> -->
 				</td>
 				<td width='10px'>
 					<span style='font-size:16px;'>
@@ -211,21 +213,21 @@ session_start();
 				</td>
 				<td colspan="1" align="right">Email:</td>
 				<td colspan="1">
-					<input autocomplete="off" required type="text" id="NewPlayerEMail" name="NewPlayerEMail" style="width: 220px;"><br>
+					<input autocomplete="off" required type="text" id="NewPlayerEMail" style="width: 220px;"><br>
 				</td>
 				<td width='10px'></td>
 			</tr>
 			<tr>
 				<td colspan="1" align="right">Password:</td>
 				<td colspan="1">
-					<input autocomplete="off" required type="password" id="NewPlayerPassword" name="NewPlayerPassword" style="width: 220px;"><br>
+					<input autocomplete="new-password" required type="password" id="NewPlayerPassword" style="width: 220px;"><br>
 				</td>
 				<td width='10px'></td>
 			</tr>
 			<tr>
 				<td colspan="1" align="right">Confirm:</td>
 				<td colspan="1">
-					<input autocomplete="off" required type="password" id="NewPlayerPasswordConfirm" name="NewPlayerPasswordConfirm" style="width: 220px;"><br>
+					<input autocomplete="new-password" required type="password" id="NewPlayerPasswordConfirm" style="width: 220px;"><br>
 				</td>
 				<td width='10px'></td>
 			</tr>
