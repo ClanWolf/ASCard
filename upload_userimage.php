@@ -1,4 +1,13 @@
 <?php
+
+// https://www.php-einfach.de/php-tutorial/dateiupload/
+// 
+// USAGE:
+// <form action="upload.php" method="post" enctype="multipart/form-data">
+// <input type="file" name="datei"><br>
+// <input type="submit" value="Hochladen">
+// </form>
+
 $upload_folder = 'upload/';
 $filename = pathinfo($_FILES['datei']['name'], PATHINFO_FILENAME);
 $extension = strtolower(pathinfo($_FILES['datei']['name'], PATHINFO_EXTENSION));
