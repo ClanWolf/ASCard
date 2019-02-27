@@ -96,7 +96,7 @@ session_start();
 <?php
 
 	$addMechToUnitLinkArray = array();
-	$mechsInUnits = array();
+	$mechsInAllUnits = array();
 
 	echo "<td nowrap style='width:200px;height:70px;' class='mechselect_button_active'>".$pname."</td>";
 	// Select units for this player
@@ -128,8 +128,14 @@ session_start();
 
 			$mechsInSingleUnit = array();
 			while ($rowUnitAssignment = $result_asc_checkunitassignments->fetch_assoc()) {
+
+				$assignedMechID = $rowUnitAssignment['mechid'];
+				$assignedPilotID = $rowUnitAssignment['pilotid'];
+
 				$mechDetailString = "";
-				$mechDetailString = $mechDetailString . "";
+				$mechDetailString = $mechDetailString . "$assignedMechID";
+				$mechDetailString = $mechDetailString . "$assignedPilotID";
+
 				array_push($mechsInSingleUnit, $mechDetailString);
 			}
 			array_push($mechsInAllUnits, $mechsInSingleUnit);
@@ -148,6 +154,14 @@ session_start();
 	echo "		<a href='".$addMechToUnitLinkArray[2]."'><i class='fa fa-fw fa-plus-square'></i></a>";
 	echo "	</td>";
 	echo "</tr>";
+
+	foreach ($mechsInAllUnits as &$mechsInSingleUnit) {
+        foreach ($mechsInSingleUnit as &$str) {
+            echo $str;
+        }
+        echo "<br>";
+    }
+
 ?>
 
 		<tr>
