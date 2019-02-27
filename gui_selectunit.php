@@ -139,18 +139,18 @@ session_start();
 				// GET MECH DATA FROM assignedMechID
 				
 				$mechDetailString = $mechDetailString."<td nowrap style='width:200px;height:50px;background-color:#444444;' class='mechselect_button_active'>";
-				$mechDetailString = $mechDetailString."<table width='100%' cellspacing=0 cellpadding=0 border=0px>";
-				$mechDetailString = $mechDetailString."<tr>";
-				$mechDetailString = $mechDetailString."<td nowrap width='99%' align='left' style='background-color:#444444;text-align:left;' class='mechselect_button_active'>";
-				$mechDetailString = $mechDetailString."<span style='font-size:16px;'>Timberwolf</span>";
-				$mechDetailString = $mechDetailString."</td>";
-				$mechDetailString = $mechDetailString."<td nowrap width='1%' style='background-color:#444444;text-align:right;' class='mechselect_button_active'>";
-				$mechDetailString = $mechDetailString."<span style='font-size:16px;'>";
-				$mechDetailString = $mechDetailString."<a href=''><i class='fa fa-fw fa-minus-square'></i></a>";
-				$mechDetailString = $mechDetailString."</span>";
-				$mechDetailString = $mechDetailString."</td>";
-				$mechDetailString = $mechDetailString."</tr>";
-				$mechDetailString = $mechDetailString."</table>";
+				$mechDetailString = $mechDetailString."	<table width='100%' cellspacing=0 cellpadding=0 border=0px>";
+				$mechDetailString = $mechDetailString."		<tr>";
+				$mechDetailString = $mechDetailString."			<td nowrap width='99%' align='left' style='background-color:#444444;text-align:left;' class='mechselect_button_active'>";
+				$mechDetailString = $mechDetailString."				<span style='font-size:16px;'>Timberwolf</span>";
+				$mechDetailString = $mechDetailString."			</td>";
+				$mechDetailString = $mechDetailString."			<td nowrap width='1%' style='background-color:#444444;text-align:right;' class='mechselect_button_active'>";
+				$mechDetailString = $mechDetailString."				<span style='font-size:16px;'>";
+				$mechDetailString = $mechDetailString."					<a href=''><i class='fa fa-fw fa-minus-square'></i></a>";
+				$mechDetailString = $mechDetailString."				</span>";
+				$mechDetailString = $mechDetailString."			</td>";
+				$mechDetailString = $mechDetailString."		</tr>";
+				$mechDetailString = $mechDetailString."	</table>";
 				$mechDetailString = $mechDetailString."</td>";
 
 				array_push($mechsInSingleUnit, $mechDetailString);
