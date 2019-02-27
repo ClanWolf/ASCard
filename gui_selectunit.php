@@ -100,7 +100,7 @@ session_start();
 
 	echo "<td nowrap style='width:200px;height:70px;' class='mechselect_button_active'>".$pname."</td>";
 	// Select units for this player
-    if (!($stmtUnits = $conn->prepare("SELECT SQL_NO_CACHE * FROM asc_unit where playerid = ".$pid." ORDER BY unitid;"))) {
+	if (!($stmtUnits = $conn->prepare("SELECT SQL_NO_CACHE * FROM asc_unit where playerid = ".$pid." ORDER BY unitid;"))) {
 		echo "Prepare failed: (" . $conn->errno . ")" . $conn->error;
 	}
 	if ($stmtUnits->execute()) {
@@ -133,8 +133,22 @@ session_start();
 				$assignedPilotID = $rowUnitAssignment['pilotid'];
 
 				$mechDetailString = "";
-				$mechDetailString = $mechDetailString . "$assignedMechID";
-				$mechDetailString = $mechDetailString . "$assignedPilotID";
+				// $mechDetailString = $mechDetailString."$assignedMechID";
+				// $mechDetailString = $mechDetailString."$assignedPilotID";
+				$mechDetailString = $mechDetailString."<td nowrap style='width:200px;height:50px;background-color:#444444;' class='mechselect_button_active'>";
+				$mechDetailString = $mechDetailString."<table width='100%' cellspacing=0 cellpadding=0 border=0px>";
+				$mechDetailString = $mechDetailString."<tr>";
+				$mechDetailString = $mechDetailString."<td nowrap width='99%' align='left' style='background-color:#444444;text-align:left;' class='mechselect_button_active'>";
+				$mechDetailString = $mechDetailString."<span style='font-size:16px;'>Timberwolf</span>";
+				$mechDetailString = $mechDetailString."</td>";
+				$mechDetailString = $mechDetailString."<td nowrap width='1%' style='background-color:#444444;text-align:right;' class='mechselect_button_active'>";
+				$mechDetailString = $mechDetailString."<span style='font-size:16px;'>";
+				$mechDetailString = $mechDetailString."<a href=''><i class='fa fa-fw fa-minus-square'></i></a>";
+				$mechDetailString = $mechDetailString."</span>";
+				$mechDetailString = $mechDetailString."</td>";
+				$mechDetailString = $mechDetailString."</tr>";
+				$mechDetailString = $mechDetailString."</table>";
+				$mechDetailString = $mechDetailString."</td>";
 
 				array_push($mechsInSingleUnit, $mechDetailString);
 			}
@@ -156,12 +170,13 @@ session_start();
 	echo "</tr>";
 
 	foreach ($mechsInAllUnits as &$mechsInSingleUnit) {
-        foreach ($mechsInSingleUnit as &$str) {
-            echo $str;
-        }
-        echo "<br>";
-    }
-
+		echo "<tr>";
+		echo "<td></td>";
+		foreach ($mechsInSingleUnit as &$str) {
+			echo $str;
+		}
+		echo "</tr>";
+	}
 ?>
 
 		<tr>
