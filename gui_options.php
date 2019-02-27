@@ -20,7 +20,7 @@ session_start();
 		// storing changed options to database
 		$sql_update_options = "UPDATE asc_options SET OPTION1=".$opt1.", OPTION2=".$opt2." WHERE playerid = ".$pid;
 		$result_update_options = mysqli_query($conn, $sql_update_options);
-		echo "<meta http-equiv='refresh' content='0;url=./options.php'>";
+		echo "<meta http-equiv='refresh' content='0;url=./gui_options.php'>";
 		die();
 	} else {
 		// getting options from database
