@@ -94,6 +94,10 @@ session_start();
 		<tr>
 
 <?php
+
+	$addMechToUnitLinkArray = array();
+	$mechsInUnits = array();
+
 	echo "<td nowrap style='width:200px;height:70px;' class='mechselect_button_active'>".$pname."</td>";
 	// Select units for this player
     if (!($stmtUnits = $conn->prepare("SELECT SQL_NO_CACHE * FROM asc_unit where playerid = ".$pid." ORDER BY unitid;"))) {
@@ -105,6 +109,8 @@ session_start();
 			$unitidSelected = $rowUnit['unitid'];
 			$factionidSelected = $rowUnit['factionid'];
 			$forcenameSelected = $rowUnit['forcename'];
+
+			array_push($addMechToUnitLinkArray, "gui_createunit.php?unitid=".$unitidSelected."&unitname=".$forcenameSelected);
 
 			$sql_asc_checkunitassignments = "SELECT SQL_NO_CACHE * FROM asc_assign where unitid=".$unitidSelected.";";
 			$result_asc_checkunitassignments = mysqli_query($conn, $sql_asc_checkunitassignments);
@@ -119,23 +125,31 @@ session_start();
 				echo "<span style='font-size:16px;'>Empty</span>";
 				echo "</td>";
 			}
+
+			$mechsInSingleUnit = array();
+			while ($rowUnitAssignment = $result_asc_checkunitassignments->fetch_assoc()) {
+				$mechDetailString = "";
+				$mechDetailString = $mechDetailString . "";
+				array_push($mechsInSingleUnit, $mechDetailString);
+			}
+			array_push($mechsInAllUnits, $mechsInSingleUnit);
 		}
 	}
+	echo "</tr>";
+	echo "<tr>";
+	echo "	<td></td>";
+	echo "	<td nowrap style='text-align:center;width:200px;height:30px;background-color:#transparent;'>";
+	echo "		<a href='".$addMechToUnitLinkArray[0]."'><i class='fa fa-fw fa-plus-square'></i></a>";
+	echo "	</td>";
+	echo "	<td nowrap style='text-align:center;width:200px;height:30px;background-color:#transparent;'>";
+	echo "		<a href='".$addMechToUnitLinkArray[1]."'><i class='fa fa-fw fa-plus-square'></i></a>";
+	echo "	</td>";
+	echo "	<td nowrap style='text-align:center;width:200px;height:30px;background-color:#transparent;'>";
+	echo "		<a href='".$addMechToUnitLinkArray[2]."'><i class='fa fa-fw fa-plus-square'></i></a>";
+	echo "	</td>";
+	echo "</tr>";
 ?>
 
-		</tr>
-		<tr>
-			<td></td>
-			<td nowrap style="text-align:center;width:200px;height:30px;background-color:#transparent;">
-				<a href="gui_createunit.php?unitid=1&unitname=Alpha"><i class="fa fa-fw fa-plus-square"></i></a>
-			</td>
-			<td nowrap style="text-align:center;width:200px;height:30px;background-color:#transparent;">
-				<a href="gui_createunit.php?unitid=1&unitname=Bravo"><i class="fa fa-fw fa-plus-square"></i></a>
-			</td>
-			<td nowrap style="text-align:center;width:200px;height:30px;background-color:#transparent;">
-				<a href="gui_createunit.php?unitid=1&unitname=Charlie"><i class="fa fa-fw fa-plus-square"></i></a>
-			</td>
-		</tr>
 		<tr>
 			<td></td>
 			<td nowrap style="width:200px;height:50px;background-color:#444444;" class='mechselect_button_active'>
