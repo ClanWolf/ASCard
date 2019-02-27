@@ -135,6 +135,9 @@ session_start();
 				$mechDetailString = "";
 				// $mechDetailString = $mechDetailString."$assignedMechID";
 				// $mechDetailString = $mechDetailString."$assignedPilotID";
+				
+				// GET MECH DATA FROM assignedMechID
+				
 				$mechDetailString = $mechDetailString."<td nowrap style='width:200px;height:50px;background-color:#444444;' class='mechselect_button_active'>";
 				$mechDetailString = $mechDetailString."<table width='100%' cellspacing=0 cellpadding=0 border=0px>";
 				$mechDetailString = $mechDetailString."<tr>";
