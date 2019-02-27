@@ -158,19 +158,19 @@ session_start();
 			array_push($mechsInAllUnits, $mechsInSingleUnit);
 		}
 	}
-	echo "</tr>";
-	echo "<tr>";
-	echo "	<td></td>";
-	echo "	<td nowrap style='text-align:center;width:200px;height:30px;background-color:#transparent;'>";
-	echo "		<a href='".$addMechToUnitLinkArray[0]."'><i class='fa fa-fw fa-plus-square'></i></a>";
-	echo "	</td>";
-	echo "	<td nowrap style='text-align:center;width:200px;height:30px;background-color:#transparent;'>";
-	echo "		<a href='".$addMechToUnitLinkArray[1]."'><i class='fa fa-fw fa-plus-square'></i></a>";
-	echo "	</td>";
-	echo "	<td nowrap style='text-align:center;width:200px;height:30px;background-color:#transparent;'>";
-	echo "		<a href='".$addMechToUnitLinkArray[2]."'><i class='fa fa-fw fa-plus-square'></i></a>";
-	echo "	</td>";
-	echo "</tr>";
+	echo "		</tr>";
+	echo "		<tr>";
+	echo "			<td></td>";
+	echo "			<td nowrap style='text-align:center;width:200px;height:30px;background-color:#transparent;'>";
+	echo "				<a href='".$addMechToUnitLinkArray[0]."'><i class='fa fa-fw fa-plus-square'></i></a>";
+	echo "			</td>";
+	echo "			<td nowrap style='text-align:center;width:200px;height:30px;background-color:#transparent;'>";
+	echo "				<a href='".$addMechToUnitLinkArray[1]."'><i class='fa fa-fw fa-plus-square'></i></a>";
+	echo "			</td>";
+	echo "			<td nowrap style='text-align:center;width:200px;height:30px;background-color:#transparent;'>";
+	echo "				<a href='".$addMechToUnitLinkArray[2]."'><i class='fa fa-fw fa-plus-square'></i></a>";
+	echo "			</td>";
+	echo "		</tr>";
 
 	foreach ($mechsInAllUnits as &$mechsInSingleUnit) {
 		echo "		<tr>";
