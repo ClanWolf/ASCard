@@ -117,7 +117,7 @@ session_start();
 			if (mysqli_num_rows($result_asc_checkunitassignments) > 0) {
 				echo "<td nowrap style='width:200px;height:70px;' onclick='location.href=\"gui_unit.php?unit=".$unitidSelected."\"' class='unitselect_button_normal'>";
 				echo "<a href='gui_unit.php?unit=".$unitidSelected."'>".$forcenameSelected."</a><br>";
-				echo "<span style='font-size:16px;'>Tap to inspect</span>";
+				echo "<span style='font-size:16px;'>Tap to take control</span>";
 				echo "</td>";
 			} else {
 				echo "<td nowrap style='background-color:#444444;width:200px;height:70px;' class='mechselect_button_active'>";
