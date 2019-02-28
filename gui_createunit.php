@@ -193,6 +193,24 @@ session_start();
 		function storeNewMech() {
 			// ./gui_createunit.php?am=1
 			alert("Gather data and store mech!");
+			
+			// Store new mech
+			//var npn = document.getElementById('NewPlayerName').value;
+			//var npe = document.getElementById('NewPlayerEMail').value;
+			//var npp = document.getElementById('NewPlayerPassword').value;
+			//var nppc = document.getElementById('NewPlayerPasswordConfirm').value;
+			//if ("" == npn) {
+			//	alert("Name may not be empty!");
+			//}
+			//if (npp == nppc) {
+			//	// alert("Saving new player: " + id + " (" + NewPlayerName + ")");
+			//	var url = "./gui_createplayer.php?s=1&npn=" + npn;
+			//	url = url + "&npe=" + npe;
+			//	url = url + "&npp=" + npp;
+			//	window.location = url;
+			//} else {
+			//	alert("Passwords do not match!");
+			//}
 		}
 	</script>
 
