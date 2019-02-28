@@ -225,7 +225,7 @@ session_start();
 	echo "			<td></td>\n";
 
 	foreach ($mechsInAllUnits as &$mechsInSingleUnit) {
-		echo "			<td style='background-color:#222222;'>";
+		echo "			<td style='background-color:#333333;'>";
 		echo "				<table cellspacing=2 cellpadding=0 border=0px>";
 		foreach ($mechsInSingleUnit as &$mech) {
 			echo "					<tr>";
