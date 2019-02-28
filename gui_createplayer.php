@@ -270,28 +270,28 @@ session_start();
 		while ($row = $res->fetch_assoc()) {
 			$filename = "./images/player/".$row['image'];
 
-			echo "<tr>";
-			echo "	<td nowrap class='datalabel' style='text-align:left;';>" . $row['playerid'] . "</td>";
-			echo "	<td nowrap class='datalabel' style='text-align:left;vertical-align:middle;' valign='middle'>";
+			echo "			<tr>\n";
+			echo "				<td nowrap class='datalabel' style='text-align:left;';>" . $row['playerid'] . "</td>\n";
+			echo "				<td nowrap class='datalabel' style='text-align:left;vertical-align:middle;' valign='middle'>\n";
 			if (file_exists($filename)) {
-				echo "		<img src='./images/player/".$row['image']."' width='30px' height='30px'>";
+				echo "						<img src='./images/player/".$row['image']."' width='30px' height='30px'>\n";
 			} else {
-				echo "		<img src='./images/pilots/000_no_avatar.png' width='30px' height='30px'>";
+				echo "						<img src='./images/pilots/000_no_avatar.png' width='30px' height='30px'>\n";
 				copy("./images/pilots/000_no_avatar.png", "./images/player/".$row['image']);
 			}
-			echo "	</td>";
-			echo "	<td nowrap class='datalabel' style='text-align:left;';>" . $row['name'] . "</td>";
-			echo "	<td nowrap class='datalabel' style='text-align:left;';>" . $row['email'] . "</td>";
+			echo "				</td>\n";
+			echo "				<td nowrap class='datalabel' style='text-align:left;';>" . $row['name'] . "</td>\n";
+			echo "				<td nowrap class='datalabel' style='text-align:left;';>" . $row['email'] . "</td>\n";
 			if ($row['playerid'] != "1" && $row['playerid'] != "2") {
-				echo "	<td width='10px'>";
-				echo "		<span style='font-size:16px;'>";
-				echo "			<a href='#' onClick='saveNewPlayer(".$row['playerid'].",\"".$row['image']."\");'><i class='fa fa-fw fa-minus-square'></i></a>";
-				echo "		</span>";
-				echo "	</td>";
+				echo "				<td width='10px'>\n";
+				echo "					<span style='font-size:16px;'>\n";
+				echo "						<a href='#' onClick='saveNewPlayer(".$row['playerid'].",\"".$row['image']."\");'><i class='fa fa-fw fa-minus-square'></i></a>\n";
+				echo "					</span>\n";
+				echo "				</td>\n";
 			} else {
-				echo "	<td width='10%'></td>";
+				echo "				<td width='10%'></td>\n";
 			}
-			echo "</tr>";
+			echo "			</tr>\n";
 		}
 	}
 ?>

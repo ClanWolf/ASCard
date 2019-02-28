@@ -116,7 +116,7 @@ session_start();
 					if (na.substring(0, 4) == "OPT2") { opt2 = el1.checked }
 				}
 			})
-			var url="./options.php?opt1="+opt1+"&opt2="+opt2;
+			var url="./gui_options.php?opt1="+opt1+"&opt2="+opt2;
 			// alert (url);
 			window.location.href = url;
 		}

@@ -13,6 +13,42 @@ session_start();
 	$pid = $_SESSION['playerid'];
 	$pname = $_SESSION['name'];
 	$pimage = $_SESSION['playerimage'];
+
+	$deletemech = isset($_GET["dm"]) ? $_GET["dm"] : "";
+
+	if ($deletemech=="1") {
+		$mechid = isset($_GET["mechid"]) ? $_GET["mechid"] : "";
+		$pilotid = isset($_GET["pilotid"]) ? $_GET["pilotid"] : "";
+
+		// delete mech
+		$sqldeletemech = "DELETE FROM asc_mech WHERE mechid = ".$mechid;
+		if (mysqli_query($conn, $sqldeletemech)) {
+			// Success
+		} else {
+			// Error
+			echo "Error: " . $sqldeletemech . "<br>" . mysqli_error($conn);
+		}
+
+		// delete pilot
+		$sqldeletepilot = "DELETE FROM asc_pilot WHERE pilotid = ".$pilotid;
+		if (mysqli_query($conn, $sqldeletepilot)) {
+			// Success
+		} else {
+			// Error
+			echo "Error: " . $sqldeletepilot . "<br>" . mysqli_error($conn);
+		}
+
+		// delete assignment
+		$sqldeleteassignment = "DELETE FROM asc_assign WHERE pilotid = ".$pilotid." and mechid = " . $mechid . ";";
+		if (mysqli_query($conn, $sqldeleteassignment)) {
+			// Success
+		} else {
+			// Error
+			echo "Error: " . $sqldeleteassignment . "<br>" . mysqli_error($conn);
+		}
+
+		echo "<meta http-equiv='refresh' content='0;url=./gui_selectunit.php'>";
+	}
 ?>
 
 <html lang="en">
@@ -65,9 +101,9 @@ session_start();
 	</script>
 
 <?php
-	echo "<div id='player_image'>";
-	echo "	<img src='./images/player/".$pimage."' width='60px' height='60px'>";
-	echo "</div>";
+	echo "	<div id='player_image'>";
+	echo "		<img src='./images/player/".$pimage."' width='60px' height='60px'>";
+	echo "	</div>";
 ?>
 
 	<div id="cover"></div>
@@ -92,13 +128,12 @@ session_start();
 
 	<table align="center" cellspacing=2 cellpadding=2 border=0px>
 		<tr>
-
 <?php
 
 	$addMechToUnitLinkArray = array();
 	$mechsInAllUnits = array();
 
-	echo "<td nowrap style='width:200px;height:70px;' class='mechselect_button_active'>".$pname."</td>";
+	echo "		<td nowrap style='width:200px;height:70px;' class='mechselect_button_active'>".$pname."</td>";
 	// Select units for this player
 	if (!($stmtUnits = $conn->prepare("SELECT SQL_NO_CACHE * FROM asc_unit where playerid = ".$pid." ORDER BY unitid;"))) {
 		echo "Prepare failed: (" . $conn->errno . ")" . $conn->error;
@@ -115,15 +150,15 @@ session_start();
 			$sql_asc_checkunitassignments = "SELECT SQL_NO_CACHE * FROM asc_assign where unitid=".$unitidSelected.";";
 			$result_asc_checkunitassignments = mysqli_query($conn, $sql_asc_checkunitassignments);
 			if (mysqli_num_rows($result_asc_checkunitassignments) > 0) {
-				echo "<td nowrap style='width:200px;height:70px;' onclick='location.href=\"gui_unit.php?unit=".$unitidSelected."\"' class='unitselect_button_normal'>";
-				echo "<a href='gui_unit.php?unit=".$unitidSelected."'>".$forcenameSelected."</a><br>";
-				echo "<span style='font-size:16px;'>Tap to take control</span>";
-				echo "</td>";
+				echo "			<td nowrap style='width:200px;height:70px;' onclick='location.href=\"gui_unit.php?unit=".$unitidSelected."\"' class='unitselect_button_normal'>\n";
+				echo "				<a href='gui_unit.php?unit=".$unitidSelected."'>".$forcenameSelected."</a><br>\n";
+				echo "				<span style='font-size:16px;'>Tap to take control</span>\n";
+				echo "			</td>\n";
 			} else {
-				echo "<td nowrap style='background-color:#444444;width:200px;height:70px;' class='mechselect_button_active'>";
-				echo $forcenameSelected."<br>";
-				echo "<span style='font-size:16px;'>Empty</span>";
-				echo "</td>";
+				echo "			<td nowrap style='background-color:#444444;width:200px;height:70px;' class='mechselect_button_active'>\n";
+				echo "				".$forcenameSelected."<br>\n";
+				echo "				<span style='font-size:16px;'>Empty</span>\n";
+				echo "			</td>\n";
 			}
 
 			$mechsInSingleUnit = array();
@@ -132,190 +167,76 @@ session_start();
 				$assignedMechID = $rowUnitAssignment['mechid'];
 				$assignedPilotID = $rowUnitAssignment['pilotid'];
 
+				$sql_asc_mech = "SELECT SQL_NO_CACHE * FROM asc_mech where mechid=".$assignedMechID.";";
+				$result_asc_mech = mysqli_query($conn, $sql_asc_mech);
+				if (mysqli_num_rows($result_asc_mech) > 0) {
+					while($rowMech = mysqli_fetch_assoc($result_asc_mech)) {
+						$mechnumber = $rowMech['mech_number'];
+						$mechchassisname = $rowMech['as_name'];
+						$mechcustomname = $rowMech['custom_name'];
+					}
+				}
+
+				$sql_asc_pilot = "SELECT SQL_NO_CACHE * FROM asc_pilot where pilotid=".$assignedPilotID.";";
+				$result_asc_pilot = mysqli_query($conn, $sql_asc_pilot);
+				if (mysqli_num_rows($result_asc_pilot) > 0) {
+					while($rowPilot = mysqli_fetch_assoc($result_asc_pilot)) {
+						$pilotrank = $rowPilot['rank'];
+						$pilotname = $rowPilot['name'];
+					}
+				}
+
 				$mechDetailString = "";
-				// $mechDetailString = $mechDetailString."$assignedMechID";
-				// $mechDetailString = $mechDetailString."$assignedPilotID";
-				
-				// GET MECH DATA FROM assignedMechID
-				
-				$mechDetailString = $mechDetailString."			<td nowrap style='width:200px;height:50px;background-color:#444444;' class='mechselect_button_active'>";
-				$mechDetailString = $mechDetailString."				<table width='100%' cellspacing=0 cellpadding=0 border=0px>";
-				$mechDetailString = $mechDetailString."					<tr>";
-				$mechDetailString = $mechDetailString."						<td nowrap width='99%' align='left' style='background-color:#444444;text-align:left;' class='mechselect_button_active'>";
-				$mechDetailString = $mechDetailString."							<span style='font-size:16px;'>Timberwolf</span>";
-				$mechDetailString = $mechDetailString."						</td>";
-				$mechDetailString = $mechDetailString."						<td nowrap width='1%' style='background-color:#444444;text-align:right;' class='mechselect_button_active'>";
-				$mechDetailString = $mechDetailString."							<span style='font-size:16px;'>";
-				$mechDetailString = $mechDetailString."								<a href=''><i class='fa fa-fw fa-minus-square'></i></a>";
-				$mechDetailString = $mechDetailString."							</span>";
-				$mechDetailString = $mechDetailString."						</td>";
-				$mechDetailString = $mechDetailString."					</tr>";
-				$mechDetailString = $mechDetailString."				</table>";
-				$mechDetailString = $mechDetailString."			</td>";
+				$mechDetailString = $mechDetailString."			<td nowrap style='width:200px;height:50px;background-color:#444444;' class='mechselect_button_active'>\n";
+				$mechDetailString = $mechDetailString."				<table width='100%' cellspacing=0 cellpadding=0 border=0px>\n";
+				$mechDetailString = $mechDetailString."					<tr>\n";
+				$mechDetailString = $mechDetailString."						<td nowrap width='99%' align='left' style='color:#AAAAAA;background-color:#444444;text-align:left;' class='mechselect_button_active'>".$mechchassisname." ".$mechcustomname."\n";
+				$mechDetailString = $mechDetailString."							<br><span style='font-size:16px;'>".$pilotrank." ".$pilotname." (".$mechnumber.")</span>\n";
+				$mechDetailString = $mechDetailString."						</td>\n";
+				$mechDetailString = $mechDetailString."						<td nowrap width='1%' style='background-color:#444444;text-align:right;' class='mechselect_button_active'>\n";
+				$mechDetailString = $mechDetailString."							<span style='font-size:16px;'>\n";
+				$mechDetailString = $mechDetailString."								<a href='./gui_selectunit.php?dm=1&mechid=".$assignedMechID."&pilotid=".$assignedPilotID."'><i class='fa fa-fw fa-minus-square'></i></a>\n";
+				$mechDetailString = $mechDetailString."							</span>\n";
+				$mechDetailString = $mechDetailString."						</td>\n";
+				$mechDetailString = $mechDetailString."					</tr>\n";
+				$mechDetailString = $mechDetailString."				</table>\n";
+				$mechDetailString = $mechDetailString."			</td>\n";
 
 				array_push($mechsInSingleUnit, $mechDetailString);
 			}
 			array_push($mechsInAllUnits, $mechsInSingleUnit);
 		}
 	}
-	echo "		</tr>";
-	echo "		<tr>";
-	echo "			<td></td>";
-	echo "			<td nowrap style='text-align:center;width:200px;height:30px;background-color:#transparent;'>";
-	echo "				<a href='".$addMechToUnitLinkArray[0]."'><i class='fa fa-fw fa-plus-square'></i></a>";
-	echo "			</td>";
-	echo "			<td nowrap style='text-align:center;width:200px;height:30px;background-color:#transparent;'>";
-	echo "				<a href='".$addMechToUnitLinkArray[1]."'><i class='fa fa-fw fa-plus-square'></i></a>";
-	echo "			</td>";
-	echo "			<td nowrap style='text-align:center;width:200px;height:30px;background-color:#transparent;'>";
-	echo "				<a href='".$addMechToUnitLinkArray[2]."'><i class='fa fa-fw fa-plus-square'></i></a>";
-	echo "			</td>";
-	echo "		</tr>";
+	echo "		</tr>\n";
+	echo "		<tr>\n";
+	echo "			<td></td>\n";
+	echo "			<td nowrap style='text-align:center;width:200px;height:30px;background-color:#transparent;'>\n";
+	echo "				<a href='".$addMechToUnitLinkArray[0]."'><i class='fa fa-fw fa-plus-square'></i></a>\n";
+	echo "			</td>\n";
+	echo "			<td nowrap style='text-align:center;width:200px;height:30px;background-color:#transparent;'>\n";
+	echo "				<a href='".$addMechToUnitLinkArray[1]."'><i class='fa fa-fw fa-plus-square'></i></a>\n";
+	echo "			</td>\n";
+	echo "			<td nowrap style='text-align:center;width:200px;height:30px;background-color:#transparent;'>\n";
+	echo "				<a href='".$addMechToUnitLinkArray[2]."'><i class='fa fa-fw fa-plus-square'></i></a>\n";
+	echo "			</td>\n";
+	echo "		</tr>\n";
+	echo "		<tr>\n";
+	echo "			<td></td>\n";
 
 	foreach ($mechsInAllUnits as &$mechsInSingleUnit) {
-		echo "		<tr>";
-		echo "			<td></td>";
-		foreach ($mechsInSingleUnit as &$str) {
-			echo $str;
+		echo "			<td style='background-color:#222222;'>";
+		echo "				<table cellspacing=2 cellpadding=0 border=0px>";
+		foreach ($mechsInSingleUnit as &$mech) {
+			echo "					<tr>";
+			echo "						".$mech;
+			echo "					</tr>";
 		}
-		echo "		</tr>";
+		echo "				</table>";
+		echo "			</td>";
 	}
+	echo "		</tr>\n";
 ?>
 
-		<tr>
-			<td></td>
-			<td nowrap style="width:200px;height:50px;background-color:#444444;" class='mechselect_button_active'>
-				<table width='100%' cellspacing=0 cellpadding=0 border=0px>
-					<tr>
-						<td nowrap width="99%" align='left' style="background-color:#444444;text-align:left;" class='mechselect_button_active'>
-							<span style='font-size:16px;'>Timberwolf</span>
-						</td>
-						<td nowrap width="1%" style="background-color:#444444;text-align:right;" class='mechselect_button_active'>
-							<span style='font-size:16px;'>
-								<a href=""><i class="fa fa-fw fa-minus-square"></i></a>
-							</span>
-						</td>
-					</tr>
-				</table>
-			</td>
-			<td nowrap style="width:200px;height:50px;background-color:#444444;" class='mechselect_button_active'>
-				<table width='100%'>
-					<tr>
-						<td nowrap width="99%" align='left' style="background-color:#444444;text-align:left;" class='mechselect_button_active'>
-							<span style='font-size:16px;'>Timberwolf</span>
-						</td>
-						<td nowrap width="1%" style="background-color:#444444;text-align:right;" class='mechselect_button_active'>
-							<span style='font-size:16px;'>
-								<a href=""><i class="fa fa-fw fa-minus-square"></i></a>
-							</span>
-						</td>
-					</tr>
-				</table>
-			</td>
-			<td nowrap style="width:200px;height:50px;background-color:#444444;" class='mechselect_button_active'>
-				<table width='100%'>
-					<tr>
-						<td nowrap width="99%" valign='middle' align='left' style="background-color:#444444;text-align:left;" class='mechselect_button_active'>
-							<span style='font-size:16px;'>Timberwolf</span>
-						</td>
-						<td nowrap width="1%" style="background-color:#444444;text-align:right;" class='mechselect_button_active'>
-							<span style='font-size:16px;'>
-								<a href=""><i class="fa fa-fw fa-minus-square"></i></a>
-							</span>
-						</td>
-					</tr>
-				</table>
-			</td>
-		</tr>
-		<tr>
-			<td></td>
-			<td nowrap style="width:200px;height:50px;background-color:#444444;" class='mechselect_button_active'>
-				<table width='100%' cellspacing=0 cellpadding=0 border=0px>
-					<tr>
-						<td nowrap width="99%" align='left' style="background-color:#444444;text-align:left;" class='mechselect_button_active'>
-							<span style='font-size:16px;'>Timberwolf</span>
-						</td>
-						<td nowrap width="1%" style="background-color:#444444;text-align:right;" class='mechselect_button_active'>
-							<span style='font-size:16px;'>
-								<a href=""><i class="fa fa-fw fa-minus-square"></i></a>
-							</span>
-						</td>
-					</tr>
-				</table>
-			</td>
-			<td nowrap style="width:200px;height:50px;background-color:#444444;" class='mechselect_button_active'>
-				<table width='100%'>
-					<tr>
-						<td nowrap width="99%" align='left' style="background-color:#444444;text-align:left;" class='mechselect_button_active'>
-							<span style='font-size:16px;'>Timberwolf</span>
-						</td>
-						<td nowrap width="1%" style="background-color:#444444;text-align:right;" class='mechselect_button_active'>
-							<span style='font-size:16px;'>
-								<a href=""><i class="fa fa-fw fa-minus-square"></i></a>
-							</span>
-						</td>
-					</tr>
-				</table>
-			</td>
-			<td nowrap style="width:200px;height:50px;background-color:#444444;" class='mechselect_button_active'>
-				<table width='100%'>
-					<tr>
-						<td nowrap width="99%" align='left' style="background-color:#444444;text-align:left;" class='mechselect_button_active'>
-							<span style='font-size:16px;'>Timberwolf</span>
-						</td>
-						<td nowrap width="1%" style="background-color:#444444;text-align:right;" class='mechselect_button_active'>
-							<span style='font-size:16px;'>
-								<a href=""><i class="fa fa-fw fa-minus-square"></i></a>
-							</span>
-						</td>
-					</tr>
-				</table>
-			</td>
-		</tr>
-		<tr>
-			<td></td>
-			<td nowrap style="width:200px;height:50px;background-color:#444444;" class='mechselect_button_active'>
-				<table width='100%' cellspacing=0 cellpadding=0 border=0px>
-					<tr>
-						<td nowrap width="99%" align='left' style="background-color:#444444;text-align:left;" class='mechselect_button_active'>
-							<span style='font-size:16px;'>Timberwolf</span>
-						</td>
-						<td nowrap width="1%" style="background-color:#444444;text-align:right;" class='mechselect_button_active'>
-							<span style='font-size:16px;'>
-								<a href=""><i class="fa fa-fw fa-minus-square"></i></a>
-							</span>
-						</td>
-					</tr>
-				</table>
-			</td>
-			<td nowrap style="width:200px;height:50px;background-color:#353535;" class='mechselect_button_active'></td>
-			<td nowrap style="width:200px;height:50px;background-color:#444444;" class='mechselect_button_active'>
-				<table width='100%'>
-					<tr>
-						<td nowrap width="99%" align='left' style="background-color:#444444;text-align:left;" class='mechselect_button_active'>
-							<span style='font-size:16px;'>Timberwolf</span>
-						</td>
-						<td nowrap width="1%" style="background-color:#444444;text-align:right;" class='mechselect_button_active'>
-							<span style='font-size:16px;'>
-								<a href=""><i class="fa fa-fw fa-minus-square"></i></a>
-							</span>
-						</td>
-					</tr>
-				</table>
-			</td>
-		</tr>
-		<tr>
-			<td></td>
-			<td nowrap style="width:200px;height:50px;background-color:#353535;" class='mechselect_button_active'></td>
-			<td nowrap style="width:200px;height:50px;background-color:#353535;" class='mechselect_button_active'></td>
-			<td nowrap style="width:200px;height:50px;background-color:#353535;" class='mechselect_button_active'></td>
-		</tr>
-		<tr>
-			<td></td>
-			<td nowrap style="width:200px;height:50px;background-color:#353535;" class='mechselect_button_active'></td>
-			<td nowrap style="width:200px;height:50px;background-color:#353535;" class='mechselect_button_active'></td>
-			<td nowrap style="width:200px;height:50px;background-color:#353535;" class='mechselect_button_active'></td>
-		</tr>
 	</table>
 </body>
 

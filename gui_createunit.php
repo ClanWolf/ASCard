@@ -2,6 +2,7 @@
 session_start();
 // https://www.php-einfach.de/php-tutorial/php-sessions/
 
+	require('./db.php');
 	if (!isset($_SESSION['playerid'])) {
 		echo "Not logged in... redirecting.<br>";
 		echo "<meta http-equiv='refresh' content='0;url=./login.php'>";
@@ -10,6 +11,63 @@ session_start();
 	$pid = $_SESSION['playerid'];
 	$pimage = $_SESSION['playerimage'];
 	$hideNotOwnedMech = $_SESSION['option1'];
+
+	$paramunitid = isset($_GET["unitid"]) ? $_GET["unitid"] : "";
+	$paramunitname = isset($_GET["unitname"]) ? $_GET["unitname"] : "";
+
+	$addmech = isset($_GET["am"]) ? $_GET["am"] : "";
+
+	if ($addmech == 1) {
+		//    MECH
+		//    ----------------
+		//    mechid
+		//    mech_number
+		//    mulid
+		//    mech_tonnage
+		//    custom_name
+		//    as_name
+		//    as_model
+		//    as_pv
+		//    as_tp
+		//    as_sz
+		//    as_tmm
+		//    as_mv
+		//    as_mvj
+		//    as_role
+		//    as_skill
+		//    as_short
+		//    as_short_min
+		//    as_medium
+		//    as_medium_min
+		//    as_long
+		//    as_long_min
+		//    as_extreme
+		//    as_extreme_min
+		//    as_ov
+		//    as_armor
+		//    as_structure
+		//    as_threshold
+		//    as_specials
+		//    mech_imageurl
+		//
+		//    PILOT
+		//    ----------------
+		//    pilotid
+		//    rank
+		//    name
+		//    callsign
+		//    pilot_imageurl
+		//    playerid
+		//
+		//    ASSIGN
+		//    ----------------
+		//    id
+		//    unitid
+		//    mechid
+		//    pilotid
+
+		echo "<meta http-equiv='refresh' content='0;url=./gui_createunit.php'>";
+	}
 ?>
 
 <html lang="en">
@@ -98,9 +156,9 @@ session_start();
 	</script>
 
 <?php
-	echo "<div id='player_image'>";
-	echo "	<img src='./images/player/".$pimage."' width='60px' height='60px'>";
-	echo "</div>";
+	echo "<div id='player_image'>\n";
+	echo "	<img src='./images/player/".$pimage."' width='60px' height='60px'>\n";
+	echo "</div>\n";
 ?>
 
 	<div id="cover"></div>
@@ -211,15 +269,32 @@ session_start();
 
 									<br>Add to unit:<br>
 
-									<select required name='UID' id='UID' size='1' style='width:250px;'>
-										<option><<< Select Unit >>></option>
-										<option value="AlphaCommandStar">Alpha Command Star</option>
-										<option value="BravoCommandStar">Bravo Command Star</option>
+									<select required name='UID' id='UID' size='1' style='width:200px;'>
+<?php
+	$sql_asc_playersunits = "SELECT SQL_NO_CACHE * FROM asc_unit where playerid=".$pid;
+	$result_asc_playersunits = mysqli_query($conn, $sql_asc_playersunits);
+	if (mysqli_num_rows($result_asc_playersunits) > 0) {
+		while($rowUnits = mysqli_fetch_assoc($result_asc_playersunits)) {
+			$unitid = $rowUnits['unitid'];
+			$forcename = $rowUnits['forcename'];
+			if ($paramunitid == $unitid) {
+				echo "										<option value='".$unitid."' selected>".$forcename."</option>\n";
+			} else {
+				echo "										<option value='".$unitid."'>".$forcename."</option>\n";
+			}
+		}
+	}
+?>
 									</select>
 								</td>
 							</tr>
 						</table>
 					</div>
+				</td>
+				<td valign="top">
+<?php
+	echo "					<a href='./gui_createunit.php?am=1'><i class='fa fa-fw fa-plus-square'></i></a>\n";
+?>
 				</td>
 			</tr>
 		</table>

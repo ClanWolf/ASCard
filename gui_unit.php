@@ -83,7 +83,6 @@ session_start();
 		$meli="./gui_unit.php?unit=".$unitid."&chosenmech=".$i4;
 		if ($chosenMechIndex == $i4) {
 			echo "<td nowrap onclick=\"location.href='".$meli."'\"><table width='100%' cellspacing='0' cellpadding='0' class='mechselect_button_active_left'><tr><td width='40%' align='right' valign='center'><div style='display:inline-block;height:100%;vertical-align: middle;'><img style='vertical-align:middle;' src='./images/DD_01.png' height='40px'>&nbsp;&nbsp;&nbsp;</div></td><td nowrap width='60%'><div><a href='".$meli."'>#".$array_MECH_NUMBER[$i4]." ".$array_MECH[$i4]."</a><br><span style='font-size:16px;'>".$array_PILOT_CALLSIGN[$i4]."</span></div></td></tr></table></td>\r\n";
-			
 		} else {
 			echo "<td nowrap onclick=\"location.href='".$meli."'\"><table width='100%' cellspacing='0' cellpadding='0' class='mechselect_button_normal_left'><tr><td width='40%' align='right' valign='center'><div style='display:inline-block;height:100%;vertical-align: middle;'><img style='vertical-align:middle;' src='./images/DD_01.png' height='40px'>&nbsp;&nbsp;&nbsp;</div></td><td nowrap width='60%'><div><a href='".$meli."'>#".$array_MECH_NUMBER[$i4]." ".$array_MECH[$i4]."</a><br><span style='font-size:16px;'>".$array_PILOT_CALLSIGN[$i4]."</span></div></td></tr></table></td>\r\n";
 		}
