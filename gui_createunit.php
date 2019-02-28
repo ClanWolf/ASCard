@@ -189,6 +189,10 @@ session_start();
 			fetchMechList();
 			document.getElementById("units").selectedIndex = "1";
 		});
+
+		function storeNewMech() {
+			// ./gui_createunit.php?am=1
+		}
 	</script>
 
 <?php
@@ -329,7 +333,7 @@ session_start();
 				</td>
 				<td valign="top">
 <?php
-	echo "					<a href='./gui_createunit.php?am=1'><i class='fa fa-fw fa-plus-square'></i></a>\n";
+	echo "					<a href=''><i class='fa fa-fw fa-plus-square'></i></a>\n";
 ?>
 				</td>
 			</tr>
