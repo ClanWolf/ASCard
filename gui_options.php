@@ -48,6 +48,7 @@ session_start();
 	<meta name="robots" content="noindex,nofollow">
 	<meta name="mobile-web-app-capable" content="yes">
 	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0'>
 	<!-- <meta name="viewport" content="width=1700px, initial-scale=1.0, user-scalable=no"> -->
 
 	<link rel="manifest" href="./manifest.json">
@@ -135,9 +136,9 @@ session_start();
 	</script>
 
 <?php
-	echo "<div id='player_image'>";
-	echo "	<img src='./images/player/".$pimage."' width='60px' height='60px'>";
-	echo "</div>";
+	echo "<div id='player_image'>\n";
+	echo "	<img src='./images/player/".$pimage."' width='60px' height='60px'>\n";
+	echo "</div>\n";
 ?>
 
 	<div id="cover"></div>
@@ -161,7 +162,7 @@ session_start();
 	<br>
 
 	<div>
-		<table class="options" cellspacing=10 cellpadding=10 border=0px>
+		<table class="options" cellspacing=4 cellpadding=4 border=0px>
 			<tr>
 				<td align="left" style="color: #aaa;">
 					<label class="bigcheck"><input onchange="changeOption();" type="checkbox" class="bigcheck" name="OPT1" value="yes"/><span class="bigcheck-target"></span></label>&nbsp;&nbsp;
