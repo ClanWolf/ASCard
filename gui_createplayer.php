@@ -215,7 +215,7 @@ session_start();
 	<br>
 
 	<form>
-		<table class="options" cellspacing=10 cellpadding=5 border=0px>
+		<table class="options" cellspacing="2" cellpadding="2" border=0px>
 			<tr>
 				<td colspan="2" nowrap align="left">New player</td>
 				<td colspan="1" align="right">Name:</td>
