@@ -66,7 +66,42 @@ session_start();
 		//    mechid
 		//    pilotid
 
-		echo "<meta http-equiv='refresh' content='0;url=./gui_createunit.php'>";
+		$sql_insertmech = "";
+		$sql_insertmech = $sql_insertmech."INSERT INTO asc_mech ";
+		$sql_insertmech = $sql_insertmech."(mech_number, mulid, mech_tonnage, custom_name, as_name, as_model, as_pv, as_tp, as_sz, as_tmm, as_mv, as_mvj, as_role, as_skill, as_short, as_short_min, as_medium, as_medium_min, as_long, as_long_min, as_extreme, as_extreme_min, as_ov, as_armor, as_structure, as_threshold, as_specials, mech_imageurl) ";
+		$sql_insertmech = $sql_insertmech."VALUES ";
+		$sql_insertmech = $sql_insertmech."()";
+		if (mysqli_query($conn, $sql_insertmech)) {
+			// Success
+		} else {
+			// Error
+			echo "Error: " . $sql_insertmech . "<br>" . mysqli_error($conn);
+		}
+
+		$sql_insertpilot = "";
+		$sql_insertpilot = $sql_insertpilot."INSERT INTO asc_pilot ";
+		$sql_insertpilot = $sql_insertpilot."(rank, name, callsign, pilot_imageurl, playerid) ";
+		$sql_insertpilot = $sql_insertpilot."VALUES ";
+		$sql_insertpilot = $sql_insertpilot."()";
+		if (mysqli_query($conn, $sql_insertpilot)) {
+			// Success
+		} else {
+			// Error
+			echo "Error: " . $sql_insertpilot . "<br>" . mysqli_error($conn);
+		}
+
+		$sql_insertassign = "";
+		$sql_insertassign = $sql_insertassign."INSERT INTO asc_pilot ";
+		$sql_insertassign = $sql_insertassign."(unitid, mechid, pilotid) ";
+		$sql_insertassign = $sql_insertassign."VALUES ";
+		$sql_insertassign = $sql_insertassign."()";
+		if (mysqli_query($conn, $sql_insertassign)) {
+			// Success
+		} else {
+			// Error
+			echo "Error: " . $sql_insertassign . "<br>" . mysqli_error($conn);
+		}
+		// echo "<meta http-equiv='refresh' content='0;url=./gui_createunit.php'>";
 	}
 ?>
 
