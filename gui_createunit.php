@@ -192,6 +192,7 @@ session_start();
 
 		function storeNewMech() {
 			// ./gui_createunit.php?am=1
+			alert("Gather data and store mech!");
 		}
 	</script>
 
@@ -333,7 +334,7 @@ session_start();
 				</td>
 				<td valign="top">
 <?php
-	echo "					<a href=''><i class='fa fa-fw fa-plus-square'></i></a>\n";
+	echo "					<a href="#" onClick="storeNewMech();"><i class='fa fa-fw fa-plus-square'></i></a>\n";
 ?>
 				</td>
 			</tr>
