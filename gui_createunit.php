@@ -11,13 +11,65 @@ session_start();
 	$pid = $_SESSION['playerid'];
 	$pimage = $_SESSION['playerimage'];
 	$hideNotOwnedMech = $_SESSION['option1'];
-
 	$paramunitid = isset($_GET["unitid"]) ? $_GET["unitid"] : "";
 	$paramunitname = isset($_GET["unitname"]) ? $_GET["unitname"] : "";
-
 	$addmech = isset($_GET["am"]) ? $_GET["am"] : "";
 
 	if ($addmech == 1) {
+		$TON = isset($_GET["TON"]) ? $_GET["TON"] : "";
+		$SHORT = isset($_GET["SHORT"]) ? $_GET["SHORT"] : "";
+		$MNA = isset($_GET["MNA"]) ? $_GET["MNA"] : "";
+		$MNU = isset($_GET["MNU"]) ? $_GET["MNU"] : "";
+		$TP = isset($_GET["TP"]) ? $_GET["TP"] : "";
+		$SZ = isset($_GET["SZ"]) ? $_GET["SZ"] : "";
+		$TMM = isset($_GET["TMM"]) ? $_GET["TMM"] : "";
+		$MVG = isset($_GET["MVG"]) ? $_GET["MVG"] : "";
+		$MVJ = isset($_GET["MVJ"]) ? $_GET["MVJ"] : "";
+		$ROLE = isset($_GET["ROLE"]) ? $_GET["ROLE"] : "";
+		$DMGS = isset($_GET["DMGS"]) ? $_GET["DMGS"] : "";
+		$DMGM = isset($_GET["DMGM"]) ? $_GET["DMGM"] : "";
+		$DMGL = isset($_GET["DMGL"]) ? $_GET["DMGL"] : "";
+		$OV = isset($_GET["OV"]) ? $_GET["OV"] : "";
+		$A = isset($_GET["A"]) ? $_GET["A"] : "";
+		$S = isset($_GET["S"]) ? $_GET["S"] : "";
+		$PVA = isset($_GET["PVA"]) ? $_GET["PVA"] : "";
+		$SPCL = isset($_GET["SPCL"]) ? $_GET["SPCL"] : "";
+		$PN = isset($_GET["PN"]) ? $_GET["PN"] : "";
+		$PCS = isset($_GET["PCS"]) ? $_GET["PCS"] : "";
+		$PR = isset($_GET["PR"]) ? $_GET["PR"] : "";
+		$PI = isset($_GET["PI"]) ? $_GET["PI"] : "";
+		$SKILL = isset($_GET["SKILL"]) ? $_GET["SKILL"] : "";
+		$UNITID = isset($_GET["UNITID"]) ? $_GET["UNITID"] : "";
+		$MULID = isset($_GET["MULID"]) ? $_GET["MULID"] : "";
+		$MODEL = isset($_GET["MODEL"]) ? $_GET["MODEL"] : "";
+
+		$TON = urldecode($TON);
+		$SHORT = urldecode($SHORT);
+		$MNA = urldecode($MNA);
+		$MNU = urldecode($MNU);
+		$TP = urldecode($TP);
+		$SZ = urldecode($SZ);
+		$TMM = urldecode($TMM);
+		$MVG = urldecode($MVG);
+		$MVJ = urldecode($MVJ);
+		$ROLE = urldecode($ROLE);
+		$DMGS = urldecode($DMGS);
+		$DMGM = urldecode($DMGM);
+		$DMGL = urldecode($DMGL);
+		$OV = urldecode($OV);
+		$A = urldecode($A);
+		$S = urldecode($S);
+		$PVA = urldecode($PVA);
+		$SPCL = urldecode($SPCL);
+		$PN = urldecode($PN);
+		$PCS = urldecode($PCS);
+		$PR = urldecode($PR);
+		$PI = urldecode($PI);
+		$SKILL = urldecode($SKILL);
+		$UNITID = urldecode($UNITID);
+		$MULID = urldecode($MULID);
+		$MODEL = urldecode($MODEL);
+
 		//    MECH
 		//    ----------------
 		//    mechid
@@ -69,10 +121,43 @@ session_start();
 		$sql_insertmech = "";
 		$sql_insertmech = $sql_insertmech."INSERT INTO asc_mech ";
 		$sql_insertmech = $sql_insertmech."(mech_number, mulid, mech_tonnage, custom_name, as_name, as_model, as_pv, as_tp, as_sz, as_tmm, as_mv, as_mvj, as_role, as_skill, as_short, as_short_min, as_medium, as_medium_min, as_long, as_long_min, as_extreme, as_extreme_min, as_ov, as_armor, as_structure, as_threshold, as_specials, mech_imageurl) ";
-		$sql_insertmech = $sql_insertmech."VALUES ";
-		$sql_insertmech = $sql_insertmech."()";
+		$sql_insertmech = $sql_insertmech."VALUES (";
+		$sql_insertmech = $sql_insertmech."'".$MNU."', ";        // mech_number
+		$sql_insertmech = $sql_insertmech."'".$MULID."', ";      // mulid
+		$sql_insertmech = $sql_insertmech."'".$TON."', ";        // mech_tonnage
+		$sql_insertmech = $sql_insertmech."'".$MNA."', ";        // custom_name
+		$sql_insertmech = $sql_insertmech."'".$SHORT."', ";      // as_name
+		$sql_insertmech = $sql_insertmech."'".$MODEL."', ";      // as_model
+		$sql_insertmech = $sql_insertmech."'".$PVA."', ";        // as_pv
+		$sql_insertmech = $sql_insertmech."'".$TP."', ";         // as_tp
+		$sql_insertmech = $sql_insertmech."'".$SZ."', ";         // as_sz
+		$sql_insertmech = $sql_insertmech."'".$TMM."', ";        // as_tmm
+		$sql_insertmech = $sql_insertmech."'".$MVG."', ";        // as_mv
+		if ($MVJ == 0) {
+			$sql_insertmech = $sql_insertmech."null, ";          // as_mvj
+		} else {
+			$sql_insertmech = $sql_insertmech."'".$MVJ."', ";    // as_mvj
+		}
+		$sql_insertmech = $sql_insertmech."'".$ROLE."', ";       // as_role
+		$sql_insertmech = $sql_insertmech."'".$SKILL."', ";      // as_skill
+		$sql_insertmech = $sql_insertmech."'".$DMGS."', ";       // as_short
+		$sql_insertmech = $sql_insertmech."0, ";                 // as_short_min
+		$sql_insertmech = $sql_insertmech."'".$DMGM."', ";       // as_medium
+		$sql_insertmech = $sql_insertmech."0, ";                 // as_medium_min
+		$sql_insertmech = $sql_insertmech."'".$DMGL."', ";       // as_long
+		$sql_insertmech = $sql_insertmech."0, ";                 // as_long_min
+		$sql_insertmech = $sql_insertmech."0, ";                 // as_extreme
+		$sql_insertmech = $sql_insertmech."0, ";                 // as_extreme_min
+		$sql_insertmech = $sql_insertmech."'".$OV."', ";         // as_ov
+		$sql_insertmech = $sql_insertmech."'".$A."', ";          // as_armor
+		$sql_insertmech = $sql_insertmech."'".$S."', ";          // as_structure
+		$sql_insertmech = $sql_insertmech."0, ";                 // as_threshold
+		$sql_insertmech = $sql_insertmech."'".$SPCL."', ";       // as_specials
+		$sql_insertmech = $sql_insertmech."'".$SHORT.".png' ";   // mech_imageurl
+		$sql_insertmech = $sql_insertmech.")";
 		if (mysqli_query($conn, $sql_insertmech)) {
 			// Success
+			$newmechid = mysqli_insert_id($conn);
 		} else {
 			// Error
 			echo "Error: " . $sql_insertmech . "<br>" . mysqli_error($conn);
@@ -81,27 +166,36 @@ session_start();
 		$sql_insertpilot = "";
 		$sql_insertpilot = $sql_insertpilot."INSERT INTO asc_pilot ";
 		$sql_insertpilot = $sql_insertpilot."(rank, name, callsign, pilot_imageurl, playerid) ";
-		$sql_insertpilot = $sql_insertpilot."VALUES ";
-		$sql_insertpilot = $sql_insertpilot."()";
+		$sql_insertpilot = $sql_insertpilot."VALUES (";
+		$sql_insertpilot = $sql_insertpilot."'".$PR."', ";      // Pilot rank
+		$sql_insertpilot = $sql_insertpilot."'".$PN."', ";      // Pilotname
+		$sql_insertpilot = $sql_insertpilot."'".$PCS."', ";     // Pilot callsign
+		$sql_insertpilot = $sql_insertpilot."'".$PI."', ";      // Pilot image
+		$sql_insertpilot = $sql_insertpilot.$pid;
+		$sql_insertpilot = $sql_insertpilot.")";
 		if (mysqli_query($conn, $sql_insertpilot)) {
 			// Success
+			$newpilotid = mysqli_insert_id($conn);
 		} else {
 			// Error
 			echo "Error: " . $sql_insertpilot . "<br>" . mysqli_error($conn);
 		}
 
 		$sql_insertassign = "";
-		$sql_insertassign = $sql_insertassign."INSERT INTO asc_pilot ";
+		$sql_insertassign = $sql_insertassign."INSERT INTO asc_assign ";
 		$sql_insertassign = $sql_insertassign."(unitid, mechid, pilotid) ";
-		$sql_insertassign = $sql_insertassign."VALUES ";
-		$sql_insertassign = $sql_insertassign."()";
+		$sql_insertassign = $sql_insertassign."VALUES (";
+		$sql_insertassign = $sql_insertassign.$UNITID.", ";
+		$sql_insertassign = $sql_insertassign.$newmechid.", ";
+		$sql_insertassign = $sql_insertassign.$newpilotid;
+		$sql_insertassign = $sql_insertassign.")";
 		if (mysqli_query($conn, $sql_insertassign)) {
 			// Success
 		} else {
 			// Error
 			echo "Error: " . $sql_insertassign . "<br>" . mysqli_error($conn);
 		}
-		// echo "<meta http-equiv='refresh' content='0;url=./gui_createunit.php'>";
+		echo "<meta http-equiv='refresh' content='0;url=./gui_selectunit.php'>";
 	}
 ?>
 
@@ -118,8 +212,7 @@ session_start();
 	<meta name="robots" content="noindex,nofollow">
 	<meta name="mobile-web-app-capable" content="yes">
 	<meta name="apple-mobile-web-app-capable" content="yes">
-	<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0'>
-	<!-- <meta name="viewport" content="width=1700px, initial-scale=1.0, user-scalable=no"> -->
+	<meta name='viewport' content='user-scalable=0'>
 
 	<link rel="manifest" href="./manifest.json">
 	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
@@ -191,26 +284,83 @@ session_start();
 		});
 
 		function storeNewMech() {
-			// ./gui_createunit.php?am=1
-			alert("Gather data and store mech!");
-			
+			var url="./gui_createunit.php?am=1";
+
 			// Store new mech
-			//var npn = document.getElementById('NewPlayerName').value;
-			//var npe = document.getElementById('NewPlayerEMail').value;
-			//var npp = document.getElementById('NewPlayerPassword').value;
-			//var nppc = document.getElementById('NewPlayerPasswordConfirm').value;
-			//if ("" == npn) {
-			//	alert("Name may not be empty!");
-			//}
-			//if (npp == nppc) {
-			//	// alert("Saving new player: " + id + " (" + NewPlayerName + ")");
-			//	var url = "./gui_createplayer.php?s=1&npn=" + npn;
-			//	url = url + "&npe=" + npe;
-			//	url = url + "&npp=" + npp;
-			//	window.location = url;
-			//} else {
-			//	alert("Passwords do not match!");
-			//}
+			var TON = document.getElementById('tonnage').value;
+			var SHORT = document.getElementById('SHORT').value;
+			var MNA = document.getElementById('MNA').value;
+			var MNU = document.getElementById('MNU').value;
+			var TP = document.getElementById('TP').value;
+			var SZ = document.getElementById('SZ').value;
+			var TMM = document.getElementById('TMM').value;
+			var MV = document.getElementById('MV').value;
+			var ROLE = document.getElementById('ROLE').value;
+			var DMGS = document.getElementById('DMGS').value;
+			var DMGM = document.getElementById('DMGM').value;
+			var DMGL = document.getElementById('DMGL').value;
+			var OV = document.getElementById('OV').value;
+			var A = document.getElementById('A').value;
+			var S = document.getElementById('S').value;
+			var PVA = document.getElementById('PVA').value;
+			var SPCL = document.getElementById('SPCL').value;
+			var PN = document.getElementById('PN').value;
+			var PCS = document.getElementById('PCS').value;
+			var PR = document.getElementById('PR').value;
+			var PI = document.getElementById('PI').value;
+			var SKILL = document.getElementById('SKILL').value;
+			var UNITID = document.getElementById('UNITID').value;
+
+			var unitslistbox = document.getElementById("units");
+			var selIndex = unitslistbox.selectedIndex;
+			var selValue = unitslistbox.options[selIndex].value;
+			var selText = unitslistbox.options[selIndex].text;
+			var MULID = selValue;
+			var MODEL = selText;
+
+			var MVG = 0;
+			var MVJ = 0;
+
+			if (MV.indexOf("/") !== -1) {
+				var MV_Parts = MV.split('/');
+				MVG = MV_Parts[0].match(/\d+/)[0];
+                MVJ = MV_Parts[1].match(/\d+/)[0];
+			} else if (MV.indexOf("j") !== -1) {
+				MVG = MV.match(/\d+/)[0];
+				MVJ = MV.match(/\d+/)[0];
+			} else {
+				MVG = MV.match(/\d+/)[0];
+				MVJ = 0;
+			}
+			url=url+"&TON="+encodeURIComponent(TON);
+			url=url+"&SHORT="+encodeURIComponent(SHORT);
+			url=url+"&MNA="+encodeURIComponent(MNA);
+			url=url+"&MNU="+encodeURIComponent(MNU);
+			url=url+"&TP="+encodeURIComponent(TP);
+			url=url+"&SZ="+encodeURIComponent(SZ);
+			url=url+"&TMM="+encodeURIComponent(TMM);
+			url=url+"&MVG="+encodeURIComponent(MVG);
+			url=url+"&MVJ="+encodeURIComponent(MVJ);
+			url=url+"&ROLE="+encodeURIComponent(ROLE);
+			url=url+"&DMGS="+encodeURIComponent(DMGS);
+			url=url+"&DMGM="+encodeURIComponent(DMGM);
+			url=url+"&DMGL="+encodeURIComponent(DMGL);
+			url=url+"&OV="+encodeURIComponent(OV);
+			url=url+"&A="+encodeURIComponent(A);
+			url=url+"&S="+encodeURIComponent(S);
+			url=url+"&PVA="+encodeURIComponent(PVA);
+			url=url+"&SPCL="+encodeURIComponent(SPCL);
+			url=url+"&PN="+encodeURIComponent(PN);
+			url=url+"&PCS="+encodeURIComponent(PCS);
+			url=url+"&PR="+encodeURIComponent(PR);
+			url=url+"&PI="+encodeURIComponent(PI);
+			url=url+"&SKILL="+encodeURIComponent(SKILL);
+			url=url+"&MULID="+encodeURIComponent(MULID);
+			url=url+"&MODEL="+encodeURIComponent(MODEL);
+			url=url+"&UNITID="+encodeURIComponent(UNITID);
+
+			// alert(url);
+			window.location.href = url;
 		}
 	</script>
 
@@ -282,29 +432,27 @@ session_start();
 									<select required name='units' id='units' size='1' onchange="mechSelected();" style="width:300px"></select>
 								</td>
 							</tr>
-
-							<!--<tr> -->
-							<!-- 	<td nowrap class="datalabel" style='text-align:left;' width='50%' colspan='2'> -->
-							<!-- 		<textarea rows="10" cols="80" id="url"></textarea> -->
-							<!-- 	</td> -->
-							<!--</tr> -->
-
 							<tr>
-								<td nowrap class="datalabel" style='text-align:left;' width='50%'>
+								<td nowrap class="datalabel" style='text-align:left;' colspan='3'>
+									<input required type="text" id="SHORT" name="SHORT" style="width:80px"> SHORT<br>
+								</td>
+							</tr>
+							<tr>
+								<td nowrap class="datalabel" style='text-align:left;' width='33%'>
 									<input required type="text" id="MNA" name="MNA"> MNA<br>
 									<input required type="text" id="MNU" name="MNU"> MNU<br>
 									<input required type="text" id="TP" name="TP"> TP<br>
 									<input required type="text" id="SZ" name="SZ"> SZ<br>
 									<input required type="text" id="TMM" name="TMM"> TMM<br>
 								</td>
-								<td nowrap class="datalabel" style='text-align:left;' width='50%'>
+								<td nowrap class="datalabel" style='text-align:left;' width='34%'>
 									<input required type="text" id="MV" name="MV"> MV<br>
 									<input required type="text" id="ROLE" name="ROLE"> ROLE<br>
 									<input required type="text" id="DMGS" name="DMGS"> DMG S<br>
 									<input required type="text" id="DMGM" name="DMGM"> DMG M<br>
 									<input required type="text" id="DMGL" name="DMGL"> DMG L<br>
 								</td>
-								<td nowrap class="datalabel" style='text-align:left;' width='50%'>
+								<td nowrap class="datalabel" style='text-align:left;' width='33%'>
 									<input required type="text" id="OV" name="OV"> OV<br>
 									<input required type="text" id="A" name="A"> A<br>
 									<input required type="text" id="S" name="S"> S<br>
@@ -328,7 +476,7 @@ session_start();
 
 									<br>Add to unit:<br>
 
-									<select required name='UID' id='UID' size='1' style='width:200px;'>
+									<select required name='UNITID' id='UNITID' size='1' style='width:200px;'>
 <?php
 	$sql_asc_playersunits = "SELECT SQL_NO_CACHE * FROM asc_unit where playerid=".$pid;
 	$result_asc_playersunits = mysqli_query($conn, $sql_asc_playersunits);
@@ -352,7 +500,7 @@ session_start();
 				</td>
 				<td valign="top">
 <?php
-	echo "					<a href="#" onClick="storeNewMech();"><i class='fa fa-fw fa-plus-square'></i></a>\n";
+	echo "					<a href='#' onClick='storeNewMech();'><i class='fa fa-fw fa-plus-square'></i></a>\n";
 ?>
 				</td>
 			</tr>

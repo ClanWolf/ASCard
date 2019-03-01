@@ -50,8 +50,7 @@ session_start();
 	<meta name="robots" content="noindex,nofollow">
 	<meta name="mobile-web-app-capable" content="yes">
 	<meta name="apple-mobile-web-app-capable" content="yes">
-	<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0'>
-	<!-- <meta name="viewport" content="width=1700px, initial-scale=1.0, user-scalable=no"> -->
+	<meta name='viewport' content='user-scalable=0'>
 
 	<link rel="manifest" href="./manifest.json">
 	<link rel="stylesheet" href="./styles/styles.css" type="text/css">

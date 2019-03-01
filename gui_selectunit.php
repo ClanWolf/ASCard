@@ -62,8 +62,7 @@ session_start();
 	<meta name="robots" content="noindex,nofollow">
 	<meta name="mobile-web-app-capable" content="yes">
 	<meta name="apple-mobile-web-app-capable" content="yes">
-	<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0'>
-	<!-- <meta name="viewport" content="width=1700px, initial-scale=1.0, user-scalable=no"> -->
+	<meta name='viewport' content='user-scalable=0'>
 
 	<link rel="manifest" href="./manifest.json">
 	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
@@ -134,7 +133,7 @@ session_start();
 	$addMechToUnitLinkArray = array();
 	$mechsInAllUnits = array();
 
-	echo "		<td nowrap style='width:200px;height:70px;' class='mechselect_button_active'>".$pname."</td>";
+	echo "		<td nowrap style='width:170px;height:70px;' class='mechselect_button_active'>".$pname."</td>";
 	// Select units for this player
 	if (!($stmtUnits = $conn->prepare("SELECT SQL_NO_CACHE * FROM asc_unit where playerid = ".$pid." ORDER BY unitid;"))) {
 		echo "Prepare failed: (" . $conn->errno . ")" . $conn->error;
@@ -151,12 +150,12 @@ session_start();
 			$sql_asc_checkunitassignments = "SELECT SQL_NO_CACHE * FROM asc_assign where unitid=".$unitidSelected.";";
 			$result_asc_checkunitassignments = mysqli_query($conn, $sql_asc_checkunitassignments);
 			if (mysqli_num_rows($result_asc_checkunitassignments) > 0) {
-				echo "			<td nowrap style='width:200px;height:70px;' onclick='location.href=\"gui_unit.php?unit=".$unitidSelected."\"' class='unitselect_button_normal'>\n";
+				echo "			<td nowrap style='width:170px;height:70px;' onclick='location.href=\"gui_unit.php?unit=".$unitidSelected."\"' class='unitselect_button_normal'>\n";
 				echo "				<a href='gui_unit.php?unit=".$unitidSelected."'>".$forcenameSelected."</a><br>\n";
 				echo "				<span style='font-size:16px;'>Tap to take control</span>\n";
 				echo "			</td>\n";
 			} else {
-				echo "			<td nowrap style='background-color:#444444;width:200px;height:70px;' class='mechselect_button_active'>\n";
+				echo "			<td nowrap style='background-color:#444444;width:170px;height:70px;' class='mechselect_button_active'>\n";
 				echo "				".$forcenameSelected."<br>\n";
 				echo "				<span style='font-size:16px;'>Empty</span>\n";
 				echo "			</td>\n";
@@ -188,7 +187,7 @@ session_start();
 				}
 
 				$mechDetailString = "";
-				$mechDetailString = $mechDetailString."			<td nowrap style='width:200px;height:50px;background-color:#444444;' class='mechselect_button_active'>\n";
+				$mechDetailString = $mechDetailString."			<td nowrap style='width:170px;height:50px;background-color:#444444;' class='mechselect_button_active'>\n";
 				$mechDetailString = $mechDetailString."				<table width='100%' cellspacing=0 cellpadding=0 border=0px>\n";
 				$mechDetailString = $mechDetailString."					<tr>\n";
 				$mechDetailString = $mechDetailString."						<td nowrap width='99%' align='left' style='color:#AAAAAA;background-color:#444444;text-align:left;' class='mechselect_button_active'>".$mechchassisname." ".$mechcustomname."\n";
@@ -211,13 +210,13 @@ session_start();
 	echo "		</tr>\n";
 	echo "		<tr>\n";
 	echo "			<td></td>\n";
-	echo "			<td nowrap style='text-align:center;width:200px;height:30px;background-color:#transparent;'>\n";
+	echo "			<td nowrap style='text-align:center;width:170px;height:30px;background-color:#transparent;'>\n";
 	echo "				<a href='".$addMechToUnitLinkArray[0]."'><i class='fa fa-fw fa-plus-square'></i></a>\n";
 	echo "			</td>\n";
-	echo "			<td nowrap style='text-align:center;width:200px;height:30px;background-color:#transparent;'>\n";
+	echo "			<td nowrap style='text-align:center;width:170px;height:30px;background-color:#transparent;'>\n";
 	echo "				<a href='".$addMechToUnitLinkArray[1]."'><i class='fa fa-fw fa-plus-square'></i></a>\n";
 	echo "			</td>\n";
-	echo "			<td nowrap style='text-align:center;width:200px;height:30px;background-color:#transparent;'>\n";
+	echo "			<td nowrap style='text-align:center;width:170px;height:30px;background-color:#transparent;'>\n";
 	echo "				<a href='".$addMechToUnitLinkArray[2]."'><i class='fa fa-fw fa-plus-square'></i></a>\n";
 	echo "			</td>\n";
 	echo "		</tr>\n";
@@ -225,7 +224,7 @@ session_start();
 	echo "			<td></td>\n";
 
 	foreach ($mechsInAllUnits as &$mechsInSingleUnit) {
-		echo "			<td style='background-color:#333333;'>";
+		echo "			<td style='width:170px;background-color:#333333;' valign='top'>";
 		echo "				<table cellspacing=2 cellpadding=0 border=0px>";
 		foreach ($mechsInSingleUnit as &$mech) {
 			echo "					<tr>";
