@@ -94,6 +94,10 @@ session_start();
 	</table>
 </div>
 
+<div id="tablebuttons">
+	<p>Buttons for tables</p>
+</div>
+
 <div id="pilotimage"><?php echo "<img src='./images/pilots/".$array_PILOT_IMG_URL[$chosenMechIndex]."' width='80px' height='80px'>" ?></div>
 <div id="faction" align="center"><?php echo "<img src='./images/factions/".$FACTION_IMG_URL."' width='50px' height='50px'>" ?></div>
 <div id="mech_number" align="center"><?= $array_MECH_NUMBER[$chosenMechIndex] ?></div>
