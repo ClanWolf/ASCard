@@ -88,10 +88,10 @@ function textSize(dec) {
 	if (fontsizeLabel > 75) {
 		fontsizeLabel = 75;
 	}
-	if (fontsizeValue < 75) {
+	if (fontsizeValue > 75) {
 		fontsizeValue = 75;
 	}
-	if (fontsizeCircle < 75) {
+	if (fontsizeCircle > 75) {
 		fontsizeValue = 75;
 	}
 
