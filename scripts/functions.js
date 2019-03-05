@@ -75,14 +75,24 @@ function textSize(dec) {
 	fontsizeValue += (dec==1) ? 1 : (-1);
 	fontsizeCircle += (dec==1) ? 1 : (-1);
 
-	if (fontsizeLabel < 5) {
-		fontsizeLabel = 16;
+	if (fontsizeLabel < 22) {
+		fontsizeLabel = 22;
 	}
-	if (fontsizeValue < 5) {
-		fontsizeValue = 16;
+	if (fontsizeValue < 22) {
+		fontsizeValue = 22;
 	}
-	if (fontsizeCircle < 5) {
-		fontsizeValue = 18;
+	if (fontsizeCircle < 22) {
+		fontsizeValue = 22;
+	}
+
+	if (fontsizeLabel > 75) {
+		fontsizeLabel = 75;
+	}
+	if (fontsizeValue < 75) {
+		fontsizeValue = 75;
+	}
+	if (fontsizeCircle < 75) {
+		fontsizeValue = 75;
 	}
 
 	setSize("datalabel", fontsizeLabel);
