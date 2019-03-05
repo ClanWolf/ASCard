@@ -2,6 +2,12 @@
 session_start();
 // https://www.php-einfach.de/php-tutorial/php-sessions/
 
+function random_pic($dir = 'uploads') {
+    $files = glob($dir . '/*.*');
+    $file = array_rand($files);
+    return $files[$file];
+}
+
 	require('./db.php');
 	if (!isset($_SESSION['playerid'])) {
 		echo "Not logged in... redirecting.<br>";
@@ -204,6 +210,11 @@ session_start();
 	// TODO: get a random female name from the pilot names list
 	// TODO: get a random male name from the pilot names list
 	// --> put into javascript variable
+
+
+
+
+
 ?>
 
 <html lang="en">
