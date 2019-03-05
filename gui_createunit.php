@@ -9,7 +9,7 @@ function random_pic(male) {
 	return $files[$file];
 }
 function random_name(male) {
-	$f_contents = file("random.txt");
+	$f_contents = file("data/names/names_".male."-lst");
 	$line = $f_contents[array_rand($f_contents)];
 	$data = $line;
 	return $data;
@@ -220,6 +220,9 @@ function random_name(male) {
 	// --> put into javascript variable
 	$randomPilotMale = random_pic("m");
 	$randomPilotFemale = random_pic("f");
+
+	$randomPilotNameMale = random_name("male");
+	$randomPilotNameFemale = random_name("female");
 
 
 
