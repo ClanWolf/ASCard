@@ -104,11 +104,11 @@ session_start();
 <div id="mech"><?php echo "<img id='mechimage' src='./images/mechs/".$array_MECH_IMG_URL[$chosenMechIndex]."'>" ?></div>
 
 <div id="topleft">
-	<span style="font-size: 20px; color: #aaaaaa;"><?php echo "$array_MECH_MODEL[$chosenMechIndex]" ?></span>
+	<span style="font-size: 18px; color: #eeeeee;"><?php echo "$UNIT"; ?></span>
 	<br>
 	<span style="font-size: 30px; color: #da8e25;"><?php echo "$array_PILOT[$chosenMechIndex]"; ?></span>
 	<br>
-	<span style="font-size: 18px; color: #eeeeee;"><?php echo "$UNIT"; ?></span>
+	<span style="font-size: 20px; color: #aaaaaa;"><?php echo "$array_MECH_MODEL[$chosenMechIndex]" ?></span>
 </div>
 
 <div id="topright">
