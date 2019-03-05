@@ -448,13 +448,13 @@ session_start();
 								</td>
 							</tr>
 							<tr>
-								<td nowrap class="datalabel" style='text-align:left;' width='20%'>
+								<td nowrap class="datalabel" style='text-align:left;' width='34%'>
 									Mech number: <input required type="text" id="MNU" name="MNU" style="width:300px;">
 								</td>
-								<td nowrap class="datalabel" style='text-align:left;' width='80%'>
+								<td nowrap class="datalabel" style='text-align:left;' width='33%'>
 									Pilot name: <input type="text" required id="PN" name="PN">
 								</td>
-								<td nowrap class="datalabel" style='text-align:left;' width='80%'>
+								<td nowrap class="datalabel" style='text-align:left;' width='33%'>
 									Skill: <input type="text" required id="SKILL" name="SKILL">
 								</td>
 							</tr>
