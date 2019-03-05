@@ -17,7 +17,6 @@ session_start();
 	if ($s=="1") {
 		// save new user
 		$newplayername = isset($_GET["npn"]) ? $_GET["npn"] : "";
-		$newplayeremail = isset($_GET["npe"]) ? $_GET["npe"] : "";
 		$newplayerpassword = isset($_GET["npp"]) ? $_GET["npp"] : "";
 
 		$hashedpw = password_hash($newplayerpassword, PASSWORD_DEFAULT);
@@ -28,7 +27,7 @@ session_start();
 			// a user with that name already exists
 		} else {
 			// new user can be inserted
-			$sql = "INSERT INTO asc_player (name, email, password, image) VALUES ('".$newplayername."', '".$newplayeremail."', '".$hashedpw."', '".$newplayername.".png')";
+			$sql = "INSERT INTO asc_player (name, password, image) VALUES ('".$newplayername."', '".$hashedpw."', '".$newplayername.".png')";
 			if (mysqli_query($conn, $sql)) {
 				// Success
 				$newplayerid = mysqli_insert_id($conn);
@@ -59,10 +58,19 @@ session_start();
 			// Success
 			// delete avatar file
 			unlink("./images/player/".$playerimagetodelete);
-			echo "<meta http-equiv='refresh' content='0;url=./gui_createplayer.php'>";
 		} else {
 			// Error
 			echo "Error: " . $sqldelete . "<br>" . mysqli_error($conn);
+		}
+
+		$playersUnits = array();
+		$sql_asc_findunits = "SELECT SQL_NO_CACHE * FROM asc_unit where playerid=".$deleteplayerid.";";
+		$result_asc_findunits = mysqli_query($conn, $sql_asc_findunits);
+		if (mysqli_num_rows($result_asc_findunits) > 0) {
+			// this user has units. Get unit ids to clean up mechs and pilots
+			while ($rowUnit = $result_asc_findunits->fetch_assoc()) {
+				array_push($playersUnits, $rowUnit['unitid']);
+			}
 		}
 
 		$sqldeleteunits = "DELETE FROM asc_unit WHERE playerid = ".$deleteplayerid;
@@ -74,8 +82,11 @@ session_start();
 		}
 
 		// TODO: !!! Delete mechs belonging to those units
+		// TODO: !!! Delete Mech status belonging to those mechs
 		// TODO: !!! Delete pilots belonging to those mechs
 		// TODO: !!! Delete assignments of pilots and mechs to the deleted units
+
+		echo "<meta http-equiv='refresh' content='0;url=./gui_createplayer.php'>";
 	}
 ?>
 
@@ -163,7 +174,6 @@ session_start();
 			if (id==0) {
 				// Create new player
 				var npn = document.getElementById('NewPlayerName').value;
-				var npe = document.getElementById('NewPlayerEMail').value;
 				var npp = document.getElementById('NewPlayerPassword').value;
 				var nppc = document.getElementById('NewPlayerPasswordConfirm').value;
 
@@ -173,7 +183,6 @@ session_start();
 				if (npp == nppc) {
 					// alert("Saving new player: " + id + " (" + NewPlayerName + ")");
 					var url = "./gui_createplayer.php?s=1&npn=" + npn;
-					url = url + "&npe=" + npe;
 					url = url + "&npp=" + npp;
 					window.location = url;
 				} else {
@@ -217,9 +226,9 @@ session_start();
 	<form>
 		<table class="options" cellspacing="2" cellpadding="2" border=0px>
 			<tr>
-				<td colspan="2" nowrap align="left">New player</td>
-				<td colspan="1" align="right">Name:</td>
-				<td colspan="1">
+				<td colspan="2" class='datalabel' nowrap align="left">New player</td>
+				<td colspan="1" class='datalabel' nowrap align="right">Name:</td>
+				<td colspan="1" class='datalabel'>
 					
 					<!-- autocomplete deactivate hints -->
 					<!-- https://gist.github.com/runspired/b9fdf1fa74fc9fb4554418dea35718fe -->
@@ -228,37 +237,30 @@ session_start();
 
 					<input autocomplete="off" required type="text" id="NewPlayerName" style="width: 220px;"><br>
 				</td>
-				<td width='10px'>
+				<td class='datalabel' width='10px'>
 					<span style='font-size:16px;'>
 						<a href="#" onClick="saveNewPlayer(0, 'none');"><i class="fa fa-fw fa-plus-square"></i></a>
 					</span>
 				</td>
 			</tr>
 			<tr>
-				<td width='10px' colspan="2" rowspan="3" valign="top" align="left">
+				<td class='datalabel' width='10px' colspan="2" rowspan="2" valign="top" align="left">
 					<img src='./images/pilots/000_no_avatar.png' width='60px' height='60px'>
 				</td>
-				<td colspan="1" align="right">Email:</td>
-				<td colspan="1">
-					<input autocomplete="off" required type="text" id="NewPlayerEMail" style="width: 220px;"><br>
-				</td>
-				<td width='10px'></td>
-			</tr>
-			<tr>
-				<td colspan="1" align="right">Password:</td>
-				<td colspan="1">
+				<td class='datalabel' colspan="1" align="right">PW:</td>
+				<td class='datalabel' colspan="1">
 					<input autocomplete="new-password" required type="password" id="NewPlayerPassword" style="width: 220px;"><br>
 				</td>
-				<td width='10px'></td>
+				<td class='datalabel' width='10px'></td>
 			</tr>
 			<tr>
-				<td colspan="1" align="right">Confirm:</td>
-				<td colspan="1">
+				<td class='datalabel' colspan="1" align="right">Confirm PW:</td>
+				<td class='datalabel' colspan="1">
 					<input autocomplete="new-password" required type="password" id="NewPlayerPasswordConfirm" style="width: 220px;"><br>
 				</td>
 				<td width='10px'></td>
 			</tr>
-			<tr><td colspan="6"><hr></td></tr>
+			<tr><td class='datalabel' colspan="6"><hr></td></tr>
 
 <?php
 	if (!($stmt = $conn->prepare("SELECT SQL_NO_CACHE * FROM asc_player ORDER BY playerid"))) {
@@ -280,8 +282,7 @@ session_start();
 				copy("./images/pilots/000_no_avatar.png", "./images/player/".$row['image']);
 			}
 			echo "				</td>\n";
-			echo "				<td nowrap class='datalabel' style='text-align:left;';>" . $row['name'] . "</td>\n";
-			echo "				<td nowrap class='datalabel' style='text-align:left;';>" . $row['email'] . "</td>\n";
+			echo "				<td nowrap class='datalabel' style='text-align:left;' colspan='2'>" . $row['name'] . "</td>\n";
 			if ($row['playerid'] != "1" && $row['playerid'] != "2") {
 				echo "				<td width='10px'>\n";
 				echo "					<span style='font-size:16px;'>\n";

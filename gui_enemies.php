@@ -101,7 +101,7 @@ session_start();
 			$playerid = $row['playerid'];
 			$playername = $row['name'];
 
-			echo "<tr><td nowrap style='width:170px;height:70px;' class='mechselect_button_active'>".$playername."</td>";
+			echo "<tr><td nowrap style='width:170px;height:40px;' class='mechselect_button_active'>".$playername."</td>";
 
 			// Select units for this player
 			if (!($stmtUnits = $conn->prepare("SELECT SQL_NO_CACHE * FROM asc_unit where playerid = ".$playerid." ORDER BY unitid;"))) {
@@ -117,14 +117,12 @@ session_start();
 					$sql_asc_checkunitassignments = "SELECT SQL_NO_CACHE * FROM asc_assign where unitid=".$unitidSelected.";";
 					$result_asc_checkunitassignments = mysqli_query($conn, $sql_asc_checkunitassignments);
 					if (mysqli_num_rows($result_asc_checkunitassignments) > 0) {
-						echo "<td nowrap style='width:170px;height:70px;' onclick='location.href=\"gui_unit.php?unit=".$unitidSelected."\"' class='unitselect_button_normal'>";
-						echo "<a href='gui_unit.php?unit=".$unitidSelected."'>".$forcenameSelected."</a><br>";
-						echo "<span style='font-size:16px;'>Tap to inspect</span>";
+						echo "<td nowrap style='width:170px;height:40px;' onclick='location.href=\"gui_unit.php?unit=".$unitidSelected."\"' class='unitselect_button_normal'>";
+						echo "<a href='gui_unit.php?unit=".$unitidSelected."'>".$forcenameSelected."</a>";
 						echo "</td>";
 					} else {
-						echo "<td nowrap style='background-color:#444444;width:170px;height:70px;' class='mechselect_button_active'>";
-						echo $forcenameSelected."<br>";
-						echo "<span style='font-size:16px;'>Empty</span>";
+						echo "<td nowrap style='background-color:#444444;width:170px;height:40px;' class='mechselect_button_active'>";
+						echo $forcenameSelected;
 						echo "</td>";
 					}
 				}

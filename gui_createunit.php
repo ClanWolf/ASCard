@@ -17,8 +17,6 @@ session_start();
 
 	if ($addmech == 1) {
 		$TON = isset($_GET["TON"]) ? $_GET["TON"] : "";
-		$SHORT = isset($_GET["SHORT"]) ? $_GET["SHORT"] : "";
-		$MNA = isset($_GET["MNA"]) ? $_GET["MNA"] : "";
 		$MNU = isset($_GET["MNU"]) ? $_GET["MNU"] : "";
 		$TP = isset($_GET["TP"]) ? $_GET["TP"] : "";
 		$SZ = isset($_GET["SZ"]) ? $_GET["SZ"] : "";
@@ -35,8 +33,6 @@ session_start();
 		$PVA = isset($_GET["PVA"]) ? $_GET["PVA"] : "";
 		$SPCL = isset($_GET["SPCL"]) ? $_GET["SPCL"] : "";
 		$PN = isset($_GET["PN"]) ? $_GET["PN"] : "";
-		$PCS = isset($_GET["PCS"]) ? $_GET["PCS"] : "";
-		$PR = isset($_GET["PR"]) ? $_GET["PR"] : "";
 		$PI = isset($_GET["PI"]) ? $_GET["PI"] : "";
 		$SKILL = isset($_GET["SKILL"]) ? $_GET["SKILL"] : "";
 		$UNITID = isset($_GET["UNITID"]) ? $_GET["UNITID"] : "";
@@ -44,8 +40,6 @@ session_start();
 		$MODEL = isset($_GET["MODEL"]) ? $_GET["MODEL"] : "";
 
 		$TON = urldecode($TON);
-		$SHORT = urldecode($SHORT);
-		$MNA = urldecode($MNA);
 		$MNU = urldecode($MNU);
 		$TP = urldecode($TP);
 		$SZ = urldecode($SZ);
@@ -62,8 +56,6 @@ session_start();
 		$PVA = urldecode($PVA);
 		$SPCL = urldecode($SPCL);
 		$PN = urldecode($PN);
-		$PCS = urldecode($PCS);
-		$PR = urldecode($PR);
 		$PI = urldecode($PI);
 		$SKILL = urldecode($SKILL);
 		$UNITID = urldecode($UNITID);
@@ -76,8 +68,6 @@ session_start();
 		//    mech_number
 		//    mulid
 		//    mech_tonnage
-		//    custom_name
-		//    as_name
 		//    as_model
 		//    as_pv
 		//    as_tp
@@ -105,9 +95,7 @@ session_start();
 		//    PILOT
 		//    ----------------
 		//    pilotid
-		//    rank
 		//    name
-		//    callsign
 		//    pilot_imageurl
 		//    playerid
 		//
@@ -120,13 +108,11 @@ session_start();
 
 		$sql_insertmech = "";
 		$sql_insertmech = $sql_insertmech."INSERT INTO asc_mech ";
-		$sql_insertmech = $sql_insertmech."(mech_number, mulid, mech_tonnage, custom_name, as_name, as_model, as_pv, as_tp, as_sz, as_tmm, as_mv, as_mvj, as_role, as_skill, as_short, as_short_min, as_medium, as_medium_min, as_long, as_long_min, as_extreme, as_extreme_min, as_ov, as_armor, as_structure, as_threshold, as_specials, mech_imageurl) ";
+		$sql_insertmech = $sql_insertmech."(mech_number, mulid, mech_tonnage, as_model, as_pv, as_tp, as_sz, as_tmm, as_mv, as_mvj, as_role, as_skill, as_short, as_short_min, as_medium, as_medium_min, as_long, as_long_min, as_extreme, as_extreme_min, as_ov, as_armor, as_structure, as_threshold, as_specials, mech_imageurl) ";
 		$sql_insertmech = $sql_insertmech."VALUES (";
 		$sql_insertmech = $sql_insertmech."'".$MNU."', ";        // mech_number
 		$sql_insertmech = $sql_insertmech."'".$MULID."', ";      // mulid
 		$sql_insertmech = $sql_insertmech."'".$TON."', ";        // mech_tonnage
-		$sql_insertmech = $sql_insertmech."'".$MNA."', ";        // custom_name
-		$sql_insertmech = $sql_insertmech."'".$SHORT."', ";      // as_name
 		$sql_insertmech = $sql_insertmech."'".$MODEL."', ";      // as_model
 		$sql_insertmech = $sql_insertmech."'".$PVA."', ";        // as_pv
 		$sql_insertmech = $sql_insertmech."'".$TP."', ";         // as_tp
@@ -153,7 +139,7 @@ session_start();
 		$sql_insertmech = $sql_insertmech."'".$S."', ";          // as_structure
 		$sql_insertmech = $sql_insertmech."0, ";                 // as_threshold
 		$sql_insertmech = $sql_insertmech."'".$SPCL."', ";       // as_specials
-		$sql_insertmech = $sql_insertmech."'".$SHORT.".png' ";   // mech_imageurl
+		$sql_insertmech = $sql_insertmech."'".$MODEL.".png' ";   // mech_imageurl
 		$sql_insertmech = $sql_insertmech.")";
 		if (mysqli_query($conn, $sql_insertmech)) {
 			// Success
@@ -165,13 +151,10 @@ session_start();
 
 		$sql_insertpilot = "";
 		$sql_insertpilot = $sql_insertpilot."INSERT INTO asc_pilot ";
-		$sql_insertpilot = $sql_insertpilot."(rank, name, callsign, pilot_imageurl, playerid) ";
+		$sql_insertpilot = $sql_insertpilot."(name, pilot_imageurl) ";
 		$sql_insertpilot = $sql_insertpilot."VALUES (";
-		$sql_insertpilot = $sql_insertpilot."'".$PR."', ";      // Pilot rank
 		$sql_insertpilot = $sql_insertpilot."'".$PN."', ";      // Pilotname
-		$sql_insertpilot = $sql_insertpilot."'".$PCS."', ";     // Pilot callsign
-		$sql_insertpilot = $sql_insertpilot."'".$PI."', ";      // Pilot image
-		$sql_insertpilot = $sql_insertpilot.$pid;
+		$sql_insertpilot = $sql_insertpilot."'".$PI."'";        // Pilot image
 		$sql_insertpilot = $sql_insertpilot.")";
 		if (mysqli_query($conn, $sql_insertpilot)) {
 			// Success
@@ -194,6 +177,26 @@ session_start();
 		} else {
 			// Error
 			echo "Error: " . $sql_insertassign . "<br>" . mysqli_error($conn);
+		}
+
+		$sql_insertmechstatus = "";
+		$sql_insertmechstatus = $sql_insertmechstatus."INSERT INTO asc_mechstatus ";
+		$sql_insertmechstatus = $sql_insertmechstatus."(mechid, heat, armor, structure, crit_engine, crit_fc, crit_mp, crit_weapons) ";
+		$sql_insertmechstatus = $sql_insertmechstatus."VALUES (";
+		$sql_insertmechstatus = $sql_insertmechstatus.$newmechid.", ";
+		$sql_insertmechstatus = $sql_insertmechstatus."0, ";
+		$sql_insertmechstatus = $sql_insertmechstatus."0, ";
+		$sql_insertmechstatus = $sql_insertmechstatus."0, ";
+		$sql_insertmechstatus = $sql_insertmechstatus."0, ";
+		$sql_insertmechstatus = $sql_insertmechstatus."0, ";
+		$sql_insertmechstatus = $sql_insertmechstatus."0, ";
+		$sql_insertmechstatus = $sql_insertmechstatus."0";
+		$sql_insertmechstatus = $sql_insertmechstatus.")";
+		if (mysqli_query($conn, $sql_insertmechstatus)) {
+			// Success
+		} else {
+			// Error
+			echo "Error: " . $sql_insertmechstatus . "<br>" . mysqli_error($conn);
 		}
 		echo "<meta http-equiv='refresh' content='0;url=./gui_selectunit.php'>";
 	}
@@ -288,8 +291,6 @@ session_start();
 
 			// Store new mech
 			var TON = document.getElementById('tonnage').value;
-			var SHORT = document.getElementById('SHORT').value;
-			var MNA = document.getElementById('MNA').value;
 			var MNU = document.getElementById('MNU').value;
 			var TP = document.getElementById('TP').value;
 			var SZ = document.getElementById('SZ').value;
@@ -305,8 +306,6 @@ session_start();
 			var PVA = document.getElementById('PVA').value;
 			var SPCL = document.getElementById('SPCL').value;
 			var PN = document.getElementById('PN').value;
-			var PCS = document.getElementById('PCS').value;
-			var PR = document.getElementById('PR').value;
 			var PI = document.getElementById('PI').value;
 			var SKILL = document.getElementById('SKILL').value;
 			var UNITID = document.getElementById('UNITID').value;
@@ -317,6 +316,8 @@ session_start();
 			var selText = unitslistbox.options[selIndex].text;
 			var MULID = selValue;
 			var MODEL = selText;
+			MODEL = MODEL.replace(/"/g,"&quot;");
+			MODEL = MODEL.replace(/'/g,"&apos;");
 
 			var MVG = 0;
 			var MVJ = 0;
@@ -333,8 +334,6 @@ session_start();
 				MVJ = 0;
 			}
 			url=url+"&TON="+encodeURIComponent(TON);
-			url=url+"&SHORT="+encodeURIComponent(SHORT);
-			url=url+"&MNA="+encodeURIComponent(MNA);
 			url=url+"&MNU="+encodeURIComponent(MNU);
 			url=url+"&TP="+encodeURIComponent(TP);
 			url=url+"&SZ="+encodeURIComponent(SZ);
@@ -351,8 +350,6 @@ session_start();
 			url=url+"&PVA="+encodeURIComponent(PVA);
 			url=url+"&SPCL="+encodeURIComponent(SPCL);
 			url=url+"&PN="+encodeURIComponent(PN);
-			url=url+"&PCS="+encodeURIComponent(PCS);
-			url=url+"&PR="+encodeURIComponent(PR);
 			url=url+"&PI="+encodeURIComponent(PI);
 			url=url+"&SKILL="+encodeURIComponent(SKILL);
 			url=url+"&MULID="+encodeURIComponent(MULID);
@@ -423,7 +420,7 @@ session_start();
 										<option value="100">100</option>
 									</select>
 
-									<input required type="text" id="NameFilter" name="NameFilter" onchange="fetchMechList();" style="width:100px">
+									Filter: <input required type="text" id="NameFilter" name="NameFilter" onchange="fetchMechList();" style="width:100px">
 								</td>
 							</tr>
 							<tr>
@@ -433,31 +430,29 @@ session_start();
 								</td>
 							</tr>
 							<tr>
-								<td nowrap class="datalabel" style='text-align:left;' colspan='3'>
-									<input required type="text" id="SHORT" name="SHORT" style="width:80px"> SHORT<br>
+								<td nowrap class="datalabel" style='text-align:left;' width='100%' colspan='3'>
+									<hr>
+									<input required type="hidden" id="TP" name="TP">
+									<input required type="hidden" id="SZ" name="SZ">
+									<input required type="hidden" id="TMM" name="TMM">
+									<input required type="hidden" id="MV" name="MV">
+									<input required type="hidden" id="ROLE" name="ROLE">
+									<input required type="hidden" id="DMGS" name="DMGS">
+									<input required type="hidden" id="DMGM" name="DMGM">
+									<input required type="hidden" id="DMGL" name="DMGL">
+									<input required type="hidden" id="OV" name="OV">
+									<input required type="hidden" id="A" name="A">
+									<input required type="hidden" id="S" name="S">
+									<input required type="hidden" id="PVA" name="PVA">
+									<input required type="hidden" id="SPCL" name="SPCL">
 								</td>
 							</tr>
 							<tr>
-								<td nowrap class="datalabel" style='text-align:left;' width='33%'>
-									<input required type="text" id="MNA" name="MNA"> MNA<br>
-									<input required type="text" id="MNU" name="MNU"> MNU<br>
-									<input required type="text" id="TP" name="TP"> TP<br>
-									<input required type="text" id="SZ" name="SZ"> SZ<br>
-									<input required type="text" id="TMM" name="TMM"> TMM<br>
+								<td nowrap class="datalabel" style='text-align:left;' width='20%'>
+									Mech number:
 								</td>
-								<td nowrap class="datalabel" style='text-align:left;' width='34%'>
-									<input required type="text" id="MV" name="MV"> MV<br>
-									<input required type="text" id="ROLE" name="ROLE"> ROLE<br>
-									<input required type="text" id="DMGS" name="DMGS"> DMG S<br>
-									<input required type="text" id="DMGM" name="DMGM"> DMG M<br>
-									<input required type="text" id="DMGL" name="DMGL"> DMG L<br>
-								</td>
-								<td nowrap class="datalabel" style='text-align:left;' width='33%'>
-									<input required type="text" id="OV" name="OV"> OV<br>
-									<input required type="text" id="A" name="A"> A<br>
-									<input required type="text" id="S" name="S"> S<br>
-									<input required type="text" id="PVA" name="PVA"> PV<br>
-									<input required type="text" id="SPCL" name="SPCL"> SPCL<br>
+								<td nowrap class="datalabel" style='text-align:left;' width='80%' colspan="2">
+									<input required type="text" id="MNU" name="MNU" style="width:300px;">
 								</td>
 							</tr>
 						</table>
@@ -469,8 +464,6 @@ session_start();
 							<tr>
 								<td nowrap class="datalabel" style='text-align:left;' width='50%'>
 									<input type="text" required id="PN" name="PN"> PilotName<br>
-									<input type="text" required id="PCS" name="PCS"> PilotCallsign<br>
-									<input type="text" required id="PR" name="PR"> PilotRank<br>
 									<input type="text" required id="PI" name="PI"> PilotImage<br>
 									<input type="text" required id="SKILL" name="SKILL"> SKILL<br>
 
@@ -499,9 +492,7 @@ session_start();
 					</div>
 				</td>
 				<td valign="top">
-<?php
-	echo "					<a href='#' onClick='storeNewMech();'><i class='fa fa-fw fa-plus-square'></i></a>\n";
-?>
+					<a href='#' onClick='storeNewMech();'><i class='fa fa-fw fa-plus-square'></i></a>
 				</td>
 			</tr>
 		</table>

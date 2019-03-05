@@ -1,28 +1,21 @@
 <?php
 	require('./db.php');
 
-//	$parentunitid = 0;
 	$factionid = 0;
 	$mechid = 0;
 	$pilotid = 0;
 
 	$FACTION = "DEFAULT";
 	$FACTION_IMG_URL = "...";
-//	$FACTION_TYPE = "...";
 	$UNIT = "DEFAULT";
-//	$UNIT_PARENTS = "";
 	$UNIT_IMG_URL = "...";
 
 	// Store in arrays to keep the mech- and pilotdata of the current unit
 	$array_PILOT = array();
-	$array_PILOT_CALLSIGN = array();
 	$array_PILOT_IMG_URL = array();
 
 	$array_MECH_DBID = array();
 	$array_MECH_NUMBER = array();
-	$array_MECH_CUSTOM_NAME = array();
-
-	$array_MECH = array();
 	$array_MECH_IMG_URL = array();
 	$array_PV = array();
 	$array_TP = array();
@@ -63,22 +56,10 @@
 			if ($row["unitid"] == $unitid) {
 				$UNIT = $row["forcename"];
 				$UNIT_IMG_URL = $row["unit_imageurl"];
-//				$parentunitid = $row["parentforceid"];
 				$factionid = $row["factionid"];
 				$unitplayerid = $row["playerid"];
 			}
 		}
-//		$UNIT_PARENTS = $UNIT;
-//		while($parentunitid !== "null") {
-//			mysqli_data_seek($result_asc_unit, 0);
-//			while($row = mysqli_fetch_assoc($result_asc_unit)) {
-//				if ($row["unitid"] == $parentunitid) {
-//					$name = $row["forcename"];
-//					$UNIT_PARENTS = $name.",<br>".$UNIT_PARENTS;
-//					$parentunitid = $row["parentforceid"];
-//				}
-//			}
-//		}
 	}
 	mysqli_free_result($result_asc_unit);
 
@@ -91,7 +72,6 @@
 			if ($row["factionid"] == $factionid) {
 				$FACTION = $row["name"];
 				$FACTION_IMG_URL = $row["faction_imageurl"];
-//				$FACTION_TYPE = $row["factiontype"];
 			}
 		}
 	}
@@ -126,8 +106,6 @@
 						if ($row["mechid"] == $mechid) {
 							$array_MECH_DBID[$mechcount] = $row["mechid"];
 							$array_MECH_NUMBER[$mechcount] = $row["mech_number"];
-							$array_MECH_CUSTOM_NAME[$mechcount] = $row["custom_name"];
-							$array_MECH[$mechcount] = $row["as_name"];
 							$array_MECH_MODEL[$mechcount] = $row["as_model"];
 							$array_MECH_IMG_URL[$mechcount] = $row["mech_imageurl"];
 							$array_PV[$mechcount] = $row["as_pv"];
@@ -145,11 +123,6 @@
 							$array_SPCL[$mechcount] = $row["as_specials"];
 							$array_A_MAX[$mechcount] = $row["as_armor"];
 							$array_S_MAX[$mechcount] = $row["as_structure"];
-
-							// echo "<script>console.log('".$array_MECH_DBID[$mechcount]."');</script>";
-							// echo $array_MECH_DBID[$mechcount];
-							// echo $array_MECH[$mechcount];
-							// echo $array_MECH_MODEL[$mechcount];
 						}
 					}
 				}
@@ -185,8 +158,7 @@
 				if (mysqli_num_rows($result_asc_pilot) > 0) {
 					while($row = mysqli_fetch_assoc($result_asc_pilot)) {
 						if ($row["pilotid"] == $pilotid) {
-							$array_PILOT_CALLSIGN[$mechcount] = $row["callsign"];
-							$array_PILOT[$mechcount] = $row["rank"]." ".$row["name"]." \"".$row["callsign"]."\"";
+							$array_PILOT[$mechcount] = $row["rank"]." ".$row["name"];
 							$array_PILOT_IMG_URL[$mechcount] = $row["pilot_imageurl"];
 						}
 					}

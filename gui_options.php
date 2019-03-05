@@ -15,10 +15,11 @@ session_start();
 
 	$opt1 = isset($_GET["opt1"]) ? $_GET["opt1"] : "";
 	$opt2 = isset($_GET["opt2"]) ? $_GET["opt2"] : "";
+	$opt3 = isset($_GET["opt3"]) ? $_GET["opt3"] : "";
 
-	if ($opt1 == true || $opt2 == true) {
+	if ($opt1 == true || $opt2 == true || $opt3 == true) {
 		// storing changed options to database
-		$sql_update_options = "UPDATE asc_options SET OPTION1=".$opt1.", OPTION2=".$opt2." WHERE playerid = ".$pid;
+		$sql_update_options = "UPDATE asc_options SET OPTION1=".$opt1.", OPTION2=".$opt2.", OPTION3=".$opt3." WHERE playerid = ".$pid;
 		$result_update_options = mysqli_query($conn, $sql_update_options);
 		echo "<meta http-equiv='refresh' content='0;url=./gui_options.php'>";
 		die();
@@ -30,8 +31,10 @@ session_start();
 			while($row = mysqli_fetch_assoc($result_asc_options)) {
 				$opt1 = $row["option1"];
 				$opt2 = $row["option2"];
+				$opt3 = $row["option3"];
 				$_SESSION['option1'] = $opt1;
 				$_SESSION['option2'] = $opt2;
+				$_SESSION['option3'] = $opt2;
 			}
 		}
 	}
@@ -108,15 +111,17 @@ session_start();
 			var na = "";
 			var opt1 = 0;
 			var opt2 = 0;
+			var opt3 = 0;
 			var list = document.getElementsByClassName("bigcheck");
 			[].forEach.call(list, function (el1) {
 				na = el1.name;
 				if (typeof na != 'undefined') {
 					if (na.substring(0, 4) == "OPT1") { opt1 = el1.checked }
 					if (na.substring(0, 4) == "OPT2") { opt2 = el1.checked }
+					if (na.substring(0, 4) == "OPT3") { opt3 = el1.checked }
 				}
 			})
-			var url="./gui_options.php?opt1="+opt1+"&opt2="+opt2;
+			var url="./gui_options.php?opt1="+opt1+"&opt2="+opt2+"&opt3="+opt3;
 			// alert (url);
 			window.location.href = url;
 		}
@@ -129,6 +134,7 @@ session_start();
 				if (typeof na != 'undefined') {
 					if (na.substring(0, 4) == "OPT1") { el1.checked = <?php echo $opt1 ?> }
 					if (na.substring(0, 4) == "OPT2") { el1.checked = <?php echo $opt2 ?> }
+					if (na.substring(0, 4) == "OPT3") { el1.checked = <?php echo $opt3 ?> }
 				}
 			})
 		}
@@ -163,7 +169,7 @@ session_start();
 	<div>
 		<table class="options" cellspacing=4 cellpadding=4 border=0px>
 			<tr>
-				<td align="left" style="color: #aaa;">
+				<td align="left" class='datalabel'>
 					<label class="bigcheck"><input onchange="changeOption();" type="checkbox" class="bigcheck" name="OPT1" value="yes"/><span class="bigcheck-target"></span></label>&nbsp;&nbsp;
 				</td>
 				<td align="left" class="datalabel">
@@ -171,13 +177,22 @@ session_start();
 				</td>
 			</tr>
 			<tr>
-				<td align="left" style="color: #aaa;">
+				<td align="left" class='datalabel'>
 					<label class="bigcheck"><input onchange="changeOption();" type="checkbox" class="bigcheck" name="OPT2" value="yes"/><span class="bigcheck-target"></span></label>&nbsp;&nbsp;
 				</td>
 				<td align="left" class="datalabel">
 					Auto crit rolls (tap dice)
 				</td>
 			</tr>
+			<tr><td colspan="2"><hr></td></tr>
+			<tr>
+				<td align="left" class='datalabel'>
+					<label class="bigcheck"><input onchange="changeOption();" type="checkbox" class="bigcheck" name="OPT3" value="yes"/><span class="bigcheck-target"></span></label>&nbsp;&nbsp;
+				</td>
+				<td align="left" class="datalabel">
+					Editable mode
+				</td>
+</tr>
 		</table>
 	</div>
 
