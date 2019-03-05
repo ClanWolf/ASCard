@@ -8,7 +8,12 @@ function random_pic(male) {
 	$file = array_rand($files);
 	return $files[$file];
 }
-
+function random_name(male) {
+	$f_contents = file("random.txt");
+	$line = $f_contents[array_rand($f_contents)];
+	$data = $line;
+	return $data;
+}
 	require('./db.php');
 	if (!isset($_SESSION['playerid'])) {
 		echo "Not logged in... redirecting.<br>";
