@@ -157,7 +157,7 @@ session_start();
 				if (mysqli_num_rows($result_asc_mech) > 0) {
 					while($rowMech = mysqli_fetch_assoc($result_asc_mech)) {
 						$mechnumber = $rowMech['mech_number'];
-						$mechchassisname = $rowMech['as_name'];
+						$mechchassisname = $rowMech['as_model'];
 						$mechcustomname = $rowMech['custom_name'];
 					}
 				}
@@ -175,8 +175,8 @@ session_start();
 				$mechDetailString = $mechDetailString."			<td nowrap onclick='location.href=\"gui_unit.php?unit=".$unitidSelected."&chosenmech=".$c."\"' style='width:240px;height:50px;background-color:#444444;' class='mechselect_button_active'>\n";
 				$mechDetailString = $mechDetailString."				<table width='100%' cellspacing=0 cellpadding=0 border=0px>\n";
 				$mechDetailString = $mechDetailString."					<tr>\n";
-				$mechDetailString = $mechDetailString."						<td nowrap width='99%' align='left' style='color:#AAAAAA;background-color:#444444;text-align:left;' class='mechselect_button_active'><a href=gui_unit.php?unit=".$unitidSelected."&chosenmech=".$c.">".$mechnumber." ".$mechchassisname."</a>\n";
-				$mechDetailString = $mechDetailString."							<br><span style='font-size:16px;'>".$pilotname."</span>\n";
+				$mechDetailString = $mechDetailString."						<td nowrap width='99%' align='left' style='color:#AAAAAA;background-color:#444444;text-align:left;' class='mechselect_button_active'><a href=gui_unit.php?unit=".$unitidSelected."&chosenmech=".$c.">".$mechnumber." ".$pilotname."</a>\n";
+				$mechDetailString = $mechDetailString."							<br><span style='font-size:16px;'>".$mechchassisname.$pilotname."</span>\n";
 				$mechDetailString = $mechDetailString."						</td>\n";
 				$mechDetailString = $mechDetailString."						<td nowrap width='1%' style='background-color:#444444;text-align:right;' class='mechselect_button_active'>\n";
 				$mechDetailString = $mechDetailString."							<span style='font-size:16px;'>\n";
