@@ -2,10 +2,11 @@
 session_start();
 // https://www.php-einfach.de/php-tutorial/php-sessions/
 
-function random_pic($dir = 'uploads') {
-    $files = glob($dir . '/*.*');
-    $file = array_rand($files);
-    return $files[$file];
+function random_pic(male) {
+	$dir = './images/pilots'
+	$files = glob($dir . '/".male."_*.png');
+	$file = array_rand($files);
+	return $files[$file];
 }
 
 	require('./db.php');
@@ -207,10 +208,13 @@ function random_pic($dir = 'uploads') {
 		echo "<meta http-equiv='refresh' content='0;url=./gui_selectunit.php'>";
 	}
 
+	// TODO: get a random female image from the pilot names list
+	// TODO: get a random male image from the pilot names list
 	// TODO: get a random female name from the pilot names list
 	// TODO: get a random male name from the pilot names list
 	// --> put into javascript variable
-
+	$randomPilotMale = random_pic("m");
+	$randomPilotFemale = random_pic("f");
 
 
 
