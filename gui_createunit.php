@@ -200,6 +200,10 @@ session_start();
 		}
 		echo "<meta http-equiv='refresh' content='0;url=./gui_selectunit.php'>";
 	}
+
+	// TODO: get a random female name from the pilot names list
+	// TODO: get a random male name from the pilot names list
+	// --> put into javascript variable
 ?>
 
 <html lang="en">
@@ -325,7 +329,7 @@ session_start();
 			if (MV.indexOf("/") !== -1) {
 				var MV_Parts = MV.split('/');
 				MVG = MV_Parts[0].match(/\d+/)[0];
-                MVJ = MV_Parts[1].match(/\d+/)[0];
+				MVJ = MV_Parts[1].match(/\d+/)[0];
 			} else if (MV.indexOf("j") !== -1) {
 				MVG = MV.match(/\d+/)[0];
 				MVJ = MV.match(/\d+/)[0];
@@ -358,6 +362,13 @@ session_start();
 
 			// alert(url);
 			window.location.href = url;
+		}
+		function createNewPilot(male) {
+			if (male == "true") {
+				// male pilot
+			} else {
+				// female pilot
+			}
 		}
 	</script>
 
@@ -455,7 +466,14 @@ session_start();
 									Pilot name: <input type="text" required id="PN" name="PN">
 								</td>
 								<td nowrap class="datalabel" style='text-align:left;' width='33%'>
-									Skill: <input type="text" required id="SKILL" name="SKILL">
+									Skill: <select required name='SKILL' id='SKILL' size='1'>
+										<option value="0">0</option>
+										<option value="1">1</option>
+										<option value="2">2</option>
+										<option value="3">3</option>
+										<option value="4">4</option>
+										<option value="5">5</option>
+									</select>
 								</td>
 							</tr>
 						</table>
