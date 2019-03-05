@@ -39,7 +39,9 @@ function getMechList(filter, tech, minTon, maxTon) {
 			} else {
 				variant = "";
 			}
-			optionList = optionList + "<option value=" + unit.Id + "> " + unit.Name + variant + "</option>";
+			if (unit.Sz != "0") {
+				optionList = optionList + "<option value=" + unit.Id + "> " + unit.Name + variant + "</option>";
+			}
 		});
 	}).then(function data() {
 		document.getElementById("units").innerHTML = optionList;
