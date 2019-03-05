@@ -449,10 +449,13 @@ session_start();
 							</tr>
 							<tr>
 								<td nowrap class="datalabel" style='text-align:left;' width='20%'>
-									Mech number:
+									Mech number: <input required type="text" id="MNU" name="MNU" style="width:300px;">
 								</td>
-								<td nowrap class="datalabel" style='text-align:left;' width='80%' colspan="2">
-									<input required type="text" id="MNU" name="MNU" style="width:300px;">
+								<td nowrap class="datalabel" style='text-align:left;' width='80%'>
+									Pilot name: <input type="text" required id="PN" name="PN">
+								</td>
+								<td nowrap class="datalabel" style='text-align:left;' width='80%'>
+									Skill: <input type="text" required id="SKILL" name="SKILL">
 								</td>
 							</tr>
 						</table>
@@ -463,9 +466,7 @@ session_start();
 						<table width='100%' cellspacing=5 cellpadding=5>
 							<tr>
 								<td nowrap class="datalabel" style='text-align:left;' width='50%'>
-									<input type="text" required id="PN" name="PN"> PilotName<br>
 									<input type="text" required id="PI" name="PI"> PilotImage<br>
-									<input type="text" required id="SKILL" name="SKILL"> SKILL<br>
 
 									<br>Add to unit:<br>
 
