@@ -456,6 +456,7 @@ session_start();
 									<input required type="hidden" id="S" name="S">
 									<input required type="hidden" id="PVA" name="PVA">
 									<input required type="hidden" id="SPCL" name="SPCL">
+									<input required type="hidden" id="PI" name="PI">
 								</td>
 							</tr>
 							<tr>
@@ -484,8 +485,6 @@ session_start();
 						<table width='100%' cellspacing=5 cellpadding=5>
 							<tr>
 								<td nowrap class="datalabel" style='text-align:left;' width='50%'>
-									<input type="text" required id="PI" name="PI"> PilotImage<br>
-
 									<br>Add to unit:<br>
 
 									<select required name='UNITID' id='UNITID' size='1' style='width:200px;'>
