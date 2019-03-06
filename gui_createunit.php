@@ -16,7 +16,12 @@ session_start();
 		$data = $line;
 		return $data;
 	}
-
+	function getMechImageByName($mechname) {
+		$f_mechimages = file("images/mechs/*.png");
+		$image = $f_mechimages[0];
+		return 
+	}
+	
 	if (!isset($_SESSION['playerid'])) {
 		echo "Not logged in... redirecting.<br>";
 		echo "<meta http-equiv='refresh' content='0;url=./login.php'>";
@@ -76,6 +81,8 @@ session_start();
 		$MULID = urldecode($MULID);
 		$MODEL = urldecode($MODEL);
 
+		$MECHIMAGE = getMechImageByName($MODEL);
+		
 		//    MECH
 		//    ----------------
 		//    mechid
