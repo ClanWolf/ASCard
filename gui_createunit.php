@@ -214,17 +214,6 @@ session_start();
 		}
 		echo "<meta http-equiv='refresh' content='0;url=./gui_selectunit.php'>";
 	}
-	$randomPilotPictureMale = random_pic("m");
-	$randomPilotPictureFemale = random_pic("f");
-	$randomPilotNameMale = random_name("male");
-	$randomPilotNameFemale = random_name("female");
-
-	echo "<script>\n";
-	echo "	var randomPilotPictureFemale='".$randomPilotPictureFemale."';\n";
-	echo "	var randomPilotNameFemale='".$randomPilotNameFemale."';\n";
-	echo "	var randomPilotPictureMale='".$randomPilotPictureMale."';\n";
-	echo "	var randomPilotNameMale='".$randomPilotNameMale."';\n";
-	echo "</script>\n";
 ?>
 
 <html lang="en">
@@ -305,6 +294,16 @@ session_start();
 
 <body>
 	<script>
+<?php
+	$randomPilotPictureMale = random_pic("m");
+	$randomPilotPictureFemale = random_pic("f");
+	$randomPilotNameMale = random_name("male");
+	$randomPilotNameFemale = random_name("female");
+	echo "		var randomPilotPictureFemale='".trim($randomPilotPictureFemale)."';\n";
+	echo "		var randomPilotNameFemale='".trim($randomPilotNameFemale)."';\n";
+	echo "		var randomPilotPictureMale='".trim($randomPilotPictureMale)."';\n";
+	echo "		var randomPilotNameMale='".trim($randomPilotNameMale)."';\n";
+?>
 		$(document).ready(function() {
 			$("#cover").hide();
 			fetchMechList();
