@@ -13,6 +13,7 @@ session_start();
 	$pid = $_SESSION['playerid'];
 	$pname = $_SESSION['name'];
 	$pimage = $_SESSION['playerimage'];
+	$hideMinusButtons = $_SESSION['option3'];
 
 	$deletemech = isset($_GET["dm"]) ? $_GET["dm"] : "";
 
