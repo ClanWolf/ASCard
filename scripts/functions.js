@@ -77,21 +77,33 @@ function textSize(dec) {
 
 	if (fontsizeLabel < 22) {
 		fontsizeLabel = 22;
+		fontsizeValue = 22;
+		fontsizeValue = 22;
 	}
 	if (fontsizeValue < 22) {
+		fontsizeLabel = 22;
+		fontsizeValue = 22;
 		fontsizeValue = 22;
 	}
 	if (fontsizeCircle < 22) {
+		fontsizeLabel = 22;
+		fontsizeValue = 22;
 		fontsizeValue = 22;
 	}
 
 	if (fontsizeLabel > 75) {
 		fontsizeLabel = 75;
+		fontsizeValue = 75;
+		fontsizeValue = 75;
 	}
 	if (fontsizeValue > 75) {
+		fontsizeLabel = 75;
+		fontsizeValue = 75;
 		fontsizeValue = 75;
 	}
 	if (fontsizeCircle > 75) {
+		fontsizeLabel = 75;
+		fontsizeValue = 75;
 		fontsizeValue = 75;
 	}
 
