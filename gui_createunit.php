@@ -18,7 +18,7 @@ session_start();
 	}
 	function getMechImageByName($mechname) {
 		$f_mechimages = file("images/mechs/*.png");
-		$image = "";
+		$image = "Generic.png";
 		foreach ($f_mechimages as &$img) {
 			$imagenametrimmed = str_replace(' ', '', trim($img));
 			$mechnametrimmed = str_replace(' ', '', trim($mechname));
