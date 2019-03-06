@@ -18,8 +18,15 @@ session_start();
 	}
 	function getMechImageByName($mechname) {
 		$f_mechimages = file("images/mechs/*.png");
-		$image = $f_mechimages[0];
-		return 
+		$image = "";
+		foreach ($f_mechimages as &$img) {
+			$imagenametrimmed = str_replace(' ', '', trim($img));
+			$mechnametrimmed = str_replace(' ', '', trim($mechname));
+			if (strpos($mechnametrimmed, $imagenametrimmed) !== false) {
+				$image = $imagenametrimmed;
+			}
+		}
+		return $image; 
 	}
 	
 	if (!isset($_SESSION['playerid'])) {
