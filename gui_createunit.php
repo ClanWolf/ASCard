@@ -1,8 +1,12 @@
 <?php
 session_start();
 // https://www.php-einfach.de/php-tutorial/php-sessions/
-
 	require('./db.php');
+	if (!isset($_SESSION['playerid'])) {
+		echo "Not logged in... redirecting.<br>";
+		echo "<meta http-equiv='refresh' content='0;url=./login.php'>";
+		die();
+	}
 
 	function random_pic($male) {
 		$dir = 'images/pilots/';
@@ -28,12 +32,7 @@ session_start();
 		}
 		return $image; 
 	}
-	
-	if (!isset($_SESSION['playerid'])) {
-		echo "Not logged in... redirecting.<br>";
-		echo "<meta http-equiv='refresh' content='0;url=./login.php'>";
-		die();
-	}
+
 	$pid = $_SESSION['playerid'];
 	$pimage = $_SESSION['playerimage'];
 	$hideNotOwnedMech = $_SESSION['option1'];
