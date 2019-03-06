@@ -2,19 +2,21 @@
 session_start();
 // https://www.php-einfach.de/php-tutorial/php-sessions/
 
-function random_pic(male) {
-	$dir = './images/pilots'
-	$files = glob($dir . '/".male."_*.png');
-	$file = array_rand($files);
-	return $files[$file];
-}
-function random_name(male) {
-	$f_contents = file("data/names/names_".male."-lst");
-	$line = $f_contents[array_rand($f_contents)];
-	$data = $line;
-	return $data;
-}
 	require('./db.php');
+
+	function random_pic($male) {
+		$dir = 'images/pilots/';
+		$files = glob($dir . $male.'_*.png');
+		$file = array_rand($files);
+		return $files[$file];
+	}
+	function random_name($male) {
+		$f_contents = file("data/names/names_".$male.".lst");
+		$line = $f_contents[array_rand($f_contents)];
+		$data = $line;
+		return $data;
+	}
+
 	if (!isset($_SESSION['playerid'])) {
 		echo "Not logged in... redirecting.<br>";
 		echo "<meta http-equiv='refresh' content='0;url=./login.php'>";
@@ -212,21 +214,17 @@ function random_name(male) {
 		}
 		echo "<meta http-equiv='refresh' content='0;url=./gui_selectunit.php'>";
 	}
-
-	// TODO: get a random female image from the pilot names list
-	// TODO: get a random male image from the pilot names list
-	// TODO: get a random female name from the pilot names list
-	// TODO: get a random male name from the pilot names list
-	// --> put into javascript variable
-	$randomPilotMale = random_pic("m");
-	$randomPilotFemale = random_pic("f");
-
+	$randomPilotPictureMale = random_pic("m");
+	$randomPilotPictureFemale = random_pic("f");
 	$randomPilotNameMale = random_name("male");
 	$randomPilotNameFemale = random_name("female");
 
-
-
-
+	echo "<script>\n";
+	echo "	var randomPilotPictureFemale='".$randomPilotPictureFemale."';\n";
+	echo "	var randomPilotNameFemale='".$randomPilotNameFemale."';\n";
+	echo "	var randomPilotPictureMale='".$randomPilotPictureMale."';\n";
+	echo "	var randomPilotNameMale='".$randomPilotNameMale."';\n";
+	echo "</script>\n";
 ?>
 
 <html lang="en">
@@ -386,13 +384,6 @@ function random_name(male) {
 			// alert(url);
 			window.location.href = url;
 		}
-		function createNewPilot(male) {
-			if (male == "true") {
-				// male pilot
-			} else {
-				// female pilot
-			}
-		}
 	</script>
 
 <?php
@@ -484,7 +475,7 @@ function random_name(male) {
 							</tr>
 							<tr>
 								<td nowrap class="datalabel" style='text-align:left;' width='34%'>
-									Mech number: <input required type="text" id="MNU" name="MNU" style="width:300px;">
+									#: <input required type="text" id="MNU" name="MNU">
 								</td>
 								<td nowrap class="datalabel" style='text-align:left;' width='33%'>
 									Pilot name: <input type="text" required id="PN" name="PN">
@@ -539,6 +530,9 @@ function random_name(male) {
 		</table>
 	</form>
 
+	<script>
+		document.getElementById('PN').value = randomPilotNameMale;
+	</script>
 </body>
 
 </html>
