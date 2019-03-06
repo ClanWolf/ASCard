@@ -167,7 +167,7 @@ session_start();
 		$sql_insertmech = $sql_insertmech."'".$S."', ";          // as_structure
 		$sql_insertmech = $sql_insertmech."0, ";                 // as_threshold
 		$sql_insertmech = $sql_insertmech."'".$SPCL."', ";       // as_specials
-		$sql_insertmech = $sql_insertmech."'".$MODEL.".png' ";   // mech_imageurl
+		$sql_insertmech = $sql_insertmech."'".$MECHIMAGE."'";    // mech_imageurl
 		$sql_insertmech = $sql_insertmech.")";
 		if (mysqli_query($conn, $sql_insertmech)) {
 			// Success
