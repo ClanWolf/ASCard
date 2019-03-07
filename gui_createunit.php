@@ -432,7 +432,7 @@ session_start();
 					<div>
 						<table cellspacing=5 cellpadding=5>
 							<tr>
-								<td nowrap class="datalabel" style='text-align:left;' width='50%' colspan='3'>
+								<td nowrap class="datalabel" style='text-align:left;' width='50%' colspan='4'>
 									Tech: <select required name='tech' id='tech' size='1' onchange="fetchMechList();">
 										<option value="2">Clan</option>
 										<option value="1">IS</option>
@@ -462,13 +462,13 @@ session_start();
 								</td>
 							</tr>
 							<tr>
-								<td nowrap class="datalabel" style='text-align:left;' width='50%' colspan='3'>
+								<td nowrap class="datalabel" style='text-align:left;' width='50%' colspan='4'>
 									<!-- will be filled by 'getMechList();' -->
 									<select required name='units' id='units' size='1' onchange="mechSelected();" style="width:300px"></select>
 								</td>
 							</tr>
 							<tr>
-								<td nowrap class="datalabel" style='text-align:left;' width='100%' colspan='3'>
+								<td nowrap class="datalabel" style='text-align:left;' width='100%' colspan='4'>
 									<hr>
 									<input required type="hidden" id="TP" name="TP">
 									<input required type="hidden" id="SZ" name="SZ">
