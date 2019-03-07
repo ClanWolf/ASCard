@@ -39,7 +39,7 @@ function getMechList(filter, tech, minTon, maxTon) {
 			} else {
 				variant = "";
 			}
-			if (unit.Sz != "0") {
+			if (unit.BFSize != "0") {
 				optionList = optionList + "<option value=" + unit.Id + "> " + unit.Name + variant + "</option>";
 			}
 		});
@@ -52,7 +52,7 @@ function getMechList(filter, tech, minTon, maxTon) {
 		document.getElementById("TMM").value="";
 		document.getElementById("MV").value="";
 		document.getElementById("ROLE").value="";
-		document.getElementById("SKILL").value="";
+		//document.getElementById("SKILL").value="";
 		document.getElementById("DMGS").value="";
 		document.getElementById("DMGM").value="";
 		document.getElementById("DMGL").value="";
@@ -72,7 +72,7 @@ function getMechDetails(id) {
 		document.getElementById("TMM").value="";
 		document.getElementById("MV").value="";
 		document.getElementById("ROLE").value="";
-		document.getElementById("SKILL").value="";
+		//document.getElementById("SKILL").value="";
 		document.getElementById("DMGS").value="";
 		document.getElementById("DMGM").value="";
 		document.getElementById("DMGL").value="";
@@ -93,7 +93,8 @@ function getMechDetails(id) {
 		document.getElementById("TMM").value=json.BFTMM;
 		document.getElementById("MV").value=json.BFMove;
 		document.getElementById("ROLE").value=json.Role.Name;
-		document.getElementById("SKILL").value=json.Skill;
+		//document.getElementById("SKILL").value=json.Skill;
+		//document.getElementById("SKILL").value=3;
 		document.getElementById("DMGS").value=json.BFDamageShort;
 		document.getElementById("DMGM").value=json.BFDamageMedium;
 		document.getElementById("DMGL").value=json.BFDamageLong;

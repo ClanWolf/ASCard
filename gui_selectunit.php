@@ -173,8 +173,8 @@ session_start();
 				}
 
 				$mechDetailString = "";
-				$mechDetailString = $mechDetailString."			<td nowrap onclick='location.href=\"gui_unit.php?unit=".$unitidSelected."&chosenmech=".$c."\"' style='width:240px;height:50px;background-color:#444444;' class='mechselect_button_active' width='40%' align='right' valign='center'><div style='display:inline-block;height:100%;vertical-align: middle;'><img style='vertical-align:middle;' src='./images/DD_01.png' height='40px'></div></td>\n";
-				$mechDetailString = $mechDetailString."			<td nowrap onclick='location.href=\"gui_unit.php?unit=".$unitidSelected."&chosenmech=".$c."\"' style='width:240px;height:50px;background-color:#444444;' class='mechselect_button_active'>\n";
+				$mechDetailString = $mechDetailString."			<td nowrap onclick='location.href=\"gui_unit.php?unit=".$unitidSelected."&chosenmech=".$c."\"' style='background-color:#444444;' class='mechselect_button_active' align='right' valign='center'><div style='display:inline-block;height:100%;vertical-align: middle;'><img style='vertical-align:middle;' src='./images/DD_01.png' height='40px'></div></td>\n";
+				$mechDetailString = $mechDetailString."			<td nowrap onclick='location.href=\"gui_unit.php?unit=".$unitidSelected."&chosenmech=".$c."\"' style='width:240px;background-color:#444444;' class='mechselect_button_active'>\n";
 				$mechDetailString = $mechDetailString."				<table width='100%' cellspacing=0 cellpadding=0 border=0px>\n";
 				$mechDetailString = $mechDetailString."					<tr>\n";
 				$mechDetailString = $mechDetailString."						<td nowrap width='99%' align='left' style='color:#AAAAAA;background-color:#444444;text-align:left;' class='mechselect_button_active'><a href=gui_unit.php?unit=".$unitidSelected."&chosenmech=".$c.">#".$mechnumber." ".$pilotname."</a>\n";

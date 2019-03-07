@@ -316,7 +316,7 @@ session_start();
 	echo "		var randomPilotPictureFemale='".trim($randomPilotPictureFemale)."';\n";
 	echo "		var randomPilotNameFemale='".trim($randomPilotNameFemale)."';\n";
 	echo "		var randomPilotPictureMale='".trim($randomPilotPictureMale)."';\n";
-	echo "		var randomPilotNameMale='".trim($randomPilotNameMale)."';\n";
+	echo "		var randomPilotNameMale='".trim($randomPilotNameMale)."';\n\n";
 ?>
 		$(document).ready(function() {
 			$("#cover").hide();
@@ -487,18 +487,21 @@ session_start();
 								</td>
 							</tr>
 							<tr>
-								<td nowrap class="datalabel" style='text-align:left;' width='34%'>
-									#: <input required type="text" id="MNU" name="MNU">
+								<td nowrap class="datalabel" style='text-align:left;' width='15%'>
+									#: <input required type="text" id="MNU" name="MNU" style='width:100px'>
 								</td>
-								<td nowrap class="datalabel" style='text-align:left;' width='33%'>
-									Pilot name: <input type="text" required id="PN" name="PN">
+								<td nowrap class="datalabel" style='text-align:left;' width='10%'>
+									<img id="newpilotimage" src="" width="50px">
 								</td>
-								<td nowrap class="datalabel" style='text-align:left;' width='33%'>
+								<td nowrap class="datalabel" style='text-align:left;' width='37%'>
+									Pilot name: <input type="text" required id="PN" name="PN" style='width:200px'>
+								</td>
+								<td nowrap class="datalabel" style='text-align:left;' width='38%'>
 									Skill: <select required name='SKILL' id='SKILL' size='1'>
 										<option value="0">0</option>
 										<option value="1">1</option>
 										<option value="2">2</option>
-										<option value="3">3</option>
+										<option value="3" selected>3</option>
 										<option value="4">4</option>
 										<option value="5">5</option>
 									</select>
@@ -544,7 +547,20 @@ session_start();
 	</form>
 
 	<script>
-		document.getElementById('PN').value = randomPilotNameMale;
+		var finalPilotName = "";
+		var finalPilotImage = "";
+		var male = Math.random() >= 0.5;
+		if (male) {
+			document.getElementById('PN').value = randomPilotNameMale;
+			document.getElementById('newpilotimage').src = "<?php echo trim($randomPilotPictureMale) ?>";
+			finalPilotName = randomPilotNameMale;
+			finalPilotImage = "<?php echo trim($randomPilotPictureMale) ?>";
+		} else {
+			document.getElementById('PN').value = randomPilotNameFemale;
+			document.getElementById('newpilotimage').src = "<?php echo trim($randomPilotPictureFemale) ?>";
+			finalPilotName = randomPilotNameFemale;
+			finalPilotImage = "<?php echo trim($randomPilotPictureFemale) ?>";
+		}
 	</script>
 </body>
 

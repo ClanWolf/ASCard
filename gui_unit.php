@@ -153,7 +153,7 @@ session_start();
 							<td nowrap class="datalabel" width="12%">TMM:</td>
 							<td nowrap class="datavalue" width="13%"><?php echo "$array_TMM[$chosenMechIndex]"; ?></td>
 							<td nowrap class="datalabel" width="12%">MV:</td>
-							<td nowrap class="datalabel" width="13%" style="color:#fff;"><?php echo "$array_MV[$chosenMechIndex]&rdquo;";
+							<td nowrap class="datavalue" width="13%"><?php echo "$array_MV[$chosenMechIndex]&rdquo;";
 							if ($array_MVJ[$chosenMechIndex] != null) {
 								echo "/$array_MVJ[$chosenMechIndex]&rdquo;&nbsp;j";
 							} ?></td>

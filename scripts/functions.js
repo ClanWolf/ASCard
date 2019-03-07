@@ -1,6 +1,6 @@
-var fontsizeLabel = 16;
-var fontsizeValue = 16;
-var fontsizeCircle = 18;
+var fontsizeLabel = 18;
+var fontsizeValue = 22;
+var fontsizeCircle = 24;
 var rolling = 0;
 
 // http://goldfirestudios.com/blog/104/howler.js-Modern-Web-Audio-Javascript-Library
@@ -75,36 +75,36 @@ function textSize(dec) {
 	fontsizeValue += (dec==1) ? 1 : (-1);
 	fontsizeCircle += (dec==1) ? 1 : (-1);
 
-	if (fontsizeLabel < 22) {
-		fontsizeLabel = 22;
+	if (fontsizeLabel < 18) {
+		fontsizeLabel = 18;
 		fontsizeValue = 22;
-		fontsizeValue = 22;
+		fontsizeCircle = 24;
 	}
 	if (fontsizeValue < 22) {
-		fontsizeLabel = 22;
+		fontsizeLabel = 18;
 		fontsizeValue = 22;
-		fontsizeValue = 22;
+		fontsizeCircle = 24;
 	}
-	if (fontsizeCircle < 22) {
-		fontsizeLabel = 22;
+	if (fontsizeCircle < 24) {
+		fontsizeLabel = 18;
 		fontsizeValue = 22;
-		fontsizeValue = 22;
+		fontsizeCircle = 24;
 	}
 
-	if (fontsizeLabel > 75) {
-		fontsizeLabel = 75;
-		fontsizeValue = 75;
-		fontsizeValue = 75;
+	if (fontsizeLabel > 81) {
+		fontsizeLabel = 81;
+		fontsizeValue = 85;
+		fontsizeCircle = 87;
 	}
-	if (fontsizeValue > 75) {
-		fontsizeLabel = 75;
-		fontsizeValue = 75;
-		fontsizeValue = 75;
+	if (fontsizeValue > 85) {
+		fontsizeLabel = 81;
+		fontsizeValue = 85;
+		fontsizeCircle = 87;
 	}
-	if (fontsizeCircle > 75) {
-		fontsizeLabel = 75;
-		fontsizeValue = 75;
-		fontsizeValue = 75;
+	if (fontsizeCircle > 87) {
+		fontsizeLabel = 81;
+		fontsizeValue = 85;
+		fontsizeCircle = 87;
 	}
 
 	setSize("datalabel", fontsizeLabel);
