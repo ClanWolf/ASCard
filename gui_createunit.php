@@ -493,10 +493,10 @@ session_start();
 								<td nowrap class="datalabel" style='text-align:left;' width='10%'>
 									<img id="newpilotimage" src="" width="50px">
 								</td>
-								<td nowrap class="datalabel" style='text-align:left;' width='37%'>
-									Pilot name: <input type="text" required id="PN" name="PN" style='width:200px'>
+								<td nowrap class="datalabel" style='text-align:left;' width='40%'>
+									Pilot name: <input type="text" required id="PN" name="PN" style='width:120px'>
 								</td>
-								<td nowrap class="datalabel" style='text-align:left;' width='38%'>
+								<td nowrap class="datalabel" style='text-align:left;' width='35%'>
 									Skill: <select required name='SKILL' id='SKILL' size='1'>
 										<option value="0">0</option>
 										<option value="1">1</option>
