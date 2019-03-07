@@ -488,7 +488,7 @@ session_start();
 							</tr>
 							<tr>
 								<td nowrap class="datalabel" style='text-align:left;' width='15%'>
-									#: <input required type="text" id="MNU" name="MNU" style='width:100px'>
+									#: <input required type="text" id="MNU" name="MNU" style='width:60px'>
 								</td>
 								<td nowrap class="datalabel" style='text-align:left;' width='10%'>
 									<img id="newpilotimage" src="" width="50px">
