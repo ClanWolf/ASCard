@@ -508,7 +508,7 @@ session_start();
 								</td>
 							</tr>
 							<tr>
-								<td nowrap class="datalabel" style='text-align:left;' width='50%' colspan='4'>
+								<td nowrap class="datalabel" style='text-align:left;' width='50%' colspan='3'>
 									<br>Add to unit: <select required name='UNITID' id='UNITID' size='1' style='width:200px;'>
 <?php
 	$sql_asc_playersunits = "SELECT SQL_NO_CACHE * FROM asc_unit where playerid=".$pid;
@@ -526,6 +526,9 @@ session_start();
 	}
 ?>
 									</select>
+								</td>
+								<td>
+									<a href='#' onClick='storeNewMech();'><i class='fa fa-fw fa-plus-square'></i></a>
 								</td>
 							</tr>
 						</table>
@@ -561,7 +564,7 @@ session_start();
 					</div>
 				</td>
 				<td valign="top">
-					<a href='#' onClick='storeNewMech();'><i class='fa fa-fw fa-plus-square'></i></a>
+					
 				</td>
 			</tr>
 		</table>
