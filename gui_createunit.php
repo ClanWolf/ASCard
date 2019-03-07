@@ -10,7 +10,7 @@ session_start();
 
 	function random_pic($male) {
 		$dir = 'images/pilots/';
-		$files = glob($dir . $male.'_*.png');
+		$files = glob($dir.$male.'_*.png');
 		$file = array_rand($files);
 		return $files[$file];
 	}
@@ -20,19 +20,34 @@ session_start();
 		$data = $line;
 		return $data;
 	}
+//	function getMechImageByName($mechname) {
+//		$image = "Generic.png";
+//		$dir = 'images/mechs/';
+//		$files = glob($dir.'*.png');
+//		foreach ($files as &$img) {
+//			$imagenametrimmed = str_replace(' ', '', trim($img));
+//			$mechnametrimmed = str_replace(' ', '', trim($mechname));
+//			if (strpos(strtolower($mechnametrimmed), strtolower($imagenametrimmed)) !== false) {
+//				$image = $imagenametrimmed;
+//				break;
+//			}
+//		}
+//		return $image;
+//	}
 	function getMechImageByName($mechname) {
-		$f_mechimages = file("images/mechs/*.png");
 		$image = "Generic.png";
-		foreach ($f_mechimages as &$img) {
-			$imagenametrimmed = str_replace(' ', '', trim($img));
-			$mechnametrimmed = str_replace(' ', '', trim($mechname));
+		$dir = 'images/mechs/';
+		$files = glob($dir.'*.png');
+		foreach ($files as &$img) {
+			$imagenametrimmed = basename(strtolower(str_replace(' ', '', trim($img))), ".png");
+			$imagename = basename(str_replace(' ', '', trim($img)));
+			$mechnametrimmed = strtolower(str_replace(' ', '', trim($mechname)));
 			if (strpos($mechnametrimmed, $imagenametrimmed) !== false) {
-				$image = $imagenametrimmed;
-				echo $imagenametrimmed." | ".$mechnametrimmed;
+				$image = $imagename;
 				break;
 			}
 		}
-		return $image; 
+		return $image;
 	}
 
 	$pid = $_SESSION['playerid'];
@@ -345,7 +360,7 @@ session_start();
 			var PVA = document.getElementById('PVA').value;
 			var SPCL = document.getElementById('SPCL').value;
 			var PN = document.getElementById('PN').value;
-			var PI = document.getElementById('PI').value;
+			var PI = finalPilotImage;
 			var SKILL = document.getElementById('SKILL').value;
 			var UNITID = document.getElementById('UNITID').value;
 
@@ -427,90 +442,85 @@ session_start();
 	<br>
 
 	<form>
-		<table class="options" cellspacing=10 cellpadding=5 border=0px>
+		<table class="options" cellspacing=4 cellpadding=4 border=0px>
+			<tr>
+				<td nowrap class="datalabel" style='text-align:left;' colspan='4'>
+					Tech: <select required name='tech' id='tech' size='1' onchange="fetchMechList();">
+						<option value="2">Clan</option>
+						<option value="1">IS</option>
+					</select>
+
+					Tons: <select required name='tonnage' id='tonnage' size='1' onchange="fetchMechList();">
+						<option value="20">20</option>
+						<option value="25">25</option>
+						<option value="30">30</option>
+						<option value="35">35</option>
+						<option value="40">40</option>
+						<option value="45">45</option>
+						<option value="50">50</option>
+						<option value="55">55</option>
+						<option value="60">60</option>
+						<option value="65">65</option>
+						<option value="70">70</option>
+						<option value="75">75</option>
+						<option value="80">80</option>
+						<option value="85">85</option>
+						<option value="90">90</option>
+						<option value="95">95</option>
+						<option value="100">100</option>
+					</select>
+
+					Filter: <input required type="text" id="NameFilter" name="NameFilter" onchange="fetchMechList();">
+				</td>
+			</tr>
+			<tr>
+				<td nowrap class="datalabel" style='text-align:left;' colspan='4'>
+					<!-- will be filled by 'getMechList();' -->
+					<select required name='units' id='units' size='1' onchange="mechSelected();" style="width:300px"></select>
+				</td>
+			</tr>
+			<tr>
+				<td nowrap class="datalabel" style='text-align:left;' colspan='4'>
+					<hr>
+					<input required type="hidden" id="TP" name="TP">
+					<input required type="hidden" id="SZ" name="SZ">
+					<input required type="hidden" id="TMM" name="TMM">
+					<input required type="hidden" id="MV" name="MV">
+					<input required type="hidden" id="ROLE" name="ROLE">
+					<input required type="hidden" id="DMGS" name="DMGS">
+					<input required type="hidden" id="DMGM" name="DMGM">
+					<input required type="hidden" id="DMGL" name="DMGL">
+					<input required type="hidden" id="OV" name="OV">
+					<input required type="hidden" id="A" name="A">
+					<input required type="hidden" id="S" name="S">
+					<input required type="hidden" id="PVA" name="PVA">
+					<input required type="hidden" id="SPCL" name="SPCL">
+					<input required type="hidden" id="PI" name="PI">
+				</td>
+			</tr>
 			<tr>
 				<td nowrap class="datalabel" style='text-align:left;'>
-					<div>
-						<table cellspacing=5 cellpadding=5>
-							<tr>
-								<td nowrap class="datalabel" style='text-align:left;' width='50%' colspan='4'>
-									Tech: <select required name='tech' id='tech' size='1' onchange="fetchMechList();">
-										<option value="2">Clan</option>
-										<option value="1">IS</option>
-									</select>
-
-									Tons: <select required name='tonnage' id='tonnage' size='1' onchange="fetchMechList();">
-										<option value="20">20</option>
-										<option value="25">25</option>
-										<option value="30">30</option>
-										<option value="35">35</option>
-										<option value="40">40</option>
-										<option value="45">45</option>
-										<option value="50">50</option>
-										<option value="55">55</option>
-										<option value="60">60</option>
-										<option value="65">65</option>
-										<option value="70">70</option>
-										<option value="75">75</option>
-										<option value="80">80</option>
-										<option value="85">85</option>
-										<option value="90">90</option>
-										<option value="95">95</option>
-										<option value="100">100</option>
-									</select>
-
-									Filter: <input required type="text" id="NameFilter" name="NameFilter" onchange="fetchMechList();" style="width:100px">
-								</td>
-							</tr>
-							<tr>
-								<td nowrap class="datalabel" style='text-align:left;' width='50%' colspan='4'>
-									<!-- will be filled by 'getMechList();' -->
-									<select required name='units' id='units' size='1' onchange="mechSelected();" style="width:300px"></select>
-								</td>
-							</tr>
-							<tr>
-								<td nowrap class="datalabel" style='text-align:left;' width='100%' colspan='4'>
-									<hr>
-									<input required type="hidden" id="TP" name="TP">
-									<input required type="hidden" id="SZ" name="SZ">
-									<input required type="hidden" id="TMM" name="TMM">
-									<input required type="hidden" id="MV" name="MV">
-									<input required type="hidden" id="ROLE" name="ROLE">
-									<input required type="hidden" id="DMGS" name="DMGS">
-									<input required type="hidden" id="DMGM" name="DMGM">
-									<input required type="hidden" id="DMGL" name="DMGL">
-									<input required type="hidden" id="OV" name="OV">
-									<input required type="hidden" id="A" name="A">
-									<input required type="hidden" id="S" name="S">
-									<input required type="hidden" id="PVA" name="PVA">
-									<input required type="hidden" id="SPCL" name="SPCL">
-									<input required type="hidden" id="PI" name="PI">
-								</td>
-							</tr>
-							<tr>
-								<td nowrap class="datalabel" style='text-align:left;' width='15%'>
-									#: <input required type="text" id="MNU" name="MNU" style='width:60px'>
-								</td>
-								<td nowrap class="datalabel" style='text-align:left;' width='10%'>
-									<img id="newpilotimage" src="" width="50px">
-								</td>
-								<td nowrap class="datalabel" style='text-align:left;' width='40%'>
-									Pilot name: <input type="text" required id="PN" name="PN" style='width:120px'>
-								</td>
-								<td nowrap class="datalabel" style='text-align:left;' width='35%'>
-									Skill: <select required name='SKILL' id='SKILL' size='1'>
-										<option value="0">0</option>
-										<option value="1">1</option>
-										<option value="2">2</option>
-										<option value="3" selected>3</option>
-										<option value="4">4</option>
-										<option value="5">5</option>
-									</select>
-								</td>
-							</tr>
-							<tr>
-								<td nowrap class="datalabel" style='text-align:left;' width='50%' colspan='3'>
-									<br>Add to unit: <select required name='UNITID' id='UNITID' size='1' style='width:200px;'>
+					#: <input required type="text" id="MNU" name="MNU" style='width:60px'>
+				</td>
+				<td nowrap class="datalabel" style='text-align:left;'>
+					<img id="newpilotimage" src="" width="50px">
+				</td>
+				<td nowrap class="datalabel" style='text-align:left;'>
+					Pilot name: <input type="text" required id="PN" name="PN" style='width:120px'>
+				</td>
+				<td nowrap class="datalabel" style='text-align:left;'>
+					Skill: <select required name='SKILL' id='SKILL' size='1'>
+						<option value="0">0</option>
+						<option value="1">1</option>
+						<option value="2">2</option>
+						<option value="3" selected>3</option>
+						<option value="4">4</option>
+						<option value="5">5</option>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<td nowrap class="datalabel" style='text-align:left;' colspan='3'>Add to unit: <select required name='UNITID' id='UNITID' size='1' style='width:200px;'>
 <?php
 	$sql_asc_playersunits = "SELECT SQL_NO_CACHE * FROM asc_unit where playerid=".$pid;
 	$result_asc_playersunits = mysqli_query($conn, $sql_asc_playersunits);
@@ -526,46 +536,10 @@ session_start();
 		}
 	}
 ?>
-									</select>
-								</td>
-								<td>
-									<a href='#' onClick='storeNewMech();'><i class='fa fa-fw fa-plus-square'></i></a>
-								</td>
-							</tr>
-						</table>
-					</div>
+					</select>
 				</td>
-				<td nowrap style='text-align:left;vertical-align:top'>
-					<div>
-						<table width='100%' cellspacing=5 cellpadding=5>
-							<tr>
-								<td nowrap class="datalabel" style='text-align:left;' width='50%'>
-									<br>Add to unit:<br>
-
-									<select required name='UNITID' id='UNITID' size='1' style='width:200px;'>
-<?php
-	$sql_asc_playersunits = "SELECT SQL_NO_CACHE * FROM asc_unit where playerid=".$pid;
-	$result_asc_playersunits = mysqli_query($conn, $sql_asc_playersunits);
-	if (mysqli_num_rows($result_asc_playersunits) > 0) {
-		while($rowUnits = mysqli_fetch_assoc($result_asc_playersunits)) {
-			$unitid = $rowUnits['unitid'];
-			$forcename = $rowUnits['forcename'];
-			if ($paramunitid == $unitid) {
-				echo "										<option value='".$unitid."' selected>".$forcename."</option>\n";
-			} else {
-				echo "										<option value='".$unitid."'>".$forcename."</option>\n";
-			}
-		}
-	}
-?>
-									</select>
-								</td>
-							</tr>
-						</table>
-					</div>
-				</td>
-				<td valign="top">
-					
+				<td align="right">
+					<a href='#' onClick='storeNewMech();'><i class='fa fa-fw fa-plus-square'></i></a>
 				</td>
 			</tr>
 		</table>
