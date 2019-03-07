@@ -28,6 +28,7 @@ session_start();
 			$mechnametrimmed = str_replace(' ', '', trim($mechname));
 			if (strpos($mechnametrimmed, $imagenametrimmed) !== false) {
 				$image = $imagenametrimmed;
+				echo $imagenametrimmed." | ".$mechnametrimmed;
 				break;
 			}
 		}
