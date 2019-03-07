@@ -507,6 +507,27 @@ session_start();
 									</select>
 								</td>
 							</tr>
+							<tr>
+								<td nowrap class="datalabel" style='text-align:left;' width='50%' colspan='4'>
+									<br>Add to unit: <select required name='UNITID' id='UNITID' size='1' style='width:200px;'>
+<?php
+	$sql_asc_playersunits = "SELECT SQL_NO_CACHE * FROM asc_unit where playerid=".$pid;
+	$result_asc_playersunits = mysqli_query($conn, $sql_asc_playersunits);
+	if (mysqli_num_rows($result_asc_playersunits) > 0) {
+		while($rowUnits = mysqli_fetch_assoc($result_asc_playersunits)) {
+			$unitid = $rowUnits['unitid'];
+			$forcename = $rowUnits['forcename'];
+			if ($paramunitid == $unitid) {
+				echo "										<option value='".$unitid."' selected>".$forcename."</option>\n";
+			} else {
+				echo "										<option value='".$unitid."'>".$forcename."</option>\n";
+			}
+		}
+	}
+?>
+									</select>
+								</td>
+							</tr>
 						</table>
 					</div>
 				</td>
