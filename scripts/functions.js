@@ -55,6 +55,9 @@ function readCircles(index, a_max, s_max) {
 	if (e == 2) {
 		mechstatus = 4;
 	}
+	if (e == 1 && h == 0) {
+		h = 1;
+	}
 
 	var url="./save.php?index="+index+"&h="+h+"&a="+a+"&s="+s+"&e="+e+"&fc="+fc+"&mp="+mp+"&w="+w;
 	window.frames['saveframe'].location.replace(url);
