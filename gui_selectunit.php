@@ -117,6 +117,7 @@ session_start();
 <?php
 
 	$addMechToUnitLinkArray = array();
+	$assignMechToUnitLinkArray = array();
 	$mechsInAllUnits = array();
 
 	//echo "		<td nowrap style='width:170px;height:70px;' class='mechselect_button_active'>".$pname."</td>";
@@ -132,6 +133,7 @@ session_start();
 			$forcenameSelected = $rowUnit['forcename'];
 
 			array_push($addMechToUnitLinkArray, "gui_createunit.php?unitid=".$unitidSelected."&unitname=".$forcenameSelected);
+			array_push($assignMechToUnitLinkArray, "gui_assignunit.php?unitid=".$unitidSelected."&unitname=".$forcenameSelected);
 
 			$sql_asc_checkunitassignments = "SELECT SQL_NO_CACHE * FROM asc_assign where unitid=".$unitidSelected.";";
 			$result_asc_checkunitassignments = mysqli_query($conn, $sql_asc_checkunitassignments);
@@ -198,16 +200,16 @@ session_start();
 	echo "		<tr>\n";
 //	echo "			<td></td>\n";
 	echo "			<td nowrap style='text-align:center;width:200px;height:30px;background-color:#transparent;'>\n";
-	echo "				<a href='".$addMechToUnitLinkArray[0]."'><i class='fa fa-fw fa-plus-square'></i></a>\n";
+	echo "				<a href='".$assignMechToUnitLinkArray[0]."'><i class='fa fa-fw fa-plus-square'></i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\n";
 	echo "				<a href='".$addMechToUnitLinkArray[0]."'><i class='fas fa-asterisk'></i></a>\n";
 	echo "			</td>\n";
 	echo "			<td nowrap style='text-align:center;width:200px;height:30px;background-color:#transparent;'>\n";
-	echo "				<a href='".$addMechToUnitLinkArray[1]."'><i class='fa fa-fw fa-plus-square'></i></a>\n";
-	echo "				<a href='".$addMechToUnitLinkArray[0]."'><i class='fas fa-asterisk'></i></a>\n";
+	echo "				<a href='".$assignMechToUnitLinkArray[1]."'><i class='fa fa-fw fa-plus-square'></i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\n";
+	echo "				<a href='".$addMechToUnitLinkArray[1]."'><i class='fas fa-asterisk'></i></a>\n";
 	echo "			</td>\n";
 	echo "			<td nowrap style='text-align:center;width:200px;height:30px;background-color:#transparent;'>\n";
-	echo "				<a href='".$addMechToUnitLinkArray[2]."'><i class='fa fa-fw fa-plus-square'></i></a>\n";
-	echo "				<a href='".$addMechToUnitLinkArray[0]."'><i class='fas fa-asterisk'></i></a>\n";
+	echo "				<a href='".$assignMechToUnitLinkArray[2]."'><i class='fa fa-fw fa-plus-square'></i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\n";
+	echo "				<a href='".$addMechToUnitLinkArray[2]."'><i class='fas fa-asterisk'></i></a>\n";
 	echo "			</td>\n";
 	echo "		</tr>\n";
 	echo "		<tr>\n";
