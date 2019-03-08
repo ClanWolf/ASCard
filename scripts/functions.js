@@ -14,7 +14,7 @@ function setSize(name, value) {
 	});
 }
 
-function readCircles(index) {
+function readCircles(index, a_max, s_max) {
 	playTapSound();
 
 	var na = "";
