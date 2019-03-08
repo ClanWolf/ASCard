@@ -246,6 +246,12 @@ session_start();
 
 				<div class="dataarea">
 					<table width="100%">
+
+						<?php
+							$array_A_MAX[$chosenMechIndex]
+							$array_S_MAX[$chosenMechIndex]
+						?>
+
 						<tr>
 							<td nowrap class="datalabel" width="5%" style="text-align: right;">ENGN:</td>
 							<td nowrap width="55%" style="text-align: left;">
