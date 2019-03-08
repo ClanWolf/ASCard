@@ -3,6 +3,8 @@ var fontsizeValue = 22;
 var fontsizeCircle = 24;
 var rolling = 0;
 
+var mechstatus = 1; // 1: green (untouched) | 2: yellow (hit) | 3: red (crit) | 4: black (wrecked)
+
 // http://goldfirestudios.com/blog/104/howler.js-Modern-Web-Audio-Javascript-Library
 var sound_dice = null;
 var sound_key = null;
@@ -40,6 +42,20 @@ function readCircles(index, a_max, s_max) {
 			if (na.substring(0, 5) == "CD_W_"  && el1.checked) { w++;  }
 		}
 	});
+	
+	if (a > 1) {
+		mechstatus = 2;
+	}
+	if (s > 1) {
+		mechstatus = 3;
+	}
+	if (s == s_max) {
+		mechstatus = 4;
+	}
+	if (e == 2) {
+		mechstatus = 4;
+	}
+
 	var url="./save.php?index="+index+"&h="+h+"&a="+a+"&s="+s+"&e="+e+"&fc="+fc+"&mp="+mp+"&w="+w;
 	window.frames['saveframe'].location.replace(url);
 }
