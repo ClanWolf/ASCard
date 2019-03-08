@@ -59,6 +59,15 @@ function readCircles(index, a_max, s_max) {
 		h = 1;
 	}
 
+	// ...
+	
+	
+	
+	
+	if (mechstatus == 4) {
+		var wallpaperWrecked = "./images/body-bg_wrecked.png";
+		document.body.style.backgroundImage = "url('" + wallpaperWrecked + "')";
+	}
 	var url="./save.php?index="+index+"&h="+h+"&a="+a+"&s="+s+"&e="+e+"&fc="+fc+"&mp="+mp+"&w="+w;
 	window.frames['saveframe'].location.replace(url);
 }
