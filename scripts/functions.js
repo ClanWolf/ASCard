@@ -199,4 +199,4 @@ function playTapSound() {
 function updateSite(event) {
 	window.location.reload();
 }
-window.applicationCache.addEventListener('updateready', updateSite, false);
+// window.applicationCache.addEventListener('updateready', updateSite, false);
