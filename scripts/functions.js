@@ -212,7 +212,7 @@ function playTapSound() {
 	sound_key.play();
 }
 
-function updateSite(event) {
-	window.location.reload();
-}
+// function updateSite(event) {
+// 	window.location.reload();
+// }
 // window.applicationCache.addEventListener('updateready', updateSite, false);
