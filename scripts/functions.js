@@ -52,9 +52,9 @@ function readCircles(index, a_max, s_max) {
 	if (s == s_max) {
 		mechstatus = 4;
 	}
-	if (e == 2) {
-		mechstatus = 4;
-	}
+//	if (e == 2) {
+//		mechstatus = 4;
+//	}
 	if (e == 1 && h == 0) {
 		h = 1;
 	}
