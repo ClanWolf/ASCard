@@ -327,7 +327,7 @@ input[type='checkbox'].bigcheck {
 	position: relative;
 	left: -999em;
 	opacity: 0;
-	z-index: -10000;<
+	z-index: -10000;
 }
 input[type='checkbox'].bigcheck + span.bigcheck-target:after {
 	content: "\f10c";
@@ -354,6 +354,13 @@ input[type='checkbox'].bigcheck:checked + span.bigcheck-target:after {
 	margin-right: 3px;
 }
 .datalabel {
+	font-family: 'Pathway Gothic One', sans-serif;
+	vertical-align: middle;
+	color: #999;
+	font-size: 100%;
+	padding-right: 5px;
+}
+.datalabel_thin {
 	font-family: 'Pathway Gothic One', sans-serif;
 	vertical-align: middle;
 	color: #999;

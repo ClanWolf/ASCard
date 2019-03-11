@@ -1,9 +1,14 @@
 var fontsizeLabel = 18;
+var fontsizeLabelthin = 10;
 var fontsizeValue = 22;
 var fontsizeCircle = 24;
 var rolling = 0;
 
 var mechstatus = 1; // 1: green (untouched) | 2: yellow (hit) | 3: red (crit) | 4: black (wrecked)
+var enginehit = 0;
+var updatedshortvalue = 0;
+var updatedmediumvalue = 2;
+var updatedlongvalue = 4;
 
 // http://goldfirestudios.com/blog/104/howler.js-Modern-Web-Audio-Javascript-Library
 var sound_dice = null;
@@ -43,31 +48,30 @@ function readCircles(index, a_max, s_max) {
 		}
 	});
 	
-	if (a > 1) {
-		mechstatus = 2;
+	if (e == 1) {
+		if (enginehit == 0) {
+			enginehit = 1;
+			h = h + 1;
+		}
+	} else {
+			if (enginehit == 1) {
+			enginehit = 0;
+			h = h - 1;
+		}
 	}
-	if (s > 1) {
-		mechstatus = 3;
+	if (h > 4) {
+		h = 4;
 	}
-	if (s == s_max) {
-		mechstatus = 4;
+	if (h < 0) {
+		h = 0;
 	}
-//	if (e == 2) {
-//		mechstatus = 4;
-//	}
 	if (e == 1 && h == 0) {
 		h = 1;
 	}
-
-	// ...
-	
-	
-	
-	
-	if (mechstatus == 4) {
-		var wallpaperWrecked = "./images/body-bg_wrecked.png";
-		document.body.style.backgroundImage = "url('" + wallpaperWrecked + "')";
+	if (e == 2) {
+		h = 4;
 	}
+	setCircles(h, a, s, e, fc, mp, w);
 	var url="./save.php?index="+index+"&h="+h+"&a="+a+"&s="+s+"&e="+e+"&fc="+fc+"&mp="+mp+"&w="+w;
 	window.frames['saveframe'].location.replace(url);
 }
@@ -83,7 +87,15 @@ function setCircles(h, a, s, e, fc, mp, w) {
 	var mp_c = 0;
 	var w_c = 0;
 
+	mechstatus = 1;
+	updatedshortvalue = 0;
+	updatedmediumvalue = 2;
+	updatedlongvalue = 4;
+
 	var list = document.getElementsByClassName("bigcheck");
+	[].forEach.call(list, function (el1) {
+		el1.checked = false;
+	});
 	[].forEach.call(list, function (el1) {
 		na1 = el1.name;
 		if (typeof na1 != 'undefined') {
@@ -96,51 +108,255 @@ function setCircles(h, a, s, e, fc, mp, w) {
 			if (na1.substring(0, 5) == "CD_W_")  { w_c++;  if (w_c<=w)   { el1.checked = true; }}
 		}
 	});
+	if (e == 0) {
+    	document.getElementById("ht_field").style.color ="#000000";
+	} else if (e == 1) {
+		enginehit = 1;
+		document.getElementById("ht_field").style.color ="#00ff00";
+	} else if (e == 2) {
+		enginehit = 1;
+		document.getElementById("ht_field").style.color ="#ff0000";
+	}
+	if (h == 0) {
+		updatedshortvalue = 0;
+		updatedmediumvalue = 2;
+		updatedlongvalue = 4;
+	} else if (h == 1) {
+		document.getElementById("ht_field").style.color ="#a49708";
+		updatedshortvalue = updatedshortvalue + 1;
+		updatedmediumvalue = updatedmediumvalue + 1;
+		updatedlongvalue = updatedlongvalue + 1;
+	} else if (h == 2) {
+		document.getElementById("ht_field").style.color ="#da8e25";
+		updatedshortvalue = updatedshortvalue + 2;
+		updatedmediumvalue = updatedmediumvalue + 2;
+		updatedlongvalue = updatedlongvalue + 2;
+	} else if (h == 3) {
+		document.getElementById("ht_field").style.color ="#ba4112";
+		updatedshortvalue = updatedshortvalue + 3;
+		updatedmediumvalue = updatedmediumvalue + 3;
+		updatedlongvalue = updatedlongvalue + 3;
+	} else if (h == 4) {
+		document.getElementById("ht_field").style.color ="#ff0000";
+		updatedshortvalue = updatedshortvalue + 4;
+		updatedmediumvalue = updatedmediumvalue + 4;
+		updatedlongvalue = updatedlongvalue + 4;
+	}
+	if (fc == 0) {
+		//
+	} else if (fc == 1) {
+		updatedshortvalue = updatedshortvalue + 2;
+		updatedmediumvalue = updatedmediumvalue + 2;
+		updatedlongvalue = updatedlongvalue + 2;
+	} else if (fc == 2) {
+		updatedshortvalue = updatedshortvalue + 4;
+		updatedmediumvalue = updatedmediumvalue + 4;
+		updatedlongvalue = updatedlongvalue + 4;
+	} else if (fc == 3) {
+		updatedshortvalue = updatedshortvalue + 6;
+		updatedmediumvalue = updatedmediumvalue + 6;
+		updatedlongvalue = updatedlongvalue + 6;
+	} else if (fc == 4) {
+		updatedshortvalue = updatedshortvalue + 8;
+		updatedmediumvalue = updatedmediumvalue + 8;
+		updatedlongvalue = updatedlongvalue + 8;
+ 	}
+
+	var updatedshortdamage = shortdamage;
+	var updatedmediumdamage = mediumdamage;
+	var updatedlongdamage = longdamage;
+
+	if (w == 0) {
+		document.getElementById("dmgshort_s").style.color ="#999";
+		document.getElementById("dmgmedium_s").style.color ="#999";
+		document.getElementById("dmglong_s").style.color ="#999";
+	} else if (w == 1) {
+		document.getElementById("dmgshort_s").style.color ="#da8e25";
+		document.getElementById("dmgmedium_s").style.color ="#da8e25";
+		document.getElementById("dmglong_s").style.color ="#da8e25";
+		updatedshortdamage = updatedshortdamage - 1;
+		updatedmediumdamage = updatedmediumdamage - 1;
+		updatedlongdamage = updatedlongdamage - 1;
+	} else if (w == 2) {
+		document.getElementById("dmgshort_s").style.color ="#da8e25";
+		document.getElementById("dmgmedium_s").style.color ="#da8e25";
+		document.getElementById("dmglong_s").style.color ="#da8e25";
+		updatedshortdamage = updatedshortdamage - 2;
+		updatedmediumdamage = updatedmediumdamage - 2;
+		updatedlongdamage = updatedlongdamage - 2;
+	} else if (w == 3) {
+		document.getElementById("dmgshort_s").style.color ="#da8e25";
+		document.getElementById("dmgmedium_s").style.color ="#da8e25";
+		document.getElementById("dmglong_s").style.color ="#da8e25";
+		updatedshortdamage = updatedshortdamage - 3;
+		updatedmediumdamage = updatedmediumdamage - 3;
+ 		updatedlongdamage = updatedlongdamage - 3;
+	} else if (w == 4) {
+		document.getElementById("dmgshort_s").style.color ="#da8e25";
+		document.getElementById("dmgmedium_s").style.color ="#da8e25";
+		document.getElementById("dmglong_s").style.color ="#da8e25";
+		updatedshortdamage = updatedshortdamage - 4;
+		updatedmediumdamage = updatedmediumdamage - 4;
+		updatedlongdamage = updatedlongdamage - 4;
+	}
+	if (updatedshortdamage < 0) updatedshortdamage = 0;
+	if (updatedmediumdamage < 0) updatedmediumdamage = 0;
+	if (updatedlongdamage < 0) updatedlongdamage = 0;
+
+	document.getElementById("dmgshort_s").innerHTML = updatedshortdamage;
+	document.getElementById("dmgmedium_s").innerHTML = updatedmediumdamage;
+	document.getElementById("dmglong_s").innerHTML = updatedlongdamage;
+
+	var updatedmovementpointsground = movementpointsground;
+	var updatemovementpointsjump = movementpointsjump;
+	if (mp == 0) {
+		document.getElementById("mv_points").style.color = "#ccc";
+		document.getElementById("TMM").style.color = "#ccc";
+	} else if (mp == 1) {
+		document.getElementById("mv_points").style.color ="#a49708";
+		document.getElementById("TMM").style.color = "#a49708";
+		updatedmovementpointsground = Math.ceil(updatedmovementpointsground / 2);
+		updatemovementpointsjump = Math.ceil(updatemovementpointsjump / 2);
+	} else if (mp == 2) {
+		document.getElementById("mv_points").style.color ="#a49708";
+		document.getElementById("TMM").style.color = "#a49708";
+		updatedmovementpointsground = Math.ceil(updatedmovementpointsground / 4);
+		updatemovementpointsjump = Math.ceil(updatemovementpointsjump / 4);
+	} else if (mp == 3) {
+		document.getElementById("mv_points").style.color ="#a49708";
+		document.getElementById("TMM").style.color = "#a49708";
+		updatedmovementpointsground = Math.ceil(updatedmovementpointsground / 8);
+		updatemovementpointsjump = Math.ceil(updatemovementpointsjump / 8);
+	} else if (mp == 4) {
+		document.getElementById("mv_points").style.color ="#a49708";
+		document.getElementById("TMM").style.color = "#a49708";
+		updatedmovementpointsground = Math.ceil(updatedmovementpointsground / 16);
+		updatemovementpointsjump = Math.ceil(updatemovementpointsjump / 16);
+	}
+	var mvstring = updatedmovementpointsground + "&rdquo;";
+	if (updatemovementpointsjump > 0) {
+		mvstring = mvstring + "/" + updatemovementpointsjump + "&rdquo;j";
+	}
+	document.getElementById("mv_points").innerHTML = mvstring;
+
+	// recalculate the TMM according to changed movement
+	var tmpTMM = 0;
+	if(updatedmovementpointsground < 5) {
+		tmpTMM = 0;
+	} else if(updatedmovementpointsground < 9 ) {
+		tmpTMM = 1;
+	} else if(updatedmovementpointsground < 13 ) {
+		tmpTMM = 2;
+	} else if(updatedmovementpointsground < 19 ) {
+		tmpTMM = 3;
+	} else if(updatedmovementpointsground < 35 ) {
+		tmpTMM = 4;
+	} else {
+		tmpTMM = 5;
+	}
+	document.getElementById("TMM").innerHTML = tmpTMM;
+
+	if (updatedshortvalue == 0) {
+		document.getElementById("minrollshort").style.color ="#999";
+		document.getElementById("minrollmedium").style.color ="#999";
+		document.getElementById("minrolllong").style.color ="#999";
+	} else if (updatedshortvalue > 0) {
+		document.getElementById("minrollshort").style.color ="#a49708";
+		document.getElementById("minrollmedium").style.color ="#a49708";
+		document.getElementById("minrolllong").style.color ="#a49708";
+	}
+	document.getElementById("minrollshort").innerHTML="S (+" + updatedshortvalue + ")";
+	document.getElementById("minrollmedium").innerHTML="M (+" + updatedmediumvalue + ")";
+	document.getElementById("minrolllong").innerHTML="L (+" + updatedlongvalue + ")";
+
+	if (a > 1) {
+		mechstatus = 2;
+	}
+	if (s > 1) {
+		mechstatus = 3;
+	}
+	if (s == maximalstructurepoints) {
+		mechstatus = 4;
+	}
+	if (e == 2) {
+		mechstatus = 4;
+	}
+
+	if (mechstatus == 4) {
+		// Mech destroyed
+		var wallpaperWrecked = "./images/body-bg_wrecked2.jpg";
+		document.body.style.backgroundImage = "url('" + wallpaperWrecked + "')";
+		// alert ("Mech destroyed!");
+	} else {
+		var wallpaperNorm = "./images/body-bg_2.png";
+		document.body.style.backgroundImage = "url('" + wallpaperNorm + "')";
+	}
 }
 
 function textSize(dec) {
 	fontsizeLabel += (dec==1) ? 1 : (-1);
+	fontsizeLabelthin += (dec==1) ? 1 : (-1);
 	fontsizeValue += (dec==1) ? 1 : (-1);
 	fontsizeCircle += (dec==1) ? 1 : (-1);
 
+	if (fontsizeLabelthin < 10) {
+		fontsizeLabel = 18;
+		fontsizeLabelthin = 10;
+		fontsizeValue = 22;
+		fontsizeCircle = 24;
+	}
 	if (fontsizeLabel < 18) {
 		fontsizeLabel = 18;
+		fontsizeLabelthin = 10;
 		fontsizeValue = 22;
 		fontsizeCircle = 24;
 	}
 	if (fontsizeValue < 22) {
 		fontsizeLabel = 18;
+		fontsizeLabelthin = 10;
 		fontsizeValue = 22;
 		fontsizeCircle = 24;
 	}
 	if (fontsizeCircle < 24) {
 		fontsizeLabel = 18;
+		fontsizeLabelthin = 10;
 		fontsizeValue = 22;
 		fontsizeCircle = 24;
 	}
 
+	if (fontsizeLabelthin > 73) {
+		fontsizeLabel = 81;
+		fontsizeLabelthin = 73;
+		fontsizeValue = 85;
+		fontsizeCircle = 87;
+	}
 	if (fontsizeLabel > 81) {
 		fontsizeLabel = 81;
+		fontsizeLabelthin = 73;
 		fontsizeValue = 85;
 		fontsizeCircle = 87;
 	}
 	if (fontsizeValue > 85) {
 		fontsizeLabel = 81;
+		fontsizeLabelthin = 73;
 		fontsizeValue = 85;
 		fontsizeCircle = 87;
 	}
 	if (fontsizeCircle > 87) {
 		fontsizeLabel = 81;
+		fontsizeLabelthin = 73;
 		fontsizeValue = 85;
 		fontsizeCircle = 87;
 	}
 
 	setSize("datalabel", fontsizeLabel);
+	setSize("datalabel_thin", fontsizeLabelthin);
 	setSize("datavalue", fontsizeValue);
 	setSize("datavalue_thin", fontsizeLabel);
 	setSize("bigcheck-target", fontsizeCircle);
 
 	setCookie("fontsizeLabel", fontsizeLabel, 365);
+	setCookie("fontsizeLabelthin", fontsizeLabelthin, 365);
 	setCookie("fontsizeValue", fontsizeValue, 365);
 	setCookie("fontsizeCircle", fontsizeCircle, 365);
 	setCookie("savedBefore", "true", 365);
@@ -149,9 +365,11 @@ function textSize(dec) {
 $(document).ready(function() {
 	if (getCookie("savedBefore") === "true") {
 		fontsizeLabel = parseInt(getCookie("fontsizeLabel"));
+		fontsizeLabelthin = parseInt(getCookie("fontsizeLabelthin"));
 		fontsizeValue = parseInt(getCookie("fontsizeValue"));
 		fontsizeCircle = parseInt(getCookie("fontsizeCircle"));
 		setSize("datalabel", fontsizeLabel);
+		setSize("datalabel_thin", fontsizeLabelthin);
 		setSize("datavalue", fontsizeValue);
 		setSize("datavalue_thin", fontsizeLabel);
 		setSize("bigcheck-target", fontsizeCircle);
