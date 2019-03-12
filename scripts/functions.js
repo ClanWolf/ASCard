@@ -25,6 +25,7 @@ function readCircles(index, a_max, s_max) {
 	playTapSound();
 
 	var na = "";
+	var mechstatus = 1;
 
 	var h = 0;
 	var a = 0;
@@ -70,6 +71,18 @@ function readCircles(index, a_max, s_max) {
 	}
 	if (e == 2) {
 		h = 4;
+	}
+	if (a > 1) {
+		mechstatus = 2;
+	}
+	if (s > 1) {
+		mechstatus = 3;
+	}
+	if (s == maximalstructurepoints) {
+		mechstatus = 4;
+	}
+	if (e == 2) {
+		mechstatus = 4;
 	}
 	setCircles(h, a, s, e, fc, mp, w);
 	var url="./save.php?index="+index+"&h="+h+"&a="+a+"&s="+s+"&e="+e+"&fc="+fc+"&mp="+mp+"&w="+w;
