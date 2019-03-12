@@ -25,7 +25,6 @@ function readCircles(index, a_max, s_max) {
 	playTapSound();
 
 	var na = "";
-	var mechstatus = 1;
 
 	var h = 0;
 	var a = 0;
@@ -34,6 +33,8 @@ function readCircles(index, a_max, s_max) {
 	var fc = 0;
 	var mp = 0;
 	var w = 0;
+
+	var mechstatus = 1;
 
 	var list = document.getElementsByClassName("bigcheck");
 	[].forEach.call(list, function (el1) {
