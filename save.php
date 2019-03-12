@@ -29,8 +29,8 @@
 		echo $mstat;
 		echo "<br>";
 
-		$sql = "UPDATE asc_mechstatus SET heat=".$h.",armor=".$a.",structure=".$s.",crit_engine=".$e.",crit_fc=".$fc.",crit_mp=".$mp.",crit_weapons=".$w." WHERE mechid=".$index;
-		echo "UPDATE asc_mechstatus<br>SET heat=".$h.",armor=".$a.",structure=".$s.",crit_engine=".$e.",crit_fc=".$fc.",crit_mp=".$mp.",crit_weapons=".$w." WHERE mechid=".$index;
+		$sql = "UPDATE asc_mechstatus SET heat=".$h.",armor=".$a.",structure=".$s.",crit_engine=".$e.",crit_fc=".$fc.",crit_mp=".$mp.",crit_weapons=".$w.",mech_statusimageurl=".$mstat." WHERE mechid=".$index;
+		echo "UPDATE asc_mechstatus<br>SET heat=".$h.",armor=".$a.",structure=".$s.",crit_engine=".$e.",crit_fc=".$fc.",crit_mp=".$mp.",crit_weapons=".$w.",mech_statusimageurl=".$mstat." WHERE mechid=".$index;
 
 		if (mysqli_query($conn, $sql)) {
 			echo "<br>";
