@@ -35,6 +35,7 @@ function readCircles(index, a_max, s_max) {
 	var w = 0;
 
 	var mechstatus = 1;
+	var mechstatusimage = "images/DD_01.png";
 
 	var list = document.getElementsByClassName("bigcheck");
 	[].forEach.call(list, function (el1) {
@@ -75,18 +76,22 @@ function readCircles(index, a_max, s_max) {
 	}
 	if (a > 1) {
 		mechstatus = 2;
+		mechstatusimage = "images/DD_02.png";
 	}
 	if (s > 1) {
 		mechstatus = 3;
+		mechstatusimage = "images/DD_03.png";
 	}
 	if (s == maximalstructurepoints) {
 		mechstatus = 4;
+		mechstatusimage = "images/DD_04.png";
 	}
 	if (e == 2) {
 		mechstatus = 4;
+		mechstatusimage = "images/DD_04.png";
 	}
 	setCircles(h, a, s, e, fc, mp, w);
-	var url="./save.php?index="+index+"&h="+h+"&a="+a+"&s="+s+"&e="+e+"&fc="+fc+"&mp="+mp+"&w="+w+"&mstat="+mechstatus;
+	var url="./save.php?index="+index+"&h="+h+"&a="+a+"&s="+s+"&e="+e+"&fc="+fc+"&mp="+mp+"&w="+w+"&mstat="+mechstatusimage;
 	window.frames['saveframe'].location.replace(url);
 }
 
