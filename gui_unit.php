@@ -76,6 +76,8 @@ session_start();
 		echo "		var movementpointsjump = 0;";
 	}
 	echo "	var maximalstructurepoints = ".$array_S_MAX[$chosenMechIndex].";";
+	echo "	var originalmechimage = '".$array_MECH_IMG_URL[$chosenMechIndex]."';";
+	echo "	var deadmechimage = 'images/skull.png';";
 	echo "</script>";
 ?>
 
