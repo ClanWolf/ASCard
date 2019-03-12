@@ -11,6 +11,7 @@
 	$fc    = isset($_GET["fc"]) ? $_GET["fc"] : "";
 	$mp    = isset($_GET["mp"]) ? $_GET["mp"] : "";
 	$w     = isset($_GET["w"]) ? $_GET["w"] : "";
+	$mstat = isset($_GET("mstat"]) ? $_GET["mstat" : "";
 
 	echo "<p style='font-family:Arial,sans-serif;font-size:14px;color:yellow;'>";
 
@@ -25,6 +26,7 @@
 		echo $fc;
 		echo $mp;
 		echo $w;
+		echo $mstat;
 		echo "<br>";
 
 		$sql = "UPDATE asc_mechstatus SET heat=".$h.",armor=".$a.",structure=".$s.",crit_engine=".$e.",crit_fc=".$fc.",crit_mp=".$mp.",crit_weapons=".$w." WHERE mechid=".$index;
