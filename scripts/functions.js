@@ -286,10 +286,13 @@ function setCircles(h, a, s, e, fc, mp, w) {
 		// Mech destroyed
 		var wallpaperWrecked = "./images/body-bg_wrecked2.jpg";
 		document.body.style.backgroundImage = "url('" + wallpaperWrecked + "')";
-		// alert ("Mech destroyed!");
+
+		// deadmechimage
 	} else {
 		var wallpaperNorm = "./images/body-bg_2.png";
 		document.body.style.backgroundImage = "url('" + wallpaperNorm + "')";
+
+		// originalmechimage
 	}
 }
 
