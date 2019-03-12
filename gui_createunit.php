@@ -373,6 +373,11 @@ session_start();
 			MODEL = MODEL.replace(/"/g,"&quot;");
 			MODEL = MODEL.replace(/'/g,"&apos;");
 
+			if ("<<< Select Mech >>>" == MODEL) {
+				alert("Select a Mech Model!");
+				return;
+			}
+
 			var MVG = 0;
 			var MVJ = 0;
 

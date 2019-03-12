@@ -74,11 +74,19 @@ function readCircles(index, a_max, s_max) {
 	if (e == 2) {
 		h = 4;
 	}
-	if (a > 1) {
+	if (s == 1 && a < maximalarmorpoints) {
+		s = 0;
+		a = a + 1;
+	}
+	if (s > 0 && a < maximalarmorpoints) {
+		s = s - 1;
+		a = a + 1;
+	}
+	if (a > 0) {
 		mechstatus = 2;
 		mechstatusimage = "images/DD_02.png";
 	}
-	if (s > 1) {
+	if (s > 0) {
 		mechstatus = 3;
 		mechstatusimage = "images/DD_03.png";
 	}
@@ -90,8 +98,12 @@ function readCircles(index, a_max, s_max) {
 		mechstatus = 4;
 		mechstatusimage = "images/DD_04.png";
 	}
+
+	document.getElementById('mechstatusimagemenu').src=mechstatusimage;
+
 	setCircles(h, a, s, e, fc, mp, w);
 	var url="./save.php?index="+index+"&h="+h+"&a="+a+"&s="+s+"&e="+e+"&fc="+fc+"&mp="+mp+"&w="+w+"&mstat="+mechstatusimage;
+	// alert(url);
 	window.frames['saveframe'].location.replace(url);
 }
 
@@ -300,16 +312,15 @@ function setCircles(h, a, s, e, fc, mp, w) {
 	if (e == 2) {
 		mechstatus = 4;
 	}
-
 	if (mechstatus == 4) {
 		// Mech destroyed
 		var wallpaperWrecked = "./images/body-bg_wrecked2.jpg";
 		document.body.style.backgroundImage = "url('" + wallpaperWrecked + "')";
-		document.getElementById('mechimage').src=deadmechimage;
+		document.getElementById('mechimage').src="./images/mechs/" + deadmechimage;
 	} else {
 		var wallpaperNorm = "./images/body-bg_2.png";
 		document.body.style.backgroundImage = "url('" + wallpaperNorm + "')";
-		document.getElementById('mechimage').src=originalmechimage;
+		document.getElementById('mechimage').src="./images/mechs/" + originalmechimage;
 	}
 }
 

@@ -75,9 +75,10 @@ session_start();
 	} else {
 		echo "		var movementpointsjump = 0;";
 	}
+	echo "	var maximalarmorpoints = ".$array_A_MAX[$chosenMechIndex].";";
 	echo "	var maximalstructurepoints = ".$array_S_MAX[$chosenMechIndex].";";
 	echo "	var originalmechimage = '".$array_MECH_IMG_URL[$chosenMechIndex]."';";
-	echo "	var deadmechimage = 'images/skull.png';";
+	echo "	var deadmechimage = 'skull.png';";
 	echo "</script>";
 ?>
 
@@ -97,9 +98,9 @@ session_start();
 	for ($i4 = 1; $i4 <= $size; $i4++) {
 		$meli="./gui_unit.php?unit=".$unitid."&chosenmech=".$i4;
 		if ($chosenMechIndex == $i4) {
-			echo "<td nowrap onclick=\"location.href='".$meli."'\"><table width='100%' cellspacing='0' cellpadding='0' class='mechselect_button_active_left'><tr><td width='40%' align='right' valign='center'><div style='display:inline-block;height:100%;vertical-align: middle;'><img style='vertical-align:middle;' src='./images/DD_01.png' height='40px'>&nbsp;&nbsp;&nbsp;</div></td><td nowrap width='60%'><div><a href='".$meli."'>#".$array_MECH_NUMBER[$i4]." - ".$array_PILOT[$i4]."</a><br><span style='font-size:16px;'>".$array_MECH_MODEL[$i4]."</span></div></td></tr></table></td>\r\n";
+			echo "<td nowrap onclick=\"location.href='".$meli."'\"><table width='100%' cellspacing='0' cellpadding='0' class='mechselect_button_active_left'><tr><td nowrap width='30px' align='center' valign='center'><div style='display:inline-block;height:100%;vertical-align:middle;'><img id='mechstatusimagemenu' style='vertical-align:middle;' src='".$array_MECH_IMG_STATUS[$i4]."' height='30px' width='25px'></div></td><td nowrap width='100%'><div><a href='".$meli."'><span style='font-size:15px;'>".$array_MECH_NUMBER[$i4]."</span> ".$array_PILOT[$i4]."</a><br><span style='font-size:14px;'>".$array_MECH_MODEL[$i4]."</span></div></td></tr></table></td>\r\n";
 		} else {
-			echo "<td nowrap onclick=\"location.href='".$meli."'\"><table width='100%' cellspacing='0' cellpadding='0' class='mechselect_button_normal_left'><tr><td width='40%' align='right' valign='center'><div style='display:inline-block;height:100%;vertical-align: middle;'><img style='vertical-align:middle;' src='./images/DD_01.png' height='40px'>&nbsp;&nbsp;&nbsp;</div></td><td nowrap width='60%'><div><a href='".$meli."'>#".$array_MECH_NUMBER[$i4]." - ".$array_PILOT[$i4]."</a><br><span style='font-size:16px;'>".$array_MECH_MODEL[$i4]."</span></div></td></tr></table></td>\r\n";
+			echo "<td nowrap onclick=\"location.href='".$meli."'\"><table width='100%' cellspacing='0' cellpadding='0' class='mechselect_button_normal_left'><tr><td nowrap width='30px' align='center' valign='center'><div style='display:inline-block;height:100%;vertical-align:middle;'><img                          style='vertical-align:middle;' src='".$array_MECH_IMG_STATUS[$i4]."' height='30px' width='25px'></div></td><td nowrap width='100%'><div><a href='".$meli."'><span style='font-size:15px;'>".$array_MECH_NUMBER[$i4]."</span> ".$array_PILOT[$i4]."</a><br><span style='font-size:14px;'>".$array_MECH_MODEL[$i4]."</span></div></td></tr></table></td>\r\n";
 		}
 	}
 ?>
@@ -109,9 +110,11 @@ session_start();
 	</table>
 </div>
 
+<!--
 <div id="tablebuttons">
 	<p>Buttons for tables</p>
 </div>
+-->
 
 <div id="pilotimage"><?php echo "<img src='".$array_PILOT_IMG_URL[$chosenMechIndex]."' width='80px' height='80px'>" ?></div>
 <div id="faction" align="center"><?php echo "<img src='./images/factions/".$FACTION_IMG_URL."' width='50px' height='50px'>" ?></div>

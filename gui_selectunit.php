@@ -140,7 +140,7 @@ session_start();
 			$result_asc_checkunitassignments = mysqli_query($conn, $sql_asc_checkunitassignments);
 			if (mysqli_num_rows($result_asc_checkunitassignments) > 0) {
 				echo "			<td nowrap style='width:240px;height:40px;' onclick='location.href=\"gui_unit.php?unit=".$unitidSelected."\"' class='unitselect_button_normal'>\n";
-				echo "				<a href='gui_unit.php?unit=".$unitidSelected."'>".$forcenameSelected."</a>\n";
+				echo "				<img src='https://www.clanwolf.net/apps/ASCard/images/factions/CW.png' width='20px' style='border:1px solid;'>&nbsp;&nbsp;&nbsp;<a href='gui_unit.php?unit=".$unitidSelected."'>".$forcenameSelected."</a>\n";
 				echo "			</td>\n";
 			} else {
 				echo "			<td nowrap style='background-color:#444444;width:240px;height:40px;' class='mechselect_button_active'>\n";
@@ -162,7 +162,7 @@ session_start();
 					while($rowMech = mysqli_fetch_assoc($result_asc_mech)) {
 						$mechnumber = $rowMech['mech_number'];
 						$mechchassisname = $rowMech['as_model'];
-						$mechcustomname = $rowMech['custom_name'];
+						$mechstatusimage = $rowMech['mech_statusimageurl'];
 					}
 				}
 
@@ -176,7 +176,7 @@ session_start();
 				}
 
 				$mechDetailString = "";
-				$mechDetailString = $mechDetailString."			<td nowrap onclick='location.href=\"gui_unit.php?unit=".$unitidSelected."&chosenmech=".$c."\"' style='background-color:#444444;' class='mechselect_button_active' align='right' valign='center'><div style='display:inline-block;height:100%;vertical-align: middle;'><img style='vertical-align:middle;' src='./images/DD_01.png' height='40px'></div></td>\n";
+				$mechDetailString = $mechDetailString."			<td nowrap onclick='location.href=\"gui_unit.php?unit=".$unitidSelected."&chosenmech=".$c."\"' style='background-color:#444444;' class='mechselect_button_active' align='right' valign='center'><div style='display:inline-block;height:100%;vertical-align: middle;'><img style='vertical-align:middle;' src='".$mechstatusimage."' height='40px'></div></td>\n";
 				$mechDetailString = $mechDetailString."			<td nowrap onclick='location.href=\"gui_unit.php?unit=".$unitidSelected."&chosenmech=".$c."\"' style='width:240px;background-color:#444444;' class='mechselect_button_active'>\n";
 				$mechDetailString = $mechDetailString."				<table width='100%' cellspacing=0 cellpadding=0 border=0px>\n";
 				$mechDetailString = $mechDetailString."					<tr>\n";

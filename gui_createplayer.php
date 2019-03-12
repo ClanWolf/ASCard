@@ -179,6 +179,7 @@ session_start();
 
 				if ("" == npn) {
 					alert("Name may not be empty!");
+					return;
 				}
 				if (npp == nppc) {
 					// alert("Saving new player: " + id + " (" + NewPlayerName + ")");

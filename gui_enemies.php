@@ -119,7 +119,7 @@ session_start();
 					$result_asc_checkunitassignments = mysqli_query($conn, $sql_asc_checkunitassignments);
 					if (mysqli_num_rows($result_asc_checkunitassignments) > 0) {
 						echo "<td nowrap style='width:170px;height:40px;' onclick='location.href=\"gui_unit.php?unit=".$unitidSelected."\"' class='unitselect_button_normal'>";
-						echo "<a href='gui_unit.php?unit=".$unitidSelected."'>".$forcenameSelected."</a>";
+						echo "<img src='https://www.clanwolf.net/apps/ASCard/images/factions/CW.png' width='20px' style='border:1px solid;'>&nbsp;&nbsp;&nbsp;<a href='gui_unit.php?unit=".$unitidSelected."'>".$forcenameSelected."</a>";
 						echo "</td>";
 					} else {
 						echo "<td nowrap style='background-color:#444444;width:170px;height:40px;' class='mechselect_button_active'>";
