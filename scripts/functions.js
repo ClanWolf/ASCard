@@ -86,7 +86,7 @@ function readCircles(index, a_max, s_max) {
 		mechstatus = 4;
 	}
 	setCircles(h, a, s, e, fc, mp, w);
-	var url="./save.php?index="+index+"&h="+h+"&a="+a+"&s="+s+"&e="+e+"&fc="+fc+"&mp="+mp+"&w="+w;
+	var url="./save.php?index="+index+"&h="+h+"&a="+a+"&s="+s+"&e="+e+"&fc="+fc+"&mp="+mp+"&w="+w+"&mstat="+mechstatus;
 	window.frames['saveframe'].location.replace(url);
 }
 
