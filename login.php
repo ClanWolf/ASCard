@@ -28,6 +28,21 @@ session_start();
 						$_SESSION['name'] = $row['name'];
 						$_SESSION['email'] = $row['email'];
 						$_SESSION['playerimage'] = $row['image'];
+
+						// getting options from database
+						$sql_asc_options = "SELECT SQL_NO_CACHE * FROM asc_options where playerid = ".$pid;
+						$result_asc_options = mysqli_query($conn, $sql_asc_options);
+						if (mysqli_num_rows($result_asc_options) > 0) {
+							while($row11 = mysqli_fetch_assoc($result_asc_options)) {
+								$opt1 = $row11["option1"];
+								$opt2 = $row11["option2"];
+								$opt3 = $row11["option3"];
+								$_SESSION['option1'] = $opt1;
+								$_SESSION['option2'] = $opt2;
+								$_SESSION['option3'] = $opt2;
+							}
+						}
+
    						header("Location: ./gui_selectunit.php");
 						die('Login succeeded!<br>');
 					} else {
