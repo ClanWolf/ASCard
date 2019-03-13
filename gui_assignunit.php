@@ -93,6 +93,10 @@ session_start();
 		$(document).ready(function() {
 			$("#cover").hide();
 		});
+
+		function assignMech() {
+			//
+		}
 	</script>
 <?php
 	echo "<div id='player_image'>\n";
@@ -149,7 +153,7 @@ session_start();
 					</select>
 				</td>
 				<td align="right">
-					<a href='#' onClick='storeNewMech();'><i class='fa fa-fw fa-plus-square'></i></a>
+					<a href='#' onClick='assignMech();'><i class='fa fa-fw fa-plus-square'></i></a>
 				</td>
 			</tr>
 		</table>
