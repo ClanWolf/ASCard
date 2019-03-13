@@ -424,18 +424,20 @@ $(document).ready(function() {
 				rolling++;
 				setTimeout("rolldice()", i * 80);
 			}
+			var res = rolldice();
 			var resMes = "";
 			if (res ==  2) { resMes = "Ammo hit"; }
-			if (res ==  3) { resMes = "Engine hit"; }
-			if (res ==  4) { resMes = "Fire control hit"; }
-			if (res ==  5) { resMes = "No critical hit"; }
-			if (res ==  6) { resMes = "Weapon hit"; }
-			if (res ==  7) { resMes = "Movement points hit"; }
-			if (res ==  8) { resMes = "Weapon hit"; }
-			if (res ==  9) { resMes = "No critical hit"; }
-			if (res == 10) { resMes = "Fire control hit"; }
-			if (res == 11) { resMes = "Engine hit"; }
-			if (res == 12) { resMes = "Unit destroyed"; }
+			else if (res ==  3) { resMes = "Engine hit"; }
+			else if (res ==  4) { resMes = "Fire control hit"; }
+			else if (res ==  5) { resMes = "No critical hit"; }
+			else if (res ==  6) { resMes = "Weapon hit"; }
+			else if (res ==  7) { resMes = "Movement points hit"; }
+			else if (res ==  8) { resMes = "Weapon hit"; }
+			else if (res ==  9) { resMes = "No critical hit"; }
+			else if (res == 10) { resMes = "Fire control hit"; }
+			else if (res == 11) { resMes = "Engine hit"; }
+			else if (res == 12) { resMes = "Unit destroyed"; }
+			alert (resMes);
 		}
 	});
 
@@ -457,9 +459,13 @@ function rolldice() {
 	var die_02 = rand(1, 6);
 	var die_01_image = document.getElementById("die1");
 	var die_02_image = document.getElementById("die2");
+
 	die_01_image.src = "./images/dice/d6_" + die_01 + ".png";
 	die_02_image.src = "./images/dice/d6_" + die_02 + ".png";
+
 	rolling--;
+
+	return die_01 + die_02;
 }
 
 // function changeWallpaper() {
