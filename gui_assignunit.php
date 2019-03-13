@@ -16,7 +16,7 @@ session_start();
 <html lang="en">
 
 <head>
-	<title>ClanWolf.net: AplhaStrike Card App (ASCard): Unit creator</title>
+	<title>ClanWolf.net: AplhaStrike Card App (ASCard): Unit assignment</title>
 	<meta charset="utf-8">
 	<meta http-equiv="expires" content="0">
 	<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
@@ -44,7 +44,6 @@ session_start();
 
 	<script type="text/javascript" src="./scripts/jquery-3.3.1.min.js"></script>
 	<script type="text/javascript" src="./scripts/basic.js"></script>
-	<script type="text/javascript" src="./scripts/masterunitlist.js"></script>
 
 	<style>
 		html, body {
@@ -93,8 +92,6 @@ session_start();
 	<script>
 		$(document).ready(function() {
 			$("#cover").hide();
-			fetchMechList();
-			document.getElementById("units").selectedIndex = "1";
 		});
 	</script>
 <?php
