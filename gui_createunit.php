@@ -43,7 +43,7 @@ session_start();
 			$imagename = basename(str_replace(' ', '', trim($img)));
 			$mechnametrimmed = strtolower(str_replace(' ', '', trim($mechname)));
 			if (strpos($mechnametrimmed, $imagenametrimmed) !== false) {
-				$image = $imagename;
+				$image = str_replace(' ', '%20', trim($img));
 				break;
 			}
 		}
