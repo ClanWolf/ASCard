@@ -424,6 +424,18 @@ $(document).ready(function() {
 				rolling++;
 				setTimeout("rolldice()", i * 80);
 			}
+			var resMes = "";
+			if (res ==  2) { resMes = "Ammo hit"; }
+			if (res ==  3) { resMes = "Engine hit"; }
+			if (res ==  4) { resMes = "Fire control hit"; }
+			if (res ==  5) { resMes = "No critical hit"; }
+			if (res ==  6) { resMes = "Weapon hit"; }
+			if (res ==  7) { resMes = "Movement points hit"; }
+			if (res ==  8) { resMes = "Weapon hit"; }
+			if (res ==  9) { resMes = "No critical hit"; }
+			if (res == 10) { resMes = "Fire control hit"; }
+			if (res == 11) { resMes = "Engine hit"; }
+			if (res == 12) { resMes = "Unit destroyed"; }
 		}
 	});
 
