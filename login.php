@@ -30,7 +30,7 @@ session_start();
 						$_SESSION['playerimage'] = $row['image'];
 
 						// getting options from database
-						$sql_asc_options = "SELECT SQL_NO_CACHE * FROM asc_options where playerid = ".$pid;
+						$sql_asc_options = "SELECT SQL_NO_CACHE * FROM asc_options where playerid = ".$_SESSION['playerid'];
 						$result_asc_options = mysqli_query($conn, $sql_asc_options);
 						if (mysqli_num_rows($result_asc_options) > 0) {
 							while($row11 = mysqli_fetch_assoc($result_asc_options)) {

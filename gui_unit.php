@@ -120,7 +120,7 @@ session_start();
 <div id="pilotimage"><?php echo "<img src='".$array_PILOT_IMG_URL[$chosenMechIndex]."' width='80px' height='80px'>" ?></div>
 <div id="faction" align="center"><?php echo "<img src='./images/factions/".$FACTION_IMG_URL."' width='50px' height='50px'>" ?></div>
 <div id="mech_number" align="center"><?= $array_MECH_NUMBER[$chosenMechIndex] ?></div>
-<div id="mech"><?php echo "<img id='mechimage' src='./images/mechs/".$array_MECH_IMG_URL[$chosenMechIndex]."'>" ?></div>
+<div id="mech"><?php echo "<img id='mechimage' src='".$array_MECH_IMG_URL[$chosenMechIndex]."'>" ?></div>
 
 <div id="topleft">
 	<span style="font-size: 18px; color: #eeeeee;"><?php echo "$UNIT"; ?></span>
@@ -257,6 +257,8 @@ session_start();
 
 			</td>
 			<td width="40%" valign="bottom" align="right">
+
+				<div id="criticalhit"></div>
 
 				<div id="dice" valign="middle" align="center">
 					<img id="die1" src="./images/dice/d6_0.png" width="65px" height="65px">

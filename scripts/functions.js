@@ -3,6 +3,7 @@ var fontsizeLabelthin = 10;
 var fontsizeValue = 22;
 var fontsizeCircle = 24;
 var rolling = 0;
+var ccc = 1;
 
 var mechstatus = 1; // 1: green (untouched) | 2: yellow (hit) | 3: red (crit) | 4: black (wrecked)
 var enginehit = 0;
@@ -198,9 +199,9 @@ function setCircles(h, a, s, e, fc, mp, w) {
 	var updatedlongdamage = longdamage;
 
 	if (w == 0) {
-		document.getElementById("dmgshort_s").style.color ="#999";
-		document.getElementById("dmgmedium_s").style.color ="#999";
-		document.getElementById("dmglong_s").style.color ="#999";
+		document.getElementById("dmgshort_s").style.color ="#ccc";
+		document.getElementById("dmgmedium_s").style.color ="#ccc";
+		document.getElementById("dmglong_s").style.color ="#ccc";
 	} else if (w == 1) {
 		document.getElementById("dmgshort_s").style.color ="#da8e25";
 		document.getElementById("dmgmedium_s").style.color ="#da8e25";
@@ -316,11 +317,11 @@ function setCircles(h, a, s, e, fc, mp, w) {
 		// Mech destroyed
 		var wallpaperWrecked = "./images/body-bg_wrecked2.jpg";
 		document.body.style.backgroundImage = "url('" + wallpaperWrecked + "')";
-		document.getElementById('mechimage').src="./images/mechs/" + deadmechimage;
+		document.getElementById('mechimage').src="images/mechs/" + deadmechimage;
 	} else {
 		var wallpaperNorm = "./images/body-bg_2.png";
 		document.body.style.backgroundImage = "url('" + wallpaperNorm + "')";
-		document.getElementById('mechimage').src="./images/mechs/" + originalmechimage;
+		document.getElementById('mechimage').src=originalmechimage;
 	}
 }
 
@@ -422,22 +423,8 @@ $(document).ready(function() {
 			playDiceSound();
 			for (i = 1; i < 12; i++) {
 				rolling++;
-				setTimeout("rolldice()", i * 80);
+				setTimeout("rolldice(i)", i * 80);
 			}
-			var res = rolldice();
-			var resMes = "";
-			if (res ==  2) { resMes = "Ammo hit"; }
-			else if (res ==  3) { resMes = "Engine hit"; }
-			else if (res ==  4) { resMes = "Fire control hit"; }
-			else if (res ==  5) { resMes = "No critical hit"; }
-			else if (res ==  6) { resMes = "Weapon hit"; }
-			else if (res ==  7) { resMes = "Movement points hit"; }
-			else if (res ==  8) { resMes = "Weapon hit"; }
-			else if (res ==  9) { resMes = "No critical hit"; }
-			else if (res == 10) { resMes = "Fire control hit"; }
-			else if (res == 11) { resMes = "Engine hit"; }
-			else if (res == 12) { resMes = "Unit destroyed"; }
-			alert (resMes);
 		}
 	});
 
@@ -455,8 +442,10 @@ function rand (min, max) {
 } 
 
 function rolldice() {
+	ccc++;
 	var die_01 = rand(1, 6);
 	var die_02 = rand(1, 6);
+	var res = die_01 + die_02;
 	var die_01_image = document.getElementById("die1");
 	var die_02_image = document.getElementById("die2");
 
@@ -465,7 +454,23 @@ function rolldice() {
 
 	rolling--;
 
-	return die_01 + die_02;
+	if (ccc == 12) {
+		var resMes = "";
+		if (res ==  2) { resMes = "Ammo hit"; }
+		else if (res ==  3) { resMes = "Engine hit"; }
+		else if (res ==  4) { resMes = "Fire control hit"; }
+		else if (res ==  5) { resMes = "No critical hit"; }
+		else if (res ==  6) { resMes = "Weapon hit"; }
+		else if (res ==  7) { resMes = "Movement points hit"; }
+		else if (res ==  8) { resMes = "Weapon hit"; }
+		else if (res ==  9) { resMes = "No critical hit"; }
+		else if (res == 10) { resMes = "Fire control hit"; }
+		else if (res == 11) { resMes = "Engine hit"; }
+		else if (res == 12) { resMes = "Unit destroyed"; }
+
+		document.getElementById("criticalhit").innerHTML=res + ": " + resMes;
+		ccc = 1;
+	}
 }
 
 // function changeWallpaper() {
