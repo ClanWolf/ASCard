@@ -119,6 +119,41 @@ session_start();
 
 	<br>
 
+	<form>
+		<table class="options" cellspacing=4 cellpadding=4 border=0px>
+			<tr>
+				<td nowrap class="datalabel" style='text-align:left;' colspan='4'>
+					Tech: <select required name='existingMechs' id='existingMechs' size='1' onchange="">
+						<option value="2">Clan</option>
+						<option value="1">IS</option>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<td nowrap class="datalabel" style='text-align:left;' colspan='3'>Add to unit: <select required name='UNITID' id='UNITID' size='1' style='width:200px;'>
+<?php
+	$sql_asc_playersunits = "SELECT SQL_NO_CACHE * FROM asc_unit where playerid=".$pid;
+	$result_asc_playersunits = mysqli_query($conn, $sql_asc_playersunits);
+	if (mysqli_num_rows($result_asc_playersunits) > 0) {
+		while($rowUnits = mysqli_fetch_assoc($result_asc_playersunits)) {
+			$unitid = $rowUnits['unitid'];
+			$forcename = $rowUnits['forcename'];
+			if ($paramunitid == $unitid) {
+				echo "										<option value='".$unitid."' selected>".$forcename."</option>\n";
+			} else {
+				echo "										<option value='".$unitid."'>".$forcename."</option>\n";
+			}
+		}
+	}
+?>
+					</select>
+				</td>
+				<td align="right">
+					<a href='#' onClick='storeNewMech();'><i class='fa fa-fw fa-plus-square'></i></a>
+				</td>
+			</tr>
+		</table>
+	</form>
 </body>
 
 </html>
