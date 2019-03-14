@@ -58,7 +58,7 @@ function readCircles(index, a_max, s_max) {
 			h = h + 1;
 		}
 	} else {
-			if (enginehit == 1) {
+		if (enginehit == 1) {
 			enginehit = 0;
 			h = h - 1;
 		}
@@ -141,7 +141,7 @@ function setCircles(h, a, s, e, fc, mp, w) {
 		}
 	});
 	if (e == 0) {
-    	document.getElementById("ht_field").style.color ="#000000";
+    		document.getElementById("ht_field").style.color ="#000000";
 	} else if (e == 1) {
 		enginehit = 1;
 		document.getElementById("ht_field").style.color ="#00ff00";
