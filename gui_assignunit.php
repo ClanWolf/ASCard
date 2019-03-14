@@ -128,16 +128,35 @@ session_start();
 			<tr>
 				<td nowrap class="datalabel" style='text-align:left;' colspan='4'>
 					Existing Mechs: <select required name='existingMechs' id='existingMechs' size='1' onchange="">
+
+<!-- 
+Alle Mechs, die einer Unit zugewiesen sind
+SELECT * FROM asc_assign a, asc_mech m, asc_pilot p WHERE a.pilotid = p.pilotid and a.mechid = m.mechid;
+
+Alle Mechs, die im Moment keiner Unit zugewiesen sind
+SELECT * from asc_mech m, asc_pilot a where m.mechid not in (select mechid from asc_assign);
+
+mechid
+mech_number
+as_model
+pilotname
+-->
+
 <?php
-	$sql_asc_mechs = "SELECT SQL_NO_CACHE * FROM asc_mech";
+	$sql_asc_mechs = "SELECT SQL_NO_CACHE mechid, mech_number, as_model, pilotname FROM asc_mech m, asc_pilot a where m.mechid not in (select mechid from asc_assign)";
 	$result_asc_mechs = mysqli_query($conn, $sql_asc_mechs);
 	if (mysqli_num_rows($result_asc_mech) > 0) {
 		while($rowMechs = mysqli_fetch_assoc($result_asc_mechs)) {
-			// #81 | Timber Wolf (Mad Cat) E (Mike) 
-			$entryValue = "";
-			$entryString = "";
+			// #81 | Timber Wolf (Mad Cat) E (Mike)
+			$mechid = $rowMechs['mechid'];
+			$mechnumber = $rowMechs['mech_number'];
+			$model = $rowMechs['as_model'];
+			$pilotname = $rowMechs['pilotname'];
 
-			echo "<option value=".$entryValue.">".$entryString."</option>";
+			$entryValue = $mechid;
+			$entryString = $mechnumber." | ".$model." (".$pilotname.")";
+
+			echo "						<option value=".$entryValue.">".$entryString."</option>";
 		}
 	}
 ?>
@@ -146,14 +165,6 @@ session_start();
 			</tr>
 			<tr>
 				<td nowrap class="datalabel" style='text-align:left;' colspan='3'>Add to unit: <select required name='UNITID' id='UNITID' size='1' style='width:200px;'>
-
-
-<!-- Alle Mechs, die einer Unit zugewiesen sind -->
-<!-- SELECT * FROM asc_assign a, asc_mech m, asc_pilot p WHERE a.pilotid = p.pilotid and a.mechid = m.mechid; -->
-
-
-
-				
 <?php
 	$sql_asc_playersunits = "SELECT SQL_NO_CACHE * FROM asc_unit where playerid=".$pid;
 	$result_asc_playersunits = mysqli_query($conn, $sql_asc_playersunits);
