@@ -146,6 +146,14 @@ session_start();
 			</tr>
 			<tr>
 				<td nowrap class="datalabel" style='text-align:left;' colspan='3'>Add to unit: <select required name='UNITID' id='UNITID' size='1' style='width:200px;'>
+
+
+<!-- Alle Mechs, die einer Unit zugewiesen sind -->
+<!-- SELECT * FROM asc_assign a, asc_mech m, asc_pilot p WHERE a.pilotid = p.pilotid and a.mechid = m.mechid; -->
+
+
+
+				
 <?php
 	$sql_asc_playersunits = "SELECT SQL_NO_CACHE * FROM asc_unit where playerid=".$pid;
 	$result_asc_playersunits = mysqli_query($conn, $sql_asc_playersunits);
