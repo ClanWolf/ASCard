@@ -39,7 +39,7 @@ session_start();
 								$opt3 = $row11["option3"];
 								$_SESSION['option1'] = $opt1;
 								$_SESSION['option2'] = $opt2;
-								$_SESSION['option3'] = $opt2;
+								$_SESSION['option3'] = $opt3;
 							}
 						}
 

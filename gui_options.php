@@ -34,7 +34,7 @@ session_start();
 				$opt3 = $row["option3"];
 				$_SESSION['option1'] = $opt1;
 				$_SESSION['option2'] = $opt2;
-				$_SESSION['option3'] = $opt2;
+				$_SESSION['option3'] = $opt3;
 			}
 		}
 	}
@@ -191,7 +191,7 @@ session_start();
 					<label class="bigcheck"><input onchange="changeOption();" type="checkbox" class="bigcheck" name="OPT3" value="yes"/><span class="bigcheck-target"></span></label>&nbsp;&nbsp;
 				</td>
 				<td align="left" class="datalabel">
-					Hide delete icons in unit overview (play mode)
+					Hide delete icons (play mode)
 				</td>
 </tr>
 		</table>

@@ -73,6 +73,16 @@ session_start();
 			}
 		}
 
+		foreach ($playersUnits as &$unitid) {
+			$sqlupdateunit = "update asc_assign set unitid=null where unitid = ".$unitid;
+			if (mysqli_query($conn, $sqlupdateunit)) {
+				// Success
+			} else {
+				// Error
+				echo "Error: " . $sqldeleteunits . "<br>" . mysqli_error($conn);
+			}
+		}
+
 		$sqldeleteunits = "DELETE FROM asc_unit WHERE playerid = ".$deleteplayerid;
 		if (mysqli_query($conn, $sqldeleteunits)) {
 			// Success
@@ -80,11 +90,6 @@ session_start();
 			// Error
 			echo "Error: " . $sqldeleteunits . "<br>" . mysqli_error($conn);
 		}
-
-		// TODO: !!! Delete mechs belonging to those units
-		// TODO: !!! Delete Mech status belonging to those mechs
-		// TODO: !!! Delete pilots belonging to those mechs
-		// TODO: !!! Delete assignments of pilots and mechs to the deleted units
 
 		echo "<meta http-equiv='refresh' content='0;url=./gui_createplayer.php'>";
 	}

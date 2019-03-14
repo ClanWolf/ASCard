@@ -25,7 +25,8 @@ session_start();
 		// only the assignment is deleted
 		// the mech and the pilot are kept in the database for later re-assignment
 		// the model number probably stays the same
-		$sqldeleteassignment = "DELETE FROM asc_assign WHERE pilotid = ".$pilotid." and mechid = " . $mechid . ";";
+		//$sqldeleteassignment = "DELETE FROM asc_assign WHERE pilotid = ".$pilotid." and mechid = " . $mechid . ";";
+		$sqldeleteassignment = "UPDATE asc_assign set unitid=null WHERE pilotid = ".$pilotid." and mechid = " . $mechid . ";";
 		if (mysqli_query($conn, $sqldeleteassignment)) {
 			// Success
 		} else {
@@ -139,11 +140,11 @@ session_start();
 			$sql_asc_checkunitassignments = "SELECT SQL_NO_CACHE * FROM asc_assign where unitid=".$unitidSelected.";";
 			$result_asc_checkunitassignments = mysqli_query($conn, $sql_asc_checkunitassignments);
 			if (mysqli_num_rows($result_asc_checkunitassignments) > 0) {
-				echo "			<td nowrap style='width:240px;height:40px;' onclick='location.href=\"gui_unit.php?unit=".$unitidSelected."\"' class='unitselect_button_normal'>\n";
+				echo "			<td nowrap style='width:295px;height:40px;' onclick='location.href=\"gui_unit.php?unit=".$unitidSelected."\"' class='unitselect_button_normal'>\n";
 				echo "				<img src='https://www.clanwolf.net/apps/ASCard/images/factions/CW.png' width='20px' style='border:1px solid;'>&nbsp;&nbsp;&nbsp;<a href='gui_unit.php?unit=".$unitidSelected."'>".$forcenameSelected."</a>\n";
 				echo "			</td>\n";
 			} else {
-				echo "			<td nowrap style='background-color:#444444;width:240px;height:40px;' class='mechselect_button_active'>\n";
+				echo "			<td nowrap style='background-color:#444444;width:295px;height:40px;' class='mechselect_button_active'>\n";
 				echo "				".$forcenameSelected."\n";
 				echo "			</td>\n";
 			}
@@ -187,9 +188,9 @@ session_start();
 				$mechDetailString = $mechDetailString."							<span style='font-size:16px;'>\n";
 				
 				if ($hideMinusButtons) {
-					$mechDetailString = $mechDetailString."								<a href='./gui_selectunit.php?dm=1&mechid=".$assignedMechID."&pilotid=".$assignedPilotID."'><i class='fa fa-fw fa-minus-square'></i></a>\n";
-				} else {
 					$mechDetailString = $mechDetailString."								&nbsp;\n";
+				} else {
+					$mechDetailString = $mechDetailString."								<a href='./gui_selectunit.php?dm=1&mechid=".$assignedMechID."&pilotid=".$assignedPilotID."'><i class='fa fa-fw fa-minus-square'></i></a>\n";
 				}
 				$mechDetailString = $mechDetailString."							</span>\n";
 				$mechDetailString = $mechDetailString."						</td>\n";

@@ -11,6 +11,45 @@ session_start();
 	$pid = $_SESSION['playerid'];
 	$pname = $_SESSION['name'];
 	$pimage = $_SESSION['playerimage'];
+	$hideMinusButtons = $_SESSION['option3'];
+
+	$paramunitid = isset($_GET["unitid"]) ? $_GET["unitid"] : "";
+    $paramunitname = isset($_GET["unitname"]) ? $_GET["unitname"] : "";
+	$assignmech = isset($_GET["assignmech"]) ? $_GET["assignmech"] : "";
+	$deletestoredmech = isset($_GET["deletestoredmech"]) ? $_GET["deletestoredmech"] : "";
+
+	if ($assignmech == 1) {
+		$UNITID = isset($_GET["UNITID"]) ? $_GET["UNITID"] : "";
+		$MECHID = isset($_GET["MECHID"]) ? $_GET["MECHID"] : "";
+
+		$sql_update_assignment = "UPDATE asc_assign set unitid = ".$UNITID." where mechid = ".$MECHID;
+		if (mysqli_query($conn, $sql_update_assignment)) {
+			// Success
+		} else {
+			// Error
+			echo "Error: " . $sql_update_assignment . "<br>" . mysqli_error($conn);
+		}
+		echo "<meta http-equiv='refresh' content='0;url=./gui_selectunit.php'>";
+	}
+
+	if ($deletestoredmech == 1) {
+		$UNITID = isset($_GET["UNITID"]) ? $_GET["UNITID"] : "";
+		$MECHID = isset($_GET["MECHID"]) ? $_GET["MECHID"] : "";
+
+		//$PILOTID =
+
+		// TODO: !!! Delete the mech (by mechid)
+		// TODO: !!! Delete the mechstatus (by mechid)
+		// TODO: !!! Delete the pilot (by pilotid)
+		// TODO: !!! Delete the assignment (by mechid and pilotid / unitid is null at this point)
+
+		//"delete from asc_mech where mechid = ".$MECHID;
+		//"delete from asc_mechstatus where mechid = ".$MECHID;
+		//"delete from asc_pilot where pilotid = ".$PILOTID;
+		//"delete from asc_assign where pilotid = ".$PILOTID." and mechid = ".$MECHID;
+
+		echo "<meta http-equiv='refresh' content='0;url=./gui_selectunit.php'>";
+	}
 ?>
 
 <html lang="en">
@@ -95,7 +134,41 @@ session_start();
 		});
 
 		function assignMech() {
-			//
+			var url="./gui_assignunit.php?assignmech=1";
+
+			// Assign existing mech
+			var UNITID = document.getElementById('UNITID').value;
+			var MECHID = document.getElementById('existingMechs').value;
+
+			if (MECHID == 0) {
+				alert("Select a stored Mech!");
+				return;
+			}
+
+			url=url+"&UNITID="+encodeURIComponent(UNITID);
+			url=url+"&MECHID="+encodeURIComponent(MECHID);
+
+			// alert(url);
+			window.location.href = url;
+		}
+
+		function deleteStoredMech() {
+			var url="./gui_assignunit.php?deletestoredmech=1";
+
+			// Assign existing mech
+			var UNITID = document.getElementById('UNITID').value;
+			var MECHID = document.getElementById('existingMechs').value;
+
+			if (MECHID == 0) {
+				alert("Select a stored Mech!");
+				return;
+			}
+
+			url=url+"&UNITID="+encodeURIComponent(UNITID);
+			url=url+"&MECHID="+encodeURIComponent(MECHID);
+
+			// alert(url);
+			window.location.href = url;
 		}
 	</script>
 <?php
@@ -127,34 +200,21 @@ session_start();
 		<table class="options" cellspacing=4 cellpadding=4 border=0px>
 			<tr>
 				<td nowrap class="datalabel" style='text-align:left;' colspan='4'>
-					Existing Mechs: <select required name='existingMechs' id='existingMechs' size='1' onchange="">
-
-<!-- 
-Alle Mechs, die einer Unit zugewiesen sind
-SELECT * FROM asc_assign a, asc_mech m, asc_pilot p WHERE a.pilotid = p.pilotid and a.mechid = m.mechid;
-
-Alle Mechs, die im Moment keiner Unit zugewiesen sind
-SELECT * from asc_mech m, asc_pilot a where m.mechid not in (select mechid from asc_assign);
-
-mechid
-mech_number
-as_model
-pilotname
--->
-
+					Existing Mechs: <select required name='existingMechs' id='existingMechs' size='1' onchange="" style='width:400px;'>
+						<option value="0"><<< Select a Mech >>></option>
 <?php
-	$sql_asc_mechs = "SELECT SQL_NO_CACHE mechid, mech_number, as_model, pilotname FROM asc_mech m, asc_pilot a where m.mechid not in (select mechid from asc_assign)";
+	$sql_asc_mechs = "select m.mechid, m.mech_number, m.as_model, p.name from asc_assign a, asc_mech m, asc_pilot p where a.unitid is null and a.mechid = m.mechid and a.pilotid = p.pilotid";
 	$result_asc_mechs = mysqli_query($conn, $sql_asc_mechs);
-	if (mysqli_num_rows($result_asc_mech) > 0) {
+	if (mysqli_num_rows($result_asc_mechs) > 0) {
 		while($rowMechs = mysqli_fetch_assoc($result_asc_mechs)) {
 			// #81 | Timber Wolf (Mad Cat) E (Mike)
 			$mechid = $rowMechs['mechid'];
 			$mechnumber = $rowMechs['mech_number'];
 			$model = $rowMechs['as_model'];
-			$pilotname = $rowMechs['pilotname'];
+			$pilotname = $rowMechs['name'];
 
 			$entryValue = $mechid;
-			$entryString = $mechnumber." | ".$model." (".$pilotname.")";
+			$entryString = $mechnumber." | ".$model." [".$pilotname."]";
 
 			echo "						<option value=".$entryValue.">".$entryString."</option>";
 		}
@@ -164,7 +224,7 @@ pilotname
 				</td>
 			</tr>
 			<tr>
-				<td nowrap class="datalabel" style='text-align:left;' colspan='3'>Add to unit: <select required name='UNITID' id='UNITID' size='1' style='width:200px;'>
+				<td nowrap class="datalabel" style='text-align:left;' colspan='3'>Add to unit: <select required name='UNITID' id='UNITID' size='1' style='width:250px;'>
 <?php
 	$sql_asc_playersunits = "SELECT SQL_NO_CACHE * FROM asc_unit where playerid=".$pid;
 	$result_asc_playersunits = mysqli_query($conn, $sql_asc_playersunits);
@@ -186,6 +246,23 @@ pilotname
 					<a href='#' onClick='assignMech();'><i class='fa fa-fw fa-plus-square'></i></a>
 				</td>
 			</tr>
+<?php
+	if ($hideMinusButtons) {
+		echo "			<tr>";
+		echo "			    <td colspan='4'>";
+		echo "			</tr>";
+	} else {
+		echo "			<tr>";
+		echo "				<td colspan='4'><hr></td>";
+		echo "			</tr>";
+		echo "			<tr>";
+		echo "				<td colspan='3'>Delete selected Mech from Hangar (!)</td>";
+		echo "				<td align='right'>";
+		echo "					<a href='#' onClick='deleteStoredMech();'><i class='fa fa-fw fa-minus-square'></i></a>";
+		echo "				</td>";
+		echo "			</tr>";
+	}
+?>
 		</table>
 	</form>
 </body>
