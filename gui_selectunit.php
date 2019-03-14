@@ -185,7 +185,12 @@ session_start();
 				$mechDetailString = $mechDetailString."						</td>\n";
 				$mechDetailString = $mechDetailString."						<td nowrap width='1%' style='background-color:#444444;text-align:right;' class='mechselect_button_active'>\n";
 				$mechDetailString = $mechDetailString."							<span style='font-size:16px;'>\n";
-				$mechDetailString = $mechDetailString."								<a href='./gui_selectunit.php?dm=1&mechid=".$assignedMechID."&pilotid=".$assignedPilotID."'><i class='fa fa-fw fa-minus-square'></i></a>\n";
+				
+				if ($hideMinusButtons) {
+					$mechDetailString = $mechDetailString."								<a href='./gui_selectunit.php?dm=1&mechid=".$assignedMechID."&pilotid=".$assignedPilotID."'><i class='fa fa-fw fa-minus-square'></i></a>\n";
+				} else {
+					$mechDetailString = $mechDetailString."								&nbsp;\n";
+				}
 				$mechDetailString = $mechDetailString."							</span>\n";
 				$mechDetailString = $mechDetailString."						</td>\n";
 				$mechDetailString = $mechDetailString."					</tr>\n";
