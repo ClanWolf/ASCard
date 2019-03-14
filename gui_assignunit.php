@@ -127,9 +127,20 @@ session_start();
 		<table class="options" cellspacing=4 cellpadding=4 border=0px>
 			<tr>
 				<td nowrap class="datalabel" style='text-align:left;' colspan='4'>
-					Tech: <select required name='existingMechs' id='existingMechs' size='1' onchange="">
-						<option value="2">Clan</option>
-						<option value="1">IS</option>
+					Existing Mechs: <select required name='existingMechs' id='existingMechs' size='1' onchange="">
+<?php
+	$sql_asc_mechs = "SELECT SQL_NO_CACHE * FROM asc_mech";
+	$result_asc_mechs = mysqli_query($conn, $sql_asc_mechs);
+	if (mysqli_num_rows($result_asc_mech) > 0) {
+		while($rowMechs = mysqli_fetch_assoc($result_asc_mechs)) {
+			// #81 | Timber Wolf (Mad Cat) E (Mike) 
+			$entryValue = "";
+			$entryString = "";
+
+			echo "<option value=".$entryValue.">".$entryString."</option>";
+		}
+	}
+?>
 					</select>
 				</td>
 			</tr>
