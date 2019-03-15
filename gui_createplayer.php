@@ -10,6 +10,7 @@ session_start();
 	// Get data on units from db
 	$pid = $_SESSION['playerid'];
 	$pimage = $_SESSION['playerimage'];
+	$hideMinusButtons = $_SESSION['option3'];
 
 	$s = isset($_GET["s"]) ? $_GET["s"] : "";
 	$d = isset($_GET["d"]) ? $_GET["d"] : "";
@@ -293,7 +294,11 @@ session_start();
 			if ($row['playerid'] != "1" && $row['playerid'] != "2") {
 				echo "				<td width='10px'>\n";
 				echo "					<span style='font-size:16px;'>\n";
-				echo "						<a href='#' onClick='saveNewPlayer(".$row['playerid'].",\"".$row['image']."\");'><i class='fa fa-fw fa-minus-square'></i></a>\n";
+				if ($hideMinusButtons) {
+					echo "						&nbsp;\n";
+				} else {
+					echo "						<a href='#' onClick='saveNewPlayer(".$row['playerid'].",\"".$row['image']."\");'><i class='fa fa-fw fa-minus-square'></i></a>\n";
+				}
 				echo "					</span>\n";
 				echo "				</td>\n";
 			} else {
