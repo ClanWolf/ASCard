@@ -294,10 +294,11 @@ session_start();
 			if ($row['playerid'] != "1" && $row['playerid'] != "2") {
 				echo "				<td width='10px'>\n";
 				echo "					<span style='font-size:16px;'>\n";
+				echo "					<a href='#' onclick=''><i class="fas fa-pen"></i></a>\n";
 				if ($hideMinusButtons) {
-					echo "						&nbsp;\n";
+					echo "						\n";
 				} else {
-					echo "						<a href='#' onClick='saveNewPlayer(".$row['playerid'].",\"".$row['image']."\");'><i class='fa fa-fw fa-minus-square'></i></a>\n";
+					echo "						&nbsp;&nbsp;<a href='#' onClick='saveNewPlayer(".$row['playerid'].",\"".$row['image']."\");'><i class='fa fa-fw fa-minus-square'></i></a>\n";
 				}
 				echo "					</span>\n";
 				echo "				</td>\n";
