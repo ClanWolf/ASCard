@@ -265,6 +265,12 @@ function setCircles(h, a, s, e, fc, mp, w) {
 		updatedmovementpointsground = Math.ceil(updatedmovementpointsground / 16);
 		updatemovementpointsjump = Math.ceil(updatemovementpointsjump / 16);
 	}
+	if (h == 4) {
+		document.getElementById("mv_points").style.color ="#ff0000";
+		document.getElementById("TMM").style.color ="#ff0000";
+		updatedmovementpointsground = 0;
+		updatemovementpointsjump = 0;
+	}
 	var mvstring = updatedmovementpointsground + "&rdquo;";
 	if (updatemovementpointsjump > 0) {
 		mvstring = mvstring + "/" + updatemovementpointsjump + "&rdquo;j";
@@ -285,6 +291,9 @@ function setCircles(h, a, s, e, fc, mp, w) {
 		tmpTMM = 4;
 	} else {
 		tmpTMM = 5;
+	}
+	if (h == 4) {
+		tmpTMM = -4;
 	}
 	document.getElementById("TMM").innerHTML = tmpTMM;
 

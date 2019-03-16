@@ -281,7 +281,7 @@ session_start();
 			$filename = "./images/player/".$row['image'];
 
 			echo "			<tr>\n";
-			echo "				<td nowrap class='datalabel' style='text-align:left;';>" . $row['playerid'] . "</td>\n";
+			echo "				<td nowrap class='datalabel' style='text-align:left;';><a href='#' onclick=''><i class='fa fa-edit'></i></a>&nbsp;&nbsp;&nbsp;".$row['playerid']."</td>\n";
 			echo "				<td nowrap class='datalabel' style='text-align:left;vertical-align:middle;' valign='middle'>\n";
 			if (file_exists($filename)) {
 				echo "						<img src='./images/player/".$row['image']."' width='30px' height='30px'>\n";
@@ -292,13 +292,12 @@ session_start();
 			echo "				</td>\n";
 			echo "				<td nowrap class='datalabel' style='text-align:left;' colspan='2'>" . $row['name'] . "</td>\n";
 			if ($row['playerid'] != "1" && $row['playerid'] != "2") {
-				echo "				<td width='10px'>\n";
+				echo "				<td width='10px' nowrap>\n";
 				echo "					<span style='font-size:16px;'>\n";
-				echo "					<a href='#' onclick=''><i class="fas fa-pen"></i></a>\n";
 				if ($hideMinusButtons) {
 					echo "						\n";
 				} else {
-					echo "						&nbsp;&nbsp;<a href='#' onClick='saveNewPlayer(".$row['playerid'].",\"".$row['image']."\");'><i class='fa fa-fw fa-minus-square'></i></a>\n";
+					echo "						<a href='#' onClick='saveNewPlayer(".$row['playerid'].",\"".$row['image']."\");'><i class='fa fa-fw fa-minus-square'></i></a>\n";
 				}
 				echo "					</span>\n";
 				echo "				</td>\n";
