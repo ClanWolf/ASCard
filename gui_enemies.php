@@ -118,13 +118,31 @@ session_start();
 					$sql_asc_checkunitassignments = "SELECT SQL_NO_CACHE * FROM asc_assign where unitid=".$unitidSelected.";";
 					$result_asc_checkunitassignments = mysqli_query($conn, $sql_asc_checkunitassignments);
 					if (mysqli_num_rows($result_asc_checkunitassignments) > 0) {
-						echo "<td nowrap style='width:170px;height:40px;' onclick='location.href=\"gui_unit.php?unit=".$unitidSelected."\"' class='unitselect_button_normal'>";
-						echo "<img src='https://www.clanwolf.net/apps/ASCard/images/factions/CW.png' width='20px' style='border:1px solid;'>&nbsp;&nbsp;&nbsp;<a href='gui_unit.php?unit=".$unitidSelected."'>".$forcenameSelected."</a>";
-						echo "</td>";
+						echo "<td nowrap style='width:170px;height:40px;' onclick='location.href=\"gui_unit.php?unit=".$unitidSelected."\"' class='unitselect_button_normal'>\n";
+						echo "	<table cellspacing='0' cellpadding='0'>\n";
+						echo "		<tr>\n";
+						echo "			<td style='text-align:left;'>\n";
+						echo "				<img src='https://www.clanwolf.net/apps/ASCard/images/factions/CW.png' width='20px' style='border:1px solid;'>\n";
+						echo "			</td>\n";
+						echo "			<td style='text-align:right;'>\n";
+						echo "				<a href='gui_unit.php?unit=".$unitidSelected."'>".$forcenameSelected."</a>\n";
+						echo "			</td>\n";
+						echo "		</tr>\n";
+						echo "	</table>\n";
+						echo "</td>\n";
 					} else {
-						echo "<td nowrap style='background-color:#444444;width:170px;height:40px;' class='mechselect_button_active'>";
-						echo $forcenameSelected;
-						echo "</td>";
+						echo "<td nowrap style='background-color:#444444;width:170px;height:40px;' class='mechselect_button_active'>\n";
+						echo "	<table cellspacing='0' cellpadding='0'>\n";
+						echo "		<tr>\n";
+						echo "			<td style='text-align:left;'>\n";
+						echo "				<img src='https://www.clanwolf.net/apps/ASCard/images/factions/xx.png' width='20px' style='border:1px solid;'>\n";
+						echo "			</td>\n";
+						echo "			<td style='text-align:right;'>\n";
+						echo "				".$forcenameSelected."\n";
+						echo "			</td>\n";
+						echo "		</tr>\n";
+						echo "	</table>\n";
+						echo "</td>\n";
 					}
 				}
 			}
