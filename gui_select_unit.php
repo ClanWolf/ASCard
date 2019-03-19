@@ -34,7 +34,7 @@ session_start();
 			echo "Error: " . $sqldeleteassignment . "<br>" . mysqli_error($conn);
 		}
 
-		echo "<meta http-equiv='refresh' content='0;url=./gui_selectunit.php'>";
+		echo "<meta http-equiv='refresh' content='0;url=./gui_select_unit.php'>";
 	}
 ?>
 
@@ -101,11 +101,11 @@ session_start();
 				<td nowrap onclick="location.href='./logout.php'" width="60px" style="background: rgba(50,50,50,1.0); text-align: center; vertical-align: middle;">
 					<div><a style="color: #eee;" href="./logout.php"><i class="fa fa-power-off" aria-hidden="true"></i></a></div>
 				</td>
-				<td nowrap onclick="location.href='./gui_selectunit.php'" width="17%"><div class='mechselect_button_active'><a href='./gui_selectunit.php'>ROSTER</a><br><span style='font-size:16px;'>Choose a Mech</span></div></td>
+				<td nowrap onclick="location.href='./gui_select_unit.php'" width="17%"><div class='mechselect_button_active'><a href='./gui_select_unit.php'>ROSTER</a><br><span style='font-size:16px;'>Choose a Mech</span></div></td>
 				<td nowrap onclick="location.href='./gui_enemies.php'" width="17%"><div class='mechselect_button_normal'><a href='./gui_enemies.php'>OPFOR</a><br><span style='font-size:16px;'>Enemy Mechs</span></div></td>
-				<td nowrap onclick="location.href='./gui_assignunit.php'" width="17%"><div class='mechselect_button_normal'><a href='./gui_assignunit.php'>ASSIGN</a><br><span style='font-size:16px;'>Assign Mech</span></div></td>
-				<td nowrap onclick="location.href='./gui_createunit.php'" width="17%"><div class='mechselect_button_normal'><a href='./gui_createunit.php'>ADD</a><br><span style='font-size:16px;'>Create a Mech</span></div></td>
-				<td nowrap onclick="location.href='./gui_createplayer.php'" width="17%"><div class='mechselect_button_normal'><a href='./gui_createplayer.php'>PLAYER</a><br><span style='font-size:16px;'>Manage players</span></div></td>
+				<td nowrap onclick="location.href='./gui_assign_unit.php'" width="17%"><div class='mechselect_button_normal'><a href='./gui_assign_unit.php'>ASSIGN</a><br><span style='font-size:16px;'>Assign Mech</span></div></td>
+				<td nowrap onclick="location.href='./gui_create_mech.php'" width="17%"><div class='mechselect_button_normal'><a href='./gui_create_mech.php'>ADD</a><br><span style='font-size:16px;'>Create a Mech</span></div></td>
+				<td nowrap onclick="location.href='./gui_create_player.php'" width="17%"><div class='mechselect_button_normal'><a href='./gui_create_player.php'>PLAYER</a><br><span style='font-size:16px;'>Manage players</span></div></td>
 				<td nowrap onclick="location.href='./gui_options.php'" width="17%"><div class='mechselect_button_normal'><a href='./gui_options.php'>OPTIONS</a><br><span style='font-size:16px;'>Change options</span></div></td>
 				<td nowrap width="60px" style="background: rgba(50,50,50,1.0); text-align: center; vertical-align: middle;"><div id='loggedOnUser'></div></td>
 			</tr>
@@ -134,20 +134,20 @@ session_start();
 			$factionidSelected = $rowUnit['factionid'];
 			$forcenameSelected = $rowUnit['forcename'];
 
-			array_push($addMechToUnitLinkArray, "gui_createunit.php?unitid=".$unitidSelected."&unitname=".$forcenameSelected);
-			array_push($assignMechToUnitLinkArray, "gui_assignunit.php?unitid=".$unitidSelected."&unitname=".$forcenameSelected);
+			array_push($addMechToUnitLinkArray, "gui_create_mech.php?unitid=".$unitidSelected."&unitname=".$forcenameSelected);
+			array_push($assignMechToUnitLinkArray, "gui_assign_unit.php?unitid=".$unitidSelected."&unitname=".$forcenameSelected);
 
 			$sql_asc_checkunitassignments = "SELECT SQL_NO_CACHE * FROM asc_assign where unitid=".$unitidSelected.";";
 			$result_asc_checkunitassignments = mysqli_query($conn, $sql_asc_checkunitassignments);
 			if (mysqli_num_rows($result_asc_checkunitassignments) > 0) {
-				echo "			<td nowrap style='width:270px;height:40px;' onclick='location.href=\"gui_unit.php?unit=".$unitidSelected."\"' class='unitselect_button_normal'>\n";
+				echo "			<td nowrap style='width:270px;height:40px;' onclick='location.href=\"gui_play_mech.php?unit=".$unitidSelected."\"' class='unitselect_button_normal'>\n";
 				echo "				<table style='width:100%;' cellspacing=0 cellpadding=0>\n";
 				echo "					<tr>\n";
 				echo "						<td style='text-align:left;'>\n";
-				echo "							<a href='#' onclick=''><i class='fa fa-edit'></i></a>\n";
+				echo "							<a href='gui__edit_unit.php?unit=".$unitidSelected."'><i class='fa fa-edit'></i></a>\n";
 				echo "						</td>\n";
 				echo "						<td style='text-align:center;'>\n";
-				echo "							<a href='gui_unit.php?unit=".$unitidSelected."'>".$forcenameSelected."</a>\n";
+				echo "							<a href='gui_play_mech.php?unit=".$unitidSelected."'>".$forcenameSelected."</a>\n";
 				echo "						</td>\n";
 				echo "						<td style='text-align:right;'>\n";
 				echo "							<img src='https://www.clanwolf.net/apps/ASCard/images/factions/CW.png' width='20px' style='border:1px solid;'>\n";
@@ -189,11 +189,11 @@ session_start();
 				}
 
 				$mechDetailString = "";
-				$mechDetailString = $mechDetailString."			<td nowrap onclick='location.href=\"gui_unit.php?unit=".$unitidSelected."&chosenmech=".$c."\"' style='background-color:#444444;' class='mechselect_button_active' align='right' valign='center'><div style='display:inline-block;height:100%;vertical-align: middle;'><img style='vertical-align:middle;' src='".$mechstatusimage."' height='40px'></div></td>\n";
-				$mechDetailString = $mechDetailString."			<td nowrap onclick='location.href=\"gui_unit.php?unit=".$unitidSelected."&chosenmech=".$c."\"' style='width:100%;background-color:#444444;' class='mechselect_button_active'>\n";
+				$mechDetailString = $mechDetailString."			<td nowrap onclick='location.href=\"gui_play_mech.php?unit=".$unitidSelected."&chosenmech=".$c."\"' style='background-color:#444444;' class='mechselect_button_active' align='right' valign='center'><div style='display:inline-block;height:100%;vertical-align: middle;'><img style='vertical-align:middle;' src='".$mechstatusimage."' height='40px'></div></td>\n";
+				$mechDetailString = $mechDetailString."			<td nowrap onclick='location.href=\"gui_play_mech.php?unit=".$unitidSelected."&chosenmech=".$c."\"' style='width:100%;background-color:#444444;' class='mechselect_button_active'>\n";
 				$mechDetailString = $mechDetailString."				<table width='100%' cellspacing=0 cellpadding=0 border=0px>\n";
 				$mechDetailString = $mechDetailString."					<tr>\n";
-				$mechDetailString = $mechDetailString."						<td nowrap width='99%' align='left' style='color:#AAAAAA;background-color:#444444;text-align:left;' class='mechselect_button_active'><a href=gui_unit.php?unit=".$unitidSelected."&chosenmech=".$c.">".$mechnumber." ".$pilotname."</a>\n";
+				$mechDetailString = $mechDetailString."						<td nowrap width='99%' align='left' style='color:#AAAAAA;background-color:#444444;text-align:left;' class='mechselect_button_active'><a href=gui_play_mech.php?unit=".$unitidSelected."&chosenmech=".$c.">".$mechnumber." ".$pilotname."</a>\n";
 				$mechDetailString = $mechDetailString."							<br><span style='font-size:16px;'>".$mechchassisname."</span>\n";
 				$mechDetailString = $mechDetailString."						</td>\n";
 				$mechDetailString = $mechDetailString."						<td nowrap width='1%' style='background-color:#444444;text-align:right;' class='mechselect_button_active'>\n";
@@ -202,7 +202,7 @@ session_start();
 				if ($hideMinusButtons) {
 					$mechDetailString = $mechDetailString."								&nbsp;\n";
 				} else {
-					$mechDetailString = $mechDetailString."								<a href='./gui_selectunit.php?dm=1&mechid=".$assignedMechID."&pilotid=".$assignedPilotID."'><i class='fa fa-fw fa-minus-square'></i></a>\n";
+					$mechDetailString = $mechDetailString."								<a href='./gui_select_unit.php?dm=1&mechid=".$assignedMechID."&pilotid=".$assignedPilotID."'><i class='fa fa-fw fa-minus-square'></i></a>\n";
 				}
 				$mechDetailString = $mechDetailString."							</span>\n";
 				$mechDetailString = $mechDetailString."						</td>\n";

@@ -43,7 +43,7 @@ session_start();
 							}
 						}
 
-   						header("Location: ./gui_selectunit.php");
+   						header("Location: ./gui_select_unit.php");
 						die('Login succeeded!<br>');
 					} else {
 						$errorMessage = "LOGIN FAILED!<br>";
