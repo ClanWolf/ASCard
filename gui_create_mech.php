@@ -366,6 +366,8 @@ session_start();
 			var SKILL = document.getElementById('SKILL').value;
 			var UNITID = document.getElementById('UNITID').value;
 
+			var adjustedPV = adjustPointValue(PVA, SKILL);
+
 			var unitslistbox = document.getElementById("units");
 			var selIndex = unitslistbox.selectedIndex;
 			var selValue = unitslistbox.options[selIndex].value;
@@ -408,7 +410,7 @@ session_start();
 			url=url+"&OV="+encodeURIComponent(OV);
 			url=url+"&A="+encodeURIComponent(A);
 			url=url+"&S="+encodeURIComponent(S);
-			url=url+"&PVA="+encodeURIComponent(PVA);
+			url=url+"&PVA="+encodeURIComponent(adjustedPV);
 			url=url+"&SPCL="+encodeURIComponent(SPCL);
 			url=url+"&PN="+encodeURIComponent(PN);
 			url=url+"&PI="+encodeURIComponent(PI);
