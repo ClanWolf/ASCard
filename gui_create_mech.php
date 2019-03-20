@@ -278,6 +278,8 @@ session_start();
 	<script type="text/javascript" src="./scripts/jquery-3.3.1.min.js"></script>
 	<script type="text/javascript" src="./scripts/basic.js"></script>
 	<script type="text/javascript" src="./scripts/masterunitlist.js"></script>
+	<script type="text/javascript" src="./scripts/adjustPointValue.js"></script>
+
 
 	<style>
 		html, body {
