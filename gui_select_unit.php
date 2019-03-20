@@ -156,7 +156,7 @@ session_start();
 				echo "				</table>\n";
 				echo "			</td>\n";
 			} else {
-				echo "			<td nowrap style='background-color:#444444;width:295px;height:40px;' class='mechselect_button_active'>\n";
+				echo "			<td nowrap style='background-color:#444444;width:270px;height:40px;' class='mechselect_button_active'>\n";
 				echo "				".$forcenameSelected."\n";
 				echo "			</td>\n";
 			}
