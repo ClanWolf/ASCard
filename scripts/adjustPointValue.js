@@ -1,4 +1,8 @@
 function adjustPointValue(PV, actualPilotSkill) {
+
+	// Calculation of PointValue according to changed pilot skill
+	// https://bg.battletech.com/wp-content/uploads/2018/09/Alpha-Strike-2018-06-06-v2.4.pdf?x64300
+
 	var tempSkill = actualPilotSkill - 4;
 	var tempPV = PV;
 
