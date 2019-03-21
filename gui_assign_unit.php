@@ -44,10 +44,9 @@ session_start();
 		if ($stmt->execute()) {
 			$res = $stmt->get_result();
 			while ($row = $res->fetch_assoc()) {
-				$PILOTID = -1000;
+				$PILOTID = $row['pilotid'];
 			}
 		}
-		
 
 		// TODO: !!! Delete the mech (by mechid)
 		// TODO: !!! Delete the mechstatus (by mechid)
