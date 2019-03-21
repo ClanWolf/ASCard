@@ -33,9 +33,10 @@ session_start();
 	}
 
 	if ($deletestoredmech == 1) {
-		$UNITID = isset($_GET["UNITID"]) ? $_GET["UNITID"] : "";
 		$MECHID = isset($_GET["MECHID"]) ? $_GET["MECHID"] : "";
 
+		$sql_pilotid = "select pilotid from asc_assign where mechid = ".$MECHID;
+		
 		//$PILOTID =
 
 		// TODO: !!! Delete the mech (by mechid)
@@ -155,8 +156,7 @@ session_start();
 		function deleteStoredMech() {
 			var url="./gui_assign_unit.php?deletestoredmech=1";
 
-			// Assign existing mech
-			var UNITID = document.getElementById('UNITID').value;
+			// Delete existing mech from hangar
 			var MECHID = document.getElementById('existingMechs').value;
 
 			if (MECHID == 0) {
@@ -164,7 +164,6 @@ session_start();
 				return;
 			}
 
-			url=url+"&UNITID="+encodeURIComponent(UNITID);
 			url=url+"&MECHID="+encodeURIComponent(MECHID);
 
 			// alert(url);
