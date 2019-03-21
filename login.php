@@ -3,8 +3,8 @@ ini_set('session.gc_maxlifetime', 36000);
 session_set_cookie_params(36000);
 session_start();
 // https://www.php-einfach.de/php-tutorial/php-sessions/
+	require('./logger.php');
 	require('./db.php');
-
 	ini_set("display_errors", 1); error_reporting(E_ALL);
 	$login = isset($_GET['login']) ? $_GET['login'] : "";
 	$playername = isset($_POST['pn']) ? $_POST['pn'] : "";
