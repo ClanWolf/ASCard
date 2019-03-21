@@ -1,10 +1,10 @@
 <?php
 	// write a line to log
-	function logMsg(msg) {
+	function logMsg($msg) {
 		$logdatei=fopen("logs/logfile.txt","a");
 		fputs($logdatei,
-		      date("d.m.Y, H:i:s",time()) .
-		      msg ."\n"
+		      date("d.m.Y, H:i:s", time()) .
+		      $msg ."\n"
 		);
 		fclose($logdatei);
 	}
