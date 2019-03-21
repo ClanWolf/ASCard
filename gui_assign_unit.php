@@ -38,6 +38,8 @@ session_start();
 		$MECHID = isset($_GET["MECHID"]) ? $_GET["MECHID"] : "";
 		$PILOTID = 0;
 
+		logMsg("Deleting stored Mech: " . $MECHID . " (id)");
+
 		$sql_pilotid = "select pilotid from asc_assign where mechid = ".$MECHID;
 		if (!($stmt = $conn->prepare($sql_pilotid))) {
 			echo "Prepare failed: (" . $conn->errno . ") " . $conn->error;
@@ -46,6 +48,7 @@ session_start();
 			$res = $stmt->get_result();
 			while ($row = $res->fetch_assoc()) {
 				$PILOTID = $row['pilotid'];
+				logMsg("Selected pilot id: " . $PILOTID);
 			}
 		}
 
