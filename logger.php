@@ -1,4 +1,8 @@
 <?php
+	if (!file_exists('logs')) {
+		mkdir('logs', 0777, true);
+	}
+
 	// write a line to log
 	function logMsg($msg) {
 		$logdatei=fopen("logs/logfile.txt","a");
