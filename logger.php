@@ -1,28 +1,30 @@
 <?php
+	$logfilename = "logs/logfile.txt";
+
 	if (!file_exists('logs')) {
 		mkdir('logs', 0777, true);
 	}
 
 	// write a line to log
 	function logMsg($msg) {
-		$logdatei=fopen("logs/logfile.txt","a");
-		fputs($logdatei,
+		$logfile=fopen($logfilename, "a");
+		fputs($logfile,
 		      date("d.m.Y, H:i:s", time()) .
 		      " " .
-		      $msg ."\n"
+		      $msg . "\n"
 		);
-		fclose($logdatei);
+		fclose($logfile);
 	}
 
 	// log the access to a file
-	$logdatei=fopen("logs/logfile.txt","a");
-	fputs($logdatei,
-		date("d.m.Y, H:i:s",time()) .
+	$logfile=fopen($logfilename, "a");
+	fputs($logfile,
+		date("d.m.Y, H:i:s", time()) .
 		", " . $_SERVER['REMOTE_ADDR'] .
 		", " . $_SERVER['REQUEST_METHOD'] .
 		", " . $_SERVER['PHP_SELF'] .
 		", " . $_SERVER['HTTP_USER_AGENT'] .
 		", " . $_SERVER['HTTP_REFERER'] ."\n"
 	);
-	fclose($logdatei);
+	fclose($logfile);
 ?>
