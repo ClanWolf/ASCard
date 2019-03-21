@@ -8,6 +8,7 @@
 		$logdatei=fopen("logs/logfile.txt","a");
 		fputs($logdatei,
 		      date("d.m.Y, H:i:s", time()) .
+		      " " .
 		      $msg ."\n"
 		);
 		fclose($logdatei);
