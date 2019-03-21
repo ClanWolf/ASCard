@@ -332,6 +332,10 @@ function setCircles(h, a, s, e, fc, mp, w) {
 		document.body.style.backgroundImage = "url('" + wallpaperNorm + "')";
 		document.getElementById('mechimage').src=originalmechimage;
 	}
+	if (h == 4) {
+		var wallpaperWrecked = "./images/body-bg_wrecked2.jpg";
+		document.body.style.backgroundImage = "url('" + wallpaperWrecked + "')";
+	}
 }
 
 function textSize(dec) {
