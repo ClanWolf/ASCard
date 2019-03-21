@@ -322,18 +322,19 @@ function setCircles(h, a, s, e, fc, mp, w) {
 	if (e == 2) {
 		mechstatus = 4;
 	}
+
+	var wallpaperNorm = "./images/body-bg_2.png";
+	var wallpaperWrecked = "./images/body-bg_wrecked2.jpg";
+
 	if (mechstatus == 4) {
 		// Mech destroyed
-		var wallpaperWrecked = "./images/body-bg_wrecked2.jpg";
 		document.body.style.backgroundImage = "url('" + wallpaperWrecked + "')";
 		document.getElementById('mechimage').src="images/mechs/" + deadmechimage;
 	} else {
-		var wallpaperNorm = "./images/body-bg_2.png";
 		document.body.style.backgroundImage = "url('" + wallpaperNorm + "')";
 		document.getElementById('mechimage').src=originalmechimage;
 	}
 	if (h == 4) {
-		var wallpaperWrecked = "./images/body-bg_wrecked2.jpg";
 		document.body.style.backgroundImage = "url('" + wallpaperWrecked + "')";
 	}
 }
