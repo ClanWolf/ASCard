@@ -1,7 +1,7 @@
 <?php
 session_start();
 // https://www.php-einfach.de/php-tutorial/php-sessions/
-
+	require('./logger.php');
 	if (!isset($_SESSION['playerid'])) {
 		echo "Not logged in... redirecting.<br>";
 		echo "<meta http-equiv='refresh' content='0;url=./login.php'>";
