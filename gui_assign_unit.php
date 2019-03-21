@@ -29,6 +29,7 @@ session_start();
 		} else {
 			// Error
 			echo "Error: " . $sql_update_assignment . "<br>" . mysqli_error($conn);
+			logMsg("Error: " . $sql_update_assignment . ": " . mysqli_error($conn));
 		}
 		echo "<meta http-equiv='refresh' content='0;url=./gui_select_unit.php'>";
 	}
