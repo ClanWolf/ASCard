@@ -176,6 +176,7 @@ session_start();
 						$mechnumber = $rowMech['mech_number'];
 						$mechchassisname = $rowMech['as_model'];
 						$mechstatusimage = $rowMech['mech_statusimageurl'];
+						$mechpointvalue = $rowMech['as_pv'];
 					}
 				}
 
@@ -194,7 +195,7 @@ session_start();
 				$mechDetailString = $mechDetailString."				<table width='100%' cellspacing=0 cellpadding=0 border=0px>\n";
 				$mechDetailString = $mechDetailString."					<tr>\n";
 				$mechDetailString = $mechDetailString."						<td nowrap width='99%' align='left' style='color:#AAAAAA;background-color:#444444;text-align:left;' class='mechselect_button_active'><a href=gui_play_mech.php?unit=".$unitidSelected."&chosenmech=".$c.">".$mechnumber." ".$pilotname."</a>\n";
-				$mechDetailString = $mechDetailString."							<br><span style='font-size:16px;'>".$mechchassisname."</span>\n";
+				$mechDetailString = $mechDetailString."							<br><span style='font-size:16px;'>".$mechchassisname." PV: ".$mechpointvalue."</span>\n";
 				$mechDetailString = $mechDetailString."						</td>\n";
 				$mechDetailString = $mechDetailString."						<td nowrap width='1%' style='background-color:#444444;text-align:right;' class='mechselect_button_active'>\n";
 				$mechDetailString = $mechDetailString."							<span style='font-size:16px;'>\n";
