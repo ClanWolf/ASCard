@@ -14,7 +14,7 @@ session_start();
 	$hideMinusButtons = $_SESSION['option3'];
 
 	$paramunitid = isset($_GET["unitid"]) ? $_GET["unitid"] : "";
-    $paramunitname = isset($_GET["unitname"]) ? $_GET["unitname"] : "";
+	$paramunitname = isset($_GET["unitname"]) ? $_GET["unitname"] : "";
 	$assignmech = isset($_GET["assignmech"]) ? $_GET["assignmech"] : "";
 	$deletestoredmech = isset($_GET["deletestoredmech"]) ? $_GET["deletestoredmech"] : "";
 
@@ -34,10 +34,19 @@ session_start();
 
 	if ($deletestoredmech == 1) {
 		$MECHID = isset($_GET["MECHID"]) ? $_GET["MECHID"] : "";
+		$PILOTID = 0;
 
 		$sql_pilotid = "select pilotid from asc_assign where mechid = ".$MECHID;
+		if (!($stmt = $conn->prepare($sql_pilotid))) {
+			echo "Prepare failed: (" . $conn->errno . ") " . $conn->error;
+		}
+		if ($stmt->execute()) {
+			$res = $stmt->get_result();
+			while ($row = $res->fetch_assoc()) {
+				$PILOTID = -1000;
+			}
+		}
 		
-		//$PILOTID =
 
 		// TODO: !!! Delete the mech (by mechid)
 		// TODO: !!! Delete the mechstatus (by mechid)
