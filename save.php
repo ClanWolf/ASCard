@@ -1,6 +1,8 @@
 <?php
 	session_start();
 	ini_set("display_errors", 1); error_reporting(E_ALL);
+
+	require('./logger.php');
 	require_once('./db.php');
 
 	$index = isset($_GET["index"]) ? $_GET["index"] : "";
