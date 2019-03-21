@@ -48,7 +48,7 @@ session_start();
 			$res = $stmt->get_result();
 			while ($row = $res->fetch_assoc()) {
 				$PILOTID = $row['pilotid'];
-				logMsg("Selected pilot id: " . $PILOTID);
+				logMsg("Found pilot id for given Mech: " . $PILOTID);
 			}
 		}
 
