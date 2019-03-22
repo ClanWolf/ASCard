@@ -266,7 +266,7 @@ session_start();
 			$entryValue = $mechid;
 			$entryString = $mechnumber." | ".$model." [".$pilotname."]";
 
-			echo "						<option value=".$entryValue.">".$entryString."</option>";
+			echo "						<option value=".$entryValue.">".$entryString."</option>\n";
 		}
 	}
 ?>
@@ -298,19 +298,19 @@ session_start();
 			</tr>
 <?php
 	if ($hideMinusButtons) {
-		echo "			<tr>";
-		echo "			    <td colspan='4'>";
-		echo "			</tr>";
+		echo "			<tr>\n";
+		echo "			    <td colspan='4'>\n";
+		echo "			</tr>\n";
 	} else {
-		echo "			<tr>";
-		echo "				<td colspan='4'><hr></td>";
-		echo "			</tr>";
-		echo "			<tr>";
-		echo "				<td colspan='3'>Delete selected Mech from Hangar (!)</td>";
-		echo "				<td align='right'>";
-		echo "					<a href='#' onClick='deleteStoredMech();'><i class='fa fa-fw fa-minus-square'></i></a>";
-		echo "				</td>";
-		echo "			</tr>";
+		echo "			<tr>\n";
+		echo "				<td colspan='4'><hr></td>\n";
+		echo "			</tr>\n";
+		echo "			<tr>\n";
+		echo "				<td colspan='3'>Delete selected Mech from Hangar (!)</td>\n";
+		echo "				<td align='right'>\n";
+		echo "					<a href='#' onClick='deleteStoredMech();'><i class='fa fa-fw fa-minus-square'></i></a>\n";
+		echo "				</td>\n";
+		echo "			</tr>\n";
 	}
 ?>
 		</table>
