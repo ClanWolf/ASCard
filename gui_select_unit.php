@@ -238,15 +238,15 @@ session_start();
 //	echo "			<td></td>\n";
 
 	foreach ($mechsInAllUnits as &$mechsInSingleUnit) {
-		echo "			<td style='width:170px;background-color:#333333;' valign='top'>";
-		echo "				<table cellspacing=2 cellpadding=0 border=0px style='border-collapse: collapse;'>";
+		echo "			<td style='width:170px;background-color:#333333;' valign='top'>\n";
+		echo "				<table cellspacing=2 cellpadding=0 border=0px style='border-collapse: collapse;'>\n";
 		foreach ($mechsInSingleUnit as &$mech) {
-			echo "					<tr>";
-			echo "						".$mech;
-			echo "					</tr>";
+			echo "					<tr>\n";
+			echo "						".$mech."\n";
+			echo "					</tr>\n";
 		}
-		echo "				</table>";
-		echo "			</td>";
+		echo "				</table>\n";
+		echo "			</td>\n";
 	}
 	echo "		</tr>\n";
 ?>
