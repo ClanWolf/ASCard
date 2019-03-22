@@ -195,10 +195,10 @@ session_start();
 				$mechDetailString = $mechDetailString."			<td nowrap onclick='location.href=\"gui_play_mech.php?unit=".$unitidSelected."&chosenmech=".$c."\"' style='width:100%;background-color:#444444;' class='mechselect_button_active'>\n";
 				$mechDetailString = $mechDetailString."				<table width='100%' cellspacing=0 cellpadding=0 border=0px>\n";
 				$mechDetailString = $mechDetailString."					<tr>\n";
-				$mechDetailString = $mechDetailString."						<td nowrap width='99%' align='left' style='color:#AAAAAA;background-color:#444444;text-align:left;' class='mechselect_button_active'><a href=gui_play_mech.php?unit=".$unitidSelected."&chosenmech=".$c."><span style='font-size:14px;'>".$mechnumber."</span> <span style='font-size:18px;'>".$pilotname."</a></span>\n";
+				$mechDetailString = $mechDetailString."						<td nowrap width='99%' align='left' style='color:#AAAAAA;background-color:#444444;text-align:left;'><a href=gui_play_mech.php?unit=".$unitidSelected."&chosenmech=".$c."><span style='font-size:14px;'>".$mechnumber."</span> <span style='font-size:18px;'>".$pilotname."</a></span>\n";
 				$mechDetailString = $mechDetailString."							<br><span style='font-size:16px;'>".$mechchassisname."</span> <span style='font-size:16px;'> (".$mechpointvalue.")</span>\n";
 				$mechDetailString = $mechDetailString."						</td>\n";
-				$mechDetailString = $mechDetailString."						<td nowrap width='1%' style='background-color:#444444;text-align:right;' class='mechselect_button_active'>\n";
+				$mechDetailString = $mechDetailString."						<td nowrap width='1%' style='background-color:#444444;text-align:right;'>\n";
 				$mechDetailString = $mechDetailString."							<span style='font-size:16px;'>\n";
 				
 				if ($hideMinusButtons) {
