@@ -190,13 +190,12 @@ session_start();
 				}
 
 				$mechDetailString = "";
-				// $mechDetailString = $mechDetailString."			<td nowrap onclick='location.href=\"gui_play_mech.php?unit=".$unitidSelected."&chosenmech=".$c."\"' style='background-color:#444444;' class='mechselect_button_active' align='right' valign='center'><div style='display:inline-block;height:100%;vertical-align:middle;'><img style='vertical-align:middle;' src='".$mechstatusimage."' height='40px'></div></td>\n";
-				$mechDetailString = $mechDetailString."			<td nowrap onclick='location.href=\"gui_play_mech.php?unit=".$unitidSelected."&chosenmech=".$c."\"' style='background-color:#444444;' class='mechselect_button_active' align='right' valign='center'><div style='display:inline-block;vertical-align:middle;'><img style='vertical-align:middle;' src='".$mechstatusimage."' height='40px'></div></td>\n";
+				$mechDetailString = $mechDetailString."			<td nowrap onclick='location.href=\"gui_play_mech.php?unit=".$unitidSelected."&chosenmech=".$c."\"' style='background-color:#444444;' class='mechselect_button_active' align='right' valign='center'><div style='display:inline-block;height:100%;vertical-align:middle;'><img style='vertical-align:middle;' src='".$mechstatusimage."' height='40px'></div></td>\n";
 				$mechDetailString = $mechDetailString."			<td nowrap onclick='location.href=\"gui_play_mech.php?unit=".$unitidSelected."&chosenmech=".$c."\"' style='width:100%;background-color:#444444;' class='mechselect_button_active'>\n";
 				$mechDetailString = $mechDetailString."				<table width='100%' cellspacing=0 cellpadding=0 border=0px>\n";
 				$mechDetailString = $mechDetailString."					<tr>\n";
 				$mechDetailString = $mechDetailString."						<td nowrap width='99%' align='left' style='color:#AAAAAA;background-color:#444444;text-align:left;'><a href=gui_play_mech.php?unit=".$unitidSelected."&chosenmech=".$c."><span style='font-size:14px;'>".$mechnumber."</span> <span style='font-size:18px;'>".$pilotname."</a></span>\n";
-				$mechDetailString = $mechDetailString."							<br><span style='font-size:16px;'>".$mechchassisname."</span> <span style='font-size:16px;'> (".$mechpointvalue.")</span>\n";
+				$mechDetailString = $mechDetailString."							<br><span style='font-size:16px;'>".$mechchassisname." (".$mechpointvalue.")</span>\n";
 				$mechDetailString = $mechDetailString."						</td>\n";
 				$mechDetailString = $mechDetailString."						<td nowrap width='1%' style='background-color:#444444;text-align:right;'>\n";
 				$mechDetailString = $mechDetailString."							<span style='font-size:16px;'>\n";
@@ -219,7 +218,6 @@ session_start();
 	}
 	echo "		</tr>\n";
 	echo "		<tr>\n";
-//	echo "			<td></td>\n";
 	echo "			<td nowrap style='text-align:center;width:200px;height:30px;background-color:#transparent;'>\n";
 	echo "				<a href='".$assignMechToUnitLinkArray[0]."'><i class='fa fa-fw fa-plus-square'></i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\n";
 	echo "				<a href='".$addMechToUnitLinkArray[0]."'><i class='fa fa-asterisk'></i></a>\n";
@@ -234,7 +232,6 @@ session_start();
 	echo "			</td>\n";
 	echo "		</tr>\n";
 	echo "		<tr>\n";
-//	echo "			<td></td>\n";
 
 	foreach ($mechsInAllUnits as &$mechsInSingleUnit) {
 		echo "			<td style='width:170px;background-color:#333333;' valign='top'>\n";
