@@ -53,14 +53,52 @@ session_start();
 		}
 
 		// TODO: !!! Delete the mech (by mechid)
-		// TODO: !!! Delete the mechstatus (by mechid)
-		// TODO: !!! Delete the pilot (by pilotid)
-		// TODO: !!! Delete the assignment (by mechid and pilotid / unitid is null at this point)
-
 		//"delete from asc_mech where mechid = ".$MECHID;
+		$sqldeletemech = "DELETE FROM asc_mech WHERE mechid = ".$MECHID;
+		if (mysqli_query($conn, $sqldeletemech)) {
+			// Success
+			logMsg("Deleted Mech: ".$MECHID);
+		} else {
+			// Error
+			echo "Error: " . $sqldeletemech . "<br>" . mysqli_error($conn);
+			logMsg("Error: " . $sqldeletemech . ": " . mysqli_error($conn);
+		}
+		
+		// TODO: !!! Delete the mechstatus (by mechid)
 		//"delete from asc_mechstatus where mechid = ".$MECHID;
+		$sqldeletemechstatus = "DELETE FROM asc_mechstatus WHERE mechid = ".$MECHID;
+		if (mysqli_query($conn, $sqldeletemechstatus)) {
+			// Success
+			logMsg("Deleted MechStatus for Mech: ".$MECHID);
+		} else {
+			// Error
+			echo "Error: " . $sqldeletemechstatus . "<br>" . mysqli_error($conn);
+			logMsg("Error: " . $sqldeletemechstatus . ": " . mysqli_error($conn);
+		}
+
+		// TODO: !!! Delete the pilot (by pilotid)
 		//"delete from asc_pilot where pilotid = ".$PILOTID;
+		$sqldeletepilot = "DELETE FROM asc_pilot WHERE mechid = ".$PILOTID;
+		if (mysqli_query($conn, $sqldeletepilot)) {
+			// Success
+			logMsg("Deleted Pilot: ".$PILOTID);
+		} else {
+			// Error
+			echo "Error: " . $sqldeletepilot . "<br>" . mysqli_error($conn);
+			logMsg("Error: " . $sqldeletepilot . ": " . mysqli_error($conn);
+		}
+
+		// TODO: !!! Delete the assignment (by mechid and pilotid / unitid is null at this point)		
 		//"delete from asc_assign where pilotid = ".$PILOTID." and mechid = ".$MECHID;
+		$sqldeleteassign = "DELETE FROM asc_assign WHERE pilotid = ".$PILOTID." and mechid = ".$MECHID;
+		if (mysqli_query($conn, $sqldeleteassign)) {
+			// Success
+			logMsg("Deleted Mech assignment for Mech: ".$MECHID." and pilot: ".$PILOTID);
+		} else {
+			// Error
+			echo "Error: " . $sqldeleteassign . "<br>" . mysqli_error($conn);
+			logMsg("Error: " . $sqldeleteassign . ": " . mysqli_error($conn);
+		}
 
 		echo "<meta http-equiv='refresh' content='0;url=./gui_select_unit.php'>";
 	}
