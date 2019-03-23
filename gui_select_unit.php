@@ -102,11 +102,11 @@ session_start();
 					<div><a style="color: #eee;" href="./logout.php"><i class="fa fa-power-off" aria-hidden="true"></i></a></div>
 				</td>
 				<td nowrap onclick="location.href='./gui_select_unit.php'" width="17%"><div class='mechselect_button_active'><a href='./gui_select_unit.php'>ROSTER</a><br><span style='font-size:16px;'>Choose a Mech</span></div></td>
-				<td nowrap onclick="location.href='./gui_enemies.php'" width="17%"><div class='mechselect_button_normal'><a href='./gui_enemies.php'>OPFOR</a><br><span style='font-size:16px;'>Enemy Mechs</span></div></td>
+				<td nowrap onclick="location.href='./gui_select_enemy_unit.php'" width="17%"><div class='mechselect_button_normal'><a href='./gui_select_enemy_unit.php'>OPFOR</a><br><span style='font-size:16px;'>Enemy Mechs</span></div></td>
 				<td nowrap onclick="location.href='./gui_assign_unit.php'" width="17%"><div class='mechselect_button_normal'><a href='./gui_assign_unit.php'>ASSIGN</a><br><span style='font-size:16px;'>Assign Mech</span></div></td>
 				<td nowrap onclick="location.href='./gui_create_mech.php'" width="17%"><div class='mechselect_button_normal'><a href='./gui_create_mech.php'>ADD</a><br><span style='font-size:16px;'>Create a Mech</span></div></td>
 				<td nowrap onclick="location.href='./gui_create_player.php'" width="17%"><div class='mechselect_button_normal'><a href='./gui_create_player.php'>PLAYER</a><br><span style='font-size:16px;'>Manage players</span></div></td>
-				<td nowrap onclick="location.href='./gui_options.php'" width="17%"><div class='mechselect_button_normal'><a href='./gui_options.php'>OPTIONS</a><br><span style='font-size:16px;'>Change options</span></div></td>
+				<td nowrap onclick="location.href='./gui_edit_option.php'" width="17%"><div class='mechselect_button_normal'><a href='./gui_edit_option.php'>OPTIONS</a><br><span style='font-size:16px;'>Change options</span></div></td>
 				<td nowrap width="60px" style="background: rgba(50,50,50,1.0); text-align: center; vertical-align: middle;"><div id='loggedOnUser'></div></td>
 			</tr>
 		</table>
@@ -144,7 +144,7 @@ session_start();
 				echo "				<table style='width:100%;' cellspacing=0 cellpadding=0>\n";
 				echo "					<tr>\n";
 				echo "						<td style='text-align:left;'>\n";
-				echo "							<a href='gui__edit_unit.php?unit=".$unitidSelected."'><i class='fa fa-edit'></i></a>\n";
+				echo "							<a href='gui_edit_unit.php?unit=".$unitidSelected."'><i class='fa fa-edit'></i></a>\n";
 				echo "						</td>\n";
 				echo "						<td style='text-align:center;'>\n";
 				echo "							<a href='gui_play_mech.php?unit=".$unitidSelected."'>".$forcenameSelected."</a>\n";
@@ -190,12 +190,15 @@ session_start();
 				}
 
 				$mechDetailString = "";
-				$mechDetailString = $mechDetailString."			<td nowrap onclick='location.href=\"gui_play_mech.php?unit=".$unitidSelected."&chosenmech=".$c."\"' style='background-color:#444444;' class='mechselect_button_active' align='right' valign='center'><div style='display:inline-block;height:100%;vertical-align:middle;'><img style='vertical-align:middle;' src='".$mechstatusimage."' height='40px'></div></td>\n";
+				$mechDetailString = $mechDetailString."			<td nowrap onclick='location.href=\"gui_play_mech.php?unit=".$unitidSelected."&chosenmech=".$c."\"' style='background-color:#444444;' class='mechselect_button_active' align='right' valign='center'><div style='display:inline-block;height:100%;vertical-align:middle;'><img style='vertical-align:middle;' src='".$mechstatusimage."' height='30px'><br><span style='font-size:12px;'>".$mechnumber."</span></div></td>\n";
 				$mechDetailString = $mechDetailString."			<td nowrap onclick='location.href=\"gui_play_mech.php?unit=".$unitidSelected."&chosenmech=".$c."\"' style='width:100%;background-color:#444444;' class='mechselect_button_active'>\n";
 				$mechDetailString = $mechDetailString."				<table width='100%' cellspacing=0 cellpadding=0 border=0px>\n";
 				$mechDetailString = $mechDetailString."					<tr>\n";
-				$mechDetailString = $mechDetailString."						<td nowrap width='99%' align='left' style='color:#AAAAAA;background-color:#444444;text-align:left;'><a href=gui_play_mech.php?unit=".$unitidSelected."&chosenmech=".$c."><span style='font-size:14px;'>".$mechnumber."</span> <span style='font-size:18px;'>".$pilotname."</a></span>\n";
-				$mechDetailString = $mechDetailString."							<br><span style='font-size:16px;'>".$mechchassisname." (".$mechpointvalue.")</span>\n";
+
+// <span style='font-size:16px;'>PV: ".$mechpointvalue."</span>
+
+				$mechDetailString = $mechDetailString."						<td nowrap width='99%' align='left' style='color:#AAAAAA;background-color:#444444;text-align:left;'><a href=gui_play_mech.php?unit=".$unitidSelected."&chosenmech=".$c."> <span style='font-size:30px;'>".$pilotname."</span></a></span>\n";
+				$mechDetailString = $mechDetailString."							<br><span style='font-size:16px;'>".$mechchassisname."</span>\n";
 				$mechDetailString = $mechDetailString."						</td>\n";
 				$mechDetailString = $mechDetailString."						<td nowrap width='1%' style='background-color:#444444;text-align:right;'>\n";
 				$mechDetailString = $mechDetailString."							<span style='font-size:16px;'>\n";

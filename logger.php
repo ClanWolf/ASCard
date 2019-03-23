@@ -1,22 +1,22 @@
 <?php
-	$logfilename = "logs/logfile.txt";
-
 	if (!file_exists('logs')) {
 		mkdir('logs', 0777, true);
 	}
 
 	// write a line to log
 	function logMsg($msg) {
+		$logfilename = "logs/logfile.txt";
 		$logfile=fopen($logfilename, "a");
 		fputs($logfile,
-		      date("d.m.Y, H:i:s", time()).
-		      " ".
-		      $msg."\n"
+			date("d.m.Y, H:i:s", time()).
+			" ".
+			$msg."\n"
 		);
 		fclose($logfile);
 	}
 
 	// log the access to a file
+	$logfilename = "logs/logfile.txt";
 	$logfile=fopen($logfilename, "a");
 	fputs($logfile,
 		date("d.m.Y, H:i:s", time()).

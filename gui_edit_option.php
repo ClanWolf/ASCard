@@ -21,7 +21,7 @@ session_start();
 		// storing changed options to database
 		$sql_update_options = "UPDATE asc_options SET OPTION1=".$opt1.", OPTION2=".$opt2.", OPTION3=".$opt3." WHERE playerid = ".$pid;
 		$result_update_options = mysqli_query($conn, $sql_update_options);
-		echo "<meta http-equiv='refresh' content='0;url=./gui_options.php'>";
+		echo "<meta http-equiv='refresh' content='0;url=./gui_edit_option.php'>";
 		die();
 	} else {
 		// getting options from database
@@ -121,7 +121,7 @@ session_start();
 					if (na.substring(0, 4) == "OPT3") { opt3 = el1.checked }
 				}
 			})
-			var url="./gui_options.php?opt1="+opt1+"&opt2="+opt2+"&opt3="+opt3;
+			var url="./gui_edit_option.php?opt1="+opt1+"&opt2="+opt2+"&opt3="+opt3;
 			// alert (url);
 			window.location.href = url;
 		}
@@ -155,11 +155,11 @@ session_start();
 					<div><a style="color: #eee;" href="./logout.php"><i class="fa fa-power-off" aria-hidden="true"></i></a></div>
 				</td>
 				<td nowrap onclick="location.href='./gui_select_unit.php'" width="17%"><div class='mechselect_button_normal'><a href='./gui_select_unit.php'>ROSTER</a><br><span style='font-size:16px;'>Choose a Mech</span></div></td>
-				<td nowrap onclick="location.href='./gui_enemies.php'" width="17%"><div class='mechselect_button_normal'><a href='./gui_enemies.php'>OPFOR</a><br><span style='font-size:16px;'>Enemy Mechs</span></div></td>
+				<td nowrap onclick="location.href='./gui_select_enemy_unit.php'" width="17%"><div class='mechselect_button_normal'><a href='./gui_select_enemy_unit.php'>OPFOR</a><br><span style='font-size:16px;'>Enemy Mechs</span></div></td>
 				<td nowrap onclick="location.href='./gui_assign_unit.php'" width="17%"><div class='mechselect_button_normal'><a href='./gui_assign_unit.php'>ASSIGN</a><br><span style='font-size:16px;'>Assign Mech</span></div></td>
 				<td nowrap onclick="location.href='./gui_create_mech.php'" width="17%"><div class='mechselect_button_normal'><a href='./gui_create_mech.php'>ADD</a><br><span style='font-size:16px;'>Create a Mech</span></div></td>
 				<td nowrap onclick="location.href='./gui_create_player.php'" width="17%"><div class='mechselect_button_normal'><a href='./gui_create_player.php'>PLAYER</a><br><span style='font-size:16px;'>Manage players</span></div></td>
-				<td nowrap onclick="location.href='./gui_options.php'" width="17%"><div class='mechselect_button_active'><a href='./gui_options.php'>OPTIONS</a><br><span style='font-size:16px;'>Change options</span></div></td>
+				<td nowrap onclick="location.href='./gui_edit_option.php'" width="17%"><div class='mechselect_button_active'><a href='./gui_edit_option.php'>OPTIONS</a><br><span style='font-size:16px;'>Change options</span></div></td>
 				<td nowrap width="60px" style="background: rgba(50,50,50,1.0); text-align: center; vertical-align: middle;"><div id='loggedOnUser'></div></td>
 			</tr>
 		</table>

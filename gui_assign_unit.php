@@ -52,8 +52,6 @@ session_start();
 			}
 		}
 
-		// TODO: !!! Delete the mech (by mechid)
-		//"delete from asc_mech where mechid = ".$MECHID;
 		$sqldeletemech = "DELETE FROM asc_mech WHERE mechid = ".$MECHID;
 		if (mysqli_query($conn, $sqldeletemech)) {
 			// Success
@@ -61,11 +59,9 @@ session_start();
 		} else {
 			// Error
 			echo "Error: " . $sqldeletemech . "<br>" . mysqli_error($conn);
-			logMsg("Error: " . $sqldeletemech . ": " . mysqli_error($conn);
+			logMsg("Error: " . $sqldeletemech . ": " . mysqli_error($conn));
 		}
-		
-		// TODO: !!! Delete the mechstatus (by mechid)
-		//"delete from asc_mechstatus where mechid = ".$MECHID;
+
 		$sqldeletemechstatus = "DELETE FROM asc_mechstatus WHERE mechid = ".$MECHID;
 		if (mysqli_query($conn, $sqldeletemechstatus)) {
 			// Success
@@ -73,23 +69,19 @@ session_start();
 		} else {
 			// Error
 			echo "Error: " . $sqldeletemechstatus . "<br>" . mysqli_error($conn);
-			logMsg("Error: " . $sqldeletemechstatus . ": " . mysqli_error($conn);
+			logMsg("Error: " . $sqldeletemechstatus . ": " . mysqli_error($conn));
 		}
 
-		// TODO: !!! Delete the pilot (by pilotid)
-		//"delete from asc_pilot where pilotid = ".$PILOTID;
-		$sqldeletepilot = "DELETE FROM asc_pilot WHERE mechid = ".$PILOTID;
+		$sqldeletepilot = "DELETE FROM asc_pilot WHERE pilotid = ".$PILOTID;
 		if (mysqli_query($conn, $sqldeletepilot)) {
 			// Success
 			logMsg("Deleted Pilot: ".$PILOTID);
 		} else {
 			// Error
 			echo "Error: " . $sqldeletepilot . "<br>" . mysqli_error($conn);
-			logMsg("Error: " . $sqldeletepilot . ": " . mysqli_error($conn);
+			logMsg("Error: " . $sqldeletepilot . ": " . mysqli_error($conn));
 		}
 
-		// TODO: !!! Delete the assignment (by mechid and pilotid / unitid is null at this point)		
-		//"delete from asc_assign where pilotid = ".$PILOTID." and mechid = ".$MECHID;
 		$sqldeleteassign = "DELETE FROM asc_assign WHERE pilotid = ".$PILOTID." and mechid = ".$MECHID;
 		if (mysqli_query($conn, $sqldeleteassign)) {
 			// Success
@@ -97,10 +89,10 @@ session_start();
 		} else {
 			// Error
 			echo "Error: " . $sqldeleteassign . "<br>" . mysqli_error($conn);
-			logMsg("Error: " . $sqldeleteassign . ": " . mysqli_error($conn);
+			logMsg("Error: " . $sqldeleteassign . ": " . mysqli_error($conn));
 		}
 
-		echo "<meta http-equiv='refresh' content='0;url=./gui_select_unit.php'>";
+		//echo "<meta http-equiv='refresh' content='0;url=./gui_select_unit.php'>";
 	}
 ?>
 
@@ -234,11 +226,11 @@ session_start();
 					<div><a style="color: #eee;" href="./logout.php"><i class="fa fa-power-off" aria-hidden="true"></i></a></div>
 				</td>
 				<td nowrap onclick="location.href='./gui_select_unit.php'" width="17%"><div class='mechselect_button_normal'><a href='./gui_select_unit.php'>ROSTER</a><br><span style='font-size:16px;'>Choose a Mech</span></div></td>
-				<td nowrap onclick="location.href='./gui_enemies.php'" width="17%"><div class='mechselect_button_normal'><a href='./gui_enemies.php'>OPFOR</a><br><span style='font-size:16px;'>Enemy Mechs</span></div></td>
+				<td nowrap onclick="location.href='./gui_select_enemy_unit.php'" width="17%"><div class='mechselect_button_normal'><a href='./gui_select_enemy_unit.php'>OPFOR</a><br><span style='font-size:16px;'>Enemy Mechs</span></div></td>
 				<td nowrap onclick="location.href='./gui_assign_unit.php'" width="17%"><div class='mechselect_button_active'><a href='./gui_assign_unit.php'>ASSIGN</a><br><span style='font-size:16px;'>Assign Mech</span></div></td>
 				<td nowrap onclick="location.href='./gui_create_mech.php'" width="17%"><div class='mechselect_button_normal'><a href='./gui_create_mech.php'>ADD</a><br><span style='font-size:16px;'>Create a Mech</span></div></td>
 				<td nowrap onclick="location.href='./gui_create_player.php'" width="17%"><div class='mechselect_button_normal'><a href='./gui_create_player.php'>PLAYER</a><br><span style='font-size:16px;'>Manage players</span></div></td>
-				<td nowrap onclick="location.href='./gui_options.php'" width="17%"><div class='mechselect_button_normal'><a href='./gui_options.php'>OPTIONS</a><br><span style='font-size:16px;'>Change options</span></div></td>
+				<td nowrap onclick="location.href='./gui_edit_option.php'" width="17%"><div class='mechselect_button_normal'><a href='./gui_edit_option.php'>OPTIONS</a><br><span style='font-size:16px;'>Change options</span></div></td>
 				<td nowrap width="60px" style="background: rgba(50,50,50,1.0); text-align: center; vertical-align: middle;"><div id='loggedOnUser'></div></td>
 			</tr>
 		</table>
