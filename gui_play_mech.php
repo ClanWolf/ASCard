@@ -89,8 +89,20 @@ session_start();
 <div id="header">
 	<table style="width:100%;height:60px;border:none;border-collapse:collapse;background:rgba(50,50,50,1.0);" cellspacing="0" cellpadding="0">
 		<tr>
-			<td nowrap onclick="location.href='./index.html'" width="60px" style="background: rgba(50,50,50,1.0); text-align: center; vertical-align: middle;">
-				<div><a style="color: #eee;" href="./index.html"><i class="fa fa-bars" aria-hidden="true"></i></a></div>
+			<td nowrap onclick="location.href='./index.html'" width="50px" style="background:rgba(50,50,50,1.0); text-align:center;vertical-align:middle;">
+				<div><a style="color:#eee;" href="./index.html"><i class="fa fa-bars" aria-hidden="true"></i></a></div>
+			</td>
+			<td>
+				<table width='100%' cellspacing='0' cellpadding='0' class='mechselect_button_active_left' style="background:rgba(50,50,50,1.0);">
+					<tr>
+						<td nowrap width='20px' align='center' valign='center'>
+							<div style='display:inline-block;height:100%;vertical-align:middle;'>
+								<span style='font-size:16px;'>RND</span><br>
+								<span style='font-size:16px;color:#ff0;'>1</span>
+							</div>
+						</td>
+					</tr>
+				</table>
 			</td>
 
 <?php
@@ -99,9 +111,9 @@ session_start();
 	for ($i4 = 1; $i4 <= $size; $i4++) {
 		$meli="./gui_play_mech.php?unit=".$unitid."&chosenmech=".$i4;
 		if ($chosenMechIndex == $i4) {
-			echo "<td width='".$width."%' nowrap onclick=\"location.href='".$meli."'\"><table width='100%' cellspacing='0' cellpadding='0' class='mechselect_button_active_left'><tr><td nowrap width='30px' align='center' valign='center'><div style='display:inline-block;height:100%;vertical-align:middle;'><img id='mechstatusimagemenu' style='vertical-align:middle;' src='".$array_MECH_IMG_STATUS[$i4]."' height='30px' width='25px'></div></td><td nowrap width='100%'><div><a href='".$meli."'><span style='font-size:15px;'>".$array_MECH_NUMBER[$i4]."</span> ".$array_PILOT[$i4]."</a><br><span style='font-size:14px;'>".$array_MECH_MODEL[$i4]."</span></div></td></tr></table></td>\r\n";
+			echo "<td width='".$width."%' nowrap onclick=\"location.href='".$meli."'\"><table width='100%' cellspacing='0' cellpadding='0' class='mechselect_button_active_left'><tr><td nowrap width='30px' align='center' valign='center'><div style='display:inline-block;height:100%;vertical-align:middle;'><img id='mechstatusimagemenu' style='vertical-align:middle;' src='".$array_MECH_IMG_STATUS[$i4]."' height='30px' width='25px'></div></td><td nowrap width='100%'><div><a href='".$meli."'><span style='font-size:15px;'>".$array_MECH_NUMBER[$i4]."</span> ".$array_PILOT[$i4]."</a>&nbsp;&nbsp;<img src='images/check_green.png' width='20px'><br><span style='font-size:14px;'>".$array_MECH_MODEL[$i4]."</span></div></td></tr></table></td>\r\n";
 		} else {
-			echo "<td width='".$width."%' nowrap onclick=\"location.href='".$meli."'\"><table width='100%' cellspacing='0' cellpadding='0' class='mechselect_button_normal_left'><tr><td nowrap width='30px' align='center' valign='center'><div style='display:inline-block;height:100%;vertical-align:middle;'><img style='vertical-align:middle;' src='".$array_MECH_IMG_STATUS[$i4]."' height='30px' width='25px'></div></td><td nowrap width='100%'><div><a href='".$meli."'><span style='font-size:15px;'>".$array_MECH_NUMBER[$i4]."</span> ".$array_PILOT[$i4]."</a><br><span style='font-size:14px;'>".$array_MECH_MODEL[$i4]."</span></div></td></tr></table></td>\r\n";
+			echo "<td width='".$width."%' nowrap onclick=\"location.href='".$meli."'\"><table width='100%' cellspacing='0' cellpadding='0' class='mechselect_button_normal_left'><tr><td nowrap width='30px' align='center' valign='center'><div style='display:inline-block;height:100%;vertical-align:middle;'><img style='vertical-align:middle;' src='".$array_MECH_IMG_STATUS[$i4]."' height='30px' width='25px'></div></td><td nowrap width='100%'><div><a href='".$meli."'><span style='font-size:15px;'>".$array_MECH_NUMBER[$i4]."</span> ".$array_PILOT[$i4]."</a>&nbsp;&nbsp;<img src='images/check_blue.png' width='20px'><br><span style='font-size:14px;'>".$array_MECH_MODEL[$i4]."</span></div></td></tr></table></td>\r\n";
 		}
 	}
 ?>

@@ -2,12 +2,15 @@
 // in order to avoid security error messages and content blocking
 var corsproxyprefix1 = "https://cors-anywhere.herokuapp.com/";
 var corsproxyprefix2 = "https://cors.io/?";
+var corsproxyprefix3 = "https://yacdn.org/proxy/";
+
+var corsproxyprefix = corsproxyprefix1;
 
 function getMechList(filter, tech, minTon, maxTon) {
 	var optionList = '';
 	optionList = optionList + "<option><<< Select Mech >>></option>";
 
-	var url = corsproxyprefix2 + 'http://www.masterunitlist.info/Unit/QuickList';
+	var url = corsproxyprefix + 'http://www.masterunitlist.info/Unit/QuickList';
 		url = url + '?Name='			+ filter;
 		url = url + '&HasBV=false';
 		url = url + '&MinTons='			+ minTon;
@@ -86,8 +89,17 @@ function getMechDetails(id) {
 		return;
 	}
 
-	var url = corsproxyprefix2 + 'http://www.masterunitlist.info/Unit/QuickDetails?id=' + id;
+	var url = corsproxyprefix + 'http://www.masterunitlist.info/Unit/QuickDetails?id=' + id;
 	$.getJSON(url, function (json) {
+		
+		// An asterisk (*) --> &#42;
+		var sp = json.BFAbilities;
+		if (sp) {
+			var spcl = sp.replace(/\*/g, "&#42;");
+		} else {
+			var spcl = "-";
+		}
+		
 		document.getElementById("TP").value=json.BFType;
 		document.getElementById("SZ").value=json.BFSize;
 		document.getElementById("TMM").value=json.BFTMM;
@@ -101,7 +113,7 @@ function getMechDetails(id) {
 		document.getElementById("OV").value=json.BFOverheat;
 		document.getElementById("A").value=json.BFArmor;
 		document.getElementById("S").value=json.BFStructure;
-		document.getElementById("SPCL").value=json.BFAbilities;
+		document.getElementById("SPCL").value=spcl;
 
 		document.getElementById("PVA").value=json.BFPointValue;
 	});
