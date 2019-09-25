@@ -177,6 +177,7 @@ session_start();
 					Block other players units
 				</td>
 			</tr>
+			<!--
 			<tr>
 				<td align="left" class='datalabel'>
 					<label class="bigcheck"><input onchange="changeOption();" type="checkbox" class="bigcheck" name="OPT2" value="yes"/><span class="bigcheck-target"></span></label>&nbsp;&nbsp;
@@ -186,6 +187,7 @@ session_start();
 				</td>
 			</tr>
 			<tr><td colspan="2"><hr></td></tr>
+			-->
 			<tr>
 				<td align="left" class='datalabel'>
 					<label class="bigcheck"><input onchange="changeOption();" type="checkbox" class="bigcheck" name="OPT3" value="yes"/><span class="bigcheck-target"></span></label>&nbsp;&nbsp;

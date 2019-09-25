@@ -279,9 +279,9 @@ function setCircles(h, a, s, e, fc, mp, w) {
 
 	// recalculate the TMM according to changed movement
 	var tmpTMM = 0;
-	if(updatedmovementpointsground < 5) {
+	       if(updatedmovementpointsground <  5) {
 		tmpTMM = 0;
-	} else if(updatedmovementpointsground < 9 ) {
+	} else if(updatedmovementpointsground <  9 ) {
 		tmpTMM = 1;
 	} else if(updatedmovementpointsground < 13 ) {
 		tmpTMM = 2;
@@ -470,7 +470,7 @@ function rolldice() {
 
 	if (ccc == 12) {
 		var resMes = "";
-		if (res ==  2) { resMes = "Ammo hit"; }
+		     if (res ==  2) { resMes = "Ammo hit"; }
 		else if (res ==  3) { resMes = "Engine hit"; }
 		else if (res ==  4) { resMes = "Fire control hit"; }
 		else if (res ==  5) { resMes = "No critical hit"; }

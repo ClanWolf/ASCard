@@ -63,6 +63,10 @@ session_start();
 	if (empty($chosenMechIndex)) {
 		$chosenMechIndex = 1;
 	}
+	$movd = $_GET["movd"];
+	if (empty($movd)) {
+		$movd=0;
+	}
 	require('./db_getdata.php');
 
 	echo "<script>";
@@ -111,6 +115,7 @@ session_start();
 	for ($i4 = 1; $i4 <= $size; $i4++) {
 		$meli="./gui_play_mech.php?unit=".$unitid."&chosenmech=".$i4;
 		if ($chosenMechIndex == $i4) {
+			$meli=$meli."&movd=1";
 			echo "<td width='".$width."%' nowrap onclick=\"location.href='".$meli."'\"><table width='100%' cellspacing='0' cellpadding='0' class='mechselect_button_active_left'><tr><td nowrap width='30px' align='center' valign='center'><div style='display:inline-block;height:100%;vertical-align:middle;'><img id='mechstatusimagemenu' style='vertical-align:middle;' src='".$array_MECH_IMG_STATUS[$i4]."' height='30px' width='25px'></div></td><td nowrap width='100%'><div><a href='".$meli."'><span style='font-size:15px;'>".$array_MECH_NUMBER[$i4]."</span> ".$array_PILOT[$i4]."</a>&nbsp;&nbsp;<img src='images/check_green.png' width='20px'><br><span style='font-size:14px;'>".$array_MECH_MODEL[$i4]."</span></div></td></tr></table></td>\r\n";
 		} else {
 			echo "<td width='".$width."%' nowrap onclick=\"location.href='".$meli."'\"><table width='100%' cellspacing='0' cellpadding='0' class='mechselect_button_normal_left'><tr><td nowrap width='30px' align='center' valign='center'><div style='display:inline-block;height:100%;vertical-align:middle;'><img style='vertical-align:middle;' src='".$array_MECH_IMG_STATUS[$i4]."' height='30px' width='25px'></div></td><td nowrap width='100%'><div><a href='".$meli."'><span style='font-size:15px;'>".$array_MECH_NUMBER[$i4]."</span> ".$array_PILOT[$i4]."</a>&nbsp;&nbsp;<img src='images/check_blue.png' width='20px'><br><span style='font-size:14px;'>".$array_MECH_MODEL[$i4]."</span></div></td></tr></table></td>\r\n";
