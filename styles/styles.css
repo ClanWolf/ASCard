@@ -187,13 +187,13 @@ a:hover {
 	background-size: cover;
 }
 #editMovementValues {
-	z-index: 700;
+	z-index: 200;
 	position: absolute;
 	top: 50px;
 	bottom: 40px;
 	left: 0px;
 	right: 0px;
-	background-image: url('../images/block.png');
+	background-image: url('../images/editmovement.png');
 	opacity: 1.00;
 	background-size: cover;
 }

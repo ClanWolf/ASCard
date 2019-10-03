@@ -356,7 +356,26 @@ session_start();
 <?php
 	if ($movd==1) {
 		if ($playable) {
-			echo "<div id='editMovementValues'></div>";
+			echo "<div id='editMovementValues'>\n";
+			echo "  <table class='options' cellspacing=4 cellpadding=4 border=0px>\n";
+			echo "		<tr>\n";
+			echo "			<td align='left' class='datalabel'>\n";
+			echo "				<label class='bigcheck'><input onchange='changeOption();' type='checkbox' class='bigcheck' name='JUMPED' value='yes'/><span class='bigcheck-target'></span></label>\n";
+			echo "			</td>\n";
+			echo "			<td align='left' class='datalabel'>\n";
+			echo "				Unit has jumped\n";
+			echo "			</td>\n";
+			echo "		</tr>\n";
+			echo "		<tr>\n";
+			echo "			<td align='left' class='datalabel'>\n";
+			echo "				<label class='bigcheck'><input onchange='changeOption();' type='checkbox' class='bigcheck' name='FIRED' value='yes'/><span class='bigcheck-target'></span></label>\n";
+ 			echo "			</td>\n";
+ 			echo "			<td align='left' class='datalabel'>\n";
+			echo "				Unit has fired\n";
+			echo "			</td>\n";
+			echo "		</tr>\n";
+			echo "	</table>\n";
+			echo "</div>\n";
 		}
 	}
 ?>

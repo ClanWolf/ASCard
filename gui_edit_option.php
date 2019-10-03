@@ -195,7 +195,7 @@ session_start();
 				<td align="left" class="datalabel">
 					Hide delete icons (play mode)
 				</td>
-</tr>
+			</tr>
 		</table>
 	</div>
 
