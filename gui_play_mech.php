@@ -233,7 +233,7 @@ session_start();
 								<label class="bigcheck"><input onchange="readCircles(<?= $array_MECH_DBID[$chosenMechIndex] ?>, <?= $array_A_MAX[$chosenMechIndex] ?>, <?= $array_S_MAX[$chosenMechIndex] ?>);" type="checkbox" class="bigcheck" name="H3" id="H3" value="yes"/><span class="bigcheck-target"></span></label>
 								<label class="bigcheck"><input onchange="readCircles(<?= $array_MECH_DBID[$chosenMechIndex] ?>, <?= $array_A_MAX[$chosenMechIndex] ?>, <?= $array_S_MAX[$chosenMechIndex] ?>);" type="checkbox" class="bigcheck" name="H4" id="H4" value="yes"/><span class="bigcheck-target"></span></label>
 							</td>
-							<td class="datalabel" width="5%" style="text-align: right;">&nbsp;&nbsp;&nbsp;(SHDN)</td>
+							<td class="datalabel" width="5%" style="text-align: right;">&nbsp;&nbsp;&nbsp;(SD)</td>
 						</tr>
 					</table>
 				</div>
@@ -270,7 +270,7 @@ session_start();
 				<div class="dataarea">
 					<table width="100%">
 						<tr>
-							<td nowrap width="10%" class="datalabel" width="100%">SPCL:</td>
+							<td nowrap width="10%" class="datalabel" width="100%">SP:</td>
 							<td nowrap width="90%" class="datavalue_thin" style="text-align: left;"><?php echo "$array_SPCL[$chosenMechIndex]"; ?></td>
 						</tr>
 					</table>
@@ -297,7 +297,7 @@ session_start();
 							<td nowrap class="datalabel_thin" width="5%" style="text-align: right;">+1 HT FIRING</td>
 						</tr>
 						<tr>
-							<td nowrap class="datalabel" width="5%" style="text-align: right;">FR-CTRL:</td>
+							<td nowrap class="datalabel" width="5%" style="text-align: right;">FCTL:</td>
 							<td nowrap width="90%" style="text-align: left;">
 								<label class="bigcheck"><input onchange="readCircles(<?= $array_MECH_DBID[$chosenMechIndex] ?>, <?= $array_A_MAX[$chosenMechIndex] ?>, <?= $array_S_MAX[$chosenMechIndex] ?>);" type="checkbox" class="bigcheck" name="CD_FC_1" id="CD_FC_1" value="yes"/><span class="bigcheck-target"></span></label>
 								<label class="bigcheck"><input onchange="readCircles(<?= $array_MECH_DBID[$chosenMechIndex] ?>, <?= $array_A_MAX[$chosenMechIndex] ?>, <?= $array_S_MAX[$chosenMechIndex] ?>);" type="checkbox" class="bigcheck" name="CD_FC_2" id="CD_FC_2" value="yes"/><span class="bigcheck-target"></span></label>
@@ -357,24 +357,27 @@ session_start();
 	if ($movd==1) {
 		if ($playable) {
 			echo "<div id='editMovementValues'>\n";
-			echo "  <table class='options' cellspacing=4 cellpadding=4 border=0px>\n";
-			echo "		<tr>\n";
-			echo "			<td align='left' class='datalabel'>\n";
-			echo "				<label class='bigcheck'><input onchange='changeOption();' type='checkbox' class='bigcheck' name='JUMPED' value='yes'/><span class='bigcheck-target'></span></label>\n";
-			echo "			</td>\n";
-			echo "			<td align='left' class='datalabel'>\n";
-			echo "				Unit has jumped\n";
-			echo "			</td>\n";
-			echo "		</tr>\n";
-			echo "		<tr>\n";
-			echo "			<td align='left' class='datalabel'>\n";
-			echo "				<label class='bigcheck'><input onchange='changeOption();' type='checkbox' class='bigcheck' name='FIRED' value='yes'/><span class='bigcheck-target'></span></label>\n";
- 			echo "			</td>\n";
- 			echo "			<td align='left' class='datalabel'>\n";
-			echo "				Unit has fired\n";
-			echo "			</td>\n";
-			echo "		</tr>\n";
-			echo "	</table>\n";
+			echo "	<br>\n";
+			echo "	<div>\n";
+			echo "		<table class='options' cellspacing=4 cellpadding=4 border=0px>\n";
+			echo "			<tr>\n";
+			echo "				<td align='left' class='datalabel'>\n";
+			echo "					<label class='bigcheck'><input onchange='changeOption();' type='checkbox' class='bigcheck' name='JUMPED' value='yes'/><span class='bigcheck-target'></span></label>\n";
+			echo "				</td>\n";
+			echo "				<td align='left' class='datalabel'>\n";
+			echo "					Unit has jumped\n";
+			echo "				</td>\n";
+			echo "			</tr>\n";
+			echo "			<tr>\n";
+			echo "				<td align='left' class='datalabel'>\n";
+			echo "					<label class='bigcheck'><input onchange='changeOption();' type='checkbox' class='bigcheck' name='FIRED' value='yes'/><span class='bigcheck-target'></span></label>\n";
+ 			echo "				</td>\n";
+ 			echo "				<td align='left' class='datalabel'>\n";
+			echo "					Unit has fired\n";
+			echo "				</td>\n";
+			echo "			</tr>\n";
+			echo "		</table>\n";
+			echo "	<div>\n";
 			echo "</div>\n";
 		}
 	}
