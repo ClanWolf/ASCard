@@ -171,6 +171,15 @@ session_start();
 		select:valid, input:valid {
 			background: rgba(70,70,70,0.75);;
 		}
+		.scroll-pane {
+			width: 100%;
+			height: 200px;
+			overflow: auto;
+		}
+		.horizontal-only {
+			height: auto;
+			max-height: 200px;
+		}
 	</style>
 </head>
 
@@ -238,6 +247,7 @@ session_start();
 
 	<br>
 
+	<div class="scroll-pane">
 	<form>
 		<table class="options" cellspacing="2" cellpadding="2" border=0px>
 			<tr>
@@ -318,6 +328,7 @@ session_start();
 
 		</table>
 	</form>
+	</div>
 
 </body>
 
