@@ -342,6 +342,7 @@ session_start();
 <div id="bottomleft"><img src="./images/bottom-left.png" width="200px"></div>
 
 <div align="center" id="settings">
+	<a href='https://www.clanwolf.net/static/files/Rulebooks/CAT35860%20-%20AlphaStrike%20CommandersEdition.pdf' target='_blank'><i class="fa fa-fw fa-book"></li></a>&nbsp;&nbsp;&nbsp;
 	<a href="#" onclick="javascript:window.location.reload(true)"><i class="fa fa-fw fa-refresh"></i></a>&nbsp;&nbsp;&nbsp;
 	<a href="javascript:textSize(0)"><i class="fa fa-fw fa-minus-square"></i></a>&nbsp;&nbsp;&nbsp;
 	<a href="javascript:textSize(1)"><i class="fa fa-fw fa-plus-square"></i></a>
