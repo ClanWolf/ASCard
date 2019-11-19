@@ -113,6 +113,7 @@ session_start();
 	<link rel="manifest" href="./manifest.json">
 	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
 	<link rel="stylesheet" type="text/css" href="./styles/styles.css">
+	<link rel="stylesheet" type="text/css" href="./styles/jquery.jscrollpane.css">
 	<link rel="icon" href="./favicon.png" type="image/png">
 	<link rel="shortcut icon" href="./images/icon_196x196.png" type="image/png" sizes="196x196">
 	<link rel="apple-touch-icon" href="./images/icon_57x57.png" type="image/png" sizes="57x57">
@@ -125,6 +126,8 @@ session_start();
 	<link rel="apple-touch-icon" href="./images/icon_180x180.png" type="image/png" sizes="180x180">
 
 	<script type="text/javascript" src="./scripts/jquery-3.3.1.min.js"></script>
+	<script type="text/javascript" src="./scripts/jquery.jscrollpane.min.js"></script>
+	<script type="text/javascript" src="./scripts/jquery.mousewheel.js"></script>
 	<script type="text/javascript" src="./scripts/howler.min.js"></script>
 	<script type="text/javascript" src="./scripts/cookies.js"></script>
 
