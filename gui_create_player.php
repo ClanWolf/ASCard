@@ -176,6 +176,9 @@ session_start();
 
 <body>
 	<script>
+		$(function() {
+			$('.scroll-pane').jScrollPane();
+		});
 		$(document).ready(function() {
 			$("#cover").hide();
 		});
