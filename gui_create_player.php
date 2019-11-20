@@ -247,7 +247,6 @@ session_start();
 
 	<br>
 
-	<div class="scroll-pane">
 	<form>
 		<table class="options" cellspacing="2" cellpadding="2" border=0px>
 			<tr>
@@ -286,7 +285,10 @@ session_start();
 				<td width='10px'></td>
 			</tr>
 			<tr><td class='datalabel' colspan="6"><hr></td></tr>
-
+			<tr>
+				<td colspan="5">
+					<div class="scroll-pane">
+						<table cellspacing="2" cellpadding="2" border="0px" width="100%">
 <?php
 	if (!($stmt = $conn->prepare("SELECT SQL_NO_CACHE * FROM asc_player ORDER BY playerid"))) {
 		echo "Prepare failed: (" . $conn->errno . ") " . $conn->error;
@@ -297,38 +299,40 @@ session_start();
 		while ($row = $res->fetch_assoc()) {
 			$filename = "./images/player/".$row['image'];
 
-			echo "			<tr>\n";
-			echo "				<td nowrap class='datalabel' style='text-align:left;';><a href='gui_edit_player.php?playerid=".$row['playerid']."'><i class='fa fa-edit'></i></a>&nbsp;&nbsp;&nbsp;".$row['playerid']."</td>\n";
-			echo "				<td nowrap class='datalabel' style='text-align:left;vertical-align:middle;' valign='middle'>\n";
+			echo "							<tr>\n";
+			echo "								<td nowrap class='datalabel' style='text-align:left;';><a href='gui_edit_player.php?playerid=".$row['playerid']."'><i class='fa fa-edit'></i></a>&nbsp;&nbsp;&nbsp;".$row['playerid']."</td>\n";
+			echo "								<td nowrap class='datalabel' style='text-align:left;vertical-align:middle;' valign='middle'>\n";
 			if (file_exists($filename)) {
-				echo "						<img src='./images/player/".$row['image']."' width='30px' height='30px'>\n";
+				echo "										<img src='./images/player/".$row['image']."' width='30px' height='30px'>\n";
 			} else {
-				echo "						<img src='./images/pilots/000_no_avatar.png' width='30px' height='30px'>\n";
+				echo "										<img src='./images/pilots/000_no_avatar.png' width='30px' height='30px'>\n";
 				copy("./images/pilots/000_no_avatar.png", "./images/player/".$row['image']);
 			}
-			echo "				</td>\n";
-			echo "				<td nowrap class='datalabel' style='text-align:left;' colspan='2'>" . $row['name'] . "</td>\n";
+			echo "								</td>\n";
+			echo "								<td nowrap class='datalabel' style='text-align:left;' colspan='2'>" . $row['name'] . "</td>\n";
 			if ($row['playerid'] != "1" && $row['playerid'] != "2") {
-				echo "				<td width='10px' nowrap>\n";
-				echo "					<span style='font-size:16px;'>\n";
+				echo "								<td width='10px' nowrap>\n";
+				echo "									<span style='font-size:16px;'>\n";
 				if ($hideMinusButtons) {
-					echo "						\n";
+					echo "										\n";
 				} else {
-					echo "						<a href='#' onClick='saveNewPlayer(".$row['playerid'].",\"".$row['image']."\");'><i class='fa fa-fw fa-minus-square'></i></a>\n";
+					echo "										<a href='#' onClick='saveNewPlayer(".$row['playerid'].",\"".$row['image']."\");'><i class='fa fa-fw fa-minus-square'></i></a>\n";
 				}
-				echo "					</span>\n";
-				echo "				</td>\n";
+				echo "									</span>\n";
+				echo "								</td>\n";
 			} else {
-				echo "				<td width='10%'></td>\n";
+				echo "								<td width='10%'></td>\n";
 			}
-			echo "			</tr>\n";
+			echo "							</tr>\n";
 		}
 	}
 ?>
-
+						</table>
+					</div>
+				</td>
+			</tr>
 		</table>
 	</form>
-	</div>
 
 </body>
 

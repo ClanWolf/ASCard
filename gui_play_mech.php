@@ -43,9 +43,38 @@ session_start();
 	<script type="text/javascript" src="./scripts/howler.min.js"></script>
 	<script type="text/javascript" src="./scripts/cookies.js"></script>
 	<script type="text/javascript" src="./scripts/functions.js"></script>
+
+	<style>
+		.options {
+			border-radius: 5px;
+			border-style: solid;
+			border-width: 3px;
+			padding: 5px;
+			background: rgba(60,60,60,0.75);
+			color: #ddd;
+			border-color: #aaa;
+		}
+	</style>
 </head>
 
 <body>
+	<script>
+		function changeMovementFlag(fln) {
+			var list = document.getElementsByClassName("bigcheck");
+			[].forEach.call(list, function (el1) {
+				na = el1.name;
+				if (typeof na != 'undefined') {
+					if (na.substring(0, 2) == "MV") { el1.checked = false }
+					// if (na.substring(0, 4) == "MV1_") { el1.checked = true }
+					// if (na.substring(0, 4) == "MV2_") { el1.checked = true }
+					// if (na.substring(0, 4) == "MV3_") { el1.checked = true }
+					// if (na.substring(0, 4) == "MV4_") { el1.checked = true }
+					// if (na.substring(0, 4) == "MV5_") { el1.checked = true }
+				}
+			})
+			// alert("Movement flag " + fln + " changed");
+		}
+	</script>
 
 <?php
 	$file = file_get_contents('./version.txt', true);
@@ -342,7 +371,7 @@ session_start();
 <div id="bottomleft"><img src="./images/bottom-left.png" width="200px"></div>
 
 <div align="center" id="settings">
-	<a href='https://www.clanwolf.net/static/files/Rulebooks/CAT35860%20-%20AlphaStrike%20CommandersEdition.pdf' target='_blank'><i class="fa fa-fw fa-book"></li></a>&nbsp;&nbsp;&nbsp;
+	<a href="https://www.clanwolf.net/static/files/Rulebooks/CAT35860%20-%20AlphaStrike%20CommandersEdition.pdf" target="_blank"><i class="fa fa-fw fa-bookmark"></i></a>&nbsp;&nbsp;&nbsp;
 	<a href="#" onclick="javascript:window.location.reload(true)"><i class="fa fa-fw fa-refresh"></i></a>&nbsp;&nbsp;&nbsp;
 	<a href="javascript:textSize(0)"><i class="fa fa-fw fa-minus-square"></i></a>&nbsp;&nbsp;&nbsp;
 	<a href="javascript:textSize(1)"><i class="fa fa-fw fa-plus-square"></i></a>
@@ -359,46 +388,73 @@ session_start();
 		if ($playable) {
 			echo "<div id='editMovementValues'>\n";
 			echo "	<br>\n";
+			echo "	<br>\n";
 			echo "	<div>\n";
-			echo "		<table class='options' cellspacing=4 cellpadding=4 border=0px>\n";
+			echo "		<table class='options' style='margin-left: auto;margin-right: auto;' cellspacing=4 cellpadding=4 border=0px>\n";
 			echo "			<tr>\n";
 			echo "				<td align='left' class='datalabel'>\n";
-			echo "					<label class='bigcheck'><input onchange='changeOption();' type='checkbox' class='bigcheck' name='IMMOBILE' value='yes'/><span class='bigcheck-target'></span></label>\n";
+			echo "					<label class='bigcheck'><input onchange='changeMovementFlag(1);' type='checkbox' class='bigcheck' name='MV1_IMMOBILE' value='yes'/><span class='bigcheck-target'></span></label>\n";
 			echo "				</td>\n";
 			echo "				<td align='left' class='datalabel'>\n";
-			echo "					Unit is immobile\n";
+			echo "					&nbsp;&nbsp;&nbsp;TMM -4\n";
+			echo "				</td>\n";
+			echo "				<td align='left' class='datalabel'>\n";
+			echo "					&nbsp;&nbsp;&nbsp;Unit fallen\n";
 			echo "				</td>\n";
 			echo "			</tr>\n";
 			echo "			<tr>\n";
 			echo "				<td align='left' class='datalabel'>\n";
-			echo "					<label class='bigcheck'><input onchange='changeOption();' type='checkbox' class='bigcheck' name='STANDSTILL' value='yes'/><span class='bigcheck-target'></span></label>\n";
+			echo "					<label class='bigcheck'><input onchange='changeMovementFlag(2);' type='checkbox' class='bigcheck' name='MV2_STANDSTILL' value='yes'/><span class='bigcheck-target'></span></label>\n";
 			echo "				</td>\n";
 			echo "				<td align='left' class='datalabel'>\n";
-			echo "					Unit has not moved\n";
-			echo "				</td>\n";
-			echo "			</tr>\n";
-			echo "			<tr>\n";
-			echo "				<td align='left' class='datalabel'>\n";
-			echo "					<label class='bigcheck'><input onchange='changeOption();' type='checkbox' class='bigcheck' name='MOVED' value='yes'/><span class='bigcheck-target'></span></label>\n";
+			echo "					&nbsp;&nbsp;&nbsp;TMM 0\n";
 			echo "				</td>\n";
 			echo "				<td align='left' class='datalabel'>\n";
-			echo "					Unit has moved one inch or more\n";
+			echo "					&nbsp;&nbsp;&nbsp;Unit stationary\n";
 			echo "				</td>\n";
 			echo "			</tr>\n";
 			echo "			<tr>\n";
 			echo "				<td align='left' class='datalabel'>\n";
-			echo "					<label class='bigcheck'><input onchange='changeOption();' type='checkbox' class='bigcheck' name='JUMPED' value='yes'/><span class='bigcheck-target'></span></label>\n";
+			echo "					<label class='bigcheck'><input onchange='changeMovementFlag(3);' type='checkbox' class='bigcheck' name='MV3_MOVED' value='yes'/><span class='bigcheck-target'></span></label>\n";
 			echo "				</td>\n";
 			echo "				<td align='left' class='datalabel'>\n";
-			echo "					Unit has jumped\n";
+			echo "					&nbsp;&nbsp;&nbsp;TMM $array_TMM[$chosenMechIndex]\n";
+			echo "				</td>\n";
+			echo "				<td align='left' class='datalabel'>\n";
+			echo "					&nbsp;&nbsp;&nbsp;Unit walked (>1\")\n";
 			echo "				</td>\n";
 			echo "			</tr>\n";
 			echo "			<tr>\n";
 			echo "				<td align='left' class='datalabel'>\n";
-			echo "					<label class='bigcheck'><input onchange='changeOption();' type='checkbox' class='bigcheck' name='WEAPONSFIRED' value='yes'/><span class='bigcheck-target'></span></label>\n";
+			echo "					<label class='bigcheck'><input onchange='changeMovementFlag(4);' type='checkbox' class='bigcheck' name='MV4_JUMPED' value='yes'/><span class='bigcheck-target'></span></label>\n";
+			echo "				</td>\n";
+			echo "				<td align='left' class='datalabel'>\n";
+			echo "					&nbsp;&nbsp;&nbsp;TMM ";
+
+			if(strpos($array_SPCL[$chosenMechIndex],"JMPS#") !== false) {
+				// special strong jumpjets
+			} else if(strpos($array_SPCL[$chosenMechIndex],"JMPW#") !== false) {
+				// special weak jumpjets
+			} else {
+				// no special jumpjets
+			}
+
+			echo intval($array_TMM[$chosenMechIndex]) + 1;
+			echo "\n";
+			echo "				</td>\n";
+			echo "				<td align='left' class='datalabel'>\n";
+			echo "					&nbsp;&nbsp;&nbsp;Unit jumped\n";
+			echo "				</td>\n";
+			echo "			</tr>\n";
+			echo "			<tr>\n";
+			echo "			    <td colspan='3'><hr></td>\n";
+			echo "			</tr>\n";
+			echo "			<tr>\n";
+			echo "				<td align='left' class='datalabel'>\n";
+			echo "					<label class='bigcheck'><input onchange='changeMovementFlag(5);' type='checkbox' class='bigcheck' name='WF_WEAPONSFIRED' value='yes'/><span class='bigcheck-target'></span></label>\n";
  			echo "				</td>\n";
- 			echo "				<td align='left' class='datalabel'>\n";
-			echo "					Unit has fired weapons\n";
+ 			echo "				<td colspan='2' align='left' class='datalabel'>\n";
+			echo "					&nbsp;&nbsp;&nbsp;Unit fired\n";
 			echo "				</td>\n";
 			echo "			</tr>\n";
 			echo "		</table>\n";
