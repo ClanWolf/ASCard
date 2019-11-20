@@ -378,7 +378,7 @@ session_start();
 </div>
 
 <div id="version">
-	<?php echo "$version"; ?>
+	<?php echo "0 - 6 - 24 - 42\"&nbsp;&nbsp;&middot;&nbsp;&nbsp;$version"; ?>
 </div>
 
 <div id="bottomright"><img src="./images/bt-logo2.png" width="250px"></div>
