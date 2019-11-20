@@ -431,9 +431,9 @@ session_start();
 			echo "				<td align='left' class='datalabel'>\n";
 			echo "					&nbsp;&nbsp;&nbsp;TMM ";
 
-			if(strpos($array_SPCL[$chosenMechIndex],"JMPS#") !== false) {
+			if(strpos($array_SPCL[$chosenMechIndex],"JMPS") !== false) {
 				// special strong jumpjets
-			} else if(strpos($array_SPCL[$chosenMechIndex],"JMPW#") !== false) {
+			} else if(strpos($array_SPCL[$chosenMechIndex],"JMPW") !== false) {
 				// special weak jumpjets
 			} else {
 				// no special jumpjets
