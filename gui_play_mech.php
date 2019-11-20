@@ -65,11 +65,7 @@ session_start();
 				na = el1.name;
 				if (typeof na != 'undefined') {
 					if (na.substring(0, 2) == "MV") { el1.checked = false }
-					// if (na.substring(0, 4) == "MV1_") { el1.checked = true }
-					// if (na.substring(0, 4) == "MV2_") { el1.checked = true }
-					// if (na.substring(0, 4) == "MV3_") { el1.checked = true }
-					// if (na.substring(0, 4) == "MV4_") { el1.checked = true }
-					// if (na.substring(0, 4) == "MV5_") { el1.checked = true }
+					if (na.substring(0, 4) == "MV" + fln + "_") { el1.checked = true }
 				}
 			})
 			// alert("Movement flag " + fln + " changed");
