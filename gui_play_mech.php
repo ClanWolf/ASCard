@@ -217,7 +217,9 @@ session_start();
 							<td nowrap class="datavalue" width="13%"><?php echo "$array_SZ[$chosenMechIndex]"; ?></td>
 							<td nowrap class="datalabel" width="12%">TMM:</td>
 							<td nowrap class="datavalue" width="13%" id="TMM">
-								<?php echo "$array_TMM[$chosenMechIndex]"; ?>&nbsp;<a href=""><i class="far fa-hexagon"></i></a>
+								<?php echo "$array_TMM[$chosenMechIndex]"; ?>&nbsp;
+								<a href=""><i class="far fa-hexagon"></i></a>
+								// <a href=""><i class="far fa-triangle"></i></a>
 							</td>
 							<td nowrap class="datalabel" width="12%">MV:</td>
 							<td nowrap class="datavalue_thin" style="text-transform: none;" width="13%" id="mv_points"><?php echo "$array_MV[$chosenMechIndex]&rdquo;";
