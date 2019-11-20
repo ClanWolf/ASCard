@@ -59,16 +59,31 @@ session_start();
 
 <body>
 	<script>
-		function changeMovementFlag(fln) {
+		function changeMovementFlag(index, fln) {
 			var list = document.getElementsByClassName("bigcheck");
+			var fired = 0;
+			var mv = 0;
 			[].forEach.call(list, function (el1) {
 				na = el1.name;
 				if (typeof na != 'undefined') {
-					if (na.substring(0, 2) == "MV") { el1.checked = false }
-					if (na.substring(0, 4) == "MV" + fln + "_") { el1.checked = true }
+					if (na.substring(0, 2) == "MV" && fln != 5) { el1.checked = false }
+					if (na.substring(0, 4) == "MV" + fln + "_") {
+						el1.checked = true;
+						mv = fln;
+					}
+
+					if ((na.substring(0, 4) == "MV1_") && el1.checked == true) { mv = 1; }
+					if ((na.substring(0, 4) == "MV2_") && el1.checked == true) { mv = 2; }
+					if ((na.substring(0, 4) == "MV3_") && el1.checked == true) { mv = 3; }
+					if ((na.substring(0, 4) == "MV4_") && el1.checked == true) { mv = 4; }
+
+					if (na == "WF_WEAPONSFIRED" && el1.checked == true) {
+						fired = 1;
+					}
 				}
 			})
-			// alert("Movement flag " + fln + " changed");
+			var url="./save_movement.php?index="+index+"&mvmt="+mv+"&wpns="+fired;
+			window.frames['saveframe'].location.replace(url);
 		}
 	</script>
 
@@ -216,11 +231,7 @@ session_start();
 							<td nowrap class="datalabel" width="12%">SZ:</td>
 							<td nowrap class="datavalue" width="13%"><?php echo "$array_SZ[$chosenMechIndex]"; ?></td>
 							<td nowrap class="datalabel" width="12%">TMM:</td>
-							<td nowrap class="datavalue" width="13%" id="TMM">
-								<?php echo "$array_TMM[$chosenMechIndex]"; ?>&nbsp;
-								<a href=""><i class="far fa-hexagon"></i></a>
-								// <a href=""><i class="far fa-triangle"></i></a>
-							</td>
+							<td nowrap class="datavalue" width="13%" id="TMM"><?php echo "$array_TMM[$chosenMechIndex]"; ?></td>
 							<td nowrap class="datalabel" width="12%">MV:</td>
 							<td nowrap class="datavalue_thin" style="text-transform: none;" width="13%" id="mv_points"><?php echo "$array_MV[$chosenMechIndex]&rdquo;";
 							if ($array_MVJ[$chosenMechIndex] != null) {
@@ -389,47 +400,51 @@ session_start();
 			echo "<div id='editMovementValues'>\n";
 			echo "	<br>\n";
 			echo "	<br>\n";
-			echo "	<div>\n";
-			echo "		<table class='options' style='margin-left: auto;margin-right: auto;' cellspacing=4 cellpadding=4 border=0px>\n";
-			echo "			<tr>\n";
-			echo "				<td align='left' class='datalabel'>\n";
-			echo "					<label class='bigcheck'><input onchange='changeMovementFlag(1);' type='checkbox' class='bigcheck' name='MV1_IMMOBILE' value='yes'/><span class='bigcheck-target'></span></label>\n";
-			echo "				</td>\n";
-			echo "				<td align='left' class='datalabel'>\n";
-			echo "					&nbsp;&nbsp;&nbsp;TMM -4\n";
-			echo "				</td>\n";
-			echo "				<td align='left' class='datalabel'>\n";
-			echo "					&nbsp;&nbsp;&nbsp;Unit fallen\n";
-			echo "				</td>\n";
-			echo "			</tr>\n";
-			echo "			<tr>\n";
-			echo "				<td align='left' class='datalabel'>\n";
-			echo "					<label class='bigcheck'><input onchange='changeMovementFlag(2);' type='checkbox' class='bigcheck' name='MV2_STANDSTILL' value='yes'/><span class='bigcheck-target'></span></label>\n";
-			echo "				</td>\n";
-			echo "				<td align='left' class='datalabel'>\n";
-			echo "					&nbsp;&nbsp;&nbsp;TMM 0\n";
-			echo "				</td>\n";
-			echo "				<td align='left' class='datalabel'>\n";
-			echo "					&nbsp;&nbsp;&nbsp;Unit stationary\n";
-			echo "				</td>\n";
-			echo "			</tr>\n";
-			echo "			<tr>\n";
-			echo "				<td align='left' class='datalabel'>\n";
-			echo "					<label class='bigcheck'><input onchange='changeMovementFlag(3);' type='checkbox' class='bigcheck' name='MV3_MOVED' value='yes'/><span class='bigcheck-target'></span></label>\n";
-			echo "				</td>\n";
-			echo "				<td align='left' class='datalabel'>\n";
-			echo "					&nbsp;&nbsp;&nbsp;TMM $array_TMM[$chosenMechIndex]\n";
-			echo "				</td>\n";
-			echo "				<td align='left' class='datalabel'>\n";
-			echo "					&nbsp;&nbsp;&nbsp;Unit walked (>1\")\n";
-			echo "				</td>\n";
-			echo "			</tr>\n";
-			echo "			<tr>\n";
-			echo "				<td align='left' class='datalabel'>\n";
-			echo "					<label class='bigcheck'><input onchange='changeMovementFlag(4);' type='checkbox' class='bigcheck' name='MV4_JUMPED' value='yes'/><span class='bigcheck-target'></span></label>\n";
-			echo "				</td>\n";
-			echo "				<td align='left' class='datalabel'>\n";
-			echo "					&nbsp;&nbsp;&nbsp;TMM ";
+			echo "	<table width='100%'>\n";
+			echo "		<tr>\n";
+			echo "			<td width='40%' onclick=\"location.href='".$meli."'\"></td>\n";
+			echo "			<td width='20%'>\n";
+			echo "				<div>\n";
+			echo "					<table class='options' style='margin-left: auto;margin-right: auto;' cellspacing=4 cellpadding=4 border=0px>\n";
+			echo "						<tr>\n";
+			echo "							<td nowrap align='left' class='datalabel'>\n";
+			echo "								<label class='bigcheck'><input onchange='changeMovementFlag($array_MECH_DBID[$chosenMechIndex], 1);' type='checkbox' class='bigcheck' name='MV1_IMMOBILE' value='yes'/><span class='bigcheck-target'></span></label>\n";
+			echo "							</td>\n";
+			echo "							<td nowrap align='left' class='datalabel'>\n";
+			echo "								&nbsp;&nbsp;&nbsp;TMM -4\n";
+			echo "							</td>\n";
+			echo "							<td nowrap align='left' class='datalabel'>\n";
+			echo "								&nbsp;&nbsp;&nbsp;Unit fallen\n";
+			echo "							</td>\n";
+			echo "						</tr>\n";
+			echo "						<tr>\n";
+			echo "							<td nowrap align='left' class='datalabel'>\n";
+			echo "								<label class='bigcheck'><input onchange='changeMovementFlag($array_MECH_DBID[$chosenMechIndex], 2);' type='checkbox' class='bigcheck' name='MV2_STANDSTILL' value='yes'/><span class='bigcheck-target'></span></label>\n";
+			echo "							</td>\n";
+			echo "							<td nowrap align='left' class='datalabel'>\n";
+			echo "								&nbsp;&nbsp;&nbsp;TMM 0\n";
+			echo "							</td>\n";
+			echo "							<td nowrap align='left' class='datalabel'>\n";
+			echo "								&nbsp;&nbsp;&nbsp;Unit stationary\n";
+			echo "							</td>\n";
+			echo "						</tr>\n";
+			echo "						<tr>\n";
+			echo "							<td nowrap align='left' class='datalabel'>\n";
+			echo "								<label class='bigcheck'><input onchange='changeMovementFlag($array_MECH_DBID[$chosenMechIndex], 3);' type='checkbox' class='bigcheck' name='MV3_MOVED' value='yes'/><span class='bigcheck-target'></span></label>\n";
+			echo "							</td>\n";
+			echo "							<td nowrap align='left' class='datalabel'>\n";
+			echo "								&nbsp;&nbsp;&nbsp;TMM $array_TMM[$chosenMechIndex]\n";
+			echo "							</td>\n";
+			echo "							<td nowrap align='left' class='datalabel'>\n";
+			echo "								&nbsp;&nbsp;&nbsp;Unit walked (>1\")\n";
+			echo "							</td>\n";
+			echo "						</tr>\n";
+			echo "						<tr>\n";
+			echo "							<td nowrap align='left' class='datalabel'>\n";
+			echo "								<label class='bigcheck'><input onchange='changeMovementFlag($array_MECH_DBID[$chosenMechIndex], 4);' type='checkbox' class='bigcheck' name='MV4_JUMPED' value='yes'/><span class='bigcheck-target'></span></label>\n";
+			echo "							</td>\n";
+			echo "							<td nowrap align='left' class='datalabel'>\n";
+			echo "								&nbsp;&nbsp;&nbsp;TMM ";
 
 			if(strpos($array_SPCL[$chosenMechIndex],"JMPS") !== false) {
 				// special strong jumpjets
@@ -439,26 +454,29 @@ session_start();
 				// no special jumpjets
 			}
 
-			echo intval($array_TMM[$chosenMechIndex]) + 1;
-			echo "\n";
-			echo "				</td>\n";
-			echo "				<td align='left' class='datalabel'>\n";
-			echo "					&nbsp;&nbsp;&nbsp;Unit jumped\n";
-			echo "				</td>\n";
-			echo "			</tr>\n";
-			echo "			<tr>\n";
-			echo "			    <td colspan='3'><hr></td>\n";
-			echo "			</tr>\n";
-			echo "			<tr>\n";
-			echo "				<td align='left' class='datalabel'>\n";
-			echo "					<label class='bigcheck'><input onchange='changeMovementFlag(5);' type='checkbox' class='bigcheck' name='WF_WEAPONSFIRED' value='yes'/><span class='bigcheck-target'></span></label>\n";
- 			echo "				</td>\n";
- 			echo "				<td colspan='2' align='left' class='datalabel'>\n";
-			echo "					&nbsp;&nbsp;&nbsp;Unit fired\n";
-			echo "				</td>\n";
-			echo "			</tr>\n";
-			echo "		</table>\n";
-			echo "	<div>\n";
+			echo intval($array_TMM[$chosenMechIndex]) + 1 . "\n";
+			echo "							</td>\n";
+			echo "							<td nowrap align='left' class='datalabel'>\n";
+			echo "								&nbsp;&nbsp;&nbsp;Unit jumped\n";
+			echo "							</td>\n";
+			echo "						</tr>\n";
+			echo "						<tr>\n";
+			echo "						    <td nowrap colspan='3'><hr></td>\n";
+			echo "						</tr>\n";
+			echo "						<tr>\n";
+			echo "							<td nowrap align='left' class='datalabel'>\n";
+			echo "								<label class='bigcheck'><input onchange='changeMovementFlag($array_MECH_DBID[$chosenMechIndex], 5);' type='checkbox' class='bigcheck' name='WF_WEAPONSFIRED' value='yes'/><span class='bigcheck-target'></span></label>\n";
+ 			echo "							</td>\n";
+ 			echo "							<td nowrap colspan='2' align='left' class='datalabel'>\n";
+			echo "								&nbsp;&nbsp;&nbsp;Unit fired\n";
+			echo "							</td>\n";
+			echo "						</tr>\n";
+			echo "					</table>\n";
+			echo "				<div>\n";
+			echo "			</td>\n";
+			echo "			<td width='40%' onclick=\"location.href='".$meli."'\"></td>\n";
+			echo "		</tr>\n";
+			echo "	</table>\n";
 			echo "</div>\n";
 		}
 	}
