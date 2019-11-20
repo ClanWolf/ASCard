@@ -85,6 +85,22 @@ session_start();
 			var url="./save_movement.php?index="+index+"&mvmt="+mv+"&wpns="+fired;
 			window.frames['saveframe'].location.replace(url);
 		}
+		function setMovementFlags(index, movement, weaponsfired) {
+			var list = document.getElementsByClassName("bigcheck");
+			[].forEach.call(list, function (el1) {
+				na = el1.name;
+				if (typeof na != 'undefined') {
+					if (na.substring(0, 2) == "MV") { el1.checked = false }
+
+					if ((na.substring(0, 4) == "MV1_") && movement == 1) { el1.checked = true; }
+					if ((na.substring(0, 4) == "MV2_") && movement == 2) { el1.checked = true; }
+					if ((na.substring(0, 4) == "MV3_") && movement == 3) { el1.checked = true; }
+					if ((na.substring(0, 4) == "MV4_") && movement == 4) { el1.checked = true; }
+
+					if (na == "WF_WEAPONSFIRED" && weaponsfired == 1) { el1.checked = true; }
+				}
+			})
+		}
 	</script>
 
 <?php
@@ -157,6 +173,7 @@ session_start();
 		if ($chosenMechIndex == $i4) {
 			if ($movd==1) {
 				$meli=$meli."&movd=0";
+				$locmeli = $meli;
 			} else {
 				$meli=$meli."&movd=1";
 			}
@@ -402,7 +419,7 @@ session_start();
 			echo "	<br>\n";
 			echo "	<table width='100%'>\n";
 			echo "		<tr>\n";
-			echo "			<td width='40%' onclick=\"location.href='".$meli."'\"></td>\n";
+			echo "			<td width='40%' onclick=\"location.href='".$locmeli."'\"></td>\n";
 			echo "			<td width='20%'>\n";
 			echo "				<div>\n";
 			echo "					<table class='options' style='margin-left: auto;margin-right: auto;' cellspacing=4 cellpadding=4 border=0px>\n";
@@ -474,10 +491,16 @@ session_start();
 			echo "					</table>\n";
 			echo "				<div>\n";
 			echo "			</td>\n";
-			echo "			<td width='40%' onclick=\"location.href='".$meli."'\"></td>\n";
+			echo "			<td width='40%' onclick=\"location.href='".$locmeli."'\"></td>\n";
 			echo "		</tr>\n";
 			echo "	</table>\n";
 			echo "</div>\n";
+
+			echo "<script>\n";
+			echo "	var movement = $array_MVMT[$chosenMechIndex]\n";
+			echo "	var weaponsfired = $array_WPNSFIRED[$chosenMechIndex]\n";
+			echo "	setMovementFlags($array_MECH_DBID[$chosenMechIndex], movement, weaponsfired);\n";
+			echo "</script>\n";
 		}
 	}
 ?>

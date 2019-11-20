@@ -14,6 +14,9 @@
 	$array_PILOT = array();
 	$array_PILOT_IMG_URL = array();
 
+	$array_MVMT = array();
+	$array_WPNSFIRED = array();
+
 	$array_MECH_DBID = array();
 	$array_MECH_NUMBER = array();
 	$array_MECH_IMG_URL = array();
@@ -92,6 +95,9 @@
 				// echo "<script>console.log('Pilot-ID: ".$pilotid."');</script>";
 				$mechid = $row["mechid"];
 				$pilotid = $row["pilotid"];
+
+				$array_MVMT[$mechcount] = $row["round_moved"];
+				$array_WPNSFIRED[$mechcount] = $row["round_fired"];
 
 				// Mech
 				// mechid; mulid; mech_tonnage; custom_name; as_name; as_model; 
