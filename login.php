@@ -113,9 +113,19 @@ session_start();
 			document.getElementById("f1").style.visibility = "visible";
 			setTimeout(function(){
 				console.log("Click...");
+				// Tried to trick Chrome to apply the right css style to the input fields
+				// while auto filling them. No luck...
+
+				//$(window).trigger('resize');
+				//$('body').click();
 				//document.getElementById('pn').click();
 				//document.getElementById('pn').dispatchEvent(new MouseEvent('click', {shiftKey: true}))
-				$("#f1").trigger('focus');
+				//$("#f1").trigger('focus');
+				//var a = $('#pn').val();
+				//$("#pn").val($('#pn').val());
+				$('#pn').focus();
+				//$("#pn").val("sdsd");
+				$('#pw').focus();
   			},3000);
 		});
 	</script>
