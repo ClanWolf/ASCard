@@ -28,7 +28,6 @@ session_start();
 						$_SESSION['name'] = $row['name'];
 						$_SESSION['email'] = $row['email'];
 						$_SESSION['playerimage'] = $row['image'];
-
 						// getting options from database
 						$sql_asc_options = "SELECT SQL_NO_CACHE * FROM asc_options where playerid = ".$_SESSION['playerid'];
 						$result_asc_options = mysqli_query($conn, $sql_asc_options);
@@ -42,7 +41,6 @@ session_start();
 								$_SESSION['option3'] = $opt3;
 							}
 						}
-
    						header("Location: ./gui_select_unit.php");
 						die('Login succeeded!<br>');
 					} else {
@@ -80,6 +78,8 @@ session_start();
 	<link rel="apple-touch-icon" href="./images/icon_152x152.png" type="image/png" sizes="152x152">
 	<link rel="apple-touch-icon" href="./images/icon_180x180.png" type="image/png" sizes="180x180">
 
+	<script type="text/javascript" src="./scripts/jquery-3.3.1.min.js"></script>
+
 	<style>
 		html, body {
 			background-image: url('./images/body-bg_2.jpg');
@@ -110,8 +110,13 @@ session_start();
 	<script>
 		$(document).ready(function() {
 			// console.log("Clicking on the form to make the webfont display!");
-			document.getElementById('pn').click();
-			document.getElementById('f1').css('visibility', 'visible');
+			document.getElementById("f1").style.visibility = "visible";
+			setTimeout(function(){
+				console.log("Click...");
+				//document.getElementById('pn').click();
+				//document.getElementById('pn').dispatchEvent(new MouseEvent('click', {shiftKey: true}))
+				$("#f1").trigger('focus');
+  			},3000);
 		});
 	</script>
 
