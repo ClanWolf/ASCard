@@ -111,6 +111,7 @@ session_start();
 		$(document).ready(function() {
 			// console.log("Clicking on the form to make the webfont display!");
 			document.getElementById('pn').click();
+			document.getElementById('f1').css('visibility', 'visible');
 		});
 	</script>
 
@@ -124,7 +125,7 @@ session_start();
 		}
 	?>
 
-	<form action="?login=1" method="post">
+	<form id="f1" css="visibility:hidden;" action="?login=1" method="post">
 		<table class="box" cellspacing=10 cellpadding=10 border=0px>
 			<tr>
 				<td class='mechselect_button_active'>
