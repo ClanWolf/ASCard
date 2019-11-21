@@ -125,7 +125,7 @@ session_start();
 		}
 	?>
 
-	<form id="f1" css="visibility:hidden;" action="?login=1" method="post">
+	<form id="f1" style="visibility:hidden;" action="?login=1" method="post">
 		<table class="box" cellspacing=10 cellpadding=10 border=0px>
 			<tr>
 				<td class='mechselect_button_active'>
