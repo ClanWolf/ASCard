@@ -126,7 +126,7 @@ session_start();
 				$('#pn').focus();
 				//$("#pn").val("sdsd");
 				$('#pw').focus();
-  			},3000);
+  			},1000);
 		});
 	</script>
 
