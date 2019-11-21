@@ -107,6 +107,13 @@ session_start();
 </head>
 
 <body>
+	<script>
+		$(document).ready(function() {
+			// console.log("Clicking on the form to make the webfont display!");
+			document.getElementById('pn').click();
+		});
+	</script>
+
 	<?php
 		if(isset($errorMessage)) {
 			echo "<table cellspacing=10 cellpadding=10 border=0px><tr><td><br><br><br>";
