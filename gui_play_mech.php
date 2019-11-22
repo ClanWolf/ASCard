@@ -169,6 +169,26 @@ session_start();
 	$size = sizeof($array_MECH_MODEL);
 	$width = ceil(100 / $size);
 	for ($i4 = 1; $i4 <= $size; $i4++) {
+
+		$mechstatusimage = "./images/check_red.png";
+		$mvmt = $array_MVMT[$i4];
+		$wpnsfired = $array_WPNSFIRED;
+		if ($mvmt == 0 && $wpnsfired == 0) {
+			// 
+			$mechstatusimage = "./images/check_red.png";
+		}
+		if ($mvmt > 0 && $wpnsfired == 0) {
+			// 
+			$mechstatusimage = "./images/check_yellow.png";
+		}
+		if ($mvmt > 0 && $wpnsfired == 1) {
+			// 
+			$mechstatusimage = "./images/check_green.png";
+		}
+		if ($mvmt == 0 && $wpnsfired == 1) {
+			// Error! Unit has fired but no movement was specified! Ask again!
+		}
+
 		$meli="./gui_play_mech.php?unit=".$unitid."&chosenmech=".$i4;
 		if ($chosenMechIndex == $i4) {
 			if ($movd==1) {
