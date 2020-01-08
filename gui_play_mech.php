@@ -171,8 +171,15 @@ session_start();
 	for ($i4 = 1; $i4 <= $size; $i4++) {
 
 		$mechstatusimage = "./images/check_red.png";
+		$heatimage = "";
 		$mvmt = $array_MVMT[$i4];
 		$wpnsfired = $array_WPNSFIRED[$i4];
+
+		if ($array_TP[$i4] == "BA") {
+			$heatimage = "";
+		} else {
+			$heatimage = "<img src='./images/temp_0.png' height='21px'>";
+		}
 
 //		echo "<p>ggg".$mvmt." : ".$wpnsfired."</p>\n";
 
@@ -200,9 +207,9 @@ session_start();
 			} else {
 				$meli=$meli."&movd=1";
 			}
-			echo "<td width='".$width."%' nowrap onclick=\"location.href='".$meli."'\"><table width='100%' cellspacing='0' cellpadding='0' class='mechselect_button_active_left'><tr><td nowrap width='30px' align='center' valign='center'><div style='display:inline-block;height:100%;vertical-align:middle;'><img id='mechstatusimagemenu' style='vertical-align:middle;' src='".$array_MECH_IMG_STATUS[$i4]."' height='30px' width='25px'></div></td><td nowrap width='100%'><div><a href='".$meli."'><span style='font-size:15px;'>".$array_MECH_NUMBER[$i4]."</span> ".$array_PILOT[$i4]."</a>&nbsp;&nbsp;<img src='".$mechstatusimage."' height='21px'><img src='./images/temp_0.png' height='21px'><br><span style='font-size:14px;'>".$array_MECH_MODEL[$i4]."</span></div></td></tr></table></td>\r\n";
+			echo "<td width='".$width."%' nowrap onclick=\"location.href='".$meli."'\"><table width='100%' cellspacing='0' cellpadding='0' class='mechselect_button_active_left'><tr><td nowrap width='30px' align='center' valign='center'><div style='display:inline-block;height:100%;vertical-align:middle;'><img id='mechstatusimagemenu' style='vertical-align:middle;' src='".$array_MECH_IMG_STATUS[$i4]."' height='30px' width='25px'></div></td><td nowrap width='100%'><div><a href='".$meli."'><span style='font-size:15px;'>".$array_MECH_NUMBER[$i4]."</span> ".$array_PILOT[$i4]."</a>&nbsp;&nbsp;<img src='".$mechstatusimage."' height='21px'>".$heatimage."<br><span style='font-size:14px;'>".$array_MECH_MODEL[$i4]."</span></div></td></tr></table></td>\r\n";
 		} else {
-			echo "<td width='".$width."%' nowrap onclick=\"location.href='".$meli."'\"><table width='100%' cellspacing='0' cellpadding='0' class='mechselect_button_normal_left'><tr><td nowrap width='30px' align='center' valign='center'><div style='display:inline-block;height:100%;vertical-align:middle;'><img style='vertical-align:middle;' src='".$array_MECH_IMG_STATUS[$i4]."' height='30px' width='25px'></div></td><td nowrap width='100%'><div><a href='".$meli."'><span style='font-size:15px;'>".$array_MECH_NUMBER[$i4]."</span> ".$array_PILOT[$i4]."</a>&nbsp;&nbsp;<img src='".$mechstatusimage."' height='21px'><img src='./images/temp_0.png' height='21px'><br><span style='font-size:14px;'>".$array_MECH_MODEL[$i4]."</span></div></td></tr></table></td>\r\n";
+			echo "<td width='".$width."%' nowrap onclick=\"location.href='".$meli."'\"><table width='100%' cellspacing='0' cellpadding='0' class='mechselect_button_normal_left'><tr><td nowrap width='30px' align='center' valign='center'><div style='display:inline-block;height:100%;vertical-align:middle;'><img style='vertical-align:middle;' src='".$array_MECH_IMG_STATUS[$i4]."' height='30px' width='25px'></div></td><td nowrap width='100%'><div><a href='".$meli."'><span style='font-size:15px;'>".$array_MECH_NUMBER[$i4]."</span> ".$array_PILOT[$i4]."</a>&nbsp;&nbsp;<img src='".$mechstatusimage."' height='21px'>".$heatimage."<br><span style='font-size:14px;'>".$array_MECH_MODEL[$i4]."</span></div></td></tr></table></td>\r\n";
 		}
 	}
 ?>
@@ -269,7 +276,7 @@ session_start();
 							<td nowrap class="datalabel" width="12%">TP:</td>
 							<td nowrap class="datavalue" width="13%"><?php echo "$array_TP[$chosenMechIndex]"; ?></td>
 							<td nowrap class="datalabel" width="12%">SZ:</td>
-							<td nowrap class="datavalue" width="13%"><?php echo "$array_SZ[$chosenMechIndex]"; ?></td>
+							<td nowrap class="datavalue" width="13%"><?php echo "$array_SZ[$chosenMechIndex] ($array_TON[$chosenMechIndex] <img src='./images/tons.png' width='15px'>)"; ?></td>
 							<td nowrap class="datalabel" width="12%">TMM:</td>
 							<td nowrap class="datavalue" width="13%" id="TMM"><?php echo "$array_TMM[$chosenMechIndex]"; ?></td>
 							<td nowrap class="datalabel" width="12%">MV:</td>
@@ -301,7 +308,15 @@ session_start();
 					</table>
 				</div>
 
-				<div class="dataarea">
+<?php
+	if ($array_TP[$chosenMechIndex] == "BA") {
+		// Do not show the heat block for all Battle Armor units
+		echo "				<div class='dataarea' style='display:none;'>\r\n";
+	} else {
+		echo "				<div class='dataarea'>\r\n";
+	}
+?>
+
 					<table width="100%">
 						<tr>
 							<td nowrap class="datalabel" width="5%">OV:</td>
@@ -366,7 +381,15 @@ session_start();
 					<img id="die2" src="./images/dice/d6_0.png" width="65px" height="65px">
 				</div>
 
-				<div class="dataarea">
+<?php
+	if ($array_TP[$chosenMechIndex] == "BA") {
+		// Do not show the heat block for all Battle Armor units
+		echo "				<div class='dataarea' style='display:none;'>\r\n";
+	} else {
+		echo "				<div class='dataarea'>\r\n";
+	}
+?>
+
 					<table width="100%">
 						<tr>
 							<td nowrap class="datalabel" width="5%" style="text-align: right;">ENGN:</td>
