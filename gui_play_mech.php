@@ -276,7 +276,7 @@ session_start();
 							<td nowrap class="datalabel" width="12%">TP:</td>
 							<td nowrap class="datavalue" width="13%" id="unit_type"><?php echo "$array_TP[$chosenMechIndex]"; ?></td>
 							<td nowrap class="datalabel" width="12%">SZ:</td>
-							<td nowrap class="datavalue" width="13%"><?php echo "$array_SZ[$chosenMechIndex] ($array_TON[$chosenMechIndex] <img src='./images/tons.png' width='15px'>)"; ?></td>
+							<td nowrap class="datavalue" width="13%"><?php echo "$array_SZ[$chosenMechIndex]/$array_TON[$chosenMechIndex]"; ?></td>
 							<td nowrap class="datalabel" width="12%">TMM:</td>
 							<td nowrap class="datavalue" width="13%" id="TMM"><?php echo "$array_TMM[$chosenMechIndex]"; ?></td>
 							<td nowrap class="datalabel" width="12%">MV:</td>

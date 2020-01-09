@@ -21,6 +21,7 @@
 	$array_MECH_NUMBER = array();
 	$array_MECH_IMG_URL = array();
 	$array_MECH_IMG_STATUS = array();
+	$array_TECH = array();
 	$array_PV = array();
 	$array_TP = array();
 	$array_SZ = array();
@@ -117,6 +118,7 @@
 							$array_MECH_MODEL[$mechcount] = $row["as_model"];
 							$array_MECH_IMG_URL[$mechcount] = $row["mech_imageurl"];
 							$array_MECH_IMG_STATUS[$mechcount] = $row["mech_statusimageurl"];
+							$array_TECH[$mechcount] = $row["tech"];
 							$array_PV[$mechcount] = $row["as_pv"];
 							$array_TP[$mechcount] = $row["as_tp"];
 							$array_SZ[$mechcount] = $row["as_sz"];

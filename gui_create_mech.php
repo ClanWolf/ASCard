@@ -81,6 +81,7 @@ session_start();
 		$UNITID = isset($_GET["UNITID"]) ? $_GET["UNITID"] : "";
 		$MULID = isset($_GET["MULID"]) ? $_GET["MULID"] : "";
 		$MODEL = isset($_GET["MODEL"]) ? $_GET["MODEL"] : "";
+		$TECH = isset($_GET["TECH"]) ? $_GET["TECH"] : "";
 
 		$TON = urldecode($TON);
 		$MNU = urldecode($MNU);
@@ -106,11 +107,20 @@ session_start();
 		$MODEL = urldecode($MODEL);
 
 		$MECHIMAGE = getMechImageByName($MODEL);
-		
+
+		if ($TECH == '2' && $TP == 'BA') {
+			// This is a Clan Battle Armor
+			// Add Armor +1, PV +3 and replace CAR4 by CAR5 (in SPCL)
+
+		} else {
+			// This is anything else
+		}
+
 		//    MECH
 		//    ----------------
 		//    mechid
 		//    mech_number
+		//    tech
 		//    mulid
 		//    mech_tonnage
 		//    as_model
@@ -153,9 +163,10 @@ session_start();
 
 		$sql_insertmech = "";
 		$sql_insertmech = $sql_insertmech."INSERT INTO asc_mech ";
-		$sql_insertmech = $sql_insertmech."(mech_number, mulid, mech_tonnage, as_model, as_pv, as_tp, as_sz, as_tmm, as_mv, as_mvj, as_role, as_skill, as_short, as_short_min, as_medium, as_medium_min, as_long, as_long_min, as_extreme, as_extreme_min, as_ov, as_armor, as_structure, as_threshold, as_specials, mech_imageurl) ";
+		$sql_insertmech = $sql_insertmech."(mech_number, tech, mulid, mech_tonnage, as_model, as_pv, as_tp, as_sz, as_tmm, as_mv, as_mvj, as_role, as_skill, as_short, as_short_min, as_medium, as_medium_min, as_long, as_long_min, as_extreme, as_extreme_min, as_ov, as_armor, as_structure, as_threshold, as_specials, mech_imageurl) ";
 		$sql_insertmech = $sql_insertmech."VALUES (";
 		$sql_insertmech = $sql_insertmech."'".$MNU."', ";        // mech_number
+		$sql_insertmech = $sql_insertmech."'".$TECH."', ";       // tech
 		$sql_insertmech = $sql_insertmech."'".$MULID."', ";      // mulid
 		$sql_insertmech = $sql_insertmech."'".$TON."', ";        // mech_tonnage
 		$sql_insertmech = $sql_insertmech."'".$MODEL."', ";      // as_model
@@ -349,6 +360,7 @@ session_start();
 			// Store new mech
 
 			var TON = document.getElementById("F_TON").value;
+			var TECH = document.getElementById("TECH").value;
 			//var TON = document.getElementById('tonnage').value;
 			var MNU = document.getElementById('MNU').value;
 			var TP = document.getElementById('TP').value;
@@ -426,6 +438,7 @@ session_start();
 			url=url+"&MULID="+encodeURIComponent(MULID);
 			url=url+"&MODEL="+encodeURIComponent(MODEL);
 			url=url+"&UNITID="+encodeURIComponent(UNITID);
+			url=url+"&TECH="+encodeURIComponent(TECH);
 
 			// alert(url);
 			window.location.href = url;
@@ -516,6 +529,7 @@ session_start();
 					<input required type="hidden" id="SPCL" name="SPCL">
 					<input required type="hidden" id="PI" name="PI">
 					<input required type="hidden" id="F_TON" name="F_TON">
+					<input required type="hidden" id="TECH" name="TECH">
 				</td>
 			</tr>
 			<tr>

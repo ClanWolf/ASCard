@@ -76,6 +76,8 @@ function getMechList(filter, tech, minTon, maxTon) {
 		document.getElementById("S").value="";
 		document.getElementById("SPCL").value="";
 		document.getElementById("PVA").value="";
+		document.getElementById("F_TON").value="";
+		document.getElementById("TECH").value="";
 	});
 }
 
@@ -95,6 +97,8 @@ function getMechDetails(id) {
 		document.getElementById("S").value="";
 		document.getElementById("SPCL").value="";
 		document.getElementById("PVA").value="";
+		document.getElementById("F_TON").value="";
+		document.getElementById("TECH").value="";
 
 		return;
 	}
@@ -109,7 +113,9 @@ function getMechDetails(id) {
 		} else {
 			var spcl = "-";
 		}
-		
+
+		console.log("TECH: " + json.Technology.Id);
+
 		document.getElementById("TP").value=json.BFType;
 		document.getElementById("SZ").value=json.BFSize;
 		document.getElementById("TMM").value=json.BFTMM;
@@ -126,6 +132,7 @@ function getMechDetails(id) {
 		document.getElementById("SPCL").value=spcl;
 		document.getElementById("PVA").value=json.BFPointValue;
 		document.getElementById("F_TON").value=json.Tonnage;
+		document.getElementById("TECH").value=json.Technology.Id;
 	});
 }
 
