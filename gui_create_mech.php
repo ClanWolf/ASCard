@@ -107,6 +107,7 @@ session_start();
 		$MODEL = urldecode($MODEL);
 
 		$MECHIMAGE = getMechImageByName($MODEL);
+		$MECHSTATUSIMAGE = "";
 
 		// Corrections for Clan Battle Armor (unit size)
 		$pos = strpos($SPCL, "CAR4");
@@ -115,10 +116,13 @@ session_start();
 			// Add Armor +1, PV +3 and replace CAR4 by CAR5 (in SPCL)
 			// This is because MUL delivers the data for a 4 point unit (as Clan we want a SQUAD5 unit)
             $SPCL = str_replace("CAR4", "CAR5", $SPCL);
-            //$A = $A + 1;
-            //$PVA = $PVA + 3:
+            $A = intval($A) + 1;
+            $PVA = intval($PVA) + 3;
+
+            $MECHSTATUSIMAGE = "images/DD_ELE_01.png";
 		} else {
 			// This is anything else
+			$MECHSTATUSIMAGE = "images/DD_01.png";
 		}
 
 		//    MECH
@@ -168,39 +172,40 @@ session_start();
 
 		$sql_insertmech = "";
 		$sql_insertmech = $sql_insertmech."INSERT INTO asc_mech ";
-		$sql_insertmech = $sql_insertmech."(mech_number, tech, mulid, mech_tonnage, as_model, as_pv, as_tp, as_sz, as_tmm, as_mv, as_mvj, as_role, as_skill, as_short, as_short_min, as_medium, as_medium_min, as_long, as_long_min, as_extreme, as_extreme_min, as_ov, as_armor, as_structure, as_threshold, as_specials, mech_imageurl) ";
+		$sql_insertmech = $sql_insertmech."(mech_number, tech, mulid, mech_tonnage, as_model, as_pv, as_tp, as_sz, as_tmm, as_mv, as_mvj, as_role, as_skill, as_short, as_short_min, as_medium, as_medium_min, as_long, as_long_min, as_extreme, as_extreme_min, as_ov, as_armor, as_structure, as_threshold, as_specials, mech_imageurl, mech_statusimageurl) ";
 		$sql_insertmech = $sql_insertmech."VALUES (";
-		$sql_insertmech = $sql_insertmech."'".$MNU."', ";        // mech_number
-		$sql_insertmech = $sql_insertmech."'".$TECH."', ";       // tech
-		$sql_insertmech = $sql_insertmech."'".$MULID."', ";      // mulid
-		$sql_insertmech = $sql_insertmech."'".$TON."', ";        // mech_tonnage
-		$sql_insertmech = $sql_insertmech."'".$MODEL."', ";      // as_model
-		$sql_insertmech = $sql_insertmech."'".$PVA."', ";        // as_pv
-		$sql_insertmech = $sql_insertmech."'".$TP."', ";         // as_tp
-		$sql_insertmech = $sql_insertmech."'".$SZ."', ";         // as_sz
-		$sql_insertmech = $sql_insertmech."'".$TMM."', ";        // as_tmm
-		$sql_insertmech = $sql_insertmech."'".$MVG."', ";        // as_mv
+		$sql_insertmech = $sql_insertmech."'".$MNU."', ";           // mech_number
+		$sql_insertmech = $sql_insertmech."'".$TECH."', ";          // tech
+		$sql_insertmech = $sql_insertmech."'".$MULID."', ";         // mulid
+		$sql_insertmech = $sql_insertmech."'".$TON."', ";           // mech_tonnage
+		$sql_insertmech = $sql_insertmech."'".$MODEL."', ";         // as_model
+		$sql_insertmech = $sql_insertmech."'".$PVA."', ";           // as_pv
+		$sql_insertmech = $sql_insertmech."'".$TP."', ";            // as_tp
+		$sql_insertmech = $sql_insertmech."'".$SZ."', ";            // as_sz
+		$sql_insertmech = $sql_insertmech."'".$TMM."', ";           // as_tmm
+		$sql_insertmech = $sql_insertmech."'".$MVG."', ";           // as_mv
 		if ($MVJ == 0) {
-			$sql_insertmech = $sql_insertmech."null, ";          // as_mvj
+			$sql_insertmech = $sql_insertmech."null, ";             // as_mvj
 		} else {
-			$sql_insertmech = $sql_insertmech."'".$MVJ."', ";    // as_mvj
+			$sql_insertmech = $sql_insertmech."'".$MVJ."', ";       // as_mvj
 		}
-		$sql_insertmech = $sql_insertmech."'".$ROLE."', ";       // as_role
-		$sql_insertmech = $sql_insertmech."'".$SKILL."', ";      // as_skill
-		$sql_insertmech = $sql_insertmech."'".$DMGS."', ";       // as_short
-		$sql_insertmech = $sql_insertmech."0, ";                 // as_short_min
-		$sql_insertmech = $sql_insertmech."'".$DMGM."', ";       // as_medium
-		$sql_insertmech = $sql_insertmech."0, ";                 // as_medium_min
-		$sql_insertmech = $sql_insertmech."'".$DMGL."', ";       // as_long
-		$sql_insertmech = $sql_insertmech."0, ";                 // as_long_min
-		$sql_insertmech = $sql_insertmech."0, ";                 // as_extreme
-		$sql_insertmech = $sql_insertmech."0, ";                 // as_extreme_min
-		$sql_insertmech = $sql_insertmech."'".$OV."', ";         // as_ov
-		$sql_insertmech = $sql_insertmech."'".$A."', ";          // as_armor
-		$sql_insertmech = $sql_insertmech."'".$S."', ";          // as_structure
-		$sql_insertmech = $sql_insertmech."0, ";                 // as_threshold
-		$sql_insertmech = $sql_insertmech."'".$SPCL."', ";       // as_specials
-		$sql_insertmech = $sql_insertmech."'".$MECHIMAGE."'";    // mech_imageurl
+		$sql_insertmech = $sql_insertmech."'".$ROLE."', ";          // as_role
+		$sql_insertmech = $sql_insertmech."'".$SKILL."', ";         // as_skill
+		$sql_insertmech = $sql_insertmech."'".$DMGS."', ";          // as_short
+		$sql_insertmech = $sql_insertmech."0, ";                    // as_short_min
+		$sql_insertmech = $sql_insertmech."'".$DMGM."', ";          // as_medium
+		$sql_insertmech = $sql_insertmech."0, ";                    // as_medium_min
+		$sql_insertmech = $sql_insertmech."'".$DMGL."', ";          // as_long
+		$sql_insertmech = $sql_insertmech."0, ";                    // as_long_min
+		$sql_insertmech = $sql_insertmech."0, ";                    // as_extreme
+		$sql_insertmech = $sql_insertmech."0, ";                    // as_extreme_min
+		$sql_insertmech = $sql_insertmech."'".$OV."', ";            // as_ov
+		$sql_insertmech = $sql_insertmech."'".$A."', ";             // as_armor
+		$sql_insertmech = $sql_insertmech."'".$S."', ";             // as_structure
+		$sql_insertmech = $sql_insertmech."0, ";                    // as_threshold
+		$sql_insertmech = $sql_insertmech."'".$SPCL."', ";          // as_specials
+		$sql_insertmech = $sql_insertmech."'".$MECHIMAGE."', ";     // mech_imageurl
+		$sql_insertmech = $sql_insertmech."'".$MECHSTATUSIMAGE."'"; // mech_statusimageurl
 		$sql_insertmech = $sql_insertmech.")";
 		if (mysqli_query($conn, $sql_insertmech)) {
 			// Success
