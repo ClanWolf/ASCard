@@ -347,7 +347,9 @@ session_start();
 			var url="./gui_create_mech.php?am=1";
 
 			// Store new mech
-			var TON = document.getElementById('tonnage').value;
+
+			var TON = document.getElementById("F_TON").value;
+			//var TON = document.getElementById('tonnage').value;
 			var MNU = document.getElementById('MNU').value;
 			var TP = document.getElementById('TP').value;
 			var SZ = document.getElementById('SZ').value;
@@ -380,6 +382,11 @@ session_start();
 
 			if ("<<< Select Mech >>>" == MODEL) {
 				alert("Select a Mech Model!");
+				return;
+			}
+
+			if ("<<< Select BA >>>" == MODEL) {
+				alert("Select a BA Model!");
 				return;
 			}
 
@@ -462,6 +469,7 @@ session_start();
 					</select>
 
 					Tons: <select required name='tonnage' id='tonnage' size='1' onchange="fetchMechList();">
+						<option value="0-2">0-2</option>
 						<option value="20">20</option>
 						<option value="25">25</option>
 						<option value="30">30</option>
@@ -486,7 +494,7 @@ session_start();
 			</tr>
 			<tr>
 				<td nowrap class="datalabel" style='text-align:left;' colspan='4'>
-					<!-- will be filled by 'getMechList();' -->
+					<!-- will be filled by 'fetchMechList();' -->
 					<select required name='units' id='units' size='1' onchange="mechSelected();" style="width:300px"></select>
 				</td>
 			</tr>
@@ -507,6 +515,7 @@ session_start();
 					<input required type="hidden" id="PVA" name="PVA">
 					<input required type="hidden" id="SPCL" name="SPCL">
 					<input required type="hidden" id="PI" name="PI">
+					<input required type="hidden" id="F_TON" name="F_TON">
 				</td>
 			</tr>
 			<tr>
@@ -524,8 +533,8 @@ session_start();
 						<option value="0">0</option>
 						<option value="1">1</option>
 						<option value="2">2</option>
-						<option value="3">3</option>
-						<option value="4" selected>4</option>
+						<option value="3" selected>3</option>
+						<option value="4">4</option>
 						<option value="5">5</option>
 						<option value="6">6</option>
 						<option value="7">7</option>

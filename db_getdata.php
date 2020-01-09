@@ -24,6 +24,7 @@
 	$array_PV = array();
 	$array_TP = array();
 	$array_SZ = array();
+	$array_TON = array();
 	$array_TMM = array();
 	$array_MV = array();
 	$array_MVJ = array();
@@ -119,6 +120,7 @@
 							$array_PV[$mechcount] = $row["as_pv"];
 							$array_TP[$mechcount] = $row["as_tp"];
 							$array_SZ[$mechcount] = $row["as_sz"];
+							$array_TON[$mechcount] = $row["mech_tonnage"];
 							$array_TMM[$mechcount] = $row["as_tmm"];
 							$array_MV[$mechcount] = $row["as_mv"];
 							$array_MVJ[$mechcount] = $row["as_mvj"];

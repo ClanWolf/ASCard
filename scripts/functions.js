@@ -83,21 +83,42 @@ function readCircles(index, a_max, s_max) {
 		s = s - 1;
 		a = a + 1;
 	}
-	if (a > 0) {
-		mechstatus = 2;
-		mechstatusimage = "images/DD_02.png";
-	}
-	if (s > 0) {
-		mechstatus = 3;
-		mechstatusimage = "images/DD_03.png";
-	}
-	if (s == maximalstructurepoints) {
-		mechstatus = 4;
-		mechstatusimage = "images/DD_04.png";
-	}
-	if (e == 2) {
-		mechstatus = 4;
-		mechstatusimage = "images/DD_04.png";
+	if (document.getElementById('unit_type').innerText == "BA") {
+		mechstatusimage = "images/DD_ELE_01.png";
+		if (a > 0) {
+			mechstatus = 2;
+			mechstatusimage = "images/DD_ELE_02.png";
+		}
+		if (s > 0) {
+			mechstatus = 3;
+			mechstatusimage = "images/DD_ELE_03.png";
+		}
+		if (s == maximalstructurepoints) {
+			mechstatus = 4;
+			mechstatusimage = "images/DD_ELE_04.png";
+		}
+		if (e == 2) {
+			mechstatus = 4;
+			mechstatusimage = "images/DD_ELE_04.png";
+		}
+	} else {
+		mechstatusimage = "images/DD_01.png";
+		if (a > 0) {
+    		mechstatus = 2;
+    		mechstatusimage = "images/DD_02.png";
+    	}
+    	if (s > 0) {
+    		mechstatus = 3;
+    		mechstatusimage = "images/DD_03.png";
+    	}
+    	if (s == maximalstructurepoints) {
+    		mechstatus = 4;
+    		mechstatusimage = "images/DD_04.png";
+    	}
+    	if (e == 2) {
+    		mechstatus = 4;
+    		mechstatusimage = "images/DD_04.png";
+    	}
 	}
 
 	document.getElementById('mechstatusimagemenu').src=mechstatusimage;
@@ -141,7 +162,7 @@ function setCircles(h, a, s, e, fc, mp, w) {
 		}
 	});
 	if (e == 0) {
-    		document.getElementById("ht_field").style.color ="#000000";
+    	document.getElementById("ht_field").style.color ="#000000";
 	} else if (e == 1) {
 		enginehit = 1;
 		document.getElementById("ht_field").style.color ="#00ff00";

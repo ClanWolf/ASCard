@@ -8,13 +8,15 @@ var corsproxyprefix = corsproxyprefix1;
 
 function getMechList(filter, tech, minTon, maxTon) {
 	var optionList = '';
-	optionList = optionList + "<option><<< Select Mech >>></option>";
+	if (maxTon == '2') {
+		optionList = optionList + "<option><<< Select BA >>></option>";
+	} else {
+		optionList = optionList + "<option><<< Select Mech >>></option>";
+	}
 
 	var url = corsproxyprefix + 'http://www.masterunitlist.info/Unit/QuickList';
 		url = url + '?Name='			+ filter;
 		url = url + '&HasBV=false';
-		url = url + '&MinTons='			+ minTon;
-		url = url + '&MaxTons='			+ maxTon;
 		url = url + '&MinBV=';
 		url = url + '&MaxBV=';
 		url = url + '&MinIntro=';
@@ -27,9 +29,19 @@ function getMechList(filter, tech, minTon, maxTon) {
 		url = url + '&MaxPV=';
 		url = url + '&Role=None+Selected';
 		url = url + '&Technologies='	+ tech;
-		url = url + '&Types=18';
 		url = url + '&BookAuto=';
 		url = url + '&FactionAuto=';
+		if (maxTon == '2') {
+			url = url + '&Types=21';                    // Infantry
+			url = url + '&SubTypes=28';                 // Elementals / Battle Armor
+		} else {
+			url = url + '&MinTons='			+ minTon;
+			url = url + '&MaxTons='			+ maxTon;
+			url = url + '&Types=18';                    // Mechs
+		}
+
+		console.log(url);
+
 	$.getJSON(url, function (json) {
 		json.Units.sort(function(a, b) {
 		    if (a.Name < b.Name) return -1;
@@ -63,13 +75,12 @@ function getMechList(filter, tech, minTon, maxTon) {
 		document.getElementById("A").value="";
 		document.getElementById("S").value="";
 		document.getElementById("SPCL").value="";
-
-		document.getElementById("PVA").value=json="";
+		document.getElementById("PVA").value="";
 	});
 }
 
 function getMechDetails(id) {
-	if (id == "<<< Select Mech >>>") {
+	if ((id == "<<< Select Mech >>>") || (id == "<<< Select BA >>>")) {
 		document.getElementById("TP").value="";
 		document.getElementById("SZ").value="";
 		document.getElementById("TMM").value="";
@@ -83,8 +94,7 @@ function getMechDetails(id) {
 		document.getElementById("A").value="";
 		document.getElementById("S").value="";
 		document.getElementById("SPCL").value="";
-
-		document.getElementById("PVA").value=json="";
+		document.getElementById("PVA").value="";
 
 		return;
 	}
@@ -114,8 +124,8 @@ function getMechDetails(id) {
 		document.getElementById("A").value=json.BFArmor;
 		document.getElementById("S").value=json.BFStructure;
 		document.getElementById("SPCL").value=spcl;
-
 		document.getElementById("PVA").value=json.BFPointValue;
+		document.getElementById("F_TON").value=json.Tonnage;
 	});
 }
 
@@ -135,5 +145,9 @@ function fetchMechList() {
 	if (tonnagevalue == '0') {
 		tonnagevalue = '';
 	}
-	getMechList(filter, techid, tonnagevalue, tonnagevalue);
+	if (tonnagevalue == '0-2') {
+		getMechList(filter, techid, 0, 2);
+	} else {
+		getMechList(filter, techid, tonnagevalue, tonnagevalue);
+	}
 }
