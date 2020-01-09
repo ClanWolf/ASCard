@@ -108,10 +108,15 @@ session_start();
 
 		$MECHIMAGE = getMechImageByName($MODEL);
 
-		if ($TECH == '2' && $TP == 'BA') {
+		// Corrections for Clan Battle Armor (unit size)
+		$pos = strpos($SPCL, "CAR4");
+		if ($TECH == "2" && $TP == "BA" && $pos !== false) {
 			// This is a Clan Battle Armor
 			// Add Armor +1, PV +3 and replace CAR4 by CAR5 (in SPCL)
-
+			// This is because MUL delivers the data for a 4 point unit (as Clan we want a SQUAD5 unit)
+            $SPCL = str_replace("CAR4", "CAR5", $SPCL);
+            //$A = $A + 1;
+            //$PVA = $PVA + 3:
 		} else {
 			// This is anything else
 		}
