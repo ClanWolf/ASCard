@@ -113,9 +113,15 @@
 				if (mysqli_num_rows($result_asc_mech) > 0) {
 					while($row = mysqli_fetch_assoc($result_asc_mech)) {
 						if ($row["mechid"] == $mechid) {
+
+							$clan = "";
+							if ($row["tech"] == "2") {
+								$clan = "c ";
+							}
+
 							$array_MECH_DBID[$mechcount] = $row["mechid"];
 							$array_MECH_NUMBER[$mechcount] = $row["mech_number"];
-							$array_MECH_MODEL[$mechcount] = $row["as_model"];
+							$array_MECH_MODEL[$mechcount] = $clan.$row["as_model"];
 							$array_MECH_IMG_URL[$mechcount] = $row["mech_imageurl"];
 							$array_MECH_IMG_STATUS[$mechcount] = $row["mech_statusimageurl"];
 							$array_TECH[$mechcount] = $row["tech"];

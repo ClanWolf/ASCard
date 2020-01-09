@@ -543,8 +543,14 @@ session_start();
 			echo "</div>\n";
 
 			echo "<script>\n";
-			echo "	var movement = $array_MVMT[$chosenMechIndex]\n";
-			echo "	var weaponsfired = $array_WPNSFIRED[$chosenMechIndex]\n";
+			echo "	var movement = 0\n";
+			if ($array_MVMT[$chosenMechIndex] != null) {
+				echo "	movement = $array_MVMT[$chosenMechIndex]\n";
+			}
+			echo "	var weaponsfired = 0\n";
+			if ($array_WPNSFIRED[$chosenMechIndex] != null) {
+				echo "	weaponsfired = $array_WPNSFIRED[$chosenMechIndex]\n";
+			}
 			echo "	setMovementFlags($array_MECH_DBID[$chosenMechIndex], movement, weaponsfired);\n";
 			echo "</script>\n";
 		}
