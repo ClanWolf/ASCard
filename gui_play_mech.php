@@ -178,7 +178,7 @@ session_start();
 		if ($array_TP[$i4] == "BA") {
 			$heatimage = "";
 		} else {
-			$heatimage = "<img src='./images/temp_0.png' height='21px'>";
+			$heatimage = "<img id='heatimage' src='./images/temp_".$array_HT[$i4].".png' height='21px'>";
 		}
 
 //		echo "<p>ggg".$mvmt." : ".$wpnsfired."</p>\n";

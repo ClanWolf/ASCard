@@ -346,6 +346,11 @@ function setCircles(h, a, s, e, fc, mp, w) {
 
 	var wallpaperNorm = "./images/body-bg_2.png";
 	var wallpaperWrecked = "./images/body-bg_wrecked2.jpg";
+	var temp0 = "./images/temp_0.png";
+	var temp1 = "./images/temp_1.png";
+	var temp2 = "./images/temp_2.png";
+	var temp3 = "./images/temp_3.png";
+	var temp4 = "./images/temp_4.png";
 
 	if (mechstatus == 4) {
 		// Mech destroyed
@@ -355,8 +360,21 @@ function setCircles(h, a, s, e, fc, mp, w) {
 		document.body.style.backgroundImage = "url('" + wallpaperNorm + "')";
 		document.getElementById('mechimage').src=originalmechimage;
 	}
+	if (h == 0) {
+		document.getElementById('heatimage').src=temp0;
+	}
+	if (h == 1) {
+		document.getElementById('heatimage').src=temp1;
+	}
+	if (h == 2) {
+		document.getElementById('heatimage').src=temp2;
+	}
+	if (h == 3) {
+		document.getElementById('heatimage').src=temp3;
+	}
 	if (h == 4) {
 		document.body.style.backgroundImage = "url('" + wallpaperWrecked + "')";
+		document.getElementById('heatimage').src=temp4;
 	}
 }
 

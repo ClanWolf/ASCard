@@ -53,6 +53,8 @@
 	$array_DMG_LONG_MOD = array();
 	$array_FRCTRL_MOD = array();
 
+	$array_ACTIVE_BID = array();
+
 	// Unit
 	// unitid; factionid; forcename; --parentforceid--; unit_imageurl; playable
 	$sql_asc_unit = "SELECT SQL_NO_CACHE * FROM asc_unit;";
@@ -141,6 +143,7 @@
 							$array_SPCL[$mechcount] = $row["as_specials"];
 							$array_A_MAX[$mechcount] = $row["as_armor"];
 							$array_S_MAX[$mechcount] = $row["as_structure"];
+							$array_ACTIVE_BID[$mechcount] = $row["active_bid"];
 						}
 					}
 				}
