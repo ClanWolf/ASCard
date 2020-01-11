@@ -199,6 +199,11 @@ session_start();
 			// Error! Unit has fired but no movement was specified! Ask again!
 		}
 
+		$memodel = $array_MECH_MODEL[$i4];
+		if ($array_ACTIVE_BID[$i4] == "0") {
+			$memodel = "--- Bidden away ---";
+		}
+
 		$meli="./gui_play_mech.php?unit=".$unitid."&chosenmech=".$i4;
 		if ($chosenMechIndex == $i4) {
 			if ($movd==1) {
@@ -207,9 +212,9 @@ session_start();
 			} else {
 				$meli=$meli."&movd=1";
 			}
-			echo "<td width='".$width."%' nowrap onclick=\"location.href='".$meli."'\"><table width='100%' cellspacing='0' cellpadding='0' class='mechselect_button_active_left'><tr><td nowrap width='30px' align='center' valign='center'><div style='display:inline-block;height:100%;vertical-align:middle;'><img id='mechstatusimagemenu' style='vertical-align:middle;' src='".$array_MECH_IMG_STATUS[$i4]."' height='30px' width='25px'></div></td><td nowrap width='100%'><div><a href='".$meli."'><span style='font-size:15px;'>".$array_MECH_NUMBER[$i4]."</span> ".$array_PILOT[$i4]."</a>&nbsp;&nbsp;<img src='".$mechstatusimage."' height='21px'>".$heatimage."<br><span style='font-size:14px;'>".$array_MECH_MODEL[$i4]."</span></div></td></tr></table></td>\r\n";
+			echo "<td width='".$width."%' nowrap onclick=\"location.href='".$meli."'\"><table width='100%' cellspacing='0' cellpadding='0' class='mechselect_button_active_left'><tr><td nowrap width='30px' align='center' valign='center'><div style='display:inline-block;height:100%;vertical-align:middle;'><img id='mechstatusimagemenu' style='vertical-align:middle;' src='".$array_MECH_IMG_STATUS[$i4]."' height='30px' width='25px'></div></td><td nowrap width='100%'><div><a href='".$meli."'><span style='font-size:15px;'>".$array_MECH_NUMBER[$i4]."</span> ".$array_PILOT[$i4]."</a>&nbsp;&nbsp;<img src='".$mechstatusimage."' height='21px'>".$heatimage."<br><span style='font-size:14px;'>".$memodel."</span></div></td></tr></table></td>\r\n";
 		} else {
-			echo "<td width='".$width."%' nowrap onclick=\"location.href='".$meli."'\"><table width='100%' cellspacing='0' cellpadding='0' class='mechselect_button_normal_left'><tr><td nowrap width='30px' align='center' valign='center'><div style='display:inline-block;height:100%;vertical-align:middle;'><img style='vertical-align:middle;' src='".$array_MECH_IMG_STATUS[$i4]."' height='30px' width='25px'></div></td><td nowrap width='100%'><div><a href='".$meli."'><span style='font-size:15px;'>".$array_MECH_NUMBER[$i4]."</span> ".$array_PILOT[$i4]."</a>&nbsp;&nbsp;<img src='".$mechstatusimage."' height='21px'>".$heatimage."<br><span style='font-size:14px;'>".$array_MECH_MODEL[$i4]."</span></div></td></tr></table></td>\r\n";
+			echo "<td width='".$width."%' nowrap onclick=\"location.href='".$meli."'\"><table width='100%' cellspacing='0' cellpadding='0' class='mechselect_button_normal_left'><tr><td nowrap width='30px' align='center' valign='center'><div style='display:inline-block;height:100%;vertical-align:middle;'><img style='vertical-align:middle;' src='".$array_MECH_IMG_STATUS[$i4]."' height='30px' width='25px'></div></td><td nowrap width='100%'><div><a href='".$meli."'><span style='font-size:15px;'>".$array_MECH_NUMBER[$i4]."</span> ".$array_PILOT[$i4]."</a>&nbsp;&nbsp;<img src='".$mechstatusimage."' height='21px'>".$heatimage."<br><span style='font-size:14px;'>".$memodel."</span></div></td></tr></table></td>\r\n";
 		}
 	}
 ?>
@@ -250,6 +255,10 @@ session_start();
 		// Current Mech is playable by current user
 		$playable = true;
 	} else {
+		$playable = false;
+	}
+
+	if ($array_ACTIVE_BID[$chosenMechIndex] == "0") {
 		$playable = false;
 	}
 
@@ -374,7 +383,13 @@ session_start();
 			</td>
 			<td width="40%" valign="bottom" align="right">
 
-				<div id="criticalhit"></div>
+<?php
+	if ($array_TP[$chosenMechIndex] != "BA") {
+		echo "				<div id='criticalhit'></div>\r\n";
+	} else {
+		echo "				<div id='criticalhit' style='display:none;'></div>\r\n";
+	}
+?>
 
 				<div id="dice" valign="middle" align="center">
 					<img id="die1" src="./images/dice/d6_0.png" width="65px" height="65px">

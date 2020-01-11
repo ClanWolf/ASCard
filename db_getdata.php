@@ -118,7 +118,7 @@
 
 							$clan = "";
 							if ($row["tech"] == "2") {
-								$clan = "c ";
+								//$clan = "c ";
 							}
 
 							$array_MECH_DBID[$mechcount] = $row["mechid"];
@@ -179,7 +179,8 @@
 				if (mysqli_num_rows($result_asc_pilot) > 0) {
 					while($row = mysqli_fetch_assoc($result_asc_pilot)) {
 						if ($row["pilotid"] == $pilotid) {
-							$array_PILOT[$mechcount] = $row["rank"]." ".$row["name"];
+							//$array_PILOT[$mechcount] = $row["rank"]." ".$row["name"];
+							$array_PILOT[$mechcount] = $row["name"];
 							$array_PILOT_IMG_URL[$mechcount] = $row["pilot_imageurl"];
 						}
 					}

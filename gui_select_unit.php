@@ -16,6 +16,7 @@ session_start();
 	$hideMinusButtons = $_SESSION['option3'];
 
 	$deletemech = isset($_GET["dm"]) ? $_GET["dm"] : "";
+	$togglebid = isset($_GET["activebid"]) ? $_GET["activebid"] : "";
 
 	if ($deletemech=="1") {
 		$mechid = isset($_GET["mechid"]) ? $_GET["mechid"] : "";
@@ -32,6 +33,20 @@ session_start();
 		} else {
 			// Error
 			echo "Error: " . $sqldeleteassignment . "<br>" . mysqli_error($conn);
+		}
+
+		echo "<meta http-equiv='refresh' content='0;url=./gui_select_unit.php'>";
+	}
+
+	if ($togglebid == "1" || $togglebid == "0") {
+		$mechid = isset($_GET["mechid"]) ? $_GET["mechid"] : "";
+	    $sqltogglebid = "UPDATE asc_mech set active_bid=".$togglebid." WHERE mechid = " . $mechid . ";";
+		if (mysqli_query($conn, $sqltogglebid)) {
+			// Success
+			//echo "Error: " . $sqltogglebid . "<br>";
+		} else {
+			// Error
+			echo "Error: " . $sqltogglebid . "<br>" . mysqli_error($conn);
 		}
 
 		echo "<meta http-equiv='refresh' content='0;url=./gui_select_unit.php'>";
@@ -124,6 +139,7 @@ session_start();
 	$pointvaluetotal = 0;
 	$pointvaluetotalactivebid = 0;
 	$tonnagetotal = 0;
+	$tonnagetotalactivebid = 0;
 
 	//echo "		<td nowrap style='width:170px;height:70px;' class='mechselect_button_active'>".$pname."</td>";
 	// Select units for this player
@@ -192,6 +208,11 @@ session_start();
 
 						$pointvaluetotal = $pointvaluetotal + intval($mechpointvalue);
 						$tonnagetotal = $tonnagetotal + intval($mechtonnage);
+
+						if ($activebid == "1") {
+							$pointvaluetotalactivebid = $pointvaluetotalactivebid + intval($mechpointvalue);
+							$tonnagetotalactivebid = $tonnagetotalactivebid + intval($mechtonnage);
+						}
 					}
 				}
 
@@ -214,10 +235,25 @@ session_start();
 					$bidcolor = "#444444;";
 				} else {
 					// given away in bidding
-					$bidcolor = "#222222;";
+					$bidcolor = "#741300;";
 				}
 
 				$mechDetailString = "";
+
+				$mechDetailString = $mechDetailString."						<td nowrap width='1%'  onclick='location.href=\"\"' style='background-color:#121212;text-align:right;'>\n";
+				$mechDetailString = $mechDetailString."							<span style='font-size:16px;'>\n";
+				if (!$hideMinusButtons) {
+					$mechDetailString = $mechDetailString."								\n";
+				} else {
+					if ($activebid == "1") {
+						$mechDetailString = $mechDetailString."								<span><a href='./gui_select_unit.php?activebid=0&mechid=".$assignedMechID."'>&nbsp;<i class='fa fa-arrow-circle-left' aria-hidden='true' style='font-size:26;color:#741300;'></i></a>&nbsp;</span>\n";
+					} else {
+						$mechDetailString = $mechDetailString."								<span><a href='./gui_select_unit.php?activebid=1&mechid=".$assignedMechID."'>&nbsp;<i class='fa fa-arrow-circle-right' aria-hidden='true' style='font-size:26;color:#2f7c2f;'></i></a>&nbsp;</span>\n";
+					}
+				}
+				$mechDetailString = $mechDetailString."							</span>\n";
+				$mechDetailString = $mechDetailString."						</td>\n";
+
 				$mechDetailString = $mechDetailString."			<td nowrap onclick='location.href=\"gui_play_mech.php?unit=".$unitidSelected."&chosenmech=".$c."\"' style='background-color:".$bidcolor."' class='mechselect_button_active' align='right' valign='center'><div style='display:inline-block;height:100%;vertical-align:middle;'><img style='vertical-align:middle;' src='".$mechstatusimage."' height='30px'><br><span style='font-size:12px;'>".$numStr."</span></div></td>\n";
 				$mechDetailString = $mechDetailString."			<td nowrap onclick='location.href=\"gui_play_mech.php?unit=".$unitidSelected."&chosenmech=".$c."\"' style='width:100%;background-color:".$bidcolor."' class='mechselect_button_active'>\n";
 				$mechDetailString = $mechDetailString."				<table width='100%' cellspacing=0 cellpadding=0 border=0px>\n";
@@ -276,7 +312,11 @@ session_start();
 	}
 	echo "		</tr>\n";
 	echo "		<tr>\n";
-	echo "			<td colspan='3' style='background-color:#333333;' align='center' valign='top'><span style='font-size:20;color:#da8e25;'>PV ∑: ".$pointvaluetotal."</span><span style='font-size:20;color:#eeeeee;'>&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;</span><span style='font-size:20;color:#ff33ee;'>TON ∑: ".$tonnagetotal."</span></td>\n";
+	echo "			<td colspan='3' style='background-color:#333333;' align='center' valign='top'>";
+	echo "				<span style='font-size:20;color:#eeeeee;'>Bid:&nbsp;</span><span style='font-size:20;color:#da8e25;'>PV: ".$pointvaluetotalactivebid."</span><span style='font-size:20;color:#eeeeee;'>&nbsp;/&nbsp;</span><span style='font-size:20;color:#ff33ee;'>".$tonnagetotalactivebid." t</span>";
+	echo "				<span style='font-size:20;color:#eeeeee;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>";
+	echo "				<span style='font-size:20;color:#eeeeee;'>Total:&nbsp;PV ".$pointvaluetotal."&nbsp;/&nbsp;".$tonnagetotal." t</span>";
+	echo "			</td>\n";
 	echo "		</tr>\n";
 ?>
 
