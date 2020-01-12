@@ -360,21 +360,22 @@ function setCircles(h, a, s, e, fc, mp, w) {
 		document.body.style.backgroundImage = "url('" + wallpaperNorm + "')";
 		document.getElementById('mechimage').src=originalmechimage;
 	}
+
 	if (h == 0) {
-		document.getElementById('heatimage').src=temp0;
+		document.getElementById('heatimage_' + chosenmechindex).src=temp0;
 	}
 	if (h == 1) {
-		document.getElementById('heatimage').src=temp1;
+		document.getElementById('heatimage_' + chosenmechindex).src=temp1;
 	}
 	if (h == 2) {
-		document.getElementById('heatimage').src=temp2;
+		document.getElementById('heatimage_' + chosenmechindex).src=temp2;
 	}
 	if (h == 3) {
-		document.getElementById('heatimage').src=temp3;
+		document.getElementById('heatimage_' + chosenmechindex).src=temp3;
 	}
 	if (h == 4) {
 		document.body.style.backgroundImage = "url('" + wallpaperWrecked + "')";
-		document.getElementById('heatimage').src=temp4;
+		document.getElementById('heatimage_' + chosenmechindex).src=temp4;
 	}
 }
 

@@ -189,7 +189,7 @@ session_start();
 				$assignedMechID = $rowUnitAssignment['mechid'];
 				$assignedPilotID = $rowUnitAssignment['pilotid'];
 
-				$sql_asc_mech = "SELECT SQL_NO_CACHE * FROM asc_mech where mechid=".$assignedMechID.";";
+				$sql_asc_mech = "SELECT SQL_NO_CACHE * FROM asc_mech where mechid=".$assignedMechID." order by mech_tonnage desc;";
 				$result_asc_mech = mysqli_query($conn, $sql_asc_mech);
 				if (mysqli_num_rows($result_asc_mech) > 0) {
 					while($rowMech = mysqli_fetch_assoc($result_asc_mech)) {

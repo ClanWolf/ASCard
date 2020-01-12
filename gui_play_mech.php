@@ -78,7 +78,12 @@ session_start();
 					if ((na.substring(0, 4) == "MV4_") && el1.checked == true) { mv = 4; }
 
 					if (na == "WF_WEAPONSFIRED" && el1.checked == true) {
-						fired = 1;
+						if (mv == 0) {
+							alert("First movement has to be specified!");
+							el1.checked = false;
+						} else {
+							fired = 1;
+						}
 					}
 				}
 			})
@@ -126,6 +131,7 @@ session_start();
 	require('./db_getdata.php');
 
 	echo "<script>";
+	echo "  var chosenmechindex = ".$chosenMechIndex.";";
 	echo "	var shortdamage = ".$array_DMG_SHORT[$chosenMechIndex].";";
 	echo "	var mediumdamage = ".$array_DMG_MEDIUM[$chosenMechIndex].";";
 	echo "	var longdamage = ".$array_DMG_LONG[$chosenMechIndex].";";
@@ -168,17 +174,17 @@ session_start();
 <?php
 	$size = sizeof($array_MECH_MODEL);
 	$width = ceil(100 / $size);
+	$heatimage = array();
 	for ($i4 = 1; $i4 <= $size; $i4++) {
 
 		$mechstatusimage = "./images/check_red.png";
-		$heatimage = "";
 		$mvmt = $array_MVMT[$i4];
 		$wpnsfired = $array_WPNSFIRED[$i4];
 
 		if ($array_TP[$i4] == "BA") {
-			$heatimage = "";
+			$heatimage[$i4] = "";
 		} else {
-			$heatimage = "<img id='heatimage' src='./images/temp_".$array_HT[$i4].".png' height='21px'>";
+			$heatimage[$i4] = "<img id='heatimage_".$i4."' src='./images/temp_".$array_HT[$i4].".png' height='21px'>";
 		}
 
 //		echo "<p>ggg".$mvmt." : ".$wpnsfired."</p>\n";
@@ -212,9 +218,9 @@ session_start();
 			} else {
 				$meli=$meli."&movd=1";
 			}
-			echo "<td width='".$width."%' nowrap onclick=\"location.href='".$meli."'\"><table width='100%' cellspacing='0' cellpadding='0' class='mechselect_button_active_left'><tr><td nowrap width='30px' align='center' valign='center'><div style='display:inline-block;height:100%;vertical-align:middle;'><img id='mechstatusimagemenu' style='vertical-align:middle;' src='".$array_MECH_IMG_STATUS[$i4]."' height='30px' width='25px'></div></td><td nowrap width='100%'><div><a href='".$meli."'><span style='font-size:15px;'>".$array_MECH_NUMBER[$i4]."</span> ".$array_PILOT[$i4]."</a>&nbsp;&nbsp;<img src='".$mechstatusimage."' height='21px'>".$heatimage."<br><span style='font-size:14px;'>".$memodel."</span></div></td></tr></table></td>\r\n";
+			echo "<td width='".$width."%' nowrap onclick=\"location.href='".$meli."'\"><table width='100%' cellspacing='0' cellpadding='0' class='mechselect_button_active_left'><tr><td nowrap width='30px' align='center' valign='center'><div style='display:inline-block;height:100%;vertical-align:middle;'><img id='mechstatusimagemenu' style='vertical-align:middle;' src='".$array_MECH_IMG_STATUS[$i4]."' height='30px' width='25px'></div></td><td nowrap width='100%'><div><a href='".$meli."'><span style='font-size:15px;'>".$array_MECH_NUMBER[$i4]."</span> ".$array_PILOT[$i4]."</a>&nbsp;&nbsp;<img src='".$mechstatusimage."' height='21px'>".$heatimage[$i4]."<br><span style='font-size:14px;'>".$memodel."</span></div></td></tr></table></td>\r\n";
 		} else {
-			echo "<td width='".$width."%' nowrap onclick=\"location.href='".$meli."'\"><table width='100%' cellspacing='0' cellpadding='0' class='mechselect_button_normal_left'><tr><td nowrap width='30px' align='center' valign='center'><div style='display:inline-block;height:100%;vertical-align:middle;'><img style='vertical-align:middle;' src='".$array_MECH_IMG_STATUS[$i4]."' height='30px' width='25px'></div></td><td nowrap width='100%'><div><a href='".$meli."'><span style='font-size:15px;'>".$array_MECH_NUMBER[$i4]."</span> ".$array_PILOT[$i4]."</a>&nbsp;&nbsp;<img src='".$mechstatusimage."' height='21px'>".$heatimage."<br><span style='font-size:14px;'>".$memodel."</span></div></td></tr></table></td>\r\n";
+			echo "<td width='".$width."%' nowrap onclick=\"location.href='".$meli."'\"><table width='100%' cellspacing='0' cellpadding='0' class='mechselect_button_normal_left'><tr><td nowrap width='30px' align='center' valign='center'><div style='display:inline-block;height:100%;vertical-align:middle;'><img style='vertical-align:middle;' src='".$array_MECH_IMG_STATUS[$i4]."' height='30px' width='25px'></div></td><td nowrap width='100%'><div><a href='".$meli."'><span style='font-size:15px;'>".$array_MECH_NUMBER[$i4]."</span> ".$array_PILOT[$i4]."</a>&nbsp;&nbsp;<img src='".$mechstatusimage."' height='21px'>".$heatimage[$i4]."<br><span style='font-size:14px;'>".$memodel."</span></div></td></tr></table></td>\r\n";
 		}
 	}
 ?>
