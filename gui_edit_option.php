@@ -193,7 +193,7 @@ session_start();
 					<label class="bigcheck"><input onchange="changeOption();" type="checkbox" class="bigcheck" name="OPT3" value="yes"/><span class="bigcheck-target"></span></label>&nbsp;&nbsp;
 				</td>
 				<td align="left" class="datalabel">
-					Hide delete icons (play mode)
+					Play mode (deactivate to edit units)
 				</td>
 			</tr>
 		</table>

@@ -163,9 +163,11 @@ session_start();
 				echo "			<td nowrap style='width:270px;height:40px;' onclick='location.href=\"gui_play_mech.php?unit=".$unitidSelected."\"' class='unitselect_button_normal'>\n";
 				echo "				<table style='width:100%;' cellspacing=0 cellpadding=0>\n";
 				echo "					<tr>\n";
-				echo "						<td style='text-align:left;'>\n";
-				echo "							<a href='gui_edit_unit.php?unit=".$unitidSelected."'><i class='fa fa-edit'></i></a>\n";
-				echo "						</td>\n";
+				if (!$hideMinusButtons) {
+					echo "						<td style='text-align:left;'>\n";
+					echo "							<a href='gui_edit_unit.php?unit=".$unitidSelected."'><i class='fa fa-edit'></i></a>\n";
+					echo "						</td>\n";
+				}
 				echo "						<td style='text-align:center;'>\n";
 				echo "							<a href='gui_play_mech.php?unit=".$unitidSelected."'>".$forcenameSelected."</a>\n";
 				echo "						</td>\n";
@@ -196,7 +198,8 @@ session_start();
 
 						$clan = "";
 						if ($rowMech["tech"] == "2") {
-							$clan = "c ";
+							//$clan = "c ";
+							$clan = "";
 						}
 
 						$mechnumber = $rowMech['mech_number'];
@@ -283,20 +286,22 @@ session_start();
 		}
 	}
 	echo "		</tr>\n";
-	echo "		<tr>\n";
-	echo "			<td nowrap style='text-align:center;width:200px;height:30px;background-color:#transparent;'>\n";
-	echo "				<a href='".$assignMechToUnitLinkArray[0]."'><i class='fa fa-fw fa-plus-square'></i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\n";
-	echo "				<a href='".$addMechToUnitLinkArray[0]."'><i class='fa fa-asterisk'></i></a>\n";
-	echo "			</td>\n";
-	echo "			<td nowrap style='text-align:center;width:200px;height:30px;background-color:#transparent;'>\n";
-	echo "				<a href='".$assignMechToUnitLinkArray[1]."'><i class='fa fa-fw fa-plus-square'></i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\n";
-	echo "				<a href='".$addMechToUnitLinkArray[1]."'><i class='fa fa-asterisk'></i></a>\n";
-	echo "			</td>\n";
-	echo "			<td nowrap style='text-align:center;width:200px;height:30px;background-color:#transparent;'>\n";
-	echo "				<a href='".$assignMechToUnitLinkArray[2]."'><i class='fa fa-fw fa-plus-square'></i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\n";
-	echo "				<a href='".$addMechToUnitLinkArray[2]."'><i class='fa fa-asterisk'></i></a>\n";
-	echo "			</td>\n";
-	echo "		</tr>\n";
+	if (!$hideMinusButtons) {
+		echo "		<tr>\n";
+		echo "			<td nowrap style='text-align:center;width:200px;height:30px;background-color:#transparent;'>\n";
+		echo "				<a href='".$assignMechToUnitLinkArray[0]."'><i class='fa fa-fw fa-plus-square'></i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\n";
+		echo "				<a href='".$addMechToUnitLinkArray[0]."'><i class='fa fa-asterisk'></i></a>\n";
+		echo "			</td>\n";
+		echo "			<td nowrap style='text-align:center;width:200px;height:30px;background-color:#transparent;'>\n";
+		echo "				<a href='".$assignMechToUnitLinkArray[1]."'><i class='fa fa-fw fa-plus-square'></i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\n";
+		echo "				<a href='".$addMechToUnitLinkArray[1]."'><i class='fa fa-asterisk'></i></a>\n";
+		echo "			</td>\n";
+		echo "			<td nowrap style='text-align:center;width:200px;height:30px;background-color:#transparent;'>\n";
+		echo "				<a href='".$assignMechToUnitLinkArray[2]."'><i class='fa fa-fw fa-plus-square'></i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\n";
+		echo "				<a href='".$addMechToUnitLinkArray[2]."'><i class='fa fa-asterisk'></i></a>\n";
+		echo "			</td>\n";
+		echo "		</tr>\n";
+	}
 	echo "		<tr>\n";
 
 	foreach ($mechsInAllUnits as &$mechsInSingleUnit) {
