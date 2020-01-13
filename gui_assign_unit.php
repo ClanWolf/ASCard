@@ -213,12 +213,23 @@ session_start();
 			window.location.href = url;
 		}
 	</script>
+
 <?php
 	echo "<div id='player_image'>\n";
 	echo "	<img src='./images/player/".$pimage."' width='60px' height='60px'>\n";
 	echo "</div>\n";
 ?>
+
 	<div id="cover"></div>
+
+<?php
+	if ($hideMinusButtons) {
+		$buttonWidth = "17%";
+	} else {
+		$buttonWidth = "34%";
+	}
+?>
+
 	<div id="header">
 		<table style="width:100%;height:60px;border:none;border-collapse:collapse;background:rgba(50,50,50,1.0);" cellspacing="0" cellpadding="0">
 			<tr>
