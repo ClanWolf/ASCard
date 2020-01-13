@@ -226,7 +226,7 @@ session_start();
 					<div><a style="color: #eee;" href="./logout.php"><i class="fa fa-power-off" aria-hidden="true"></i></a></div>
 				</td>
 				<td nowrap onclick="location.href='./gui_select_unit.php'" width="17%"><div class='mechselect_button_normal'><a href='./gui_select_unit.php'>ROSTER</a><br><span style='font-size:16px;'>Choose a Mech</span></div></td>
-				<td nowrap onclick="location.href='./gui_select_enemy_unit.php'" width="17%"><div class='mechselect_button_normal'><a href='./gui_select_enemy_unit.php'>FORCES</a><br><span style='font-size:16px;'>Other combatants</span></div></td>
+				<td nowrap onclick="location.href='./gui_select_enemy_unit.php'" width="17%"><div class='mechselect_button_normal'><a href='./gui_select_enemy_unit.php'>FORCES</a><br><span style='font-size:16px;'>All units</span></div></td>
 				<td nowrap onclick="location.href='./gui_assign_unit.php'" width="17%"><div class='mechselect_button_active'><a href='./gui_assign_unit.php'>ASSIGN</a><br><span style='font-size:16px;'>Assign Mech/BA</span></div></td>
 				<td nowrap onclick="location.href='./gui_create_mech.php'" width="17%"><div class='mechselect_button_normal'><a href='./gui_create_mech.php'>ADD</a><br><span style='font-size:16px;'>Create a Mech/BA</span></div></td>
 				<td nowrap onclick="location.href='./gui_create_player.php'" width="17%"><div class='mechselect_button_normal'><a href='./gui_create_player.php'>PLAYER</a><br><span style='font-size:16px;'>Manage players</span></div></td>
