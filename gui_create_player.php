@@ -44,7 +44,18 @@ session_start();
 					// Error
 					echo "Error: " . $sqlinsertunit . "<br>" . mysqli_error($conn);
 				}
-				echo "<meta http-equiv='refresh' content='0;url=./gui_create_player.php'>";
+
+				// Create options entry for new user
+				$sqlinsertoptions = "INSERT INTO asc_options (playerid, option1, option2, option3) VALUES ";
+				$sqlinsertoptions = $sqlinsertoptions . "(".$newplayerid.", 1, 0, 0)";
+				if (mysqli_query($conn, $sqlinsertoptions)) {
+					// Success inserting units for new player
+				} else {
+					// Error
+					echo "Error: " . $sqlinsertoptions . "<br>" . mysqli_error($conn);
+				}
+
+				//echo "<meta http-equiv='refresh' content='0;url=./gui_create_player.php'>";
 			} else {
 				// Error
 				echo "Error: " . $sql . "<br>" . mysqli_error($conn);

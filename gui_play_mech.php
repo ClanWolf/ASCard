@@ -498,7 +498,7 @@ session_start();
 			echo "								&nbsp;&nbsp;&nbsp;TMM -4\n";
 			echo "							</td>\n";
 			echo "							<td nowrap align='left' class='datalabel'>\n";
-			echo "								&nbsp;&nbsp;&nbsp;Prone\n";
+			echo "								&nbsp;&nbsp;&nbsp;Immobile\n";
 			echo "							</td>\n";
 			echo "						</tr>\n";
 			echo "						<tr>\n";
