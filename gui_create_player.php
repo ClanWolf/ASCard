@@ -104,6 +104,14 @@ session_start();
 			echo "Error: " . $sqldeleteunits . "<br>" . mysqli_error($conn);
 		}
 
+		$sqldeleteoptions = "DELETE FROM asc_options WHERE playerid = ".$deleteplayerid;
+		if (mysqli_query($conn, $sqldeleteoptions)) {
+			// Success
+		} else {
+			// Error
+			echo "Error: " . $sqldeleteoptions . "<br>" . mysqli_error($conn);
+		}
+
 		echo "<meta http-equiv='refresh' content='0;url=./gui_create_player.php'>";
 	}
 ?>
