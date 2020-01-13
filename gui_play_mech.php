@@ -182,7 +182,7 @@ session_start();
 		$wpnsfired = $array_WPNSFIRED[$i4];
 
 		if ($array_TP[$i4] == "BA") {
-			$heatimage[$i4] = "";
+			$heatimage[$i4] = "<img id='heatimage_".$i4."' src='./images/temp_".$array_HT[$i4].".png' height='21px' width='0px'>";
 		} else {
 			$heatimage[$i4] = "<img id='heatimage_".$i4."' src='./images/temp_".$array_HT[$i4].".png' height='21px'>";
 		}
