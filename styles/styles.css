@@ -309,21 +309,21 @@ a:hover {
 .mechselect_button_normal_play_left {
 	font-size: 100%;
 	padding: 5px;
-	background-color: #0000ff;
+	background-color: #556b8f;
 	color: #000000;
 	text-align: left;
 }
 .mechselect_button_normal_play_left:hover {
 	font-size: 100%;
 	padding: 5px;
-	background-color: #000022;
+	background-color: #425470;
 	color: #000000;
 	text-align: left;
 }
 .mechselect_button_active_play_left {
 	font-size: 100%;
 	padding: 5px;
-	background-color: #000066;
+	background-color: #2b3649;
 	color: #ffffff;
 	text-align: left;
 }
