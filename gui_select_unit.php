@@ -13,7 +13,8 @@ session_start();
 	$pid = $_SESSION['playerid'];
 	$pname = $_SESSION['name'];
 	$pimage = $_SESSION['playerimage'];
-	$hideMinusButtons = $_SESSION['option3'];
+	$opt3 = $_SESSION['option3'];
+	$playMode = $opt3;
 
 	$deletemech = isset($_GET["dm"]) ? $_GET["dm"] : "";
 	$togglebid = isset($_GET["activebid"]) ? $_GET["activebid"] : "";
@@ -111,10 +112,10 @@ session_start();
 	<div id="cover"></div>
 
 <?php
-	if ($hideMinusButtons) {
-		$buttonWidth = "17%";
-	} else {
+	if ($playMode) {
 		$buttonWidth = "34%";
+	} else {
+		$buttonWidth = "17%";
 	}
 ?>
 
@@ -124,12 +125,18 @@ session_start();
 				<td nowrap onclick="location.href='./logout.php'" width="60px" style="background: rgba(50,50,50,1.0); text-align: center; vertical-align: middle;">
 					<div><a style="color: #eee;" href="./logout.php"><i class="fa fa-power-off" aria-hidden="true"></i></a></div>
 				</td>
-				<td nowrap onclick="location.href='./gui_select_unit.php'" width="17%"><div class='mechselect_button_active'><a href='./gui_select_unit.php'>ROSTER</a><br><span style='font-size:16px;'>Choose a Mech</span></div></td>
-				<td nowrap onclick="location.href='./gui_select_enemy_unit.php'" width="17%"><div class='mechselect_button_normal'><a href='./gui_select_enemy_unit.php'>FORCES</a><br><span style='font-size:16px;'>All units</span></div></td>
-				<td nowrap onclick="location.href='./gui_assign_unit.php'" width="17%"><div class='mechselect_button_normal'><a href='./gui_assign_unit.php'>ASSIGN</a><br><span style='font-size:16px;'>Assign Mech/BA</span></div></td>
-				<td nowrap onclick="location.href='./gui_create_mech.php'" width="17%"><div class='mechselect_button_normal'><a href='./gui_create_mech.php'>ADD</a><br><span style='font-size:16px;'>Create a Mech/BA</span></div></td>
-				<td nowrap onclick="location.href='./gui_create_player.php'" width="17%"><div class='mechselect_button_normal'><a href='./gui_create_player.php'>PLAYER</a><br><span style='font-size:16px;'>Manage players</span></div></td>
-				<td nowrap onclick="location.href='./gui_edit_option.php'" width="17%"><div class='mechselect_button_normal'><a href='./gui_edit_option.php'>OPTIONS</a><br><span style='font-size:16px;'>Change options</span></div></td>
+				<td nowrap onclick="location.href='./gui_select_unit.php'" width="<?php echo $buttonWidth ?>"><div class='mechselect_button_active'><a href='./gui_select_unit.php'>ROSTER</a><br><span style='font-size:16px;'>Choose a Mech</span></div></td>
+				<td nowrap onclick="location.href='./gui_select_enemy_unit.php'" width="<?php echo $buttonWidth ?>"><div class='mechselect_button_normal'><a href='./gui_select_enemy_unit.php'>FORCES</a><br><span style='font-size:16px;'>All units</span></div></td>
+
+<?php
+	if (!$playMode) {
+		echo "				<td nowrap onclick=\"location.href='./gui_assign_unit.php'\" width='17%'><div class='mechselect_button_normal'><a href='./gui_assign_unit.php'>ASSIGN</a><br><span style='font-size:16px;'>Assign Mech/BA</span></div></td>\n";
+		echo "				<td nowrap onclick=\"location.href='./gui_create_mech.php'\" width='17%'><div class='mechselect_button_normal'><a href='./gui_create_mech.php'>ADD</a><br><span style='font-size:16px;'>Create a Mech/BA</span></div></td>\n";
+		echo "				<td nowrap onclick=\"location.href='./gui_create_player.php'\" width='17%'><div class='mechselect_button_normal'><a href='./gui_create_player.php'>PLAYER</a><br><span style='font-size:16px;'>Manage players</span></div></td>\n";
+	}
+?>
+
+				<td nowrap onclick="location.href='./gui_edit_option.php'" width="<?php echo $buttonWidth ?>"><div class='mechselect_button_normal'><a href='./gui_edit_option.php'>OPTIONS</a><br><span style='font-size:16px;'>Change options</span></div></td>
 				<td nowrap width="60px" style="background: rgba(50,50,50,1.0); text-align: center; vertical-align: middle;"><div id='loggedOnUser'></div></td>
 			</tr>
 		</table>
@@ -171,7 +178,7 @@ session_start();
 				echo "			<td nowrap style='width:270px;height:40px;' onclick='location.href=\"gui_play_mech.php?unit=".$unitidSelected."\"' class='unitselect_button_normal'>\n";
 				echo "				<table style='width:100%;' cellspacing=0 cellpadding=0>\n";
 				echo "					<tr>\n";
-				if (!$hideMinusButtons) {
+				if (!$playMode) {
 					echo "						<td style='text-align:left;'>\n";
 					echo "							<a href='gui_edit_unit.php?unit=".$unitidSelected."'><i class='fa fa-edit'></i></a>\n";
 					echo "						</td>\n";
@@ -253,7 +260,7 @@ session_start();
 
 				$mechDetailString = $mechDetailString."						<td nowrap width='1%'  onclick='location.href=\"\"' style='background-color:#121212;text-align:right;'>\n";
 				$mechDetailString = $mechDetailString."							<span style='font-size:16px;'>\n";
-				if (!$hideMinusButtons) {
+				if (!$playMode) {
 					$mechDetailString = $mechDetailString."								\n";
 				} else {
 					if ($activebid == "1") {
@@ -277,7 +284,7 @@ session_start();
 				$mechDetailString = $mechDetailString."						<td nowrap width='1%' style='background-color:".$bidcolor."text-align:right;'>\n";
 				$mechDetailString = $mechDetailString."							<span style='font-size:16px;'>\n";
 				
-				if ($hideMinusButtons) {
+				if ($playMode) {
 					$mechDetailString = $mechDetailString."								&nbsp;\n";
 				} else {
 					$mechDetailString = $mechDetailString."								<a href='./gui_select_unit.php?dm=1&mechid=".$assignedMechID."&pilotid=".$assignedPilotID."'><i class='fa fa-fw fa-minus-square'></i></a>\n";
@@ -294,7 +301,7 @@ session_start();
 		}
 	}
 	echo "		</tr>\n";
-	if (!$hideMinusButtons) {
+	if (!$playMode) {
 		echo "		<tr>\n";
 		echo "			<td nowrap style='text-align:center;width:200px;height:30px;background-color:#transparent;'>\n";
 		echo "				<a href='".$assignMechToUnitLinkArray[0]."'><i class='fa fa-fw fa-plus-square'></i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\n";

@@ -21,7 +21,7 @@ session_start();
 		// storing changed options to database
 		$sql_update_options = "UPDATE asc_options SET OPTION1=".$opt1.", OPTION2=".$opt2.", OPTION3=".$opt3." WHERE playerid = ".$pid;
 		$result_update_options = mysqli_query($conn, $sql_update_options);
-		$hideMinusButtons = !$opt3;
+		$playMode = $opt3;
 		echo "<meta http-equiv='refresh' content='0;url=./gui_edit_option.php'>";
 		die();
 	} else {
@@ -39,7 +39,7 @@ session_start();
 			}
 		}
 	}
-	$hideMinusButtons = !$opt3;
+	$playMode = $opt3;
 ?>
 
 <html lang="en">
@@ -151,10 +151,10 @@ session_start();
 	<div id="cover"></div>
 
 <?php
-	if ($hideMinusButtons) {
-		$buttonWidth = "17%";
-	} else {
+	if ($playMode) {
 		$buttonWidth = "34%";
+	} else {
+		$buttonWidth = "17%";
 	}
 ?>
 
@@ -168,7 +168,7 @@ session_start();
 				<td nowrap onclick="location.href='./gui_select_enemy_unit.php'" width="<?php echo $buttonWidth ?>"><div class='mechselect_button_normal'><a href='./gui_select_enemy_unit.php'>FORCES</a><br><span style='font-size:16px;'>All units</span></div></td>
 
 <?php
-	if ($hideMinusButtons) {
+	if (!$playMode) {
 		echo "				<td nowrap onclick=\"location.href='./gui_assign_unit.php'\" width='17%'><div class='mechselect_button_normal'><a href='./gui_assign_unit.php'>ASSIGN</a><br><span style='font-size:16px;'>Assign Mech/BA</span></div></td>\n";
 		echo "				<td nowrap onclick=\"location.href='./gui_create_mech.php'\" width='17%'><div class='mechselect_button_normal'><a href='./gui_create_mech.php'>ADD</a><br><span style='font-size:16px;'>Create a Mech/BA</span></div></td>\n";
 		echo "				<td nowrap onclick=\"location.href='./gui_create_player.php'\" width='17%'><div class='mechselect_button_normal'><a href='./gui_create_player.php'>PLAYER</a><br><span style='font-size:16px;'>Manage players</span></div></td>\n";

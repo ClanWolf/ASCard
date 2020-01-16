@@ -303,6 +303,33 @@ a:hover {
 	color: #ffffff;
 	text-align: left;
 }
+
+
+
+.mechselect_button_normal_play_left {
+	font-size: 100%;
+	padding: 5px;
+	background-color: #0000ff;
+	color: #000000;
+	text-align: left;
+}
+.mechselect_button_normal_play_left:hover {
+	font-size: 100%;
+	padding: 5px;
+	background-color: #000022;
+	color: #000000;
+	text-align: left;
+}
+.mechselect_button_active_play_left {
+	font-size: 100%;
+	padding: 5px;
+	background-color: #000066;
+	color: #ffffff;
+	text-align: left;
+}
+
+
+
 .unitselect_button_normal {
  	font-size: 100%;
  	padding: 5px;
