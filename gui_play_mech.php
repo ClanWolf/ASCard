@@ -62,6 +62,18 @@ session_start();
 
 <body>
 	<script>
+		window.addEventListener('orientationchange', function() {
+			// After orientationchange, add a one-time resize event
+			var afterOrientationChange = function() {
+				document.body.style.height = window.innerHeight;
+				// Remove the resize event listener after it has executed
+				window.removeEventListener('resize', afterOrientationChange);
+				console.log(window.innerHeight);
+                alert("The window has been rotated.");
+			};
+			window.addEventListener('resize', afterOrientationChange);
+		});
+
 		function changeMovementFlag(index, fln) {
 			var list = document.getElementsByClassName("bigcheck");
 			var fired = 0;
