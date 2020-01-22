@@ -29,6 +29,8 @@ session_start();
 	<meta name="apple-mobile-web-app-capable" content="yes">
 	<meta name="viewport" content="width=device-width, initial-scale=0.75, minimum-scale=0.75, maximum-scale=0.75, user-scalable=no" />
 
+	<meta http-equiv="refresh" content="5" />
+
 	<link rel="manifest" href="./manifest.json">
 	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
 	<link rel="stylesheet" type="text/css" href="./styles/styles.css">
@@ -109,7 +111,8 @@ session_start();
 	<table align="center" cellspacing=2 cellpadding=2 border=0px>
 
 <?php
-	if (!($stmt = $conn->prepare("SELECT SQL_NO_CACHE * FROM asc_player where playerid != ".$pid." ORDER BY playerid;"))) {
+	//if (!($stmt = $conn->prepare("SELECT SQL_NO_CACHE * FROM asc_player where playerid != ".$pid." ORDER BY playerid;"))) {
+	if (!($stmt = $conn->prepare("SELECT SQL_NO_CACHE * FROM asc_player where bid_pv is not null and bid_pv > 0 ORDER BY bid_pv asc;"))) {
 		echo "Prepare failed: (" . $conn->errno . ") " . $conn->error;
 	}
 	if ($stmt->execute()) {
@@ -117,8 +120,9 @@ session_start();
 		while ($row = $res->fetch_assoc()) {
 			$playerid = $row['playerid'];
 			$playername = $row['name'];
+			$pv_bidden = $row['bid_pv'];
 
-			echo "<tr><td nowrap style='width:170px;height:40px;' class='mechselect_button_active'>".$playername."</td>";
+			echo "<tr><td nowrap style='height:40px;padding-left:20px;padding-right:20px' class='mechselect_button_active'>".$playername."</td>";
 
 			// Select units for this player
 			if (!($stmtUnits = $conn->prepare("SELECT SQL_NO_CACHE * FROM asc_unit where playerid = ".$playerid." ORDER BY unitid;"))) {
@@ -162,6 +166,7 @@ session_start();
 					}
 				}
 			}
+			echo "<td nowrap style='text-align:right;color:00ff00;background-color:#666666;height:40px;padding-left:10px;padding-right:10px'>".$pv_bidden."</td>\n";
 			echo "</tr>";
 		}
 	}

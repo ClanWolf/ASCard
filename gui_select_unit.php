@@ -41,13 +41,46 @@ session_start();
 
 	if ($togglebid == "1" || $togglebid == "0") {
 		$mechid = isset($_GET["mechid"]) ? $_GET["mechid"] : "";
-	    $sqltogglebid = "UPDATE asc_mech set active_bid=".$togglebid." WHERE mechid = " . $mechid . ";";
+		$sqltogglebid = "UPDATE asc_mech set active_bid=".$togglebid." WHERE mechid = " . $mechid . ";";
 		if (mysqli_query($conn, $sqltogglebid)) {
 			// Success
 			//echo "Error: " . $sqltogglebid . "<br>";
 		} else {
 			// Error
 			echo "Error: " . $sqltogglebid . "<br>" . mysqli_error($conn);
+		}
+
+		$overallpv = -1;
+		$overalltonnage = -1;
+		$sqlselectoverallpv = "";
+		$sqlselectoverallpv = $sqlselectoverallpv . "SELECT asc_mech.mech_tonnage, asc_mech.as_pv from asc_assign, asc_mech, asc_unit ";
+        $sqlselectoverallpv = $sqlselectoverallpv . "WHERE asc_assign.unitid = asc_unit.unitid ";
+        $sqlselectoverallpv = $sqlselectoverallpv . "AND asc_assign.mechid = asc_mech.mechid ";
+        $sqlselectoverallpv = $sqlselectoverallpv . "AND asc_mech.active_bid = 1 ";
+		$sqlselectoverallpv = $sqlselectoverallpv . "AND asc_unit.playerid = ".$pid.";";
+		if (mysqli_query($conn, $sqlselectoverallpv)) {
+			// Success
+			$result_sqlselectoverallpv = mysqli_query($conn, $sqlselectoverallpv);
+			if (mysqli_num_rows($result_sqlselectoverallpv) > 0) {
+				$overallpv = 0;
+				while($row = mysqli_fetch_assoc($result_sqlselectoverallpv)) {
+					$TONNAGE = $row["mech_tonnage"];
+					$POINTVALUE = $row["as_pv"];
+					$overallpv = $overallpv + $POINTVALUE;
+				}
+			}
+		} else {
+			// Error
+			echo "Error: " . $sqlselectoverallpv . "<br>" . mysqli_error($conn);
+		}
+
+		$sqlstoreoverallpv = "UPDATE asc_player set bid_pv=".$overallpv." WHERE playerid = " . $pid . ";";
+		if (mysqli_query($conn, $sqlstoreoverallpv)) {
+			// Success
+			//echo "Error: " . $sqltogglebid . "<br>";
+		} else {
+			// Error
+			echo "Error: " . $sqlstoreoverallpv . "<br>" . mysqli_error($conn);
 		}
 
 		echo "<meta http-equiv='refresh' content='0;url=./gui_select_unit.php'>";

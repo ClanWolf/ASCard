@@ -72,9 +72,7 @@ session_start();
 			//window.innerHeight = 600;
 			//window.scrollTo(0,1);
 			//$(window).trigger('resize');
-
 			//document.body.style.height = 780; // window.innerWidth;
-
 			//console.log("New height: " + windowHeight);
 			//alert("New height: " + windowHeight);
 			//alert("New height: " + calculated_total_height);
