@@ -117,19 +117,20 @@ session_start();
 			$TON = $TON * 4;
 		}
 
-		// Corrections for Clan Battle Armor (unit size)
+		// Corrections for Clan Battle Armor (unit size / Name)
 		$pos = strpos($SPCL, "CAR4");
 		if ($TECH == "2" && $TP == "BA" && $pos !== false) {
 			// This is a Clan Battle Armor
 			// Add Armor +1, PV +3 and replace CAR4 by CAR5 (in SPCL)
 			// This is because MUL delivers the data for a 4 point unit (as Clan we want a SQUAD5 unit)
-            $SPCL = str_replace("CAR4", "CAR5", $SPCL);
-            $MODEL = str_replace("Elemental Battle Armor", "Elemental BA", $MODEL);
-            $A = intval($A) + 1;
-            $PVA = intval($PVA) + 3;
-            $TON = $TON * 5;
+			$SPCL = str_replace("CAR4", "CAR5", $SPCL);
+			$MODEL = str_replace("Elemental Battle Armor", "Elemental BA", $MODEL);
 
-            $MECHSTATUSIMAGE = "images/DD_ELE_01.png";
+			$A = intval($A) + 1;
+			$PVA = intval($PVA) + 3;
+			$TON = $TON * 5;
+
+			$MECHSTATUSIMAGE = "images/DD_ELE_01.png";
 		} else {
 			// This is anything else
 			$MECHSTATUSIMAGE = "images/DD_01.png";
@@ -291,7 +292,7 @@ session_start();
 	<meta name="robots" content="noindex,nofollow">
 	<meta name="mobile-web-app-capable" content="yes">
 	<meta name="apple-mobile-web-app-capable" content="yes">
-	<meta name='viewport' content='user-scalable=0'>
+	<meta name="viewport" content="width=device-width, initial-scale=0.75, minimum-scale=0.75, maximum-scale=0.75, user-scalable=no" />
 
 	<link rel="manifest" href="./manifest.json">
 	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">

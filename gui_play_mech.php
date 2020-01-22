@@ -26,7 +26,7 @@ session_start();
 	<meta name="robots" content="noindex,nofollow">
 	<meta name="mobile-web-app-capable" content="yes">
 	<meta name="apple-mobile-web-app-capable" content="yes">
-	<meta name='viewport' content='user-scalable=0'>
+	<meta name="viewport" content="width=device-width, initial-scale=0.75, minimum-scale=0.75, maximum-scale=0.75, user-scalable=no" />
 
 	<link rel="manifest" href="./manifest.json">
 	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
@@ -62,17 +62,30 @@ session_start();
 
 <body>
 	<script>
-		window.addEventListener('orientationchange', function() {
-			// After orientationchange, add a one-time resize event
-			var afterOrientationChange = function() {
-				document.body.style.height = window.innerHeight;
-				// Remove the resize event listener after it has executed
-				window.removeEventListener('resize', afterOrientationChange);
-				console.log(window.innerHeight);
-                alert("The window has been rotated.");
-			};
-			window.addEventListener('resize', afterOrientationChange);
+
+		// -------------------------------------------------------------------------------------------------------------
+		function fixHeight() {
+			var calculated_total_height = screen.height*window.devicePixelRatio; // this works with the real y value as a result
+			//var windowWidth = window.innerWidth;
+			//var windowHeight = window.innerHeight;
+			//document.getElementsByTagName('body')[0].style.height = windowHeight + "px";
+			//window.innerHeight = 600;
+			//window.scrollTo(0,1);
+			//$(window).trigger('resize');
+
+			//document.body.style.height = 780; // window.innerWidth;
+
+			//console.log("New height: " + windowHeight);
+			//alert("New height: " + windowHeight);
+			//alert("New height: " + calculated_total_height);
+		}
+		$(window).on('orientationchange', function () {
+			$(window).one('resize', function () {
+				setTimeout(fixHeight, 600);
+			});
 		});
+		setTimeout(fixHeight, 600);
+		// -------------------------------------------------------------------------------------------------------------
 
 		function changeMovementFlag(index, fln) {
 			var list = document.getElementsByClassName("bigcheck");
