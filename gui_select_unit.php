@@ -291,15 +291,15 @@ session_start();
 
 				$mechDetailString = "";
 
-				$mechDetailString = $mechDetailString."						<td nowrap width='1%'  onclick='location.href=\"\"' style='background-color:#121212;text-align:right;'>\n";
+				$mechDetailString = $mechDetailString."						<td nowrap width='1%' onclick='location.href=\"\"' style='background-color:#121212;text-align:right;'>\n";
 				$mechDetailString = $mechDetailString."							<span style='font-size:16px;'>\n";
 				if (!$playMode) {
 					$mechDetailString = $mechDetailString."								\n";
 				} else {
 					if ($activebid == "1") {
-						$mechDetailString = $mechDetailString."								<span><a href='./gui_select_unit.php?activebid=0&mechid=".$assignedMechID."'>&nbsp;<i class='fa fa-arrow-circle-left' aria-hidden='true' style='font-size:26;color:#741300;'></i></a>&nbsp;</span>\n";
+						$mechDetailString = $mechDetailString."								<span><a href='./gui_select_unit.php?activebid=0&mechid=".$assignedMechID."'>&nbsp;<i class='fa fa-arrow-circle-left' aria-hidden='true' style='font-size:28;color:#741300;'></i></a>&nbsp;</span>\n";
 					} else {
-						$mechDetailString = $mechDetailString."								<span><a href='./gui_select_unit.php?activebid=1&mechid=".$assignedMechID."'>&nbsp;<i class='fa fa-arrow-circle-right' aria-hidden='true' style='font-size:26;color:#2f7c2f;'></i></a>&nbsp;</span>\n";
+						$mechDetailString = $mechDetailString."								<span><a href='./gui_select_unit.php?activebid=1&mechid=".$assignedMechID."'>&nbsp;<i class='fa fa-arrow-circle-right' aria-hidden='true' style='font-size:28;color:#2f7c2f;'></i></a>&nbsp;</span>\n";
 					}
 				}
 				$mechDetailString = $mechDetailString."							</span>\n";
