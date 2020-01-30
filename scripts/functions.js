@@ -316,20 +316,67 @@ function setCircles(h, a, s, e, fc, mp, w) {
 	if (h == 4) {
 		tmpTMM = -4;
 	}
+
+	// variable: weaponsfired (1 or 0)
+	// variable: movement
+	// 1:	TMM -4							Immobile
+	// 2:	TMM 0			AMM -1			Stationary
+	// 3:	TMM 1 (#)		Walked (>1")
+	// 4:	TMM 1 (#+SPCL)	AMM +2			Jumped
+	if (movement == 1) {
+		document.getElementById("TMM").style.color = "#ff0000";
+		tmpTMM = -4;
+	} else if (movement == 2) {
+		document.getElementById("TMM").style.color = "#ff0000";
+		tmpTMM = 0;
+		updatedshortvalue = updatedshortvalue - 1;
+		updatedmediumvalue = updatedmediumvalue - 1;
+        updatedlongvalue = updatedlongvalue - 1;
+	} else if (movement == 3) {
+		document.getElementById("TMM").style.color = "#ffff00";
+	} else if (movement == 4) {
+		document.getElementById("TMM").style.color = "#00ff00";
+		tmpTMM = tmpTMM + 1; // jumped
+		updatedshortvalue = updatedshortvalue + 2;
+		updatedmediumvalue = updatedmediumvalue + 2;
+        updatedlongvalue = updatedlongvalue + 2;
+		//TODO: Add value for SPCL Ability for JJs (calculate into TMM)
+	}
+
 	document.getElementById("TMM").innerHTML = tmpTMM;
 
-	if (updatedshortvalue == 0) {
+	if (updatedshortvalue < 0) {
+		document.getElementById("minrollshort").style.color ="#00ff00";
+		document.getElementById("minrollshort").innerHTML="S (" + updatedshortvalue + ")";
+	} else if (updatedshortvalue == 0) {
 		document.getElementById("minrollshort").style.color ="#999";
-		document.getElementById("minrollmedium").style.color ="#999";
-		document.getElementById("minrolllong").style.color ="#999";
+		document.getElementById("minrollshort").innerHTML="S (+" + updatedshortvalue + ")";
 	} else if (updatedshortvalue > 0) {
 		document.getElementById("minrollshort").style.color ="#a49708";
-		document.getElementById("minrollmedium").style.color ="#a49708";
-		document.getElementById("minrolllong").style.color ="#a49708";
+		document.getElementById("minrollshort").innerHTML="S (+" + updatedshortvalue + ")";
 	}
-	document.getElementById("minrollshort").innerHTML="S (+" + updatedshortvalue + ")";
-	document.getElementById("minrollmedium").innerHTML="M (+" + updatedmediumvalue + ")";
-	document.getElementById("minrolllong").innerHTML="L (+" + updatedlongvalue + ")";
+
+	if (updatedmediumvalue < 0) {
+		document.getElementById("minrollmedium").style.color ="#00ff00";
+		document.getElementById("minrollmedium").innerHTML="M (" + updatedmediumvalue + ")";
+	} else if (updatedmediumvalue == 0) {
+		document.getElementById("minrollmedium").style.color ="#999";
+		document.getElementById("minrollmedium").innerHTML="M (+" + updatedmediumvalue + ")";
+	} else if (updatedmediumvalue > 0) {
+		document.getElementById("minrollmedium").style.color ="#a49708";
+		document.getElementById("minrollmedium").innerHTML="M (+" + updatedmediumvalue + ")";
+	}
+
+	if (updatedlongvalue < 0) {
+		document.getElementById("minrolllong").style.color ="#a49708";
+		document.getElementById("minrolllong").innerHTML="L (" + updatedlongvalue + ")";
+	} else if (updatedlongvalue == 0) {
+		document.getElementById("minrolllong").style.color ="#999";
+		document.getElementById("minrolllong").innerHTML="L (+" + updatedlongvalue + ")";
+	} else if (updatedlongvalue > 0) {
+		document.getElementById("minrolllong").style.color ="#a49708";
+		document.getElementById("minrolllong").innerHTML="L (+" + updatedlongvalue + ")";
+	}
 
 	if (a > 1) {
 		mechstatus = 2;

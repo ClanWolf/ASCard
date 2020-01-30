@@ -63,32 +63,33 @@ session_start();
 <body>
 	<script>
 
-		// -------------------------------------------------------------------------------------------------------------
-		function fixHeight() {
-			var calculated_total_height = screen.height*window.devicePixelRatio; // this works with the real y value as a result
-			//var windowWidth = window.innerWidth;
-			//var windowHeight = window.innerHeight;
-			//document.getElementsByTagName('body')[0].style.height = windowHeight + "px";
-			//window.innerHeight = 600;
-			//window.scrollTo(0,1);
-			//$(window).trigger('resize');
-			//document.body.style.height = 780; // window.innerWidth;
-			//console.log("New height: " + windowHeight);
-			//alert("New height: " + windowHeight);
-			//alert("New height: " + calculated_total_height);
-		}
-		$(window).on('orientationchange', function () {
-			$(window).one('resize', function () {
-				setTimeout(fixHeight, 600);
-			});
-		});
-		setTimeout(fixHeight, 600);
-		// -------------------------------------------------------------------------------------------------------------
+//		// -------------------------------------------------------------------------------------------------------------
+//		function fixHeight() {
+//			var calculated_total_height = screen.height*window.devicePixelRatio; // this works with the real y value as a result
+//			//var windowWidth = window.innerWidth;
+//			//var windowHeight = window.innerHeight;
+//			//document.getElementsByTagName('body')[0].style.height = windowHeight + "px";
+//			//window.innerHeight = 600;
+//			//window.scrollTo(0,1);
+//			//$(window).trigger('resize');
+//			//document.body.style.height = 780; // window.innerWidth;
+//			//console.log("New height: " + windowHeight);
+//			//alert("New height: " + windowHeight);
+//			//alert("New height: " + calculated_total_height);
+//		}
+//		$(window).on('orientationchange', function () {
+//			$(window).one('resize', function () {
+//				setTimeout(fixHeight, 600);
+//			});
+//		});
+//		setTimeout(fixHeight, 600);
+//		// -------------------------------------------------------------------------------------------------------------
 
 		function changeMovementFlag(index, fln) {
 			var list = document.getElementsByClassName("bigcheck");
 			var fired = 0;
 			var mv = 0;
+
 			[].forEach.call(list, function (el1) {
 				na = el1.name;
 				if (typeof na != 'undefined') {
@@ -171,6 +172,10 @@ session_start();
 	echo "	var maximalstructurepoints = ".$array_S_MAX[$chosenMechIndex].";";
 	echo "	var originalmechimage = '".$array_MECH_IMG_URL[$chosenMechIndex]."';";
 	echo "	var deadmechimage = 'skull.png';";
+
+	echo "	var movement = ".$array_MVMT[$chosenMechIndex].";";
+	echo "	var weaponsfired = ".$array_WPNSFIRED[$chosenMechIndex].";";
+
 	echo "</script>";
 ?>
 
@@ -565,6 +570,7 @@ session_start();
 			echo "							<td nowrap align='left' class='datalabel'>\n";
 			echo "								&nbsp;&nbsp;&nbsp;TMM ";
 
+			//TODO: SPCL Ability for JJs (calculate into TMM)
 			// SPCL modifier for JJs
 			$JJ_TMM_SPCL_Modifier = 0;
 			if(strpos($array_SPCL[$chosenMechIndex],"JMPS") !== false) {
