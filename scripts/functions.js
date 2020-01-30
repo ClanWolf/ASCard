@@ -360,22 +360,28 @@ function setCircles(h, a, s, e, fc, mp, w) {
 		document.getElementById("minrollmedium").style.color ="#00ff00";
 		document.getElementById("minrollmedium").innerHTML="M (" + updatedmediumvalue + ")";
 	} else if (updatedmediumvalue == 0) {
-		document.getElementById("minrollmedium").style.color ="#999";
+		document.getElementById("minrollmedium").style.color ="#a49708";
 		document.getElementById("minrollmedium").innerHTML="M (+" + updatedmediumvalue + ")";
 	} else if (updatedmediumvalue > 0) {
 		document.getElementById("minrollmedium").style.color ="#a49708";
 		document.getElementById("minrollmedium").innerHTML="M (+" + updatedmediumvalue + ")";
 	}
+	if (updatedmediumvalue == 2) {
+		document.getElementById("minrollmedium").style.color ="#999";
+	}
 
 	if (updatedlongvalue < 0) {
-		document.getElementById("minrolllong").style.color ="#a49708";
+		document.getElementById("minrolllong").style.color ="#00ff00";
 		document.getElementById("minrolllong").innerHTML="L (" + updatedlongvalue + ")";
 	} else if (updatedlongvalue == 0) {
-		document.getElementById("minrolllong").style.color ="#999";
+		document.getElementById("minrolllong").style.color ="#a49708";
 		document.getElementById("minrolllong").innerHTML="L (+" + updatedlongvalue + ")";
 	} else if (updatedlongvalue > 0) {
 		document.getElementById("minrolllong").style.color ="#a49708";
 		document.getElementById("minrolllong").innerHTML="L (+" + updatedlongvalue + ")";
+	}
+	if (updatedlongvalue == 4) {
+		document.getElementById("minrolllong").style.color ="#999";
 	}
 
 	if (a > 1) {

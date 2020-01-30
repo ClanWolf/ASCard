@@ -344,11 +344,11 @@ session_start();
 					<table width="100%">
 						<tr>
 							<td nowrap class="datalabel" width="10%" style="text-align: left;">DMG:</td>
-							<td nowrap class="datalabel_thin" width="15%" style="text-align: center;" id="minrollshort">S (+0):</td>
+							<td nowrap class="datalabel" width="15%" style="text-align: center;" id="minrollshort">S (+0):</td>
 							<td nowrap class="datavalue" width="15%" style="text-align: center;" id="dmgshort_s"><?php echo "$array_DMG_SHORT[$chosenMechIndex]"; ?></td>
-							<td nowrap class="datalabel_thin" width="15%" style="text-align: center;" id="minrollmedium">M (+2):</td>
+							<td nowrap class="datalabel" width="15%" style="text-align: center;" id="minrollmedium">M (+2):</td>
 							<td nowrap class="datavalue" width="15%" style="text-align: center;" id="dmgmedium_s"><?php echo "$array_DMG_MEDIUM[$chosenMechIndex]"; ?></td>
-							<td nowrap class="datalabel_thin" width="15%" style="text-align: center;" id="minrolllong">L (+4):</td>
+							<td nowrap class="datalabel" width="15%" style="text-align: center;" id="minrolllong">L (+4):</td>
 							<td nowrap class="datavalue" width="15%" style="text-align: center;" id="dmglong_s"><?php echo "$array_DMG_LONG[$chosenMechIndex]"; ?></td>
 						</tr>
 					</table>
