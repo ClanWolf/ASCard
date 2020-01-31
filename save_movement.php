@@ -30,6 +30,52 @@
 			echo "<br>";
 			echo "Error (asc_assign) updating record: " . mysqli_error($conn);
 		}
+
+		// Check if all units have moved in this round
+		$sql_checkround = "select gameid, round_moved, round_fired from asc_assign where gameid = 1";
+		if (!($stmt = $conn->prepare($sql_checkround))) {
+			echo "Prepare failed: (" . $conn->errno . ") " . $conn->error;
+		}
+		$mechCount = 0;
+		if ($stmt->execute()) {
+			$res = $stmt->get_result();
+			while ($row = $res->fetch_assoc()) {
+				$GAMEID = $row['gameid'];
+				$ROUNDMOVED = $row['round_moved'];
+				$ROUNDFIRED = $row['round_fired'];
+
+				if ($GAMEID == 1 && ($ROUNDMOVED == 0 || $ROUNDFIRED == 0)) {
+					// anything here is still in an older round than the current one
+					$mechCount = $mechCount + 1;
+				}
+			}
+			if ($mechCount == 0) {
+				// there are no units left over in the last round
+				// advance the row
+				$sql3 = "UPDATE asc_assign SET round_moved=0,round_fired=0 WHERE gameid=1";
+				echo "UPDATE asc_assign SET round_moved=0,round_fired=0 WHERE gameid=1";
+
+				if (mysqli_query($conn, $sql3)) {
+					echo "<br>";
+					echo "Record (asc_assign) updated successfully";
+					mysqli_commit($conn);
+				} else {
+					echo "<br>";
+					echo "Error (asc_assign) updating record: " . mysqli_error($conn);
+				}
+
+				$sql4 = "UPDATE asc_game SET currentround = currentround + 1 WHERE gameid=1";
+                echo "UPDATE asc_game SET currentround = currentround + 1 WHERE gameid=1";
+                if (mysqli_query($conn, $sql4)) {
+					echo "<br>";
+					echo "Record (asc_game) updated successfully";
+					mysqli_commit($conn);
+				} else {
+					echo "<br>";
+					echo "Error (asc_game) updating record: " . mysqli_error($conn);
+				}
+			}
+		}
 	} else {
 		echo "WAITING FOR SAVE OPERATION...<br>";
 	}
