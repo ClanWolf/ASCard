@@ -32,7 +32,14 @@
 		}
 
 		// Check if all units have moved in this round
-		$sql_checkround = "select gameid, round_moved, round_fired from asc_assign where gameid = 1";
+
+		// select asc_assign.unitid, asc_assign.gameid, asc_assign.round_moved, asc_assign.round_fired, asc_mech.active_bid from asc_assign, asc_mech
+		// where asc_assign.gameid = 1 and asc_mech.active_bid = 1 and asc_assign.unitid is not null
+
+		$sql_checkround = "select asc_assign.unitid, asc_assign.gameid, asc_assign.round_moved, asc_assign.round_fired, asc_mech.active_bid from asc_assign, asc_mech ";
+		$sql_checkround = $sql_checkround + " where asc_assign.gameid = 1 ";
+		$sql_checkround = $sql_checkround + " and asc_mech.active_bid = 1 ";
+		$sql_checkround = $sql_checkround + " and asc_assign.unitid is not null ";
 		if (!($stmt = $conn->prepare($sql_checkround))) {
 			echo "Prepare failed: (" . $conn->errno . ") " . $conn->error;
 		}
@@ -40,11 +47,12 @@
 		if ($stmt->execute()) {
 			$res = $stmt->get_result();
 			while ($row = $res->fetch_assoc()) {
+				$UNITID = $row['unitid'];
 				$GAMEID = $row['gameid'];
 				$ROUNDMOVED = $row['round_moved'];
 				$ROUNDFIRED = $row['round_fired'];
 
-				if ($GAMEID == 1 && ($ROUNDMOVED == 0 || $ROUNDFIRED == 0)) {
+				if ($UNITID != null && $GAMEID == 1 && ($ROUNDMOVED == 0 || $ROUNDFIRED == 0)) {
 					// anything here is still in an older round than the current one
 					$mechCount = $mechCount + 1;
 				}

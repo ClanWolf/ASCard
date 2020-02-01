@@ -5,6 +5,8 @@
 	$mechid = 0;
 	$pilotid = 0;
 
+	$CURRENTROUND = -1;
+
 	$FACTION = "DEFAULT";
 	$FACTION_IMG_URL = "...";
 	$UNIT = "DEFAULT";
@@ -54,6 +56,17 @@
 	$array_FRCTRL_MOD = array();
 
 	$array_ACTIVE_BID = array();
+
+	// Game
+	// currentround
+	$sql_asc_game = "SELECT SQL_NO_CACHE * FROM asc_game where gameid = 1;";
+	$result_asc_game = mysqli_query($conn, $sql_asc_game);
+	if (mysqli_num_rows($result_asc_game) > 0) {
+		while($row = mysqli_fetch_assoc($result_asc_game)) {
+			$CURRENTROUND = $row["currentround"];
+		}
+	}
+	mysqli_free_result($result_asc_game);
 
 	// Unit
 	// unitid; factionid; forcename; --parentforceid--; unit_imageurl; playable

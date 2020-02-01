@@ -195,7 +195,7 @@ session_start();
 						<td nowrap width='20px' align='center' valign='center'>
 							<div style='display:inline-block;height:100%;vertical-align:middle;'>
 								<span style='font-size:16px;'>RND</span><br>
-								<span style='font-size:16px;color:#ff0;'>1</span>
+								<span style='font-size:16px;color:#ff0;'><?php echo $CURRENTROUND ?></span>
 							</div>
 						</td>
 					</tr>
