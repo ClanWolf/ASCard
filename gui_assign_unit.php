@@ -307,7 +307,7 @@ session_start();
 				</td>
 			</tr>
 <?php
-	if (!$playMode) {
+	if ($playMode) {
 		echo "			<tr>\n";
 		echo "			    <td colspan='4'>\n";
 		echo "			</tr>\n";
