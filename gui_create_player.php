@@ -344,7 +344,7 @@ session_start();
 			}
 			echo "								</td>\n";
 			echo "								<td nowrap class='datalabel' style='text-align:left;' colspan='2'>" . $row['name'] . "</td>\n";
-			if ($row['playerid'] != "1" && $row['playerid'] != "2") {
+			if ($row['playerid'] != "1" && $row['playerid'] != "2" && $row['playerid'] != "3") {
 				echo "								<td width='10px' nowrap>\n";
 				echo "									<span style='font-size:16px;'>\n";
 				if ($playMode) {
