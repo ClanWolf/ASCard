@@ -366,7 +366,7 @@ session_start();
 	echo "		</tr>\n";
 	echo "		<tr>\n";
 	echo "			<td colspan='3' style='background-color:#333333;' align='center' valign='top'>";
-	echo "				<span style='font-size:20;color:#eeeeee;'>Bid:&nbsp;</span><span style='font-size:20;color:#da8e25;'>PV: ".$pointvaluetotalactivebid."</span><span style='font-size:20;color:#eeeeee;'>&nbsp;/&nbsp;</span><span style='font-size:20;color:#ff33ee;'>".$tonnagetotalactivebid." t</span>";
+	echo "				<span style='font-size:20;color:#eeeeee;'>Bid:&nbsp;</span><span style='font-size:20;color:#da8e25;'>PV ".$pointvaluetotalactivebid."</span><span style='font-size:20;color:#eeeeee;'>&nbsp;/&nbsp;</span><span style='font-size:20;color:#ff33ee;'>".$tonnagetotalactivebid." t</span>";
 	echo "				<span style='font-size:20;color:#eeeeee;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>";
 	echo "				<span style='font-size:20;color:#eeeeee;'>Total:&nbsp;PV ".$pointvaluetotal."&nbsp;/&nbsp;".$tonnagetotal." t</span>";
 	echo "			</td>\n";
