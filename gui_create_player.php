@@ -36,9 +36,9 @@ session_start();
 				$newplayerid = mysqli_insert_id($conn);
 
 				$sqlinsertunit = "INSERT INTO asc_unit (factionid, forcename, playerid) VALUES ";
-				$sqlinsertunit = $sqlinsertunit . "(1, 'Alpha', ".$newplayerid."), ";
-				$sqlinsertunit = $sqlinsertunit . "(1, 'Bravo', ".$newplayerid."), ";
-				$sqlinsertunit = $sqlinsertunit . "(1, 'Charlie', ".$newplayerid.")";
+				$sqlinsertunit = $sqlinsertunit . "(1, 'Command', ".$newplayerid."), ";
+				$sqlinsertunit = $sqlinsertunit . "(1, 'Battle', ".$newplayerid."), ";
+				$sqlinsertunit = $sqlinsertunit . "(1, 'Striker', ".$newplayerid.")";
 				if (mysqli_query($conn, $sqlinsertunit)) {
 					// Success inserting units for new player
 				} else {
@@ -263,7 +263,7 @@ session_start();
 					<div><a style="color: #eee;" href="./logout.php"><i class="fa fa-power-off" aria-hidden="true"></i></a></div>
 				</td>
 				<td nowrap onclick="location.href='./gui_select_unit.php'" width="<?php echo $buttonWidth ?>"><div class='mechselect_button_normal'><a href='./gui_select_unit.php'>ROSTER</a><br><span style='font-size:16px;'>Choose a Mech</span></div></td>
-				<td nowrap onclick="location.href='./gui_select_enemy_unit.php'" width="<?php echo $buttonWidth ?>"><div class='mechselect_button_normal'><a href='./gui_select_enemy_unit.php'>FORCES</a><br><span style='font-size:16px;'>All units</span></div></td>
+				<td nowrap onclick="location.href='./gui_select_enemy_unit.php'" width="<?php echo $buttonWidth ?>"><div class='mechselect_button_normal'><a href='./gui_select_enemy_unit.php'>FORCES</a><br><span style='font-size:16px;'>All bidding units</span></div></td>
 
 <?php
 	if (!$playMode) {

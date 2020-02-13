@@ -90,7 +90,7 @@ session_start();
 					<div><a style="color: #eee;" href="./logout.php"><i class="fa fa-power-off" aria-hidden="true"></i></a></div>
 				</td>
 				<td nowrap onclick="location.href='./gui_select_unit.php'" width="<?php echo $buttonWidth ?>"><div class='mechselect_button_normal'><a href='./gui_select_unit.php'>ROSTER</a><br><span style='font-size:16px;'>Choose a Mech</span></div></td>
-				<td nowrap onclick="location.href='./gui_select_enemy_unit.php'" width="<?php echo $buttonWidth ?>"><div class='mechselect_button_active'><a href='./gui_select_enemy_unit.php'>FORCES</a><br><span style='font-size:16px;'>All units</span></div></td>
+				<td nowrap onclick="location.href='./gui_select_enemy_unit.php'" width="<?php echo $buttonWidth ?>"><div class='mechselect_button_active'><a href='./gui_select_enemy_unit.php'>FORCES</a><br><span style='font-size:16px;'>All bidding units</span></div></td>
 
 <?php
 	if (!$playMode) {
@@ -111,67 +111,97 @@ session_start();
 	<table align="center" cellspacing=2 cellpadding=2 border=0px>
 
 <?php
-	//if (!($stmt = $conn->prepare("SELECT SQL_NO_CACHE * FROM asc_player where playerid != ".$pid." ORDER BY playerid;"))) {
-	if (!($stmt = $conn->prepare("SELECT SQL_NO_CACHE * FROM asc_player where bid_pv is not null and bid_pv > 0 ORDER BY bid_pv asc;"))) {
+	if (!($stmt = $conn->prepare("SELECT SQL_NO_CACHE * FROM asc_player where bid_pv is not null and bid_pv > 0 and name = 'OpFor' ORDER BY bid_pv asc;"))) {
 		echo "Prepare failed: (" . $conn->errno . ") " . $conn->error;
 	}
 	if ($stmt->execute()) {
 		$res = $stmt->get_result();
 		while ($row = $res->fetch_assoc()) {
-			$playerid = $row['playerid'];
-			$playername = $row['name'];
-			$pv_bidden = $row['bid_pv'];
+			if ($row['name'] == "OpFor") {
+				$playerid = $row['playerid'];
+                $playername = $row['name'];
 
-			echo "<tr><td nowrap style='height:40px;padding-left:20px;padding-right:20px' class='mechselect_button_active'>".$playername."</td>";
-
-			// Select units for this player
-			if (!($stmtUnits = $conn->prepare("SELECT SQL_NO_CACHE * FROM asc_unit where playerid = ".$playerid." ORDER BY unitid;"))) {
-				echo "Prepare failed: (" . $conn->errno . ")" . $conn->error;
+				echo "<tr>\n";
+				echo "	<td></td>\n";
+				echo "	<td nowrap style='background-color:#0b4c81;width:120px;height:40px;' class='mechselect_button_active'>".$playername."</td>\n";
+				echo "	<td nowrap style='background-color:#148dee;width:170px;height:40px;' class='mechselect_button_active'>jkjj</td>\n";
+				echo "	<td nowrap style='background-color:#148dee;width:170px;height:40px;' class='mechselect_button_active'>jkjj</td>\n";
+				echo "	<td nowrap style='background-color:#148dee;width:170px;height:40px;' class='mechselect_button_active'>jkjj</td>\n";
+				echo "	<td nowrap style='background-color:#093f6b;height:40px;' class='mechselect_button_active'>jkjj</td>\n";
+				echo "</tr>\n";
+				echo "<tr><td colspan='6' style='font-size:10px'>&nbsp;</td></tr>\n";
 			}
-			if ($stmtUnits->execute()) {
-				$resUnits = $stmtUnits->get_result();
-				while ($rowUnit = $resUnits->fetch_assoc()) {
-					$unitidSelected = $rowUnit['unitid'];
-					$factionidSelected = $rowUnit['factionid'];
-					$forcenameSelected = $rowUnit['forcename'];
+		}
+	}
 
-					$sql_asc_checkunitassignments = "SELECT SQL_NO_CACHE * FROM asc_assign where unitid=".$unitidSelected.";";
-					$result_asc_checkunitassignments = mysqli_query($conn, $sql_asc_checkunitassignments);
-					if (mysqli_num_rows($result_asc_checkunitassignments) > 0) {
-						echo "<td nowrap style='width:170px;height:40px;' onclick='location.href=\"gui_play_mech.php?unit=".$unitidSelected."\"' class='unitselect_button_normal'>\n";
-						echo "	<table cellspacing='0' cellpadding='0'>\n";
-						echo "		<tr>\n";
-						echo "			<td width='90%' style='text-align:left;'>\n";
-						echo "				<a href='gui_play_mech.php?unit=".$unitidSelected."'>".$forcenameSelected."</a>\n";
-						echo "			</td>\n";
-						echo "			<td width='10%' style='text-align:right;'>\n";
-						echo "				<img src='https://www.clanwolf.net/apps/ASCard/images/factions/CW.png' width='20px' style='border:1px solid;'>\n";
-						echo "			</td>\n";
-						echo "		</tr>\n";
-						echo "	</table>\n";
-						echo "</td>\n";
-					} else {
-						echo "<td nowrap style='background-color:#444444;width:170px;height:40px;' class='mechselect_button_active'>\n";
-						echo "	<table cellspacing='0' cellpadding='0'>\n";
-						echo "		<tr>\n";
-						echo "			<td width='90%' style='text-align:left;'>\n";
-						echo "				".$forcenameSelected."\n";
-						echo "			</td>\n";
-						echo "			<td width='10%' style='text-align:right;'>\n";
-						echo "				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\n";
-						echo "			</td>\n";
-						echo "		</tr>\n";
-						echo "	</table>\n";
-						echo "</td>\n";
+	if (!($stmt2 = $conn->prepare("SELECT SQL_NO_CACHE * FROM asc_player where bid_pv is not null and bid_pv > 0 and name != 'OpFor' ORDER BY bid_pv asc limit 5;"))) {
+		echo "Prepare failed: (" . $conn->errno . ") " . $conn->error;
+	}
+	if ($stmt2->execute()) {
+		$res = $stmt2->get_result();
+		while ($row = $res->fetch_assoc()) {
+			if ($row['name'] != "OpFor") {
+				$playerid = $row['playerid'];
+				$playername = $row['name'];
+				$pv_bidden = $row['bid_pv'];
+
+				echo "<tr>\n";
+				if ($pid == $playerid) {
+					echo "<td style='color:eee;font-size:24;color:#ffaa00;text-align:center;'><img src='./images/indicator.png' height='24px'></td>\n";
+				} else {
+					echo "<td></td>\n";
+				}
+				echo "<td nowrap style='height:40px;padding-left:20px;padding-right:20px' class='mechselect_button_active'>".$playername."</td>";
+
+				// Select units for this player
+				if (!($stmtUnits = $conn->prepare("SELECT SQL_NO_CACHE * FROM asc_unit where playerid = ".$playerid." ORDER BY unitid;"))) {
+					echo "Prepare failed: (" . $conn->errno . ")" . $conn->error;
+				}
+				if ($stmtUnits->execute()) {
+					$resUnits = $stmtUnits->get_result();
+					while ($rowUnit = $resUnits->fetch_assoc()) {
+						$unitidSelected = $rowUnit['unitid'];
+						$factionidSelected = $rowUnit['factionid'];
+						$forcenameSelected = $rowUnit['forcename'];
+
+						$sql_asc_checkunitassignments = "SELECT SQL_NO_CACHE * FROM asc_assign where unitid=".$unitidSelected.";";
+						$result_asc_checkunitassignments = mysqli_query($conn, $sql_asc_checkunitassignments);
+						if (mysqli_num_rows($result_asc_checkunitassignments) > 0) {
+							echo "<td nowrap style='width:170px;height:40px;' onclick='location.href=\"gui_play_mech.php?unit=".$unitidSelected."\"' class='unitselect_button_normal'>\n";
+							echo "	<table cellspacing='0' cellpadding='0'>\n";
+							echo "		<tr>\n";
+							echo "			<td width='90%' style='text-align:left;'>\n";
+							echo "				<a href='gui_play_mech.php?unit=".$unitidSelected."'>".$forcenameSelected."</a>\n";
+							echo "			</td>\n";
+							echo "			<td width='10%' style='text-align:right;'>\n";
+							echo "				<img src='https://www.clanwolf.net/apps/ASCard/images/factions/CW.png' width='20px' style='border:1px solid;'>\n";
+							echo "			</td>\n";
+							echo "		</tr>\n";
+							echo "	</table>\n";
+							echo "</td>\n";
+						} else {
+							echo "<td nowrap style='background-color:#444444;width:170px;height:40px;' class='mechselect_button_active'>\n";
+							echo "	<table cellspacing='0' cellpadding='0'>\n";
+							echo "		<tr>\n";
+							echo "			<td width='90%' style='text-align:left;'>\n";
+							echo "				".$forcenameSelected."\n";
+							echo "			</td>\n";
+							echo "			<td width='10%' style='text-align:right;'>\n";
+							echo "				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\n";
+							echo "			</td>\n";
+							echo "		</tr>\n";
+							echo "	</table>\n";
+							echo "</td>\n";
+						}
 					}
 				}
+				echo "<td nowrap style='text-align:right;color:00ff00;background-color:#666666;height:40px;padding-left:10px;padding-right:10px'>".$pv_bidden."</td>\n";
+				echo "</tr>\n";
 			}
-			echo "<td nowrap style='text-align:right;color:00ff00;background-color:#666666;height:40px;padding-left:10px;padding-right:10px'>".$pv_bidden."</td>\n";
-			echo "</tr>";
 		}
 	}
 ?>
-
+		<tr><td colspan="6" style="color:eee;font-size:20;text-align:center;"><br>Only the 5 lowest bidders will be visible.</td></tr>
 	</table>
 </body>
 
