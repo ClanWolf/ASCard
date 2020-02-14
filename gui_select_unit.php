@@ -63,10 +63,12 @@ session_start();
 			$result_sqlselectoverallpv = mysqli_query($conn, $sqlselectoverallpv);
 			if (mysqli_num_rows($result_sqlselectoverallpv) > 0) {
 				$overallpv = 0;
+				$overalltonnage = 0;
 				while($row = mysqli_fetch_assoc($result_sqlselectoverallpv)) {
 					$TONNAGE = $row["mech_tonnage"];
 					$POINTVALUE = $row["as_pv"];
 					$overallpv = $overallpv + $POINTVALUE;
+					$overalltonnage = $overalltonnage + $TONNAGE;
 				}
 			}
 		} else {
@@ -74,7 +76,7 @@ session_start();
 			echo "Error: " . $sqlselectoverallpv . "<br>" . mysqli_error($conn);
 		}
 
-		$sqlstoreoverallpv = "UPDATE asc_player set bid_pv=".$overallpv." WHERE playerid = " . $pid . ";";
+		$sqlstoreoverallpv = "UPDATE asc_player set bid_pv=".$overallpv.", bid_tonnage=".$overalltonnage." WHERE playerid = " . $pid . ";";
 		if (mysqli_query($conn, $sqlstoreoverallpv)) {
 			// Success
 			//echo "Error: " . $sqltogglebid . "<br>";
@@ -311,7 +313,7 @@ session_start();
 				$mechDetailString = $mechDetailString."					<tr>\n";
 
 				$mechDetailString = $mechDetailString."						<td nowrap width='99%' align='left' style='color:#AAAAAA;background-color:".$bidcolor."text-align:left;'><a href=gui_play_mech.php?unit=".$unitidSelected."&chosenmech=".$c."> <span style='font-size:26px;'>";
-				$mechDetailString = $mechDetailString."						<img src='./images/ranks/".$factionidSelected."/".$pilotrank.".png' style='border: 1px solid #222;' width='18px' height='18px'>";
+				$mechDetailString = $mechDetailString."						<img src='./images/ranks/".$factionidSelected."/".$pilotrank.".png' width='18px' height='18px'>";
 				$mechDetailString = $mechDetailString."						".$pilotname."</span> <span style='font-weight:bold;font-size:16px;color:#da8e25;'> (".$mechpointvalue.")</span></a></span>\n";
 				$mechDetailString = $mechDetailString."							<br><span style='font-size:16px;'>".$mechchassisname."</span>\n";
 				$mechDetailString = $mechDetailString."						</td>\n";

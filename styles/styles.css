@@ -107,10 +107,10 @@ a:hover {
 	z-index: 3;
 	position: absolute;
 	padding: 0px;
-	top: 133px;
-	left: 6px;
+	top: 125px;
+	left: 95px;
 	border-style: solid;
-    border-width: 1px;
+    //border-width: 1px;
 }
 #mech_number {
 	z-index: 3;

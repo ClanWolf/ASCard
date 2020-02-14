@@ -111,39 +111,98 @@ session_start();
 	<table align="center" cellspacing=2 cellpadding=2 border=0px>
 
 <?php
-	if (!($stmt = $conn->prepare("SELECT SQL_NO_CACHE * FROM asc_player where bid_pv is not null and bid_pv > 0 and name = 'OpFor' ORDER BY bid_pv asc;"))) {
+	if (!($stmt = $conn->prepare("SELECT SQL_NO_CACHE * FROM asc_player where bid_pv is not null and bid_pv > 0 and opfor = 1 ORDER BY bid_pv asc;"))) {
 		echo "Prepare failed: (" . $conn->errno . ") " . $conn->error;
 	}
 	if ($stmt->execute()) {
 		$res = $stmt->get_result();
 		while ($row = $res->fetch_assoc()) {
-			if ($row['name'] == "OpFor") {
+			if ($row['opfor'] == 1) {
 				$playerid = $row['playerid'];
                 $playername = $row['name'];
+				$pv_bidden = $row['bid_pv'];
+				$tonnage_bidden = $row['bid_tonnage'];
 
 				echo "<tr>\n";
-				echo "	<td></td>\n";
-				echo "	<td nowrap style='background-color:#0b4c81;width:120px;height:40px;' class='mechselect_button_active'>".$playername."</td>\n";
-				echo "	<td nowrap style='background-color:#148dee;width:170px;height:40px;' class='mechselect_button_active'>jkjj</td>\n";
-				echo "	<td nowrap style='background-color:#148dee;width:170px;height:40px;' class='mechselect_button_active'>jkjj</td>\n";
-				echo "	<td nowrap style='background-color:#148dee;width:170px;height:40px;' class='mechselect_button_active'>jkjj</td>\n";
-				echo "	<td nowrap style='background-color:#093f6b;height:40px;' class='mechselect_button_active'>jkjj</td>\n";
+				echo "	<td style='color:eee;font-size:22;'>OPFOR&nbsp;&nbsp;&nbsp;</td>\n";
+				echo "	<td nowrap style='background-color:#812c2c;width:170px;height:40px;' class='mechselect_button_active'>".$playername."</td>\n";
+
+				//echo "	<td nowrap style='background-color:#148dee;width:170px;height:40px;' class='mechselect_button_active'>jkjj</td>\n";
+				//echo "	<td nowrap style='background-color:#148dee;width:170px;height:40px;' class='mechselect_button_active'>jkjj</td>\n";
+				//echo "	<td nowrap style='background-color:#148dee;width:170px;height:40px;' class='mechselect_button_active'>jkjj</td>\n";
+
+				// Select units for this player
+				if (!($stmtUnits = $conn->prepare("SELECT SQL_NO_CACHE * FROM asc_unit where playerid = ".$playerid." ORDER BY unitid;"))) {
+					echo "Prepare failed: (" . $conn->errno . ")" . $conn->error;
+				}
+				if ($stmtUnits->execute()) {
+					$resUnits = $stmtUnits->get_result();
+					while ($rowUnit = $resUnits->fetch_assoc()) {
+						$unitidSelected = $rowUnit['unitid'];
+						$factionidSelected = $rowUnit['factionid'];
+						$forcenameSelected = $rowUnit['forcename'];
+
+						// Select faction logo
+						if (!($stmtFactionLogo = $conn->prepare("SELECT SQL_NO_CACHE * FROM asc_faction where factionid = ".$factionidSelected." ORDER BY factionid;"))) {
+							echo "Prepare failed: (" . $conn->errno . ")" . $conn->error;
+						}
+						if ($stmtFactionLogo->execute()) {
+							$resFactionLogo = $stmtFactionLogo->get_result();
+							while ($rowFactionLogo = $resFactionLogo->fetch_assoc()) {
+								$unitlogo = $rowFactionLogo['faction_imageurl'];
+							}
+						}
+
+						$sql_asc_checkunitassignments = "SELECT SQL_NO_CACHE * FROM asc_assign where unitid=".$unitidSelected.";";
+						$result_asc_checkunitassignments = mysqli_query($conn, $sql_asc_checkunitassignments);
+						if (mysqli_num_rows($result_asc_checkunitassignments) > 0) {
+							echo "<td nowrap style='background-color:#b43c3e;width:170px;height:40px;' onclick='location.href=\"gui_play_mech.php?unit=".$unitidSelected."\"' class='unitselect_button_normal'>\n";
+							echo "	<table cellspacing='0' cellpadding='0'>\n";
+							echo "		<tr>\n";
+							echo "			<td width='90%' style='text-align:left;'>\n";
+							echo "				<a href='gui_play_mech.php?unit=".$unitidSelected."'>".$forcenameSelected."</a>\n";
+							echo "			</td>\n";
+							echo "			<td width='10%' style='text-align:right;'>\n";
+							echo "				<img src='./images/factions/".$unitlogo."' width='20px' style='border:1px solid;'>\n";
+							echo "			</td>\n";
+							echo "		</tr>\n";
+							echo "	</table>\n";
+							echo "</td>\n";
+						} else {
+							echo "<td nowrap style='background-color:#973232;width:170px;height:40px;' class='mechselect_button_active'>\n";
+							echo "	<table cellspacing='0' cellpadding='0'>\n";
+							echo "		<tr>\n";
+							echo "			<td width='90%' style='text-align:left;'>\n";
+							echo "				".$forcenameSelected."\n";
+							echo "			</td>\n";
+							echo "			<td width='10%' style='text-align:right;'>\n";
+							echo "				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\n";
+							echo "			</td>\n";
+							echo "		</tr>\n";
+							echo "	</table>\n";
+							echo "</td>\n";
+						}
+					}
+				}
+
+				echo "<td nowrap style='font-size:16px;text-align:right;color:#dddddd;background-color:#b33939;height:40px;padding-left:10px;padding-right:10px'>PV ".$pv_bidden."</td><td nowrap style='text-align:right;color:#ffff00;background-color:#b33939;height:40px;padding-left:10px;padding-right:10px'>".$tonnage_bidden." t</td>\n";
 				echo "</tr>\n";
 				echo "<tr><td colspan='6' style='font-size:10px'>&nbsp;</td></tr>\n";
 			}
 		}
 	}
 
-	if (!($stmt2 = $conn->prepare("SELECT SQL_NO_CACHE * FROM asc_player where bid_pv is not null and bid_pv > 0 and name != 'OpFor' ORDER BY bid_pv asc limit 5;"))) {
+	if (!($stmt2 = $conn->prepare("SELECT SQL_NO_CACHE * FROM asc_player where bid_pv is not null and bid_pv > 0 and opfor = 0 ORDER BY bid_tonnage, bid_pv asc limit 5;"))) {
 		echo "Prepare failed: (" . $conn->errno . ") " . $conn->error;
 	}
 	if ($stmt2->execute()) {
 		$res = $stmt2->get_result();
 		while ($row = $res->fetch_assoc()) {
-			if ($row['name'] != "OpFor") {
+			if ($row['opfor'] == 0) {
 				$playerid = $row['playerid'];
 				$playername = $row['name'];
 				$pv_bidden = $row['bid_pv'];
+				$tonnage_bidden = $row['bid_tonnage'];
 
 				echo "<tr>\n";
 				if ($pid == $playerid) {
@@ -164,6 +223,17 @@ session_start();
 						$factionidSelected = $rowUnit['factionid'];
 						$forcenameSelected = $rowUnit['forcename'];
 
+						// Select faction logo
+						if (!($stmtFactionLogo = $conn->prepare("SELECT SQL_NO_CACHE * FROM asc_faction where factionid = ".$factionidSelected." ORDER BY factionid;"))) {
+							echo "Prepare failed: (" . $conn->errno . ")" . $conn->error;
+						}
+						if ($stmtFactionLogo->execute()) {
+							$resFactionLogo = $stmtFactionLogo->get_result();
+							while ($rowFactionLogo = $resFactionLogo->fetch_assoc()) {
+								$unitlogo = $rowFactionLogo['faction_imageurl'];
+							}
+						}
+
 						$sql_asc_checkunitassignments = "SELECT SQL_NO_CACHE * FROM asc_assign where unitid=".$unitidSelected.";";
 						$result_asc_checkunitassignments = mysqli_query($conn, $sql_asc_checkunitassignments);
 						if (mysqli_num_rows($result_asc_checkunitassignments) > 0) {
@@ -174,7 +244,7 @@ session_start();
 							echo "				<a href='gui_play_mech.php?unit=".$unitidSelected."'>".$forcenameSelected."</a>\n";
 							echo "			</td>\n";
 							echo "			<td width='10%' style='text-align:right;'>\n";
-							echo "				<img src='https://www.clanwolf.net/apps/ASCard/images/factions/CW.png' width='20px' style='border:1px solid;'>\n";
+							echo "				<img src='./images/factions/".$unitlogo."' width='20px' style='border:1px solid;'>\n";
 							echo "			</td>\n";
 							echo "		</tr>\n";
 							echo "	</table>\n";
@@ -195,13 +265,14 @@ session_start();
 						}
 					}
 				}
-				echo "<td nowrap style='text-align:right;color:00ff00;background-color:#666666;height:40px;padding-left:10px;padding-right:10px'>".$pv_bidden."</td>\n";
+
+				echo "<td nowrap style='font-size:16px;text-align:right;color:dddddd;background-color:#666666;height:40px;padding-left:10px;padding-right:10px'>PV ".$pv_bidden."</td><td nowrap style='text-align:right;color:00ff00;background-color:#666666;height:40px;padding-left:10px;padding-right:10px'>".$tonnage_bidden." t</td>\n";
 				echo "</tr>\n";
 			}
 		}
 	}
 ?>
-		<tr><td colspan="6" style="color:eee;font-size:20;text-align:center;"><br>Only the 5 lowest bidders will be visible.</td></tr>
+		<tr><td colspan="7" style="color:eee;font-size:20;text-align:center;"><br>Only the 5 lowest bidders will be visible.</td></tr>
 	</table>
 </body>
 
