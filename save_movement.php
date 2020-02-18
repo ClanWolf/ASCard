@@ -86,8 +86,8 @@
 				}
 
 				$sql4 = "UPDATE asc_game SET currentround = currentround + 1 WHERE gameid=1";
-                echo "UPDATE asc_game SET currentround = currentround + 1 WHERE gameid=1";
-                if (mysqli_query($conn, $sql4)) {
+				echo "UPDATE asc_game SET currentround = currentround + 1 WHERE gameid=1";
+				if (mysqli_query($conn, $sql4)) {
 					echo "<br>";
 					echo "Record (asc_game) updated successfully";
 					mysqli_commit($conn);
