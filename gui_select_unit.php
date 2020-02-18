@@ -96,7 +96,7 @@ session_start();
 		}
 
 		// find winner
-		$sqlfindwinner = "SELECT * FROM asc_player order by bid_tonnage, bid_pv limit 1 and opfor = 0;";
+		$sqlfindwinner = "SELECT * FROM asc_player where opfor = 0 and bid_pv != -1 order by bid_tonnage, bid_pv limit 1;";
 		if (mysqli_query($conn, $sqlfindwinner)) {
 			// Success
 			$result_sqlsqlfindwinner = mysqli_query($conn, $sqlfindwinner);
