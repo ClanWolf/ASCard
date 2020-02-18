@@ -79,10 +79,46 @@ session_start();
 		$sqlstoreoverallpv = "UPDATE asc_player set bid_pv=".$overallpv.", bid_tonnage=".$overalltonnage." WHERE playerid = " . $pid . ";";
 		if (mysqli_query($conn, $sqlstoreoverallpv)) {
 			// Success
-			//echo "Error: " . $sqltogglebid . "<br>";
+			//echo "Error: " . $sqlstoreoverallpv . "<br>";
 		} else {
 			// Error
 			echo "Error: " . $sqlstoreoverallpv . "<br>" . mysqli_error($conn);
+		}
+
+		// reset winner flag
+		$sqlresetwinner = "UPDATE asc_player set bid_winner=0;";
+		if (mysqli_query($conn, $sqlresetwinner)) {
+			// Success
+			//echo "Error: " . $sqlresetwinner . "<br>";
+		} else {
+			// Error
+			echo "Error: " . $sqlresetwinner . "<br>" . mysqli_error($conn);
+		}
+
+		// find winner
+		$sqlfindwinner = "SELECT * FROM asc_player order by bid_tonnage, bid_pv limit 1 and opfor = 0;";
+		if (mysqli_query($conn, $sqlfindwinner)) {
+			// Success
+			$result_sqlsqlfindwinner = mysqli_query($conn, $sqlfindwinner);
+			if (mysqli_num_rows($result_sqlsqlfindwinner) > 0) {
+				$winneruserid = 0;
+				while($row = mysqli_fetch_assoc($result_sqlsqlfindwinner)) {
+					$winnerplayerid = $row["playerid"];
+				}
+			}
+		} else {
+			// Error
+			echo "Error: " . $sqlfindwinner . "<br>" . mysqli_error($conn);
+		}
+
+		// set winner flag for lowest bid
+		$sqlsetwinner = "UPDATE asc_player set bid_winner=1 WHERE playerid = " . $winnerplayerid . ";";
+		if (mysqli_query($conn, $sqlsetwinner)) {
+			// Success
+			//echo "Error: " . $sqlsetwinner . "<br>";
+		} else {
+			// Error
+			echo "Error: " . $sqlsetwinner . "<br>" . mysqli_error($conn);
 		}
 
 		echo "<meta http-equiv='refresh' content='0;url=./gui_select_unit.php'>";
