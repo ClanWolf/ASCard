@@ -361,7 +361,7 @@ session_start();
 
 				$mechDetailString = $mechDetailString."						<td nowrap width='99%' align='left' style='color:#AAAAAA;background-color:".$bidcolor."text-align:left;'><a href=gui_play_mech.php?unit=".$unitidSelected."&chosenmech=".$c."> <span style='font-size:26px;'>";
 				$mechDetailString = $mechDetailString."						<img src='./images/ranks/".$factionidSelected."/".$pilotrank.".png' width='18px' height='18px'>";
-				$mechDetailString = $mechDetailString."						".$pilotname."</span> <span style='font-weight:bold;font-size:16px;color:#da8e25;'> (".$mechpointvalue.")</span></a></span>\n";
+				$mechDetailString = $mechDetailString."						".$pilotname."</span> <span style='font-weight:bold;font-size:16px;color:#da8e25;'> (PV ".$mechpointvalue."/".$mechtonnage." t)</span></a></span>\n";
 				$mechDetailString = $mechDetailString."							<br><span style='font-size:16px;'>".$mechchassisname."</span>\n";
 				$mechDetailString = $mechDetailString."						</td>\n";
 
