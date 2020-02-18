@@ -54,9 +54,9 @@ session_start();
 		$overalltonnage = -1;
 		$sqlselectoverallpv = "";
 		$sqlselectoverallpv = $sqlselectoverallpv . "SELECT asc_mech.mech_tonnage, asc_mech.as_pv from asc_assign, asc_mech, asc_unit ";
-        $sqlselectoverallpv = $sqlselectoverallpv . "WHERE asc_assign.unitid = asc_unit.unitid ";
-        $sqlselectoverallpv = $sqlselectoverallpv . "AND asc_assign.mechid = asc_mech.mechid ";
-        $sqlselectoverallpv = $sqlselectoverallpv . "AND asc_mech.active_bid = 1 ";
+		$sqlselectoverallpv = $sqlselectoverallpv . "WHERE asc_assign.unitid = asc_unit.unitid ";
+		$sqlselectoverallpv = $sqlselectoverallpv . "AND asc_assign.mechid = asc_mech.mechid ";
+		$sqlselectoverallpv = $sqlselectoverallpv . "AND asc_mech.active_bid = 1 ";
 		$sqlselectoverallpv = $sqlselectoverallpv . "AND asc_unit.playerid = ".$pid.";";
 		if (mysqli_query($conn, $sqlselectoverallpv)) {
 			// Success
