@@ -33,13 +33,26 @@
 
 		// Check if all units have moved in this round
 
-		// select asc_assign.unitid, asc_assign.gameid, asc_assign.round_moved, asc_assign.round_fired, asc_mech.active_bid from asc_assign, asc_mech
-		// where asc_assign.gameid = 1 and asc_mech.active_bid = 1 and asc_assign.unitid is not null
+		// select asc_assign.unitid, asc_assign.gameid, asc_assign.round_moved, asc_assign.round_fired, asc_mech.active_bid 
+		// from asc_assign, asc_mech, asc_unit, asc_player 
+		// where asc_assign.gameid = 1 
+		// and asc_mech.active_bid = 1 
+		// and asc_assign.unitid is not null 
+		// and asc_assign.mechid = asc_mech.mechid 
+		// and asc_assign.unitid = asc_unit.unitid
+		// and asc_unit.playerid = asc_player.playerid
+		// and asc_player.bid_winner = 1
 
-		$sql_checkround = "select asc_assign.unitid, asc_assign.gameid, asc_assign.round_moved, asc_assign.round_fired, asc_mech.active_bid from asc_assign, asc_mech ";
+		$sql_checkround = "";
+		$sql_checkround = $sql_checkround + " select asc_assign.unitid, asc_assign.gameid, asc_assign.round_moved, asc_assign.round_fired, asc_mech.active_bid ";
+		$sql_checkround = $sql_checkround + " from asc_assign, asc_mech, asc_unit, asc_player ";
 		$sql_checkround = $sql_checkround + " where asc_assign.gameid = 1 ";
 		$sql_checkround = $sql_checkround + " and asc_mech.active_bid = 1 ";
 		$sql_checkround = $sql_checkround + " and asc_assign.unitid is not null ";
+		$sql_checkround = $sql_checkround + " and asc_assign.mechid = asc_mech.mechid ";
+		$sql_checkround = $sql_checkround + " and asc_assign.unitid = asc_unit.unitid ";
+		$sql_checkround = $sql_checkround + " and asc_unit.playerid = asc_player.playerid ";
+		$sql_checkround = $sql_checkround + " and asc_player.bid_winner = 1 ";
 		if (!($stmt = $conn->prepare($sql_checkround))) {
 			echo "Prepare failed: (" . $conn->errno . ") " . $conn->error;
 		}
