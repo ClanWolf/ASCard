@@ -15,7 +15,7 @@ function getMechList(filter, tech, minTon, maxTon) {
 	}
 
 	var url = corsproxyprefix + 'http://www.masterunitlist.info/Unit/QuickList';
-		url = url + '?Name='			+ filter;
+		url = url + '?Name='					+ filter;
 		url = url + '&HasBV=false';
 		url = url + '&MinBV=';
 		url = url + '&MaxBV=';
@@ -28,21 +28,32 @@ function getMechList(filter, tech, minTon, maxTon) {
 		url = url + '&MinPV=';
 		url = url + '&MaxPV=';
 		url = url + '&Role=None+Selected';
-		url = url + '&Technologies='	+ tech;
+		url = url + '&Technologies='			+ tech;
 		url = url + '&BookAuto=';
 		url = url + '&FactionAuto=';
 		if (maxTon == '2') {
 			url = url + '&Types=21';                    // Infantry
 			url = url + '&SubTypes=28';                 // Elementals / Battle Armor
 		} else {
-			url = url + '&MinTons='			+ minTon;
-			url = url + '&MaxTons='			+ maxTon;
+			url = url + '&MinTons='				+ minTon;
+			url = url + '&MaxTons='				+ maxTon;
 			url = url + '&Types=18';                    // Mechs
 		}
 
-		console.log(url);
+	var cache_url = 'https://www.clanwolf.net/apps/ASCard/cache/mul/';
+		if (tech == '2') {
+			cache_url = cache_url + 'Clan';
+		} else {
+			cache_url = cache_url + 'IS';
+		}
+		cache_url = cache_url + '_';
+		cache_url = cache_url + maxTon;
+		cache_url = cache_url + '.json';
 
-	$.getJSON(url, function (json) {
+	// console.log("URL: " + url);
+	// console.log("Cache: " + cache_url);
+
+	$.getJSON(cache_url, function (json) {
 		json.Units.sort(function(a, b) {
 		    if (a.Name < b.Name) return -1;
 			if (a.Name > b.Name) return 1;

@@ -40,6 +40,8 @@ session_start();
 		}
 	}
 	$playMode = $opt3;
+
+	$file_cacheversion = file_get_contents('./cache/mul/cache.version', true);
 ?>
 
 <html lang="en">
@@ -213,6 +215,9 @@ session_start();
 				</td>
 			</tr>
 		</table>
+
+		<p class='datalabel' align="center"><a href="https://www.clanwolf.net/apps/ASCard/data/mul_cache/cache.php" target="_BLANK">Update unit cache from MUL</a><br>
+		(Last updated: <?php echo $file_cacheversion ?>)</p>
 	</div>
 
 	<script>
