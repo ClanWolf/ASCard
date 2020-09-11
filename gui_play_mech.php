@@ -615,7 +615,7 @@ session_start();
 			echo "					</table>\n";
 			echo "				<div>\n";
 			echo "			</td>\n";
-			echo "			<td width='40%' onclick=\"location.href='".$locmeli."'\"></td>\n";
+			echo "			<td width='40%' onclick=\"location.href='".$locmeli."'\"><img src='./images/cancel.png' width='100px'></td>\n";
 			echo "		</tr>\n";
 			echo "	</table>\n";
 			echo "</div>\n";
