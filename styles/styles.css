@@ -8,6 +8,13 @@
 	/* font-family: 'Anton', sans-serif; */
 
 	font-size: 26px;
+	
+	-webkit-touch-callout: none; /* iOS Safari */
+	-webkit-user-select: none; /* Safari */
+	-khtml-user-select: none; /* Konqueror HTML */
+	-moz-user-select: none; /* Old versions of Firefox */
+	-ms-user-select: none; /* Internet Explorer/Edge */
+	user-select: none; /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
 }
 /*
 @media only screen and (min-width: 0px) and (max-width: 800px) {
