@@ -502,6 +502,7 @@ session_start();
 <div align="center" id="settings">
 	<a href="https://www.clanwolf.net/static/files/Rulebooks/CAT35860%20-%20AlphaStrike%20CommandersEdition.pdf" target="_blank"><i class="fa fa-fw fa-bookmark"></i></a>&nbsp;&nbsp;&nbsp;
 	<a href="#" onclick="javascript:window.location.reload(true)"><i class="fa fa-fw fa-refresh"></i></a>&nbsp;&nbsp;&nbsp;
+	<a href="javascript:changeWallpaper()"><i class="fa fa-file-image-o"></i></a>&nbsp;&nbsp;&nbsp;
 	<a href="javascript:textSize(0)"><i class="fa fa-fw fa-minus-square"></i></a>&nbsp;&nbsp;&nbsp;
 	<a href="javascript:textSize(1)"><i class="fa fa-fw fa-plus-square"></i></a>
 </div>
@@ -615,7 +616,7 @@ session_start();
 			echo "					</table>\n";
 			echo "				<div>\n";
 			echo "			</td>\n";
-			echo "			<td width='40%' onclick=\"location.href='".$locmeli."'\"><img src='./images/cancel.png' width='100px'></td>\n";
+			echo "			<td width='40%' valign='top' onclick=\"location.href='".$locmeli."'\">&nbsp;&nbsp;&nbsp;&nbsp;<img src='./images/cancel.png' width='60px'></td>\n";
 			echo "		</tr>\n";
 			echo "	</table>\n";
 			echo "</div>\n";
