@@ -398,6 +398,13 @@ function setCircles(h, a, s, e, fc, mp, w) {
 	}
 
 	var wallpaperNorm = "./images/body-bg_2.png";
+	var wallpaperName = getCookie("wallpaper");
+	if ((wallpaperName !== null) && (typeof wallpaperName != 'undefined')) {
+		var res = wallpaperName.substr(-3);
+		if (res === "png") {
+			wallpaperNorm = getCookie("wallpaper");
+		}
+	}
 	var wallpaperWrecked = "./images/body-bg_wrecked2.jpg";
 	var temp0 = "./images/temp_0.png";
 	var temp1 = "./images/temp_1.png";
