@@ -544,6 +544,9 @@ $(document).ready(function() {
 
 	$("#cover").hide();
 	//$("#cover").fadeOut(400, "linear");
+
+	$("#phasebutton").fadeOut(0, "linear");
+	$("#phasebutton").fadeIn(1000, "linear");
 });
 
 $(window).resize(function() {
