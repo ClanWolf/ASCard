@@ -590,7 +590,7 @@ function rolldice() {
 function changeWallpaper() {
 	var wallpaperName = getCookie("wallpaper");
 	do {
-		var wallpaperNameRand = "./images/body-bg_" + rand(1, 5) + ".png";
+		var wallpaperNameRand = "./images/body-bg_" + rand(1, 8) + ".png";
 	} while (wallpaperName === wallpaperNameRand);
 	document.body.style.backgroundImage = "url('" + wallpaperNameRand+ "')";
 	setCookie("wallpaper", wallpaperNameRand, 365);
