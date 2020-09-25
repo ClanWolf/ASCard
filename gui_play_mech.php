@@ -333,6 +333,9 @@ session_start();
 							if ($array_MVJ[$chosenMechIndex] != null) {
 								echo "/$array_MVJ[$chosenMechIndex]&rdquo;&nbsp;j";
 							} ?></td>
+							<td nowrap rowspan="2" class="datalabel" width="1px">
+								&nbsp;&nbsp;&nbsp;<a href=""><img src="$mechstatusimage" height="25px"></a>
+							</td>
 						</tr>
 						<tr>
 							<td nowrap class="datalabel" width="12%" colspan="1">ROLE:</td>
