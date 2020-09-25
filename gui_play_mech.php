@@ -86,6 +86,8 @@ session_start();
 //		// -------------------------------------------------------------------------------------------------------------
 
 		function changeMovementFlag(index, fln) {
+			playTapSound();
+
 			var list = document.getElementsByClassName("bigcheck");
 			var fired = 0;
 			var mv = 0;
@@ -117,7 +119,10 @@ session_start();
 			var url="./save_movement.php?index="+index+"&mvmt="+mv+"&wpns="+fired;
 			window.frames['saveframe'].location.replace(url);
 		}
+
 		function setMovementFlags(index, movement, weaponsfired) {
+			playTapSound();
+
 			var list = document.getElementsByClassName("bigcheck");
 			[].forEach.call(list, function (el1) {
 				na = el1.name;
