@@ -313,6 +313,9 @@ session_start();
 </div>
 
 <?php
+	echo "<div id='mechalive_status_div'>\n";
+	echo "	<img id='mechalive_status' src='./images/vitalmonitor.gif' width='140px' height='140px'>\n";
+	echo "</div>\n";
 	echo "<div id='player_image'>\n";
 	echo "	<img src='./images/player/".$pimage."' width='60px' height='60px'>\n";
 	echo "</div>\n";
@@ -361,7 +364,6 @@ session_start();
 							if ($array_MVJ[$chosenMechIndex] != null) {
 								echo "/$array_MVJ[$chosenMechIndex]&rdquo;&nbsp;j";
 							} ?></td>
-							<td nowrap rowspan="2" style="vertical-align: bottom;" valign="bottom" class="datalabel" width="1%">&nbsp;&nbsp;<a href=<?php echo "'$currentmeli'"; ?>"><img src=<?php echo "'$currentMechStatusImage'"; ?>" height="100px"></a></td>
 						</tr>
 						<tr>
 							<td nowrap class="datalabel" width="12%" colspan="1">ROLE:</td>
@@ -452,9 +454,10 @@ session_start();
 			</td>
 			<td width="40%" valign="bottom" align="right">
 			<table width="100%">
-				</tr>
+				<tr>
+					<td nowrap rowspan="2" style="vertical-align: bottom;" valign="bottom" class="datalabel" width="1%">&nbsp;&nbsp;<a href=<?php echo "'$currentmeli'"; ?>"><img src=<?php echo "'$currentMechStatusImage'"; ?>" style='height:120px;'></a></td>
 					<td align="left">
-						<div id="phasebutton" name="phasebutton"><a href=<?php echo "'$currentmeli'"; ?>><img src=<?php echo "'$currentPhaseButton'"; ?> width="160px"></a></div>
+						<div id="phasebutton" name="phasebutton"><a href=<?php echo "'$currentmeli'"; ?>><img src=<?php echo "'$currentPhaseButton'"; ?> style='height:140px;'></a></div>
 					</td>
 					<td align="right" valign="bottom">
 <?php
@@ -659,7 +662,7 @@ session_start();
 			echo "					</table>\n";
 			echo "				<div>\n";
 			echo "			</td>\n";
-			echo "			<td width='40%' valign='top' onclick=\"location.href='".$locmeli."'\">&nbsp;&nbsp;&nbsp;&nbsp;<img src='./images/cancel.png' width='60px'></td>\n";
+			echo "			<td width='40%' valign='top' onclick=\"location.href='".$locmeli."'\">&nbsp;&nbsp;&nbsp;&nbsp;<img src='./images/cancel.png' width='80px'></td>\n";
 			echo "		</tr>\n";
 			echo "	</table>\n";
 			echo "</div>\n";
