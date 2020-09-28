@@ -309,12 +309,12 @@ session_start();
 </div>
 
 <div id="topright">
-	<img src="./images/top-right.png" height="150px">
+	<img src="./images/top-right.png" height="190px">
 </div>
 
 <?php
 	echo "<div id='mechalive_status_div'>\n";
-	echo "	<img id='mechalive_status' src='./images/vitalmonitor.gif' width='140px' height='140px'>\n";
+	echo "	<img id='mechalive_status' src='./images/vitalmonitor.gif' width='140px' height='120px'>\n";
 	echo "</div>\n";
 	echo "<div id='player_image'>\n";
 	echo "	<img src='./images/player/".$pimage."' width='60px' height='60px'>\n";
