@@ -400,12 +400,15 @@ function setCircles(h, a, s, e, fc, mp, w) {
 	var wallpaperNorm = "./images/body-bg_2.png";
 	var wallpaperName = getCookie("wallpaper");
 	if ((wallpaperName !== null) && (typeof wallpaperName != 'undefined')) {
-		var res = wallpaperName.substr(-3);
-		if (res === "png") {
-			wallpaperNorm = getCookie("wallpaper");
+		if (parseFloat(wallpaperName) > 0 && parseFloat(wallpaperName) < 9) {
+			wallpaperNorm = wallpaperName;
 		}
 	}
+
+	// console.log(wallpaperNorm);
+
 	var wallpaperWrecked = "./images/body-bg_wrecked2.jpg";
+	var wallpaperHeated = "./images/body-bg_heated.jpg";
 	var temp0 = "./images/temp_0.png";
 	var temp1 = "./images/temp_1.png";
 	var temp2 = "./images/temp_2.png";
@@ -414,11 +417,11 @@ function setCircles(h, a, s, e, fc, mp, w) {
 
 	if (mechstatus == 4) {
 		// Mech destroyed
-		document.body.style.backgroundImage = "url('" + wallpaperWrecked + "')";
-		document.getElementById('mechimage').src="images/mechs/" + deadmechimage;
+		// document.body.style.backgroundImage = "url('" + wallpaperWrecked + "')";
+		document.getElementById('mechalive_status').src="./images/skull.png";
 	} else {
-		document.body.style.backgroundImage = "url('" + wallpaperNorm + "')";
-		document.getElementById('mechimage').src=originalmechimage;
+		// document.body.style.backgroundImage = "url('./images/body-bg_" + wallpaperNorm + ".png')";
+		document.getElementById('mechalive_status').src="./images/vitalmonitor.gif";
 	}
 
 	if (h == 0) {
@@ -433,8 +436,8 @@ function setCircles(h, a, s, e, fc, mp, w) {
 	if (h == 3) {
 		document.getElementById('heatimage_' + chosenmechindex).src=temp3;
 	}
-	if (h == 4) {
-		document.body.style.backgroundImage = "url('" + wallpaperWrecked + "')";
+	if (h == 4 && mechstatus != 4) {
+		// document.body.style.backgroundImage = "url('" + wallpaperHeated + "')";
 		document.getElementById('heatimage_' + chosenmechindex).src=temp4;
 	}
 }
@@ -526,9 +529,8 @@ $(document).ready(function() {
 
 	var wallpaperName = getCookie("wallpaper");
 	if ((wallpaperName !== null) && (typeof wallpaperName != 'undefined')) {
-		var res = wallpaperName.substr(-3);
-		if (res === "png") {
-			document.body.style.backgroundImage = "url('" + getCookie("wallpaper") + "')";
+		if (wallpaperName > 0 && wallpaperName < 9) {
+			document.body.style.backgroundImage = "url('./images/body-bg_" + wallpaperName + ".png')";
 		}
 	}
 
@@ -592,10 +594,16 @@ function rolldice() {
 
 function changeWallpaper() {
 	var wallpaperName = getCookie("wallpaper");
-	do {
-		var wallpaperNameRand = "./images/body-bg_" + rand(1, 8) + ".png";
-	} while (wallpaperName === wallpaperNameRand);
-	document.body.style.backgroundImage = "url('" + wallpaperNameRand+ "')";
+	if (isNaN(parseFloat(wallpaperName)) || parseFloat(wallpaperName) > 8 || parseFloat(wallpaperName) < 0) {
+		wallpaperName = 0;
+	}
+
+	var wallpaperNameRand = parseFloat(wallpaperName) + 1;
+	if (wallpaperNameRand > 8) {
+		wallpaperNameRand = 1;
+	}
+   	// console.log(wallpaperNameRand);
+	document.body.style.backgroundImage = "url('./images/body-bg_" + wallpaperNameRand + ".png')";
 	setCookie("wallpaper", wallpaperNameRand, 365);
 }
 
