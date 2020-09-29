@@ -283,6 +283,17 @@ a:hover {
 	//background-color: #ffffff;
 	//background-image: url('../images/bgdicebar.png');
 }
+#infopanel {
+	z-index: 10;
+	position: absolute;
+	width: 220px;
+	right: 20px;
+	bottom: 55px;
+	color: #000000;
+	text-align: right;
+	//background-color: #ffffff;
+	//background-image: url('../images/bgdicebar.png');
+}
 #barclosebutton {
 	z-index: 11;
 	position: absolute;

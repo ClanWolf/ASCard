@@ -275,6 +275,10 @@ session_start();
 			// Error! Unit has fired but no movement was specified! Ask again!
 		}
 
+		if ($array_MECH_IMG_STATUS[$i4] == "images/DD_04.png") {
+			$phaseButton = "./images/top-right_phase00.png";
+		}
+
 		$memodel = $array_MECH_MODEL[$i4];
 		if ($array_ACTIVE_BID[$i4] == "0") {
 			$memodel = "--- BIDDEN AWAY ---";
@@ -329,7 +333,9 @@ session_start();
 </div>
 
 <div id="topright">
-	<a onclick=\"location.href='".$currentmeli."'\" href=<?php echo "'$currentmeli'"; ?>><img src=<?php echo "'$currentPhaseButton'"; ?> style='height:170px;'></a>
+	<a onclick=location.href=<?php echo "'$currentmeli'"; ?> href=<?php echo "'$currentmeli'"; ?>>
+		<img id='toprightimage' src=<?php echo "'$currentPhaseButton'"; ?> style='height:170px;'>
+	</a>
 </div>
 
 <?php
@@ -571,6 +577,9 @@ session_start();
 	<div name='barclosebutton' id='barclosebutton'>
 		<a href='#' onclick='hideInfoBar();'><img src='.\images\selector_03-close.png' width='50px'></a>
 	</div>
+	<div name='infopanel' id='infopanel'>
+    	<img src='./images/ranks/<?php echo $factionid ?>/<?php echo $array_PILOT_RANK[$chosenMechIndex] ?>.png' width='50px' height='50px'>
+    </div>
 </div>
 
 <div name='dicebar' id='dicebar'>
@@ -625,11 +634,11 @@ session_start();
 	if ($movd==1) {
 		if ($playable) {
 			echo "<div id='editMovementValues'>\n";
-			echo "	<br>\n";
+			//echo "	<br>\n";
 			echo "	<br>\n";
 			echo "	<table width='100%'>\n";
 			echo "		<tr>\n";
-			echo "			<td width='40%' onclick=\"location.href='".$locmeli."'\"></td>\n";
+			echo "			<td width='40%'></td>\n"; // onclick=\"location.href='".$locmeli."'\"
 			echo "			<td width='20%'>\n";
 			echo "				<div>\n";
 			echo "					<table class='options' style='margin-left: auto;margin-right: auto;' cellspacing=4 cellpadding=4 border=0px>\n";
@@ -721,18 +730,21 @@ session_start();
 			echo "								&nbsp;&nbsp;&nbsp;Fired\n";
 			echo "							</td>\n";
 			echo "						</tr>\n";
-			echo "						<tr>\n";
-			echo "						    <td nowrap colspan='4'><hr></td>\n";
-			echo "						</tr>\n";
-			echo "						<tr>\n";
- 			echo "							<td nowrap colspan='4' align='center' class='datalabel'>\n";
- 			echo "							    <a onclick='clearFlags($array_MECH_DBID[$chosenMechIndex])' href='javascript:clearFlags($array_MECH_DBID[$chosenMechIndex]);'>CLEAR SELECTION</a>\n";
-			echo "							</td>\n";
-			echo "						</tr>\n";
+//			echo "						<tr>\n";
+//			echo "						    <td nowrap colspan='4'><hr></td>\n";
+//			echo "						</tr>\n";
+//			echo "						<tr>\n";
+// 			echo "							<td nowrap colspan='4' align='center' class='datalabel'>\n";
+// 			echo "							    <a onclick='clearFlags($array_MECH_DBID[$chosenMechIndex])' href='javascript:clearFlags($array_MECH_DBID[$chosenMechIndex]);'>CLEAR SELECTION</a>\n";
+//			echo "							</td>\n";
+//			echo "						</tr>\n";
 			echo "					</table>\n";
 			echo "				<div>\n";
 			echo "			</td>\n";
-			echo "			<td width='40%' valign='top' onclick=\"location.href='".$locmeli."'\">&nbsp;&nbsp;&nbsp;&nbsp;<img src='./images/cancel.png' width='80px'></td>\n";
+			echo "			<td width='40%' valign='top'>\n";
+			echo "				<a href='#' onclick=\"location.href='".$locmeli."'\">&nbsp;&nbsp;&nbsp;&nbsp;<img src='./images/confirm.png' width='80px'></a><br>\n";
+			echo "				<a onclick='clearFlags($array_MECH_DBID[$chosenMechIndex])' href='javascript:clearFlags($array_MECH_DBID[$chosenMechIndex]);'>&nbsp;&nbsp;&nbsp;&nbsp;<img src='./images/cancel.png' width='80px'></a>\n";
+			echo "			</td>\n";
 			echo "		</tr>\n";
 			echo "	</table>\n";
 			echo "</div>\n";

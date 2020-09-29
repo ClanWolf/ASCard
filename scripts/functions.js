@@ -114,10 +114,12 @@ function readCircles(index, a_max, s_max) {
     	if (s == maximalstructurepoints) {
     		mechstatus = 4;
     		mechstatusimage = "images/DD_04.png";
+    		document.getElementById('toprightimage').src='./images/top-right_phase00.png';
     	}
     	if (e == 2) {
     		mechstatus = 4;
     		mechstatusimage = "images/DD_04.png";
+    		document.getElementById('toprightimage').src='./images/top-right_phase00.png';
     	}
 	}
 
@@ -419,9 +421,20 @@ function setCircles(h, a, s, e, fc, mp, w) {
 		// Mech destroyed
 		// document.body.style.backgroundImage = "url('" + wallpaperWrecked + "')";
 		document.getElementById('mechalive_status').src="./images/skull.png";
+		document.getElementById('toprightimage').src="./images/top-right_phase00.png";
 	} else {
 		// document.body.style.backgroundImage = "url('./images/body-bg_" + wallpaperNorm + ".png')";
 		document.getElementById('mechalive_status').src="./images/vitalmonitor.gif";
+		// console.log(movement);
+		if ((movement == 0 || movement === undefined) && weaponsfired == 0) {
+			document.getElementById('toprightimage').src="./images/top-right_phase01.png";
+		}
+		if ((movement > 0 && movement < 5) && weaponsfired == 0) {
+			document.getElementById('toprightimage').src="./images/top-right_phase02.png";
+		}
+		if ((movement > 0 && movement < 5) && weaponsfired == 1) {
+			document.getElementById('toprightimage').src="./images/top-right_phase03.png";
+		}
 	}
 
 	if (h == 0) {
@@ -547,8 +560,8 @@ $(document).ready(function() {
 	$("#cover").hide();
 	//$("#cover").fadeOut(400, "linear");
 
-	$("#phasebutton").fadeOut(0, "linear");
-	$("#phasebutton").fadeIn(1000, "linear");
+	//$("#phasebutton").fadeOut(0, "linear");
+	//$("#phasebutton").fadeIn(1000, "linear");
 });
 
 $(window).resize(function() {
