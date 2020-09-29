@@ -146,11 +146,31 @@ session_start();
 			[].forEach.call(list, function (el1) {
 				na = el1.name;
 				if (typeof na != 'undefined') {
-					el1.checked = false;
+					if ((na.substring(0, 2) == "MV") || (na.substring(0, 2) == "WF")) {
+						el1.checked = false;
+					}
 				}
 			})
 			var url="./save_movement.php?index="+index+"&mvmt=0&wpns=0";
 			window.frames['saveframe'].location.replace(url);
+		}
+
+		function hideInfoBar() {
+			$("#infobar").hide();
+		}
+
+		function showInfoBar() {
+			$("#infobar").show();
+            $("#dicebar").hide();
+		}
+
+		function hideDiceBar() {
+			$("#dicebar").hide();
+		}
+
+		function showDiceBar() {
+			$("#dicebar").show();
+			$("#infobar").hide();
 		}
 	</script>
 
@@ -227,7 +247,7 @@ session_start();
 	$heatimage = array();
 	$currentMechStatusImage = "./images/check_red.png";
 	$currentmeli = "";
-	$currentPhaseButton = "./images/phasebutton-01_move.png";
+	$currentPhaseButton = "./images/top-right_phase01.png";
 	for ($i4 = 1; $i4 <= $size; $i4++) {
 
 		$mechstatusimage = "./images/check_red.png";
@@ -241,15 +261,15 @@ session_start();
 		}
 		if ($mvmt == 0 && $wpnsfired == 0) {
 			$mechstatusimage = "./images/check_red.png";
-			$phaseButton = "./images/phasebutton-01_move.png";
+			$phaseButton = "./images/top-right_phase01.png";
 		}
 		if ($mvmt > 0 && $wpnsfired == 0) {
 			$mechstatusimage = "./images/check_yellow.png";
-			$phaseButton = "./images/phasebutton-02_fire.png";
+			$phaseButton = "./images/top-right_phase02.png";
 		}
 		if ($mvmt > 0 && $wpnsfired == 1) {
 			$mechstatusimage = "./images/check_green.png";
-			$phaseButton = "./images/phasebutton-03_done.png";
+			$phaseButton = "./images/top-right_phase03.png";
 		}
 		if ($mvmt == 0 && $wpnsfired == 1) {
 			// Error! Unit has fired but no movement was specified! Ask again!
@@ -297,7 +317,7 @@ session_start();
 
 <div id="pilotimage"><?php echo "<img src='".$array_PILOT_IMG_URL[$chosenMechIndex]."' width='80px' height='80px'>" ?></div>
 <div id="faction" align="center"><?php echo "<img src='./images/factions/".$FACTION_IMG_URL."' width='50px' height='50px'>" ?></div>
-<div id="mech_number" align="center"><?= $array_MECH_NUMBER[$chosenMechIndex] ?></div>
+<div id="mech_number" align="center">#<?= $array_MECH_NUMBER[$chosenMechIndex] ?></div>
 <div id="mech"><?php echo "<img id='mechimage' src='".$array_MECH_IMG_URL[$chosenMechIndex]."'>" ?></div>
 
 <div id="topleft">
@@ -309,7 +329,7 @@ session_start();
 </div>
 
 <div id="topright">
-	<img src="./images/top-right.png" height="190px">
+	<a onclick=\"location.href='".$currentmeli."'\" href=<?php echo "'$currentmeli'"; ?>><img src=<?php echo "'$currentPhaseButton'"; ?> style='height:170px;'></a>
 </div>
 
 <?php
@@ -341,8 +361,8 @@ session_start();
 ?>
 
 <div id="pv">
-	<span style="font-size: 22px; color: #aaaaaa; vertical-align: middle;">PV:&nbsp;&nbsp;</span>
-	<span style="font-size: 48px; color: #da8e25; vertical-align: middle;"><?php echo "$array_PV[$chosenMechIndex]"; ?></span>
+	<span style="font-size: 22px; color: #aaaaaa; vertical-align: middle;">PV:&nbsp;</span>
+	<span style="font-size: 36px; color: #da8e25; vertical-align: middle; font-weight: bold;"><?php echo "$array_PV[$chosenMechIndex]"; ?></span>
 </div>
 
 <div class="datatable">
@@ -453,27 +473,39 @@ session_start();
 
 			</td>
 			<td width="40%" valign="bottom" align="right">
-			<table width="100%">
-				<tr>
-					<td nowrap rowspan="2" style="vertical-align: bottom;" valign="bottom" class="datalabel" width="1%">&nbsp;&nbsp;<a href=<?php echo "'$currentmeli'"; ?>"><img src=<?php echo "'$currentMechStatusImage'"; ?>" style='height:120px;'></a></td>
-					<td align="left">
-						<div id="phasebutton" name="phasebutton"><a href=<?php echo "'$currentmeli'"; ?>><img src=<?php echo "'$currentPhaseButton'"; ?> style='height:140px;'></a></div>
-					</td>
-					<td align="right" valign="bottom">
+
+
+
+
+
+			<!--
+				<table width="100%">
+					<tr>
+						<td nowrap rowspan="2" style="vertical-align: bottom;" valign="bottom" class="datalabel" width="1%">&nbsp;&nbsp;<a href=<?php echo "'$currentmeli'"; ?>"><img src=<?php echo "'$currentMechStatusImage'"; ?>" style='height:120px;'></a></td>
+						<td align="left">
+							<div id="phasebutton" name="phasebutton"><a href=<?php echo "'$currentmeli'"; ?>><img src=<?php echo "'$currentPhaseButton'"; ?> style='height:140px;'></a></div>
+						</td>
+						<td align="right" valign="bottom">
 <?php
 	if ($array_TP[$chosenMechIndex] != "BA") {
-		echo "		    		<div id='criticalhit'></div>\r\n";
+		echo "		            	<div id='criticalhit'></div>\r\n";
 	} else {
-		echo "		    		<div id='criticalhit' style='display:none;'></div>\r\n";
+		echo "		        		<div id='criticalhit' style='display:none;'></div>\r\n";
 	}
 ?>
-						<div id="dice" valign="middle" align="center">
-							<img id="die1" src="./images/dice/d6_0.png" width="65px" height="65px">
-							<img id="die2" src="./images/dice/d6_0.png" width="65px" height="65px">
-						</div>
-					</td>
-				</tr>
-			</table>
+							<div id="dice" valign="middle" align="center">
+								<img id="die1" src="./images/dice/d6_0.png" width="65px" height="65px">
+								<img id="die2" src="./images/dice/d6_0.png" width="65px" height="65px">
+							</div>
+						</td>
+					</tr>
+				</table>
+			-->
+
+
+
+
+
 <?php
 	if ($array_TP[$chosenMechIndex] == "BA") {
 		// Do not show the heat block for all Battle Armor units
@@ -524,13 +556,51 @@ session_start();
 						</tr>
 					</table>
 				</div>
-
+			</td>
+			<td valign='bottom'>
+				<a onclick='showInfoBar();' href='#'><img src='./images/selector_02-info.png' width='50px'></a><br>
+				<a onclick='showDiceBar();' href='#'><img src='./images/selector_01-dice.png' width='50px'></a>
 			</td>
 		</tr>
 	</table>
 </div>
 
+<div name='bgrightbar' id='bgrightbar'></div>
+
+<div name='infobar' id='infobar'>
+	<div name='barclosebutton' id='barclosebutton'>
+		<a href='#' onclick='hideInfoBar();'><img src='.\images\selector_03-close.png' width='50px'></a>
+	</div>
+</div>
+
+<div name='dicebar' id='dicebar'>
+	<div name='barclosebutton' id='barclosebutton'>
+		<a href='#' onclick='hideDiceBar();'><img src='.\images\selector_03-close.png' width='50px'></a>
+	</div>
+	<div name='dicepanel' id='dicepanel'>
+		<table width="220px">
+			<tr>
+				<td align="right" valign="bottom">
+<?php
+	if ($array_TP[$chosenMechIndex] != "BA") {
+		echo "                  <div id='criticalhit'></div>\r\n";
+	} else {
+		echo "                  <div id='criticalhit' style='display:none;'></div>\r\n";
+	}
+?>
+					<div id="dice" valign="middle" align="center">
+						<img id="die1" src="./images/dice/d6_0.png" width="65px" height="65px">
+						<img id="die2" src="./images/dice/d6_0.png" width="65px" height="65px">
+					</div>
+				</td>
+			</tr>
+		</table>
+	</div>
+</div>
+
 <script type="text/javascript">
+	$("#infobar").hide();
+	$("#dicebar").hide();
 	setCircles(<?=$array_HT[$chosenMechIndex]?>,<?=$array_A[$chosenMechIndex]?>,<?=$array_S[$chosenMechIndex]?>,<?=$array_ENGN[$chosenMechIndex]?>,<?=$array_FRCTRL[$chosenMechIndex]?>,<?=$array_MP[$chosenMechIndex]?>,<?=$array_WPNS[$chosenMechIndex]?>);
 </script>
 
