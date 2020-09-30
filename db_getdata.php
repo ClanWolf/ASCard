@@ -58,6 +58,9 @@
 
 	$array_ACTIVE_BID = array();
 
+	$array_USEDOVERHEAT = array();
+	$array_CURRENTTMM = array();
+
 	// Game
 	// currentround
 	$sql_asc_game = "SELECT SQL_NO_CACHE * FROM asc_game where gameid = 1;";
@@ -178,6 +181,8 @@
 							$array_FRCTRL[$mechcount] = $row["crit_fc"];
 							$array_MP[$mechcount] = $row["crit_mp"];
 							$array_WPNS[$mechcount] = $row["crit_weapons"];
+							$array_USEDOVERHEAT[$mechcount] = $row["usedoverheat"];
+							$array_CURRENTTMM[$mechcount] = $row["currenttmm"];
 
 							// echo "<script>console.log('".$sql_asc_mechstatus." --- ".$row["heat"]."');</script>";
 						}

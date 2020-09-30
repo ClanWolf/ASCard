@@ -4,6 +4,7 @@ var fontsizeValue = 22;
 var fontsizeCircle = 24;
 var rolling = 0;
 var ccc = 1;
+var structuralDamageCache = 0;
 
 var mechstatus = 1; // 1: green (untouched) | 2: yellow (hit) | 3: red (crit) | 4: black (wrecked)
 var enginehit = 0;
@@ -34,6 +35,7 @@ function readCircles(index, a_max, s_max) {
 	var fc = 0;
 	var mp = 0;
 	var w = 0;
+	var uov = 0; // used overheat
 
 	var mechstatus = 1;
 	var mechstatusimage = "images/DD_01.png";
@@ -42,13 +44,14 @@ function readCircles(index, a_max, s_max) {
 	[].forEach.call(list, function (el1) {
 		na = el1.name;
 		if (typeof na != 'undefined') {
-			if (na.substring(0, 1) == "H"      && el1.checked) { h++;  }
-			if (na.substring(0, 1) == "A"      && el1.checked) { a++;  }
-			if (na.substring(0, 1) == "S"      && el1.checked) { s++;  }
-			if (na.substring(0, 5) == "CD_E_"  && el1.checked) { e++;  }
-			if (na.substring(0, 6) == "CD_FC_" && el1.checked) { fc++; }
-			if (na.substring(0, 6) == "CD_MP_" && el1.checked) { mp++; }
-			if (na.substring(0, 5) == "CD_W_"  && el1.checked) { w++;  }
+			if (na.substring(0, 1) == "H"      && el1.checked) { h++;   }
+			if (na.substring(0, 1) == "A"      && el1.checked) { a++;   }
+			if (na.substring(0, 1) == "S"      && el1.checked) { s++;   }
+			if (na.substring(0, 5) == "CD_E_"  && el1.checked) { e++;   }
+			if (na.substring(0, 6) == "CD_FC_" && el1.checked) { fc++;  }
+			if (na.substring(0, 6) == "CD_MP_" && el1.checked) { mp++;  }
+			if (na.substring(0, 5) == "CD_W_"  && el1.checked) { w++;   }
+			if (na.substring(0, 3) == "UOV"    && el1.checked) { uov++; }
 		}
 	});
 	
@@ -125,13 +128,21 @@ function readCircles(index, a_max, s_max) {
 
 	document.getElementById('mechstatusimagemenu').src=mechstatusimage;
 
-	setCircles(h, a, s, e, fc, mp, w);
-	var url="./save.php?index="+index+"&h="+h+"&a="+a+"&s="+s+"&e="+e+"&fc="+fc+"&mp="+mp+"&w="+w+"&mstat="+mechstatusimage;
+	setCircles(h, a, s, e, fc, mp, w, uov);
+	var url="./save.php?index="+index+"&h="+h+"&a="+a+"&s="+s+"&e="+e+"&fc="+fc+"&mp="+mp+"&w="+w+"&mstat="+mechstatusimage+"&uov="+uov;
 	// alert(url);
 	window.frames['saveframe'].location.replace(url);
+
+	//console.log("Structural damage: " + s);
+	//console.log("Structural damage cache: " + structuralDamageCache);
+	if (s > structuralDamageCache) {
+		showDiceBar();
+	}
+	structuralDamageCache = s;
+	//console.log("New structural damage cache: " + structuralDamageCache);
 }
 
-function setCircles(h, a, s, e, fc, mp, w) {
+function setCircles(h, a, s, e, fc, mp, w, uov) {
 	var na1 = "";
 
 	var h_c = 0;
@@ -141,6 +152,9 @@ function setCircles(h, a, s, e, fc, mp, w) {
 	var fc_c = 0;
 	var mp_c = 0;
 	var w_c = 0;
+	var uov_c = 0;
+
+	//console.log("uov: " + uov);
 
 	mechstatus = 1;
 	updatedshortvalue = 0;
@@ -154,13 +168,14 @@ function setCircles(h, a, s, e, fc, mp, w) {
 	[].forEach.call(list, function (el1) {
 		na1 = el1.name;
 		if (typeof na1 != 'undefined') {
-			if (na1.substring(0, 1) == "H")      { h_c++;  if (h_c<=h)   { el1.checked = true; }}
-			if (na1.substring(0, 1) == "A")      { a_c++;  if (a_c<=a)   { el1.checked = true; }}
-			if (na1.substring(0, 1) == "S")      { s_c++;  if (s_c<=s)   { el1.checked = true; }}
-			if (na1.substring(0, 5) == "CD_E_")  { e_c++;  if (e_c<=e)   { el1.checked = true; }}
-			if (na1.substring(0, 6) == "CD_FC_") { fc_c++; if (fc_c<=fc) { el1.checked = true; }}
-			if (na1.substring(0, 6) == "CD_MP_") { mp_c++; if (mp_c<=mp) { el1.checked = true; }}
-			if (na1.substring(0, 5) == "CD_W_")  { w_c++;  if (w_c<=w)   { el1.checked = true; }}
+			if (na1.substring(0, 1) == "H")      { h_c++;   if (h_c<=h)     { el1.checked = true; }}
+			if (na1.substring(0, 1) == "A")      { a_c++;   if (a_c<=a)     { el1.checked = true; }}
+			if (na1.substring(0, 1) == "S")      { s_c++;   if (s_c<=s)     { el1.checked = true; }}
+			if (na1.substring(0, 5) == "CD_E_")  { e_c++;   if (e_c<=e)     { el1.checked = true; }}
+			if (na1.substring(0, 6) == "CD_FC_") { fc_c++;  if (fc_c<=fc)   { el1.checked = true; }}
+			if (na1.substring(0, 6) == "CD_MP_") { mp_c++;  if (mp_c<=mp)   { el1.checked = true; }}
+			if (na1.substring(0, 5) == "CD_W_")  { w_c++;   if (w_c<=w)     { el1.checked = true; }}
+			if (na1.substring(0, 3) == "UOV")    { uov_c++; if (uov_c<=uov) { el1.checked = true; }}
 		}
 	});
 	if (e == 0) {
@@ -257,6 +272,10 @@ function setCircles(h, a, s, e, fc, mp, w) {
 	if (updatedshortdamage < 0) updatedshortdamage = 0;
 	if (updatedmediumdamage < 0) updatedmediumdamage = 0;
 	if (updatedlongdamage < 0) updatedlongdamage = 0;
+
+	if (updatedshortdamage > 0) { updatedshortdamage = updatedshortdamage + uov; }
+	if (updatedmediumdamage > 0) { updatedmediumdamage = updatedmediumdamage + uov; }
+	if (updatedlongdamage > 0) { updatedlongdamage = updatedlongdamage + uov; }
 
 	document.getElementById("dmgshort_s").innerHTML = updatedshortdamage;
 	document.getElementById("dmgmedium_s").innerHTML = updatedmediumdamage;
@@ -452,6 +471,7 @@ function setCircles(h, a, s, e, fc, mp, w) {
 	if (h == 4 && mechstatus != 4) {
 		// document.body.style.backgroundImage = "url('" + wallpaperHeated + "')";
 		document.getElementById('heatimage_' + chosenmechindex).src=temp4;
+		document.getElementById('mechalive_status').src="./images/heatalarm.gif";
 	}
 }
 
@@ -485,7 +505,6 @@ function textSize(dec) {
 		fontsizeValue = 22;
 		fontsizeCircle = 24;
 	}
-
 	if (fontsizeLabelthin > 73) {
 		fontsizeLabel = 81;
 		fontsizeLabelthin = 73;
@@ -560,8 +579,8 @@ $(document).ready(function() {
 	$("#cover").hide();
 	//$("#cover").fadeOut(400, "linear");
 
-	//$("#phasebutton").fadeOut(0, "linear");
-	//$("#phasebutton").fadeIn(1000, "linear");
+	//$("#toprightimage").fadeOut(0, "linear");
+	//$("#toprightimage").fadeIn(1000, "linear");
 });
 
 $(window).resize(function() {

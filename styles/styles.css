@@ -188,6 +188,17 @@ a:hover {
 	font-size: 24px;
 	color: #eeeeee;
 }
+#pilotinfo {
+	z-index: 3;
+	vertical-align: middle;
+	padding: 2px;
+	margin-top: 3px;
+	margin-bottom: 3px;
+	margin-left: 3px;
+	margin-right: 0px;
+	font-size: 24px;
+	color: #eeeeee;
+}
 #topright {
 	z-index: 11;
 	position: absolute;
@@ -201,8 +212,8 @@ a:hover {
 	border-style: solid;
 	border-width: 0px;
 	padding: 0px;
-	top: 100px;
-	right: 275px;
+	top: 99px;
+	right: 274px;
 	width: 80px;
 	height: 54px;
 }
@@ -287,8 +298,9 @@ a:hover {
 	z-index: 10;
 	position: absolute;
 	width: 220px;
-	right: 20px;
-	bottom: 55px;
+	right: 0px;
+	bottom: 50px;
+	padding-right: 10px;
 	color: #000000;
 	text-align: right;
 	//background-color: #ffffff;

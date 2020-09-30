@@ -11,6 +11,9 @@ session_start();
 	$pimage = $_SESSION['playerimage'];
 	$hideNotOwnedMech = $_SESSION['option1'];
 
+	$opt2 = $_SESSION['option2'];
+	$showplayerdata_topleft = $opt2;
+
 	$array_modified_TMM = array();
 	$array_AMM = array();
 ?>
@@ -169,8 +172,20 @@ session_start();
 		}
 
 		function showDiceBar() {
-			$("#dicebar").show();
-			$("#infobar").hide();
+			if($('#dicebar').is(':visible')) {
+				// the dicebar is already open. do nothing
+			} else {
+				$("#dicebar").show();
+				$("#infobar").hide();
+
+				if (rolling === 0) {
+				    playDiceSound();
+					for (i = 1; i < 12; i++) {
+						rolling++;
+						setTimeout("rolldice(i)", i * 80);
+					}
+				}
+			}
 		}
 	</script>
 
@@ -313,12 +328,6 @@ session_start();
 	</table>
 </div>
 
-<!--
-<div id="tablebuttons">
-	<p>Buttons for tables</p>
-</div>
--->
-
 <div id="pilotimage"><?php echo "<img src='".$array_PILOT_IMG_URL[$chosenMechIndex]."' width='80px' height='80px'>" ?></div>
 <div id="faction" align="center"><?php echo "<img src='./images/factions/".$FACTION_IMG_URL."' width='50px' height='50px'>" ?></div>
 <div id="mech_number" align="center">#<?= $array_MECH_NUMBER[$chosenMechIndex] ?></div>
@@ -363,6 +372,24 @@ session_start();
 		if ($hideNotOwnedMech) {
 			echo "<div id='blockNotOwnedMechs'></div>";
 		}
+	}
+
+	if ($showplayerdata_topleft == 1) {
+        // show top left pilot info
+		echo "<script type='text/javascript'>\n";
+		echo "  $('#pilotimage').show();\n";
+		echo "  $('#faction').show();\n";
+		echo "  $('#pilotrank').show();\n";
+		echo "  $('#topleft').show();\n";
+		echo "</script>\n";
+	} else {
+		// do not show pilot infor
+		echo "<script type='text/javascript'>\n";
+		echo "  $('#pilotimage').hide();\n";
+		echo "  $('#faction').hide();\n";
+		echo "  $('#pilotrank').hide();\n";
+		echo "  $('#topleft').hide();\n";
+		echo "</script>\n";
 	}
 ?>
 
@@ -413,7 +440,6 @@ session_start();
 						</tr>
 					</table>
 				</div>
-
 <?php
 	if ($array_TP[$chosenMechIndex] == "BA") {
 		// Do not show the heat block for all Battle Armor units
@@ -422,19 +448,25 @@ session_start();
 		echo "				<div class='dataarea'>\r\n";
 	}
 ?>
-
 					<table width="100%">
 						<tr>
 							<td nowrap class="datalabel" width="5%">OV:</td>
-							<td nowrap class="datavalue" width="20%" style="text-align: center;"><?php echo "$array_OV[$chosenMechIndex]"; ?></td>
+							<!-- <td nowrap class="datavalue" width="15%" style="text-align: center;"><?php echo "$array_OV[$chosenMechIndex]"; ?></td> -->
+							<td nowrap width="30%" style="color: #222;">
+<?php
+	for ($i1 = 1; $i1 <= $array_OV[$chosenMechIndex]; $i1++) {
+		echo "<label class='bigcheck'><input onchange='readCircles($array_MECH_DBID[$chosenMechIndex]);' type='checkbox' class='bigcheck' name='UOV".$i1."' id='UOV".$i1."' value='yes'/><span class='bigcheck-target'></span></label>&nbsp;\r\n";
+	}
+?>
+							</td>
 							<td nowrap class="datalabel" width="10%" style="text-align: right;">&nbsp;&nbsp;&nbsp;HT:</td>
-							<td nowrap width="60%" style="text-align: right;" id="ht_field">
+							<td nowrap width="35%" style="text-align: right;" id="ht_field">
 								<label class="bigcheck"><input onchange="readCircles(<?= $array_MECH_DBID[$chosenMechIndex] ?>, <?= $array_A_MAX[$chosenMechIndex] ?>, <?= $array_S_MAX[$chosenMechIndex] ?>);" type="checkbox" class="bigcheck" name="H1" id="H1" value="yes"/><span class="bigcheck-target"></span></label>
 								<label class="bigcheck"><input onchange="readCircles(<?= $array_MECH_DBID[$chosenMechIndex] ?>, <?= $array_A_MAX[$chosenMechIndex] ?>, <?= $array_S_MAX[$chosenMechIndex] ?>);" type="checkbox" class="bigcheck" name="H2" id="H2" value="yes"/><span class="bigcheck-target"></span></label>
 								<label class="bigcheck"><input onchange="readCircles(<?= $array_MECH_DBID[$chosenMechIndex] ?>, <?= $array_A_MAX[$chosenMechIndex] ?>, <?= $array_S_MAX[$chosenMechIndex] ?>);" type="checkbox" class="bigcheck" name="H3" id="H3" value="yes"/><span class="bigcheck-target"></span></label>
 								<label class="bigcheck"><input onchange="readCircles(<?= $array_MECH_DBID[$chosenMechIndex] ?>, <?= $array_A_MAX[$chosenMechIndex] ?>, <?= $array_S_MAX[$chosenMechIndex] ?>);" type="checkbox" class="bigcheck" name="H4" id="H4" value="yes"/><span class="bigcheck-target"></span></label>
 							</td>
-							<td class="datalabel" width="5%" style="text-align: right;">&nbsp;&nbsp;&nbsp;(SD)</td>
+							<!-- <td class="datalabel" width="5%" style="text-align: right;">&nbsp;&nbsp;&nbsp;(SD)</td> -->
 						</tr>
 					</table>
 				</div>
@@ -444,25 +476,22 @@ session_start();
 						<tr>
 							<td nowrap width="5%" class="datalabel">A:</td>
 							<td nowrap width="95%" style="color: #222;">
-
 <?php
 	for ($i1 = 1; $i1 <= $array_A_MAX[$chosenMechIndex]; $i1++) {
 		echo "<label class='bigcheck'><input onchange='readCircles($array_MECH_DBID[$chosenMechIndex]);' type='checkbox' class='bigcheck' name='A".$i1."' value='yes'/><span class='bigcheck-target'></span></label>&nbsp;\r\n";
 	}
 ?>
-
 							</td>
 						</tr>
 						<tr>
 							<td nowrap width="5%" class="datalabel">S:</td>
 							<td nowrap width="95%" style="color: #aaa;">
-
 <?php
 	for ($i2 = 1; $i2 <= $array_S_MAX[$chosenMechIndex]; $i2++) {
+		//echo "<script type='text/javascript'>console.log('Current structure damage: $array_S[$chosenMechIndex]');</script>";
 		echo "<label class='bigcheck'><input onchange='readCircles($array_MECH_DBID[$chosenMechIndex]);' type='checkbox' class='bigcheck' name='S".$i2."' value='yes'/><span class='bigcheck-target'></span></label>&nbsp;\r\n";
 	}
 ?>
-
 							</td>
 						</tr>
 					</table>
@@ -479,10 +508,6 @@ session_start();
 
 			</td>
 			<td width="40%" valign="bottom" align="right">
-
-
-
-
 
 			<!--
 				<table width="100%">
@@ -508,10 +533,6 @@ session_start();
 				</table>
 			-->
 
-
-
-
-
 <?php
 	if ($array_TP[$chosenMechIndex] == "BA") {
 		// Do not show the heat block for all Battle Armor units
@@ -528,7 +549,7 @@ session_start();
 								<label class="bigcheck"><input onchange="readCircles(<?= $array_MECH_DBID[$chosenMechIndex] ?>, <?= $array_A_MAX[$chosenMechIndex] ?>, <?= $array_S_MAX[$chosenMechIndex] ?>);" type="checkbox" class="bigcheck" name="CD_E_1" id="CD_E_1" value="yes"/><span class="bigcheck-target"></span></label>
 								<label class="bigcheck"><input onchange="readCircles(<?= $array_MECH_DBID[$chosenMechIndex] ?>, <?= $array_A_MAX[$chosenMechIndex] ?>, <?= $array_S_MAX[$chosenMechIndex] ?>);" type="checkbox" class="bigcheck" name="CD_E_2" id="CD_E_2" value="yes"/><span class="bigcheck-target"></span></label>
 							</td>
-							<td nowrap class="datalabel_thin" width="5%" style="text-align: right;">+1 HT FIRING</td>
+							<td nowrap class="datalabel_thin" width="5%" style="text-align: right;">+1 HT</td>
 						</tr>
 						<tr>
 							<td nowrap class="datalabel" width="5%" style="text-align: right;">FCTL:</td>
@@ -538,7 +559,7 @@ session_start();
 								<label class="bigcheck"><input onchange="readCircles(<?= $array_MECH_DBID[$chosenMechIndex] ?>, <?= $array_A_MAX[$chosenMechIndex] ?>, <?= $array_S_MAX[$chosenMechIndex] ?>);" type="checkbox" class="bigcheck" name="CD_FC_3" id="CD_FC_3" value="yes"/><span class="bigcheck-target"></span></label>
 								<label class="bigcheck"><input onchange="readCircles(<?= $array_MECH_DBID[$chosenMechIndex] ?>, <?= $array_A_MAX[$chosenMechIndex] ?>, <?= $array_S_MAX[$chosenMechIndex] ?>);" type="checkbox" class="bigcheck" name="CD_FC_4" id="CD_FC_4" value="yes"/><span class="bigcheck-target"></span></label>
 							</td>
-							<td nowrap class="datalabel_thin" width="5%" style="text-align: right;">+2 TO-HIT EA.</td>
+							<td nowrap class="datalabel_thin" width="5%" style="text-align: right;">+2 TO-HIT</td>
 						</tr>
 						<tr>
 							<td nowrap class="datalabel" width="5%" style="text-align: right;">MP:</td>
@@ -548,7 +569,7 @@ session_start();
 								<label class="bigcheck"><input onchange="readCircles(<?= $array_MECH_DBID[$chosenMechIndex] ?>, <?= $array_A_MAX[$chosenMechIndex] ?>, <?= $array_S_MAX[$chosenMechIndex] ?>);" type="checkbox" class="bigcheck" name="CD_MP_3" id="CD_MP_3" value="yes"/><span class="bigcheck-target"></span></label>
 								<label class="bigcheck"><input onchange="readCircles(<?= $array_MECH_DBID[$chosenMechIndex] ?>, <?= $array_A_MAX[$chosenMechIndex] ?>, <?= $array_S_MAX[$chosenMechIndex] ?>);" type="checkbox" class="bigcheck" name="CD_MP_4" id="CD_MP_4" value="yes"/><span class="bigcheck-target"></span></label>
 							</td>
-							<td nowrap class="datalabel_thin" width="5%" style="text-align: right;">1/2 MV EA.</td>
+							<td nowrap class="datalabel_thin" width="5%" style="text-align: right;">1/2 MV</td>
 						</tr>
 						<tr>
 							<td nowrap class="datalabel" width="5%" style="text-align: right;">WPNS:</td>
@@ -558,7 +579,7 @@ session_start();
 								<label class="bigcheck"><input onchange="readCircles(<?= $array_MECH_DBID[$chosenMechIndex] ?>, <?= $array_A_MAX[$chosenMechIndex] ?>, <?= $array_S_MAX[$chosenMechIndex] ?>);" type="checkbox" class="bigcheck" name="CD_W_3" id="CD_W_3" value="yes"/><span class="bigcheck-target"></span></label>
 								<label class="bigcheck"><input onchange="readCircles(<?= $array_MECH_DBID[$chosenMechIndex] ?>, <?= $array_A_MAX[$chosenMechIndex] ?>, <?= $array_S_MAX[$chosenMechIndex] ?>);" type="checkbox" class="bigcheck" name="CD_W_4" id="CD_W_4" value="yes"/><span class="bigcheck-target"></span></label>
 							</td>
-							<td nowrap class="datalabel_thin" width="5%" style="text-align: right;">-1 DMG EA.</td>
+							<td nowrap class="datalabel_thin" width="5%" style="text-align: right;">-1 DMG</td>
 						</tr>
 					</table>
 				</div>
@@ -578,7 +599,33 @@ session_start();
 		<a href='#' onclick='hideInfoBar();'><img src='.\images\selector_03-close.png' width='50px'></a>
 	</div>
 	<div name='infopanel' id='infopanel'>
-    	<img src='./images/ranks/<?php echo $factionid ?>/<?php echo $array_PILOT_RANK[$chosenMechIndex] ?>.png' width='50px' height='50px'>
+		<table width="220px">
+			<tr>
+				<td id='pilotinfo' align="right" valign="bottom">
+					<span style="font-size: 18px; color: #eeeeee;"><?php echo "$UNIT"; ?></span><br>
+					<span style="font-size: 30px; color: #da8e25;"><?php echo "$array_PILOT[$chosenMechIndex]"; ?></span><br>
+					<span style="font-size: 20px; color: #aaaaaa;"><?php echo "$array_MECH_MODEL[$chosenMechIndex]" ?></span><br><br>
+					<!-- Mechwarriors are highly trained and effective warriors.<br><br> -->
+					<div id="pilotinfo" valign="bottom" align="right">
+						<table cellspacing="0" cellpadding="0">
+							<tr>
+								<td rowspan="2">
+									<?php echo "<img src='".$array_PILOT_IMG_URL[$chosenMechIndex]."' width='84px' height='84px' style='border: 1px solid #000000;'>" ?>
+								</td>
+								<td style='background-color:#000000;' align='right'>
+									<?php echo "<img src='./images/factions/".$FACTION_IMG_URL."' width='40px' height='40px' style='border: 1px solid #000000;'>" ?>
+								</td>
+							</tr>
+							<tr>
+								<td valign='bottom' align='right'>
+									<img src='./images/ranks/<?php echo $factionid ?>/<?php echo $array_PILOT_RANK[$chosenMechIndex] ?>.png' style='border: 1px solid #000000;' width='40px' height='40px'>
+								</td>
+							</tr>
+						</table>
+                    </div>
+                </td>
+            </tr>
+        </table>
     </div>
 </div>
 
@@ -610,7 +657,7 @@ session_start();
 <script type="text/javascript">
 	$("#infobar").hide();
 	$("#dicebar").hide();
-	setCircles(<?=$array_HT[$chosenMechIndex]?>,<?=$array_A[$chosenMechIndex]?>,<?=$array_S[$chosenMechIndex]?>,<?=$array_ENGN[$chosenMechIndex]?>,<?=$array_FRCTRL[$chosenMechIndex]?>,<?=$array_MP[$chosenMechIndex]?>,<?=$array_WPNS[$chosenMechIndex]?>);
+	setCircles(<?=$array_HT[$chosenMechIndex]?>,<?=$array_A[$chosenMechIndex]?>,<?=$array_S[$chosenMechIndex]?>,<?=$array_ENGN[$chosenMechIndex]?>,<?=$array_FRCTRL[$chosenMechIndex]?>,<?=$array_MP[$chosenMechIndex]?>,<?=$array_WPNS[$chosenMechIndex]?>,<?=$array_USEDOVERHEAT[$chosenMechIndex]?>);
 </script>
 
 <div id="footer"></div>
