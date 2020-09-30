@@ -142,6 +142,10 @@ function readCircles(index, a_max, s_max) {
 	//console.log("New structural damage cache: " + structuralDamageCache);
 }
 
+function setStructuralDamageCache(value) {
+	structuralDamageCache = value;
+}
+
 function setCircles(h, a, s, e, fc, mp, w, uov) {
 	var na1 = "";
 

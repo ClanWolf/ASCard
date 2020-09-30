@@ -374,23 +374,23 @@ session_start();
 		}
 	}
 
+	echo "<script type='text/javascript'>\n";
 	if ($showplayerdata_topleft == 1) {
         // show top left pilot info
-		echo "<script type='text/javascript'>\n";
 		echo "  $('#pilotimage').show();\n";
 		echo "  $('#faction').show();\n";
 		echo "  $('#pilotrank').show();\n";
 		echo "  $('#topleft').show();\n";
-		echo "</script>\n";
 	} else {
 		// do not show pilot infor
-		echo "<script type='text/javascript'>\n";
 		echo "  $('#pilotimage').hide();\n";
 		echo "  $('#faction').hide();\n";
 		echo "  $('#pilotrank').hide();\n";
 		echo "  $('#topleft').hide();\n";
-		echo "</script>\n";
 	}
+	echo "  //console.log('Current structure damage: $array_S[$chosenMechIndex]');\n";
+	echo "  setStructuralDamageCache($array_S[$chosenMechIndex]);\n";
+	echo "</script>\n";
 ?>
 
 <div id="pv">
@@ -488,7 +488,6 @@ session_start();
 							<td nowrap width="95%" style="color: #aaa;">
 <?php
 	for ($i2 = 1; $i2 <= $array_S_MAX[$chosenMechIndex]; $i2++) {
-		//echo "<script type='text/javascript'>console.log('Current structure damage: $array_S[$chosenMechIndex]');</script>";
 		echo "<label class='bigcheck'><input onchange='readCircles($array_MECH_DBID[$chosenMechIndex]);' type='checkbox' class='bigcheck' name='S".$i2."' value='yes'/><span class='bigcheck-target'></span></label>&nbsp;\r\n";
 	}
 ?>
