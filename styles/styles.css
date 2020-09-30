@@ -542,6 +542,12 @@ input[type='checkbox'].bigcheck:checked + span.bigcheck-target:after {
 	color: #ccc;
 	text-transform: uppercase;
 }
+.datavalue_small {
+	vertical-align: middle;
+	font-size: 110%;
+	color: #ccc;
+	text-transform: uppercase;
+}
 .datavalue_thin {
 	font-family: 'Pathway Gothic One', sans-serif;
 	vertical-align: middle;
