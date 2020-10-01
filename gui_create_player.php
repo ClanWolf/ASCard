@@ -131,7 +131,8 @@ session_start();
 	<meta name="viewport" content="width=device-width, initial-scale=0.75, minimum-scale=0.75, maximum-scale=0.75, user-scalable=no" />
 
 	<link rel="manifest" href="./manifest.json">
-	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
+	<!-- <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css"> -->
+	<link rel="stylesheet" type="text/css" href="./fontawesome/css/all.min.css" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="./styles/styles.css">
 	<link rel="stylesheet" type="text/css" href="./styles/jquery.jscrollpane.css">
 	<link rel="icon" href="./favicon.png" type="image/png">

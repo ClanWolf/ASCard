@@ -32,7 +32,8 @@ session_start();
 	<meta http-equiv="refresh" content="5" />
 
 	<link rel="manifest" href="./manifest.json">
-	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
+	<!-- <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css"> -->
+	<link rel="stylesheet" type="text/css" href="./fontawesome/css/all.min.css" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="./styles/styles.css">
 	<link rel="icon" href="./favicon.png" type="image/png">
 	<link rel="shortcut icon" href="./images/icon_196x196.png" type="image/png" sizes="196x196">
