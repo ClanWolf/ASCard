@@ -92,6 +92,13 @@ session_start();
 
 		var movementcache = 0;
 
+		var sminrollvalue = 3;
+		var sdamagevalue = 3;
+		var mminrollvalue = 3;
+		var mdamagevalue = 3;
+		var lminrollvalue = 3;
+		var ldamagevalue = 3;
+
 		function setFireValues() {
 			// Set spans to their respective values:
 			// SMinRoll
@@ -106,6 +113,13 @@ session_start();
 			var mdamagespan = document.getElementById('MDamage');
 			var lminrollspan = document.getElementById('LMinRoll');
 			var ldamagespan = document.getElementById('LDamage');
+
+			sminrollspan.innerHTML = sminrollvalue;
+			sdamagespan.innerHTML = sdamagevalue;
+			mminrollspan.innerHTML = mminrollvalue;
+			mdamagespan.innerHTML = mdamagevalue;
+			lminrollspan.innerHTML = lminrollvalue;
+			ldamagespan.innerHTML = ldamagevalue;
 		}
 
 		function changeMovementFlag(index, fln) {
@@ -840,31 +854,31 @@ session_start();
 			echo "										<td nowrap align='left' class='datalabel' width='1%'>\n";
 			echo "											&nbsp;&nbsp;&nbsp;Fired\n";
 			echo "										</td>\n";
-			echo "										<td nowrap align='right' class='datalabel' width='16%' style='text-align:right;'>\n";
+			echo "										<td nowrap align='right' class='datalabel' width='16%' style='text-align:right;vertical-align:top;'>\n";
 			echo "											S&nbsp;&nbsp;&nbsp;&nbsp;<span class='datalabel' id='SDamage'>x</span>\n";
 			echo "										</td>\n";
-			echo "										<td nowrap align='right' class='datalabel' width='1%' style='text-align:center;'>\n";
+			echo "										<td nowrap align='right' class='datalabel' width='1%' style='text-align:center;vertical-align:top;'>\n";
 			echo "											|\n";
 			echo "										</td>\n";
-			echo "										<td nowrap align='left' class='datalabel' width='16%' style='text-align:left;'>\n";
+			echo "										<td nowrap align='left' class='datalabel' width='16%' style='text-align:left;vertical-align:top;'>\n";
 			echo "											<span class='datalabel' id='SMinRoll'>y</span>\n";
 			echo "										</td>\n";
-			echo "										<td nowrap align='right' class='datalabel' width='16%' style='text-align:right;'>\n";
+			echo "										<td nowrap align='right' class='datalabel' width='16%' style='text-align:right;vertical-align:top;'>\n";
 			echo "											M&nbsp;&nbsp;&nbsp;&nbsp;<span class='datalabel' id='MDamage'>x</span>\n";
 			echo "										</td>\n";
-			echo "										<td nowrap align='right' class='datalabel' width='1%' style='text-align:center;'>\n";
+			echo "										<td nowrap align='right' class='datalabel' width='1%' style='text-align:center;vertical-align:top;'>\n";
 			echo "											|\n";
 			echo "										</td>\n";
-			echo "										<td nowrap align='left' class='datalabel' width='16%' style='text-align:left;'>\n";
+			echo "										<td nowrap align='left' class='datalabel' width='16%' style='text-align:left;vertical-align:top;'>\n";
 			echo "											<span class='datalabel' id='MMinRoll'>y</span>\n";
 			echo "										</td>\n";
-			echo "										<td nowrap align='right' class='datalabel' width='16%' style='text-align:right;'>\n";
+			echo "										<td nowrap align='right' class='datalabel' width='16%' style='text-align:right;vertical-align:top;'>\n";
 			echo "											L&nbsp;&nbsp;&nbsp;&nbsp;<span class='datalabel' id='LDamage'>x</span>\n";
 			echo "										</td>\n";
-			echo "										<td nowrap align='right' class='datalabel' width='1%' style='text-align:center;'>\n";
+			echo "										<td nowrap align='right' class='datalabel' width='1%' style='text-align:center;vertical-align:top;'>\n";
 			echo "											|\n";
 			echo "										</td>\n";
-			echo "										<td nowrap align='left' class='datalabel' width='16%' style='text-align:left;'>\n";
+			echo "										<td nowrap align='left' class='datalabel' width='16%' style='text-align:left;vertical-align:top;'>\n";
 			echo "											<span class='datalabel' id='LMinRoll'>y</span>\n";
 			echo "										</td>\n";
 			echo "									</tr>\n";
