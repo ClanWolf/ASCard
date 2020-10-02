@@ -499,7 +499,7 @@ input[type='checkbox'].bigcheck {
 	z-index: -10000;
 }
 input[type='checkbox'].bigcheck + span.bigcheck-target:after {
-	content: "\f111";
+	content: "<i class="far fa-circle"></i>";
 
 }
 input[type='checkbox'].bigcheck:checked + span.bigcheck-target:after {
