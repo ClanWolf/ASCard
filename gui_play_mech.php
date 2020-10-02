@@ -721,7 +721,7 @@ session_start();
 <?php
 	if ($movd==1) {
 		if ($playable) {
-			echo "<div id='editMovementValues'>\n";
+			echo "<div id='editMovementValues' style='visibility: hidden;'>\n";
 			//echo "	<br>\n";
 			echo "	<br>\n";
 			echo "	<table width='100%'>\n";
@@ -923,6 +923,7 @@ session_start();
 				echo "	weaponsfired = $array_WPNSFIRED[$chosenMechIndex]\n";
 			}
 			echo "	setMovementFlags($array_MECH_DBID[$chosenMechIndex], movement, weaponsfired);\n";
+			echo "  document.getElementById('editMovementValues').style.visibility='visible';\n";
 			echo "</script>\n";
 		}
 	}
