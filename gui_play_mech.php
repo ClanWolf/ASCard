@@ -90,6 +90,8 @@ session_start();
 //		setTimeout(fixHeight, 600);
 //		// -------------------------------------------------------------------------------------------------------------
 
+		var movementcache = 0;
+
 		function changeMovementFlag(index, fln) {
 			playTapSound();
 
@@ -121,6 +123,23 @@ session_start();
 					}
 				}
 			})
+
+			var elem1 = document.getElementById("fire_info_cell_1");
+			var elem2 = document.getElementById("fire_info_cell_2");
+			if (mv == "0") {
+				elem1.className = 'datalabel_disabled_solid';
+				elem2.className = 'datalabel_disabled_dashed';
+			} else {
+				elem1.className = 'datalabel';
+				elem2.className = 'datalabel';
+			}
+
+			if (movementcache == mv) {
+				//clearFlags(index);
+			} else {
+				movementcache = mv;
+			}
+
 			var url="./save_movement.php?index="+index+"&mvmt="+mv+"&wpns="+fired;
 			window.frames['saveframe'].location.replace(url);
 		}
@@ -142,6 +161,18 @@ session_start();
 					if (na == "WF_WEAPONSFIRED" && weaponsfired == 1) { el1.checked = true; }
 				}
 			})
+
+			var elem1 = document.getElementById("fire_info_cell_1");
+			var elem2 = document.getElementById("fire_info_cell_2");
+			if (movement == "0") {
+				elem1.className = 'datalabel_disabled_solid';
+				elem2.className = 'datalabel_disabled_dashed';
+			} else {
+				elem1.className = 'datalabel';
+				elem2.className = 'datalabel';
+			}
+
+			movementcache = movement;
 		}
 
 		function clearFlags(index) {
@@ -156,6 +187,14 @@ session_start();
 					}
 				}
 			})
+
+			var elem1 = document.getElementById("fire_info_cell_1");
+			var elem2 = document.getElementById("fire_info_cell_2");
+			elem1.className = 'datalabel_disabled_solid';
+			elem2.className = 'datalabel_disabled_dashed';
+
+			movementcache = 0;
+
 			var url="./save_movement.php?index="+index+"&mvmt=0&wpns=0";
 			window.frames['saveframe'].location.replace(url);
 		}
@@ -213,26 +252,26 @@ session_start();
 	}
 	require('./db_getdata.php');
 
-	echo "<script>";
-	echo "  var chosenmechindex = ".$chosenMechIndex.";";
-	echo "	var shortdamage = ".$array_DMG_SHORT[$chosenMechIndex].";";
-	echo "	var mediumdamage = ".$array_DMG_MEDIUM[$chosenMechIndex].";";
-	echo "	var longdamage = ".$array_DMG_LONG[$chosenMechIndex].";";
-	echo "	var movementpointsground = ".$array_MV[$chosenMechIndex].";";
+	echo "<script>\n";
+	echo "  var chosenmechindex = ".$chosenMechIndex.";\n";
+	echo "	var shortdamage = ".$array_DMG_SHORT[$chosenMechIndex].";\n";
+	echo "	var mediumdamage = ".$array_DMG_MEDIUM[$chosenMechIndex].";\n";
+	echo "	var longdamage = ".$array_DMG_LONG[$chosenMechIndex].";\n";
+	echo "	var movementpointsground = ".$array_MV[$chosenMechIndex].";\n";
 	if ($array_MVJ[$chosenMechIndex] != null) {
-		echo "		var movementpointsjump = ".$array_MVJ[$chosenMechIndex].";";
+		echo "	var movementpointsjump = ".$array_MVJ[$chosenMechIndex].";\n";
 	} else {
-		echo "		var movementpointsjump = 0;";
+		echo "	var movementpointsjump = 0;\n";
 	}
-	echo "	var maximalarmorpoints = ".$array_A_MAX[$chosenMechIndex].";";
-	echo "	var maximalstructurepoints = ".$array_S_MAX[$chosenMechIndex].";";
-	echo "	var originalmechimage = '".$array_MECH_IMG_URL[$chosenMechIndex]."';";
-	echo "	var deadmechimage = 'skull.png';";
+	echo "	var maximalarmorpoints = ".$array_A_MAX[$chosenMechIndex].";\n";
+	echo "	var maximalstructurepoints = ".$array_S_MAX[$chosenMechIndex].";\n";
+	echo "	var originalmechimage = '".$array_MECH_IMG_URL[$chosenMechIndex]."';\n";
+	echo "	var deadmechimage = 'skull.png';\n";
 
-	echo "	var movement = ".$array_MVMT[$chosenMechIndex].";";
-	echo "	var weaponsfired = ".$array_WPNSFIRED[$chosenMechIndex].";";
+	echo "	var movement = ".$array_MVMT[$chosenMechIndex].";\n";
+	echo "	var weaponsfired = ".$array_WPNSFIRED[$chosenMechIndex].";\n";
 
-	echo "</script>";
+	echo "</script>\n";
 ?>
 
 <iframe name="saveframe" src="./save.php"></iframe>
