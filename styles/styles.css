@@ -499,11 +499,16 @@ input[type='checkbox'].bigcheck {
 	z-index: -10000;
 }
 input[type='checkbox'].bigcheck + span.bigcheck-target:after {
-	content: "<i class="far fa-circle"></i>";
-
+	content: "\f111";
+	transition: all .25s;
+	font-family: 'Font Awesome 5 Free';
+	font-weight: 200;
 }
 input[type='checkbox'].bigcheck:checked + span.bigcheck-target:after {
 	content: "\f192";
+	transition: all .25s;
+	font-family: 'Font Awesome 5 Free';
+	font-weight: 200;
 }
 .datatable {
 	width: 100%;
