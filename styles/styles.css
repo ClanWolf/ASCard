@@ -508,7 +508,7 @@ input[type='checkbox'].bigcheck:checked + span.bigcheck-target:after {
 	content: "\f192";
 	//transition: all .25s;
 	font-family: 'Font Awesome 5 Free';
-	font-weight: 200;
+	font-weight: 900;
 }
 .datatable {
 	width: 100%;
