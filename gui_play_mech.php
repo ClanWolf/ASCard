@@ -134,14 +134,13 @@ session_start();
 				elem2.className = 'datalabel';
 			}
 
-			if (movementcache == mv) {
-				//clearFlags(index);
+			if (movementcache == mv && fln != 5) {
+				clearFlags(index); // clearFlags will also save!
 			} else {
 				movementcache = mv;
+				var url="./save_movement.php?index="+index+"&mvmt="+mv+"&wpns="+fired;
+				window.frames['saveframe'].location.replace(url);
 			}
-
-			var url="./save_movement.php?index="+index+"&mvmt="+mv+"&wpns="+fired;
-			window.frames['saveframe'].location.replace(url);
 		}
 
 		function setMovementFlags(index, movement, weaponsfired) {
@@ -908,7 +907,7 @@ session_start();
 			echo "			</td>\n";
 			echo "			<td width='40%' valign='top'>\n";
 			echo "				<a href='#' onclick=\"location.href='".$locmeli."'\">&nbsp;&nbsp;&nbsp;&nbsp;<img src='./images/confirm.png' width='80px'></a><br>\n";
-			echo "				<a onclick='clearFlags($array_MECH_DBID[$chosenMechIndex])' href='javascript:clearFlags($array_MECH_DBID[$chosenMechIndex]);'>&nbsp;&nbsp;&nbsp;&nbsp;<img src='./images/cancel.png' width='80px'></a>\n";
+//			echo "				<a onclick='clearFlags($array_MECH_DBID[$chosenMechIndex])' href='javascript:clearFlags($array_MECH_DBID[$chosenMechIndex]);'>&nbsp;&nbsp;&nbsp;&nbsp;<img src='./images/cancel.png' width='80px'></a>\n";
 			echo "			</td>\n";
 			echo "		</tr>\n";
 			echo "	</table>\n";
