@@ -500,13 +500,13 @@ input[type='checkbox'].bigcheck {
 }
 input[type='checkbox'].bigcheck + span.bigcheck-target:after {
 	content: "\f111";
-	transition: all .25s;
+	//transition: all .25s;
 	font-family: 'Font Awesome 5 Free';
 	font-weight: 200;
 }
 input[type='checkbox'].bigcheck:checked + span.bigcheck-target:after {
 	content: "\f192";
-	transition: all .25s;
+	//transition: all .25s;
 	font-family: 'Font Awesome 5 Free';
 	font-weight: 200;
 }
