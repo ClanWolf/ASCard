@@ -92,6 +92,22 @@ session_start();
 
 		var movementcache = 0;
 
+		function setFireValues() {
+			// Set spans to their respective values:
+			// SMinRoll
+			// SDamage
+			// MMinRoll
+			// MDamage
+			// LMinRoll
+			// LDamage
+			var sminrollspan = document.getElementById('SMinRoll');
+			var sdamagespan = document.getElementById('SDamage');
+			var mminrollspan = document.getElementById('MMinRoll');
+			var mdamagespan = document.getElementById('MDamage');
+			var lminrollspan = document.getElementById('LMinRoll');
+			var ldamagespan = document.getElementById('LDamage');
+		}
+
 		function changeMovementFlag(index, fln) {
 			playTapSound();
 
@@ -136,8 +152,10 @@ session_start();
 
 			if (movementcache == mv && fln != 5) {
 				clearFlags(index); // clearFlags will also save!
+				setFireValues();
 			} else {
 				movementcache = mv;
+				setFireValues();
 				var url="./save_movement.php?index="+index+"&mvmt="+mv+"&wpns="+fired;
 				window.frames['saveframe'].location.replace(url);
 			}
@@ -172,6 +190,7 @@ session_start();
 			}
 
 			movementcache = movement;
+			setFireValues();
 		}
 
 		function clearFlags(index) {
@@ -193,6 +212,7 @@ session_start();
 			elem2.className = 'datalabel_disabled_dashed';
 
 			movementcache = 0;
+			setFireValues();
 
 			var url="./save_movement.php?index="+index+"&mvmt=0&wpns=0";
 			window.frames['saveframe'].location.replace(url);
