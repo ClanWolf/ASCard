@@ -1,0 +1,8 @@
+https://www.mediaevent.de/css/gradient.html
+
+.bar { background-image:
+       repeating-linear-gradient(45deg, 
+                                white 0%, 
+                                white 2%, cyan 2%, 
+                                cyan 4%, white 4%);
+}
