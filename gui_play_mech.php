@@ -773,10 +773,10 @@ session_start();
 			echo "							<td nowrap colspan='4'><hr></td>\n";
 			echo "						</tr>\n";
 			echo "						<tr>\n";
-			echo "							<td id='fireinfocell' nowrap align='left' valign='top' class='datalabel' style='vertical-align:top;background-color:#aaaa00;'>\n";
+			echo "							<td id='fireinfocell' nowrap align='left' valign='top' class='datalabel_disabled_solid'>\n";
 			echo "								<label class='bigcheck'><input onchange='changeMovementFlag($array_MECH_DBID[$chosenMechIndex], 5);' type='checkbox' class='bigcheck' name='WF_WEAPONSFIRED' value='yes'/><span class='bigcheck-target'></span></label>\n";
  			echo "							</td>\n";
- 			echo "							<td id='fireinfocell' nowrap colspan='3' align='left' class='datalabel' style='background-image:repeating-linear-gradient(45deg, #444444 0%, #444444 2%, #aaaa00 2%, #aaaa00 4%, #444444 4%);'>\n";
+ 			echo "							<td id='fireinfocell' nowrap colspan='3' align='left' class='datalabel_disabled_dashed'>\n";
 			echo "							    <table width='100%' cellspacing='1'>\n"; // style='background-color:#754743;'
 			echo "									<tr>\n";
 			echo "										<td nowrap align='left' class='datalabel' width='1%'>\n";
