@@ -499,11 +499,11 @@ input[type='checkbox'].bigcheck {
 	z-index: -10000;
 }
 input[type='checkbox'].bigcheck + span.bigcheck-target:after {
-	content: "\f10c";
+	content: "\f111";
 
 }
 input[type='checkbox'].bigcheck:checked + span.bigcheck-target:after {
-	content: "\f111";
+	content: "\f192";
 }
 .datatable {
 	width: 100%;
