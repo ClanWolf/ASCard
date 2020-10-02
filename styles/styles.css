@@ -534,6 +534,22 @@ input[type='checkbox'].bigcheck:checked + span.bigcheck-target:after {
 	font-size: 100%;
 	padding-right: 5px;
 }
+.datalabel_disabled_solid {
+	font-family: 'Pathway Gothic One', sans-serif;
+	vertical-align: middle;
+	color: #999;
+	font-size: 100%;
+	padding-right: 5px;
+	background-color:#aaaa00;
+}
+.datalabel_disabled_dashed {
+	font-family: 'Pathway Gothic One', sans-serif;
+	vertical-align: middle;
+	color: #999;
+	font-size: 100%;
+	padding-right: 5px;
+	background-image:repeating-linear-gradient(45deg, #444444 0%, #444444 2%, #aaaa00 2%, #aaaa00 4%, #444444 4%);
+}
 .datalabel_thin {
 	font-family: 'Pathway Gothic One', sans-serif;
 	vertical-align: middle;
