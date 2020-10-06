@@ -464,6 +464,15 @@ function setCircles(h, a, s, e, fc, mp, w, uov) {
 		if ((movement > 0 && movement < 5) && weaponsfired == 1) {
 			document.getElementById('toprightimage').src="./images/top-right_phase03.png";
 		}
+		if ((movement > 0 && movement < 5) && weaponsfired == 2) {
+			document.getElementById('toprightimage').src="./images/top-right_phase03.png";
+		}
+		if ((movement > 0 && movement < 5) && weaponsfired == 3) {
+			document.getElementById('toprightimage').src="./images/top-right_phase03.png";
+		}
+		if ((movement > 0 && movement < 5) && weaponsfired == 4) {
+			document.getElementById('toprightimage').src="./images/top-right_phase03.png";
+		}
 	}
 
 	if (h == 0) {
