@@ -283,6 +283,17 @@ a:hover {
 	//background-color: #ffffff;
 	background-image: url('../images/bgdicebar.png');
 }
+#movebar {
+	z-index: 10;
+	position: absolute;
+	width: 300px;
+	right: 0px;
+	bottom: 0px;
+	top: 0px;
+	color: #000000;
+	//background-color: #ffffff;
+	background-image: url('../images/bgdicebar.png');
+}
 #dicepanel {
 	z-index: 10;
 	position: absolute;
@@ -303,6 +314,19 @@ a:hover {
 	padding-right: 10px;
 	color: #000000;
 	text-align: right;
+	//background-color: #ffffff;
+	//background-image: url('../images/bgdicebar.png');
+}
+#movepanel {
+	z-index: 10;
+	position: absolute;
+	width: 210px;
+	right: 0px;
+	bottom: 50px;
+	padding-right: 10px;
+	padding-left: 10px;
+	color: #000000;
+	text-align: center;
 	//background-color: #ffffff;
 	//background-image: url('../images/bgdicebar.png');
 }
@@ -394,6 +418,30 @@ a:hover {
 	padding: 5px;
 	background-color: #925a0a;
 	color: #000000;
+	text-align: center;
+}
+.phase_button_normal {
+	font-size: 100%;
+	padding: 20px;
+	border: 10px;
+	background-color: #555555;
+	color: #eeeeee;
+	text-align: center;
+}
+.phase_button_normal:hover {
+	font-size: 100%;
+	padding: 20px;
+	border: 10px;
+	background-color: #888888;
+	color: #eeeeee;
+	text-align: center;
+}
+.phase_button_selected {
+	font-size: 100%;
+	padding: 20px;
+	border: 10px;
+	background-color: #da8a17;
+	color: #eeeeee;
 	text-align: center;
 }
 .mechselect_button_normal_left {

@@ -184,14 +184,15 @@ session_start();
 				}
 			})
 
-			//var elem1 = document.getElementById("fire_info_cell_1");
-			var elem2 = document.getElementById("fire_info_cell_2");
-			if (mv == "0") {
-				//elem1.className = 'datalabel_disabled_solid';
-				elem2.className = 'datalabel_disabled_dashed';
+			var elem = document.getElementById("fire_info_cell_2");
+			if (elem == null || elem === undefined) {
+				// nothing
 			} else {
-				//elem1.className = 'datalabel';
-				elem2.className = 'datalabel';
+				if (mv == "0") {
+					elem.className = 'datalabel_disabled_dashed';
+				} else {
+					elem.className = 'datalabel';
+				}
 			}
 
 			var clearmovement = false;
@@ -248,14 +249,15 @@ session_start();
 				}
 			})
 
-			//var elem1 = document.getElementById("fire_info_cell_1");
-			var elem2 = document.getElementById("fire_info_cell_2");
-			if (movement == "0") {
-				//elem1.className = 'datalabel_disabled_solid';
-				elem2.className = 'datalabel_disabled_dashed';
+			var elem = document.getElementById("fire_info_cell_2");
+			if (elem == null || elem === undefined) {
+				// nothing
 			} else {
-				//elem1.className = 'datalabel';
-				elem2.className = 'datalabel';
+				if (movement == "0") {
+					elem.className = 'datalabel_disabled_dashed';
+				} else {
+					elem.className = 'datalabel';
+				}
 			}
 
 			movementcache = movement;
@@ -292,10 +294,12 @@ session_start();
 				}
 			})
 
-			//var elem1 = document.getElementById("fire_info_cell_1");
-			var elem2 = document.getElementById("fire_info_cell_2");
-			//elem1.className = 'datalabel_disabled_solid';
-			elem2.className = 'datalabel_disabled_dashed';
+			var elem = document.getElementById("fire_info_cell_2");
+			if (elem == null || elem === undefined) {
+				// nothing
+			} else {
+				elem.className = 'datalabel_disabled_dashed';
+			}
 
 			movementcache = 0;
 		}
@@ -305,8 +309,14 @@ session_start();
 		}
 
 		function showInfoBar() {
-			$("#infobar").show();
-            $("#dicebar").hide();
+			if($('#infobar').is(':visible')) {
+				// the movebar is already open. do nothing
+			} else {
+				$("#movebar").hide();
+				$("#dicebar").hide();
+				$("#firebar").hide();
+				$("#infobar").show();
+			}
 		}
 
 		function hideDiceBar() {
@@ -317,8 +327,10 @@ session_start();
 			if($('#dicebar').is(':visible')) {
 				// the dicebar is already open. do nothing
 			} else {
-				$("#dicebar").show();
 				$("#infobar").hide();
+				$("#movebar").hide();
+				$("#firebar").hide();
+				$("#dicebar").show();
 
 				if (rolling === 0) {
 				    playDiceSound();
@@ -327,6 +339,36 @@ session_start();
 						setTimeout("rolldice(i)", i * 80);
 					}
 				}
+			}
+		}
+
+		function hideMoveBar() {
+			$("#movebar").hide();
+		}
+
+		function showMoveBar() {
+			if($('#movebar').is(':visible')) {
+				// the movebar is already open. do nothing
+			} else {
+				$("#dicebar").hide();
+				$("#infobar").hide();
+				$("#firebar").hide();
+				$("#movebar").show();
+			}
+		}
+
+		function hideFireBar() {
+			$("#firebar").hide();
+		}
+
+		function showFireBar() {
+			if($('#firebar').is(':visible')) {
+				// the movebar is already open. do nothing
+			} else {
+				$("#dicebar").hide();
+				$("#infobar").hide();
+				$("#movebar").hide();
+				$("#firebar").show();
 			}
 		}
 	</script>
@@ -405,6 +447,10 @@ session_start();
 	$currentMechStatusImage = "./images/check_red.png";
 	$currentmeli = "";
 	$currentPhaseButton = "./images/top-right_phase01.png";
+
+	$currentMechMovement = 0;
+	$currentMechFired = 0;
+
 	for ($i4 = 1; $i4 <= $size; $i4++) {
 
 		$mechstatusimage = "./images/check_red.png";
@@ -458,6 +504,10 @@ session_start();
 			$currentMechStatusImage = $mechstatusimage;
 			$currentmeli = $meli;
 			$currentPhaseButton = $phaseButton;
+
+			$currentMechMovement = $mvmt;
+			$currentMechFired = $wpnsfired;
+
 			// <td width='".$width."%' nowrap onclick=\"location.href='".$meli."'\">
 			echo "<td width='".$width."%' nowrap><table width='100%' cellspacing='0' cellpadding='0' class='mechselect_button_active_play_left'><tr><td nowrap width='30px' align='center' valign='center'><div style='display:inline-block;height:100%;vertical-align:middle;'><span style='color:#ccffff;font-size:15px;'>&nbsp;&nbsp;".$mn."&nbsp;&nbsp;</span><br><img id='mechstatusimagemenu' style='vertical-align:middle;' src='".$array_MECH_IMG_STATUS[$i4]."' height='25px' width='23px'></div></td><td nowrap width='100%'><div><img src='./images/ranks/".$factionid."/".$array_PILOT_RANK[$i4].".png' width='18px' height='18px'>&nbsp;<a style='font-size:24px' href='".$meli."'>".$array_PILOT[$i4]."</a>&nbsp;&nbsp;<img src='".$mechstatusimage."' height='21px'>".$heatimage[$i4]."<br><span style='font-size:14px;'>".$memodel."</span></div></td></tr></table></td>\r\n";
 		} else {
@@ -729,7 +779,8 @@ session_start();
 			</td>
 			<td valign='bottom'>
 				<a onclick='showInfoBar();' href='#'><img src='./images/selector_02-info.png' width='50px'></a><br>
-				<a onclick='showDiceBar();' href='#'><img src='./images/selector_01-dice.png' width='50px'></a>
+				<a onclick='showDiceBar();' href='#'><img src='./images/selector_01-dice.png' width='50px'></a><br>
+				<a onclick='showMoveBar();' href='#'><img id='roundphaseshortcutimage' src='./images/selector_04-movement.png' width='50px'></a>
 			</td>
 		</tr>
 	</table>
@@ -765,12 +816,109 @@ session_start();
 								</td>
 							</tr>
 						</table>
+					</div>
+				</td>
+			</tr>
+		</table>
+	</div>
+</div>
+
+<div name='movebar' id='movebar'>
+	<div name='barclosebutton' id='barclosebutton'>
+		<a href='#' onclick='hideMoveBar();'><img src='.\images\selector_03-close.png' width='50px'></a>
+	</div>
+	<div name='movepanel' id='movepanel'>
+		<table width="100%">
+			<tr>
+				<td id='moveinfo' align="right" valign="bottom">
+					<div id="moveinfo" valign="bottom" align="left">
+						<table cellspacing="5" cellpadding="0" width="100%">
+							<tr>
+								<td id="phasemovebutton1" class='phase_button_normal'>
+									<a href="#" onclick="">Immobile</a>
+								</td>
+							</tr>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+							<tr>
+								<td id="phasemovebutton2" class='phase_button_normal'>Stationary</td>
+							</tr>
+							<tr>
+								<td id="phasemovebutton3" class='phase_button_normal'>Walked</td>
+							</tr>
+							<tr>
+								<td id="phasemovebutton4" class='phase_button_normal'>Jumped</td>
+							</tr>
+						</table>
                     </div>
                 </td>
             </tr>
         </table>
     </div>
 </div>
+
+<?php
+	if ($currentMechMovement > 0) {
+		echo "<script type='text/javascript'>\n";
+		echo "  document.getElementById('phasemovebutton".$currentMechMovement."').className='phase_button_selected';\n";
+		echo "</script>\n";
+	}
+?>
+
+<div name='firebar' id='firebar'>
+	<div name='barclosebutton' id='barclosebutton'>
+		<a href='#' onclick='hideFireBar();'><img src='.\images\selector_03-close.png' width='50px'></a>
+	</div>
+	<div name='firepanel' id='firepanel'>
+		<table width="100%">
+			<tr>
+				<td id='fireinfo' align="right" valign="bottom">
+					<div id="fireinfo" valign="bottom" align="left">
+						<table cellspacing="5" cellpadding="0" width="100%">
+							<tr>
+								<td class='phasefirebutton1'>No Fire</td>
+							</tr>
+							<tr>
+								<td class='phasefirebutton2'>Fired Short Range</td>
+							</tr>
+							<tr>
+								<td class='phasefirebutton3'>Fired Medium Range</td>
+							</tr>
+							<tr>
+								<td class='phasefirebutton4'>Fired Long Range</td>
+							</tr>
+						</table>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+<?php
+	if ($currentMechFired > 0) {
+//		echo "<script type='text/javascript'>\n";
+//		echo "  document.getElementById('phasefirebutton".$currentMechFired."').className='phase_button_selected';\n";
+//		echo "</script>\n";
+	}
+?>
 
 <div name='dicebar' id='dicebar'>
 	<div name='barclosebutton' id='barclosebutton'>
@@ -800,6 +948,8 @@ session_start();
 <script type="text/javascript">
 	$("#infobar").hide();
 	$("#dicebar").hide();
+	$("#movebar").hide();
+	$("#firebar").hide();
 	setCircles(<?=$array_HT[$chosenMechIndex]?>,<?=$array_A[$chosenMechIndex]?>,<?=$array_S[$chosenMechIndex]?>,<?=$array_ENGN[$chosenMechIndex]?>,<?=$array_FRCTRL[$chosenMechIndex]?>,<?=$array_MP[$chosenMechIndex]?>,<?=$array_WPNS[$chosenMechIndex]?>,<?=$array_USEDOVERHEAT[$chosenMechIndex]?>);
 </script>
 
@@ -830,8 +980,8 @@ session_start();
 			echo "	<br>\n";
 			echo "	<table width='100%'>\n";
 			echo "		<tr>\n";
-			echo "			<td width='15%'></td>\n"; // onclick=\"location.href='".$locmeli."'\"
-			echo "			<td width='70%'>\n";
+			echo "			<td width='20%'></td>\n"; // onclick=\"location.href='".$locmeli."'\"
+			echo "			<td width='60%'>\n";
 			echo "				<div>\n";
 			echo "					<table width='100%' class='options' style='margin-left: auto;margin-right: auto;' cellspacing=4 cellpadding=4 border=0px>\n";
 			echo "						<tr>\n";
@@ -965,36 +1115,36 @@ session_start();
 			echo "										</td>\n";
 			echo "									</tr>\n";
 			echo "									<tr>\n";
-			echo "										<td nowrap colspan='1' class='datavalue_small' width='1%' style='text-align:center;'>Dissipate</td>\n";
-			echo "										<td nowrap colspan='1' class='datavalue_small' width='16%' style='text-align:right;'>+TMM</td>\n";
-			echo "										<td nowrap colspan='1' class='datavalue_small' width='1%' style='text-align:center;'>|</td>\n";
-			echo "										<td nowrap colspan='1' class='datavalue_small' width='16%' style='text-align:left;'>+Behind</td>\n";
-			echo "										<td nowrap colspan='1' class='datavalue_small' width='16%' style='text-align:right;'>+TMM</td>\n";
-			echo "										<td nowrap colspan='1' class='datavalue_small' width='1%' style='text-align:center;'>|</td>\n";
-			echo "										<td nowrap colspan='1' class='datavalue_small' width='16%' style='text-align:left;'>+Behind</td>\n";
-			echo "										<td nowrap colspan='1' class='datavalue_small' width='16%' style='text-align:right;'>+TMM</td>\n";
-			echo "										<td nowrap colspan='1' class='datavalue_small' width='1%' style='text-align:center;'>|</td>\n";
-			echo "										<td nowrap colspan='1' class='datavalue_small' width='16%' style='text-align:left;'>+Behind</td>\n";
+			echo "										<td nowrap colspan='1' class='datavalue_small' width='1%' style='vertical-align:top;text-align:center;'>Dissipate</td>\n";
+			echo "										<td nowrap colspan='1' class='datavalue_small' width='16%' style='vertical-align:top;text-align:right;'>+TMM<br>+Cover</td>\n";
+			echo "										<td nowrap colspan='1' class='datavalue_small' width='1%' style='vertical-align:top;text-align:center;'>|<br>|</td>\n";
+			echo "										<td nowrap colspan='1' class='datavalue_small' width='16%' style='vertical-align:top;text-align:left;'>+Behind</td>\n";
+			echo "										<td nowrap colspan='1' class='datavalue_small' width='16%' style='vertical-align:top;text-align:right;'>+TMM<br>+Cover</td>\n";
+			echo "										<td nowrap colspan='1' class='datavalue_small' width='1%' style='vertical-align:top;text-align:center;'>|<br>|</td>\n";
+			echo "										<td nowrap colspan='1' class='datavalue_small' width='16%' style='vertical-align:top;text-align:left;'>+Behind</td>\n";
+			echo "										<td nowrap colspan='1' class='datavalue_small' width='16%' style='vertical-align:top;text-align:right;'>+TMM<br>+Cover</td>\n";
+			echo "										<td nowrap colspan='1' class='datavalue_small' width='1%' style='vertical-align:top;text-align:center;'>|<br>|</td>\n";
+			echo "										<td nowrap colspan='1' class='datavalue_small' width='16%' style='vertical-align:top;text-align:left;'>+Behind</td>\n";
 			echo "									</tr>\n";
-			echo "									<tr>\n";
-			echo "										<td nowrap colspan='1' class='datavalue_small' width='1%' style='text-align:center;'>Heat</td>\n";
-			echo "										<td nowrap colspan='1' class='datavalue_small' width='16%' style='text-align:right;'>+Cover</td>\n";
-			echo "										<td nowrap colspan='1' class='datavalue_small' width='1%' style='text-align:center;'>|</td>\n";
-			echo "										<td nowrap colspan='1' class='datavalue_small' width='16%' style='text-align:left;'></td>\n";
-			echo "										<td nowrap colspan='1' class='datavalue_small' width='16%' style='text-align:right;'>+Cover</td>\n";
-			echo "										<td nowrap colspan='1' class='datavalue_small' width='1%' style='text-align:center;'>|</td>\n";
-			echo "										<td nowrap colspan='1' class='datavalue_small' width='16%' style='text-align:left;'></td>\n";
-			echo "										<td nowrap colspan='1' class='datavalue_small' width='16%' style='text-align:right;'>+Cover</td>\n";
-			echo "										<td nowrap colspan='1' class='datavalue_small' width='1%' style='text-align:center;'>|</td>\n";
-			echo "										<td nowrap colspan='1' class='datavalue_small' width='16%' style='text-align:left;'></td>\n";
-			echo "									</tr>\n";
+//			echo "									<tr>\n";
+//			echo "										<td nowrap colspan='1' class='datavalue_small' width='1%' style='text-align:center;'>Heat</td>\n";
+//			echo "										<td nowrap colspan='1' class='datavalue_small' width='16%' style='text-align:right;'>+Cover</td>\n";
+//			echo "										<td nowrap colspan='1' class='datavalue_small' width='1%' style='text-align:center;'>|</td>\n";
+//			echo "										<td nowrap colspan='1' class='datavalue_small' width='16%' style='text-align:left;'></td>\n";
+//			echo "										<td nowrap colspan='1' class='datavalue_small' width='16%' style='text-align:right;'>+Cover</td>\n";
+//			echo "										<td nowrap colspan='1' class='datavalue_small' width='1%' style='text-align:center;'>|</td>\n";
+//			echo "										<td nowrap colspan='1' class='datavalue_small' width='16%' style='text-align:left;'></td>\n";
+//			echo "										<td nowrap colspan='1' class='datavalue_small' width='16%' style='text-align:right;'>+Cover</td>\n";
+//			echo "										<td nowrap colspan='1' class='datavalue_small' width='1%' style='text-align:center;'>|</td>\n";
+//			echo "										<td nowrap colspan='1' class='datavalue_small' width='16%' style='text-align:left;'></td>\n";
+//			echo "									</tr>\n";
 			echo "								</table>\n";
 			echo "							</td>\n";
 			echo "						</tr>\n";
 			echo "					</table>\n";
 			echo "				<div>\n";
 			echo "			</td>\n";
-			echo "			<td width='15%' valign='top'>\n";
+			echo "			<td width='20%' valign='top'>\n";
 			echo "				<a href='#' onclick=\"location.href='".$locmeli."'\">&nbsp;&nbsp;&nbsp;&nbsp;<img src='./images/confirm.png' width='80px'></a><br>\n";
 			echo "			</td>\n";
 			echo "		</tr>\n";
