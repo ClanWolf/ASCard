@@ -12,6 +12,8 @@ var updatedshortvalue = 0;
 var updatedmediumvalue = 2;
 var updatedlongvalue = 4;
 
+var context = null;
+
 // http://goldfirestudios.com/blog/104/howler.js-Modern-Web-Audio-Javascript-Library
 var sound_dice = null;
 var sound_key = null;
@@ -199,22 +201,26 @@ function setCircles(h, a, s, e, fc, mp, w, uov) {
 		document.getElementById("ht_field").style.color ="#a49708";
 		updatedshortvalue = updatedshortvalue + 1;
 		updatedmediumvalue = updatedmediumvalue + 1;
-		updatedlongvalue = updatedlongvalue + 1;
+		//TODO: Do this only if special ability OVL (Overheat long) is available
+		//updatedlongvalue = updatedlongvalue + 1;
 	} else if (h == 2) {
 		document.getElementById("ht_field").style.color ="#da8e25";
 		updatedshortvalue = updatedshortvalue + 2;
 		updatedmediumvalue = updatedmediumvalue + 2;
-		updatedlongvalue = updatedlongvalue + 2;
+		//TODO: Do this only if special ability OVL (Overheat long) is available
+		//updatedlongvalue = updatedlongvalue + 2;
 	} else if (h == 3) {
 		document.getElementById("ht_field").style.color ="#ba4112";
 		updatedshortvalue = updatedshortvalue + 3;
 		updatedmediumvalue = updatedmediumvalue + 3;
-		updatedlongvalue = updatedlongvalue + 3;
+		//TODO: Do this only if special ability OVL (Overheat long) is available
+		//updatedlongvalue = updatedlongvalue + 3;
 	} else if (h == 4) {
 		document.getElementById("ht_field").style.color ="#ff0000";
 		updatedshortvalue = updatedshortvalue + 4;
 		updatedmediumvalue = updatedmediumvalue + 4;
-		updatedlongvalue = updatedlongvalue + 4;
+		//TODO: Do this only if special ability OVL (Overheat long) is available
+		//updatedlongvalue = updatedlongvalue + 4;
 	}
 	if (fc == 0) {
 		//
@@ -644,17 +650,39 @@ function changeWallpaper() {
 }
 
 function playDiceSound() {
-	if (sound_dice == null) {
-		sound_dice = new Howl({ src: ['./audio/dice.mp3', './audio/dice.ogg'] });
+	if (context != null ) {
+		if (sound_dice == null) {
+			context.resume().then(() => {
+				console.log('Playback resumed successfully');
+			});
+			sound_dice = new Howl({ src: ['./audio/dice.mp3', './audio/dice.ogg'] });
+		}
+		sound_dice.play();
+	} else {
+		console.log('Audiocontext not ready');
+		context = new AudioContext();
+        console.log('Loading audio context');
 	}
-	sound_dice.play();
 }
 
 function playTapSound() {
-	if (sound_key == null) {
-        sound_key = new Howl({ src: ['./audio/key.mp3', './audio/key.ogg'] });
+	if (context != null ) {
+		if (sound_key == null) {
+	        context.resume().then(() => {
+				console.log('Playback resumed successfully');
+			});
+			sound_key = new Howl({ src: ['./audio/key.mp3', './audio/key.ogg'] });
+		}
+		sound_key.play();
+	} else {
+		console.log('Audiocontext not ready');
+		context = new AudioContext();
+		console.log('Loading audio context');
 	}
-	sound_key.play();
+}
+
+window.onload = function() {
+
 }
 
 // function updateSite(event) {

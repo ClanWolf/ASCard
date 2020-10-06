@@ -91,6 +91,7 @@ session_start();
 //		// -------------------------------------------------------------------------------------------------------------
 
 		var movementcache = 0;
+		var firedcache = 0;
 
 		var sminrollvalue = 3;
 		var sdamagevalue = 3;
@@ -125,8 +126,6 @@ session_start();
 		function changeMovementFlag(index, fln) {
 			playTapSound();
 
-			//console.log("change movement flag: " + index + " / " + fln);
-
 			var list = document.getElementsByClassName("bigcheck");
 			var fired = 0;
 			var mv = 0;
@@ -134,7 +133,7 @@ session_start();
 			[].forEach.call(list, function (el1) {
 				na = el1.name;
 				if (typeof na != 'undefined') {
-					if (na.substring(0, 2) == "MV" && fln != 5) { el1.checked = false }
+					if (na.substring(0, 2) == "MV" && (fln!=5 && fln!=6 && fln!=7 && fln!=8)) { el1.checked = false }
 					if (na.substring(0, 4) == "MV" + fln + "_") {
 						el1.checked = true;
 						mv = fln;
@@ -145,12 +144,41 @@ session_start();
 					if ((na.substring(0, 4) == "MV3_") && el1.checked == true) { mv = 3; }
 					if ((na.substring(0, 4) == "MV4_") && el1.checked == true) { mv = 4; }
 
-					if (na == "WF_WEAPONSFIRED_0" && el1.checked == true) {
+					if (na.substring(0,2) == "WF" && (fln!=1 && fln!=2 && fln!=3 && fln!=4)) { el1.checked = false }
+					if (na.substring(0,4) == "WF" + fln + "_") {
+						el1.checked = true;
+					}
+
+					if (na == "WF5_WEAPONSFIRED" && el1.checked == true) {
 						if (mv == 0) {
 							//alert("First movement has to be specified!");
 							el1.checked = false;
 						} else {
-							fired = 1;
+							fired = 1; // not fired on purpose to cool down
+						}
+					}
+					if (na == "WF6_WEAPONSFIRED" && el1.checked == true) {
+						if (mv == 0) {
+							//alert("First movement has to be specified!");
+							el1.checked = false;
+						} else {
+							fired = 2; // fired on short range
+						}
+					}
+					if (na == "WF7_WEAPONSFIRED" && el1.checked == true) {
+						if (mv == 0) {
+							//alert("First movement has to be specified!");
+							el1.checked = false;
+						} else {
+							fired = 3; // fired on medium range
+						}
+					}
+					if (na == "WF8_WEAPONSFIRED" && el1.checked == true) {
+						if (mv == 0) {
+							//alert("First movement has to be specified!");
+							el1.checked = false;
+						} else {
+							fired = 4; // fired on long range
 						}
 					}
 				}
@@ -166,15 +194,31 @@ session_start();
 				elem2.className = 'datalabel';
 			}
 
-			if (movementcache == mv && fln != 5) {
-				clearFlags(index); // clearFlags will also save!
-				setFireValues();
+			var clearmovement = false;
+			if (movementcache == mv && (fln!=5 && fln!=6 && fln!=7 && fln!=8)) {
+				clearMovementFlags(index);
+				clearmovement = true;
+				fired=0;
 			} else {
 				movementcache = mv;
-				setFireValues();
-				var url="./save_movement.php?index="+index+"&mvmt="+mv+"&wpns="+fired;
-				window.frames['saveframe'].location.replace(url);
 			}
+
+			if (firedcache == fired && (fln!=1 && fln!=2 && fln!=3 && fln!=4)) {
+				clearFiredFlags(index, mv);
+				fired = 0;
+			} else {
+				firedcache = fired;
+			}
+
+			if (clearmovement) {
+				mv = 0;
+				fired = 0;
+			}
+
+			setFireValues();
+			var url="./save_movement.php?index="+index+"&mvmt="+mv+"&wpns="+fired;
+			//console.log("Final 3: " + url);
+			window.frames['saveframe'].location.replace(url);
 		}
 
 		function setMovementFlags(index, movement, weaponsfired) {
@@ -191,7 +235,16 @@ session_start();
 					if ((na.substring(0, 4) == "MV3_") && movement == 3) { el1.checked = true; }
 					if ((na.substring(0, 4) == "MV4_") && movement == 4) { el1.checked = true; }
 
-					if (na == "WF_WEAPONSFIRED_0" && weaponsfired == 1) { el1.checked = true; }
+					// weaponsfired == 0 : not fired yet
+					// weaponsfired == 1 : not fired on purpose
+					// weaponsfired == 2 : fired on short
+					// weaponsfired == 3 : fired on medium
+					// weaponsfired == 4 : fired on long
+
+					if (na == "WF5_WEAPONSFIRED" && weaponsfired == 1) { el1.checked = true; }
+					if (na == "WF6_WEAPONSFIRED" && weaponsfired == 2) { el1.checked = true; }
+					if (na == "WF7_WEAPONSFIRED" && weaponsfired == 3) { el1.checked = true; }
+					if (na == "WF8_WEAPONSFIRED" && weaponsfired == 4) { el1.checked = true; }
 				}
 			})
 
@@ -206,10 +259,27 @@ session_start();
 			}
 
 			movementcache = movement;
+			firedcache = weaponsfired;
 			setFireValues();
 		}
 
-		function clearFlags(index) {
+		function clearFiredFlags(index, mv) {
+			playTapSound();
+
+			var list = document.getElementsByClassName("bigcheck");
+			[].forEach.call(list, function (el1) {
+				na = el1.name;
+				if (typeof na != 'undefined') {
+					if (na.substring(0, 2) == "WF") {
+						el1.checked = false;
+					}
+				}
+			})
+
+			firedcache = 0;
+		}
+
+		function clearMovementFlags(index) {
 			playTapSound();
 
 			var list = document.getElementsByClassName("bigcheck");
@@ -228,10 +298,6 @@ session_start();
 			elem2.className = 'datalabel_disabled_dashed';
 
 			movementcache = 0;
-			setFireValues();
-
-			var url="./save_movement.php?index="+index+"&mvmt=0&wpns=0";
-			window.frames['saveframe'].location.replace(url);
 		}
 
 		function hideInfoBar() {
@@ -262,12 +328,6 @@ session_start();
 					}
 				}
 			}
-		}
-
-		function showEditMovementValues() {
-			//console.log("Show editor");
-			//$("#editMovementValues").css("visibility", "visible");
-			$("#editMovementValues").show();
 		}
 	</script>
 
@@ -323,7 +383,7 @@ session_start();
 	<table style="width:100%;height:60px;border:none;border-collapse:collapse;background:rgba(50,50,50,1.0);" cellspacing="0" cellpadding="0">
 		<tr>
 			<td nowrap onclick="location.href='./index.html'" width="50px" style="background:rgba(50,50,50,1.0); text-align:center;vertical-align:middle;">
-				<div><a style="color:#eee;" href="./index.html"><i class="fa fa-bars" aria-hidden="true"></i></a></div>
+				<div><a style="color:#eee;" href="./index.html"><i class="fas fa-bars" aria-hidden="true"></i></a></div>
 			</td>
 			<td style="background:rgba(1,1,1,1.0);">
 				<table width='100%' cellspacing='0' cellpadding='0' class='mechselect_button_active_left' style="background:rgba(1,1,1,1.0);">
@@ -364,11 +424,11 @@ session_start();
 			$mechstatusimage = "./images/check_yellow.png";
 			$phaseButton = "./images/top-right_phase02.png";
 		}
-		if ($mvmt > 0 && $wpnsfired == 1) {
+		if ($mvmt > 0 && ($wpnsfired == 1 || $wpnsfired == 2 || $wpnsfired == 3 || $wpnsfired == 4)) {
 			$mechstatusimage = "./images/check_green.png";
 			$phaseButton = "./images/top-right_phase03.png";
 		}
-		if ($mvmt == 0 && $wpnsfired == 1) {
+		if ($mvmt == 0 && ($wpnsfired == 1 || $wpnsfired == 2 || $wpnsfired == 3 || $wpnsfired == 4)) {
 			// Error! Unit has fired but no movement was specified! Ask again!
 		}
 
@@ -402,7 +462,7 @@ session_start();
 			echo "<td width='".$width."%' nowrap><table width='100%' cellspacing='0' cellpadding='0' class='mechselect_button_active_play_left'><tr><td nowrap width='30px' align='center' valign='center'><div style='display:inline-block;height:100%;vertical-align:middle;'><span style='color:#ccffff;font-size:15px;'>&nbsp;&nbsp;".$mn."&nbsp;&nbsp;</span><br><img id='mechstatusimagemenu' style='vertical-align:middle;' src='".$array_MECH_IMG_STATUS[$i4]."' height='25px' width='23px'></div></td><td nowrap width='100%'><div><img src='./images/ranks/".$factionid."/".$array_PILOT_RANK[$i4].".png' width='18px' height='18px'>&nbsp;<a style='font-size:24px' href='".$meli."'>".$array_PILOT[$i4]."</a>&nbsp;&nbsp;<img src='".$mechstatusimage."' height='21px'>".$heatimage[$i4]."<br><span style='font-size:14px;'>".$memodel."</span></div></td></tr></table></td>\r\n";
 		} else {
 			// <td width='".$width."%' nowrap onclick=\"location.href='".$meli."'\">
-			echo "<td width='".$width."%' nowrap><table width='100%' cellspacing='0' cellpadding='0' class='mechselect_button_normal_play_left'><tr><td nowrap width='30px' align='center' valign='center'><div style='display:inline-block;height:100%;vertical-align:middle;'><span style='color:#ccffff;font-size:15px;'>&nbsp;&nbsp;".$mn."&nbsp;&nbsp;</span><br><img style='vertical-align:middle;' src='".$array_MECH_IMG_STATUS[$i4]."' height='25px' width='23px'></div></td><td nowrap width='100%'><div><img src='./images/ranks/".$factionid."/".$array_PILOT_RANK[$i4].".png' width='18px' height='18px'>&nbsp;<a style='font-size:24px' href='".$meli."'>".$array_PILOT[$i4]."</a>&nbsp;&nbsp;<img src='".$mechstatusimage."' height='21px'>".$heatimage[$i4]."<br><span style='font-size:14px;'>".$memodel."</span></div></td></tr></table></td>\r\n";
+			echo "<td width='".$width."%' nowrap onclick=\"location.href='".$meli."'\"><table width='100%' cellspacing='0' cellpadding='0' class='mechselect_button_normal_play_left'><tr><td nowrap width='30px' align='center' valign='center'><div style='display:inline-block;height:100%;vertical-align:middle;'><span style='color:#ccffff;font-size:15px;'>&nbsp;&nbsp;".$mn."&nbsp;&nbsp;</span><br><img style='vertical-align:middle;' src='".$array_MECH_IMG_STATUS[$i4]."' height='25px' width='23px'></div></td><td nowrap width='100%'><div><img src='./images/ranks/".$factionid."/".$array_PILOT_RANK[$i4].".png' width='18px' height='18px'>&nbsp;<a style='font-size:24px' href='".$meli."'>".$array_PILOT[$i4]."</a>&nbsp;&nbsp;<img src='".$mechstatusimage."' height='21px'>".$heatimage[$i4]."<br><span style='font-size:14px;'>".$memodel."</span></div></td></tr></table></td>\r\n";
 		}
 	}
 ?>
@@ -426,15 +486,9 @@ session_start();
 </div>
 
 <div id="topright">
-	<!--
 	<a onclick=location.href=<?php echo "'$currentmeli'"; ?> href=<?php echo "'$currentmeli'"; ?>>
 		<img id='toprightimage' src=<?php echo "'$currentPhaseButton'"; ?> style='height:170px;'>
 	</a>
-	-->
-	<a onclick='showEditMovementValues();' href='javascript:showEditMovementValues();'>
-		<img id='toprightimage' src=<?php echo "'$currentPhaseButton'"; ?> style='height:170px;'>
-	</a>
-
 </div>
 
 <?php
@@ -754,7 +808,7 @@ session_start();
 <div id="bottomleft"><img src="./images/bottom-left.png" width="200px"></div>
 
 <div align="center" id="settings">
-	<!-- <a href="https://www.clanwolf.net/static/files/Rulebooks/CAT35860%20-%20AlphaStrike%20CommandersEdition.pdf" target="_blank"><i class="fa fa-fw fa-bookmark"></i></a>&nbsp;&nbsp; -->
+	<!-- <a href="https://www.clanwolf.net/static/files/Rulebooks/CAT35860%20-%20AlphaStrike%20CommandersEdition.pdf" target="_blank"><i class="fas fa-bookmark"></i></a>&nbsp;&nbsp; -->
 	<!-- <a href="#" onclick="javascript:window.location.reload(true)"><i class="fas fa-redo"></i></a>&nbsp;&nbsp; -->
 	<a href="javascript:changeWallpaper()"><i class="fas fa-image"></i></a>&nbsp;&nbsp;
 	<a href="javascript:textSize(0)"><i class="fas fa-minus-square"></i></a>&nbsp;&nbsp;
@@ -769,17 +823,17 @@ session_start();
 <div id="bottomright"><img src="./images/bt-logo2.png" width="250px"></div>
 
 <?php
-	//if ($movd==1) {
+	if ($movd==1) {
 		if ($playable) {
 			echo "<div id='editMovementValues' style='display:none;'>\n";
 			//echo "	<br>\n";
 			echo "	<br>\n";
 			echo "	<table width='100%'>\n";
 			echo "		<tr>\n";
-			echo "			<td width='40%'></td>\n"; // onclick=\"location.href='".$locmeli."'\"
-			echo "			<td width='20%'>\n";
+			echo "			<td width='15%'></td>\n"; // onclick=\"location.href='".$locmeli."'\"
+			echo "			<td width='70%'>\n";
 			echo "				<div>\n";
-			echo "					<table class='options' style='margin-left: auto;margin-right: auto;' cellspacing=4 cellpadding=4 border=0px>\n";
+			echo "					<table width='100%' class='options' style='margin-left: auto;margin-right: auto;' cellspacing=4 cellpadding=4 border=0px>\n";
 			echo "						<tr>\n";
 			echo "							<td nowrap align='left' class='datalabel' style='vertical-align:top;'>\n";
 			echo "								<label class='bigcheck'><input onchange='changeMovementFlag($array_MECH_DBID[$chosenMechIndex], 1);' type='checkbox' class='bigcheck' name='MV1_IMMOBILE' value='yes'/><span class='bigcheck-target'></span></label>\n";
@@ -787,10 +841,10 @@ session_start();
 			echo "							<td nowrap align='left' class='datalabel'>\n";
 			echo "								&nbsp;&nbsp;&nbsp;Immobile\n";
 			echo "							</td>\n";
-			echo "							<td nowrap align='left' class='datalabel'>\n";
+			echo "							<td nowrap align='left' class='datavalue_small'>\n";
 			echo "								&nbsp;&nbsp;&nbsp;\n";
 			echo "							</td>\n";
-			echo "							<td nowrap align='left' class='datalabel'>\n";
+			echo "							<td nowrap align='left' class='datavalue_small'>\n";
 			echo "								&nbsp;&nbsp;&nbsp;TMM -4\n";
 			echo "							</td>\n";
 			echo "						</tr>\n";
@@ -801,10 +855,10 @@ session_start();
 			echo "							<td nowrap align='left' class='datalabel'>\n";
 			echo "								&nbsp;&nbsp;&nbsp;Stationary\n";
 			echo "							</td>\n";
-			echo "							<td nowrap align='left' class='datalabel'>\n";
+			echo "							<td nowrap align='left' class='datavalue_small'>\n";
 			echo "								&nbsp;&nbsp;&nbsp;AMM -1\n";
 			echo "							</td>\n";
-			echo "							<td nowrap align='left' class='datalabel'>\n";
+			echo "							<td nowrap align='left' class='datavalue_small'>\n";
 			echo "								&nbsp;&nbsp;&nbsp;TMM 0\n";
 			echo "							</td>\n";
 			echo "						</tr>\n";
@@ -816,10 +870,10 @@ session_start();
 //			echo "								&nbsp;&nbsp;&nbsp;Walked (>1\")\n";
 			echo "								&nbsp;&nbsp;&nbsp;Walked\n";
 			echo "							</td>\n";
-			echo "							<td nowrap align='left' class='datalabel'>\n";
+			echo "							<td nowrap align='left' class='datavalue_small'>\n";
 			echo "								&nbsp;&nbsp;&nbsp;\n";
 			echo "							</td>\n";
-			echo "							<td nowrap align='left' class='datalabel'>\n";
+			echo "							<td nowrap align='left' class='datavalue_small'>\n";
 			echo "								&nbsp;&nbsp;&nbsp;TMM ".$array_TMM[$chosenMechIndex]." (#)\n";
 			echo "							</td>\n";
 			echo "						</tr>\n";
@@ -830,10 +884,10 @@ session_start();
 			echo "							<td nowrap align='left' class='datalabel'>\n";
 			echo "								&nbsp;&nbsp;&nbsp;Jumped\n";
 			echo "							</td>\n";
-			echo "							<td nowrap align='left' class='datalabel'>\n";
+			echo "							<td nowrap align='left' class='datavalue_small'>\n";
 			echo "								&nbsp;&nbsp;&nbsp;AMM +2\n";
 			echo "							</td>\n";
-			echo "							<td nowrap align='left' class='datalabel'>\n";
+			echo "							<td nowrap align='left' class='datavalue_small'>\n";
 			echo "								&nbsp;&nbsp;&nbsp;TMM ";
 
 			//TODO: SPCL Ability for JJs (calculate into TMM)
@@ -866,16 +920,16 @@ session_start();
 			echo "							    <table width='100%' cellspacing='1'>\n"; // style='background-color:#754743;'
 			echo "									<tr>\n";
 			echo "										<td colspan='1' width='25%' nowrap align='center' valign='top' class='datalabel' style='vertical-align:top;text-align:center'>\n";
-			echo "											<label class='bigcheck'><input onchange='changeMovementFlag($array_MECH_DBID[$chosenMechIndex], 5);' type='checkbox' class='bigcheck' name='WF_WEAPONSFIRED_0' value='yes'/><span class='bigcheck-target'></span></label>\n";
+			echo "											<label class='bigcheck'><input onchange='changeMovementFlag($array_MECH_DBID[$chosenMechIndex], 5);' type='checkbox' class='bigcheck' name='WF5_WEAPONSFIRED' value='yes'/><span class='bigcheck-target'></span></label>\n";
  			echo "										</td>\n";
 			echo "										<td colspan='3' width='25%' nowrap align='center' valign='top' class='datalabel' style='vertical-align:top;text-align:center'>\n";
-			echo "											<label class='bigcheck'><input onchange='changeMovementFlag($array_MECH_DBID[$chosenMechIndex], 6);' type='checkbox' class='bigcheck' name='WF_WEAPONSFIRED_S' value='yes'/><span class='bigcheck-target'></span></label>\n";
+			echo "											<label class='bigcheck'><input onchange='changeMovementFlag($array_MECH_DBID[$chosenMechIndex], 6);' type='checkbox' class='bigcheck' name='WF6_WEAPONSFIRED' value='yes'/><span class='bigcheck-target'></span></label>\n";
  			echo "										</td>\n";
 			echo "										<td colspan='3' width='25%' nowrap align='center' valign='top' class='datalabel' style='vertical-align:top;text-align:center'>\n";
-			echo "											<label class='bigcheck'><input onchange='changeMovementFlag($array_MECH_DBID[$chosenMechIndex], 7);' type='checkbox' class='bigcheck' name='WF_WEAPONSFIRED_M' value='yes'/><span class='bigcheck-target'></span></label>\n";
+			echo "											<label class='bigcheck'><input onchange='changeMovementFlag($array_MECH_DBID[$chosenMechIndex], 7);' type='checkbox' class='bigcheck' name='WF7_WEAPONSFIRED' value='yes'/><span class='bigcheck-target'></span></label>\n";
  			echo "										</td>\n";
 			echo "										<td colspan='3' width='25%' nowrap align='center' valign='top' class='datalabel' style='vertical-align:top;text-align:center'>\n";
-			echo "											<label class='bigcheck'><input onchange='changeMovementFlag($array_MECH_DBID[$chosenMechIndex], 8);' type='checkbox' class='bigcheck' name='WF_WEAPONSFIRED_L' value='yes'/><span class='bigcheck-target'></span></label>\n";
+			echo "											<label class='bigcheck'><input onchange='changeMovementFlag($array_MECH_DBID[$chosenMechIndex], 8);' type='checkbox' class='bigcheck' name='WF8_WEAPONSFIRED' value='yes'/><span class='bigcheck-target'></span></label>\n";
  			echo "										</td>\n";
 			echo "									</tr>\n";
 			echo "									<tr>\n";
@@ -937,39 +991,11 @@ session_start();
 			echo "								</table>\n";
 			echo "							</td>\n";
 			echo "						</tr>\n";
-//			echo "						<tr>\n";
-//			echo "							<td nowrap colspan='4'><hr></td>\n";
-//			echo "						</tr>\n";
-//			echo "						<tr>\n";
-//			echo "							<td nowrap align='right' class='datavalue_small' width='10%'>\n";
-//			echo "								Roll:\n";
-//			echo "							</td>\n";
-//			echo "							<td nowrap align='left' class='datavalue_small' width='90%' colspan='3'>\n";
-//			echo "								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Pilotskill + AMM + Firevalue for Range + Oponent TMM + Partial Cover + Trees\n";
-//			echo "							</td>\n";
-//			echo "						</tr>\n";
-//			echo "						<tr>\n";
-//			echo "							<td nowrap align='right' class='datavalue_small' width='10%'>\n";
-//			echo "								Damage:\n";
-//			echo "							</td>\n";
-//			echo "							<td nowrap align='left' class='datavalue_small' width='90%' colspan='3'>\n";
-//			echo "								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Weapondamage for Range + Overheat + Fire from behind\n";
-//			echo "							</td>\n";
-//			echo "						</tr>\n";
-//			echo "						<tr>\n";
-//			echo "						    <td nowrap colspan='4'><hr></td>\n";
-//			echo "						</tr>\n";
-//			echo "						<tr>\n";
-// 			echo "							<td nowrap colspan='4' align='center' class='datalabel'>\n";
-// 			echo "							    <a onclick='clearFlags($array_MECH_DBID[$chosenMechIndex])' href='javascript:clearFlags($array_MECH_DBID[$chosenMechIndex]);'>CLEAR SELECTION</a>\n";
-//			echo "							</td>\n";
-//			echo "						</tr>\n";
 			echo "					</table>\n";
 			echo "				<div>\n";
 			echo "			</td>\n";
-			echo "			<td width='40%' valign='top'>\n";
+			echo "			<td width='15%' valign='top'>\n";
 			echo "				<a href='#' onclick=\"location.href='".$locmeli."'\">&nbsp;&nbsp;&nbsp;&nbsp;<img src='./images/confirm.png' width='80px'></a><br>\n";
-//			echo "				<a onclick='clearFlags($array_MECH_DBID[$chosenMechIndex])' href='javascript:clearFlags($array_MECH_DBID[$chosenMechIndex]);'>&nbsp;&nbsp;&nbsp;&nbsp;<img src='./images/cancel.png' width='80px'></a>\n";
 			echo "			</td>\n";
 			echo "		</tr>\n";
 			echo "	</table>\n";
@@ -986,9 +1012,10 @@ session_start();
 			}
 			echo "	setMovementFlags($array_MECH_DBID[$chosenMechIndex], movement, weaponsfired);\n";
 			echo "  document.getElementById('editMovementValues').style.visibility='visible';\n";
+			echo " 	$('#editMovementValues').show();\n";
 			echo "</script>\n";
 		}
-	//}
+	}
 ?>
 
 </body>

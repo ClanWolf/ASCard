@@ -236,7 +236,7 @@ session_start();
 		<table style="width:100%;height:60px;border:none;border-collapse:collapse;background:rgba(50,50,50,1.0);" cellspacing="0" cellpadding="0">
 			<tr>
 				<td nowrap onclick="location.href='./logout.php'" width="60px" style="background: rgba(50,50,50,1.0); text-align: center; vertical-align: middle;">
-					<div><a style="color: #eee;" href="./logout.php"><i class="fa fa-power-off" aria-hidden="true"></i></a></div>
+					<div><a style="color: #eee;" href="./logout.php"><i class="fas fa-power-off" aria-hidden="true"></i></a></div>
 				</td>
 				<td nowrap onclick="location.href='./gui_select_unit.php'" width="<?php echo $buttonWidth ?>"><div class='mechselect_button_normal'><a href='./gui_select_unit.php'>ROSTER</a><br><span style='font-size:16px;'>Choose a Mech</span></div></td>
 				<td nowrap onclick="location.href='./gui_select_enemy_unit.php'" width="<?php echo $buttonWidth ?>"><div class='mechselect_button_normal'><a href='./gui_select_enemy_unit.php'>FORCES</a><br><span style='font-size:16px;'>All bidding units</span></div></td>
@@ -257,7 +257,7 @@ session_start();
 
 	<br>
 
-	<form>
+	<form autocomplete="off">
 		<table class="options" cellspacing=4 cellpadding=4 border=0px>
 			<tr>
 				<td nowrap class="datalabel" style='text-align:left;' colspan='4'>

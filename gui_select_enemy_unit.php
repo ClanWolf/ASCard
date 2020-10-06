@@ -88,7 +88,7 @@ session_start();
 		<table style="width:100%;height:60px;border:none;border-collapse:collapse;background:rgba(50,50,50,1.0);" cellspacing="0" cellpadding="0">
 			<tr>
 				<td nowrap onclick="location.href='./logout.php'" width="60px" style="background: rgba(50,50,50,1.0); text-align: center; vertical-align: middle;">
-					<div><a style="color: #eee;" href="./logout.php"><i class="fa fa-power-off" aria-hidden="true"></i></a></div>
+					<div><a style="color: #eee;" href="./logout.php"><i class="fas fa-power-off" aria-hidden="true"></i></a></div>
 				</td>
 				<td nowrap onclick="location.href='./gui_select_unit.php'" width="<?php echo $buttonWidth ?>"><div class='mechselect_button_normal'><a href='./gui_select_unit.php'>ROSTER</a><br><span style='font-size:16px;'>Choose a Mech</span></div></td>
 				<td nowrap onclick="location.href='./gui_select_enemy_unit.php'" width="<?php echo $buttonWidth ?>"><div class='mechselect_button_active'><a href='./gui_select_enemy_unit.php'>FORCES</a><br><span style='font-size:16px;'>All bidding units</span></div></td>
@@ -157,36 +157,36 @@ session_start();
 						$sql_asc_checkunitassignments = "SELECT SQL_NO_CACHE * FROM asc_assign where unitid=".$unitidSelected.";";
 						$result_asc_checkunitassignments = mysqli_query($conn, $sql_asc_checkunitassignments);
 						if (mysqli_num_rows($result_asc_checkunitassignments) > 0) {
-							echo "<td nowrap style='background-color:#b43c3e;width:170px;height:40px;' onclick='location.href=\"gui_play_mech.php?unit=".$unitidSelected."\"' class='unitselect_button_normal'>\n";
-							echo "	<table cellspacing='0' cellpadding='0'>\n";
-							echo "		<tr>\n";
-							echo "			<td width='90%' style='text-align:left;'>\n";
-							echo "				<a href='gui_play_mech.php?unit=".$unitidSelected."'>".$forcenameSelected."</a>\n";
-							echo "			</td>\n";
-							echo "			<td width='10%' style='text-align:right;'>\n";
-							echo "				<img src='./images/factions/".$unitlogo."' width='20px' style='border:1px solid;'>\n";
-							echo "			</td>\n";
-							echo "		</tr>\n";
-							echo "	</table>\n";
-							echo "</td>\n";
+							echo "	<td nowrap style='background-color:#b43c3e;width:170px;height:40px;' onclick='location.href=\"gui_play_mech.php?unit=".$unitidSelected."\"' class='unitselect_button_normal'>\n";
+							echo "		<table cellspacing='0' cellpadding='0'>\n";
+							echo "			<tr>\n";
+							echo "				<td width='90%' style='text-align:left;'>\n";
+							echo "					<a href='gui_play_mech.php?unit=".$unitidSelected."'>".$forcenameSelected."</a>\n";
+							echo "				</td>\n";
+							echo "				<td width='10%' style='text-align:right;'>\n";
+							echo "					<img src='./images/factions/".$unitlogo."' width='20px' style='border:1px solid;'>\n";
+							echo "				</td>\n";
+							echo "			</tr>\n";
+							echo "		</table>\n";
+							echo "	</td>\n";
 						} else {
-							echo "<td nowrap style='background-color:#973232;width:170px;height:40px;' class='mechselect_button_active'>\n";
-							echo "	<table cellspacing='0' cellpadding='0'>\n";
-							echo "		<tr>\n";
-							echo "			<td width='90%' style='text-align:left;'>\n";
-							echo "				".$forcenameSelected."\n";
-							echo "			</td>\n";
-							echo "			<td width='10%' style='text-align:right;'>\n";
-							echo "				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\n";
-							echo "			</td>\n";
-							echo "		</tr>\n";
-							echo "	</table>\n";
-							echo "</td>\n";
+							echo "	<td nowrap style='background-color:#973232;width:170px;height:40px;' class='mechselect_button_active'>\n";
+							echo "		<table cellspacing='0' cellpadding='0'>\n";
+							echo "			<tr>\n";
+							echo "				<td width='90%' style='text-align:left;'>\n";
+							echo "					".$forcenameSelected."\n";
+							echo "				</td>\n";
+							echo "				<td width='10%' style='text-align:right;'>\n";
+							echo "					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\n";
+							echo "				</td>\n";
+							echo "			</tr>\n";
+							echo "		</table>\n";
+							echo "	</td>\n";
 						}
 					}
 				}
-
-				echo "<td nowrap style='font-size:16px;text-align:right;color:#dddddd;background-color:#b33939;height:40px;padding-left:10px;padding-right:10px'>PV ".$pv_bidden."</td><td nowrap style='text-align:right;color:#ffff00;background-color:#b33939;height:40px;padding-left:10px;padding-right:10px'>".$tonnage_bidden." t</td>\n";
+				echo "	<td nowrap style='font-size:16px;text-align:right;color:#dddddd;background-color:#b33939;height:40px;padding-left:10px;padding-right:10px'>PV ".$pv_bidden."</td><td nowrap style='text-align:right;color:#ffff00;background-color:#b33939;height:40px;padding-left:10px;padding-right:10px'>".$tonnage_bidden." t</td>\n";
+				echo "	<td style='color:eee;font-size:22;text-align:right;' align='right'>&nbsp;&nbsp;&nbsp;OPFOR</td>\n";
 				echo "</tr>\n";
 				echo "<tr><td colspan='6' style='font-size:10px'>&nbsp;</td></tr>\n";
 			}
@@ -205,13 +205,17 @@ session_start();
 				$pv_bidden = $row['bid_pv'];
 				$tonnage_bidden = $row['bid_tonnage'];
 
-				echo "<tr>\n";
+				$selectBorder='';
 				if ($pid == $playerid) {
-					echo "<td style='color:eee;font-size:24;color:#ffaa00;text-align:center;'><img src='./images/indicator.png' height='24px'></td>\n";
+					$selectBorder='border-top:3px solid yellow;border-bottom:3px solid yellow;';
+					echo "<tr>\n";
+					echo "<td style='color:eee;font-size:24;color:#ffaa00;text-align:center;$selectBorder'><img src='./images/indicator.png' height='24px'></td>\n";
 				} else {
+					$selectBorder='';
+					echo "<tr>\n";
 					echo "<td></td>\n";
 				}
-				echo "<td nowrap style='height:40px;padding-left:20px;padding-right:20px' class='mechselect_button_active'>".$playername."</td>";
+				echo "<td nowrap style='height:40px;padding-left:20px;padding-right:20px;$selectBorder' class='mechselect_button_active'>".$playername."</td>";
 
 				// Select units for this player
 				if (!($stmtUnits = $conn->prepare("SELECT SQL_NO_CACHE * FROM asc_unit where playerid = ".$playerid." ORDER BY unitid;"))) {
@@ -238,7 +242,7 @@ session_start();
 						$sql_asc_checkunitassignments = "SELECT SQL_NO_CACHE * FROM asc_assign where unitid=".$unitidSelected.";";
 						$result_asc_checkunitassignments = mysqli_query($conn, $sql_asc_checkunitassignments);
 						if (mysqli_num_rows($result_asc_checkunitassignments) > 0) {
-							echo "<td nowrap style='width:170px;height:40px;' onclick='location.href=\"gui_play_mech.php?unit=".$unitidSelected."\"' class='unitselect_button_normal'>\n";
+							echo "<td nowrap style='width:170px;height:40px;$selectBorder' onclick='location.href=\"gui_play_mech.php?unit=".$unitidSelected."\"' class='unitselect_button_normal'>\n";
 							echo "	<table cellspacing='0' cellpadding='0'>\n";
 							echo "		<tr>\n";
 							echo "			<td width='90%' style='text-align:left;'>\n";
@@ -251,7 +255,7 @@ session_start();
 							echo "	</table>\n";
 							echo "</td>\n";
 						} else {
-							echo "<td nowrap style='background-color:#444444;width:170px;height:40px;' class='mechselect_button_active'>\n";
+							echo "<td nowrap style='background-color:#444444;width:170px;height:40px;$selectBorder' class='mechselect_button_active'>\n";
 							echo "	<table cellspacing='0' cellpadding='0'>\n";
 							echo "		<tr>\n";
 							echo "			<td width='90%' style='text-align:left;'>\n";
@@ -267,13 +271,18 @@ session_start();
 					}
 				}
 
-				echo "<td nowrap style='font-size:16px;text-align:right;color:dddddd;background-color:#666666;height:40px;padding-left:10px;padding-right:10px'>PV ".$pv_bidden."</td><td nowrap style='text-align:right;color:00ff00;background-color:#666666;height:40px;padding-left:10px;padding-right:10px'>".$tonnage_bidden." t</td>\n";
+				echo "<td nowrap style='font-size:16px;text-align:right;color:dddddd;background-color:#666666;height:40px;padding-left:10px;padding-right:10px;$selectBorder'>PV ".$pv_bidden."</td><td nowrap style='text-align:right;color:00ff00;background-color:#666666;height:40px;padding-left:10px;padding-right:10px;$selectBorder'>".$tonnage_bidden." t</td>\n";
+				if ($pid == $playerid) {
+					echo "<td style='color:eee;font-size:24;color:#ffaa00;text-align:center;$selectBorder'><img src='./images/indicatorl.png' height='24px'></td>\n";
+				} else {
+					echo "<td></td>\n";
+				}
 				echo "</tr>\n";
 			}
 		}
 	}
 ?>
-		<tr><td colspan="7" style="color:eee;font-size:20;text-align:center;"><br>Only the 5 lowest bidders will be visible.</td></tr>
+		<tr><td colspan="8" style="color:eee;font-size:20;text-align:center;"><br>Only the 5 lowest bidders will be visible.</td></tr>
 	</table>
 </body>
 

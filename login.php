@@ -109,10 +109,9 @@ session_start();
 <body>
 	<script>
 		$(document).ready(function() {
-			// console.log("Clicking on the form to make the webfont display!");
+			console.log("Clicking on the form to make the webfont display!");
 			document.getElementById("f1").style.visibility = "visible";
 			setTimeout(function(){
-				console.log("Click...");
 				// Tried to trick Chrome to apply the right css style to the input fields
 				// while auto filling them. No luck...
 
@@ -125,7 +124,7 @@ session_start();
 				//$("#pn").val($('#pn').val());
 				$('#pn').focus();
 				//$("#pn").val("sdsd");
-				$('#pw').focus();
+				//$('#pw').focus();
   			},1000);
 		});
 	</script>
@@ -140,15 +139,15 @@ session_start();
 		}
 	?>
 
-	<form id="f1" style="visibility:hidden;" action="?login=1" method="post">
+	<form id="f1" style="visibility:hidden;" action="?login=1" method="post" autocomplete="on">
 		<table class="box" cellspacing=10 cellpadding=10 border=0px>
 			<tr>
 				<td class='mechselect_button_active'>
 					<img src="./images/icon_144x144.png">
 				</td>
 				<td class='mechselect_button_active'>
-					<input type="text" size="20" maxlength="80" id="pn" name="pn"><br>
-					<input type="password" size="20"  maxlength="32" id="pw" name="pw"><br><br>
+					<input type="text" size="20" maxlength="80" id="pn" name="pn" required autocomplete="userName"><br>
+					<input type="password" size="20"  maxlength="32" id="pw" name="pw" required autocomplete="current-password"><br><br>
 					<input type="submit" size="50" style="width:200px" value="LOGIN"><br>
 				</td>
 			</tr>
