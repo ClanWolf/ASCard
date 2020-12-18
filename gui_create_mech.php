@@ -512,7 +512,7 @@ session_start();
 	<form autocomplete="off">
 		<table class="options" cellspacing=4 cellpadding=4 border=0px>
 			<tr>
-				<td nowrap class="datalabel" style='text-align:left;' colspan='4'>
+				<td nowrap class="datalabel" style='text-align:left;' colspan='5'>
 					Tech: <select required name='tech' id='tech' size='1' onchange="fetchMechList();">
 						<option value="2">Clan</option>
 						<option value="1">IS</option>
@@ -543,13 +543,13 @@ session_start();
 				</td>
 			</tr>
 			<tr>
-				<td nowrap class="datalabel" style='text-align:left;' colspan='4'>
+				<td nowrap class="datalabel" style='text-align:left;' colspan='5'>
 					<!-- will be filled by 'fetchMechList();' -->
 					<select required name='units' id='units' size='1' onchange="mechSelected();" style="width:300px"></select>
 				</td>
 			</tr>
 			<tr>
-				<td nowrap class="datalabel" style='text-align:left;' colspan='4'>
+				<td nowrap class="datalabel" style='text-align:left;' colspan='5'>
 					<hr>
 					<input required type="hidden" id="TP" name="TP">
 					<input required type="hidden" id="SZ" name="SZ">
@@ -591,9 +591,12 @@ session_start();
 						<option value="7">7</option>
 					</select>
 				</td>
+				<td>
+					<a href='#' onClick='createPilot();'><i class="fas fa-redo"></i></a>
+				</td>
 			</tr>
 			<tr>
-				<td nowrap class="datalabel" style='text-align:left;' colspan='3'>Add to unit: <select required name='UNITID' id='UNITID' size='1' style='width:200px;'>
+				<td nowrap class="datalabel" style='text-align:left;' colspan='4'>Add to unit: <select required name='UNITID' id='UNITID' size='1' style='width:200px;'>
 <?php
 	$sql_asc_playersunits = "SELECT SQL_NO_CACHE * FROM asc_unit where playerid=".$pid;
 	$result_asc_playersunits = mysqli_query($conn, $sql_asc_playersunits);
@@ -612,27 +615,45 @@ session_start();
 					</select>
 				</td>
 				<td align="right">
-					<a href='#' onClick='createPilot();'><i class="fa fa-refresh" aria-hidden="true"></i></a>&nbsp;&nbsp;<a href='#' onClick='storeNewMech();'><i class='fa fa-fw fa-plus-square'></i></a>
+					<a href='#' onClick='storeNewMech();'><i class='fa fa-fw fa-plus-square'></i></a>
 				</td>
 			</tr>
 		</table>
 	</form>
 
 	<script>
+		var finalPilotName = "";
+		var finalPilotImage = "";
+
 		function createPilot() {
-			var finalPilotName = "";
-			var finalPilotImage = "";
+			$.get("random_pic_female.php", function(data) {
+				randomPilotPictureFemale = data;
+//				console.log(randomPilotPictureFemale);
+			});
+			$.get("random_pic_male.php", function(data) {
+				randomPilotPictureMale = data;
+//				console.log(randomPilotPictureMale);
+			});
+			$.get("random_name_female.php", function(data) {
+				randomPilotNameFemale = data;
+//				console.log(randomPilotNameFemale);
+			});
+			$.get("random_name_male.php", function(data) {
+				randomPilotNameMale = data;
+//				console.log(randomPilotNameMale);
+			});
+
 			var male = Math.random() >= 0.3;
 			if (male) {
 				document.getElementById('PN').value = randomPilotNameMale;
-				document.getElementById('newpilotimage').src = "<?php echo trim($randomPilotPictureMale) ?>";
+				document.getElementById('newpilotimage').src = randomPilotPictureMale;
 				finalPilotName = randomPilotNameMale;
-				finalPilotImage = "<?php echo trim($randomPilotPictureMale) ?>";
+				finalPilotImage = randomPilotPictureMale;
 			} else {
 				document.getElementById('PN').value = randomPilotNameFemale;
-				document.getElementById('newpilotimage').src = "<?php echo trim($randomPilotPictureFemale) ?>";
+				document.getElementById('newpilotimage').src = randomPilotPictureFemale;
 				finalPilotName = randomPilotNameFemale;
-				finalPilotImage = "<?php echo trim($randomPilotPictureFemale) ?>";
+				finalPilotImage = randomPilotPictureFemale;
 			}
 		}
 		createPilot();
