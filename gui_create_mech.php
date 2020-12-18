@@ -612,27 +612,30 @@ session_start();
 					</select>
 				</td>
 				<td align="right">
-					<a href='#' onClick='storeNewMech();'><i class='fa fa-fw fa-plus-square'></i></a>
+					<a href='#' onClick='createPilot();'><i class="fa fa-refresh" aria-hidden="true"></i></a>&nbsp;&nbsp;<a href='#' onClick='storeNewMech();'><i class='fa fa-fw fa-plus-square'></i></a>
 				</td>
 			</tr>
 		</table>
 	</form>
 
 	<script>
-		var finalPilotName = "";
-		var finalPilotImage = "";
-		var male = Math.random() >= 0.5;
-		if (male) {
-			document.getElementById('PN').value = randomPilotNameMale;
-			document.getElementById('newpilotimage').src = "<?php echo trim($randomPilotPictureMale) ?>";
-			finalPilotName = randomPilotNameMale;
-			finalPilotImage = "<?php echo trim($randomPilotPictureMale) ?>";
-		} else {
-			document.getElementById('PN').value = randomPilotNameFemale;
-			document.getElementById('newpilotimage').src = "<?php echo trim($randomPilotPictureFemale) ?>";
-			finalPilotName = randomPilotNameFemale;
-			finalPilotImage = "<?php echo trim($randomPilotPictureFemale) ?>";
+		function createPilot() {
+			var finalPilotName = "";
+			var finalPilotImage = "";
+			var male = Math.random() >= 0.3;
+			if (male) {
+				document.getElementById('PN').value = randomPilotNameMale;
+				document.getElementById('newpilotimage').src = "<?php echo trim($randomPilotPictureMale) ?>";
+				finalPilotName = randomPilotNameMale;
+				finalPilotImage = "<?php echo trim($randomPilotPictureMale) ?>";
+			} else {
+				document.getElementById('PN').value = randomPilotNameFemale;
+				document.getElementById('newpilotimage').src = "<?php echo trim($randomPilotPictureFemale) ?>";
+				finalPilotName = randomPilotNameFemale;
+				finalPilotImage = "<?php echo trim($randomPilotPictureFemale) ?>";
+			}
 		}
+		createPilot();
 	</script>
 </body>
 
