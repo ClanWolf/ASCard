@@ -40,7 +40,8 @@ session_start();
 //		return $image;
 //	}
 	function getMechImageByName($mechname) {
-		$image = "images/mechs/Generic.png";
+//		$image = "images/mechs/Generic.png";
+		$image = "images/mechs/Generic.gif";
 		$dir = 'images/mechs/';
 		$files = glob($dir.'*.png');
 		foreach ($files as &$img) {
