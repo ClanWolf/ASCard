@@ -577,7 +577,7 @@ session_start();
 					<img id="newpilotimage" src="" width="50px">
 				</td>
 				<td nowrap class="datalabel" style='text-align:left;'>
-					Pilot name: <input type="text" required id="PN" name="PN" style='width:120px'>
+					Pilot: <input type="text" required id="PN" name="PN" style='width:120px'>
 				</td>
 				<td nowrap class="datalabel" style='text-align:left;'>
 					Skill: <select required name='SKILL' id='SKILL' size='1'>
