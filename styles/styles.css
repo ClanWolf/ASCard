@@ -553,7 +553,7 @@ input[type='checkbox'].bigcheck + span.bigcheck-target:after {
 	font-weight: 200;
 }
 input[type='checkbox'].bigcheck:checked + span.bigcheck-target:after {
-	content: "\f058";
+	content: "\f057";
 	//transition: all .25s;
 	font-family: 'Font Awesome 5 Free';
 	font-weight: 900;
