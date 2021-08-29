@@ -351,7 +351,7 @@ session_start();
 				if ($playMode) {
 					echo "										\n";
 				} else {
-					echo "										<a href='#' onClick='saveNewPlayer(".$row['playerid'].",\"".$row['image']."\");'><i class='fa fa-fw fa-minus-square'></i></a>\n";
+					echo "										<a href='#' onClick='saveNewPlayer(".$row['playerid'].",\"".$row['image']."\");'><i class='fas fa-minus-square'></i></a>\n";
 				}
 				echo "									</span>\n";
 				echo "								</td>\n";

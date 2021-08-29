@@ -615,7 +615,7 @@ session_start();
 					</select>
 				</td>
 				<td align="right">
-					<a href='#' onClick='storeNewMech();'><i class='fa fa-fw fa-plus-square'></i></a>
+					<a href='#' onClick='storeNewMech();'><i class='fas fa-plus-square'></i></a>
 				</td>
 			</tr>
 		</table>

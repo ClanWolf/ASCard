@@ -304,7 +304,7 @@ session_start();
 					</select>
 				</td>
 				<td align="right">
-					<a href='#' onClick='assignMech();'><i class='fa fa-fw fa-plus-square'></i></a>
+					<a href='#' onClick='assignMech();'><i class='fas fa-plus-square'></i></a>
 				</td>
 			</tr>
 <?php
@@ -319,7 +319,7 @@ session_start();
 		echo "			<tr>\n";
 		echo "				<td colspan='3'>Delete selected Mech/BA from Hangar (!)</td>\n";
 		echo "				<td align='right'>\n";
-		echo "					<a href='#' onClick='deleteStoredMech();'><i class='fa fa-fw fa-minus-square'></i></a>\n";
+		echo "					<a href='#' onClick='deleteStoredMech();'><i class='fas fa-minus-square'></i></a>\n";
 		echo "				</td>\n";
 		echo "			</tr>\n";
 	}
