@@ -3,8 +3,10 @@
 var corsproxyprefix1 = "https://cors-anywhere.herokuapp.com/";
 var corsproxyprefix2 = "https://cors.io/?";
 var corsproxyprefix3 = "https://yacdn.org/proxy/";
+var corsproxyprefix4 = "https://api.allorigins.win/get?url=";
+var corsproxyprefix5 = "https://jsonp.afeld.me/?url=";
 
-var corsproxyprefix = corsproxyprefix1;
+var corsproxyprefix = corsproxyprefix5;
 
 function getMechList(filter, tech, minTon, maxTon) {
 	var optionList = '';
