@@ -117,8 +117,11 @@ function getMechDetails(id) {
 	}
 
 	var url = corsproxyprefix + 'http://www.masterunitlist.info/Unit/QuickDetails?id=' + id;
-	$.getJSON(url, function (json) {
-		
+	var cache_details_url = 'https://www.clanwolf.net/apps/ASCard/cache/mul/mechdetails/' + id + '.json';
+
+	// $.getJSON(url, function (json) {
+	$.getJSON(cache_details_url, function (json) {
+
 		// An asterisk (*) --> &#42;
 		var sp = json.BFAbilities;
 		if (sp) {

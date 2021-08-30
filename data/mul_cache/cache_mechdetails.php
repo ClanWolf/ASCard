@@ -8,7 +8,7 @@
 	$opts = array('http'=>array('header' => "User-Agent:MyAgent/1.0\r\n"));
 	$context = stream_context_create($opts);
 
-	for ($i = 2300; $i <= 2600; $i++ ) {
+	for ($i = 9600; $i <= 9800; $i++ ) {
         $url_value = "http://www.masterunitlist.info/Unit/QuickDetails?id=" . $i;
 		$content = file_get_contents($url_value, false, $context);
 
