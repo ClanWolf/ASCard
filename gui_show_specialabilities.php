@@ -40,6 +40,48 @@ session_start();
 	<script type="text/javascript" src="./scripts/jquery-3.3.1.min.js"></script>
 	<script type="text/javascript" src="./scripts/howler.min.js"></script>
 	<script type="text/javascript" src="./scripts/cookies.js"></script>
+
+	<style>
+		html, body {
+			background-image: url('./images/body-bg_2.jpg');
+		}
+		table {
+			margin-left: auto;
+			margin-right: auto;
+		}
+		.box {
+			width: 80%;
+			background-color :#transparent;
+			top: 50%;
+			left: 50%;
+		}
+		.options {
+			border-radius: 5px;
+			border-style: solid;
+			border-width: 3px;
+			padding: 5px;
+			background: rgba(60,60,60,0.75);
+			color: #ddd;
+			border-color: #aaa;
+		}
+		input, select {
+			width: 80px;
+			vertical-align: middle;
+			color: #ddd;
+			border-width: 0px;
+			padding: 2px;
+			font-family: 'Pathway Gothic One', sans-serif;
+		}
+		select:focus, textarea:focus, input:focus {
+			outline: none;
+		}
+		select:invalid, input:invalid {
+			background: rgba(40,40,40,0.75);;
+		}
+		select:valid, input:valid {
+			background: rgba(70,70,70,0.75);;
+		}
+	</style>
 </head>
 
 <body>
