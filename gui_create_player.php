@@ -335,7 +335,7 @@ session_start();
 			$filename = "./images/player/".$row['image'];
 
 			echo "							<tr>\n";
-			echo "								<td nowrap class='datalabel' style='text-align:left;';><a href='gui_edit_player.php?playerid=".$row['playerid']."'><i class='fa fa-edit'></i></a>&nbsp;&nbsp;&nbsp;".$row['playerid']."</td>\n";
+			echo "								<td nowrap class='datalabel' style='text-align:left;';><a href='gui_edit_player.php?playerid=".$row['playerid']."'><i class='fas fa-edit'></i></a>&nbsp;&nbsp;&nbsp;".$row['playerid']."</td>\n";
 			echo "								<td nowrap class='datalabel' style='text-align:left;vertical-align:middle;' valign='middle'>\n";
 			if (file_exists($filename)) {
 				echo "										<img src='./images/player/".$row['image']."' width='30px' height='30px'>\n";
