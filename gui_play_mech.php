@@ -694,7 +694,18 @@ session_start();
 					<table width="100%">
 						<tr>
 							<td nowrap width="10%" class="datalabel" width="100%">SP:</td>
-							<td nowrap width="90%" class="datavalue_thin" style="text-align: left;"><?php echo "$array_SPCL[$chosenMechIndex]"; ?></td>
+							<td nowrap width="90%" class="datavalue_thin" style="text-align: left;">
+								<table>
+									<tr>
+										<td nowrap width="99%" class="datavalue_thin" style="text-align: left;">
+											<?php echo "$array_SPCL[$chosenMechIndex]"; ?>
+										</td>
+										<td nowrap width="1%" class="datavalue_thin" style="text-align: right;" align="right">
+											<a href="https://www.clanwolf.net/apps/ASCard/gui_show_specialabilities.php"><i class="fas fa-info-circle"></i></a>
+										</td>
+									</tr>
+								</table>
+							</td>
 						</tr>
 					</table>
 				</div>

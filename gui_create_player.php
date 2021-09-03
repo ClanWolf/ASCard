@@ -162,7 +162,7 @@ session_start();
 		}
 		.box {
 			width: 80%;
-			background-color :#transparent;
+			background-color: #transparent;
 			top: 50%;
 			left: 50%;
 		}
