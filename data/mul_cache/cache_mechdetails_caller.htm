@@ -1,0 +1,33 @@
+<html>
+
+<head>
+	<script>
+      const update_cache = async () => {
+        document.getElementById("error").innerHTML = "";
+
+        for (let i = 0; i < 10000;) {
+          await fetch("https://www.clanwolf.net/apps/ASCard/data/mul_cache/cache_mechdetails.php?startindex="+i).
+                catch(error => {
+                    document.getElementById("error").innerHTML = error + " index: " + i ;
+                })
+          i += 200;
+          document.getElementById("num").innerHTML = i;
+        }
+      }
+
+    </script>
+</head>
+
+<body>
+<div id="status">
+	Done: <span id="num">0</span>
+</div>
+
+<div id="error" style="color:red"></div>
+
+<button onclick="update_cache()">
+	Cache
+</button>
+</body>
+
+</html>
