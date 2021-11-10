@@ -1,4 +1,7 @@
 # ASCard
+
+<img src="https://img.shields.io/liberapay/receives/WarWolfen.svg?logo=liberapay">
+
 HTML implementation of the AlphaStrike TableTop Cards.
 
 # Copyright
