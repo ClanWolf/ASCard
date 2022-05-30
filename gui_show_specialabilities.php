@@ -4,8 +4,9 @@ session_start();
 	require('./db.php');
 	if (!isset($_SESSION['playerid'])) {
 		echo "Not logged in... redirecting.<br>";
-		echo "<meta http-equiv='refresh' content='0;url=./login.php'>";
-		die();
+		echo "<meta http-equiv='refresh' content='0;url=./login.php?auto=1'>";
+		header("Location: ./login.php?auto=1");
+		die("Check position 4");
 	}
 
 	// Get data on units from db
@@ -168,7 +169,7 @@ session_start();
 		<tr>
 			<td align="left" class='datalabel'>
 				<div class="scroll-pane">
-					<p id="prb"><strong>Active Probe (PRB)</strong><br>
+					<p id="PRB"><strong>Active Probe (PRB)</strong><br>
 						Units equipped with active probes have an extended view of the battlefield,<br>
 						enabling them to provide information about targets without moving into the<br>
 						target’s Short range bracket. The active probe’s effective range is 18”,<br>
@@ -180,13 +181,10 @@ session_start();
 						will overwhelm the active probe’s abilities.
 					</p>
 					<p id="AFC"><strong>Advanced Fire Control (AFC)</strong><br>
-						IndustrialMechs and support vehicles equipped with Advanced Fire Control do<br>
-						not suffer to-hit modifiers for their unit type.
+						IndustrialMechs and support vehicles equipped with Advanced Fire Control do not suffer to-hit modifiers for their unit type.
 					</p>
 					<p id="AT"><strong>Aerospace Transport (AT#)</strong><br>
-						A unit with this special ability can transport, launch and recover the<br>
-						indicated number of aerospace or conventional fighters (see Aerospace Unit<br>
-						Transports, p. 72).
+						A unit with this special ability can transport, launch and recover the indicated number of aerospace or conventional fighters (see Aerospace Unit Transports, p. 72).
 					</p>
 					<p id="AMP"><strong>Amphibious (AMP)</strong><br>
 						This ability makes a non-naval unit capable of water  movement. Amphibious<br>

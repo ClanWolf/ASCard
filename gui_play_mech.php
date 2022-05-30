@@ -4,8 +4,9 @@ session_start();
 	require('./logger.php');
 	if (!isset($_SESSION['playerid'])) {
 		echo "Not logged in... redirecting.<br>";
-		echo "<meta http-equiv='refresh' content='0;url=./login.php'>";
-		die();
+		echo "<meta http-equiv='refresh' content='0;url=./login.php?auto=1'>";
+		header("Location: ./login.php?auto=1");
+		die("Check position 5");
 	}
 	$pid = $_SESSION['playerid'];
 	$pimage = $_SESSION['playerimage'];
@@ -32,7 +33,6 @@ session_start();
 	<meta name="viewport" content="width=device-width, initial-scale=0.75, minimum-scale=0.75, maximum-scale=0.75, user-scalable=no" />
 
 	<link rel="manifest" href="./manifest.json">
-	<!-- <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css"> -->
 	<link rel="stylesheet" type="text/css" href="./fontawesome/css/all.min.css" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="./styles/styles.css">
 	<link rel="icon" href="./favicon.png" type="image/png">
@@ -377,13 +377,15 @@ session_start();
 	$file = file_get_contents('./version.txt', true);
 	$version = $file;
 	if (!isset($_GET["unit"])) {
-		echo "<meta http-equiv='refresh' content='0;url=./index.html'> ";
-		die();
+		echo "<meta http-equiv='refresh' content='0;url=./gui_select_unit.php'> ";
+		header("Location: ./gui_select_unit.php");
+		die("Check position 1");
 	}
 	$unitid = $_GET["unit"];
 	if (empty($unitid)) {
-		echo "<meta http-equiv='refresh' content='0;url=./index.html'> ";
-		die();
+		echo "<meta http-equiv='refresh' content='0;url=./gui_select_unit.php'> ";
+		header("Location: ./gui_select_unit.php");
+		die("Check position 2");
 	}
 	$chosenMechIndex = $_GET["chosenmech"];
 	if (empty($chosenMechIndex)) {
@@ -697,7 +699,7 @@ session_start();
 							<td nowrap width="90%" class="datavalue_thin" style="text-align: left;">
 								<table>
 									<tr>
-										<td nowrap width="99%" class="datavalue_thin" style="text-align: left;">
+										<td nowrap width="99%" class="datavalue_thin" style="text-align: left;" id="sa_field">
 											<?php echo "$array_SPCL[$chosenMechIndex]"; ?>
 										</td>
 										<td nowrap width="1%" class="datavalue_thin" style="text-align: right;" align="right">

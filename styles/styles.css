@@ -421,7 +421,7 @@ a:hover {
 }
 .phase_button_normal {
 	font-size: 100%;
-	padding: 20px;
+	padding: 10px;
 	border: 10px;
 	background-color: #555555;
 	color: #eeeeee;
@@ -429,7 +429,7 @@ a:hover {
 }
 .phase_button_normal:hover {
 	font-size: 100%;
-	padding: 20px;
+	padding: 10px;
 	border: 10px;
 	background-color: #888888;
 	color: #eeeeee;
@@ -437,7 +437,7 @@ a:hover {
 }
 .phase_button_selected {
 	font-size: 100%;
-	padding: 20px;
+	padding: 10px;
 	border: 10px;
 	background-color: #da8a17;
 	color: #eeeeee;

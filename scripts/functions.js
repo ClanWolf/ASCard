@@ -201,26 +201,22 @@ function setCircles(h, a, s, e, fc, mp, w, uov) {
 		document.getElementById("ht_field").style.color ="#a49708";
 		updatedshortvalue = updatedshortvalue + 1;
 		updatedmediumvalue = updatedmediumvalue + 1;
-		//TODO: Do this only if special ability OVL (Overheat long) is available
-		//updatedlongvalue = updatedlongvalue + 1;
+		updatedlongvalue = updatedlongvalue + 1;
 	} else if (h == 2) {
 		document.getElementById("ht_field").style.color ="#da8e25";
 		updatedshortvalue = updatedshortvalue + 2;
 		updatedmediumvalue = updatedmediumvalue + 2;
-		//TODO: Do this only if special ability OVL (Overheat long) is available
-		//updatedlongvalue = updatedlongvalue + 2;
+		updatedlongvalue = updatedlongvalue + 2;
 	} else if (h == 3) {
 		document.getElementById("ht_field").style.color ="#ba4112";
 		updatedshortvalue = updatedshortvalue + 3;
 		updatedmediumvalue = updatedmediumvalue + 3;
-		//TODO: Do this only if special ability OVL (Overheat long) is available
-		//updatedlongvalue = updatedlongvalue + 3;
+		updatedlongvalue = updatedlongvalue + 3;
 	} else if (h == 4) {
 		document.getElementById("ht_field").style.color ="#ff0000";
 		updatedshortvalue = updatedshortvalue + 4;
 		updatedmediumvalue = updatedmediumvalue + 4;
-		//TODO: Do this only if special ability OVL (Overheat long) is available
-		//updatedlongvalue = updatedlongvalue + 4;
+		updatedlongvalue = updatedlongvalue + 4;
 	}
 	if (fc == 0) {
 		//
@@ -285,7 +281,11 @@ function setCircles(h, a, s, e, fc, mp, w, uov) {
 
 	if (updatedshortdamage > 0) { updatedshortdamage = updatedshortdamage + uov; }
 	if (updatedmediumdamage > 0) { updatedmediumdamage = updatedmediumdamage + uov; }
-	if (updatedlongdamage > 0) { updatedlongdamage = updatedlongdamage + uov; }
+	if (document.getElementById('sa_field').innerText.indexOf('OVL') !== -1) {
+		if (updatedlongdamage > 0) { updatedlongdamage = updatedlongdamage + uov; }
+	} else {
+		if (updatedlongdamage > 0) { updatedlongdamage = updatedlongdamage; }
+	}
 
 	document.getElementById("dmgshort_s").innerHTML = updatedshortdamage;
 	document.getElementById("dmgmedium_s").innerHTML = updatedmediumdamage;

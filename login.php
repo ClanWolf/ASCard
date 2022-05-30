@@ -9,14 +9,27 @@ session_start();
 	$login = isset($_GET['login']) ? $_GET['login'] : "";
 	$playername = isset($_POST['pn']) ? $_POST['pn'] : "";
 	$password = isset($_POST['pw']) ? $_POST['pw'] : "";
+	$auto = isset($_POST['auto']) ? $_POST['auto'] : "";
+
+    if (!($stmt_all = $conn->prepare("SELECT * FROM asc_player"))) {
+		echo "Prepare failed: (" . $conn->errno . ") " . $conn->error;
+	}
+	if (!($stmt = $conn->prepare("SELECT * FROM asc_player WHERE name = ?"))) {
+		echo "Prepare failed: (" . $conn->errno . ") " . $conn->error;
+	}
+	if (!$stmt->bind_param("s", $playername)) {
+		echo "Binding parameters failed: (" . $stmt->errno . ") " . $stmt->error;
+	}
+
+    $userlist = "";
+	if ($stmt_all->execute()) {
+    	$res_all = $stmt_all->get_result();
+    	while ($row_all = $res_all->fetch_assoc()) {
+            $userlist = $userlist . "<option value='".$row_all['name']."'>".$row_all['name']."</option>";
+        }
+    }
 
 	if(!$login == "") {
-		if (!($stmt = $conn->prepare("SELECT * FROM asc_player WHERE name = ?"))) {
-			echo "Prepare failed: (" . $conn->errno . ") " . $conn->error;
-		}
-		if (!$stmt->bind_param("s", $playername)) {
-			echo "Binding parameters failed: (" . $stmt->errno . ") " . $stmt->error;
-		}
 		if ($stmt->execute()) {
 			$res = $stmt->get_result();
 			while ($row = $res->fetch_assoc()) {
@@ -79,6 +92,7 @@ session_start();
 	<link rel="apple-touch-icon" href="./images/icon_180x180.png" type="image/png" sizes="180x180">
 
 	<script type="text/javascript" src="./scripts/jquery-3.3.1.min.js"></script>
+	<script type="text/javascript" src="./scripts/cookies.js"></script>
 
 	<style>
 		html, body {
@@ -109,29 +123,49 @@ session_start();
 <body>
 	<script>
 		$(document).ready(function() {
-			console.log("Clicking on the form to make the webfont display!");
 			document.getElementById("f1").style.visibility = "visible";
 			setTimeout(function(){
-				// Tried to trick Chrome to apply the right css style to the input fields
-				// while auto filling them. No luck...
+				var pn_1 = $('#pn').val();
+				var pw_1 = $('#pw').val();
 
-				//$(window).trigger('resize');
-				//$('body').click();
-				//document.getElementById('pn').click();
-				//document.getElementById('pn').dispatchEvent(new MouseEvent('click', {shiftKey: true}))
-				//$("#f1").trigger('focus');
-				//var a = $('#pn').val();
-				//$("#pn").val($('#pn').val());
-				$('#pn').focus();
-				//$("#pn").val("sdsd");
-				//$('#pw').focus();
-  			},1000);
+                //if (pn_1 === "") {
+                //console.log("No name entry found, trying to fill from cookie.");
+
+                var pn_FromCookie = getCookie("ASCards_un");
+                var pw_FromCookie = getCookie("ASCards_pw");
+                var auto = "<?= isset($_GET['auto']) ? $_GET['auto'] : '1'; ?>";
+                //console.log("Found username: " + pn_FromCookie);
+                //console.log("Found password: " + pw_FromCookie);
+                //console.log("Auto: " + auto);
+
+                $('#pn').focus();
+                $("#pn").val(pn_FromCookie);
+                $('#pw').focus();
+                $("#pw").val(pw_FromCookie);
+                $("#submitbutton").focus();
+
+                if (auto == '1' && !isset($errorMessage)) {
+                    document.getElementById("f1").submit();
+                }
+                //} else {
+                //    console.log("Name entry found.");
+                //}
+  			},100);
 		});
+
+        function storeCredentials() {
+            console.log("Storing!");
+            var pn_1 = $('#pn').val();
+            var pw_1 = $('#pw').val();
+            setCookie("ASCards_un", pn_1, 365);
+            setCookie("ASCards_pw", pw_1, 365);
+            //alert("test");
+        }
 	</script>
 
 	<?php
 		if(isset($errorMessage)) {
-			echo "<table cellspacing=10 cellpadding=10 border=0px><tr><td><br><br><br>";
+			echo "<table cellspacing=10 cellpadding=10 border=0px><tr><td><br>";
 			echo "<span style='color:red; font-size: 42px;'>";
 			echo $errorMessage;
 			echo "</span>";
@@ -139,16 +173,21 @@ session_start();
 		}
 	?>
 
-	<form id="f1" style="visibility:hidden;" action="?login=1" method="post" autocomplete="on">
+	<form id="f1" onsubmit="storeCredentials();" style="visibility:hidden;" action="?login=1" method="post" autocomplete="on">
 		<table class="box" cellspacing=10 cellpadding=10 border=0px>
 			<tr>
 				<td class='mechselect_button_active'>
 					<img src="./images/icon_144x144.png">
 				</td>
 				<td class='mechselect_button_active'>
-					<input type="text" size="20" maxlength="80" id="pn" name="pn" required autocomplete="userName"><br>
-					<input type="password" size="20"  maxlength="32" id="pw" name="pw" required autocomplete="current-password"><br><br>
-					<input type="submit" size="50" style="width:200px" value="LOGIN"><br>
+	                <?php
+				        echo "<select style='width:250px;height=60px;' name='pn' size='1' maxlength='80' id='pn'>";
+                        echo $userlist;
+                        echo "</select><br>";
+                    ?>
+					<!-- <input type="text" size="20" maxlength="80"  style='width:250px;height=60px;' id="pn" name="pn" required autocomplete="userName"><br> -->
+					<input type="text" size="20" style='width:250px;height=60px;' maxlength="32" id="pw" name="pw" required autocomplete="current-password"><br><br>
+					<input type="submit" id="submitbutton" size="50" style="width:250px;height=60px;" value="LOGIN"><br>
 				</td>
 			</tr>
 		</table>

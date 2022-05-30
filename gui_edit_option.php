@@ -5,8 +5,9 @@ session_start();
 	require('./db.php');
 	if (!isset($_SESSION['playerid'])) {
 		echo "Not logged in... redirecting.<br>";
-		echo "<meta http-equiv='refresh' content='0;url=./login.php'>";
-		die();
+		echo "<meta http-equiv='refresh' content='0;url=./login.php?auto=1'>";
+		header("Location: ./login.php?auto=1");
+		die("Check position 8");
 	}
 
 	// Get data on units from db
@@ -23,7 +24,8 @@ session_start();
 		$result_update_options = mysqli_query($conn, $sql_update_options);
 		$playMode = $opt3;
 		echo "<meta http-equiv='refresh' content='0;url=./gui_edit_option.php'>";
-		die();
+		header("Location: ./gui_edit_option.php");
+		die("Check position 7");
 	} else {
 		// getting options from database
 		$sql_asc_options = "SELECT SQL_NO_CACHE * FROM asc_options where playerid = ".$pid;

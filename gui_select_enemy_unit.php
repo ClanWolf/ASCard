@@ -5,8 +5,9 @@ session_start();
 	require('./db.php');
 	if (!isset($_SESSION['playerid'])) {
 		echo "Not logged in... redirecting.<br>";
-		echo "<meta http-equiv='refresh' content='0;url=./login.php'>";
-		die();
+		echo "<meta http-equiv='refresh' content='0;url=./login.php?auto=1'>";
+		header("Location: ./login.php?auto=1");
+		die("Check position 6");
 	}
 
 	// Get data on units from db
