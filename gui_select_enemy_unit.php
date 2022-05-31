@@ -283,7 +283,7 @@ session_start();
 		}
 	}
 ?>
-		<tr><td colspan="8" style="color:eee;font-size:20;text-align:center;"><br>Only the 5 lowest bidders will be visible.</td></tr>
+		<tr><td colspan="8" style="color:eee;font-size:20;text-align:center;"><br>Only the 5 lowest bidders in PointValue (PV) will be visible.</td></tr>
 	</table>
 </body>
 
