@@ -317,10 +317,33 @@ function setCircles(h, a, s, e, fc, mp, w, uov) {
 		updatedmovementpointsground = Math.ceil(updatedmovementpointsground / 16);
 		updatemovementpointsjump = Math.ceil(updatemovementpointsjump / 16);
 	}
-	if (h == 4) {
+	if (h == 1) {
+		document.getElementById("mv_points").style.color ="#a49708";
+		document.getElementById("TMM").style.color = "#a49708";
+		updatedmovementpointsground = updatedmovementpointsground - 2;
+		updatemovementpointsjump = updatemovementpointsjump - 2;
+	} else if (h == 2) {
+		document.getElementById("mv_points").style.color ="#a49708";
+    	document.getElementById("TMM").style.color = "#a49708";
+		updatedmovementpointsground = updatedmovementpointsground - 4;
+		updatemovementpointsjump = updatemovementpointsjump - 4;
+	} else if (h == 3) {
+		document.getElementById("mv_points").style.color ="#a49708";
+		document.getElementById("TMM").style.color = "#a49708";
+		updatedmovementpointsground = updatedmovementpointsground - 6;
+		updatemovementpointsjump = updatemovementpointsjump - 6;
+	} else if (h == 4) {
 		document.getElementById("mv_points").style.color ="#ff0000";
 		document.getElementById("TMM").style.color ="#ff0000";
 		updatedmovementpointsground = 0;
+		updatemovementpointsjump = 0;
+	}
+	if (updatedmovementpointsground < 0) {
+		document.getElementById("mv_points").style.color ="#ff0000";
+		updatedmovementpointsground = 0;
+	}
+    if (updatemovementpointsjump < 0) {
+		document.getElementById("mv_points").style.color ="#ff0000";
 		updatemovementpointsjump = 0;
 	}
 	var mvstring = updatedmovementpointsground + "&rdquo;";

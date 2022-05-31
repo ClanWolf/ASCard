@@ -194,7 +194,7 @@ session_start();
 		}
 	}
 
-	if (!($stmt2 = $conn->prepare("SELECT SQL_NO_CACHE * FROM asc_player where bid_pv is not null and bid_pv > 0 and opfor = 0 ORDER BY bid_tonnage, bid_pv asc limit 5;"))) {
+	if (!($stmt2 = $conn->prepare("SELECT SQL_NO_CACHE * FROM asc_player where bid_pv is not null and bid_pv > 0 and opfor = 0 ORDER BY bid_pv, bid_tonnage asc limit 5;"))) {
 		echo "Prepare failed: (" . $conn->errno . ") " . $conn->error;
 	}
 	if ($stmt2->execute()) {

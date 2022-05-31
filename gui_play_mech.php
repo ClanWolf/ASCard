@@ -16,7 +16,6 @@ session_start();
 	$showplayerdata_topleft = $opt2;
 
 	$array_modified_TMM = array();
-	$array_AMM = array();
 ?>
 
 <html lang="en">
@@ -93,34 +92,22 @@ session_start();
 		var movementcache = 0;
 		var firedcache = 0;
 
-		var sminrollvalue = 3;
-		var sdamagevalue = 3;
-		var mminrollvalue = 3;
-		var mdamagevalue = 3;
-		var lminrollvalue = 3;
-		var ldamagevalue = 3;
-
-		function setFireValues() {
-			// Set spans to their respective values:
-			// SMinRoll
-			// SDamage
-			// MMinRoll
-			// MDamage
-			// LMinRoll
-			// LDamage
-			var sminrollspan = document.getElementById('SMinRoll');
-			var sdamagespan = document.getElementById('SDamage');
-			var mminrollspan = document.getElementById('MMinRoll');
-			var mdamagespan = document.getElementById('MDamage');
-			var lminrollspan = document.getElementById('LMinRoll');
-			var ldamagespan = document.getElementById('LDamage');
-
-			sminrollspan.innerHTML = sminrollvalue;
-			sdamagespan.innerHTML = sdamagevalue;
-			mminrollspan.innerHTML = mminrollvalue;
-			mdamagespan.innerHTML = mdamagevalue;
-			lminrollspan.innerHTML = lminrollvalue;
-			ldamagespan.innerHTML = ldamagevalue;
+		function setFireValues(mv, fired) {
+			// fired 1: HOLD FIRE
+			// fired 2: FIRED
+			// mv 2: STATIONARY AMM -1
+			// mv 3: WALKED
+			// mv 4: JUMPED AMM +2
+			if (mv == 2) {
+				console.log("mv: 2");
+				document.getElementById("AMM").innerHTML = "-1";
+			} else if (mv == 4) {
+				console.log("mv: 4");
+				document.getElementById("AMM").innerHTML = "+2";
+			} else {
+				console.log("mv: else");
+				document.getElementById("AMM").innerHTML = "0";
+			}
 		}
 
 		function changeMovementFlag(index, fln) {
@@ -165,22 +152,22 @@ session_start();
 							fired = 2; // fired on short range
 						}
 					}
-					if (na == "WF7_WEAPONSFIRED" && el1.checked == true) {
-						if (mv == 0) {
-							//alert("First movement has to be specified!");
-							el1.checked = false;
-						} else {
-							fired = 3; // fired on medium range
-						}
-					}
-					if (na == "WF8_WEAPONSFIRED" && el1.checked == true) {
-						if (mv == 0) {
-							//alert("First movement has to be specified!");
-							el1.checked = false;
-						} else {
-							fired = 4; // fired on long range
-						}
-					}
+//					if (na == "WF7_WEAPONSFIRED" && el1.checked == true) {
+//						if (mv == 0) {
+//							//alert("First movement has to be specified!");
+//							el1.checked = false;
+//						} else {
+//							fired = 3; // fired on medium range
+//						}
+//					}
+//					if (na == "WF8_WEAPONSFIRED" && el1.checked == true) {
+//						if (mv == 0) {
+//							//alert("First movement has to be specified!");
+//							el1.checked = false;
+//						} else {
+//							fired = 4; // fired on long range
+//						}
+//					}
 				}
 			})
 
@@ -216,7 +203,7 @@ session_start();
 				fired = 0;
 			}
 
-			setFireValues();
+			setFireValues(mv, fired);
 			var url="./save_movement.php?index="+index+"&mvmt="+mv+"&wpns="+fired;
 			//console.log("Final 3: " + url);
 			window.frames['saveframe'].location.replace(url);
@@ -262,7 +249,7 @@ session_start();
 
 			movementcache = movement;
 			firedcache = weaponsfired;
-			setFireValues();
+			setFireValues(movement, weaponsfired);
 		}
 
 		function clearFiredFlags(index, mv) {
@@ -618,7 +605,7 @@ session_start();
 							<td nowrap class="datalabel" width="12%" colspan="1">ROLE:</td>
 							<td nowrap class="datavalue_thin" width="38%" colspan="3"><?php echo "$array_ROLE[$chosenMechIndex]"; ?></td>
 							<td nowrap class="datalabel" width="12%" colspan="1">SKILL:</td>
-							<td nowrap class="datavalue" width="37%" colspan="3"><?php echo "$array_SKILL[$chosenMechIndex]"; ?></td>
+							<td nowrap class="datavalue" width="37%" colspan="3" valign="middle" style="top:0px;bottom:0px;vertical-align:middle;display:inline;"><?php echo "$array_SKILL[$chosenMechIndex]"; ?>&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-family:'Pathway Gothic One',sans-serif;font-size:75%;text-transform:uppercase;color:#999;" id="AMM">?</span> <span style="font-family:'Pathway Gothic One',sans-serif;font-size:75%;text-transform:uppercase;color:#999;">(AMM)</span></td>
 						</tr>
 					</table>
 				</div>
@@ -846,11 +833,13 @@ session_start();
 				<td id='moveinfo' align="right" valign="bottom">
 					<div id="moveinfo" valign="bottom" align="left">
 						<table cellspacing="5" cellpadding="0" width="100%">
+							<!--
 							<tr>
 								<td id="phasemovebutton1" class='phase_button_normal'>
 									<a href="#" onclick="">Immobile</a>
 								</td>
 							</tr>
+							-->
 
 
 
@@ -986,6 +975,19 @@ session_start();
 <div id="bottomright"><img src="./images/bt-logo2.png" width="250px"></div>
 
 <?php
+	// Show AMM
+	echo "<script>\n";
+	echo "	var movement = 0\n";
+	if ($array_MVMT[$chosenMechIndex] != null) {
+		echo "	movement = $array_MVMT[$chosenMechIndex]\n";
+	}
+	echo "	var weaponsfired = 0\n";
+	if ($array_WPNSFIRED[$chosenMechIndex] != null) {
+		echo "	weaponsfired = $array_WPNSFIRED[$chosenMechIndex]\n";
+	}
+	echo "	setFireValues(movement, weaponsfired);\n";
+	echo "</script>\n";
+
 	if ($movd==1) {
 		if ($playable) {
 			echo "<div id='editMovementValues' style='display:none;'>\n";
@@ -993,24 +995,24 @@ session_start();
 			echo "	<br>\n";
 			echo "	<table width='100%'>\n";
 			echo "		<tr>\n";
-			echo "			<td width='20%'></td>\n"; // onclick=\"location.href='".$locmeli."'\"
-			echo "			<td width='60%'>\n";
+			echo "			<td width='30%'></td>\n"; // onclick=\"location.href='".$locmeli."'\"
+			echo "			<td width='40%'>\n";
 			echo "				<div>\n";
 			echo "					<table width='100%' class='options' style='margin-left: auto;margin-right: auto;' cellspacing=4 cellpadding=4 border=0px>\n";
-			echo "						<tr>\n";
-			echo "							<td nowrap align='left' class='datalabel' style='vertical-align:top;'>\n";
-			echo "								<label class='bigcheck'><input onchange='changeMovementFlag($array_MECH_DBID[$chosenMechIndex], 1);' type='checkbox' class='bigcheck' name='MV1_IMMOBILE' value='yes'/><span class='bigcheck-target'></span></label>\n";
-			echo "							</td>\n";
-			echo "							<td nowrap align='left' class='datalabel'>\n";
-			echo "								&nbsp;&nbsp;&nbsp;Immobile\n";
-			echo "							</td>\n";
-			echo "							<td nowrap align='left' class='datavalue_small'>\n";
-			echo "								&nbsp;&nbsp;&nbsp;\n";
-			echo "							</td>\n";
-			echo "							<td nowrap align='left' class='datavalue_small'>\n";
-			echo "								&nbsp;&nbsp;&nbsp;TMM -4\n";
-			echo "							</td>\n";
-			echo "						</tr>\n";
+//			echo "						<tr>\n";
+//			echo "							<td nowrap align='left' class='datalabel' style='vertical-align:top;'>\n";
+//			echo "								<label class='bigcheck'><input onchange='changeMovementFlag($array_MECH_DBID[$chosenMechIndex], 1);' type='checkbox' class='bigcheck' name='MV1_IMMOBILE' value='yes'/><span class='bigcheck-target'></span></label>\n";
+//			echo "							</td>\n";
+//			echo "							<td nowrap align='left' class='datalabel'>\n";
+//			echo "								&nbsp;&nbsp;&nbsp;Immobile\n";
+//			echo "							</td>\n";
+//			echo "							<td nowrap align='left' class='datavalue_small'>\n";
+//			echo "								&nbsp;&nbsp;&nbsp;\n";
+//			echo "							</td>\n";
+//			echo "							<td nowrap align='left' class='datavalue_small'>\n";
+//			echo "								&nbsp;&nbsp;&nbsp;TMM -4\n";
+//			echo "							</td>\n";
+//			echo "						</tr>\n";
 			echo "						<tr>\n";
 			echo "							<td nowrap align='left' class='datalabel' style='vertical-align:top;'>\n";
 			echo "								<label class='bigcheck'><input onchange='changeMovementFlag($array_MECH_DBID[$chosenMechIndex], 2);' type='checkbox' class='bigcheck' name='MV2_STANDSTILL' value='yes'/><span class='bigcheck-target'></span></label>\n";
@@ -1065,7 +1067,7 @@ session_start();
 			}
 
 			if ($array_TP[$chosenMechIndex] == "BA") {
-				// BA do not use the +1 modifier for jumping
+				// BA do not use the modifier for jumping
 				$array_modified_TMM[$chosenMechIndex] = intval($array_TMM[$chosenMechIndex]) + intval($JJ_TMM_SPCL_Modifier); // + SPCL (!)
 				echo $array_modified_TMM[$chosenMechIndex] . " (#+SPCL)\n";
 			} else {
@@ -1082,63 +1084,77 @@ session_start();
  			echo "							<td id='fire_info_cell_2' nowrap colspan='4' align='left' class='datalabel_disabled_dashed'>\n";
 			echo "							    <table width='100%' cellspacing='1'>\n"; // style='background-color:#754743;'
 			echo "									<tr>\n";
-			echo "										<td colspan='1' width='25%' nowrap align='center' valign='top' class='datalabel' style='vertical-align:top;text-align:center'>\n";
+			echo "										<td colspan='1' width='50%' nowrap align='center' valign='top' class='datalabel' style='vertical-align:top;text-align:center'>\n";
 			echo "											<label class='bigcheck'><input onchange='changeMovementFlag($array_MECH_DBID[$chosenMechIndex], 5);' type='checkbox' class='bigcheck' name='WF5_WEAPONSFIRED' value='yes'/><span class='bigcheck-target'></span></label>\n";
  			echo "										</td>\n";
-			echo "										<td colspan='3' width='25%' nowrap align='center' valign='top' class='datalabel' style='vertical-align:top;text-align:center'>\n";
+			echo "										<td colspan='1' width='50%' nowrap align='center' valign='top' class='datalabel' style='vertical-align:top;text-align:center'>\n";
 			echo "											<label class='bigcheck'><input onchange='changeMovementFlag($array_MECH_DBID[$chosenMechIndex], 6);' type='checkbox' class='bigcheck' name='WF6_WEAPONSFIRED' value='yes'/><span class='bigcheck-target'></span></label>\n";
  			echo "										</td>\n";
-			echo "										<td colspan='3' width='25%' nowrap align='center' valign='top' class='datalabel' style='vertical-align:top;text-align:center'>\n";
-			echo "											<label class='bigcheck'><input onchange='changeMovementFlag($array_MECH_DBID[$chosenMechIndex], 7);' type='checkbox' class='bigcheck' name='WF7_WEAPONSFIRED' value='yes'/><span class='bigcheck-target'></span></label>\n";
- 			echo "										</td>\n";
-			echo "										<td colspan='3' width='25%' nowrap align='center' valign='top' class='datalabel' style='vertical-align:top;text-align:center'>\n";
-			echo "											<label class='bigcheck'><input onchange='changeMovementFlag($array_MECH_DBID[$chosenMechIndex], 8);' type='checkbox' class='bigcheck' name='WF8_WEAPONSFIRED' value='yes'/><span class='bigcheck-target'></span></label>\n";
- 			echo "										</td>\n";
+//			echo "										<td colspan='3' width='25%' nowrap align='center' valign='top' class='datalabel' style='vertical-align:top;text-align:center'>\n";
+//			echo "											<label class='bigcheck'><input onchange='changeMovementFlag($array_MECH_DBID[$chosenMechIndex], 7);' type='checkbox' class='bigcheck' name='WF7_WEAPONSFIRED' value='yes'/><span class='bigcheck-target'></span></label>\n";
+// 			echo "										</td>\n";
+//			echo "										<td colspan='3' width='25%' nowrap align='center' valign='top' class='datalabel' style='vertical-align:top;text-align:center'>\n";
+//			echo "											<label class='bigcheck'><input onchange='changeMovementFlag($array_MECH_DBID[$chosenMechIndex], 8);' type='checkbox' class='bigcheck' name='WF8_WEAPONSFIRED' value='yes'/><span class='bigcheck-target'></span></label>\n";
+// 			echo "										</td>\n";
 			echo "									</tr>\n";
 			echo "									<tr>\n";
-			echo "										<td nowrap align='center' class='datalabel' width='1%' style='vertical-align:top;text-align:center'>\n";
-			echo "											Hold\n";
-			echo "										</td>\n";
-			echo "										<td nowrap align='right' class='datalabel' width='16%' style='text-align:right;vertical-align:top;'>\n";
-			echo "											S&nbsp;&nbsp;&nbsp;&nbsp;<span style='vertical-align:top;' class='datalabel' id='SDamage'>x</span>\n";
-			echo "										</td>\n";
-			echo "										<td nowrap align='right' class='datalabel' width='1%' style='text-align:center;vertical-align:top;'>\n";
-			echo "											|\n";
-			echo "										</td>\n";
-			echo "										<td nowrap align='left' class='datalabel' width='16%' style='text-align:left;vertical-align:top;'>\n";
-			echo "											<span style='vertical-align:top;' class='datalabel' id='SMinRoll'>y</span>\n";
-			echo "										</td>\n";
-			echo "										<td nowrap align='right' class='datalabel' width='16%' style='text-align:right;vertical-align:top;'>\n";
-			echo "											M&nbsp;&nbsp;&nbsp;&nbsp;<span style='vertical-align:top;' class='datalabel' id='MDamage'>x</span>\n";
-			echo "										</td>\n";
-			echo "										<td nowrap align='right' class='datalabel' width='1%' style='text-align:center;vertical-align:top;'>\n";
-			echo "											|\n";
-			echo "										</td>\n";
-			echo "										<td nowrap align='left' class='datalabel' width='16%' style='text-align:left;vertical-align:top;'>\n";
-			echo "											<span style='vertical-align:top;' class='datalabel' id='MMinRoll'>y</span>\n";
-			echo "										</td>\n";
-			echo "										<td nowrap align='right' class='datalabel' width='16%' style='text-align:right;vertical-align:top;'>\n";
-			echo "											L&nbsp;&nbsp;&nbsp;&nbsp;<span style='vertical-align:top;' class='datalabel' id='LDamage'>x</span>\n";
-			echo "										</td>\n";
-			echo "										<td nowrap align='right' class='datalabel' width='1%' style='text-align:center;vertical-align:top;'>\n";
-			echo "											|\n";
-			echo "										</td>\n";
-			echo "										<td nowrap align='left' class='datalabel' width='16%' style='text-align:left;vertical-align:top;'>\n";
-			echo "											<span style='vertical-align:top;' class='datalabel' id='LMinRoll'>y</span>\n";
-			echo "										</td>\n";
+			echo "										<td colspan='1' width='50%' nowrap align='center' valign='top' class='datalabel' style='vertical-align:top;text-align:center'>\n";
+			echo "											HOLD FIRE\n";
+ 			echo "										</td>\n";
+			echo "										<td colspan='1' width='50%' nowrap align='center' valign='top' class='datalabel' style='vertical-align:top;text-align:center'>\n";
+			echo "											FIRED\n";
+ 			echo "										</td>\n";
+//			echo "										<td colspan='3' width='25%' nowrap align='center' valign='top' class='datalabel' style='vertical-align:top;text-align:center'>\n";
+//			echo "											<label class='bigcheck'><input onchange='changeMovementFlag($array_MECH_DBID[$chosenMechIndex], 7);' type='checkbox' class='bigcheck' name='WF7_WEAPONSFIRED' value='yes'/><span class='bigcheck-target'></span></label>\n";
+// 			echo "										</td>\n";
+//			echo "										<td colspan='3' width='25%' nowrap align='center' valign='top' class='datalabel' style='vertical-align:top;text-align:center'>\n";
+//			echo "											<label class='bigcheck'><input onchange='changeMovementFlag($array_MECH_DBID[$chosenMechIndex], 8);' type='checkbox' class='bigcheck' name='WF8_WEAPONSFIRED' value='yes'/><span class='bigcheck-target'></span></label>\n";
+// 			echo "										</td>\n";
 			echo "									</tr>\n";
-			echo "									<tr>\n";
-			echo "										<td nowrap colspan='1' class='datavalue_small' width='1%' style='vertical-align:top;text-align:center;'>Dissipate</td>\n";
-			echo "										<td nowrap colspan='1' class='datavalue_small' width='16%' style='vertical-align:top;text-align:right;'>+TMM<br>+Cover</td>\n";
-			echo "										<td nowrap colspan='1' class='datavalue_small' width='1%' style='vertical-align:top;text-align:center;'>|<br>|</td>\n";
-			echo "										<td nowrap colspan='1' class='datavalue_small' width='16%' style='vertical-align:top;text-align:left;'>+Behind</td>\n";
-			echo "										<td nowrap colspan='1' class='datavalue_small' width='16%' style='vertical-align:top;text-align:right;'>+TMM<br>+Cover</td>\n";
-			echo "										<td nowrap colspan='1' class='datavalue_small' width='1%' style='vertical-align:top;text-align:center;'>|<br>|</td>\n";
-			echo "										<td nowrap colspan='1' class='datavalue_small' width='16%' style='vertical-align:top;text-align:left;'>+Behind</td>\n";
-			echo "										<td nowrap colspan='1' class='datavalue_small' width='16%' style='vertical-align:top;text-align:right;'>+TMM<br>+Cover</td>\n";
-			echo "										<td nowrap colspan='1' class='datavalue_small' width='1%' style='vertical-align:top;text-align:center;'>|<br>|</td>\n";
-			echo "										<td nowrap colspan='1' class='datavalue_small' width='16%' style='vertical-align:top;text-align:left;'>+Behind</td>\n";
-			echo "									</tr>\n";
+//			echo "									<tr>\n";
+//			echo "										<td nowrap align='center' class='datalabel' width='1%' style='vertical-align:top;text-align:center'>\n";
+//			echo "											Hold\n";
+//			echo "										</td>\n";
+//			echo "										<td nowrap align='right' class='datalabel' width='16%' style='text-align:right;vertical-align:top;'>\n";
+//			echo "											S&nbsp;&nbsp;&nbsp;&nbsp;<span style='vertical-align:top;' class='datalabel' id='SDamage'>x</span>\n";
+//			echo "										</td>\n";
+//			echo "										<td nowrap align='right' class='datalabel' width='1%' style='text-align:center;vertical-align:top;'>\n";
+//			echo "											|\n";
+//			echo "										</td>\n";
+//			echo "										<td nowrap align='left' class='datalabel' width='16%' style='text-align:left;vertical-align:top;'>\n";
+//			echo "											<span style='vertical-align:top;' class='datalabel' id='SMinRoll'>y</span>\n";
+//			echo "										</td>\n";
+//			echo "										<td nowrap align='right' class='datalabel' width='16%' style='text-align:right;vertical-align:top;'>\n";
+//			echo "											M&nbsp;&nbsp;&nbsp;&nbsp;<span style='vertical-align:top;' class='datalabel' id='MDamage'>x</span>\n";
+//			echo "										</td>\n";
+//			echo "										<td nowrap align='right' class='datalabel' width='1%' style='text-align:center;vertical-align:top;'>\n";
+//			echo "											|\n";
+//			echo "										</td>\n";
+//			echo "										<td nowrap align='left' class='datalabel' width='16%' style='text-align:left;vertical-align:top;'>\n";
+//			echo "											<span style='vertical-align:top;' class='datalabel' id='MMinRoll'>y</span>\n";
+//			echo "										</td>\n";
+//			echo "										<td nowrap align='right' class='datalabel' width='16%' style='text-align:right;vertical-align:top;'>\n";
+//			echo "											L&nbsp;&nbsp;&nbsp;&nbsp;<span style='vertical-align:top;' class='datalabel' id='LDamage'>x</span>\n";
+//			echo "										</td>\n";
+//			echo "										<td nowrap align='right' class='datalabel' width='1%' style='text-align:center;vertical-align:top;'>\n";
+//			echo "											|\n";
+//			echo "										</td>\n";
+//			echo "										<td nowrap align='left' class='datalabel' width='16%' style='text-align:left;vertical-align:top;'>\n";
+//			echo "											<span style='vertical-align:top;' class='datalabel' id='LMinRoll'>y</span>\n";
+//			echo "										</td>\n";
+//			echo "									</tr>\n";
+//			echo "									<tr>\n";
+//			echo "										<td nowrap colspan='1' class='datavalue_small' width='1%' style='vertical-align:top;text-align:center;'>Dissipate</td>\n";
+//			echo "										<td nowrap colspan='1' class='datavalue_small' width='16%' style='vertical-align:top;text-align:right;'>+TMM<br>+Cover</td>\n";
+//			echo "										<td nowrap colspan='1' class='datavalue_small' width='1%' style='vertical-align:top;text-align:center;'>|<br>|</td>\n";
+//			echo "										<td nowrap colspan='1' class='datavalue_small' width='16%' style='vertical-align:top;text-align:left;'>+Behind</td>\n";
+//			echo "										<td nowrap colspan='1' class='datavalue_small' width='16%' style='vertical-align:top;text-align:right;'>+TMM<br>+Cover</td>\n";
+//			echo "										<td nowrap colspan='1' class='datavalue_small' width='1%' style='vertical-align:top;text-align:center;'>|<br>|</td>\n";
+//			echo "										<td nowrap colspan='1' class='datavalue_small' width='16%' style='vertical-align:top;text-align:left;'>+Behind</td>\n";
+//			echo "										<td nowrap colspan='1' class='datavalue_small' width='16%' style='vertical-align:top;text-align:right;'>+TMM<br>+Cover</td>\n";
+//			echo "										<td nowrap colspan='1' class='datavalue_small' width='1%' style='vertical-align:top;text-align:center;'>|<br>|</td>\n";
+//			echo "										<td nowrap colspan='1' class='datavalue_small' width='16%' style='vertical-align:top;text-align:left;'>+Behind</td>\n";
+//			echo "									</tr>\n";
 //			echo "									<tr>\n";
 //			echo "										<td nowrap colspan='1' class='datavalue_small' width='1%' style='text-align:center;'>Heat</td>\n";
 //			echo "										<td nowrap colspan='1' class='datavalue_small' width='16%' style='text-align:right;'>+Cover</td>\n";
@@ -1157,7 +1173,7 @@ session_start();
 			echo "					</table>\n";
 			echo "				<div>\n";
 			echo "			</td>\n";
-			echo "			<td width='20%' valign='top'>\n";
+			echo "			<td width='30%' valign='top'>\n";
 			echo "				<a href='#' onclick=\"location.href='".$locmeli."'\">&nbsp;&nbsp;&nbsp;&nbsp;<img src='./images/confirm.png' width='80px'></a><br>\n";
 			echo "			</td>\n";
 			echo "		</tr>\n";
@@ -1174,6 +1190,7 @@ session_start();
 				echo "	weaponsfired = $array_WPNSFIRED[$chosenMechIndex]\n";
 			}
 			echo "	setMovementFlags($array_MECH_DBID[$chosenMechIndex], movement, weaponsfired);\n";
+			echo "	setFireValues(movement, weaponsfired);\n";
 			echo "  document.getElementById('editMovementValues').style.visibility='visible';\n";
 			echo " 	$('#editMovementValues').show();\n";
 			echo "</script>\n";
