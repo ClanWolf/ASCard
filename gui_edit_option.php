@@ -7,7 +7,7 @@ session_start();
 		echo "Not logged in... redirecting.<br>";
 		echo "<meta http-equiv='refresh' content='0;url=./login.php?auto=1'>";
 		header("Location: ./login.php?auto=1");
-		die("Check position 8");
+		//die("Check position 8");
 	}
 
 	// Get data on units from db
@@ -25,7 +25,7 @@ session_start();
 		$playMode = $opt3;
 		echo "<meta http-equiv='refresh' content='0;url=./gui_edit_option.php'>";
 		header("Location: ./gui_edit_option.php");
-		die("Check position 7");
+		//die("Check position 7");
 	} else {
 		// getting options from database
 		$sql_asc_options = "SELECT SQL_NO_CACHE * FROM asc_options where playerid = ".$pid;

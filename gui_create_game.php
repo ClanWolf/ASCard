@@ -7,7 +7,7 @@ session_start();
 		echo "Not logged in... redirecting.<br>";
 		echo "<meta http-equiv='refresh' content='0;url=./login.php?auto=1'>";
 		header("Location: ./login.php?auto=1");
-		die("Check position 10");
+		//die("Check position 10");
 	}
 	// Get data on units from db
 	$pid = $_SESSION['playerid'];

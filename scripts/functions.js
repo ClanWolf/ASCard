@@ -119,12 +119,12 @@ function readCircles(index, a_max, s_max) {
     	if (s == maximalstructurepoints) {
     		mechstatus = 4;
     		mechstatusimage = "images/DD_04.png";
-    		document.getElementById('toprightimage').src='./images/top-right_phase00.png';
+    		document.getElementById('toprightimage').src='./images/top-right_old.png';
     	}
     	if (e == 2) {
     		mechstatus = 4;
     		mechstatusimage = "images/DD_04.png";
-    		document.getElementById('toprightimage').src='./images/top-right_phase00.png';
+    		document.getElementById('toprightimage').src='./images/top-right_old.png';
     	}
 	}
 
@@ -472,29 +472,29 @@ function setCircles(h, a, s, e, fc, mp, w, uov) {
 	if (mechstatus == 4) {
 		// Mech destroyed
 		// document.body.style.backgroundImage = "url('" + wallpaperWrecked + "')";
-		document.getElementById('mechalive_status').src="./images/skull.png";
-		document.getElementById('toprightimage').src="./images/top-right_phase00.png";
+		//document.getElementById('mechalive_status').src="./images/skull.png";
+		//document.getElementById('toprightimage').src="./images/top-right_phase00.png";
 	} else {
 		// document.body.style.backgroundImage = "url('./images/body-bg_" + wallpaperNorm + ".png')";
 		document.getElementById('mechalive_status').src="./images/vitalmonitor.gif";
 		// console.log(movement);
 		if ((movement == 0 || movement === undefined) && weaponsfired == 0) {
-			document.getElementById('toprightimage').src="./images/top-right_phase01.png";
+		//	document.getElementById('toprightimage').src="./images/top-right_phase01.png";
 		}
 		if ((movement > 0 && movement < 5) && weaponsfired == 0) {
-			document.getElementById('toprightimage').src="./images/top-right_phase02.png";
+		//	document.getElementById('toprightimage').src="./images/top-right_phase02.png";
 		}
 		if ((movement > 0 && movement < 5) && weaponsfired == 1) {
-			document.getElementById('toprightimage').src="./images/top-right_phase03.png";
+		//	document.getElementById('toprightimage').src="./images/top-right_phase03.png";
 		}
 		if ((movement > 0 && movement < 5) && weaponsfired == 2) {
-			document.getElementById('toprightimage').src="./images/top-right_phase03.png";
+		//	document.getElementById('toprightimage').src="./images/top-right_phase03.png";
 		}
 		if ((movement > 0 && movement < 5) && weaponsfired == 3) {
-			document.getElementById('toprightimage').src="./images/top-right_phase03.png";
+		//	document.getElementById('toprightimage').src="./images/top-right_phase03.png";
 		}
 		if ((movement > 0 && movement < 5) && weaponsfired == 4) {
-			document.getElementById('toprightimage').src="./images/top-right_phase03.png";
+		//	document.getElementById('toprightimage').src="./images/top-right_phase03.png";
 		}
 	}
 

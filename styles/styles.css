@@ -127,22 +127,6 @@ a:hover {
 	border-style: solid;
     //border-width: 1px;
 }
-#mech_number {
-	z-index: 100;
-	position: absolute;
-	display: inline-block;
-	text-align: right;
-	vertical-align: middle;
-	padding: 0px;
-	//background-image: url('../images/mech_number.png');
-	background-size: cover;
-	width: 90px;
-	height: 60px;
-	line-height: 60px;
-	right: 5px;
-	top: 138px;
-	color: #fff;
-}
 #topleft {
 	z-index: 3;
 	position: absolute;
@@ -215,6 +199,7 @@ a:hover {
 	right: 274px;
 	width: 80px;
 	height: 54px;
+	visibility: hidden;
 }
 #player_image {
 	z-index: 1250;
@@ -337,15 +322,32 @@ a:hover {
 	bottom: 46px;
 	color: #000000;
 }
+#mech_number {
+	z-index: 100;
+	position: absolute;
+	display: inline-block;
+	text-align: right;
+	vertical-align: middle;
+	padding: 0px;
+	//background-image: url('../images/mech_number.png');
+	background-size: cover;
+	width: 90px;
+	height: 50px;
+	line-height: 60px;
+	right: 10px;
+	top: 85px;
+	color: #fff;
+}
 #pv {
 	z-index: 11;
 	position: absolute;
-//	display: inline-block;
+	display: inline-block;
    	text-align: right;
  	vertical-align: middle;
 	padding: 0px;
 	top: 95px;
-	right: 5px;
+	height: 50px;
+	right: 75px;
 }
 #bottomleft {
 	z-index: 20;

@@ -6,7 +6,7 @@ session_start();
 		echo "Not logged in... redirecting.<br>";
 		echo "<meta http-equiv='refresh' content='0;url=./login.php?auto=1'>";
 		header("Location: ./login.php?auto=1");
-		die("Check position 5");
+		//die("Check position 5");
 	}
 	$pid = $_SESSION['playerid'];
 	$pimage = $_SESSION['playerimage'];
@@ -366,13 +366,13 @@ session_start();
 	if (!isset($_GET["unit"])) {
 		echo "<meta http-equiv='refresh' content='0;url=./gui_select_unit.php'> ";
 		header("Location: ./gui_select_unit.php");
-		die("Check position 1");
+		//die("Check position 1");
 	}
 	$unitid = $_GET["unit"];
 	if (empty($unitid)) {
 		echo "<meta http-equiv='refresh' content='0;url=./gui_select_unit.php'> ";
 		header("Location: ./gui_select_unit.php");
-		die("Check position 2");
+		//die("Check position 2");
 	}
 	$chosenMechIndex = $_GET["chosenmech"];
 	if (empty($chosenMechIndex)) {
@@ -526,7 +526,8 @@ session_start();
 
 <div id="topright">
 	<a onclick=location.href=<?php echo "'$currentmeli'"; ?> href=<?php echo "'$currentmeli'"; ?>>
-		<img id='toprightimage' src=<?php echo "'$currentPhaseButton'"; ?> style='height:170px;'>
+		<!--<img id='toprightimage' src=<?php echo "'$currentPhaseButton'"; ?> style='height:170px;'> -->
+		<img id='toprightimage' src='./images/top-right_old.png' style='height:170px;'>
 	</a>
 </div>
 
@@ -605,7 +606,7 @@ session_start();
 							<td nowrap class="datalabel" width="12%" colspan="1">ROLE:</td>
 							<td nowrap class="datavalue_thin" width="38%" colspan="3"><?php echo "$array_ROLE[$chosenMechIndex]"; ?></td>
 							<td nowrap class="datalabel" width="12%" colspan="1">SKILL:</td>
-							<td nowrap class="datavalue" width="37%" colspan="3" valign="middle" style="top:0px;bottom:0px;vertical-align:middle;display:inline;"><?php echo "$array_SKILL[$chosenMechIndex]"; ?>&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-family:'Pathway Gothic One',sans-serif;font-size:75%;text-transform:uppercase;color:#999;" id="AMM">?</span> <span style="font-family:'Pathway Gothic One',sans-serif;font-size:75%;text-transform:uppercase;color:#999;">(AMM)</span></td>
+							<td nowrap class="datavalue" width="37%" colspan="3" valign="middle" style="top:0px;bottom:0px;vertical-align:middle;"><?php echo "$array_SKILL[$chosenMechIndex]"; ?>&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-family:'Pathway Gothic One',sans-serif;font-size:75%;text-transform:uppercase;color:#999;" id="AMM">?</span> <span style="font-family:'Pathway Gothic One',sans-serif;font-size:75%;text-transform:uppercase;color:#999;">(AMM)</span></td>
 						</tr>
 					</table>
 				</div>
@@ -725,7 +726,43 @@ session_start();
 					</tr>
 				</table>
 			-->
+				<div class="dataarea">
+					<table width="100%">
+						<tr>
+							<td nowrap rowspan="1" style="vertical-align: bottom;" valign="bottom" class="datalabel" width="1%">
+								<table cellspacing="0" cellpadding="0">
+									<tr>
+										<td nowrap rowspan="2" style="vertical-align: bottom;" valign="bottom">
+											&nbsp;<a href=<?php echo "'$currentmeli'"; ?>"><img src=<?php echo "'$currentMechStatusImage'"; ?>" style='height:60px;'></a>&nbsp;&nbsp;&nbsp;
+										</td>
+										<td nowrap class="datalabel_thin">FIRED:&nbsp;</td>
+										<td nowrap class="datalabel_thin">
+											<label class='bigcheck'><input type='checkbox' class='bigcheck' name='fired1_hold' value='no'/><span class='bigcheck-target'></span></label>
+											<label class='bigcheck'><input type='checkbox' class='bigcheck' name='fired2_fired' value='no'/><span class='bigcheck-target'></span></label>
+										</td>
+									</tr>
+									<tr>
+										<td nowrap class="datalabel_thin">MOVED:&nbsp;</td>
+										<td nowrap class="datalabel_thin">
+											<label class='bigcheck'><input type='checkbox' class='bigcheck' name='moved1_standstill' value='no'/><span class='bigcheck-target'></span></label>
+											<label class='bigcheck'><input type='checkbox' class='bigcheck' name='moved2_moved' value='no'/><span class='bigcheck-target'></span></label>
+											<label class='bigcheck'><input type='checkbox' class='bigcheck' name='moved3_jumped' value='no'/><span class='bigcheck-target'></span></label>
+										</td>
+									</tr>
+								</table>
+							</td>
 
+							<td align="center" width="98%">
+								<div id="phasebutton" name="phasebutton"><a href=<?php echo "'$currentmeli'"; ?>><img src=<?php echo "'$currentPhaseButton'"; ?> style='height:70px;'></a></div>
+							</td>
+							<td align="right" width="1%" valign="middle">
+								<div id="movementtoken" valign="middle" align="center">
+									<a href=<?php echo "'$currentmeli'"; ?>"><img id="movementtoken" src="./images/dice/yd6_4.png" width="50px"></a>
+								</div>
+							</td>
+						</tr>
+					</table>
+				</div>
 <?php
 	if ($array_TP[$chosenMechIndex] == "BA") {
 		// Do not show the heat block for all Battle Armor units

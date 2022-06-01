@@ -56,7 +56,7 @@ session_start();
 						}
    						echo "<meta http-equiv='refresh' content='0;url=./gui_select_unit.php'>";
    						header("Location: ./gui_select_unit.php");
-						die('Login succeeded!<br>');
+						//die('Login succeeded!<br>');
 					} else {
 						$errorMessage = "LOGIN FAILED!<br>";
 					}

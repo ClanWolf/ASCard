@@ -4,6 +4,6 @@
 	if ($conn->connect_error) {
 		echo "<meta http-equiv='refresh' content='0;url=./login.php?auto=1'>";
     	header("Location: ./login.php?auto=1");
-		die("Connection failed: " . $conn->connect_error);
+		//die("Connection failed: " . $conn->connect_error);
 	}
 ?>
