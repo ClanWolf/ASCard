@@ -127,7 +127,8 @@
 				// as_long; as_long_min; as_extreme; as_extreme_min; 
 				// as_ov; as_armor; as_structure; as_threshold; as_specials;
 				// mech_imageurl
-				$sql_asc_mech = "SELECT SQL_NO_CACHE * FROM asc_mech where mechid=".$mechid." and active_bid=1 order by mech_tonnage desc;";
+				// and active_bid=1
+				$sql_asc_mech = "SELECT SQL_NO_CACHE * FROM asc_mech where mechid=".$mechid." order by mech_tonnage desc;";
 				$result_asc_mech = mysqli_query($conn, $sql_asc_mech);
 				if (mysqli_num_rows($result_asc_mech) > 0) {
 					while($row = mysqli_fetch_assoc($result_asc_mech)) {

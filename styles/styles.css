@@ -334,7 +334,7 @@ a:hover {
 	width: 90px;
 	height: 50px;
 	line-height: 60px;
-	right: 10px;
+	right: 20px;
 	top: 85px;
 	color: #fff;
 }
@@ -345,9 +345,9 @@ a:hover {
    	text-align: right;
  	vertical-align: middle;
 	padding: 0px;
-	top: 95px;
+	top: 80px;
 	height: 50px;
-	right: 75px;
+	right: 265px;
 }
 #bottomleft {
 	z-index: 20;

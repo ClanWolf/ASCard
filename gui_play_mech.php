@@ -130,8 +130,9 @@ session_start();
 					if ((na.substring(0, 4) == "MV2_") && el1.checked == true) { mv = 2; }
 					if ((na.substring(0, 4) == "MV3_") && el1.checked == true) { mv = 3; }
 					if ((na.substring(0, 4) == "MV4_") && el1.checked == true) { mv = 4; }
+					if ((na.substring(0, 4) == "MV9_") && el1.checked == true) { mv = 9; }
 
-					if (na.substring(0,2) == "WF" && (fln!=1 && fln!=2 && fln!=3 && fln!=4)) { el1.checked = false }
+					if (na.substring(0,2) == "WF" && (fln!=1 && fln!=2 && fln!=3 && fln!=4 && fln!=9)) { el1.checked = false }
 					if (na.substring(0,4) == "WF" + fln + "_") {
 						el1.checked = true;
 					}
@@ -141,7 +142,7 @@ session_start();
 							//alert("First movement has to be specified!");
 							el1.checked = false;
 						} else {
-							fired = 1; // not fired on purpose to cool down
+							fired = 1; // not fired on purpose to cool down (or the unit sprinted)
 						}
 					}
 					if (na == "WF6_WEAPONSFIRED" && el1.checked == true) {
@@ -149,7 +150,7 @@ session_start();
 							//alert("First movement has to be specified!");
 							el1.checked = false;
 						} else {
-							fired = 2; // fired on short range
+							fired = 2; // fired weapons, was before: fired on short range (not anymore, there is just fired or hold fire)
 						}
 					}
 //					if (na == "WF7_WEAPONSFIRED" && el1.checked == true) {
@@ -175,7 +176,7 @@ session_start();
 			if (elem == null || elem === undefined) {
 				// nothing
 			} else {
-				if (mv == "0") {
+				if (mv == "0" || mv == "9") {
 					elem.className = 'datalabel_disabled_dashed';
 				} else {
 					elem.className = 'datalabel';
@@ -186,12 +187,12 @@ session_start();
 			if (movementcache == mv && (fln!=5 && fln!=6 && fln!=7 && fln!=8)) {
 				clearMovementFlags(index);
 				clearmovement = true;
-				fired=0;
+				fired = 0;
 			} else {
 				movementcache = mv;
 			}
 
-			if (firedcache == fired && (fln!=1 && fln!=2 && fln!=3 && fln!=4)) {
+			if (firedcache == fired && (fln!=1 && fln!=2 && fln!=3 && fln!=4 && fln!=9)) {
 				clearFiredFlags(index, mv);
 				fired = 0;
 			} else {
@@ -202,6 +203,22 @@ session_start();
 				mv = 0;
 				fired = 0;
 			}
+
+			if (mv == 9) {
+				fired = 1;
+			}
+
+			if (mv == "9") {
+                var e1 = document.getElementById("WF5_WEAPONSFIRED");
+                var e2 = document.getElementById("WF6_WEAPONSFIRED");
+                e1.checked = true;
+                e2.checked = false;
+				var e1a = document.getElementById("WF5_WEAPONSFIRED2");
+				var e2a = document.getElementById("WF6_WEAPONSFIRED2");
+				e1a.checked = true;
+                e2a.checked = false;
+                fired = 1;
+            }
 
 			setFireValues(mv, fired);
 			var url="./save_movement.php?index="+index+"&mvmt="+mv+"&wpns="+fired;
@@ -222,17 +239,18 @@ session_start();
 					if ((na.substring(0, 4) == "MV2_") && movement == 2) { el1.checked = true; }
 					if ((na.substring(0, 4) == "MV3_") && movement == 3) { el1.checked = true; }
 					if ((na.substring(0, 4) == "MV4_") && movement == 4) { el1.checked = true; }
+					if ((na.substring(0, 4) == "MV9_") && movement == 9) { el1.checked = true; }
 
 					// weaponsfired == 0 : not fired yet
 					// weaponsfired == 1 : not fired on purpose
-					// weaponsfired == 2 : fired on short
-					// weaponsfired == 3 : fired on medium
-					// weaponsfired == 4 : fired on long
+					// weaponsfired == 2 : fired
 
 					if (na == "WF5_WEAPONSFIRED" && weaponsfired == 1) { el1.checked = true; }
+					if (na == "WF5_WEAPONSFIRED2" && weaponsfired == 1) { el1.checked = true; }
 					if (na == "WF6_WEAPONSFIRED" && weaponsfired == 2) { el1.checked = true; }
-					if (na == "WF7_WEAPONSFIRED" && weaponsfired == 3) { el1.checked = true; }
-					if (na == "WF8_WEAPONSFIRED" && weaponsfired == 4) { el1.checked = true; }
+					if (na == "WF6_WEAPONSFIRED2" && weaponsfired == 2) { el1.checked = true; }
+					//if (na == "WF7_WEAPONSFIRED" && weaponsfired == 3) { el1.checked = true; }
+					//if (na == "WF8_WEAPONSFIRED" && weaponsfired == 4) { el1.checked = true; }
 				}
 			})
 
@@ -240,11 +258,23 @@ session_start();
 			if (elem == null || elem === undefined) {
 				// nothing
 			} else {
-				if (movement == "0") {
+				if (movement == "0" || movement == "9") {
 					elem.className = 'datalabel_disabled_dashed';
 				} else {
 					elem.className = 'datalabel';
 				}
+			}
+
+			if (movement == "9") {
+				var e1 = document.getElementById("WF5_WEAPONSFIRED");
+				var e2 = document.getElementById("WF6_WEAPONSFIRED");
+				e1.checked = true;
+                e2.checked = false;
+				var e1a = document.getElementById("WF5_WEAPONSFIRED2");
+				var e2a = document.getElementById("WF6_WEAPONSFIRED2");
+				e1a.checked = true;
+                e2a.checked = false;
+                fired = 1;
 			}
 
 			movementcache = movement;
@@ -431,6 +461,11 @@ session_start();
 
 <?php
 	$size = sizeof($array_MECH_MODEL);
+	for ($i11 = 1; $i11 <= sizeof($array_MECH_MODEL); $i11++) {
+		if ($array_ACTIVE_BID[$i11] == "0") {
+        	$size = $size - 1;
+        }
+	}
 	$width = ceil(100 / $size);
 	$heatimage = array();
 	$currentMechStatusImage = "./images/check_red.png";
@@ -440,8 +475,7 @@ session_start();
 	$currentMechMovement = 0;
 	$currentMechFired = 0;
 
-	for ($i4 = 1; $i4 <= $size; $i4++) {
-
+	for ($i4 = 1; $i4 <= sizeof($array_MECH_MODEL); $i4++) {
 		$mechstatusimage = "./images/check_red.png";
 		$mvmt = $array_MVMT[$i4];
 		$wpnsfired = $array_WPNSFIRED[$i4];
@@ -501,7 +535,11 @@ session_start();
 			echo "<td width='".$width."%' nowrap><table width='100%' cellspacing='0' cellpadding='0' class='mechselect_button_active_play_left'><tr><td nowrap width='30px' align='center' valign='center'><div style='display:inline-block;height:100%;vertical-align:middle;'><span style='color:#ccffff;font-size:15px;'>&nbsp;&nbsp;".$mn."&nbsp;&nbsp;</span><br><img id='mechstatusimagemenu' style='vertical-align:middle;' src='".$array_MECH_IMG_STATUS[$i4]."' height='25px' width='23px'></div></td><td nowrap width='100%'><div><img src='./images/ranks/".$factionid."/".$array_PILOT_RANK[$i4].".png' width='18px' height='18px'>&nbsp;<a style='font-size:24px' href='".$meli."'>".$array_PILOT[$i4]."</a>&nbsp;&nbsp;<img src='".$mechstatusimage."' height='21px'>".$heatimage[$i4]."<br><span style='font-size:14px;'>".$memodel."</span></div></td></tr></table></td>\r\n";
 		} else {
 			// <td width='".$width."%' nowrap onclick=\"location.href='".$meli."'\">
-			echo "<td width='".$width."%' nowrap onclick=\"location.href='".$meli."'\"><table width='100%' cellspacing='0' cellpadding='0' class='mechselect_button_normal_play_left'><tr><td nowrap width='30px' align='center' valign='center'><div style='display:inline-block;height:100%;vertical-align:middle;'><span style='color:#ccffff;font-size:15px;'>&nbsp;&nbsp;".$mn."&nbsp;&nbsp;</span><br><img style='vertical-align:middle;' src='".$array_MECH_IMG_STATUS[$i4]."' height='25px' width='23px'></div></td><td nowrap width='100%'><div><img src='./images/ranks/".$factionid."/".$array_PILOT_RANK[$i4].".png' width='18px' height='18px'>&nbsp;<a style='font-size:24px' href='".$meli."'>".$array_PILOT[$i4]."</a>&nbsp;&nbsp;<img src='".$mechstatusimage."' height='21px'>".$heatimage[$i4]."<br><span style='font-size:14px;'>".$memodel."</span></div></td></tr></table></td>\r\n";
+			if ($array_ACTIVE_BID[$i4] == "1") {
+            	echo "<td width='".$width."%' nowrap onclick=\"location.href='".$meli."'\"><table width='100%' cellspacing='0' cellpadding='0' class='mechselect_button_normal_play_left'><tr><td nowrap width='30px' align='center' valign='center'><div style='display:inline-block;height:100%;vertical-align:middle;'><span style='color:#ccffff;font-size:15px;'>&nbsp;&nbsp;".$mn."&nbsp;&nbsp;</span><br><img style='vertical-align:middle;' src='".$array_MECH_IMG_STATUS[$i4]."' height='25px' width='23px'></div></td><td nowrap width='100%'><div><img src='./images/ranks/".$factionid."/".$array_PILOT_RANK[$i4].".png' width='18px' height='18px'>&nbsp;<a style='font-size:24px' href='".$meli."'>".$array_PILOT[$i4]."</a>&nbsp;&nbsp;<img src='".$mechstatusimage."' height='21px'>".$heatimage[$i4]."<br><span style='font-size:14px;'>".$memodel."</span></div></td></tr></table></td>\r\n";
+            } else {
+                echo "<td style='display:none;visibility:hidden;' width='".$width."%' nowrap onclick=\"location.href='".$meli."'\"><table width='100%' cellspacing='0' cellpadding='0' class='mechselect_button_normal_play_left'><tr><td nowrap width='30px' align='center' valign='center'><div style='display:inline-block;height:100%;vertical-align:middle;'><span style='color:#ccffff;font-size:15px;'>&nbsp;&nbsp;".$mn."&nbsp;&nbsp;</span><br><img style='vertical-align:middle;' src='".$array_MECH_IMG_STATUS[$i4]."' height='25px' width='23px'></div></td><td nowrap width='100%'><div><img src='./images/ranks/".$factionid."/".$array_PILOT_RANK[$i4].".png' width='18px' height='18px'>&nbsp;<a style='font-size:24px' href='".$meli."'>".$array_PILOT[$i4]."</a>&nbsp;&nbsp;<img src='".$mechstatusimage."' height='21px'>".$heatimage[$i4]."<br><span style='font-size:14px;'>".$memodel."</span></div></td></tr></table></td>\r\n";
+			}
 		}
 	}
 ?>
@@ -527,7 +565,7 @@ session_start();
 <div id="topright">
 	<a onclick=location.href=<?php echo "'$currentmeli'"; ?> href=<?php echo "'$currentmeli'"; ?>>
 		<!--<img id='toprightimage' src=<?php echo "'$currentPhaseButton'"; ?> style='height:170px;'> -->
-		<img id='toprightimage' src='./images/top-right_old.png' style='height:170px;'>
+		<img id='toprightimage' src='./images/top-right_02.png' style='height:135px;'>
 	</a>
 </div>
 
@@ -729,38 +767,31 @@ session_start();
 				<div class="dataarea">
 					<table width="100%">
 						<tr>
-							<td nowrap rowspan="1" style="vertical-align: bottom;" valign="bottom" class="datalabel" width="1%">
-								<table cellspacing="0" cellpadding="0">
-									<tr>
-										<td nowrap rowspan="2" style="vertical-align: bottom;" valign="bottom">
-											&nbsp;<a href=<?php echo "'$currentmeli'"; ?>"><img src=<?php echo "'$currentMechStatusImage'"; ?>" style='height:60px;'></a>&nbsp;&nbsp;&nbsp;
-										</td>
-										<td nowrap class="datalabel_thin">FIRED:&nbsp;</td>
-										<td nowrap class="datalabel_thin">
-											<label class='bigcheck'><input type='checkbox' class='bigcheck' name='fired1_hold' value='no'/><span class='bigcheck-target'></span></label>
-											<label class='bigcheck'><input type='checkbox' class='bigcheck' name='fired2_fired' value='no'/><span class='bigcheck-target'></span></label>
-										</td>
-									</tr>
-									<tr>
-										<td nowrap class="datalabel_thin">MOVED:&nbsp;</td>
-										<td nowrap class="datalabel_thin">
-											<label class='bigcheck'><input type='checkbox' class='bigcheck' name='moved1_standstill' value='no'/><span class='bigcheck-target'></span></label>
-											<label class='bigcheck'><input type='checkbox' class='bigcheck' name='moved2_moved' value='no'/><span class='bigcheck-target'></span></label>
-											<label class='bigcheck'><input type='checkbox' class='bigcheck' name='moved3_jumped' value='no'/><span class='bigcheck-target'></span></label>
-										</td>
-									</tr>
-								</table>
+							<td nowrap rowspan="2" style="vertical-align: middle;" valign="middle" align="center" width="15%">
+                               	<div style="padding: 0 15 0 15;" id="phasebutton" name="phasebutton"><a href=<?php echo "'$currentmeli'"; ?>><img src=<?php echo "'$currentPhaseButton'"; ?> style='height:50px;'></a></div>
+                            </td>
+							<td id="INFOFIRED" nowrap  width="15%" class="datalabel">FIRED:&nbsp;</td>
+							<td nowrap width="70%" class="datalabel_thin">
+								<label class='bigcheck'><input type='checkbox' class='bigcheck' name='WF5_WEAPONSFIRED2' id='WF5_WEAPONSFIRED2' value='no'/><span class='bigcheck-target'></span></label>
+								<label class='bigcheck'><input type='checkbox' class='bigcheck' name='WF6_WEAPONSFIRED2' id='WF6_WEAPONSFIRED2' value='no'/><span class='bigcheck-target'></span></label>
 							</td>
 
-							<td align="center" width="98%">
-								<div id="phasebutton" name="phasebutton"><a href=<?php echo "'$currentmeli'"; ?>><img src=<?php echo "'$currentPhaseButton'"; ?> style='height:70px;'></a></div>
-							</td>
-							<td align="right" width="1%" valign="middle">
-								<div id="movementtoken" valign="middle" align="center">
-									<a href=<?php echo "'$currentmeli'"; ?>"><img id="movementtoken" src="./images/dice/yd6_4.png" width="50px"></a>
+							<td align="middle" width="98%" valign="middle"></td>
+							<td rowspan="2" align="right" width="1%" valign="bottom">
+								<div id="movementtoken" valign="bottom" align="right">
+									<a href=<?php echo "'$currentmeli'"; ?>"><img id="movementtoken" src="./images/dice/yd6_4.png" height="40px"></a>
 								</div>
 							</td>
 						</tr>
+						<tr>
+                            <td id="INFOMOVED" nowrap class="datalabel">MOVED:&nbsp;</td>
+                            <td nowrap class="datalabel_thin">
+                                <label class='bigcheck'><input type='checkbox' class='bigcheck' name='MV2_moved2_standstill' id='MV2_moved2_standstill' value='no'/><span class='bigcheck-target'></span></label>
+                                <label class='bigcheck'><input type='checkbox' class='bigcheck' name='MV3_moved3_moved' id='MV3_moved3_moved' value='no'/><span class='bigcheck-target'></span></label>
+                                <label class='bigcheck'><input type='checkbox' class='bigcheck' name='MV9_moved9_sprinted' id='MV9_moved9_sprinted' value='no'/><span class='bigcheck-target'></span></label>
+                                <label class='bigcheck'><input type='checkbox' class='bigcheck' name='MV4_moved4_jumped' id='MV4_moved4_jumped' value='no'/><span class='bigcheck-target'></span></label>
+                            </td>
+                        </tr>
 					</table>
 				</div>
 <?php
@@ -903,6 +934,9 @@ session_start();
 								<td id="phasemovebutton3" class='phase_button_normal'>Walked</td>
 							</tr>
 							<tr>
+								<td id="phasemovebutton9" class='phase_button_normal'>Sprinted</td>
+							</tr>
+							<tr>
 								<td id="phasemovebutton4" class='phase_button_normal'>Jumped</td>
 							</tr>
 						</table>
@@ -1022,6 +1056,7 @@ session_start();
 	if ($array_WPNSFIRED[$chosenMechIndex] != null) {
 		echo "	weaponsfired = $array_WPNSFIRED[$chosenMechIndex]\n";
 	}
+	echo "	setMovementFlags($array_MECH_DBID[$chosenMechIndex], movement, weaponsfired);\n";
 	echo "	setFireValues(movement, weaponsfired);\n";
 	echo "</script>\n";
 
@@ -1081,6 +1116,20 @@ session_start();
 			echo "						</tr>\n";
 			echo "						<tr>\n";
 			echo "							<td nowrap align='left' class='datalabel' style='vertical-align:top;'>\n";
+			echo "								<label class='bigcheck'><input onchange='changeMovementFlag($array_MECH_DBID[$chosenMechIndex], 9);' type='checkbox' class='bigcheck' name='MV9_SPRINTED' value='yes'/><span class='bigcheck-target'></span></label>\n";
+			echo "							</td>\n";
+			echo "							<td nowrap align='left' class='datalabel'>\n";
+			echo "								&nbsp;&nbsp;&nbsp;Sprinted\n";
+			echo "							</td>\n";
+			echo "							<td nowrap align='left' class='datavalue_small'>\n";
+			echo "								&nbsp;&nbsp;&nbsp;NO FIRE\n";
+			echo "							</td>\n";
+			echo "							<td nowrap align='left' class='datavalue_small'>\n";
+			echo "								&nbsp;&nbsp;&nbsp;\n";
+			echo "							</td>\n";
+			echo "						</tr>\n";
+			echo "						<tr>\n";
+			echo "							<td nowrap align='left' class='datalabel' style='vertical-align:top;'>\n";
 			echo "								<label class='bigcheck'><input onchange='changeMovementFlag($array_MECH_DBID[$chosenMechIndex], 4);' type='checkbox' class='bigcheck' name='MV4_JUMPED' value='yes'/><span class='bigcheck-target'></span></label>\n";
 			echo "							</td>\n";
 			echo "							<td nowrap align='left' class='datalabel'>\n";
@@ -1122,10 +1171,10 @@ session_start();
 			echo "							    <table width='100%' cellspacing='1'>\n"; // style='background-color:#754743;'
 			echo "									<tr>\n";
 			echo "										<td colspan='1' width='50%' nowrap align='center' valign='top' class='datalabel' style='vertical-align:top;text-align:center'>\n";
-			echo "											<label class='bigcheck'><input onchange='changeMovementFlag($array_MECH_DBID[$chosenMechIndex], 5);' type='checkbox' class='bigcheck' name='WF5_WEAPONSFIRED' value='yes'/><span class='bigcheck-target'></span></label>\n";
+			echo "											<label class='bigcheck'><input onchange='changeMovementFlag($array_MECH_DBID[$chosenMechIndex], 5);' type='checkbox' class='bigcheck' name='WF5_WEAPONSFIRED' id='WF5_WEAPONSFIRED' value='yes'/><span class='bigcheck-target'></span></label>\n";
  			echo "										</td>\n";
 			echo "										<td colspan='1' width='50%' nowrap align='center' valign='top' class='datalabel' style='vertical-align:top;text-align:center'>\n";
-			echo "											<label class='bigcheck'><input onchange='changeMovementFlag($array_MECH_DBID[$chosenMechIndex], 6);' type='checkbox' class='bigcheck' name='WF6_WEAPONSFIRED' value='yes'/><span class='bigcheck-target'></span></label>\n";
+			echo "											<label class='bigcheck'><input onchange='changeMovementFlag($array_MECH_DBID[$chosenMechIndex], 6);' type='checkbox' class='bigcheck' name='WF6_WEAPONSFIRED' id='WF6_WEAPONSFIRED'value='yes'/><span class='bigcheck-target'></span></label>\n";
  			echo "										</td>\n";
 //			echo "										<td colspan='3' width='25%' nowrap align='center' valign='top' class='datalabel' style='vertical-align:top;text-align:center'>\n";
 //			echo "											<label class='bigcheck'><input onchange='changeMovementFlag($array_MECH_DBID[$chosenMechIndex], 7);' type='checkbox' class='bigcheck' name='WF7_WEAPONSFIRED' value='yes'/><span class='bigcheck-target'></span></label>\n";

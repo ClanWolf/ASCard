@@ -119,12 +119,12 @@ function readCircles(index, a_max, s_max) {
     	if (s == maximalstructurepoints) {
     		mechstatus = 4;
     		mechstatusimage = "images/DD_04.png";
-    		document.getElementById('toprightimage').src='./images/top-right_old.png';
+    		document.getElementById('toprightimage').src='./images/top-right_02.png';
     	}
     	if (e == 2) {
     		mechstatus = 4;
     		mechstatusimage = "images/DD_04.png";
-    		document.getElementById('toprightimage').src='./images/top-right_old.png';
+    		document.getElementById('toprightimage').src='./images/top-right_02.png';
     	}
 	}
 
@@ -346,6 +346,13 @@ function setCircles(h, a, s, e, fc, mp, w, uov) {
 		document.getElementById("mv_points").style.color ="#ff0000";
 		updatemovementpointsjump = 0;
 	}
+
+	// SPRINTED
+	if (movement == '9') {
+		document.getElementById("mv_points").style.color ="#a49708";
+	    updatedmovementpointsground = updatedmovementpointsground + (updatedmovementpointsground / 2);
+	}
+
 	var mvstring = updatedmovementpointsground + "&rdquo;";
 	if (updatemovementpointsjump > 0) {
 		mvstring = mvstring + "/" + updatemovementpointsjump + "&rdquo;j";
@@ -586,6 +593,22 @@ function textSize(dec) {
 }
 
 $(document).ready(function() {
+	//$("#cover").hide();
+	$("#cover").fadeOut(150, "linear");
+
+	var mechimage = document.getElementById("mechimage");
+	mechimage.style.height="" + ($(document).height() * 0.8 + "px");
+
+	$("#dice").click(function(event) {
+		if (rolling === 0) {
+			playDiceSound();
+			for (i = 1; i < 12; i++) {
+				rolling++;
+				setTimeout("rolldice(i)", i * 80);
+			}
+		}
+	});
+
 	if (getCookie("savedBefore") === "true") {
 		fontsizeLabel = parseInt(getCookie("fontsizeLabel"));
 		fontsizeLabelthin = parseInt(getCookie("fontsizeLabelthin"));
@@ -598,28 +621,12 @@ $(document).ready(function() {
 		setSize("bigcheck-target", fontsizeCircle);
 	}
 
-	var mechimage = document.getElementById("mechimage");
-	mechimage.style.height="" + ($(document).height() * 0.8 + "px");
-
 	var wallpaperName = getCookie("wallpaper");
 	if ((wallpaperName !== null) && (typeof wallpaperName != 'undefined')) {
 		if (wallpaperName > 0 && wallpaperName < 9) {
 			document.body.style.backgroundImage = "url('./images/body-bg_" + wallpaperName + ".png')";
 		}
 	}
-
-	$("#dice").click(function(event) {
-		if (rolling === 0) {
-			playDiceSound();
-			for (i = 1; i < 12; i++) {
-				rolling++;
-				setTimeout("rolldice(i)", i * 80);
-			}
-		}
-	});
-
-	$("#cover").hide();
-	//$("#cover").fadeOut(400, "linear");
 
 	//$("#toprightimage").fadeOut(0, "linear");
 	//$("#toprightimage").fadeIn(1000, "linear");
@@ -713,9 +720,8 @@ function playTapSound() {
 	}
 }
 
-window.onload = function() {
-
-}
+//window.onload = function() {
+//}
 
 // function updateSite(event) {
 // 	window.location.reload();
