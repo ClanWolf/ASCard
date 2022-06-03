@@ -46,7 +46,7 @@ session_start();
 	<link rel="apple-touch-icon" href="./images/icon_152x152.png" type="image/png" sizes="152x152">
 	<link rel="apple-touch-icon" href="./images/icon_180x180.png" type="image/png" sizes="180x180">
 
-	<script type="text/javascript" src="./scripts/jquery-3.3.1.min.js"></script>
+	<script type="text/javascript" src="./scripts/jquery-3.6.0.min.js"></script>
 	<script type="text/javascript" src="./scripts/jquery.jscrollpane.min.js"></script>
 	<script type="text/javascript" src="./scripts/jquery.mousewheel.js"></script>
 	<script type="text/javascript" src="./scripts/howler.min.js"></script>

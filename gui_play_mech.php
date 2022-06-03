@@ -45,7 +45,7 @@ session_start();
 	<link rel="apple-touch-icon" href="./images/icon_152x152.png" type="image/png" sizes="152x152">
 	<link rel="apple-touch-icon" href="./images/icon_180x180.png" type="image/png" sizes="180x180">
 
-	<script type="text/javascript" src="./scripts/jquery-3.3.1.min.js"></script>
+	<script type="text/javascript" src="./scripts/jquery-3.6.0.min.js"></script>
 	<script type="text/javascript" src="./scripts/howler.min.js"></script>
 	<script type="text/javascript" src="./scripts/cookies.js"></script>
 	<script type="text/javascript" src="./scripts/functions.js"></script>
@@ -119,6 +119,7 @@ session_start();
 			var list = document.getElementsByClassName("bigcheck");
 			var fired = 0;
 			var mv = 0;
+			var movementdiestring = "";
 
 			[].forEach.call(list, function (el1) {
 				na = el1.name;
@@ -211,17 +212,42 @@ session_start();
 				fired = 1;
 			}
 
-			if (mv == "9") {
+			var tmmDiceValue = document.getElementById("TMM").innerHTML;
+
+			if (mv == "0") { // not moved yet
+			    movementdiestring = movementdiestring + "d6_0.png";
+			} else if (mv == "2") { // stationary
+			    movementdiestring = movementdiestring + "bd6_" + tmmDiceValue + ".png";
+			} else if (mv == "3") { // walked
+			    movementdiestring = movementdiestring + "d6_" + tmmDiceValue + ".png";
+			} else if (mv == "4") { // jumped
+			    movementdiestring = movementdiestring + "rd6_" + tmmDiceValue + ".png";
+			} else if (mv == "9") { // sprinted
+				movementdiestring = movementdiestring + "yd6_" + tmmDiceValue + ".png";
                 var e1 = document.getElementById("WF5_WEAPONSFIRED");
                 var e2 = document.getElementById("WF6_WEAPONSFIRED");
-                e1.checked = true;
-                e2.checked = false;
+                if (e1 !== undefined && e1 !== null) { e1.checked = true; }
+                if (e2 !== undefined && e2 !== null) { e2.checked = false; }
 				var e1a = document.getElementById("WF5_WEAPONSFIRED2");
 				var e2a = document.getElementById("WF6_WEAPONSFIRED2");
-				e1a.checked = true;
-                e2a.checked = false;
+				if (e1a !== undefined && e1a !== null) { e1a.checked = true; }
+                if (e2a !== undefined && e2a !== null) { e2a.checked = false; }
                 fired = 1;
             }
+
+
+
+
+
+
+
+
+
+
+
+			document.getElementById('movementtokenimage').src="./images/dice/" + movementdiestring;
+
+
 
 			setFireValues(mv, fired);
 			var url="./save_movement.php?index="+index+"&mvmt="+mv+"&wpns="+fired;
@@ -231,6 +257,8 @@ session_start();
 
 		function setMovementFlags(index, movement, weaponsfired) {
 			playTapSound();
+
+			var movementdiestring = "";
 
 			var list = document.getElementsByClassName("bigcheck");
 			[].forEach.call(list, function (el1) {
@@ -268,17 +296,30 @@ session_start();
 				}
 			}
 
-			if (movement == "9") {
+			var tmmDiceValue = document.getElementById("TMM").innerHTML;
+
+			if (movement == "0") { // not moved yet
+			    movementdiestring = movementdiestring + "d6_0.png";
+			} else if (movement == "2") { // stationary
+			    movementdiestring = movementdiestring + "bd6_" + tmmDiceValue + ".png";
+			} else if (movement == "3") { // walked
+			    movementdiestring = movementdiestring + "d6_" + tmmDiceValue + ".png";
+			} else if (movement == "4") { // jumped
+			    movementdiestring = movementdiestring + "rd6_" + tmmDiceValue + ".png";
+			} else if (movement == "9") {
+				movementdiestring = movementdiestring + "yd6_" + tmmDiceValue + ".png";
 				var e1 = document.getElementById("WF5_WEAPONSFIRED");
 				var e2 = document.getElementById("WF6_WEAPONSFIRED");
-				e1.checked = true;
-                e2.checked = false;
+                if (e1 !== undefined && e1 !== null) { e1.checked = true; }
+                if (e2 !== undefined && e2 !== null) { e2.checked = false; }
 				var e1a = document.getElementById("WF5_WEAPONSFIRED2");
 				var e2a = document.getElementById("WF6_WEAPONSFIRED2");
-				e1a.checked = true;
-                e2a.checked = false;
+				if (e1a !== undefined && e1a !== null) { e1a.checked = true; }
+                if (e2a !== undefined && e2a !== null) { e2a.checked = false; }
                 fired = 1;
 			}
+
+			document.getElementById('movementtokenimage').src="./images/dice/" + movementdiestring;
 
 			movementcache = movement;
 			firedcache = weaponsfired;
@@ -773,20 +814,6 @@ session_start();
 							<td nowrap rowspan="2" style="vertical-align: middle;" valign="middle" align="center" width="15%">
                                	<div style="padding: 0 15 0 15;" id="phasebutton" name="phasebutton"><a href=<?php echo "'$currentmeli'"; ?>><img src=<?php echo "'$currentPhaseButton'"; ?> style='height:50px;'></a></div>
                             </td>
-							<td id="INFOFIRED" nowrap  width="15%" class="datalabel">FIRED:&nbsp;</td>
-							<td nowrap width="70%" class="datalabel_thin">
-								<label class='bigcheck'><input type='checkbox' class='bigcheck' name='WF5_WEAPONSFIRED2' id='WF5_WEAPONSFIRED2' value='no'/><span class='bigcheck-target'></span></label>
-								<label class='bigcheck'><input type='checkbox' class='bigcheck' name='WF6_WEAPONSFIRED2' id='WF6_WEAPONSFIRED2' value='no'/><span class='bigcheck-target'></span></label>
-							</td>
-
-							<td align="middle" width="98%" valign="middle"></td>
-							<td rowspan="2" align="right" width="1%" valign="bottom">
-								<div id="movementtoken" valign="bottom" align="right">
-									<a href=<?php echo "'$currentmeli'"; ?>"><img id="movementtoken" src="./images/dice/yd6_4.png" height="40px"></a>
-								</div>
-							</td>
-						</tr>
-						<tr>
                             <td id="INFOMOVED" nowrap class="datalabel">MOVED:&nbsp;</td>
                             <td nowrap class="datalabel_thin">
                                 <label class='bigcheck'><input type='checkbox' class='bigcheck' name='MV2_moved2_standstill' id='MV2_moved2_standstill' value='no'/><span class='bigcheck-target'></span></label>
@@ -794,7 +821,21 @@ session_start();
                                 <label class='bigcheck'><input type='checkbox' class='bigcheck' name='MV9_moved9_sprinted' id='MV9_moved9_sprinted' value='no'/><span class='bigcheck-target'></span></label>
                                 <label class='bigcheck'><input type='checkbox' class='bigcheck' name='MV4_moved4_jumped' id='MV4_moved4_jumped' value='no'/><span class='bigcheck-target'></span></label>
                             </td>
+                            <td rowspan="2" align="right" width="1%" valign="top">
+                                <div id="movementtoken" valign="top" align="right">
+                                    <a href=<?php echo "'$currentmeli'"; ?>"><img valign="top" id="movementtokenimage" src="./images/dice/yd6_4.png" height="35px"></a>
+                                </div>
+                            </td>
                         </tr>
+						<tr>
+							<td id="INFOFIRED" nowrap  width="15%" class="datalabel">FIRED:&nbsp;</td>
+							<td nowrap width="70%" class="datalabel_thin">
+								<label class='bigcheck'><input type='checkbox' class='bigcheck' name='WF5_WEAPONSFIRED2' id='WF5_WEAPONSFIRED2' value='no'/><span class='bigcheck-target'></span></label>
+								<label class='bigcheck'><input type='checkbox' class='bigcheck' name='WF6_WEAPONSFIRED2' id='WF6_WEAPONSFIRED2' value='no'/><span class='bigcheck-target'></span></label>
+							</td>
+
+							<td align="middle" width="98%" valign="middle"></td>
+						</tr>
 					</table>
 				</div>
 <?php

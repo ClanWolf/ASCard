@@ -361,9 +361,9 @@ function setCircles(h, a, s, e, fc, mp, w, uov) {
 
 	// recalculate the TMM according to changed movement
 	var tmpTMM = 0;
-	       if(updatedmovementpointsground <  5) {
+	if(updatedmovementpointsground < 5) {
 		tmpTMM = 0;
-	} else if(updatedmovementpointsground <  9 ) {
+	} else if(updatedmovementpointsground < 9 ) {
 		tmpTMM = 1;
 	} else if(updatedmovementpointsground < 13 ) {
 		tmpTMM = 2;
@@ -404,7 +404,12 @@ function setCircles(h, a, s, e, fc, mp, w, uov) {
 		//TODO: Add value for SPCL Ability for JJs (calculate into TMM)
 	}
 
-	document.getElementById("TMM").innerHTML = tmpTMM;
+	// SPRINTED (TMM shall not change)
+	if (movement != '9') {
+		document.getElementById("TMM").innerHTML = tmpTMM;
+	}
+
+// TODO: Check if heat decreases TMM
 
 	if (updatedshortvalue < 0) {
 		document.getElementById("minrollshort").style.color ="#00ff00";
