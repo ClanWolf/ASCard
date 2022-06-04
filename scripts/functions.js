@@ -185,35 +185,35 @@ function setCircles(h, a, s, e, fc, mp, w, uov) {
 		}
 	});
 	if (e == 0) {
-    	document.getElementById("ht_field").style.color ="#000000";
+//    	document.getElementById("ht_field").style.color ="#000000";
 	} else if (e == 1) {
 		enginehit = 1;
-		document.getElementById("ht_field").style.color ="#00ff00";
+//		document.getElementById("ht_field").style.color ="#00ff00";
 	} else if (e == 2) {
 		enginehit = 1;
-		document.getElementById("ht_field").style.color ="#ff0000";
+//		document.getElementById("ht_field").style.color ="#ff0000";
 	}
 	if (h == 0) {
 		updatedshortvalue = 0;
 		updatedmediumvalue = 2;
 		updatedlongvalue = 4;
 	} else if (h == 1) {
-		document.getElementById("ht_field").style.color ="#a49708";
+//		document.getElementById("ht_field").style.color ="#a49708";
 		updatedshortvalue = updatedshortvalue + 1;
 		updatedmediumvalue = updatedmediumvalue + 1;
 		updatedlongvalue = updatedlongvalue + 1;
 	} else if (h == 2) {
-		document.getElementById("ht_field").style.color ="#da8e25";
+//		document.getElementById("ht_field").style.color ="#da8e25";
 		updatedshortvalue = updatedshortvalue + 2;
 		updatedmediumvalue = updatedmediumvalue + 2;
 		updatedlongvalue = updatedlongvalue + 2;
 	} else if (h == 3) {
-		document.getElementById("ht_field").style.color ="#ba4112";
+//		document.getElementById("ht_field").style.color ="#ba4112";
 		updatedshortvalue = updatedshortvalue + 3;
 		updatedmediumvalue = updatedmediumvalue + 3;
 		updatedlongvalue = updatedlongvalue + 3;
 	} else if (h == 4) {
-		document.getElementById("ht_field").style.color ="#ff0000";
+//		document.getElementById("ht_field").style.color ="#ff0000";
 		updatedshortvalue = updatedshortvalue + 4;
 		updatedmediumvalue = updatedmediumvalue + 4;
 		updatedlongvalue = updatedlongvalue + 4;
@@ -243,34 +243,34 @@ function setCircles(h, a, s, e, fc, mp, w, uov) {
 	var updatedlongdamage = longdamage;
 
 	if (w == 0) {
-		document.getElementById("dmgshort_s").style.color ="#ccc";
-		document.getElementById("dmgmedium_s").style.color ="#ccc";
-		document.getElementById("dmglong_s").style.color ="#ccc";
+//		document.getElementById("dmgshort_s").style.color ="#ccc";
+//		document.getElementById("dmgmedium_s").style.color ="#ccc";
+//		document.getElementById("dmglong_s").style.color ="#ccc";
 	} else if (w == 1) {
-		document.getElementById("dmgshort_s").style.color ="#da8e25";
-		document.getElementById("dmgmedium_s").style.color ="#da8e25";
-		document.getElementById("dmglong_s").style.color ="#da8e25";
+//		document.getElementById("dmgshort_s").style.color ="#da8e25";
+//		document.getElementById("dmgmedium_s").style.color ="#da8e25";
+//		document.getElementById("dmglong_s").style.color ="#da8e25";
 		updatedshortdamage = updatedshortdamage - 1;
 		updatedmediumdamage = updatedmediumdamage - 1;
 		updatedlongdamage = updatedlongdamage - 1;
 	} else if (w == 2) {
-		document.getElementById("dmgshort_s").style.color ="#da8e25";
-		document.getElementById("dmgmedium_s").style.color ="#da8e25";
-		document.getElementById("dmglong_s").style.color ="#da8e25";
+//		document.getElementById("dmgshort_s").style.color ="#da8e25";
+//		document.getElementById("dmgmedium_s").style.color ="#da8e25";
+//		document.getElementById("dmglong_s").style.color ="#da8e25";
 		updatedshortdamage = updatedshortdamage - 2;
 		updatedmediumdamage = updatedmediumdamage - 2;
 		updatedlongdamage = updatedlongdamage - 2;
 	} else if (w == 3) {
-		document.getElementById("dmgshort_s").style.color ="#da8e25";
-		document.getElementById("dmgmedium_s").style.color ="#da8e25";
-		document.getElementById("dmglong_s").style.color ="#da8e25";
+//		document.getElementById("dmgshort_s").style.color ="#da8e25";
+//		document.getElementById("dmgmedium_s").style.color ="#da8e25";
+//		document.getElementById("dmglong_s").style.color ="#da8e25";
 		updatedshortdamage = updatedshortdamage - 3;
 		updatedmediumdamage = updatedmediumdamage - 3;
  		updatedlongdamage = updatedlongdamage - 3;
 	} else if (w == 4) {
-		document.getElementById("dmgshort_s").style.color ="#da8e25";
-		document.getElementById("dmgmedium_s").style.color ="#da8e25";
-		document.getElementById("dmglong_s").style.color ="#da8e25";
+//		document.getElementById("dmgshort_s").style.color ="#da8e25";
+//		document.getElementById("dmgmedium_s").style.color ="#da8e25";
+//		document.getElementById("dmglong_s").style.color ="#da8e25";
 		updatedshortdamage = updatedshortdamage - 4;
 		updatedmediumdamage = updatedmediumdamage - 4;
 		updatedlongdamage = updatedlongdamage - 4;
@@ -294,62 +294,62 @@ function setCircles(h, a, s, e, fc, mp, w, uov) {
 	var updatedmovementpointsground = movementpointsground;
 	var updatemovementpointsjump = movementpointsjump;
 	if (mp == 0) {
-		document.getElementById("mv_points").style.color = "#ccc";
-		document.getElementById("TMM").style.color = "#ccc";
+//		document.getElementById("mv_points").style.color = "#ccc";
+//		document.getElementById("TMM").style.color = "#ccc";
 	} else if (mp == 1) {
-		document.getElementById("mv_points").style.color ="#a49708";
-		document.getElementById("TMM").style.color = "#a49708";
+//		document.getElementById("mv_points").style.color ="#a49708";
+//		document.getElementById("TMM").style.color = "#a49708";
 		updatedmovementpointsground = Math.ceil(updatedmovementpointsground / 2);
 		updatemovementpointsjump = Math.ceil(updatemovementpointsjump / 2);
 	} else if (mp == 2) {
-		document.getElementById("mv_points").style.color ="#a49708";
-		document.getElementById("TMM").style.color = "#a49708";
+//		document.getElementById("mv_points").style.color ="#a49708";
+//		document.getElementById("TMM").style.color = "#a49708";
 		updatedmovementpointsground = Math.ceil(updatedmovementpointsground / 4);
 		updatemovementpointsjump = Math.ceil(updatemovementpointsjump / 4);
 	} else if (mp == 3) {
-		document.getElementById("mv_points").style.color ="#a49708";
-		document.getElementById("TMM").style.color = "#a49708";
+//		document.getElementById("mv_points").style.color ="#a49708";
+//		document.getElementById("TMM").style.color = "#a49708";
 		updatedmovementpointsground = Math.ceil(updatedmovementpointsground / 8);
 		updatemovementpointsjump = Math.ceil(updatemovementpointsjump / 8);
 	} else if (mp == 4) {
-		document.getElementById("mv_points").style.color ="#a49708";
-		document.getElementById("TMM").style.color = "#a49708";
+//		document.getElementById("mv_points").style.color ="#a49708";
+//		document.getElementById("TMM").style.color = "#a49708";
 		updatedmovementpointsground = Math.ceil(updatedmovementpointsground / 16);
 		updatemovementpointsjump = Math.ceil(updatemovementpointsjump / 16);
 	}
 	if (h == 1) {
-		document.getElementById("mv_points").style.color ="#a49708";
-		document.getElementById("TMM").style.color = "#a49708";
+//		document.getElementById("mv_points").style.color ="#a49708";
+//		document.getElementById("TMM").style.color = "#a49708";
 		updatedmovementpointsground = updatedmovementpointsground - 2;
 		updatemovementpointsjump = updatemovementpointsjump - 2;
 	} else if (h == 2) {
-		document.getElementById("mv_points").style.color ="#a49708";
-    	document.getElementById("TMM").style.color = "#a49708";
+//		document.getElementById("mv_points").style.color ="#a49708";
+//    	document.getElementById("TMM").style.color = "#a49708";
 		updatedmovementpointsground = updatedmovementpointsground - 4;
 		updatemovementpointsjump = updatemovementpointsjump - 4;
 	} else if (h == 3) {
-		document.getElementById("mv_points").style.color ="#a49708";
-		document.getElementById("TMM").style.color = "#a49708";
+//		document.getElementById("mv_points").style.color ="#a49708";
+//		document.getElementById("TMM").style.color = "#a49708";
 		updatedmovementpointsground = updatedmovementpointsground - 6;
 		updatemovementpointsjump = updatemovementpointsjump - 6;
 	} else if (h == 4) {
-		document.getElementById("mv_points").style.color ="#ff0000";
-		document.getElementById("TMM").style.color ="#ff0000";
+//		document.getElementById("mv_points").style.color ="#ff0000";
+//		document.getElementById("TMM").style.color ="#ff0000";
 		updatedmovementpointsground = 0;
 		updatemovementpointsjump = 0;
 	}
 	if (updatedmovementpointsground < 0) {
-		document.getElementById("mv_points").style.color ="#ff0000";
+//		document.getElementById("mv_points").style.color ="#ff0000";
 		updatedmovementpointsground = 0;
 	}
     if (updatemovementpointsjump < 0) {
-		document.getElementById("mv_points").style.color ="#ff0000";
+//		document.getElementById("mv_points").style.color ="#ff0000";
 		updatemovementpointsjump = 0;
 	}
 
 	// SPRINTED
 	if (movement == '9') {
-		document.getElementById("mv_points").style.color ="#a49708";
+//		document.getElementById("mv_points").style.color ="#a49708";
 	    updatedmovementpointsground = updatedmovementpointsground + (updatedmovementpointsground / 2);
 	}
 
@@ -359,23 +359,46 @@ function setCircles(h, a, s, e, fc, mp, w, uov) {
 	}
 	document.getElementById("mv_points").innerHTML = mvstring;
 
+	var tmmFromCurrentMech = originalTMM;
+	var tmpTMM = tmmFromCurrentMech;
+
 	// recalculate the TMM according to changed movement
-	var tmpTMM = 0;
-	if(updatedmovementpointsground < 5) {
-		tmpTMM = 0;
-	} else if(updatedmovementpointsground < 9 ) {
-		tmpTMM = 1;
-	} else if(updatedmovementpointsground < 13 ) {
-		tmpTMM = 2;
-	} else if(updatedmovementpointsground < 19 ) {
-		tmpTMM = 3;
-	} else if(updatedmovementpointsground < 35 ) {
-		tmpTMM = 4;
-	} else {
-		tmpTMM = 5;
-	}
-	if (h == 4) {
+	// das hier machen wir nicht mehr. Der TMM kommt aus der MUL und bleibt fest, bis auf die normalen Anpassungen
+	// während des Spiels
+	// var tmpTMM = 0;
+	// if(updatedmovementpointsground < 5) {
+	// 	tmpTMM = 0;
+	// } else if(updatedmovementpointsground < 9 ) {
+	// 	tmpTMM = 1;
+	// } else if(updatedmovementpointsground < 13 ) {
+	// 	tmpTMM = 2;
+	// } else if(updatedmovementpointsground < 19 ) {
+	// 	tmpTMM = 3;
+	// } else if(updatedmovementpointsground < 35 ) {
+	// 	tmpTMM = 4;
+	// } else {
+	// 	tmpTMM = 5;
+	// }
+
+	if (h == 1) {
+//	    updatedshortvalue = updatedshortvalue + 1;
+//	    updatedmediumvalue = updatedmediumvalue + 1;
+//	    updatedlongvalue = updatedlongvalue + 1;
+    } else if (h == 2) {
+		tmpTMM = tmpTMM - 1;
+//	    updatedshortvalue = updatedshortvalue + 2;
+//        updatedmediumvalue = updatedmediumvalue + 2;
+//        updatedlongvalue = updatedlongvalue + 2;
+	} else if (h == 3) {
+		tmpTMM = tmpTMM - 1;
+//	    updatedshortvalue = updatedshortvalue + 3;
+//	    updatedmediumvalue = updatedmediumvalue + 3;
+//	    updatedlongvalue = updatedlongvalue + 3;
+	} else if (h == 4) { // SHUTDOWN
 		tmpTMM = -4;
+//	    updatedshortvalue = updatedshortvalue + 4;
+//	    updatedmediumvalue = updatedmediumvalue + 4;
+//	    updatedlongvalue = updatedlongvalue + 4;
 	}
 
 	// variable: weaponsfired (1 or 0)
@@ -385,69 +408,66 @@ function setCircles(h, a, s, e, fc, mp, w, uov) {
 	// 3:	TMM 1 (#)		Walked (>1")
 	// 4:	TMM 1 (#+SPCL)	AMM +2			Jumped
 	if (movement == 1) {
-		document.getElementById("TMM").style.color = "#ff0000";
+//		document.getElementById("TMM").style.color = "#ff0000";
 		tmpTMM = -4;
 	} else if (movement == 2) {
-		document.getElementById("TMM").style.color = "#ff0000";
+//		document.getElementById("TMM").style.color = "#ff0000";
 		tmpTMM = 0;
 		updatedshortvalue = updatedshortvalue - 1;
 		updatedmediumvalue = updatedmediumvalue - 1;
         updatedlongvalue = updatedlongvalue - 1;
 	} else if (movement == 3) {
-		document.getElementById("TMM").style.color = "#ffff00";
+//		document.getElementById("TMM").style.color = "#ffff00";
 	} else if (movement == 4) {
-		document.getElementById("TMM").style.color = "#00ff00";
+//		document.getElementById("TMM").style.color = "#00ff00";
 		tmpTMM = tmpTMM + 1; // jumped
 		updatedshortvalue = updatedshortvalue + 2;
 		updatedmediumvalue = updatedmediumvalue + 2;
         updatedlongvalue = updatedlongvalue + 2;
 		//TODO: Add value for SPCL Ability for JJs (calculate into TMM)
+	} else if (movement == 9) {
+		// TMM nicht ändern wie bei WALKED
 	}
 
-	// SPRINTED (TMM shall not change)
-	if (movement != '9') {
-		document.getElementById("TMM").innerHTML = tmpTMM;
-	}
-
-// TODO: Check if heat decreases TMM
+	document.getElementById("TMM").innerHTML = tmpTMM;
 
 	if (updatedshortvalue < 0) {
-		document.getElementById("minrollshort").style.color ="#00ff00";
+//		document.getElementById("minrollshort").style.color ="#00ff00";
 		document.getElementById("minrollshort").innerHTML="S (" + updatedshortvalue + ")";
 	} else if (updatedshortvalue == 0) {
-		document.getElementById("minrollshort").style.color ="#999";
+//		document.getElementById("minrollshort").style.color ="#999";
 		document.getElementById("minrollshort").innerHTML="S (+" + updatedshortvalue + ")";
 	} else if (updatedshortvalue > 0) {
-		document.getElementById("minrollshort").style.color ="#a49708";
+//		document.getElementById("minrollshort").style.color ="#a49708";
 		document.getElementById("minrollshort").innerHTML="S (+" + updatedshortvalue + ")";
 	}
 
 	if (updatedmediumvalue < 0) {
-		document.getElementById("minrollmedium").style.color ="#00ff00";
+//		document.getElementById("minrollmedium").style.color ="#00ff00";
 		document.getElementById("minrollmedium").innerHTML="M (" + updatedmediumvalue + ")";
 	} else if (updatedmediumvalue == 0) {
-		document.getElementById("minrollmedium").style.color ="#a49708";
+//		document.getElementById("minrollmedium").style.color ="#a49708";
 		document.getElementById("minrollmedium").innerHTML="M (+" + updatedmediumvalue + ")";
 	} else if (updatedmediumvalue > 0) {
-		document.getElementById("minrollmedium").style.color ="#a49708";
+//		document.getElementById("minrollmedium").style.color ="#a49708";
 		document.getElementById("minrollmedium").innerHTML="M (+" + updatedmediumvalue + ")";
 	}
 	if (updatedmediumvalue == 2) {
-		document.getElementById("minrollmedium").style.color ="#999";
+//		document.getElementById("minrollmedium").style.color ="#999";
 	}
 
 	if (updatedlongvalue < 0) {
-		document.getElementById("minrolllong").style.color ="#00ff00";
+//		document.getElementById("minrolllong").style.color ="#00ff00";
 		document.getElementById("minrolllong").innerHTML="L (" + updatedlongvalue + ")";
 	} else if (updatedlongvalue == 0) {
-		document.getElementById("minrolllong").style.color ="#a49708";
+//		document.getElementById("minrolllong").style.color ="#a49708";
 		document.getElementById("minrolllong").innerHTML="L (+" + updatedlongvalue + ")";
 	} else if (updatedlongvalue > 0) {
-		document.getElementById("minrolllong").style.color ="#a49708";
+//		document.getElementById("minrolllong").style.color ="#a49708";
 		document.getElementById("minrolllong").innerHTML="L (+" + updatedlongvalue + ")";
 	}
 	if (updatedlongvalue == 4) {
-		document.getElementById("minrolllong").style.color ="#999";
+//		document.getElementById("minrolllong").style.color ="#999";
 	}
 
 	if (a > 1) {
@@ -488,7 +508,7 @@ function setCircles(h, a, s, e, fc, mp, w, uov) {
 		//document.getElementById('toprightimage').src="./images/top-right_phase00.png";
 	} else {
 		// document.body.style.backgroundImage = "url('./images/body-bg_" + wallpaperNorm + ".png')";
-		document.getElementById('mechalive_status').src="./images/vitalmonitor.gif";
+		// document.getElementById('mechalive_status').src="./images/vitalmonitor.gif";
 		// console.log(movement);
 		if ((movement == 0 || movement === undefined) && weaponsfired == 0) {
 		//	document.getElementById('toprightimage').src="./images/top-right_phase01.png";

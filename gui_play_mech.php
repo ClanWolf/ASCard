@@ -213,15 +213,22 @@ session_start();
 			}
 
 			var tmmDiceValue = document.getElementById("TMM").innerHTML;
+			if (tmmDiceValue == '0') {
+				tmmDiceValue = 6;
+			}
 
 			if (mv == "0") { // not moved yet
 			    movementdiestring = movementdiestring + "d6_0.png";
+			    document.getElementById('INFOMOVED').innerHTML = "MOVE:";
 			} else if (mv == "2") { // stationary
 			    movementdiestring = movementdiestring + "bd6_" + tmmDiceValue + ".png";
+			    document.getElementById('INFOMOVED').innerHTML = "STATIONARY";
 			} else if (mv == "3") { // walked
 			    movementdiestring = movementdiestring + "d6_" + tmmDiceValue + ".png";
+			    document.getElementById('INFOMOVED').innerHTML = "WALKED";
 			} else if (mv == "4") { // jumped
 			    movementdiestring = movementdiestring + "rd6_" + tmmDiceValue + ".png";
+			    document.getElementById('INFOMOVED').innerHTML = "JUMPED";
 			} else if (mv == "9") { // sprinted
 				movementdiestring = movementdiestring + "yd6_" + tmmDiceValue + ".png";
                 var e1 = document.getElementById("WF5_WEAPONSFIRED");
@@ -232,22 +239,19 @@ session_start();
 				var e2a = document.getElementById("WF6_WEAPONSFIRED2");
 				if (e1a !== undefined && e1a !== null) { e1a.checked = true; }
                 if (e2a !== undefined && e2a !== null) { e2a.checked = false; }
-                fired = 1;
+                fired = 1; // HOLD FIRE!
+                document.getElementById('INFOMOVED').innerHTML = "SPRINTED";
             }
 
-
-
-
-
-
-
-
-
-
+			if (fired == 0) {
+                document.getElementById('INFOFIRED').innerHTML = "FIRE:";
+            } else if (fired == 1) {
+				document.getElementById('INFOFIRED').innerHTML = "HOLD FIRE";
+			} else if (fired == 2) {
+				document.getElementById('INFOFIRED').innerHTML = "FIRED";
+			}
 
 			document.getElementById('movementtokenimage').src="./images/dice/" + movementdiestring;
-
-
 
 			setFireValues(mv, fired);
 			var url="./save_movement.php?index="+index+"&mvmt="+mv+"&wpns="+fired;
@@ -297,15 +301,22 @@ session_start();
 			}
 
 			var tmmDiceValue = document.getElementById("TMM").innerHTML;
+			if (tmmDiceValue == '0') {
+				tmmDiceValue = 6;
+			}
 
 			if (movement == "0") { // not moved yet
 			    movementdiestring = movementdiestring + "d6_0.png";
+			    document.getElementById('INFOMOVED').innerHTML = "MOVE:";
 			} else if (movement == "2") { // stationary
 			    movementdiestring = movementdiestring + "bd6_" + tmmDiceValue + ".png";
+			    document.getElementById('INFOMOVED').innerHTML = "STATIONARY";
 			} else if (movement == "3") { // walked
 			    movementdiestring = movementdiestring + "d6_" + tmmDiceValue + ".png";
+			    document.getElementById('INFOMOVED').innerHTML = "WALKED";
 			} else if (movement == "4") { // jumped
 			    movementdiestring = movementdiestring + "rd6_" + tmmDiceValue + ".png";
+			    document.getElementById('INFOMOVED').innerHTML = "JUMPED";
 			} else if (movement == "9") {
 				movementdiestring = movementdiestring + "yd6_" + tmmDiceValue + ".png";
 				var e1 = document.getElementById("WF5_WEAPONSFIRED");
@@ -316,7 +327,16 @@ session_start();
 				var e2a = document.getElementById("WF6_WEAPONSFIRED2");
 				if (e1a !== undefined && e1a !== null) { e1a.checked = true; }
                 if (e2a !== undefined && e2a !== null) { e2a.checked = false; }
-                fired = 1;
+                fired = 1; // HOLD FIRE!
+                document.getElementById('INFOMOVED').innerHTML = "SPRINTED";
+			}
+
+			if (weaponsfired == 0) {
+				document.getElementById('INFOFIRED').innerHTML = "FIRE:";
+			} else if (weaponsfired == 1) {
+				document.getElementById('INFOFIRED').innerHTML = "HOLD FIRE";
+			} else if (weaponsfired == 2) {
+				document.getElementById('INFOFIRED').innerHTML = "FIRED";
 			}
 
 			document.getElementById('movementtokenimage').src="./images/dice/" + movementdiestring;
@@ -952,25 +972,6 @@ session_start();
 								</td>
 							</tr>
 							-->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 							<tr>
 								<td id="phasemovebutton2" class='phase_button_normal'>Stationary</td>
 							</tr>
@@ -1092,6 +1093,7 @@ session_start();
 <?php
 	// Show AMM
 	echo "<script>\n";
+	echo "	var originalTMM = $array_TMM[$chosenMechIndex]\n";
 	echo "	var movement = 0\n";
 	if ($array_MVMT[$chosenMechIndex] != null) {
 		echo "	movement = $array_MVMT[$chosenMechIndex]\n";
