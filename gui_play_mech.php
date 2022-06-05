@@ -497,6 +497,10 @@ session_start();
 	echo "	var movement = ".$array_MVMT[$chosenMechIndex].";\n";
 	echo "	var weaponsfired = ".$array_WPNSFIRED[$chosenMechIndex].";\n";
 
+	if ($array_TMM[$chosenMechIndex] != null) {
+		echo "	var originalTMM = $array_TMM[$chosenMechIndex]\n";
+	}
+
 	echo "</script>\n";
 ?>
 
@@ -1093,7 +1097,6 @@ session_start();
 <?php
 	// Show AMM
 	echo "<script>\n";
-	echo "	var originalTMM = $array_TMM[$chosenMechIndex]\n";
 	echo "	var movement = 0\n";
 	if ($array_MVMT[$chosenMechIndex] != null) {
 		echo "	movement = $array_MVMT[$chosenMechIndex]\n";

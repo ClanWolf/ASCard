@@ -401,7 +401,7 @@ function setCircles(h, a, s, e, fc, mp, w, uov) {
 //	    updatedlongvalue = updatedlongvalue + 4;
 	}
 
-	// variable: weaponsfired (1 or 0)
+	// variable: weaponsfired
 	// variable: movement
 	// 1:	TMM -4							Immobile
 	// 2:	TMM 0			AMM -1			Stationary
