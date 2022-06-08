@@ -26,7 +26,9 @@ function setSize(name, value) {
 }
 
 function readCircles(index, a_max, s_max) {
-	playTapSound();
+	if (context != null) {
+		playTapSound();
+	}
 
 	var na = "";
 
@@ -359,76 +361,57 @@ function setCircles(h, a, s, e, fc, mp, w, uov) {
 	}
 	document.getElementById("mv_points").innerHTML = mvstring;
 
-	var tmmFromCurrentMech = originalTMM;
-	var tmpTMM = tmmFromCurrentMech;
-
-	// recalculate the TMM according to changed movement
-	// das hier machen wir nicht mehr. Der TMM kommt aus der MUL und bleibt fest, bis auf die normalen Anpassungen
-	// während des Spiels
-	// var tmpTMM = 0;
-	// if(updatedmovementpointsground < 5) {
-	// 	tmpTMM = 0;
-	// } else if(updatedmovementpointsground < 9 ) {
-	// 	tmpTMM = 1;
-	// } else if(updatedmovementpointsground < 13 ) {
-	// 	tmpTMM = 2;
-	// } else if(updatedmovementpointsground < 19 ) {
-	// 	tmpTMM = 3;
-	// } else if(updatedmovementpointsground < 35 ) {
-	// 	tmpTMM = 4;
-	// } else {
-	// 	tmpTMM = 5;
-	// }
-
-	if (h == 1) {
-//	    updatedshortvalue = updatedshortvalue + 1;
-//	    updatedmediumvalue = updatedmediumvalue + 1;
-//	    updatedlongvalue = updatedlongvalue + 1;
-    } else if (h == 2) {
-		tmpTMM = tmpTMM - 1;
-//	    updatedshortvalue = updatedshortvalue + 2;
-//        updatedmediumvalue = updatedmediumvalue + 2;
-//        updatedlongvalue = updatedlongvalue + 2;
-	} else if (h == 3) {
-		tmpTMM = tmpTMM - 1;
-//	    updatedshortvalue = updatedshortvalue + 3;
-//	    updatedmediumvalue = updatedmediumvalue + 3;
-//	    updatedlongvalue = updatedlongvalue + 3;
-	} else if (h == 4) { // SHUTDOWN
+	var tmpTMM = originalTMM;
+	if (movement == 0) {                            // 0:   NOT MOVED YET
+        if (h > 1 && h < 4) { tmpTMM = tmpTMM - 1; }
+	} else if (movement == 1 || h == 4) {           // 1:	TMM -4					Immobile (Shutdown?)
 		tmpTMM = -4;
-//	    updatedshortvalue = updatedshortvalue + 4;
-//	    updatedmediumvalue = updatedmediumvalue + 4;
-//	    updatedlongvalue = updatedlongvalue + 4;
-	}
-
-	// variable: weaponsfired
-	// variable: movement
-	// 1:	TMM -4							Immobile
-	// 2:	TMM 0			AMM -1			Stationary
-	// 3:	TMM 1 (#)		Walked (>1")
-	// 4:	TMM 1 (#+SPCL)	AMM +2			Jumped
-	if (movement == 1) {
-//		document.getElementById("TMM").style.color = "#ff0000";
-		tmpTMM = -4;
-	} else if (movement == 2) {
-//		document.getElementById("TMM").style.color = "#ff0000";
-		tmpTMM = 0;
+	} else if (movement == 2) {                     // 2:	TMM 0 AMM -1			Stationary
 		updatedshortvalue = updatedshortvalue - 1;
 		updatedmediumvalue = updatedmediumvalue - 1;
         updatedlongvalue = updatedlongvalue - 1;
-	} else if (movement == 3) {
-//		document.getElementById("TMM").style.color = "#ffff00";
-	} else if (movement == 4) {
-//		document.getElementById("TMM").style.color = "#00ff00";
-		tmpTMM = tmpTMM + 1; // jumped
+		tmpTMM = 0;
+        if (h > 1 && h < 4) { tmpTMM = tmpTMM - 1; }
+	} else if (movement == 3) {                 	// 3:	TMM #		            Walked (>1")
+		if (h > 1 && h < 4) { tmpTMM = tmpTMM - 1; }
+	} else if (movement == 4) {                     // 4:	TMM 1 (#+SPCL) AMM +2	Jumped
 		updatedshortvalue = updatedshortvalue + 2;
 		updatedmediumvalue = updatedmediumvalue + 2;
-        updatedlongvalue = updatedlongvalue + 2;
-		//TODO: Add value for SPCL Ability for JJs (calculate into TMM)
-	} else if (movement == 9) {
-		// TMM nicht ändern wie bei WALKED
-	}
+		updatedlongvalue = updatedlongvalue + 2;
 
+		if (unitType == "BA") {
+			console.log("BattleArmor --> NO +1 TMM modifier (jump).");
+		} else {
+			console.log("NO BattleArmor --> +1 TMM modifier (jump).");
+			tmpTMM = tmpTMM + 1;
+		}
+
+		if (h > 1 && h < 4) { tmpTMM = tmpTMM - 1; }
+
+		// SPCL JMPS JMPW
+		// JMPW# -# from TMM
+		// JMPS# +# to TMM
+		if (document.getElementById('sa_field').innerText.indexOf('JMPS') !== -1 || document.getElementById('sa_field').innerText.indexOf('JMPW') !== -1) {
+			const myArray = document.getElementById('sa_field').innerText.split(",");
+            for (let index = 0; index < myArray.length; ++index) {
+                const element = myArray[index];
+                var value = 0;
+                if (element.indexOf('JMPS') !== -1) {
+                    var num = element.replace(/[^0-9]/g,'');
+					var value = parseInt(num, 10);
+					console.log("Found JMPS: " + value);
+                }
+	            if (element.indexOf('JMPW') !== -1) {
+	                var num = element.replace(/[^0-9]/g,'');
+					var value = parseInt(num, 10);
+					console.log("Found JMPW: " + value);
+	            }
+            }
+		}
+	} else if (movement == 9) { 	                // 9:	TMM #		            Sprinted (>1")
+		if (h > 1 && h < 4) { tmpTMM = tmpTMM - 1; }
+	}
+	console.log("H (Heat) = " + h + " / movement = " + movement + " --> TMM: " + tmpTMM);
 	document.getElementById("TMM").innerHTML = tmpTMM;
 
 	if (updatedshortvalue < 0) {
@@ -618,11 +601,56 @@ function textSize(dec) {
 }
 
 $(document).ready(function() {
-	//$("#cover").hide();
 	$("#cover").fadeOut(150, "linear");
 
 	var mechimage = document.getElementById("mechimage");
 	mechimage.style.height="" + ($(document).height() * 0.8 + "px");
+
+	var list = document.getElementsByClassName("bigcheck");
+	[].forEach.call(list, function (el1) {
+		el1.addEventListener('click', function() {
+			if (context != null ) {
+				context.resume().then(() => {
+				// console.log('Playback resumed successfully');
+				});
+			} else {
+				context = new AudioContext();
+			}
+		});
+	});
+
+	var infoButton = document.getElementById("InfoButton");
+	infoButton.addEventListener('click', function() {
+		if (context != null ) {
+			context.resume().then(() => {
+				// console.log('Playback resumed successfully');
+			});
+		} else {
+            context = new AudioContext();
+		}
+	});
+
+	var diceButton = document.getElementById("DiceButton");
+	diceButton.addEventListener('click', function() {
+		if (context != null ) {
+			context.resume().then(() => {
+				// console.log('Playback resumed successfully');
+			});
+		} else {
+			context = new AudioContext();
+		}
+    });
+
+	var moveButton = document.getElementById("MoveButton");
+	moveButton.addEventListener('click', function() {
+		if (context != null ) {
+            context.resume().then(() => {
+				// console.log('Playback resumed successfully');
+			});
+        } else {
+			context = new AudioContext();
+        }
+	});
 
 	$("#dice").click(function(event) {
 		if (rolling === 0) {
@@ -714,41 +742,29 @@ function changeWallpaper() {
 }
 
 function playDiceSound() {
-	if (context != null ) {
-		if (sound_dice == null) {
-			context.resume().then(() => {
-				console.log('Playback resumed successfully');
-			});
-			sound_dice = new Howl({ src: ['./audio/dice.mp3', './audio/dice.ogg'] });
-		}
-		sound_dice.play();
-	} else {
-		console.log('Audiocontext not ready');
-		context = new AudioContext();
-        console.log('Loading audio context');
+	if (sound_dice == null) {
+		sound_dice = new Howl({ src: ['./audio/dice.mp3', './audio/dice.ogg'] });
 	}
+	sound_dice.play();
 }
 
 function playTapSound() {
-	if (context != null ) {
-		if (sound_key == null) {
-	        context.resume().then(() => {
-				console.log('Playback resumed successfully');
-			});
-			sound_key = new Howl({ src: ['./audio/key.mp3', './audio/key.ogg'] });
-		}
-		sound_key.play();
-	} else {
-		console.log('Audiocontext not ready');
-		context = new AudioContext();
-		console.log('Loading audio context');
+	if (sound_key == null) {
+		sound_key = new Howl({ src: ['./audio/key.mp3', './audio/key.ogg'] });
 	}
+	sound_key.play();
 }
 
+//function touchStarted() {
+//
+//}
+
 //window.onload = function() {
+//
 //}
 
 // function updateSite(event) {
 // 	window.location.reload();
 // }
+
 // window.applicationCache.addEventListener('updateready', updateSite, false);

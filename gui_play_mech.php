@@ -14,8 +14,6 @@ session_start();
 
 	$opt2 = $_SESSION['option2'];
 	$showplayerdata_topleft = $opt2;
-
-	$array_modified_TMM = array();
 ?>
 
 <html lang="en">
@@ -49,7 +47,7 @@ session_start();
 	<script type="text/javascript" src="./scripts/howler.min.js"></script>
 	<script type="text/javascript" src="./scripts/cookies.js"></script>
 	<script type="text/javascript" src="./scripts/functions.js"></script>
-	<script type="text/javascript" src="./scripts/qrcode.js"></script>
+	<!-- <script type="text/javascript" src="./scripts/qrcode.js"></script> -->
 
 	<style>
 		.options {
@@ -93,28 +91,21 @@ session_start();
 		var firedcache = 0;
 
 		function setFireValues(mv, fired) {
-			// fired 1: HOLD FIRE
-			// fired 2: FIRED
-			// mv 2: STATIONARY AMM -1
-			// mv 3: WALKED
-			// mv 4: JUMPED AMM +2
-			if (mv == 2) {
-				console.log("mv: 2");
+			if (mv == 2) { // Stationary (AMM -1)
 				document.getElementById("AMM").innerHTML = "-1";
-			} else if (mv == 4) {
-				console.log("mv: 4");
+			} else if (mv == 4) { // Jumped (AMM +2)
 				document.getElementById("AMM").innerHTML = "+2";
-			} else if (mv == 9) {
-             	console.log("mv: 9");
+			} else if (mv == 9) { // Sprinted
              	document.getElementById("AMM").innerHTML = "0";
              } else {
-				console.log("mv: else");
 				document.getElementById("AMM").innerHTML = "0";
 			}
 		}
 
 		function changeMovementFlag(index, fln) {
-			playTapSound();
+			if (context != null) {
+				playTapSound();
+			}
 
 			var list = document.getElementsByClassName("bigcheck");
 			var fired = 0;
@@ -260,7 +251,9 @@ session_start();
 		}
 
 		function setMovementFlags(index, movement, weaponsfired) {
-			playTapSound();
+			if (context != null) {
+				playTapSound();
+			}
 
 			var movementdiestring = "";
 
@@ -347,7 +340,9 @@ session_start();
 		}
 
 		function clearFiredFlags(index, mv) {
-			playTapSound();
+			if (context != null) {
+				playTapSound();
+			}
 
 			var list = document.getElementsByClassName("bigcheck");
 			[].forEach.call(list, function (el1) {
@@ -363,7 +358,9 @@ session_start();
 		}
 
 		function clearMovementFlags(index) {
-			playTapSound();
+			if (context != null) {
+				playTapSound();
+			}
 
 			var list = document.getElementsByClassName("bigcheck");
 			[].forEach.call(list, function (el1) {
@@ -494,13 +491,18 @@ session_start();
 	echo "	var originalmechimage = '".$array_MECH_IMG_URL[$chosenMechIndex]."';\n";
 	echo "	var deadmechimage = 'skull.png';\n";
 
-	echo "	var movement = ".$array_MVMT[$chosenMechIndex].";\n";
-	echo "	var weaponsfired = ".$array_WPNSFIRED[$chosenMechIndex].";\n";
-
 	if ($array_TMM[$chosenMechIndex] != null) {
-		echo "	var originalTMM = $array_TMM[$chosenMechIndex]\n";
+		echo "	var originalTMM = $array_TMM[$chosenMechIndex];\n";
 	}
-
+	if ($array_MVMT[$chosenMechIndex] != null) {
+		echo "	var movement = $array_MVMT[$chosenMechIndex];\n";
+	}
+	if ($array_WPNSFIRED[$chosenMechIndex] != null) {
+		echo "	var weaponsfired = $array_WPNSFIRED[$chosenMechIndex];\n";
+	}
+	if ($array_TP[$chosenMechIndex] != null) {
+		echo "  var unitType = '$array_TP[$chosenMechIndex]';\n";
+	}
 	echo "</script>\n";
 ?>
 
@@ -914,9 +916,9 @@ session_start();
 				</div>
 			</td>
 			<td valign='bottom'>
-				<a onclick='showInfoBar();' href='#'><img src='./images/selector_02-info.png' width='50px'></a><br>
-				<a onclick='showDiceBar();' href='#'><img src='./images/selector_01-dice.png' width='50px'></a><br>
-				<a onclick='showMoveBar();' href='#'><img id='roundphaseshortcutimage' src='./images/selector_04-movement.png' width='50px'></a>
+				<a onclick='showInfoBar();' id="InfoButton" href='#'><img src='./images/selector_02-info.png' width='50px'></a><br>
+				<a onclick='showDiceBar();' id="DiceButton" href='#'><img src='./images/selector_01-dice.png' width='50px'></a><br>
+				<a onclick='showMoveBar();' id="MoveButton" href='#'><img id='roundphaseshortcutimage' src='./images/selector_04-movement.png' width='50px'></a>
 			</td>
 		</tr>
 	</table>
@@ -1097,14 +1099,6 @@ session_start();
 <?php
 	// Show AMM
 	echo "<script>\n";
-	echo "	var movement = 0\n";
-	if ($array_MVMT[$chosenMechIndex] != null) {
-		echo "	movement = $array_MVMT[$chosenMechIndex]\n";
-	}
-	echo "	var weaponsfired = 0\n";
-	if ($array_WPNSFIRED[$chosenMechIndex] != null) {
-		echo "	weaponsfired = $array_WPNSFIRED[$chosenMechIndex]\n";
-	}
 	echo "	setMovementFlags($array_MECH_DBID[$chosenMechIndex], movement, weaponsfired);\n";
 	echo "	setFireValues(movement, weaponsfired);\n";
 	echo "</script>\n";
@@ -1153,14 +1147,13 @@ session_start();
 			echo "								<label class='bigcheck'><input onchange='changeMovementFlag($array_MECH_DBID[$chosenMechIndex], 3);' type='checkbox' class='bigcheck' name='MV3_MOVED' value='yes'/><span class='bigcheck-target'></span></label>\n";
 			echo "							</td>\n";
 			echo "							<td nowrap align='left' class='datalabel'>\n";
-//			echo "								&nbsp;&nbsp;&nbsp;Walked (>1\")\n";
 			echo "								&nbsp;&nbsp;&nbsp;Walked\n";
 			echo "							</td>\n";
 			echo "							<td nowrap align='left' class='datavalue_small'>\n";
 			echo "								&nbsp;&nbsp;&nbsp;\n";
 			echo "							</td>\n";
 			echo "							<td nowrap align='left' class='datavalue_small'>\n";
-			echo "								&nbsp;&nbsp;&nbsp;TMM ".$array_TMM[$chosenMechIndex]." (#)\n";
+			echo "								&nbsp;&nbsp;&nbsp;TMM #\n";
 			echo "							</td>\n";
 			echo "						</tr>\n";
 			echo "						<tr>\n";
@@ -1190,24 +1183,11 @@ session_start();
 			echo "							<td nowrap align='left' class='datavalue_small'>\n";
 			echo "								&nbsp;&nbsp;&nbsp;TMM ";
 
-			//TODO: SPCL Ability for JJs (calculate into TMM)
-			// SPCL modifier for JJs
-			$JJ_TMM_SPCL_Modifier = 0;
-			if(strpos($array_SPCL[$chosenMechIndex],"JMPS") !== false) {
-				// special strong jumpjets
-			} else if(strpos($array_SPCL[$chosenMechIndex],"JMPW") !== false) {
-				// special weak jumpjets
-			} else {
-				// no special jumpjets
-			}
-
 			if ($array_TP[$chosenMechIndex] == "BA") {
 				// BA do not use the modifier for jumping
-				$array_modified_TMM[$chosenMechIndex] = intval($array_TMM[$chosenMechIndex]) + intval($JJ_TMM_SPCL_Modifier); // + SPCL (!)
-				echo $array_modified_TMM[$chosenMechIndex] . " (#+SPCL)\n";
+				echo "#+SPCL\n";
 			} else {
-				$array_modified_TMM[$chosenMechIndex] = intval($array_TMM[$chosenMechIndex]) + 1 + intval($JJ_TMM_SPCL_Modifier);
-				echo $array_modified_TMM[$chosenMechIndex] . " (#+1+SPCL)\n";
+				echo "#+1+SPCL\n";
 			}
 
 			echo "							</td>\n";
@@ -1244,7 +1224,7 @@ session_start();
 // 			echo "										</td>\n";
 //			echo "										<td colspan='3' width='25%' nowrap align='center' valign='top' class='datalabel' style='vertical-align:top;text-align:center'>\n";
 //			echo "											<label class='bigcheck'><input onchange='changeMovementFlag($array_MECH_DBID[$chosenMechIndex], 8);' type='checkbox' class='bigcheck' name='WF8_WEAPONSFIRED' value='yes'/><span class='bigcheck-target'></span></label>\n";
-// 			echo "										</td>\n";
+//			echo "										</td>\n";
 			echo "									</tr>\n";
 //			echo "									<tr>\n";
 //			echo "										<td nowrap align='center' class='datalabel' width='1%' style='vertical-align:top;text-align:center'>\n";
@@ -1316,11 +1296,9 @@ session_start();
 			echo "</div>\n";
 
 			echo "<script>\n";
-			echo "	var movement = 0\n";
 			if ($array_MVMT[$chosenMechIndex] != null) {
 				echo "	movement = $array_MVMT[$chosenMechIndex]\n";
 			}
-			echo "	var weaponsfired = 0\n";
 			if ($array_WPNSFIRED[$chosenMechIndex] != null) {
 				echo "	weaponsfired = $array_WPNSFIRED[$chosenMechIndex]\n";
 			}
