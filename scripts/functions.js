@@ -17,6 +17,7 @@ var context = null;
 // http://goldfirestudios.com/blog/104/howler.js-Modern-Web-Audio-Javascript-Library
 var sound_dice = null;
 var sound_key = null;
+var showingMech = false;
 
 function setSize(name, value) {
 	var list = document.getElementsByClassName(name);
@@ -41,6 +42,9 @@ function readCircles(index, a_max, s_max) {
 	var w = 0;
 	var uov = 0; // used overheat
 
+	var mvmnt = 0;
+	var wpnsf = 0;
+
 	var mechstatus = 1;
 	var mechstatusimage = "images/DD_01.png";
 
@@ -56,6 +60,14 @@ function readCircles(index, a_max, s_max) {
 			if (na.substring(0, 6) == "CD_MP_" && el1.checked) { mp++;  }
 			if (na.substring(0, 5) == "CD_W_"  && el1.checked) { w++;   }
 			if (na.substring(0, 3) == "UOV"    && el1.checked) { uov++; }
+
+			if (na.substring(0, 4) == "MV2_"   && el1.checked) { mvmnt=2; } // standstill
+			if (na.substring(0, 4) == "MV3_"   && el1.checked) { mvmnt=3; } // walked
+			if (na.substring(0, 4) == "MV9_"   && el1.checked) { mvmnt=9; } // sprinted
+			if (na.substring(0, 4) == "MV4_"   && el1.checked) { mvmnt=4; } // jumped
+
+			if (na.substring(0, 4) == "WF5_"   && el1.checked) { wpnsf=1; } // hold fire
+			if (na.substring(0, 4) == "WF6_"   && el1.checked) { wpnsf=2; } // fired
 		}
 	});
 	
@@ -132,6 +144,7 @@ function readCircles(index, a_max, s_max) {
 
 	document.getElementById('mechstatusimagemenu').src=mechstatusimage;
 
+	//setCircles(h, a, s, e, fc, mp, w, uov, mvmnt, wpnsf);
 	setCircles(h, a, s, e, fc, mp, w, uov);
 	var url="./save.php?index="+index+"&h="+h+"&a="+a+"&s="+s+"&e="+e+"&fc="+fc+"&mp="+mp+"&w="+w+"&mstat="+mechstatusimage+"&uov="+uov;
 	// alert(url);
@@ -150,6 +163,7 @@ function setStructuralDamageCache(value) {
 	structuralDamageCache = value;
 }
 
+//function setCircles(h, a, s, e, fc, mp, w, uov, mvmnt, wpnsf) {
 function setCircles(h, a, s, e, fc, mp, w, uov) {
 	var na1 = "";
 
@@ -323,17 +337,17 @@ function setCircles(h, a, s, e, fc, mp, w, uov) {
 //		document.getElementById("mv_points").style.color ="#a49708";
 //		document.getElementById("TMM").style.color = "#a49708";
 		updatedmovementpointsground = updatedmovementpointsground - 2;
-		updatemovementpointsjump = updatemovementpointsjump - 2;
+//		updatemovementpointsjump = updatemovementpointsjump - 2;
 	} else if (h == 2) {
 //		document.getElementById("mv_points").style.color ="#a49708";
 //    	document.getElementById("TMM").style.color = "#a49708";
 		updatedmovementpointsground = updatedmovementpointsground - 4;
-		updatemovementpointsjump = updatemovementpointsjump - 4;
+//		updatemovementpointsjump = updatemovementpointsjump - 4;
 	} else if (h == 3) {
 //		document.getElementById("mv_points").style.color ="#a49708";
 //		document.getElementById("TMM").style.color = "#a49708";
 		updatedmovementpointsground = updatedmovementpointsground - 6;
-		updatemovementpointsjump = updatemovementpointsjump - 6;
+//		updatemovementpointsjump = updatemovementpointsjump - 6;
 	} else if (h == 4) {
 //		document.getElementById("mv_points").style.color ="#ff0000";
 //		document.getElementById("TMM").style.color ="#ff0000";
@@ -361,28 +375,32 @@ function setCircles(h, a, s, e, fc, mp, w, uov) {
 	}
 	document.getElementById("mv_points").innerHTML = mvstring;
 
+	console.log("TMM ------------>");
 	var tmpTMM = originalTMM;
-	if (movement == 0) {                            // 0:   NOT MOVED YET
+	console.log("Mech: " + mechmodel);
+	console.log("Starting with TMM: " + tmpTMM);
+	if (movement == 0) {                            // -------------- 0:   NOT MOVED YET
         if (h > 1 && h < 4) { tmpTMM = tmpTMM - 1; }
-	} else if (movement == 1 || h == 4) {           // 1:	TMM -4					Immobile (Shutdown?)
+        if (h == 4) { tmpTMM = -4; }
+	} else if (movement == 1 || h == 4) {           // -------------- 1:	TMM -4					Immobile (Shutdown?)
 		tmpTMM = -4;
-	} else if (movement == 2) {                     // 2:	TMM 0 AMM -1			Stationary
+	} else if (movement == 2) {                     // -------------- 2:	TMM 0 AMM -1			Stationary
 		updatedshortvalue = updatedshortvalue - 1;
 		updatedmediumvalue = updatedmediumvalue - 1;
         updatedlongvalue = updatedlongvalue - 1;
 		tmpTMM = 0;
         if (h > 1 && h < 4) { tmpTMM = tmpTMM - 1; }
-	} else if (movement == 3) {                 	// 3:	TMM #		            Walked (>1")
+	} else if (movement == 3) {                 	// -------------- 3:	TMM #		            Walked (>1")
 		if (h > 1 && h < 4) { tmpTMM = tmpTMM - 1; }
-	} else if (movement == 4) {                     // 4:	TMM 1 (#+SPCL) AMM +2	Jumped
+	} else if (movement == 4) {                     // -------------- 4:	TMM 1 (#+SPCL) AMM +2	Jumped
 		updatedshortvalue = updatedshortvalue + 2;
 		updatedmediumvalue = updatedmediumvalue + 2;
 		updatedlongvalue = updatedlongvalue + 2;
 
 		if (unitType == "BA") {
-			console.log("BattleArmor --> NO +1 TMM modifier (jump).");
+			console.log("BattleArmor --> NO +1 TMM modifier (jump)");
 		} else {
-			console.log("NO BattleArmor --> +1 TMM modifier (jump).");
+			console.log("NO BattleArmor --> +1 TMM modifier (jump)");
 			tmpTMM = tmpTMM + 1;
 		}
 
@@ -399,20 +417,28 @@ function setCircles(h, a, s, e, fc, mp, w, uov) {
                 if (element.indexOf('JMPS') !== -1) {
                     var num = element.replace(/[^0-9]/g,'');
 					var value = parseInt(num, 10);
-					console.log("Found JMPS: " + value);
+					console.log("Found JMPS. Value: " + value);
+					console.log("+" + value + " TMM modifier (strong JJs)");
+					tmpTMM = tmpTMM + value;
                 }
 	            if (element.indexOf('JMPW') !== -1) {
 	                var num = element.replace(/[^0-9]/g,'');
 					var value = parseInt(num, 10);
-					console.log("Found JMPW: " + value);
+					console.log("Found JMPW. Value: " + value);
+					console.log("-" + value + " TMM modifier (weak JJs)");
+					tmpTMM = tmpTMM - value;
 	            }
             }
 		}
-	} else if (movement == 9) { 	                // 9:	TMM #		            Sprinted (>1")
+	} else if (movement == 9) { 	                // -------------- 9:	TMM #		            Sprinted (>1")
 		if (h > 1 && h < 4) { tmpTMM = tmpTMM - 1; }
 	}
 	console.log("H (Heat) = " + h + " / movement = " + movement + " --> TMM: " + tmpTMM);
+//	if (tmpTMM != originalTMM) {
+//		document.getElementById("TMM").style.color ="#00ff00";
+//	}
 	document.getElementById("TMM").innerHTML = tmpTMM;
+	console.log("TMM ------------<");
 
 	if (updatedshortvalue < 0) {
 //		document.getElementById("minrollshort").style.color ="#00ff00";
@@ -739,6 +765,20 @@ function changeWallpaper() {
    	// console.log(wallpaperNameRand);
 	document.body.style.backgroundImage = "url('./images/body-bg_" + wallpaperNameRand + ".png')";
 	setCookie("wallpaper", wallpaperNameRand, 365);
+}
+
+function showMech() {
+	if (!showingMech) {
+	    $(".dataarea").each(function() {
+			$(this).fadeOut(500, "linear");
+		});
+		showingMech = true;
+	} else {
+		$(".dataarea").each(function() {
+			$(this).fadeIn(500, "linear");
+		});
+		showingMech = false;
+	}
 }
 
 function playDiceSound() {

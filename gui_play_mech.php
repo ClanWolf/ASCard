@@ -477,6 +477,7 @@ session_start();
 
 	echo "<script>\n";
 	echo "  var chosenmechindex = ".$chosenMechIndex.";\n";
+	echo "  var mechmodel = '".$array_MECH_MODEL[$chosenMechIndex]."';\n";
 	echo "	var shortdamage = ".$array_DMG_SHORT[$chosenMechIndex].";\n";
 	echo "	var mediumdamage = ".$array_DMG_MEDIUM[$chosenMechIndex].";\n";
 	echo "	var longdamage = ".$array_DMG_LONG[$chosenMechIndex].";\n";
@@ -842,10 +843,10 @@ session_start();
                             </td>
                             <td id="INFOMOVED" nowrap class="datalabel">MOVED:&nbsp;</td>
                             <td nowrap class="datalabel_thin">
-                                <label class='bigcheck'><input type='checkbox' class='bigcheck' name='MV2_moved2_standstill' id='MV2_moved2_standstill' value='no'/><span class='bigcheck-target'></span></label>
-                                <label class='bigcheck'><input type='checkbox' class='bigcheck' name='MV3_moved3_moved' id='MV3_moved3_moved' value='no'/><span class='bigcheck-target'></span></label>
-                                <label class='bigcheck'><input type='checkbox' class='bigcheck' name='MV9_moved9_sprinted' id='MV9_moved9_sprinted' value='no'/><span class='bigcheck-target'></span></label>
-                                <label class='bigcheck'><input type='checkbox' class='bigcheck' name='MV4_moved4_jumped' id='MV4_moved4_jumped' value='no'/><span class='bigcheck-target'></span></label>
+                                <label class='bigcheck'><input type='checkbox' onchange='readCircles(<?= $array_MECH_DBID[$chosenMechIndex] ?>, <?= $array_A_MAX[$chosenMechIndex] ?>, <?= $array_S_MAX[$chosenMechIndex] ?>);' class='bigcheck' name='MV2_moved2_standstill' id='MV2_moved2_standstill' value='no'/><span class='bigcheck-target'></span></label>
+                                <label class='bigcheck'><input type='checkbox' onchange='readCircles(<?= $array_MECH_DBID[$chosenMechIndex] ?>, <?= $array_A_MAX[$chosenMechIndex] ?>, <?= $array_S_MAX[$chosenMechIndex] ?>);' class='bigcheck' name='MV3_moved3_moved' id='MV3_moved3_moved' value='no'/><span class='bigcheck-target'></span></label>
+                                <label class='bigcheck'><input type='checkbox' onchange='readCircles(<?= $array_MECH_DBID[$chosenMechIndex] ?>, <?= $array_A_MAX[$chosenMechIndex] ?>, <?= $array_S_MAX[$chosenMechIndex] ?>);' class='bigcheck' name='MV9_moved9_sprinted' id='MV9_moved9_sprinted' value='no'/><span class='bigcheck-target'></span></label>
+                                <label class='bigcheck'><input type='checkbox' onchange='readCircles(<?= $array_MECH_DBID[$chosenMechIndex] ?>, <?= $array_A_MAX[$chosenMechIndex] ?>, <?= $array_S_MAX[$chosenMechIndex] ?>);' class='bigcheck' name='MV4_moved4_jumped' id='MV4_moved4_jumped' value='no'/><span class='bigcheck-target'></span></label>
                             </td>
                             <td rowspan="2" align="right" width="1%" valign="top">
                                 <div id="movementtoken" valign="top" align="right">
@@ -856,8 +857,8 @@ session_start();
 						<tr>
 							<td id="INFOFIRED" nowrap  width="15%" class="datalabel">FIRED:&nbsp;</td>
 							<td nowrap width="70%" class="datalabel_thin">
-								<label class='bigcheck'><input type='checkbox' class='bigcheck' name='WF5_WEAPONSFIRED2' id='WF5_WEAPONSFIRED2' value='no'/><span class='bigcheck-target'></span></label>
-								<label class='bigcheck'><input type='checkbox' class='bigcheck' name='WF6_WEAPONSFIRED2' id='WF6_WEAPONSFIRED2' value='no'/><span class='bigcheck-target'></span></label>
+								<label class='bigcheck'><input type='checkbox' onchange='readCircles(<?= $array_MECH_DBID[$chosenMechIndex] ?>, <?= $array_A_MAX[$chosenMechIndex] ?>, <?= $array_S_MAX[$chosenMechIndex] ?>);' class='bigcheck' name='WF5_WEAPONSFIRED2' id='WF5_WEAPONSFIRED2' value='no'/><span class='bigcheck-target'></span></label>
+								<label class='bigcheck'><input type='checkbox' onchange='readCircles(<?= $array_MECH_DBID[$chosenMechIndex] ?>, <?= $array_A_MAX[$chosenMechIndex] ?>, <?= $array_S_MAX[$chosenMechIndex] ?>);' class='bigcheck' name='WF6_WEAPONSFIRED2' id='WF6_WEAPONSFIRED2' value='no'/><span class='bigcheck-target'></span></label>
 							</td>
 
 							<td align="middle" width="98%" valign="middle"></td>
@@ -1082,11 +1083,12 @@ session_start();
 <div id="bottomleft"><img src="./images/bottom-left.png" width="200px"></div>
 
 <div align="center" id="settings">
+	<a href="javascript:showMech()"><i class="fas fa-eye"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 	<!-- <a href="https://www.clanwolf.net/static/files/Rulebooks/CAT35860%20-%20AlphaStrike%20CommandersEdition.pdf" target="_blank"><i class="fas fa-bookmark"></i></a>&nbsp;&nbsp; -->
 	<!-- <a href="#" onclick="javascript:window.location.reload(true)"><i class="fas fa-redo"></i></a>&nbsp;&nbsp; -->
-	<a href="javascript:changeWallpaper()"><i class="fas fa-image"></i></a>&nbsp;&nbsp;
 	<a href="javascript:textSize(0)"><i class="fas fa-minus-square"></i></a>&nbsp;&nbsp;
-	<a href="javascript:textSize(1)"><i class="fas fa-plus-square"></i></a>&nbsp;&nbsp;
+	<a href="javascript:textSize(1)"><i class="fas fa-plus-square"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	<a href="javascript:changeWallpaper()"><i class="fas fa-image"></i></a>&nbsp;&nbsp;
 	<a href="./gui_edit_option.php"><i class="fas fa-cog"></i></a>
 </div>
 
@@ -1097,7 +1099,6 @@ session_start();
 <div id="bottomright"><img src="./images/bt-logo2.png" width="250px"></div>
 
 <?php
-	// Show AMM
 	echo "<script>\n";
 	echo "	setMovementFlags($array_MECH_DBID[$chosenMechIndex], movement, weaponsfired);\n";
 	echo "	setFireValues(movement, weaponsfired);\n";
