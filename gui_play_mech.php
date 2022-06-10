@@ -124,6 +124,7 @@ session_start();
 					if ((na.substring(0, 4) == "MV1_") && el1.checked == true) { mv = 1; }
 					if ((na.substring(0, 4) == "MV2_") && el1.checked == true) { mv = 2; }
 					if ((na.substring(0, 4) == "MV3_") && el1.checked == true) { mv = 3; }
+					if ((na.substring(0, 5) == "MV10_") && el1.checked == true) { mv = 10; }
 					if ((na.substring(0, 4) == "MV4_") && el1.checked == true) { mv = 4; }
 					if ((na.substring(0, 4) == "MV9_") && el1.checked == true) { mv = 9; }
 
@@ -266,6 +267,7 @@ session_start();
 					if ((na.substring(0, 4) == "MV1_") && movement == 1) { el1.checked = true; }
 					if ((na.substring(0, 4) == "MV2_") && movement == 2) { el1.checked = true; }
 					if ((na.substring(0, 4) == "MV3_") && movement == 3) { el1.checked = true; }
+					if ((na.substring(0, 5) == "MV10_") && movement == 10) { el1.checked = true; }
 					if ((na.substring(0, 4) == "MV4_") && movement == 4) { el1.checked = true; }
 					if ((na.substring(0, 4) == "MV9_") && movement == 9) { el1.checked = true; }
 
@@ -843,10 +845,11 @@ session_start();
                             </td>
                             <td id="INFOMOVED" nowrap class="datalabel">MOVED:&nbsp;</td>
                             <td nowrap class="datalabel_thin">
-                                <label class='bigcheck'><input type='checkbox' onchange='readCircles(<?= $array_MECH_DBID[$chosenMechIndex] ?>, <?= $array_A_MAX[$chosenMechIndex] ?>, <?= $array_S_MAX[$chosenMechIndex] ?>);' class='bigcheck' name='MV2_moved2_standstill' id='MV2_moved2_standstill' value='no'/><span class='bigcheck-target'></span></label>
-                                <label class='bigcheck'><input type='checkbox' onchange='readCircles(<?= $array_MECH_DBID[$chosenMechIndex] ?>, <?= $array_A_MAX[$chosenMechIndex] ?>, <?= $array_S_MAX[$chosenMechIndex] ?>);' class='bigcheck' name='MV3_moved3_moved' id='MV3_moved3_moved' value='no'/><span class='bigcheck-target'></span></label>
-                                <label class='bigcheck'><input type='checkbox' onchange='readCircles(<?= $array_MECH_DBID[$chosenMechIndex] ?>, <?= $array_A_MAX[$chosenMechIndex] ?>, <?= $array_S_MAX[$chosenMechIndex] ?>);' class='bigcheck' name='MV9_moved9_sprinted' id='MV9_moved9_sprinted' value='no'/><span class='bigcheck-target'></span></label>
-                                <label class='bigcheck'><input type='checkbox' onchange='readCircles(<?= $array_MECH_DBID[$chosenMechIndex] ?>, <?= $array_A_MAX[$chosenMechIndex] ?>, <?= $array_S_MAX[$chosenMechIndex] ?>);' class='bigcheck' name='MV4_moved4_jumped' id='MV4_moved4_jumped' value='no'/><span class='bigcheck-target'></span></label>
+                                <label class='bigcheck'><input type='checkbox' onchange='readCircles(<?= $array_MECH_DBID[$chosenMechIndex] ?>, <?= $array_A_MAX[$chosenMechIndex] ?>, <?= $array_S_MAX[$chosenMechIndex] ?>, 2, -1);' class='bigcheck' name='MV2_moved2_standstill' id='MV2_moved2_standstill' value='no'/><span class='bigcheck-target'></span></label>
+                                <label class='bigcheck'><input type='checkbox' onchange='readCircles(<?= $array_MECH_DBID[$chosenMechIndex] ?>, <?= $array_A_MAX[$chosenMechIndex] ?>, <?= $array_S_MAX[$chosenMechIndex] ?>, 10,-1);' class='bigcheck' name='MV10_moved10_hulldown' id='MV10_moved10_hulldown' value='no'/><span class='bigcheck-target'></span></label>
+                                <label class='bigcheck'><input type='checkbox' onchange='readCircles(<?= $array_MECH_DBID[$chosenMechIndex] ?>, <?= $array_A_MAX[$chosenMechIndex] ?>, <?= $array_S_MAX[$chosenMechIndex] ?>, 3, -1);' class='bigcheck' name='MV3_moved3_moved' id='MV3_moved3_moved' value='no'/><span class='bigcheck-target'></span></label>
+                                <label class='bigcheck'><input type='checkbox' onchange='readCircles(<?= $array_MECH_DBID[$chosenMechIndex] ?>, <?= $array_A_MAX[$chosenMechIndex] ?>, <?= $array_S_MAX[$chosenMechIndex] ?>, 9, -1);' class='bigcheck' name='MV9_moved9_sprinted' id='MV9_moved9_sprinted' value='no'/><span class='bigcheck-target'></span></label>
+                                <label class='bigcheck'><input type='checkbox' onchange='readCircles(<?= $array_MECH_DBID[$chosenMechIndex] ?>, <?= $array_A_MAX[$chosenMechIndex] ?>, <?= $array_S_MAX[$chosenMechIndex] ?>, 4, -1);' class='bigcheck' name='MV4_moved4_jumped' id='MV4_moved4_jumped' value='no'/><span class='bigcheck-target'></span></label>
                             </td>
                             <td rowspan="2" align="right" width="1%" valign="top">
                                 <div id="movementtoken" valign="top" align="right">
@@ -857,8 +860,8 @@ session_start();
 						<tr>
 							<td id="INFOFIRED" nowrap  width="15%" class="datalabel">FIRED:&nbsp;</td>
 							<td nowrap width="70%" class="datalabel_thin">
-								<label class='bigcheck'><input type='checkbox' onchange='readCircles(<?= $array_MECH_DBID[$chosenMechIndex] ?>, <?= $array_A_MAX[$chosenMechIndex] ?>, <?= $array_S_MAX[$chosenMechIndex] ?>);' class='bigcheck' name='WF5_WEAPONSFIRED2' id='WF5_WEAPONSFIRED2' value='no'/><span class='bigcheck-target'></span></label>
-								<label class='bigcheck'><input type='checkbox' onchange='readCircles(<?= $array_MECH_DBID[$chosenMechIndex] ?>, <?= $array_A_MAX[$chosenMechIndex] ?>, <?= $array_S_MAX[$chosenMechIndex] ?>);' class='bigcheck' name='WF6_WEAPONSFIRED2' id='WF6_WEAPONSFIRED2' value='no'/><span class='bigcheck-target'></span></label>
+								<label class='bigcheck'><input type='checkbox' onchange='readCircles(<?= $array_MECH_DBID[$chosenMechIndex] ?>, <?= $array_A_MAX[$chosenMechIndex] ?>, <?= $array_S_MAX[$chosenMechIndex] ?>, -1, 1);' class='bigcheck' name='WF5_WEAPONSFIRED2' id='WF5_WEAPONSFIRED2' value='no'/><span class='bigcheck-target'></span></label>
+								<label class='bigcheck'><input type='checkbox' onchange='readCircles(<?= $array_MECH_DBID[$chosenMechIndex] ?>, <?= $array_A_MAX[$chosenMechIndex] ?>, <?= $array_S_MAX[$chosenMechIndex] ?>, -1, 2);' class='bigcheck' name='WF6_WEAPONSFIRED2' id='WF6_WEAPONSFIRED2' value='no'/><span class='bigcheck-target'></span></label>
 							</td>
 
 							<td align="middle" width="98%" valign="middle"></td>
@@ -981,6 +984,9 @@ session_start();
 							-->
 							<tr>
 								<td id="phasemovebutton2" class='phase_button_normal'>Stationary</td>
+							</tr>
+							<tr>
+								<td id="phasemovebutton10" class='phase_button_normal'>Hulldown</td>
 							</tr>
 							<tr>
 								<td id="phasemovebutton3" class='phase_button_normal'>Walked</td>
@@ -1141,6 +1147,20 @@ session_start();
 			echo "							</td>\n";
 			echo "							<td nowrap align='left' class='datavalue_small'>\n";
 			echo "								&nbsp;&nbsp;&nbsp;TMM 0\n";
+			echo "							</td>\n";
+			echo "						</tr>\n";
+			echo "						<tr>\n";
+			echo "							<td nowrap align='left' class='datalabel' style='vertical-align:top;'>\n";
+			echo "								<label class='bigcheck'><input onchange='changeMovementFlag($array_MECH_DBID[$chosenMechIndex], 2);' type='checkbox' class='bigcheck' name='MV10_HULLDOWN' value='yes'/><span class='bigcheck-target'></span></label>\n";
+			echo "							</td>\n";
+			echo "							<td nowrap align='left' class='datalabel'>\n";
+			echo "								&nbsp;&nbsp;&nbsp;Hulldown\n";
+			echo "							</td>\n";
+			echo "							<td nowrap align='left' class='datavalue_small'>\n";
+			echo "								&nbsp;&nbsp;&nbsp;AMM xx\n";
+			echo "							</td>\n";
+			echo "							<td nowrap align='left' class='datavalue_small'>\n";
+			echo "								&nbsp;&nbsp;&nbsp;TMM xx\n";
 			echo "							</td>\n";
 			echo "						</tr>\n";
 			echo "						<tr>\n";
