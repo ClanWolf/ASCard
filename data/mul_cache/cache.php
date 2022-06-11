@@ -116,4 +116,5 @@
 	fwrite($cacheversionfileHandle, date('M Y'));
 	fclose($cacheversionfileHandle);
 	echo "saved.<br>";
+	echo "<br><br><a href='https://www.clanwolf.net/apps/ASCard/data/mul_cache/cache_mechdetails_caller.htm'>Update Mechdetails (slow!)</a>"
 ?>

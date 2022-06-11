@@ -446,6 +446,12 @@ function setCircles(h, a, s, e, fc, mp, w, uov, mvmnt, wpnsf) {
 		updatemovementpointsjump = 0;
 	}
 
+	// HULLDOWN
+	if (movement == '10') {
+//		document.getElementById("mv_points").style.color ="#a49708";
+	    updatedmovementpointsground = updatedmovementpointsground - 4;
+	}
+
 	// SPRINTED
 	if (movement == '9') {
 //		document.getElementById("mv_points").style.color ="#a49708";
@@ -515,11 +521,19 @@ function setCircles(h, a, s, e, fc, mp, w, uov, mvmnt, wpnsf) {
 		}
 	} else if (movement == 9) { 	                // -------------- 9:	TMM #		            Sprinted (>1")
 		if (h > 1 && h < 4) { tmpTMM = tmpTMM - 1; }
-	}
+	} else if (movement == 10) { 	                // -------------- 9:	TMM #		            Sprinted (>1")
+     		if (h > 1 && h < 4) { tmpTMM = tmpTMM - 1; }
+     		tmpTMM = tmpTMM - 1;
+     	}
 	console.log("H (Heat) = " + h + " / movement = " + movement + " --> TMM: " + tmpTMM);
 //	if (tmpTMM != originalTMM) {
 //		document.getElementById("TMM").style.color ="#00ff00";
 //	}
+	if (movement == 10) {
+		document.getElementById("tmmLabel").innerHTML = "TMM*:";
+	} else {
+		document.getElementById("tmmLabel").innerHTML = "TMM:";
+	}
 	document.getElementById("TMM").innerHTML = tmpTMM;
 	console.log("TMM ------------<");
 
@@ -710,7 +724,7 @@ function textSize(dec) {
 }
 
 $(document).ready(function() {
-	$("#cover").fadeOut(150, "linear");
+	$("#cover").fadeOut(300, "linear");
 
 	var mechimage = document.getElementById("mechimage");
 	mechimage.style.height="" + ($(document).height() * 0.8 + "px");
@@ -852,11 +866,13 @@ function changeWallpaper() {
 
 function showMech() {
 	if (!showingMech) {
+		$("#movementtoken").fadeOut(500, "linear");
 	    $(".dataarea").each(function() {
 			$(this).fadeOut(500, "linear");
 		});
 		showingMech = true;
 	} else {
+		$("#movementtoken").fadeIn(500, "linear");
 		$(".dataarea").each(function() {
 			$(this).fadeIn(500, "linear");
 		});
@@ -876,6 +892,99 @@ function playTapSound() {
 		sound_key = new Howl({ src: ['./audio/key.mp3', './audio/key.ogg'] });
 	}
 	sound_key.play();
+}
+
+function clearMovementFlags(index) {
+	if (context != null) {
+		playTapSound();
+	}
+
+	var list = document.getElementsByClassName("bigcheck");
+	[].forEach.call(list, function (el1) {
+		na = el1.name;
+		if (typeof na != 'undefined') {
+			if ((na.substring(0, 2) == "MV") || (na.substring(0, 2) == "WF")) {
+				el1.checked = false;
+			}
+		}
+	})
+
+	var elem = document.getElementById("fire_info_cell_2");
+	if (elem == null || elem === undefined) {
+		// nothing
+	} else {
+		elem.className = 'datalabel_disabled_dashed';
+	}
+
+	movementcache = 0;
+}
+
+function hideInfoBar() {
+	$("#infobar").hide();
+}
+
+function showInfoBar() {
+	if($('#infobar').is(':visible')) {
+		// the movebar is already open. do nothing
+	} else {
+		$("#movebar").hide();
+		$("#dicebar").hide();
+		$("#firebar").hide();
+		$("#infobar").show();
+	}
+}
+
+function hideDiceBar() {
+	$("#dicebar").hide();
+}
+
+function showDiceBar() {
+	if($('#dicebar').is(':visible')) {
+		// the dicebar is already open. do nothing
+	} else {
+		$("#infobar").hide();
+		$("#movebar").hide();
+		$("#firebar").hide();
+		$("#dicebar").show();
+
+		if (rolling === 0) {
+		    playDiceSound();
+			for (i = 1; i < 12; i++) {
+				rolling++;
+				setTimeout("rolldice(i)", i * 80);
+			}
+		}
+	}
+}
+
+function hideMoveBar() {
+	$("#movebar").hide();
+}
+
+function showMoveBar() {
+	if($('#movebar').is(':visible')) {
+		// the movebar is already open. do nothing
+	} else {
+		$("#dicebar").hide();
+		$("#infobar").hide();
+		$("#firebar").hide();
+		$("#movebar").show();
+	}
+}
+
+function hideFireBar() {
+	$("#firebar").hide();
+}
+
+function showFireBar() {
+	if($('#firebar').is(':visible')) {
+		// the movebar is already open. do nothing
+	} else {
+		$("#dicebar").hide();
+		$("#infobar").hide();
+		$("#movebar").hide();
+		$("#firebar").show();
+	}
 }
 
 //function touchStarted() {
