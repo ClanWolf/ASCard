@@ -27,10 +27,10 @@ function setSize(name, value) {
 }
 
 function readCircles(index3, a_max3, s_max3) {
-	readcircles(index3, a_max3, s_max3, -9, -9);
+	readCircles2(index3, a_max3, s_max3, -1, -1);
 }
 
-function readCircles(index, a_max, s_max, mv_bt_id, f_bt_id) {
+function readCircles2(index, a_max, s_max, mv_bt_id, f_bt_id) {
 	if (context != null) {
 		playTapSound();
 	}
