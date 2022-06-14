@@ -606,6 +606,13 @@ input[type='checkbox'].bigcheck:checked + span.bigcheck-target:after {
 	font-size: 100%;
 	padding-right: 5px;
 }
+.datalabel_thin_disabled {
+	font-family: 'Pathway Gothic One', sans-serif;
+	vertical-align: middle;
+	color: #222;
+	font-size: 100%;
+	padding-right: 5px;
+}
 .datavalue {
 	vertical-align: middle;
 	font-size: 100%;

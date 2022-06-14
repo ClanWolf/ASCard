@@ -192,7 +192,7 @@ function readCircles2(index, a_max, s_max, mv_bt_id, f_bt_id) {
 	document.getElementById('mechstatusimagemenu').src=mechstatusimage;
 
 	setCircles(h, a, s, e, fc, mp, w, uov, mvmnt, wpnsf);
-	var url="./save.php?index="+index+"&h="+h+"&a="+a+"&s="+s+"&e="+e+"&fc="+fc+"&mp="+mp+"&w="+w+"&mstat="+mechstatusimage+"&uov="+uov;
+	var url="./save.php?index="+index+"&h="+h+"&a="+a+"&s="+s+"&e="+e+"&fc="+fc+"&mp="+mp+"&w="+w+"&mstat="+mechstatusimage+"&uov="+uov+"&mvmnt="+mvmnt+"&wpnsf="+wpnsf;
 	// alert(url);
 	window.frames['saveframe'].location.replace(url);
 
@@ -246,6 +246,9 @@ function setCircles(h, a, s, e, fc, mp, w, uov, mvmnt, wpnsf) {
 		}
 	});
 
+	var updatedmovementpointsground = movementpointsground;
+	var updatemovementpointsjump = movementpointsjump;
+
 	var radioMV2_moved2_standstill = document.getElementById("MV2_moved2_standstill");
     var radioMV10_moved10_hulldown = document.getElementById("MV10_moved10_hulldown");
     var radioMV3_moved3_moved = document.getElementById("MV3_moved3_moved");
@@ -261,20 +264,29 @@ function setCircles(h, a, s, e, fc, mp, w, uov, mvmnt, wpnsf) {
 	radioWF5_WEAPONSFIRED2.checked = false;
 	radioWF6_WEAPONSFIRED2.checked = false;
 
-	if (mvmnt == 2) { // standstill
+	document.getElementById("tmmLabel").innerHTML = "TMM:";
+	if (mvmnt == 2) { // Stationary (AMM -1)
 		radioMV2_moved2_standstill.checked = true;
+		document.getElementById("AMM").innerHTML = "-1";
 	}
 	if (mvmnt == 3) { // walked
 		radioMV3_moved3_moved.checked = true;
+		document.getElementById("AMM").innerHTML = "0";
 	}
 	if (mvmnt == 10) { // hulldown
 		radioMV10_moved10_hulldown.checked = true;
+		document.getElementById("AMM").innerHTML = "0";
+	    updatedmovementpointsground = updatedmovementpointsground - 4;
+	    document.getElementById("tmmLabel").innerHTML = "TMM*:";
 	}
 	if (mvmnt == 9) { // sprinted
 		radioMV9_moved9_sprinted.checked = true;
+		document.getElementById("AMM").innerHTML = "0";
+	    updatedmovementpointsground = updatedmovementpointsground + (updatedmovementpointsground / 2);
 	}
-	if (mvmnt == 4) { // jumped
+	if (mvmnt == 4) { // Jumped (AMM +2)
 		radioMV4_moved4_jumped.checked = true;
+		document.getElementById("AMM").innerHTML = "+2";
 	}
 	if (wpnsf == 1) { // hold fire
 		radioWF5_WEAPONSFIRED2.checked = true;
@@ -390,9 +402,7 @@ function setCircles(h, a, s, e, fc, mp, w, uov, mvmnt, wpnsf) {
 	document.getElementById("dmgmedium_s").innerHTML = updatedmediumdamage;
 	document.getElementById("dmglong_s").innerHTML = updatedlongdamage;
 
-	var updatedmovementpointsground = movementpointsground;
-	var updatemovementpointsjump = movementpointsjump;
-	if (mp == 0) {
+	if (mp == 0) { // Critical movement point hits
 //		document.getElementById("mv_points").style.color = "#ccc";
 //		document.getElementById("TMM").style.color = "#ccc";
 	} else if (mp == 1) {
@@ -446,18 +456,6 @@ function setCircles(h, a, s, e, fc, mp, w, uov, mvmnt, wpnsf) {
 		updatemovementpointsjump = 0;
 	}
 
-	// HULLDOWN
-	if (movement == '10') {
-//		document.getElementById("mv_points").style.color ="#a49708";
-	    updatedmovementpointsground = updatedmovementpointsground - 4;
-	}
-
-	// SPRINTED
-	if (movement == '9') {
-//		document.getElementById("mv_points").style.color ="#a49708";
-	    updatedmovementpointsground = updatedmovementpointsground + (updatedmovementpointsground / 2);
-	}
-
 	var mvstring = updatedmovementpointsground + "&rdquo;";
 	if (updatemovementpointsjump > 0) {
 		mvstring = mvstring + "/" + updatemovementpointsjump + "&rdquo;j";
@@ -468,20 +466,20 @@ function setCircles(h, a, s, e, fc, mp, w, uov, mvmnt, wpnsf) {
 	var tmpTMM = originalTMM;
 	console.log("Mech: " + mechmodel);
 	console.log("Starting with TMM: " + tmpTMM);
-	if (movement == 0) {                            // -------------- 0:   NOT MOVED YET
+	if (mvmnt == 0) {                            // -------------- 0:   NOT MOVED YET
         if (h > 1 && h < 4) { tmpTMM = tmpTMM - 1; }
         if (h == 4) { tmpTMM = -4; }
-	} else if (movement == 1 || h == 4) {           // -------------- 1:	TMM -4					Immobile (Shutdown?)
+	} else if (mvmnt == 1 || h == 4) {           // -------------- 1:	TMM -4					Immobile (Shutdown?)
 		tmpTMM = -4;
-	} else if (movement == 2) {                     // -------------- 2:	TMM 0 AMM -1			Stationary
+	} else if (mvmnt == 2) {                     // -------------- 2:	TMM 0 AMM -1			Stationary
 		updatedshortvalue = updatedshortvalue - 1;
 		updatedmediumvalue = updatedmediumvalue - 1;
         updatedlongvalue = updatedlongvalue - 1;
 		tmpTMM = 0;
         if (h > 1 && h < 4) { tmpTMM = tmpTMM - 1; }
-	} else if (movement == 3) {                 	// -------------- 3:	TMM #		            Walked (>1")
+	} else if (mvmnt == 3) {                 	// -------------- 3:	TMM #		            Walked (>1")
 		if (h > 1 && h < 4) { tmpTMM = tmpTMM - 1; }
-	} else if (movement == 4) {                     // -------------- 4:	TMM 1 (#+SPCL) AMM +2	Jumped
+	} else if (mvmnt == 4) {                     // -------------- 4:	TMM 1 (#+SPCL) AMM +2	Jumped
 		updatedshortvalue = updatedshortvalue + 2;
 		updatedmediumvalue = updatedmediumvalue + 2;
 		updatedlongvalue = updatedlongvalue + 2;
@@ -519,21 +517,14 @@ function setCircles(h, a, s, e, fc, mp, w, uov, mvmnt, wpnsf) {
 	            }
             }
 		}
-	} else if (movement == 9) { 	                // -------------- 9:	TMM #		            Sprinted (>1")
+	} else if (mvmnt == 9) { 	                // -------------- 9:	TMM #		            Sprinted (>1")
 		if (h > 1 && h < 4) { tmpTMM = tmpTMM - 1; }
-	} else if (movement == 10) { 	                // -------------- 9:	TMM #		            Sprinted (>1")
+	} else if (mvmnt == 10) { 	                // -------------- 9:	TMM #		            Sprinted (>1")
      		if (h > 1 && h < 4) { tmpTMM = tmpTMM - 1; }
      		tmpTMM = tmpTMM - 1;
      	}
-	console.log("H (Heat) = " + h + " / movement = " + movement + " --> TMM: " + tmpTMM);
-//	if (tmpTMM != originalTMM) {
-//		document.getElementById("TMM").style.color ="#00ff00";
-//	}
-	if (movement == 10) {
-		document.getElementById("tmmLabel").innerHTML = "TMM*:";
-	} else {
-		document.getElementById("tmmLabel").innerHTML = "TMM:";
-	}
+	console.log("H (Heat) = " + h + " / mvmnt = " + mvmnt + " --> TMM: " + tmpTMM);
+
 	document.getElementById("TMM").innerHTML = tmpTMM;
 	console.log("TMM ------------<");
 
@@ -597,8 +588,6 @@ function setCircles(h, a, s, e, fc, mp, w, uov, mvmnt, wpnsf) {
 		}
 	}
 
-	// console.log(wallpaperNorm);
-
 	var wallpaperWrecked = "./images/body-bg_wrecked2.jpg";
 	var wallpaperHeated = "./images/body-bg_heated.jpg";
 	var temp0 = "./images/temp_0.png";
@@ -612,28 +601,6 @@ function setCircles(h, a, s, e, fc, mp, w, uov, mvmnt, wpnsf) {
 		// document.body.style.backgroundImage = "url('" + wallpaperWrecked + "')";
 		//document.getElementById('mechalive_status').src="./images/skull.png";
 		//document.getElementById('toprightimage').src="./images/top-right_phase00.png";
-	} else {
-		// document.body.style.backgroundImage = "url('./images/body-bg_" + wallpaperNorm + ".png')";
-		// document.getElementById('mechalive_status').src="./images/vitalmonitor.gif";
-		// console.log(movement);
-		if ((movement == 0 || movement === undefined) && weaponsfired == 0) {
-		//	document.getElementById('toprightimage').src="./images/top-right_phase01.png";
-		}
-		if ((movement > 0 && movement < 5) && weaponsfired == 0) {
-		//	document.getElementById('toprightimage').src="./images/top-right_phase02.png";
-		}
-		if ((movement > 0 && movement < 5) && weaponsfired == 1) {
-		//	document.getElementById('toprightimage').src="./images/top-right_phase03.png";
-		}
-		if ((movement > 0 && movement < 5) && weaponsfired == 2) {
-		//	document.getElementById('toprightimage').src="./images/top-right_phase03.png";
-		}
-		if ((movement > 0 && movement < 5) && weaponsfired == 3) {
-		//	document.getElementById('toprightimage').src="./images/top-right_phase03.png";
-		}
-		if ((movement > 0 && movement < 5) && weaponsfired == 4) {
-		//	document.getElementById('toprightimage').src="./images/top-right_phase03.png";
-		}
 	}
 
 	if (h == 0) {
@@ -652,6 +619,61 @@ function setCircles(h, a, s, e, fc, mp, w, uov, mvmnt, wpnsf) {
 		// document.body.style.backgroundImage = "url('" + wallpaperHeated + "')";
 		document.getElementById('heatimage_' + chosenmechindex).src=temp4;
 		document.getElementById('mechalive_status').src="./images/heatalarm.gif";
+	}
+
+	var tmmDiceValue = document.getElementById("TMM").innerHTML;
+	var movementdiestring = "";
+	document.getElementById('firecontainer').className = "datalabel_thin";
+	if (mvmnt == "0") { // not moved yet
+	    movementdiestring = movementdiestring + "empty.png";
+	    document.getElementById('INFOMOVED').innerHTML = "";
+	} else if (mvmnt == "2") { // stationary
+	    movementdiestring = movementdiestring + "bd6_" + tmmDiceValue + ".png";
+	    document.getElementById('INFOMOVED').innerHTML = "STAND";
+	} else if (mvmnt == "3") { // walked
+	    movementdiestring = movementdiestring + "d6_" + tmmDiceValue + ".png";
+	    document.getElementById('INFOMOVED').innerHTML = "WALK";
+	} else if (mvmnt == "10") { // hulldown
+		movementdiestring = movementdiestring + "bd6_" + tmmDiceValue + ".png";
+		document.getElementById('INFOMOVED').innerHTML = "HLLDWN";
+	}  else if (mvmnt == "4") { // jumped
+	    movementdiestring = movementdiestring + "rd6_" + tmmDiceValue + ".png";
+	    document.getElementById('INFOMOVED').innerHTML = "JUMP";
+	} else if (mvmnt == "9") { // sprinted
+		movementdiestring = movementdiestring + "yd6_" + tmmDiceValue + ".png";
+        var e1 = document.getElementById("WF5_WEAPONSFIRED");
+        var e2 = document.getElementById("WF6_WEAPONSFIRED");
+        if (e1 !== undefined && e1 !== null) { e1.checked = true; }
+        if (e2 !== undefined && e2 !== null) { e2.checked = false; }
+		var e1a = document.getElementById("WF5_WEAPONSFIRED2");
+		var e2a = document.getElementById("WF6_WEAPONSFIRED2");
+		if (e1a !== undefined && e1a !== null) { e1a.checked = true; }
+        if (e2a !== undefined && e2a !== null) { e2a.checked = false; }
+        wpnsf = 1; // HOLD FIRE!
+        document.getElementById('INFOMOVED').innerHTML = "SPRINT";
+        document.getElementById('firecontainer').className = "datalabel_thin_disabled";
+    }
+
+	if (wpnsf == 0) {
+        document.getElementById('INFOFIRED').innerHTML = "";
+    } else if (wpnsf == 1) {
+		document.getElementById('INFOFIRED').innerHTML = "HOLD";
+	} else if (wpnsf == 2) {
+		document.getElementById('INFOFIRED').innerHTML = "FIRE";
+	}
+
+	document.getElementById('movementtokenimage').src="./images/dice/" + movementdiestring;
+
+	if (mvmnt == 0 && wpnsf == 0) {
+		document.getElementById('phasebuttonimage').src="./images/top-right_phase01.png";
+	} else if (mvmnt > 0 && wpnsf == 0) {
+		document.getElementById('phasebuttonimage').src="./images/top-right_phase02.png";
+	} else if (mvmnt > 0 && wpnsf > 0) {
+		document.getElementById('phasebuttonimage').src="./images/top-right_phase03.png";
+	} else {
+		document.getElementById("WF5_WEAPONSFIRED2").checked = false;
+		document.getElementById("WF6_WEAPONSFIRED2").checked = false;
+        document.getElementById('INFOFIRED').innerHTML = "";
 	}
 }
 
@@ -973,7 +995,7 @@ function showMoveBar() {
 }
 
 function hideFireBar() {
-	$("#firebar").hide();
+//	$("#firebar").hide();
 }
 
 function showFireBar() {

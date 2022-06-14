@@ -15,22 +15,26 @@
 	$w     = isset($_GET["w"]) ? $_GET["w"] : "";
 	$mstat = isset($_GET["mstat"]) ? $_GET["mstat"] : "";
 	$uov   = isset($_GET["uov"]) ? $_GET["uov"] : "";
+	$mvmnt = isset($_GET["mvmnt"]) ? $_GET["mvmnt"] : "";
+	$wpnsf = isset($_GET["wpnsf"]) ? $_GET["wpnsf"] : "";
 
 	echo "<p style='font-family:Arial,sans-serif;font-size:14px;color:yellow;'>";
 
 	if (!empty($index)) {
 		echo "SAVING DATA...<br>";
 
-		echo $index;
-		echo $h;
-		echo $a;
-		echo $s;
-		echo $e;
-		echo $fc;
-		echo $mp;
-		echo $w;
-		echo $mstat;
-		echo $uov;
+		echo $index."<br>";
+		echo $h."<br>";
+		echo $a."<br>";
+		echo $s."<br>";
+		echo $e."<br>";
+		echo $fc."<br>";
+		echo $mp."<br>";
+		echo $w."<br>";
+		echo $mstat."<br>";
+		echo $uov."<br>";
+		echo $mvmnt."<br>";
+		echo $wpnsf."<br>";
 		echo "<br>";
 
 		$sql = "UPDATE asc_mechstatus SET heat=".$h.",armor=".$a.",structure=".$s.",crit_engine=".$e.",crit_fc=".$fc.",crit_mp=".$mp.",crit_weapons=".$w.",usedoverheat=".$uov." WHERE mechid=".$index;
@@ -55,6 +59,18 @@
 		} else {
 			echo "<br>";
 			echo "Error (asc_mech) updating record: " . mysqli_error($conn);
+		}
+
+		$sql3 = "UPDATE asc_assign SET round_moved=".$mvmnt.",round_fired=".$wpnsf." WHERE mechid=".$index;
+		echo "UPDATE asc_assign<br>SET round_moved=".$mvmnt.",round_fired=".$wpnsf." WHERE mechid=".$index;
+
+		if (mysqli_query($conn, $sql3)) {
+			echo "<br>";
+			echo "Record (asc_assign) updated successfully";
+			mysqli_commit($conn);
+		} else {
+			echo "<br>";
+			echo "Error (asc_assign) updating record: " . mysqli_error($conn);
 		}
 	} else {
 		echo "WAITING FOR SAVE OPERATION...<br>";

@@ -72,7 +72,7 @@
 			}
 			if ($mechCount == 0) {
 				// there are no units left over in the last round
-				// advance the row
+				// advance the round
 				$sql3 = "UPDATE asc_assign SET round_moved=0,round_fired=0 WHERE gameid=1";
 				echo "UPDATE asc_assign SET round_moved=0,round_fired=0 WHERE gameid=1";
 
