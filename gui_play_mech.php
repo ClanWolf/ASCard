@@ -680,8 +680,8 @@ session_start();
 
 					<table width="100%">
 						<tr>
-							<td nowrap class="datalabel" width="5%" style="text-align: right;">ENGN:</td>
-							<td nowrap class="datalabel_button">&nbsp;&nbsp;<a href="javascript:increaseENGN_PREP();"><i class="fas fa-plus-square"></i></a></td>
+							<td nowrap class="datalabel" width="5%" style="text-align: right;">ENGN:&nbsp;&nbsp;</td>
+							<td nowrap class="datalabel_button" valign="middle"><a href="javascript:increaseENGN_PREP();"><i class="fas fa-plus-square"></i></a></td>
 							<td nowrap class="datalabel" id="label_ENGN_PREP" align="center"><?= $array_ENGN_PREP[$chosenMechIndex] ?></td>
 							<td nowrap class="datalabel">&nbsp;&nbsp;</td>
 							<td nowrap width="55%" style="text-align: left;">
@@ -691,8 +691,8 @@ session_start();
 							<td nowrap class="datalabel_thin_small" width="5%" style="text-align: right;">+1 HT</td>
 						</tr>
 						<tr>
-							<td nowrap class="datalabel" width="5%" style="text-align: right;">FCTL:</td>
-							<td nowrap class="datalabel_button">&nbsp;&nbsp;<a href="javascript:increaseFCTL_PREP();"><i class="fas fa-plus-square"></i></a></td>
+							<td nowrap class="datalabel" width="5%" style="text-align: right;">FCTL:&nbsp;&nbsp;</td>
+							<td nowrap class="datalabel_button" valign="middle"><a href="javascript:increaseFCTL_PREP();"><i class="fas fa-plus-square"></i></a></td>
 							<td nowrap class="datalabel" id="label_FCTL_PREP" align="center"><?= $array_FRCTRL_PREP[$chosenMechIndex] ?></td>
 							<td nowrap class="datalabel">&nbsp;&nbsp;</td>
 							<td nowrap width="90%" style="text-align: left;">
@@ -704,8 +704,8 @@ session_start();
 							<td nowrap class="datalabel_thin_small" width="5%" style="text-align: right;">+2 TO-HIT</td>
 						</tr>
 						<tr>
-							<td nowrap class="datalabel" width="5%" style="text-align: right;">MP:</td>
-							<td nowrap class="datalabel_button">&nbsp;&nbsp;<a href="javascript:increaseMP_PREP();"><i class="fas fa-plus-square"></i></a></td>
+							<td nowrap class="datalabel" width="5%" style="text-align: right;">MP:&nbsp;&nbsp;</td>
+							<td nowrap class="datalabel_button" valign="middle"><a href="javascript:increaseMP_PREP();"><i class="fas fa-plus-square"></i></a></td>
 							<td nowrap class="datalabel" id="label_MP_PREP" align="center"><?= $array_MP_PREP[$chosenMechIndex] ?></td>
 							<td nowrap class="datalabel">&nbsp;&nbsp;</td>
 							<td nowrap width="55%" style="text-align: left;">
@@ -717,8 +717,8 @@ session_start();
 							<td nowrap class="datalabel_thin_small" width="5%" style="text-align: right;">1/2 MV</td>
 						</tr>
 						<tr>
-							<td nowrap class="datalabel" width="5%" style="text-align: right;">WPNS:</td>
-							<td nowrap class="datalabel_button">&nbsp;&nbsp;<a href="javascript:increaseWPNS_PREP();"><i class="fas fa-plus-square"></i></a></td>
+							<td nowrap class="datalabel" width="5%" style="text-align: right;">WPNS:&nbsp;&nbsp;</td>
+							<td nowrap class="datalabel_button" valign="middle"><a href="javascript:increaseWPNS_PREP();"><i class="fas fa-plus-square"></i></a></td>
 							<td nowrap class="datalabel" id="label_WPNS_PREP" align="center"><?= $array_WPNS_PREP[$chosenMechIndex] ?></td>
 							<td nowrap class="datalabel">&nbsp;&nbsp;</td>
 							<td nowrap width="55%" style="text-align: left;">
@@ -837,7 +837,7 @@ session_start();
 </div>
 
 <div id="destroyedIndicator">
-	<img src='./images/skull.png' height='250px'>
+	<img src='./images/skull.png' onclick="javascript:hideSkull();" height='250px'>
 </div>
 
 <script type="text/javascript">

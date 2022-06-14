@@ -111,6 +111,8 @@ session_start();
 		});
 		$(document).ready(function() {
 			$("#cover").hide();
+			var api = $('.scroll-pane').data('jsp');
+			api.reinitialise();
 		});
 	</script>
 
@@ -157,28 +159,30 @@ session_start();
 
 	<table width="70%" class="options" cellspacing=4 cellpadding=4 border=0px>
 		<tr>
-			<td align="center">
+			<td width="15%" nowrap align="center">
 				<a href="javascript:window.history.back();"><< Go back</a>
+			</td>
+			<td width="85%" align="center">
+				<a href="#PRB" id="PRBLink" target="_SELF">PRB</a>&nbsp;&nbsp;
+				<a href="#AFC" target="_SELF">AFC</a>&nbsp;&nbsp;
+				<a href="#AT" target="_SELF">AT</a>&nbsp;&nbsp;
+				<a href="#AMP" target="_SELF">AMP</a>&nbsp;&nbsp;
+				<a href="#AECM" target="_SELF">AECM</a>&nbsp;&nbsp;
+				<a href="#AM" target="_SELF">AM</a>&nbsp;&nbsp;
+				<a href="#AMS" target="_SELF">AMS</a>&nbsp;&nbsp;
+				<a href="#ARM" target="_SELF">ARM</a>&nbsp;&nbsp;
 			</td>
 		</tr>
 		<tr>
-			<td align="center">
+			<td colspan="2" align="center">
 				<hr>
 			</td>
 		</tr>
 		<tr>
-			<td align="left" class='datalabel'>
+			<td colspan="2" align="left" class='datalabel'>
 				<div class="scroll-pane">
 					<p id="PRB"><strong>Active Probe (PRB)</strong><br>
-						Units equipped with active probes have an extended view of the battlefield,<br>
-						enabling them to provide information about targets without moving into the<br>
-						target’s Short range bracket. The active probe’s effective range is 18”,<br>
-						automatically confers the Recon (RCN) special ability upon its user, and<br>
-						enables it to detect hidden units (see Hidden Units, p. 102), identify<br>
-						incoming sensor blips, or even discover the capabilities of unknown hostile<br>
-						units that fall within this range (see Concealing Unit Data, pp. 87-89).<br>
-						Hostile ECM systems, including Angel ECM (AECM) and standard ECM (ECM)<br>
-						will overwhelm the active probe’s abilities.
+						Units equipped with active probes have an extended view of the battlefield, enabling them to provide information about targets without moving into the target’s Short range bracket. The active probe’s effective range is 18”, automatically confers the Recon (RCN) special ability upon its user, and enables it to detect hidden units (see Hidden Units, p. 102), identify incoming sensor blips, or even discover the capabilities of unknown hostile units that fall within this range (see Concealing Unit Data, pp. 87-89). Hostile ECM systems, including Angel ECM (AECM) and standard ECM (ECM) will overwhelm the active probe’s abilities.
 					</p>
 					<p id="AFC"><strong>Advanced Fire Control (AFC)</strong><br>
 						IndustrialMechs and support vehicles equipped with Advanced Fire Control do not suffer to-hit modifiers for their unit type.
@@ -921,27 +925,13 @@ session_start();
 						reduction.)
 					</p>
 					<p id="TSM"><strong>Triple-Strength Myomer (TSM)</strong><br>
-						’Mechs with the Triple-Strength Myomer special ability can move faster<br>
-						and deliver additional damage in standard- and melee-type physical<br>
-						attacks, but only when running hot. Once a unit with TSM overheats,<br>
-						the following rules apply only to its movement and physical attack<br>
-						capabilities. All other rules for overheating and gameplay apply<br>
-						normally.
+						’Mechs with the Triple-Strength Myomer special ability can move faster and deliver additional damage in standard- and melee-type physical attacks, but only when running hot. Once a unit with TSM overheats, the following rules apply only to its movement and physical attack capabilities. All other rules for overheating and gameplay apply normally.
 					</p>
 					<p>
-						<em>Movement:</em> When a ’Mech with TSM has a heat scale level of 1<br>
-						or higher, it gains 2 inches of additional ground Move. If the heat<br>
-						scale is 1, the unit also ignores the loss of 2 inches from overheating,<br>
-						but the overheating effects on Move for heat levels of 2+ remain in<br>
-						effect. (Unlike units with Industrial TSM, units with this ability do<br>
-						not include its movement effects in their normal stats, because the<br>
-						ability is activated only by overheating.)
+						<em>Movement:</em> When a ’Mech with TSM has a heat scale level of 1 or higher, it gains 2 inches of additional ground Move. If the heat scale is 1, the unit also ignores the loss of 2 inches from overheating, but the overheating effects on Move for heat levels of 2+ remain in effect. (Unlike units with Industrial TSM, units with this ability do not include its movement effects in their normal stats, because the ability is activated only by overheating.)
 					</p>
 					<p>
-						<em>Physical Attacks:</em> When an overheating unit delivers a successful<br>
-						standard- or melee-type physical attack, it adds 1 point to the damage<br>
-						delivered by the attack. Unlike Industrial TSM, this heat-activated<br>
-						version imposes no additional to-hit modifiers.
+						<em>Physical Attacks:</em> When an overheating unit delivers a successful standard- or melee-type physical attack, it adds 1 point to the damage delivered by the attack. Unlike Industrial TSM, this heat-activated version imposes no additional to-hit modifiers.
 					</p>
 					<p id="TUR"><strong>Turret (TUR#)</strong><br>
 						A unit with a turret has some (or all) of its weapons mounted with a 360-degree field of fire. Damage for all turret-mounted weapons are included in the base damage values for the unit, and then separately for the TUR special ability. Thus, when a unit with a turret wishes to make an attack outside of its normal forward field of fire, it must use the damage values for its TUR special ability in place of the unit’s standard damage values.
@@ -962,6 +952,18 @@ session_start();
 			</td>
 		</tr>
 	</table>
+
+	<script>
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+//                console.log("scrolling");
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
 </body>
 
 </html>

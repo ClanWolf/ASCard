@@ -1002,3 +1002,7 @@ function showMoveBar() {
 		$("#movebar").show();
 	}
 }
+
+function hideSkull() {
+	$("#destroyedIndicator").fadeOut(500, "linear");
+}
