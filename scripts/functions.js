@@ -521,7 +521,7 @@ function setCircles(h, a, s, e, fc, mp, w, uov, mvmnt, wpnsf) {
 		if (h > 1 && h < 4) { tmpTMM = tmpTMM - 1; }
 	} else if (mvmnt == 10) { 	                // -------------- 9:	TMM #		            Sprinted (>1")
      		if (h > 1 && h < 4) { tmpTMM = tmpTMM - 1; }
-     		tmpTMM = tmpTMM - 1;
+     		tmpTMM = tmpTMM + 1;
      	}
 	console.log("H (Heat) = " + h + " / mvmnt = " + mvmnt + " --> TMM: " + tmpTMM);
 
@@ -580,27 +580,29 @@ function setCircles(h, a, s, e, fc, mp, w, uov, mvmnt, wpnsf) {
 		mechstatus = 4;
 	}
 
-	var wallpaperNorm = "./images/body-bg_2.png";
-	var wallpaperName = getCookie("wallpaper");
-	if ((wallpaperName !== null) && (typeof wallpaperName != 'undefined')) {
-		if (parseFloat(wallpaperName) > 0 && parseFloat(wallpaperName) < 9) {
-			wallpaperNorm = wallpaperName;
-		}
-	}
-
-	var wallpaperWrecked = "./images/body-bg_wrecked2.jpg";
-	var wallpaperHeated = "./images/body-bg_heated.jpg";
 	var temp0 = "./images/temp_0.png";
 	var temp1 = "./images/temp_1.png";
 	var temp2 = "./images/temp_2.png";
 	var temp3 = "./images/temp_3.png";
 	var temp4 = "./images/temp_4.png";
 
+	$("#destroyedIndicator").hide();
 	if (mechstatus == 4) {
 		// Mech destroyed
-		// document.body.style.backgroundImage = "url('" + wallpaperWrecked + "')";
-		//document.getElementById('mechalive_status').src="./images/skull.png";
-		//document.getElementById('toprightimage').src="./images/top-right_phase00.png";
+		$("#destroyedIndicator").show();
+
+
+
+
+
+
+
+
+
+
+
+
+
 	}
 
 	if (h == 0) {
@@ -616,7 +618,6 @@ function setCircles(h, a, s, e, fc, mp, w, uov, mvmnt, wpnsf) {
 		document.getElementById('heatimage_' + chosenmechindex).src=temp3;
 	}
 	if (h == 4 && mechstatus != 4) {
-		// document.body.style.backgroundImage = "url('" + wallpaperHeated + "')";
 		document.getElementById('heatimage_' + chosenmechindex).src=temp4;
 		document.getElementById('mechalive_status').src="./images/heatalarm.gif";
 	}
@@ -654,6 +655,17 @@ function setCircles(h, a, s, e, fc, mp, w, uov, mvmnt, wpnsf) {
         document.getElementById('firecontainer').className = "datalabel_thin_disabled";
     }
 
+	var currentButton = 'phasemovebutton' + mvmnt;
+	document.getElementById('phasemovebutton2').className='phase_button_normal';
+	document.getElementById('phasemovebutton10').className='phase_button_normal';
+	document.getElementById('phasemovebutton3').className='phase_button_normal';
+	document.getElementById('phasemovebutton9').className='phase_button_normal';
+	document.getElementById('phasemovebutton4').className='phase_button_normal';
+	var elx = document.getElementById(currentButton)
+    if (typeof(elx) != 'undefined' && elx != null) {
+		elx.className='phase_button_selected';
+    }
+
 	if (wpnsf == 0) {
         document.getElementById('INFOFIRED').innerHTML = "";
     } else if (wpnsf == 1) {
@@ -673,7 +685,8 @@ function setCircles(h, a, s, e, fc, mp, w, uov, mvmnt, wpnsf) {
 	} else {
 		document.getElementById("WF5_WEAPONSFIRED2").checked = false;
 		document.getElementById("WF6_WEAPONSFIRED2").checked = false;
-        document.getElementById('INFOFIRED').innerHTML = "";
+		document.getElementById('INFOFIRED').innerHTML = "";
+		document.getElementById('phasebuttonimage').src="./images/top-right_phase01.png";
 	}
 }
 
@@ -951,7 +964,6 @@ function showInfoBar() {
 	} else {
 		$("#movebar").hide();
 		$("#dicebar").hide();
-		$("#firebar").hide();
 		$("#infobar").show();
 	}
 }
@@ -966,7 +978,6 @@ function showDiceBar() {
 	} else {
 		$("#infobar").hide();
 		$("#movebar").hide();
-		$("#firebar").hide();
 		$("#dicebar").show();
 
 		if (rolling === 0) {
@@ -989,36 +1000,6 @@ function showMoveBar() {
 	} else {
 		$("#dicebar").hide();
 		$("#infobar").hide();
-		$("#firebar").hide();
 		$("#movebar").show();
 	}
 }
-
-function hideFireBar() {
-//	$("#firebar").hide();
-}
-
-function showFireBar() {
-	if($('#firebar').is(':visible')) {
-		// the movebar is already open. do nothing
-	} else {
-		$("#dicebar").hide();
-		$("#infobar").hide();
-		$("#movebar").hide();
-		$("#firebar").show();
-	}
-}
-
-//function touchStarted() {
-//
-//}
-
-//window.onload = function() {
-//
-//}
-
-// function updateSite(event) {
-// 	window.location.reload();
-// }
-
-// window.applicationCache.addEventListener('updateready', updateSite, false);

@@ -22,8 +22,7 @@ session_start();
 	<title>ClanWolf.net: AplhaStrike Card App (ASCard)</title>
 	<meta charset="utf-8">
 	<meta http-equiv="expires" content="0">
-	<meta name="description" co
-	ntent="Cards app for the AlphaStrike TableTop (BattleTech).">
+	<meta name="description" content="Cards app for the AlphaStrike TableTop (BattleTech).">
 	<meta name="keywords" content="BattleTech, AlphaStrike, Mech">
 	<meta name="robots" content="noindex,nofollow">
 	<meta name="mobile-web-app-capable" content="yes">
@@ -65,33 +64,9 @@ session_start();
 
 <body>
 	<script>
-
-//		// -------------------------------------------------------------------------------------------------------------
-//		function fixHeight() {
-//			var calculated_total_height = screen.height*window.devicePixelRatio; // this works with the real y value as a result
-//			//var windowWidth = window.innerWidth;
-//			//var windowHeight = window.innerHeight;
-//			//document.getElementsByTagName('body')[0].style.height = windowHeight + "px";
-//			//window.innerHeight = 600;
-//			//window.scrollTo(0,1);
-//			//$(window).trigger('resize');
-//			//document.body.style.height = 780; // window.innerWidth;
-//			//console.log("New height: " + windowHeight);
-//			//alert("New height: " + windowHeight);
-//			//alert("New height: " + calculated_total_height);
-//		}
-//		$(window).on('orientationchange', function () {
-//			$(window).one('resize', function () {
-//				setTimeout(fixHeight, 600);
-//			});
-//		});
-//		setTimeout(fixHeight, 600);
-//		// -------------------------------------------------------------------------------------------------------------
-
 		var movementcache = 0;
 		var firedcache = 0;
 
-// DONE!
 		function setFireValues(mv, fired) {
 			if (mv == 2) { // Stationary (AMM -1)
 				document.getElementById("AMM").innerHTML = "-1";
@@ -103,7 +78,6 @@ session_start();
 				document.getElementById("AMM").innerHTML = "0";
 			}
 		}
-// DONE!
 
 		function changeMovementFlag(index, fln) {
 			if (context != null) {
@@ -152,22 +126,6 @@ session_start();
 							fired = 2; // fired weapons, was before: fired on short range (not anymore, there is just fired or hold fire)
 						}
 					}
-//					if (na == "WF7_WEAPONSFIRED" && el1.checked == true) {
-//						if (mv == 0) {
-//							//alert("First movement has to be specified!");
-//							el1.checked = false;
-//						} else {
-//							fired = 3; // fired on medium range
-//						}
-//					}
-//					if (na == "WF8_WEAPONSFIRED" && el1.checked == true) {
-//						if (mv == 0) {
-//							//alert("First movement has to be specified!");
-//							el1.checked = false;
-//						} else {
-//							fired = 4; // fired on long range
-//						}
-//					}
 				}
 			})
 
@@ -208,10 +166,6 @@ session_start();
 			}
 
 			var tmmDiceValue = document.getElementById("TMM").innerHTML;
-//			if (tmmDiceValue == '0') {
-//				tmmDiceValue = 6;
-//			}
-
 			if (mv == "0") { // not moved yet
 			    movementdiestring = movementdiestring + "d6_0.png";
 			    document.getElementById('INFOMOVED').innerHTML = "MOVE:";
@@ -384,10 +338,6 @@ session_start();
 	if (empty($chosenMechIndex)) {
 		$chosenMechIndex = 1;
 	}
-//	$movd = $_GET["movd"];
-//	if (empty($movd)) {
-//		$movd=0;
-//	}
 	require('./db_getdata.php');
 
 	echo "<script>\n";
@@ -410,12 +360,6 @@ session_start();
 	if ($array_TMM[$chosenMechIndex] != null) {
 		echo "	var originalTMM = $array_TMM[$chosenMechIndex];\n";
 	}
-//	if ($array_MVMT[$chosenMechIndex] != null) {
-//		echo "	var movement = $array_MVMT[$chosenMechIndex];\n";
-//	}
-//	if ($array_WPNSFIRED[$chosenMechIndex] != null) {
-//		echo "	var weaponsfired = $array_WPNSFIRED[$chosenMechIndex];\n";
-//	}
 	if ($array_TP[$chosenMechIndex] != null) {
 		echo "  var unitType = '$array_TP[$chosenMechIndex]';\n";
 	}
@@ -504,12 +448,7 @@ session_start();
 
 		$meli="./gui_play_mech.php?unit=".$unitid."&chosenmech=".$i4;
 		if ($chosenMechIndex == $i4) {
-//			if ($movd==1) {
-//				$meli = $meli; //."&movd=0";
-				$locmeli = $meli;
-//			} else {
-//				$meli = $meli; //."&movd=1";
-//			}
+			$locmeli = $meli;
 			$currentMechStatusImage = $mechstatusimage;
 			$currentmeli = $meli;
 			$currentPhaseButton = $phaseButton;
@@ -517,7 +456,6 @@ session_start();
 			$currentMechMovement = $mvmt;
 			$currentMechFired = $wpnsfired;
 
-//			echo "<td width='".$width."%' nowrap><table width='100%' cellspacing='0' cellpadding='0' class='mechselect_button_active_play_left'><tr><td nowrap width='30px' align='center' valign='center'><div style='display:inline-block;height:100%;vertical-align:middle;'><span style='color:#ccffff;font-size:15px;'>&nbsp;&nbsp;".$mn."&nbsp;&nbsp;</span><br><img id='mechstatusimagemenu' style='vertical-align:middle;' src='".$array_MECH_IMG_STATUS[$i4]."' height='25px' width='23px'></div></td><td nowrap width='100%'><div><img src='./images/ranks/".$factionid."/".$array_PILOT_RANK[$i4].".png' width='18px' height='18px'>&nbsp;<a style='font-size:24px' href='".$meli."'>".$array_PILOT[$i4]."</a>&nbsp;&nbsp;<img src='".$mechstatusimage."' height='21px'>".$heatimage[$i4]."<br><span style='font-size:14px;'>".$memodel."</span></div></td></tr></table></td>\r\n";
 			echo "<td width='".$width."%' nowrap><table width='100%' cellspacing='0' cellpadding='0' class='mechselect_button_active_play_left'><tr><td nowrap width='30px' align='center' valign='center'><div style='display:inline-block;height:100%;vertical-align:middle;'><span style='color:#ccffff;font-size:15px;'>&nbsp;&nbsp;".$mn."&nbsp;&nbsp;</span><br><img id='mechstatusimagemenu' style='vertical-align:middle;' src='".$array_MECH_IMG_STATUS[$i4]."' height='25px' width='23px'></div></td><td nowrap width='100%'><div><img src='./images/ranks/".$factionid."/".$array_PILOT_RANK[$i4].".png' width='18px' height='18px'>&nbsp;<span style='font-size:24px'>".$array_PILOT[$i4]."</span>&nbsp;&nbsp;<img src='".$mechstatusimage."' height='21px'>".$heatimage[$i4]."<br><span style='font-size:14px;'>".$memodel."</span></div></td></tr></table></td>\r\n";
 		} else {
 			if ($array_ACTIVE_BID[$i4] == "1") {
@@ -548,10 +486,7 @@ session_start();
 </div>
 
 <div id="topright">
-	<!-- <a onclick=location.href=<?php echo "'$currentmeli'"; ?> href=<?php echo "'$currentmeli'"; ?>> -->
-		<!--<img id='toprightimage' src=<?php echo "'$currentPhaseButton'"; ?> style='height:170px;'> -->
-		<img id='toprightimage' src='./images/top-right_02.png' style='height:135px;'>
-	<!-- </a> -->
+	<img id='toprightimage' src='./images/top-right_02.png' style='height:135px;'>
 </div>
 
 <?php
@@ -725,34 +660,8 @@ session_start();
 
 			</td>
 			<td width="40%" valign="bottom" align="left">
-
-			<!--
-				<table width="100%">
-					<tr>
-						<td nowrap rowspan="2" style="vertical-align: bottom;" valign="bottom" class="datalabel" width="1%">&nbsp;&nbsp;<a href=<?php echo "'$currentmeli'"; ?>"><img src=<?php echo "'$currentMechStatusImage'"; ?>" style='height:120px;'></a></td>
-						<td align="left">
-							<div id="phasebutton" name="phasebutton"><a href=<?php echo "'$currentmeli'"; ?>><img src=<?php echo "'$currentPhaseButton'"; ?> style='height:140px;'></a></div>
-						</td>
-						<td align="right" valign="bottom">
-<?php
-	if ($array_TP[$chosenMechIndex] != "BA") {
-		echo "		            	<div id='criticalhit'></div>\r\n";
-	} else {
-		echo "		        		<div id='criticalhit' style='display:none;'></div>\r\n";
-	}
-?>
-							<div id="dice" valign="middle" align="center">
-								<img id="die1" src="./images/dice/d6_0.png" width="65px" height="65px">
-								<img id="die2" src="./images/dice/d6_0.png" width="65px" height="65px">
-							</div>
-						</td>
-					</tr>
-				</table>
-			-->
                 <div id="movementtoken" width="100%" valign="top" align="left">
-                    <!-- <a href=<?php echo "'$currentmeli'"; ?>"> -->
                     <img valign="top" id="movementtokenimage" src="./images/dice/yd6_4.png" height="70px">
-                    <!-- </a> -->
                 </div>
 				<div class="dataarea">
 					<table width="100%">
@@ -885,13 +794,6 @@ session_start();
 				<td id='moveinfo' align="right" valign="bottom">
 					<div id="moveinfo" valign="bottom" align="left">
 						<table cellspacing="5" cellpadding="0" width="100%">
-							<!--
-							<tr>
-								<td id="phasemovebutton1" class='phase_button_normal'>
-									<a href="#" onclick="">Immobile</a>
-								</td>
-							</tr>
-							-->
 							<tr>
 								<td id="phasemovebutton2" class='phase_button_normal'>Stationary</td>
 							</tr>
@@ -914,52 +816,6 @@ session_start();
         </table>
     </div>
 </div>
-
-<?php
-	if ($currentMechMovement > 0) {
-		echo "<script type='text/javascript'>\n";
-		echo "  document.getElementById('phasemovebutton".$currentMechMovement."').className='phase_button_selected';\n";
-		echo "</script>\n";
-	}
-?>
-
-<div name='firebar' id='firebar'>
-	<div name='barclosebutton' id='barclosebutton'>
-		<a href='#' onclick='hideFireBar();'><img src='.\images\selector_03-close.png' width='50px'></a>
-	</div>
-	<div name='firepanel' id='firepanel'>
-		<table width="100%">
-			<tr>
-				<td id='fireinfo' align="right" valign="bottom">
-					<div id="fireinfo" valign="bottom" align="left">
-						<table cellspacing="5" cellpadding="0" width="100%">
-							<tr>
-								<td class='phasefirebutton1'>No Fire</td>
-							</tr>
-							<tr>
-								<td class='phasefirebutton2'>Fired Short Range</td>
-							</tr>
-							<tr>
-								<td class='phasefirebutton3'>Fired Medium Range</td>
-							</tr>
-							<tr>
-								<td class='phasefirebutton4'>Fired Long Range</td>
-							</tr>
-						</table>
-                    </div>
-                </td>
-            </tr>
-        </table>
-    </div>
-</div>
-
-<?php
-	if ($currentMechFired > 0) {
-//		echo "<script type='text/javascript'>\n";
-//		echo "  document.getElementById('phasefirebutton".$currentMechFired."').className='phase_button_selected';\n";
-//		echo "</script>\n";
-	}
-?>
 
 <div name='dicebar' id='dicebar'>
 	<div name='barclosebutton' id='barclosebutton'>
@@ -986,12 +842,15 @@ session_start();
 	</div>
 </div>
 
+<div id="destroyedIndicator">
+	<img src='./images/skull.png' height='250px'>
+</div>
+
 <script type="text/javascript">
 	$("#infobar").hide();
 	$("#dicebar").hide();
 	$("#movebar").hide();
-	$("#firebar").hide();
-
+	$("#destroyedIndicator").hide();
 	setCircles(<?=$array_HT[$chosenMechIndex]?>,<?=$array_A[$chosenMechIndex]?>,<?=$array_S[$chosenMechIndex]?>,<?=$array_ENGN[$chosenMechIndex]?>,<?=$array_FRCTRL[$chosenMechIndex]?>,<?=$array_MP[$chosenMechIndex]?>,<?=$array_WPNS[$chosenMechIndex]?>,<?=$array_USEDOVERHEAT[$chosenMechIndex]?>,<?=$array_MVMT[$chosenMechIndex]?>,<?=$array_WPNSFIRED[$chosenMechIndex]?>);
 </script>
 

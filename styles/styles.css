@@ -98,6 +98,16 @@ a:hover {
 	/* background-image: url('images/body-bg_1.png'); */
 	z-index:100;
 }
+#destroyedIndicator {
+	text-align: center;
+	position: fixed;
+    margin: 0 auto;
+    width: 100%;
+	height: 250px;
+	top: 100;
+	background: transparent;
+	z-index:1000;
+}
 #header {
 	position: relative;
 	z-index: 999;
