@@ -64,260 +64,242 @@ session_start();
 
 <body>
 	<script>
-		var movementcache = 0;
-		var firedcache = 0;
+//		var movementcache = 0;
+//		var firedcache = 0;
+//
+//		function setFireValues(mv, fired) {
+//			if (mv == 2) { // Stationary (AMM -1)
+//				document.getElementById("AMM").innerHTML = "-1";
+//			} else if (mv == 4) { // Jumped (AMM +2)
+//				document.getElementById("AMM").innerHTML = "+2";
+//			} else if (mv == 9) { // Sprinted
+//             	document.getElementById("AMM").innerHTML = "0";
+//             } else {
+//				document.getElementById("AMM").innerHTML = "0";
+//			}
+//		}
 
-		function setFireValues(mv, fired) {
-			if (mv == 2) { // Stationary (AMM -1)
-				document.getElementById("AMM").innerHTML = "-1";
-			} else if (mv == 4) { // Jumped (AMM +2)
-				document.getElementById("AMM").innerHTML = "+2";
-			} else if (mv == 9) { // Sprinted
-             	document.getElementById("AMM").innerHTML = "0";
-             } else {
-				document.getElementById("AMM").innerHTML = "0";
-			}
-		}
+//		function changeMovementFlag(index, fln) {
+//			if (context != null) {
+//				playTapSound();
+//			}
+//
+//			var list = document.getElementsByClassName("bigcheck");
+//			var fired = 0;
+//			var mv = 0;
+//			var movementdiestring = "";
+//
+//			[].forEach.call(list, function (el1) {
+//				na = el1.name;
+//				if (typeof na != 'undefined') {
+//					if (na.substring(0, 2) == "MV" && (fln!=5 && fln!=6 && fln!=7 && fln!=8)) { el1.checked = false }
+//					if (na.substring(0, 4) == "MV" + fln + "_" || na.substring(0, 5) == "MV" + fln + "_") {
+//						el1.checked = true;
+//						mv = fln;
+//					}
+//
+//					if ((na.substring(0, 4) == "MV1_") && el1.checked == true) { mv = 1; }
+//					if ((na.substring(0, 4) == "MV2_") && el1.checked == true) { mv = 2; }
+//					if ((na.substring(0, 4) == "MV3_") && el1.checked == true) { mv = 3; }
+//					if ((na.substring(0, 5) == "MV10_") && el1.checked == true) { mv = 10; }
+//					if ((na.substring(0, 4) == "MV4_") && el1.checked == true) { mv = 4; }
+//					if ((na.substring(0, 4) == "MV9_") && el1.checked == true) { mv = 9; }
+//
+//					if (na.substring(0,2) == "WF" && (fln!=1 && fln!=2 && fln!=3 && fln!=4 && fln!=9 && fln!=10)) { el1.checked = false }
+//					if (na.substring(0,4) == "WF" + fln + "_") {
+//						el1.checked = true;
+//					}
+//
+//					if (na == "WF5_WEAPONSFIRED" && el1.checked == true) {
+//						if (mv == 0) {
+//							//alert("First movement has to be specified!");
+//							el1.checked = false;
+//						} else {
+//							fired = 1; // not fired on purpose to cool down (or the unit sprinted)
+//						}
+//					}
+//					if (na == "WF6_WEAPONSFIRED" && el1.checked == true) {
+//						if (mv == 0) {
+//							//alert("First movement has to be specified!");
+//							el1.checked = false;
+//						} else {
+//							fired = 2; // fired weapons, was before: fired on short range (not anymore, there is just fired or hold fire)
+//						}
+//					}
+//				}
+//			})
+//
+//			var elem = document.getElementById("fire_info_cell_2");
+//			if (elem == null || elem === undefined) {
+//				// nothing
+//			} else {
+//				if (mv == "0" || mv == "9") {
+//					elem.className = 'datalabel_disabled_dashed';
+//				} else {
+//					elem.className = 'datalabel';
+//				}
+//			}
+//
+//			var clearmovement = false;
+//			if (movementcache == mv && (fln!=5 && fln!=6 && fln!=7 && fln!=8)) {
+//				clearMovementFlags(index);
+//				clearmovement = true;
+//				fired = 0;
+//			} else {
+//				movementcache = mv;
+//			}
+//
+//			if (firedcache == fired && (fln!=1 && fln!=2 && fln!=3 && fln!=4 && fln!=9 && fln!=10)) {
+//				clearFiredFlags(index, mv);
+//				fired = 0;
+//			} else {
+//				firedcache = fired;
+//			}
+//
+//			if (clearmovement) {
+//				mv = 0;
+//				fired = 0;
+//			}
+//
+//			if (mv == 9) {
+//				fired = 1;
+//			}
+//
+//			var tmmDiceValue = document.getElementById("TMM").innerHTML;
+//			if (mv == "0") { // not moved yet
+//			    movementdiestring = movementdiestring + "d6_0.png";
+//			    document.getElementById('INFOMOVED').innerHTML = "MOVE:";
+//			} else if (mv == "2") { // stationary
+//			    movementdiestring = movementdiestring + "bd6_" + tmmDiceValue + ".png";
+//			    document.getElementById('INFOMOVED').innerHTML = "STATIONARY";
+//			} else if (mv == "3") { // walked
+//			    movementdiestring = movementdiestring + "d6_" + tmmDiceValue + ".png";
+//			    document.getElementById('INFOMOVED').innerHTML = "WALKED";
+//			} else if (mv == "10") { // hulldown
+//				movementdiestring = movementdiestring + "bd6_" + tmmDiceValue + ".png";
+//				document.getElementById('INFOMOVED').innerHTML = "HULLDOWN";
+//			}  else if (mv == "4") { // jumped
+//			    movementdiestring = movementdiestring + "rd6_" + tmmDiceValue + ".png";
+//			    document.getElementById('INFOMOVED').innerHTML = "JUMPED";
+//			} else if (mv == "9") { // sprinted
+//				movementdiestring = movementdiestring + "yd6_" + tmmDiceValue + ".png";
+//                var e1 = document.getElementById("WF5_WEAPONSFIRED");
+//                var e2 = document.getElementById("WF6_WEAPONSFIRED");
+//                if (e1 !== undefined && e1 !== null) { e1.checked = true; }
+//                if (e2 !== undefined && e2 !== null) { e2.checked = false; }
+//				var e1a = document.getElementById("WF5_WEAPONSFIRED2");
+//				var e2a = document.getElementById("WF6_WEAPONSFIRED2");
+//				if (e1a !== undefined && e1a !== null) { e1a.checked = true; }
+//                if (e2a !== undefined && e2a !== null) { e2a.checked = false; }
+//                fired = 1; // HOLD FIRE!
+//                document.getElementById('INFOMOVED').innerHTML = "SPRINTED";
+//            }
+//
+//			if (fired == 0) {
+//                document.getElementById('INFOFIRED').innerHTML = "FIRE:";
+//            } else if (fired == 1) {
+//				document.getElementById('INFOFIRED').innerHTML = "HOLD FIRE";
+//			} else if (fired == 2) {
+//				document.getElementById('INFOFIRED').innerHTML = "FIRED";
+//			}
+//
+//			document.getElementById('movementtokenimage').src="./images/dice/" + movementdiestring;
+//
+//			setFireValues(mv, fired);
+//			var url="./save_movement.php?index="+index+"&mvmt="+mv+"&wpns="+fired;
+//			//console.log("Final 3: " + url);
+//			window.frames['saveframe'].location.replace(url);
+//		}
 
-		function changeMovementFlag(index, fln) {
-			if (context != null) {
-				playTapSound();
-			}
-
-			var list = document.getElementsByClassName("bigcheck");
-			var fired = 0;
-			var mv = 0;
-			var movementdiestring = "";
-
-			[].forEach.call(list, function (el1) {
-				na = el1.name;
-				if (typeof na != 'undefined') {
-					if (na.substring(0, 2) == "MV" && (fln!=5 && fln!=6 && fln!=7 && fln!=8)) { el1.checked = false }
-					if (na.substring(0, 4) == "MV" + fln + "_" || na.substring(0, 5) == "MV" + fln + "_") {
-						el1.checked = true;
-						mv = fln;
-					}
-
-					if ((na.substring(0, 4) == "MV1_") && el1.checked == true) { mv = 1; }
-					if ((na.substring(0, 4) == "MV2_") && el1.checked == true) { mv = 2; }
-					if ((na.substring(0, 4) == "MV3_") && el1.checked == true) { mv = 3; }
-					if ((na.substring(0, 5) == "MV10_") && el1.checked == true) { mv = 10; }
-					if ((na.substring(0, 4) == "MV4_") && el1.checked == true) { mv = 4; }
-					if ((na.substring(0, 4) == "MV9_") && el1.checked == true) { mv = 9; }
-
-					if (na.substring(0,2) == "WF" && (fln!=1 && fln!=2 && fln!=3 && fln!=4 && fln!=9 && fln!=10)) { el1.checked = false }
-					if (na.substring(0,4) == "WF" + fln + "_") {
-						el1.checked = true;
-					}
-
-					if (na == "WF5_WEAPONSFIRED" && el1.checked == true) {
-						if (mv == 0) {
-							//alert("First movement has to be specified!");
-							el1.checked = false;
-						} else {
-							fired = 1; // not fired on purpose to cool down (or the unit sprinted)
-						}
-					}
-					if (na == "WF6_WEAPONSFIRED" && el1.checked == true) {
-						if (mv == 0) {
-							//alert("First movement has to be specified!");
-							el1.checked = false;
-						} else {
-							fired = 2; // fired weapons, was before: fired on short range (not anymore, there is just fired or hold fire)
-						}
-					}
-				}
-			})
-
-			var elem = document.getElementById("fire_info_cell_2");
-			if (elem == null || elem === undefined) {
-				// nothing
-			} else {
-				if (mv == "0" || mv == "9") {
-					elem.className = 'datalabel_disabled_dashed';
-				} else {
-					elem.className = 'datalabel';
-				}
-			}
-
-			var clearmovement = false;
-			if (movementcache == mv && (fln!=5 && fln!=6 && fln!=7 && fln!=8)) {
-				clearMovementFlags(index);
-				clearmovement = true;
-				fired = 0;
-			} else {
-				movementcache = mv;
-			}
-
-			if (firedcache == fired && (fln!=1 && fln!=2 && fln!=3 && fln!=4 && fln!=9 && fln!=10)) {
-				clearFiredFlags(index, mv);
-				fired = 0;
-			} else {
-				firedcache = fired;
-			}
-
-			if (clearmovement) {
-				mv = 0;
-				fired = 0;
-			}
-
-			if (mv == 9) {
-				fired = 1;
-			}
-
-			var tmmDiceValue = document.getElementById("TMM").innerHTML;
-			if (mv == "0") { // not moved yet
-			    movementdiestring = movementdiestring + "d6_0.png";
-			    document.getElementById('INFOMOVED').innerHTML = "MOVE:";
-			} else if (mv == "2") { // stationary
-			    movementdiestring = movementdiestring + "bd6_" + tmmDiceValue + ".png";
-			    document.getElementById('INFOMOVED').innerHTML = "STATIONARY";
-			} else if (mv == "3") { // walked
-			    movementdiestring = movementdiestring + "d6_" + tmmDiceValue + ".png";
-			    document.getElementById('INFOMOVED').innerHTML = "WALKED";
-			} else if (mv == "10") { // hulldown
-				movementdiestring = movementdiestring + "bd6_" + tmmDiceValue + ".png";
-				document.getElementById('INFOMOVED').innerHTML = "HULLDOWN";
-			}  else if (mv == "4") { // jumped
-			    movementdiestring = movementdiestring + "rd6_" + tmmDiceValue + ".png";
-			    document.getElementById('INFOMOVED').innerHTML = "JUMPED";
-			} else if (mv == "9") { // sprinted
-				movementdiestring = movementdiestring + "yd6_" + tmmDiceValue + ".png";
-                var e1 = document.getElementById("WF5_WEAPONSFIRED");
-                var e2 = document.getElementById("WF6_WEAPONSFIRED");
-                if (e1 !== undefined && e1 !== null) { e1.checked = true; }
-                if (e2 !== undefined && e2 !== null) { e2.checked = false; }
-				var e1a = document.getElementById("WF5_WEAPONSFIRED2");
-				var e2a = document.getElementById("WF6_WEAPONSFIRED2");
-				if (e1a !== undefined && e1a !== null) { e1a.checked = true; }
-                if (e2a !== undefined && e2a !== null) { e2a.checked = false; }
-                fired = 1; // HOLD FIRE!
-                document.getElementById('INFOMOVED').innerHTML = "SPRINTED";
-            }
-
-			if (fired == 0) {
-                document.getElementById('INFOFIRED').innerHTML = "FIRE:";
-            } else if (fired == 1) {
-				document.getElementById('INFOFIRED').innerHTML = "HOLD FIRE";
-			} else if (fired == 2) {
-				document.getElementById('INFOFIRED').innerHTML = "FIRED";
-			}
-
-			document.getElementById('movementtokenimage').src="./images/dice/" + movementdiestring;
-
-			setFireValues(mv, fired);
-			var url="./save_movement.php?index="+index+"&mvmt="+mv+"&wpns="+fired;
-			//console.log("Final 3: " + url);
-			window.frames['saveframe'].location.replace(url);
-		}
-
-		function setMovementFlags(index, movement, weaponsfired) {
-			if (context != null) {
-				playTapSound();
-			}
-
-			var movementdiestring = "";
-
-			var list = document.getElementsByClassName("bigcheck");
-			[].forEach.call(list, function (el1) {
-				na = el1.name;
-				if (typeof na != 'undefined') {
-					if (na.substring(0, 2) == "MV") { el1.checked = false }
-
-					if ((na.substring(0, 4) == "MV1_") && movement == 1) { el1.checked = true; }
-					if ((na.substring(0, 4) == "MV2_") && movement == 2) { el1.checked = true; }
-					if ((na.substring(0, 4) == "MV3_") && movement == 3) { el1.checked = true; }
-					if ((na.substring(0, 5) == "MV10_") && movement == 10) { el1.checked = true; }
-					if ((na.substring(0, 4) == "MV4_") && movement == 4) { el1.checked = true; }
-					if ((na.substring(0, 4) == "MV9_") && movement == 9) { el1.checked = true; }
-
-					// weaponsfired == 0 : not fired yet
-					// weaponsfired == 1 : not fired on purpose
-					// weaponsfired == 2 : fired
-
-					if (na == "WF5_WEAPONSFIRED" && weaponsfired == 1) { el1.checked = true; }
-					if (na == "WF5_WEAPONSFIRED2" && weaponsfired == 1) { el1.checked = true; }
-					if (na == "WF6_WEAPONSFIRED" && weaponsfired == 2) { el1.checked = true; }
-					if (na == "WF6_WEAPONSFIRED2" && weaponsfired == 2) { el1.checked = true; }
-					//if (na == "WF7_WEAPONSFIRED" && weaponsfired == 3) { el1.checked = true; }
-					//if (na == "WF8_WEAPONSFIRED" && weaponsfired == 4) { el1.checked = true; }
-				}
-			})
-
-			var elem = document.getElementById("fire_info_cell_2");
-			if (elem == null || elem === undefined) {
-				// nothing
-			} else {
-				if (movement == "0" || movement == "9") {
-					elem.className = 'datalabel_disabled_dashed';
-				} else {
-					elem.className = 'datalabel';
-				}
-			}
-
-			var tmmDiceValue = document.getElementById("TMM").innerHTML.replace('*','');
-
-			if (movement == "0") { // not moved yet
-			    movementdiestring = movementdiestring + "d6_0.png";
-			    document.getElementById('INFOMOVED').innerHTML = "MOVE:";
-			} else if (movement == "2") { // stationary
-				movementdiestring = movementdiestring + "bd6_" + tmmDiceValue + ".png";
-				document.getElementById('INFOMOVED').innerHTML = "STATIONARY";
-			} else if (movement == "3") { // walked
-				movementdiestring = movementdiestring + "d6_" + tmmDiceValue + ".png";
-				document.getElementById('INFOMOVED').innerHTML = "WALKED";
-			} else if (movement == "10") { // hulldown
-				movementdiestring = movementdiestring + "bd6_" + tmmDiceValue + ".png";
-				document.getElementById('INFOMOVED').innerHTML = "HULLDOWN";
-            } else if (movement == "4") { // jumped
-			    movementdiestring = movementdiestring + "rd6_" + tmmDiceValue + ".png";
-			    document.getElementById('INFOMOVED').innerHTML = "JUMPED";
-			} else if (movement == "9") {
-				movementdiestring = movementdiestring + "yd6_" + tmmDiceValue + ".png";
-				var e1 = document.getElementById("WF5_WEAPONSFIRED");
-				var e2 = document.getElementById("WF6_WEAPONSFIRED");
-                if (e1 !== undefined && e1 !== null) { e1.checked = true; }
-                if (e2 !== undefined && e2 !== null) { e2.checked = false; }
-				var e1a = document.getElementById("WF5_WEAPONSFIRED2");
-				var e2a = document.getElementById("WF6_WEAPONSFIRED2");
-				if (e1a !== undefined && e1a !== null) { e1a.checked = true; }
-                if (e2a !== undefined && e2a !== null) { e2a.checked = false; }
-                fired = 1; // HOLD FIRE!
-                document.getElementById('INFOMOVED').innerHTML = "SPRINTED";
-			}
-
-			if (weaponsfired == 0) {
-				document.getElementById('INFOFIRED').innerHTML = "FIRE:";
-			} else if (weaponsfired == 1) {
-				document.getElementById('INFOFIRED').innerHTML = "HOLD FIRE";
-			} else if (weaponsfired == 2) {
-				document.getElementById('INFOFIRED').innerHTML = "FIRED";
-			}
-
-			document.getElementById('movementtokenimage').src="./images/dice/" + movementdiestring;
-
-			movementcache = movement;
-			firedcache = weaponsfired;
-			setFireValues(movement, weaponsfired);
-		}
-
-		function clearFiredFlags(index, mv) {
-			if (context != null) {
-				playTapSound();
-			}
-
-			var list = document.getElementsByClassName("bigcheck");
-			[].forEach.call(list, function (el1) {
-				na = el1.name;
-				if (typeof na != 'undefined') {
-					if (na.substring(0, 2) == "WF") {
-						el1.checked = false;
-					}
-				}
-			})
-
-			firedcache = 0;
-		}
+//		function setMovementFlags(index, movement, weaponsfired) {
+//			if (context != null) {
+//				playTapSound();
+//			}
+//
+//			var movementdiestring = "";
+//
+//			var list = document.getElementsByClassName("bigcheck");
+//			[].forEach.call(list, function (el1) {
+//				na = el1.name;
+//				if (typeof na != 'undefined') {
+//					if (na.substring(0, 2) == "MV") { el1.checked = false }
+//
+//					if ((na.substring(0, 4) == "MV1_") && movement == 1) { el1.checked = true; }
+//					if ((na.substring(0, 4) == "MV2_") && movement == 2) { el1.checked = true; }
+//					if ((na.substring(0, 4) == "MV3_") && movement == 3) { el1.checked = true; }
+//					if ((na.substring(0, 5) == "MV10_") && movement == 10) { el1.checked = true; }
+//					if ((na.substring(0, 4) == "MV4_") && movement == 4) { el1.checked = true; }
+//					if ((na.substring(0, 4) == "MV9_") && movement == 9) { el1.checked = true; }
+//
+//					// weaponsfired == 0 : not fired yet
+//					// weaponsfired == 1 : not fired on purpose
+//					// weaponsfired == 2 : fired
+//
+//					if (na == "WF5_WEAPONSFIRED" && weaponsfired == 1) { el1.checked = true; }
+//					if (na == "WF5_WEAPONSFIRED2" && weaponsfired == 1) { el1.checked = true; }
+//					if (na == "WF6_WEAPONSFIRED" && weaponsfired == 2) { el1.checked = true; }
+//					if (na == "WF6_WEAPONSFIRED2" && weaponsfired == 2) { el1.checked = true; }
+//					//if (na == "WF7_WEAPONSFIRED" && weaponsfired == 3) { el1.checked = true; }
+//					//if (na == "WF8_WEAPONSFIRED" && weaponsfired == 4) { el1.checked = true; }
+//				}
+//			})
+//
+//			var elem = document.getElementById("fire_info_cell_2");
+//			if (elem == null || elem === undefined) {
+//				// nothing
+//			} else {
+//				if (movement == "0" || movement == "9") {
+//					elem.className = 'datalabel_disabled_dashed';
+//				} else {
+//					elem.className = 'datalabel';
+//				}
+//			}
+//
+//			var tmmDiceValue = document.getElementById("TMM").innerHTML.replace('*','');
+//
+//			if (movement == "0") { // not moved yet
+//			    movementdiestring = movementdiestring + "d6_0.png";
+//			    document.getElementById('INFOMOVED').innerHTML = "MOVE:";
+//			} else if (movement == "2") { // stationary
+//				movementdiestring = movementdiestring + "bd6_" + tmmDiceValue + ".png";
+//				document.getElementById('INFOMOVED').innerHTML = "STATIONARY";
+//			} else if (movement == "3") { // walked
+//				movementdiestring = movementdiestring + "d6_" + tmmDiceValue + ".png";
+//				document.getElementById('INFOMOVED').innerHTML = "WALKED";
+//			} else if (movement == "10") { // hulldown
+//				movementdiestring = movementdiestring + "bd6_" + tmmDiceValue + ".png";
+//				document.getElementById('INFOMOVED').innerHTML = "HULLDOWN";
+//            } else if (movement == "4") { // jumped
+//			    movementdiestring = movementdiestring + "rd6_" + tmmDiceValue + ".png";
+//			    document.getElementById('INFOMOVED').innerHTML = "JUMPED";
+//			} else if (movement == "9") {
+//				movementdiestring = movementdiestring + "yd6_" + tmmDiceValue + ".png";
+//				var e1 = document.getElementById("WF5_WEAPONSFIRED");
+//				var e2 = document.getElementById("WF6_WEAPONSFIRED");
+//                if (e1 !== undefined && e1 !== null) { e1.checked = true; }
+//                if (e2 !== undefined && e2 !== null) { e2.checked = false; }
+//				var e1a = document.getElementById("WF5_WEAPONSFIRED2");
+//				var e2a = document.getElementById("WF6_WEAPONSFIRED2");
+//				if (e1a !== undefined && e1a !== null) { e1a.checked = true; }
+//                if (e2a !== undefined && e2a !== null) { e2a.checked = false; }
+//                fired = 1; // HOLD FIRE!
+//                document.getElementById('INFOMOVED').innerHTML = "SPRINTED";
+//			}
+//
+//			if (weaponsfired == 0) {
+//				document.getElementById('INFOFIRED').innerHTML = "FIRE:";
+//			} else if (weaponsfired == 1) {
+//				document.getElementById('INFOFIRED').innerHTML = "HOLD FIRE";
+//			} else if (weaponsfired == 2) {
+//				document.getElementById('INFOFIRED').innerHTML = "FIRED";
+//			}
+//
+//			document.getElementById('movementtokenimage').src="./images/dice/" + movementdiestring;
+//
+//			movementcache = movement;
+//			firedcache = weaponsfired;
+//			setFireValues(movement, weaponsfired);
+//		}
 	</script>
 
 <?php
@@ -342,6 +324,7 @@ session_start();
 
 	echo "<script>\n";
 	echo "  var chosenmechindex = ".$chosenMechIndex.";\n";
+	echo "  var chosenmechdbid = ".$array_MECH_DBID[$chosenMechIndex].";\n";
 	echo "  var mechmodel = '".$array_MECH_MODEL[$chosenMechIndex]."';\n";
 	echo "	var shortdamage = ".$array_DMG_SHORT[$chosenMechIndex].";\n";
 	echo "	var mediumdamage = ".$array_DMG_MEDIUM[$chosenMechIndex].";\n";
@@ -356,13 +339,12 @@ session_start();
 	echo "	var maximalstructurepoints = ".$array_S_MAX[$chosenMechIndex].";\n";
 	echo "	var originalmechimage = '".$array_MECH_IMG_URL[$chosenMechIndex]."';\n";
 	echo "	var deadmechimage = 'skull.png';\n";
-
-	if ($array_TMM[$chosenMechIndex] != null) {
-		echo "	var originalTMM = $array_TMM[$chosenMechIndex];\n";
-	}
-	if ($array_TP[$chosenMechIndex] != null) {
-		echo "  var unitType = '$array_TP[$chosenMechIndex]';\n";
-	}
+	echo "	var originalTMM = $array_TMM[$chosenMechIndex];\n";
+	echo "  var unitType = '$array_TP[$chosenMechIndex]';\n";
+	echo "  var ENGN_PREP = $array_ENGN_PREP[$chosenMechIndex];\n";
+	echo "  var FCTL_PREP = $array_FRCTRL_PREP[$chosenMechIndex];\n";
+	echo "  var MP_PREP = $array_MP_PREP[$chosenMechIndex];\n";
+	echo "  var WPNS_PREP = $array_WPNS_PREP[$chosenMechIndex];\n";
 	echo "</script>\n";
 ?>
 
@@ -699,41 +681,53 @@ session_start();
 					<table width="100%">
 						<tr>
 							<td nowrap class="datalabel" width="5%" style="text-align: right;">ENGN:</td>
+							<td nowrap class="datalabel_button">&nbsp;&nbsp;<a href="javascript:increaseENGN_PREP();"><i class="fas fa-plus-square"></i></a></td>
+							<td nowrap class="datalabel" id="label_ENGN_PREP" align="center"><?= $array_ENGN_PREP[$chosenMechIndex] ?></td>
+							<td nowrap class="datalabel">&nbsp;&nbsp;</td>
 							<td nowrap width="55%" style="text-align: left;">
 								<label class="bigcheck"><input onchange="readCircles(<?= $array_MECH_DBID[$chosenMechIndex] ?>, <?= $array_A_MAX[$chosenMechIndex] ?>, <?= $array_S_MAX[$chosenMechIndex] ?>);" type="checkbox" class="bigcheck" name="CD_E_1" id="CD_E_1" value="yes"/><span class="bigcheck-target"></span></label>
 								<label class="bigcheck"><input onchange="readCircles(<?= $array_MECH_DBID[$chosenMechIndex] ?>, <?= $array_A_MAX[$chosenMechIndex] ?>, <?= $array_S_MAX[$chosenMechIndex] ?>);" type="checkbox" class="bigcheck" name="CD_E_2" id="CD_E_2" value="yes"/><span class="bigcheck-target"></span></label>
 							</td>
-							<td nowrap class="datalabel_thin" width="5%" style="text-align: right;">+1 HT</td>
+							<td nowrap class="datalabel_thin_small" width="5%" style="text-align: right;">+1 HT</td>
 						</tr>
 						<tr>
 							<td nowrap class="datalabel" width="5%" style="text-align: right;">FCTL:</td>
+							<td nowrap class="datalabel_button">&nbsp;&nbsp;<a href="javascript:increaseFCTL_PREP();"><i class="fas fa-plus-square"></i></a></td>
+							<td nowrap class="datalabel" id="label_FCTL_PREP" align="center"><?= $array_FRCTRL_PREP[$chosenMechIndex] ?></td>
+							<td nowrap class="datalabel">&nbsp;&nbsp;</td>
 							<td nowrap width="90%" style="text-align: left;">
 								<label class="bigcheck"><input onchange="readCircles(<?= $array_MECH_DBID[$chosenMechIndex] ?>, <?= $array_A_MAX[$chosenMechIndex] ?>, <?= $array_S_MAX[$chosenMechIndex] ?>);" type="checkbox" class="bigcheck" name="CD_FC_1" id="CD_FC_1" value="yes"/><span class="bigcheck-target"></span></label>
 								<label class="bigcheck"><input onchange="readCircles(<?= $array_MECH_DBID[$chosenMechIndex] ?>, <?= $array_A_MAX[$chosenMechIndex] ?>, <?= $array_S_MAX[$chosenMechIndex] ?>);" type="checkbox" class="bigcheck" name="CD_FC_2" id="CD_FC_2" value="yes"/><span class="bigcheck-target"></span></label>
 								<label class="bigcheck"><input onchange="readCircles(<?= $array_MECH_DBID[$chosenMechIndex] ?>, <?= $array_A_MAX[$chosenMechIndex] ?>, <?= $array_S_MAX[$chosenMechIndex] ?>);" type="checkbox" class="bigcheck" name="CD_FC_3" id="CD_FC_3" value="yes"/><span class="bigcheck-target"></span></label>
 								<label class="bigcheck"><input onchange="readCircles(<?= $array_MECH_DBID[$chosenMechIndex] ?>, <?= $array_A_MAX[$chosenMechIndex] ?>, <?= $array_S_MAX[$chosenMechIndex] ?>);" type="checkbox" class="bigcheck" name="CD_FC_4" id="CD_FC_4" value="yes"/><span class="bigcheck-target"></span></label>
 							</td>
-							<td nowrap class="datalabel_thin" width="5%" style="text-align: right;">+2 TO-HIT</td>
+							<td nowrap class="datalabel_thin_small" width="5%" style="text-align: right;">+2 TO-HIT</td>
 						</tr>
 						<tr>
 							<td nowrap class="datalabel" width="5%" style="text-align: right;">MP:</td>
+							<td nowrap class="datalabel_button">&nbsp;&nbsp;<a href="javascript:increaseMP_PREP();"><i class="fas fa-plus-square"></i></a></td>
+							<td nowrap class="datalabel" id="label_MP_PREP" align="center"><?= $array_MP_PREP[$chosenMechIndex] ?></td>
+							<td nowrap class="datalabel">&nbsp;&nbsp;</td>
 							<td nowrap width="55%" style="text-align: left;">
 								<label class="bigcheck"><input onchange="readCircles(<?= $array_MECH_DBID[$chosenMechIndex] ?>, <?= $array_A_MAX[$chosenMechIndex] ?>, <?= $array_S_MAX[$chosenMechIndex] ?>);" type="checkbox" class="bigcheck" name="CD_MP_1" id="CD_MP_1" value="yes"/><span class="bigcheck-target"></span></label>
 								<label class="bigcheck"><input onchange="readCircles(<?= $array_MECH_DBID[$chosenMechIndex] ?>, <?= $array_A_MAX[$chosenMechIndex] ?>, <?= $array_S_MAX[$chosenMechIndex] ?>);" type="checkbox" class="bigcheck" name="CD_MP_2" id="CD_MP_2" value="yes"/><span class="bigcheck-target"></span></label>
 								<label class="bigcheck"><input onchange="readCircles(<?= $array_MECH_DBID[$chosenMechIndex] ?>, <?= $array_A_MAX[$chosenMechIndex] ?>, <?= $array_S_MAX[$chosenMechIndex] ?>);" type="checkbox" class="bigcheck" name="CD_MP_3" id="CD_MP_3" value="yes"/><span class="bigcheck-target"></span></label>
 								<label class="bigcheck"><input onchange="readCircles(<?= $array_MECH_DBID[$chosenMechIndex] ?>, <?= $array_A_MAX[$chosenMechIndex] ?>, <?= $array_S_MAX[$chosenMechIndex] ?>);" type="checkbox" class="bigcheck" name="CD_MP_4" id="CD_MP_4" value="yes"/><span class="bigcheck-target"></span></label>
 							</td>
-							<td nowrap class="datalabel_thin" width="5%" style="text-align: right;">1/2 MV</td>
+							<td nowrap class="datalabel_thin_small" width="5%" style="text-align: right;">1/2 MV</td>
 						</tr>
 						<tr>
 							<td nowrap class="datalabel" width="5%" style="text-align: right;">WPNS:</td>
+							<td nowrap class="datalabel_button">&nbsp;&nbsp;<a href="javascript:increaseWPNS_PREP();"><i class="fas fa-plus-square"></i></a></td>
+							<td nowrap class="datalabel" id="label_WPNS_PREP" align="center"><?= $array_WPNS_PREP[$chosenMechIndex] ?></td>
+							<td nowrap class="datalabel">&nbsp;&nbsp;</td>
 							<td nowrap width="55%" style="text-align: left;">
 								<label class="bigcheck"><input onchange="readCircles(<?= $array_MECH_DBID[$chosenMechIndex] ?>, <?= $array_A_MAX[$chosenMechIndex] ?>, <?= $array_S_MAX[$chosenMechIndex] ?>);" type="checkbox" class="bigcheck" name="CD_W_1" id="CD_W_1" value="yes"/><span class="bigcheck-target"></span></label>
 								<label class="bigcheck"><input onchange="readCircles(<?= $array_MECH_DBID[$chosenMechIndex] ?>, <?= $array_A_MAX[$chosenMechIndex] ?>, <?= $array_S_MAX[$chosenMechIndex] ?>);" type="checkbox" class="bigcheck" name="CD_W_2" id="CD_W_2" value="yes"/><span class="bigcheck-target"></span></label>
 								<label class="bigcheck"><input onchange="readCircles(<?= $array_MECH_DBID[$chosenMechIndex] ?>, <?= $array_A_MAX[$chosenMechIndex] ?>, <?= $array_S_MAX[$chosenMechIndex] ?>);" type="checkbox" class="bigcheck" name="CD_W_3" id="CD_W_3" value="yes"/><span class="bigcheck-target"></span></label>
 								<label class="bigcheck"><input onchange="readCircles(<?= $array_MECH_DBID[$chosenMechIndex] ?>, <?= $array_A_MAX[$chosenMechIndex] ?>, <?= $array_S_MAX[$chosenMechIndex] ?>);" type="checkbox" class="bigcheck" name="CD_W_4" id="CD_W_4" value="yes"/><span class="bigcheck-target"></span></label>
 							</td>
-							<td nowrap class="datalabel_thin" width="5%" style="text-align: right;">-1 DMG</td>
+							<td nowrap class="datalabel_thin_small" width="5%" style="text-align: right;">-1 DMG</td>
 						</tr>
 					</table>
 				</div>

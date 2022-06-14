@@ -944,33 +944,19 @@ session_start();
 						version imposes no additional to-hit modifiers.
 					</p>
 					<p id="TUR"><strong>Turret (TUR#)</strong><br>
-						A unit with a turret has some (or all) of its weapons mounted with a<br>
-						360-degree field of fire. Damage for all turret-mounted weapons are<br>
-						included in the base damage values for the unit, and then separately<br>
-						for the TUR special ability. Thus, when a unit with a turret wishes<br>
-						to make an attack outside of its normal forward field of fire, it must<br>
-						use the damage values for its TUR special ability in place of the<br>
-						unit’s standard damage values.
+						A unit with a turret has some (or all) of its weapons mounted with a 360-degree field of fire. Damage for all turret-mounted weapons are included in the base damage values for the unit, and then separately for the TUR special ability. Thus, when a unit with a turret wishes to make an attack outside of its normal forward field of fire, it must use the damage values for its TUR special ability in place of the unit’s standard damage values.
 					</p>
 					<p>
-						Weapon attacks made using the turret cannot be combined with any<br>
-						other special attack ability (such as IF, FLK, and so on). Some<br>
-						particularly large units—such as mobile structures and very large or<br>
-						super large vehicles—may feature multiple turrets. A unit with multiple<br>
-						turrets may use each turret individually to deliver its attacks (see<br>
-						Exceptionally Large Units, pp. 96-99).
+						Weapon attacks made using the turret cannot be combined with any other special attack ability (such as IF, FLK, and so on). Some particularly large units—such as mobile structures and very large or super large vehicles—may feature multiple turrets. A unit with multiple turrets may use each turret individually to deliver its attacks<br>
+						(see Exceptionally Large Units, pp. 96-99).
 					</p>
 					<p id="UMU"><strong>Underwater Maneuvering Units (UMU)</strong><br>
-						A unit with the UMU special ability uses the submersible movement rules<br>
-						when it is submerged in water instead of the normal underwater movement<br>
-						rules (see Submersible Movement, p. 31).
+						A unit with the UMU special ability uses the submersible movement rules when it is submerged in water instead of the normal underwater movement rules<br>
+						(see Submersible Movement, p. 31).
 					</p>
 					<p id="WAT"><strong>Watchdog (WAT)</strong><br>
-						A unit with this special ability possesses the Watchdog Composite<br>
-						Electronic Warfare System. For purposes of  Alpha Strike, it is treated<br>
-						as if it has both the ECM and Light Active Probe (LPRB) special abilities.<br>
-						(Active probes are covered in greater detail in the Advanced Options<br>
-						chapter, see pp. 62-113.)
+						A unit with this special ability possesses the Watchdog Composite Electronic Warfare System. For purposes of  Alpha Strike, it is treated as if it has both the ECM and Light Active Probe (LPRB) special abilities.<br>
+						(Active probes are covered in greater detail in the Advanced Options chapter, see pp. 62-113.)
 					</p>
 				</div>
 			</td>

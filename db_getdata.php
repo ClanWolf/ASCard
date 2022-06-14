@@ -45,16 +45,21 @@
 	$array_HT = array();
 	$array_A = array();
 	$array_S = array();
+
 	$array_ENGN = array();
 	$array_FRCTRL = array();
 	$array_MP = array();
 	$array_WPNS = array();
 
+	$array_ENGN_PREP = array();
+	$array_FRCTRL_PREP = array();
+	$array_MP_PREP = array();
+	$array_WPNS_PREP = array();
+
 	$array_MV_MOD = array();
 	$array_DMG_SHORT_MOD = array();
 	$array_DMG_MEDIUM_MOD = array();
 	$array_DMG_LONG_MOD = array();
-	$array_FRCTRL_MOD = array();
 
 	$array_ACTIVE_BID = array();
 
@@ -182,6 +187,10 @@
 							$array_FRCTRL[$mechcount] = $row["crit_fc"];
 							$array_MP[$mechcount] = $row["crit_mp"];
 							$array_WPNS[$mechcount] = $row["crit_weapons"];
+							$array_ENGN_PREP[$mechcount] = $row["crit_engine_PREP"];
+							$array_FRCTRL_PREP[$mechcount] = $row["crit_fc_PREP"];
+							$array_MP_PREP[$mechcount] = $row["crit_mp_PREP"];
+							$array_WPNS_PREP[$mechcount] = $row["crit_weapons_PREP"];
 							$array_USEDOVERHEAT[$mechcount] = $row["usedoverheat"];
 							$array_CURRENTTMM[$mechcount] = $row["currenttmm"];
 

@@ -590,19 +590,6 @@ function setCircles(h, a, s, e, fc, mp, w, uov, mvmnt, wpnsf) {
 	if (mechstatus == 4) {
 		// Mech destroyed
 		$("#destroyedIndicator").show();
-
-
-
-
-
-
-
-
-
-
-
-
-
 	}
 
 	if (h == 0) {
@@ -758,8 +745,49 @@ function textSize(dec) {
 	setCookie("savedBefore", "true", 365);
 }
 
+function increaseENGN_PREP() {
+	// console.log("ENGN_PREP: " + ENGN_PREP);
+	ENGN_PREP = ENGN_PREP + 1;
+	if (ENGN_PREP > 2) {
+		ENGN_PREP = 0;
+	}
+	document.getElementById("label_ENGN_PREP").innerHTML = ENGN_PREP;
+	var url="./save_PREP.php?index="+chosenmechdbid+"&desc=ENGN_PREP&value="+ENGN_PREP;
+	window.frames['saveframe'].location.replace(url);
+}
+function increaseFCTL_PREP() {
+	// console.log("FCTL_PREP: " + FCTL_PREP);
+	FCTL_PREP = FCTL_PREP + 1;
+	if (FCTL_PREP > 4) {
+		FCTL_PREP = 0;
+	}
+	document.getElementById("label_FCTL_PREP").innerHTML = FCTL_PREP;
+	var url="./save_PREP.php?index="+chosenmechdbid+"&desc=FCTL_PREP&value="+FCTL_PREP;
+	window.frames['saveframe'].location.replace(url);
+}
+function increaseMP_PREP() {
+	// console.log("MP_PREP: " + MP_PREP);
+	MP_PREP = MP_PREP + 1;
+	if (MP_PREP > 4) {
+		MP_PREP = 0;
+	}
+	document.getElementById("label_MP_PREP").innerHTML = MP_PREP;
+	var url="./save_PREP.php?index="+chosenmechdbid+"&desc=MP_PREP&value="+MP_PREP;
+	window.frames['saveframe'].location.replace(url);
+}
+function increaseWPNS_PREP() {
+	// console.log("WPNS_PREP: " + WPNS_PREP);
+	WPNS_PREP = WPNS_PREP + 1;
+	if (WPNS_PREP > 4) {
+		WPNS_PREP = 0;
+	}
+	document.getElementById("label_WPNS_PREP").innerHTML = WPNS_PREP;
+	var url="./save_PREP.php?index="+chosenmechdbid+"&desc=WPNS_PREP&value="+WPNS_PREP;
+	window.frames['saveframe'].location.replace(url);
+}
+
 $(document).ready(function() {
-	$("#cover").fadeOut(300, "linear");
+	$("#cover").fadeOut(200, "linear");
 
 	var mechimage = document.getElementById("mechimage");
 	mechimage.style.height="" + ($(document).height() * 0.8 + "px");
@@ -838,9 +866,6 @@ $(document).ready(function() {
 			document.body.style.backgroundImage = "url('./images/body-bg_" + wallpaperName + ".png')";
 		}
 	}
-
-	//$("#toprightimage").fadeOut(0, "linear");
-	//$("#toprightimage").fadeIn(1000, "linear");
 });
 
 $(window).resize(function() {
@@ -894,7 +919,6 @@ function changeWallpaper() {
 	if (wallpaperNameRand > 8) {
 		wallpaperNameRand = 1;
 	}
-   	// console.log(wallpaperNameRand);
 	document.body.style.backgroundImage = "url('./images/body-bg_" + wallpaperNameRand + ".png')";
 	setCookie("wallpaper", wallpaperNameRand, 365);
 }
@@ -927,31 +951,6 @@ function playTapSound() {
 		sound_key = new Howl({ src: ['./audio/key.mp3', './audio/key.ogg'] });
 	}
 	sound_key.play();
-}
-
-function clearMovementFlags(index) {
-	if (context != null) {
-		playTapSound();
-	}
-
-	var list = document.getElementsByClassName("bigcheck");
-	[].forEach.call(list, function (el1) {
-		na = el1.name;
-		if (typeof na != 'undefined') {
-			if ((na.substring(0, 2) == "MV") || (na.substring(0, 2) == "WF")) {
-				el1.checked = false;
-			}
-		}
-	})
-
-	var elem = document.getElementById("fire_info_cell_2");
-	if (elem == null || elem === undefined) {
-		// nothing
-	} else {
-		elem.className = 'datalabel_disabled_dashed';
-	}
-
-	movementcache = 0;
 }
 
 function hideInfoBar() {
