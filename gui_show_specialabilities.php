@@ -962,6 +962,8 @@ session_start();
                 document.querySelector(this.getAttribute('href')).scrollIntoView({
                     behavior: 'smooth'
                 });
+		var api = $('.scroll-pane').data('jsp');
+		api.reinitialise();
             });
         });
     </script>
