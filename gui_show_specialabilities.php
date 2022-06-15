@@ -49,6 +49,7 @@ session_start();
 	<script type="text/javascript" src="./scripts/jquery-3.6.0.min.js"></script>
 	<script type="text/javascript" src="./scripts/jquery.jscrollpane.min.js"></script>
 	<script type="text/javascript" src="./scripts/jquery.mousewheel.js"></script>
+	<script type="text/javascript" src="./scripts/mwheelIntent.js"></script>
 	<script type="text/javascript" src="./scripts/howler.min.js"></script>
 	<script type="text/javascript" src="./scripts/cookies.js"></script>
 
