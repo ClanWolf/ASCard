@@ -18,6 +18,9 @@
 	$mvmnt = isset($_GET["mvmnt"]) ? $_GET["mvmnt"] : "";
 	$wpnsf = isset($_GET["wpnsf"]) ? $_GET["wpnsf"] : "";
 
+	echo "<!DOCTYPE html>\n";
+	echo "<html lang='en'>\n";
+	echo "<body>\n";
 	echo "<p style='font-family:Arial,sans-serif;font-size:14px;color:yellow;'>";
 
 	if (!empty($index)) {
@@ -76,5 +79,7 @@
 		echo "WAITING FOR SAVE OPERATION...<br>";
 	}
 
-	echo "</p>";
+	echo "</p>\n";
+	echo "</body>\n";
+	echo "</html>\n";
 ?>

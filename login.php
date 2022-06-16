@@ -66,6 +66,7 @@ session_start();
 	}
 ?>
 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="en">
 
 <head>
@@ -182,7 +183,7 @@ session_start();
 				</td>
 				<td class='mechselect_button_active'>
 	                <?php
-				        echo "<select style='width:250px;height=60px;' name='pn' size='1' maxlength='80' id='pn'>";
+				        echo "<select style='width:260px;height=60px;' name='pn' size='1' maxlength='80' id='pn'>";
                         echo $userlist;
                         echo "</select><br>";
                     ?>

@@ -1,21 +1,21 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
 	<script>
-      const update_cache = async () => {
-        document.getElementById("error").innerHTML = "";
+		const update_cache = async () => {
+		document.getElementById("error").innerHTML = "";
 
-        for (let i = 0; i < 16000;) {
-          await fetch("https://www.clanwolf.net/apps/ASCard/data/mul_cache/cache_mechdetails.php?startindex="+i).
-                catch(error => {
+		for (let i = 0; i < 16000;) {
+            await fetch("https://www.clanwolf.net/apps/ASCard/data/mul_cache/cache_mechdetails.php?startindex="+i).
+				catch(error => {
                     document.getElementById("error").innerHTML = error + " index: " + i ;
-                })
-          i += 200;
-          document.getElementById("num").innerHTML = i;
-        }
-      }
-
-    </script>
+				})
+				i += 200;
+				document.getElementById("num").innerHTML = i;
+			}
+		}
+	</script>
 </head>
 
 <body>

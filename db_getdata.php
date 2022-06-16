@@ -66,16 +66,16 @@
 	$array_USEDOVERHEAT = array();
 	$array_CURRENTTMM = array();
 
-	// Game
-	// currentround
-	$sql_asc_game = "SELECT SQL_NO_CACHE * FROM asc_game where gameid = 1;";
-	$result_asc_game = mysqli_query($conn, $sql_asc_game);
-	if (mysqli_num_rows($result_asc_game) > 0) {
-		while($row = mysqli_fetch_assoc($result_asc_game)) {
-			$CURRENTROUND = $row["currentround"];
-		}
-	}
-	mysqli_free_result($result_asc_game);
+//	// Game
+//	// currentround
+//	$sql_asc_game = "SELECT SQL_NO_CACHE * FROM asc_game where gameid = 1;";
+//	$result_asc_game = mysqli_query($conn, $sql_asc_game);
+//	if (mysqli_num_rows($result_asc_game) > 0) {
+//		while($row = mysqli_fetch_assoc($result_asc_game)) {
+//			$CURRENTROUND = $row["currentround"];
+//		}
+//	}
+//	mysqli_free_result($result_asc_game);
 
 	// Unit
 	// unitid; factionid; forcename; --parentforceid--; unit_imageurl; playable
@@ -92,6 +92,17 @@
 		}
 	}
 	mysqli_free_result($result_asc_unit);
+
+	// Game
+	// currentround from player
+	$sql_asc_playerround = "SELECT SQL_NO_CACHE * FROM asc_player where playerid = " . $unitplayerid . ";";
+	$result_asc_playerround = mysqli_query($conn, $sql_asc_playerround);
+	if (mysqli_num_rows($result_asc_playerround) > 0) {
+		while($row = mysqli_fetch_assoc($result_asc_playerround)) {
+			$CURRENTROUND = $row["round"];
+		}
+	}
+	mysqli_free_result($result_asc_playerround);
 
 	// Faction
 	// factionid; name; --factiontype--; faction_imageurl

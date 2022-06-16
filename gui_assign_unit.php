@@ -16,6 +16,14 @@ session_start();
 	$opt3 = $_SESSION['option3'];
 	$playMode = $opt3;
 
+	$sql_asc_playerround = "SELECT SQL_NO_CACHE * FROM asc_player where playerid = " . $pid . ";";
+	$result_asc_playerround = mysqli_query($conn, $sql_asc_playerround);
+	if (mysqli_num_rows($result_asc_playerround) > 0) {
+		while($row = mysqli_fetch_assoc($result_asc_playerround)) {
+			$CURRENTROUND = $row["round"];
+		}
+	}
+
 	$paramunitid = isset($_GET["unitid"]) ? $_GET["unitid"] : "";
 	$paramunitname = isset($_GET["unitname"]) ? $_GET["unitname"] : "";
 	$assignmech = isset($_GET["assignmech"]) ? $_GET["assignmech"] : "";
@@ -98,6 +106,7 @@ session_start();
 	}
 ?>
 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="en">
 
 <head>
@@ -217,12 +226,6 @@ session_start();
 		}
 	</script>
 
-<?php
-	echo "<div id='player_image'>\n";
-	echo "	<img src='./images/player/".$pimage."' width='60px' height='60px'>\n";
-	echo "</div>\n";
-?>
-
 	<div id="cover"></div>
 
 <?php
@@ -236,8 +239,14 @@ session_start();
 	<div id="header">
 		<table style="width:100%;height:60px;border:none;border-collapse:collapse;background:rgba(50,50,50,1.0);" cellspacing="0" cellpadding="0">
 			<tr>
-				<td nowrap onclick="location.href='./logout.php'" width="60px" style="background: rgba(50,50,50,1.0); text-align: center; vertical-align: middle;">
-					<div><a style="color: #eee;" href="./logout.php"><i class="fas fa-power-off" aria-hidden="true"></i></a></div>
+				<td style="width: 100px;" nowrap onclick="location.href='./logout.php'" width="60px" style="background: rgba(50,50,50,1.0); text-align: center; vertical-align: middle;">
+					<div><a style="color: #eee;" href="./logout.php">&nbsp;&nbsp;&nbsp;<i class="fas fa-power-off" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;</a></div>
+				</td>
+				<td style="width: 100px;" nowrap onclick="location.href='./finalizeRound.php'" width="100px" style="background: rgba(50,50,50,1.0); text-align: center; vertical-align: middle;">
+					<div><a style="color: #eee;" href="./finalizeRound.php">&nbsp;&nbsp;&nbsp;<i class="fas fa-redo"></i>&nbsp;&nbsp;&nbsp;</a></div>
+				</td>
+				<td style="width: 100px;" nowrap onclick="location.href='./finalizeRound.php'" style="background:rgba(1,1,1,1.0);">
+					<div style='vertical-align:middle;font-size:28px;color:#ff0;'>&nbsp;&nbsp;&nbsp;R<?php echo $CURRENTROUND ?>&nbsp;&nbsp;&nbsp;</div>
 				</td>
 				<td nowrap onclick="location.href='./gui_select_unit.php'" width="<?php echo $buttonWidth ?>"><div class='mechselect_button_normal'><a href='./gui_select_unit.php'>ROSTER</a><br><span style='font-size:16px;'>Choose a Mech</span></div></td>
 				<td nowrap onclick="location.href='./gui_select_enemy_unit.php'" width="<?php echo $buttonWidth ?>"><div class='mechselect_button_normal'><a href='./gui_select_enemy_unit.php'>FORCES</a><br><span style='font-size:16px;'>All bidding units</span></div></td>
@@ -251,7 +260,7 @@ session_start();
 ?>
 
 				<td nowrap onclick="location.href='./gui_edit_option.php'" width="<?php echo $buttonWidth ?>"><div class='mechselect_button_normal'><a href='./gui_edit_option.php'>OPTIONS</a><br><span style='font-size:16px;'>Change options</span></div></td>
-				<td nowrap width="60px" style="background: rgba(50,50,50,1.0); text-align: center; vertical-align: middle;"><div id='loggedOnUser'></div></td>
+				<td style="width: 100px;" nowrap width="100px" style="background: rgba(50,50,50,1.0); text-align: center; vertical-align: middle;"><img src='./images/player/<?=$pimage?>' width='60px' height='60px'></td>
 			</tr>
 		</table>
 	</div>

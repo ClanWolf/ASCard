@@ -16,6 +16,7 @@ session_start();
 	$showplayerdata_topleft = $opt2;
 ?>
 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="en">
 
 <head>
@@ -355,20 +356,14 @@ session_start();
 <div id="header">
 	<table style="width:100%;height:60px;border:none;border-collapse:collapse;background:rgba(50,50,50,1.0);" cellspacing="0" cellpadding="0">
 		<tr>
-			<td nowrap onclick="location.href='./index.html'" width="50px" style="background:rgba(50,50,50,1.0); text-align:center;vertical-align:middle;">
-				<div><a style="color:#eee;" href="./index.html"><i class="fas fa-bars" aria-hidden="true"></i></a></div>
+			<td style="width: 100px;" nowrap onclick="location.href='./index.html'" width="60px" style="background:rgba(50,50,50,1.0); text-align:center;vertical-align:middle;">
+				<div><a style="color:#eee;" href="./index.html">&nbsp;&nbsp;&nbsp;<i class="fas fa-bars" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;</a></div>
 			</td>
-			<td style="background:rgba(1,1,1,1.0);">
-				<table width='100%' cellspacing='0' cellpadding='0' class='mechselect_button_active_left' style="background:rgba(1,1,1,1.0);">
-					<tr>
-						<td nowrap width='20px' align='center' valign='center'>
-							<div style='display:inline-block;height:100%;vertical-align:middle;'>
-								<span style='font-size:16px;'>RND</span><br>
-								<span style='font-size:16px;color:#ff0;'><?php echo $CURRENTROUND ?></span>
-							</div>
-						</td>
-					</tr>
-				</table>
+			<td style="width: 100px;" nowrap onclick="location.href='./finalizeRound.php'" width="100px" style="background: rgba(50,50,50,1.0); text-align: center; vertical-align: middle;">
+				<div><a style="color: #eee;" href="./finalizeRound.php">&nbsp;&nbsp;&nbsp;<i class="fas fa-redo"></i>&nbsp;&nbsp;&nbsp;</a></div>
+			</td>
+			<td style="width: 100px;" onclick="location.href='./finalizeRound.php'" nowrap style="background:rgba(1,1,1,1.0);">
+				<div style='vertical-align:middle;font-size:28px;color:#ff0;'>&nbsp;&nbsp;&nbsp;R<?php echo $CURRENTROUND ?>&nbsp;&nbsp;&nbsp;</div>
 			</td>
 
 <?php
@@ -449,7 +444,7 @@ session_start();
 	}
 ?>
 
-			<td nowrap width="60px" style="background: rgba(50,50,50,1.0); text-align: center; vertical-align: middle;"><div id='loggedOnUser'></div></td>
+			<td style="width: 100px;" style="width: 100px;" nowrap width="100px" style="background: rgba(50,50,50,1.0); text-align: center; vertical-align: middle;"><img src='./images/player/<?=$pimage?>' width='60px' height='60px'></td>
 		</tr>
 	</table>
 </div>

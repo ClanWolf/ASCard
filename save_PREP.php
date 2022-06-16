@@ -9,6 +9,9 @@
 	$desc   = isset($_GET["desc"]) ? $_GET["desc"] : "";
 	$value  = isset($_GET["value"]) ? $_GET["value"] : "";
 
+	echo "<!DOCTYPE html>\n";
+	echo "<html lang='en'>\n";
+	echo "<body>\n";
 	echo "<p style='font-family:Arial,sans-serif;font-size:14px;color:yellow;'>";
 
 	if (!empty($index)) {
@@ -42,5 +45,7 @@
 			echo "Error (asc_assign) updating record: " . mysqli_error($conn);
 		}
 	}
-	echo "</p>";
+	echo "</p>\n";
+	echo "</body>\n";
+	echo "</html>\n";
 ?>
