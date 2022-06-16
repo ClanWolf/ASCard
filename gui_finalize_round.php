@@ -271,11 +271,6 @@ session_start();
 				echo "			<td nowrap style='width:270px;height:40px;' onclick='location.href=\"gui_play_mech.php?unit=".$unitidSelected."\"' class='unitselect_button_normal'>\n";
 				echo "				<table style='width:100%;' cellspacing=0 cellpadding=0>\n";
 				echo "					<tr>\n";
-				if (!$playMode) {
-					echo "						<td style='text-align:left;'>\n";
-					echo "							<a href='gui_edit_unit.php?unit=".$unitidSelected."'><i class='fas fa-edit'></i></a>\n";
-					echo "						</td>\n";
-				}
 				echo "						<td style='text-align:center;'>\n";
 				echo "							<a href='gui_play_mech.php?unit=".$unitidSelected."'>".$forcenameSelected."</a>\n";
 				echo "						</td>\n";
@@ -353,23 +348,15 @@ session_start();
 
 				$mechDetailString = $mechDetailString."						<td nowrap width='1%' onclick='location.href=\"\"' style='background-color:#121212;text-align:right;'>\n";
 				$mechDetailString = $mechDetailString."							<span style='font-size:16px;'>\n";
-				if (!$playMode) {
-					$mechDetailString = $mechDetailString."								\n";
-				} else {
-					if ($activebid == "1") {
-						$mechDetailString = $mechDetailString."								<span><a href='./gui_select_unit.php?activebid=0&mechid=".$assignedMechID."'>&nbsp;<i class='fas fa-arrow-circle-left' aria-hidden='true' style='font-size:28;color:#741300;'></i></a>&nbsp;</span>\n";
-					} else {
-						$mechDetailString = $mechDetailString."								<span><a href='./gui_select_unit.php?activebid=1&mechid=".$assignedMechID."'>&nbsp;<i class='fas fa-arrow-circle-right' aria-hidden='true' style='font-size:28;color:#2f7c2f;'></i></a>&nbsp;</span>\n";
-					}
-				}
+				$mechDetailString = $mechDetailString."								\n";
 				$mechDetailString = $mechDetailString."							</span>\n";
 				$mechDetailString = $mechDetailString."						</td>\n";
 
 				if ($activebid == "1") {
-					$mechDetailString = $mechDetailString."			<td nowrap onclick='location.href=\"gui_play_mech.php?unit=".$unitidSelected."&chosenmech=".$c."\"' style='background-color:".$bidcolor."' class='mechselect_button_active' align='right' valign='center'><div style='display:inline-block;height:100%;vertical-align:middle;'><img style='vertical-align:middle;' src='".$mechstatusimage."' height='30px'><br><span style='font-size:12px;'>".$numStr."</span></div></td>\n";
+					$mechDetailString = $mechDetailString."			<td nowrap onclick='location.href=\"gui_play_mech.php?unit=".$unitidSelected."&chosenmech=".$c."\"' style='background-color:".$bidcolor."' class='mechselect_button_active' align='right' valign='center'><div style='display:inline-block;height:100%;vertical-align:middle;'>STAT</div></td>\n";
 					$mechDetailString = $mechDetailString."			<td nowrap onclick='location.href=\"gui_play_mech.php?unit=".$unitidSelected."&chosenmech=".$c."\"' style='width:100%;background-color:".$bidcolor."' class='mechselect_button_active'>\n";
 				} else {
-					$mechDetailString = $mechDetailString."			<td nowrap style='background-color:".$bidcolor."' class='mechselect_button_active' align='right' valign='center'><div style='display:inline-block;height:100%;vertical-align:middle;'><img style='vertical-align:middle;' src='".$mechstatusimage."' height='30px'><br><span style='font-size:12px;'>".$numStr."</span></div></td>\n";
+					$mechDetailString = $mechDetailString."			<td nowrap style='background-color:".$bidcolor."' class='mechselect_button_active' align='right' valign='center'><div style='display:inline-block;height:100%;vertical-align:middle;'>STAT</div></td>\n";
 					$mechDetailString = $mechDetailString."			<td nowrap style='width:100%;background-color:".$bidcolor."' class='mechselect_button_active'>\n";
 				}
 				$mechDetailString = $mechDetailString."				<table width='100%' cellspacing=0 cellpadding=0 border=0px>\n";
@@ -380,19 +367,14 @@ session_start();
 				} else {
 					$mechDetailString = $mechDetailString."						<td nowrap width='99%' align='left' style='color:#AAAAAA;background-color:".$bidcolor."text-align:left;'><a href='' target='_SELF'> <span style='font-size:26px;'>";
 				}
-				$mechDetailString = $mechDetailString."						<img src='./images/ranks/".$factionidSelected."/".$pilotrank.".png' width='18px' height='18px'>";
-				$mechDetailString = $mechDetailString."						".$pilotname."</span> <span style='font-weight:normal;font-size:16px;color:#da8e25;'> (PV ".$mechpointvalue."/".$mechtonnage." t)</span></a></span>\n";
+//				$mechDetailString = $mechDetailString."						<img src='./images/ranks/".$factionidSelected."/".$pilotrank.".png' width='18px' height='18px'>";
+				$mechDetailString = $mechDetailString."						".$pilotname."</span></a></span>\n";
 				$mechDetailString = $mechDetailString."							<br><span style='font-size:16px;'>".$mechchassisname."</span>\n";
 				$mechDetailString = $mechDetailString."						</td>\n";
 
 				$mechDetailString = $mechDetailString."						<td nowrap width='1%' style='background-color:".$bidcolor."text-align:right;'>\n";
 				$mechDetailString = $mechDetailString."							<span style='font-size:16px;'>\n";
-				
-				if ($playMode) {
-					$mechDetailString = $mechDetailString."								&nbsp;\n";
-				} else {
-					$mechDetailString = $mechDetailString."								<a href='./gui_select_unit.php?dm=1&mechid=".$assignedMechID."&pilotid=".$assignedPilotID."'><i class='fas fa-minus-square'></i></a>\n";
-				}
+				$mechDetailString = $mechDetailString."								&nbsp;\n";
 				$mechDetailString = $mechDetailString."							</span>\n";
 				$mechDetailString = $mechDetailString."						</td>\n";
 				$mechDetailString = $mechDetailString."					</tr>\n";
@@ -405,22 +387,6 @@ session_start();
 		}
 	}
 	echo "		</tr>\n";
-	if (!$playMode) {
-		echo "		<tr>\n";
-		echo "			<td nowrap style='text-align:center;width:200px;height:30px;background-color:#transparent;'>\n";
-		echo "				<a href='".$assignMechToUnitLinkArray[0]."'><i class='fas fa-plus-square'></i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\n";
-		echo "				<a href='".$addMechToUnitLinkArray[0]."'><i class='fas fa-asterisk'></i></a>\n";
-		echo "			</td>\n";
-		echo "			<td nowrap style='text-align:center;width:200px;height:30px;background-color:#transparent;'>\n";
-		echo "				<a href='".$assignMechToUnitLinkArray[1]."'><i class='fas fa-plus-square'></i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\n";
-		echo "				<a href='".$addMechToUnitLinkArray[1]."'><i class='fas fa-asterisk'></i></a>\n";
-		echo "			</td>\n";
-		echo "			<td nowrap style='text-align:center;width:200px;height:30px;background-color:#transparent;'>\n";
-		echo "				<a href='".$assignMechToUnitLinkArray[2]."'><i class='fas fa-plus-square'></i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\n";
-		echo "				<a href='".$addMechToUnitLinkArray[2]."'><i class='fas fa-asterisk'></i></a>\n";
-		echo "			</td>\n";
-		echo "		</tr>\n";
-	}
 	echo "		<tr>\n";
 
 	foreach ($mechsInAllUnits as &$mechsInSingleUnit) {
@@ -434,13 +400,6 @@ session_start();
 		echo "				</table>\n";
 		echo "			</td>\n";
 	}
-	echo "		</tr>\n";
-	echo "		<tr>\n";
-	echo "			<td colspan='3' style='background-color:#333333;' align='center' valign='top'>";
-	echo "				<span style='font-size:20;color:#eeeeee;'>Bid:&nbsp;</span><span style='font-size:20;color:#da8e25;'>PV ".$pointvaluetotalactivebid."</span><span style='font-size:20;color:#eeeeee;'>&nbsp;/&nbsp;</span><span style='font-size:20;color:#ff33ee;'>".$tonnagetotalactivebid." t</span>";
-	echo "				<span style='font-size:20;color:#eeeeee;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>";
-	echo "				<span style='font-size:20;color:#eeeeee;'>Total:&nbsp;PV ".$pointvaluetotal."&nbsp;/&nbsp;".$tonnagetotal." t</span>";
-	echo "			</td>\n";
 	echo "		</tr>\n";
 ?>
 

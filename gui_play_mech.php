@@ -359,10 +359,10 @@ session_start();
 			<td style="width: 100px;" nowrap onclick="location.href='./index.html'" width="60px" style="background:rgba(50,50,50,1.0); text-align:center;vertical-align:middle;">
 				<div><a style="color:#eee;" href="./index.html">&nbsp;&nbsp;&nbsp;<i class="fas fa-bars" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;</a></div>
 			</td>
-			<td style="width: 100px;" nowrap onclick="location.href='./finalizeRound.php'" width="100px" style="background: rgba(50,50,50,1.0); text-align: center; vertical-align: middle;">
-				<div><a style="color: #eee;" href="./finalizeRound.php">&nbsp;&nbsp;&nbsp;<i class="fas fa-redo"></i>&nbsp;&nbsp;&nbsp;</a></div>
+			<td style="width: 100px;" nowrap onclick="location.href='./gui_finalize_round.php'" width="100px" style="background: rgba(50,50,50,1.0); text-align: center; vertical-align: middle;">
+				<div><a style="color: #eee;" href="./gui_finalize_round.php">&nbsp;&nbsp;&nbsp;<i class="fas fa-redo"></i>&nbsp;&nbsp;&nbsp;</a></div>
 			</td>
-			<td style="width: 100px;" onclick="location.href='./finalizeRound.php'" nowrap style="background:rgba(1,1,1,1.0);">
+			<td style="width: 100px;" onclick="location.href='./gui_finalize_round.php'" nowrap style="background:rgba(1,1,1,1.0);">
 				<div style='vertical-align:middle;font-size:28px;color:#ff0;'>&nbsp;&nbsp;&nbsp;R<?php echo $CURRENTROUND ?>&nbsp;&nbsp;&nbsp;</div>
 			</td>
 

@@ -94,10 +94,10 @@ session_start();
 				<td style="width: 100px;" nowrap onclick="location.href='./logout.php'" width="60px" style="background: rgba(50,50,50,1.0); text-align: center; vertical-align: middle;">
 					<div><a style="color: #eee;" href="./logout.php">&nbsp;&nbsp;&nbsp;<i class="fas fa-power-off" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;</a></div>
 				</td>
-				<td style="width: 100px;" nowrap onclick="location.href='./finalizeRound.php'" width="100px" style="background: rgba(50,50,50,1.0); text-align: center; vertical-align: middle;">
-					<div><a style="color: #eee;" href="./finalizeRound.php">&nbsp;&nbsp;&nbsp;<i class="fas fa-redo"></i>&nbsp;&nbsp;&nbsp;</a></div>
+				<td style="width: 100px;" nowrap onclick="location.href='./gui_finalize_round.php'" width="100px" style="background: rgba(50,50,50,1.0); text-align: center; vertical-align: middle;">
+					<div><a style="color: #eee;" href="./gui_finalize_round.php">&nbsp;&nbsp;&nbsp;<i class="fas fa-redo"></i>&nbsp;&nbsp;&nbsp;</a></div>
 				</td>
-				<td style="width: 100px;" nowrap onclick="location.href='./finalizeRound.php'" style="background:rgba(1,1,1,1.0);">
+				<td style="width: 100px;" nowrap onclick="location.href='./gui_finalize_round.php'" style="background:rgba(1,1,1,1.0);">
 					<div style='vertical-align:middle;font-size:28px;color:#ff0;'>&nbsp;&nbsp;&nbsp;R<?php echo $CURRENTROUND ?>&nbsp;&nbsp;&nbsp;</div>
 				</td>
 				<td nowrap onclick="location.href='./gui_select_unit.php'" width="<?php echo $buttonWidth ?>"><div class='mechselect_button_normal'><a href='./gui_select_unit.php'>ROSTER</a><br><span style='font-size:16px;'>Choose a Mech</span></div></td>
@@ -135,7 +135,7 @@ session_start();
 				$tonnage_bidden = $row['bid_tonnage'];
 
 				echo "<tr>\n";
-				echo "	<td style='color:eee;font-size:22;'>OPFOR&nbsp;&nbsp;&nbsp;</td>\n";
+				echo "	<td style='color:#eee;font-size:22;'>OPFOR&nbsp;&nbsp;&nbsp;</td>\n";
 				echo "	<td nowrap style='background-color:#812c2c;width:170px;height:40px;' class='mechselect_button_active'>".$playername."</td>\n";
 
 				//echo "	<td nowrap style='background-color:#148dee;width:170px;height:40px;' class='mechselect_button_active'>jkjj</td>\n";
@@ -195,8 +195,8 @@ session_start();
 						}
 					}
 				}
-				echo "	<td nowrap style='font-size:16px;text-align:right;color:#dddddd;background-color:#b33939;height:40px;padding-left:10px;padding-right:10px'>PV ".$pv_bidden."</td><td nowrap style='text-align:right;color:#ffff00;background-color:#b33939;height:40px;padding-left:10px;padding-right:10px'>".$tonnage_bidden." t</td>\n";
-				echo "	<td style='color:eee;font-size:22;text-align:right;' align='right'>&nbsp;&nbsp;&nbsp;OPFOR</td>\n";
+				echo "	<td nowrap style='font-size:24px;text-align:right;color:#dddddd;background-color:#b33939;height:40px;padding-left:10px;padding-right:10px'>PV ".$pv_bidden."</td><td nowrap style='text-align:right;color:#ffff00;background-color:#b33939;height:40px;padding-left:10px;padding-right:10px'>".$tonnage_bidden." t</td>\n";
+				echo "	<td style='color:#eee;font-size:22;text-align:right;' align='right'>&nbsp;&nbsp;&nbsp;OPFOR</td>\n";
 				echo "</tr>\n";
 				echo "<tr><td colspan='6' style='font-size:10px'>&nbsp;</td></tr>\n";
 			}
@@ -281,7 +281,7 @@ session_start();
 					}
 				}
 
-				echo "<td nowrap style='font-size:16px;text-align:right;color:dddddd;background-color:#666666;height:40px;padding-left:10px;padding-right:10px;$selectBorder'>PV ".$pv_bidden."</td><td nowrap style='text-align:right;color:00ff00;background-color:#666666;height:40px;padding-left:10px;padding-right:10px;$selectBorder'>".$tonnage_bidden." t</td>\n";
+				echo "<td nowrap style='font-size:24px;text-align:right;color:#ddd;background-color:#666666;height:40px;padding-left:10px;padding-right:10px;$selectBorder'>PV ".$pv_bidden."</td><td nowrap style='font-size:24px;text-align:right;color:#00ff00;background-color:#666666;height:40px;padding-left:10px;padding-right:10px;$selectBorder'>".$tonnage_bidden." t</td>\n";
 				if ($pid == $playerid) {
 					echo "<td style='color:eee;font-size:24;color:#ffaa00;text-align:center;$selectBorder'><img src='./images/indicatorl.png' height='24px'></td>\n";
 				} else {
@@ -292,7 +292,7 @@ session_start();
 		}
 	}
 ?>
-		<tr><td colspan="8" style="color:eee;font-size:20;text-align:center;"><br>Only the 5 lowest bidders in PointValue (PV) will be visible.</td></tr>
+		<tr><td colspan="8" style="color:#eee;font-size:20;text-align:center;"><br>Only the 5 lowest bidders in PointValue (PV) will be visible.</td></tr>
 	</table>
 </body>
 
