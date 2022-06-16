@@ -191,6 +191,10 @@ function readCircles2(index, a_max, s_max, mv_bt_id, f_bt_id) {
 
 	document.getElementById('mechstatusimagemenu').src=mechstatusimage;
 
+	if (mvmnt == 9) {
+		wpnsf = 1;
+	}
+
 	setCircles(h, a, s, e, fc, mp, w, uov, mvmnt, wpnsf);
 	var url="./save.php?index="+index+"&h="+h+"&a="+a+"&s="+s+"&e="+e+"&fc="+fc+"&mp="+mp+"&w="+w+"&mstat="+mechstatusimage+"&uov="+uov+"&mvmnt="+mvmnt+"&wpnsf="+wpnsf;
 	// alert(url);
