@@ -198,14 +198,14 @@ session_start();
 	<div id="header">
 		<table style="width:100%;height:60px;border:none;border-collapse:collapse;background:rgba(50,50,50,1.0);" cellspacing="0" cellpadding="0">
 			<tr>
-				<td style="width: 100px;" nowrap onclick="location.href='./logout.php'" width="100px" style="background: rgba(50,50,50,1.0); text-align: center; vertical-align: middle;">
-					<div><a style="color: #eee;" href="./logout.php">&nbsp;&nbsp;&nbsp;<i class="fas fa-power-off" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;</a></div>
+				<td nowrap onclick="location.href='./logout.php'" width="100px" style="width: 100px;background: rgba(50,50,50,1.0); text-align: center; vertical-align: middle;">
+					<div><a style="color:#eee;" href="./logout.php">&nbsp;&nbsp;&nbsp;<i class="fas fa-power-off" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;</a></div>
 				</td>
-				<td style="width: 100px;" nowrap onclick="location.href='./gui_finalize_round.php'" width="100px" style="background:rgba(20,20,20,1.0); text-align: center; vertical-align: middle;">
-					<div><a style="color:#da8e25;" href="./gui_finalize_round.php">&nbsp;&nbsp;&nbsp;<i class="fas fa-redo"></i>&nbsp;&nbsp;&nbsp;</a></div>
+				<td nowrap onclick="location.href='./gui_finalize_round.php'" width="100px" style="width: 100px;background:rgba(105,64,7,1.0); text-align: center; vertical-align: middle;">
+					<div><a style="color:#eee;" href="./gui_finalize_round.php">&nbsp;&nbsp;&nbsp;<i class="fas fa-redo"></i>&nbsp;&nbsp;&nbsp;</a></div>
 				</td>
-				<td style="width: 100px;" nowrap onclick="location.href='./gui_finalize_round.php'" style="background:rgba(20,20,20,1.0);">
-					<div style='vertical-align:middle;font-size:28px;color:#da8e25;'>&nbsp;&nbsp;&nbsp;R<?php echo $CURRENTROUND ?>&nbsp;&nbsp;&nbsp;</div>
+				<td nowrap onclick="location.href='./gui_finalize_round.php'" style="width: 100px;background:rgba(105,64,7,1.0);">
+					<div style='vertical-align:middle;font-size:28px;color:#eee;'>&nbsp;&nbsp;&nbsp;R<?php echo $CURRENTROUND ?>&nbsp;&nbsp;&nbsp;</div>
 				</td>
 				<td nowrap onclick="location.href='./gui_select_unit.php'" width="<?php echo $buttonWidth ?>"><div class='mechselect_button_normal'><a href='./gui_select_unit.php'>ROSTER</a><br><span style='font-size:16px;'>Choose a Mech</span></div></td>
 				<td nowrap onclick="location.href='./gui_select_enemy_unit.php'" width="<?php echo $buttonWidth ?>"><div class='mechselect_button_normal'><a href='./gui_select_enemy_unit.php'>FORCES</a><br><span style='font-size:16px;'>All bidding units</span></div></td>
@@ -227,6 +227,11 @@ session_start();
 	<br>
 
 	<table align="center" cellspacing=2 cellpadding=2 border=0px>
+		<tr>
+			<td nowrap colspan='3' style='background-color:#444444;width:270px;height:40px;' class='mechselect_button_active'>
+    		    &nbsp;&nbsp;&nbsp;<i class="fas fa-redo"></i>&nbsp;&nbsp;&nbsp;Finalize current round
+			</td>
+		</tr>
 		<tr>
 <?php
 
@@ -294,6 +299,23 @@ session_start();
 				$assignedMechID = $rowUnitAssignment['mechid'];
 				$assignedPilotID = $rowUnitAssignment['pilotid'];
 
+				$mechHasMoved = $rowUnitAssignment['round_moved'];
+				$mechHasFired = $rowUnitAssignment['round_fired'];
+
+				$mechStatusImage = "";
+				if ($mechHasMoved == 0 && $mechHasFired == 0) {
+					$mechStatusImage = "./images/top-right_phase01.png";
+				}
+				if ($mechHasMoved == 0 && $mechHasFired > 0) {
+					$mechStatusImage = "./images/top-right_phase01.png";
+				}
+				if ($mechHasMoved > 0 && $mechHasFired == 0) {
+					$mechStatusImage = "./images/top-right_phase02.png";
+				}
+				if ($mechHasMoved > 0 && $mechHasFired > 0) {
+					$mechStatusImage = "./images/top-right_phase03.png";
+				}
+
 				$sql_asc_mech = "SELECT SQL_NO_CACHE * FROM asc_mech where mechid=".$assignedMechID." order by mech_tonnage desc;";
 				$result_asc_mech = mysqli_query($conn, $sql_asc_mech);
 				if (mysqli_num_rows($result_asc_mech) > 0) {
@@ -353,10 +375,10 @@ session_start();
 				$mechDetailString = $mechDetailString."						</td>\n";
 
 				if ($activebid == "1") {
-					$mechDetailString = $mechDetailString."			<td nowrap onclick='location.href=\"gui_play_mech.php?unit=".$unitidSelected."&chosenmech=".$c."\"' style='background-color:".$bidcolor."' class='mechselect_button_active' align='right' valign='center'><div style='display:inline-block;height:100%;vertical-align:middle;'>STAT</div></td>\n";
+					$mechDetailString = $mechDetailString."			<td nowrap onclick='location.href=\"gui_play_mech.php?unit=".$unitidSelected."&chosenmech=".$c."\"' style='background-color:".$bidcolor."' class='mechselect_button_active' align='right' valign='center'><div style='display:inline-block;height:100%;vertical-align:middle;'><img src='".$mechStatusImage."' width='30px'></div></td>\n";
 					$mechDetailString = $mechDetailString."			<td nowrap onclick='location.href=\"gui_play_mech.php?unit=".$unitidSelected."&chosenmech=".$c."\"' style='width:100%;background-color:".$bidcolor."' class='mechselect_button_active'>\n";
 				} else {
-					$mechDetailString = $mechDetailString."			<td nowrap style='background-color:".$bidcolor."' class='mechselect_button_active' align='right' valign='center'><div style='display:inline-block;height:100%;vertical-align:middle;'>STAT</div></td>\n";
+					$mechDetailString = $mechDetailString."			<td nowrap style='background-color:".$bidcolor."' class='mechselect_button_active' align='right' valign='center'><div style='display:inline-block;height:100%;vertical-align:middle;'><img src='".$mechStatusImage."' width='30px'></div></td>\n";
 					$mechDetailString = $mechDetailString."			<td nowrap style='width:100%;background-color:".$bidcolor."' class='mechselect_button_active'>\n";
 				}
 				$mechDetailString = $mechDetailString."				<table width='100%' cellspacing=0 cellpadding=0 border=0px>\n";
@@ -381,7 +403,11 @@ session_start();
 				$mechDetailString = $mechDetailString."				</table>\n";
 				$mechDetailString = $mechDetailString."			</td>\n";
 
-				array_push($mechsInSingleUnit, $mechDetailString);
+				if ($mechstatusimage != "images/DD_ELE_04.png" && $mechstatusimage != "images/DD_04.png") {
+					if ($activebid == "1") {
+						array_push($mechsInSingleUnit, $mechDetailString);
+					}
+				}
 			}
 			array_push($mechsInAllUnits, $mechsInSingleUnit);
 		}
