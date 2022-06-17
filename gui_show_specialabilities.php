@@ -1,30 +1,3 @@
-<?php
-session_start();
-	require('./logger.php');
-	require('./db.php');
-	if (!isset($_SESSION['playerid'])) {
-		echo "Not logged in... redirecting.<br>";
-		echo "<meta http-equiv='refresh' content='0;url=./login.php?auto=1'>";
-		header("Location: ./login.php?auto=1");
-		//die("Check position 4");
-	}
-
-	// Get data on units from db
-	$pid = $_SESSION['playerid'];
-	$pname = $_SESSION['name'];
-	$pimage = $_SESSION['playerimage'];
-	$opt3 = $_SESSION['option3'];
-	$playMode = $opt3;
-
-	$sql_asc_playerround = "SELECT SQL_NO_CACHE * FROM asc_player where playerid = " . $pid . ";";
-    $result_asc_playerround = mysqli_query($conn, $sql_asc_playerround);
-    if (mysqli_num_rows($result_asc_playerround) > 0) {
-        while($row = mysqli_fetch_assoc($result_asc_playerround)) {
-            $CURRENTROUND = $row["round"];
-        }
-    }
-?>
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="en">
 
@@ -40,10 +13,8 @@ session_start();
 	<meta name="viewport" content="width=device-width, initial-scale=0.75, minimum-scale=0.75, maximum-scale=0.75, user-scalable=no" />
 
 	<link rel="manifest" href="./manifest.json">
-	<!-- <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css"> -->
 	<link rel="stylesheet" type="text/css" href="./fontawesome/css/all.min.css" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="./styles/styles.css">
-	<link rel="stylesheet" type="text/css" href="./styles/jquery.jscrollpane.css">
 	<link rel="icon" href="./favicon.png" type="image/png">
 	<link rel="shortcut icon" href="./images/icon_196x196.png" type="image/png" sizes="196x196">
 	<link rel="apple-touch-icon" href="./images/icon_57x57.png" type="image/png" sizes="57x57">
@@ -56,211 +27,118 @@ session_start();
 	<link rel="apple-touch-icon" href="./images/icon_180x180.png" type="image/png" sizes="180x180">
 
 	<script type="text/javascript" src="./scripts/jquery-3.6.0.min.js"></script>
-	<script type="text/javascript" src="./scripts/jquery.jscrollpane.min.js"></script>
-	<script type="text/javascript" src="./scripts/jquery.mousewheel.js"></script>
-	<script type="text/javascript" src="./scripts/mwheelIntent.js"></script>
-	<script type="text/javascript" src="./scripts/howler.min.js"></script>
-	<script type="text/javascript" src="./scripts/cookies.js"></script>
-
-	<style>
-		html, body {
-			background-image: url('./images/body-bg_2.jpg');
-		}
-		table {
-			margin-left: auto;
-			margin-right: auto;
-		}
-		.box {
-			width: 80%;
-			background-color :#transparent;
-			top: 50%;
-			left: 50%;
-		}
-		.options {
-			border-radius: 5px;
-			border-style: solid;
-			border-width: 3px;
-			padding: 5px;
-			background: rgba(60,60,60,0.75);
-			color: #ddd;
-			border-color: #aaa;
-		}
-		input, select {
-			width: 80px;
-			vertical-align: middle;
-			color: #ddd;
-			border-width: 0px;
-			padding: 2px;
-			font-family: 'Pathway Gothic One', sans-serif;
-		}
-		select:focus, textarea:focus, input:focus {
-			outline: none;
-		}
-		select:invalid, input:invalid {
-			background: rgba(40,40,40,0.75);;
-		}
-		select:valid, input:valid {
-			background: rgba(70,70,70,0.75);;
-		}
-		.scroll-pane {
-			width: 100%;
-			height: 300px;
-			overflow: none;
-		}
-		.horizontal-only {
-			height: auto;
-			max-height: 200px;
-		}
-	</style>
 </head>
 
 <body>
-	<script>
-		$(function() {
-			$('.scroll-pane').jScrollPane();
-		});
-		$(document).ready(function() {
-			$("#cover").hide();
-			var api = $('.scroll-pane').data('jsp');
-			api.reinitialise();
-		});
-	</script>
+	<style>
+		.topnav {
+			overflow: hidden;
+			background-color: #333;
+			position: fixed;
+		}
+		.content {
+			overflow-x: hidden;
+			overflow-y: scroll;
+			position: fixed;
+			bottom: 0px;
+		}
+	</style>
 
-	<div id="cover"></div>
-
-<?php
-	if ($playMode) {
-		$buttonWidth = "34%";
-	} else {
-		$buttonWidth = "17%";
-	}
-?>
-
-	<div id="header">
-		<table style="width:100%;height:60px;border:none;border-collapse:collapse;background:rgba(50,50,50,1.0);" cellspacing="0" cellpadding="0">
+	<div class="topnav" id="nav">
+		<table class="options" cellspacing=10 cellpadding=10 border=0px>
 			<tr>
-				<td nowrap onclick="location.href='./logout.php'" width="60px" style="width: 100px;background: rgba(50,50,50,1.0); text-align: center; vertical-align: middle;">
-					<div><a style="color: #eee;" href="./logout.php">&nbsp;&nbsp;&nbsp;<i class="fas fa-power-off" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;</a></div>
+				<td width="15%" nowrap align="center">
+					<!-- <a href="javascript:window.history.back();"><< Back</a> -->
+					<a href="./gui_select_unit.php"><< Back</a>
 				</td>
-				<td nowrap onclick="location.href='./gui_finalize_round.php'" width="100px" style="width: 100px;background: rgba(50,50,50,1.0); text-align: center; vertical-align: middle;">
-					<div><a style="color: #eee;" href="./gui_finalize_round.php">&nbsp;&nbsp;&nbsp;<i class="fas fa-redo"></i>&nbsp;&nbsp;&nbsp;</a></div>
+				<td width="85%" align="left">
+					<a href="#PRB" target="_SELF">PRB</a>&nbsp;&nbsp;
+					<a href="#AFC" target="_SELF">AFC</a>&nbsp;&nbsp;
+					<a href="#AT" target="_SELF">AT</a>&nbsp;&nbsp;
+					<a href="#AMP" target="_SELF">AMP</a>&nbsp;&nbsp;
+					<a href="#AECM" target="_SELF">AECM</a>&nbsp;&nbsp;
+					<a href="#AM" target="_SELF">AM</a>&nbsp;&nbsp;
+					<a href="#AMS" target="_SELF">AMS</a>&nbsp;&nbsp;
+					<a href="#ARM" target="_SELF">ARM</a>&nbsp;&nbsp;
+	                <a href="#ARS" target="_SELF">ARS</a>&nbsp;&nbsp;
+	                <a href="#ARTX" target="_SELF">ARTX</a>&nbsp;&nbsp;
+	                <a href="#AC" target="_SELF">AC</a>&nbsp;&nbsp;
+	                <a href="#BHJ" target="_SELF">BHJ</a>&nbsp;&nbsp;
+	                <a href="#SHLD" target="_SELF">SHLD</a>&nbsp;&nbsp;
+	                <a href="#BH" target="_SELF">BH</a>&nbsp;&nbsp;
+	                <a href="#BT" target="_SELF">BT</a>&nbsp;&nbsp;
+	                <a href="#BOMB" target="_SELF">BOMB</a>&nbsp;&nbsp;
+	                <a href="#BRID" target="_SELF">BRID</a>&nbsp;&nbsp;
+	                <a href="#CAP" target="_SELF">CAP</a>&nbsp;&nbsp;
+	                <a href="#CK" target="_SELF">CK</a>&nbsp;&nbsp;
+	                <a href="#CT" target="_SELF">CT</a>&nbsp;&nbsp;
+	                <a href="#CASE" target="_SELF">CASE</a>&nbsp;&nbsp;
+	                <a href="#CASEII" target="_SELF">CASEII</a>&nbsp;&nbsp;
+	                <a href="#CRW" target="_SELF">CRW</a>&nbsp;&nbsp;
+	                <a href="#CR" target="_SELF">CR</a>&nbsp;&nbsp;
+	                <a href="#D" target="_SELF">D</a>&nbsp;&nbsp;
+	                <a href="#DRO" target="_SELF">DRO</a>&nbsp;&nbsp;
+	                <a href="#DCC" target="_SELF">DCC</a>&nbsp;&nbsp;
+	                <a href="#DUN" target="_SELF">DUN</a>&nbsp;&nbsp;
+	                <a href="#ECM" target="_SELF">ECM</a>&nbsp;&nbsp;
+	                <a href="#ES" target="_SELF">ES</a>&nbsp;&nbsp;
+	                <a href="#ENG" target="_SELF">ENG</a>&nbsp;&nbsp;
+	                <a href="#ENE" target="_SELF">ENE</a>&nbsp;&nbsp;
+	                <a href="#SEAL" target="_SELF">SEAL</a>&nbsp;&nbsp;
+	                <a href="#FF" target="_SELF">FF</a>&nbsp;&nbsp;
+	                <a href="#FLK" target="_SELF">FLK</a>&nbsp;&nbsp;
+	                <a href="#FD" target="_SELF">FD</a>&nbsp;&nbsp;
+	                <a href="#HT" target="_SELF">HT</a>&nbsp;&nbsp;
+	                <a href="#HELI" target="_SELF">HELI</a>&nbsp;&nbsp;
+	                <a href="#IF" target="_SELF">IF</a>&nbsp;&nbsp;
+	                <a href="#INARC" target="_SELF">INARC</a>&nbsp;&nbsp;
+	                <a href="#LG" target="_SELF">LG</a>&nbsp;&nbsp;
+	                <a href="#LPRB" target="_SELF">LPRB</a>&nbsp;&nbsp;
+	                <a href="#LECM" target="_SELF">LECM</a>&nbsp;&nbsp;
+	                <a href="#LTAG" target="_SELF">LTAG</a>&nbsp;&nbsp;
+	                <a href="#LRM" target="_SELF">LRM</a>&nbsp;&nbsp;
+	                <a href="#MAG" target="_SELF">MAG</a>&nbsp;&nbsp;
+	                <a href="#MT" target="_SELF">MT</a>&nbsp;&nbsp;
+	                <a href="#MEL" target="_SELF">MEL</a>&nbsp;&nbsp;
+	                <a href="#MDS" target="_SELF">MDS</a>&nbsp;&nbsp;
+	                <a href="#MSW" target="_SELF">MSW</a>&nbsp;&nbsp;
+	                <a href="#MSL" target="_SELF">MSL</a>&nbsp;&nbsp;
+	                <a href="#MHQ" target="_SELF">MHQ</a>&nbsp;&nbsp;
+	                <a href="#MTN" target="_SELF">MTN</a>&nbsp;&nbsp;
+	                <a href="#CNARC" target="_SELF">CNARC</a>&nbsp;&nbsp;
+	                <a href="#OMNI" target="_SELF">OMNI</a>&nbsp;&nbsp;
+	                <a href="#OVL" target="_SELF">OVL</a>&nbsp;&nbsp;
+	                <a href="#PNT" target="_SELF">PNT</a>&nbsp;&nbsp;
+	                <a href="#PT" target="_SELF">PT</a>&nbsp;&nbsp;
+	                <a href="#RAIL" target="_SELF">RAIL</a>&nbsp;&nbsp;
+	                <a href="#RCA" target="_SELF">RCA</a>&nbsp;&nbsp;
+	                <a href="#RFA" target="_SELF">RFA</a>&nbsp;&nbsp;
+	                <a href="#RSD" target="_SELF">RSD</a>&nbsp;&nbsp;
+	                <a href="#SAW" target="_SELF">SAW</a>&nbsp;&nbsp;
+	                <a href="#SRCH" target="_SELF">SRCH</a>&nbsp;&nbsp;
+	                <a href="#SRM" target="_SELF">SRM</a>&nbsp;&nbsp;
+	                <a href="#ST" target="_SELF">ST</a>&nbsp;&nbsp;
+	                <a href="#SDS" target="_SELF">SDS</a>&nbsp;&nbsp;
+	                <a href="#STL" target="_SELF">STL</a>&nbsp;&nbsp;
+	                <a href="#SCAP" target="_SELF">SCAP</a>&nbsp;&nbsp;
+	                <a href="#SLG" target="_SELF">SLG</a>&nbsp;&nbsp;
+	                <a href="#TAG" target="_SELF">TAG</a>&nbsp;&nbsp;
+	                <a href="#MTAS" target="_SELF">MTAS</a>&nbsp;&nbsp;
+	                <a href="#BTAS" target="_SELF">BTAS</a>&nbsp;&nbsp;
+	                <a href="#TOR" target="_SELF">TOR</a>&nbsp;&nbsp;
+	                <a href="#TSM" target="_SELF">TSM</a>&nbsp;&nbsp;
+	                <a href="#TUR" target="_SELF">TUR</a>&nbsp;&nbsp;
+	                <a href="#UMU" target="_SELF">UMU</a>&nbsp;&nbsp;
+	                <a href="#WAT" target="_SELF">WAT</a>&nbsp;&nbsp;
 				</td>
-				<td nowrap onclick="location.href='./gui_finalize_round.php'" style="width: 100px;background:rgba(1,1,1,1.0);">
-					<div style='vertical-align:middle;font-size:28px;color:#ff0;'>&nbsp;&nbsp;&nbsp;R<?php echo $CURRENTROUND ?>&nbsp;&nbsp;&nbsp;</div>
-				</td>
-				<td nowrap onclick="location.href='./gui_select_unit.php'" width="<?php echo $buttonWidth ?>"><div class='mechselect_button_normal'><a href='./gui_select_unit.php'>ROSTER</a><br><span style='font-size:16px;'>Choose a Mech</span></div></td>
-				<td nowrap onclick="location.href='./gui_select_enemy_unit.php'" width="<?php echo $buttonWidth ?>"><div class='mechselect_button_normal'><a href='./gui_select_enemy_unit.php'>FORCES</a><br><span style='font-size:16px;'>All bidding units</span></div></td>
-
-<?php
-	if (!$playMode) {
-		echo "				<td nowrap onclick=\"location.href='./gui_assign_unit.php'\" width='17%'><div class='mechselect_button_normal'><a href='./gui_assign_unit.php'>ASSIGN</a><br><span style='font-size:16px;'>Assign Mech/BA</span></div></td>\n";
-		echo "				<td nowrap onclick=\"location.href='./gui_create_mech.php'\" width='17%'><div class='mechselect_button_normal'><a href='./gui_create_mech.php'>ADD</a><br><span style='font-size:16px;'>Create a Mech/BA</span></div></td>\n";
-		echo "				<td nowrap onclick=\"location.href='./gui_create_player.php'\" width='17%'><div class='mechselect_button_normal'><a href='./gui_create_player.php'>PLAYER</a><br><span style='font-size:16px;'>Manage players</span></div></td>\n";
-	}
-?>
-
-				<td nowrap onclick="location.href='./gui_edit_option.php'" width="<?php echo $buttonWidth ?>"><div class='mechselect_button_normal'><a href='./gui_edit_option.php'>OPTIONS</a><br><span style='font-size:16px;'>Change options</span></div></td>
-				<td style="width: 100px;" nowrap width="100px" style="background: rgba(50,50,50,1.0); text-align: center; vertical-align: middle;"><img src='./images/player/<?=$pimage?>' width='60px' height='60px'></td>
 			</tr>
 		</table>
 	</div>
 
-	<br>
-
-	<table width="70%" class="options" cellspacing=4 cellpadding=4 border=0px>
-		<tr>
-			<td width="15%" nowrap align="center">
-				<a href="javascript:window.history.back();"><< Go back</a>
-			</td>
-			<td width="85%" align="center">
-				<a href="#PRB" target="_SELF">PRB</a>&nbsp;&nbsp;
-				<a href="#AFC" target="_SELF">AFC</a>&nbsp;&nbsp;
-				<a href="#AT" target="_SELF">AT</a>&nbsp;&nbsp;
-				<a href="#AMP" target="_SELF">AMP</a>&nbsp;&nbsp;
-				<a href="#AECM" target="_SELF">AECM</a>&nbsp;&nbsp;
-				<a href="#AM" target="_SELF">AM</a>&nbsp;&nbsp;
-				<a href="#AMS" target="_SELF">AMS</a>&nbsp;&nbsp;
-				<a href="#ARM" target="_SELF">ARM</a>&nbsp;&nbsp;
-                <a href="#ARS" target="_SELF">ARS</a>&nbsp;&nbsp;
-                <a href="#ARTX" target="_SELF">ARTX</a>&nbsp;&nbsp;
-                <a href="#AC" target="_SELF">AC</a>&nbsp;&nbsp;
-                <a href="#BHJ" target="_SELF">BHJ</a>&nbsp;&nbsp;
-                <a href="#SHLD" target="_SELF">SHLD</a>&nbsp;&nbsp;
-                <a href="#BH" target="_SELF">BH</a>&nbsp;&nbsp;
-                <a href="#BT" target="_SELF">BT</a>&nbsp;&nbsp;
-                <a href="#BOMB" target="_SELF">BOMB</a>&nbsp;&nbsp;
-                <a href="#BRID" target="_SELF">BRID</a>&nbsp;&nbsp;
-                <a href="#CAP" target="_SELF">CAP</a>&nbsp;&nbsp;
-                <a href="#CK" target="_SELF">CK</a>&nbsp;&nbsp;
-                <a href="#CT" target="_SELF">CT</a>&nbsp;&nbsp;
-                <a href="#CASE" target="_SELF">CASE</a>&nbsp;&nbsp;
-                <a href="#CASEII" target="_SELF">CASEII</a>&nbsp;&nbsp;
-                <a href="#CRW" target="_SELF">CRW</a>&nbsp;&nbsp;
-                <a href="#CR" target="_SELF">CR</a>&nbsp;&nbsp;
-                <a href="#D" target="_SELF">D</a>&nbsp;&nbsp;
-                <a href="#DRO" target="_SELF">DRO</a>&nbsp;&nbsp;
-                <a href="#DCC" target="_SELF">DCC</a>&nbsp;&nbsp;
-                <a href="#DUN" target="_SELF">DUN</a>&nbsp;&nbsp;
-                <a href="#ECM" target="_SELF">ECM</a>&nbsp;&nbsp;
-                <a href="#ES" target="_SELF">ES</a>&nbsp;&nbsp;
-                <a href="#ENG" target="_SELF">ENG</a>&nbsp;&nbsp;
-                <a href="#ENE" target="_SELF">ENE</a>&nbsp;&nbsp;
-                <a href="#SEAL" target="_SELF">SEAL</a>&nbsp;&nbsp;
-                <a href="#FF" target="_SELF">FF</a>&nbsp;&nbsp;
-                <a href="#FLK" target="_SELF">FLK</a>&nbsp;&nbsp;
-                <a href="#FD" target="_SELF">FD</a>&nbsp;&nbsp;
-                <a href="#HT" target="_SELF">HT</a>&nbsp;&nbsp;
-                <a href="#HELI" target="_SELF">HELI</a>&nbsp;&nbsp;
-                <a href="#IF" target="_SELF">IF</a>&nbsp;&nbsp;
-                <a href="#INARC" target="_SELF">INARC</a>&nbsp;&nbsp;
-                <a href="#LG" target="_SELF">LG</a>&nbsp;&nbsp;
-                <a href="#LPRB" target="_SELF">LPRB</a>&nbsp;&nbsp;
-                <a href="#LECM" target="_SELF">LECM</a>&nbsp;&nbsp;
-                <a href="#LTAG" target="_SELF">LTAG</a>&nbsp;&nbsp;
-                <a href="#LRM" target="_SELF">LRM</a>&nbsp;&nbsp;
-                <a href="#MAG" target="_SELF">MAG</a>&nbsp;&nbsp;
-                <a href="#MT" target="_SELF">MT</a>&nbsp;&nbsp;
-                <a href="#MEL" target="_SELF">MEL</a>&nbsp;&nbsp;
-                <a href="#MDS" target="_SELF">MDS</a>&nbsp;&nbsp;
-                <a href="#MSW" target="_SELF">MSW</a>&nbsp;&nbsp;
-                <a href="#MSL" target="_SELF">MSL</a>&nbsp;&nbsp;
-                <a href="#MHQ" target="_SELF">MHQ</a>&nbsp;&nbsp;
-                <a href="#MTN" target="_SELF">MTN</a>&nbsp;&nbsp;
-                <a href="#CNARC" target="_SELF">CNARC</a>&nbsp;&nbsp;
-                <a href="#OMNI" target="_SELF">OMNI</a>&nbsp;&nbsp;
-                <a href="#OVL" target="_SELF">OVL</a>&nbsp;&nbsp;
-                <a href="#PNT" target="_SELF">PNT</a>&nbsp;&nbsp;
-                <a href="#PT" target="_SELF">PT</a>&nbsp;&nbsp;
-                <a href="#RAIL" target="_SELF">RAIL</a>&nbsp;&nbsp;
-                <a href="#RCA" target="_SELF">RCA</a>&nbsp;&nbsp;
-                <a href="#RFA" target="_SELF">RFA</a>&nbsp;&nbsp;
-                <a href="#RSD" target="_SELF">RSD</a>&nbsp;&nbsp;
-                <a href="#SAW" target="_SELF">SAW</a>&nbsp;&nbsp;
-                <a href="#SRCH" target="_SELF">SRCH</a>&nbsp;&nbsp;
-                <a href="#SRM" target="_SELF">SRM</a>&nbsp;&nbsp;
-                <a href="#ST" target="_SELF">ST</a>&nbsp;&nbsp;
-                <a href="#SDS" target="_SELF">SDS</a>&nbsp;&nbsp;
-                <a href="#STL" target="_SELF">STL</a>&nbsp;&nbsp;
-                <a href="#SCAP" target="_SELF">SCAP</a>&nbsp;&nbsp;
-                <a href="#SLG" target="_SELF">SLG</a>&nbsp;&nbsp;
-                <a href="#TAG" target="_SELF">TAG</a>&nbsp;&nbsp;
-                <a href="#MTAS" target="_SELF">MTAS</a>&nbsp;&nbsp;
-                <a href="#BTAS" target="_SELF">BTAS</a>&nbsp;&nbsp;
-                <a href="#TOR" target="_SELF">TOR</a>&nbsp;&nbsp;
-                <a href="#TSM" target="_SELF">TSM</a>&nbsp;&nbsp;
-                <a href="#TUR" target="_SELF">TUR</a>&nbsp;&nbsp;
-                <a href="#UMU" target="_SELF">UMU</a>&nbsp;&nbsp;
-                <a href="#WAT" target="_SELF">WAT</a>&nbsp;&nbsp;
-			</td>
-		</tr>
-		<tr>
-			<td colspan="2" align="center">
-				<hr>
-			</td>
-		</tr>
-		<tr>
-			<td colspan="2" align="left" class='datalabel'>
-				<div class="scroll-pane">
+	<div class="content" id="cont">
+		<table class="options" cellspacing=5 cellpadding=5 border=0px>
+			<tr>
+				<td align="left" class='datalabel'>
 					<p id="PRB"><strong>Active Probe (PRB)</strong><br>
 						Units equipped with active probes have an extended view of the battlefield, enabling them to provide information about targets without moving into the target’s Short range bracket. The active probe’s effective range is 18”, automatically confers the Recon (RCN) special ability upon its user, and enables it to detect hidden units (see Hidden Units, p. 102), identify incoming sensor blips, or even discover the capabilities of unknown hostile units that fall within this range (see Concealing Unit Data, pp. 87-89). Hostile ECM systems, including Angel ECM (AECM) and standard ECM (ECM) will overwhelm the active probe’s abilities.
 					</p>
@@ -580,24 +458,22 @@ session_start();
 						A unit with this special ability possesses the Watchdog Composite Electronic Warfare System. For purposes of  Alpha Strike, it is treated as if it has both the ECM and Light Active Probe (LPRB) special abilities.<br>
 						(Active probes are covered in greater detail in the Advanced Options chapter, see pp. 62-113.)
 					</p>
-				</div>
-			</td>
-		</tr>
-	</table>
+				</td>
+			</tr>
+		</table>
+	</div>
 
 	<script>
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-//                console.log("scrolling");
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
-		var api = $('.scroll-pane').data('jsp');
-		api.reinitialise();
-            });
-        });
-    </script>
+		$(document).ready(function() {
+			var offsetHeight = document.getElementById('nav').offsetHeight + 20;
+			document.getElementById('cont').style.setProperty("top", offsetHeight + "px");
+
+		});
+		$(window).resize(function() {
+			var offsetHeight = document.getElementById('nav').offsetHeight + 20;
+			document.getElementById('cont').style.setProperty("top", offsetHeight + "px");
+		});
+	</script>
 </body>
 
 </html>

@@ -53,6 +53,7 @@ html, body {
 	background-image: url('../images/body-bg_2.png');
 	overflow: visible;
 	background-size: cover;
+	background-attachment: fixed;
 }
 .fullscreen {
   height: 100%;
