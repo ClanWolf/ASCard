@@ -173,7 +173,7 @@ session_start();
 				<a href="javascript:window.history.back();"><< Go back</a>
 			</td>
 			<td width="85%" align="center">
-				<a href="#PRB" id="PRBLink" target="_SELF">PRB</a>&nbsp;&nbsp;
+				<a href="#PRB" target="_SELF">PRB</a>&nbsp;&nbsp;
 				<a href="#AFC" target="_SELF">AFC</a>&nbsp;&nbsp;
 				<a href="#AT" target="_SELF">AT</a>&nbsp;&nbsp;
 				<a href="#AMP" target="_SELF">AMP</a>&nbsp;&nbsp;
@@ -181,6 +181,76 @@ session_start();
 				<a href="#AM" target="_SELF">AM</a>&nbsp;&nbsp;
 				<a href="#AMS" target="_SELF">AMS</a>&nbsp;&nbsp;
 				<a href="#ARM" target="_SELF">ARM</a>&nbsp;&nbsp;
+                <a href="#ARS" target="_SELF">ARS</a>&nbsp;&nbsp;
+                <a href="#ARTX" target="_SELF">ARTX</a>&nbsp;&nbsp;
+                <a href="#AC" target="_SELF">AC</a>&nbsp;&nbsp;
+                <a href="#BHJ" target="_SELF">BHJ</a>&nbsp;&nbsp;
+                <a href="#SHLD" target="_SELF">SHLD</a>&nbsp;&nbsp;
+                <a href="#BH" target="_SELF">BH</a>&nbsp;&nbsp;
+                <a href="#BT" target="_SELF">BT</a>&nbsp;&nbsp;
+                <a href="#BOMB" target="_SELF">BOMB</a>&nbsp;&nbsp;
+                <a href="#BRID" target="_SELF">BRID</a>&nbsp;&nbsp;
+                <a href="#CAP" target="_SELF">CAP</a>&nbsp;&nbsp;
+                <a href="#CK" target="_SELF">CK</a>&nbsp;&nbsp;
+                <a href="#CT" target="_SELF">CT</a>&nbsp;&nbsp;
+                <a href="#CASE" target="_SELF">CASE</a>&nbsp;&nbsp;
+                <a href="#CASEII" target="_SELF">CASEII</a>&nbsp;&nbsp;
+                <a href="#CRW" target="_SELF">CRW</a>&nbsp;&nbsp;
+                <a href="#CR" target="_SELF">CR</a>&nbsp;&nbsp;
+                <a href="#D" target="_SELF">D</a>&nbsp;&nbsp;
+                <a href="#DRO" target="_SELF">DRO</a>&nbsp;&nbsp;
+                <a href="#DCC" target="_SELF">DCC</a>&nbsp;&nbsp;
+                <a href="#DUN" target="_SELF">DUN</a>&nbsp;&nbsp;
+                <a href="#ECM" target="_SELF">ECM</a>&nbsp;&nbsp;
+                <a href="#ES" target="_SELF">ES</a>&nbsp;&nbsp;
+                <a href="#ENG" target="_SELF">ENG</a>&nbsp;&nbsp;
+                <a href="#ENE" target="_SELF">ENE</a>&nbsp;&nbsp;
+                <a href="#SEAL" target="_SELF">SEAL</a>&nbsp;&nbsp;
+                <a href="#FF" target="_SELF">FF</a>&nbsp;&nbsp;
+                <a href="#FLK" target="_SELF">FLK</a>&nbsp;&nbsp;
+                <a href="#FD" target="_SELF">FD</a>&nbsp;&nbsp;
+                <a href="#HT" target="_SELF">HT</a>&nbsp;&nbsp;
+                <a href="#HELI" target="_SELF">HELI</a>&nbsp;&nbsp;
+                <a href="#IF" target="_SELF">IF</a>&nbsp;&nbsp;
+                <a href="#INARC" target="_SELF">INARC</a>&nbsp;&nbsp;
+                <a href="#LG" target="_SELF">LG</a>&nbsp;&nbsp;
+                <a href="#LPRB" target="_SELF">LPRB</a>&nbsp;&nbsp;
+                <a href="#LECM" target="_SELF">LECM</a>&nbsp;&nbsp;
+                <a href="#LTAG" target="_SELF">LTAG</a>&nbsp;&nbsp;
+                <a href="#LRM" target="_SELF">LRM</a>&nbsp;&nbsp;
+                <a href="#MAG" target="_SELF">MAG</a>&nbsp;&nbsp;
+                <a href="#MT" target="_SELF">MT</a>&nbsp;&nbsp;
+                <a href="#MEL" target="_SELF">MEL</a>&nbsp;&nbsp;
+                <a href="#MDS" target="_SELF">MDS</a>&nbsp;&nbsp;
+                <a href="#MSW" target="_SELF">MSW</a>&nbsp;&nbsp;
+                <a href="#MSL" target="_SELF">MSL</a>&nbsp;&nbsp;
+                <a href="#MHQ" target="_SELF">MHQ</a>&nbsp;&nbsp;
+                <a href="#MTN" target="_SELF">MTN</a>&nbsp;&nbsp;
+                <a href="#CNARC" target="_SELF">CNARC</a>&nbsp;&nbsp;
+                <a href="#OMNI" target="_SELF">OMNI</a>&nbsp;&nbsp;
+                <a href="#OVL" target="_SELF">OVL</a>&nbsp;&nbsp;
+                <a href="#PNT" target="_SELF">PNT</a>&nbsp;&nbsp;
+                <a href="#PT" target="_SELF">PT</a>&nbsp;&nbsp;
+                <a href="#RAIL" target="_SELF">RAIL</a>&nbsp;&nbsp;
+                <a href="#RCA" target="_SELF">RCA</a>&nbsp;&nbsp;
+                <a href="#RFA" target="_SELF">RFA</a>&nbsp;&nbsp;
+                <a href="#RSD" target="_SELF">RSD</a>&nbsp;&nbsp;
+                <a href="#SAW" target="_SELF">SAW</a>&nbsp;&nbsp;
+                <a href="#SRCH" target="_SELF">SRCH</a>&nbsp;&nbsp;
+                <a href="#SRM" target="_SELF">SRM</a>&nbsp;&nbsp;
+                <a href="#ST" target="_SELF">ST</a>&nbsp;&nbsp;
+                <a href="#SDS" target="_SELF">SDS</a>&nbsp;&nbsp;
+                <a href="#STL" target="_SELF">STL</a>&nbsp;&nbsp;
+                <a href="#SCAP" target="_SELF">SCAP</a>&nbsp;&nbsp;
+                <a href="#SLG" target="_SELF">SLG</a>&nbsp;&nbsp;
+                <a href="#TAG" target="_SELF">TAG</a>&nbsp;&nbsp;
+                <a href="#MTAS" target="_SELF">MTAS</a>&nbsp;&nbsp;
+                <a href="#BTAS" target="_SELF">BTAS</a>&nbsp;&nbsp;
+                <a href="#TOR" target="_SELF">TOR</a>&nbsp;&nbsp;
+                <a href="#TSM" target="_SELF">TSM</a>&nbsp;&nbsp;
+                <a href="#TUR" target="_SELF">TUR</a>&nbsp;&nbsp;
+                <a href="#UMU" target="_SELF">UMU</a>&nbsp;&nbsp;
+                <a href="#WAT" target="_SELF">WAT</a>&nbsp;&nbsp;
 			</td>
 		</tr>
 		<tr>
@@ -237,416 +307,158 @@ session_start();
 					<p>
 						In addition to these standard features, the Bloodhound is also unaffected by standard and light ECM specials (ECM and LECM). Presently, only the Angel ECM (AECM) can overwhelm the sensing abilities of the Bloodhound.
 					</p>
-					<p><strong>Booby Trap (BT)</strong><br>
-						The booby trap is a last-ditch weapon. A unit with this<br>
-						ability has devoted considerable mass toward a devastating<br>
-						selfdestruct mechanism designed inflict damage on nearby<br>
-						units as well. The booby trap may be activated during the<br>
-						Combat Phase, in place of a weapon or physical attack. Once<br>
-						activated, the system automatically destroys the unit and<br>
-						delivers an area-effect attack to all units within an area<br>
-						covered by a 2” AoE template. Activated on the ground, all<br>
-						units in the area of effect suffer damage equal to the<br>
-						booby-trapped unit’s weight/size class times half its Move.<br>
-						For example, a booby-trapped assault ’Mech with a Move of 6”<br>
-						would deliver 12 points of damage (Size 4 x [Move 6” ÷ 2] =<br>
-						12) to all units in its area of effect.
+					<p id="BT"><strong>Booby Trap (BT)</strong><br>
+						The booby trap is a last-ditch weapon. A unit with this ability has devoted considerable mass toward a devastating selfdestruct mechanism designed inflict damage on nearby units as well. The booby trap may be activated during the Combat Phase, in place of a weapon or physical attack. Once activated, the system automatically destroys the unit and delivers an area-effect attack to all units within an area covered by a 2” AoE template. Activated on the ground, all units in the area of effect suffer damage equal to the booby-trapped unit’s weight/size class times half its Move. For example, a booby-trapped assault ’Mech with a Move of 6” would deliver 12 points of damage (Size 4 x [Move 6” ÷ 2] = 12) to all units in its area of effect.
 					</p>
 					<p>
-						<em>Airborne Booby Traps:</em> A booby trap that is activated<br>
-						in the air by units using on the Radar Map has no effect in<br>
-						Alpha Strike gameplay. Airborne units on the ground map that<br>
-						activate a booby trap inflict damage in a 2” AoE template<br>
-						centered on a point, as chosen by the player. All units on<br>
-						the ground within that area of effect suffer damage equal<br>
-						to the booby-trapped unit’s weight/size class. Thus, while<br>
-						a heavy aerospace fighter with a booby trap would inflict<br>
-						no damage on the Radar Map, if it were flying over the<br>
-						ground map and chose to self destruct, its damage to all<br>
-						units within the area covered by the 2” AoE template<br>
-						centered on a point on its flight path would be 3<br>
-						points.
+						<em>Airborne Booby Traps:</em> A booby trap that is activated in the air by units using on the Radar Map has no effect in Alpha Strike gameplay. Airborne units on the ground map that activate a booby trap inflict damage in a 2” AoE template centered on a point, as chosen by the player. All units on the ground within that area of effect suffer damage equal to the booby-trapped unit’s weight/size class. Thus, while a heavy aerospace fighter with a booby trap would inflict no damage on the Radar Map, if it were flying over the ground map and chose to self destruct, its damage to all units within the area covered by the 2” AoE template centered on a point on its flight path would be 3 points.
 					</p>
 					<p id="BOMB"><strong>Bomb (BOMB#)</strong><br>
-						Conventional and aerospace fighters, fixed-wing support<br>
-						vehicles, and some battle armor can carry bombs. The<br>
-						number of bombs these units can carry are equal to the<br>
-						number in the ability’s notation (so a unit with BOMB4<br>
-						carries up to 4 bombs). For most units, these bombs may<br>
-						be of any type, though battle armor units with this<br>
-						ability may only use cluster bombs (see p. 57). (As a<br>
-						special exception, Arrow IV missiles of all types may<br>
-						be carried as bombs, but a unit that uses Arrow IV bombs<br>
-						must count the first Arrow IV missile carried this way<br>
-						as 2 bombs. All remaining bombs are then counted<br>
-						normally.)
+						Conventional and aerospace fighters, fixed-wing support vehicles, and some battle armor can carry bombs. The number of bombs these units can carry are equal to the number in the ability’s notation (so a unit with BOMB4 carries up to 4 bombs). For most units, these bombs may be of any type, though battle armor units with this ability may only use cluster bombs (see p. 57). (As a special exception, Arrow IV missiles of all types may be carried as bombs, but a unit that uses Arrow IV bombs must count the first Arrow IV missile carried this way as 2 bombs. All remaining bombs are then counted normally.)
 					</p>
 					<p>
-						Each bomb a unit carries reduces its Thrust value by 1.<br>
-						(Battle armor units with bombs suffer no effects on their<br>
-						Move ratings.) A bomb-carrying unit’s card should list how<br>
-						many bombs the unit is carrying in the scenario, which must<br>
-						be equal to or less than the number this ability enables it<br>
-						to carry.
+						Each bomb a unit carries reduces its Thrust value by 1. (Battle armor units with bombs suffer no effects on their Move ratings.) A bomb-carrying unit’s card should list how many bombs the unit is carrying in the scenario, which must be equal to or less than the number this ability enables it to carry.
 					</p>
 					<p id="BRID"><strong>Bridgelayer (BRID)</strong><br>
-						A unit with this special ability may deploy a temporary bridge<br>
-						capable of spanning gaps up to 2 inches in width. Multiple<br>
-						bridges may be linked together to extend the reach of an existing<br>
-						bridge. Deploying or extending a bridge takes one turn,<br>
-						during which the bridgelayer unit cannot move. After the bridge is<br>
-						deployed, the bridgelaying unit may move normally. A bridge does<br>
-						not need to be deployed such that each side of the bridge rests<br>
-						on solid ground; it may be deployed as a makeshift dock extending<br>
-						into water. Bridges placed by bridgelayer units are temporary in<br>
-						nature. Once a bridgelayer unit places a bridge, it may not place<br>
-						another for the remainder of the scenario unless it removes the<br>
-						original. Removing one of these temporary bridges may only be done<br>
-						by non-infantry bridgelayer units, and requires the unit to remain<br>
-						in base-contact with the bridge being removed for the entire turn,<br>
-						with no other units passing over the bridge in that same turn.
+						A unit with this special ability may deploy a temporary bridge capable of spanning gaps up to 2 inches in width. Multiple bridges may be linked together to extend the reach of an existing bridge. Deploying or extending a bridge takes one turn, during which the bridgelayer unit cannot move. After the bridge is deployed, the bridgelaying unit may move normally. A bridge does not need to be deployed such that each side of the bridge rests on solid ground; it may be deployed as a makeshift dock extending into water. Bridges placed by bridgelayer units are temporary in nature. Once a bridgelayer unit places a bridge, it may not place another for the remainder of the scenario unless it removes the original. Removing one of these temporary bridges may only be done by non-infantry bridgelayer units, and requires the unit to remain in base-contact with the bridge being removed for the entire turn, with no other units passing over the bridge in that same turn.
 					</p>
 					<p>
-						All bridgelayer bridges automatically float on water, as they contain<br>
-						integral flotation devices by design. Bridges placed by a non-infantry<br>
-						unit with this ability have a CF of 18 and may support units of Size<br>
-						class 3. The bridge may be targeted as a building and will be<br>
-						destroyed once its CF is reduced to 0. A bridge reduced to 10 points<br>
-						or less may only support units up to Size 2. Bridges reduced to 5 or<br>
-						fewer points it may only support Size 1 units.
+						All bridgelayer bridges automatically float on water, as they contain integral flotation devices by design. Bridges placed by a non-infantry unit with this ability have a CF of 18 and may support units of Size class 3. The bridge may be targeted as a building and will be destroyed once its CF is reduced to 0. A bridge reduced to 10 points or less may only support units up to Size 2. Bridges reduced to 5 or fewer points it may only support Size 1 units.
 					</p>
 					<p>
-						If a unit that exceeds a bridge’s Size limit attempts to use it, the<br>
-						bridge immediately collapses once the unit moves onto it. All units<br>
-						on a bridge when it collapses will fall and suffer 1 point of damage<br>
-						per 3 inches (or fraction thereof) of difference between the starting<br>
-						level and destination level, rolling for critical hits as normal. If<br>
-						the unit falls into prohibited terrain as a result of a bridge<br>
-						collapse, it is destroyed.
+						If a unit that exceeds a bridge’s Size limit attempts to use it, the bridge immediately collapses once the unit moves onto it. All units on a bridge when it collapses will fall and suffer 1 point of damage per 3 inches (or fraction thereof) of difference between the starting level and destination level, rolling for critical hits as normal. If the unit falls into prohibited terrain as a result of a bridge collapse, it is destroyed.
 					</p>
 					<p><em>Infantry Bridgelayers:</em><br>
-						Infantry with this ability may erect a bridge using gear and parts<br>
-						carried with them for the task, but may only do so once per scenario.<br>
-						Infantry bridgelayers require 2 turns to complete their bridges, which<br>
-						possess a starting CF of 8, and can support units up to Size 2.
+						Infantry with this ability may erect a bridge using gear and parts carried with them for the task, but may only do so once per scenario. Infantry bridgelayers require 2 turns to complete their bridges, which possess a starting CF of 8, and can support units up to Size 2.
 					</p>
 					<p id="CAP"><strong>Capital Weapons (CAP)</strong><br>
-						Capital weapons are large weapons that are seen only on truly massive<br>
-						installations, mobile structures, and WarShips Because their use is<br>
-						almost exclusively limited to combat between units in orbital space<br>
-						and beyond, their use is beyond the general scope of the ground war<br>
-						game presented in this book. Nevertheless, in certain limited<br>
-						instances where they may be used, consult the Capital and<br>
-						Sub-Capital Weapons rules (see pp. 86-87).
+						Capital weapons are large weapons that are seen only on truly massive installations, mobile structures, and WarShips Because their use is almost exclusively limited to combat between units in orbital space and beyond, their use is beyond the general scope of the ground war game presented in this book. Nevertheless, in certain limited instances where they may be used, consult the Capital and Sub-Capital Weapons rules (see pp. 86-87).
 					</p>
 					<p id="CK"><strong>Cargo Transport, Kilotons (CK#)</strong><br>
-						This ability is identical to the Cargo Transport–Tons ability, except<br>
-						that the numerical designation for this special ability represents<br>
-						cargo capacity in 1,000-ton lots. This may be a decimal value, so a<br>
-						unit with CK3.57 would have a cargo capacity of 3,570 tons (1,000<br>
-						tons x 3.57 = 3,570 tons).
+						This ability is identical to the Cargo Transport–Tons ability, except that the numerical designation for this special ability represents cargo capacity in 1,000-ton lots. This may be a decimal value, so a unit with CK3.57 would have a cargo capacity of 3,570 tons (1,000 tons x 3.57 = 3,570 tons).
 					</p>
 					<p id="CT"><strong>Cargo Transport, Tons (CT#)</strong><br>
-						Units with this special ability have bays or other internal space<br>
-						set aside for carrying bulk cargo such as munitions, supplies and<br>
-						the like. This space is not generally suited for transporting<br>
-						battleready units like vehicles, ’Mechs, or infantry, and such<br>
-						units may not be dropped or deployed from cargo bays as a<br>
-						result—though they can be carried as cargo (see Units as Cargo,<br>
-						p. 64). This ability usually applies to DropShips, and is always<br>
-						used in conjunction with the Door (D#) special ability. The<br>
-						numerical value in this ability indicates how many tons of cargo<br>
-						the unit may transport.
+						Units with this special ability have bays or other internal space set aside for carrying bulk cargo such as munitions, supplies and the like. This space is not generally suited for transporting battleready units like vehicles, ’Mechs, or infantry, and such units may not be dropped or deployed from cargo bays as a result—though they can be carried as cargo (see Units as Cargo, p. 64). This ability usually applies to DropShips, and is always used in conjunction with the Door (D#) special ability. The numerical value in this ability indicates how many tons of cargo the unit may transport.
 					</p>
 					<p id="CASE"><strong>Cellular Ammunition Storage Equipment (CASE)</strong><br>
-						Units with this ability can minimize the catastrophic effects of<br>
-						an ammunition explosion and thus can survive Ammo Hit critical<br>
-						hits (see Ammo Hit, p. 18), but will suffer additional damage.
+						Units with this ability can minimize the catastrophic effects of an ammunition explosion and thus can survive Ammo Hit critical hits (see Ammo Hit, p. 18), but will suffer additional damage.
 					</p>
 					<p id="CASEII"><strong>Cellular Ammunition Storage Equipment II (CASEII)</strong><br>
-						Units with this ability have superior protection against ammunition<br>
-						explosions and can ignore Ammo Hit critical hits (see Ammo Hit, p.<br>
-						18).
+						Units with this ability have superior protection against ammunition explosions and can ignore Ammo Hit critical hits (see Ammo Hit, p. 18).
 					</p>
 					<p id="CRW"><strong>Crew (CRW#)</strong><br>
-						Non-DropShip units with this ability can temporarily inflict a Crew<br>
-						Stunned critical hit on themselves, while DropShip units can<br>
-						temporarily inflict a Crew Hit critical on themselves instead.<br>
-						Doing so enables these units to deploy a number of infantry<br>
-						units—equal to the number rating of this ability—as additional<br>
-						marines to aid in repelling enemy boarding parties. These foot<br>
-						infantry units have a Move of 2”f, 2 Armor points, 1 Structure point,<br>
-						and Damage Values of 1 at Short and Medium range (see Boarding<br>
-						Actions, p. 98).
+						Non-DropShip units with this ability can temporarily inflict a Crew Stunned critical hit on themselves, while DropShip units can temporarily inflict a Crew Hit critical on themselves instead. Doing so enables these units to deploy a number of infantry units—equal to the number rating of this ability—as additional marines to aid in repelling enemy boarding parties. These foot infantry units have a Move of 2”f, 2 Armor points, 1 Structure point, and Damage Values of 1 at Short and Medium range (see Boarding Actions, p. 98).
 					</p>
 					<p id="CR"><strong>Critical-Resistant (CR)</strong><br>
-						A unit with this special ability features special armor or other<br>
-						protective features that reduces the chance and severity of a<br>
-						critical hit (including damage to structure, damage effects from<br>
-						armor-penetrating weapons, and hull breaches while in vacuum or<br>
-						underwater). Any time an attack on this unit prompts a roll on<br>
-						its Critical Hits Table, apply a –2 modifier to the Critical Hit<br>
-						roll. Modified critical results of 1 or less are treated as No<br>
-						Critical Hit results.
+						A unit with this special ability features special armor or other protective features that reduces the chance and severity of a critical hit (including damage to structure, damage effects from armor-penetrating weapons, and hull breaches while in vacuum or underwater). Any time an attack on this unit prompts a roll on its Critical Hits Table, apply a –2 modifier to the Critical Hit roll. Modified critical results of 1 or less are treated as No Critical Hit results.
 					</p>
 					<p id="D"><strong>Door (D#)</strong><br>
-						This ability indicates the number of ingress/egress doors<br>
-						available on a DropShip, small craft, or support vehicles’<br>
-						transport bays. Each door a unit has is tied to a particular<br>
-						bay, and can accommodate a limited number of units per turn<br>
-						(see Transporting Non-Infantry Units, p. 63).
+						This ability indicates the number of ingress/egress doors available on a DropShip, small craft, or support vehicles’ transport bays. Each door a unit has is tied to a particular bay, and can accommodate a limited number of units per turn (see Transporting Non-Infantry Units, p. 63).
 					</p>
 					<p id="DRO"><strong>Drone (DRO)</strong><br>
-						Units with this special ability are unmanned units capable of<br>
-						movement and (occasionally) combat. Ground drones must stay<br>
-						within 900” of their control vehicle, unless the control<br>
-						vehicle is airborne or in orbit, in which case range is<br>
-						functionally limitless for a ground game. In space, drones<br>
-						need only remain within LOS to their controller, as the actual<br>
-						range limit is more than 100,000”.
+						Units with this special ability are unmanned units capable of movement and (occasionally) combat. Ground drones must stay within 900” of their control vehicle, unless the control vehicle is airborne or in orbit, in which case range is functionally limitless for a ground game. In space, drones need only remain within LOS to their controller, as the actual range limit is more than 100,000”.
 					</p>
 					<p>
-						Drones enveloped in a hostile ECM field shut down during the<br>
-						End Phase of the turn in which they were trapped by the field.<br>
-						They remain shut down until the ECM field is no longer present.<br>
-						Drones restart automatically in the End Phase of the turn in<br>
-						which the ECM field is removed. If the drone control unit is<br>
-						caught by a hostile ECM field, all of its drones shut down until<br>
-						the ECM field is no longer present. In addition, if the LOS from<br>
-						a drone control unit to its drone passes through an ECM bubble,<br>
-						the drone will shut down. This is frequently avoided by the use<br>
-						of Satellite uplinks for drone control. If the drone control unit<br>
-						is eliminated, the drones shut down for the rest of the game.
+						Drones enveloped in a hostile ECM field shut down during the End Phase of the turn in which they were trapped by the field. They remain shut down until the ECM field is no longer present. Drones restart automatically in the End Phase of the turn in which the ECM field is removed. If the drone control unit is caught by a hostile ECM field, all of its drones shut down until the ECM field is no longer present. In addition, if the LOS from a drone control unit to its drone passes through an ECM bubble, the drone will shut down. This is frequently avoided by the use of Satellite uplinks for drone control. If the drone control unit is eliminated, the drones shut down for the rest of the game.
 					</p>
 					<p>
-						When not affected by hostile ECM, and as long as their control<br>
-						units (see below) are operational, drone units may Move, attack,<br>
-						spot for indirect fire, and use special abilities as an<br>
-						equivalent unit of the same motive type and capabilities. The<br>
-						Skill rating of a drone is equal to that of its controller’s<br>
-						Skill, plus 1.
+						When not affected by hostile ECM, and as long as their control units (see below) are operational, drone units may Move, attack, spot for indirect fire, and use special abilities as an equivalent unit of the same motive type and capabilities. The Skill rating of a drone is equal to that of its controller’s Skill, plus 1.
 					</p>
-					<p><strong>Drone Carrier Control System (DCC#)</strong><br>
-						Units with the drone carrier control system (DCC) special<br>
-						ability may control units with the drone (DRO) special.<br>
-						The numerical value of this ability indicates the number<br>
-						of drones the unit can control. All drones controlled by<br>
-						this unit will shut down if the control unit is destroyed,<br>
-						disabled, or enveloped in hostile ECM fields.
+					<p id="DCC"><strong>Drone Carrier Control System (DCC#)</strong><br>
+						Units with the drone carrier control system (DCC) special ability may control units with the drone (DRO) special. The numerical value of this ability indicates the number of drones the unit can control. All drones controlled by this unit will shut down if the control unit is destroyed, disabled, or enveloped in hostile ECM fields.
 					</p>
 					<p id="DUN"><strong>Dune Buggy (DUN)</strong><br>
-						A unit with this special ability can move more easily over<br>
-						Sand (see Advanced Terrain, p. 64).
+						A unit with this special ability can move more easily over Sand (see Advanced Terrain, p. 64).
 					</p>
 					<p id="ECM"><strong>Electronic Countermeasures (ECM)</strong><br>
-						In Alpha Strike, an ECM suite’s area of effect covers a<br>
-						12-inch radius from the unit that has this special ability.<br>
-						Electronics (including active probes and C3 computers) used<br>
-						by units friendly to the ECM-equipped unit will not be<br>
-						affected by this item, nor will an ECM suite affect other<br>
-						scanning and targeting devices (such as basic or advanced<br>
-						fire control, or TAG).
+						In Alpha Strike, an ECM suite’s area of effect covers a 12-inch radius from the unit that has this special ability. Electronics (including active probes and C3 computers) used by units friendly to the ECM-equipped unit will not be affected by this item, nor will an ECM suite affect other scanning and targeting devices (such as basic or advanced fire control, or TAG).
 					</p>
 					<p id="ES"><strong>Ejection Seat (ES)</strong><br>
-						The pilot of a unit with an ejection seat may abandon his<br>
-						unit at any time using the unit’s on-board ejection system.<br>
-						The pilot with an ejection seat is also automatically ejected<br>
-						if his unit suffers an Ammo Hit critical and does not feature<br>
-						a CASE or CASEII special (see Ejection/Abandoning Units, p.<br>
-						91).
+						The pilot of a unit with an ejection seat may abandon his unit at any time using the unit’s on-board ejection system. The pilot with an ejection seat is also automatically ejected if his unit suffers an Ammo Hit critical and does not feature a CASE or CASEII special (see Ejection/Abandoning Units, p. 91).
 					</p>
 					<p id="ENG"><strong>Engineering (ENG)</strong><br>
-						A unit with this special ability can clear woods just like a<br>
-						unit with the Saw special ability (see Saw, p. 107). In<br>
-						addition, a unit with this ability can clear a path through<br>
-						rubble. It takes 1 turn for a group of 4 or more units with<br>
-						the Engineering special to clear a 2” long path of rubble,<br>
-						2 turns for 3 units, 3 turns for 2 units and 4 turns for<br>
-						1 unit.
+						A unit with this special ability can clear woods just like a unit with the Saw special ability (see Saw, p. 107). In addition, a unit with this ability can clear a path through rubble. It takes 1 turn for a group of 4 or more units with the Engineering special to clear a 2” long path of rubble, 2 turns for 3 units, 3 turns for 2 units and 4 turns for 1 unit.
 					</p>
 					<p>
-						An area cleared by engineering units does not actually change<br>
-						its terrain type; the clearing action simply creates a narrow,<br>
-						clear path through it that units may use to pass through the<br>
-						terrain as if it is clear. (For further explanation, see<br>
-						Terrain Conversion, p. 104.)
+						An area cleared by engineering units does not actually change its terrain type; the clearing action simply creates a narrow, clear path through it that units may use to pass through the terrain as if it is clear. (For further explanation, see Terrain Conversion, p. 104.)
 					</p>
 					<p id="ENE"><strong>Energy (ENE)</strong><br>
-						A unit with this ability has little to no ammo to explode, and<br>
-						ignores Ammo Hit critical hits (see Ammo Hit, p. 18).
+						A unit with this ability has little to no ammo to explode, and ignores Ammo Hit critical hits (see Ammo Hit, p. 18).
 					</p>
 					<p id="SEAL"><strong>Environmental Sealing (SEAL)</strong><br>
-						A unit with this special ability may operate in hostile<br>
-						environments (including underwater, vacuum, and so forth).<br>
-						Aerospace units, ProtoMechs, combat vehicles and support<br>
-						vehicles built as submarines are automatically treated as<br>
-						if they have this ability.
+						A unit with this special ability may operate in hostile environments (including underwater, vacuum, and so forth). Aerospace units, ProtoMechs, combat vehicles and support vehicles built as submarines are automatically treated as if they have this ability.
 					</p>
 					<p id="FF"><strong>Firefighter (FF)</strong><br>
-						Firefighter units may put out fires within 2” of their<br>
-						position. This action requires a 2D6 roll of 8+, made in<br>
-						place of a weapon attack. Reduce this target number by 1<br>
-						for each turn the unit spends fighting a fire, and for each<br>
-						additional unit engaged in fighting the same fire (to a maximum<br>
-						target number modifier of –3).
+						Firefighter units may put out fires within 2” of their position. This action requires a 2D6 roll of 8+, made in place of a weapon attack. Reduce this target number by 1 for each turn the unit spends fighting a fire, and for each additional unit engaged in fighting the same fire (to a maximum target number modifier of –3).
 					</p>
 					<p id="FLK"><strong>Flak (FLK#/#/#/#)</strong><br>
-						If a unit with this ability misses its to-hit roll by 2 points<br>
-						or less when attacking an airborne aerospace unit, VTOL or WiGE<br>
-						target, the unit will deal damage to its target equal to its<br>
-						FLK rating at the appropriate range bracket.
+						If a unit with this ability misses its to-hit roll by 2 points or less when attacking an airborne aerospace unit, VTOL or WiGE target, the unit will deal damage to its target equal to its FLK rating at the appropriate range bracket.
 					</p>
 					<p id="FD"><strong>Flight Deck (FD)</strong><br>
-						A unit with this special ability can be used as a landing area<br>
-						by an aerospace fighter, conventional fighter, small craft,<br>
-						fixedwing support vehicle, airship support vehicle, or VTOL unit.
+						A unit with this special ability can be used as a landing area by an aerospace fighter, conventional fighter, small craft, fixedwing support vehicle, airship support vehicle, or VTOL unit.
 					</p>
 					<p id="HT"><strong>Heat (HT#/#/#)</strong><br>
-						Units with this ability apply heat to the target’s Heat scale<br>
-						during the End Phase of the turn in which they deliver a<br>
-						successful weapon attack. If the target is a unit type that does<br>
-						not use a Heat Scale, the heat this ability would normally<br>
-						produce is added to the normal attack damage instead (see<br>
-						Determine and Apply Damage, p. 17).
+						Units with this ability apply heat to the target’s Heat scale during the End Phase of the turn in which they deliver a successful weapon attack. If the target is a unit type that does not use a Heat Scale, the heat this ability would normally produce is added to the normal attack damage instead (see Determine and Apply Damage, p. 17).
 					</p>
 					<p id="HELI"><strong>Helipad (HELI)</strong><br>
-						A unit with this special ability can be used as a landing area<br>
-						by a unit with VTOL movement.
+						A unit with this special ability can be used as a landing area by a unit with VTOL movement.
 					</p>
 					<p id="IF"><strong>Indirect Fire (IF#)</strong><br>
-						The Indirect Fire special ability allows a unit to attack a<br>
-						target without having a valid LOS to it via arcing missiles<br>
-						over the intervening obstacles, similar to how mortars and<br>
-						artillery work. This attack requires a friendly unit with a<br>
-						valid LOS to act as a spotter. The numerical rating for this<br>
-						ability indicates the amount of damage a successful indirect<br>
-						attack will deliver. Because they attack when other weapons<br>
-						cannot, damage from an indirect attack applies in place of<br>
-						the unit’s normal weapon attack (see Indirect Fire, p. 35).
+						The Indirect Fire special ability allows a unit to attack a target without having a valid LOS to it via arcing missiles over the intervening obstacles, similar to how mortars and artillery work. This attack requires a friendly unit with a valid LOS to act as a spotter. The numerical rating for this ability indicates the amount of damage a successful indirect attack will deliver. Because they attack when other weapons cannot, damage from an indirect attack applies in place of the unit’s normal weapon attack (see Indirect Fire, p. 35).
 					</p>
 					<p id="INARC"><strong>Improved Narc Missile Beacon (iNARC#)</strong><br>
-						A unit with the INARC# special ability may make an extra weapon<br>
-						attack using its iNarc missile beacon device. A unit hit by an<br>
-						iNarc beacon will not suffer damage from the iNarc itself, but<br>
-						will suffer 1 additional point of damage from any Indirect Fire<br>
-						(IF), LRM, or SRM attacks for the rest of the game—unless the<br>
-						unit is within a friendly ECM bubble. The iNarc beacon launcher<br>
-						is usable up to the Medium range bracket. Instead of their normal<br>
-						attack, iNarc launchers may fire specialty ammo (see Alternate<br>
-						Munitions, p. 76). The numerical value of this ability indicates<br>
-						the number of extra iNarc beacon attacks the unit can deliver in<br>
-						a single turn.
+						A unit with the INARC# special ability may make an extra weapon attack using its iNarc missile beacon device. A unit hit by an iNarc beacon will not suffer damage from the iNarc itself, but will suffer 1 additional point of damage from any Indirect Fire (IF), LRM, or SRM attacks for the rest of the game—unless the unit is within a friendly ECM bubble. The iNarc beacon launcher is usable up to the Medium range bracket. Instead of their normal attack, iNarc launchers may fire specialty ammo (see Alternate Munitions, p. 76). The numerical value of this ability indicates the number of extra iNarc beacon attacks the unit can deliver in a single turn.
 					</p>
 					<p id="LG"><strong>Large (LG)</strong><br>
 						Large units cover a 2” AoE template area. Large units block LOS.
 					</p>
 					<p id="LPRB"><strong>Light Active Probe (LPRB)</strong><br>
-						Light active probes function in the same way as standard active<br>
-						probes, but only have an effective range of 12”. As with standard<br>
-						probes, light probes automatically confer the Recon (RCN) special<br>
-						ability upon their users, and enable them to detect hidden units<br>
-						(see Hidden Units, p. 102), identify incoming sensor blips, or<br>
-						discover the capabilities of unknown hostile units that fall within<br>
-						this range (see Concealing Unit Data, pp. 87-89).
+						Light active probes function in the same way as standard active probes, but only have an effective range of 12”. As with standard probes, light probes automatically confer the Recon (RCN) special ability upon their users, and enable them to detect hidden units (see Hidden Units, p. 102), identify incoming sensor blips, or discover the capabilities of unknown hostile units that fall within this range (see Concealing Unit Data, pp. 87-89).
 					</p>
 					<p>
-						Hostile ECM systems, including Angel ECM (AECM) and standard ECM<br>
-						(ECM) will overwhelm the light active probe’s abilities.
+						Hostile ECM systems, including Angel ECM (AECM) and standard ECM (ECM) will overwhelm the light active probe’s abilities.
 					</p>
 					<p id="LECM"><strong>Light ECM (LECM)</strong><br>
-						Light ECM functions identically to ECM, but with a reduced radius.<br>
-						Light ECM only creates an ECM bubble with a 2” radius.
+						Light ECM functions identically to ECM, but with a reduced radius. Light ECM only creates an ECM bubble with a 2” radius.
 					</p>
 					<p id="LTAG"><strong>Light Target Acquisition Gear (LTAG)</strong><br>
-						A unit with Light TAG can “paint” targets for artillery homing<br>
-						rounds (see Artillery, p. 73) in the same way as a unit with<br>
-						standard target acquisition gear (TAG). Light TAG may only be<br>
-						used in the Short range bracket.
+						A unit with Light TAG can “paint” targets for artillery homing rounds (see Artillery, p. 73) in the same way as a unit with standard target acquisition gear (TAG). Light TAG may only be used in the Short range bracket.
 					</p>
 					<p id="LRM"><strong>Long-Range Missiles (LRM#/#/#/#)</strong><br>
-						This unit mounts a significant number of long-range missile<br>
-						launchers and may fire them together as an alternative weapon<br>
-						attack instead of a standard weapon attack. This ability enables<br>
-						the unit to use alternate LRM ammo for modified effects (see<br>
-						Alternate Munitions, p. 76).
+						This unit mounts a significant number of long-range missile launchers and may fire them together as an alternative weapon attack instead of a standard weapon attack. This ability enables the unit to use alternate LRM ammo for modified effects (see Alternate Munitions, p. 76).
 					</p>
 					<p id="MAG"><strong>Maglev (MAG)</strong><br>
-						A variation of the Rail (RAIL) special ability (see Rail, p. 108),<br>
-						units with magnetic levitation (maglev) systems may only travel<br>
-						along rail terrain designated for maglev units.
+						A variation of the Rail (RAIL) special ability (see Rail, p. 108), units with magnetic levitation (maglev) systems may only travel along rail terrain designated for maglev units.
 					</p>
 					<p id="MT"><strong>’Mech Transport (MT#)</strong><br>
-						A unit with this special ability can transport, deploy, and drop<br>
-						the indicated number of ’Mechs. This ability usually applies to<br>
-						DropShips, and is always used in conjunction with the Door special<br>
-						ability (see Transporting Non-Infantry Units, and Dropping Troops,<br>
-						pp. 63 and 90, respectively).
+						A unit with this special ability can transport, deploy, and drop the indicated number of ’Mechs. This ability usually applies to DropShips, and is always used in conjunction with the Door special ability (see Transporting Non-Infantry Units, and Dropping Troops, pp. 63 and 90, respectively).
 					</p>
 					<p id="MEL"><strong>Melee (MEL)</strong><br>
-						This special ability indicates that the ’Mech is equipped with a<br>
-						physical attack weapon, and adds 1 additional point of physical<br>
-						attack damage on a successful Melee-type physical attack (see<br>
-						Resolving Physical Attacks, p. 19).
+						This special ability indicates that the ’Mech is equipped with a physical attack weapon, and adds 1 additional point of physical attack damage on a successful Melee-type physical attack (see Resolving Physical Attacks, p. 19).
 					</p>
 					<p id="MDS"><strong>Mine Dispenser (MDS#)</strong><br>
-						This ability allows a unit to create minefields in areas through<br>
-						which it travels (see Minefields, p. 102). Record this ability<br>
-						as MDS# where # is the number of mine dispensers mounted on the<br>
-						unit. Each mine dispenser deploys a density 1 minefield. Multiple<br>
-						deployments in the same location increase the density of the<br>
-						minefield by 1 each, to a maximum density of 5.
+						This ability allows a unit to create minefields in areas through which it travels (see Minefields, p. 102). Record this ability as MDS# where # is the number of mine dispensers mounted on the unit. Each mine dispenser deploys a density 1 minefield. Multiple deployments in the same location increase the density of the minefield by 1 each, to a maximum density of 5.
 					</p>
 					<p id="MSW"><strong>Minesweeper (MSW)</strong><br>
-						A unit with a minesweeper automatically clears any minefields it<br>
-						is in base contact with at the end of the Movement Phase (see<br>
-						Minefields, p. 102). During the minesweeper’s Combat Phase, it<br>
-						may not execute any attacks, but must roll 2D6 to clear the<br>
-						minefield, applying a +4 modifier to the result if the<br>
-						minesweeping unit is not infantry. If the result is 10 or better,<br>
-						the minefield is cleared and removed from the map. If the result<br>
-						is 5 or less, the minefield detonates for its full effects. Any<br>
-						other roll result means the minefield is not cleared.
+						A unit with a minesweeper automatically clears any minefields it is in base contact with at the end of the Movement Phase (see Minefields, p. 102). During the minesweeper’s Combat Phase, it may not execute any attacks, but must roll 2D6 to clear the minefield, applying a +4 modifier to the result if the minesweeping unit is not infantry. If the result is 10 or better, the minefield is cleared and removed from the map. If the result is 5 or less, the minefield detonates for its full effects. Any other roll result means the minefield is not cleared.
 					</p>
 					<p id="MSL"><strong>Missile (MSL #/#/#/#)</strong><br>
-						Units with this special ability are aerospace units that have<br>
-						been outfitted with capital and/or sub-capital scale missile<br>
-						launchers. Though these weapons are treated as artillery when<br>
-						attacking the ground, they cannot use alternative munitions<br>
-						under these rules.
+						Units with this special ability are aerospace units that have been outfitted with capital and/or sub-capital scale missile launchers. Though these weapons are treated as artillery when attacking the ground, they cannot use alternative munitions under these rules.
 					</p>
 					<p>
-						Consult the Capital and Sub-Capital Weapons rules to resolve<br>
-						combat using these weapons (see pp. 86-87).
+						Consult the Capital and Sub-Capital Weapons rules to resolve combat using these weapons (see pp. 86-87).
 					</p>
 					<p id="MHQ"><strong>Mobile Headquarters (MHQ#)</strong><br>
-						The standard MHQ is equipped with a wide array of special equipment<br>
-						to coordinate engagements over a large area. This ability provides<br>
-						different bonuses depending on the numerical rating (see Battlefield<br>
-						Intelligence, p. 82).
+						The standard MHQ is equipped with a wide array of special equipment to coordinate engagements over a large area. This ability provides different bonuses depending on the numerical rating (see Battlefield Intelligence, p. 82).
 					</p>
 					<p id="MTN"><strong>Mountain Troops (MTN)</strong><br>
-						Infantry units with this special ability may climb 2 inches per<br>
-						inch moved forward in a turn.
+						Infantry units with this special ability may climb 2 inches per inch moved forward in a turn.
 					</p>
 					<p id="CNARC"><strong>Narc Missile Beacon (CNARC#)</strong><br>
-						A unit with the CNARC# or SNARC# special ability may make an extra<br>
-						weapon attack using its Narc missile beacon device. A unit hit by<br>
-						a Narc beacon will not suffer damage from the Narc itself, but<br>
-						will suffer 1 additional point of damage from any Indirect Fire<br>
-						(IF), LRM, or SRM attacks for the rest of the game—unless the unit<br>
-						is within a friendly ECM bubble. Standard Narc beacon launchers<br>
-						(indicated by SNARC) have a maximum range of Medium, while Compact<br>
-						Narc beacon launchers (CNARC) have a maximum range of Short.
+						A unit with the CNARC# or SNARC# special ability may make an extra weapon attack using its Narc missile beacon device. A unit hit by a Narc beacon will not suffer damage from the Narc itself, but will suffer 1 additional point of damage from any Indirect Fire (IF), LRM, or SRM attacks for the rest of the game—unless the unit is within a friendly ECM bubble. Standard Narc beacon launchers (indicated by SNARC) have a maximum range of Medium, while Compact Narc beacon launchers (CNARC) have a maximum range of Short.
 					</p>
 					<p id="SNARC"><strong>Narc Missile Beacon (SNARC#)</strong><br>
-						A unit with the CNARC# or SNARC# special ability may make an extra<br>
-						weapon attack using its Narc missile beacon device. A unit hit by<br>
-						a Narc beacon will not suffer damage from the Narc itself, but will<br>
-						suffer 1 additional point of damage from any Indirect Fire (IF),<br>
-						LRM, or SRM attacks for the rest of the game—unless the unit is<br>
-						within a friendly ECM bubble. Standard Narc beacon launchers<br>
-						(indicated by SNARC) have a maximum range of Medium, while Compact<br>
-						Narc beacon launchers (CNARC) have a maximum range of Short.
+						A unit with the CNARC# or SNARC# special ability may make an extra weapon attack using its Narc missile beacon device. A unit hit by a Narc beacon will not suffer damage from the Narc itself, but will suffer 1 additional point of damage from any Indirect Fire (IF), LRM, or SRM attacks for the rest of the game—unless the unit is within a friendly ECM bubble. Standard Narc beacon launchers (indicated by SNARC) have a maximum range of Medium, while Compact Narc beacon launchers (CNARC) have a maximum range of Short.
 					</p>
 					<p>
 						Instead of their normal attack, Narc launchers may fire specialty ammo (see Alternate Munitions, p. 76). The numerical value of this ability indicates the number of extra Narc beacon attacks the unit can deliver in a single turn.
@@ -666,7 +478,7 @@ session_start();
 					<p>
 						For all other incoming missiles, 1 point of defensive damage will apply a +1 to-hit modifier to the missile’s attack roll, and reduce the incoming attack’s damage value by half (rounded down, to a minimum of 0 points). If 2 or more points of defensive damage are assigned to an incoming missile attack, the attack is eliminated entirely.
 					</p>
-					<p><strong>ProtoMech Transport (PT#)</strong><br>
+					<p id="PT"><strong>ProtoMech Transport (PT#)</strong><br>
 						A unit with this special ability can transport, deploy, and drop the indicated number of ProtoMechs. This ability usually applies to DropShips, and is always used in conjunction with the Door special ability (see Transporting Non-Infantry Units and Dropping Troops, pp. 63, 90, respectively).
 					</p>
 					<p id="RAIL"><strong>Rail (RAIL)</strong><br>
