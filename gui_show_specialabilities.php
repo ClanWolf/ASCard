@@ -201,93 +201,41 @@ session_start();
 						A unit with this special ability can transport, launch and recover the indicated number of aerospace or conventional fighters (see Aerospace Unit Transports, p. 72).
 					</p>
 					<p id="AMP"><strong>Amphibious (AMP)</strong><br>
-						This ability makes a non-naval unit capable of water  movement. Amphibious<br>
-						units pay a total of 4” per inch of water traversed and move as a surface<br>
-						naval unit in water, except that they freely move in and out of water areas.
+						This ability makes a non-naval unit capable of water  movement. Amphibious units pay a total of 4” per inch of water traversed and move as a surface naval unit in water, except that they freely move in and out of water areas.
 					</p>
 					<p id="AECM"><strong>Angel ECM (AECM)</strong><br>
-						An Angel ECM suite has all the advantages of a standard ECM suite. Angel<br>
-						ECM is treated as two standard ECM suites.
+						An Angel ECM suite has all the advantages of a standard ECM suite. Angel ECM is treated as two standard ECM suites.
 					</p>
 					<p id="AM"><strong>Anti-’Mech (AM)</strong><br>
-						Infantry units with the Anti-’Mech (AM) special ability can make a<br>
-						special attack against any ground units, landed VTOLs and WiGEs, or<br>
-						grounded aerospace units with which they are in base-to-base contact.<br>
-						Anti-’Mech Infantry attacks are treated as a physical attack<br>
+						Infantry units with the Anti-’Mech (AM) special ability can make a special attack against any ground units, landed VTOLs and WiGEs, or grounded aerospace units with which they are in base-to-base contact. Anti-’Mech Infantry attacks are treated as a physical attack<br>
 						(see p. 42).
 					</p>
 					<p id="AMS"><strong>Anti-Missile System (AMS)</strong><br>
-						A unit with an AMS reduces the damage by 1 point (to a minimum of 1)<br>
-						from any of the following attacks: standard weapon attack from a unit<br>
-						with the IF, SRM, or LRM special abilities, Indirect Fire attack<br>
-						using the IF special ability, or special weapon attack made using<br>
-						the SRM or LRM special abilities. AMS only works on attacks coming<br>
-						in the front arc, unless mounted in a turret (TUR).
+						A unit with an AMS reduces the damage by 1 point (to a minimum of 1) from any of the following attacks: standard weapon attack from a unit with the IF, SRM, or LRM special abilities, Indirect Fire attack using the IF special ability, or special weapon attack made using the SRM or LRM special abilities. AMS only works on attacks coming in the front arc, unless mounted in a turret (TUR).
 					</p>
 					<p id="ARM"><strong>Armored Components (ARM)</strong><br>
-						A unit with this ability ignores the first critical hit chance rolled<br>
-						against it during a single Alpha Strike scenario. The first time<br>
-						circumstances arise that would normally generate an opportunity<br>
-						for a critical hit (such as structure damage), the unit’s<br>
-						controlling player must strike off this ability as “spent” for the<br>
-						remainder of the scenario, and the attacker loses his first<br>
-						opportunity to roll for a critical hit.
+						A unit with this ability ignores the first critical hit chance rolled against it during a single Alpha Strike scenario. The first time circumstances arise that would normally generate an opportunity for a critical hit (such as structure damage), the unit’s controlling player must strike off this ability as “spent” for the remainder of the scenario, and the attacker loses his first opportunity to roll for a critical hit.
 					</p>
 					<p id="ARS"><strong>Armored Motive Systems (ARS)</strong><br>
-						A unit with this special ability applies a –1 modifier on the<br>
-						Determining Motive Systems Damage roll (see Determining Motive<br>
-						Systems Damage Table, p. 42).
+						A unit with this special ability applies a –1 modifier on the Determining Motive Systems Damage roll (see Determining Motive Systems Damage Table, p. 42).
 					</p>
 					<p id="ARTX"><strong>Artillery (ARTX-#)</strong><br>
-						This special ability lets a unit make an artillery attack,<br>
-						with an abbreviation for each type of artillery replacing the<br>
-						“X” in the ability’s acronym. Each different type of artillery<br>
-						a unit carries is listed separately, with the number indicating<br>
-						the number of that type carried. For example, a unit with two<br>
-						Long Tom artillery weapons would record this as ARTLT-2. Refer<br>
-						to the Artillery Abbreviations Table, below (see the Bomb<br>
-						(BOMB#) special ability, p. 105, for Arrow IV missiles carried<br>
-						as bombs).
+						This special ability lets a unit make an artillery attack, with an abbreviation for each type of artillery replacing the “X” in the ability’s acronym. Each different type of artillery a unit carries is listed separately, with the number indicating the number of that type carried. For example, a unit with two Long Tom artillery weapons would record this as ARTLT-2. Refer to the Artillery Abbreviations Table, below (see the Bomb (BOMB#) special ability, p. 105, for Arrow IV missiles carried as bombs).
 					</p>
 					<p id="AC"><strong>Autocannon (AC#/#/#/#)</strong><br>
-						This unit mounts a significant number of autocannons and may<br>
-						fire them together as an alternative weapon attack instead of<br>
-						a standard weapon attack. This ability enables the unit to<br>
-						use alternate autocannon ammo for modified effects.
+						This unit mounts a significant number of autocannons and may fire them together as an alternative weapon attack instead of a standard weapon attack. This ability enables the unit to use alternate autocannon ammo for modified effects.
 					</p>
 					<p id="BHJ"><strong>BattleMech HarJel (BHJ)</strong><br>
-						A ’Mech protected by HarJel ignores the additional critical<br>
-						hit chance incurred by suffering damage while operating<br>
-						underwater or in a vacuum. Critical hit chances from normal<br>
-						structure damage (and other sources) still apply.
+						A ’Mech protected by HarJel ignores the additional critical hit chance incurred by suffering damage while operating underwater or in a vacuum. Critical hit chances from normal structure damage (and other sources) still apply.
 					</p>
 					<p id="SHLD"><strong>BattleMech Shield (SHLD)</strong><br>
-						Shield-bearing ’Mechs gain some protection against weapon<br>
-						and physical attacks at the expense of their own attack<br>
-						accuracy. To reflect this, shield-equipped units reduce<br>
-						the damage from most weapons and physical attacks by 1<br>
-						point (to a minimum of 0). Indirect attacks, heat-causing<br>
-						attacks, and area-effect attacks (such as artillery and<br>
-						bombs) are not dampened by the shield and thus deliver<br>
-						full damage. All weapon attacks made by a ’Mech with<br>
-						this ability incur an additional +1 to-hit modifier.
+						Shield-bearing ’Mechs gain some protection against weapon and physical attacks at the expense of their own attack accuracy. To reflect this, shield-equipped units reduce the damage from most weapons and physical attacks by 1 point (to a minimum of 0). Indirect attacks, heat-causing attacks, and area-effect attacks (such as artillery and bombs) are not dampened by the shield and thus deliver full damage. All weapon attacks made by a ’Mech with this ability incur an additional +1 to-hit modifier.
 					</p>
 					<p id="BH"><strong>Bloodhound Active Probe (BH)</strong><br>
-						An enhanced version of the standard active probe (PRB),<br>
-						the Bloodhound probe offers all the same features, but<br>
-						with an effective range of 26”. Bloodhound probes<br>
-						automatically confer the Recon (RCN) special ability<br>
-						upon their users, and enable them to detect hidden<br>
-						units (see Hidden Units, p. 102), identify incoming<br>
-						sensor blips, or discover the capabilities of unknown<br>
-						hostile units that fall within this range (see<br>
-						Concealing Unit Data, pp. 87-89).
+						An enhanced version of the standard active probe (PRB), the Bloodhound probe offers all the same features, but with an effective range of 26”. Bloodhound probes automatically confer the Recon (RCN) special ability upon their users, and enable them to detect hidden units (see Hidden Units, p. 102), identify incoming sensor blips, or discover the capabilities of unknown hostile units that fall within this range (see Concealing Unit Data, pp. 87-89).
 					</p>
 					<p>
-						In addition to these standard features, the Bloodhound is<br>
-						also unaffected by standard and light ECM specials (ECM and<br>
-						LECM). Presently, only the Angel ECM (AECM) can overwhelm the<br>
-						sensing abilities of the Bloodhound.
+						In addition to these standard features, the Bloodhound is also unaffected by standard and light ECM specials (ECM and LECM). Presently, only the Angel ECM (AECM) can overwhelm the sensing abilities of the Bloodhound.
 					</p>
 					<p><strong>Booby Trap (BT)</strong><br>
 						The booby trap is a last-ditch weapon. A unit with this<br>
@@ -701,238 +649,100 @@ session_start();
 						Narc beacon launchers (CNARC) have a maximum range of Short.
 					</p>
 					<p>
-						Instead of their normal attack, Narc launchers may fire specialty ammo<br>
-						(see Alternate Munitions, p. 76). The numerical value of this ability<br>
-						indicates the number of extra Narc beacon attacks the unit can deliver<br>
-						in a single turn.
+						Instead of their normal attack, Narc launchers may fire specialty ammo (see Alternate Munitions, p. 76). The numerical value of this ability indicates the number of extra Narc beacon attacks the unit can deliver in a single turn.
 					</p>
 					<p id="OMNI"><strong>Omni (OMNI)</strong><br>
-						In standard Alpha Strike play, ground-based Omni units (’Mechs or<br>
-						vehicles) may transport a single battle armor unit using the mechanized<br>
-						battle armor rules (see Transporting Infantry, p. 32).
+						In standard Alpha Strike play, ground-based Omni units (’Mechs or vehicles) may transport a single battle armor unit using the mechanized battle armor rules (see Transporting Infantry, p. 32).
 					</p>
 					<p id="OVL"><strong>Overheat Long (OVL)</strong><br>
-						A unit with this special ability may overheat up to its OV value and<br>
-						apply that value to its Long range damage value as well as the unit’s<br>
-						Short and Medium range damage values. (A unit without this special<br>
-						ability may only apply the damage benefits of its Overheat capabilities<br>
-						to damage delivered in the Short and Medium range brackets.)
+						A unit with this special ability may overheat up to its OV value and apply that value to its Long range damage value as well as the unit’s Short and Medium range damage values. (A unit without this special ability may only apply the damage benefits of its Overheat capabilities to damage delivered in the Short and Medium range brackets.)
 					</p>
 					<p id="PAR"><strong>Paratroops (PAR)</strong><br>
-						These units may dismount from airborne transport units (including<br>
-						aerospace units) just like jump infantry.
+						These units may dismount from airborne transport units (including aerospace units) just like jump infantry.
 					</p>
 					<p id="PNT"><strong>Point Defense (PNT#)</strong><br>
-						Unless it is shut down, a unit protected by a point defense system<br>
-						automatically engages any missiles that attack it. Unlike an<br>
-						anti-missile system (AMS), the point defense system may engage<br>
-						Arrow IV, capital or sub-capital missiles as well as missile<br>
-						attacks delivered using the IF, SRM, and LRM specials. Point<br>
-						defense has a 360-degree arc of fire, and is always successful,<br>
-						so no to-hit roll is required. Point defense generates a number<br>
-						of “defensive damage points” equal to the ability’s numerical<br>
-						rating. Thus, a unit with a PNT6 special would generate 6 points<br>
-						of “defensive damage” per turn. This damage is distributed among<br>
-						incoming missiles at the controlling player’s discretion. If an<br>
-						incoming missile delivers no damage to begin with, any amount of<br>
-						defensive damage from a point defense ability will destroy the<br>
-						incoming missile before it can attack.
+						Unless it is shut down, a unit protected by a point defense system automatically engages any missiles that attack it. Unlike an anti-missile system (AMS), the point defense system may engage Arrow IV, capital or sub-capital missiles as well as missile attacks delivered using the IF, SRM, and LRM specials. Point defense has a 360-degree arc of fire, and is always successful, so no to-hit roll is required. Point defense generates a number of “defensive damage points” equal to the ability’s numerical rating. Thus, a unit with a PNT6 special would generate 6 points of “defensive damage” per turn. This damage is distributed among incoming missiles at the controlling player’s discretion. If an incoming missile delivers no damage to begin with, any amount of defensive damage from a point defense ability will destroy the incoming missile before it can attack.
 					</p>
 					<p>
-						For all other incoming missiles, 1 point of defensive damage will<br>
-						apply a +1 to-hit modifier to the missile’s attack roll, and reduce<br>
-						the incoming attack’s damage value by half (rounded down, to a minimum<br>
-						of 0 points). If 2 or more points of defensive damage are assigned to<br>
-						an incoming missile attack, the attack is eliminated entirely.
+						For all other incoming missiles, 1 point of defensive damage will apply a +1 to-hit modifier to the missile’s attack roll, and reduce the incoming attack’s damage value by half (rounded down, to a minimum of 0 points). If 2 or more points of defensive damage are assigned to an incoming missile attack, the attack is eliminated entirely.
 					</p>
 					<p><strong>ProtoMech Transport (PT#)</strong><br>
-						A unit with this special ability can transport, deploy, and drop the<br>
-						indicated number of ProtoMechs. This ability usually applies to<br>
-						DropShips, and is always used in conjunction with the Door special<br>
-						ability (see Transporting Non-Infantry Units and Dropping Troops,<br>
-						pp. 63, 90, respectively).
+						A unit with this special ability can transport, deploy, and drop the indicated number of ProtoMechs. This ability usually applies to DropShips, and is always used in conjunction with the Door special ability (see Transporting Non-Infantry Units and Dropping Troops, pp. 63, 90, respectively).
 					</p>
 					<p id="RAIL"><strong>Rail (RAIL)</strong><br>
 						A unit with the Rail special can only move along rails.
 					</p>
 					<p id="RCA"><strong>Reactive Armor (RCA)</strong><br>
-						A unit with reactive armor is resistant to damage from explosive<br>
-						ordnance, particularly those delivered by artillery and missile<br>
-						weaponry. If a unit with this special is struck by damage from<br>
-						any area-effect attack, or by any attacking using the ART, BOMB,<br>
-						MSL, or FLK specials, reduce the damage from these attacks by<br>
-						half before applying it (rounding down). For any attack against<br>
-						a unit with reactive armor by a unit with the IF, LRM, or SRM<br>
-						specials, reduce the amount of attack’s damage by half of the<br>
-						LRM or SRM special’s value at the appropriate range (rounding<br>
-						up). If reactive armor reduces damage below 1 point, treat the<br>
-						attack as delivering 1 point.
+						A unit with reactive armor is resistant to damage from explosive ordnance, particularly those delivered by artillery and missile weaponry. If a unit with this special is struck by damage from any area-effect attack, or by any attacking using the ART, BOMB, MSL, or FLK specials, reduce the damage from these attacks by half before applying it (rounding down). For any attack against a unit with reactive armor by a unit with the IF, LRM, or SRM specials, reduce the amount of attack’s damage by half of the LRM or SRM special’s value at the appropriate range (rounding up). If reactive armor reduces damage below 1 point, treat the attack as delivering 1 point.
 					</p>
 					<p>
-						Note that this damage reducing effect even covers general attacks<br>
-						by units that possess such abilities, so if a unit that can deliver<br>
-						4 points of damage at Short range attacks a target with reactive<br>
-						armor, and the attacker has the SRM 2/2 special, the damage<br>
-						delivered is 3 points (4 points total – (2 ÷ 2) = 3).
+						Note that this damage reducing effect even covers general attacks by units that possess such abilities, so if a unit that can deliver 4 points of damage at Short range attacks a target with reactive armor, and the attacker has the SRM 2/2 special, the damage delivered is 3 points (4 points total – (2 ÷ 2) = 3).
 					</p>
 					<p><strong>Recon (RCN)</strong><br>
-						The recon ability works in conjunction with the Mobile Headquarters<br>
-						(MHQ#) ability. Every unit with the recon special confers a +1<br>
-						initiative bonus to itself and 3 other units.
+						The recon ability works in conjunction with the Mobile Headquarters (MHQ#) ability. Every unit with the recon special confers a +1 initiative bonus to itself and 3 other units.
 					</p>
 					<p id="RFA"><strong>Reflective Armor (RFA)</strong><br>
-						A unit with reflective armor is resistant to damage from energy<br>
-						weapons, including flamers, but is much more susceptible to physical<br>
-						attacks, area-effect weapons, and armor-penetrating hits. If a unit<br>
-						with this special is struck by an air-to-ground strafing attack, or<br>
-						by a weapon attack by a unit with the ENE special, or by an attack<br>
-						using the HT special, reduce this damage (or heat) by half before<br>
-						applying it. (Round this damage down, to a minimum of 1 point of<br>
-						damage or heat applied from that attack type.) If, on the other hand,<br>
-						a unit with this ability suffers damage from any physical attack, an<br>
-						area-effect attack, or by any attack using the ART, BOMB, FLK, or MSL<br>
-						specials, double the damage applied by that attack.
+						A unit with reflective armor is resistant to damage from energy weapons, including flamers, but is much more susceptible to physical attacks, area-effect weapons, and armor-penetrating hits. If a unit with this special is struck by an air-to-ground strafing attack, or by a weapon attack by a unit with the ENE special, or by an attack using the HT special, reduce this damage (or heat) by half before applying it. (Round this damage down, to a minimum of 1 point of damage or heat applied from that attack type.) If, on the other hand, a unit with this ability suffers damage from any physical attack, an area-effect attack, or by any attack using the ART, BOMB, FLK, or MSL specials, double the damage applied by that attack.
 					</p>
 					<p>
-						For all other attacks against a unit with reflective armor, reduce the<br>
-						total damage applied by 1 point (to a minimum of 1 point). Finally, all<br>
-						critical hits suffered by a unit equipped with reflective armor apply a +2<br>
-						modifier on the unit’s Critical Hits Table. Modified critical results of 13<br>
-						or higher are treated as Engine Hits. Note that this damage reducing (and<br>
-						increasing) effect even covers general attacks by such units that possess<br>
-						such abilities, so if a unit that can deliver 4 points of damage at Short<br>
-						range attacks a target ’Mech with reflective armor, and the attacker also<br>
-						has the HT2 special, the attack will deliver 3 points of damage (4 – 1 = 3),<br>
-						plus 1 point of heat (HT2 ÷ 2 = 1).
+						For all other attacks against a unit with reflective armor, reduce the total damage applied by 1 point (to a minimum of 1 point). Finally, all critical hits suffered by a unit equipped with reflective armor apply a +2 modifier on the unit’s Critical Hits Table. Modified critical results of 13 or higher are treated as Engine Hits. Note that this damage reducing (and increasing) effect even covers general attacks by such units that possess such abilities, so if a unit that can deliver 4 points of damage at Short range attacks a target ’Mech with reflective armor, and the attacker also has the HT2 special, the attack will deliver 3 points of damage (4 – 1 = 3), plus 1 point of heat (HT2 ÷ 2 = 1).
 					</p>
 					<p id="RSD"><strong>Remote Sensor Dispenser (RSD#)</strong><br>
-						A unit with this ability may deploy 1 remote sensor per turn per Remote<br>
-						Sensor Dispenser. (The number of dispensers the unit is carrying is<br>
-						indicated in the special ability’s abbreviation.) When deployed, sensors<br>
-						are stationary and rest on the surface of the underlying terrain. A remote<br>
-						sensor has no armor to speak of, and is automatically destroyed in the End<br>
-						Phase of any turn that ends with an opposing unit in base-to-base contact<br>
-						with them. Alternatively, the sensor may be destroyed if it takes 1 point<br>
-						of damage. Attacks against a sensor apply a –2 to-hit modifier. Each type<br>
-						of sensor may also be carried as a bomb (taking 1 bomb slot) by any unit<br>
-						that possesses the BOMB# special ability. Once deployed, remote sensors<br>
-						may be used to spot for indirect or artillery attacks, as if they were a<br>
-						friendly unit, but they apply an additional +3 to-hit modifier.
+						A unit with this ability may deploy 1 remote sensor per turn per Remote Sensor Dispenser. (The number of dispensers the unit is carrying is indicated in the special ability’s abbreviation.) When deployed, sensors are stationary and rest on the surface of the underlying terrain. A remote sensor has no armor to speak of, and is automatically destroyed in the End Phase of any turn that ends with an opposing unit in base-to-base contact with them. Alternatively, the sensor may be destroyed if it takes 1 point of damage. Attacks against a sensor apply a –2 to-hit modifier. Each type of sensor may also be carried as a bomb (taking 1 bomb slot) by any unit that possesses the BOMB# special ability. Once deployed, remote sensors may be used to spot for indirect or artillery attacks, as if they were a friendly unit, but they apply an additional +3 to-hit modifier.
 					</p>
 					<p>
-						Remote Sensors can also reveal units (see Hidden Units, p. 102), unless<br>
-						they are affected by hostile ECM systems, including Angel ECM (AECM) and<br>
-						standard ECM (ECM), which will overwhelm their abilities.
+						Remote Sensors can also reveal units (see Hidden Units, p. 102), unless they are affected by hostile ECM systems, including Angel ECM (AECM) and standard ECM (ECM), which will overwhelm their abilities.
 					</p>
 					<p id="SAW"><strong>Saw (SAW)</strong><br>
-						A unit with this special ability may forego its attack to clear an area<br>
-						of woods (see Terrain Conversion, p. 104).
+						A unit with this special ability may forego its attack to clear an area of woods (see Terrain Conversion, p. 104).
 					</p>
 					<p id="SRCH"><strong>Searchlight (SRCH)</strong><br>
-						Units equipped with a searchlight ignore the to-hit modifiers for combat<br>
-						in darkness (see Darkness, p. 92).
+						Units equipped with a searchlight ignore the to-hit modifiers for combat in darkness (see Darkness, p. 92).
 					</p>
 					<p id="SRM"><strong>Short Range Missiles (SRM #/#)</strong><br>
-						This unit mounts a significant number of short-range missile launchers and<br>
-						may fire them together as an alternative weapon attack instead of a standard<br>
-						weapon attack. This ability enables the unit to use alternate SRM ammo for<br>
-						modified effects (see Alternate Munitions, p. 76).
+						This unit mounts a significant number of short-range missile launchers and may fire them together as an alternative weapon attack instead of a standard weapon attack. This ability enables the unit to use alternate SRM ammo for modified effects (see Alternate Munitions, p. 76).
 					</p>
 					<p id="ST"><strong>Small Craft Transport (ST#)</strong><br>
-						A unit with this special ability can transport/ launch, and recover the<br>
-						indicated number of Small Craft. This ability usually applies to DropShips,<br>
-						and is always used in conjunction with the Door special ability (see<br>
-						Transporting Non-Infantry Units, p. 63).
+						A unit with this special ability can transport/ launch, and recover the indicated number of Small Craft. This ability usually applies to DropShips, and is always used in conjunction with the Door special ability (see Transporting Non-Infantry Units, p. 63).
 					</p>
 					<p id="SDS"><strong>Space Defense System (SDS-C #/#/#/#, SDS-CM #/#/#/#, SDS-SC #/#/#/#)</strong><br>
-						Any non-DropShip unit or installation with SDS weapons is a unit that<br>
-						carries large weapons designed almost exclusively for use against WarShips.<br>
-						These capital or sub-capital weapons are generally too large to use<br>
-						effectively in ground combat, and are generally reserved to target<br>
-						incoming DropShips and WarShips, though SDS missiles (SDS-CM) may<br>
-						also be employed as artillery.
+						Any non-DropShip unit or installation with SDS weapons is a unit that carries large weapons designed almost exclusively for use against WarShips. These capital or sub-capital weapons are generally too large to use effectively in ground combat, and are generally reserved to target incoming DropShips and WarShips, though SDS missiles (SDS-CM) may also be employed as artillery.
 					</p>
 					<p>
-						In the limited instances where these weapons may be used, consult the<br>
-						Capital and Sub-Capital Weapons rules (see pp. 86-87).
+						In the limited instances where these weapons may be used, consult the Capital and Sub-Capital Weapons rules (see pp. 86-87).
 					</p>
 					<p><strong>Space Operations Adaptation (SOA)</strong><br>
-						A unit with this special ability can operate in vacuum (see p. 92),<br>
-						but is not capable of spaceflight on its own.
+						A unit with this special ability can operate in vacuum (see p. 92), but is not capable of spaceflight on its own.
 					</p>
 					<p id="STL"><strong>Stealth (STL)</strong><br>
-						Though various stealth systems exist in the BattleTech universe, the<br>
-						majority are similar enough in function that Alpha Strike does not<br>
-						distinguish between them. These systems make a target more difficult<br>
-						to hit with weapon attacks (but not physical attacks), based on the<br>
-						range and unit type being targeted. For attacks made against<br>
-						non-infantry targets with the STL special, apply an additional +1<br>
-						to-hit modifier to attacks at Medium range, and an additional +2<br>
-						to-hit modifier at Long range (or greater). For attacks made against<br>
-						battle armor targets with the STL special, apply an additional +1<br>
-						to-hit modifier at Short and Medium range, and an additional +2<br>
-						to-hit modifier at Long range (or greater).
+						Though various stealth systems exist in the BattleTech universe, the majority are similar enough in function that Alpha Strike does not distinguish between them. These systems make a target more difficult to hit with weapon attacks (but not physical attacks), based on the range and unit type being targeted. For attacks made against non-infantry targets with the STL special, apply an additional +1 to-hit modifier to attacks at Medium range, and an additional +2 to-hit modifier at Long range (or greater). For attacks made against battle armor targets with the STL special, apply an additional +1 to-hit modifier at Short and Medium range, and an additional +2 to-hit modifier at Long range (or greater).
 					</p>
 					<p id="SCAP"><strong>Sub-Capital (SCAP)</strong><br>
-						Sub-capital weapons are smaller-scale versions of the capital weapons<br>
-						used on WarShips and SDS batteries. Their use is still almost<br>
-						exclusively limited to combat between units in orbital space and<br>
-						beyond, and so is generally beyond the general scope of the ground<br>
-						war game presented in this book. Nevertheless, in certain limited<br>
-						instances where they may be used, consult the Capital and Sub-Capital<br>
-						Weapons rules (see pp. 86-87).
+						Sub-capital weapons are smaller-scale versions of the capital weapons used on WarShips and SDS batteries. Their use is still almost exclusively limited to combat between units in orbital space and beyond, and so is generally beyond the general scope of the ground war game presented in this book. Nevertheless, in certain limited instances where they may be used, consult the Capital and Sub-Capital Weapons rules (see pp. 86-87).
 					</p>
 					<p id="SLG"><strong>Super Large (SLG)</strong><br>
-						Super Large units occupy a 6” AoE template sized area or larger.<br>
-						Super Large units block LOS.
+						Super Large units occupy a 6” AoE template sized area or larger. Super Large units block LOS.
 					</p>
 					<p id="TAG"><strong>Target Acquisition Gear (TAG)</strong><br>
-						TAG is used to designate targets for homing artillery attacks. A unit<br>
-						with this ability may designate targets in the Short and Medium range<br>
-						brackets (see Artillery, p. 73).
+						TAG is used to designate targets for homing artillery attacks. A unit with this ability may designate targets in the Short and Medium range brackets (see Artillery, p. 73).
 					</p>
 					<p id="MTAS"><strong>Taser (MTAS#)</strong><br>
-						A unit with the MTAS# special is carrying a ’Mech Taser; a unit with<br>
-						the BTAS# special carries a battle armor Taser. For MTAS special<br>
-						abilities, the # in this special indicates the quantity of Taser<br>
-						weapons mounted by the unit in question, each of which may attempt<br>
-						one attack per turn against any targets that lie in the unit’s firing<br>
-						arc and within its Short range bracket.
+						A unit with the MTAS# special is carrying a ’Mech Taser; a unit with the BTAS# special carries a battle armor Taser. For MTAS special abilities, the # in this special indicates the quantity of Taser weapons mounted by the unit in question, each of which may attempt one attack per turn against any targets that lie in the unit’s firing arc and within its Short range bracket.
 					</p>
 					<p id="BTAS"><strong>Taser (BTAS#)</strong><br>
-						A unit with the MTAS# special is carrying a ’Mech Taser; a unit with<br>
-						the BTAS# special carries a battle armor Taser. For MTAS special<br>
-						abilities, the # in this special indicates the quantity of Taser<br>
-						weapons mounted by the unit in question, each of which may attempt<br>
-						one attack per turn against any targets that lie in the unit’s<br>
-						firing arc and within its Short range bracket.
+						A unit with the MTAS# special is carrying a ’Mech Taser; a unit with the BTAS# special carries a battle armor Taser. For MTAS special abilities, the # in this special indicates the quantity of Taser weapons mounted by the unit in question, each of which may attempt one attack per turn against any targets that lie in the unit’s firing arc and within its Short range bracket.
 					</p>
 					<p>
-						For BTAS special abilities, the # in this special represents the<br>
-						maximum number of Taser attacks the unit can make for the entire<br>
-						scenario.
+						For BTAS special abilities, the # in this special represents the maximum number of Taser attacks the unit can make for the entire scenario.
 					</p>
 					<p>
-						All Taser attacks are resolved separately, and may be made in addition<br>
-						to the unit’s normal weapon or physical attacks.
+						All Taser attacks are resolved separately, and may be made in addition to the unit’s normal weapon or physical attacks.
 					</p>
 					<p id="TOR"><strong>Torpedo (TOR#)</strong><br>
-						Torpedo launchers may only be launched by units in water (or on the<br>
-						surface of a water feature), against targets that are also on or in<br>
-						water (this includes units like hovercraft and airborne WiGEs operating<br>
-						just above the surface of water). Torpedo special ability damage is<br>
-						given in range brackets like a standard weapon attack, and may be fired<br>
-						separately or combined with the standard weapon damage that a submerged<br>
-						unit may deliver in combat.
+						Torpedo launchers may only be launched by units in water (or on the surface of a water feature), against targets that are also on or in water (this includes units like hovercraft and airborne WiGEs operating just above the surface of water). Torpedo special ability damage is given in range brackets like a standard weapon attack, and may be fired separately or combined with the standard weapon damage that a submerged unit may deliver in combat.
 					</p>
 					<p>
-						Torpedo attacks ignore underwater range and damage  modifiers that<br>
-						affect other weapons. For example, if a submerged unit, with damage<br>
-						values of 2/2/2 and a TOR 3/3 special, fires at a target that is in<br>
-						its underwater Short range bracket, it will deliver 4 points of total<br>
-						damage on a successful attack. (The base damage of 2 for its normal<br>
-						weapons is halved to 1, but the full TOR damage of 3 applies without<br>
-						reduction.)
+						Torpedo attacks ignore underwater range and damage  modifiers that affect other weapons. For example, if a submerged unit, with damage values of 2/2/2 and a TOR 3/3 special, fires at a target that is in its underwater Short range bracket, it will deliver 4 points of total damage on a successful attack. (The base damage of 2 for its normal weapons is halved to 1, but the full TOR damage of 3 applies without reduction.)
 					</p>
 					<p id="TSM"><strong>Triple-Strength Myomer (TSM)</strong><br>
 						’Mechs with the Triple-Strength Myomer special ability can move faster and deliver additional damage in standard- and melee-type physical attacks, but only when running hot. Once a unit with TSM overheats, the following rules apply only to its movement and physical attack capabilities. All other rules for overheating and gameplay apply normally.

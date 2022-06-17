@@ -133,10 +133,11 @@ session_start();
                 $playername = $row['name'];
 				$pv_bidden = $row['bid_pv'];
 				$tonnage_bidden = $row['bid_tonnage'];
+				$currRound = $row['round'];
 
 				echo "<tr>\n";
 				echo "	<td style='color:#eee;font-size:22;'>OPFOR&nbsp;&nbsp;&nbsp;</td>\n";
-				echo "	<td nowrap style='background-color:#812c2c;width:170px;height:40px;' class='mechselect_button_active'>".$playername."</td>\n";
+				echo "	<td nowrap style='background-color:#812c2c;width:170px;height:40px;' class='mechselect_button_active'>".$playername."&nbsp;(R".$currRound.")</td>\n";
 
 				//echo "	<td nowrap style='background-color:#148dee;width:170px;height:40px;' class='mechselect_button_active'>jkjj</td>\n";
 				//echo "	<td nowrap style='background-color:#148dee;width:170px;height:40px;' class='mechselect_button_active'>jkjj</td>\n";
@@ -225,7 +226,7 @@ session_start();
 					echo "<tr>\n";
 					echo "<td></td>\n";
 				}
-				echo "<td nowrap style='height:40px;padding-left:20px;padding-right:20px;$selectBorder' class='mechselect_button_active'>".$playername."</td>";
+				echo "<td nowrap style='height:40px;padding-left:20px;padding-right:20px;$selectBorder' class='mechselect_button_active'>".$playername."&nbsp;(R".$currRound.")</td>\n";
 
 				// Select units for this player
 				if (!($stmtUnits = $conn->prepare("SELECT SQL_NO_CACHE * FROM asc_unit where playerid = ".$playerid." ORDER BY unitid;"))) {
