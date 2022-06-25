@@ -26,26 +26,50 @@
 		// - select all mechids (+ moved and fired) from assign with the unitids
 		// - select all prepvalues != 0 from mechstatus with mechids
 
+		$finishedMechsInThisRound = 0;
+
+		$currentRound = "";
+		$sql_asc_playerRound = "SELECT SQL_NO_CACHE * FROM asc_player where playerid = ".$pid.";";
+		$result_asc_playerRound = mysqli_query($conn, $sql_asc_playerRound);
+		if (mysqli_num_rows($result_asc_playerRound) > 0) {
+			while($row = mysqli_fetch_assoc($result_asc_playerRound)) {
+				$currentRound = $row["round"];
+			}
+		}
+		$nextRound = $currentRound + 1;
+
+		echo "Currentround: " . $currentRound . "<br>";
+		echo "Nextround: " . $nextRound . "<br><br>";
+
 		$unitIds = "";
 		$sql_asc_unit = "SELECT SQL_NO_CACHE * FROM asc_unit where playerid = ".$pid.";";
 		$result_asc_unit = mysqli_query($conn, $sql_asc_unit);
 		if (mysqli_num_rows($result_asc_unit) > 0) {
 			while($row = mysqli_fetch_assoc($result_asc_unit)) {
-				$unitid = $row["unitid"];
-				$unitIds = $unitIds . "," . $unitid;
+				$unitId = $row["unitid"];
+				if ($unitIds == "") {
+					$unitIds = $unitIds.$unitId;
+				} else {
+					$unitIds = $unitIds.",".$unitId;
+				}
 			}
 		}
 
 		$sql_asc_assign = "SELECT SQL_NO_CACHE * FROM asc_assign where unitid in (".$unitIds.");";
+		echo $sql_asc_assign;
 		$result_asc_assign = mysqli_query($conn, $sql_asc_assign);
 		if (mysqli_num_rows($result_asc_assign) > 0) {
-            while($row = mysqli_fetch_assoc($result_asc_assign)) {
-				$mechid = $row["mechid"];
-				$round_moved = $row["round_moved"];
-				$round_fired = $row["round_fired"];
+			while($row = mysqli_fetch_assoc($result_asc_assign)) {
+				$mechId = $row["mechid"];
+				$roundMoved = $row["round_moved"];
+				$roundFired = $row["round_fired"];
+
+				if ($roundMoved > 0 && $roundFired > 0) {
+					$finishedMechsInThisRound = $finishedMechsInThisRound + 1;
+				}
 
 				// Mechstatus
-				$sql_asc_mechstatus = "SELECT SQL_NO_CACHE * FROM asc_mechstatus where mechid=".$mechid.";";
+				$sql_asc_mechstatus = "SELECT SQL_NO_CACHE * FROM asc_mechstatus where mechid=".$mechId.";";
 				$result_asc_mechstatus = mysqli_query($conn, $sql_asc_mechstatus);
 				if (mysqli_num_rows($result_asc_mechstatus) > 0) {
                     while($row = mysqli_fetch_assoc($result_asc_mechstatus)) {
@@ -72,92 +96,73 @@
 						if ($final_MP > 4) { $final_MP = 4; }
 						if ($final_WPNS > 4) { $final_WPNS = 4; }
 
-						//update mechstatus
+						$sqlUpdateMechStatus = "";
+						$sqlUpdateMechStatus = $sqlUpdateMechStatus . "UPDATE asc_mechstatus ";
+						$sqlUpdateMechStatus = $sqlUpdateMechStatus . "SET ";
+						$sqlUpdateMechStatus = $sqlUpdateMechStatus . "crit_engine_PREP=0, crit_fc_PREP=0, crit_mp_PREP=0, crit_weapons_PREP=0, usedoverheat=0, ";
+						$sqlUpdateMechStatus = $sqlUpdateMechStatus . "crit_engine=".$final_ENGN.", crit_fc=".$final_FRCTRL.", crit_mp=".$final_MP.", crit_weapons=".$final_WPNS.", heat=".$finalHeat." ";
+						$sqlUpdateMechStatus = $sqlUpdateMechStatus . "where mechid=".$mechId.";";
+						echo $sqlUpdateMechStatus."<br><br>";
+						if (mysqli_query($conn, $sqlUpdateMechStatus)) {
+							echo "<br>";
+							echo "Record (asc_mechstatus) updated successfully<br>";
+							mysqli_commit($conn);
+						} else {
+							echo "<br>";
+							echo "Error (asc_mechstatus) updating record: " . mysqli_error($conn) . "<br>";
+
+							echo "<script>top.window.location = './gui_message_round_finalized_error_01.php'</script>";
+							die;
+						}
 					}
 				}
+
+				// Update fired and moved for mechid in asc_assign
+				$sqlUpdateMechMovementFiresStatus = "";
+                $sqlUpdateMechMovementFiresStatus = $sqlUpdateMechMovementFiresStatus . "UPDATE asc_assign ";
+                $sqlUpdateMechMovementFiresStatus = $sqlUpdateMechMovementFiresStatus . "SET ";
+                $sqlUpdateMechMovementFiresStatus = $sqlUpdateMechMovementFiresStatus . "round_moved=0, round_fired=0 ";
+                $sqlUpdateMechMovementFiresStatus = $sqlUpdateMechMovementFiresStatus . "where mechid=".$mechId.";";
+                echo $sqlUpdateMechMovementFiresStatus;
+                if (mysqli_query($conn, $sqlUpdateMechMovementFiresStatus)) {
+                    echo "<br>";
+                    echo "Record (asc_assign) updated successfully<br>";
+                    mysqli_commit($conn);
+                } else {
+                    echo "<br>";
+                    echo "Error (asc_assign) updating record: " . mysqli_error($conn) . "<br>";
+
+					echo "<script>top.window.location = './gui_message_round_finalized_error_01.php'</script>";
+					die;
+                }
 			}
 		}
 
-//		$sql = "UPDATE asc_assign SET round_moved=".$mvmt.",round_fired=".$wpns." WHERE mechid=".$index;
-//		echo "UPDATE asc_assign<br>SET round_moved=".$mvmt.",round_fired=".$wpns." WHERE mechid=".$index;
-//
-//		if (mysqli_query($conn, $sql)) {
-//			echo "<br>";
-//			echo "Record (asc_assign) updated successfully";
-//			mysqli_commit($conn);
-//		} else {
-//			echo "<br>";
-//			echo "Error (asc_assign) updating record: " . mysqli_error($conn);
-//		}
-//
-//		// Check if all units have moved in this round
-//
-//		// select asc_assign.unitid, asc_assign.gameid, asc_assign.round_moved, asc_assign.round_fired, asc_mech.active_bid
-//		// from asc_assign, asc_mech, asc_unit, asc_player
-//		// where asc_assign.gameid = 1
-//		// and asc_mech.active_bid = 1
-//		// and asc_assign.unitid is not null
-//		// and asc_assign.mechid = asc_mech.mechid
-//		// and asc_assign.unitid = asc_unit.unitid
-//		// and asc_unit.playerid = asc_player.playerid
-//		// and asc_player.bid_winner = 1
-//
-//		$sql_checkround = "";
-//		$sql_checkround = $sql_checkround + " select asc_assign.unitid, asc_assign.gameid, asc_assign.round_moved, asc_assign.round_fired, asc_mech.active_bid ";
-//		$sql_checkround = $sql_checkround + " from asc_assign, asc_mech, asc_unit, asc_player ";
-//		$sql_checkround = $sql_checkround + " where asc_assign.gameid = 1 ";
-//		$sql_checkround = $sql_checkround + " and asc_mech.active_bid = 1 ";
-//		$sql_checkround = $sql_checkround + " and asc_assign.unitid is not null ";
-//		$sql_checkround = $sql_checkround + " and asc_assign.mechid = asc_mech.mechid ";
-//		$sql_checkround = $sql_checkround + " and asc_assign.unitid = asc_unit.unitid ";
-//		$sql_checkround = $sql_checkround + " and asc_unit.playerid = asc_player.playerid ";
-//		$sql_checkround = $sql_checkround + " and asc_player.bid_winner = 1 ";
-//		if (!($stmt = $conn->prepare($sql_checkround))) {
-//			echo "Prepare failed: (" . $conn->errno . ") " . $conn->error;
-//		}
-//		$mechCount = 0;
-//		if ($stmt->execute()) {
-//			$res = $stmt->get_result();
-//			while ($row = $res->fetch_assoc()) {
-//				$UNITID = $row['unitid'];
-//				$GAMEID = $row['gameid'];
-//				$ROUNDMOVED = $row['round_moved'];
-//				$ROUNDFIRED = $row['round_fired'];
-//
-//				if ($UNITID != null && $GAMEID == 1 && ($ROUNDMOVED == 0 || $ROUNDFIRED == 0)) {
-//					// anything here is still in an older round than the current one
-//					$mechCount = $mechCount + 1;
-//				}
-//			}
-//			if ($mechCount == 0) {
-//				// there are no units left over in the last round
-//				// advance the round
-//				$sql3 = "UPDATE asc_assign SET round_moved=0,round_fired=0 WHERE gameid=1";
-//				echo "UPDATE asc_assign SET round_moved=0,round_fired=0 WHERE gameid=1";
-//
-//				if (mysqli_query($conn, $sql3)) {
-//					echo "<br>";
-//					echo "Record (asc_assign) updated successfully";
-//					mysqli_commit($conn);
-//				} else {
-//					echo "<br>";
-//					echo "Error (asc_assign) updating record: " . mysqli_error($conn);
-//				}
-//
-//				$sql4 = "UPDATE asc_game SET currentround = currentround + 1 WHERE gameid=1";
-//				echo "UPDATE asc_game SET currentround = currentround + 1 WHERE gameid=1";
-//				if (mysqli_query($conn, $sql4)) {
-//					echo "<br>";
-//					echo "Record (asc_game) updated successfully";
-//					mysqli_commit($conn);
-//				} else {
-//					echo "<br>";
-//					echo "Error (asc_game) updating record: " . mysqli_error($conn);
-//				}
-//			}
-//		}
-//	} else {
-//		echo "WAITING FOR SAVE OPERATION...<br>";
+		if ($finishedMechsInThisRound > 0) {
+			$sqlUpdatePlayerRound = "";
+			$sqlUpdatePlayerRound = $sqlUpdatePlayerRound . "UPDATE asc_player ";
+			$sqlUpdatePlayerRound = $sqlUpdatePlayerRound . "SET ";
+			$sqlUpdatePlayerRound = $sqlUpdatePlayerRound . "round=".$nextRound." ";
+			$sqlUpdatePlayerRound = $sqlUpdatePlayerRound . "where playerid=".$pid.";";
+			echo $sqlUpdatePlayerRound;
+			if (mysqli_query($conn, $sqlUpdatePlayerRound)) {
+				echo "<br>";
+				echo "Record (asc_player) updated successfully<br>";
+				mysqli_commit($conn);
+
+				echo "<script>top.window.location = './gui_message_round_finalized.php'</script>";
+                die;
+			} else {
+				echo "<br>";
+				echo "Error (asc_player) updating record: " . mysqli_error($conn) . "<br>";
+
+				echo "<script>top.window.location = './gui_message_round_finalized_error_01.php'</script>";
+				die;
+			}
+		} else {
+			echo "<script>top.window.location = './gui_message_round_finalized_error_02.php'</script>";
+			die;
+		}
 	}
 
 	echo "</p>\n";

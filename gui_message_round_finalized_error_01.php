@@ -1,0 +1,151 @@
+<?php
+session_start();
+// https://www.php-einfach.de/php-tutorial/php-sessions/
+	require('./logger.php');
+	require('./db.php');
+	if (!isset($_SESSION['playerid'])) {
+		echo "Not logged in... redirecting.<br>";
+		echo "<meta http-equiv='refresh' content='0;url=./login.php?auto=1'>";
+		header("Location: ./login.php?auto=1");
+		//die("Check position 8");
+	}
+
+	// Get data on units from db
+	$pid = $_SESSION['playerid'];
+	$pimage = $_SESSION['playerimage'];
+
+	$opt3 = $_SESSION['option3'];
+	$playMode = $opt3;
+
+	$sql_asc_playerround = "SELECT SQL_NO_CACHE * FROM asc_player where playerid = " . $pid . ";";
+    $result_asc_playerround = mysqli_query($conn, $sql_asc_playerround);
+    if (mysqli_num_rows($result_asc_playerround) > 0) {
+        while($row = mysqli_fetch_assoc($result_asc_playerround)) {
+            $CURRENTROUND = $row["round"];
+        }
+    }
+?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en">
+
+<head>
+	<title>ClanWolf.net: AplhaStrike Card App (ASCard): Unit selector</title>
+	<meta charset="utf-8">
+	<meta http-equiv="expires" content="0">
+	<meta name="description" content="Cards app for the AlphaStrike TableTop (BattleTech).">
+	<meta name="keywords" content="BattleTech, AlphaStrike, Mech">
+	<meta name="robots" content="noindex,nofollow">
+	<meta name="mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="viewport" content="width=device-width, initial-scale=0.75, minimum-scale=0.75, maximum-scale=0.75, user-scalable=no" />
+
+	<link rel="manifest" href="./manifest.json">
+	<!-- <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css"> -->
+	<link rel="stylesheet" type="text/css" href="./fontawesome/css/all.min.css" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="./styles/styles.css">
+	<link rel="icon" href="./favicon.png" type="image/png">
+	<link rel="shortcut icon" href="./images/icon_196x196.png" type="image/png" sizes="196x196">
+	<link rel="apple-touch-icon" href="./images/icon_57x57.png" type="image/png" sizes="57x57">
+	<link rel="apple-touch-icon" href="./images/icon_72x72.png" type="image/png" sizes="72x72">
+	<link rel="apple-touch-icon" href="./images/icon_76x76.png" type="image/png" sizes="76x76">
+	<link rel="apple-touch-icon" href="./images/icon_114x114.png" type="image/png" sizes="114x114">
+	<link rel="apple-touch-icon" href="./images/icon_120x120.png" type="image/png" sizes="120x120">
+	<link rel="apple-touch-icon" href="./images/icon_144x144.png" type="image/png" sizes="144x144">
+	<link rel="apple-touch-icon" href="./images/icon_152x152.png" type="image/png" sizes="152x152">
+	<link rel="apple-touch-icon" href="./images/icon_180x180.png" type="image/png" sizes="180x180">
+
+	<script type="text/javascript" src="./scripts/jquery-3.6.0.min.js"></script>
+	<script type="text/javascript" src="./scripts/howler.min.js"></script>
+	<script type="text/javascript" src="./scripts/cookies.js"></script>
+
+	<style>
+		html, body {
+			background-image: url('./images/body-bg_2.jpg');
+		}
+		table {
+			margin-left: auto;
+			margin-right: auto;
+		}
+		.box {
+			width: 400px;
+			height: 200px;
+			background-color: #transparent;
+			position: fixed;
+			margin-left: -200px;
+			margin-top: -100px;
+			top: 50%;
+			left: 50%;
+		}
+		.options {
+			border-radius: 5px;
+			border-style: solid;
+			border-width: 3px;
+			padding: 5px;
+			background: rgba(60,60,60,0.75);
+			color: #ddd;
+			border-color: #aaa;
+		}
+	</style>
+</head>
+
+<body>
+	<script>
+		$(document).ready(function() {
+			$("#cover").hide();
+		});
+	</script>
+
+	<div id="cover"></div>
+
+<?php
+	if ($playMode) {
+		$buttonWidth = "34%";
+	} else {
+		$buttonWidth = "17%";
+	}
+?>
+
+	<div id="header">
+		<table style="width:100%;height:60px;border:none;border-collapse:collapse;background:rgba(50,50,50,1.0);" cellspacing="0" cellpadding="0">
+			<tr>
+				<td nowrap onclick="location.href='./logout.php'" width="100px" style="width: 100px;background: rgba(50,50,50,1.0); text-align: center; vertical-align: middle;">
+					<div><a style="color:#eee;" href="./logout.php">&nbsp;&nbsp;&nbsp;<i class="fas fa-power-off" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;</a></div>
+				</td>
+				<td nowrap onclick="location.href='./gui_finalize_round.php'" width="100px" style="width: 100px;background:rgba(81,125,37,1.0); text-align: center; vertical-align: middle;">
+					<div><a style="color:#fff;" href="./gui_finalize_round.php">&nbsp;&nbsp;&nbsp;<i class="fas fa-redo"></i>&nbsp;&nbsp;&nbsp;</a></div>
+				</td>
+				<td nowrap onclick="location.href='./gui_finalize_round.php'" style="width: 100px;background:rgba(81,125,37,1.0);">
+					<div style='vertical-align:middle;font-size:28px;color:#fff;'>&nbsp;&nbsp;&nbsp;R<?php echo $CURRENTROUND ?>&nbsp;&nbsp;&nbsp;</div>
+				</td>
+				<td nowrap onclick="location.href='./gui_select_unit.php'" width="<?php echo $buttonWidth ?>"><div class='mechselect_button_normal'><a href='./gui_select_unit.php'>ROSTER</a><br><span style='font-size:16px;'>Choose a Mech</span></div></td>
+				<td nowrap onclick="location.href='./gui_select_enemy_unit.php'" width="<?php echo $buttonWidth ?>"><div class='mechselect_button_normal'><a href='./gui_select_enemy_unit.php'>FORCES</a><br><span style='font-size:16px;'>All bidding units</span></div></td>
+
+<?php
+	if (!$playMode) {
+		echo "				<td nowrap onclick=\"location.href='./gui_assign_unit.php'\" width='17%'><div class='mechselect_button_normal'><a href='./gui_assign_unit.php'>ASSIGN</a><br><span style='font-size:16px;'>Assign Mech/BA</span></div></td>\n";
+		echo "				<td nowrap onclick=\"location.href='./gui_create_mech.php'\" width='17%'><div class='mechselect_button_normal'><a href='./gui_create_mech.php'>ADD</a><br><span style='font-size:16px;'>Create a Mech/BA</span></div></td>\n";
+		echo "				<td nowrap onclick=\"location.href='./gui_create_player.php'\" width='17%'><div class='mechselect_button_normal'><a href='./gui_create_player.php'>PLAYER</a><br><span style='font-size:16px;'>Manage players</span></div></td>\n";
+	}
+?>
+
+				<td nowrap onclick="location.href='./gui_edit_option.php'" width="<?php echo $buttonWidth ?>"><div class='mechselect_button_normal'><a href='./gui_edit_option.php'>OPTIONS</a><br><span style='font-size:16px;'>Change options</span></div></td>
+				<td style="width: 100px;" style="width: 100px;" nowrap width="100px" style="background: rgba(50,50,50,1.0); text-align: center; vertical-align: middle;"><img src='./images/player/<?=$pimage?>' width='60px' height='60px'></td>
+			</tr>
+		</table>
+	</div>
+
+	<br>
+
+	<div>
+		<table class="options" cellspacing=4 cellpadding=4 border=0px>
+			<tr>
+				<td align="center" class='datalabel'>
+					Round could not be finalized.<br>Error!
+				</td>
+			</tr>
+		</table>
+	</div>
+</body>
+
+</html>
