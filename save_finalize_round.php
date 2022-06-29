@@ -96,9 +96,8 @@
 						if ($final_MP > 4) { $final_MP = 4; }
 						if ($final_WPNS > 4) { $final_WPNS = 4; }
 
-						if ($roundFired == 0) {
+						if ($roundFired == 2) { // Check for number for "DO NOT FIRE", if the mech held fire, reduce effective overheat to 0
 							$finalHeat = 0;
-							$usedOverHeat = 0;
 						}
 
 						$sqlUpdateMechStatus = "";
