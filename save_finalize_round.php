@@ -96,7 +96,10 @@
 						if ($final_MP > 4) { $final_MP = 4; }
 						if ($final_WPNS > 4) { $final_WPNS = 4; }
 
-						if ($roundFired == 2) { // Check for number for "DO NOT FIRE", if the mech held fire, reduce effective overheat to 0
+						// Check for number for "DO NOT FIRE", if the mech held fire, reduce effective overheat to 0
+						// console.log("Fire 1: hold fire");
+						// console.log("Fire 2: fired");
+						if ($roundFired == 1) {
 							$finalHeat = 0;
 						}
 
