@@ -72,12 +72,12 @@
 				$sql_asc_mechstatus = "SELECT SQL_NO_CACHE * FROM asc_mechstatus where mechid=".$mechId.";";
 				$result_asc_mechstatus = mysqli_query($conn, $sql_asc_mechstatus);
 				if (mysqli_num_rows($result_asc_mechstatus) > 0) {
-                    while($row = mysqli_fetch_assoc($result_asc_mechstatus)) {
+					while($row = mysqli_fetch_assoc($result_asc_mechstatus)) {
 						$heat = $row["heat"];
 						$ENGN_PREP = $row["crit_engine_PREP"];
 						$FRCTRL_PREP = $row["crit_fc_PREP"];
 						$MP_PREP = $row["crit_mp_PREP"];
-                        $WPNS_PREP = $row["crit_weapons_PREP"];
+						$WPNS_PREP = $row["crit_weapons_PREP"];
 						$ENGN = $row["crit_engine"];
 						$FRCTRL = $row["crit_fc"];
 						$MP = $row["crit_mp"];
@@ -95,6 +95,12 @@
 						if ($final_FRCTRL > 4) { $final_FRCTRL = 4; }
 						if ($final_MP > 4) { $final_MP = 4; }
 						if ($final_WPNS > 4) { $final_WPNS = 4; }
+
+						if ($roundFired == 0) {
+							if ($usedOverHeat == 0) {
+							
+							}
+						}
 
 						$sqlUpdateMechStatus = "";
 						$sqlUpdateMechStatus = $sqlUpdateMechStatus . "UPDATE asc_mechstatus ";
