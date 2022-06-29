@@ -97,9 +97,8 @@
 						if ($final_WPNS > 4) { $final_WPNS = 4; }
 
 						if ($roundFired == 0) {
-							if ($usedOverHeat == 0) {
-							
-							}
+							$finalHeat = 0;
+							$usedOverHeat = 0;
 						}
 
 						$sqlUpdateMechStatus = "";
@@ -125,22 +124,24 @@
 
 				// Update fired and moved for mechid in asc_assign
 				$sqlUpdateMechMovementFiresStatus = "";
-                $sqlUpdateMechMovementFiresStatus = $sqlUpdateMechMovementFiresStatus . "UPDATE asc_assign ";
-                $sqlUpdateMechMovementFiresStatus = $sqlUpdateMechMovementFiresStatus . "SET ";
-                $sqlUpdateMechMovementFiresStatus = $sqlUpdateMechMovementFiresStatus . "round_moved=0, round_fired=0 ";
-                $sqlUpdateMechMovementFiresStatus = $sqlUpdateMechMovementFiresStatus . "where mechid=".$mechId.";";
-                echo $sqlUpdateMechMovementFiresStatus;
-                if (mysqli_query($conn, $sqlUpdateMechMovementFiresStatus)) {
-                    echo "<br>";
-                    echo "Record (asc_assign) updated successfully<br>";
-                    mysqli_commit($conn);
-                } else {
-                    echo "<br>";
-                    echo "Error (asc_assign) updating record: " . mysqli_error($conn) . "<br>";
+				$sqlUpdateMechMovementFiresStatus = $sqlUpdateMechMovementFiresStatus . "UPDATE asc_assign ";
+				$sqlUpdateMechMovementFiresStatus = $sqlUpdateMechMovementFiresStatus . "SET ";
+				$sqlUpdateMechMovementFiresStatus = $sqlUpdateMechMovementFiresStatus . "round_moved=0, round_fired=0 ";
+				$sqlUpdateMechMovementFiresStatus = $sqlUpdateMechMovementFiresStatus . "where mechid=".$mechId.";";
+
+				echo $sqlUpdateMechMovementFiresStatus;
+
+				if (mysqli_query($conn, $sqlUpdateMechMovementFiresStatus)) {
+					echo "<br>";
+					echo "Record (asc_assign) updated successfully<br>";
+					mysqli_commit($conn);
+				} else {
+					echo "<br>";
+					echo "Error (asc_assign) updating record: " . mysqli_error($conn) . "<br>";
 
 					echo "<script>top.window.location = './gui_message_round_finalized_error_01.php'</script>";
 					die;
-                }
+                		}
 			}
 		}
 
@@ -150,14 +151,16 @@
 			$sqlUpdatePlayerRound = $sqlUpdatePlayerRound . "SET ";
 			$sqlUpdatePlayerRound = $sqlUpdatePlayerRound . "round=".$nextRound." ";
 			$sqlUpdatePlayerRound = $sqlUpdatePlayerRound . "where playerid=".$pid.";";
+
 			echo $sqlUpdatePlayerRound;
+
 			if (mysqli_query($conn, $sqlUpdatePlayerRound)) {
 				echo "<br>";
 				echo "Record (asc_player) updated successfully<br>";
 				mysqli_commit($conn);
 
 				echo "<script>top.window.location = './gui_message_round_finalized.php'</script>";
-                die;
+				die;
 			} else {
 				echo "<br>";
 				echo "Error (asc_player) updating record: " . mysqli_error($conn) . "<br>";
