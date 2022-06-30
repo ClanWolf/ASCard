@@ -141,7 +141,8 @@ session_start();
 		<table class="options" cellspacing=4 cellpadding=4 border=0px>
 			<tr>
 				<td align="center" class='datalabel'>
-					Round could not be finalized.<br>Error!
+					<p>Round could not be finalized.</p>
+					<p style="font-family:'Pathway Gothic One',sans-serif,bold;font-size:55px;color:red;">Error!</p>
 				</td>
 			</tr>
 		</table>

@@ -141,7 +141,8 @@ session_start();
 		<table class="options" cellspacing=4 cellpadding=4 border=0px>
 			<tr>
 				<td align="center" class='datalabel'>
-					Round successfully finalized.<br><br>You are now in round:<br><?= $CURRENTROUND ?>
+					<p>Round successfully finalized.<br><br>You are now in round:</p>
+					<p style="font-family:'Pathway Gothic One',sans-serif,bold;font-size:75px;color:green;"><?= $CURRENTROUND ?></p>
 				</td>
 			</tr>
 		</table>

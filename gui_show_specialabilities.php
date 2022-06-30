@@ -32,11 +32,13 @@
 <body>
 	<style>
 		.topnav {
+			z-index: 10;
 			overflow: hidden;
 			background-color: #333;
 			position: fixed;
 		}
 		.content {
+			z-index: 10;
 			overflow-x: hidden;
 			overflow-y: scroll;
 			position: fixed;
@@ -133,6 +135,21 @@
 				</td>
 			</tr>
 		</table>
+	</div>
+
+	<div class="hudcenteranimation">
+		<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 1000 1000" style="enable-background:new 0 0 1000 1000;" xml:space="preserve">
+			<circle class="st0" cx="500" cy="500" r="302.8">
+				<animateTransform attributeType="xml" attributeName="transform" type="rotate" from="0 500 500" to="360 500 500" dur="100s" repeatCount="indefinite"></animateTransform>
+			</circle>
+			<circle class="st1" cx="500" cy="500" r="237.7">
+				<animateTransform attributeType="xml" attributeName="transform" type="rotate" from="0 500 500" to="360 500 500" dur="40s" repeatCount="indefinite"></animateTransform>
+			</circle>
+			<circle class="st2" cx="500" cy="500" r="366.8" transform="rotate(0 500 500)" ;="">
+				<animateTransform attributeType="xml" attributeName="transform" type="rotate" from="0 500 500" to="-360 500 500" dur="50s" repeatCount="indefinite"></animateTransform>
+			</circle>
+			<circle class="st3" cx="500" cy="500" r="395.1"></circle>
+		</svg>
 	</div>
 
 	<div class="content" id="cont">

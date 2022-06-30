@@ -141,7 +141,8 @@ session_start();
 		<table class="options" cellspacing=4 cellpadding=4 border=0px>
 			<tr>
 				<td align="center" class='datalabel'>
-					Round was not changed.<br>No Mechs have moved or fired!
+					<p>Round was not changed.</p>
+					<p style="font-family:'Pathway Gothic One',sans-serif,bold;font-size:55px;color:yellow;">No Mechs have moved or fired!</p>
 				</td>
 			</tr>
 		</table>
