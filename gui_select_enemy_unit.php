@@ -17,12 +17,12 @@ session_start();
 	$playMode = $opt3;
 
 	$sql_asc_playerround = "SELECT SQL_NO_CACHE * FROM asc_player where playerid = " . $pid . ";";
-    $result_asc_playerround = mysqli_query($conn, $sql_asc_playerround);
-    if (mysqli_num_rows($result_asc_playerround) > 0) {
-        while($row = mysqli_fetch_assoc($result_asc_playerround)) {
-            $CURRENTROUND = $row["round"];
-        }
-    }
+	$result_asc_playerround = mysqli_query($conn, $sql_asc_playerround);
+	if (mysqli_num_rows($result_asc_playerround) > 0) {
+		while($row = mysqli_fetch_assoc($result_asc_playerround)) {
+			$CURRENTROUND = $row["round"];
+		}
+	}
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -215,6 +215,7 @@ session_start();
 				$playername = $row['name'];
 				$pv_bidden = $row['bid_pv'];
 				$tonnage_bidden = $row['bid_tonnage'];
+				$currRound = $row['round'];
 
 				$selectBorder='';
 				if ($pid == $playerid) {
