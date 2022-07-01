@@ -139,9 +139,9 @@ session_start();
 				},
 				"position": "top",
 				"content": {
-				"message": "This app uses cookies to store options and values. No personal data is stored. To use the app, you need to confirm (DSGVO 2022).",
-				"dismiss": "Confirm",
-				"link": "Learn more..."
+					"message": "This app uses cookies to store options and values. No personal data is stored. To use the app, you need to confirm (DSGVO, 2022).",
+					"dismiss": "Confirm",
+					"link": "Learn more..."
 				}
 			})
 		});
