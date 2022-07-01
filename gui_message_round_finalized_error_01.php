@@ -142,7 +142,7 @@ session_start();
 			<tr>
 				<td align="center" class='datalabel'>
 					<p>Round could not be finalized.</p>
-					<p style="font-family:'Pathway Gothic One',sans-serif,bold;font-size:55px;color:red;">Error!</p>
+					<p style="font-family:'Pathway Gothic One',sans-serif,bold;font-size:45px;color:red;">Error!</p>
 				</td>
 			</tr>
 		</table>
