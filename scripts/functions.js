@@ -789,6 +789,16 @@ function increaseWPNS_PREP() {
 	var url="./save_PREP.php?index="+chosenmechdbid+"&desc=WPNS_PREP&value="+WPNS_PREP;
 	window.frames['saveframe'].location.replace(url);
 }
+function increaseHT_PREP() {
+	// console.log("HT_PREP: " + HT_PREP);
+	HT_PREP = HT_PREP + 1;
+	if (HT_PREP > 4) {
+		HT_PREP = 0;
+	}
+	document.getElementById("label_HT_PREP").innerHTML = HT_PREP;
+	var url="./save_PREP.php?index="+chosenmechdbid+"&desc=HT_PREP&value="+HT_PREP;
+	window.frames['saveframe'].location.replace(url);
+}
 
 $(document).ready(function() {
 	$("#cover").fadeOut(200, "linear");
