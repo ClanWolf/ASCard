@@ -346,6 +346,7 @@ session_start();
 	echo "  var FCTL_PREP = $array_FRCTRL_PREP[$chosenMechIndex];\n";
 	echo "  var MP_PREP = $array_MP_PREP[$chosenMechIndex];\n";
 	echo "  var WPNS_PREP = $array_WPNS_PREP[$chosenMechIndex];\n";
+	echo "	var HT_PREP = $array_HT_PREP[$chosenMechIndex];\n";
 	echo "</script>\n";
 ?>
 
@@ -589,6 +590,7 @@ session_start();
 ?>
 							</td>
 							<td nowrap class="datalabel" width="10%" style="text-align: right;">&nbsp;&nbsp;&nbsp;HT:</td>
+							<td nowrap class="datalabel" id="label_HT_PREP" align="center"><?= $array_HT_PREP[$chosenMechIndex] ?></td>
 							<td nowrap width="35%" style="text-align: right;" id="ht_field">
 								<label class="bigcheck"><input onchange="readCircles(<?= $array_MECH_DBID[$chosenMechIndex] ?>, <?= $array_A_MAX[$chosenMechIndex] ?>, <?= $array_S_MAX[$chosenMechIndex] ?>);" type="checkbox" class="bigcheck" name="H1" id="H1" value="yes"/><span class="bigcheck-target"></span></label>
 								<label class="bigcheck"><input onchange="readCircles(<?= $array_MECH_DBID[$chosenMechIndex] ?>, <?= $array_A_MAX[$chosenMechIndex] ?>, <?= $array_S_MAX[$chosenMechIndex] ?>);" type="checkbox" class="bigcheck" name="H2" id="H2" value="yes"/><span class="bigcheck-target"></span></label>
