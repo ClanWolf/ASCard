@@ -78,13 +78,14 @@
 						$FRCTRL_PREP = $row["crit_fc_PREP"];
 						$MP_PREP = $row["crit_mp_PREP"];
 						$WPNS_PREP = $row["crit_weapons_PREP"];
+						$HT_PREP = $row["heat_PREP"];
 						$ENGN = $row["crit_engine"];
 						$FRCTRL = $row["crit_fc"];
 						$MP = $row["crit_mp"];
 						$WPNS = $row["crit_weapons"];
 						$usedOverHeat = $row["usedoverheat"];
 
-						$finalHeat = $heat + $usedOverHeat;
+						$finalHeat = $heat + $usedOverHeat + $HT_PREP;
 						$final_ENGN = $ENGN + $ENGN_PREP;
 						$final_FRCTRL = $FRCTRL + $FRCTRL_PREP;
 						$final_MP = $MP + $MP_PREP;
@@ -120,7 +121,7 @@
 						$sqlUpdateMechStatus = "";
 						$sqlUpdateMechStatus = $sqlUpdateMechStatus . "UPDATE asc_mechstatus ";
 						$sqlUpdateMechStatus = $sqlUpdateMechStatus . "SET ";
-						$sqlUpdateMechStatus = $sqlUpdateMechStatus . "crit_engine_PREP=0, crit_fc_PREP=0, crit_mp_PREP=0, crit_weapons_PREP=0, usedoverheat=0, ";
+						$sqlUpdateMechStatus = $sqlUpdateMechStatus . "crit_engine_PREP=0, crit_fc_PREP=0, crit_mp_PREP=0, crit_weapons_PREP=0, heat_PREP=0, usedoverheat=0, ";
 						$sqlUpdateMechStatus = $sqlUpdateMechStatus . "crit_engine=".$final_ENGN.", crit_fc=".$final_FRCTRL.", crit_mp=".$final_MP.", crit_weapons=".$final_WPNS.", heat=".$finalHeat." ";
 						$sqlUpdateMechStatus = $sqlUpdateMechStatus . "where mechid=".$mechId.";";
 						echo $sqlUpdateMechStatus."<br><br>";
