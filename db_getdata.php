@@ -55,6 +55,7 @@
 	$array_FRCTRL_PREP = array();
 	$array_MP_PREP = array();
 	$array_WPNS_PREP = array();
+	$array_HT_PREP = array();
 
 	$array_MV_MOD = array();
 	$array_DMG_SHORT_MOD = array();
@@ -202,6 +203,7 @@
 							$array_FRCTRL_PREP[$mechcount] = $row["crit_fc_PREP"];
 							$array_MP_PREP[$mechcount] = $row["crit_mp_PREP"];
 							$array_WPNS_PREP[$mechcount] = $row["crit_weapons_PREP"];
+							$array_HT_PREP[$mechcount] = $row["heat_PREP"];
 							$array_USEDOVERHEAT[$mechcount] = $row["usedoverheat"];
 							$array_CURRENTTMM[$mechcount] = $row["currenttmm"];
 
