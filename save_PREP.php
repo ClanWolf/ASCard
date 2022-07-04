@@ -34,6 +34,9 @@
 		if ($desc == "WPNS_PREP") {
 			$sql = "UPDATE asc_mechstatus SET crit_weapons_PREP=".$value." WHERE mechid=".$index;
 		}
+		if ($desc == "HT_PREP") {
+			$sql = "UPDATE asc_mechstatus SET heat_PREP=".$value." WHERE mechid=".$index;
+		}
 		echo $sql;
 
 		if (mysqli_query($conn, $sql)) {
