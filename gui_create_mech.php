@@ -65,12 +65,12 @@ session_start();
 	$addmech = isset($_GET["am"]) ? $_GET["am"] : "";
 
 	$sql_asc_playerround = "SELECT SQL_NO_CACHE * FROM asc_player where playerid = " . $pid . ";";
-    $result_asc_playerround = mysqli_query($conn, $sql_asc_playerround);
-    if (mysqli_num_rows($result_asc_playerround) > 0) {
-        while($row = mysqli_fetch_assoc($result_asc_playerround)) {
-            $CURRENTROUND = $row["round"];
-        }
-    }
+	$result_asc_playerround = mysqli_query($conn, $sql_asc_playerround);
+	if (mysqli_num_rows($result_asc_playerround) > 0) {
+		while($row = mysqli_fetch_assoc($result_asc_playerround)) {
+			$CURRENTROUND = $row["round"];
+		}
+	}
 
 	if ($addmech == 1) {
 		$TON = isset($_GET["TON"]) ? $_GET["TON"] : "";

@@ -19,12 +19,12 @@ session_start();
 	$d = isset($_GET["d"]) ? $_GET["d"] : "";
 
 	$sql_asc_playerround = "SELECT SQL_NO_CACHE * FROM asc_player where playerid = " . $pid . ";";
-    $result_asc_playerround = mysqli_query($conn, $sql_asc_playerround);
-    if (mysqli_num_rows($result_asc_playerround) > 0) {
-        while($row = mysqli_fetch_assoc($result_asc_playerround)) {
-            $CURRENTROUND = $row["round"];
-        }
-    }
+	$result_asc_playerround = mysqli_query($conn, $sql_asc_playerround);
+	if (mysqli_num_rows($result_asc_playerround) > 0) {
+		while($row = mysqli_fetch_assoc($result_asc_playerround)) {
+			$CURRENTROUND = $row["round"];
+		}
+	}
 
 	if ($s=="1") {
 		// save new user

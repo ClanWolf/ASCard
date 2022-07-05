@@ -11,7 +11,7 @@ session_start();
 	$password = isset($_POST['pw']) ? $_POST['pw'] : "";
 	$auto = isset($_POST['auto']) ? $_POST['auto'] : "";
 
-    if (!($stmt_all = $conn->prepare("SELECT * FROM asc_player"))) {
+	if (!($stmt_all = $conn->prepare("SELECT * FROM asc_player"))) {
 		echo "Prepare failed: (" . $conn->errno . ") " . $conn->error;
 	}
 	if (!($stmt = $conn->prepare("SELECT * FROM asc_player WHERE name = ?"))) {
@@ -21,13 +21,13 @@ session_start();
 		echo "Binding parameters failed: (" . $stmt->errno . ") " . $stmt->error;
 	}
 
-    $userlist = "";
+	$userlist = "";
 	if ($stmt_all->execute()) {
-    	$res_all = $stmt_all->get_result();
-    	while ($row_all = $res_all->fetch_assoc()) {
-            $userlist = $userlist . "<option value='".$row_all['name']."'>".$row_all['name']."</option>";
-        }
-    }
+		$res_all = $stmt_all->get_result();
+		while ($row_all = $res_all->fetch_assoc()) {
+			$userlist = $userlist . "<option value='".$row_all['name']."'>".$row_all['name']."</option>";
+		}
+	}
 
 	if(!$login == "") {
 		if ($stmt->execute()) {
@@ -54,8 +54,8 @@ session_start();
 								$_SESSION['option3'] = $opt3;
 							}
 						}
-   						echo "<meta http-equiv='refresh' content='0;url=./gui_select_unit.php'>";
-   						header("Location: ./gui_select_unit.php");
+						echo "<meta http-equiv='refresh' content='0;url=./gui_select_unit.php'>";
+						header("Location: ./gui_select_unit.php");
 						//die('Login succeeded!<br>');
 					} else {
 						$errorMessage = "LOGIN FAILED!<br>";
@@ -124,8 +124,8 @@ session_start();
 </head>
 
 <body>
-    <script type="text/javascript" src="./scripts/cookieconsent.js"></script>
-    <script>
+	<script type="text/javascript" src="./scripts/cookieconsent.js"></script>
+	<script>
 		window.addEventListener("load", function(){
 			window.cookieconsent.initialise({
 				"palette": {
@@ -174,17 +174,17 @@ session_start();
 					//console.log("autologin");
 					document.getElementById("f1").submit();
 				}
-  			},100);
+			},100);
 		});
 
-        function storeCredentials() {
-            console.log("Storing!");
-            var pn_1 = $('#pn').val();
-            var pw_1 = $('#pw').val();
-            setCookie("ASCards_un", pn_1, 365);
-            setCookie("ASCards_pw", pw_1, 365);
-            //alert("test");
-        }
+		function storeCredentials() {
+			console.log("Storing!");
+			var pn_1 = $('#pn').val();
+			var pw_1 = $('#pw').val();
+			setCookie("ASCards_un", pn_1, 365);
+			setCookie("ASCards_pw", pw_1, 365);
+			//alert("test");
+		}
 	</script>
 
 	<?php
@@ -204,11 +204,11 @@ session_start();
 					<img src="./images/icon_144x144.png">
 				</td>
 				<td class='mechselect_button_active'>
-	                <?php
-				        echo "<select style='width:260px;height=60px;' name='pn' size='1' maxlength='80' id='pn'>";
-                        echo $userlist;
-                        echo "</select><br>";
-                    ?>
+					<?php
+						echo "<select style='width:260px;height=60px;' name='pn' size='1' maxlength='80' id='pn'>";
+						echo $userlist;
+						echo "</select><br>";
+					?>
 					<!-- <input type="text" size="20" maxlength="80"  style='width:250px;height=60px;' id="pn" name="pn" required autocomplete="userName"><br> -->
 					<input type="text" size="20" style='width:250px;height=60px;' maxlength="32" id="pw" name="pw" required autocomplete="current-password"><br><br>
 					<input type="submit" id="submitbutton" size="50" style="width:250px;height=60px;" value="LOGIN"><br>

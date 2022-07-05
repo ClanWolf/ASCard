@@ -158,7 +158,7 @@
 
 					echo "<script>top.window.location = './gui_message_round_finalized_error_01.php'</script>";
 					die;
-                		}
+						}
 			}
 		}
 

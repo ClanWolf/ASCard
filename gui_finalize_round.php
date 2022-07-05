@@ -188,7 +188,7 @@ session_start();
 
 		function finalizeRound(playerId) {
 			var url="./save_finalize_round.php?pid=" + playerId;
-           	window.frames["saveframe"].location.replace(url);
+			window.frames["saveframe"].location.replace(url);
 		}
 	</script>
 
@@ -236,7 +236,7 @@ session_start();
 	<table align="center" cellspacing=2 cellpadding=2 border=0px>
 		<tr>
 			<td nowrap onclick="javascript:finalizeRound(<?= $pid ?>);" colspan='3' style='background-color:#444444;width:270px;height:40px;' class='mechselect_button_active'>
-    		    &nbsp;&nbsp;&nbsp;<i class="fas fa-redo"></i>&nbsp;&nbsp;&nbsp;Finalize current round (<?= $CURRENTROUND ?>)
+				&nbsp;&nbsp;&nbsp;<i class="fas fa-redo"></i>&nbsp;&nbsp;&nbsp;Finalize current round (<?= $CURRENTROUND ?>)
 			</td>
 		</tr>
 		<tr>

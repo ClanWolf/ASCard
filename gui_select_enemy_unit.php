@@ -130,7 +130,7 @@ session_start();
 		while ($row = $res->fetch_assoc()) {
 			if ($row['opfor'] == 1) {
 				$playerid = $row['playerid'];
-                $playername = $row['name'];
+				$playername = $row['name'];
 				$pv_bidden = $row['bid_pv'];
 				$tonnage_bidden = $row['bid_tonnage'];
 				$currRound = $row['round'];

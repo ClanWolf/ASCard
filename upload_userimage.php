@@ -32,9 +32,9 @@ if(function_exists('exif_imagetype')) { //Die exif_imagetype-Funktion erfordert 
  $allowed_types = array(IMAGETYPE_PNG, IMAGETYPE_JPEG, IMAGETYPE_GIF);
  $detected_type = exif_imagetype($_FILES['datei']['tmp_name']);
  if(!in_array($detected_type, $allowed_types)) {
- 	echo "<meta http-equiv='refresh' content='0;url=./login.php?auto=1'>";
- 	header("Location: ./login.php?auto=1");
-    die("Nur der Upload von Bilddateien ist gestattet");
+	echo "<meta http-equiv='refresh' content='0;url=./login.php?auto=1'>";
+	header("Location: ./login.php?auto=1");
+	die("Nur der Upload von Bilddateien ist gestattet");
  }
 }
  
