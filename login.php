@@ -169,8 +169,10 @@ session_start();
 				$("#submitbutton").focus();
 
 				var errorOccured = "<?php if(isset($errormessage)) { echo '1'; } else { echo '0'; } ?>";
+				var usernameFilled = document.getElementById("pn").value;
+				var passwordFilled = document.getElementById("pw").value;
 				//console.log(errorOccured);
-				if (auto == '1' && errorOccured == 0) {
+				if (auto == '1' && errorOccured == 0 && usernameFilled != "" && passwordFilled != "") {
 					//console.log("autologin");
 					document.getElementById("f1").submit();
 				}
