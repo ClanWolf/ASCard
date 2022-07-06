@@ -176,7 +176,7 @@ session_start();
 					//console.log("autologin");
 					document.getElementById("f1").submit();
 				}
-			},100);
+			},75);
 		});
 
 		function storeCredentials() {
