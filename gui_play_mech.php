@@ -524,7 +524,7 @@ session_start();
 ?>
 
 <div id="pv">
-	<span style="font-size: 22px; color: #aaaaaa; vertical-align: middle;">PV:&nbsp;</span>
+	<span style="font-size: 22px; color: #aaaaaa; vertical-align: middle;">&nbsp;PV:&nbsp;</span>
 	<span style="font-size: 36px; color: #da8e25; vertical-align: middle; font-weight: bold;"><?php echo "$array_PV[$chosenMechIndex]"; ?></span>
 </div>
 
@@ -876,7 +876,7 @@ session_start();
 
 <div id="bottomright"><img src="./images/bt-logo2.png" width="250px"></div>
 
-//<?php
+<?php
 //	echo "<script>\n";
 //	echo "	setMovementFlags($array_MECH_DBID[$chosenMechIndex], $array_MVMT[$chosenMechIndex], $array_WPNSFIRED[$chosenMechIndex]);\n";
 //	echo "	setFireValues($array_MVMT[$chosenMechIndex], $array_WPNSFIRED[$chosenMechIndex]);\n";
@@ -1102,7 +1102,7 @@ session_start();
 //			echo "</script>\n";
 //		}
 //	}
-//?>
+?>
 
 </body>
 

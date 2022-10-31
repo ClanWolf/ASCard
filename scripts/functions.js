@@ -925,12 +925,12 @@ function rolldice() {
 
 function changeWallpaper() {
 	var wallpaperName = getCookie("wallpaper");
-	if (isNaN(parseFloat(wallpaperName)) || parseFloat(wallpaperName) > 8 || parseFloat(wallpaperName) < 0) {
+	if (isNaN(parseFloat(wallpaperName)) || parseFloat(wallpaperName) > 9 || parseFloat(wallpaperName) < 0) {
 		wallpaperName = 0;
 	}
 
 	var wallpaperNameRand = parseFloat(wallpaperName) + 1;
-	if (wallpaperNameRand > 8) {
+	if (wallpaperNameRand > 9) {
 		wallpaperNameRand = 1;
 	}
 	document.body.style.backgroundImage = "url('./images/body-bg_" + wallpaperNameRand + ".png')";

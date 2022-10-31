@@ -7,7 +7,7 @@
 		document.getElementById("error").innerHTML = "";
 
 		for (let i = 0; i < 16000;) {
-            await fetch("https://www.clanwolf.net/apps/ASCard/data/mul_cache/cache_mechdetails.php?startindex="+i).
+            await fetch("https://www.clanwolf.net/apps/ASCard/data/mul_cache/cache_mechdetails.php?startindex=" + i).
 				catch(error => {
                     document.getElementById("error").innerHTML = error + " index: " + i ;
 				})
@@ -25,11 +25,15 @@
 
 <div id="error" style="color:red"></div>
 
+<br><br>
+
 <button onclick="update_cache()">
 	Cache
 </button>
 
-<div>This will take a long time and look unresponsive! Just wait!</div>
+<br><br>
+
+<div>This will take a long time and look unresponsive!<br>Click on 'Cache' once and just wait!</div>
 
 </body>
 
