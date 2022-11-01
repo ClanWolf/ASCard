@@ -50,8 +50,8 @@
 		<table class="options" cellspacing=10 cellpadding=10 border=0px>
 			<tr>
 				<td width="15%" nowrap align="center">
-					<!-- <a href="javascript:window.history.back();"><< Back</a> -->
-					<a href="./gui_select_unit.php"><< Back</a>
+					<a href="javascript:window.history.back();"><< Back</a>
+					<!-- <a href="./gui_select_unit.php"><< Back</a> -->
 				</td>
 				<td width="85%" align="left">
 					<a href="#PRB" target="_SELF">PRB</a>&nbsp;&nbsp;

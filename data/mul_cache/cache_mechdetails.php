@@ -1,4 +1,4 @@
-//<?php
+<?php
 //	echo "ASCard App - caching mech details from MUL<br>";
 //	echo "-------------------------------------------<br>";
 //	echo date('M Y') . "<br>";
@@ -27,7 +27,7 @@
 //			echo "saved.<br>";
 //		}
 //	}
-//?>
+?>
 
 // https://www.clanwolf.net/path/cache_mechdetails.php?startindex=100
 

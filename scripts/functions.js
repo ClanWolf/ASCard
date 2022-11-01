@@ -876,7 +876,7 @@ $(document).ready(function() {
 
 	var wallpaperName = getCookie("wallpaper");
 	if ((wallpaperName !== null) && (typeof wallpaperName != 'undefined')) {
-		if (wallpaperName > 0 && wallpaperName < 9) {
+		if (wallpaperName > 0 && wallpaperName < 10) {
 			document.body.style.backgroundImage = "url('./images/body-bg_" + wallpaperName + ".png')";
 		}
 	}
