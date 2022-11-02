@@ -52,8 +52,8 @@ function getMechList(filter, tech, minTon, maxTon) {
 		cache_url = cache_url + maxTon;
 		cache_url = cache_url + '.json';
 
-	// console.log("URL: " + url);
-	// console.log("Cache: " + cache_url);
+	//console.log("URL: " + url);
+	//console.log("Cache: " + cache_url);
 
 	$.getJSON(cache_url, function (json) {
 		json.Units.sort(function(a, b) {
@@ -130,7 +130,7 @@ function getMechDetails(id) {
 			var spcl = "-";
 		}
 
-		console.log("TECH: " + json.Technology.Id);
+		//console.log("TECH: " + json.Technology.Id);
 
 		document.getElementById("TP").value=json.BFType;
 		document.getElementById("SZ").value=json.BFSize;

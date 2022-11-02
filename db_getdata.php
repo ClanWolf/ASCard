@@ -5,6 +5,8 @@
 	$mechid = 0;
 	$pilotid = 0;
 
+	$useMULImages = 0;
+
 	$CURRENTROUND = -1;
 
 	$FACTION = "DEFAULT";
@@ -93,6 +95,16 @@
 		}
 	}
 	mysqli_free_result($result_asc_unit);
+
+	// Use MUL Images
+	$sql_asc_useMULImages = "SELECT SQL_NO_CACHE * FROM asc_options where playerid = " . $unitplayerid . ";";
+	$result_asc_useMULImages = mysqli_query($conn, $sql_asc_useMULImages);
+	if (mysqli_num_rows($result_asc_useMULImages) > 0) {
+		while($row33 = mysqli_fetch_assoc($result_asc_useMULImages)) {
+			$useMULImages = $row33["UseMULImages"];
+		}
+	}
+	mysqli_free_result($result_asc_useMULImages);
 
 	// Game
 	// currentround from player

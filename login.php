@@ -181,7 +181,7 @@ session_start();
 		});
 
 		function storeCredentials() {
-			console.log("Storing!");
+			//console.log("Storing!");
 			var pn_1 = $('#pn').val();
 			var pw_1 = $('#pw').val();
 			setCookie("ASCards_un", pn_1, 365);
@@ -197,10 +197,12 @@ session_start();
 			echo $errorMessage;
 			echo "</span>";
 			echo "</td></tr></table>";
+			echo "<form id='f1' onsubmit='storeCredentials();' style='visibility:hidden;' action='?login=1&auto=0' method='post' autocomplete='on'>";
+		} else {
+			echo "<form id='f1' onsubmit='storeCredentials();' style='visibility:hidden;' action='?login=1&auto=1' method='post' autocomplete='on'>";
 		}
 	?>
 
-	<form id="f1" onsubmit="storeCredentials();" style="visibility:hidden;" action="?login=1" method="post" autocomplete="on">
 		<table class="box" cellspacing=10 cellpadding=10 border=0px>
 			<tr>
 				<td class='mechselect_button_active'>

@@ -348,6 +348,7 @@ session_start();
 	echo "  var MP_PREP = $array_MP_PREP[$chosenMechIndex];\n";
 	echo "  var WPNS_PREP = $array_WPNS_PREP[$chosenMechIndex];\n";
 	echo "	var HT_PREP = $array_HT_PREP[$chosenMechIndex];\n";
+	echo "	var playerId = ".$pid.";\n";
 	echo "</script>\n";
 ?>
 
@@ -466,10 +467,17 @@ session_start();
 
 			$imagenametrimmed_a = basename(strtolower(str_replace(' ', '', trim($img))), ".png");
 			$imagenametrimmed = str_replace("'", "", $imagenametrimmed_a);
-			$mechnametrimmed_a = strtolower(str_replace(' ', '', trim($mechname)));
-			$mechnametrimmed = str_replace('&apos;', '', $mechnametrimmed_a);
 
-			if (strpos($mechnametrimmed, $imagenametrimmed) !== false) {
+			$mechnametrimmed_a = str_replace('ELE ', 'Elemental ', trim($mechname));
+			$mechnametrimmed_b = str_replace('BA ', 'Battle Armor ', trim($mechnametrimmed_a));
+			$mechnametrimmed_c = str_replace('&apos;', '', trim($mechnametrimmed_b));
+			$mechnametrimmed_d = str_replace(' ', '', trim($mechnametrimmed_c));
+			$mechnametrimmed = strtolower($mechnametrimmed_d);
+
+			// echo "<script>console.log('SEARCHING: >>" . $imagenametrimmed . "?" . $mechnametrimmed . "<<');</script>";
+
+			if (strpos($imagenametrimmed,$mechnametrimmed) !== false) {
+				// echo "<script>console.log('FOUND: >>" . $imagenametrimmed . "?" . $mechnametrimmed . "<<');</script>";
 				$image = str_replace(' ', '%20', trim($img));
 				break;
 			}
@@ -486,8 +494,16 @@ session_start();
 <div id="pilotimage"><?php echo "<img src='".$array_PILOT_IMG_URL[$chosenMechIndex]."' width='80px' height='80px'>" ?></div>
 <div id="faction" align="center"><?php echo "<img src='./images/factions/".$FACTION_IMG_URL."' width='50px' height='50px'>" ?></div>
 <div id="mech_number" align="center">#<?= $array_MECH_NUMBER[$chosenMechIndex] ?></div>
-<!-- <div id="mech"><?php echo "<img id='mechimage' src='".$array_MECH_IMG_URL[$chosenMechIndex]."'>" ?></div> -->
-<div id="mech"><?php echo "<img id='mechimage' src='" . getMechMULImageByName($array_MECH_MODEL[$chosenMechIndex]) . "'>" ?></div>
+
+<?php
+	if ($useMULImages == 0) {
+		echo "<div id='mech'><img id='mechimage' src='" . $array_MECH_IMG_URL[$chosenMechIndex] . "'></div>\n";
+	} else if ($useMULImages == 1) {
+		echo "<div id='mech'><img id='mechimage' src='" . getMechMULImageByName($array_MECH_MODEL[$chosenMechIndex]) . "'></div>\n";
+	}
+	echo "<script>var mechImageURL='".$array_MECH_IMG_URL[$chosenMechIndex]."';</script>\n";
+	echo "<script>var mechImageURLMUL='".getMechMULImageByName($array_MECH_MODEL[$chosenMechIndex])."';</script>\n";
+?>
 
 <div id="topleft">
 	<span style="font-size: 18px; color: #eeeeee;"><?php echo "$UNIT"; ?></span>

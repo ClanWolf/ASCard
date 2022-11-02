@@ -466,10 +466,10 @@ function setCircles(h, a, s, e, fc, mp, w, uov, mvmnt, wpnsf) {
 	}
 	document.getElementById("mv_points").innerHTML = mvstring;
 
-	console.log("TMM ------------>");
+	//console.log("TMM ------------>");
 	var tmpTMM = originalTMM;
-	console.log("Mech: " + mechmodel);
-	console.log("Starting with TMM: " + tmpTMM);
+	//console.log("Mech: " + mechmodel);
+	//console.log("Starting with TMM: " + tmpTMM);
 	if (mvmnt == 0) {                            // -------------- 0:   NOT MOVED YET
         if (h > 1 && h < 4) { tmpTMM = tmpTMM - 1; }
         if (h == 4) { tmpTMM = -4; }
@@ -489,9 +489,9 @@ function setCircles(h, a, s, e, fc, mp, w, uov, mvmnt, wpnsf) {
 		updatedlongvalue = updatedlongvalue + 2;
 
 		if (unitType == "BA") {
-			console.log("BattleArmor --> NO +1 TMM modifier (jump)");
+			//console.log("BattleArmor --> NO +1 TMM modifier (jump)");
 		} else {
-			console.log("NO BattleArmor --> +1 TMM modifier (jump)");
+			//console.log("NO BattleArmor --> +1 TMM modifier (jump)");
 			tmpTMM = tmpTMM + 1;
 		}
 
@@ -508,15 +508,15 @@ function setCircles(h, a, s, e, fc, mp, w, uov, mvmnt, wpnsf) {
                 if (element.indexOf('JMPS') !== -1) {
                     var num = element.replace(/[^0-9]/g,'');
 					var value = parseInt(num, 10);
-					console.log("Found JMPS. Value: " + value);
-					console.log("+" + value + " TMM modifier (strong JJs)");
+					//console.log("Found JMPS. Value: " + value);
+					//console.log("+" + value + " TMM modifier (strong JJs)");
 					tmpTMM = tmpTMM + value;
                 }
 	            if (element.indexOf('JMPW') !== -1) {
 	                var num = element.replace(/[^0-9]/g,'');
 					var value = parseInt(num, 10);
-					console.log("Found JMPW. Value: " + value);
-					console.log("-" + value + " TMM modifier (weak JJs)");
+					//console.log("Found JMPW. Value: " + value);
+					//console.log("-" + value + " TMM modifier (weak JJs)");
 					tmpTMM = tmpTMM - value;
 	            }
             }
@@ -527,10 +527,10 @@ function setCircles(h, a, s, e, fc, mp, w, uov, mvmnt, wpnsf) {
      		if (h > 1 && h < 4) { tmpTMM = tmpTMM - 1; }
      		tmpTMM = tmpTMM + 1;
      	}
-	console.log("H (Heat) = " + h + " / mvmnt = " + mvmnt + " --> TMM: " + tmpTMM);
+	//console.log("H (Heat) = " + h + " / mvmnt = " + mvmnt + " --> TMM: " + tmpTMM);
 
 	document.getElementById("TMM").innerHTML = tmpTMM;
-	console.log("TMM ------------<");
+	//console.log("TMM ------------<");
 
 	if (updatedshortvalue < 0) {
 //		document.getElementById("minrollshort").style.color ="#00ff00";
@@ -750,7 +750,7 @@ function textSize(dec) {
 }
 
 function increaseENGN_PREP() {
-	// console.log("ENGN_PREP: " + ENGN_PREP);
+	//console.log("ENGN_PREP: " + ENGN_PREP);
 	ENGN_PREP = ENGN_PREP + 1;
 	if (ENGN_PREP > 2) {
 		ENGN_PREP = 0;
@@ -760,7 +760,7 @@ function increaseENGN_PREP() {
 	window.frames['saveframe'].location.replace(url);
 }
 function increaseFCTL_PREP() {
-	// console.log("FCTL_PREP: " + FCTL_PREP);
+	//console.log("FCTL_PREP: " + FCTL_PREP);
 	FCTL_PREP = FCTL_PREP + 1;
 	if (FCTL_PREP > 4) {
 		FCTL_PREP = 0;
@@ -770,7 +770,7 @@ function increaseFCTL_PREP() {
 	window.frames['saveframe'].location.replace(url);
 }
 function increaseMP_PREP() {
-	// console.log("MP_PREP: " + MP_PREP);
+	//console.log("MP_PREP: " + MP_PREP);
 	MP_PREP = MP_PREP + 1;
 	if (MP_PREP > 4) {
 		MP_PREP = 0;
@@ -780,7 +780,7 @@ function increaseMP_PREP() {
 	window.frames['saveframe'].location.replace(url);
 }
 function increaseWPNS_PREP() {
-	// console.log("WPNS_PREP: " + WPNS_PREP);
+	//console.log("WPNS_PREP: " + WPNS_PREP);
 	WPNS_PREP = WPNS_PREP + 1;
 	if (WPNS_PREP > 4) {
 		WPNS_PREP = 0;
@@ -790,7 +790,7 @@ function increaseWPNS_PREP() {
 	window.frames['saveframe'].location.replace(url);
 }
 function increaseHT_PREP() {
-	// console.log("HT_PREP: " + HT_PREP);
+	//console.log("HT_PREP: " + HT_PREP);
 	HT_PREP = HT_PREP + 1;
 	if (HT_PREP > 4) {
 		HT_PREP = 0;
@@ -811,7 +811,7 @@ $(document).ready(function() {
 		el1.addEventListener('click', function() {
 			if (context != null ) {
 				context.resume().then(() => {
-				// console.log('Playback resumed successfully');
+				//console.log('Playback resumed successfully');
 				});
 			} else {
 				context = new AudioContext();
@@ -823,7 +823,7 @@ $(document).ready(function() {
 	infoButton.addEventListener('click', function() {
 		if (context != null ) {
 			context.resume().then(() => {
-				// console.log('Playback resumed successfully');
+				//console.log('Playback resumed successfully');
 			});
 		} else {
             context = new AudioContext();
@@ -834,7 +834,7 @@ $(document).ready(function() {
 	diceButton.addEventListener('click', function() {
 		if (context != null ) {
 			context.resume().then(() => {
-				// console.log('Playback resumed successfully');
+				//console.log('Playback resumed successfully');
 			});
 		} else {
 			context = new AudioContext();
@@ -845,7 +845,7 @@ $(document).ready(function() {
 	moveButton.addEventListener('click', function() {
 		if (context != null ) {
             context.resume().then(() => {
-				// console.log('Playback resumed successfully');
+				//console.log('Playback resumed successfully');
 			});
         } else {
 			context = new AudioContext();
@@ -935,6 +935,18 @@ function changeWallpaper() {
 	}
 	document.body.style.backgroundImage = "url('./images/body-bg_" + wallpaperNameRand + ".png')";
 	setCookie("wallpaper", wallpaperNameRand, 365);
+
+	if (wallpaperNameRand == 9) {
+		// Set use MUL images to 1 on database (white background + MUL images)
+		var url="./save_UseMULImages.php?playerId="+playerId+"&useMulImages=1";
+		window.frames['saveframe'].location.replace(url);
+		document.getElementById("mechimage").src=mechImageURLMUL;
+	} else {
+		// Set use MUL images to 0 on database (dark background + alternative images)
+		var url="./save_UseMULImages.php?playerId="+playerId+"&useMulImages=0";
+		window.frames['saveframe'].location.replace(url);
+		document.getElementById("mechimage").src=mechImageURL;
+	}
 }
 
 function showMech() {
