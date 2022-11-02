@@ -22,7 +22,8 @@ session_start();
 <head>
 	<title>ClanWolf.net: AplhaStrike Card App (ASCard)</title>
 	<meta charset="utf-8">
-	<meta http-equiv="expires" content="0">
+	<!-- <meta http-equiv="expires" content="0"> -->
+	<!-- <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"> -->
 	<meta name="description" content="Cards app for the AlphaStrike TableTop (BattleTech).">
 	<meta name="keywords" content="BattleTech, AlphaStrike, Mech">
 	<meta name="robots" content="noindex,nofollow">
@@ -44,7 +45,7 @@ session_start();
 	<link rel="apple-touch-icon" href="./images/icon_152x152.png" type="image/png" sizes="152x152">
 	<link rel="apple-touch-icon" href="./images/icon_180x180.png" type="image/png" sizes="180x180">
 
-	<script type="text/javascript" src="./scripts/jquery-3.6.0.min.js"></script>
+	<script type="text/javascript" src="./scripts/jquery-3.6.1.min.js"></script>
 	<script type="text/javascript" src="./scripts/howler.min.js"></script>
 	<script type="text/javascript" src="./scripts/cookies.js"></script>
 	<script type="text/javascript" src="./scripts/functions.js"></script>
@@ -453,6 +454,28 @@ session_start();
 		echo "<meta http-equiv='refresh' content='0;url=./gui_select_unit.php'> ";
 		header("Location: ./gui_select_unit.php");
 	}
+
+	function getMechMULImageByName($mechname) {
+		$image = "images/mechs/Generic.gif";
+		$dir = 'images/mechs_mul/';
+		$startChar = mb_substr($mechname, 0, 3); // use first 3 chars to list files to keep the resultlist as small as possible
+
+		$files = glob($dir."{$startChar}*.png");
+		foreach ($files as &$img) {
+			//echo "<script>console.log('>>" . trim($img) . "<<');</script>";
+
+			$imagenametrimmed_a = basename(strtolower(str_replace(' ', '', trim($img))), ".png");
+			$imagenametrimmed = str_replace("'", "", $imagenametrimmed_a);
+			$mechnametrimmed_a = strtolower(str_replace(' ', '', trim($mechname)));
+			$mechnametrimmed = str_replace('&apos;', '', $mechnametrimmed_a);
+
+			if (strpos($mechnametrimmed, $imagenametrimmed) !== false) {
+				$image = str_replace(' ', '%20', trim($img));
+				break;
+			}
+		}
+		return $image;
+	}
 ?>
 
 			<td style="width: 100px;" style="width: 100px;" nowrap width="100px" style="background: rgba(50,50,50,1.0); text-align: center; vertical-align: middle;"><img src='./images/player/<?=$pimage?>' width='60px' height='60px'></td>
@@ -463,7 +486,8 @@ session_start();
 <div id="pilotimage"><?php echo "<img src='".$array_PILOT_IMG_URL[$chosenMechIndex]."' width='80px' height='80px'>" ?></div>
 <div id="faction" align="center"><?php echo "<img src='./images/factions/".$FACTION_IMG_URL."' width='50px' height='50px'>" ?></div>
 <div id="mech_number" align="center">#<?= $array_MECH_NUMBER[$chosenMechIndex] ?></div>
-<div id="mech"><?php echo "<img id='mechimage' src='".$array_MECH_IMG_URL[$chosenMechIndex]."'>" ?></div>
+<!-- <div id="mech"><?php echo "<img id='mechimage' src='".$array_MECH_IMG_URL[$chosenMechIndex]."'>" ?></div> -->
+<div id="mech"><?php echo "<img id='mechimage' src='" . getMechMULImageByName($array_MECH_MODEL[$chosenMechIndex]) . "'>" ?></div>
 
 <div id="topleft">
 	<span style="font-size: 18px; color: #eeeeee;"><?php echo "$UNIT"; ?></span>

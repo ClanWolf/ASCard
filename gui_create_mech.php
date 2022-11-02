@@ -295,9 +295,8 @@ session_start();
 <head>
 	<title>ClanWolf.net: AplhaStrike Card App (ASCard): Unit creator</title>
 	<meta charset="utf-8">
-	<meta http-equiv="expires" content="0">
-	<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
-
+	<!-- <meta http-equiv="expires" content="0"> -->
+	<!-- <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"> -->
 	<meta name="description" content="Cards app for the AlphaStrike TableTop (BattleTech).">
 	<meta name="keywords" content="BattleTech, AlphaStrike, Mech">
 	<meta name="robots" content="noindex,nofollow">
@@ -320,7 +319,7 @@ session_start();
 	<link rel="apple-touch-icon" href="./images/icon_152x152.png" type="image/png" sizes="152x152">
 	<link rel="apple-touch-icon" href="./images/icon_180x180.png" type="image/png" sizes="180x180">
 
-	<script type="text/javascript" src="./scripts/jquery-3.6.0.min.js"></script>
+	<script type="text/javascript" src="./scripts/jquery-3.6.1.min.js"></script>
 	<script type="text/javascript" src="./scripts/basic.js"></script>
 	<script type="text/javascript" src="./scripts/masterunitlist.js"></script>
 	<script type="text/javascript" src="./scripts/adjustPointValue.js"></script>
