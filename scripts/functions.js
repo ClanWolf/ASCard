@@ -879,6 +879,17 @@ $(document).ready(function() {
 		if (wallpaperName > 0 && wallpaperName < 10) {
 			document.body.style.backgroundImage = "url('./images/body-bg_" + wallpaperName + ".png')";
 		}
+		if (wallpaperName == 9) {
+			// Set use MUL images to 1 on database (white background + MUL images)
+			var url="./save_UseMULImages.php?playerId="+playerId+"&useMulImages=1";
+			window.frames['saveframe'].location.replace(url);
+			document.getElementById("mechimage").src=mechImageURLMUL;
+		} else {
+			// Set use MUL images to 0 on database (dark background + alternative images)
+			var url="./save_UseMULImages.php?playerId="+playerId+"&useMulImages=0";
+			window.frames['saveframe'].location.replace(url);
+			document.getElementById("mechimage").src=mechImageURL;
+		}
 	}
 });
 

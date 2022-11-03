@@ -56,8 +56,8 @@ session_start();
 				}
 
 				// Create options entry for new user
-				$sqlinsertoptions = "INSERT INTO asc_options (playerid, option1, option2, option3) VALUES ";
-				$sqlinsertoptions = $sqlinsertoptions . "(".$newplayerid.", 1, 0, 0)";
+				$sqlinsertoptions = "INSERT INTO asc_options (playerid, option1, option2, option3, UseMULImages) VALUES ";
+				$sqlinsertoptions = $sqlinsertoptions . "(".$newplayerid.", 1, 1, 1, 0)";
 				if (mysqli_query($conn, $sqlinsertoptions)) {
 					// Success inserting units for new player
 				} else {
