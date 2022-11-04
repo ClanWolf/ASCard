@@ -173,9 +173,11 @@ session_start();
 				<td nowrap onclick="location.href='./logout.php'" width="60px" style="width: 100px;background: rgba(50,50,50,1.0); text-align: center; vertical-align: middle;">
 					<div><a style="color: #eee;" href="./logout.php">&nbsp;&nbsp;&nbsp;<i class="fas fa-power-off" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;</a></div>
 				</td>
+				<!--
 				<td nowrap onclick="location.href='./gui_finalize_round.php'" width="100px" style="width: 100px;background: rgba(56,87,26,1.0); text-align: center; vertical-align: middle;">
 					<div><a style="color: #eee;" href="./gui_finalize_round.php">&nbsp;&nbsp;&nbsp;<i class="fas fa-redo"></i>&nbsp;&nbsp;&nbsp;</a></div>
 				</td>
+				-->
 				<td nowrap onclick="location.href='./gui_finalize_round.php'" style="width: 100px;background:rgba(56,87,26,1.0);">
 					<div style='vertical-align:middle;font-size:28px;color:#eee;'>&nbsp;&nbsp;&nbsp;R<?php echo $CURRENTROUND ?>&nbsp;&nbsp;&nbsp;</div>
 				</td>
@@ -227,7 +229,14 @@ session_start();
 			</tr>
 		</table>
 
-		<p class='datalabel' align="center"><a href="https://www.clanwolf.net/apps/ASCard/data/mul_cache/cache.php" target="_BLANK">Update unit cache from MUL</a><br>
+<?php
+	if ($pid == 2) { // Meldric (only admin may refresh the cache)
+		echo "<p class='datalabel' align='center'><a href='https://www.clanwolf.net/apps/ASCard/data/mul_cache/cache.php' target='_BLANK'>Update unit cache from MUL</a><br>";
+	} else {
+		echo "<p class='datalabel' align='center'>Only admin may refresh cache!<br>";
+	}
+?>
+
 		(Last updated: <?php echo $file_cacheversion ?>)</p>
 	</div>
 

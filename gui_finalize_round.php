@@ -209,9 +209,11 @@ session_start();
 				<td nowrap onclick="location.href='./logout.php'" width="100px" style="width: 100px;background: rgba(50,50,50,1.0); text-align: center; vertical-align: middle;">
 					<div><a style="color:#eee;" href="./logout.php">&nbsp;&nbsp;&nbsp;<i class="fas fa-power-off" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;</a></div>
 				</td>
+				<!--
 				<td nowrap onclick="location.href='./gui_finalize_round.php'" width="100px" style="width: 100px;background:rgba(81,125,37,1.0); text-align: center; vertical-align: middle;">
 					<div><a style="color:#fff;" href="./gui_finalize_round.php">&nbsp;&nbsp;&nbsp;<i class="fas fa-redo"></i>&nbsp;&nbsp;&nbsp;</a></div>
 				</td>
+				-->
 				<td nowrap onclick="location.href='./gui_finalize_round.php'" style="width: 100px;background:rgba(81,125,37,1.0);">
 					<div style='vertical-align:middle;font-size:28px;color:#fff;'>&nbsp;&nbsp;&nbsp;R<?php echo $CURRENTROUND ?>&nbsp;&nbsp;&nbsp;</div>
 				</td>
@@ -236,13 +238,13 @@ session_start();
 
 	<table align="center" cellspacing=2 cellpadding=2 border=0px>
 		<tr>
-			<td nowrap onclick="javascript:finalizeRound(<?= $pid ?>);" colspan='3' style='background-color:#444444;width:270px;height:40px;' class='mechselect_button_active'>
+			<td nowrap onclick="javascript:finalizeRound(<?= $pid ?>);" colspan='3' style='background-color:#517D25;width:810px;height:40px;' class='mechselect_button_active'>
 				&nbsp;&nbsp;&nbsp;<i class="fas fa-redo"></i>&nbsp;&nbsp;&nbsp;Finalize current round (<?= $CURRENTROUND ?>)
 			</td>
 		</tr>
 		<tr>
-<?php
 
+<?php
 	$addMechToUnitLinkArray = array();
 	$assignMechToUnitLinkArray = array();
 	$mechsInAllUnits = array();
@@ -376,9 +378,10 @@ session_start();
 
 				$mechDetailString = "";
 
-				$mechDetailString = $mechDetailString."						<td nowrap width='1%' onclick='location.href=\"\"' style='background-color:#121212;text-align:right;'>\n";
+				$mechDetailString = $mechDetailString."						<td nowrap width='1%' valign='middle' onclick='location.href=\"\"' style='background-color:#121212;text-align:right;'>\n";
 				$mechDetailString = $mechDetailString."							<span style='font-size:16px;'>\n";
-				$mechDetailString = $mechDetailString."								\n";
+				$mechDetailString = $mechDetailString."						        &nbsp;&nbsp;&nbsp;<img src='./images/ranks/".$factionidSelected."/".$pilotrank.".png' width='28px' height='28px'>&nbsp;&nbsp;&nbsp;";
+				//$mechDetailString = $mechDetailString."								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\n";
 				$mechDetailString = $mechDetailString."							</span>\n";
 				$mechDetailString = $mechDetailString."						</td>\n";
 
@@ -436,6 +439,12 @@ session_start();
 	}
 	echo "		</tr>\n";
 ?>
+
+	<tr>
+		<td style='background-color:#333333;' valign='top' align='center' colspan='3'>
+			<span style='font-size:24px;color:#fff;'>Round can be finalized as soon as all Mechs have moved and fired.</span>
+		</td>
+	</tr>
 
 	</table>
 </body>
