@@ -884,11 +884,35 @@ $(document).ready(function() {
 			var url="./save_UseMULImages.php?playerId="+playerId+"&useMulImages=1";
 			window.frames['saveframe'].location.replace(url);
 			document.getElementById("mechimage").src=mechImageURLMUL;
+			const allDataAreas = document.getElementsByClassName("dataarea");
+			for (let i = 0; i < allDataAreas.length; i++) {
+				allDataAreas[i].style.backgroundColor="rgba(255,255,255,0.90)"
+			}
+			const allDataValues = document.getElementsByClassName("datavalue");
+			for (let i = 0; i < allDataValues.length; i++) {
+				allDataValues[i].style.color="#000"
+			}
+			const allDataValueThins = document.getElementsByClassName("datavalue_thin");
+			for (let i = 0; i < allDataValueThins.length; i++) {
+				allDataValueThins[i].style.color="#000"
+			}
 		} else {
 			// Set use MUL images to 0 on database (dark background + alternative images)
 			var url="./save_UseMULImages.php?playerId="+playerId+"&useMulImages=0";
 			window.frames['saveframe'].location.replace(url);
 			document.getElementById("mechimage").src=mechImageURL;
+			const allDataAreas = document.getElementsByClassName("dataarea");
+			for (let i = 0; i < allDataAreas.length; i++) {
+				allDataAreas[i].style.backgroundColor="rgba(70,70,70,0.85)"
+			}
+			const allDataValues = document.getElementsByClassName("datavalue");
+			for (let i = 0; i < allDataValues.length; i++) {
+				allDataValues[i].style.color="#ccc"
+			}
+			const allDataValueThins = document.getElementsByClassName("datavalue_thin");
+			for (let i = 0; i < allDataValueThins.length; i++) {
+				allDataValueThins[i].style.color="#ccc"
+			}
 		}
 	}
 });
@@ -952,11 +976,35 @@ function changeWallpaper() {
 		var url="./save_UseMULImages.php?playerId="+playerId+"&useMulImages=1";
 		window.frames['saveframe'].location.replace(url);
 		document.getElementById("mechimage").src=mechImageURLMUL;
+		const allDataAreas = document.getElementsByClassName("dataarea");
+		for (let i = 0; i < allDataAreas.length; i++) {
+			allDataAreas[i].style.backgroundColor="rgba(255,255,255,0.85)"
+		}
+		const allDataValues = document.getElementsByClassName("datavalue");
+		for (let i = 0; i < allDataValues.length; i++) {
+			allDataValues[i].style.color="#000"
+		}
+		const allDataValueThins = document.getElementsByClassName("datavalue_thin");
+		for (let i = 0; i < allDataValueThins.length; i++) {
+			allDataValueThins[i].style.color="#000"
+		}
 	} else {
 		// Set use MUL images to 0 on database (dark background + alternative images)
 		var url="./save_UseMULImages.php?playerId="+playerId+"&useMulImages=0";
 		window.frames['saveframe'].location.replace(url);
 		document.getElementById("mechimage").src=mechImageURL;
+		const allDataAreas = document.getElementsByClassName("dataarea");
+		for (let i = 0; i < allDataAreas.length; i++) {
+			allDataAreas[i].style.backgroundColor="rgba(70,70,70,0.85)"
+		}
+		const allDataValues = document.getElementsByClassName("datavalue");
+		for (let i = 0; i < allDataValues.length; i++) {
+			allDataValues[i].style.color="#ccc"
+		}
+		const allDataValueThins = document.getElementsByClassName("datavalue_thin");
+		for (let i = 0; i < allDataValueThins.length; i++) {
+			allDataValueThins[i].style.color="#ccc"
+		}
 	}
 }
 
