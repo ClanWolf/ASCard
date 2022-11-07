@@ -287,7 +287,7 @@ session_start();
 			// Error
 			echo "Error: " . $sql_insertmechstatus . "<br>" . mysqli_error($conn);
 		}
-		echo "<meta http-equiv='refresh' content='0;url=./gui_select_unit.php'>";
+		echo "<meta http-equiv='refresh' content='0;url=./gui_select_unit.php?activebid=1&mechid=" . $newmechid . "'>";
 	}
 ?>
 

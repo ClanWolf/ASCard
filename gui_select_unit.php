@@ -45,7 +45,7 @@ session_start();
 			echo "Error: " . $sqldeleteassignment . "<br>" . mysqli_error($conn);
 		}
 
-		echo "<meta http-equiv='refresh' content='0;url=./gui_select_unit.php'>";
+		echo "<meta http-equiv='refresh' content='0;url=./gui_select_unit.php?activebid=0&mechid=" . $mechid . "'>";
 	}
 
 	if ($togglebid == "1" || $togglebid == "0") {
