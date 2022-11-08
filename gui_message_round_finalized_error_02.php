@@ -145,7 +145,7 @@ session_start();
 			<tr>
 				<td align="center" class='datalabel'>
 					<p>Round was not changed.</p>
-					<p style="font-family:'Pathway Gothic One',sans-serif,bold;font-size:45px;color:yellow;">Some Mechs have not moved or fired yet!</p>
+					<p style="font-family:'Pathway Gothic One',sans-serif,bold;font-size:45px;color:yellow;">Some Units have not moved or fired yet!</p>
 				</td>
 			</tr>
 		</table>
