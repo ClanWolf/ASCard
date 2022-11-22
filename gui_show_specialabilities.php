@@ -102,6 +102,7 @@
 					<a href="#LRM" target="_SELF">LRM</a>&nbsp;&nbsp;
 					<a href="#MAG" target="_SELF">MAG</a>&nbsp;&nbsp;
 					<a href="#MT" target="_SELF">MT</a>&nbsp;&nbsp;
+					<a href="#MEC" target="_SELF">MEC</a>&nbsp;&nbsp;
 					<a href="#MEL" target="_SELF">MEL</a>&nbsp;&nbsp;
 					<a href="#MDS" target="_SELF">MDS</a>&nbsp;&nbsp;
 					<a href="#MSW" target="_SELF">MSW</a>&nbsp;&nbsp;
@@ -133,6 +134,7 @@
 					<a href="#TUR" target="_SELF">TUR</a>&nbsp;&nbsp;
 					<a href="#UMU" target="_SELF">UMU</a>&nbsp;&nbsp;
 					<a href="#WAT" target="_SELF">WAT</a>&nbsp;&nbsp;
+					<a href="#XMEC" target="_SELF">XMEC</a>&nbsp;&nbsp;
 				</td>
 			</tr>
 		</table>
@@ -329,6 +331,9 @@
 					<p id="MT"><strong>’Mech Transport (MT#)</strong><br>
 						A unit with this special ability can transport, deploy, and drop the indicated number of ’Mechs. This ability usually applies to DropShips, and is always used in conjunction with the Door special ability (see Transporting Non-Infantry Units, and Dropping Troops, pp. 63 and 90, respectively).
 					</p>
+					<p id="MEC"><strong>Mechanized (MEC)</strong><br>
+						Battle Armor with this special ability can be carried into battle as mechanized battle armor by units with the OMNI special ability.
+					</p>
 					<p id="MEL"><strong>Melee (MEL)</strong><br>
 						This special ability indicates that the ’Mech is equipped with a physical attack weapon, and adds 1 additional point of physical attack damage on a successful Melee-type physical attack (see Resolving Physical Attacks, p. 19).
 					</p>
@@ -475,6 +480,9 @@
 					<p id="WAT"><strong>Watchdog (WAT)</strong><br>
 						A unit with this special ability possesses the Watchdog Composite Electronic Warfare System. For purposes of  Alpha Strike, it is treated as if it has both the ECM and Light Active Probe (LPRB) special abilities.<br>
 						(Active probes are covered in greater detail in the Advanced Options chapter, see pp. 62-113.)
+					</p>
+					<p id="XMEC"><strong>Extended Mechanized (XMEC)</strong><br>
+						Battle Armor with this ability can be transported on the battlefield by any type of unit as mechanized battle armor (see page 32 for details on transporting infantry.)  Normally, only Units with the Omni tag can carry mechanized Battle Armor.
 					</p>
 				</td>
 			</tr>
