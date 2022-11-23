@@ -1,0 +1,5 @@
+Clan_2.json, 8597.json:
+Special ability of BattleArmor "Undine" "MECH" --> "MECH"
+
+2735.json, 2736.json, 2737.json, 4933.json, 4934.json:
+Hetzer renamed, preserved
