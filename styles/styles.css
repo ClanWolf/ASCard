@@ -360,7 +360,7 @@ a:hover {
 	padding: 0px;
 	top: 80px;
 	height: 50px;
-	right: 265px;
+	right: 262px;
 }
 #bottomleft {
 	z-index: 20;
@@ -648,6 +648,7 @@ input[type='checkbox'].bigcheck:checked + span.bigcheck-target:after {
 	color: #222;
 	font-size: 100%;
 	padding-right: 5px;
+	visibility: hidden;
 }
 .datavalue {
 	vertical-align: middle;
