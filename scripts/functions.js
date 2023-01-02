@@ -801,10 +801,6 @@ function increaseHT_PREP() {
 }
 
 $(document).ready(function() {
-	//$("#cover").fadeOut(200, "linear");
-	$("#cover").hide();
-	document.getElementById("cover").style.visibility = "hidden";
-
 	var mechimage = document.getElementById("mechimage");
 	mechimage.style.height="" + ($(document).height() * 0.8 + "px");
 
@@ -917,6 +913,11 @@ $(document).ready(function() {
 			}
 		}
 	}
+
+	$("#cover").fadeOut(350, "linear", function() {
+		$("#cover").hide();
+		document.getElementById("cover").style.visibility = "hidden";
+	});
 });
 
 $(window).resize(function() {
@@ -924,7 +925,7 @@ $(window).resize(function() {
 	mechimage.style.height="" + $(document).height() * 0.8 + "px";
 });
 
-function rand (min, max) {
+function rand(min, max) {
 	return Math.floor(Math.random() * (max - min + 1)) + min;
 } 
 

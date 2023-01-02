@@ -50,6 +50,7 @@ html, body {
 	min-height: 100%;
 	height: 100vh;
 	min-height: 100vh;
+	background-color: #000000;
 	background-image: url('../images/body-bg_2.png');
 	overflow: visible;
 	background-size: cover;
@@ -95,7 +96,7 @@ a:hover {
 	width: 100%;
 	top: 0;
 	left: 0;
-	background: #000;
+	background-color: #000000;
 	/* background-image: url('images/body-bg_1.png'); */
 	z-index:100;
 }
