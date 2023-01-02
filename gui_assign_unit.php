@@ -330,7 +330,13 @@ session_start();
 		echo "			<tr>\n";
 		echo "				<td colspan='3'>Delete selected Mech/BA from Hangar (!)</td>\n";
 		echo "				<td align='right'>\n";
-		echo "					<a href='#' onClick='deleteStoredMech();'><i class='fas fa-minus-square'></i></a>\n";
+
+		if ($pid == 2) { // Meldric (only admin may delete units)
+			echo "					<a href='#' onClick='deleteStoredMech();'><i class='fas fa-minus-square'></i></a>\n";
+		} else {
+			echo "					<i class=\"fas fa-ban\"></i>\n";
+		}
+
 		echo "				</td>\n";
 		echo "			</tr>\n";
 	}

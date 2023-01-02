@@ -162,7 +162,7 @@
 								echo "Error (asc_mechstatus) updating record: " . mysqli_error($conn) . "<br>";
 
 								echo "<script>top.window.location = './gui_message_round_finalized_error_01.php'</script>";
-								die;
+								die('ERROR 1');
 							}
 						}
 					}
@@ -185,7 +185,7 @@
 						echo "Error (asc_assign) updating record: " . mysqli_error($conn) . "<br>";
 
 						echo "<script>top.window.location = './gui_message_round_finalized_error_01.php'</script>";
-						die;
+						die('ERROR 2');
 					}
 				}
 			}
@@ -204,17 +204,17 @@
 				mysqli_commit($conn);
 
 				echo "<script>top.window.location = './gui_message_round_finalized.php'</script>";
-				die;
+				die('ERROR 3');
 			} else {
 				echo "<br>";
 				echo "Error (asc_player) updating record: " . mysqli_error($conn) . "<br>";
 
 				echo "<script>top.window.location = './gui_message_round_finalized_error_01.php'</script>";
-				die;
+				die('ERROR 4');
 			}
 		} else {
 			echo "<script>top.window.location = './gui_message_round_finalized_error_02.php'</script>";
-			die;
+			die('ERROR 5');
 		}
 	}
 

@@ -364,7 +364,11 @@ session_start();
 				if ($playMode) {
 					echo "										\n";
 				} else {
-					echo "										<a href='#' onClick='saveNewPlayer(".$row['playerid'].",\"".$row['image']."\");'><i class='fas fa-minus-square'></i></a>\n";
+					if ($pid == 2) { // Meldric (only admin may delete player)
+						echo "										<a href='#' onClick='saveNewPlayer(".$row['playerid'].",\"".$row['image']."\");'><i class='fas fa-minus-square'></i></a>\n";
+					} else {
+						echo "										<i class=\"fas fa-ban\"></i>\n";
+					}
 				}
 				echo "									</span>\n";
 				echo "								</td>\n";

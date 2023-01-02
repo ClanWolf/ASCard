@@ -1,5 +1,12 @@
 <?php
 session_start();
+
+// https://stackoverflow.com/questions/22911552/php-blank-white-page-no-errors
+// php.ini: error_reporting=~E_ALL & ~E_DEPRECATED & ~E_STRICT & ~E_NOTICE & ~WARNING
+//ini_set('display_startup_errors',1);
+//ini_set('display_errors',1);
+//error_reporting(-1);
+
 // https://www.php-einfach.de/php-tutorial/php-sessions/
 	require('./logger.php');
 	if (!isset($_SESSION['playerid'])) {
@@ -318,8 +325,12 @@ session_start();
 		header("Location: ./gui_select_unit.php");
 		//die("Check position 2");
 	}
-	$chosenMechIndex = $_GET["chosenmech"];
-	if (empty($chosenMechIndex)) {
+	if (isset($_GET["chosenmech"])) {
+		$chosenMechIndex = $_GET["chosenmech"];
+		if (empty($chosenMechIndex)) {
+			$chosenMechIndex = 1;
+		}
+	} else {
 		$chosenMechIndex = 1;
 	}
 	require('./db_getdata.php');
@@ -399,6 +410,7 @@ session_start();
 		} else {
 			$heatimage[$i4] = "<img id='heatimage_".$i4."' src='./images/temp_".$array_HT[$i4].".png' height='21px'>";
 		}
+		$phaseButton = "./images/top-right_phase01.png";
 		if ($mvmt == 0 && $wpnsfired == 0) {
 			$mechstatusimage = "./images/check_red.png";
 			$phaseButton = "./images/top-right_phase01.png";
@@ -414,7 +426,6 @@ session_start();
 		if ($mvmt == 0 && ($wpnsfired == 1 || $wpnsfired == 2 || $wpnsfired == 3 || $wpnsfired == 4)) {
 			// Error! Unit has fired but no movement was specified! Ask again!
 		}
-
 		if ($array_MECH_IMG_STATUS[$i4] == "images/DD_04.png") {
 			$phaseButton = "./images/top-right_phase00.png";
 		}

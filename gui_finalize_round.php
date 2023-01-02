@@ -191,6 +191,10 @@ session_start();
 			var url="./save_finalize_round.php?pid=" + playerId;
 			window.frames["saveframe"].location.replace(url);
 		}
+		function resetRound(playerId) {
+			var url="./save_reset_round.php?pid=" + playerId;
+			window.frames["saveframe"].location.replace(url);
+		}
 	</script>
 
 	<div id="cover"></div>
@@ -236,10 +240,31 @@ session_start();
 
 	<br>
 
-	<table align="center" cellspacing=2 cellpadding=2 border=0px>
+	<table align="center" cellspacing="2" cellpadding="2" border="0px">
 		<tr>
-			<td nowrap onclick="javascript:finalizeRound(<?= $pid ?>);" colspan='3' style='background-color:#517D25;width:810px;height:40px;' class='mechselect_button_active'>
-				&nbsp;&nbsp;&nbsp;<i class="fas fa-redo"></i>&nbsp;&nbsp;&nbsp;Finalize current round (<?= $CURRENTROUND ?>)
+			<td nowrap colspan='3'>
+				<table cellspacing="2" cellpadding="2">
+
+				<?php
+					if (!$playMode) {
+						echo "<tr>\n";
+						echo "	<td nowrap width='99%' style='background-color:#517D25;width:810px;height:40px;' class='mechselect_button_active' onclick='javascript:finalizeRound(".$pid.");'>\n";
+						echo "		&nbsp;&nbsp;&nbsp;<i class='fas fa-redo'></i>&nbsp;&nbsp;&nbsp;Finalize current round (".$CURRENTROUND.")\n";
+						echo "	</td>\n";
+						echo "	<td nowrap width='1%' style='background-color:#831100;height:40px;' class='mechselect_button_active' onclick='javascript:resetRound(".$pid.");'>\n";
+						echo "		&nbsp;&nbsp;&nbsp;Reset&nbsp;&nbsp;&nbsp;\n";
+						echo "	</td>\n";
+						echo "</tr>\n";
+					} else {
+						echo "<tr>\n";
+						echo "	<td nowrap width='100%' style='background-color:#517D25;width:810px;height:40px;' class='mechselect_button_active' onclick='javascript:finalizeRound(".$pid.");'>\n";
+						echo "		&nbsp;&nbsp;&nbsp;<i class='fas fa-redo'></i>&nbsp;&nbsp;&nbsp;Finalize current round (".$CURRENTROUND.")\n";
+						echo "	</td>\n";
+						echo "</tr>\n";
+					}
+				?>
+
+				</table>
 			</td>
 		</tr>
 		<tr>

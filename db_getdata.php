@@ -12,7 +12,7 @@
 	$FACTION = "DEFAULT";
 	$FACTION_IMG_URL = "...";
 	$UNIT = "DEFAULT";
-	$UNIT_IMG_URL = "...";
+	//$UNIT_IMG_URL = "...";
 
 	// Store in arrays to keep the mech- and pilotdata of the current unit
 	$array_PILOT = array();
@@ -88,7 +88,7 @@
 		while($row = mysqli_fetch_assoc($result_asc_unit)) {
 			if ($row["unitid"] == $unitid) {
 				$UNIT = $row["forcename"];
-				$UNIT_IMG_URL = $row["unit_imageurl"];
+				//$UNIT_IMG_URL = $row["unit_imageurl"];
 				$factionid = $row["factionid"];
 				$unitplayerid = $row["playerid"];
 			}
@@ -243,11 +243,10 @@
 			}
 		}
 	}
-	mysqli_free_result($result_asc);
-
 	$thread_id = mysqli_thread_id($conn);
+
+	mysqli_free_result($result_asc);
 	mysqli_kill($conn, $thread_id);
 
 	mysqli_close($conn);
-	mysqli_refresh();
 ?>
