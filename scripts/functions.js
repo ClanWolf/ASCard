@@ -801,7 +801,9 @@ function increaseHT_PREP() {
 }
 
 $(document).ready(function() {
-	$("#cover").fadeOut(200, "linear");
+	//$("#cover").fadeOut(200, "linear");
+	$("#cover").hide();
+	document.getElementById("cover").style.visibility = "hidden";
 
 	var mechimage = document.getElementById("mechimage");
 	mechimage.style.height="" + ($(document).height() * 0.8 + "px");
