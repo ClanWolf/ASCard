@@ -715,11 +715,11 @@ session_start();
 							<td nowrap width="65%" class="datalabel_thin">
 								<table cellspacing="0" cellpadding="0">
 									<tr>
-										<td style="background-color: black;height: 5px;border: 0px solid;border-color: black;"></td>
-										<td style="background-color: black;height: 5px;border: 0px solid;border-color: black;"></td>
-										<td style="background-color: white;height: 5px;border: 0px solid;border-color: black;"></td>
-										<td style="background-color: yellow;height: 5px;border: 0px solid;border-color: black;"></td>
-										<td style="background-color: red;height: 5px;border: 0px solid;border-color: black;"></td>
+										<td align="center"><img src="./images/buttons/mov01.png" width='30px' style="border: 0px solid #000000;"></td>
+										<td align="center"><img src="./images/buttons/mov02.png" width='30px' style="border: 0px solid #000000;"></td>
+										<td align="center"><img src="./images/buttons/mov03.png" width='30px' style="border: 0px solid #000000;"></td>
+										<td align="center"><img src="./images/buttons/mov04.png" width='30px' style="border: 0px solid #000000;"></td>
+										<td align="center"><img src="./images/buttons/mov05.png" width='30px' style="border: 0px solid #000000;"></td>
 									</tr>
 									<tr>
 										<td><label class='bigcheck'><input type='checkbox' onchange='readCircles2(<?= $array_MECH_DBID[$chosenMechIndex] ?>, <?= $array_A_MAX[$chosenMechIndex] ?>, <?= $array_S_MAX[$chosenMechIndex] ?>, 2, -1);' class='bigcheck' name='MV2_moved2_standstill' id='MV2_moved2_standstill' value='no'/><span class='bigcheck-target'></span></label></td>
