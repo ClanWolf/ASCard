@@ -800,138 +800,6 @@ function increaseHT_PREP() {
 	window.frames['saveframe'].location.replace(url);
 }
 
-$(document).ready(function() {
-	$("#cover").click(function(event) {
-		$("#cover").fadeOut(350, "linear", function() {
-			$("#cover").hide();
-			document.getElementById("cover").style.visibility = "hidden";
-		});
-	});
-
-	var mechimage = document.getElementById("mechimage");
-	mechimage.style.height="" + ($(document).height() * 0.8 + "px");
-
-	var list = document.getElementsByClassName("bigcheck");
-	[].forEach.call(list, function (el1) {
-		el1.addEventListener('click', function() {
-			if (context != null ) {
-				context.resume().then(() => {
-				//console.log('Playback resumed successfully');
-				});
-			} else {
-				context = new AudioContext();
-			}
-		});
-	});
-
-	var infoButton = document.getElementById("InfoButton");
-	infoButton.addEventListener('click', function() {
-		if (context != null ) {
-			context.resume().then(() => {
-				//console.log('Playback resumed successfully');
-			});
-		} else {
-            context = new AudioContext();
-		}
-	});
-
-	var diceButton = document.getElementById("DiceButton");
-	diceButton.addEventListener('click', function() {
-		if (context != null ) {
-			context.resume().then(() => {
-				//console.log('Playback resumed successfully');
-			});
-		} else {
-			context = new AudioContext();
-		}
-    });
-
-	var moveButton = document.getElementById("MoveButton");
-	moveButton.addEventListener('click', function() {
-		if (context != null ) {
-            context.resume().then(() => {
-				//console.log('Playback resumed successfully');
-			});
-        } else {
-			context = new AudioContext();
-        }
-	});
-
-	$("#dice").click(function(event) {
-		if (rolling === 0) {
-			playDiceSound();
-			for (i = 1; i < 12; i++) {
-				rolling++;
-				setTimeout("rolldice(i)", i * 80);
-			}
-		}
-	});
-
-	if (getCookie("savedBefore") === "true") {
-		fontsizeLabel = parseInt(getCookie("fontsizeLabel"));
-		fontsizeLabelthin = parseInt(getCookie("fontsizeLabelthin"));
-		fontsizeValue = parseInt(getCookie("fontsizeValue"));
-		fontsizeCircle = parseInt(getCookie("fontsizeCircle"));
-		setSize("datalabel", fontsizeLabel);
-		setSize("datalabel_thin", fontsizeLabelthin);
-		setSize("datavalue", fontsizeValue);
-		setSize("datavalue_thin", fontsizeLabel);
-		setSize("bigcheck-target", fontsizeCircle);
-	}
-
-	var wallpaperName = getCookie("wallpaper");
-	if ((wallpaperName !== null) && (typeof wallpaperName != 'undefined')) {
-		if (wallpaperName > 0 && wallpaperName < 10) {
-			document.body.style.backgroundImage = "url('./images/body-bg_" + wallpaperName + ".png')";
-		}
-		if (wallpaperName == 9) {
-			// Set use MUL images to 1 on database (white background + MUL images)
-			var url="./save_UseMULImages.php?playerId="+playerId+"&useMulImages=1";
-			window.frames['saveframe'].location.replace(url);
-			document.getElementById("mechimage").src=mechImageURLMUL;
-			const allDataAreas = document.getElementsByClassName("dataarea");
-			for (let i = 0; i < allDataAreas.length; i++) {
-				allDataAreas[i].style.backgroundColor="rgba(255,255,255,0.90)"
-			}
-			const allDataValues = document.getElementsByClassName("datavalue");
-			for (let i = 0; i < allDataValues.length; i++) {
-				allDataValues[i].style.color="#000"
-			}
-			const allDataValueThins = document.getElementsByClassName("datavalue_thin");
-			for (let i = 0; i < allDataValueThins.length; i++) {
-				allDataValueThins[i].style.color="#000"
-			}
-		} else {
-			// Set use MUL images to 0 on database (dark background + alternative images)
-			var url="./save_UseMULImages.php?playerId="+playerId+"&useMulImages=0";
-			window.frames['saveframe'].location.replace(url);
-			document.getElementById("mechimage").src=mechImageURL;
-			const allDataAreas = document.getElementsByClassName("dataarea");
-			for (let i = 0; i < allDataAreas.length; i++) {
-				allDataAreas[i].style.backgroundColor="rgba(70,70,70,0.85)"
-			}
-			const allDataValues = document.getElementsByClassName("datavalue");
-			for (let i = 0; i < allDataValues.length; i++) {
-				allDataValues[i].style.color="#ccc"
-			}
-			const allDataValueThins = document.getElementsByClassName("datavalue_thin");
-			for (let i = 0; i < allDataValueThins.length; i++) {
-				allDataValueThins[i].style.color="#ccc"
-			}
-		}
-	}
-
-	$("#cover").fadeOut(350, "linear", function() {
-		$("#cover").hide();
-		document.getElementById("cover").style.visibility = "hidden";
-	});
-});
-
-$(window).resize(function() {
-	var mechimage = document.getElementById("mechimage");
-	mechimage.style.height="" + $(document).height() * 0.8 + "px";
-});
-
 function rand(min, max) {
 	return Math.floor(Math.random() * (max - min + 1)) + min;
 } 
@@ -1101,3 +969,135 @@ function showMoveBar() {
 function hideSkull() {
 	$("#destroyedIndicator").fadeOut(500, "linear");
 }
+
+$(window).resize(function() {
+	var mechimage = document.getElementById("mechimage");
+	mechimage.style.height="" + $(document).height() * 0.8 + "px";
+});
+
+$(document).ready(function() {
+	$("#cover").click(function(event) {
+		$("#cover").fadeOut(350, "linear", function() {
+			$("#cover").hide();
+			document.getElementById("cover").style.visibility = "hidden";
+		});
+	});
+
+	var mechimage = document.getElementById("mechimage");
+	mechimage.style.height="" + ($(document).height() * 0.8 + "px");
+
+	var list = document.getElementsByClassName("bigcheck");
+	[].forEach.call(list, function (el1) {
+		el1.addEventListener('click', function() {
+			if (context != null ) {
+				context.resume().then(() => {
+				//console.log('Playback resumed successfully');
+				});
+			} else {
+				context = new AudioContext();
+			}
+		});
+	});
+
+	var infoButton = document.getElementById("InfoButton");
+	infoButton.addEventListener('click', function() {
+		if (context != null ) {
+			context.resume().then(() => {
+				//console.log('Playback resumed successfully');
+			});
+		} else {
+            context = new AudioContext();
+		}
+	});
+
+	var diceButton = document.getElementById("DiceButton");
+	diceButton.addEventListener('click', function() {
+		if (context != null ) {
+			context.resume().then(() => {
+				//console.log('Playback resumed successfully');
+			});
+		} else {
+			context = new AudioContext();
+		}
+    });
+
+	var moveButton = document.getElementById("MoveButton");
+	moveButton.addEventListener('click', function() {
+		if (context != null ) {
+            context.resume().then(() => {
+				//console.log('Playback resumed successfully');
+			});
+        } else {
+			context = new AudioContext();
+        }
+	});
+
+	$("#dice").click(function(event) {
+		if (rolling === 0) {
+			playDiceSound();
+			for (i = 1; i < 12; i++) {
+				rolling++;
+				setTimeout("rolldice(i)", i * 80);
+			}
+		}
+	});
+
+	if (getCookie("savedBefore") === "true") {
+		fontsizeLabel = parseInt(getCookie("fontsizeLabel"));
+		fontsizeLabelthin = parseInt(getCookie("fontsizeLabelthin"));
+		fontsizeValue = parseInt(getCookie("fontsizeValue"));
+		fontsizeCircle = parseInt(getCookie("fontsizeCircle"));
+		setSize("datalabel", fontsizeLabel);
+		setSize("datalabel_thin", fontsizeLabelthin);
+		setSize("datavalue", fontsizeValue);
+		setSize("datavalue_thin", fontsizeLabel);
+		setSize("bigcheck-target", fontsizeCircle);
+	}
+
+	var wallpaperName = getCookie("wallpaper");
+	if ((wallpaperName !== null) && (typeof wallpaperName != 'undefined')) {
+		if (wallpaperName > 0 && wallpaperName < 10) {
+			document.body.style.backgroundImage = "url('./images/body-bg_" + wallpaperName + ".png')";
+		}
+		if (wallpaperName == 9) {
+			// Set use MUL images to 1 on database (white background + MUL images)
+			var url="./save_UseMULImages.php?playerId="+playerId+"&useMulImages=1";
+			window.frames['saveframe'].location.replace(url);
+			document.getElementById("mechimage").src=mechImageURLMUL;
+			const allDataAreas = document.getElementsByClassName("dataarea");
+			for (let i = 0; i < allDataAreas.length; i++) {
+				allDataAreas[i].style.backgroundColor="rgba(255,255,255,0.90)"
+			}
+			const allDataValues = document.getElementsByClassName("datavalue");
+			for (let i = 0; i < allDataValues.length; i++) {
+				allDataValues[i].style.color="#000"
+			}
+			const allDataValueThins = document.getElementsByClassName("datavalue_thin");
+			for (let i = 0; i < allDataValueThins.length; i++) {
+				allDataValueThins[i].style.color="#000"
+			}
+		} else {
+			// Set use MUL images to 0 on database (dark background + alternative images)
+			var url="./save_UseMULImages.php?playerId="+playerId+"&useMulImages=0";
+			window.frames['saveframe'].location.replace(url);
+			document.getElementById("mechimage").src=mechImageURL;
+			const allDataAreas = document.getElementsByClassName("dataarea");
+			for (let i = 0; i < allDataAreas.length; i++) {
+				allDataAreas[i].style.backgroundColor="rgba(70,70,70,0.85)"
+			}
+			const allDataValues = document.getElementsByClassName("datavalue");
+			for (let i = 0; i < allDataValues.length; i++) {
+				allDataValues[i].style.color="#ccc"
+			}
+			const allDataValueThins = document.getElementsByClassName("datavalue_thin");
+			for (let i = 0; i < allDataValueThins.length; i++) {
+				allDataValueThins[i].style.color="#ccc"
+			}
+		}
+	}
+
+	$("#cover").fadeOut(350, "linear", function() {
+		$("#cover").hide();
+		document.getElementById("cover").style.visibility = "hidden";
+	});
+});

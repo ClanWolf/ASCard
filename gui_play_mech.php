@@ -370,17 +370,16 @@ session_start();
 <div id="header">
 	<table style="width:100%;height:60px;border:none;border-collapse:collapse;background:rgba(50,50,50,1.0);" cellspacing="0" cellpadding="0">
 		<tr>
-			<td nowrap onclick="location.href='./index.html'" width="60px" style="width: 100px;background:rgba(50,50,50,1.0); text-align:center;vertical-align:middle;">
+			<td nowrap onclick="location.href='./index.html'" width="60px" style="width:100px;background:rgba(50,50,50,1.0);text-align:center;vertical-align:middle;">
 				<div><a style="color:#eee;" href="./index.html">&nbsp;&nbsp;&nbsp;<i class="fa fa-arrow-left" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;</a></div>
 			</td>
-				<!--
-				<td nowrap onclick="location.href='./gui_finalize_round.php'" width="100px" style="width: 100px;background: rgba(56,87,26,1.0); text-align: center; vertical-align: middle;">
-					<div><a style="color: #eee;" href="./gui_finalize_round.php">&nbsp;&nbsp;&nbsp;<i class="fas fa-redo"></i>&nbsp;&nbsp;&nbsp;</a></div>
-				</td>
-				-->
-				<td nowrap onclick="location.href='./gui_finalize_round.php'" style="width: 100px;background:rgba(56,87,26,1.0);">
-					<div style='vertical-align:middle;font-size:28px;color:#eee;'>&nbsp;&nbsp;&nbsp;R<?php echo $CURRENTROUND ?>&nbsp;&nbsp;&nbsp;</div>
-				</td>
+			<!-- <td nowrap onclick="location.href='./gui_finalize_round.php'" width="100px" style="width: 100px;background:rgba(56,87,26,1.0);text-align:center;vertical-align:middle;">
+				<div><a style="color: #eee;" href="./gui_finalize_round.php">&nbsp;&nbsp;&nbsp;<i class="fas fa-redo"></i>&nbsp;&nbsp;&nbsp;</a></div>
+			</td>
+			-->
+			<td nowrap onclick="location.href='./gui_finalize_round.php'" style="width:100px;background:rgba(56,87,26,1.0);">
+				<div style='vertical-align:middle;font-size:28px;color:#eee;'>&nbsp;&nbsp;&nbsp;R<?php echo $CURRENTROUND ?>&nbsp;&nbsp;&nbsp;</div>
+			</td>
 
 <?php
 	$size = sizeof($array_MECH_MODEL);
@@ -499,7 +498,7 @@ session_start();
 	}
 ?>
 
-			<td style="width: 100px;" style="width: 100px;" nowrap width="100px" style="background: rgba(50,50,50,1.0); text-align: center; vertical-align: middle;"><img src='./images/player/<?=$pimage?>' width='60px' height='60px'></td>
+			<td style="width: 100px;" style="width: 100px;" nowrap width="100px" style="background:rgba(50,50,50,1.0);text-align:center;vertical-align:middle;display:block;"><img src='./images/player/<?=$pimage?>' width='60px' height='60px'></td>
 		</tr>
 	</table>
 </div>
@@ -715,11 +714,11 @@ session_start();
 							<td nowrap width="65%" class="datalabel_thin">
 								<table cellspacing="0" cellpadding="0">
 									<tr>
-										<td align="center"><img src="./images/buttons/mov01.png" width='30px' style="border: 0px solid #000000;"></td>
-										<td align="center"><img src="./images/buttons/mov02.png" width='30px' style="border: 0px solid #000000;"></td>
-										<td align="center"><img src="./images/buttons/mov03.png" width='30px' style="border: 0px solid #000000;"></td>
-										<td align="center"><img src="./images/buttons/mov04.png" width='30px' style="border: 0px solid #000000;"></td>
-										<td align="center"><img src="./images/buttons/mov05.png" width='30px' style="border: 0px solid #000000;"></td>
+										<td align="center"><img src="./images/buttons/mov01.png" height='17px' style="border: 0px solid #000000;"></td>
+										<td align="center"><img src="./images/buttons/mov02.png" height='17px' style="border: 0px solid #000000;"></td>
+										<td align="center"><img src="./images/buttons/mov03.png" height='17px' style="border: 0px solid #000000;"></td>
+										<td align="center"><img src="./images/buttons/mov04.png" height='17px' style="border: 0px solid #000000;"></td>
+										<td align="center"><img src="./images/buttons/mov05.png" height='17px' style="border: 0px solid #000000;"></td>
 									</tr>
 									<tr>
 										<td><label class='bigcheck'><input type='checkbox' onchange='readCircles2(<?= $array_MECH_DBID[$chosenMechIndex] ?>, <?= $array_A_MAX[$chosenMechIndex] ?>, <?= $array_S_MAX[$chosenMechIndex] ?>, 2, -1);' class='bigcheck' name='MV2_moved2_standstill' id='MV2_moved2_standstill' value='no'/><span class='bigcheck-target'></span></label></td>
@@ -740,8 +739,7 @@ session_start();
 									<td><label class='bigcheck'><input type='checkbox' onchange='readCircles2(<?= $array_MECH_DBID[$chosenMechIndex] ?>, <?= $array_A_MAX[$chosenMechIndex] ?>, <?= $array_S_MAX[$chosenMechIndex] ?>, -1, 2);' class='bigcheck' name='WF6_WEAPONSFIRED2' id='WF6_WEAPONSFIRED2' value='no'/><span class='bigcheck-target'></span></label></td>
 								</tr>
 								<tr>
-									<td style="background-color: orange;height: 5px;border: 0px solid;border-color: black;"></td>
-									<td style="background-color: red;height: 5px;border: 0px solid;border-color: black;"></td>
+									<td align="center" colspan="2"><img src="./images/buttons/fire.png" height='17px' style="border: 0px solid #000000;"></td>
                                 </tr>
 							</table>
 							</td>
