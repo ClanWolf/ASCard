@@ -975,13 +975,17 @@ $(window).resize(function() {
 	mechimage.style.height="" + $(document).height() * 0.8 + "px";
 });
 
+//$(window).load(function() {
+//     alert("hi 2");
+//});
+
 $(document).ready(function() {
-	$("#cover").click(function(event) {
-		$("#cover").fadeOut(350, "linear", function() {
-			$("#cover").hide();
-			document.getElementById("cover").style.visibility = "hidden";
-		});
-	});
+//	$("#cover").click(function(event) {
+//		$("#cover").fadeOut(350, "linear", function() {
+//			$("#cover").hide();
+//			document.getElementById("cover").style.visibility = "hidden";
+//		});
+//	});
 
 	var mechimage = document.getElementById("mechimage");
 	mechimage.style.height="" + ($(document).height() * 0.8 + "px");
@@ -1096,8 +1100,8 @@ $(document).ready(function() {
 		}
 	}
 
-	$("#cover").fadeOut(350, "linear", function() {
-		$("#cover").hide();
-		document.getElementById("cover").style.visibility = "hidden";
-	});
+//	$("#cover").fadeOut(350, "linear", function() {
+//		$("#cover").hide();
+//		document.getElementById("cover").style.visibility = "hidden";
+//	});
 });

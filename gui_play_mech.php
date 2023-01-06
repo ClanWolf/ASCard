@@ -946,6 +946,17 @@ session_start();
 
 <div id="bottomright"><img src="./images/bt-logo2.png" width="250px"></div>
 
+<script>
+	document.addEventListener('readystatechange', event => {
+	    if (event.target.readyState === "complete") {
+    		$("#cover").fadeOut(350, "linear", function() {
+       			$("#cover").hide();
+       			document.getElementById("cover").style.visibility = "hidden";
+       		});
+	    }
+	});
+</script>
+
 <?php
 //	echo "<script>\n";
 //	echo "	setMovementFlags($array_MECH_DBID[$chosenMechIndex], $array_MVMT[$chosenMechIndex], $array_WPNSFIRED[$chosenMechIndex]);\n";
