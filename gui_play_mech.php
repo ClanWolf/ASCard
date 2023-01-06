@@ -950,10 +950,10 @@ session_start();
 	document.addEventListener('readystatechange', event => {
 	    if (event.target.readyState === "complete") {
     		$("#cover").fadeOut(350, "linear", function() {
-       			$("#cover").hide();
-       			document.getElementById("cover").style.visibility = "hidden";
-       		});
-	    }
+				$("#cover").hide();
+				document.getElementById("cover").style.visibility = "hidden";
+			});
+		}
 	});
 </script>
 
