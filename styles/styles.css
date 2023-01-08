@@ -50,8 +50,8 @@ html, body {
 	min-height: 100%;
 	height: 100vh;
 	min-height: 100vh;
-	background-color: #000000;
-	background-image: url('../images/body-bg_2.png');
+	background-color: #440000;
+	/* background-image: url('../images/body-bg_2.png'); */
 	overflow: visible;
 	background-size: cover;
 	background-attachment: fixed;
@@ -344,7 +344,7 @@ a:hover {
 	vertical-align: middle;
 	padding: 0px;
 	/* background-image: url('../images/mech_number.png'); */
-	background-size: cover;
+	/* background-size: cover; */
 	width: 90px;
 	height: 50px;
 	line-height: 60px;

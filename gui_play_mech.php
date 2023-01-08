@@ -609,7 +609,7 @@ session_start();
 					</table>
 				</div>
 
-				<div class="dataarea">
+				<div class="dataarea" id="firepanel">
 					<table width="100%">
 						<tr>
 							<td nowrap class="datalabel" width="10%" style="text-align: left;">DMG:</td>

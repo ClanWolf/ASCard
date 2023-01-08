@@ -269,6 +269,8 @@ function setCircles(h, a, s, e, fc, mp, w, uov, mvmnt, wpnsf) {
 	radioWF6_WEAPONSFIRED2.checked = false;
 
 	document.getElementById("tmmLabel").innerHTML = "TMM:";
+	document.getElementById("AMM").innerHTML = "0";
+	document.getElementById("firepanel").style.visibility = "visible";
 	if (mvmnt == 2) { // Stationary (AMM -1)
 		radioMV2_moved2_standstill.checked = true;
 		document.getElementById("AMM").innerHTML = "-1";
@@ -286,7 +288,8 @@ function setCircles(h, a, s, e, fc, mp, w, uov, mvmnt, wpnsf) {
 	if (mvmnt == 9) { // sprinted
 		radioMV9_moved9_sprinted.checked = true;
 		document.getElementById("AMM").innerHTML = "0";
-	    updatedmovementpointsground = updatedmovementpointsground + (updatedmovementpointsground / 2);
+		updatedmovementpointsground = updatedmovementpointsground + (updatedmovementpointsground / 2);
+		document.getElementById("firepanel").style.visibility = "hidden";
 	}
 	if (mvmnt == 4) { // Jumped (AMM +2)
 		radioMV4_moved4_jumped.checked = true;
