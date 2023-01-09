@@ -622,6 +622,14 @@ session_start();
 						</tr>
 					</table>
 				</div>
+
+				<div class="dataarea" id="firepanelhidden" style="visibility: hidden;display:none">
+					<table width="100%">
+						<tr>
+							<td nowrap class="datavalue" width="10%" style="text-align: center;">TRADING FIRE FOR SPEED</td>
+						</tr>
+					</table>
+				</div>
 <?php
 	if ($array_TP[$chosenMechIndex] == "BA") {
 		// Do not show the heat block for all Battle Armor units

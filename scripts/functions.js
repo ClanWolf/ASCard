@@ -270,7 +270,10 @@ function setCircles(h, a, s, e, fc, mp, w, uov, mvmnt, wpnsf) {
 
 	document.getElementById("tmmLabel").innerHTML = "TMM:";
 	document.getElementById("AMM").innerHTML = "0";
+	document.getElementById("firepanel").style.display = "block";
 	document.getElementById("firepanel").style.visibility = "visible";
+	document.getElementById("firepanelhidden").style.display = "none";
+	document.getElementById("firepanelhidden").style.visibility = "hidden";
 	if (mvmnt == 2) { // Stationary (AMM -1)
 		radioMV2_moved2_standstill.checked = true;
 		document.getElementById("AMM").innerHTML = "-1";
@@ -289,7 +292,10 @@ function setCircles(h, a, s, e, fc, mp, w, uov, mvmnt, wpnsf) {
 		radioMV9_moved9_sprinted.checked = true;
 		document.getElementById("AMM").innerHTML = "0";
 		updatedmovementpointsground = updatedmovementpointsground + (updatedmovementpointsground / 2);
+		document.getElementById("firepanel").style.display = "none";
 		document.getElementById("firepanel").style.visibility = "hidden";
+		document.getElementById("firepanelhidden").style.display = "block";
+		document.getElementById("firepanelhidden").style.visibility = "visible";
 	}
 	if (mvmnt == 4) { // Jumped (AMM +2)
 		radioMV4_moved4_jumped.checked = true;
