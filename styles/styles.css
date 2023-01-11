@@ -14,7 +14,7 @@
 	/* font-family: 'Russo One', sans-serif; */
 	/* font-family: 'Anton', sans-serif; */
 
-	font-size: 26px;
+	font-size: 24px;
 	
 	-webkit-touch-callout: none; /* iOS Safari */
 	-webkit-user-select: none; /* Safari */
@@ -87,7 +87,7 @@ a:hover {
 	font-family: FontAwesome;
 	font-size: 30px;
 }
-.fa-fw { /* symbole mit fester Breite */
+.fa-fw { /* symbols with fixed width */
 	text-align: center;
 	width: 1em;
 }
@@ -672,9 +672,6 @@ input[type='checkbox'].bigcheck:checked + span.bigcheck-target:after {
 	color: #ccc;
 }
 
-
-
-
 .hudanimation {
 	z-index: 5;
 	position: absolute;
@@ -682,7 +679,6 @@ input[type='checkbox'].bigcheck:checked + span.bigcheck-target:after {
 	right: 0px;
 	opacity: 0.3;
 }
-
 .hudcenteranimation {
 	z-index: 5;
 	position: absolute;
@@ -692,33 +688,26 @@ input[type='checkbox'].bigcheck:checked + span.bigcheck-target:after {
 	margin: auto;
 	width: 100%;
 }
-
-
 svg {
 	height: 500px;
 	width: 100%;
 }
-
 .st0, .st1, .st2, .st3 {
 	fill: none;
 	stroke: rgba(120, 120, 120, 0.35);
 	stroke-width: 42;
 	stroke-miterlimit: 10;
 }
-
 .st0 {
 	stroke-dasharray: 12.1947, 12.1947, 12.1947, 12.1947, 12.1947, 12.1947;
 }
-
 .st1 {
 	stroke-dasharray: 50, 90, 200, 30, 40, 0;
 }
-
 .st2 {
 	stroke-linecap: square;
 	stroke-dasharray: 120, 20, 110, 20, 140;
 }
-
 .st3 {
 	stroke-width: 16;
 	stroke-linecap: square;
