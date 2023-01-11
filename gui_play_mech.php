@@ -626,7 +626,7 @@ session_start();
 				<div class="dataarea" id="firepanelhidden" style="visibility: hidden;display:none">
 					<table width="100%">
 						<tr>
-							<td nowrap class="datavalue" width="10%" style="text-align: center;">TRADING FIRE FOR SPEED</td>
+							<td nowrap class="datavalue" width="10%" style="text-align: center;">TRADE ABILITY TO FIRE FOR SPEED</td>
 						</tr>
 					</table>
 				</div>
