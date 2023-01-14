@@ -16,6 +16,7 @@ session_start();
 		//die("Check position 5");
 	}
 	$pid = $_SESSION['playerid'];
+	$gid = $_SESSION['gameid'];
 	$pimage = $_SESSION['playerimage'];
 	$hideNotOwnedMech = $_SESSION['option1'];
 
@@ -378,7 +379,7 @@ session_start();
 			</td>
 			-->
 			<td nowrap onclick="location.href='./gui_finalize_round.php'" style="width:100px;background:rgba(56,87,26,1.0);">
-				<div style='vertical-align:middle;font-size:28px;color:#eee;'>&nbsp;&nbsp;&nbsp;R<?php echo $CURRENTROUND ?>&nbsp;&nbsp;&nbsp;</div>
+				<div style='vertical-align:middle;font-size:28px;color:#eee;'>&nbsp;&nbsp;&nbsp;G<?php echo $gid ?>&nbsp;R<?php echo $CURRENTROUND ?>&nbsp;&nbsp;&nbsp;</div>
 			</td>
 
 <?php
@@ -745,9 +746,7 @@ session_start();
 								<tr>
 									<td><label class='bigcheck'><input type='checkbox' onchange='readCircles2(<?= $array_MECH_DBID[$chosenMechIndex] ?>, <?= $array_A_MAX[$chosenMechIndex] ?>, <?= $array_S_MAX[$chosenMechIndex] ?>, -1, 1);' class='bigcheck' name='WF5_WEAPONSFIRED2' id='WF5_WEAPONSFIRED2' value='no'/><span class='bigcheck-target'></span></label></td>
 									<td><label class='bigcheck'><input type='checkbox' onchange='readCircles2(<?= $array_MECH_DBID[$chosenMechIndex] ?>, <?= $array_A_MAX[$chosenMechIndex] ?>, <?= $array_S_MAX[$chosenMechIndex] ?>, -1, 2);' class='bigcheck' name='WF6_WEAPONSFIRED2' id='WF6_WEAPONSFIRED2' value='no'/><span class='bigcheck-target'></span></label></td>
-								</tr>
-								<tr>
-									<td align="center" colspan="2"><img src="./images/buttons/fire.png" height='17px' style="border: 0px solid #000000;"></td>
+									<td align="right" valign="bottom">&nbsp;&nbsp;&nbsp;&nbsp;<img src="./images/buttons/fire.png" height='20px' style="border: 0px solid #000000;"></td>
                                 </tr>
 							</table>
 							</td>

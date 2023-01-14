@@ -12,6 +12,7 @@ session_start();
 
 	// Get data on units from db
 	$pid = $_SESSION['playerid'];
+	$gid = $_SESSION['gameid'];
 	$pimage = $_SESSION['playerimage'];
 
 	$opt3 = $_SESSION['option3'];
@@ -119,7 +120,7 @@ session_start();
 				</td>
 				-->
 				<td nowrap onclick="location.href='./gui_finalize_round.php'" style="width: 100px;background:rgba(81,125,37,1.0);">
-					<div style='vertical-align:middle;font-size:28px;color:#fff;'>&nbsp;&nbsp;&nbsp;R<?php echo $CURRENTROUND ?>&nbsp;&nbsp;&nbsp;</div>
+					<div style='vertical-align:middle;font-size:28px;color:#fff;'>&nbsp;&nbsp;&nbsp;G<?php echo $gid ?>&nbsp;R<?php echo $CURRENTROUND ?>&nbsp;&nbsp;&nbsp;</div>
 				</td>
 				<td nowrap onclick="location.href='./gui_select_unit.php'" width="<?php echo $buttonWidth ?>"><div class='mechselect_button_normal'><a href='./gui_select_unit.php'>ROSTER</a><br><span style='font-size:16px;'>Choose a Mech</span></div></td>
 				<td nowrap onclick="location.href='./gui_select_enemy_unit.php'" width="<?php echo $buttonWidth ?>"><div class='mechselect_button_normal'><a href='./gui_select_enemy_unit.php'>FORCES</a><br><span style='font-size:16px;'>All bidding units</span></div></td>

@@ -14,6 +14,8 @@
 	$UNIT = "DEFAULT";
 	//$UNIT_IMG_URL = "...";
 
+	$GAMEID = -1;
+
 	// Store in arrays to keep the mech- and pilotdata of the current unit
 	$array_PILOT = array();
 	$array_PILOT_RANK = array();
@@ -112,6 +114,7 @@
 	$result_asc_playerround = mysqli_query($conn, $sql_asc_playerround);
 	if (mysqli_num_rows($result_asc_playerround) > 0) {
 		while($row = mysqli_fetch_assoc($result_asc_playerround)) {
+			$GAMEID = $row["gameid"];
 			$CURRENTROUND = $row["round"];
 		}
 	}

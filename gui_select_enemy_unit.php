@@ -12,6 +12,7 @@ session_start();
 
 	// Get data on units from db
 	$pid = $_SESSION['playerid'];
+	$gid = $_SESSION['gameid'];
 	$pimage = $_SESSION['playerimage'];
 	$opt3 = $_SESSION['option3'];
 	$playMode = $opt3;
@@ -101,7 +102,7 @@ session_start();
 				</td>
 				-->
 				<td nowrap onclick="location.href='./gui_finalize_round.php'" style="width: 100px;background:rgba(56,87,26,1.0);">
-					<div style='vertical-align:middle;font-size:28px;color:#eee;'>&nbsp;&nbsp;&nbsp;R<?php echo $CURRENTROUND ?>&nbsp;&nbsp;&nbsp;</div>
+					<div style='vertical-align:middle;font-size:28px;color:#eee;'>&nbsp;&nbsp;&nbsp;G<?php echo $gid ?>&nbsp;R<?php echo $CURRENTROUND ?>&nbsp;&nbsp;&nbsp;</div>
 				</td>
 				<td nowrap onclick="location.href='./gui_select_unit.php'" width="<?php echo $buttonWidth ?>"><div class='mechselect_button_normal'><a href='./gui_select_unit.php'>ROSTER</a><br><span style='font-size:16px;'>Choose a Mech</span></div></td>
 				<td nowrap onclick="location.href='./gui_select_enemy_unit.php'" width="<?php echo $buttonWidth ?>"><div class='mechselect_button_active'><a href='./gui_select_enemy_unit.php'>FORCES</a><br><span style='font-size:16px;'>All bidding units</span></div></td>
@@ -125,7 +126,7 @@ session_start();
 	<table align="center" cellspacing=2 cellpadding=2 border=0px>
 
 <?php
-	if (!($stmt = $conn->prepare("SELECT SQL_NO_CACHE * FROM asc_player where bid_pv is not null and bid_pv > 0 and opfor = 1 ORDER BY bid_pv asc;"))) {
+	if (!($stmt = $conn->prepare("SELECT SQL_NO_CACHE * FROM asc_player where bid_pv is not null and bid_pv > 0 and opfor = 1 and gameid = ".$gid." ORDER BY bid_pv asc;"))) {
 		echo "Prepare failed: (" . $conn->errno . ") " . $conn->error;
 	}
 	if ($stmt->execute()) {
@@ -207,7 +208,7 @@ session_start();
 		}
 	}
 
-	if (!($stmt2 = $conn->prepare("SELECT SQL_NO_CACHE * FROM asc_player where bid_pv is not null and bid_pv > 0 and opfor = 0 ORDER BY bid_pv, bid_tonnage asc limit 5;"))) {
+	if (!($stmt2 = $conn->prepare("SELECT SQL_NO_CACHE * FROM asc_player where bid_pv is not null and bid_pv > 0 and opfor = 0 and gameid = ".$gid." ORDER BY bid_pv, bid_tonnage asc limit 5;"))) {
 		echo "Prepare failed: (" . $conn->errno . ") " . $conn->error;
 	}
 	if ($stmt2->execute()) {
@@ -297,7 +298,7 @@ session_start();
 		}
 	}
 ?>
-		<tr><td colspan="8" style="color:#eee;font-size:20;text-align:center;"><br>Only the 5 lowest bidders in PointValue (PV) will be visible.</td></tr>
+		<tr><td colspan="8" style="color:#eee;font-size:20;text-align:center;"><br>Only the 5 lowest bidders in PointValue (PV) with the same Game-ID will be visible.</td></tr>
 	</table>
 </body>
 

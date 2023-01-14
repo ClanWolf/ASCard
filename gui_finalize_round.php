@@ -12,6 +12,7 @@ session_start();
 
 	// Get data on units from db
 	$pid = $_SESSION['playerid'];
+	$gid = $_SESSION['gameid'];
 	$pname = $_SESSION['name'];
 	$pimage = $_SESSION['playerimage'];
 	$opt3 = $_SESSION['option3'];
@@ -219,7 +220,7 @@ session_start();
 				</td>
 				-->
 				<td nowrap onclick="location.href='./gui_finalize_round.php'" style="width: 100px;background:rgba(81,125,37,1.0);">
-					<div style='vertical-align:middle;font-size:28px;color:#fff;'>&nbsp;&nbsp;&nbsp;R<?php echo $CURRENTROUND ?>&nbsp;&nbsp;&nbsp;</div>
+					<div style='vertical-align:middle;font-size:28px;color:#fff;'>&nbsp;&nbsp;&nbsp;G<?php echo $gid ?>&nbsp;R<?php echo $CURRENTROUND ?>&nbsp;&nbsp;&nbsp;</div>
 				</td>
 				<td nowrap onclick="location.href='./gui_select_unit.php'" width="<?php echo $buttonWidth ?>"><div class='mechselect_button_normal'><a href='./gui_select_unit.php'>ROSTER</a><br><span style='font-size:16px;'>Choose a Mech</span></div></td>
 				<td nowrap onclick="location.href='./gui_select_enemy_unit.php'" width="<?php echo $buttonWidth ?>"><div class='mechselect_button_normal'><a href='./gui_select_enemy_unit.php'>FORCES</a><br><span style='font-size:16px;'>All bidding units</span></div></td>
@@ -248,17 +249,20 @@ session_start();
 				<?php
 					if (!$playMode) {
 						echo "<tr>\n";
-						echo "	<td nowrap width='99%' style='background-color:#517D25;width:810px;height:40px;' class='mechselect_button_active' onclick='javascript:finalizeRound(".$pid.");'>\n";
-						echo "		&nbsp;&nbsp;&nbsp;<i class='fas fa-redo'></i>&nbsp;&nbsp;&nbsp;Finalize current round (".$CURRENTROUND.")\n";
+						echo "	<td nowrap width='98%' style='background-color:#517D25;width:810px;height:40px;' class='mechselect_button_active' onclick='javascript:finalizeRound(".$pid.");'>\n";
+						echo "		&nbsp;&nbsp;&nbsp;<i class='fas fa-redo'></i>&nbsp;&nbsp;&nbsp;Finalize round ".$CURRENTROUND." of game ".$gid."\n";
+						echo "	</td>\n";
+						echo "	<td nowrap width='1%' style='background-color:#d95000;height:40px;' class='mechselect_button_active' onclick='javascript:editGame(".$pid.");'>\n";
+						echo "		&nbsp;&nbsp;&nbsp;Edit Game&nbsp;&nbsp;&nbsp;\n";
 						echo "	</td>\n";
 						echo "	<td nowrap width='1%' style='background-color:#831100;height:40px;' class='mechselect_button_active' onclick='javascript:resetRound(".$pid.");'>\n";
-						echo "		&nbsp;&nbsp;&nbsp;Reset&nbsp;&nbsp;&nbsp;\n";
+						echo "		&nbsp;&nbsp;&nbsp;RESET Round&nbsp;&nbsp;&nbsp;\n";
 						echo "	</td>\n";
 						echo "</tr>\n";
 					} else {
 						echo "<tr>\n";
 						echo "	<td nowrap width='100%' style='background-color:#517D25;width:810px;height:40px;' class='mechselect_button_active' onclick='javascript:finalizeRound(".$pid.");'>\n";
-						echo "		&nbsp;&nbsp;&nbsp;<i class='fas fa-redo'></i>&nbsp;&nbsp;&nbsp;Finalize current round (".$CURRENTROUND.")\n";
+						echo "		&nbsp;&nbsp;&nbsp;<i class='fas fa-redo'></i>&nbsp;&nbsp;&nbsp;Finalize round ".$CURRENTROUND." of game ".$gid."\n";
 						echo "	</td>\n";
 						echo "</tr>\n";
 					}
@@ -466,8 +470,8 @@ session_start();
 ?>
 
 	<tr>
-		<td style='background-color:#333333;' valign='top' align='center' colspan='3'>
-			<span style='font-size:24px;color:#fff;'>Round can be finalized as soon as all Mechs have moved and fired.</span>
+		<td valign='top' align='center' colspan='3'>
+			<br><span style='font-size:24px;color:#fff;'>Round can be finalized as soon as all units have reported.<br>Disable play mode (<a href="https://www.clanwolf.net/apps/ASCard/gui_edit_option.php">Options</a>) to reset round or edit OpFor / Game-ID.</span>
 		</td>
 	</tr>
 

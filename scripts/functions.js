@@ -903,12 +903,29 @@ function showMech() {
 		});
 		showingMech = true;
 	} else {
+		/*
 		$("#movementtoken").fadeIn(500, "linear");
 		$(".dataarea").each(function() {
 			$(this).fadeIn(500, "linear");
 		});
+		*/
 		showingMech = false;
+		location.reload();
 	}
+
+	/*
+	if (mvmnt == 9) { // sprinted
+		document.getElementById("firepanel").style.display = "none";
+		document.getElementById("firepanel").style.visibility = "hidden";
+		document.getElementById("firepanelhidden").style.display = "block";
+		document.getElementById("firepanelhidden").style.visibility = "visible";
+	} else {
+		document.getElementById("firepanel").style.display = "block";
+		document.getElementById("firepanel").style.visibility = "visible";
+		document.getElementById("firepanelhidden").style.display = "none";
+		document.getElementById("firepanelhidden").style.visibility = "hidden";
+	}
+	*/
 }
 
 function playDiceSound() {
@@ -1069,43 +1086,48 @@ $(document).ready(function() {
 
 	var wallpaperName = getCookie("wallpaper");
 	if ((wallpaperName !== null) && (typeof wallpaperName != 'undefined')) {
-		if (wallpaperName > 0 && wallpaperName < 10) {
-			document.body.style.backgroundImage = "url('./images/body-bg_" + wallpaperName + ".png')";
+		// A wallpaperName was found in the cookie
+	} else {
+		// A wallpaperName was NOT found, go with the default
+		wallpaperName = 1;
+	}
+
+	if (wallpaperName > 0 && wallpaperName < 10) {
+		document.body.style.backgroundImage = "url('./images/body-bg_" + wallpaperName + ".png')";
+	}
+	if (wallpaperName == 9) {
+		// Set use MUL images to 1 on database (white background + MUL images)
+		var url="./save_UseMULImages.php?playerId="+playerId+"&useMulImages=1";
+		window.frames['saveframe'].location.replace(url);
+		document.getElementById("mechimage").src=mechImageURLMUL;
+		const allDataAreas = document.getElementsByClassName("dataarea");
+		for (let i = 0; i < allDataAreas.length; i++) {
+			allDataAreas[i].style.backgroundColor="rgba(255,255,255,0.90)"
 		}
-		if (wallpaperName == 9) {
-			// Set use MUL images to 1 on database (white background + MUL images)
-			var url="./save_UseMULImages.php?playerId="+playerId+"&useMulImages=1";
-			window.frames['saveframe'].location.replace(url);
-			document.getElementById("mechimage").src=mechImageURLMUL;
-			const allDataAreas = document.getElementsByClassName("dataarea");
-			for (let i = 0; i < allDataAreas.length; i++) {
-				allDataAreas[i].style.backgroundColor="rgba(255,255,255,0.90)"
-			}
-			const allDataValues = document.getElementsByClassName("datavalue");
-			for (let i = 0; i < allDataValues.length; i++) {
-				allDataValues[i].style.color="#000"
-			}
-			const allDataValueThins = document.getElementsByClassName("datavalue_thin");
-			for (let i = 0; i < allDataValueThins.length; i++) {
-				allDataValueThins[i].style.color="#000"
-			}
-		} else {
-			// Set use MUL images to 0 on database (dark background + alternative images)
-			var url="./save_UseMULImages.php?playerId="+playerId+"&useMulImages=0";
-			window.frames['saveframe'].location.replace(url);
-			document.getElementById("mechimage").src=mechImageURL;
-			const allDataAreas = document.getElementsByClassName("dataarea");
-			for (let i = 0; i < allDataAreas.length; i++) {
-				allDataAreas[i].style.backgroundColor="rgba(70,70,70,0.85)"
-			}
-			const allDataValues = document.getElementsByClassName("datavalue");
-			for (let i = 0; i < allDataValues.length; i++) {
-				allDataValues[i].style.color="#ccc"
-			}
-			const allDataValueThins = document.getElementsByClassName("datavalue_thin");
-			for (let i = 0; i < allDataValueThins.length; i++) {
-				allDataValueThins[i].style.color="#ccc"
-			}
+		const allDataValues = document.getElementsByClassName("datavalue");
+		for (let i = 0; i < allDataValues.length; i++) {
+			allDataValues[i].style.color="#000"
+		}
+		const allDataValueThins = document.getElementsByClassName("datavalue_thin");
+		for (let i = 0; i < allDataValueThins.length; i++) {
+			allDataValueThins[i].style.color="#000"
+		}
+	} else {
+		// Set use MUL images to 0 on database (dark background + alternative images)
+		var url="./save_UseMULImages.php?playerId="+playerId+"&useMulImages=0";
+		window.frames['saveframe'].location.replace(url);
+		document.getElementById("mechimage").src=mechImageURL;
+		const allDataAreas = document.getElementsByClassName("dataarea");
+		for (let i = 0; i < allDataAreas.length; i++) {
+			allDataAreas[i].style.backgroundColor="rgba(70,70,70,0.85)"
+		}
+		const allDataValues = document.getElementsByClassName("datavalue");
+		for (let i = 0; i < allDataValues.length; i++) {
+			allDataValues[i].style.color="#ccc"
+		}
+		const allDataValueThins = document.getElementsByClassName("datavalue_thin");
+		for (let i = 0; i < allDataValueThins.length; i++) {
+			allDataValueThins[i].style.color="#ccc"
 		}
 	}
 
@@ -1113,4 +1135,5 @@ $(document).ready(function() {
 //		$("#cover").hide();
 //		document.getElementById("cover").style.visibility = "hidden";
 //	});
+
 });
