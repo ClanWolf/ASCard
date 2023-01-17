@@ -1,0 +1,9 @@
+Problem:
+On Chrome (or chromium based browsers), sometimes a screen turns completly white and irresponsive.
+
+Solutions:
+- Use other browser (like "Fullscreen Browser" on Android)
+- Set this to avoid issue:
+	1. launch the browser
+	2. navigate in browser to "chrome://flags/"
+	3. Disable "Enables Display Compositor to use a new gpu thread"
