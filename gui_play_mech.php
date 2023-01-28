@@ -746,7 +746,10 @@ session_start();
 								<tr>
 									<td><label class='bigcheck'><input type='checkbox' onchange='readCircles2(<?= $array_MECH_DBID[$chosenMechIndex] ?>, <?= $array_A_MAX[$chosenMechIndex] ?>, <?= $array_S_MAX[$chosenMechIndex] ?>, -1, 1);' class='bigcheck' name='WF5_WEAPONSFIRED2' id='WF5_WEAPONSFIRED2' value='no'/><span class='bigcheck-target'></span></label></td>
 									<td><label class='bigcheck'><input type='checkbox' onchange='readCircles2(<?= $array_MECH_DBID[$chosenMechIndex] ?>, <?= $array_A_MAX[$chosenMechIndex] ?>, <?= $array_S_MAX[$chosenMechIndex] ?>, -1, 2);' class='bigcheck' name='WF6_WEAPONSFIRED2' id='WF6_WEAPONSFIRED2' value='no'/><span class='bigcheck-target'></span></label></td>
-									<td align="right" valign="bottom">&nbsp;&nbsp;&nbsp;&nbsp;<img src="./images/buttons/fire.png" height='20px' style="border: 0px solid #000000;"></td>
+									<td nowrap class="datavalue" style="text-align: right;" align="right">&nbsp;&nbsp;&nbsp;<span style="font-family:'Pathway Gothic One',sans-serif;font-size:60%;text-transform:uppercase;color:#999;">WEAPONS</span></td>
+									<!--
+									<td style="width:40%;background-size:100% 100%;background-image:url(./images/buttons/fire.png)" align="right" valign="bottom">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+									-->
                                 </tr>
 							</table>
 							</td>
