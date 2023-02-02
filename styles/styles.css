@@ -51,11 +51,11 @@ html, body {
 	height: 100vh;
 	min-height: 100vh;
 	background: transparent;
-	/* background-color: #440000; */
-	/* background-image: url('../images/body-bg_2.png'); */
+	background-color: #220000;
+	background-image: url('../images/body-bg_2.png');
 	/* overflow: visible; */
-	/* background-size: cover; */
-	/* background-attachment: fixed; */
+	background-size: cover;
+	background-attachment: fixed;
 }
 .fullscreen {
 	height: 100%;
