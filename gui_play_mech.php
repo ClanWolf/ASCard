@@ -603,7 +603,7 @@ session_start();
 						</tr>
 						<tr>
 							<!-- <td nowrap class="datalabel" width="12%" colspan="1">&nbsp;</td> -->
-							<td nowrap class="datavalue_thin" width="50%" colspan="3"><?php echo "$array_ROLE[$chosenMechIndex]"; ?></td>
+							<td nowrap class="datavalue_thin" width="50%" colspan="4"><?php echo "$array_ROLE[$chosenMechIndex]"; ?></td>
 							<td nowrap class="datalabel" width="12%" colspan="1">SKILL:</td>
 							<td nowrap class="datavalue" width="12%" colspan="1" valign="middle" style="top:0px;bottom:0px;vertical-align:middle;"><?php echo "$array_SKILL[$chosenMechIndex]"; ?></td>
 							<td nowrap class="datalabel" width="13%" colspan="1" valign="middle" >AMM:</td>
