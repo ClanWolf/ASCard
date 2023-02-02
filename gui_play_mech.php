@@ -582,9 +582,9 @@ session_start();
 </div>
 
 <div class="datatable">
-	<table width="100%" style="height: 100%;">
+	<table width="100%" style="height:100%;">
 		<tr>
-			<td width="60%" valign="bottom">
+			<td width="50%" valign="bottom">
 
 				<div class="dataarea">
 					<table width="100%">
