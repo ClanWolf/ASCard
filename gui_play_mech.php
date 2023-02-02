@@ -710,6 +710,24 @@ session_start();
 				</div>
 
 			</td>
+	
+	
+	
+	
+	
+	
+	
+	<td width="10%" valign="bottom" align="center">
+		<div class="dataarea">
+			To hit:
+		</div>
+	</td>
+	
+	
+	
+	
+	
+	
 			<td width="40%" valign="bottom" align="left">
 				<div id="movementtoken" width="100%" valign="top" align="left">
 					<img valign="top" id="movementtokenimage" src="./images/dice/yd6_4.png" height="70px">
