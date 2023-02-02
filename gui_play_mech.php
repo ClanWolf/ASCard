@@ -602,10 +602,12 @@ session_start();
 							} ?></td>
 						</tr>
 						<tr>
-							<td nowrap class="datalabel" width="12%" colspan="1">ROLE:</td>
+							<td nowrap class="datalabel" width="12%" colspan="1">&nbsp;</td>
 							<td nowrap class="datavalue_thin" width="38%" colspan="3"><?php echo "$array_ROLE[$chosenMechIndex]"; ?></td>
 							<td nowrap class="datalabel" width="12%" colspan="1">SKILL:</td>
-							<td nowrap class="datavalue" width="37%" colspan="3" valign="middle" style="top:0px;bottom:0px;vertical-align:middle;"><?php echo "$array_SKILL[$chosenMechIndex]"; ?>&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-family:'Pathway Gothic One',sans-serif;font-size:75%;text-transform:uppercase;color:#999;" id="AMM">0</span> <span style="font-family:'Pathway Gothic One',sans-serif;font-size:75%;text-transform:uppercase;color:#999;">(AMM)</span></td>
+							<td nowrap class="datavalue" width="12%" colspan="1" valign="middle" style="top:0px;bottom:0px;vertical-align:middle;"><?php echo "$array_SKILL[$chosenMechIndex]"; ?></td>
+							<td nowrap class="datalabel" width="13%" colspan="1" valign="middle" >AMM:</td>
+							<td nowrap class="datavalue_thin" width="12%" colspan="1" valign="middle" ><span style="font-family:'Pathway Gothic One',sans-serif;font-size:75%;text-transform:uppercase;color:#999;" id="AMM">0</span> <span style="font-family:'Pathway Gothic One',sans-serif;font-size:75%;text-transform:uppercase;color:#999;">(AMM)</span></td>
 						</tr>
 					</table>
 				</div>
