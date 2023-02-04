@@ -431,6 +431,12 @@ session_start();
 		}
 
 		$memodel = $array_MECH_MODEL[$i4];
+		$maxLength = 30;
+		if (strlen($memodel) > $maxLength) {
+			$memodel = substr($memodel, 0, $maxLength - 3);
+			$memodel = $memodel . "...";
+		}
+
 		if ($array_ACTIVE_BID[$i4] == "0") {
 			$memodel = "--- BIDDEN AWAY ---";
 		}
@@ -588,7 +594,7 @@ session_start();
 				<div class="dataarea_red" id="TargetingComputer">
 					<table width="90%">
 						<tr>
-							<td colspan="3" nowrap style="text-align:center;" class="datalabel">To hit:</td>
+							<td colspan="3" nowrap style="text-align:center;" class="datalabel">TCmp</td>
 						</tr>
 						<tr>
 							<td colspan="3" nowrap id="ToHitResult" style="font-size:50px;color:#da8e25;vertical-align:middle;text-align:center;font-weight:bold;">5</td>
@@ -599,9 +605,9 @@ session_start();
 							<td nowrap style="text-align:center;" class="datalabel_thin_small">L</td>
 						</tr>
 						<tr>
-							<td nowrap style="text-align:center;" class="datalabel" onclick="setRangeToShort();"><label class='bigcheck'><input type='checkbox' class='bigcheck' name='ToHitShort' id='ToHitShort' value='no'/><span class='bigcheck-target'></span></label></td>
-							<td nowrap style="text-align:center;" class="datalabel" onclick="setRangeToMedium();"><label class='bigcheck'><input type='checkbox' class='bigcheck' name='ToHitMedium' id='ToHitMedium' value='yes'/><span class='bigcheck-target'></span></label></td>
-							<td nowrap style="text-align:center;" class="datalabel" onclick="setRangeToLong();"><label class='bigcheck'><input type='checkbox' class='bigcheck' name='ToHitLong' id='ToHitLong' value='no'/><span class='bigcheck-target'></span></label></td>
+							<td nowrap style="text-align:center;" class="datalabel"><label class='bigcheck'><input onchange="setRangeToShort();" type='checkbox' class='bigcheck' name='ToHitShort' id='ToHitShort' value='no'/><span class='bigcheck-target'></span></label></td>
+							<td nowrap style="text-align:center;" class="datalabel"><label class='bigcheck'><input onchange="setRangeToMedium();" type='checkbox' class='bigcheck' name='ToHitMedium' id='ToHitMedium' value='yes'/><span class='bigcheck-target'></span></label></td>
+							<td nowrap style="text-align:center;" class="datalabel"><label class='bigcheck'><input onchange="setRangeToLong();" type='checkbox' class='bigcheck' name='ToHitLong' id='ToHitLong' value='no'/><span class='bigcheck-target'></span></label></td>
 						</tr>
 						<tr>
 							<td nowrap style="text-align:center;" class="datalabel_thin_small">&#60;6&quot;</td>
@@ -646,9 +652,9 @@ session_start();
 						<tr>
 							<td onclick="toggleTargetingComputer();" nowrap style="text-align:center;" width="5%" id="targetcomp" rowspan="2">&nbsp;&nbsp;&nbsp;<i class="fa-solid fa-circle-left" style="color:#999;font-size:40px;"></i>&nbsp;&nbsp;&nbsp;</td>
 							<td nowrap class="datalabel" width="12%">TP:</td>
-							<td nowrap class="datavalue" width="13%" id="unit_type"><?php echo "$array_TP[$chosenMechIndex]"; ?></td>
+							<td nowrap class="datavalue" width="25%" id="unit_type" colspan="3"><?php echo "$array_TP[$chosenMechIndex]"; ?> <span class='datalabel_thin_small'><?php echo "$array_SZ[$chosenMechIndex]"; ?>/<?php echo "$array_TON[$chosenMechIndex]"; ?></span></td>
 							<!-- <td nowrap class="datalabel" width="12%">SZ:</td> -->
-							<td nowrap class="datavalue_thin" width="12%" colspan="2">(<?php echo "$array_SZ[$chosenMechIndex]"; ?>)</td>
+							<!-- <td nowrap class="datavalue_thin" width="12%" colspan="2">(<?php echo "$array_SZ[$chosenMechIndex]"; ?>)</td> -->
 							<td id="tmmLabel" nowrap class="datalabel" width="12%">TMM:</td>
 							<td nowrap class="datavalue" width="13%" id="TMM"><?php echo "$array_TMM[$chosenMechIndex]"; ?></td>
 							<td nowrap class="datalabel" width="12%">MV:</td>
@@ -659,7 +665,7 @@ session_start();
 						</tr>
 						<tr>
 							<!-- <td nowrap class="datalabel" width="12%" colspan="1">&nbsp;</td> -->
-							<td nowrap class="datavalue_special" width="50%" colspan="4" style="text-align:left;"><?php echo "$array_ROLE[$chosenMechIndex] <span class='datalabel_thin_small'>($array_TON[$chosenMechIndex]t)</span>"; ?></td>
+							<td nowrap class="datavalue_special" width="50%" colspan="4" style="text-align:left;"><?php echo "$array_ROLE[$chosenMechIndex]"; ?></td>
 							<td nowrap class="datalabel" width="13%" colspan="1" valign="middle" >AMM:</td>
 							<td nowrap class="datavalue" width="12%" colspan="1" valign="middle" style="top:0px;bottom:0px;vertical-align:middle;"><span class="datavalue" id="AMM">0</span></td>
 							<td nowrap class="datalabel" width="12%" colspan="1">SKILL:</td>

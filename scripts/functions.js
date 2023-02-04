@@ -39,7 +39,11 @@ var context = null;
 // http://goldfirestudios.com/blog/104/howler.js-Modern-Web-Audio-Javascript-Library
 var sound_dice = null;
 var sound_key = null;
+var sound_keyTC = null;
+var sound_openTC = null;
 var showingMech = false;
+
+var skipTapSample = false;
 
 function setSize(name, value) {
 	var list = document.getElementsByClassName(name);
@@ -56,7 +60,9 @@ function readCircles(index3, a_max3, s_max3) {
 
 function readCircles2(index, a_max, s_max, mv_bt_id, f_bt_id) {
 	if (context != null) {
-		playTapSound();
+		if (skipTapSample == false) {
+			playTapSound();
+		}
 	}
 
 	var na = "";
@@ -258,7 +264,6 @@ function setCircles(h, a, s, e, fc, mp, w, uov, mvmnt, wpnsf, tc_rangeValueReadi
 
 	tc_heat = h;
 	tc_firecontrolDamage = fc * 2;
-	updateOverAllToHitValue();
 
 	var h_c = 0;
 	var a_c = 0;
@@ -755,7 +760,7 @@ function setCircles(h, a, s, e, fc, mp, w, uov, mvmnt, wpnsf, tc_rangeValueReadi
 		document.getElementById('INFOFIRED').innerHTML = "";
 		document.getElementById('phasebuttonimage').src="./images/top-right_phase01.png";
 	}
-	updateOverAllToHitValue();
+	updateOverAllToHitValue(1);
 }
 
 function textSize(dec) {
@@ -981,6 +986,21 @@ function playTapSound() {
 	sound_key.play();
 }
 
+function playTCOpenSound() {
+	if (sound_openTC == null) {
+		sound_openTC = new Howl({ src: ['./audio/openTC.mp3', './audio/openTC.ogg'] });
+	}
+	sound_openTC.play();
+}
+
+function playTCClickSound() {
+	if (sound_keyTC == null) {
+		sound_keyTC = new Howl({ src: ['./audio/keyTC.mp3', './audio/keyTC.ogg'] });
+	}
+	//console.log("tap");
+	sound_keyTC.play();
+}
+
 function hideInfoBar() {
 	$("#infobar").hide();
 }
@@ -1027,6 +1047,7 @@ function toggleTargetingComputer() {
 		document.getElementById("TargetingComputer").style.display = "block";
 		document.getElementById("targetcomp").innerHTML = "&nbsp;&nbsp;&nbsp;<i class='fa-solid fa-circle-left' style='color:#999;font-size:40px;'></i>&nbsp;&nbsp;&nbsp;";
 	}
+	playTCOpenSound();
 }
 
 function setRangeToShort() {
@@ -1034,6 +1055,7 @@ function setRangeToShort() {
 	document.getElementById("ToHitMedium").checked = false;
 	document.getElementById("ToHitLong").checked = false;
 	tc_rangeValue = 0;
+	//console.log("Set range to S");
 	updateOverAllToHitValue();
 }
 
@@ -1042,6 +1064,7 @@ function setRangeToMedium() {
 	document.getElementById("ToHitMedium").checked = true;
 	document.getElementById("ToHitLong").checked = false;
 	tc_rangeValue = 2;
+	//console.log("Set range to M");
 	updateOverAllToHitValue();
 }
 
@@ -1050,6 +1073,7 @@ function setRangeToLong() {
 	document.getElementById("ToHitMedium").checked = false;
 	document.getElementById("ToHitLong").checked = true;
 	tc_rangeValue = 4;
+	//console.log("Set range to L");
 	updateOverAllToHitValue();
 }
 
@@ -1071,7 +1095,7 @@ function reduceEnemyTMM() {
 	updateOverAllToHitValue();
 }
 
-function updateOverAllToHitValue() {
+function updateOverAllToHitValue(skipTap) {
 	var result = 0;
 	tc_skill = parseInt(document.getElementById("skillfield").innerText);
 
@@ -1085,8 +1109,16 @@ function updateOverAllToHitValue() {
     result += tc_wood;
     result += tc_heat;
     result += tc_firecontrolDamage;
-	document.getElementById("ToHitResult").innerText = result;
-	playTapSound();
+
+    if (result > 12) {
+		document.getElementById("ToHitResult").innerText = "-";
+    } else {
+		document.getElementById("ToHitResult").innerText = result;
+    }
+
+     if (skipTap != 1) {
+		playTCClickSound();
+	}
 }
 
 function hideMoveBar() {
