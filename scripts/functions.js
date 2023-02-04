@@ -1,7 +1,29 @@
 var fontsizeLabel = 18;
-var fontsizeLabelthin = 10;
-var fontsizeValue = 22;
-var fontsizeCircle = 24;
+
+var minSize = 10;
+var maxSize = 60;
+
+var fontsizeLabelthinFactor = 0.6;
+var fontsizeLabelthinSmallFactor = 0.6;
+var fontsizeValueFactor = 1.3;
+var fontsizeValueThinFactor = 0.8;
+var fontsizeCircleFactor = 1.1;
+
+var fontsizeLabelthin = fontsizeLabel * fontsizeLabelthinFactor;
+var fontsizeLabelthinSmall = fontsizeLabel * fontsizeLabelthinSmallFactor;
+var fontsizeValue = fontsizeLabel * fontsizeValueFactor;
+var fontsizeValueThin = fontsizeLabel * fontsizeValueThinFactor;
+var fontsizeCircle = fontsizeLabel * fontsizeCircleFactor;
+
+var tc_enemyTMM = 2;
+var tc_amm = 0;
+var tc_skill = 0;
+var tc_rangeValue = 2;
+var tc_partialCover = 0;
+var tc_wood = 0;
+var tc_heat;
+var tc_firecontrolDamage;
+
 var rolling = 0;
 var ccc = 1;
 var structuralDamageCache = 0;
@@ -27,6 +49,8 @@ function setSize(name, value) {
 }
 
 function readCircles(index3, a_max3, s_max3) {
+	/* console.log("a_max3=" + a_max3); */
+	/* console.log("s_max3=" + s_max3); */
 	readCircles2(index3, a_max3, s_max3, -1, -1);
 }
 
@@ -195,7 +219,23 @@ function readCircles2(index, a_max, s_max, mv_bt_id, f_bt_id) {
 		wpnsf = 1;
 	}
 
-	setCircles(h, a, s, e, fc, mp, w, uov, mvmnt, wpnsf);
+	var tc_rangeValueReading = 2;
+	if (document.getElementById("ToHitShort").checked == true
+	&& document.getElementById("ToHitMedium").checked == false
+	&& document.getElementById("ToHitLong").checked == false) {
+		tc_rangeValueReading = 0;
+	} else if (document.getElementById("ToHitShort").checked == false
+	&& document.getElementById("ToHitMedium").checked == true
+	&& document.getElementById("ToHitLong").checked == false) {
+		tc_rangeValueReading = 2;
+	} else if (document.getElementById("ToHitShort").checked == false
+	&& document.getElementById("ToHitMedium").checked == false
+	&& document.getElementById("ToHitLong").checked == true) {
+		tc_rangeValueReading = 4;
+	}
+	/* console.log("range: " + tc_rangeValueReading); */
+
+	setCircles(h, a, s, e, fc, mp, w, uov, mvmnt, wpnsf, tc_rangeValueReading);
 	var url="./save.php?index="+index+"&h="+h+"&a="+a+"&s="+s+"&e="+e+"&fc="+fc+"&mp="+mp+"&w="+w+"&mstat="+mechstatusimage+"&uov="+uov+"&mvmnt="+mvmnt+"&wpnsf="+wpnsf;
 	// alert(url);
 	window.frames['saveframe'].location.replace(url);
@@ -213,8 +253,12 @@ function setStructuralDamageCache(value) {
 	structuralDamageCache = value;
 }
 
-function setCircles(h, a, s, e, fc, mp, w, uov, mvmnt, wpnsf) {
+function setCircles(h, a, s, e, fc, mp, w, uov, mvmnt, wpnsf, tc_rangeValueReading) {
 	var na1 = "";
+
+	tc_heat = h;
+	tc_firecontrolDamage = fc * 2;
+	updateOverAllToHitValue();
 
 	var h_c = 0;
 	var a_c = 0;
@@ -250,6 +294,23 @@ function setCircles(h, a, s, e, fc, mp, w, uov, mvmnt, wpnsf) {
 		}
 	});
 
+	/* console.log("range2: " + tc_rangeValueReading); */
+	if (tc_rangeValueReading == 0) {
+		document.getElementById("ToHitShort").checked = true;
+		document.getElementById("ToHitMedium").checked = false;
+		document.getElementById("ToHitLong").checked = false;
+	}
+	if (tc_rangeValueReading == 2) {
+		document.getElementById("ToHitShort").checked = false;
+		document.getElementById("ToHitMedium").checked = true;
+		document.getElementById("ToHitLong").checked = false;
+	}
+	if (tc_rangeValueReading == 4) {
+		document.getElementById("ToHitShort").checked = false;
+		document.getElementById("ToHitMedium").checked = false;
+		document.getElementById("ToHitLong").checked = true;
+	}
+
 	var updatedmovementpointsground = movementpointsground;
 	var updatemovementpointsjump = movementpointsjump;
 
@@ -268,6 +329,7 @@ function setCircles(h, a, s, e, fc, mp, w, uov, mvmnt, wpnsf) {
 	radioWF5_WEAPONSFIRED2.checked = false;
 	radioWF6_WEAPONSFIRED2.checked = false;
 
+	tc_amm = 0;
 	document.getElementById("tmmLabel").innerHTML = "TMM:";
 	document.getElementById("AMM").innerHTML = "0";
 	document.getElementById("firepanel").style.display = "block";
@@ -277,16 +339,19 @@ function setCircles(h, a, s, e, fc, mp, w, uov, mvmnt, wpnsf) {
 	if (mvmnt == 2) { // Stationary (AMM -1)
 		radioMV2_moved2_standstill.checked = true;
 		document.getElementById("AMM").innerHTML = "-1";
+		tc_amm = -1;
 	}
 	if (mvmnt == 3) { // walked
 		radioMV3_moved3_moved.checked = true;
 		document.getElementById("AMM").innerHTML = "0";
+		tc_amm = 0;
 	}
 	if (mvmnt == 10) { // hulldown
 		radioMV10_moved10_hulldown.checked = true;
 		document.getElementById("AMM").innerHTML = "0";
 	    updatedmovementpointsground = updatedmovementpointsground - 4;
 	    document.getElementById("tmmLabel").innerHTML = "TMM*:";
+	    tc_amm = 0;
 	}
 	if (mvmnt == 9) { // sprinted
 		radioMV9_moved9_sprinted.checked = true;
@@ -296,10 +361,12 @@ function setCircles(h, a, s, e, fc, mp, w, uov, mvmnt, wpnsf) {
 		document.getElementById("firepanel").style.visibility = "hidden";
 		document.getElementById("firepanelhidden").style.display = "block";
 		document.getElementById("firepanelhidden").style.visibility = "visible";
+		tc_amm = 0;
 	}
 	if (mvmnt == 4) { // Jumped (AMM +2)
 		radioMV4_moved4_jumped.checked = true;
-		document.getElementById("AMM").innerHTML = "+2";
+		document.getElementById("AMM").innerHTML = "2";
+		tc_amm = 2;
 	}
 	if (wpnsf == 1) { // hold fire
 		radioWF5_WEAPONSFIRED2.checked = true;
@@ -630,16 +697,16 @@ function setCircles(h, a, s, e, fc, mp, w, uov, mvmnt, wpnsf) {
 	    document.getElementById('INFOMOVED').innerHTML = "";
 	} else if (mvmnt == "2") { // stationary
 	    movementdiestring = movementdiestring + "bd6_" + tmmDiceValue + ".png";
-	    document.getElementById('INFOMOVED').innerHTML = "STAND";
+	    document.getElementById('INFOMOVED').innerHTML = "STD";
 	} else if (mvmnt == "3") { // walked
 	    movementdiestring = movementdiestring + "d6_" + tmmDiceValue + ".png";
-	    document.getElementById('INFOMOVED').innerHTML = "WALK";
+	    document.getElementById('INFOMOVED').innerHTML = "WLK";
 	} else if (mvmnt == "10") { // hulldown
 		movementdiestring = movementdiestring + "bd6_" + tmmDiceValue + ".png";
-		document.getElementById('INFOMOVED').innerHTML = "HLLDWN";
+		document.getElementById('INFOMOVED').innerHTML = "HDWN";
 	}  else if (mvmnt == "4") { // jumped
 	    movementdiestring = movementdiestring + "rd6_" + tmmDiceValue + ".png";
-	    document.getElementById('INFOMOVED').innerHTML = "JUMP";
+	    document.getElementById('INFOMOVED').innerHTML = "JMP";
 	} else if (mvmnt == "9") { // sprinted
 		movementdiestring = movementdiestring + "yd6_" + tmmDiceValue + ".png";
         var e1 = document.getElementById("WF5_WEAPONSFIRED");
@@ -651,7 +718,7 @@ function setCircles(h, a, s, e, fc, mp, w, uov, mvmnt, wpnsf) {
 		if (e1a !== undefined && e1a !== null) { e1a.checked = true; }
         if (e2a !== undefined && e2a !== null) { e2a.checked = false; }
         wpnsf = 1; // HOLD FIRE!
-        document.getElementById('INFOMOVED').innerHTML = "SPRINT";
+        document.getElementById('INFOMOVED').innerHTML = "SPNT";
         document.getElementById('firecontainer').className = "datalabel_thin_disabled";
     }
 
@@ -688,71 +755,40 @@ function setCircles(h, a, s, e, fc, mp, w, uov, mvmnt, wpnsf) {
 		document.getElementById('INFOFIRED').innerHTML = "";
 		document.getElementById('phasebuttonimage').src="./images/top-right_phase01.png";
 	}
+	updateOverAllToHitValue();
 }
 
 function textSize(dec) {
 	fontsizeLabel += (dec==1) ? 1 : (-1);
-	fontsizeLabelthin += (dec==1) ? 1 : (-1);
-	fontsizeValue += (dec==1) ? 1 : (-1);
-	fontsizeCircle += (dec==1) ? 1 : (-1);
 
-	if (fontsizeLabelthin < 10) {
-		fontsizeLabel = 18;
-		fontsizeLabelthin = 10;
-		fontsizeValue = 22;
-		fontsizeCircle = 24;
+	if (fontsizeLabel < minSize) {
+		fontsizeLabel = minSize;
+	} else if (fontsizeLabel > maxSize) {
+		fontsizeLabel = maxSize;
 	}
-	if (fontsizeLabel < 18) {
-		fontsizeLabel = 18;
-		fontsizeLabelthin = 10;
-		fontsizeValue = 22;
-		fontsizeCircle = 24;
-	}
-	if (fontsizeValue < 22) {
-		fontsizeLabel = 18;
-		fontsizeLabelthin = 10;
-		fontsizeValue = 22;
-		fontsizeCircle = 24;
-	}
-	if (fontsizeCircle < 24) {
-		fontsizeLabel = 18;
-		fontsizeLabelthin = 10;
-		fontsizeValue = 22;
-		fontsizeCircle = 24;
-	}
-	if (fontsizeLabelthin > 73) {
-		fontsizeLabel = 81;
-		fontsizeLabelthin = 73;
-		fontsizeValue = 85;
-		fontsizeCircle = 87;
-	}
-	if (fontsizeLabel > 81) {
-		fontsizeLabel = 81;
-		fontsizeLabelthin = 73;
-		fontsizeValue = 85;
-		fontsizeCircle = 87;
-	}
-	if (fontsizeValue > 85) {
-		fontsizeLabel = 81;
-		fontsizeLabelthin = 73;
-		fontsizeValue = 85;
-		fontsizeCircle = 87;
-	}
-	if (fontsizeCircle > 87) {
-		fontsizeLabel = 81;
-		fontsizeLabelthin = 73;
-		fontsizeValue = 85;
-		fontsizeCircle = 87;
-	}
+
+	fontsizeLabelthin = fontsizeLabel * fontsizeLabelthinFactor;
+	fontsizeLabelthinSmall = fontsizeLabel * fontsizeLabelthinSmallFactor;
+	fontsizeValue = fontsizeLabel * fontsizeValueFactor;
+	fontsizeValueThin = fontsizeLabel * fontsizeValueThinFactor;
+	fontsizeCircle = fontsizeLabel * fontsizeCircleFactor;
 
 	setSize("datalabel", fontsizeLabel);
+	setSize("datalabel_button", fontsizeLabel);
+	setSize("datalabel_disabled_solid", fontsizeLabel);
+	setSize("datalabel_disabled_dashed", fontsizeLabel);
 	setSize("datalabel_thin", fontsizeLabelthin);
+	setSize("datalabel_thin_small", fontsizeLabelthinSmall);
+	setSize("datalabel_thin_disabled", fontsizeLabelthin);
 	setSize("datavalue", fontsizeValue);
-	setSize("datavalue_thin", fontsizeLabel);
+	setSize("datavalue_small", fontsizeValue);
+	setSize("datavalue_thin", fontsizeValueThin);
+	setSize("datavalue_special", fontsizeLabel);
 	setSize("bigcheck-target", fontsizeCircle);
 
 	setCookie("fontsizeLabel", fontsizeLabel, 365);
 	setCookie("fontsizeLabelthin", fontsizeLabelthin, 365);
+	setCookie("fontsizeLabelthinSmall", fontsizeLabelthin, 365);
 	setCookie("fontsizeValue", fontsizeValue, 365);
 	setCookie("fontsizeCircle", fontsizeCircle, 365);
 	setCookie("savedBefore", "true", 365);
@@ -901,6 +937,9 @@ function showMech() {
 	    $(".dataarea").each(function() {
 			$(this).fadeOut(500, "linear");
 		});
+	    $(".dataarea_red").each(function() {
+			$(this).fadeOut(500, "linear");
+		});
 		showingMech = true;
 	} else {
 		/*
@@ -978,6 +1017,78 @@ function showDiceBar() {
 	}
 }
 
+function toggleTargetingComputer() {
+	if($('#TargetingComputer').is(':visible')) {
+		$("#TargetingComputer").hide();
+		document.getElementById("TargetingComputer").style.display = "none";
+		document.getElementById("targetcomp").innerHTML = "&nbsp;&nbsp;&nbsp;<i class='fa-solid fa-bullseye' style='color:#999;font-size:40px;'></i>&nbsp;&nbsp;&nbsp;";
+	} else {
+		$("#TargetingComputer").show();
+		document.getElementById("TargetingComputer").style.display = "block";
+		document.getElementById("targetcomp").innerHTML = "&nbsp;&nbsp;&nbsp;<i class='fa-solid fa-circle-left' style='color:#999;font-size:40px;'></i>&nbsp;&nbsp;&nbsp;";
+	}
+}
+
+function setRangeToShort() {
+	document.getElementById("ToHitShort").checked = true;
+	document.getElementById("ToHitMedium").checked = false;
+	document.getElementById("ToHitLong").checked = false;
+	tc_rangeValue = 0;
+	updateOverAllToHitValue();
+}
+
+function setRangeToMedium() {
+	document.getElementById("ToHitShort").checked = false;
+	document.getElementById("ToHitMedium").checked = true;
+	document.getElementById("ToHitLong").checked = false;
+	tc_rangeValue = 2;
+	updateOverAllToHitValue();
+}
+
+function setRangeToLong() {
+	document.getElementById("ToHitShort").checked = false;
+	document.getElementById("ToHitMedium").checked = false;
+	document.getElementById("ToHitLong").checked = true;
+	tc_rangeValue = 4;
+	updateOverAllToHitValue();
+}
+
+function increaseEnemyTMM() {
+	tc_enemyTMM = tc_enemyTMM + 1;
+	if (tc_enemyTMM > 6) {
+		tc_enemyTMM = 6;
+	}
+	document.getElementById("EnemyTMM").innerText = tc_enemyTMM;
+	updateOverAllToHitValue();
+}
+
+function reduceEnemyTMM() {
+	tc_enemyTMM = tc_enemyTMM - 1;
+	if (tc_enemyTMM < -4) {
+		tc_enemyTMM = -4;
+	}
+	document.getElementById("EnemyTMM").innerText = tc_enemyTMM;
+	updateOverAllToHitValue();
+}
+
+function updateOverAllToHitValue() {
+	var result = 0;
+	tc_skill = parseInt(document.getElementById("skillfield").innerText);
+
+	/* console.log("Skill: " + tc_skill); */
+
+	result += tc_enemyTMM;
+	result += tc_amm;
+	result += tc_skill;
+    result += tc_rangeValue;
+    result += tc_partialCover;
+    result += tc_wood;
+    result += tc_heat;
+    result += tc_firecontrolDamage;
+	document.getElementById("ToHitResult").innerText = result;
+	playTapSound();
+}
+
 function hideMoveBar() {
 	$("#movebar").hide();
 }
@@ -1012,6 +1123,10 @@ $(document).ready(function() {
 //			document.getElementById("cover").style.visibility = "hidden";
 //		});
 //	});
+
+	document.getElementById("ToHitShort").checked = false;
+	document.getElementById("ToHitMedium").checked = true;
+	document.getElementById("ToHitLong").checked = false;
 
 	var mechimage = document.getElementById("mechimage");
 	mechimage.style.height="" + ($(document).height() * 0.8 + "px");
@@ -1074,13 +1189,29 @@ $(document).ready(function() {
 
 	if (getCookie("savedBefore") === "true") {
 		fontsizeLabel = parseInt(getCookie("fontsizeLabel"));
-		fontsizeLabelthin = parseInt(getCookie("fontsizeLabelthin"));
-		fontsizeValue = parseInt(getCookie("fontsizeValue"));
-		fontsizeCircle = parseInt(getCookie("fontsizeCircle"));
+		if (fontsizeLabel < minSize) {
+			fontsizeLabel = minSize;
+		}
+		if (fontsizeLabel > maxSize) {
+			fontsizeLabel = maxSize;
+		}
+		fontsizeLabelthin = fontsizeLabel * fontsizeLabelthinFactor;
+		fontsizeLabelthinSmall = fontsizeLabel * fontsizeLabelthinSmallFactor;
+		fontsizeValue = fontsizeLabel * fontsizeValueFactor;
+		fontsizeValueThin = fontsizeLabel * fontsizeValueThinFactor;
+		fontsizeCircle = fontsizeLabel * fontsizeCircleFactor;
+
 		setSize("datalabel", fontsizeLabel);
+		setSize("datalabel_button", fontsizeLabel);
+		setSize("datalabel_disabled_solid", fontsizeLabel);
+		setSize("datalabel_disabled_dashed", fontsizeLabel);
 		setSize("datalabel_thin", fontsizeLabelthin);
+		setSize("datalabel_thin_small", fontsizeLabelthinSmall);
+		setSize("datalabel_thin_disabled", fontsizeLabelthin);
 		setSize("datavalue", fontsizeValue);
-		setSize("datavalue_thin", fontsizeLabel);
+		setSize("datavalue_small", fontsizeValue);
+		setSize("datavalue_thin", fontsizeValueThin);
+		setSize("datavalue_special", fontsizeLabel);
 		setSize("bigcheck-target", fontsizeCircle);
 	}
 

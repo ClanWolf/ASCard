@@ -584,30 +584,86 @@ session_start();
 <div class="datatable">
 	<table width="100%" style="height:100%;">
 		<tr>
-			<td width="50%" valign="bottom">
+			<td width="0%" valign="bottom" align="center">
+				<div class="dataarea_red" id="TargetingComputer">
+					<table width="90%">
+						<tr>
+							<td colspan="3" nowrap style="text-align:center;" class="datalabel">To hit:</td>
+						</tr>
+						<tr>
+							<td colspan="3" nowrap id="ToHitResult" style="font-size:50px;color:#da8e25;vertical-align:middle;text-align:center;font-weight:bold;">5</td>
+						</tr>
+						<tr>
+							<td nowrap style="text-align:center;" class="datalabel_thin_small">S</td>
+							<td nowrap style="text-align:center;" class="datalabel_thin_small">M</td>
+							<td nowrap style="text-align:center;" class="datalabel_thin_small">L</td>
+						</tr>
+						<tr>
+							<td nowrap style="text-align:center;" class="datalabel" onclick="setRangeToShort();"><label class='bigcheck'><input type='checkbox' class='bigcheck' name='ToHitShort' id='ToHitShort' value='no'/><span class='bigcheck-target'></span></label></td>
+							<td nowrap style="text-align:center;" class="datalabel" onclick="setRangeToMedium();"><label class='bigcheck'><input type='checkbox' class='bigcheck' name='ToHitMedium' id='ToHitMedium' value='yes'/><span class='bigcheck-target'></span></label></td>
+							<td nowrap style="text-align:center;" class="datalabel" onclick="setRangeToLong();"><label class='bigcheck'><input type='checkbox' class='bigcheck' name='ToHitLong' id='ToHitLong' value='no'/><span class='bigcheck-target'></span></label></td>
+						</tr>
+						<tr>
+							<td nowrap style="text-align:center;" class="datalabel_thin_small">&#60;6&quot;</td>
+							<td nowrap style="text-align:center;" class="datalabel_thin_small">&#60;24&quot;</td>
+							<td nowrap style="text-align:center;" class="datalabel_thin_small">&#60;42&quot;</td>
+						</tr>
+						<tr>
+							<td nowrap style="text-align:center;" class="datalabel" colspan="3"><hr></td>
+						</tr>
+						<tr>
+							<td nowrap style="text-align:center;" class="datalabel"><label class='bigcheck'><input type='checkbox' onchange='' class='bigcheck' name='ToHitShort' id='ToHitShort' value='no'/><span class='bigcheck-target'></span></label></td>
+							<td nowrap style="text-align:left;" class="datalabel_thin_small" colspan="2">Cover</td>
+						</tr>
+						<tr>
+							<td nowrap style="text-align:center;" class="datalabel"><label class='bigcheck'><input type='checkbox' onchange='' class='bigcheck' name='ToHitShort' id='ToHitShort' value='no'/><span class='bigcheck-target'></span></label></td>
+							<td nowrap style="text-align:left;" class="datalabel_thin_small" colspan="2">Forrest</td>
+						</tr>
+						<tr>
+							<td nowrap style="text-align:center;" class="datalabel" colspan="3"><hr></td>
+						</tr>
+						<tr>
+							<td colspan="3" align="center">
+								<table width="90%">
+									<tr>
+										<td colspan="3" nowrap style="text-align:center;" class="datalabel_thin_small">TMM</td>
+									</tr>
+									<tr>
+										<td width="5%" nowrap style="text-align:right;" class="datalabel_button" valign="middle"><a href="javascript:reduceEnemyTMM();"><i class="fas fa-minus-square"></i></a></td>
+										<td width="5%" nowrap style="text-align:center;" class="datalabel" id="EnemyTMM" align="center">2</td>
+										<td width="5%" nowrap style="text-align:left;" class="datalabel_button" valign="middle"><a href="javascript:increaseEnemyTMM();"><i class="fas fa-plus-square"></i></a></td>
+									</tr>
+								</table>
+							</td>
+						</tr>
+					</table>
+				</div>
+			</td>
 
+			<td width="60%" valign="bottom">
 				<div class="dataarea">
 					<table width="100%">
 						<tr>
+							<td onclick="toggleTargetingComputer();" nowrap style="text-align:center;" width="5%" id="targetcomp" rowspan="2">&nbsp;&nbsp;&nbsp;<i class="fa-solid fa-circle-left" style="color:#999;font-size:40px;"></i>&nbsp;&nbsp;&nbsp;</td>
 							<td nowrap class="datalabel" width="12%">TP:</td>
 							<td nowrap class="datavalue" width="13%" id="unit_type"><?php echo "$array_TP[$chosenMechIndex]"; ?></td>
-							<td nowrap class="datalabel" width="12%">SZ:</td>
-							<td nowrap class="datavalue" width="13%"><?php echo "$array_SZ[$chosenMechIndex]/$array_TON[$chosenMechIndex]"; ?></td>
+							<!-- <td nowrap class="datalabel" width="12%">SZ:</td> -->
+							<td nowrap class="datavalue_thin" width="12%" colspan="2">(<?php echo "$array_SZ[$chosenMechIndex]"; ?>)</td>
 							<td id="tmmLabel" nowrap class="datalabel" width="12%">TMM:</td>
 							<td nowrap class="datavalue" width="13%" id="TMM"><?php echo "$array_TMM[$chosenMechIndex]"; ?></td>
 							<td nowrap class="datalabel" width="12%">MV:</td>
-							<td nowrap class="datavalue_thin" style="text-transform: none;" width="12%" id="mv_points"><?php echo "$array_MV[$chosenMechIndex]&rdquo;";
+							<td nowrap class="datavalue" style="text-transform: none;" width="13%" id="mv_points"><?php echo "$array_MV[$chosenMechIndex]&rdquo;";
 							if ($array_MVJ[$chosenMechIndex] != null) {
 								echo "/$array_MVJ[$chosenMechIndex]&rdquo;&nbsp;j";
 							} ?></td>
 						</tr>
 						<tr>
 							<!-- <td nowrap class="datalabel" width="12%" colspan="1">&nbsp;</td> -->
-							<td nowrap class="datavalue_thin" width="50%" colspan="4"><?php echo "$array_ROLE[$chosenMechIndex]"; ?></td>
-							<td nowrap class="datalabel" width="12%" colspan="1">SKILL:</td>
-							<td nowrap class="datavalue" width="12%" colspan="1" valign="middle" style="top:0px;bottom:0px;vertical-align:middle;"><?php echo "$array_SKILL[$chosenMechIndex]"; ?></td>
+							<td nowrap class="datavalue_special" width="50%" colspan="4" style="text-align:left;"><?php echo "$array_ROLE[$chosenMechIndex] <span class='datalabel_thin_small'>($array_TON[$chosenMechIndex]t)</span>"; ?></td>
 							<td nowrap class="datalabel" width="13%" colspan="1" valign="middle" >AMM:</td>
-							<td nowrap class="datavalue_thin" width="12%" colspan="1" valign="middle" ><span style="font-family:'Pathway Gothic One',sans-serif;font-size:75%;text-transform:uppercase;color:#999;" id="AMM">0</span> <span style="font-family:'Pathway Gothic One',sans-serif;font-size:75%;text-transform:uppercase;color:#999;">(AMM)</span></td>
+							<td nowrap class="datavalue" width="12%" colspan="1" valign="middle" style="top:0px;bottom:0px;vertical-align:middle;"><span class="datavalue" id="AMM">0</span></td>
+							<td nowrap class="datalabel" width="12%" colspan="1">SKILL:</td>
+							<td nowrap class="datavalue" width="12%" colspan="1" valign="middle" id="skillfield" style="top:0px;bottom:0px;vertical-align:middle;"><?php echo "$array_SKILL[$chosenMechIndex]"; ?></td>
 						</tr>
 					</table>
 				</div>
@@ -629,7 +685,7 @@ session_start();
 				<div class="dataarea" id="firepanelhidden" style="visibility: hidden;display:none">
 					<table width="100%">
 						<tr>
-							<td nowrap class="datavalue" width="10%" style="text-align: center;">TRADE ABILITY TO FIRE FOR SPEED</td>
+							<td nowrap class="datavalue_thin" width="10%" style="text-align: center;">TRADE ABILITY TO FIRE FOR SPEED</td>
 						</tr>
 					</table>
 				</div>
@@ -719,11 +775,7 @@ session_start();
 	
 	
 	
-	<td width="10%" valign="bottom" align="center">
-		<div class="dataarea">
-			To hit:
-		</div>
-	</td>
+
 	
 	
 	
@@ -735,13 +787,13 @@ session_start();
 					<img valign="top" id="movementtokenimage" src="./images/dice/yd6_4.png" height="70px">
 				</div>
 				<div class="dataarea">
-					<table width="100%">
+					<table width="100%" cellpadding="0" cellspacing="0">
 						<tr>
 							<td nowrap rowspan="3" style="vertical-align: middle;" valign="middle" align="center" width="15px">
 								<div style="padding: 0 15 0 15;" id="phasebutton" name="phasebutton"><img id="phasebuttonimage" src=<?php echo "'$currentPhaseButton'"; ?> style='height:50px;'></div> <!-- <a href=<?php echo "'$currentmeli'"; ?>> </a> -->
 							</td>
 							<td nowrap width="65%" class="datalabel_thin">
-								<table cellspacing="0" cellpadding="0">
+								<table cellspacing="2" cellpadding="0">
 									<tr>
 										<td align="center"><img src="./images/buttons/mov01.png" height='17px' style="border: 0px solid #000000;"></td>
 										<td align="center"><img src="./images/buttons/mov02.png" height='17px' style="border: 0px solid #000000;"></td>
@@ -750,30 +802,27 @@ session_start();
 										<td align="center"><img src="./images/buttons/mov05.png" height='17px' style="border: 0px solid #000000;"></td>
 									</tr>
 									<tr>
-										<td><label class='bigcheck'><input type='checkbox' onchange='readCircles2(<?= $array_MECH_DBID[$chosenMechIndex] ?>, <?= $array_A_MAX[$chosenMechIndex] ?>, <?= $array_S_MAX[$chosenMechIndex] ?>, 2, -1);' class='bigcheck' name='MV2_moved2_standstill' id='MV2_moved2_standstill' value='no'/><span class='bigcheck-target'></span></label></td>
-										<td><label class='bigcheck'><input type='checkbox' onchange='readCircles2(<?= $array_MECH_DBID[$chosenMechIndex] ?>, <?= $array_A_MAX[$chosenMechIndex] ?>, <?= $array_S_MAX[$chosenMechIndex] ?>, 10,-1);' class='bigcheck' name='MV10_moved10_hulldown' id='MV10_moved10_hulldown' value='no'/><span class='bigcheck-target'></span></label></td>
-										<td><label class='bigcheck'><input type='checkbox' onchange='readCircles2(<?= $array_MECH_DBID[$chosenMechIndex] ?>, <?= $array_A_MAX[$chosenMechIndex] ?>, <?= $array_S_MAX[$chosenMechIndex] ?>, 3, -1);' class='bigcheck' name='MV3_moved3_moved' id='MV3_moved3_moved' value='no'/><span class='bigcheck-target'></span></label></td>
-										<td><label class='bigcheck'><input type='checkbox' onchange='readCircles2(<?= $array_MECH_DBID[$chosenMechIndex] ?>, <?= $array_A_MAX[$chosenMechIndex] ?>, <?= $array_S_MAX[$chosenMechIndex] ?>, 9, -1);' class='bigcheck' name='MV9_moved9_sprinted' id='MV9_moved9_sprinted' value='no'/><span class='bigcheck-target'></span></label></td>
-										<td><label class='bigcheck'><input type='checkbox' onchange='readCircles2(<?= $array_MECH_DBID[$chosenMechIndex] ?>, <?= $array_A_MAX[$chosenMechIndex] ?>, <?= $array_S_MAX[$chosenMechIndex] ?>, 4, -1);' class='bigcheck' name='MV4_moved4_jumped' id='MV4_moved4_jumped' value='no'/><span class='bigcheck-target'></span></label></td>
+										<td><label class='bigcheck'><input type='checkbox' onchange='readCircles2(<?= $array_MECH_DBID[$chosenMechIndex] ?>, <?= $array_A_MAX[$chosenMechIndex] ?>, <?= $array_S_MAX[$chosenMechIndex] ?>, 2, -1);' class='bigcheck' name='MV2_moved2_standstill' id='MV2_moved2_standstill' value='no'/><span class='bigcheck-target'></span></label>&nbsp;</td>
+										<td><label class='bigcheck'><input type='checkbox' onchange='readCircles2(<?= $array_MECH_DBID[$chosenMechIndex] ?>, <?= $array_A_MAX[$chosenMechIndex] ?>, <?= $array_S_MAX[$chosenMechIndex] ?>, 10,-1);' class='bigcheck' name='MV10_moved10_hulldown' id='MV10_moved10_hulldown' value='no'/><span class='bigcheck-target'></span></label>&nbsp;</td>
+										<td><label class='bigcheck'><input type='checkbox' onchange='readCircles2(<?= $array_MECH_DBID[$chosenMechIndex] ?>, <?= $array_A_MAX[$chosenMechIndex] ?>, <?= $array_S_MAX[$chosenMechIndex] ?>, 3, -1);' class='bigcheck' name='MV3_moved3_moved' id='MV3_moved3_moved' value='no'/><span class='bigcheck-target'></span></label>&nbsp;</td>
+										<td><label class='bigcheck'><input type='checkbox' onchange='readCircles2(<?= $array_MECH_DBID[$chosenMechIndex] ?>, <?= $array_A_MAX[$chosenMechIndex] ?>, <?= $array_S_MAX[$chosenMechIndex] ?>, 9, -1);' class='bigcheck' name='MV9_moved9_sprinted' id='MV9_moved9_sprinted' value='no'/><span class='bigcheck-target'></span></label>&nbsp;</td>
+										<td><label class='bigcheck'><input type='checkbox' onchange='readCircles2(<?= $array_MECH_DBID[$chosenMechIndex] ?>, <?= $array_A_MAX[$chosenMechIndex] ?>, <?= $array_S_MAX[$chosenMechIndex] ?>, 4, -1);' class='bigcheck' name='MV4_moved4_jumped' id='MV4_moved4_jumped' value='no'/><span class='bigcheck-target'></span></label>&nbsp;</td>
 									</tr>
 								</table>
 							</td>
-							<td id="INFOMOVED" nowrap width="20%" class="datalabel"></td> <!-- &nbsp;(MOVEMENT) -->
+							<td id="INFOMOVED" nowrap width="20%" class="datalabel"></td>
 						</tr>
 						<tr>
 							<td nowrap width="65%" id="firecontainer" class="datalabel_thin">
-							<table cellspacing="0" cellpadding="0">
+							<table cellspacing="2" cellpadding="0">
 								<tr>
-									<td><label class='bigcheck'><input type='checkbox' onchange='readCircles2(<?= $array_MECH_DBID[$chosenMechIndex] ?>, <?= $array_A_MAX[$chosenMechIndex] ?>, <?= $array_S_MAX[$chosenMechIndex] ?>, -1, 1);' class='bigcheck' name='WF5_WEAPONSFIRED2' id='WF5_WEAPONSFIRED2' value='no'/><span class='bigcheck-target'></span></label></td>
-									<td><label class='bigcheck'><input type='checkbox' onchange='readCircles2(<?= $array_MECH_DBID[$chosenMechIndex] ?>, <?= $array_A_MAX[$chosenMechIndex] ?>, <?= $array_S_MAX[$chosenMechIndex] ?>, -1, 2);' class='bigcheck' name='WF6_WEAPONSFIRED2' id='WF6_WEAPONSFIRED2' value='no'/><span class='bigcheck-target'></span></label></td>
-									<td nowrap class="datavalue" style="text-align: right;" align="right">&nbsp;&nbsp;&nbsp;<span style="font-family:'Pathway Gothic One',sans-serif;font-size:60%;text-transform:uppercase;color:#999;">WEAPONS</span></td>
-									<!--
-									<td style="width:40%;background-size:100% 100%;background-image:url(./images/buttons/fire.png)" align="right" valign="bottom">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-									-->
+									<td><label class='bigcheck'><input type='checkbox' onchange='readCircles2(<?= $array_MECH_DBID[$chosenMechIndex] ?>, <?= $array_A_MAX[$chosenMechIndex] ?>, <?= $array_S_MAX[$chosenMechIndex] ?>, -1, 1);' class='bigcheck' name='WF5_WEAPONSFIRED2' id='WF5_WEAPONSFIRED2' value='no'/><span class='bigcheck-target'></span></label>&nbsp;</td>
+									<td><label class='bigcheck'><input type='checkbox' onchange='readCircles2(<?= $array_MECH_DBID[$chosenMechIndex] ?>, <?= $array_A_MAX[$chosenMechIndex] ?>, <?= $array_S_MAX[$chosenMechIndex] ?>, -1, 2);' class='bigcheck' name='WF6_WEAPONSFIRED2' id='WF6_WEAPONSFIRED2' value='no'/><span class='bigcheck-target'></span></label>&nbsp;</td>
+									<td nowrap class="datavalue" style="text-align: right;" align="right"><span style="font-family:'Pathway Gothic One',sans-serif;font-size:60%;text-transform:uppercase;color:#999;">&nbsp;&nbsp;&nbsp;WEAPONS</span></td>
                                 </tr>
 							</table>
 							</td>
-							<td id="INFOFIRED" nowrap  width="20%" class="datalabel"></td> <!-- &nbsp;(WEAPONS) -->
+							<td id="INFOFIRED" nowrap width="20%" class="datalabel"></td>
 						</tr>
 					</table>
 				</div>
@@ -788,7 +837,7 @@ session_start();
 
 					<table width="100%">
 						<tr>
-							<td nowrap class="datalabel" width="5%" style="text-align: right;">ENGN:&nbsp;&nbsp;</td>
+							<td nowrap class="datalabel" width="5%" style="text-align: right;">EN:&nbsp;&nbsp;</td>
 							<td nowrap class="datalabel_button" valign="middle"><a href="javascript:increaseENGN_PREP();"><i class="fas fa-plus-square"></i></a></td>
 							<td nowrap class="datalabel" id="label_ENGN_PREP" align="center"><?= $array_ENGN_PREP[$chosenMechIndex] ?></td>
 							<td nowrap class="datalabel">&nbsp;&nbsp;</td>
@@ -799,7 +848,7 @@ session_start();
 							<td nowrap class="datalabel_thin_small" width="5%" style="text-align: right;">+1 HT</td>
 						</tr>
 						<tr>
-							<td nowrap class="datalabel" width="5%" style="text-align: right;">FCTL:&nbsp;&nbsp;</td>
+							<td nowrap class="datalabel" width="5%" style="text-align: right;">FC:&nbsp;&nbsp;</td>
 							<td nowrap class="datalabel_button" valign="middle"><a href="javascript:increaseFCTL_PREP();"><i class="fas fa-plus-square"></i></a></td>
 							<td nowrap class="datalabel" id="label_FCTL_PREP" align="center"><?= $array_FRCTRL_PREP[$chosenMechIndex] ?></td>
 							<td nowrap class="datalabel">&nbsp;&nbsp;</td>
@@ -825,7 +874,7 @@ session_start();
 							<td nowrap class="datalabel_thin_small" width="5%" style="text-align: right;">1/2 MV</td>
 						</tr>
 						<tr>
-							<td nowrap class="datalabel" width="5%" style="text-align: right;">WPNS:&nbsp;&nbsp;</td>
+							<td nowrap class="datalabel" width="5%" style="text-align: right;">WN:&nbsp;&nbsp;</td>
 							<td nowrap class="datalabel_button" valign="middle"><a href="javascript:increaseWPNS_PREP();"><i class="fas fa-plus-square"></i></a></td>
 							<td nowrap class="datalabel" id="label_WPNS_PREP" align="center"><?= $array_WPNS_PREP[$chosenMechIndex] ?></td>
 							<td nowrap class="datalabel">&nbsp;&nbsp;</td>

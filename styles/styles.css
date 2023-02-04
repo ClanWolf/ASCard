@@ -564,7 +564,7 @@ span.bigcheck-target {
 	margin-right: 0px;
 	padding-left: -20px;
 	padding-right: 0px;
-	font-size: 100%;
+	font-size: 80%;
 }
 input[type='checkbox'].bigcheck {     
 	position: relative;
@@ -601,25 +601,33 @@ input[type='checkbox'].bigcheck:checked + span.bigcheck-target:after {
 	margin-left: 3px;
 	margin-right: 3px;
 }
+.dataarea_red {
+	border-radius: 12px;
+	border-style: solid;
+	border-width: 6px;
+	padding: 3px;
+	background: rgba(70,0,0,0.65);
+	margin-top: 3px;
+	margin-bottom: 3px;
+	margin-left: 3px;
+	margin-right: 3px;
+}
 .datalabel {
 	font-family: 'Pathway Gothic One', sans-serif;
 	vertical-align: middle;
 	color: #999;
-	font-size: 100%;
 	padding-right: 5px;
 }
 .datalabel_button {
 	font-family: 'Pathway Gothic One', sans-serif;
 	vertical-align: middle;
 	color: #999;
-	font-size: 140%;
 	padding-right: 5px;
 }
 .datalabel_disabled_solid {
 	font-family: 'Pathway Gothic One', sans-serif;
 	vertical-align: middle;
 	color: #999;
-	font-size: 100%;
 	padding-right: 5px;
 	background-color:#aaaa00;
 }
@@ -627,7 +635,6 @@ input[type='checkbox'].bigcheck:checked + span.bigcheck-target:after {
 	font-family: 'Pathway Gothic One', sans-serif;
 	vertical-align: middle;
 	color: #999;
-	font-size: 100%;
 	padding-right: 5px;
 	background-image:repeating-linear-gradient(45deg, #444444 0%, #444444 2%, #aaaa00 2%, #aaaa00 4%, #444444 4%);
 }
@@ -635,40 +642,39 @@ input[type='checkbox'].bigcheck:checked + span.bigcheck-target:after {
 	font-family: 'Pathway Gothic One', sans-serif;
 	vertical-align: middle;
 	color: #999;
-	font-size: 100%;
 	padding-right: 5px;
 }
 .datalabel_thin_small {
 	font-family: 'Pathway Gothic One', sans-serif;
 	vertical-align: middle;
 	color: #999;
-	font-size: 75%;
 	padding-right: 5px;
 }
 .datalabel_thin_disabled {
 	font-family: 'Pathway Gothic One', sans-serif;
 	vertical-align: middle;
 	color: #222;
-	font-size: 100%;
 	padding-right: 5px;
 	visibility: hidden;
 }
 .datavalue {
 	vertical-align: middle;
-	font-size: 100%;
 	color: #ccc;
+	text-transform: uppercase;
+}
+.datavalue_special {
+	vertical-align: middle;
+	color: #8ec76b;
 	text-transform: uppercase;
 }
 .datavalue_small {
 	vertical-align: middle;
-	font-size: 110%;
 	color: #ccc;
 	text-transform: uppercase;
 }
 .datavalue_thin {
 	font-family: 'Pathway Gothic One', sans-serif;
 	vertical-align: middle;
-	font-size: 100%;
 	text-transform: uppercase;
 	color: #ccc;
 }
