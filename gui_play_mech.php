@@ -594,7 +594,7 @@ session_start();
 				<div class="dataarea_red" id="TargetingComputer">
 					<table width="90%">
 						<tr>
-							<td colspan="3" nowrap style="text-align:center;" class="datalabel">TCmp</td>
+							<td colspan="3" nowrap style="text-align:center;" class="datalabel">TC</td>
 						</tr>
 						<tr>
 							<td colspan="3" nowrap id="ToHitResult" style="font-size:50px;color:#da8e25;vertical-align:middle;text-align:center;font-weight:bold;">5</td>
@@ -618,11 +618,11 @@ session_start();
 							<td nowrap style="text-align:center;" class="datalabel" colspan="3"><hr></td>
 						</tr>
 						<tr>
-							<td nowrap style="text-align:center;" class="datalabel"><label class='bigcheck'><input type='checkbox' onchange='' class='bigcheck' name='ToHitShort' id='ToHitShort' value='no'/><span class='bigcheck-target'></span></label></td>
+							<td nowrap style="text-align:center;" class="datalabel"><label class='bigcheck'><input type='checkbox' onchange="setCover();" class='bigcheck' name='ToHitCover' id='ToHitCover' value='no'/><span class='bigcheck-target'></span></label></td>
 							<td nowrap style="text-align:left;" class="datalabel_thin_small" colspan="2">Cover</td>
 						</tr>
 						<tr>
-							<td nowrap style="text-align:center;" class="datalabel"><label class='bigcheck'><input type='checkbox' onchange='' class='bigcheck' name='ToHitShort' id='ToHitShort' value='no'/><span class='bigcheck-target'></span></label></td>
+							<td nowrap style="text-align:center;" class="datalabel"><label class='bigcheck'><input type='checkbox' onchange="setForrest();" class='bigcheck' name='ToHitForrest' id='ToHitForrest' value='no'/><span class='bigcheck-target'></span></label></td>
 							<td nowrap style="text-align:left;" class="datalabel_thin_small" colspan="2">Forrest</td>
 						</tr>
 						<tr>
@@ -897,6 +897,7 @@ session_start();
 			</td>
 			<td valign='bottom'>
 				<a onclick='showInfoBar();' id="InfoButton" href='#'><img src='./images/selector_02-info.png' width='50px'></a><br>
+				<a onclick='showSoundBoard();' id="SoundBoard" href='#'><img src='./images/selector_00-sb.png' width='50px'></a><br>
 				<a onclick='showDiceBar();' id="DiceButton" href='#'><img src='./images/selector_01-dice.png' width='50px'></a><br>
 				<a onclick='showMoveBar();' id="MoveButton" href='#'><img id='roundphaseshortcutimage' src='./images/selector_04-movement.png' width='50px'></a>
 			</td>
@@ -905,6 +906,39 @@ session_start();
 </div>
 
 <div name='bgrightbar' id='bgrightbar'></div>
+
+<div name='soundboard' id='soundboard'>
+	<div name='barclosebutton' id='barclosebutton'>
+		<a href='#' onclick='hideSoundBoard();'><img src='.\images\selector_03-close.png' width='50px'></a>
+	</div>
+	<div name='soundboardpanel' id='soundboardpanel'>
+		<table width="100%">
+			<tr>
+				<td align="right" valign="bottom">
+					<div valign="bottom" align="left">
+						<table cellspacing="5" cellpadding="0" width="100%">
+							<tr>
+								<td class='phase_button_normal'>Wir sind Clan Wolf</td>
+							</tr>
+							<tr>
+								<td class='phase_button_normal'>Trial by combat</td>
+							</tr>
+							<tr>
+								<td class='phase_button_normal'>Know this...</td>
+							</tr>
+							<tr>
+								<td class='phase_button_normal'>Register identiy</td>
+							</tr>
+							<tr>
+								<td class='phase_button_normal'>Busted</td>
+							</tr>
+						</table>
+					</div>
+				</td>
+			</tr>
+		</table>
+	</div>
+</div>
 
 <div name='infobar' id='infobar'>
 	<div name='barclosebutton' id='barclosebutton'>
@@ -1007,6 +1041,7 @@ session_start();
 	$("#infobar").hide();
 	$("#dicebar").hide();
 	$("#movebar").hide();
+	$("#soundboard").hide();
 	$("#destroyedIndicator").hide();
 	setCircles(<?=$array_HT[$chosenMechIndex]?>,<?=$array_A[$chosenMechIndex]?>,<?=$array_S[$chosenMechIndex]?>,<?=$array_ENGN[$chosenMechIndex]?>,<?=$array_FRCTRL[$chosenMechIndex]?>,<?=$array_MP[$chosenMechIndex]?>,<?=$array_WPNS[$chosenMechIndex]?>,<?=$array_USEDOVERHEAT[$chosenMechIndex]?>,<?=$array_MVMT[$chosenMechIndex]?>,<?=$array_WPNSFIRED[$chosenMechIndex]?>);
 </script>

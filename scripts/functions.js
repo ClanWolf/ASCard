@@ -41,6 +41,8 @@ var sound_dice = null;
 var sound_key = null;
 var sound_keyTC = null;
 var sound_openTC = null;
+var sound_closeTC = null;
+
 var showingMech = false;
 
 var skipTapSample = false;
@@ -908,6 +910,10 @@ function changeWallpaper() {
 		for (let i = 0; i < allDataAreas.length; i++) {
 			allDataAreas[i].style.backgroundColor="rgba(255,255,255,0.85)"
 		}
+		const allDataAreaReds = document.getElementsByClassName("dataarea_red");
+		for (let i = 0; i < allDataAreaReds.length; i++) {
+			allDataAreaReds[i].style.backgroundColor="rgba(255,255,255,0.85)"
+		}
 		const allDataValues = document.getElementsByClassName("datavalue");
 		for (let i = 0; i < allDataValues.length; i++) {
 			allDataValues[i].style.color="#000"
@@ -924,6 +930,10 @@ function changeWallpaper() {
 		const allDataAreas = document.getElementsByClassName("dataarea");
 		for (let i = 0; i < allDataAreas.length; i++) {
 			allDataAreas[i].style.backgroundColor="rgba(70,70,70,0.85)"
+		}
+		const allDataAreaReds = document.getElementsByClassName("dataarea_red");
+		for (let i = 0; i < allDataAreaReds.length; i++) {
+			allDataAreaReds[i].style.backgroundColor="rgba(70,0,0,0.65)"
 		}
 		const allDataValues = document.getElementsByClassName("datavalue");
 		for (let i = 0; i < allDataValues.length; i++) {
@@ -993,6 +1003,13 @@ function playTCOpenSound() {
 	sound_openTC.play();
 }
 
+function playTCCloseSound() {
+	if (sound_closeTC == null) {
+		sound_closeTC = new Howl({ src: ['./audio/closeTC.mp3', './audio/closeTC.ogg'] });
+	}
+	sound_closeTC.play();
+}
+
 function playTCClickSound() {
 	if (sound_keyTC == null) {
 		sound_keyTC = new Howl({ src: ['./audio/keyTC.mp3', './audio/keyTC.ogg'] });
@@ -1012,6 +1029,22 @@ function showInfoBar() {
 		$("#movebar").hide();
 		$("#dicebar").hide();
 		$("#infobar").show();
+		$("#soundboard").hide();
+	}
+}
+
+function hideSoundBoard() {
+	$("#soundboard").hide();
+}
+
+function showSoundBoard() {
+	if($('#soundboard').is(':visible')) {
+		// the movebar is already open. do nothing
+	} else {
+		$("#movebar").hide();
+		$("#dicebar").hide();
+		$("#infobar").hide();
+		$("#soundboard").show();
 	}
 }
 
@@ -1026,6 +1059,7 @@ function showDiceBar() {
 		$("#infobar").hide();
 		$("#movebar").hide();
 		$("#dicebar").show();
+		$("#soundboard").hide();
 
 		if (rolling === 0) {
 		    playDiceSound();
@@ -1042,12 +1076,15 @@ function toggleTargetingComputer() {
 		$("#TargetingComputer").hide();
 		document.getElementById("TargetingComputer").style.display = "none";
 		document.getElementById("targetcomp").innerHTML = "&nbsp;&nbsp;&nbsp;<i class='fa-solid fa-bullseye' style='color:#999;font-size:40px;'></i>&nbsp;&nbsp;&nbsp;";
+		setCookie("tcmp", 0, 365);
+		playTCCloseSound();
 	} else {
 		$("#TargetingComputer").show();
 		document.getElementById("TargetingComputer").style.display = "block";
 		document.getElementById("targetcomp").innerHTML = "&nbsp;&nbsp;&nbsp;<i class='fa-solid fa-circle-left' style='color:#999;font-size:40px;'></i>&nbsp;&nbsp;&nbsp;";
+		setCookie("tcmp", 1, 365);
+		playTCOpenSound();
 	}
-	playTCOpenSound();
 }
 
 function setRangeToShort() {
@@ -1092,6 +1129,24 @@ function reduceEnemyTMM() {
 		tc_enemyTMM = -4;
 	}
 	document.getElementById("EnemyTMM").innerText = tc_enemyTMM;
+	updateOverAllToHitValue();
+}
+
+function setCover() {
+	if (document.getElementById("ToHitCover").checked == true) {
+		tc_partialCover = 2;
+	} else {
+		tc_partialCover = 0;
+	}
+	updateOverAllToHitValue();
+}
+
+function setForrest() {
+	if (document.getElementById("ToHitForrest").checked == true) {
+		tc_wood = 2;
+	} else {
+		tc_wood = 0;
+	}
 	updateOverAllToHitValue();
 }
 
@@ -1156,6 +1211,11 @@ $(document).ready(function() {
 //		});
 //	});
 
+	if (getCookie("tcmp") === "0") {
+		$("#TargetingComputer").hide();
+		document.getElementById("TargetingComputer").style.display = "none";
+		document.getElementById("targetcomp").innerHTML = "&nbsp;&nbsp;&nbsp;<i class='fa-solid fa-bullseye' style='color:#999;font-size:40px;'></i>&nbsp;&nbsp;&nbsp;";
+	}
 	document.getElementById("ToHitShort").checked = false;
 	document.getElementById("ToHitMedium").checked = true;
 	document.getElementById("ToHitLong").checked = false;

@@ -282,6 +282,17 @@ a:hover {
 	/* background-color: #ffffff; */
 	background-image: url('../images/bgdicebar.png');
 }
+#soundboard {
+	z-index: 10;
+	position: absolute;
+	width: 300px;
+	right: 0px;
+	bottom: 0px;
+	top: 0px;
+	color: #000000;
+	/* background-color: #ffffff; */
+	background-image: url('../images/bgdicebar.png');
+}
 #movebar {
 	z-index: 10;
 	position: absolute;
@@ -305,6 +316,18 @@ a:hover {
 	/* background-image: url('../images/bgdicebar.png'); */
 }
 #infopanel {
+	z-index: 10;
+	position: absolute;
+	width: 220px;
+	right: 0px;
+	bottom: 50px;
+	padding-right: 10px;
+	color: #000000;
+	text-align: right;
+	/* background-color: #ffffff; */
+	/* background-image: url('../images/bgdicebar.png'); */
+}
+#soundboardpanel {
 	z-index: 10;
 	position: absolute;
 	width: 220px;
