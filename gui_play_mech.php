@@ -916,21 +916,24 @@ session_start();
 			<tr>
 				<td align="right" valign="bottom">
 					<div valign="bottom" align="left">
-						<table cellspacing="5" cellpadding="0" width="100%">
+						<table cellspacing="5" cellpadding="2" width="100%">
 							<tr>
-								<td class='phase_button_normal'>Wir sind Clan Wolf</td>
+								<td class='phase_button_normal' onclick="javascript:playSound_01();">1</td>
+								<td class='phase_button_normal' onclick="javascript:playSound_02();">2</td>
+								<td class='phase_button_normal' onclick="javascript:playSound_03();">3</td>
 							</tr>
 							<tr>
-								<td class='phase_button_normal'>Trial by combat</td>
+								<td class='phase_button_normal' onclick="javascript:playSound_04();">4</td>
+								<td class='phase_button_normal' onclick="javascript:playSound_05();">5</td>
+								<td class='phase_button_normal' onclick="javascript:playSound_06();">6</td>
 							</tr>
 							<tr>
-								<td class='phase_button_normal'>Know this...</td>
+								<td class='phase_button_normal' onclick="javascript:playSound_07();">7</td>
+								<td class='phase_button_normal' onclick="javascript:playSound_08();">8</td>
+								<td class='phase_button_normal' onclick="javascript:playSound_09();">9</td>
 							</tr>
 							<tr>
-								<td class='phase_button_normal'>Register identiy</td>
-							</tr>
-							<tr>
-								<td class='phase_button_normal'>Busted</td>
+								<td class='phase_button_normal' colspan="3" onclick="javascript:window.location.reload();">STOP</td>
 							</tr>
 						</table>
 					</div>

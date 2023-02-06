@@ -42,6 +42,15 @@ var sound_key = null;
 var sound_keyTC = null;
 var sound_openTC = null;
 var sound_closeTC = null;
+var sound_01 = null;
+var sound_02 = null;
+var sound_03 = null;
+var sound_04 = null;
+var sound_05 = null;
+var sound_06 = null;
+var sound_07 = null;
+var sound_08 = null;
+var sound_09 = null;
 
 var showingMech = false;
 
@@ -1016,6 +1025,61 @@ function playTCClickSound() {
 	}
 	//console.log("tap");
 	sound_keyTC.play();
+}
+
+function playSound_01() {
+	if (sound_01 == null) {
+		sound_01 = new Howl({ src: ['./audio/samples/ACallToTrial.mp3', './audio/samples/ACallToTrial.ogg'] });
+	}
+	sound_01.play();
+}
+function playSound_02() {
+	if (sound_02 == null) {
+		sound_02 = new Howl({ src: ['./audio/samples/AlrightWheresTheCavalry.mp3', './audio/samples/AlrightWheresTheCavalry.ogg'] });
+	}
+	sound_02.play();
+}
+function playSound_03() {
+	if (sound_03 == null) {
+		sound_03 = new Howl({ src: ['./audio/samples/DriveLikeAFreebirth.mp3', './audio/samples/DriveLikeAFreebirth.ogg'] });
+	}
+	sound_03.play();
+}
+function playSound_04() {
+	if (sound_04 == null) {
+		sound_04 = new Howl({ src: ['./audio/samples/KnowThisMercenaries.mp3', './audio/samples/KnowThisMercenaries.ogg'] });
+	}
+	sound_04.play();
+}
+function playSound_05() {
+	if (sound_05 == null) {
+		sound_05 = new Howl({ src: ['./audio/samples/RegisterSibcoIdentity.mp3', './audio/samples/RegisterSibcoIdentity.ogg'] });
+	}
+	sound_05.play();
+}
+function playSound_06() {
+	if (sound_06 == null) {
+		sound_06 = new Howl({ src: ['./audio/samples/SurlyYesSir.mp3', './audio/samples/SurlyYesSir.ogg'] });
+	}
+	sound_06.play();
+}
+function playSound_07() {
+	if (sound_07 == null) {
+		sound_07 = new Howl({ src: ['./audio/samples/ThisOnesAllMine.mp3', './audio/samples/ThisOnesAllMine.ogg'] });
+	}
+	sound_07.play();
+}
+function playSound_08() {
+	if (sound_08 == null) {
+		sound_08 = new Howl({ src: ['./audio/samples/YesSir.mp3', './audio/samples/YesSir.ogg'] });
+	}
+	sound_08.play();
+}
+function playSound_09() {
+	if (sound_09 == null) {
+		sound_09 = new Howl({ src: ['./audio/WeAreClanWolf.mp3', './audio/WeAreClanWolf.ogg'] });
+	}
+	sound_09.play();
 }
 
 function hideInfoBar() {
