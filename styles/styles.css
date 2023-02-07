@@ -369,13 +369,13 @@ a:hover {
 	padding: 0px;
 	/* background-image: url('../images/mech_number.png'); */
 	/* background-size: cover; */
-	width: 90px;
+	width: 140px;
 	height: 50px;
 	line-height: 60px;
-	right: 20px;
+	right: 15px;
 	top: 85px;
 	color: #fff;
-	font-size: 36px;
+	font-size: 30px;
 }
 #pv {
 	z-index: 11;

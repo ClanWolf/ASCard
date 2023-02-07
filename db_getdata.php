@@ -25,6 +25,7 @@
 	$array_WPNSFIRED = array();
 
 	$array_MECH_DBID = array();
+	$array_MECH_MULID = array();
 	$array_MECH_NUMBER = array();
 	$array_MECH_IMG_URL = array();
 	$array_MECH_IMG_STATUS = array();
@@ -172,6 +173,7 @@
 							}
 
 							$array_MECH_DBID[$mechcount] = $row["mechid"];
+							$array_MECH_MULID[$mechcount] = $row["mulid"];
 							$array_MECH_NUMBER[$mechcount] = $row["mech_number"];
 							$array_MECH_MODEL[$mechcount] = $clan.$row["as_model"];
 							$array_MECH_IMG_URL[$mechcount] = $row["mech_imageurl"];

@@ -594,10 +594,14 @@ session_start();
 				<div class="dataarea_red" id="TargetingComputer">
 					<table width="90%">
 						<tr>
-							<td colspan="3" nowrap style="text-align:center;" class="datalabel">TC</td>
-						</tr>
-						<tr>
-							<td colspan="3" nowrap id="ToHitResult" style="font-size:50px;color:#da8e25;vertical-align:middle;text-align:center;font-weight:bold;">5</td>
+							<td colspan="3">
+								<table>
+									<tr>
+										<td width="10%" nowrap style="text-align:center;vertical-align:top;" valign="top" class="datalabel">TC</td>
+										<td width="90%" nowrap id="ToHitResult" style="font-size:72px;color:#da8e25;vertical-align:middle;text-align:right;font-weight:bold;">5</td>
+									</tr>
+								</table>
+							</td>
 						</tr>
 						<tr>
 							<td nowrap style="text-align:center;" class="datalabel_thin_small">S</td>
@@ -619,12 +623,14 @@ session_start();
 						</tr>
 						<tr>
 							<td nowrap style="text-align:center;" class="datalabel"><label class='bigcheck'><input type='checkbox' onchange="setCover();" class='bigcheck' name='ToHitCover' id='ToHitCover' value='no'/><span class='bigcheck-target'></span></label></td>
-							<td nowrap style="text-align:left;" class="datalabel_thin_small" colspan="2">Cover</td>
+							<td nowrap style="text-align:left;" class="datalabel_thin_small" colspan="2">Par. cover</td>
 						</tr>
+						<!--
 						<tr>
 							<td nowrap style="text-align:center;" class="datalabel"><label class='bigcheck'><input type='checkbox' onchange="setForrest();" class='bigcheck' name='ToHitForrest' id='ToHitForrest' value='no'/><span class='bigcheck-target'></span></label></td>
 							<td nowrap style="text-align:left;" class="datalabel_thin_small" colspan="2">Forrest</td>
 						</tr>
+						-->
 						<tr>
 							<td nowrap style="text-align:center;" class="datalabel" colspan="3"><hr></td>
 						</tr>
@@ -632,12 +638,25 @@ session_start();
 							<td colspan="3" align="center">
 								<table width="90%">
 									<tr>
-										<td colspan="3" nowrap style="text-align:center;" class="datalabel_thin_small">TMM</td>
+										<td width="5px" nowrap style="text-align:left;" class="datalabel_thin_small">TMM</td>
+										<td width="80%"</td>
+										<td width="5px" nowrap style="text-align:right;" class="datalabel_button" valign="middle"><a href="javascript:reduceEnemyTMM();"><i class="fas fa-minus-square"></i></a></td>
+										<td width="5px" nowrap style="text-align:center;" class="datalabel" id="EnemyTMM" align="center">2</td>
+										<td width="5px" nowrap style="text-align:left;" class="datalabel_button" valign="middle"><a href="javascript:increaseEnemyTMM();"><i class="fas fa-plus-square"></i></a></td>
 									</tr>
 									<tr>
-										<td width="5%" nowrap style="text-align:right;" class="datalabel_button" valign="middle"><a href="javascript:reduceEnemyTMM();"><i class="fas fa-minus-square"></i></a></td>
-										<td width="5%" nowrap style="text-align:center;" class="datalabel" id="EnemyTMM" align="center">2</td>
-										<td width="5%" nowrap style="text-align:left;" class="datalabel_button" valign="middle"><a href="javascript:increaseEnemyTMM();"><i class="fas fa-plus-square"></i></a></td>
+										<td width="5px" nowrap style="text-align:left;" class="datalabel_thin_small">Forrest</td>
+										<td width="80%"</td>
+										<td width="5px" nowrap style="text-align:right;" class="datalabel_button" valign="middle"><a href="javascript:reduceForrest();"><i class="fas fa-minus-square"></i></a></td>
+										<td width="5px" nowrap style="text-align:center;" class="datalabel" id="Forrest" align="center">0</td>
+										<td width="5px" nowrap style="text-align:left;" class="datalabel_button" valign="middle"><a href="javascript:increaseForrest();"><i class="fas fa-plus-square"></i></a></td>
+									</tr>
+									<tr>
+										<td width="5px" nowrap style="text-align:left;" class="datalabel_thin_small">Other</td>
+										<td width="80%"</td>
+										<td width="5px" nowrap style="text-align:right;" class="datalabel_button" valign="middle"><a href="javascript:reduceOther();"><i class="fas fa-minus-square"></i></a></td>
+										<td width="5px" nowrap style="text-align:center;" class="datalabel" id="Other" align="center">0</td>
+										<td width="5px" nowrap style="text-align:left;" class="datalabel_button" valign="middle"><a href="javascript:increaseOther();"><i class="fas fa-plus-square"></i></a></td>
 									</tr>
 								</table>
 							</td>
@@ -665,7 +684,7 @@ session_start();
 						</tr>
 						<tr>
 							<!-- <td nowrap class="datalabel" width="12%" colspan="1">&nbsp;</td> -->
-							<td nowrap class="datavalue_special" width="50%" colspan="4" style="text-align:left;"><?php echo "$array_ROLE[$chosenMechIndex]"; ?></td>
+							<td nowrap class="datavalue_special" width="50%" colspan="4" style="text-align:left;" onclick="javascript:window.open('http://www.masterunitlist.info/Unit/Details/<?php echo $array_MECH_MULID[$chosenMechIndex] ?>');"><?php echo "$array_ROLE[$chosenMechIndex]"; ?>&nbsp;<i class="fa-solid fa-square-up-right"></i></td>
 							<td nowrap class="datalabel" width="13%" colspan="1" valign="middle" >AMM:</td>
 							<td nowrap class="datavalue" width="12%" colspan="1" valign="middle" style="top:0px;bottom:0px;vertical-align:middle;"><span class="datavalue" id="AMM">0</span></td>
 							<td nowrap class="datalabel" width="12%" colspan="1">SKILL:</td>
@@ -933,7 +952,7 @@ session_start();
 								<td class='phase_button_normal' onclick="javascript:playSound_09();">9</td>
 							</tr>
 							<tr>
-								<td class='phase_button_normal' colspan="3" onclick="javascript:window.location.reload();">STOP</td>
+								<td class='phase_button_normal' colspan="3" onclick="javascript:stopSoundSB();">STOP</td>
 							</tr>
 						</table>
 					</div>
@@ -1054,11 +1073,12 @@ session_start();
 <div id="bottomleft"><img src="./images/bottom-left.png" width="200px"></div>
 
 <div align="center" id="settings">
-	<a href="javascript:showMech()"><i class="fas fa-eye"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	<a href="https://liberapay.com/WarWolfen/donate" target="_blank"><img alt="Donate using Liberapay" height="20px" src="https://liberapay.com/assets/widgets/donate.svg"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	<a href="javascript:showMech()"><i class="fas fa-eye"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 	<!-- <a href="https://www.clanwolf.net/static/files/Rulebooks/CAT35860%20-%20AlphaStrike%20CommandersEdition.pdf" target="_blank"><i class="fas fa-bookmark"></i></a>&nbsp;&nbsp; -->
 	<!-- <a href="#" onclick="javascript:window.location.reload(true)"><i class="fas fa-redo"></i></a>&nbsp;&nbsp; -->
 	<a href="javascript:textSize(0)"><i class="fas fa-minus-square"></i></a>&nbsp;&nbsp;
-	<a href="javascript:textSize(1)"><i class="fas fa-plus-square"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	<a href="javascript:textSize(1)"><i class="fas fa-plus-square"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 	<a href="javascript:changeWallpaper()"><i class="fas fa-image"></i></a>&nbsp;&nbsp;
 	<a href="./gui_edit_option.php"><i class="fas fa-cog"></i></a>
 </div>

@@ -22,6 +22,7 @@ var tc_rangeValue = 2;
 var tc_partialCover = 0;
 var tc_wood = 0;
 var tc_heat;
+var tc_other = 0;
 var tc_firecontrolDamage;
 
 var rolling = 0;
@@ -51,6 +52,7 @@ var sound_06 = null;
 var sound_07 = null;
 var sound_08 = null;
 var sound_09 = null;
+var sound_SB = null;
 
 var showingMech = false;
 
@@ -250,9 +252,15 @@ function readCircles2(index, a_max, s_max, mv_bt_id, f_bt_id) {
 	&& document.getElementById("ToHitLong").checked == true) {
 		tc_rangeValueReading = 4;
 	}
+	var tc_partialCoverReading = 0;
+	if (document.getElementById("ToHitCover").checked == true) {
+		tc_partialCoverReading = 1;
+	} else if (document.getElementById("ToHitCover").checked == false) {
+		tc_partialCoverReading = 0;
+	}
 	/* console.log("range: " + tc_rangeValueReading); */
 
-	setCircles(h, a, s, e, fc, mp, w, uov, mvmnt, wpnsf, tc_rangeValueReading);
+	setCircles(h, a, s, e, fc, mp, w, uov, mvmnt, wpnsf, tc_rangeValueReading, tc_partialCoverReading);
 	var url="./save.php?index="+index+"&h="+h+"&a="+a+"&s="+s+"&e="+e+"&fc="+fc+"&mp="+mp+"&w="+w+"&mstat="+mechstatusimage+"&uov="+uov+"&mvmnt="+mvmnt+"&wpnsf="+wpnsf;
 	// alert(url);
 	window.frames['saveframe'].location.replace(url);
@@ -270,7 +278,7 @@ function setStructuralDamageCache(value) {
 	structuralDamageCache = value;
 }
 
-function setCircles(h, a, s, e, fc, mp, w, uov, mvmnt, wpnsf, tc_rangeValueReading) {
+function setCircles(h, a, s, e, fc, mp, w, uov, mvmnt, wpnsf, tc_rangeValueReading, tc_partialCoverReading) {
 	var na1 = "";
 
 	tc_heat = h;
@@ -325,6 +333,9 @@ function setCircles(h, a, s, e, fc, mp, w, uov, mvmnt, wpnsf, tc_rangeValueReadi
 		document.getElementById("ToHitShort").checked = false;
 		document.getElementById("ToHitMedium").checked = false;
 		document.getElementById("ToHitLong").checked = true;
+	}
+	if (tc_partialCoverReading == 1) {
+		document.getElementById("ToHitCover").checked = true;
 	}
 
 	var updatedmovementpointsground = movementpointsground;
@@ -1028,58 +1039,92 @@ function playTCClickSound() {
 }
 
 function playSound_01() {
-	if (sound_01 == null) {
-		sound_01 = new Howl({ src: ['./audio/samples/ACallToTrial.mp3', './audio/samples/ACallToTrial.ogg'] });
+	if (sound_SB != null) {
+		sound_SB.stop();
+		sound_SB.unload();
+		sound_SB = null;
 	}
-	sound_01.play();
+	sound_SB = new Howl({ src: ['./audio/samples/ACallToTrial.mp3', './audio/samples/ACallToTrial.ogg'] });
+	sound_SB.play();
 }
 function playSound_02() {
-	if (sound_02 == null) {
-		sound_02 = new Howl({ src: ['./audio/samples/AlrightWheresTheCavalry.mp3', './audio/samples/AlrightWheresTheCavalry.ogg'] });
+	if (sound_SB != null) {
+		sound_SB.stop();
+		sound_SB.unload();
+		sound_SB = null;
 	}
-	sound_02.play();
+	sound_SB = new Howl({ src: ['./audio/samples/AlrightWheresTheCavalry.mp3', './audio/samples/AlrightWheresTheCavalry.ogg'] });
+	sound_SB.play();
 }
 function playSound_03() {
-	if (sound_03 == null) {
-		sound_03 = new Howl({ src: ['./audio/samples/DriveLikeAFreebirth.mp3', './audio/samples/DriveLikeAFreebirth.ogg'] });
+	if (sound_SB != null) {
+		sound_SB.stop();
+		sound_SB.unload();
+		sound_SB = null;
 	}
-	sound_03.play();
+	sound_SB = new Howl({ src: ['./audio/samples/DriveLikeAFreebirth.mp3', './audio/samples/DriveLikeAFreebirth.ogg'] });
+	sound_SB.play();
 }
 function playSound_04() {
-	if (sound_04 == null) {
-		sound_04 = new Howl({ src: ['./audio/samples/KnowThisMercenaries.mp3', './audio/samples/KnowThisMercenaries.ogg'] });
+	if (sound_SB != null) {
+		sound_SB.stop();
+		sound_SB.unload();
+		sound_SB = null;
 	}
-	sound_04.play();
+	sound_SB = new Howl({ src: ['./audio/samples/KnowThisMercenaries.mp3', './audio/samples/KnowThisMercenaries.ogg'] });
+	sound_SB.play();
 }
 function playSound_05() {
-	if (sound_05 == null) {
-		sound_05 = new Howl({ src: ['./audio/samples/RegisterSibcoIdentity.mp3', './audio/samples/RegisterSibcoIdentity.ogg'] });
+	if (sound_SB != null) {
+		sound_SB.stop();
+		sound_SB.unload();
+		sound_SB = null;
 	}
-	sound_05.play();
+	sound_SB = new Howl({ src: ['./audio/samples/RegisterSibcoIdentity.mp3', './audio/samples/RegisterSibcoIdentity.ogg'] });
+	sound_SB.play();
 }
 function playSound_06() {
-	if (sound_06 == null) {
-		sound_06 = new Howl({ src: ['./audio/samples/SurlyYesSir.mp3', './audio/samples/SurlyYesSir.ogg'] });
+	if (sound_SB != null) {
+		sound_SB.stop();
+		sound_SB.unload();
+		sound_SB = null;
 	}
-	sound_06.play();
+	sound_SB = new Howl({ src: ['./audio/samples/SurlyYesSir.mp3', './audio/samples/SurlyYesSir.ogg'] });
+	sound_SB.play();
 }
 function playSound_07() {
-	if (sound_07 == null) {
-		sound_07 = new Howl({ src: ['./audio/samples/ThisOnesAllMine.mp3', './audio/samples/ThisOnesAllMine.ogg'] });
+	if (sound_SB != null) {
+		sound_SB.stop();
+		sound_SB.unload();
+		sound_SB = null;
 	}
-	sound_07.play();
+	sound_SB = new Howl({ src: ['./audio/samples/ThisOnesAllMine.mp3', './audio/samples/ThisOnesAllMine.ogg'] });
+	sound_SB.play();
 }
 function playSound_08() {
-	if (sound_08 == null) {
-		sound_08 = new Howl({ src: ['./audio/samples/YesSir.mp3', './audio/samples/YesSir.ogg'] });
+	if (sound_SB != null) {
+		sound_SB.stop();
+		sound_SB.unload();
+		sound_SB = null;
 	}
-	sound_08.play();
+	sound_SB = new Howl({ src: ['./audio/samples/YesSir.mp3', './audio/samples/YesSir.ogg'] });
+	sound_SB.play();
 }
 function playSound_09() {
-	if (sound_09 == null) {
-		sound_09 = new Howl({ src: ['./audio/WeAreClanWolf.mp3', './audio/WeAreClanWolf.ogg'] });
+	if (sound_SB != null) {
+		sound_SB.stop();
+		sound_SB.unload();
+		sound_SB = null;
 	}
-	sound_09.play();
+	sound_SB = new Howl({ src: ['./audio/WeAreClanWolf.mp3', './audio/WeAreClanWolf.ogg'] });
+	sound_SB.play();
+}
+function stopSoundSB() {
+	if (sound_SB != null) {
+		sound_SB.stop();
+		sound_SB.unload();
+		sound_SB = null;
+	}
 }
 
 function hideInfoBar() {
@@ -1196,9 +1241,45 @@ function reduceEnemyTMM() {
 	updateOverAllToHitValue();
 }
 
+function increaseForrest() {
+	tc_wood = tc_wood + 1;
+	if (tc_wood > 6) {
+		tc_wood = 6;
+	}
+	document.getElementById("Forrest").innerText = tc_wood;
+    updateOverAllToHitValue();
+}
+
+function reduceForrest() {
+	tc_wood = tc_wood - 1;
+	if (tc_wood < -4) {
+		tc_wood = -4;
+	}
+	document.getElementById("Forrest").innerText = tc_wood;
+    updateOverAllToHitValue();
+}
+
+function increaseOther() {
+	tc_other = tc_other + 1;
+	if (tc_other > 6) {
+		tc_other = 6;
+	}
+	document.getElementById("Other").innerText = tc_other;
+    updateOverAllToHitValue();
+}
+
+function reduceOther() {
+	tc_other = tc_other - 1;
+	if (tc_other < -4) {
+		tc_other = -4;
+	}
+	document.getElementById("Other").innerText = tc_other;
+    updateOverAllToHitValue();
+}
+
 function setCover() {
 	if (document.getElementById("ToHitCover").checked == true) {
-		tc_partialCover = 2;
+		tc_partialCover = 1;
 	} else {
 		tc_partialCover = 0;
 	}
@@ -1207,7 +1288,7 @@ function setCover() {
 
 function setForrest() {
 	if (document.getElementById("ToHitForrest").checked == true) {
-		tc_wood = 2;
+		tc_wood = 1;
 	} else {
 		tc_wood = 0;
 	}
@@ -1227,10 +1308,11 @@ function updateOverAllToHitValue(skipTap) {
     result += tc_partialCover;
     result += tc_wood;
     result += tc_heat;
+    result += tc_other;
     result += tc_firecontrolDamage;
 
     if (result > 12) {
-		document.getElementById("ToHitResult").innerText = "-";
+		document.getElementById("ToHitResult").innerText = "∞";
     } else {
 		document.getElementById("ToHitResult").innerText = result;
     }

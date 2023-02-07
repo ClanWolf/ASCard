@@ -125,7 +125,8 @@ session_start();
 		$MECHSTATUSIMAGE = "";
 
 		if ($TECH == "1" && $TP == "BA") {
-			$TON = $TON * 4;
+			//$TON = $TON * 4;
+			//$TON = "-";
 		}
 
 		// Corrections for Clan Battle Armor (unit size / Name)
@@ -139,9 +140,10 @@ session_start();
 			$MODEL = str_replace("Elemental", "ELE", $MODEL);
 			$MODEL = str_replace("Battle Armor", "BA", $MODEL);
 
-			$A = intval($A) + 1;
-			$PVA = intval($PVA) + 3;
-			$TON = $TON * 5;
+			//$A = intval($A) + 1;
+			//$PVA = intval($PVA) + 3;
+			//$TON = $TON * 5;
+			//$TON = "-";
 
 			$MECHSTATUSIMAGE = "images/DD_ELE_01.png";
 		} else {
