@@ -7,14 +7,12 @@ session_start();
 		echo "Not logged in... redirecting.<br>";
 		echo "<meta http-equiv='refresh' content='0;url=./login.php?auto=1'>";
 		header("Location: ./login.php?auto=1");
-		//die("Check position 8");
+		//die("Check position 12");
 	}
-
 	// Get data on units from db
 	$pid = $_SESSION['playerid'];
 	$gid = $_SESSION['gameid'];
 	$pimage = $_SESSION['playerimage'];
-
 	$opt3 = $_SESSION['option3'];
 	$playMode = $opt3;
 
@@ -31,7 +29,7 @@ session_start();
 <html lang="en">
 
 <head>
-	<title>ClanWolf.net: AplhaStrike Card App (ASCard): Message</title>
+	<title>ClanWolf.net: AplhaStrike Card App (ASCard): Player creator</title>
 	<meta charset="utf-8">
 	<!-- <meta http-equiv="expires" content="0"> -->
 	<!-- <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"> -->
@@ -46,6 +44,7 @@ session_start();
 	<!-- <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css"> -->
 	<link rel="stylesheet" type="text/css" href="./fontawesome/css/all.min.css" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="./styles/styles.css">
+	<link rel="stylesheet" type="text/css" href="./styles/jquery.jscrollpane.css">
 	<link rel="icon" href="./favicon.png" type="image/png">
 	<link rel="shortcut icon" href="./images/icon_196x196.png" type="image/png" sizes="196x196">
 	<link rel="apple-touch-icon" href="./images/icon_57x57.png" type="image/png" sizes="57x57">
@@ -58,6 +57,8 @@ session_start();
 	<link rel="apple-touch-icon" href="./images/icon_180x180.png" type="image/png" sizes="180x180">
 
 	<script type="text/javascript" src="./scripts/jquery-3.6.1.min.js"></script>
+	<script type="text/javascript" src="./scripts/jquery.jscrollpane.min.js"></script>
+	<script type="text/javascript" src="./scripts/jquery.mousewheel.js"></script>
 	<script type="text/javascript" src="./scripts/howler.min.js"></script>
 	<script type="text/javascript" src="./scripts/cookies.js"></script>
 
@@ -70,12 +71,8 @@ session_start();
 			margin-right: auto;
 		}
 		.box {
-			width: 400px;
-			height: 200px;
+			width: 80%;
 			background-color: #transparent;
-			position: fixed;
-			margin-left: -200px;
-			margin-top: -100px;
 			top: 50%;
 			left: 50%;
 		}
@@ -88,14 +85,70 @@ session_start();
 			color: #ddd;
 			border-color: #aaa;
 		}
+		input, select {
+			width: 80px;
+			vertical-align: middle;
+			color: #ddd;
+			border-width: 0px;
+			padding: 2px;
+			font-family: 'Pathway Gothic One', sans-serif;
+		}
+		select:focus, textarea:focus, input:focus {
+			outline: none;
+		}
+		select:invalid, input:invalid {
+			background: rgba(40,40,40,0.75);;
+		}
+		select:valid, input:valid {
+			background: rgba(70,70,70,0.75);;
+		}
+		.scroll-pane {
+			width: 100%;
+			height: 200px;
+			overflow: auto;
+		}
+		.horizontal-only {
+			height: auto;
+			max-height: 200px;
+		}
 	</style>
 </head>
 
 <body>
 	<script>
+		$(function() {
+			$('.scroll-pane').jScrollPane();
+		});
 		$(document).ready(function() {
 			$("#cover").hide();
 		});
+
+		function saveNewPlayer(id, playerimagetodelete) {
+			if (id==0) {
+				// Create new player
+				var npn = document.getElementById('NewPlayerName').value;
+				var npp = document.getElementById('NewPlayerPassword').value;
+				var nppc = document.getElementById('NewPlayerPasswordConfirm').value;
+
+				if ("" == npn) {
+					alert("Name may not be empty!");
+					return;
+				}
+				if (npp == nppc) {
+					// alert("Saving new player: " + id + " (" + NewPlayerName + ")");
+					var url = "./gui_create_player.php?s=1&npn=" + npn;
+					url = url + "&npp=" + npp;
+					window.location = url;
+				} else {
+					alert("Passwords do not match!");
+				}
+			} else {
+				// Delete existing player
+				// alert(playerimagetodelete);
+				var url = "./gui_create_player.php?d=1&deleteplayerid=" + id + "&playerimagetodelete=" + playerimagetodelete;
+				window.location = url;
+			}
+		}
 	</script>
 
 	<div id="cover"></div>
@@ -111,16 +164,16 @@ session_start();
 	<div id="header">
 		<table style="width:100%;height:60px;border:none;border-collapse:collapse;background:rgba(50,50,50,1.0);" cellspacing="0" cellpadding="0">
 			<tr>
-				<td nowrap onclick="location.href='./logout.php'" width="100px" style="width: 100px;background: rgba(50,50,50,1.0); text-align: center; vertical-align: middle;">
-					<div><a style="color:#eee;" href="./logout.php">&nbsp;&nbsp;&nbsp;<i class="fas fa-power-off" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;</a></div>
+				<td nowrap onclick="location.href='./logout.php'" width="60px" style="width: 100px;background: rgba(50,50,50,1.0); text-align: center; vertical-align: middle;">
+					<div><a style="color: #eee;" href="./logout.php">&nbsp;&nbsp;&nbsp;<i class="fas fa-power-off" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;</a></div>
 				</td>
 				<!--
-				<td nowrap onclick="location.href='./gui_finalize_round.php'" width="100px" style="width: 100px;background:rgba(81,125,37,1.0); text-align: center; vertical-align: middle;">
-					<div><a style="color:#fff;" href="./gui_finalize_round.php">&nbsp;&nbsp;&nbsp;<i class="fas fa-redo"></i>&nbsp;&nbsp;&nbsp;</a></div>
+				<td nowrap onclick="location.href='./gui_finalize_round.php'" width="100px" style="width: 100px;background: rgba(56,87,26,1.0); text-align: center; vertical-align: middle;">
+					<div><a style="color: #eee;" href="./gui_finalize_round.php">&nbsp;&nbsp;&nbsp;<i class="fas fa-redo"></i>&nbsp;&nbsp;&nbsp;</a></div>
 				</td>
 				-->
-				<td nowrap onclick="location.href='./gui_finalize_round.php'" style="width: 100px;background:rgba(81,125,37,1.0);">
-					<div style='vertical-align:middle;font-size:28px;color:#fff;'>&nbsp;&nbsp;&nbsp;G<?php echo $gid ?>&nbsp;R<?php echo $CURRENTROUND ?>&nbsp;&nbsp;&nbsp;</div>
+				<td nowrap onclick="location.href='./gui_finalize_round.php'" style="width: 100px;background:rgba(56,87,26,1.0);">
+					<div style='vertical-align:middle;font-size:28px;color:#eee;'>&nbsp;&nbsp;&nbsp;G<?php echo $gid ?>&nbsp;R<?php echo $CURRENTROUND ?>&nbsp;&nbsp;&nbsp;</div>
 				</td>
 				<td style="width:5px;">&nbsp;</td>
 				<td nowrap onclick="location.href='./gui_select_unit.php'" width="<?php echo $buttonWidth ?>"><div class='mechselect_button_normal'><a href='./gui_select_unit.php'>ROSTER</a><br><span style='font-size:16px;'>Choose a Mech</span></div></td>
@@ -138,26 +191,30 @@ session_start();
 
 				<td nowrap onclick="location.href='./gui_edit_option.php'" width="<?php echo $buttonWidth ?>"><div class='mechselect_button_normal'><a href='./gui_edit_option.php'>OPTIONS</a><br><span style='font-size:16px;'>Change options</span></div></td>
 				<td style="width:5px;">&nbsp;</td>
-				<td style="width: 100px;" style="width: 100px;" nowrap width="100px" style="background: rgba(50,50,50,1.0); text-align: center; vertical-align: middle;"><img src='./images/player/<?=$pimage?>' width='60px' height='60px'></td>
+				<td style="width: 100px;"nowrap width="100px" style="background: rgba(50,50,50,1.0); text-align: center; vertical-align: middle;"><img src='./images/player/<?=$pimage?>' width='60px' height='60px'></td>
 			</tr>
 		</table>
 	</div>
 
-	<div id="liberapay"><a href="./gui_support.php"><i class="fa-solid fa-handshake-simple"></i></a></div>
-	<div id="disclaimer"><a href="./gui_disclaimer.php">Disclaimer</a></div>
-
 	<br>
 
-	<div>
-		<table class="options" cellspacing=4 cellpadding=4 border=0px>
+	<div id="header">
+		<table width="80%" align="center" class="options" cellspacing="4" cellpadding="4" border="0px">
 			<tr>
-				<td align="center" class='datalabel'>
-					<p>Round could not be finalized.</p>
-					<p style="font-family:'Pathway Gothic One',sans-serif,bold;font-size:45px;color:red;">Error!</p>
+				<td>
+					<p>
+						Concept, Design and development by Meldric 2019-2023.<br>
+						<br>
+						This software is a completely free fan project that makes no claim to ownership to any of Catalyst Game Labs or The Topps Company, Inc properties. MechWarrior, BattleMech, ‘Mech and AeroTech are registered trademarks of The Topps Company, Inc. All Rights Reserved. Catalyst Game Labs and the Catalyst Game Labs logo are trademarks of InMediaRes Production, LLC. Neither Topps nor Catalyst Game Labs makes no representation or warranty as to the quality, viability, or suitability for purpose of this product. See additional information on <u><a href="https://bg.battletech.com/?page_id=34">BattleTech - The Board Game Website</a>.</u><br>
+						<br>
+						Unit information and images (B&W) are used with friendly permission of the <u><a href="http://www.masterunitlist.info">http://www.masterunitlist.info</a></u>.<br>
+						Mech images belong mostly to PGI (Piranha Games) / MechWarrior Online.
+					</p>
 				</td>
 			</tr>
 		</table>
 	</div>
+
 </body>
 
 </html>

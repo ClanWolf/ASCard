@@ -388,6 +388,24 @@ a:hover {
 	height: 50px;
 	right: 262px;
 }
+#liberapay {
+	z-index: 1420;
+	position: absolute;
+	bottom: 15px;
+	left: 15px;
+	text-align: left;
+	width: 400px;
+	padding: 0px
+}
+#disclaimer {
+	z-index: 1420;
+	position: absolute;
+	bottom: 15px;
+	right: 15px;
+	text-align: right;
+	width: 400px;
+	padding: 0px
+}
 #bottomleft {
 	z-index: 20;
 	position: absolute;

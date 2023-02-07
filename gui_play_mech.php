@@ -381,6 +381,7 @@ session_start();
 			<td nowrap onclick="location.href='./gui_finalize_round.php'" style="width:100px;background:rgba(56,87,26,1.0);">
 				<div style='vertical-align:middle;font-size:28px;color:#eee;'>&nbsp;&nbsp;&nbsp;G<?php echo $gid ?>&nbsp;R<?php echo $CURRENTROUND ?>&nbsp;&nbsp;&nbsp;</div>
 			</td>
+			<td style="width:5px;">&nbsp;</td>
 
 <?php
 	$size = sizeof($array_MECH_MODEL);
@@ -469,6 +470,7 @@ session_start();
 				echo "<td style='display:none;visibility:hidden;' width='".$width."%' nowrap onclick=\"location.href='".$meli."'\"><table width='100%' cellspacing='0' cellpadding='0' class='mechselect_button_normal_play_left'><tr><td nowrap width='30px' align='center' valign='center'><div style='display:inline-block;height:100%;vertical-align:middle;'><span style='color:#ccffff;font-size:15px;'>&nbsp;&nbsp;".$mn."&nbsp;&nbsp;</span><br><img style='vertical-align:middle;' src='".$array_MECH_IMG_STATUS[$i4]."' height='25px' width='23px'></div></td><td nowrap width='100%'><div><img src='./images/ranks/".$factionid."/".$array_PILOT_RANK[$i4].".png' width='18px' height='18px'>&nbsp;<a style='font-size:24px' href='".$meli."'>".$array_PILOT[$i4]."</a>&nbsp;&nbsp;<img src='".$mechstatusimage."' height='21px'>".$heatimage[$i4]."<br><span style='font-size:14px;'>".$memodel."</span></div></td></tr></table></td>\r\n";
 			}
 		}
+		echo "<td style='width:5px;'>&nbsp;</td>";
 	}
 	if ($atLeastOneValidMechInUnit == 0) {
 		echo "<meta http-equiv='refresh' content='0;url=./gui_select_unit.php'> ";
@@ -1073,7 +1075,7 @@ session_start();
 <div id="bottomleft"><img src="./images/bottom-left.png" width="200px"></div>
 
 <div align="center" id="settings">
-	<a href="https://liberapay.com/WarWolfen/donate" target="_blank"><img alt="Donate using Liberapay" height="20px" src="https://liberapay.com/assets/widgets/donate.svg"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	<a href="./gui_support.php"><i class="fa-solid fa-handshake-simple"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 	<a href="javascript:showMech()"><i class="fas fa-eye"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 	<!-- <a href="https://www.clanwolf.net/static/files/Rulebooks/CAT35860%20-%20AlphaStrike%20CommandersEdition.pdf" target="_blank"><i class="fas fa-bookmark"></i></a>&nbsp;&nbsp; -->
 	<!-- <a href="#" onclick="javascript:window.location.reload(true)"><i class="fas fa-redo"></i></a>&nbsp;&nbsp; -->
