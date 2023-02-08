@@ -205,11 +205,12 @@ session_start();
 		<table width="50%" align="center" class="options" cellspacing="4" cellpadding="4" border="0px">
 			<tr>
 				<td>
-					<p>This app has been developed by an enthusiast. Countless hours have been given into the concept and actual development and design. If you appreciate using ASCard, you can support me with one of the following options:</p>
+					<p>This app has been developed by an enthusiast. Countless hours have been given into the concept, design and actual development and testing. If you appreciate using ASCard, you can support me with one of the following options:</p>
 					<p>
 						<a href="https://liberapay.com/WarWolfen/donate" target="_blank"><img alt="Donate using Liberapay" height="50px" src="./images/liberapay.svg"></a>&nbsp;&nbsp;&nbsp;
 						<a href="https://www.paypal.com/paypalme/ClanWolf?country.x=DE&locale.x=de_DE" target="_blank"><img alt="Donate using paypal" height="50px" src="./images/paypal.png"></a>
 					</p>
+					<p>With liberapay you can arrange recurring support and paypal may be used for one time donations.</p>
 					<p>Thank you!</p>
 					<p><img src="https://img.shields.io/liberapay/patrons/WarWolfen.svg?logo=liberapay"></p>
 				</td>
