@@ -196,6 +196,9 @@ session_start();
 		</table>
 	</div>
 
+	<div id="liberapay"><a href="./gui_support.php"><i class="fa-solid fa-handshake-simple"></i></a></div>
+	<div id="disclaimer"><a href="./gui_disclaimer.php">Disclaimer</a></div>
+
 	<br>
 
 	<div id="header">
