@@ -210,7 +210,8 @@ session_start();
 						<a href="https://liberapay.com/WarWolfen/donate" target="_blank"><img alt="Donate using Liberapay" height="50px" src="./images/liberapay.svg"></a>&nbsp;&nbsp;&nbsp;
 						<a href="https://www.paypal.com/paypalme/ClanWolf?country.x=DE&locale.x=de_DE" target="_blank"><img alt="Donate using paypal" height="50px" src="./images/paypal.png"></a>
 					</p>
-					<p>Thank you very much!</p>
+					<p>Thank you!</p>
+					<p><img src="https://img.shields.io/liberapay/patrons/WarWolfen.svg?logo=liberapay"></p>
 				</td>
 			</tr>
 		</table>
