@@ -207,7 +207,7 @@ session_start();
 						<br>
 						This software is a completely free fan project that makes no claim to ownership to any of Catalyst Game Labs or The Topps Company, Inc properties. MechWarrior, BattleMech, ‘Mech and AeroTech are registered trademarks of The Topps Company, Inc. All Rights Reserved. Catalyst Game Labs and the Catalyst Game Labs logo are trademarks of InMediaRes Production, LLC. Neither Topps nor Catalyst Game Labs makes no representation or warranty as to the quality, viability, or suitability for purpose of this product. See additional information on <u><a href="https://bg.battletech.com/?page_id=34">BattleTech - The Board Game Website</a>.</u><br>
 						<br>
-						Unit information and images (B&W) are used with friendly permission of the <u><a href="http://www.masterunitlist.info">http://www.masterunitlist.info</a></u>.<br>
+						Unit information and images (B&W) are used with friendly permission of <u><a href="http://www.masterunitlist.info">http://www.masterunitlist.info</a></u>.<br>
 						Mech images belong mostly to PGI (Piranha Games) / MechWarrior Online.
 					</p>
 				</td>
