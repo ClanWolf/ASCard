@@ -196,6 +196,10 @@ session_start();
 			var url="./save_reset_round.php?pid=" + playerId;
 			window.frames["saveframe"].location.replace(url);
 		}
+		function editGame(playerId) {
+			var url="./gui_create_game.php?pid=" + playerId;
+			window.location.href=url;
+		}
 	</script>
 
 	<div id="cover"></div>

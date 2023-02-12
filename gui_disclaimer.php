@@ -29,7 +29,7 @@ session_start();
 <html lang="en">
 
 <head>
-	<title>ClanWolf.net: AplhaStrike Card App (ASCard): Player creator</title>
+	<title>ClanWolf.net: AplhaStrike Card App (ASCard): Disclaimer</title>
 	<meta charset="utf-8">
 	<!-- <meta http-equiv="expires" content="0"> -->
 	<!-- <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"> -->
@@ -122,33 +122,6 @@ session_start();
 		$(document).ready(function() {
 			$("#cover").hide();
 		});
-
-		function saveNewPlayer(id, playerimagetodelete) {
-			if (id==0) {
-				// Create new player
-				var npn = document.getElementById('NewPlayerName').value;
-				var npp = document.getElementById('NewPlayerPassword').value;
-				var nppc = document.getElementById('NewPlayerPasswordConfirm').value;
-
-				if ("" == npn) {
-					alert("Name may not be empty!");
-					return;
-				}
-				if (npp == nppc) {
-					// alert("Saving new player: " + id + " (" + NewPlayerName + ")");
-					var url = "./gui_create_player.php?s=1&npn=" + npn;
-					url = url + "&npp=" + npp;
-					window.location = url;
-				} else {
-					alert("Passwords do not match!");
-				}
-			} else {
-				// Delete existing player
-				// alert(playerimagetodelete);
-				var url = "./gui_create_player.php?d=1&deleteplayerid=" + id + "&playerimagetodelete=" + playerimagetodelete;
-				window.location = url;
-			}
-		}
 	</script>
 
 	<div id="cover"></div>
