@@ -53,6 +53,40 @@ session_start();
 			echo "Error: " . $sqlinsertgame . "<br>" . mysqli_error($conn);
 		}
 	}
+
+	$array_joinedUsers = array();
+	$sql_asc_playerround = "SELECT SQL_NO_CACHE * FROM asc_player;";
+	$result_asc_playerround = mysqli_query($conn, $sql_asc_playerround);
+	if (mysqli_num_rows($result_asc_playerround) > 0) {
+		$i = 1;
+		while($row = mysqli_fetch_assoc($result_asc_playerround)) {
+			if ($GAMEID == $row["gameid"]) {
+				// this player is joined in the game of the currently logged in player
+				$array_joinedUsers[$i] = $row["name"];
+				$i++;
+			}
+		}
+	}
+
+	$array_availableGamesToJoin = array();
+	$array_availableGamesToJoinAccessCode = array();
+	$sql_asc_gameslist = "SELECT SQL_NO_CACHE * FROM asc_game order by 1 asc;";
+	$result_asc_gameslist = mysqli_query($conn, $sql_asc_gameslist);
+	if (mysqli_num_rows($result_asc_gameslist) > 0) {
+		$ii = 0;
+		while($rowGamesList = mysqli_fetch_assoc($result_asc_gameslist)) {
+		    $kgameid = $rowGamesList["gameid"];
+        	$kownerplayerid = $rowGamesList["ownerPlayerId"];
+        	$kaccesscode = $rowGamesList["accessCode"];
+        	$klocked = $rowGamesList["locked"];
+        	$kdesc = $rowGamesList["description"];
+
+			$array_availableGamesToJoin[$ii] = $kdesc . " (" . $kgameid . ")";
+			$array_availableGamesToJoinAccessCode[$ii] = $kaccesscode;
+
+			$ii++;
+		}
+	}
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -205,21 +239,71 @@ session_start();
 	<br>
 
 	<div id="header">
-		<table width="80%" align="center" class="options" cellspacing="4" cellpadding="4" border="0px">
+		<table width="60%" align="center" class="options" cellspacing="4" cellpadding="4" border="0px">
 			<tr>
-				<td>
-					<p>Edit games</p>
-					<p>
-						<?php echo "GameId: " . $GAMEID . "<br>"; ?>
-                    	<?php echo "Owner player id: " . $OWNERPLAYERID . "<br>"; ?>
-                    	<?php echo "Access code: " . $ACCESSCODE . "<br>"; ?>
-                    	<?php echo "Locked: " . $LOCKED . "<br>"; ?>
-                    	<?php echo "Desc: " . $DESC . "<br>"; ?>
-                    </p>
+				<td valign="top" width="75%">
+					<table width="100%" cellspacing="0" cellpadding="0">
+						<tr>
+							<td nowrap colspan="3" align="left">My game: &quot;<?php echo $DESC; ?>&quot;<br><br></td>
+						</tr>
+						<tr>
+							<td nowrap align="left" width="3%">GameId:</td><td></td><td nowrap align="left" width="94%">&nbsp;&nbsp;&nbsp;<?php echo $GAMEID; ?></td>
+						</tr>
+						<tr>
+							<td nowrap align="left" width="3%">Access code:</td><td nowrap align="left" width="3%">&nbsp;&nbsp;&nbsp;<i class="fa-solid fa-rotate-right"></i></td><td nowrap align="left" width="94%">&nbsp;&nbsp;&nbsp;<?php echo $ACCESSCODE; ?>
+						</tr>
+						<tr>
+							<?php if ($LOCKED == 0) {
+								echo "<td nowrap align='left' width='3%'>Locked:</td><td nowrap align='left' width='3%'>&nbsp;&nbsp;&nbsp;<a href='#' onClick='lockGame();'><i class='fa-solid fa-lock-open'></i></i></a></td><td nowrap align='left' width='94%'>&nbsp;&nbsp;&nbsp;no (joinable with access code above)</td>";
+							} else {
+								echo "<td nowrap align='left' width='3%'>Locked:</td><td nowrap align='left' width='3%'>&nbsp;&nbsp;&nbsp;<a href='#' onClick='unlockGame();'><i class='fa-solid fa-lock'></i></a></td><td nowrap align='left' width='94%'>&nbsp;&nbsp;&nbsp;yes (not joinable)</td>";
+							} ?>
+						</tr>
+					</table>
+				</td>
+				<td nowrap valign="top" align="left" width="25%" rowspan="2">
+					Joined in my game:<br><br>
+					<table>
+					<?php
+					foreach ($array_joinedUsers as &$value) {
+						echo "<tr><td nowrap align='left' width='3%'><i class='fas fa-minus-square'></i></td><td>&nbsp;&nbsp;&nbsp;" . $value . "</td><td nowrap align='right' width='3%'>&nbsp;&nbsp;&nbsp;<i class='fas fa-minus-square'></i></td></tr>";
+					}
+					?>
+					</table>
+				</td>
+			</tr>
+			<tr><td colspan="1"><hr></td></tr>
+			<tr>
+				<td colspan="1">
+					<form autocomplete="autocomplete_off_hack_xfr4!k">
+						<table cellspacing="2" cellpadding="2" border="0px" width="100%">
+							<tr>
+								<td colspan="1" class='datalabel' nowrap align="left">Join:</td>
+								<td colspan="1" class='datalabel' nowrap align="left">
+								<select required name='game' id='game' size='1' onchange="" style="width: 220px;">
+								<?php
+									for ($i661 = 1; $i661 < sizeof($array_availableGamesToJoin); $i661++) { // ignore the first one, dummy game
+										echo "<option value='" . $array_availableGamesToJoin[$i661] . "'>" . $array_availableGamesToJoin[$i661] . "</option>";
+									}
+								?>
+								</select>
+								</td>
+								<td colspan="1" class='datalabel' nowrap align="right">Code:</td>
+								<td colspan="1" class='datalabel' nowrap align="center"><input autocomplete="autocomplete_off_hack_xfr4!k" required type="text" id="AccessCode" style="width: 100px;"></td>
+								<td colspan="1" class='datalabel' nowrap align="right"><a href="#" onClick="joinGame();"><i class="fas fa-plus-square"></i></a></td>
+							</tr>
+							<tr>
+								<td colspan="1" class='datalabel' nowrap align="left">Leave:</td>
+								<td colspan="6" class='datalabel' nowrap align="left"><a href="#" onClick="leaveGame();"><i class="fas fa-minus-square"></i>&nbsp;&nbsp;&nbsp;(I am now joined in game <?php echo $gid; ?>)</a></td>
+							</tr>
+						</table>
+					</form>
 				</td>
 			</tr>
 		</table>
 	</div>
+
+	<p align="center"><span style='font-size:24px;color:#fff;'>Locked games do NOT show up to join!<br>Access code is ALWAYS needed to join unlocked games!</span></p>
 
 </body>
 
