@@ -138,6 +138,9 @@ session_start();
 	}
 	if ($stmt->execute()) {
 		$res = $stmt->get_result();
+		$jj = 0;
+		$pv_total_opfor = 0;
+		$tonnage_total_opfor = 0;
 		while ($row = $res->fetch_assoc()) {
 			if ($row['opfor'] == 1) {
 				$playerid = $row['playerid'];
@@ -145,9 +148,14 @@ session_start();
 				$pv_bidden = $row['bid_pv'];
 				$tonnage_bidden = $row['bid_tonnage'];
 				$currRound = $row['round'];
+				$jj++;
 
 				echo "<tr>\n";
-				echo "	<td style='color:#eee;font-size:22;'>OPFOR&nbsp;&nbsp;&nbsp;</td>\n";
+				if ($jj == 1) {
+					echo "	<td style='color:#eee;font-size:22;'>OPFOR&nbsp;&nbsp;&nbsp;</td>\n";
+				} else {
+					echo "	<td style='color:#eee;font-size:22;'>&nbsp;&nbsp;&nbsp;</td>\n";
+				}
 				echo "	<td nowrap style='background-color:#812c2c;width:170px;height:40px;' class='mechselect_button_active'>".$playername."&nbsp;(R".$currRound.")</td>\n";
 
 				//echo "	<td nowrap style='background-color:#148dee;width:170px;height:40px;' class='mechselect_button_active'>jkjj</td>\n";
@@ -208,10 +216,26 @@ session_start();
 					}
 				}
 				echo "	<td nowrap style='font-size:24px;text-align:right;color:#dddddd;background-color:#b33939;height:40px;padding-left:10px;padding-right:10px'>PV ".$pv_bidden."</td><td nowrap style='text-align:right;color:#ffff00;background-color:#b33939;height:40px;padding-left:10px;padding-right:10px'>".$tonnage_bidden." t</td>\n";
-				echo "	<td style='color:#eee;font-size:22;text-align:right;' align='right'>&nbsp;&nbsp;&nbsp;OPFOR</td>\n";
+
+				$pv_total_opfor = $pv_total_opfor + $pv_bidden;
+				$tonnage_total_opfor = $tonnage_total_opfor + $tonnage_bidden;
+
+				if ($jj == 1) {
+					echo "	<td style='color:#eee;font-size:22;'>&nbsp;&nbsp;&nbsp;OPFOR</td>\n";
+				} else {
+					echo "	<td style='color:#eee;font-size:22;'>&nbsp;&nbsp;&nbsp;</td>\n";
+				}
 				echo "</tr>\n";
-				echo "<tr><td colspan='6' style='font-size:10px'>&nbsp;</td></tr>\n";
 			}
+		}
+		if ($jj > 1) {
+			echo "<tr>\n";
+			echo "<td colspan='5' align='right' nowrap style='font-size:18px;color:#eee;'>&nbsp;</td>\n";
+			echo "<td colspan='1' align='center' nowrap style='font-size:18px;color:#dddddd;'>PV ".$pv_total_opfor."</td>\n";
+			echo "<td colspan='1' align='center' nowrap style='font-size:18px;color:#ffff00;'>".$tonnage_total_opfor." t</td>\n";
+			echo "</tr>\n";
+		} else {
+			echo "<td colspan='7' align='right' nowrap style='font-size:18px;color:#eee;'>&nbsp;</td>\n";
 		}
 	}
 
@@ -220,6 +244,10 @@ session_start();
 	}
 	if ($stmt2->execute()) {
 		$res = $stmt2->get_result();
+		$jj = 0;
+		$pv_total_blufor = 0;
+		$tonnage_total_blufor = 0;
+
 		while ($row = $res->fetch_assoc()) {
 			if ($row['opfor'] == 0) {
 				$playerid = $row['playerid'];
@@ -227,6 +255,7 @@ session_start();
 				$pv_bidden = $row['bid_pv'];
 				$tonnage_bidden = $row['bid_tonnage'];
 				$currRound = $row['round'];
+				$jj++;
 
 				$selectBorder='';
 				if ($pid == $playerid) {
@@ -294,6 +323,9 @@ session_start();
 					}
 				}
 
+				$pv_total_blufor = $pv_total_blufor + $pv_bidden;
+				$tonnage_total_blufor = $tonnage_total_blufor + $tonnage_bidden;
+
 				echo "<td nowrap style='font-size:24px;text-align:right;color:#ddd;background-color:#666666;height:40px;padding-left:10px;padding-right:10px;$selectBorder'>PV ".$pv_bidden."</td><td nowrap style='font-size:24px;text-align:right;color:#00ff00;background-color:#666666;height:40px;padding-left:10px;padding-right:10px;$selectBorder'>".$tonnage_bidden." t</td>\n";
 				if ($pid == $playerid) {
 					echo "<td style='color:eee;font-size:24;color:#ffaa00;text-align:center;$selectBorder'><img src='./images/indicatorl.png' height='24px'></td>\n";
@@ -302,6 +334,15 @@ session_start();
 				}
 				echo "</tr>\n";
 			}
+		}
+		if ($jj > 1) {
+			echo "<tr>\n";
+			echo "<td colspan='5' align='right' nowrap style='font-size:18px;color:#eee;'>&nbsp;</td>\n";
+			echo "<td colspan='1' align='center' nowrap style='font-size:18px;color:#dddddd;'>PV ".$pv_total_blufor."</td>\n";
+			echo "<td colspan='1' align='center' nowrap style='font-size:18px;color:#00ff00;'>".$tonnage_total_blufor." t</td>\n";
+			echo "</tr>\n";
+		} else {
+			echo "<td colspan='7' align='right' nowrap style='font-size:18px;color:#eee;'>&nbsp;</td>\n";
 		}
 	}
 ?>

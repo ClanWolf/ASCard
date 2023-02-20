@@ -263,7 +263,7 @@ session_start();
 						</tr>
 						<tr>
 							<?php if ($LOCKED == 0) {
-								echo "<td nowrap align='left' width='3%'>Accessible:</td><td nowrap align='left' width='3%'>&nbsp;&nbsp;&nbsp;<a href='#' onClick='unlockGame();'><i class='fa-solid fa-lock'></i></i></a></td><td nowrap align='left' width='94%'>&nbsp;&nbsp;&nbsp;no (no new players allowed)</td>";
+								echo "<td nowrap align='left' width='3%'>Accessible:</td><td nowrap align='left' width='3%'>&nbsp;&nbsp;&nbsp;<a href='#' onClick='unlockGame();'><i class='fa-solid fa-lock'></i></i></a></td><td nowrap align='left' width='94%'>&nbsp;&nbsp;&nbsp;no (new players NOT allowed)</td>";
 							} else {
 								echo "<td nowrap align='left' width='3%'>Accessible:</td><td nowrap align='left' width='3%'>&nbsp;&nbsp;&nbsp;<a href='#' onClick='lockGame();'><i class='fa-solid fa-lock-open'></i></a></td><td nowrap align='left' width='94%'>&nbsp;&nbsp;&nbsp;yes (joinable with access code)</td>";
 							} ?>
@@ -273,15 +273,17 @@ session_start();
 						</tr>
 					</table>
 				</td>
-				<td nowrap valign="top" align="left" width="25%" rowspan="2">
+				<td nowrap valign="top" align="left" width="25%" rowspan="3">
 					Joined in my game:<br><br>
-					<table>
-					<?php
-					foreach ($array_joinedUsers as &$value) {
-						echo "<tr><td nowrap align='left' width='3%'><i class='fas fa-minus-square'></i></td><td>&nbsp;&nbsp;&nbsp;" . $value . "</td><td nowrap align='right' width='3%'>&nbsp;&nbsp;&nbsp;<i class='fas fa-minus-square'></i></td></tr>";
-					}
-					?>
-					</table>
+					<div class="scroll-pane">
+						<table>
+						<?php
+						foreach ($array_joinedUsers as &$value) {
+							echo "<tr><td nowrap align='left' width='3%'><i class='fas fa-minus-square'></i></td><td>&nbsp;&nbsp;&nbsp;" . $value . "</td><td nowrap align='right' width='3%'>&nbsp;&nbsp;&nbsp;<i class='fas fa-minus-square'></i></td></tr>";
+						}
+						?>
+						</table>
+					</div>
 				</td>
 			</tr>
 			<tr><td colspan="1"><hr></td></tr>
@@ -321,7 +323,7 @@ session_start();
 		</table>
 	</div>
 
-	<p align="center"><span style='font-size:24px;color:#fff;'>Locked games do NOT show up to join!<br>Access code is ALWAYS needed to join accessible games!</span></p>
+	<p align="center"><span style='font-size:24px;color:#fff;'>Inaccessible games do NOT show up to join!<br>Access code is ALWAYS needed to join accessible games!</span></p>
 
 </body>
 

@@ -1311,8 +1311,8 @@ function increaseForrest() {
 
 function reduceForrest() {
 	tc_wood = tc_wood - 1;
-	if (tc_wood < -4) {
-		tc_wood = -4;
+	if (tc_wood < 0) {
+		tc_wood = 0;
 	}
 	document.getElementById("Forrest").innerText = tc_wood;
     updateOverAllToHitValue();

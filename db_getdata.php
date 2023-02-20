@@ -29,6 +29,7 @@
 	$array_MECH_NUMBER = array();
 	$array_MECH_IMG_URL = array();
 	$array_MECH_IMG_STATUS = array();
+	$array_MECH_STATUSSTRING = array();
 	$array_TECH = array();
 	$array_PV = array();
 	$array_TP = array();
@@ -178,6 +179,7 @@
 							$array_MECH_MODEL[$mechcount] = $clan.$row["as_model"];
 							$array_MECH_IMG_URL[$mechcount] = $row["mech_imageurl"];
 							$array_MECH_IMG_STATUS[$mechcount] = $row["mech_statusimageurl"];
+							$array_MECH_STATUSSTRING[$mechcount] = $row["mech_status"];
 							$array_TECH[$mechcount] = $row["tech"];
 							$array_PV[$mechcount] = $row["as_pv"];
 							$array_TP[$mechcount] = $row["as_tp"];

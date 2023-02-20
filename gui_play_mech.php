@@ -1072,7 +1072,7 @@ session_start();
 	$("#soundboard").hide();
 	$("#destroyedIndicator").hide();
 	$("#crippledIndicator").hide();
-	setCircles(<?=$array_HT[$chosenMechIndex]?>,<?=$array_A[$chosenMechIndex]?>,<?=$array_S[$chosenMechIndex]?>,<?=$array_ENGN[$chosenMechIndex]?>,<?=$array_FRCTRL[$chosenMechIndex]?>,<?=$array_MP[$chosenMechIndex]?>,<?=$array_WPNS[$chosenMechIndex]?>,<?=$array_USEDOVERHEAT[$chosenMechIndex]?>,<?=$array_MVMT[$chosenMechIndex]?>,<?=$array_WPNSFIRED[$chosenMechIndex]?>);
+	setCircles(<?=$array_HT[$chosenMechIndex]?>,<?=$array_A[$chosenMechIndex]?>,<?=$array_S[$chosenMechIndex]?>,<?=$array_ENGN[$chosenMechIndex]?>,<?=$array_FRCTRL[$chosenMechIndex]?>,<?=$array_MP[$chosenMechIndex]?>,<?=$array_WPNS[$chosenMechIndex]?>,<?=$array_USEDOVERHEAT[$chosenMechIndex]?>,<?=$array_MVMT[$chosenMechIndex]?>,<?=$array_WPNSFIRED[$chosenMechIndex]?>,2,0,'<?=$array_MECH_STATUSSTRING[$chosenMechIndex]?>');
 </script>
 
 <div id="footer"></div>
