@@ -600,7 +600,7 @@ session_start();
 								<table>
 									<tr>
 										<td width="10%" nowrap style="text-align:center;vertical-align:top;" valign="top" class="datalabel">TC</td>
-										<td width="90%" nowrap id="ToHitResult" style="font-size:72px;color:#da8e25;vertical-align:middle;text-align:right;font-weight:bold;">5</td>
+										<td width="90%" nowrap align="right" id="ToHitResult" style="font-size:72px;color:#da8e25;vertical-align:middle;text-align:right;font-weight:bold;">5</td>
 									</tr>
 								</table>
 							</td>
@@ -1058,7 +1058,11 @@ session_start();
 </div>
 
 <div id="destroyedIndicator">
-	<img src='./images/skull.png' onclick="javascript:hideSkull();" height='250px'>
+	<img style="pointer-events:auto;" src='./images/skull.png' onclick="javascript:hideSkull();" height='250px'>
+</div>
+
+<div id="crippledIndicator">
+	<img style="pointer-events:auto;" src='./images/crippled.png' onclick="javascript:hideCrippled();" height='250px'>
 </div>
 
 <script type="text/javascript">
@@ -1067,6 +1071,7 @@ session_start();
 	$("#movebar").hide();
 	$("#soundboard").hide();
 	$("#destroyedIndicator").hide();
+	$("#crippledIndicator").hide();
 	setCircles(<?=$array_HT[$chosenMechIndex]?>,<?=$array_A[$chosenMechIndex]?>,<?=$array_S[$chosenMechIndex]?>,<?=$array_ENGN[$chosenMechIndex]?>,<?=$array_FRCTRL[$chosenMechIndex]?>,<?=$array_MP[$chosenMechIndex]?>,<?=$array_WPNS[$chosenMechIndex]?>,<?=$array_USEDOVERHEAT[$chosenMechIndex]?>,<?=$array_MVMT[$chosenMechIndex]?>,<?=$array_WPNSFIRED[$chosenMechIndex]?>);
 </script>
 

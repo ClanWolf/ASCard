@@ -37,7 +37,11 @@ session_start();
 		}
 	} else {
 		// this player does not have a game yet
-		$description = $pname . "s game";
+		if (endsWith($pname, 's')) {
+			$description = $pname . "&#039; game";
+		} else {
+			$description = $pname . "&#039;s game";
+		}
 		$accesscodeGenerated = substr(str_shuffle("0123456789"), 0, 4);
 		$sqlinsertgame = "INSERT INTO asc_game (ownerPlayerId, accessCode, locked, description) VALUES ";
 		$sqlinsertgame = $sqlinsertgame . "(".$pid.", '".$accesscodeGenerated."', false, '".$description."');";
@@ -86,6 +90,14 @@ session_start();
 
 			$ii++;
 		}
+	}
+
+	function endsWith( $haystack, $needle ) {
+		$length = strlen( $needle );
+		if( !$length ) {
+			return true;
+		}
+		return substr( $haystack, -$length ) === $needle;
 	}
 ?>
 
@@ -247,17 +259,17 @@ session_start();
 							<td nowrap colspan="3" align="left">My game: &quot;<?php echo $DESC; ?>&quot;<br><br></td>
 						</tr>
 						<tr>
-							<td nowrap align="left" width="3%">GameId:</td><td></td><td nowrap align="left" width="94%">&nbsp;&nbsp;&nbsp;<?php echo $GAMEID; ?></td>
-						</tr>
-						<tr>
-							<td nowrap align="left" width="3%">Access code:</td><td nowrap align="left" width="3%">&nbsp;&nbsp;&nbsp;<i class="fa-solid fa-rotate-right"></i></td><td nowrap align="left" width="94%">&nbsp;&nbsp;&nbsp;<?php echo $ACCESSCODE; ?>
+							<td nowrap align="left" width="3%">Game:</td><td></td><td nowrap align="left" width="94%">&nbsp;&nbsp;&nbsp;<?php echo $GAMEID; ?></td>
 						</tr>
 						<tr>
 							<?php if ($LOCKED == 0) {
-								echo "<td nowrap align='left' width='3%'>Locked:</td><td nowrap align='left' width='3%'>&nbsp;&nbsp;&nbsp;<a href='#' onClick='lockGame();'><i class='fa-solid fa-lock-open'></i></i></a></td><td nowrap align='left' width='94%'>&nbsp;&nbsp;&nbsp;no (joinable with access code above)</td>";
+								echo "<td nowrap align='left' width='3%'>Accessible:</td><td nowrap align='left' width='3%'>&nbsp;&nbsp;&nbsp;<a href='#' onClick='unlockGame();'><i class='fa-solid fa-lock'></i></i></a></td><td nowrap align='left' width='94%'>&nbsp;&nbsp;&nbsp;no (no new players allowed)</td>";
 							} else {
-								echo "<td nowrap align='left' width='3%'>Locked:</td><td nowrap align='left' width='3%'>&nbsp;&nbsp;&nbsp;<a href='#' onClick='unlockGame();'><i class='fa-solid fa-lock'></i></a></td><td nowrap align='left' width='94%'>&nbsp;&nbsp;&nbsp;yes (not joinable)</td>";
+								echo "<td nowrap align='left' width='3%'>Accessible:</td><td nowrap align='left' width='3%'>&nbsp;&nbsp;&nbsp;<a href='#' onClick='lockGame();'><i class='fa-solid fa-lock-open'></i></a></td><td nowrap align='left' width='94%'>&nbsp;&nbsp;&nbsp;yes (joinable with access code)</td>";
 							} ?>
+						</tr>
+						<tr>
+							<td nowrap align="left" width="3%">Access code:</td><td nowrap align="left" width="3%">&nbsp;&nbsp;&nbsp;<i class="fa-solid fa-rotate-right"></i></td><td nowrap align="left" width="94%">&nbsp;&nbsp;&nbsp;<?php echo $ACCESSCODE; ?>
 						</tr>
 					</table>
 				</td>
@@ -294,7 +306,13 @@ session_start();
 							</tr>
 							<tr>
 								<td colspan="1" class='datalabel' nowrap align="left">Leave:</td>
-								<td colspan="6" class='datalabel' nowrap align="left"><a href="#" onClick="leaveGame();"><i class="fas fa-minus-square"></i>&nbsp;&nbsp;&nbsp;(I am now joined in game <?php echo $gid; ?>)</a></td>
+								<?php
+								if ($gid == 1) {
+									echo "<td colspan='6' class='datalabel' nowrap align='left'>I am NOT in any game.</td>";
+								} else {
+									echo "<td colspan='6' class='datalabel' nowrap align='left'><a href='#' onClick='leaveGame();'><i class='fas fa-minus-square'></i>&nbsp;&nbsp;&nbsp;(I am in game " . $gid . ")</a></td>";
+								}
+								?>
 							</tr>
 						</table>
 					</form>
@@ -303,7 +321,7 @@ session_start();
 		</table>
 	</div>
 
-	<p align="center"><span style='font-size:24px;color:#fff;'>Locked games do NOT show up to join!<br>Access code is ALWAYS needed to join unlocked games!</span></p>
+	<p align="center"><span style='font-size:24px;color:#fff;'>Locked games do NOT show up to join!<br>Access code is ALWAYS needed to join accessible games!</span></p>
 
 </body>
 

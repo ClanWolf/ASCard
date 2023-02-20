@@ -252,10 +252,10 @@ session_start();
 
 	<br>
 
-	<table align="center" width="65%" cellspacing="2" cellpadding="2" border="0px">
+	<table style="border:none;border-collapse:collapse;" align="center" width="65%" cellspacing="2" cellpadding="2" border="0px">
 		<tr>
-			<td nowrap colspan='3'>
-				<table cellspacing="2" cellpadding="2" width="100%">
+			<td nowrap colspan='3' style="background: rgba(50,50,50,1.0); text-align: center; vertical-align: middle;">
+				<table  style="border:none;border-collapse:collapse;" cellspacing="2" cellpadding="0" border="0px" width="100%">
 
 				<?php
 					if (!$playMode) {
@@ -263,11 +263,11 @@ session_start();
 						echo "	<td nowrap width='98%' style='background-color:#517D25;width:810px;height:40px;' class='mechselect_button_active' onclick='javascript:finalizeRound(".$pid.");'>\n";
 						echo "		&nbsp;&nbsp;&nbsp;<i class='fas fa-redo'></i>&nbsp;&nbsp;&nbsp;Finalize round ".$CURRENTROUND." of game ".$gid."\n";
 						echo "	</td>\n";
-						echo "  <td>&nbsp;</td>\n";
+						echo "  <td style='width:5px;'>&nbsp;</td>\n";
 						echo "	<td nowrap width='1%' style='background-color:#da8e25;height:40px;' class='mechselect_button_active' onclick='javascript:editGame(".$pid.");'>\n";
 						echo "		&nbsp;&nbsp;&nbsp;Edit Game&nbsp;&nbsp;&nbsp;\n";
 						echo "	</td>\n";
-						echo "  <td>&nbsp;</td>\n";
+						echo "  <td style='width:5px;'>&nbsp;</td>\n";
 						echo "	<td nowrap width='1%' style='background-color:#da8e25;height:40px;' class='mechselect_button_active' onclick='javascript:resetRound(".$pid.");'>\n";
 						echo "		&nbsp;&nbsp;&nbsp;RESET Round&nbsp;&nbsp;&nbsp;\n";
 						echo "	</td>\n";
@@ -484,7 +484,7 @@ session_start();
 
 	<tr>
 		<td valign='top' align='center' colspan='3'>
-			<br><span style='font-size:24px;color:#fff;'>Round can be finalized as soon as all units have reported.<br>Disable play mode (<u><a href="https://www.clanwolf.net/apps/ASCard/gui_edit_option.php">Options</a></u>) to reset round or edit OpFor / Game-ID.</span>
+			<br><span style='font-size:24px;color:#fff;'>Round can be finalized as soon as all units have reported.<br>Disable play mode (<u><a href="https://www.clanwolf.net/apps/ASCard/gui_edit_option.php">Options</a></u>) to reset round or edit OpFor / Game-ID.<br><br></span>
 		</td>
 	</tr>
 

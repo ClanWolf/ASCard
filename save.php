@@ -5,18 +5,19 @@
 	require('./logger.php');
 	require_once('./db.php');
 
-	$index = isset($_GET["index"]) ? $_GET["index"] : "";
-	$h     = isset($_GET["h"]) ? $_GET["h"] : "";
-	$a     = isset($_GET["a"]) ? $_GET["a"] : "";
-	$s     = isset($_GET["s"]) ? $_GET["s"] : "";
-	$e     = isset($_GET["e"]) ? $_GET["e"] : "";
-	$fc    = isset($_GET["fc"]) ? $_GET["fc"] : "";
-	$mp    = isset($_GET["mp"]) ? $_GET["mp"] : "";
-	$w     = isset($_GET["w"]) ? $_GET["w"] : "";
-	$mstat = isset($_GET["mstat"]) ? $_GET["mstat"] : "";
-	$uov   = isset($_GET["uov"]) ? $_GET["uov"] : "";
-	$mvmnt = isset($_GET["mvmnt"]) ? $_GET["mvmnt"] : "";
-	$wpnsf = isset($_GET["wpnsf"]) ? $_GET["wpnsf"] : "";
+	$index    = isset($_GET["index"]) ? $_GET["index"] : "";
+	$h        = isset($_GET["h"]) ? $_GET["h"] : "";
+	$a        = isset($_GET["a"]) ? $_GET["a"] : "";
+	$s        = isset($_GET["s"]) ? $_GET["s"] : "";
+	$e        = isset($_GET["e"]) ? $_GET["e"] : "";
+	$fc       = isset($_GET["fc"]) ? $_GET["fc"] : "";
+	$mp       = isset($_GET["mp"]) ? $_GET["mp"] : "";
+	$w        = isset($_GET["w"]) ? $_GET["w"] : "";
+	$mstat    = isset($_GET["mstat"]) ? $_GET["mstat"] : "";
+	$mstatstr = isset($_GET["mstatstr"]) ? $_GET["mstatstr"] : "";
+	$uov      = isset($_GET["uov"]) ? $_GET["uov"] : "";
+	$mvmnt    = isset($_GET["mvmnt"]) ? $_GET["mvmnt"] : "";
+	$wpnsf    = isset($_GET["wpnsf"]) ? $_GET["wpnsf"] : "";
 
 	echo "<!DOCTYPE html>\n";
 	echo "<html lang='en'>\n";
@@ -35,6 +36,7 @@
 		echo $mp."<br>";
 		echo $w."<br>";
 		echo $mstat."<br>";
+		echo $mstatstr."<br>";
 		echo $uov."<br>";
 		echo $mvmnt."<br>";
 		echo $wpnsf."<br>";
@@ -52,8 +54,8 @@
 			echo "Error (asc_mechstatus) updating record: " . mysqli_error($conn);
 		}
 
-		$sql2 = "UPDATE asc_mech SET mech_statusimageurl='".$mstat."' WHERE mechid=".$index;
-		echo "<br><br>UPDATE asc_mech SET mech_statusimageurl='".$mstat."' WHERE mechid=".$index;
+		$sql2 = "UPDATE asc_mech SET mech_statusimageurl='".$mstat."',mech_status='".$mstatstr."' WHERE mechid=".$index;
+		echo "<br><br>UPDATE asc_mech SET mech_statusimageurl='".$mstat."',mech_status='".$mstatstr."' WHERE mechid=".$index;
 
 		if (mysqli_query($conn, $sql2)) {
 			echo "<br>";

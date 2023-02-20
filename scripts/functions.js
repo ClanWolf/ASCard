@@ -29,7 +29,7 @@ var rolling = 0;
 var ccc = 1;
 var structuralDamageCache = 0;
 
-var mechstatus = 1; // 1: green (untouched) | 2: yellow (hit) | 3: red (crit) | 4: black (wrecked)
+var mechstatus = 1; // 1: green (untouched) | 2: yellow (hit) | 3: red (crit) | 4: black (wrecked) | 9: crippled
 var enginehit = 0;
 var updatedshortvalue = 0;
 var updatedmediumvalue = 2;
@@ -93,6 +93,7 @@ function readCircles2(index, a_max, s_max, mv_bt_id, f_bt_id) {
 	var wpnsf = 0;
 
 	var mechstatus = 1;
+	var mechstatusstring = "fresh";
 	var mechstatusimage = "images/DD_01.png";
 
 	var list = document.getElementsByClassName("bigcheck");
@@ -192,41 +193,89 @@ function readCircles2(index, a_max, s_max, mv_bt_id, f_bt_id) {
 		s = s - 1;
 		a = a + 1;
 	}
+	// mechstatusstring: fresh, damaged, critical, crippled, destroyed
+
+//	CRIPPLING DAMAGE
+//  For the purposes of Forced Withdrawal, a unit that meets any of the following criteria is considered crippled
+//  and will be forced to withdraw:
+//      - The unit has no Armor remaining and has been reduced to half
+//  its starting Structure value (rounded up). If the unit possesses
+//  only 1 point of Structure to begin with, it begins retreating as
+//  soon as it loses all of its Armor.
+//      - The unit has been reduced to a damage value of 0 for all
+//  Medium- and Long-range attacks. This condition does not
+//  apply if the unit began the scenario with a damage value of 0
+//  at Medium and Long range.
+//      - The unit has been immobilized through damage, critical, and/
+//  or motive hit effects.
+
 	if (document.getElementById('unit_type').innerText == "BA") {
+		mechstatus = 1;
+		mechstatusstring = "fresh";
 		mechstatusimage = "images/DD_ELE_01.png";
 		if (a > 0) {
 			mechstatus = 2;
+			mechstatusstring = "damaged";
 			mechstatusimage = "images/DD_ELE_02.png";
 		}
 		if (s > 0) {
 			mechstatus = 3;
+			mechstatusstring = "critical";
 			mechstatusimage = "images/DD_ELE_03.png";
 		}
+		if (a == maximalarmorpoints && maximalstructurepoints == 1) {
+			mechstatus = 9;
+			mechstatusstring = "crippled";
+			mechstatusimage = "images/DD_03.png";
+		}
+    	if (s > maximalstructurepoints / 2) {
+    		mechstatus = 9;
+			mechstatusstring = "crippled";
+    		mechstatusimage = "images/DD_03.png";
+    	}
 		if (s == maximalstructurepoints) {
 			mechstatus = 4;
+			mechstatusstring = "destroyed";
 			mechstatusimage = "images/DD_ELE_04.png";
 		}
 		if (e == 2) {
 			mechstatus = 4;
+			mechstatusstring = "destroyed";
 			mechstatusimage = "images/DD_ELE_04.png";
 		}
 	} else {
+		mechstatus = 1;
+		mechstatusstring = "fresh";
 		mechstatusimage = "images/DD_01.png";
 		if (a > 0) {
     		mechstatus = 2;
+			mechstatusstring = "ok";
     		mechstatusimage = "images/DD_02.png";
     	}
     	if (s > 0) {
     		mechstatus = 3;
+			mechstatusstring = "critical";
+    		mechstatusimage = "images/DD_03.png";
+    	}
+		if (a == maximalarmorpoints && maximalstructurepoints == 1) {
+			mechstatus = 9;
+			mechstatusstring = "crippled";
+			mechstatusimage = "images/DD_03.png";
+		}
+    	if (s > maximalstructurepoints / 2) {
+    		mechstatus = 9;
+			mechstatusstring = "crippled";
     		mechstatusimage = "images/DD_03.png";
     	}
     	if (s == maximalstructurepoints) {
     		mechstatus = 4;
+			mechstatusstring = "destroyed";
     		mechstatusimage = "images/DD_04.png";
     		document.getElementById('toprightimage').src='./images/top-right_02.png';
     	}
     	if (e == 2) {
     		mechstatus = 4;
+			mechstatusstring = "destroyed";
     		mechstatusimage = "images/DD_04.png";
     		document.getElementById('toprightimage').src='./images/top-right_02.png';
     	}
@@ -260,8 +309,8 @@ function readCircles2(index, a_max, s_max, mv_bt_id, f_bt_id) {
 	}
 	/* console.log("range: " + tc_rangeValueReading); */
 
-	setCircles(h, a, s, e, fc, mp, w, uov, mvmnt, wpnsf, tc_rangeValueReading, tc_partialCoverReading);
-	var url="./save.php?index="+index+"&h="+h+"&a="+a+"&s="+s+"&e="+e+"&fc="+fc+"&mp="+mp+"&w="+w+"&mstat="+mechstatusimage+"&uov="+uov+"&mvmnt="+mvmnt+"&wpnsf="+wpnsf;
+	setCircles(h, a, s, e, fc, mp, w, uov, mvmnt, wpnsf, tc_rangeValueReading, tc_partialCoverReading, mechstatusstring);
+	var url="./save.php?index="+index+"&h="+h+"&a="+a+"&s="+s+"&e="+e+"&fc="+fc+"&mp="+mp+"&w="+w+"&mstat="+mechstatusimage+"&mstatstr="+mechstatusstring+"&uov="+uov+"&mvmnt="+mvmnt+"&wpnsf="+wpnsf;
 	// alert(url);
 	window.frames['saveframe'].location.replace(url);
 
@@ -278,7 +327,7 @@ function setStructuralDamageCache(value) {
 	structuralDamageCache = value;
 }
 
-function setCircles(h, a, s, e, fc, mp, w, uov, mvmnt, wpnsf, tc_rangeValueReading, tc_partialCoverReading) {
+function setCircles(h, a, s, e, fc, mp, w, uov, mvmnt, wpnsf, tc_rangeValueReading, tc_partialCoverReading, mechstatusstring) {
 	var na1 = "";
 
 	tc_heat = h;
@@ -686,6 +735,9 @@ function setCircles(h, a, s, e, fc, mp, w, uov, mvmnt, wpnsf, tc_rangeValueReadi
 	if (e == 2) {
 		mechstatus = 4;
 	}
+	if (mechstatusstring == 'crippled') {
+		mechstatus = 9;
+	}
 
 	var temp0 = "./images/temp_0.png";
 	var temp1 = "./images/temp_1.png";
@@ -693,9 +745,16 @@ function setCircles(h, a, s, e, fc, mp, w, uov, mvmnt, wpnsf, tc_rangeValueReadi
 	var temp3 = "./images/temp_3.png";
 	var temp4 = "./images/temp_4.png";
 
+	$("#crippledIndicator").hide();
+	if (mechstatus == 9) {
+		// Mech crippled
+		$("#crippledIndicator").show();
+	}
+
 	$("#destroyedIndicator").hide();
 	if (mechstatus == 4) {
 		// Mech destroyed
+		$("#crippledIndicator").hide();
 		$("#destroyedIndicator").show();
 	}
 
@@ -1339,6 +1398,9 @@ function showMoveBar() {
 function hideSkull() {
 	$("#destroyedIndicator").fadeOut(500, "linear");
 }
+function hideCrippled() {
+	$("#crippledIndicator").fadeOut(500, "linear");
+}
 
 $(window).resize(function() {
 	var mechimage = document.getElementById("mechimage");
@@ -1471,7 +1533,7 @@ $(document).ready(function() {
 		document.getElementById("mechimage").src=mechImageURLMUL;
 		const allDataAreas = document.getElementsByClassName("dataarea");
 		for (let i = 0; i < allDataAreas.length; i++) {
-			allDataAreas[i].style.backgroundColor="rgba(255,255,255,0.90)"
+			allDataAreas[i].style.backgroundColor="rgba(255,255,255,0.90)";
 		}
 		const allDataValues = document.getElementsByClassName("datavalue");
 		for (let i = 0; i < allDataValues.length; i++) {
@@ -1481,6 +1543,10 @@ $(document).ready(function() {
 		for (let i = 0; i < allDataValueThins.length; i++) {
 			allDataValueThins[i].style.color="#000"
 		}
+		const allDataAreaReds = document.getElementsByClassName("dataarea_red");
+		for (let i = 0; i < allDataAreaReds.length; i++) {
+			allDataAreaReds[i].style.backgroundColor="rgba(10,10,10,0.70)";
+		}
 	} else {
 		// Set use MUL images to 0 on database (dark background + alternative images)
 		var url="./save_UseMULImages.php?playerId="+playerId+"&useMulImages=0";
@@ -1488,7 +1554,7 @@ $(document).ready(function() {
 		document.getElementById("mechimage").src=mechImageURL;
 		const allDataAreas = document.getElementsByClassName("dataarea");
 		for (let i = 0; i < allDataAreas.length; i++) {
-			allDataAreas[i].style.backgroundColor="rgba(70,70,70,0.85)"
+			allDataAreas[i].style.backgroundColor="rgba(70,70,70,0.85)";
 		}
 		const allDataValues = document.getElementsByClassName("datavalue");
 		for (let i = 0; i < allDataValues.length; i++) {
@@ -1497,6 +1563,10 @@ $(document).ready(function() {
 		const allDataValueThins = document.getElementsByClassName("datavalue_thin");
 		for (let i = 0; i < allDataValueThins.length; i++) {
 			allDataValueThins[i].style.color="#ccc"
+		}
+		const allDataAreaReds = document.getElementsByClassName("dataarea_red");
+		for (let i = 0; i < allDataAreaReds.length; i++) {
+			allDataAreaReds[i].style.backgroundColor="rgba(70,0,0,0.60)";
 		}
 	}
 

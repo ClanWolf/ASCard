@@ -305,7 +305,7 @@ session_start();
 		}
 	}
 ?>
-		<tr><td colspan="8" style="color:#eee;font-size:20;text-align:center;"><br>Only the 5 lowest bidders in PointValue (PV) with the same Game-ID will be visible.</td></tr>
+		<tr><td colspan="8" style="color:#eee;font-size:20;text-align:center;"><br>Only the 5 lowest bidders in PointValue (PV) with the same Game-ID will be visible.<br><br></td></tr>
 	</table>
 </body>
 
