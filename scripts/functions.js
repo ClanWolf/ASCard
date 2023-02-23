@@ -414,8 +414,10 @@ function setCircles(h, a, s, e, fc, mp, w, uov, mvmnt, wpnsf, tc_rangeValueReadi
 	document.getElementById("firepanelhidden").style.visibility = "hidden";
 	if (mvmnt == 2) { // Stationary (AMM -1)
 		radioMV2_moved2_standstill.checked = true;
-		document.getElementById("AMM").innerHTML = "-1";
-		tc_amm = -1;
+		if (unitType != "BA") {
+			document.getElementById("AMM").innerHTML = "-1";
+			tc_amm = -1;
+		}
 	}
 	if (mvmnt == 3) { // walked
 		radioMV3_moved3_moved.checked = true;
@@ -441,8 +443,10 @@ function setCircles(h, a, s, e, fc, mp, w, uov, mvmnt, wpnsf, tc_rangeValueReadi
 	}
 	if (mvmnt == 4) { // Jumped (AMM +2)
 		radioMV4_moved4_jumped.checked = true;
-		document.getElementById("AMM").innerHTML = "2";
-		tc_amm = 2;
+		if (unitType != "BA") {
+			document.getElementById("AMM").innerHTML = "2";
+			tc_amm = 2;
+		}
 	}
 	if (wpnsf == 1) { // hold fire
 		radioWF5_WEAPONSFIRED2.checked = true;
@@ -628,23 +632,24 @@ function setCircles(h, a, s, e, fc, mp, w, uov, mvmnt, wpnsf, tc_rangeValueReadi
 	} else if (mvmnt == 1 || h == 4) {           // -------------- 1:	TMM -4					Immobile (Shutdown?)
 		tmpTMM = -4;
 	} else if (mvmnt == 2) {                     // -------------- 2:	TMM 0 AMM -1			Stationary
-		updatedshortvalue = updatedshortvalue - 1;
-		updatedmediumvalue = updatedmediumvalue - 1;
-        updatedlongvalue = updatedlongvalue - 1;
+		if (unitType != "BA") {
+			updatedshortvalue = updatedshortvalue - 1;
+			updatedmediumvalue = updatedmediumvalue - 1;
+			updatedlongvalue = updatedlongvalue - 1;
+        }
 		tmpTMM = 0;
         if (h > 1 && h < 4) { tmpTMM = tmpTMM - 1; }
 	} else if (mvmnt == 3) {                 	// -------------- 3:	TMM #		            Walked (>1")
 		if (h > 1 && h < 4) { tmpTMM = tmpTMM - 1; }
 	} else if (mvmnt == 4) {                     // -------------- 4:	TMM 1 (#+SPCL) AMM +2	Jumped
-		updatedshortvalue = updatedshortvalue + 2;
-		updatedmediumvalue = updatedmediumvalue + 2;
-		updatedlongvalue = updatedlongvalue + 2;
-
 		if (unitType == "BA") {
 			//console.log("BattleArmor --> NO +1 TMM modifier (jump)");
 		} else {
 			//console.log("NO BattleArmor --> +1 TMM modifier (jump)");
 			tmpTMM = tmpTMM + 1;
+			updatedshortvalue = updatedshortvalue + 2;
+			updatedmediumvalue = updatedmediumvalue + 2;
+			updatedlongvalue = updatedlongvalue + 2;
 		}
 
 		if (h > 1 && h < 4) { tmpTMM = tmpTMM - 1; }
