@@ -18,6 +18,7 @@ session_start();
 	$opt1 = isset($_GET["opt1"]) ? $_GET["opt1"] : "";
 	$opt2 = isset($_GET["opt2"]) ? $_GET["opt2"] : "";
 	$opt3 = isset($_GET["opt3"]) ? $_GET["opt3"] : "";
+	$opt4 = isset($_GET["opt4"]) ? $_GET["opt4"] : "";
 
 	$sql_asc_playerround = "SELECT SQL_NO_CACHE * FROM asc_player where playerid = " . $pid . ";";
 	$result_asc_playerround = mysqli_query($conn, $sql_asc_playerround);
@@ -27,11 +28,12 @@ session_start();
 		}
 	}
 
-	if ($opt1 == true || $opt2 == true || $opt3 == true) {
+	if ($opt1 == true || $opt2 == true || $opt3 == true || $opt4 == true) {
 		// storing changed options to database
-		$sql_update_options = "UPDATE asc_options SET OPTION1=".$opt1.", OPTION2=".$opt2.", OPTION3=".$opt3." WHERE playerid = ".$pid;
+		$sql_update_options = "UPDATE asc_options SET OPTION1=".$opt1.", OPTION2=".$opt2.", OPTION3=".$opt3.", OPTION4=".$opt4." WHERE playerid = ".$pid;
 		$result_update_options = mysqli_query($conn, $sql_update_options);
 		$playMode = $opt3;
+		$distancesHexes = $opt4;
 		echo "<meta http-equiv='refresh' content='0;url=./gui_edit_option.php'>";
 		header("Location: ./gui_edit_option.php");
 		//die("Check position 7");
@@ -44,9 +46,11 @@ session_start();
 				$opt1 = $row["option1"];
 				$opt2 = $row["option2"];
 				$opt3 = $row["option3"];
+				$opt4 = $row["option4"];
 				$_SESSION['option1'] = $opt1;
 				$_SESSION['option2'] = $opt2;
 				$_SESSION['option3'] = $opt3;
+				$_SESSION['option4'] = $opt4;
 			}
 		}
 	}
@@ -130,6 +134,7 @@ session_start();
 			var opt1 = 0;
 			var opt2 = 0;
 			var opt3 = 0;
+			var opt4 = 0;
 			var list = document.getElementsByClassName("bigcheck");
 			[].forEach.call(list, function (el1) {
 				na = el1.name;
@@ -137,9 +142,10 @@ session_start();
 					if (na.substring(0, 4) == "OPT1") { opt1 = el1.checked }
 					if (na.substring(0, 4) == "OPT2") { opt2 = el1.checked }
 					if (na.substring(0, 4) == "OPT3") { opt3 = el1.checked }
+					if (na.substring(0, 4) == "OPT4") { opt4 = el1.checked }
 				}
 			})
-			var url="./gui_edit_option.php?opt1="+opt1+"&opt2="+opt2+"&opt3="+opt3;
+			var url="./gui_edit_option.php?opt1="+opt1+"&opt2="+opt2+"&opt3="+opt3+"&opt4="+opt4;
 			// alert (url);
 			window.location.href = url;
 		}
@@ -153,6 +159,7 @@ session_start();
 					if (na.substring(0, 4) == "OPT1") { el1.checked = <?php echo $opt1 ?> }
 					if (na.substring(0, 4) == "OPT2") { el1.checked = <?php echo $opt2 ?> }
 					if (na.substring(0, 4) == "OPT3") { el1.checked = <?php echo $opt3 ?> }
+					if (na.substring(0, 4) == "OPT4") { el1.checked = <?php echo $opt4 ?> }
 				}
 			})
 		}
@@ -224,6 +231,15 @@ session_start();
 				</td>
 				<td align="left" class="datalabel">
 					Show pilot info in playmode (top left)
+				</td>
+			</tr>
+			<tr><td colspan="2"><hr></td></tr>
+			<tr>
+				<td align="left" class='datalabel'>
+					<label class="bigcheck"><input onchange="changeOption();" type="checkbox" class="bigcheck" name="OPT4" value="yes"/><span class="bigcheck-target"></span></label>&nbsp;&nbsp;
+				</td>
+				<td align="left" class="datalabel">
+					Show distances in hexes
 				</td>
 			</tr>
 			<tr><td colspan="2"><hr></td></tr>

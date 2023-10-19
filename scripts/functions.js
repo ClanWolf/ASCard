@@ -616,11 +616,26 @@ function setCircles(h, a, s, e, fc, mp, w, uov, mvmnt, wpnsf, tc_rangeValueReadi
 		updatemovementpointsjump = 0;
 	}
 
-	var mvstring = updatedmovementpointsground + "&rdquo;";
-	if (updatemovementpointsjump > 0) {
-		mvstring = mvstring + "/" + updatemovementpointsjump + "&rdquo;j";
+	console.log("MV: " + updatedmovementpointsground);
+	console.log("MVj: " + updatemovementpointsjump);
+	console.log("Rounding up to hex value");
+
+	if (showDistancesHexes == 1) {
+		var updatedmovementpointsgroundHexes =  Math.ceil(updatedmovementpointsground / 2);
+		var updatedmovementpointsjumpHexes = Math.ceil(updatemovementpointsjump / 2);
+
+		var mvstring = updatedmovementpointsgroundHexes + "<span style='font-size:0.6em;'>&#11043;</span>"; // Unicode for Hexagon
+		if (updatedmovementpointsjumpHexes > 0) {
+			mvstring = mvstring + "/" + updatedmovementpointsjumpHexes + "<span style='font-size:0.6em;'>&#11043;</span>j"; // Unicode for Hexagon
+		}
+		document.getElementById("mv_points").innerHTML = mvstring;
+	} else {
+		var mvstring = updatedmovementpointsground + "&rdquo;";
+		if (updatemovementpointsjump > 0) {
+			mvstring = mvstring + "/" + updatemovementpointsjump + "&rdquo;j";
+		}
+		document.getElementById("mv_points").innerHTML = mvstring;
 	}
-	document.getElementById("mv_points").innerHTML = mvstring;
 
 	//console.log("TMM ------------>");
 	var tmpTMM = originalTMM;
@@ -756,9 +771,17 @@ function setCircles(h, a, s, e, fc, mp, w, uov, mvmnt, wpnsf, tc_rangeValueReadi
 		$("#crippledIndicator").show();
 	}
 
+	$("#shutdownIndicator").hide();
+	if (h == 4) {
+		// Mech destroyed
+		$("#crippledIndicator").hide();
+		$("#shutdownIndicator").show();
+	}
+
 	$("#destroyedIndicator").hide();
 	if (mechstatus == 4) {
 		// Mech destroyed
+		$("#shutdownIndicator").hide();
 		$("#crippledIndicator").hide();
 		$("#destroyedIndicator").show();
 	}
@@ -938,7 +961,7 @@ function increaseHT_PREP() {
 
 function rand(min, max) {
 	return Math.floor(Math.random() * (max - min + 1)) + min;
-} 
+}
 
 function rolldice() {
 	ccc++;
@@ -1405,6 +1428,9 @@ function hideSkull() {
 }
 function hideCrippled() {
 	$("#crippledIndicator").fadeOut(500, "linear");
+}
+function hideShutdownIndicator() {
+	$("#shutdownIndicator").fadeOut(500, "linear");
 }
 
 $(window).resize(function() {

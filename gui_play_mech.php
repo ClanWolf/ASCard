@@ -22,6 +22,9 @@ session_start();
 
 	$opt2 = $_SESSION['option2'];
 	$showplayerdata_topleft = $opt2;
+
+	$opt4 = $_SESSION['option4'];
+	$showDistancesHexes = $opt4;
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -361,6 +364,7 @@ session_start();
 	echo "  var WPNS_PREP = $array_WPNS_PREP[$chosenMechIndex];\n";
 	echo "	var HT_PREP = $array_HT_PREP[$chosenMechIndex];\n";
 	echo "	var playerId = ".$pid.";\n";
+	echo "  var showDistancesHexes = ".$showDistancesHexes.";\n";
 	echo "</script>\n";
 ?>
 
@@ -616,9 +620,19 @@ session_start();
 							<td nowrap style="text-align:center;" class="datalabel"><label class='bigcheck'><input onchange="setRangeToLong();" type='checkbox' class='bigcheck' name='ToHitLong' id='ToHitLong' value='no'/><span class='bigcheck-target'></span></label></td>
 						</tr>
 						<tr>
-							<td nowrap style="text-align:center;" class="datalabel_thin_small">&#60;6&quot;</td>
-							<td nowrap style="text-align:center;" class="datalabel_thin_small">&#60;24&quot;</td>
-							<td nowrap style="text-align:center;" class="datalabel_thin_small">&#60;42&quot;</td>
+
+						<?php
+						if ($showDistancesHexes == 1) {
+							echo "<td nowrap style='text-align:center;' class='datalabel_thin_small'>&#60;3<span style='font-size:0.6em;'>&#11043;</span></td>";
+							echo "<td nowrap style='text-align:center;' class='datalabel_thin_small'>&#60;12<span style='font-size:0.6em;'>&#11043;</span></td>";
+							echo "<td nowrap style='text-align:center;' class='datalabel_thin_small'>&#60;21<span style='font-size:0.6em;'>&#11043;</span></td>";
+						} else {
+							echo "<td nowrap style='text-align:center;' class='datalabel_thin_small'>&#60;6&quot;</td>";
+							echo "<td nowrap style='text-align:center;' class='datalabel_thin_small'>&#60;24&quot;</td>";
+							echo "<td nowrap style='text-align:center;' class='datalabel_thin_small'>&#60;42&quot;</td>";
+						}
+						?>
+
 						</tr>
 						<tr>
 							<td nowrap style="text-align:center;" class="datalabel" colspan="3"><hr></td>
@@ -679,10 +693,15 @@ session_start();
 							<td id="tmmLabel" nowrap class="datalabel" width="12%">TMM:</td>
 							<td nowrap class="datavalue" width="13%" id="TMM"><?php echo "$array_TMM[$chosenMechIndex]"; ?></td>
 							<td nowrap class="datalabel" width="12%">MV:</td>
-							<td nowrap class="datavalue" style="text-transform: none;" width="13%" id="mv_points"><?php echo "$array_MV[$chosenMechIndex]&rdquo;";
-							if ($array_MVJ[$chosenMechIndex] != null) {
-								echo "/$array_MVJ[$chosenMechIndex]&rdquo;&nbsp;j";
-							} ?></td>
+							<td nowrap class="datavalue" style="text-transform: none;" width="13%" id="mv_points">
+							<?php echo "$array_MV[$chosenMechIndex]&rdquo;";
+								if ($array_MVJ[$chosenMechIndex] != null) {
+									echo "/$array_MVJ[$chosenMechIndex]&rdquo;&nbsp;j\r\n";
+								} else {
+									echo "\r\n";
+								}
+							?>
+							</td>
 						</tr>
 						<tr>
 							<!-- <td nowrap class="datalabel" width="12%" colspan="1">&nbsp;</td> -->
@@ -795,20 +814,20 @@ session_start();
 				</div>
 
 			</td>
-	
-	
-	
-	
-	
-	
-	
 
-	
-	
-	
-	
-	
-	
+
+
+
+
+
+
+
+
+
+
+
+
+
 			<td width="40%" valign="bottom" align="left">
 				<div id="movementtoken" width="100%" valign="top" align="left">
 					<img valign="top" id="movementtokenimage" src="./images/dice/yd6_4.png" height="70px">
@@ -1060,9 +1079,11 @@ session_start();
 <div id="destroyedIndicator">
 	<img style="pointer-events:auto;" src='./images/skull.png' onclick="javascript:hideSkull();" height='250px'>
 </div>
-
 <div id="crippledIndicator">
 	<img style="pointer-events:auto;" src='./images/crippled.png' onclick="javascript:hideCrippled();" height='250px'>
+</div>
+<div id="shutdownIndicator">
+	<img style="pointer-events:auto;" src='./images/heat.png' onclick="javascript:hideShutdownIndicator();" height='250px'>
 </div>
 
 <script type="text/javascript">
@@ -1072,6 +1093,7 @@ session_start();
 	$("#soundboard").hide();
 	$("#destroyedIndicator").hide();
 	$("#crippledIndicator").hide();
+	$("#shutdownIndicator").hide();
 	setCircles(<?=$array_HT[$chosenMechIndex]?>,<?=$array_A[$chosenMechIndex]?>,<?=$array_S[$chosenMechIndex]?>,<?=$array_ENGN[$chosenMechIndex]?>,<?=$array_FRCTRL[$chosenMechIndex]?>,<?=$array_MP[$chosenMechIndex]?>,<?=$array_WPNS[$chosenMechIndex]?>,<?=$array_USEDOVERHEAT[$chosenMechIndex]?>,<?=$array_MVMT[$chosenMechIndex]?>,<?=$array_WPNSFIRED[$chosenMechIndex]?>,2,0,'<?=$array_MECH_STATUSSTRING[$chosenMechIndex]?>');
 </script>
 
