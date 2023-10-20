@@ -43,7 +43,7 @@ session_start();
 						$_SESSION['playerimage'] = $row['image'];
 						$_SESSION['gameid'] = $row['gameid'];
 						// getting options from database
-						$sql_asc_options = "SELECT SQL_NO_CACHE * FROM asc_options where playerid = ".$_SESSION['playerid'];
+						$sql_asc_options = "SELECT SQL_NO_CACHE * FROM asc_options WHERE playerid = ".$_SESSION['playerid'];
 						$result_asc_options = mysqli_query($conn, $sql_asc_options);
 						if (mysqli_num_rows($result_asc_options) > 0) {
 							while($row11 = mysqli_fetch_assoc($result_asc_options)) {
@@ -57,6 +57,10 @@ session_start();
 								$_SESSION['option4'] = $opt4;
 							}
 						}
+
+						$update_query = "UPDATE asc_player SET last_login=now() WHERE playerid = ".$_SESSION['playerid'];
+						$result_update_query = mysqli_query($conn, $update_query);
+
 						echo "<meta http-equiv='refresh' content='0;url=./gui_select_unit.php'>";
 						header("Location: ./gui_select_unit.php");
 						//die('Login succeeded!<br>');
