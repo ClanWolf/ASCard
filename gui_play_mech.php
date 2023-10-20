@@ -364,7 +364,11 @@ session_start();
 	echo "  var WPNS_PREP = $array_WPNS_PREP[$chosenMechIndex];\n";
 	echo "	var HT_PREP = $array_HT_PREP[$chosenMechIndex];\n";
 	echo "	var playerId = ".$pid.";\n";
-	echo "  var showDistancesHexes = ".$showDistancesHexes.";\n";
+	if ($showDistancesHexes != null) {
+		echo "  var showDistancesHexes = ".$showDistancesHexes.";\n";
+	} else {
+		echo "  var showDistancesHexes = 0;\n";
+	}
 	echo "</script>\n";
 ?>
 

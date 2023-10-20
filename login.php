@@ -50,9 +50,11 @@ session_start();
 								$opt1 = $row11["option1"];
 								$opt2 = $row11["option2"];
 								$opt3 = $row11["option3"];
+								$opt4 = $row11["option4"];
 								$_SESSION['option1'] = $opt1;
 								$_SESSION['option2'] = $opt2;
 								$_SESSION['option3'] = $opt3;
+								$_SESSION['option4'] = $opt4;
 							}
 						}
 						echo "<meta http-equiv='refresh' content='0;url=./gui_select_unit.php'>";
