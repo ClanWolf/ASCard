@@ -10,6 +10,8 @@ session_start();
 		//die("Check position 8");
 	}
 
+	$mechIDsNotFinished = $_GET['mechs'];
+
 	// Get data on units from db
 	$pid = $_SESSION['playerid'];
 	$gid = $_SESSION['gameid'];
@@ -152,8 +154,25 @@ session_start();
 		<table class="options" cellspacing=4 cellpadding=4 border=0px>
 			<tr>
 				<td align="center" class='datalabel'>
-					<p>Round was not changed.</p>
-					<p style="font-family:'Pathway Gothic One',sans-serif,bold;font-size:45px;color:yellow;">Some Units have not moved or fired yet!</p>
+					<p>Round was not changed!</p>
+					<p style="font-family:'Pathway Gothic One',sans-serif,bold;font-size:40px;color:yellow;">Units to be checked:</p>
+					<p>
+						<?php
+							$strs = explode(',', $mechIDsNotFinished, );
+	                        foreach ($strs as $item) {
+	                            $strs2 = explode('|', $item, );
+	                            $unitId = $strs2[0];
+	                            $mechId = $strs2[1];
+	                            $mechName = $strs2[2];
+	                            $pilotName = $strs2[3];
+
+								echo $pilotName.": <a href='https://www.clanwolf.net/apps/ASCard/gui_play_mech.php?unit=".$unitId."'>".$mechName."</a><br>";
+							}
+						?>
+					</p>
+					<p>
+					Links will open the unit, not individual mechs.
+					</p>
 				</td>
 			</tr>
 		</table>
