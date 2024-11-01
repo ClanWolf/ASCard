@@ -13,7 +13,7 @@ function getMechList(filter, tech, minTon, maxTon) {
 	if (maxTon == '2') {
 		optionList = optionList + "<option><<< Select BA >>></option>";
 	} else {
-		optionList = optionList + "<option><<< Select Mech >>></option>";
+		optionList = optionList + "<option><<< Select Mech / Vehicle >>></option>";
 	}
 
 	var url = corsproxyprefix + 'http://www.masterunitlist.info/Unit/QuickList';
@@ -40,6 +40,7 @@ function getMechList(filter, tech, minTon, maxTon) {
 			url = url + '&MinTons='				+ minTon;
 			url = url + '&MaxTons='				+ maxTon;
 			url = url + '&Types=18';                    // Mechs
+			url = url + '&Types=19';                    // Combat vehicles / Tanks
 		}
 
 	var cache_url = 'https://www.clanwolf.net/apps/ASCard/cache/mul/';
@@ -62,13 +63,27 @@ function getMechList(filter, tech, minTon, maxTon) {
 		});
 		$.each(json.Units, function (i, unit) {
 			var variant = unit.variant;
+			var unittypeid = unit.Type.Id;
+			var unittypename = unit.BFType;
+
+			//console.log(unit.Type.Id);
+			//if (unittypeid === 19) {
+			//	console.log(unit.Name);
+			//}
+
+			if (unittypename !== undefined) {
+				unittypename = " [" + unit.BFType + "]"
+			} else {
+				unittypename = "";
+			}
+
 			if (variant !== undefined) {
 				variant = " / " + variant;
 			} else {
 				variant = "";
 			}
 			if (unit.BFSize != "0") {
-				optionList = optionList + "<option value=" + unit.Id + "> " + unit.Name + variant + "</option>";
+				optionList = optionList + "<option value=" + unit.Id + "> " + unit.Name + variant + unittypename + "</option>";
 			}
 		});
 	}).then(function data() {
