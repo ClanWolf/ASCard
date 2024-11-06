@@ -9,12 +9,11 @@ var corsproxyprefix5 = "https://jsonp.afeld.me/?url=";
 var corsproxyprefix = corsproxyprefix5;
 
 function getMechList(filter, tech, minTon, maxTon) {
+
+	//console.log (filter);
+
 	var optionList = '';
-	if (maxTon == '2') {
-		optionList = optionList + "<option><<< Select BA >>></option>";
-	} else {
-		optionList = optionList + "<option><<< Select Mech / Vehicle >>></option>";
-	}
+	optionList = optionList + "<option><<< Select unit >>></option>";
 
 	var url = corsproxyprefix + 'http://www.masterunitlist.info/Unit/QuickList';
 		url = url + '?Name='					+ filter;
@@ -83,7 +82,10 @@ function getMechList(filter, tech, minTon, maxTon) {
 				variant = "";
 			}
 			if (unit.BFSize != "0") {
-				optionList = optionList + "<option value=" + unit.Id + "> " + unit.Name + variant + unittypename + "</option>";
+				var unitString = unit.Id + "> " + unit.Name + variant + unittypename;
+				if (unitString.includes(filter)) {
+					optionList = optionList + "<option value=" + unitString + "</option>";
+				}
 			}
 		});
 	}).then(function data() {
@@ -110,7 +112,7 @@ function getMechList(filter, tech, minTon, maxTon) {
 }
 
 function getMechDetails(id) {
-	if ((id == "<<< Select Mech >>>") || (id == "<<< Select BA >>>")) {
+	if (id == "<<< Select unit >>>") {
 		document.getElementById("TP").value="";
 		document.getElementById("SZ").value="";
 		document.getElementById("TMM").value="";

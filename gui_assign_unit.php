@@ -49,7 +49,7 @@ session_start();
 		$MECHID = isset($_GET["MECHID"]) ? $_GET["MECHID"] : "";
 		$PILOTID = 0;
 
-		logMsg("Deleting stored Mech/BA: " . $MECHID . " (id)");
+		logMsg("Deleting stored unit: " . $MECHID . " (id)");
 
 		$sql_pilotid = "select pilotid from asc_assign where mechid = ".$MECHID;
 		if (!($stmt = $conn->prepare($sql_pilotid))) {
@@ -59,14 +59,14 @@ session_start();
 			$res = $stmt->get_result();
 			while ($row = $res->fetch_assoc()) {
 				$PILOTID = $row['pilotid'];
-				logMsg("Found pilot id for given Mech/BA: " . $PILOTID);
+				logMsg("Found pilot id for given unit: " . $PILOTID);
 			}
 		}
 
 		$sqldeletemech = "DELETE FROM asc_mech WHERE mechid = ".$MECHID;
 		if (mysqli_query($conn, $sqldeletemech)) {
 			// Success
-			logMsg("Deleted Mech/BA: ".$MECHID);
+			logMsg("Deleted unit: ".$MECHID);
 		} else {
 			// Error
 			echo "Error: " . $sqldeletemech . "<br>" . mysqli_error($conn);
@@ -76,7 +76,7 @@ session_start();
 		$sqldeletemechstatus = "DELETE FROM asc_mechstatus WHERE mechid = ".$MECHID;
 		if (mysqli_query($conn, $sqldeletemechstatus)) {
 			// Success
-			logMsg("Deleted status for Mech/BA: ".$MECHID);
+			logMsg("Deleted status for unit: ".$MECHID);
 		} else {
 			// Error
 			echo "Error: " . $sqldeletemechstatus . "<br>" . mysqli_error($conn);
@@ -96,7 +96,7 @@ session_start();
 		$sqldeleteassign = "DELETE FROM asc_assign WHERE pilotid = ".$PILOTID." and mechid = ".$MECHID;
 		if (mysqli_query($conn, $sqldeleteassign)) {
 			// Success
-			logMsg("Deleted assignment for Mech/BA: ".$MECHID." and pilot: ".$PILOTID);
+			logMsg("Deleted assignment for unit: ".$MECHID." and pilot: ".$PILOTID);
 		} else {
 			// Error
 			echo "Error: " . $sqldeleteassign . "<br>" . mysqli_error($conn);
@@ -197,7 +197,7 @@ session_start();
 			var MECHID = document.getElementById('existingMechs').value;
 
 			if (MECHID == 0) {
-				alert("Select a stored Mech/BA!");
+				alert("Select a stored unit!");
 				return;
 			}
 
@@ -215,7 +215,7 @@ session_start();
 			var MECHID = document.getElementById('existingMechs').value;
 
 			if (MECHID == 0) {
-				alert("Select a stored Mech/BA!");
+				alert("Select a stored unit!");
 				return;
 			}
 
@@ -251,15 +251,15 @@ session_start();
 					<div style='vertical-align:middle;font-size:28px;color:#eee;'>&nbsp;&nbsp;&nbsp;G<?php echo $gid ?>&nbsp;R<?php echo $CURRENTROUND ?>&nbsp;&nbsp;&nbsp;</div>
 				</td>
 				<td style="width:5px;">&nbsp;</td>
-				<td nowrap onclick="location.href='./gui_select_unit.php'" width="<?php echo $buttonWidth ?>"><div class='mechselect_button_normal'><a href='./gui_select_unit.php'>ROSTER</a><br><span style='font-size:16px;'>Choose a Mech</span></div></td>
+				<td nowrap onclick="location.href='./gui_select_unit.php'" width="<?php echo $buttonWidth ?>"><div class='mechselect_button_normal'><a href='./gui_select_unit.php'>ROSTER</a><br><span style='font-size:16px;'>Choose a unit</span></div></td>
 				<td style="width:5px;">&nbsp;</td>
-				<td nowrap onclick="location.href='./gui_select_enemy_unit.php'" width="<?php echo $buttonWidth ?>"><div class='mechselect_button_normal'><a href='./gui_select_enemy_unit.php'>FORCES</a><br><span style='font-size:16px;'>All bidding units</span></div></td>
+				<td nowrap onclick="location.href='./gui_select_formation.php'" width="<?php echo $buttonWidth ?>"><div class='mechselect_button_normal'><a href='./gui_select_formation.php'>CHALLENGE</a><br><span style='font-size:16px;'>Batchall & bidding</span></div></td>
 				<td style="width:5px;">&nbsp;</td>
 
 <?php
 	if (!$playMode) {
-		echo "				<td nowrap onclick=\"location.href='./gui_assign_unit.php'\" width='17%'><div class='mechselect_button_active'><a href='./gui_assign_unit.php'>ASSIGN</a><br><span style='font-size:16px;'>Assign Mech/BA</span></div></td><td style='width:5px;'>&nbsp;</td>\n";
-		echo "				<td nowrap onclick=\"location.href='./gui_create_mech.php'\" width='17%'><div class='mechselect_button_normal'><a href='./gui_create_mech.php'>ADD</a><br><span style='font-size:16px;'>Create a Mech/BA</span></div></td><td style='width:5px;'>&nbsp;</td>\n";
+		echo "				<td nowrap onclick=\"location.href='./gui_assign_unit.php'\" width='17%'><div class='mechselect_button_active'><a href='./gui_assign_unit.php'>ASSIGN</a><br><span style='font-size:16px;'>Assign unit</span></div></td><td style='width:5px;'>&nbsp;</td>\n";
+		echo "				<td nowrap onclick=\"location.href='./gui_create_unit.php'\" width='17%'><div class='mechselect_button_normal'><a href='./gui_create_unit.php'>ADD</a><br><span style='font-size:16px;'>Create a unit</span></div></td><td style='width:5px;'>&nbsp;</td>\n";
 		echo "				<td nowrap onclick=\"location.href='./gui_create_player.php'\" width='17%'><div class='mechselect_button_normal'><a href='./gui_create_player.php'>PLAYER</a><br><span style='font-size:16px;'>Manage players</span></div></td><td style='width:5px;'>&nbsp;</td>\n";
 	}
 ?>
@@ -280,8 +280,8 @@ session_start();
 		<table class="options" cellspacing=4 cellpadding=4 border=0px>
 			<tr>
 				<td nowrap class="datalabel" style='text-align:left;' colspan='4'>
-					Existing Mechs/BAs: <select required name='existingMechs' id='existingMechs' size='1' onchange="" style='width:400px;'>
-						<option value="0"><<< Select a Mech/BA >>></option>
+					Existing units: <select required name='existingMechs' id='existingMechs' size='1' onchange="" style='width:400px;'>
+						<option value="0"><<< Select a unit >>></option>
 <?php
 	$sql_asc_mechs = "select m.mechid, m.mech_number, m.as_model, p.name from asc_assign a, asc_mech m, asc_pilot p where a.unitid is null and a.mechid = m.mechid and a.pilotid = p.pilotid";
 	$result_asc_mechs = mysqli_query($conn, $sql_asc_mechs);
@@ -304,7 +304,7 @@ session_start();
 				</td>
 			</tr>
 			<tr>
-				<td nowrap class="datalabel" style='text-align:left;' colspan='3'>Assign to unit: <select required name='UNITID' id='UNITID' size='1' style='width:250px;'>
+				<td nowrap class="datalabel" style='text-align:left;' colspan='3'>Assign to formation: <select required name='UNITID' id='UNITID' size='1' style='width:250px;'>
 <?php
 	$sql_asc_playersunits = "SELECT SQL_NO_CACHE * FROM asc_unit where playerid=".$pid;
 	$result_asc_playersunits = mysqli_query($conn, $sql_asc_playersunits);
@@ -336,7 +336,7 @@ session_start();
 		echo "				<td colspan='4'><hr></td>\n";
 		echo "			</tr>\n";
 		echo "			<tr>\n";
-		echo "				<td colspan='3'>Delete selected Mech/BA from Hangar (!)</td>\n";
+		echo "				<td colspan='3'>Delete selected unit from Hangar (!)</td>\n";
 		echo "				<td align='right'>\n";
 
 		if ($pid == 2) { // Meldric (only admin may delete units)

@@ -66,8 +66,8 @@ function setSize(name, value) {
 }
 
 function readCircles(index3, a_max3, s_max3) {
-	/* console.log("a_max3=" + a_max3); */
-	/* console.log("s_max3=" + s_max3); */
+	//console.log("a_max3=" + a_max3);
+	//console.log("s_max3=" + s_max3);
 	readCircles2(index3, a_max3, s_max3, -1, -1);
 }
 
@@ -94,7 +94,7 @@ function readCircles2(index, a_max, s_max, mv_bt_id, f_bt_id) {
 
 	var mechstatus = 1;
 	var mechstatusstring = "fresh";
-	var mechstatusimage = "images/DD_01.png";
+	var mechstatusimage = "images/DD_BM_01.png";
 
 	var list = document.getElementsByClassName("bigcheck");
 	[].forEach.call(list, function (el1) {
@@ -199,86 +199,122 @@ function readCircles2(index, a_max, s_max, mv_bt_id, f_bt_id) {
 //  For the purposes of Forced Withdrawal, a unit that meets any of the following criteria is considered crippled
 //  and will be forced to withdraw:
 //      - The unit has no Armor remaining and has been reduced to half
-//  its starting Structure value (rounded up). If the unit possesses
-//  only 1 point of Structure to begin with, it begins retreating as
-//  soon as it loses all of its Armor.
+//        its starting Structure value (rounded up). If the unit possesses
+//        only 1 point of Structure to begin with, it begins retreating as
+//        soon as it loses all of its Armor.
 //      - The unit has been reduced to a damage value of 0 for all
-//  Medium- and Long-range attacks. This condition does not
-//  apply if the unit began the scenario with a damage value of 0
-//  at Medium and Long range.
+//        Medium- and Long-range attacks. This condition does not
+//        apply if the unit began the scenario with a damage value of 0
+//        at Medium and Long range.
 //      - The unit has been immobilized through damage, critical, and/
-//  or motive hit effects.
+//        or motive hit effects.
 
-	if (document.getElementById('unit_type').innerText == "BA") {
-		mechstatus = 1;
-		mechstatusstring = "fresh";
-		mechstatusimage = "images/DD_ELE_01.png";
-		if (a > 0) {
-			mechstatus = 2;
-			mechstatusstring = "damaged";
-			mechstatusimage = "images/DD_ELE_02.png";
-		}
-		if (s > 0) {
-			mechstatus = 3;
-			mechstatusstring = "critical";
-			mechstatusimage = "images/DD_ELE_03.png";
-		}
-		if (a == maximalarmorpoints && maximalstructurepoints == 1) {
-			mechstatus = 9;
-			mechstatusstring = "crippled";
-			mechstatusimage = "images/DD_03.png";
-		}
-    	if (s > maximalstructurepoints / 2) {
-    		mechstatus = 9;
-			mechstatusstring = "crippled";
-    		mechstatusimage = "images/DD_03.png";
-    	}
-		if (s == maximalstructurepoints) {
-			mechstatus = 4;
-			mechstatusstring = "destroyed";
-			mechstatusimage = "images/DD_ELE_04.png";
-		}
-		if (e == 2) {
-			mechstatus = 4;
-			mechstatusstring = "destroyed";
-			mechstatusimage = "images/DD_ELE_04.png";
-		}
-	} else {
-		mechstatus = 1;
-		mechstatusstring = "fresh";
-		mechstatusimage = "images/DD_01.png";
-		if (a > 0) {
-    		mechstatus = 2;
-			mechstatusstring = "ok";
-    		mechstatusimage = "images/DD_02.png";
-    	}
-    	if (s > 0) {
-    		mechstatus = 3;
-			mechstatusstring = "critical";
-    		mechstatusimage = "images/DD_03.png";
-    	}
-		if (a == maximalarmorpoints && maximalstructurepoints == 1) {
-			mechstatus = 9;
-			mechstatusstring = "crippled";
-			mechstatusimage = "images/DD_03.png";
-		}
-    	if (s > maximalstructurepoints / 2) {
-    		mechstatus = 9;
-			mechstatusstring = "crippled";
-    		mechstatusimage = "images/DD_03.png";
-    	}
-    	if (s == maximalstructurepoints) {
-    		mechstatus = 4;
-			mechstatusstring = "destroyed";
-    		mechstatusimage = "images/DD_04.png";
-    		document.getElementById('toprightimage').src='./images/top-right_02.png';
-    	}
-    	if (e == 2) {
-    		mechstatus = 4;
-			mechstatusstring = "destroyed";
-    		mechstatusimage = "images/DD_04.png";
-    		document.getElementById('toprightimage').src='./images/top-right_02.png';
-    	}
+//	if (document.getElementById('unit_type').innerText == "BA") {
+//		mechstatus = 1;
+//		mechstatusstring = "fresh";
+//		mechstatusimage = "images/DD_BA_01.png";
+//		if (a > 0) {
+//			mechstatus = 2;
+//			mechstatusstring = "damaged";
+//			mechstatusimage = "images/DD_BA_02.png";
+//		}
+//		if (s > 0) {
+//			mechstatus = 3;
+//			mechstatusstring = "critical";
+//			mechstatusimage = "images/DD_BA_03.png";
+//		}
+//		if (a == maximalarmorpoints && maximalstructurepoints == 1) {
+//			mechstatus = 9;
+//			mechstatusstring = "crippled";
+//			mechstatusimage = "images/DD_BM_03.png";
+//		}
+//    	if (s > maximalstructurepoints / 2) {
+//    		mechstatus = 9;
+//			mechstatusstring = "crippled";
+//    		mechstatusimage = "images/DD_BM_03.png";
+//    	}
+//		if (s == maximalstructurepoints) {
+//			mechstatus = 4;
+//			mechstatusstring = "destroyed";
+//			mechstatusimage = "images/DD_BA_04.png";
+//		}
+//		if (e == 2) {
+//			mechstatus = 4;
+//			mechstatusstring = "destroyed";
+//			mechstatusimage = "images/DD_BA_04.png";
+//		}
+//	} else {
+//		mechstatus = 1;
+//		mechstatusstring = "fresh";
+//		mechstatusimage = "images/DD_BM_01.png";
+//		if (a > 0) {
+//    		mechstatus = 2;
+//			mechstatusstring = "ok";
+//    		mechstatusimage = "images/DD_BM_02.png";
+//    	}
+//    	if (s > 0) {
+//    		mechstatus = 3;
+//			mechstatusstring = "critical";
+//    		mechstatusimage = "images/DD_BM_03.png";
+//    	}
+//		if (a == maximalarmorpoints && maximalstructurepoints == 1) {
+//			mechstatus = 9;
+//			mechstatusstring = "crippled";
+//			mechstatusimage = "images/DD_BM_03.png";
+//		}
+//    	if (s > maximalstructurepoints / 2) {
+//    		mechstatus = 9;
+//			mechstatusstring = "crippled";
+//    		mechstatusimage = "images/DD_BM_03.png";
+//    	}
+//    	if (s == maximalstructurepoints) {
+//    		mechstatus = 4;
+//			mechstatusstring = "destroyed";
+//    		mechstatusimage = "images/DD_BM_04.png";
+//    		document.getElementById('toprightimage').src='./images/top-right_02.png';
+//    	}
+//    	if (e == 2) {
+//    		mechstatus = 4;
+//			mechstatusstring = "destroyed";
+//    		mechstatusimage = "images/DD_BM_04.png";
+//    		document.getElementById('toprightimage').src='./images/top-right_02.png';
+//    	}
+//	}
+
+	var currentUnitType = document.getElementById('unit_type').innerText;
+	currentUnitType = currentUnitType.substring(0, currentUnitType.indexOf(' ')); // Cut off size and tonnage
+	mechstatus = 1;
+	mechstatusstring = "fresh";
+	mechstatusimage = "images/DD_" + currentUnitType + "_01.png";
+	if (a > 0) {
+		mechstatus = 2;
+		mechstatusstring = "damaged";
+		mechstatusimage = "images/DD_" + currentUnitType + "_02.png";
+	}
+	if (s > 0) {
+		mechstatus = 3;
+		mechstatusstring = "critical";
+		mechstatusimage = "images/DD_" + currentUnitType + "_03.png";
+	}
+	if (a == maximalarmorpoints && maximalstructurepoints == 1) {
+		mechstatus = 9;
+		mechstatusstring = "crippled";
+		mechstatusimage = "images/DD_" + currentUnitType + "_03.png";
+	}
+    if (s > maximalstructurepoints / 2) {
+        mechstatus = 9;
+		mechstatusstring = "crippled";
+        mechstatusimage = "images/DD_" + currentUnitType + "_03.png";
+    }
+	if (s == maximalstructurepoints) {
+		mechstatus = 4;
+		mechstatusstring = "destroyed";
+		mechstatusimage = "images/DD_" + currentUnitType + "_04.png";
+	}
+	if (e == 2) {
+		mechstatus = 4;
+		mechstatusstring = "destroyed";
+		mechstatusimage = "images/DD_" + currentUnitType + "_04.png";
 	}
 
 	document.getElementById('mechstatusimagemenu').src=mechstatusimage;
@@ -307,7 +343,7 @@ function readCircles2(index, a_max, s_max, mv_bt_id, f_bt_id) {
 	} else if (document.getElementById("ToHitCover").checked == false) {
 		tc_partialCoverReading = 0;
 	}
-	/* console.log("range: " + tc_rangeValueReading); */
+	//console.log("range: " + tc_rangeValueReading);
 
 	setCircles(h, a, s, e, fc, mp, w, uov, mvmnt, wpnsf, tc_rangeValueReading, tc_partialCoverReading, mechstatusstring);
 	var url="./save.php?index="+index+"&h="+h+"&a="+a+"&s="+s+"&e="+e+"&fc="+fc+"&mp="+mp+"&w="+w+"&mstat="+mechstatusimage+"&mstatstr="+mechstatusstring+"&uov="+uov+"&mvmnt="+mvmnt+"&wpnsf="+wpnsf;
@@ -367,7 +403,7 @@ function setCircles(h, a, s, e, fc, mp, w, uov, mvmnt, wpnsf, tc_rangeValueReadi
 		}
 	});
 
-	/* console.log("range2: " + tc_rangeValueReading); */
+	//console.log("range2: " + tc_rangeValueReading);
 	if (tc_rangeValueReading == 0) {
 		document.getElementById("ToHitShort").checked = true;
 		document.getElementById("ToHitMedium").checked = false;
@@ -616,9 +652,9 @@ function setCircles(h, a, s, e, fc, mp, w, uov, mvmnt, wpnsf, tc_rangeValueReadi
 		updatemovementpointsjump = 0;
 	}
 
-	console.log("MV: " + updatedmovementpointsground);
-	console.log("MVj: " + updatemovementpointsjump);
-	console.log("Rounding up to hex value");
+	//console.log("MV: " + updatedmovementpointsground);
+	//console.log("MVj: " + updatemovementpointsjump);
+	//console.log("Rounding up to hex value");
 
 	if (showDistancesHexes == 1) {
 		var updatedmovementpointsgroundHexes =  Math.ceil(updatedmovementpointsground / 2);
@@ -1005,7 +1041,7 @@ function changeWallpaper() {
 	if (wallpaperNameRand > 9) {
 		wallpaperNameRand = 1;
 	}
-	document.body.style.backgroundImage = "url('./images/body-bg_" + wallpaperNameRand + ".png')";
+	document.body.style.backgroundImage = "url('./images/body-bg_" + wallpaperNameRand + ".jpg')";
 	setCookie("wallpaper", wallpaperNameRand, 365);
 
 	if (wallpaperNameRand == 9) {
@@ -1386,7 +1422,7 @@ function updateOverAllToHitValue(skipTap) {
 	var result = 0;
 	tc_skill = parseInt(document.getElementById("skillfield").innerText);
 
-	/* console.log("Skill: " + tc_skill); */
+	//console.log("Skill: " + tc_skill);
 
 	result += tc_enemyTMM;
 	result += tc_amm;
