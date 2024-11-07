@@ -29,9 +29,9 @@ session_start();
 
 	function getMechImageByName($mechname, $unittype) { // BM=BattleMech, BA=BattleArmor, CV=CombatVehicle
 		if ($unittype == "CV") {
-			$image = "images/mechs/Generic_Tank.png";
+			$image = "images/mechs/Generic_Tank.gif";
 		} else {
-			$image = "images/mechs/Generic.gif"; // images/mechs/Generic.png
+			$image = "images/mechs/Generic_Mech.gif";
 		}
 		$dir = 'images/mechs/';
 		$files = glob($dir.'*.png');

@@ -32,7 +32,7 @@
 	<script type="text/javascript" src="./scripts/jquery-3.6.1.min.js"></script>
 </head>
 
-<body style="background-image: url('images/body-bg_2.png');">
+<body style="background-image: url('images/body-bg_2.jpg');">
 	<style>
 		.topnav {
 			z-index: 10;

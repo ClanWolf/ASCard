@@ -491,25 +491,30 @@ session_start();
 	function getMechMULImageByName($mechname) {
 		$image = "images/mechs/Generic.gif";
 		$dir = 'images/mechs_mul/';
-		$startChar = mb_substr($mechname, 0, 3); // use first 3 chars to list files to keep the resultlist as small as possible
+		$startChar = mb_substr($mechname, 0, 3); // use first 3 chars to list files to keep the result list as small as possible
 
 		$files = glob($dir."{$startChar}*.png");
 		foreach ($files as &$img) {
-			//echo "<script>console.log('>>" . trim($img) . "<<');</script>";
+			// echo "<script>console.log('>>" . trim($img) . "<<');</script>";
 
 			$imagenametrimmed_a = basename(strtolower(str_replace(' ', '', trim($img))), ".png");
 			$imagenametrimmed = str_replace("'", "", $imagenametrimmed_a);
+
+			// echo "<script>console.log('MECHNAME: >>" . $mechname . "<<');</script>";
 
 			$mechnametrimmed_a = str_replace('ELE ', 'Elemental ', trim($mechname));
 			$mechnametrimmed_b = str_replace('BA ', 'Battle Armor ', trim($mechnametrimmed_a));
 			$mechnametrimmed_c = str_replace('&apos;', '', trim($mechnametrimmed_b));
 			$mechnametrimmed_d = str_replace(' ', '', trim($mechnametrimmed_c));
-			$mechnametrimmed = strtolower($mechnametrimmed_d);
+			$mechnametrimmed_e = str_replace('[CV]', '', trim($mechnametrimmed_d));
+			$mechnametrimmed_f = str_replace('[BA]', '', trim($mechnametrimmed_e));
+			$mechnametrimmed_g = str_replace('[BM]', '', trim($mechnametrimmed_f));
+			$mechnametrimmed = strtolower($mechnametrimmed_g);
 
-			//echo "<script>console.log('SEARCHING: >>" . $imagenametrimmed . "?" . $mechnametrimmed . "<<');</script>";
+			// echo "<script>console.log('SEARCHING: >>" . $imagenametrimmed . " ? " . $mechnametrimmed . "<<');</script>";
 
 			if (strpos($imagenametrimmed,$mechnametrimmed) !== false) {
-				//echo "<script>console.log('FOUND: >>" . $imagenametrimmed . "?" . $mechnametrimmed . "<<');</script>";
+				// echo "<script>console.log('FOUND: >>" . $imagenametrimmed . " ? " . $mechnametrimmed . "<<');</script>";
 				$image = str_replace(' ', '%20', trim($img));
 				break;
 			}

@@ -53,7 +53,7 @@ html, body {
 	/* min-height: 100vh; */
 	background: transparent;
 	background-color: #220000;
-	background-image: url('../images/body-bg_2.png');
+	background-image: url('../images/body-bg_2.jpg');
 	/* overflow: visible; */
 	background-size: cover;
 	background-attachment: fixed;
@@ -104,7 +104,7 @@ a:hover {
 	top: 0;
 	left: 0;
 	background-color: #000000;
-	/* background-image: url('images/body-bg_1.png'); */
+	/* background-image: url('images/body-bg_1.jpg'); */
 	z-index:100;
 }
 #destroyedIndicator {
@@ -456,9 +456,15 @@ a:hover {
 	z-index: 1;
 	position: absolute;
 	margin-right: auto 0;
-	bottom: 1px;
-	/* right: 145px; */
-	right: 345px;
+	top: 12%;
+	left: 45%;
+	right: 15%;
+	object-fit: contain;
+    overflow: visible;
+}
+#mechimage {
+    width: 100%;
+	height: auto !important;
 }
 #footer {
 	z-index: 20;

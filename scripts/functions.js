@@ -1591,7 +1591,7 @@ $(document).ready(function() {
 	}
 
 	if (wallpaperName > 0 && wallpaperName < 10) {
-		document.body.style.backgroundImage = "url('./images/body-bg_" + wallpaperName + ".png')";
+		document.body.style.backgroundImage = "url('./images/body-bg_" + wallpaperName + ".jpg')";
 	}
 	if (wallpaperName == 9) {
 		// Set use MUL images to 1 on database (white background + MUL images)

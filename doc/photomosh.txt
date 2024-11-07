@@ -1,5 +1,14 @@
 Cool effect on pictures:
 https://photomosh.com/
 
+Jitter:
+amount: 0.07
+speed: 0.31
+
+Scanlines:
+count: 1
+lines amount: 1.21
+noise amount: 1.43
+
 Add transparency:
 https://www.online-image-editor.com/?language=deutsch
