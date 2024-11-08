@@ -757,8 +757,8 @@ session_start();
 					</table>
 				</div>
 <?php
-	if ($array_TP[$chosenMechIndex] == "BA") {
-		// Do not show the heat block for all Battle Armor units
+	if ($array_TP[$chosenMechIndex] == "BA" || $array_TP[$chosenMechIndex] == "CV") {
+		// Do not show the heat block for all Battle Armor and combat vehicle units
 		echo "				<div class='dataarea' style='display:none;'>\r\n";
 	} else {
 		echo "				<div class='dataarea'>\r\n";
@@ -833,22 +833,7 @@ session_start();
 						</tr>
 					</table>
 				</div>
-
 			</td>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 			<td width="40%" valign="bottom" align="left">
 				<div id="movementtoken" width="100%" valign="top" align="left">
 					<img valign="top" id="movementtokenimage" src="./images/dice/yd6_4.png" height="70px">
@@ -894,14 +879,13 @@ session_start();
 					</table>
 				</div>
 <?php
-	if ($array_TP[$chosenMechIndex] == "BA") {
-		// Do not show the heat block for all Battle Armor units
+	if ($array_TP[$chosenMechIndex] == "BA" || $array_TP[$chosenMechIndex] == "CV") {
+		// Do not show the normal critical block for all Battle Armor and combat vehicle units
 		echo "				<div class='dataarea' style='display:none;'>\r\n";
 	} else {
 		echo "				<div class='dataarea'>\r\n";
 	}
 ?>
-
 					<table width="100%">
 						<tr>
 							<td nowrap class="datalabel" width="5%" style="text-align: right;">EN:&nbsp;&nbsp;</td>
@@ -955,6 +939,22 @@ session_start();
 						</tr>
 					</table>
 				</div>
+<?php
+	if ($array_TP[$chosenMechIndex] == "CV") {
+		// Do not show the normal critical block for all Battle Armor and combat vehicle units
+		// Do show the vehicle critical block for combat vehicles
+		echo "				<div class='dataarea'>\r\n";
+	} else {
+		echo "				<div class='dataarea' style='display:none;'>\r\n";
+	}
+?>
+				<table>
+					<tr>
+						<td>Here comes the combat vehicle block!</td>
+					</tr>
+				</table>
+			</div>
+
 			</td>
 			<td valign='bottom'>
 				<a onclick='showInfoBar();' id="InfoButton" href='#'><img src='./images/selector_02-info.png' width='50px'></a><br>
