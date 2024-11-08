@@ -1,0 +1,823 @@
+SPECIAL PILOT ABILITIES
+Ability, Cost, Brief Description
+Animal Mimicry, 2, Quadruped unit gains mobility bonus and ability to demoralize opponents
+Antagonizer, 3, Unit can enrage an opponent for a brief period
+Blood Stalker, 2, Unit may focus its attacks better on a preferred target until it is destroyed
+Cluster Hitter, 2, Unit can deliver extra damage in an attack using missiles or flak weapons
+Combat Intuition, 3, Unit may move and resolve fire before any other unit acts
+Cross-Country, 2, Ground vehicle unit may enter some illegal terrain types, but at high Move cost
+Demoralizer, 3, Unit can intimidate an opponent for a brief period
+Dodge, 2, Unit can attempt to evade physical attacks
+Dust-Off, 2, Enables airborne unit types to land or liftoff in non-clear terrain
+Eagle’s Eyes, 2, Unit gains (or augments) its ability to spot hidden units and avoid mines
+Environmental Specialist, 2, Reduces movement and combat modifiers in a preferred environment
+Fist Fire, 2, Unit delivers extra damage in physical attacks
+Float Like a Butterfly 1–4, Unit may force an opponent to reroll an attack with this unit as the target
+Forward Observer, 1, Unit improves accuracy of indirect fire when used as a spotter
+Golden Goose, 3, Improves accuracy for air-to-ground strafing, strike, and bombing attacks
+Ground-Hugger, 2, Airborne unit may execute a double-strafe or double-strike air-to-ground attack
+Headhunter, 2, Can automatically identify enemy command units
+Heavy Lifter, 1, Enables increased carrying capacity with External Cargo rules
+Hopper, 1, Unit may avoid being reduced below, 1, inch of Move by MP Hits
+Hot Dog, 2, Increases the Heat a unit can sustain before shutdown
+Human TRO, 1, Unit can ignore the Concealing Unit Data rules vs. non-hidden opponents
+Iron Will, 1, Unit can resist psychological attacks and receives a bonus during Morale checks
+Jumping Jack, 2, Improves accuracy of any attack made when the unit uses jumping Move
+Lucky 1–4, Unit may reroll a limited number of failed attacks and Control Rolls per scenario
+Maneuvering Ace, 2, Reduces Move costs for woods/jungle terrain and aerospace atmospheric control
+Marksman, 2, If unit attacks while stationary, may score extra critical after delivering, 1, damage
+Melee Master, 2, Unit increases its physical attack damage by half its Size (round up)
+Melee Specialist, 1, Unit delivers physical attacks with greater accuracy
+Multi-Tasker, 2, Unit can divide its weapon attack between two targets per turn
+Natural Grace, 3, Unit gains 3,60-degree field of fire; reduces Move costs in ultra-heavy terrain
+Oblique Artilleryman, 1, Improves accuracy and reduces scatter for all artillery weapon attacks
+Oblique Attacker, 1, Improves accuracy for indirect fire, and enables indirect attacks without a spotter
+Range Master, 2, Unit swaps normal range modifier for Medium, Long, or Extreme range with Short
+Ride the Wash, 4, Unit reduces atmospheric combat modifiers; may execute special air-to-air attack
+Sandblaster, 2, Unit improves accuracy and damage when only using AC and missile weapons
+Shaky Stick, 2, Airborne unit is harder to hit from the ground during air-to-ground attacks
+Sharpshooter, 4, If unit attacks while stationary, may score an extra critical after delivering full damage
+Slugger, 1, ’Mech unit can improvise its own melee weapons from suitable terrain
+Sniper, 3, Unit reduces Medium, Long, and Extreme range modifiers by half.
+Speed Demon, 2, Unit can move faster than normal
+Stand-Aside, 1, Unit can pass directly through enemy units at extra Move cost
+Street Fighter, 2, Unit may pre-empt an attack against it by enemies in base contact
+Sure-Footed, 2, Unit receives bonus movement on paved or ice terrain and ignores skidding
+Swordsman, 2, Unit can deliver improved damage or critical hits when using MEL special
+Tactical Genius, 3, Enables command unit to reroll Initiatives once every, 2, turns
+Terrain Master (Drag Racer), 3, Ground vehicle unit gains extra speed on ice or pavement; avoids skidding better
+Terrain Master (Forest Ranger), 3, Unit moves more easily through (and gains extra cover from) woods and jungle
+Terrain Master (Frogman), 3, Unit moves more easily than others while fully submerged
+Terrain Master (Mountaineer), 3, Unit moves more easily through level changes and rough terrain types
+Terrain Master (Nightwalker), 3, Unit ignores combat modifiers for darkness
+Terrain Master (Sea Monster), 3, Unit moves more easily and ignores attack penalties in water terrain
+Terrain Master (Swamp Beast), 3, Unit moves more easily through mud and swamp terrain; ignores bog down in same
+Weapon Specialist, 3, Unit can deliver a more accurate attack as long as it uses only half its firepower
+Wind Walker, 2, Unit ignores atmospheric combat modifiers and gains a bonus to landing and liftoff
+Zweihander, 2, ’Mech unit delivers more damage in physical attacks
+Light Horseman, 2, Beast-mounted infantry unit moves faster, even through difficult terrain
+Heavy Horse, 2, Beast-mounted infantry unit can inflict extra damage at point-blank range
+Foot Cavalry, 1, Foot-based infantry unit moves faster, even through difficult terrain
+Urban Guerrilla, 1, Infantry unit is harder to attack in urban terrain, and may “spawn” support
+
+--------------------------------------
+
+ANIMAL MIMICRY
+Unit Type: ’Mechs, ProtoMechs (only if the model has four legs)
+SPA Cost: 2 points
+The pilot with this SPA has combined an exceptional
+understanding of animal behavior with his own natural aptitude at
+the controls to give the movements of his machine an uncanny—
+even frightening—resemblance to that of a wild animal.
+This ability, which works only with ’Mech and ProtoMech
+units where the model has four legs, reduces the unit’s Move
+cost for passing through ultra-heavy woods terrain, ultra-heavy
+jungle terrain, or any buildings by 2 inches per inch of movement.
+Furthermore, any enemy units that come within 6 inches of this unit
+must make a 2D6 roll, and will become Intimidated on a roll result
+of 8 or less. Units that are Intimidated in this fashion reduce their
+Move by half (round down) and suffer a +1 Target Number modifier
+for all attacks made against the animal-mimicking unit until after
+the next Movement Phase.
+
+ANTAGONIZER
+Unit Type: Any
+SPA Cost: 3 points
+As combat talents go, the ability to enrage the enemy may seem
+ill-conceived at first, but few can overstate how effective it is when
+it draws fire from a wounded friend—or exposes the berserking
+target’s weaker back armor at the worst possible moment.
+Once per turn, a unit with Antagonizer may trigger its ability
+at any single point along its path while moving. At that time, every
+enemy unit within 6 inches of the unit triggering this SPA must roll
+2D6. If the roll is 8 or less, the enemy unit becomes enraged. Enraged
+units must move as close as possible to the Antagonizer unit, taking
+the most direct, passable, and legal route toward the Antagonizer.
+The enraged unit ignores increased movement costs or possible
+damage inflicted by its path for determining the most direct path.
+The enraged unit can only make attacks against its
+Antagonizer, unless the enraged unit has no attack that can target
+the Antagonizer. If the unit has multiple attacks, and only some
+of those attacks can target the Antagonizer, the enraged unit can
+make attacks against other targets only with those attacks that can’t
+target the Antagonizer. Attacks from the enraged unit with an area
+of effect must include the Antagonizer in the attack’s targeted area
+of effect.
+If the enraged unit begins any phase more than 24” from
+or without line of sight to the Antagonizer, the unit is no longer
+enraged. This ability has no effect versus aerospace units.
+Iron Will: If an Antagonizer is subject to a similar psychological
+attack by another unit with the Animal Mimicry, Antagonizer, or
+Demoralizer SPAs, treat the unit as if it has the Iron Will SPA, and
+apply a +2 modifier to the roll result to resist being intimidated or
+enraged.
+
+BLOOD STALKER
+Unit Type: Any
+SPA Cost: 2 points
+A pilot with this SPA could be said to have a one-tracked mind,
+and focuses all of his energies on the destruction of only one enemy
+at a time.
+The Blood Stalker unit must designate a “chosen enemy” at the
+start of each game. All attacks against the chosen enemy receive a
+–1 Target Number modifier, but all attacks made against any other
+enemies suffer a +2 Target Number modifier until the chosen enemy
+is destroyed. If the Blood Stalker starts its Movement with its chosen
+enemy out of line of sight or destroyed, the Blood Stalker may
+choose a new enemy to stalk.
+
+CLUSTER HITTER
+Unit Type: Any
+SPA Cost: 2 points
+The Cluster Hitter is a pilot who has become a
+marksman with some of the least precise weapons
+available—such as missiles and flak weaponry. This allows
+him to focus his fire in tighter groupings, for more telling
+damage potential.
+As long as the unit with this SPA does not move
+during its Movement Phase, it will add 1 point of
+damage to any successful weapon attack that uses the
+FLK, LRM, SRM, or TOR special abilities (or an AC special
+in conjunction with the Flak and Flechette alternate
+munitions; see p. 143). This includes attacks that use only
+the ability itself, as well as a “standard” weapon attack.
+
+COMBAT INTUITION
+Unit Type: Any
+SPA Cost: 3 points
+The pilot or crew commander with this SPA has a
+knack for accurately predicting an enemy’s actions if he
+focuses hard enough on them. Though this intuition is
+not quite powerful enough to pass along to an entire force
+before the enemy has time to react, the warrior can make
+use of his insight to cut off a single opponent once in a
+while.
+If this unit’s side wins Initiative, the unit whose
+pilot has this SPA can move and resolve all of its attacks
+during the Movement Phase, applying all damage effects
+immediately—before any target units can act. This ability
+can only be used once every 3 turns.
+
+CROSS-COUNTRY
+Unit Type: Combat Vehicles (but only those that use ground
+movement types)
+SPA Cost: 2 points
+The vehicle driver with this SPA is not merely able to get his
+ride into and out of tight spots; he can get it into some places it’s
+just not meant to enter!
+This ground unit may enter woods, rough, or rubble terrain,
+as well as water terrain up to 1 inch deep, even if the vehicle’s
+movement type would ordinarily prohibit such movement. When
+entering terrain ordinarily prohibited to the unit, consider all Move
+costs for these terrains as double the cost to traverse as they would
+be for a ’Mech unit.
+
+DEMORALIZER
+Unit Type: Any
+SPA Cost: 3 points
+A warrior with the Demoralizer SPA can make his unit a holy
+terror on the battlefield, projecting an intimidating presence that
+manifests in the way he maneuvers and taunts his enemies—with
+or without the use of communications.
+Every enemy unit that comes within 6” of a unit using this
+SPA must roll 2D6. If the roll is 8 or less, the enemy unit becomes
+intimidated. Intimidated units reduce their Move by half (round
+down) and suffer a +1 Target Number modifier for all attacks made
+against the Demoralizer. The reduced Move rating does affect its
+target movement modifier.
+If a demoralized unit begins any phase more than 24” from
+or without line of sight to the Demoralizer, the unit is no longer
+demoralized. This ability does not function at all versus aerospace
+units.
+Iron Will: If a Demoralizer is subject to a similar psychological
+attack by another unit with the Animal Mimicry, Antagonizer, or
+Demoralizer SPAs, treat the unit as if it has the Iron Will SPA, and
+apply a +2 modifier to the roll result to resist being intimidated or
+enraged.
+
+DODGE
+Unit Type: ’Mechs, ProtoMechs
+SPA Cost: 2 points
+The pilot with this SPA is able to execute evasive actions in
+close quarters combat. Though not quite fast enough to evade
+weapons fire, it is more than enough to avoid or deflect an incoming
+physical blow.
+Any opposing unit that attempts to deliver a physical attack
+against a unit with this SPA will suffer a +2 Target Number modifier.
+
+DUST-OFF
+Unit Type: VTOLs (combat and support), Fighters (aerospace
+and conventional), Small Craft, DropShips
+SPA Cost: 2 points
+With skills likely honed for emergency medical rescues and
+other evac operations, this pilot can “read” difficult landing terrain
+better than the average aerojock. This makes it possible for him to
+find and set his aircraft down in clearings that are barely larger than
+its wingspan, where most other pilots wouldn’t dare.
+When making landing or liftoff rolls (see p. 141), this unit
+reduces the Control Roll target modifier for Inappropriate Landing
+Area from +2 to +1.
+
+EAGLE’S EYES
+Unit Type: Any
+SPA Cost: 2 points
+For some warriors, even thirty-first century sensors are
+superfluous. The warrior with this SPA is so alert and sensor-savvy
+that he can practically identify threats before his tactical computers
+can identify them, a vital edge in spotting hidden surprises before
+it’s too late.
+This unit adds 2 inches of detection range to any probe special
+abilities it already possesses (including BH, PRB, and LPRB), and
+confers the RCN special to the unit even if it does not possess such
+abilities normally. In addition, any hidden units within 2 inches
+of this unit are automatically detected, even if they possess ECM
+specials (including AECM, ECM, and LECM). Finally, this unit adds
++2 to the target number to avoid minefield “attacks” of any density.
+
+ENVIRONMENTAL SPECIALIST
+[coNDitioN]
+Unit Type: Any
+SPA Cost: 2 points
+The pilot with the Environmental Specialist SPA has not only
+learned how to survive in a harsh environment, but can actually
+thrive in it. This ability specifically focuses on atmospheric and
+weather aspects of a given environment (as opposed to terrain
+mastery), and the nature of this specialization must be identified
+when assigned.
+The conditions that apply to this SPA must be specified for this
+unit before the scenario begins, and may include any one condition
+described under Environmental Conditions (see p. 61). If the given
+environmental condition applies to the scenario, this reduces any
+additional Move costs created by that condition by 2 inches (to a
+minimum of +0 inches), and any Target Number modifiers applied
+by the condition are also reduced by –1 (to a minimum of +0).
+
+FIST FIRE
+Unit Type: ’Mechs, ProtoMechs
+SPA Cost: 2 points
+While BattleMechs and ProtoMechs often mimic the human
+form, it is only the superlative warriors who can make the most of
+their dexterity in battle. The warrior who has developed the Fist Fire
+SPA demonstrates this by using his machines onboard weapons to
+augment his physical attacks.
+This pilot with this ability adds half of his unit’s Short range
+damage value (round up) to any damage delivered by a successful
+standard or melee weapon (MEL special) physical attack. This SPA
+may not be combined with Street Fighter, nor can it be used to
+increase damage for charging or Death from Above attacks.
+
+FLOAT LIKE A BUTTERFLY
+Unit Type: Any
+SPA Cost: 1 to 4 points
+For every point spent on purchasing this special pilot ability,
+this unit may force an opponent to reroll an attack with this unit as
+the target. This unit may force a reroll of the attack roll, or the critical
+hit effects roll. The second roll result stands, even if it fails or is worse
+than the first.
+This special pilot ability may not be used to change the outcome
+of other roll types, such as its own attack rolls, hull breach checks,
+Initiative, or Morale rolls.
+
+FORWARD OBSERVER
+Unit Type: Any
+SPA Cost: 1 point
+The Forward Observer is a warrior whose finely honed direction
+sense, keen eyesight, and intelligence have combined into a talent
+for hyper-accurate artillery direction.
+A Forward Observer may serve as a spotter for multiple artillery
+attacks against one target. If the Forward Observer makes its own
+attack, any indirect attacks it spots for (IF or indirect Artillery) do not
+take the Target Number modifier for the spotter attacking.
+
+GOLDEN GOOSE
+Unit Type: VTOLs (combat and support), Fighters (aerospace
+and conventional), Small Craft
+SPA Cost: 3 points
+The pilot with this ability is a true ace when it comes to high
+speed air-to-ground attacks, often delivering accurate fire with a
+minimal amount of collateral damage.
+When resolving air-to-ground combat rules (see p. 181) this SPA
+applies a –1 Target Number modifier for air-to-ground strafing or
+striking attacks, and a –2 modifier for bombing attacks. Furthermore,
+if a bombing attack misses, the scatter distance is reduced by 2
+inches (to a minimum of 0 inches).
+
+GROUND-HUGGER
+Unit Type: VTOLs (combat and support), Fighters
+(aerospace and conventional), Small Craft
+SPA Cost: 2 points
+Another special skill for ace aviators with a burning
+hatred for those damned “ground-pounders”, the
+Ground Hugger SPA reflects a pilot whose fast reflexes
+and sense of timing enable him to deliver more damage
+in a single pass than most others.
+When resolving air-to-ground combat rules
+(see p. 181) the pilot with this SPA can execute either
+“double strafe”, or a “double strike” attack in a single
+ground-attack pass. The double strafe attack allows
+the unit to break its normal 10-inch strafing run into
+two strafing areas, each at least 2 inches long (and 2
+inches wide), with a total combined strafe line of 10
+inches. The double strike attack, meanwhile, allows the
+unit to deliver two strike attacks in a single pass over
+the battlefield. All attacks made using this SPA must be
+along the airborne unit’s flight path.
+
+HEADHUNTER
+Unit Type: Any
+SPA Cost: 2 points
+Can automatically identify enemy command
+units. This includes overall (e.g., company) and subunit
+(lance) commanders in a given battle. Gains +1 Initiative
+bonus (cumulative, max of +3) for each opposing
+command unit killed/disabled (not necessarily by her
+own attacks). If the opposing force does not have any
+designated command units, the highest PV cost unit
+(after Skill modification) in a Formation, is considered
+the commander of that Formation for this SPA.
+
+HEAVY LIFTER
+Unit Type: ’Mechs
+SPA Cost: 1 point
+The Heavy Lifter is a MechWarrior or IndustrialMech pilot who
+has mastered the finer points of balance and control when using
+his machine to lift and carry external cargo. With this SPA, the unit
+adds 1 level to the maximum Size of any cargo (or units) his ’Mech
+can lift, drag, or throw using the External Cargo Carriers rules (see
+p. 163). If this would exceed a Size of 5, the unit can lift cargo or
+units that also have the LG special. If the maximum Size allowance
+already includes the LG special, the unit can lift Very Large cargo
+or units (VLG).
+Furthermore, if the Size of the cargo or unit being carried
+by the Heavy Lifter is more than 3 levels smaller than that of his
+own ’Mech, the Heavy Lifter’s unit only reduces its movement by 2
+inches, rather than by half.
+
+HOPPER
+Unit Type: BM, IM
+SPA Cost: 1 point
+The MechWarrior with this special pilot ability has an extremely
+fine sense of balance—so fine, in fact, that he can even remain
+mobile after one of his ’Mech’s legs has been blown off. A unit
+controlled by a pilot with this SPA can ignore the effects of the first
+MP Hit it receives (it still occurs, for the purposes of any event which
+tracks critical hits; only the effects are ignored).
+Note: This ability does not grant movement if the unit has been
+immobilized for other reasons—such as when shutdown or stuck
+in bog down terrain.
+
+HOT DOG
+Unit Type: BM, IM, AF
+SPA Cost: 2 points
+This MechWarrior or fighter pilot knows how to ride the heat
+envelope. The unit acts as if it was one level lower on the Heat scale,
+and can sustain 4 points of Heat before automatically shutting
+down rather than the usual 3. At 4 points of Heat, the unit loses 6” of
+ground movement, subtracts 2 from its Target Movement Modifier
+(minimum TMM of 0), and suffers a +3 Target Number modifier
+instead of shutting down.
+
+HUMAN TRO
+Unit Type: Any
+SPA Cost: 1 point
+Everyone has a hobby; this guy’s happens to be memorizing
+the specs for thousands of ’Mechs—and he won’t let you forget it!
+If the Concealing Unit Data rules are in play (see p. 157), this unit
+will automatically identify any non-hidden unit within 12 inches,
+revealing the subject’s data card as if the Human TRO’s unit has the
+LPRB special. This ability applies even if the Human TRO’s unit does
+not have an active probe of any kind, but it does not confer the
+ability to reveal hidden units. In addition, the Human TRO may look
+for a weak spot in a target unit once per game. The use of this ability
+must be declared before rolling to hit. If the attack hits, the attacker
+may roll once on the Determining Critical Hits Table, in addition to
+any such rolls required for any other reason.
+
+IRON WILL
+Unit Type: Any
+SPA Cost: 1 point
+This warrior knows no fear. A unit with this ability is resistant to
+“psychological attacks” by opposing units, and can even overcome
+his natural impulse to flee when all hope seems lost. When forced
+to make a roll against the intimidating or enraging effects of an
+opponent using the Animal Mimicry, Antagonizer, or Demoralizer
+SPAs, a unit whose pilot or crew has the Iron Will SPA, applies a +2
+modifier to the roll result to resist these effects.
+Furthermore, if the Morale rules are in play (see p. 169), a
+unit controlled by a pilot or crew with this ability adds a –2 target
+modifier to avoid being routed or when recovering its nerve.
+
+JUMPING JACK
+Unit Type: BM, IM, PM
+SPA Cost: 2 points
+While jumping ’Mechs generally demonstrate all the grace
+once can expect from brute technological force overpowering
+physics, some pilots have turned these maneuvers into an art form.
+A pilot with the Jumping Jack SPA is so comfortable with the use of
+jumping movement that his unit receives an additional –1 Target
+Number modifier for any weapon attack it attempts during a turn
+where it has used jumping movement.
+
+LUCKY
+Unit Type: Any
+SPA Cost: (1 to 4) points
+It’s not really skill that’s placing this pilot’s shots, but nobody
+cares as long as he gets the job done. For every point spent on
+purchasing this special pilot ability, this unit may reroll 1 failed
+attack roll or 1 failed Control Roll per scenario. The second roll result
+stands, even if it fails or is worse than the first.
+This special pilot ability may not be used to change the
+outcome of other roll types, such as critical hit checks, hull breach
+checks, Initiative, or Morale rolls.
+
+MANEUVERING ACE
+Unit Type: Any
+SPA Cost: 2 points
+This pilot knows how to get his ride into and out of tight
+spots in a hurry. This unit reduces the cost for moving through all
+woods and jungle terrain types by 1 inch per inch of movement. For
+aerospace units, a pilot with this SPA reduces the unit’s Control Roll
+target modifier for atmospheric combat from +2 to +1.
+
+MARKSMAN
+Unit Type: Any
+SPA Cost: 2 points
+He may not be a sharpshooter yet, but the gunner with this
+SPA is skilled at placing his shots for maximum effect. As long as
+this unit stands still during its Movement Phase, any successful
+weapon attack it executes against a target within its weapon’s range
+will deliver only half damage (rounded down, to a minimum of 1
+point)—but if the attack scores a MoS of 3 or more, the Marksman
+also makes an additional Critical Hit check against its target. This
+critical check is made even if the target still has armor.
+
+MELEE MASTER
+Unit Type: BM, IM, PM
+SPA Cost: 2 points
+This MechWarrior is a martial artist who’s managed to teach
+his ’Mech a few of his own tricks. A pilot with this SPA adds
+additional damage equal to half his unit’s Size value (rounded up),
+upon delivering a successful physical attack of any kind, including
+standard, melee, charging, and Death from Above attacks.
+
+MELEE SPECIALIST
+Unit Type: BM, IM, PM
+SPA Cost: 1 point
+The Melee Specialist SPA reflects a warrior who mastered the
+use of physical attacks using his machine’s arms, legs, hands, and
+feet—a talent that translates to greater accuracy in a melee. A pilot
+with this ability applies an additional –1 Target Number modifier
+when making any physical attacks.
+
+MULTI-TASKER
+Unit Type: Any
+SPA Cost: 2 points
+This battle-focused warrior can engage multiple targets far
+more accurately than most of his comrades. At the player’s option,
+any unit whose gunner possesses this SPA may select two targets
+to attack in the same turn, and resolves fire against each one
+separately in the same combat phase. You may await the results of
+the first attack before declaring the target of the second, and the
+same unit may be targeted twice. Each attack is resolved using the
+modifiers appropriate to the target’s movement, range, and other
+conditions; the divided attack will not impose any further Target
+Number modifiers. Each successful attack divided in this way will
+deliver half of the damage (rounded down, to a minimum of 1)
+that the unit would ordinarily inflict against a single target at the
+appropriate range bracket.
+For example, a Multi-Tasker unit with a damage value of 4/3/2
+may decide to target two separate enemies—one at Short range,
+and the other at Medium. If both attacks succeed, the target at Short
+range will receive 2 points of damage (4 ÷ 2 = 2), while the Medium-
+range target will receive only 1 point of damage (3 ÷ 2 = 1.5, round
+down to 1).
+
+NATURAL GRACE
+Unit Type: BM, IM, PM
+SPA Cost: 3 points
+They just don’t teach the piloting skills this warrior can
+demonstrate the normal academies! This unit may make attacks as
+if it has a 360-degree firing arc (but still suffers 1 additional damage
+point if attacked through the rear facing). It also reduces its Move
+cost for passing through ultra-heavy woods terrain, ultra-heavy
+jungle terrain, or any buildings by 1 inch per inch of movement.
+
+OBLIQUE ARTILLERYMAN
+Unit Type: Any
+SPA Cost: 1 point
+The Oblique Artilleryman SPA represents a gunner whose
+accuracy with indirect artillery weapons is downright uncanny.
+A unit that possesses this special pilot ability receives a –1 Target
+Number modifier for indirect and off-board attacks using the ART
+special ability.
+If the Oblique Artilleryman is delivering counter-battery fire
+against an off-board artillery position—see Artillery Counter-Battery
+Fire, p. 153—this ability ensures that the artillery weapon will deliver
+its full damage to its off-board target even if the attack misses by a
+MoF of 1. If the MoF for a counter-battery attack against an off-board
+position is 2 or 3, the weapon will deliver half its normal damage to the
+off-board target instead. If Oblique Artilleryman misses by 4 points or
+more, his shells miss the off-board target entirely.
+
+OBLIQUE ATTACKER
+Unit Type: Any
+SPA Cost: 1 point
+Darting behind cover can’t save an enemy from this warrior’s
+missile fire. This unit receives a –1 Target Number modifier for indirect
+attacks using the IF special ability, and may even make indirect fire
+attacks without a friendly spotter. If attempting to use indirect fire
+without a friendly spotter, however, the unit trades its –1 Target
+Number modifier for a +2 modifier (which replaces any and all
+spotter-related modifiers).
+
+RANGE MASTER
+Unit Type: Any
+SPA Cost: 2 points
+This warrior’s ability to strike at their enemies has a certain
+comfort zone. Choose one range bracket other than the Short or
+Horizon brackets. The gunner for this unit specializes in attacks at
+that bracket: apply a –2 Target Number modifier for attacks in the
+specialized bracket, but a +2 modifier for any attack made in the
+Short range bracket.
+SPA S M L E
+Standard +0 +2 +4 +6
+Sniper +0 +1 +2 +3
+Medium Range Master +2 +0 +4 +6
+Long Range Master +2 +2 +2 +6
+Long Range Master w/ Sniper +2 +1 +0 +3
+Medium Range Master
+w/ Sniper +2 +0 +2 +3
+Extreme Range Master
+w/ Sniper +2 +1 +2 +1
+
+RIDE THE WASH
+Unit Type: Any airborne unit
+SPA Cost: 4 points
+This pilot has logged hundreds of flight hours with his aircraft,
+and has learned to use its own unique wake turbulence (“wash”)
+to enhance its maneuverability and even use it as an improvised
+attack against opposing aerospace that flies too close. A pilot
+with this ability reduces the unit’s Control Roll target modifiers for
+atmospheric combat from +2 to +0.
+In addition to this, if the unit is an aerospace or conventional
+fighter (AF or CF) that is tailing another aerospace unit in air-to-air
+combat, and the engagement is taking place at Short range, this
+pilot can forego a weapon attack and instead force his target to
+make a second Control Roll with a +3 target number modifier. If
+the opposing unit fails this roll, it falls two altitudes, and will crash
+if it falls from Low or Medium altitude.
+
+SANDBLASTER
+Unit Type: Any
+SPA Cost: 2 points
+Much like the Cluster Hitter, the gunner with the Sandblaster
+SPA has honed his accuracy with weapons that normally disperse
+damage, rather than focus it, but where the Cluster Hitter goes for
+concentrated fire, the Sandblaster is a specialist who works best
+with just his cluster weapons. When this unit delivers a weapon
+attack using only one of the following specials—AC, FLK, IATM, LRM,
+SRM, or TOR—it receives a –1 Target Number modifier, and delivers
+an additional 1 point of damage (increased to 2 points if the attack
+is made at Short range).
+
+SHAKY STICK
+Unit Type: Any airborne unit
+SPA Cost: 2 points
+This fighter jock has really learned to respect fire when it comes
+from the ground. When exposed to ground-to-air fire (see p. 186),
+this SPA adds a +1 Target Number modifier to all attacks against
+the unit from ground-based attackers. This modifier will not apply
+to other airborne units that attack the pilot’s craft.
+
+SHARPSHOOTER
+Unit Type: Any
+SPA Cost: 4 points
+The Sharpshooter is an improved version of the Marksman SPA,
+representing a more accomplished gunner who can strike at his
+enemy’s weakest points with deadly accuracy while still delivering
+a powerful barrage. Similar to the Marksman SPA, if this warrior’s
+unit stands still during its Movement Phase, and delivers attack
+that succeeds by a margin of 3 or more, the attack receives an
+additional Critical Hit check, even if the target still has armor. Unlike
+the Marksman, however, this attack delivers the unit’s full damage
+value at the target’s range (rather than only 1 point).
+
+SLUGGER
+Unit Type: BM, IM
+SPA Cost: 1 point
+Some ’Mechs have built in swords and hatchets to fight with,
+but this MechWarrior knows how to improvise his own. This unit
+can make use of an improvised melee weapon by simply spending
+2 extra inches of movement in a woods, jungle, rubble, or building
+terrain to find an appropriate weapon. This action requires no roll
+and creates no special modifiers, but must be declared during the
+unit’s Movement Phase.
+After obtaining a suitable weapon, the unit may execute
+physical attacks as if it has the MEL special ability, even if it ordinarily
+does not. This SPA has no effect if the unit already possesses the
+MEL special.
+
+SNIPER
+Unit Type: Any
+SPA Cost: 3 points
+The sniper prefers to fight from a distance. This gunner’s SPA
+reduces their unit’s Range Modifiers at Medium, Long, and Extreme
+range to +1 (Medium), +2 (Long), and +3 (Extreme), but does not
+affect the Short or Horizon range modifiers. Sniper also has no effect
+on indirect fire (IF) or artillery (ART) attacks.
+
+SPEED DEMON
+Unit Type: Any
+SPA Cost: 2 points
+A pilot with the Speed Demon SPA can really pour it on! Ground
+units of all motive types (including VTOLs and WiGE vehicles) receive
+an additional 2 inches of Move per turn when driven by a pilot with
+this ability, and increase their Sprinting movement (see p. 38) by 4
+inches per turn. This speed boost will not change the unit’s Target
+Movement Modifier, however.
+Aerospace units piloted by a pilot with this ability receive an
+effective Thrust value 1 point higher than is listed on their stat cards.
+
+STAND-ASIDE
+Unit Type: Any
+SPA Cost: 1 point
+This unit can move through hostile units during its Movement
+Phase, at an additional cost of 1 inch of Move. This action causes
+no damage to either unit; it simply negates the normal “stacking
+restriction” that prevents units from moving directly through
+enemy-occupied positions on the map.
+Zone of Control: A unit piloted by a warrior with this SPA is
+also immune to the maneuver-limiting effects of any opposing unit
+using the Zone of Control special command ability against it (see
+p. 109).
+
+STREET FIGHTER
+Unit Type: BM, IM, PM
+SPA Cost: 2 points
+This unit is able to deliver physical attacks with such blinding
+speed that it can essentially pre-empt those of an opposing unit
+once it gets close enough. If an opponent in base contact with the
+Street Fighter’s unit attempts to make an attack before the Street
+Fighter has resolved his own, the Street Fighter may attempt a
+special “preemptive strike” of his own against that opponent.
+This preemptive strike receives a +1 Target Number modifier,
+and effectively counts as the Street Fighter unit’s weapon and
+physical attack for the turn. If successful, the preemptive strike
+delivers damage equal to the Street Fighter unit’s Short range
+attack value, plus its normal physical attack damage (including
+any extra damage provided by a MEL or TSM special ability)—in a
+single volley. All damage effects from a Street Fighter’s preemptive
+strike must be determined before the opponent’s attack against
+the Street Fighter are resolved. Thus, it is possible in this way for a
+Street Fighter to cripple or destroy his opponent before it can even
+land its blow…regardless of Initiative order.
+Dueling Street Fighters: If both units in base contact are
+Street Fighters, the ability for each to pre-empt the other’s attacks
+will cancel out, and all attacks between them must be resolved
+normally.
+
+SURE-FOOTED
+Unit Type: BM, IM, PM
+SPA Cost: 2 points
+This unit receives an additional 2 inches to its normal movement
+allowance any turn it remains entirely on paved or ice terrain (in
+addition to the normal pavement movement bonus). If Sprinting
+movement is used (see p. 38), the Sure-Footed unit adds 4 inches
+(plus any pavement bonus) as long as his vehicle remains on the
+paved or ice terrain. Furthermore, if the Skidding rules are in play
+(see p. 74), the Sure-Footed SPA applies a –2 target number modifier
+to the unit’s Control Roll.
+
+SWORDSMAN
+Unit Type: BM, IM, PM
+SPA Cost: 2 points
+A MechWarrior or ProtoMech pilot with the Swordsman SPA
+has taken his own experience with melee weapons and translated
+it to a finesse rarely seen in a multi-ton war machine, granting its
+own physical combat weapons enough skill and accuracy to deliver
+far more telling blows. On a successful physical attack made while
+using the unit’s MEL special, this pilot may choose one of two
+options: deliver 1 extra point of damage to the opponent, or roll
+one additional Critical Hit against the target—even if it still has armor
+remaining. Note that if the unit lacks the MEL special, the Swordsman
+SPA will have no effect.
+
+TACTICAL GENIUS
+Unit Type: Any
+SPA Cost: 3 points
+An officer with this special pilot ability has a superior grasp
+of the battlefield situation, and can tap into this combat sense to
+maintain control even under the most chaotic firefights. If this unit is
+the command unit for its side, its controlling player may roll a second
+time for Initiative if the first roll was beaten by his opponent. This
+Initiative reroll result stands, even if it is worse. An Initiative reroll
+may only be attempted once every 2 turns.
+In addition, if the Battlefield Intelligence rules are in play (see p.
+154), this unit is treated as if it has the MHQ4 special ability.
+
+TERRAIN MASTER [DRAG RACER]
+Unit Type: CV (only if the unit has the tracked or wheeled
+motive types)
+SPA Cost: 3 points
+A vehicle driver with this SPA isn’t just a speed demon; he’s
+practically a professional racer. This unit receives an additional
+2 inches to its normal movement allowance any turn it remains
+entirely on paved or ice terrain (in addition to the normal pavement
+movement bonus). If Sprinting movement is used (see p. 38), the
+Drag Racer adds 4 inches (plus any pavement bonus) as long as
+his vehicle remains on the paved or ice terrain. Furthermore, if the
+Skidding rules are in play (see p. 74), the Terrain Master [Drag Racer]
+SPA applies a –2 target number modifier to the unit’s Control Roll.
+
+TERRAIN MASTER [FOREST RANGER]
+Unit Type: Any non-airborne unit
+SPA Cost: 3 points
+This warrior with this ability is truly at home in woodlands. A unit
+piloted by a warrior with this SPA reduces its additional Move costs
+when travelling through woods or jungle terrain (including heavy
+and ultra-heavy woods and jungle) by 1 inch per inch of movement
+(to a minimum added cost of +0 inches). In addition to this, attacks
+against this warrior’s unit suffer an additional +1 Terrain Modifier if
+it ends its movement inside wooded or jungle terrain.
+
+TERRAIN MASTER [FROGMAN]
+Unit Type: BM, IM, PM
+SPA Cost: 3 points
+This MechWarrior or ProtoMech pilot is uncommonly good at
+maneuvering his machine underwater, even without the benefits
+of UMU mobility. This SPA reduces the unit’s movement costs for
+underwater movement by 1 inch per inch of travel, to a minimum
+added Move cost of +0 inches. This benefit only applies when the
+unit is fully submerged.
+
+TERRAIN MASTER [MOUNTAINEER]
+Unit Type: Any non-airborne unit
+SPA Cost: 3 points
+The Mountaineer is a warrior or vehicle pilot who has an affinity
+for steep slopes and rocks. This SPA reduces the additional Move
+costs for changing levels, using Climbing movement (see p. 72), or
+for passing through rough and rubble terrain types (including ultra-
+rough and ultra-rubble) by 1 inch per inch of travel, to a minimum
+added Move cost of +0 inches.
+
+TERRAIN MASTER [NIGHTWALKER]
+Unit Type: Any non-airborne unit
+SPA Cost: 3 points
+The warrior with this special piloting ability likes things nice and
+dark. This unit ignores all modifiers for darkness without having to
+activate any searchlight (SRCH) special ability it may have.
+
+TERRAIN MASTER [SEA MONSTER]
+Unit Type: Any non-airborne unit
+SPA cost: 3 points
+This unit reduces the additional Move costs for passing
+through water terrain by 1 inch per inch of travel, to a minimum
+added cost of +0 inches. In addition to this, attacks against this
+pilot’s unit will suffer an additional +1 Terrain Modifier as long
+as the unit is occupying water terrain of depth 1”–2”. The Sea
+Monster ignores the +1 underwater terrain modifier when it is
+attacking.
+
+TERRAIN MASTER [SWAMP BEAST]
+Unit Type: Any non-airborne unit
+SPA Cost: 3 points
+Terrain masters have honed their piloting skills under
+particularly treacherous conditions; the “swamp beast” knows
+how to handle mud, marsh—even quicksand, if it comes up.
+This unit reduces the additional Move costs for passing through
+swamp terrain by 1 inch per inch of travel, to a minimum added
+cost of +0 inches. In addition to this, the Swamp Beast ignores the
+bogging down rules (see p. 60) when traveling through mud or
+swamp terrain. Finally, attacks against this pilot’s unit will suffer an
+additional +1 Terrain Modifier as long as the unit is occupying mud
+or swamp terrain.
+
+WEAPON SPECIALIST
+Unit Type: Any
+SPA Cost: 3 points
+The weapon specialist is a superlative expert with certain types
+of weapons, and can deliver much more accurate fire when he sticks
+to those guns alone. If the unit makes a standard weapons attack
+and misses by 1, the attack deals half damage (round down, to a
+minimum of 1 point).
+
+WIND WALKER
+Unit Type: Any airborne unit
+SPA Cost: 2 points
+The Wind Walker is an accomplished pilot who has a knack for
+using thermals and wind currents for a smoother flight and pinpoint
+landings. A unit whose pilot has this SPA ignores the +2 Control
+Roll target modifier for operating in atmospheric conditions, and
+receives an additional –1 Control Roll target modifier for all landings
+and liftoffs.
+
+ZWEIHANDER
+Unit Type: BM, IM
+SPA Cost: 2 points
+This MechWarrior really puts his machine’s back into physical
+combat. A pilot with this SPA adds +1 damage to the damage
+delivered by any successful standard- or melee-type physical
+attacks his ’Mech executes (but does not apply to damage from
+charging or Death from Above attacks). This damage modifier is
+in addition to any others provided by special unit abilities such
+as MEL or TSM.

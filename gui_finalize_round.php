@@ -181,7 +181,7 @@ session_start();
 </head>
 
 <body>
-	<iframe name="saveframe" src="./save_finalize_round.php"></iframe>
+	<iframe name="saveframe" src="./save_dummy.htm"></iframe>
 
 	<script>
 		$(document).ready(function() {

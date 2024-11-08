@@ -375,7 +375,7 @@ session_start();
 	echo "</script>\n";
 ?>
 
-<iframe name="saveframe" src="./save.php"></iframe>
+<iframe name="saveframe" src="./save_dummy.htm"></iframe>
 
 <div id="cover"></div>
 
