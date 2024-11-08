@@ -30,6 +30,8 @@ session_start();
 	function getMechImageByName($mechname, $unittype) { // BM=BattleMech, BA=BattleArmor, CV=CombatVehicle
 		if ($unittype == "CV") {
 			$image = "images/mechs/Generic_Tank.gif";
+		} if ($unittype == "BA") {
+			$image = "images/mechs/Generic_Battlearmor.gif";
 		} else {
 			$image = "images/mechs/Generic_Mech.gif";
 		}
