@@ -1,4 +1,5 @@
 
+// TODO: Show only one name for clan mechs (choose in options which one) ?
 // TODO: Why does the play unit page sometimes randomly takes over 1 sec to load?
 // TODO: Fix parameter names on all pages from "mech" to "unit" and "unit" to "formation"
 // TODO: Fix table names according to unit/formation changes
@@ -6,4 +7,4 @@
 // TODO: Add a pilot card to chosen units (Choose special pilot abilities from list with cost)
 // TODO: Add selector for faction prefix for unit artwork
 // TODO: Add link into options to get to "edit my game" faster
-// TODO: Add "finalize round" button into the play unit view (somewhere?)
+// TODO: Add "finalize round" button into the play unit view (where?)
