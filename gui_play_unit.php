@@ -948,7 +948,7 @@ session_start();
 		echo "				<div class='dataarea' style='display:none;'>\r\n";
 	}
 ?>
-				<table>
+				<table width="100%">
 					<tr>
 						<td>Here comes the combat vehicle block!</td>
 					</tr>
