@@ -489,9 +489,14 @@ session_start();
 	}
 
 	function getMechMULImageByName($mechname) {
-		$image = "images/mechs/Generic.gif";
+		$image = "images/mechs/Generic_Mech.gif";
+
 		$dir = 'images/mechs_mul/';
 		$startChar = mb_substr($mechname, 0, 3); // use first 3 chars to list files to keep the result list as small as possible
+		if ($startChar == "ELE") {
+			// echo "<script>console.log('SEARCHING: >>" . $startChar . "<<');</script>";
+			$startChar = "Ele";
+		}
 
 		$files = glob($dir."{$startChar}*.png");
 		foreach ($files as &$img) {
@@ -539,7 +544,7 @@ session_start();
 
 <div id="pilotimage"><?php echo "<img src='".$array_PILOT_IMG_URL[$chosenMechIndex]."' width='80px' height='80px'>" ?></div>
 <div id="faction" align="center"><?php echo "<img src='./images/factions/".$FACTION_IMG_URL."' width='50px' height='50px'>" ?></div>
-<div id="mech_number" align="center">#<?= $array_MECH_NUMBER[$chosenMechIndex] ?></div>
+<div id="mech_number" align="center">#<?= $array_MECH_NUMBER[$chosenMechIndex] ?><br>COMMAND</div>
 
 <?php
 	if ($useMULImages == 0) {

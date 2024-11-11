@@ -30,7 +30,7 @@ session_start();
 	function getMechImageByName($mechname, $unittype) { // BM=BattleMech, BA=BattleArmor, CV=CombatVehicle
 		if ($unittype == "CV") {
 			$image = "images/mechs/Generic_Tank.gif";
-		} if ($unittype == "BA") {
+		} else if ($unittype == "BA") {
 			$image = "images/mechs/Generic_Battlearmor.gif";
 		} else {
 			$image = "images/mechs/Generic_Mech.gif";
@@ -541,6 +541,7 @@ session_start();
 					</select>
 
 					Tons: <select required name='tonnage' id='tonnage' size='1' onchange="fetchMechList();">
+						<option value="None">None</option>
 						<option value="0-2">0-2</option>
 						<option value="20">20</option>
 						<option value="25">25</option>

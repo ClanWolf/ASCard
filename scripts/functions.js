@@ -984,6 +984,7 @@ function increaseWPNS_PREP() {
 	var url="./save_PREP.php?index="+chosenmechdbid+"&desc=WPNS_PREP&value="+WPNS_PREP;
 	window.frames['saveframe'].location.replace(url);
 }
+
 function increaseHT_PREP() {
 	//console.log("HT_PREP: " + HT_PREP);
 	HT_PREP = HT_PREP + 1;
@@ -1013,18 +1014,35 @@ function rolldice() {
 	rolling--;
 
 	if (ccc == 12) {
+		var t = document.getElementById("unit_type").innerHTML.slice(0, 2);
+    	// console.log(t.slice(0, 2));
+
 		var resMes = "";
-		     if (res ==  2) { resMes = "Ammo hit"; }
-		else if (res ==  3) { resMes = "Engine hit"; }
-		else if (res ==  4) { resMes = "Fire control hit"; }
-		else if (res ==  5) { resMes = "No critical hit"; }
-		else if (res ==  6) { resMes = "Weapon hit"; }
-		else if (res ==  7) { resMes = "Movement points hit"; }
-		else if (res ==  8) { resMes = "Weapon hit"; }
-		else if (res ==  9) { resMes = "No critical hit"; }
-		else if (res == 10) { resMes = "Fire control hit"; }
-		else if (res == 11) { resMes = "Engine hit"; }
-		else if (res == 12) { resMes = "Unit destroyed"; }
+		if (t == "BM") {
+			     if (res ==  2) { resMes = "Ammo hit [BM]"; }
+			else if (res ==  3) { resMes = "Engine hit [BM]"; }
+			else if (res ==  4) { resMes = "Fire control hit [BM]"; }
+			else if (res ==  5) { resMes = "No critical hit [BM]"; }
+			else if (res ==  6) { resMes = "Weapon hit [BM]"; }
+			else if (res ==  7) { resMes = "Movement points hit [BM]"; }
+			else if (res ==  8) { resMes = "Weapon hit [BM]"; }
+			else if (res ==  9) { resMes = "No critical hit [BM]"; }
+			else if (res == 10) { resMes = "Fire control hit [BM]"; }
+			else if (res == 11) { resMes = "Engine hit [BM]"; }
+			else if (res == 12) { resMes = "Unit destroyed [BM]"; }
+		} else if (t == "CV") {
+			     if (res ==  2) { resMes = "Ammo hit [CV]"; }
+            else if (res ==  3) { resMes = "Crew stunned [CV]"; }
+            else if (res ==  4) { resMes = "Fire control hit [CV]"; }
+            else if (res ==  5) { resMes = "Fire control hit [CV]"; }
+            else if (res ==  6) { resMes = "No critical hit [CV]"; }
+            else if (res ==  7) { resMes = "No critical hit [CV]"; }
+            else if (res ==  8) { resMes = "No critical hit [CV]"; }
+            else if (res ==  9) { resMes = "Weapon hit [CV]"; }
+            else if (res == 10) { resMes = "Weapon hit [CV]"; }
+            else if (res == 11) { resMes = "Crew killed [CV]"; }
+            else if (res == 12) { resMes = "Engine hit [CV]"; }
+		}
 
 		document.getElementById("criticalhit").innerHTML=res + ": " + resMes;
 		ccc = 1;

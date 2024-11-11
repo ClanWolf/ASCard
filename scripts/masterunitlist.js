@@ -83,7 +83,10 @@ function getMechList(filter, tech, minTon, maxTon) {
 			}
 			if (unit.BFSize != "0") {
 				var unitString = unit.Id + "> " + unit.Name + variant + unittypename;
-				if (unitString.includes(filter)) {
+				var unitStringLowerCase = unitString.toLowerCase();
+				var filterLowerCase = filter.toLowerCase();
+
+				if (unitStringLowerCase.includes(filterLowerCase)) {
 					optionList = optionList + "<option value=" + unitString + "</option>";
 				}
 			}
@@ -185,7 +188,9 @@ function fetchMechList() {
 	if (tonnagevalue == '0') {
 		tonnagevalue = '';
 	}
-	if (tonnagevalue == '0-2') {
+	if (tonnagevalue == 'None') {
+		getMechList(filter, techid, 0, 1000);
+	} else if (tonnagevalue == '0-2') {
 		getMechList(filter, techid, 0, 2);
 	} else {
 		getMechList(filter, techid, tonnagevalue, tonnagevalue);

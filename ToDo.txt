@@ -8,3 +8,6 @@
 // TODO: Add selector for faction prefix for unit artwork
 // TODO: Add link into options to get to "edit my game" faster
 // TODO: Add "finalize round" button into the play unit view (where?)
+
+// TODO: CV movement is missing "t" tracked, "h" hover,...
+// TODO: Reconnaisence abkürzen im Unitname oben!

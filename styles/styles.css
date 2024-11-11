@@ -9,6 +9,10 @@
 	background-color:transparent;
 }
 
+input[type="text"]::selection {
+    background-color:green;
+}
+
 * {
 	font-family: 'Pathway Gothic One', sans-serif;
 	/* font-family: 'Russo One', sans-serif; */
@@ -399,12 +403,12 @@ a:hover {
 	/* background-image: url('../images/mech_number.png'); */
 	/* background-size: cover; */
 	width: 140px;
-	height: 50px;
-	line-height: 60px;
+	/* height: 80px; */
+	/* line-height: 30px; */
 	right: 15px;
-	top: 90px;
+	top: 83px;
 	color: #fff;
-	font-size: 30px;
+	font-size: 28px;
 }
 #pv {
 	z-index: 11;

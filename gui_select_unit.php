@@ -237,7 +237,7 @@ session_start();
 
 	<br>
 
-	<table align="center" width="65%" cellspacing=2 cellpadding=2 border=0px>
+	<table align="center" width="80%" cellspacing=2 cellpadding=2 border=0px>
 		<tr>
 <?php
 
@@ -415,6 +415,12 @@ session_start();
 			array_push($mechsInAllUnits, $mechsInSingleUnit);
 		}
 	}
+
+	if ($playMode) {
+		// FINALIZE ROUND
+		echo "  		<td nowrap style='text-align:center;width:100px;background:rgba(81,125,37,1.0);' rowspan='2'><div style='vertical-align:middle;font-size:42px;color:#eee;'>&nbsp;&nbsp;&nbsp;<i class='fas fa-redo'></i>&nbsp;&nbsp;&nbsp;</div></td>\n";
+	}
+
 	echo "		</tr>\n";
 	if (!$playMode) {
 		echo "		<tr>\n";
@@ -447,7 +453,7 @@ session_start();
 	}
 	echo "		</tr>\n";
 	echo "		<tr>\n";
-	echo "			<td colspan='3' style='background-color:#333333;' align='center' valign='top'>";
+	echo "			<td colspan='4' style='background-color:#333333;' align='center' valign='top'>";
 	echo "				<span style='font-size:20;color:#eeeeee;'>Bid:&nbsp;</span><span style='font-size:20;color:#da8e25;'>PV ".$pointvaluetotalactivebid."</span><span style='font-size:20;color:#eeeeee;'>&nbsp;/&nbsp;</span><span style='font-size:20;color:#ff33ee;'>".$tonnagetotalactivebid." t</span>";
 	echo "				<span style='font-size:20;color:#eeeeee;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>";
 	echo "				<span style='font-size:20;color:#eeeeee;'>Total:&nbsp;PV ".$pointvaluetotal."&nbsp;/&nbsp;".$tonnagetotal." t</span>";
@@ -455,7 +461,7 @@ session_start();
 	echo "		</tr>\n";
 ?>
 
-		<tr><td colspan="8" style="color:#eee;font-size:20;text-align:center;"><br>Enable playmode (<u><a href="https://www.clanwolf.net/apps/ASCard/gui_edit_option.php">Options</a></u>) to add or remove units from your bid.<br><br></td></tr>
+		<tr><td colspan="9" style="color:#eee;font-size:20;text-align:center;"><br>Enable playmode (<u><a href="https://www.clanwolf.net/apps/ASCard/gui_edit_option.php">Options</a></u>) to add or remove units from your bid.<br><br></td></tr>
 
 	</table>
 </body>
