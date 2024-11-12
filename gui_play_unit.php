@@ -978,12 +978,36 @@ session_start();
 		echo "				<div class='dataarea' style='display:none;'>\r\n";
 	}
 ?>
-				<table width="100%">
-					<tr>
-						<td>Here comes the combat vehicle block!</td>
-					</tr>
-				</table>
-			</div>
+					<table width="100%">
+						<tr>
+							<td>Here comes the combat vehicle block!</td>
+						</tr>
+						<tr>
+							<td nowrap class="datalabel" width="5%" style="text-align: right;">EN:&nbsp;&nbsp;</td>
+							<td nowrap class="datalabel_button" valign="middle"><a href="javascript:increaseENGN_PREP();"><i class="fas fa-plus-square"></i></a></td>
+							<td nowrap class="datalabel" id="label_ENGN_PREP" align="center"><?= $array_ENGN_PREP[$chosenMechIndex] ?></td>
+							<td nowrap class="datalabel">&nbsp;&nbsp;</td>
+							<td nowrap width="55%" style="text-align: left;" class="datalabel_thin">
+								<label class="bigcheck"><input onchange="readCircles(<?= $array_MECH_DBID[$chosenMechIndex] ?>, <?= $array_A_MAX[$chosenMechIndex] ?>, <?= $array_S_MAX[$chosenMechIndex] ?>);" type="checkbox" class="bigcheck" name="CD_E_1" id="CD_E_1" value="yes"/><span class="bigcheck-target"></span></label>
+								<label class="bigcheck"><input onchange="readCircles(<?= $array_MECH_DBID[$chosenMechIndex] ?>, <?= $array_A_MAX[$chosenMechIndex] ?>, <?= $array_S_MAX[$chosenMechIndex] ?>);" type="checkbox" class="bigcheck" name="CD_E_2" id="CD_E_2" value="yes"/><span class="bigcheck-target"></span></label>
+							</td>
+							<td nowrap class="datalabel_thin_small" width="5%" style="text-align: right;">+1 HT</td>
+						</tr>
+						<tr>
+							<td nowrap class="datalabel" width="5%" style="text-align: right;">FC:&nbsp;&nbsp;</td>
+							<td nowrap class="datalabel_button" valign="middle"><a href="javascript:increaseFCTL_PREP();"><i class="fas fa-plus-square"></i></a></td>
+							<td nowrap class="datalabel" id="label_FCTL_PREP" align="center"><?= $array_FRCTRL_PREP[$chosenMechIndex] ?></td>
+							<td nowrap class="datalabel">&nbsp;&nbsp;</td>
+							<td nowrap width="90%" style="text-align: left;" class="datalabel_thin">
+								<label class="bigcheck"><input onchange="readCircles(<?= $array_MECH_DBID[$chosenMechIndex] ?>, <?= $array_A_MAX[$chosenMechIndex] ?>, <?= $array_S_MAX[$chosenMechIndex] ?>);" type="checkbox" class="bigcheck" name="CD_FC_1" id="CD_FC_1" value="yes"/><span class="bigcheck-target"></span></label>
+								<label class="bigcheck"><input onchange="readCircles(<?= $array_MECH_DBID[$chosenMechIndex] ?>, <?= $array_A_MAX[$chosenMechIndex] ?>, <?= $array_S_MAX[$chosenMechIndex] ?>);" type="checkbox" class="bigcheck" name="CD_FC_2" id="CD_FC_2" value="yes"/><span class="bigcheck-target"></span></label>
+								<label class="bigcheck"><input onchange="readCircles(<?= $array_MECH_DBID[$chosenMechIndex] ?>, <?= $array_A_MAX[$chosenMechIndex] ?>, <?= $array_S_MAX[$chosenMechIndex] ?>);" type="checkbox" class="bigcheck" name="CD_FC_3" id="CD_FC_3" value="yes"/><span class="bigcheck-target"></span></label>
+								<label class="bigcheck"><input onchange="readCircles(<?= $array_MECH_DBID[$chosenMechIndex] ?>, <?= $array_A_MAX[$chosenMechIndex] ?>, <?= $array_S_MAX[$chosenMechIndex] ?>);" type="checkbox" class="bigcheck" name="CD_FC_4" id="CD_FC_4" value="yes"/><span class="bigcheck-target"></span></label>
+							</td>
+							<td nowrap class="datalabel_thin_small" width="5%" style="text-align: right;">+2 TO-HIT</td>
+						</tr>
+					</table>
+				</div>
 
 			</td>
 			<td valign='bottom'>
