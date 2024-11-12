@@ -59,7 +59,7 @@ session_start();
 	<link rel="apple-touch-icon" href="./images/icon_152x152.png" type="image/png" sizes="152x152">
 	<link rel="apple-touch-icon" href="./images/icon_180x180.png" type="image/png" sizes="180x180">
 
-	<script type="text/javascript" src="./scripts/jquery-3.6.1.min.js"></script>
+	<script type="text/javascript" src="./scripts/jquery-3.7.1.min.js"></script>
 	<script type="text/javascript" src="./scripts/howler.min.js"></script>
 	<script type="text/javascript" src="./scripts/cookies.js"></script>
 	<script type="text/javascript" src="./scripts/functions.js"></script>
@@ -385,11 +385,11 @@ session_start();
 			<td nowrap onclick="location.href='./index.html'" width="60px" style="width:100px;background:rgba(50,50,50,1.0);text-align:center;vertical-align:middle;">
 				<div><a style="color:#eee;" href="./index.html">&nbsp;&nbsp;&nbsp;<i class="fa fa-arrow-left" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;</a></div>
 			</td>
-			<!-- <td nowrap onclick="location.href='./gui_finalize_round.php'" width="100px" style="width: 100px;background:rgba(56,87,26,1.0);text-align:center;vertical-align:middle;">
-				<div><a style="color: #eee;" href="./gui_finalize_round.php">&nbsp;&nbsp;&nbsp;<i class="fas fa-redo"></i>&nbsp;&nbsp;&nbsp;</a></div>
+			<!-- <td nowrap onclick="location.href='./gui_select_unit.php'" width="100px" style="width: 100px;background:rgba(56,87,26,1.0);text-align:center;vertical-align:middle;">
+				<div><a style="color: #eee;" href="./gui_select_unit.php">&nbsp;&nbsp;&nbsp;<i class="fas fa-redo"></i>&nbsp;&nbsp;&nbsp;</a></div>
 			</td>
 			-->
-			<td nowrap onclick="location.href='./gui_finalize_round.php'" style="width:100px;background:rgba(56,87,26,1.0);">
+			<td nowrap onclick="location.href='./gui_select_unit.php'" style="width:100px;background:rgba(56,87,26,1.0);">
 				<div style='vertical-align:middle;font-size:28px;color:#eee;'>&nbsp;&nbsp;&nbsp;G<?php echo $gid ?>&nbsp;R<?php echo $CURRENTROUND ?>&nbsp;&nbsp;&nbsp;</div>
 			</td>
 			<td style="width:5px;">&nbsp;</td>
@@ -514,7 +514,9 @@ session_start();
 			$mechnametrimmed_e = str_replace('[CV]', '', trim($mechnametrimmed_d));
 			$mechnametrimmed_f = str_replace('[BA]', '', trim($mechnametrimmed_e));
 			$mechnametrimmed_g = str_replace('[BM]', '', trim($mechnametrimmed_f));
-			$mechnametrimmed = strtolower($mechnametrimmed_g);
+			$mechnametrimmed_h = str_replace('Rec.', 'Reconnaissance', trim($mechnametrimmed_g));
+			$mechnametrimmed_i = str_replace('Veh.', 'Vehicle', trim($mechnametrimmed_h));
+			$mechnametrimmed = strtolower($mechnametrimmed_i);
 
 			// echo "<script>console.log('SEARCHING: >>" . $imagenametrimmed . " ? " . $mechnametrimmed . "<<');</script>";
 
@@ -544,7 +546,7 @@ session_start();
 
 <div id="pilotimage"><?php echo "<img src='".$array_PILOT_IMG_URL[$chosenMechIndex]."' width='80px' height='80px'>" ?></div>
 <div id="faction" align="center"><?php echo "<img src='./images/factions/".$FACTION_IMG_URL."' width='50px' height='50px'>" ?></div>
-<div id="mech_number" align="center">#<?= $array_MECH_NUMBER[$chosenMechIndex] ?><br>COMMAND</div>
+<div id="mech_number" align="center">#<?= $array_MECH_NUMBER[$chosenMechIndex] ?><br><?= strtoupper($UNIT) ?></div>
 
 <?php
 	if ($useMULImages == 0) {
@@ -802,6 +804,9 @@ session_start();
 <?php
 	for ($i1 = 1; $i1 <= $array_A_MAX[$chosenMechIndex]; $i1++) {
 		echo "<label class='bigcheck'><input onchange='readCircles($array_MECH_DBID[$chosenMechIndex]);' type='checkbox' class='bigcheck' name='A".$i1."' value='yes'/><span class='bigcheck-target'></span></label>&nbsp;\r\n";
+		if ($i1 == 10) {
+            echo "<br>\n";
+        }
 	}
 ?>
 							</td>
@@ -812,6 +817,9 @@ session_start();
 <?php
 	for ($i2 = 1; $i2 <= $array_S_MAX[$chosenMechIndex]; $i2++) {
 		echo "<label class='bigcheck'><input onchange='readCircles($array_MECH_DBID[$chosenMechIndex]);' type='checkbox' class='bigcheck' name='S".$i2."' value='yes'/><span class='bigcheck-target'></span></label>&nbsp;\r\n";
+		if ($i2 == 10) {
+			echo "<br>\n";
+		}
 	}
 ?>
 							</td>
@@ -847,7 +855,7 @@ session_start();
 					<table width="100%" cellpadding="0" cellspacing="0">
 						<tr>
 							<td nowrap rowspan="3" style="vertical-align: middle;" valign="middle" align="center" width="15px">
-								<div style="padding: 0 15 0 15;" id="phasebutton" name="phasebutton"><img id="phasebuttonimage" src=<?php echo "'$currentPhaseButton'"; ?> style='height:50px;'></div> <!-- <a href=<?php echo "'$currentmeli'"; ?>> </a> -->
+								<div onclick="location.href='gui_select_unit.php';" style="padding: 0 15 0 15;" id="phasebutton" name="phasebutton"><img id="phasebuttonimage" src=<?php echo "'$currentPhaseButton'"; ?> style='height:50px;'></div> <!-- <a href=<?php echo "'$currentmeli'"; ?>> </a> -->
 							</td>
 							<td nowrap width="65%" class="datalabel_thin">
 								<table cellspacing="2" cellpadding="0">
@@ -869,13 +877,18 @@ session_start();
 							</td>
 							<td id="INFOMOVED" nowrap width="20%" class="datalabel"></td>
 						</tr>
+						<tr style='height:15px;'><td style='height:15px;'><hr></td></tr>
 						<tr>
 							<td nowrap width="65%" id="firecontainer" class="datalabel_thin">
 							<table cellspacing="2" cellpadding="0">
 								<tr>
 									<td><label class='bigcheck'><input type='checkbox' onchange='readCircles2(<?= $array_MECH_DBID[$chosenMechIndex] ?>, <?= $array_A_MAX[$chosenMechIndex] ?>, <?= $array_S_MAX[$chosenMechIndex] ?>, -1, 1);' class='bigcheck' name='WF5_WEAPONSFIRED2' id='WF5_WEAPONSFIRED2' value='no'/><span class='bigcheck-target'></span></label>&nbsp;</td>
 									<td><label class='bigcheck'><input type='checkbox' onchange='readCircles2(<?= $array_MECH_DBID[$chosenMechIndex] ?>, <?= $array_A_MAX[$chosenMechIndex] ?>, <?= $array_S_MAX[$chosenMechIndex] ?>, -1, 2);' class='bigcheck' name='WF6_WEAPONSFIRED2' id='WF6_WEAPONSFIRED2' value='no'/><span class='bigcheck-target'></span></label>&nbsp;</td>
-									<td nowrap class="datavalue" style="text-align: right;" align="right"><span style="font-family:'Pathway Gothic One',sans-serif;font-size:60%;text-transform:uppercase;color:#999;">&nbsp;&nbsp;&nbsp;WEAPONS</span></td>
+									<td nowrap rowspan='2' class="datavalue" style="text-align: right;" align="right"><span style="font-family:'Pathway Gothic One',sans-serif;font-size:60%;text-transform:uppercase;color:#999;">&nbsp;&nbsp;&nbsp;WEAPONS</span></td>
+                                </tr>
+                                <tr>
+                                    <td align="center"><img src="./images/buttons/holdfire.png" height='17px' style="border: 0px solid #000000;"></td>
+                                    <td align="center"><img src="./images/buttons/fireweapons.png" height='17px' style="border: 0px solid #000000;"></td>
                                 </tr>
 							</table>
 							</td>

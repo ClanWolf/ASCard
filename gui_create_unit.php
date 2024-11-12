@@ -121,32 +121,36 @@ session_start();
 			//$TON = "-";
 		}
 
-		// Corrections for Clan Battle Armor (unit size / Name)
-		// $pos = strpos($SPCL, "CAR4");
-		// if ($TECH == "2" && $TP == "BA") { // && $pos !== false) {
 		if ($TP == "BA") { // && $pos !== false) {
-			// This is a Clan Battle Armor
-			// Add Armor +1, PV +3 and replace CAR4 by CAR5 (in SPCL)
-			// This is because MUL delivers the data for a 4 point unit (as Clan we want a SQUAD5 unit)
-			// --> this is obsolete since MUL added all squad sizes!
-			//$SPCL = str_replace("CAR4", "CAR5", $SPCL);
+			// This is a BattleArmor
 			$MODEL = str_replace("Elemental", "ELE", $MODEL);
 			$MODEL = str_replace("Battle Armor", "BA", $MODEL);
-
-			//$A = intval($A) + 1;
-			//$PVA = intval($PVA) + 3;
-			//$TON = $TON * 5;
-			//$TON = "-";
-
+			$MODEL = str_replace("Reconnaissance", "Rec.", $MODEL);
+            $MODEL = str_replace(" [BA]", "", $MODEL);
 			$MECHSTATUSIMAGE = "images/DD_BA_01.png";
 		} else if($TP == "BM") { // BM -> Battlemech
 			// This is a MECH
+			$MODEL = str_replace("Reconnaissance", "Rec.", $MODEL);
+            $MODEL = str_replace(" [BM]", "", $MODEL);
 			$MECHSTATUSIMAGE = "images/DD_BM_01.png";
 		} else if ($TP == "CV") { // CV -> Combat vehicle
 			// This is a VEHICLE
+			$MODEL = str_replace("Reconnaissance", "Rec.", $MODEL);
+			$MODEL = str_replace("Vehicle", "Veh.", $MODEL);
+			$MODEL = str_replace(" [CV]", "", $MODEL);
 			$MECHSTATUSIMAGE = "images/DD_CV_01.png";
+		} else if ($TP == "AF") { // AF -> Aerial fighter
+			// This is a fighter
+			$MODEL = str_replace("Reconnaissance", "Rec.", $MODEL);
+            $MODEL = str_replace(" [AF]", "", $MODEL);
+            $MECHSTATUSIMAGE = "images/DD_CV_01.png";
 		} else {
 			// Anything else
+			$MODEL = str_replace("Reconnaissance", "Rec.", $MODEL);
+            $MODEL = str_replace(" [BA]", "", $MODEL);
+            $MODEL = str_replace(" [BM]", "", $MODEL);
+            $MODEL = str_replace(" [CV]", "", $MODEL);
+            $MODEL = str_replace(" [AF]", "", $MODEL);
 			$MECHSTATUSIMAGE = "images/DD_BM_01.png"; // Find another image here
 		}
 
@@ -323,7 +327,7 @@ session_start();
 	<link rel="apple-touch-icon" href="./images/icon_152x152.png" type="image/png" sizes="152x152">
 	<link rel="apple-touch-icon" href="./images/icon_180x180.png" type="image/png" sizes="180x180">
 
-	<script type="text/javascript" src="./scripts/jquery-3.6.1.min.js"></script>
+	<script type="text/javascript" src="./scripts/jquery-3.7.1.min.js"></script>
 	<script type="text/javascript" src="./scripts/basic.js"></script>
 	<script type="text/javascript" src="./scripts/masterunitlist.js"></script>
 	<script type="text/javascript" src="./scripts/adjustPointValue.js"></script>
@@ -498,24 +502,26 @@ session_start();
 					<div><a style="color: #eee;" href="./logout.php">&nbsp;&nbsp;&nbsp;<i class="fas fa-power-off" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;</a></div>
 				</td>
 				<!--
-				<td nowrap onclick="location.href='./gui_finalize_round.php'" width="100px" style="width: 100px;background: rgba(56,87,26,1.0); text-align: center; vertical-align: middle;">
-					<div><a style="color: #eee;" href="./gui_finalize_round.php">&nbsp;&nbsp;&nbsp;<i class="fas fa-redo"></i>&nbsp;&nbsp;&nbsp;</a></div>
+				<td nowrap onclick="location.href='./gui_select_unit.php'" width="100px" style="width: 100px;background: rgba(56,87,26,1.0); text-align: center; vertical-align: middle;">
+					<div><a style="color: #eee;" href="./gui_select_unit.php">&nbsp;&nbsp;&nbsp;<i class="fas fa-redo"></i>&nbsp;&nbsp;&nbsp;</a></div>
 				</td>
 				-->
-				<td nowrap onclick="location.href='./gui_finalize_round.php'" style="width: 100px;background:rgba(56,87,26,1.0);">
+				<td nowrap onclick="location.href='./gui_select_unit.php'" style="width: 100px;background:rgba(56,87,26,1.0);">
 					<div style='vertical-align:middle;font-size:28px;color:#eee;'>&nbsp;&nbsp;&nbsp;G<?php echo $gid ?>&nbsp;R<?php echo $CURRENTROUND ?>&nbsp;&nbsp;&nbsp;</div>
 				</td>
 				<td style="width:5px;">&nbsp;</td>
 				<td nowrap onclick="location.href='./gui_select_unit.php'" width="<?php echo $buttonWidth ?>"><div class='mechselect_button_normal'><a href='./gui_select_unit.php'>ROSTER</a><br><span style='font-size:16px;'>Choose a unit</span></div></td>
 				<td style="width:5px;">&nbsp;</td>
-				<td nowrap onclick="location.href='./gui_select_formation.php'" width="<?php echo $buttonWidth ?>"><div class='mechselect_button_normal'><a href='./gui_select_formation.php'>CHALLENGE</a><br><span style='font-size:16px;'>Batchall & bidding</span></div></td>
-				<td style="width:5px;">&nbsp;</td>
 
 <?php
+	if ($playMode) {
+		echo "				<td nowrap onclick=\"location.href='./gui_select_formation.php'\" width=" . $buttonWidth . "><div class='mechselect_button_normal'><a href='./gui_select_formation.php'>CHALLENGE</a><br><span style='font-size:16px;'>Batchall & bidding</span></div></td><td style='width:5px;'>&nbsp;</td>\n";
+	}
 	if (!$playMode) {
 		echo "				<td nowrap onclick=\"location.href='./gui_assign_unit.php'\" width='17%'><div class='mechselect_button_normal'><a href='./gui_assign_unit.php'>ASSIGN</a><br><span style='font-size:16px;'>Assign unit</span></div></td><td style='width:5px;'>&nbsp;</td>\n";
 		echo "				<td nowrap onclick=\"location.href='./gui_create_unit.php'\" width='17%'><div class='mechselect_button_active'><a href='./gui_create_unit.php'>ADD</a><br><span style='font-size:16px;'>Create a unit</span></div></td><td style='width:5px;'>&nbsp;</td>\n";
 		echo "				<td nowrap onclick=\"location.href='./gui_create_player.php'\" width='17%'><div class='mechselect_button_normal'><a href='./gui_create_player.php'>PLAYER</a><br><span style='font-size:16px;'>Manage players</span></div></td><td style='width:5px;'>&nbsp;</td>\n";
+		echo "				<td nowrap onclick=\"location.href='./gui_create_game.php'\" width='17%'><div class='mechselect_button_normal'><a href='./gui_create_game.php'>GAME</a><br><span style='font-size:16px;'>Game settings</span></div></td><td style='width:5px;'>&nbsp;</td>\n";
 	}
 ?>
 
@@ -540,29 +546,63 @@ session_start();
 						<option value="1">IS</option>
 					</select>
 
-					Tons: <select required name='tonnage' id='tonnage' size='1' onchange="fetchMechList();">
-						<option value="None">None</option>
-						<option value="0-2">0-2</option>
-						<option value="20">20</option>
-						<option value="25">25</option>
-						<option value="30">30</option>
-						<option value="35">35</option>
-						<option value="40">40</option>
-						<option value="45">45</option>
-						<option value="50">50</option>
-						<option value="55">55</option>
-						<option value="60">60</option>
-						<option value="65">65</option>
-						<option value="70">70</option>
-						<option value="75">75</option>
-						<option value="80">80</option>
-						<option value="85">85</option>
-						<option value="90">90</option>
-						<option value="95">95</option>
-						<option value="100">100</option>
+					Type: <select required style='width:75px;' name='unittype' id='unittype' size='1' onchange="fetchMechList();">
+						<option value="BA">BA</option>
+						<option value="BM">BM</option>
+						<option value="CV">CV</option>
+						<!-- <option value="AF">AF</option> -->
 					</select>
 
-					Filter: <input required type="text" id="NameFilter" name="NameFilter" onchange="fetchMechList();">
+					<span id='weightBlock'>Weight: <select required style='width:145px;' name='tonnage' id='tonnage' size='1' onchange="fetchMechList();">
+						<option value="LIGHT">LIGHT</option>
+						<option value="MEDIUM">MEDIUM</option>
+						<option value="HEAVY">HEAVY</option>
+						<option value="ASSAULT">ASSAULT</option>
+						<option value="SUPERHEAVY">SUPERHEAVY</option>
+
+						<!-- <option value="BA">BA</option> -->
+						<!-- <option value="ALL">ALL</option> -->
+						<!-- <option value="0-2">0-2</option> -->
+						<!-- <option value="20">20</option> -->
+						<!-- <option value="25">25</option> -->
+						<!-- <option value="30">30</option> -->
+						<!-- <option value="35">35</option> -->
+						<!-- <option value="40">40</option> -->
+						<!-- <option value="45">45</option> -->
+						<!-- <option value="50">50</option> -->
+						<!-- <option value="55">55</option> -->
+						<!-- <option value="60">60</option> -->
+						<!-- <option value="65">65</option> -->
+						<!-- <option value="70">70</option> -->
+						<!-- <option value="75">75</option> -->
+						<!-- <option value="80">80</option> -->
+						<!-- <option value="85">85</option> -->
+						<!-- <option value="90">90</option> -->
+						<!-- <option value="95">95</option> -->
+						<!-- <option value="100">100</option> -->
+						<!-- <option value="105">105</option> -->
+						<!-- <option value="110">110</option> -->
+						<!-- <option value="115">115</option> -->
+						<!-- <option value="120">120</option> -->
+						<!-- <option value="125">125</option> -->
+						<!-- <option value="130">130</option> -->
+						<!-- <option value="135">135</option> -->
+						<!-- <option value="140">140</option> -->
+						<!-- <option value="145">145</option> -->
+						<!-- <option value="150">150</option> -->
+						<!-- <option value="155">155</option> -->
+						<!-- <option value="160">160</option> -->
+						<!-- <option value="165">165</option> -->
+						<!-- <option value="170">170</option> -->
+						<!-- <option value="175">175</option> -->
+						<!-- <option value="180">180</option> -->
+						<!-- <option value="185">185</option> -->
+						<!-- <option value="190">190</option> -->
+						<!-- <option value="195">195</option> -->
+						<!-- <option value="200">200</option> -->
+					</select></span>
+
+					Filter: <input required style='width:150px;' type="text" id="NameFilter" name="NameFilter" onchange="fetchMechList();">
 				</td>
 			</tr>
 			<tr>

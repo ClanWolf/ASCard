@@ -132,7 +132,19 @@ session_start();
 		}
 
 		//echo "<meta http-equiv='refresh' content='0;url=./gui_select_unit.php'>";
+
 	}
+
+	function textTruncate($text, $chars=25) {
+        if (strlen($text) <= $chars) {
+            return $text;
+        }
+        $text = $text." ";
+        $text = substr($text,0,$chars);
+        $text = substr($text,0,strrpos($text,' '));
+        $text = $text."...";
+        return $text;
+    }
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -154,6 +166,7 @@ session_start();
 	<!-- <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css"> -->
 	<link rel="stylesheet" type="text/css" href="./fontawesome/css/all.min.css" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="./styles/styles.css">
+	<link rel="stylesheet" type="text/css" href="./styles/jquery.jscrollpane.css">
 	<link rel="icon" href="./favicon.png" type="image/png">
 	<link rel="shortcut icon" href="./images/icon_196x196.png" type="image/png" sizes="196x196">
 	<link rel="apple-touch-icon" href="./images/icon_57x57.png" type="image/png" sizes="57x57">
@@ -165,7 +178,9 @@ session_start();
 	<link rel="apple-touch-icon" href="./images/icon_152x152.png" type="image/png" sizes="152x152">
 	<link rel="apple-touch-icon" href="./images/icon_180x180.png" type="image/png" sizes="180x180">
 
-	<script type="text/javascript" src="./scripts/jquery-3.6.1.min.js"></script>
+	<script type="text/javascript" src="./scripts/jquery-3.7.1.min.js"></script>
+	<script type="text/javascript" src="./scripts/jquery.jscrollpane.min.js"></script>
+	<script type="text/javascript" src="./scripts/jquery.mousewheel.js"></script>
 	<script type="text/javascript" src="./scripts/howler.min.js"></script>
 	<script type="text/javascript" src="./scripts/cookies.js"></script>
 
@@ -177,17 +192,52 @@ session_start();
 			margin-left: auto;
 			margin-right: auto;
 		}
+		input, select {
+			width: 80px;
+			vertical-align: middle;
+			color: #ddd;
+			border-width: 0px;
+			padding: 2px;
+			font-family: 'Pathway Gothic One', sans-serif;
+		}
+		select:focus, textarea:focus, input:focus {
+			outline: none;
+		}
+		select:invalid, input:invalid {
+			background: rgba(40,40,40,0.75);;
+		}
+		select:valid, input:valid {
+			background: rgba(70,70,70,0.75);;
+		}
+		.scroll-pane {
+            width: 100%;
+            height: 280px;
+            overflow: auto;
+        }
+        .horizontal-only {
+            height: auto;
+            max-height: 280px;
+        }
 	</style>
 </head>
 
 <body>
+	<iframe name="saveframe" src="./save_dummy.htm"></iframe>
+
+	<div id="cover"></div>
+
 	<script>
 		$(document).ready(function() {
 			$("#cover").hide();
 		});
+		$(function() {
+            $('.scroll-pane').jScrollPane();
+        });
+		function finalizeRound(playerId) {
+			var url="./save_finalize_round.php?pid=" + playerId;
+			window.frames["saveframe"].location.replace(url);
+		}
 	</script>
-
-	<div id="cover"></div>
 
 <?php
 	if ($playMode) {
@@ -204,24 +254,26 @@ session_start();
 					<div><a style="color: #eee;" href="./logout.php">&nbsp;&nbsp;&nbsp;<i class="fas fa-power-off" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;</a></div>
 				</td>
 				<!--
-				<td nowrap onclick="location.href='./gui_finalize_round.php'" width="100px" style="width: 100px;background: rgba(56,87,26,1.0); text-align: center; vertical-align: middle;">
-					<div><a style="color:#eee;" href="./gui_finalize_round.php">&nbsp;&nbsp;&nbsp;<i class="fas fa-redo"></i>&nbsp;&nbsp;&nbsp;</a></div>
+				<td nowrap onclick="location.href='./gui_select_unit.php'" width="100px" style="width: 100px;background: rgba(56,87,26,1.0); text-align: center; vertical-align: middle;">
+					<div><a style="color:#eee;" href="./gui_select_unit.php">&nbsp;&nbsp;&nbsp;<i class="fas fa-redo"></i>&nbsp;&nbsp;&nbsp;</a></div>
 				</td>
 				-->
-				<td nowrap onclick="location.href='./gui_finalize_round.php'" style="width: 100px;background:rgba(56,87,26,1.0);">
+				<td nowrap onclick="location.href='./gui_select_unit.php'" style="width: 100px;background:rgba(56,87,26,1.0);">
 					<div style='vertical-align:middle;font-size:28px;color:#eee;'>&nbsp;&nbsp;&nbsp;G<?php echo $gid ?>&nbsp;R<?php echo $CURRENTROUND ?>&nbsp;&nbsp;&nbsp;</div>
 				</td>
 				<td style="width:5px;">&nbsp;</td>
 				<td nowrap onclick="location.href='./gui_select_unit.php'" width="<?php echo $buttonWidth ?>"><div class='mechselect_button_active'><a href='./gui_select_unit.php'>ROSTER</a><br><span style='font-size:16px;'>Choose a unit</span></div></td>
 				<td style="width:5px;">&nbsp;</td>
-				<td nowrap onclick="location.href='./gui_select_formation.php'" width="<?php echo $buttonWidth ?>"><div class='mechselect_button_normal'><a href='./gui_select_formation.php'>CHALLENGE</a><br><span style='font-size:16px;'>Batchall & bidding</span></div></td>
-				<td style="width:5px;">&nbsp;</td>
 
 <?php
+	if ($playMode) {
+		echo "				<td nowrap onclick=\"location.href='./gui_select_formation.php'\" width=" . $buttonWidth . "><div class='mechselect_button_normal'><a href='./gui_select_formation.php'>CHALLENGE</a><br><span style='font-size:16px;'>Batchall & bidding</span></div></td><td style='width:5px;'>&nbsp;</td>\n";
+	}
 	if (!$playMode) {
 		echo "				<td nowrap onclick=\"location.href='./gui_assign_unit.php'\" width='17%'><div class='mechselect_button_normal'><a href='./gui_assign_unit.php'>ASSIGN</a><br><span style='font-size:16px;'>Assign unit</span></div></td><td style='width:5px;'>&nbsp;</td>\n";
 		echo "				<td nowrap onclick=\"location.href='./gui_create_unit.php'\" width='17%'><div class='mechselect_button_normal'><a href='./gui_create_unit.php'>ADD</a><br><span style='font-size:16px;'>Create a unit</span></div></td><td style='width:5px;'>&nbsp;</td>\n";
 		echo "				<td nowrap onclick=\"location.href='./gui_create_player.php'\" width='17%'><div class='mechselect_button_normal'><a href='./gui_create_player.php'>PLAYER</a><br><span style='font-size:16px;'>Manage players</span></div></td><td style='width:5px;'>&nbsp;</td>\n";
+		echo "				<td nowrap onclick=\"location.href='./gui_create_game.php'\" width='17%'><div class='mechselect_button_normal'><a href='./gui_create_game.php'>GAME</a><br><span style='font-size:16px;'>Game settings</span></div></td><td style='width:5px;'>&nbsp;</td>\n";
 	}
 ?>
 
@@ -237,7 +289,7 @@ session_start();
 
 	<br>
 
-	<table align="center" width="80%" cellspacing=2 cellpadding=2 border=0px>
+	<table align="center" width="85%" cellspacing=2 cellpadding=2 border=0px>
 		<tr>
 <?php
 
@@ -248,6 +300,8 @@ session_start();
 	$pointvaluetotalactivebid = 0;
 	$tonnagetotal = 0;
 	$tonnagetotalactivebid = 0;
+
+	$readyToFinalizeRound = 1;
 
 	//echo "		<td nowrap style='width:170px;height:70px;' class='mechselect_button_active'>".$pname."</td>";
 	// Select units for this player
@@ -310,6 +364,9 @@ session_start();
 				$assignedMechID = $rowUnitAssignment['mechid'];
 				$assignedPilotID = $rowUnitAssignment['pilotid'];
 
+				$mechHasMoved = $rowUnitAssignment['round_moved'];
+				$mechHasFired = $rowUnitAssignment['round_fired'];
+
 				$sql_asc_mech = "SELECT SQL_NO_CACHE * FROM asc_mech where mechid=".$assignedMechID." order by mech_tonnage desc;";
 				$result_asc_mech = mysqli_query($conn, $sql_asc_mech);
 				if (mysqli_num_rows($result_asc_mech) > 0) {
@@ -327,6 +384,7 @@ session_start();
 						$mechpointvalue = $rowMech['as_pv'];
 						$mechtonnage = $rowMech['mech_tonnage'];
 						$activebid = $rowMech['active_bid'];
+						$mechstatus = $rowMech['mech_status'];
 
 						$pointvaluetotal = $pointvaluetotal + intval($mechpointvalue);
 						$tonnagetotal = $tonnagetotal + intval($mechtonnage);
@@ -335,6 +393,32 @@ session_start();
 							$pointvaluetotalactivebid = $pointvaluetotalactivebid + intval($mechpointvalue);
 							$tonnagetotalactivebid = $tonnagetotalactivebid + intval($mechtonnage);
 						}
+
+						$mechRoundStatusImage = "";
+                        if ($mechHasMoved == 0 && $mechHasFired == 0) {
+                            $mechRoundStatusImage = "./images/top-right_phase01.png";
+                            if ($mechstatus != "destroyed") {
+                                $readyToFinalizeRound = 0;
+								// echo "<script>console.log('negating!".$readyToFinalizeRound."');</script>";
+                            }
+                        }
+                        if ($mechHasMoved == 0 && $mechHasFired > 0) {
+                            $mechRoundStatusImage = "./images/top-right_phase01.png";
+                            if ($mechstatus != "destroyed") {
+                                $readyToFinalizeRound = 0;
+                                // echo "<script>console.log('negating!".$readyToFinalizeRound."');</script>";
+                            }
+                        }
+                        if ($mechHasMoved > 0 && $mechHasFired == 0) {
+                            $mechRoundStatusImage = "./images/top-right_phase02.png";
+							if ($mechstatus != "destroyed") {
+							    $readyToFinalizeRound = 0;
+                                // echo "<script>console.log('negating!".$readyToFinalizeRound."');</script>";
+							}
+                        }
+                        if ($mechHasMoved > 0 && $mechHasFired > 0) {
+                            $mechRoundStatusImage = "./images/top-right_phase03.png";
+                        }
 					}
 				}
 
@@ -360,47 +444,80 @@ session_start();
 					$bidcolor = "#741300;";
 				}
 
+				if ($mechstatus == "destroyed") {
+					$mechRoundStatusImage = "./images/skull.png";
+					$bidcolor = "#222;";
+				}
+
 				$mechDetailString = "";
 
-				$mechDetailString = $mechDetailString."						<td nowrap width='1%' onclick='location.href=\"\"' style='background-color:#121212;text-align:right;'>\n";
-				$mechDetailString = $mechDetailString."							<span style='font-size:16px;'>\n";
-				if (!$playMode) {
-					$mechDetailString = $mechDetailString."								\n";
-				} else {
-					if ($activebid == "1") {
-						$mechDetailString = $mechDetailString."								<span><a href='./gui_select_unit.php?activebid=0&mechid=".$assignedMechID."'>&nbsp;<i class='fas fa-arrow-circle-left' aria-hidden='true' style='font-size:28;color:#741300;'></i></a>&nbsp;</span>\n";
-					} else {
-						$mechDetailString = $mechDetailString."								<span><a href='./gui_select_unit.php?activebid=1&mechid=".$assignedMechID."'>&nbsp;<i class='fas fa-arrow-circle-right' aria-hidden='true' style='font-size:28;color:#2f7c2f;'></i></a>&nbsp;</span>\n";
-					}
-				}
-				$mechDetailString = $mechDetailString."							</span>\n";
-				$mechDetailString = $mechDetailString."						</td>\n";
+//				$mechDetailString = $mechDetailString."						<td nowrap width='1%' onclick='location.href=\"\"' style='background-color:#121212;text-align:right;'>\n";
+//				$mechDetailString = $mechDetailString."							<span style='font-size:16px;'>\n";
+//				if (!$playMode) {
+//					$mechDetailString = $mechDetailString."								\n";
+//				} else {
+//					if ($activebid == "1") {
+//						$mechDetailString = $mechDetailString."								<span><a href='./gui_select_unit.php?activebid=0&mechid=".$assignedMechID."'>&nbsp;&nbsp;&nbsp;<i class='fas fa-arrow-circle-left' aria-hidden='true' style='font-size:40;color:#741300;'></i></a>&nbsp;&nbsp;&nbsp;</span>\n";
+//					} else {
+//						$mechDetailString = $mechDetailString."								<span><a href='./gui_select_unit.php?activebid=1&mechid=".$assignedMechID."'>&nbsp;&nbsp;&nbsp;<i class='fas fa-arrow-circle-right' aria-hidden='true' style='font-size:40;color:#2f7c2f;'></i></a>&nbsp;&nbsp;&nbsp;</span>\n";
+//					}
+//				}
+//				$mechDetailString = $mechDetailString."							</span>\n";
+//				$mechDetailString = $mechDetailString."						</td>\n";
 
 				if ($activebid == "1") {
-					$mechDetailString = $mechDetailString."			<td nowrap onclick='location.href=\"gui_play_unit.php?unit=".$unitidSelected."&chosenmech=".$c."\"' style='background-color:".$bidcolor."' class='mechselect_button_active' align='right' valign='center'><div style='display:inline-block;height:100%;vertical-align:middle;'><img style='vertical-align:middle;' src='".$mechstatusimage."' height='30px'><br><span style='font-size:12px;'>".$numStr."</span></div></td>\n";
+					$mechDetailString = $mechDetailString."						<td nowrap width='1%' onclick=\"location.href='gui_select_unit.php?activebid=0&mechid=".$assignedMechID."'\" style='background-color:#121212;text-align:right;'>\n";
+					$mechDetailString = $mechDetailString."							<span style='font-size:16px;'>\n";
+					if (!$playMode) {
+						$mechDetailString = $mechDetailString."								\n";
+					} else {
+						$mechDetailString = $mechDetailString."								<span>&nbsp;&nbsp;&nbsp;<i class='fas fa-arrow-circle-left' aria-hidden='true' style='font-size:40;color:#741300;'></i>&nbsp;&nbsp;&nbsp;</span>\n";
+					}
+					$mechDetailString = $mechDetailString."							</span>\n";
+					$mechDetailString = $mechDetailString."						</td>\n";
+				} else {
+					$mechDetailString = $mechDetailString."						<td nowrap width='1%' onclick=\"location.href='gui_select_unit.php?activebid=1&mechid=".$assignedMechID."'\" style='background-color:#121212;text-align:right;'>\n";
+					$mechDetailString = $mechDetailString."							<span style='font-size:16px;'>\n";
+					if (!$playMode) {
+						$mechDetailString = $mechDetailString."								\n";
+					} else {
+						$mechDetailString = $mechDetailString."								<span>&nbsp;&nbsp;&nbsp;<i class='fas fa-arrow-circle-right' aria-hidden='true' style='font-size:40;color:#2f7c2f;'></i>&nbsp;&nbsp;&nbsp;</span>\n";
+					}
+					$mechDetailString = $mechDetailString."							</span>\n";
+					$mechDetailString = $mechDetailString."						</td>\n";
+				}
+
+
+
+
+
+
+
+				if ($activebid == "1") {
+					$mechDetailString = $mechDetailString."			<td nowrap onclick='location.href=\"gui_play_unit.php?unit=".$unitidSelected."&chosenmech=".$c."\"' style='background-color:".$bidcolor."' class='mechselect_button_active' align='right' valign='center'><div style='display:inline-block;height:100%;vertical-align:middle;'><img style='vertical-align:middle;' src='".$mechstatusimage."' height='24px'><br><span style='font-size:14px;'>".$numStr."</span></div></td>\n";
 					$mechDetailString = $mechDetailString."			<td nowrap onclick='location.href=\"gui_play_unit.php?unit=".$unitidSelected."&chosenmech=".$c."\"' style='width:100%;background-color:".$bidcolor."' class='mechselect_button_active'>\n";
 				} else {
-					$mechDetailString = $mechDetailString."			<td nowrap style='background-color:".$bidcolor."' class='mechselect_button_active' align='right' valign='center'><div style='display:inline-block;height:100%;vertical-align:middle;'><img style='vertical-align:middle;' src='".$mechstatusimage."' height='30px'><br><span style='font-size:12px;'>".$numStr."</span></div></td>\n";
+					$mechDetailString = $mechDetailString."			<td nowrap style='background-color:".$bidcolor."' class='mechselect_button_active' align='right' valign='center'><div style='display:inline-block;height:100%;vertical-align:middle;'><img style='vertical-align:middle;' src='".$mechstatusimage."' height='24px'><br><span style='font-size:14px;'>".$numStr."</span></div></td>\n";
 					$mechDetailString = $mechDetailString."			<td nowrap style='width:100%;background-color:".$bidcolor."' class='mechselect_button_active'>\n";
 				}
 				$mechDetailString = $mechDetailString."				<table width='100%' cellspacing=0 cellpadding=0 border=0px>\n";
 				$mechDetailString = $mechDetailString."					<tr>\n";
 
 				if ($activebid == "1") {
-					$mechDetailString = $mechDetailString."						<td nowrap width='99%' align='left' style='color:#AAAAAA;background-color:".$bidcolor."text-align:left;'><a href=gui_play_unit.php?unit=".$unitidSelected."&chosenmech=".$c."> <span style='font-size:26px;'>";
+					$mechDetailString = $mechDetailString."						<td nowrap width='99%' align='left' style='color:#AAAAAA;background-color:".$bidcolor."text-align:left;'><a href=gui_play_unit.php?unit=".$unitidSelected."&chosenmech=".$c."> <span style='font-size:24px;'>";
 				} else {
-					$mechDetailString = $mechDetailString."						<td nowrap width='99%' align='left' style='color:#AAAAAA;background-color:".$bidcolor."text-align:left;'><a href='' target='_SELF'> <span style='font-size:26px;'>";
+					$mechDetailString = $mechDetailString."						<td nowrap width='99%' align='left' style='color:#AAAAAA;background-color:".$bidcolor."text-align:left;'><a href='' target='_SELF'> <span style='font-size:24px;'>";
 				}
-				$mechDetailString = $mechDetailString."						<img src='./images/ranks/".$factionidSelected."/".$pilotrank.".png' width='18px' height='18px'>";
-				$mechDetailString = $mechDetailString."						".$pilotname."</span> <span style='font-weight:normal;font-size:16px;color:#da8e25;'> (PV ".$mechpointvalue."/".$mechtonnage." t)</span></a></span>\n";
-				$mechDetailString = $mechDetailString."							<br><span style='font-size:16px;'>".$mechchassisname."</span>\n";
+				$mechDetailString = $mechDetailString."						<img src='./images/ranks/".$factionidSelected."/".$pilotrank.".png' width='16px' height='16px'>";
+				$mechDetailString = $mechDetailString."						".$pilotname."</span> <span style='font-weight:normal;font-size:20px;color:#ffc677;'> PV ".$mechpointvalue." / ".$mechtonnage."t</span></a></span>\n";
+				$mechDetailString = $mechDetailString."							<br><span style='font-size:15px;'>".textTruncate($mechchassisname, 28)."</span>\n";
 				$mechDetailString = $mechDetailString."						</td>\n";
 
-				$mechDetailString = $mechDetailString."						<td nowrap width='1%' style='background-color:".$bidcolor."text-align:right;'>\n";
-				$mechDetailString = $mechDetailString."							<span style='font-size:16px;'>\n";
+				$mechDetailString = $mechDetailString."						<td nowrap width='1%' valign='top' style='background-color:".$bidcolor."text-align:right;'>\n";
+				$mechDetailString = $mechDetailString."							<span style='font-size:12px;'>\n";
 
 				if ($playMode) {
-					$mechDetailString = $mechDetailString."								&nbsp;\n";
+					$mechDetailString = $mechDetailString."								<img width='25px' src='".$mechRoundStatusImage."'>\n";
 				} else {
 					$mechDetailString = $mechDetailString."								<a href='./gui_select_unit.php?dm=1&mechid=".$assignedMechID."&pilotid=".$assignedPilotID."'><i class='fas fa-minus-square'></i></a>\n";
 				}
@@ -418,7 +535,7 @@ session_start();
 
 	if ($playMode) {
 		// FINALIZE ROUND
-		echo "  		<td nowrap style='text-align:center;width:100px;background:rgba(81,125,37,1.0);' rowspan='2'><div style='vertical-align:middle;font-size:42px;color:#eee;'>&nbsp;&nbsp;&nbsp;<i class='fas fa-redo'></i>&nbsp;&nbsp;&nbsp;</div></td>\n";
+		echo "  		<td nowrap onclick='javascript:finalizeRound(".$pid.");' id='FinalizeRoundButton' style='text-align:center;width:100px;background:rgba(81,125,37,1.0);' rowspan='2'><div style='vertical-align:middle;font-size:42px;color:#eee;'>&nbsp;&nbsp;&nbsp;<i class='fas fa-redo'></i>&nbsp;&nbsp;&nbsp;</div></td>\n";
 	}
 
 	echo "		</tr>\n";
@@ -442,23 +559,35 @@ session_start();
 
 	foreach ($mechsInAllUnits as &$mechsInSingleUnit) {
 		echo "			<td width='33%' style='background-color:#333333;' valign='top'>\n";
-		echo "				<table cellspacing=2 cellpadding=0 border=0px style='border-collapse: collapse;'>\n";
+		echo "				<div class='scroll-pane'>\n";
+		echo "				<table cellspacing=1 cellpadding=0 border=0px style='border-collapse: collapse;'>\n";
 		foreach ($mechsInSingleUnit as &$mech) {
 			echo "					<tr>\n";
 			echo "						".$mech."\n";
 			echo "					</tr>\n";
 		}
 		echo "				</table>\n";
+		echo "				</div>\n";
 		echo "			</td>\n";
 	}
 	echo "		</tr>\n";
 	echo "		<tr>\n";
 	echo "			<td colspan='4' style='background-color:#333333;' align='center' valign='top'>";
-	echo "				<span style='font-size:20;color:#eeeeee;'>Bid:&nbsp;</span><span style='font-size:20;color:#da8e25;'>PV ".$pointvaluetotalactivebid."</span><span style='font-size:20;color:#eeeeee;'>&nbsp;/&nbsp;</span><span style='font-size:20;color:#ff33ee;'>".$tonnagetotalactivebid." t</span>";
+	echo "				<span style='font-size:20;color:#eeeeee;'>Bid:&nbsp;</span><span style='font-size:20;color:#ffc677;'>PV ".$pointvaluetotalactivebid."</span><span style='font-size:20;color:#eeeeee;'>&nbsp;/&nbsp;</span><span style='font-size:20;color:#ffc677;'>".$tonnagetotalactivebid."t</span>";
 	echo "				<span style='font-size:20;color:#eeeeee;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>";
-	echo "				<span style='font-size:20;color:#eeeeee;'>Total:&nbsp;PV ".$pointvaluetotal."&nbsp;/&nbsp;".$tonnagetotal." t</span>";
+	echo "				<span style='font-size:20;color:#eeeeee;'>Total:&nbsp;PV ".$pointvaluetotal."&nbsp;/&nbsp;".$tonnagetotal."t</span>";
 	echo "			</td>\n";
 	echo "		</tr>\n";
+
+	if ($readyToFinalizeRound == 1) {
+		echo "<script>\n";
+		echo "document.getElementById('FinalizeRoundButton').style.backgroundColor = '#517d25';";
+		echo "</script>\n";
+	} else {
+		echo "<script>\n";
+		echo "document.getElementById('FinalizeRoundButton').style.backgroundColor = '#5c0700';";
+        echo "</script>\n";
+	}
 ?>
 
 		<tr><td colspan="9" style="color:#eee;font-size:20;text-align:center;"><br>Enable playmode (<u><a href="https://www.clanwolf.net/apps/ASCard/gui_edit_option.php">Options</a></u>) to add or remove units from your bid.<br><br></td></tr>

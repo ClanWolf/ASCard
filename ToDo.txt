@@ -11,3 +11,9 @@
 
 // TODO: CV movement is missing "t" tracked, "h" hover,...
 // TODO: Reconnaisence abkürzen im Unitname oben!
+// TODO: Remove challenge tab if playmode is off to see for the new edit game tab
+
+// TODO: Cache units from 100 - 200 tons
+// TODO: Store all units in the ALL file
+
+// TODO: Targeting computer erscheint weiß beim umschalten auf MUL Mode, aber beim wechseln wird er grau

@@ -8,7 +8,7 @@ var corsproxyprefix5 = "https://jsonp.afeld.me/?url=";
 
 var corsproxyprefix = corsproxyprefix5;
 
-function getMechList(filter, tech, minTon, maxTon) {
+function getMechList(filter, tech, minTon, maxTon, category, unittypeString) {
 
 	//console.log (filter);
 
@@ -38,6 +38,7 @@ function getMechList(filter, tech, minTon, maxTon) {
 		} else {
 			url = url + '&MinTons='				+ minTon;
 			url = url + '&MaxTons='				+ maxTon;
+			url = url + '&Types=17';                    // Aerospace
 			url = url + '&Types=18';                    // Mechs
 			url = url + '&Types=19';                    // Combat vehicles / Tanks
 		}
@@ -49,11 +50,18 @@ function getMechList(filter, tech, minTon, maxTon) {
 			cache_url = cache_url + 'IS';
 		}
 		cache_url = cache_url + '_';
-		cache_url = cache_url + maxTon;
+		if (category != '') {
+			cache_url = cache_url + category;
+		} else {
+			cache_url = cache_url + maxTon;
+		}
+		if (unittypeString != 'BA') {
+			cache_url = cache_url + '_' + unittypeString;
+		}
 		cache_url = cache_url + '.json';
 
-	//console.log("URL: " + url);
-	//console.log("Cache: " + cache_url);
+	console.log("URL: " + url);
+	console.log("Cache: " + cache_url);
 
 	$.getJSON(cache_url, function (json) {
 		json.Units.sort(function(a, b) {
@@ -65,10 +73,10 @@ function getMechList(filter, tech, minTon, maxTon) {
 			var unittypeid = unit.Type.Id;
 			var unittypename = unit.BFType;
 
-			//console.log(unit.Type.Id);
-			//if (unittypeid === 19) {
-			//	console.log(unit.Name);
-			//}
+			// console.log(unit.Type.Id);
+			// if (unittypeid === 19) {
+				// console.log(unit.Name);
+			// }
 
 			if (unittypename !== undefined) {
 				unittypename = " [" + unit.BFType + "]"
@@ -181,18 +189,43 @@ function mechSelected() {
 function fetchMechList() {
 	var tech = document.getElementById("tech");
 	var techid = tech.options[tech.selectedIndex].value;
+	var unittype = document.getElementById("unittype");
 	var tonnage = document.getElementById("tonnage");
+	var weightBlock = document.getElementById("weightBlock");
+	var unittypevalue = unittype.options[unittype.selectedIndex].value;
 	var tonnagevalue = tonnage.options[tonnage.selectedIndex].value;
 	var filter = document.getElementById("NameFilter").value;
 
 	if (tonnagevalue == '0') {
 		tonnagevalue = '';
 	}
-	if (tonnagevalue == 'None') {
-		getMechList(filter, techid, 0, 1000);
-	} else if (tonnagevalue == '0-2') {
-		getMechList(filter, techid, 0, 2);
+
+	if (unittypevalue == "BA") {
+		tonnage.disabled = true;
+		weightBlock.style.visibility='hidden';
+		weightBlock.style.display='none';
 	} else {
-		getMechList(filter, techid, tonnagevalue, tonnagevalue);
+		tonnage.disabled = false;
+		weightBlock.style.visibility='visible';
+		weightBlock.style.display='inline';
+	}
+
+	// console.log(unittypevalue);
+	// console.log(tonnagevalue);
+
+	if (unittypevalue == "BA") {
+		getMechList(filter, techid, 0, 2, 'BA', unittypevalue);
+	} else if (tonnagevalue == 'LIGHT') {
+		getMechList(filter, techid, 20, 35, 'LIGHT', unittypevalue);
+	} else if (tonnagevalue == 'MEDIUM') {
+		getMechList(filter, techid, 40, 55, 'MEDIUM', unittypevalue);
+	} else if (tonnagevalue == 'HEAVY') {
+		getMechList(filter, techid, 60, 75, 'HEAVY', unittypevalue);
+	} else if (tonnagevalue == 'ASSAULT') {
+		getMechList(filter, techid, 80, 100, 'ASSAULT', unittypevalue);
+	} else if (tonnagevalue == 'SUPERHEAVY') {
+		getMechList(filter, techid, 105, 200, 'SUPERHEAVY', unittypevalue);
+//	} else {
+//		getMechList(filter, techid, tonnagevalue, tonnagevalue, '');
 	}
 }

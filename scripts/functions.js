@@ -43,6 +43,7 @@ var sound_key = null;
 var sound_keyTC = null;
 var sound_openTC = null;
 var sound_closeTC = null;
+var sound_error = null;
 var sound_01 = null;
 var sound_02 = null;
 var sound_03 = null;
@@ -904,6 +905,8 @@ function setCircles(h, a, s, e, fc, mp, w, uov, mvmnt, wpnsf, tc_rangeValueReadi
 		document.getElementById("WF6_WEAPONSFIRED2").checked = false;
 		document.getElementById('INFOFIRED').innerHTML = "";
 		document.getElementById('phasebuttonimage').src="./images/top-right_phase01.png";
+
+		playErrorSound();
 	}
 	updateOverAllToHitValue(1);
 }
@@ -1073,7 +1076,8 @@ function changeWallpaper() {
 		}
 		const allDataAreaReds = document.getElementsByClassName("dataarea_red");
 		for (let i = 0; i < allDataAreaReds.length; i++) {
-			allDataAreaReds[i].style.backgroundColor="rgba(255,255,255,0.85)"
+			//allDataAreaReds[i].style.backgroundColor="rgba(255,255,255,0.85)";
+			allDataAreaReds[i].style.backgroundColor="rgba(10,10,10,0.70)";
 		}
 		const allDataValues = document.getElementsByClassName("datavalue");
 		for (let i = 0; i < allDataValues.length; i++) {
@@ -1094,7 +1098,7 @@ function changeWallpaper() {
 		}
 		const allDataAreaReds = document.getElementsByClassName("dataarea_red");
 		for (let i = 0; i < allDataAreaReds.length; i++) {
-			allDataAreaReds[i].style.backgroundColor="rgba(70,0,0,0.65)"
+			allDataAreaReds[i].style.backgroundColor="rgba(70,0,0,0.65)";
 		}
 		const allDataValues = document.getElementsByClassName("datavalue");
 		for (let i = 0; i < allDataValues.length; i++) {
@@ -1155,6 +1159,13 @@ function playTapSound() {
 		sound_key = new Howl({ src: ['./audio/key.mp3', './audio/key.ogg'] });
 	}
 	sound_key.play();
+}
+
+function playErrorSound() {
+	if (sound_error == null) {
+		sound_error = new Howl({ src: ['./audio/error.mp3', './audio/error.ogg'] });
+	}
+	sound_error.play();
 }
 
 function playTCOpenSound() {

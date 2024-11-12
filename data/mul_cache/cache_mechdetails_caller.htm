@@ -6,7 +6,7 @@
 		const update_cache = async () => {
 		document.getElementById("error").innerHTML = "";
 
-		for (let i = 0; i < 16000;) {
+		for (let i = 0; i < 20000;) {
             await fetch("https://www.clanwolf.net/apps/ASCard/data/mul_cache/cache_mechdetails.php?startindex=" + i).
 				catch(error => {
                     document.getElementById("error").innerHTML = error + " index: " + i ;

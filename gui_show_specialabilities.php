@@ -29,7 +29,7 @@
 	<link rel="apple-touch-icon" href="./images/icon_152x152.png" type="image/png" sizes="152x152">
 	<link rel="apple-touch-icon" href="./images/icon_180x180.png" type="image/png" sizes="180x180">
 
-	<script type="text/javascript" src="./scripts/jquery-3.6.1.min.js"></script>
+	<script type="text/javascript" src="./scripts/jquery-3.7.1.min.js"></script>
 </head>
 
 <body style="background-image: url('images/body-bg_2.jpg');">
