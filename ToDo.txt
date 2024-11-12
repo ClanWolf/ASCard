@@ -17,3 +17,5 @@
 // TODO: Store all units in the ALL file
 
 // TODO: Targeting computer erscheint weiß beim umschalten auf MUL Mode, aber beim wechseln wird er grau
+
+// TODO: Add a user id to created mechs and show only own mechs in assignment list

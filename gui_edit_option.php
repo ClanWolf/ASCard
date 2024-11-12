@@ -72,7 +72,7 @@ session_start();
 	<meta name="robots" content="noindex,nofollow">
 	<meta name="mobile-web-app-capable" content="yes">
 	<meta name="apple-mobile-web-app-capable" content="yes">
-	<meta name="viewport" content="width=device-width, initial-scale=0.75, minimum-scale=0.75, maximum-scale=0.75, user-scalable=no" />
+	<meta name="viewport" content="width=device-width, initial-scale=0.80, minimum-scale=0.75, maximum-scale=1.85, user-scalable=yes" />
 
 	<link rel="manifest" href="./manifest.json">
 	<!-- <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css"> -->
@@ -235,7 +235,6 @@ session_start();
 					Show pilot info in playmode (top left)
 				</td>
 			</tr>
-			<tr><td colspan="2"><hr></td></tr>
 			<tr>
 				<td align="left" class='datalabel'>
 					<label class="bigcheck"><input onchange="changeOption();" type="checkbox" class="bigcheck" name="OPT4" value="yes"/><span class="bigcheck-target"></span></label>&nbsp;&nbsp;
@@ -253,22 +252,27 @@ session_start();
 					Play mode (deactivate unit editing)
 				</td>
 			</tr>
+
+            <?php
+            	if ($pid == 2) { // Meldric (only admin may refresh the cache)
+            		echo "<tr><td colspan='2'><hr></td></tr>\n";
+	                echo "<tr>\n";
+	                echo "	<td nowrap colspan='2' style='color:#dcdcdc;' class='mechselect_button_normal' onclick='window.open(\"https://www.clanwolf.net/apps/ASCard/data/mul_cache/cache.php\");'>\n";
+	                echo "		&nbsp;&nbsp;&nbsp;Update unit cache from MUL&nbsp;&nbsp;&nbsp;\n";
+	                echo "	</td>\n";
+	                echo "</tr>\n";
+				}
+            ?>
+
 		</table>
-
-<?php
-	if ($pid == 2) { // Meldric (only admin may refresh the cache)
-		echo "<p class='datalabel' align='center'><a href='https://www.clanwolf.net/apps/ASCard/data/mul_cache/cache.php' target='_BLANK'>Update unit cache from MUL</a><br>";
-	} else {
-		echo "<p class='datalabel' align='center'>Only admin may refresh cache!<br>";
-	}
-?>
-
-		(Last updated: <?php echo $file_cacheversion ?>)</p>
 	</div>
 
 	<script>
 		setOptions();
 	</script>
+
+	<p align="center" class="footerInfo">(Last updated: <?php echo $file_cacheversion ?>)</p>
+
 </body>
 
 </html>

@@ -114,7 +114,7 @@ session_start();
 	<meta name="robots" content="noindex,nofollow">
 	<meta name="mobile-web-app-capable" content="yes">
 	<meta name="apple-mobile-web-app-capable" content="yes">
-	<meta name="viewport" content="width=device-width, initial-scale=0.75, minimum-scale=0.75, maximum-scale=0.75, user-scalable=no" />
+	<meta name="viewport" content="width=device-width, initial-scale=0.80, minimum-scale=0.75, maximum-scale=1.85, user-scalable=yes" />
 
 	<link rel="manifest" href="./manifest.json">
 	<!-- <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css"> -->
@@ -180,12 +180,12 @@ session_start();
 		}
 		.scroll-pane {
 			width: 100%;
-			height: 200px;
+			height: 100px;
 			overflow: auto;
 		}
 		.horizontal-only {
 			height: auto;
-			max-height: 200px;
+			max-height: 100px;
 		}
 	</style>
 </head>
@@ -273,9 +273,9 @@ session_start();
 		<table width="60%" align="center" class="options" cellspacing="4" cellpadding="4" border="0px">
 			<tr>
 				<td valign="top" width="75%">
-					<table width="100%" cellspacing="0" cellpadding="0">
+					<table width="100%" border="0" cellspacing="0" cellpadding="0">
 						<tr>
-							<td nowrap colspan="3" align="left">&quot;<?php echo $DESC; ?>&quot; [ID: <?php echo $GAMEID; ?>]
+							<td class='datalabel' nowrap colspan="3" align="left">&quot;<?php echo $DESC; ?>&quot; [ID: <?php echo $GAMEID; ?>]
 							<?php if ($LOCKED == 0) {
 								echo "&nbsp;&nbsp;&nbsp;<a href='#' onClick='unlockGame();'><i class='fa-solid fa-lock'></i></i></a>";
 							} else {
@@ -284,17 +284,17 @@ session_start();
 							</td>
 						</tr>
 						<tr>
-							<td nowrap align="left" width="3%">Access code:</td><td nowrap align="left" width="3%">&nbsp;&nbsp;&nbsp;<i class="fa-solid fa-rotate-right"></i></td><td nowrap align="left" width="94%">&nbsp;&nbsp;&nbsp;<?php echo $ACCESSCODE; ?>
+							<td class='datalabel' nowrap align="left" width="3%">Access code:</td><td nowrap align="left" width="3%">&nbsp;&nbsp;&nbsp;<i class="fa-solid fa-rotate-right"></i></td><td class='datalabel' nowrap align="left" width="94%">&nbsp;&nbsp;&nbsp;<?php echo $ACCESSCODE; ?>
 						</tr>
 					</table>
 				</td>
-				<td nowrap valign="top" align="left" width="25%" rowspan="3">
-					Joined in my game:<br><br>
+				<td class='datalabel' nowrap valign="top" align="left" width="25%" rowspan="3">
+					Joined players:<br><br>
 					<div class="scroll-pane">
-						<table>
+						<table width="100%" border="0" cellspacing="0" cellpadding="0">
 						<?php
 						foreach ($array_joinedUsers as &$value) {
-							echo "<tr><td nowrap align='left' width='3%'><i class='fas fa-minus-square'></i></td><td>&nbsp;&nbsp;&nbsp;" . $value . "</td><td nowrap align='right' width='3%'>&nbsp;&nbsp;&nbsp;<i class='fas fa-minus-square'></i></td></tr>";
+							echo "<tr><td nowrap align='left' width='3%'><i class='fas fa-minus-square'></i></td><td class='datalabel'>&nbsp;&nbsp;&nbsp;" . $value . "</td><td nowrap align='right' width='3%'>&nbsp;&nbsp;&nbsp;<i class='fas fa-minus-square'></i></td></tr>";
 						}
 						?>
 						</table>
@@ -303,9 +303,9 @@ session_start();
 			</tr>
 			<tr><td colspan="1"><hr></td></tr>
 			<tr>
-				<td colspan="1">
+				<td class='datalabel' colspan="1">
 					<form autocomplete="autocomplete_off_hack_xfr4!k">
-						<table cellspacing="2" cellpadding="2" border="0px" width="100%">
+						<table cellspacing="0" cellpadding="0" border="0px" width="100%">
 							<tr>
 								<td colspan="1" class='datalabel' nowrap align="left">Join:</td>
 								<td colspan="1" class='datalabel' nowrap align="left">
@@ -327,47 +327,28 @@ session_start();
 								if ($gid == 1) {
 									echo "<td colspan='6' class='datalabel' nowrap align='left'>I am NOT in any game.</td>";
 								} else {
-									echo "<td colspan='6' class='datalabel' nowrap align='left'><a href='#' onClick='leaveGame();'><i class='fas fa-minus-square'></i>&nbsp;&nbsp;&nbsp;(I am in game " . $gid . ")</a></td>";
+									echo "<td colspan='6' class='datalabel' nowrap align='left'><a href='#' onClick='leaveGame();'><i class='fas fa-minus-square'></i>&nbsp;&nbsp;&nbsp;(Game " . $gid . ")</a></td>";
 								}
 								?>
 							</tr>
-                            <tr>
-                                <td nowrap colspan='8' text-align: center; vertical-align: middle;">
 
-                                    <br>
-
-                                    <table  style="border:none;border-collapse:collapse;" cellspacing="2" cellpadding="0" border="0px" width="100%">
-                                    <?php
-                                        if (!$playMode) {
-                                            echo "<tr>\n";
-                                            echo "	<td nowrap width='98%' style='color:#dcdcdc;' class='mechselect_button_normal' onclick='javascript:finalizeRound(".$pid.");'>\n";
-                                            echo "		&nbsp;&nbsp;&nbsp;<i class='fas fa-redo'></i>&nbsp;&nbsp;&nbsp;Finalize round ".$CURRENTROUND." of game ".$gid."\n";
-                                            echo "	</td>\n";
-                                            echo "  <td style='width:5px;'>&nbsp;</td>\n";
-                                            echo "	<td nowrap width='1%' style='color:#dcdcdc;' class='mechselect_button_normal' onclick='javascript:resetRound(".$pid.");'>\n";
-                                            echo "		&nbsp;&nbsp;&nbsp;RESET Round&nbsp;&nbsp;&nbsp;\n";
-                                            echo "	</td>\n";
-                                            echo "</tr>\n";
-                                        } else {
-                                            echo "<tr>\n";
-                                            echo "	<td nowrap width='100%' style='color:#dcdcdc;' class='mechselect_button_normal' onclick='javascript:finalizeRound(".$pid.");'>\n";
-                                            echo "		&nbsp;&nbsp;&nbsp;<i class='fas fa-redo'></i>&nbsp;&nbsp;&nbsp;Finalize round ".$CURRENTROUND." of game ".$gid."\n";
-                                            echo "	</td>\n";
-                                            echo "</tr>\n";
-                                        }
-                                    ?>
-
-                                    </table>
-                                </td>
-                            </tr>
 						</table>
 					</form>
 				</td>
 			</tr>
+
+										<tr><td colspan="2"><hr></td></tr>
+                                        <tr>
+                                            <td nowrap colspan='8' class='mechselect_button_normal' style='color:#dcdcdc;' onclick='javascript:resetRound(<?php echo $pid ?>);'>
+            									&nbsp;&nbsp;&nbsp;RESET Round&nbsp;&nbsp;&nbsp;
+                                            </td>
+                                        </tr>
+
+
 		</table>
 	</div>
 
-	<p align="center"><span style='font-size:24px;color:#fff;'>Inaccessible games do NOT show up to join!<br>Access code is ALWAYS needed to join accessible games!</span></p>
+	<p align="center" class="footerInfo">Inaccessible games do NOT show up! Access code is needed to join!</p>
 
 </body>
 

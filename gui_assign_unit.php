@@ -120,7 +120,7 @@ session_start();
 	<meta name="robots" content="noindex,nofollow">
 	<meta name="mobile-web-app-capable" content="yes">
 	<meta name="apple-mobile-web-app-capable" content="yes">
-	<meta name="viewport" content="width=device-width, initial-scale=0.75, minimum-scale=0.75, maximum-scale=0.75, user-scalable=no" />
+	<meta name="viewport" content="width=device-width, initial-scale=0.80, minimum-scale=0.75, maximum-scale=1.85, user-scalable=yes" />
 
 	<link rel="manifest" href="./manifest.json">
 	<!-- <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css"> -->

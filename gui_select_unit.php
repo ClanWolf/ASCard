@@ -160,7 +160,7 @@ session_start();
 	<meta name="robots" content="noindex,nofollow">
 	<meta name="mobile-web-app-capable" content="yes">
 	<meta name="apple-mobile-web-app-capable" content="yes">
-	<meta name="viewport" content="width=device-width, initial-scale=0.75, minimum-scale=0.75, maximum-scale=0.75, user-scalable=no" />
+	<meta name="viewport" content="width=device-width, initial-scale=0.80, minimum-scale=0.75, maximum-scale=1.85, user-scalable=yes" />
 
 	<link rel="manifest" href="./manifest.json">
 	<!-- <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css"> -->
@@ -211,12 +211,12 @@ session_start();
 		}
 		.scroll-pane {
             width: 100%;
-            height: 280px;
+            height: 260px;
             overflow: auto;
         }
         .horizontal-only {
             height: auto;
-            max-height: 280px;
+            max-height: 260px;
         }
 	</style>
 </head>
@@ -447,6 +447,7 @@ session_start();
 				if ($mechstatus == "destroyed") {
 					$mechRoundStatusImage = "./images/skull.png";
 					$bidcolor = "#222;";
+					// background-image:repeating-linear-gradient(45deg, #444444 0%, #444444 2%, #aaaa00 2%, #aaaa00 4%, #444444 4%);
 				}
 
 				$mechDetailString = "";
@@ -509,15 +510,15 @@ session_start();
 					$mechDetailString = $mechDetailString."						<td nowrap width='99%' align='left' style='color:#AAAAAA;background-color:".$bidcolor."text-align:left;'><a href='' target='_SELF'> <span style='font-size:24px;'>";
 				}
 				$mechDetailString = $mechDetailString."						<img src='./images/ranks/".$factionidSelected."/".$pilotrank.".png' width='16px' height='16px'>";
-				$mechDetailString = $mechDetailString."						".$pilotname."</span> <span style='font-weight:normal;font-size:20px;color:#ffc677;'> PV ".$mechpointvalue." / ".$mechtonnage."t</span></a></span>\n";
-				$mechDetailString = $mechDetailString."							<br><span style='font-size:15px;'>".textTruncate($mechchassisname, 28)."</span>\n";
+				$mechDetailString = $mechDetailString."						".$pilotname."</span> <span style='font-weight:normal;font-size:20px;color:#ffc677;'> ".$mechpointvalue."/".$mechtonnage."t</span></a></span>\n";
+				$mechDetailString = $mechDetailString."							<br><span style='font-size:15px;'>".textTruncate($mechchassisname, 22)."</span>\n";
 				$mechDetailString = $mechDetailString."						</td>\n";
 
 				$mechDetailString = $mechDetailString."						<td nowrap width='1%' valign='top' style='background-color:".$bidcolor."text-align:right;'>\n";
 				$mechDetailString = $mechDetailString."							<span style='font-size:12px;'>\n";
 
 				if ($playMode) {
-					$mechDetailString = $mechDetailString."								<img width='25px' src='".$mechRoundStatusImage."'>\n";
+					$mechDetailString = $mechDetailString."								&nbsp;&nbsp;<img width='25px' src='".$mechRoundStatusImage."'>\n";
 				} else {
 					$mechDetailString = $mechDetailString."								<a href='./gui_select_unit.php?dm=1&mechid=".$assignedMechID."&pilotid=".$assignedPilotID."'><i class='fas fa-minus-square'></i></a>\n";
 				}
@@ -539,22 +540,22 @@ session_start();
 	}
 
 	echo "		</tr>\n";
-	if (!$playMode) {
-		echo "		<tr>\n";
-		echo "			<td nowrap style='text-align:center;width:200px;height:30px;background-color:#transparent;'>\n";
-		echo "				<a href='".$assignMechToUnitLinkArray[0]."'><i class='fas fa-plus-square'></i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\n";
-		echo "				<a href='".$addMechToUnitLinkArray[0]."'><i class='fas fa-asterisk'></i></a>\n";
-		echo "			</td>\n";
-		echo "			<td nowrap style='text-align:center;width:200px;height:30px;background-color:#transparent;'>\n";
-		echo "				<a href='".$assignMechToUnitLinkArray[1]."'><i class='fas fa-plus-square'></i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\n";
-		echo "				<a href='".$addMechToUnitLinkArray[1]."'><i class='fas fa-asterisk'></i></a>\n";
-		echo "			</td>\n";
-		echo "			<td nowrap style='text-align:center;width:200px;height:30px;background-color:#transparent;'>\n";
-		echo "				<a href='".$assignMechToUnitLinkArray[2]."'><i class='fas fa-plus-square'></i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\n";
-		echo "				<a href='".$addMechToUnitLinkArray[2]."'><i class='fas fa-asterisk'></i></a>\n";
-		echo "			</td>\n";
-		echo "		</tr>\n";
-	}
+//	if (!$playMode) {
+//		echo "		<tr>\n";
+//		echo "			<td nowrap style='text-align:center;width:200px;height:30px;background-color:#transparent;'>\n";
+//		echo "				<a href='".$assignMechToUnitLinkArray[0]."'><i class='fas fa-plus-square'></i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\n";
+//		echo "				<a href='".$addMechToUnitLinkArray[0]."'><i class='fas fa-asterisk'></i></a>\n";
+//		echo "			</td>\n";
+//		echo "			<td nowrap style='text-align:center;width:200px;height:30px;background-color:#transparent;'>\n";
+//		echo "				<a href='".$assignMechToUnitLinkArray[1]."'><i class='fas fa-plus-square'></i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\n";
+//		echo "				<a href='".$addMechToUnitLinkArray[1]."'><i class='fas fa-asterisk'></i></a>\n";
+//		echo "			</td>\n";
+//		echo "			<td nowrap style='text-align:center;width:200px;height:30px;background-color:#transparent;'>\n";
+//		echo "				<a href='".$assignMechToUnitLinkArray[2]."'><i class='fas fa-plus-square'></i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\n";
+//		echo "				<a href='".$addMechToUnitLinkArray[2]."'><i class='fas fa-asterisk'></i></a>\n";
+//		echo "			</td>\n";
+//		echo "		</tr>\n";
+//	}
 	echo "		<tr>\n";
 
 	foreach ($mechsInAllUnits as &$mechsInSingleUnit) {
@@ -589,10 +590,10 @@ session_start();
         echo "</script>\n";
 	}
 ?>
-
-		<tr><td colspan="9" style="color:#eee;font-size:20;text-align:center;"><br>Enable playmode (<u><a href="https://www.clanwolf.net/apps/ASCard/gui_edit_option.php">Options</a></u>) to add or remove units from your bid.<br><br></td></tr>
-
 	</table>
+
+	<p align="center" class="footerInfo">Enable playmode to change your bid.</p>
+
 </body>
 
 </html>
