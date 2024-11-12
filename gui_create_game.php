@@ -202,7 +202,8 @@ session_start();
 
 	<div id="cover"></div>
 
-	<iframe name="saveframe" src="./save_dummy.htm"></iframe>
+	<!-- <iframe name="saveframe" src="./save_dummy.htm"></iframe> -->
+	<iframe name="saveframe"></iframe>
 
     <script>
         $(document).ready(function() {

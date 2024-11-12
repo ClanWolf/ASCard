@@ -141,7 +141,7 @@ session_start();
         }
         $text = $text." ";
         $text = substr($text,0,$chars);
-        $text = substr($text,0,strrpos($text,' '));
+        //$text = substr($text,0,strrpos($text,' '));
         $text = $text."...";
         return $text;
     }
@@ -222,7 +222,8 @@ session_start();
 </head>
 
 <body>
-	<iframe name="saveframe" src="./save_dummy.htm"></iframe>
+	<!-- <iframe name="saveframe" src="./save_dummy.htm"></iframe> -->
+	<iframe name="saveframe"></iframe>
 
 	<div id="cover"></div>
 
@@ -511,7 +512,7 @@ session_start();
 				}
 				$mechDetailString = $mechDetailString."						<img src='./images/ranks/".$factionidSelected."/".$pilotrank.".png' width='16px' height='16px'>";
 				$mechDetailString = $mechDetailString."						".$pilotname."</span> <span style='font-weight:normal;font-size:20px;color:#ffc677;'> ".$mechpointvalue."/".$mechtonnage."t</span></a></span>\n";
-				$mechDetailString = $mechDetailString."							<br><span style='font-size:15px;'>".textTruncate($mechchassisname, 22)."</span>\n";
+				$mechDetailString = $mechDetailString."							<br><span style='font-size:15px;'>".textTruncate($mechchassisname, 18)."</span>\n";
 				$mechDetailString = $mechDetailString."						</td>\n";
 
 				$mechDetailString = $mechDetailString."						<td nowrap width='1%' valign='top' style='background-color:".$bidcolor."text-align:right;'>\n";
