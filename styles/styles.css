@@ -10,7 +10,7 @@
 }
 
 input[type="text"]::selection {
-    background-color:green;
+	background-color:green;
 }
 
 * {
@@ -464,10 +464,10 @@ a:hover {
 	left: 45%;
 	right: 15%;
 	object-fit: contain;
-    overflow: visible;
+	overflow: visible;
 }
 #mechimage {
-    width: 100%;
+	width: 100%;
 	height: auto !important;
 }
 #footer {
@@ -504,7 +504,6 @@ a:hover {
 	bottom: 4px;
 	width: 100%;
 }
-
 .phase_button_normal {
 	font-size: 100%;
 	padding: 10px;
@@ -626,11 +625,11 @@ a:hover {
 }
 
 input, input:before, input:after {
-  -webkit-user-select: initial;
-  -khtml-user-select: initial;
-  -moz-user-select: initial;
-  -ms-user-select: initial;
-  user-select: initial;
+	-webkit-user-select: initial;
+	-khtml-user-select: initial;
+	-moz-user-select: initial;
+	-ms-user-select: initial;
+	user-select: initial;
 }
 
 input.bigcheck {
