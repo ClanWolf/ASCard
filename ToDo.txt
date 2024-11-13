@@ -15,3 +15,7 @@ TODO: Button für alle Mechs zurücksetzen
 TODO: Button für alle Mechs löschen
 TODO: Indikator für gemountete Elementare / Infanterie
 TODO: Shortcut bar irgendwo mit allen Mech-Ids zum schnellen Wechseln
+
+TODO: Grüner Button zum Beenden der Runde ignoriert nicht alle Einheiten, die weggeboten sind
+TODO: Alle Schriftarten sollten als em relativ definiert werden
+TODO: Initialer Scale wieder auf 0.75% --> Schriftgrößen anpassen statt dem Scale!
