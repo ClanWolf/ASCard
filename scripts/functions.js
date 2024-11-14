@@ -662,12 +662,14 @@ function setCircles(h, a, s, e, fc, mp, w, uov, mvmnt, wpnsf, tc_rangeValueReadi
 		var updatedmovementpointsjumpHexes = Math.ceil(updatemovementpointsjump / 2);
 
 		var mvstring = updatedmovementpointsgroundHexes + "<span style='font-size:0.6em;'>&#11043;</span>"; // Unicode for Hexagon
+		mvstring = mvstring + MV_TYPE;
 		if (updatedmovementpointsjumpHexes > 0) {
 			mvstring = mvstring + "/" + updatedmovementpointsjumpHexes + "<span style='font-size:0.6em;'>&#11043;</span>j"; // Unicode for Hexagon
 		}
 		document.getElementById("mv_points").innerHTML = mvstring;
 	} else {
 		var mvstring = updatedmovementpointsground + "&rdquo;";
+		mvstring = mvstring + MV_TYPE;
 		if (updatemovementpointsjump > 0) {
 			mvstring = mvstring + "/" + updatemovementpointsjump + "&rdquo;j";
 		}

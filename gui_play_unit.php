@@ -43,7 +43,7 @@ session_start();
 	<meta name="robots" content="noindex,nofollow">
 	<meta name="mobile-web-app-capable" content="yes">
 	<meta name="apple-mobile-web-app-capable" content="yes">
-	<meta name="viewport" content="width=device-width, initial-scale=0.80, minimum-scale=0.75, maximum-scale=1.85, user-scalable=yes" />
+	<meta name="viewport" content="width=device-width, initial-scale=0.75, minimum-scale=0.75, maximum-scale=1.85, user-scalable=yes" />
 
 	<link rel="manifest" href="./manifest.json">
 	<link rel="stylesheet" type="text/css" href="./fontawesome/css/all.min.css" rel="stylesheet">
@@ -58,6 +58,15 @@ session_start();
 	<link rel="apple-touch-icon" href="./images/icon_144x144.png" type="image/png" sizes="144x144">
 	<link rel="apple-touch-icon" href="./images/icon_152x152.png" type="image/png" sizes="152x152">
 	<link rel="apple-touch-icon" href="./images/icon_180x180.png" type="image/png" sizes="180x180">
+
+	<!-- https://www.npmjs.com/package/passive-events-support?activeTab=readme -->
+	<script>
+		window.passiveSupport = {
+			debug: true,
+			events: ['touchstart', 'touchmove', 'wheel']
+		}
+	</script>
+	<script type="text/javascript" src="./scripts/passive-events-support/main.js"></script>
 
 	<script type="text/javascript" src="./scripts/jquery-3.7.1.min.js"></script>
 	<script type="text/javascript" src="./scripts/howler.min.js"></script>
@@ -366,6 +375,22 @@ session_start();
 	echo "  var MP_PREP = $array_MP_PREP[$chosenMechIndex];\n";
 	echo "  var WPNS_PREP = $array_WPNS_PREP[$chosenMechIndex];\n";
 	echo "	var HT_PREP = $array_HT_PREP[$chosenMechIndex];\n";
+	if ($array_MVTYPE[$chosenMechIndex] != null) {
+		echo "	var MV_TYPE = '$array_MVTYPE[$chosenMechIndex]';\n";
+	} else {
+		echo "	var MV_TYPE = '';\n";
+	}
+	if ($array_MOUNTED_UNITID[$chosenMechIndex] != null) {
+		echo "	var MOUNTED_UNITID = ".$array_MOUNTED_UNITID[$chosenMechIndex].";\n";
+	} else {
+		echo "	var MOUNTED_UNITID = 0;\n";
+	}
+	if ($array_MOUNTED_ON_UNITID[$chosenMechIndex] != null) {
+		echo "	var MOUNTED_ON_UNITID = ".$array_MOUNTED_ON_UNITID[$chosenMechIndex].";\n";
+	} else {
+		echo "	var MOUNTED_ON_UNITID = 0;\n";
+	}
+
 	echo "	var playerId = ".$pid.";\n";
 	if ($showDistancesHexes != null) {
 		echo "  var showDistancesHexes = ".$showDistancesHexes.";\n";
@@ -734,7 +759,8 @@ session_start();
 							<td nowrap class="datavalue" width="13%" id="TMM"><?php echo "$array_TMM[$chosenMechIndex]"; ?></td>
 							<td nowrap class="datalabel" width="12%">MV:</td>
 							<td nowrap class="datavalue" style="text-transform: none;" width="13%" id="mv_points">
-							<?php echo "$array_MV[$chosenMechIndex]&rdquo;";
+							<!-- <script>console.log('MVT: <?= $array_MVTYPE[$chosenMechIndex] ?>');</script> -->
+							<?php echo "$array_MV[$chosenMechIndex]&rdquo;$array_MVTYPE[$chosenMechIndex]";
 								if ($array_MVJ[$chosenMechIndex] != null) {
 									echo "/$array_MVJ[$chosenMechIndex]&rdquo;&nbsp;j\r\n";
 								} else {

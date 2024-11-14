@@ -160,7 +160,7 @@ session_start();
 	<meta name="robots" content="noindex,nofollow">
 	<meta name="mobile-web-app-capable" content="yes">
 	<meta name="apple-mobile-web-app-capable" content="yes">
-	<meta name="viewport" content="width=device-width, initial-scale=0.80, minimum-scale=0.75, maximum-scale=1.85, user-scalable=yes" />
+	<meta name="viewport" content="width=device-width, initial-scale=0.75, minimum-scale=0.75, maximum-scale=1.85, user-scalable=yes" />
 
 	<link rel="manifest" href="./manifest.json">
 	<!-- <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css"> -->
@@ -177,6 +177,15 @@ session_start();
 	<link rel="apple-touch-icon" href="./images/icon_144x144.png" type="image/png" sizes="144x144">
 	<link rel="apple-touch-icon" href="./images/icon_152x152.png" type="image/png" sizes="152x152">
 	<link rel="apple-touch-icon" href="./images/icon_180x180.png" type="image/png" sizes="180x180">
+
+	<!-- https://www.npmjs.com/package/passive-events-support?activeTab=readme -->
+	<script>
+		window.passiveSupport = {
+			debug: true,
+			events: ['touchstart', 'touchmove', 'wheel']
+		}
+	</script>
+	<script type="text/javascript" src="./scripts/passive-events-support/main.js"></script>
 
 	<script type="text/javascript" src="./scripts/jquery-3.7.1.min.js"></script>
 	<script type="text/javascript" src="./scripts/jquery.jscrollpane.min.js"></script>
@@ -398,21 +407,21 @@ session_start();
 						$mechRoundStatusImage = "";
                         if ($mechHasMoved == 0 && $mechHasFired == 0) {
                             $mechRoundStatusImage = "./images/top-right_phase01.png";
-                            if ($mechstatus != "destroyed") {
+                            if ($mechstatus != "destroyed" && $activebid != 0) {
                                 $readyToFinalizeRound = 0;
 								// echo "<script>console.log('negating!".$readyToFinalizeRound."');</script>";
                             }
                         }
                         if ($mechHasMoved == 0 && $mechHasFired > 0) {
                             $mechRoundStatusImage = "./images/top-right_phase01.png";
-                            if ($mechstatus != "destroyed") {
+                            if ($mechstatus != "destroyed" && $activebid != 0) {
                                 $readyToFinalizeRound = 0;
                                 // echo "<script>console.log('negating!".$readyToFinalizeRound."');</script>";
                             }
                         }
                         if ($mechHasMoved > 0 && $mechHasFired == 0) {
                             $mechRoundStatusImage = "./images/top-right_phase02.png";
-							if ($mechstatus != "destroyed") {
+							if ($mechstatus != "destroyed" && $activebid != 0) {
 							    $readyToFinalizeRound = 0;
                                 // echo "<script>console.log('negating!".$readyToFinalizeRound."');</script>";
 							}

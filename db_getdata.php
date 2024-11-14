@@ -38,6 +38,7 @@
 	$array_TMM = array();
 	$array_MV = array();
 	$array_MVJ = array();
+	$array_MVTYPE = array();
 	$array_ROLE = array();
 	$array_SKILL = array();
 	$array_DMG_SHORT = array();
@@ -51,6 +52,9 @@
 	$array_HT = array();
 	$array_A = array();
 	$array_S = array();
+
+	$array_MOUNTED_UNITID = array();
+	$array_MOUNTED_ON_UNITID = array();
 
 	$array_ENGN = array();
 	$array_FRCTRL = array();
@@ -155,10 +159,10 @@
 				$array_WPNSFIRED[$mechcount] = $row["round_fired"];
 
 				// Mech
-				// mechid; mulid; mech_tonnage; custom_name; as_name; as_model; 
+				// mechid; mulid; mech_tonnage; custom_name; as_name; as_model;
 				// as_pv; as_tp; as_sz; as_tmm; as_mv; as_role; as_skill;
 				// as_short; as_short_min; as_medium; as_medium_min;
-				// as_long; as_long_min; as_extreme; as_extreme_min; 
+				// as_long; as_long_min; as_extreme; as_extreme_min;
 				// as_ov; as_armor; as_structure; as_threshold; as_specials;
 				// mech_imageurl
 				// and active_bid=1
@@ -188,6 +192,7 @@
 							$array_TMM[$mechcount] = $row["as_tmm"];
 							$array_MV[$mechcount] = $row["as_mv"];
 							$array_MVJ[$mechcount] = $row["as_mvj"];
+							$array_MVTYPE[$mechcount] = $row["as_mvtype"];
 							$array_ROLE[$mechcount] = $row["as_role"];
 							$array_SKILL[$mechcount] = $row["as_skill"];
 							$array_DMG_SHORT[$mechcount] = $row["as_short"];
@@ -197,6 +202,10 @@
 							$array_SPCL[$mechcount] = $row["as_specials"];
 							$array_A_MAX[$mechcount] = $row["as_armor"];
 							$array_S_MAX[$mechcount] = $row["as_structure"];
+
+							$array_MOUNTED_UNITID[$mechcount] = $row["mounted_unitid"];
+                            $array_MOUNTED_ON_UNITID[$mechcount] = $row["mounted_on_unitid"];
+
 							$array_ACTIVE_BID[$mechcount] = $row["active_bid"];
 						}
 					}

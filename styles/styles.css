@@ -8,11 +8,9 @@
 *::-moz-selection {
 	background-color:transparent;
 }
-
 input[type="text"]::selection {
 	background-color:green;
 }
-
 * {
 	font-family: 'Pathway Gothic One', sans-serif;
 	/* font-family: 'Russo One', sans-serif; */
@@ -20,6 +18,7 @@ input[type="text"]::selection {
 
 	font-size: 24px;
 
+	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 	-webkit-touch-callout: none; /* iOS Safari */
 	-webkit-user-select: none; /* Safari */
 	-khtml-user-select: none; /* Konqueror HTML */
@@ -27,7 +26,7 @@ input[type="text"]::selection {
 	-ms-user-select: none; /* Internet Explorer/Edge */
 	user-select: none; /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
 
-	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+	touch-action: manipulation;
 }
 /*
 @media only screen and (min-width: 0px) and (max-width: 800px) {
@@ -46,6 +45,7 @@ input[type="text"]::selection {
 	}
 }
 */
+
 html, body {
 	margin: 0;
 	padding: 0;
@@ -148,11 +148,9 @@ a:hover {
 	position: relative;
 	z-index: 999;
 	width: 100%;
-	/*
-	height: 140px;
-	min-height: 140px;
-	max-height: 140px;
-	*/
+	/* height: 140px; */
+	/* min-height: 140px; */
+	/* max-height: 140px; */
 	margin: 0 0;
 	top: 0px;
 	text-align: center;

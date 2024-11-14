@@ -90,6 +90,8 @@ session_start();
 		$MODEL = isset($_GET["MODEL"]) ? $_GET["MODEL"] : "";
 		$TECH = isset($_GET["TECH"]) ? $_GET["TECH"] : "";
 
+		$MVTYPE = isset($_GET["MVTYPE"]) ? $_GET["MVTYPE"] : "";
+
 		$TON = urldecode($TON);
 		$MNU = urldecode($MNU);
 		$TP = urldecode($TP);
@@ -201,7 +203,7 @@ session_start();
 
 		$sql_insertmech = "";
 		$sql_insertmech = $sql_insertmech."INSERT INTO asc_mech ";
-		$sql_insertmech = $sql_insertmech."(mech_number, tech, mulid, mech_tonnage, as_model, as_pv, as_tp, as_sz, as_tmm, as_mv, as_mvj, as_role, as_skill, as_short, as_short_min, as_medium, as_medium_min, as_long, as_long_min, as_extreme, as_extreme_min, as_ov, as_armor, as_structure, as_threshold, as_specials, mech_imageurl, mech_statusimageurl) ";
+		$sql_insertmech = $sql_insertmech."(mech_number, tech, mulid, mech_tonnage, as_model, as_pv, as_tp, as_sz, as_tmm, as_mv, as_mvj, as_role, as_skill, as_short, as_short_min, as_medium, as_medium_min, as_long, as_long_min, as_extreme, as_extreme_min, as_ov, as_armor, as_structure, as_threshold, as_specials, mech_imageurl, mech_statusimageurl, playerid, as_mvtype) ";
 		$sql_insertmech = $sql_insertmech."VALUES (";
 		$sql_insertmech = $sql_insertmech."'".$MNU."', ";           // mech_number
 		$sql_insertmech = $sql_insertmech."'".$TECH."', ";          // tech
@@ -234,7 +236,11 @@ session_start();
 		$sql_insertmech = $sql_insertmech."0, ";                    // as_threshold
 		$sql_insertmech = $sql_insertmech."'".$SPCL."', ";          // as_specials
 		$sql_insertmech = $sql_insertmech."'".$MECHIMAGE."', ";     // mech_imageurl
-		$sql_insertmech = $sql_insertmech."'".$MECHSTATUSIMAGE."'"; // mech_statusimageurl
+		$sql_insertmech = $sql_insertmech."'".$MECHSTATUSIMAGE."', "; // mech_statusimageurl
+
+		$sql_insertmech = $sql_insertmech."'".$pid."', "; // playerid
+		$sql_insertmech = $sql_insertmech."'".$MVTYPE."'"; // as_mvtype h = hover, w = wheeled, t = tracked
+
 		$sql_insertmech = $sql_insertmech.")";
 		if (mysqli_query($conn, $sql_insertmech)) {
 			// Success
@@ -310,7 +316,7 @@ session_start();
 	<meta name="robots" content="noindex,nofollow">
 	<meta name="mobile-web-app-capable" content="yes">
 	<meta name="apple-mobile-web-app-capable" content="yes">
-	<meta name="viewport" content="width=device-width, initial-scale=0.80, minimum-scale=0.75, maximum-scale=1.85, user-scalable=yes" />
+	<meta name="viewport" content="width=device-width, initial-scale=0.75, minimum-scale=0.75, maximum-scale=1.85, user-scalable=yes" />
 
 	<link rel="manifest" href="./manifest.json">
 	<!-- <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css"> -->
@@ -444,6 +450,15 @@ session_start();
 
 			var MVG = 0;
 			var MVJ = 0;
+			var MVType = '';
+
+			if (MV.indexOf("w") !== -1) {
+				MVType = 'w';
+			} else if (MV.indexOf("t") !== -1) {
+				MVType = 't';
+			} else if (MV.indexOf("h") !== -1) {
+				MVType = 'h';
+			}
 
 			if (MV.indexOf("/") !== -1) {
 				var MV_Parts = MV.split('/');
@@ -479,6 +494,7 @@ session_start();
 			url=url+"&MODEL="+encodeURIComponent(MODEL);
 			url=url+"&UNITID="+encodeURIComponent(UNITID);
 			url=url+"&TECH="+encodeURIComponent(TECH);
+			url=url+"&MVTYPE="+encodeURIComponent(MVType);
 
 			// alert(url);
 			window.location.href = url;
