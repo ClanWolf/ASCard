@@ -147,7 +147,8 @@ session_start();
     }
 ?>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
+
 <html lang="en">
 
 <head>
@@ -181,8 +182,25 @@ session_start();
 	<!-- https://www.npmjs.com/package/passive-events-support?activeTab=readme -->
 	<script>
 		window.passiveSupport = {
-			debug: true,
-			events: ['touchstart', 'touchmove', 'wheel']
+			debug: false,
+			events: ['touchstart', 'touchmove', 'wheel'],
+			listeners: [
+				{
+					element: '.jspContainer',
+					event: 'touchstart',
+					prevented: true
+				},
+				{
+					element: '.jspContainer',
+					event: 'touchmove',
+					prevented: true
+				},
+				{
+					element: '.jspContainer',
+					event: 'wheel',
+					prevented: true
+				}
+			]
 		}
 	</script>
 	<script type="text/javascript" src="./scripts/passive-events-support/main.js"></script>
@@ -220,12 +238,12 @@ session_start();
 		}
 		.scroll-pane {
             width: 100%;
-            height: 260px;
+            height: 280px;
             overflow: auto;
         }
         .horizontal-only {
             height: auto;
-            max-height: 260px;
+            max-height: 280px;
         }
 	</style>
 </head>
@@ -602,8 +620,13 @@ session_start();
 ?>
 	</table>
 
-	<p align="center" class="footerInfo">Enable playmode to change your bid.</p>
-
+<?php
+	if (!$playMode) {
+		echo "<p align='center' class='footerInfo'>Enable playmode to change your bid.</p>\n";
+	} else {
+		echo "<p align='center' class='footerInfo'>Check your bid. Disable playmode to unassign units.</p>\n";
+	}
+?>
 </body>
 
 </html>

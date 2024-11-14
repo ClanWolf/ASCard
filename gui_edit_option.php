@@ -59,7 +59,8 @@ session_start();
 	$file_cacheversion = file_get_contents('./cache/mul/cache.version', true);
 ?>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
+
 <html lang="en">
 
 <head>
@@ -88,6 +89,32 @@ session_start();
 	<link rel="apple-touch-icon" href="./images/icon_144x144.png" type="image/png" sizes="144x144">
 	<link rel="apple-touch-icon" href="./images/icon_152x152.png" type="image/png" sizes="152x152">
 	<link rel="apple-touch-icon" href="./images/icon_180x180.png" type="image/png" sizes="180x180">
+
+	<!-- https://www.npmjs.com/package/passive-events-support?activeTab=readme -->
+	<script>
+		window.passiveSupport = {
+			debug: false,
+			events: ['touchstart', 'touchmove', 'wheel'],
+			listeners: [
+				{
+					element: '.jspContainer',
+					event: 'touchstart',
+					prevented: true
+				},
+				{
+					element: '.jspContainer',
+					event: 'touchmove',
+					prevented: true
+				},
+				{
+					element: '.jspContainer',
+					event: 'wheel',
+					prevented: true
+				}
+			]
+		}
+	</script>
+	<script type="text/javascript" src="./scripts/passive-events-support/main.js"></script>
 
 	<script type="text/javascript" src="./scripts/jquery-3.7.1.min.js"></script>
 	<script type="text/javascript" src="./scripts/howler.min.js"></script>

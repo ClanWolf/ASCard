@@ -1,4 +1,5 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
+
 <html lang="en">
 
 <!-- https://spikeybits.com/2017/04/more-special-abilities-you-need-to-know-for-alpha-strike.html -->
@@ -29,6 +30,32 @@
 	<link rel="apple-touch-icon" href="./images/icon_152x152.png" type="image/png" sizes="152x152">
 	<link rel="apple-touch-icon" href="./images/icon_180x180.png" type="image/png" sizes="180x180">
 
+	<!-- https://www.npmjs.com/package/passive-events-support?activeTab=readme -->
+    <script>
+        window.passiveSupport = {
+            debug: false,
+            events: ['touchstart', 'touchmove', 'wheel'],
+            listeners: [
+				{
+					element: '.jspContainer',
+					event: 'touchstart',
+					prevented: true
+				},
+				{
+					element: '.jspContainer',
+					event: 'touchmove',
+					prevented: true
+				},
+				{
+					element: '.jspContainer',
+					event: 'wheel',
+					prevented: true
+				}
+            ]
+        }
+    </script>
+    <script type="text/javascript" src="./scripts/passive-events-support/main.js"></script>
+
 	<script type="text/javascript" src="./scripts/jquery-3.7.1.min.js"></script>
 </head>
 
@@ -52,10 +79,16 @@
 	<div class="topnav" id="nav">
 		<table class="options" cellspacing=10 cellpadding=10 border=0px>
 			<tr>
-				<td width="15%" nowrap align="center">
-					<!-- <a href="javascript:window.history.back();"><< Back</a> -->
-					<a href="./gui_select_unit.php"><< Back</a>
-				</td>
+				<!-- <td width="15%" nowrap align="center"> -->
+				<?php
+	                echo "					<td nowrap colspan='1' width='15%' style='color:#dcdcdc;' class='mechselect_button_normal' onclick='javascript:window.history.back();'>\n";
+                    echo "						<i style='font-size:2.5em;' class='fa-solid fa-caret-left'></i>\n";
+                    echo "					</td>\n";
+
+					// <a href="javascript:window.history.back();"><< Back</a>
+					// <a href="./gui_select_unit.php"><< Back</a>
+				?>
+				<!-- </td> -->
 				<td width="85%" align="left">
 					<a href="#PRB" target="_SELF">PRB</a>&nbsp;&nbsp;
 					<a href="#AFC" target="_SELF">AFC</a>&nbsp;&nbsp;

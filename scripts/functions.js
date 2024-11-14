@@ -141,6 +141,7 @@ function readCircles2(index, a_max, s_max, mv_bt_id, f_bt_id) {
 		mvmnt = 4;
 //		console.log("Movement 4: jumped");
 	}
+
 	if (mv_bt_id == -1) {
 		if (radioMV2_moved2_standstill.checked) { mvmnt = 2;  }
 		if (radioMV10_moved10_hulldown.checked) { mvmnt = 10; }
@@ -344,7 +345,15 @@ function readCircles2(index, a_max, s_max, mv_bt_id, f_bt_id) {
 	} else if (document.getElementById("ToHitCover").checked == false) {
 		tc_partialCoverReading = 0;
 	}
+
 	//console.log("range: " + tc_rangeValueReading);
+
+	if (mvmnt <= 0 && wpnsf > 0) {
+		// console.log("MVMNT:" + mvmnt);
+		// console.log("WPNSF:" + wpnsf);
+		wpnsf = 0; // If weaponsfired was clicked without a movement specified, the weapons value will NOT be saved
+		playErrorSound();
+	}
 
 	setCircles(h, a, s, e, fc, mp, w, uov, mvmnt, wpnsf, tc_rangeValueReading, tc_partialCoverReading, mechstatusstring);
 	var url="./save.php?index="+index+"&h="+h+"&a="+a+"&s="+s+"&e="+e+"&fc="+fc+"&mp="+mp+"&w="+w+"&mstat="+mechstatusimage+"&mstatstr="+mechstatusstring+"&uov="+uov+"&mvmnt="+mvmnt+"&wpnsf="+wpnsf;
@@ -902,13 +911,16 @@ function setCircles(h, a, s, e, fc, mp, w, uov, mvmnt, wpnsf, tc_rangeValueReadi
 		document.getElementById('phasebuttonimage').src="./images/top-right_phase02.png";
 	} else if (mvmnt > 0 && wpnsf > 0) {
 		document.getElementById('phasebuttonimage').src="./images/top-right_phase03.png";
+//	} else if (mvmt == 0 && wpnsf > 0) {
+//		document.getElementById("WF5_WEAPONSFIRED2").checked = false;
+//        document.getElementById("WF6_WEAPONSFIRED2").checked = false;
+//        document.getElementById('INFOFIRED').innerHTML = "";
+//        document.getElementById('phasebuttonimage').src="./images/top-right_phase01.png";
 	} else {
 		document.getElementById("WF5_WEAPONSFIRED2").checked = false;
 		document.getElementById("WF6_WEAPONSFIRED2").checked = false;
 		document.getElementById('INFOFIRED').innerHTML = "";
 		document.getElementById('phasebuttonimage').src="./images/top-right_phase01.png";
-
-		playErrorSound();
 	}
 	updateOverAllToHitValue(1);
 }
