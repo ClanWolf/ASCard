@@ -1,13 +1,13 @@
 var fontsizeLabel = 18;
 
-var minSize = 10;
+var minSize = 20;
 var maxSize = 60;
 
 var fontsizeLabelthinFactor = 0.6;
 var fontsizeLabelthinSmallFactor = 0.6;
-var fontsizeValueFactor = 1.3;
-var fontsizeValueThinFactor = 0.8;
-var fontsizeCircleFactor = 1.1;
+var fontsizeValueFactor = 1.0;
+var fontsizeValueThinFactor = 0.6;
+var fontsizeCircleFactor = 1.0;
 
 var fontsizeLabelthin = fontsizeLabel * fontsizeLabelthinFactor;
 var fontsizeLabelthinSmall = fontsizeLabel * fontsizeLabelthinSmallFactor;
@@ -1503,13 +1503,18 @@ function showMoveBar() {
 }
 
 function hideSkull() {
-	$("#destroyedIndicator").fadeOut(500, "linear");
+	$("#destroyedIndicator").fadeOut(300, "linear");
 }
 function hideCrippled() {
-	$("#crippledIndicator").fadeOut(500, "linear");
+	$("#crippledIndicator").fadeOut(300, "linear");
 }
 function hideShutdownIndicator() {
-	$("#shutdownIndicator").fadeOut(500, "linear");
+	$("#shutdownIndicator").fadeOut(300, "linear");
+}
+function hideTopRightPanel() {
+	$("#topright").fadeOut(300, "linear");
+	$("#pv").fadeOut(300, "linear");
+	$("#mech_number").fadeOut(300, "linear");
 }
 
 $(window).resize(function() {

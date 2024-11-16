@@ -132,7 +132,7 @@ a:hover {
 	left: 0;
 	background-color: #000000;
 	/* background-image: url('images/body-bg_1.jpg'); */
-	z-index:100;
+	z-index:110;
 }
 #destroyedIndicator {
 	text-align: center;
@@ -440,7 +440,7 @@ a:hover {
 	padding: 0px;
 	top: 80px;
 	height: 50px;
-	right: 262px;
+	right: 235px;
 }
 #liberapay {
 	z-index: 1420;

@@ -601,7 +601,7 @@ session_start();
 
 <div id="pilotimage"><?php echo "<img src='".$array_PILOT_IMG_URL[$chosenMechIndex]."' width='80px' height='80px'>" ?></div>
 <div id="faction" align="center"><?php echo "<img src='./images/factions/".$FACTION_IMG_URL."' width='50px' height='50px'>" ?></div>
-<div id="mech_number" align="center">#<?= $array_MECH_NUMBER[$chosenMechIndex] ?><br><?= strtoupper($UNIT) ?></div>
+<div id="mech_number" align="center" onclick='javascript:hideTopRightPanel();'>#<?= $array_MECH_NUMBER[$chosenMechIndex] ?><br><?= strtoupper($UNIT) ?></div>
 
 <?php
 	if ($useMULImages == 0) {
@@ -621,8 +621,8 @@ session_start();
 	<span style="font-size: 20px; color: #aaaaaa;"><?php echo "$array_MECH_MODEL[$chosenMechIndex]" ?></span>
 </div>
 
-<div id="topright">
-	<img id='toprightimage' src='./images/top-right_02.png' style='height:135px;'>
+<div id="topright" onclick='javascript:hideTopRightPanel();'>
+	<img id='toprightimage' onclick='javascript:hideTopRightPanel();' src='./images/top-right_02.png' style='height:125px;'>
 </div>
 
 <?php
@@ -671,8 +671,8 @@ session_start();
 	echo "</script>\n";
 ?>
 
-<div id="pv">
-	<span style="font-size: 22px; color: #aaaaaa; vertical-align: middle;">&nbsp;PV:&nbsp;</span>
+<div id="pv" onclick='javascript:hideTopRightPanel();'>
+	<span style="font-size: 22px; color: #aaaaaa; vertical-align: middle;">PV:&nbsp;</span>
 	<span style="font-size: 36px; color: #da8e25; vertical-align: middle; font-weight: bold;"><?php echo "$array_PV[$chosenMechIndex]"; ?></span>
 </div>
 
@@ -1031,9 +1031,7 @@ session_start();
 							<td nowrap width="55%" style="text-align: left;" class="datalabel_thin">
 								<label class="bigcheck"><input onchange="111readCircles(<?= $array_MECH_DBID[$chosenMechIndex] ?>, <?= $array_A_MAX[$chosenMechIndex] ?>, <?= $array_S_MAX[$chosenMechIndex] ?>);" type="checkbox" class="bigcheck" name="CD_E_1" id="CD_E_1" value="yes"/><span class="bigcheck-target"></span></label>
 							</td>
-							<td nowrap width="55%" style="text-align: left;" class="datalabel_thin">
-							</td>
-							<td nowrap class="datalabel_thin_small" width="5%" style="text-align: right;">+1 HT</td>
+							<td nowrap class="datalabel_thin_small" colspan="2" width="5%" style="text-align: right;">+½ MV, ½ DMG</td>
 						</tr>
 						<tr>
 							<td nowrap class="datalabel" width="5%" style="text-align: right;">FC:&nbsp;</td>
@@ -1049,7 +1047,7 @@ session_start();
 							<td nowrap class="datalabel_thin_small" width="5%" style="text-align: right;">+2 TO-HIT</td>
 						</tr>
 						<tr>
-							<td nowrap class="datalabel" width="5%" style="text-align: right;">WN:&nbsp;</td>
+							<td nowrap class="datalabel" width="5%" style="text-align:right;">WN:&nbsp;</td>
 							<td nowrap class="datalabel_button" valign="middle"><a href="javascript:increaseWPNS_PREP();"><i class="fas fa-plus-square"></i></a></td>
 							<td nowrap class="datalabel" id="label_WPNS_PREP" align="center"><?= $array_WPNS_PREP[$chosenMechIndex] ?></td>
 							<td nowrap class="datalabel">&nbsp;</td>
@@ -1062,35 +1060,64 @@ session_start();
 							<td nowrap class="datalabel_thin_small" width="5%" style="text-align: right;">-1 DMG</td>
 						</tr>
 						<tr>
-							<td nowrap class="datalabel" width="5%" style="text-align: right;">MO:&nbsp;</td>
-							<td nowrap class="datalabel_button" valign="middle"><a href="javascript:increaseWPNS_PREP();"><i class="fas fa-plus-square"></i></a></td>
-							<td nowrap class="datalabel" id="label_WPNS_PREP" align="center"><?= $array_WPNS_PREP[$chosenMechIndex] ?></td>
-							<td nowrap class="datalabel">&nbsp;</td>
-							<td nowrap width="55%" style="text-align: left;" class="datalabel_thin">
-								<label class="bigcheck"><input onchange="111readCircles(<?= $array_MECH_DBID[$chosenMechIndex] ?>, <?= $array_A_MAX[$chosenMechIndex] ?>, <?= $array_S_MAX[$chosenMechIndex] ?>);" type="checkbox" class="bigcheck" name="CD_W_1" id="CD_W_1" value="yes"/><span class="bigcheck-target"></span></label>
-								<label class="bigcheck"><input onchange="111readCircles(<?= $array_MECH_DBID[$chosenMechIndex] ?>, <?= $array_A_MAX[$chosenMechIndex] ?>, <?= $array_S_MAX[$chosenMechIndex] ?>);" type="checkbox" class="bigcheck" name="CD_W_2" id="CD_W_2" value="yes"/><span class="bigcheck-target"></span></label>
-								-2
-							</td>
-							<td nowrap width="55%" style="text-align: left;" class="datalabel_thin">
-								<label class="bigcheck"><input onchange="111readCircles(<?= $array_MECH_DBID[$chosenMechIndex] ?>, <?= $array_A_MAX[$chosenMechIndex] ?>, <?= $array_S_MAX[$chosenMechIndex] ?>);" type="checkbox" class="bigcheck" name="CD_W_3" id="CD_W_3" value="yes"/><span class="bigcheck-target"></span></label>
-								<label class="bigcheck"><input onchange="111readCircles(<?= $array_MECH_DBID[$chosenMechIndex] ?>, <?= $array_A_MAX[$chosenMechIndex] ?>, <?= $array_S_MAX[$chosenMechIndex] ?>);" type="checkbox" class="bigcheck" name="CD_W_4" id="CD_W_4" value="yes"/><span class="bigcheck-target"></span></label>
-								1/2
-							</td>
-							<td nowrap width="55%" style="text-align: left;" class="datalabel_thin">
-								<label class="bigcheck"><input onchange="111readCircles(<?= $array_MECH_DBID[$chosenMechIndex] ?>, <?= $array_A_MAX[$chosenMechIndex] ?>, <?= $array_S_MAX[$chosenMechIndex] ?>);" type="checkbox" class="bigcheck" name="CD_W_3" id="CD_W_3" value="yes"/><span class="bigcheck-target"></span></label>
-								<label class="bigcheck"><input onchange="111readCircles(<?= $array_MECH_DBID[$chosenMechIndex] ?>, <?= $array_A_MAX[$chosenMechIndex] ?>, <?= $array_S_MAX[$chosenMechIndex] ?>);" type="checkbox" class="bigcheck" name="CD_W_4" id="CD_W_4" value="yes"/><span class="bigcheck-target"></span></label>
-								0
+							<td nowrap class="datalabel" width="5%" style="text-align: right;" rowspan="2">MO:&nbsp;</td>
+							<td colspan="7">
+								<table width="100%" cellpadding="0" cellspacing="0">
+									<tr>
+																<td nowrap rowspan="2" class="datalabel">&nbsp;</td>
+										<td nowrap width="33%" colspan="2" style="text-align:center;" class="datalabel_thin">
+											<table width="100%" cellpadding="0" cellspacing="0">
+												<tr>
+													<td nowrap style="text-align:right;" class="datalabel_button" valign="middle"><a href="javascript:increaseWPNS_PREP();"><i class="fas fa-plus-square"></i></a></td>
+													<td nowrap style="text-align:left;" class="datalabel" id="label_WPNS_PREP" align="center"><?= $array_WPNS_PREP[$chosenMechIndex] ?></td>
+												</tr>
+											</table>
+										</td>
+										<td nowrap width="32%" style="text-align:center;" class="datalabel_thin">
+											<table width="100%" cellpadding="0" cellspacing="0">
+												<tr>
+													<td nowrap style="text-align:right;" class="datalabel_button" valign="middle"><a href="javascript:increaseWPNS_PREP();"><i class="fas fa-plus-square"></i></a></td>
+													<td nowrap style="text-align:left;" class="datalabel" id="label_WPNS_PREP" align="center"><?= $array_WPNS_PREP[$chosenMechIndex] ?></td>
+												</tr>
+											</table>
+										</td>
+										<td nowrap width="33%" style="text-align:center;" class="datalabel_thin">
+											<table width="100%" cellpadding="0" cellspacing="0">
+												<tr>
+													<td nowrap style="text-align:right;" class="datalabel_button" valign="middle"><a href="javascript:increaseWPNS_PREP();"><i class="fas fa-plus-square"></i></a></td>
+													<td nowrap style="text-align:left;" class="datalabel" id="label_WPNS_PREP" align="center"><?= $array_WPNS_PREP[$chosenMechIndex] ?></td>
+												</tr>
+											</table>
+										</td>
+									</tr>
+									<tr>
+										<td nowrap colspan="2" width="33%" style="text-align:center;" class="datalabel_thin">
+											<label class="bigcheck"><input onchange="111readCircles(<?= $array_MECH_DBID[$chosenMechIndex] ?>, <?= $array_A_MAX[$chosenMechIndex] ?>, <?= $array_S_MAX[$chosenMechIndex] ?>);" type="checkbox" class="bigcheck" name="CD_W_1" id="CD_W_1" value="yes"/><span class="bigcheck-target"></span></label>
+											<label class="bigcheck"><input onchange="111readCircles(<?= $array_MECH_DBID[$chosenMechIndex] ?>, <?= $array_A_MAX[$chosenMechIndex] ?>, <?= $array_S_MAX[$chosenMechIndex] ?>);" type="checkbox" class="bigcheck" name="CD_W_2" id="CD_W_2" value="yes"/><span class="bigcheck-target"></span></label>
+											-2
+										</td>
+										<td nowrap width="32%" style="text-align:center;" class="datalabel_thin">
+											<label class="bigcheck"><input onchange="111readCircles(<?= $array_MECH_DBID[$chosenMechIndex] ?>, <?= $array_A_MAX[$chosenMechIndex] ?>, <?= $array_S_MAX[$chosenMechIndex] ?>);" type="checkbox" class="bigcheck" name="CD_W_3" id="CD_W_3" value="yes"/><span class="bigcheck-target"></span></label>
+											<label class="bigcheck"><input onchange="111readCircles(<?= $array_MECH_DBID[$chosenMechIndex] ?>, <?= $array_A_MAX[$chosenMechIndex] ?>, <?= $array_S_MAX[$chosenMechIndex] ?>);" type="checkbox" class="bigcheck" name="CD_W_4" id="CD_W_4" value="yes"/><span class="bigcheck-target"></span></label>
+											½
+										</td>
+										<td nowrap width="33%" style="text-align:center;" class="datalabel_thin">
+											<label class="bigcheck"><input onchange="111readCircles(<?= $array_MECH_DBID[$chosenMechIndex] ?>, <?= $array_A_MAX[$chosenMechIndex] ?>, <?= $array_S_MAX[$chosenMechIndex] ?>);" type="checkbox" class="bigcheck" name="CD_W_3" id="CD_W_3" value="yes"/><span class="bigcheck-target"></span></label>
+											0
+										</td>
+									</tr>
+								</table>
 							</td>
 						</tr>
 					</table>
 				</div>
 
 			</td>
-			<td valign='bottom'>
-				<a onclick='showInfoBar();' id="InfoButton" href='#'><img src='./images/selector_02-info.png' width='50px'></a><br>
-				<a onclick='showSoundBoard();' id="SoundBoard" href='#'><img src='./images/selector_00-sb.png' width='50px'></a><br>
-				<a onclick='showDiceBar();' id="DiceButton" href='#'><img src='./images/selector_01-dice.png' width='50px'></a><br>
-				<a onclick='showMoveBar();' id="MoveButton" href='#'><img id='roundphaseshortcutimage' src='./images/selector_04-movement.png' width='50px'></a>
+			<td valign='bottom' style='font-size:0px;'>
+				<a onclick='showInfoBar();'    id="InfoButton" href='#' style='font-size:0;'><img style='margin:0;padding:0;' src='./images/selector_02-info.png'     width='50px'></a><br>
+				<a onclick='showSoundBoard();' id="SoundBoard" href='#' style='font-size:0;'><img style='margin:0;padding:0;' src='./images/selector_00-sb.png'       width='50px'></a><br>
+				<a onclick='showDiceBar();'    id="DiceButton" href='#' style='font-size:0;'><img style='margin:0;padding:0;' src='./images/selector_01-dice.png'     width='50px'></a><br>
+				<a onclick='showMoveBar();'    id="MoveButton" href='#' style='font-size:0;'><img style='margin:0;padding:0;' src='./images/selector_04-movement.png' width='50px' id='roundphaseshortcutimage'></a>
 			</td>
 		</tr>
 	</table>
