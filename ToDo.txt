@@ -16,3 +16,6 @@ TODO: Button für "alle Mechs löschen"
 TODO: Indikator für gemountete Elementare / Infanterie
 TODO: Shortcut bar irgendwo mit allen Mech-Ids zum schnellen Wechseln
 TODO: Alle Schriftarten sollten als em relativ definiert werden
+
+TODO: Show clan option to show/hide batchall
+TODO: Sounds für die + Buttons (Criticals und Heat)

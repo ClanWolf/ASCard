@@ -1,4 +1,4 @@
-var fontsizeLabel = 18;
+var fontsizeLabel = 16;
 
 var minSize = 20;
 var maxSize = 60;
