@@ -949,6 +949,7 @@ function textSize(dec) {
 	setSize("datalabel_thin_disabled", fontsizeLabelthin);
 	setSize("datavalue", fontsizeValue);
 	setSize("datavalue_small", fontsizeValue);
+	setSize("datavalue_small_special", fontsizeLabelthin);
 	setSize("datavalue_thin", fontsizeValueThin);
 	setSize("datavalue_special", fontsizeLabel);
 	setSize("bigcheck-target", fontsizeCircle);
@@ -1036,32 +1037,32 @@ function rolldice() {
 
 		var resMes = "";
 		if (t == "BM") {
-			     if (res ==  2) { resMes = "Ammo hit [BM]"; }
-			else if (res ==  3) { resMes = "Engine hit [BM]"; }
-			else if (res ==  4) { resMes = "Fire control hit [BM]"; }
-			else if (res ==  5) { resMes = "No critical hit [BM]"; }
-			else if (res ==  6) { resMes = "Weapon hit [BM]"; }
-			else if (res ==  7) { resMes = "Movement points hit [BM]"; }
-			else if (res ==  8) { resMes = "Weapon hit [BM]"; }
-			else if (res ==  9) { resMes = "No critical hit [BM]"; }
-			else if (res == 10) { resMes = "Fire control hit [BM]"; }
-			else if (res == 11) { resMes = "Engine hit [BM]"; }
-			else if (res == 12) { resMes = "Unit destroyed [BM]"; }
+			     if (res ==  2) { resMes = "<br>CRIT: Ammo hit<br>[BM]"; }
+			else if (res ==  3) { resMes = "<br>CRIT: Engine hit<br>[BM]"; }
+			else if (res ==  4) { resMes = "<br>CRIT: Fire control hit<br>[BM]"; }
+			else if (res ==  5) { resMes = "<br>CRIT: No critical hit<br>[BM]"; }
+			else if (res ==  6) { resMes = "<br>CRIT: Weapon hit<br>[BM]"; }
+			else if (res ==  7) { resMes = "<br>CRIT: Movement points hit<br>[BM]"; }
+			else if (res ==  8) { resMes = "<br>CRIT: Weapon hit<br>[BM]"; }
+			else if (res ==  9) { resMes = "<br>CRIT: No critical hit<br>[BM]"; }
+			else if (res == 10) { resMes = "<br>CRIT: Fire control hit<br>[BM]"; }
+			else if (res == 11) { resMes = "<br>CRIT: Engine hit<br>[BM]"; }
+			else if (res == 12) { resMes = "<br>CRIT: Unit destroyed<br>[BM]"; }
 		} else if (t == "CV") {
-			     if (res ==  2) { resMes = "Ammo hit [CV]"; }
-            else if (res ==  3) { resMes = "Crew stunned [CV]"; }
-            else if (res ==  4) { resMes = "Fire control hit [CV]"; }
-            else if (res ==  5) { resMes = "Fire control hit [CV]"; }
-            else if (res ==  6) { resMes = "No critical hit [CV]"; }
-            else if (res ==  7) { resMes = "No critical hit [CV]"; }
-            else if (res ==  8) { resMes = "No critical hit [CV]"; }
-            else if (res ==  9) { resMes = "Weapon hit [CV]"; }
-            else if (res == 10) { resMes = "Weapon hit [CV]"; }
-            else if (res == 11) { resMes = "Crew killed [CV]"; }
-            else if (res == 12) { resMes = "Engine hit [CV]"; }
+			     if (res ==  2) { resMes = "<br>MOTV: No effect<br>CRIT: Ammo hit<br>[CV]"; }
+            else if (res ==  3) { resMes = "<br>MOTV: No effect<br>CRIT: Crew stunned<br>[CV]"; }
+            else if (res ==  4) { resMes = "<br>MOTV: No effect<br>CRIT: Fire control hit<br>[CV]"; }
+            else if (res ==  5) { resMes = "<br>MOTV: No effect<br>CRIT: Fire control hit<br>[CV]"; }
+            else if (res ==  6) { resMes = "<br>MOTV: No effect<br>CRIT: No critical hit<br>[CV]"; }
+            else if (res ==  7) { resMes = "<br>MOTV: No effect<br>CRIT: No critical hit<br>[CV]"; }
+            else if (res ==  8) { resMes = "<br>MOTV: No effect<br>CRIT: No critical hit<br>[CV]"; }
+            else if (res ==  9) { resMes = "<br>MOTV: -2 MV / -1 TMM<br>CRIT: Weapon hit<br>[CV]"; }
+            else if (res == 10) { resMes = "<br>MOTV: -2 MV / -1 TMM<br>CRIT: Weapon hit<br>[CV]"; }
+            else if (res == 11) { resMes = "<br>MOTV: ½ MV / ½ TMM<br>CRIT: Crew killed<br>[CV]"; }
+            else if (res == 12) { resMes = "<br>MOTV: Immobilized<br>CRIT: Engine hit<br>[CV]"; }
 		}
 
-		document.getElementById("criticalhit").innerHTML=res + ": " + resMes;
+		document.getElementById("criticalhit").innerHTML=res + " (+2t CHECK): " + resMes;
 		ccc = 1;
 	}
 }

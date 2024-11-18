@@ -739,23 +739,23 @@ session_start();
 									<tr>
 										<td width="5px" nowrap style="text-align:left;" class="datalabel_thin_small">TMM</td>
 										<td width="80%"</td>
-										<td width="5px" nowrap style="text-align:right;" valign="middle"><a href="javascript:reduceEnemyTMM();"><i class="fas fa-minus-square"></i></a>&nbsp;</td>
+										<td width="5px" nowrap style="text-align:right;" valign="middle"><a style="padding-right:5px;" valign="middle" href="javascript:reduceEnemyTMM();"><i class="fas fa-minus-square"></i></a></td>
 										<td width="5px" nowrap style="text-align:center;" class="datalabel" id="EnemyTMM" align="center">2</td>
-										<td width="5px" nowrap style="text-align:left;" valign="middle"><a href="javascript:increaseEnemyTMM();"><i class="fas fa-plus-square"></i></a></td>
+										<td width="5px" nowrap style="text-align:left;" valign="middle"><a style="padding-right:5px;" valign="middle" href="javascript:increaseEnemyTMM();"><i class="fas fa-plus-square"></i></a></td>
 									</tr>
 									<tr>
 										<td width="5px" nowrap style="text-align:left;" class="datalabel_thin_small">Forrest</td>
 										<td width="80%"</td>
-										<td width="5px" nowrap style="text-align:right;" valign="middle"><a href="javascript:reduceForrest();"><i class="fas fa-minus-square"></i></a>&nbsp;</td>
+										<td width="5px" nowrap style="text-align:right;" valign="middle"><a style="padding-right:5px;" valign="middle" href="javascript:reduceForrest();"><i class="fas fa-minus-square"></i></a></td>
 										<td width="5px" nowrap style="text-align:center;" class="datalabel" id="Forrest" align="center">0</td>
-										<td width="5px" nowrap style="text-align:left;" valign="middle"><a href="javascript:increaseForrest();"><i class="fas fa-plus-square"></i></a></td>
+										<td width="5px" nowrap style="text-align:left;" valign="middle"><a style="padding-right:5px;" valign="middle" href="javascript:increaseForrest();"><i class="fas fa-plus-square"></i></a></td>
 									</tr>
 									<tr>
 										<td width="5px" nowrap style="text-align:left;" class="datalabel_thin_small">Other</td>
 										<td width="80%"</td>
-										<td width="5px" nowrap style="text-align:right;" valign="middle"><a href="javascript:reduceOther();"><i class="fas fa-minus-square"></i></a>&nbsp;</td>
+										<td width="5px" nowrap style="text-align:right;" valign="middle"><a style="padding-right:5px;" valign="middle" href="javascript:reduceOther();"><i class="fas fa-minus-square"></i></a></td>
 										<td width="5px" nowrap style="text-align:center;" class="datalabel" id="Other" align="center">0</td>
-										<td width="5px" nowrap style="text-align:left;" valign="middle"><a href="javascript:increaseOther();"><i class="fas fa-plus-square"></i></a></td>
+										<td width="5px" nowrap style="text-align:left;" valign="middle"><a style="padding-right:5px;" valign="middle" href="javascript:increaseOther();"><i class="fas fa-plus-square"></i></a></td>
 									</tr>
 								</table>
 							</td>
@@ -789,7 +789,7 @@ session_start();
 						</tr>
 						<tr>
 							<!-- <td nowrap class="datalabel" width="12%" colspan="1">&nbsp;</td> -->
-							<td nowrap class="datavalue_special" width="50%" colspan="4" style="text-align:left;" onclick="javascript:window.open('http://www.masterunitlist.info/Unit/Details/<?php echo $array_MECH_MULID[$chosenMechIndex] ?>');"><?php echo "$array_ROLE[$chosenMechIndex]"; ?>&nbsp;<i class="fa-solid fa-square-up-right"></i></td>
+							<td nowrap class="datavalue_small_special" width="50%" colspan="4" style="text-align:left;" valign="middle" onclick="javascript:window.open('http://www.masterunitlist.info/Unit/Details/<?php echo $array_MECH_MULID[$chosenMechIndex] ?>');"><?php echo "$array_ROLE[$chosenMechIndex]"; ?>&nbsp;<i class="fa-solid fa-square-up-right"></i></td>
 							<td nowrap class="datalabel" width="13%" colspan="1" valign="middle" >AMM:</td>
 							<td nowrap class="datavalue" width="12%" colspan="1" valign="middle" style="top:0px;bottom:0px;vertical-align:middle;"><span class="datavalue" id="AMM">0</span></td>
 							<td nowrap class="datalabel" width="12%" colspan="1">SKILL:</td>
@@ -802,11 +802,11 @@ session_start();
 					<table width="100%">
 						<tr>
 							<td nowrap class="datalabel" width="10%" style="text-align: left;">DMG:</td>
-							<td nowrap class="datalabel" width="15%" style="text-align: center;" id="minrollshort">S (+0):</td>
+							<td nowrap class="datalabel_thin" width="15%" style="text-align: center;" id="minrollshort">S (+0)</td>
 							<td nowrap class="datavalue" width="15%" style="text-align: center;" id="dmgshort_s"><?php echo "$array_DMG_SHORT[$chosenMechIndex]"; ?></td>
-							<td nowrap class="datalabel" width="15%" style="text-align: center;" id="minrollmedium">M (+2):</td>
+							<td nowrap class="datalabel_thin" width="15%" style="text-align: center;" id="minrollmedium">M (+2)</td>
 							<td nowrap class="datavalue" width="15%" style="text-align: center;" id="dmgmedium_s"><?php echo "$array_DMG_MEDIUM[$chosenMechIndex]"; ?></td>
-							<td nowrap class="datalabel" width="15%" style="text-align: center;" id="minrolllong">L (+4):</td>
+							<td nowrap class="datalabel_thin" width="15%" style="text-align: center;" id="minrolllong">L (+4)</td>
 							<td nowrap class="datavalue" width="15%" style="text-align: center;" id="dmglong_s"><?php echo "$array_DMG_LONG[$chosenMechIndex]"; ?></td>
 						</tr>
 					</table>
@@ -839,8 +839,8 @@ session_start();
 ?>
 							</td>
 							<td nowrap class="datalabel" width="15%" style="text-align: right;">&nbsp;&nbsp;&nbsp;HT:&nbsp;&nbsp;</td>
-							<td nowrap class="datalabel_button" width="2%" valign="middle"><a href="javascript:increaseHT_PREP();"><i class="fas fa-plus-square"></i></a></td>
-							<td nowrap class="datalabel" width="2%" id="label_HT_PREP" align="center"><?= $array_HT_PREP[$chosenMechIndex] ?></td>
+							<td nowrap width="2%" valign="middle"><a style="padding-right:5px;" valign="middle" href="javascript:increaseHT_PREP();"><i class="fas fa-plus-square"></i></a></td>
+							<td nowrap class="datalabel_thin" width="2%" id="label_HT_PREP" align="center"><?= $array_HT_PREP[$chosenMechIndex] ?></td>
 							<td nowrap width="36%" style="text-align: right;" id="ht_field" class="datalabel_thin">
 								<label class="bigcheck"><input onchange="readCircles(<?= $array_MECH_DBID[$chosenMechIndex] ?>, <?= $array_A_MAX[$chosenMechIndex] ?>, <?= $array_S_MAX[$chosenMechIndex] ?>);" type="checkbox" class="bigcheck" name="H1" id="H1" value="yes"/><span class="bigcheck-target"></span></label>
 								<label class="bigcheck"><input onchange="readCircles(<?= $array_MECH_DBID[$chosenMechIndex] ?>, <?= $array_A_MAX[$chosenMechIndex] ?>, <?= $array_S_MAX[$chosenMechIndex] ?>);" type="checkbox" class="bigcheck" name="H2" id="H2" value="yes"/><span class="bigcheck-target"></span></label>
@@ -963,7 +963,7 @@ session_start();
 					<table width="100%">
 						<tr>
 							<td nowrap class="datalabel" width="5%" style="text-align: right;">EN:&nbsp;</td>
-							<td nowrap valign="middle"><a href="javascript:increaseENGN_PREP();"><i class="fas fa-plus-square"></i></a>&nbsp;</td>
+							<td nowrap valign="middle"><a style="padding-right:5px;" valign="middle" href="javascript:increaseENGN_PREP();"><i class="fas fa-plus-square"></i></a></td>
 							<td nowrap class="datalabel_thin" id="label_ENGN_PREP" align="center"><?= $array_ENGN_PREP[$chosenMechIndex] ?></td>
 							<td nowrap class="datalabel">&nbsp;</td>
 							<td nowrap width="55%" style="text-align: left;" class="datalabel_thin">
@@ -974,7 +974,7 @@ session_start();
 						</tr>
 						<tr>
 							<td nowrap class="datalabel" width="5%" style="text-align: right;">FC:&nbsp;</td>
-							<td nowrap valign="middle"><a href="javascript:increaseFCTL_PREP();"><i class="fas fa-plus-square"></i></a>&nbsp;</td>
+							<td nowrap valign="middle"><a style="padding-right:5px;" valign="middle" href="javascript:increaseFCTL_PREP();"><i class="fas fa-plus-square"></i></a></td>
 							<td nowrap class="datalabel_thin" id="label_FCTL_PREP" align="center"><?= $array_FRCTRL_PREP[$chosenMechIndex] ?></td>
 							<td nowrap class="datalabel">&nbsp;</td>
 							<td nowrap width="90%" style="text-align: left;" class="datalabel_thin">
@@ -987,7 +987,7 @@ session_start();
 						</tr>
 						<tr>
 							<td nowrap class="datalabel" width="5%" style="text-align: right;">MP:&nbsp;</td>
-							<td nowrap valign="middle"><a href="javascript:increaseMP_PREP();"><i class="fas fa-plus-square"></i></a>&nbsp;</td>
+							<td nowrap valign="middle"><a style="padding-right:5px;" valign="middle" href="javascript:increaseMP_PREP();"><i class="fas fa-plus-square"></i></a></td>
 							<td nowrap class="datalabel_thin" id="label_MP_PREP" align="center"><?= $array_MP_PREP[$chosenMechIndex] ?></td>
 							<td nowrap class="datalabel">&nbsp;</td>
 							<td nowrap width="55%" style="text-align: left;" class="datalabel_thin">
@@ -996,11 +996,11 @@ session_start();
 								<label class="bigcheck"><input onchange="readCircles(<?= $array_MECH_DBID[$chosenMechIndex] ?>, <?= $array_A_MAX[$chosenMechIndex] ?>, <?= $array_S_MAX[$chosenMechIndex] ?>);" type="checkbox" class="bigcheck" name="CD_MP_3" id="CD_MP_3" value="yes"/><span class="bigcheck-target"></span></label>
 								<label class="bigcheck"><input onchange="readCircles(<?= $array_MECH_DBID[$chosenMechIndex] ?>, <?= $array_A_MAX[$chosenMechIndex] ?>, <?= $array_S_MAX[$chosenMechIndex] ?>);" type="checkbox" class="bigcheck" name="CD_MP_4" id="CD_MP_4" value="yes"/><span class="bigcheck-target"></span></label>
 							</td>
-							<td nowrap class="datalabel_thin_small" width="5%" style="text-align: right;">1/2 MV</td>
+							<td nowrap class="datalabel_thin_small" width="5%" style="text-align: right;">½ MV</td>
 						</tr>
 						<tr>
 							<td nowrap class="datalabel" width="5%" style="text-align: right;">WN:&nbsp;</td>
-							<td nowrap valign="middle"><a href="javascript:increaseWPNS_PREP();"><i class="fas fa-plus-square"></i></a>&nbsp;</td>
+							<td nowrap valign="middle"><a style="padding-right:5px;" valign="middle" href="javascript:increaseWPNS_PREP();"><i class="fas fa-plus-square"></i></a></td>
 							<td nowrap class="datalabel_thin" id="label_WPNS_PREP" align="center"><?= $array_WPNS_PREP[$chosenMechIndex] ?></td>
 							<td nowrap class="datalabel">&nbsp;</td>
 							<td nowrap width="55%" style="text-align: left;" class="datalabel_thin">
@@ -1025,17 +1025,17 @@ session_start();
 					<table width="100%">
 						<tr>
 							<td nowrap class="datalabel" width="5%" style="text-align: right;">EN:&nbsp;</td>
-							<td nowrap valign="middle"><a href="javascript:increaseENGN_PREP();"><i class="fas fa-plus-square"></i></a>&nbsp;</td>
+							<td nowrap valign="middle"><a style="padding-right:5px;" href="javascript:increaseENGN_PREP();"><i class="fas fa-plus-square"></i></a></td>
 							<td nowrap class="datalabel_thin" id="label_ENGN_PREP" align="center"><?= $array_ENGN_PREP[$chosenMechIndex] ?></td>
 							<td nowrap class="datalabel">&nbsp;</td>
 							<td nowrap width="55%" style="text-align: left;" class="datalabel_thin">
 								<label class="bigcheck"><input onchange="111readCircles(<?= $array_MECH_DBID[$chosenMechIndex] ?>, <?= $array_A_MAX[$chosenMechIndex] ?>, <?= $array_S_MAX[$chosenMechIndex] ?>);" type="checkbox" class="bigcheck" name="CD_E_1" id="CD_E_1" value="yes"/><span class="bigcheck-target"></span></label>
 							</td>
-							<td nowrap class="datalabel_thin_small" colspan="2" width="5%" style="text-align: right;">+½ MV, ½ DMG</td>
+							<td nowrap class="datalabel_thin_small" colspan="2" width="5%" style="text-align: right;">½ MV, ½ DMG</td>
 						</tr>
 						<tr>
 							<td nowrap class="datalabel" width="5%" style="text-align: right;">FC:&nbsp;</td>
-							<td nowrap valign="middle"><a href="javascript:increaseFCTL_PREP();"><i class="fas fa-plus-square"></i></a>&nbsp;</td>
+							<td nowrap valign="middle"><a style="padding-right:5px;" href="javascript:increaseFCTL_PREP();"><i class="fas fa-plus-square"></i></a></td>
 							<td nowrap class="datalabel_thin" id="label_FCTL_PREP" align="center"><?= $array_FRCTRL_PREP[$chosenMechIndex] ?></td>
 							<td nowrap class="datalabel">&nbsp;</td>
 							<td nowrap width="90%" colspan='2' style="text-align: left;" class="datalabel_thin">
@@ -1048,7 +1048,7 @@ session_start();
 						</tr>
 						<tr>
 							<td nowrap class="datalabel" width="5%" style="text-align:right;">WN:&nbsp;</td>
-							<td nowrap valign="middle"><a href="javascript:increaseWPNS_PREP();"><i class="fas fa-plus-square"></i></a>&nbsp;</td>
+							<td nowrap valign="middle"><a style="padding-right:5px;" href="javascript:increaseWPNS_PREP();"><i class="fas fa-plus-square"></i></a></td>
 							<td nowrap class="datalabel_thin" id="label_WPNS_PREP" align="center"><?= $array_WPNS_PREP[$chosenMechIndex] ?></td>
 							<td nowrap class="datalabel">&nbsp;</td>
 							<td nowrap width="55%" colspan='2' style="text-align: left;" class="datalabel_thin">
@@ -1080,8 +1080,8 @@ session_start();
 										<td nowrap width="33%" colspan="2" style="text-align:center;" class="datalabel_thin">
 											<table width="100%" cellpadding="0" cellspacing="0">
 												<tr>
-													<td nowrap style="text-align:right;" class="datalabel_thin_small" id="label_WPNS_PREP" valign="middle">-2</td>
-													<td nowrap style="text-align:right;" valign="middle"><a href="javascript:increaseWPNS_PREP();"><i class="fas fa-plus-square"></i></a>&nbsp;</td>
+													<td nowrap style="text-align:right;" class="datalabel_thin_small" id="label_WPNS_PREP" valign="middle">-2 MV</td>
+													<td nowrap style="text-align:right;"><a style="padding-right:5px;" valign="middle" href="javascript:increaseWPNS_PREP();"><i class="fas fa-plus-square"></i></a></td>
 													<td nowrap style="text-align:left;" class="datalabel_thin" id="label_WPNS_PREP" valign="middle"><?= $array_WPNS_PREP[$chosenMechIndex] ?></td>
 												</tr>
 											</table>
@@ -1089,8 +1089,8 @@ session_start();
 										<td nowrap width="32%" style="text-align:center;" class="datalabel_thin">
 											<table width="100%" cellpadding="0" cellspacing="0">
 												<tr>
-													<td nowrap style="text-align:right;" class="datalabel_thin_small" id="label_WPNS_PREP" valign="middle">½</td>
-													<td nowrap style="text-align:right;" valign="middle"><a href="javascript:increaseWPNS_PREP();"><i class="fas fa-plus-square"></i></a>&nbsp;</td>
+													<td nowrap style="text-align:right;" class="datalabel_thin_small" id="label_WPNS_PREP" valign="middle">½ MV</td>
+													<td nowrap style="text-align:right;"><a style="padding-right:5px;" valign="middle" href="javascript:increaseWPNS_PREP();"><i class="fas fa-plus-square"></i></a></td>
 													<td nowrap style="text-align:left;" class="datalabel_thin" id="label_WPNS_PREP" valign="middle"><?= $array_WPNS_PREP[$chosenMechIndex] ?></td>
 												</tr>
 											</table>
@@ -1098,8 +1098,8 @@ session_start();
 										<td nowrap width="33%" style="text-align:center;" class="datalabel_thin">
 											<table width="100%" cellpadding="0" cellspacing="0">
 												<tr>
-													<td nowrap style="text-align:right;" class="datalabel_thin_small" id="label_WPNS_PREP" valign="middle">0</td>
-													<td nowrap style="text-align:right;" valign="middle"><a href="javascript:increaseWPNS_PREP();"><i class="fas fa-plus-square"></i></a>&nbsp;</td>
+													<td nowrap style="text-align:right;" class="datalabel_thin_small" id="label_WPNS_PREP" valign="middle">0 MV</td>
+													<td nowrap style="text-align:right;"><a style="padding-right:5px;" valign="middle" href="javascript:increaseWPNS_PREP();"><i class="fas fa-plus-square"></i></a></td>
 													<td nowrap style="text-align:left;" class="datalabel_thin" id="label_WPNS_PREP" valign="middle"><?= $array_WPNS_PREP[$chosenMechIndex] ?></td>
 												</tr>
 											</table>

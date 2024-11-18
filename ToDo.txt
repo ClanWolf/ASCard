@@ -19,3 +19,6 @@ TODO: Alle Schriftarten sollten als em relativ definiert werden
 
 TODO: Show clan option to show/hide batchall
 TODO: Sounds für die + Buttons (Criticals und Heat)
+TODO: Link to Commanders edition for admin
+
+TODO: Automatically roll motive roll on CV: Show motive and crit roll for CV (--> add values for t tracked from the table)
