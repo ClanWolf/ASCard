@@ -303,7 +303,7 @@
         "name": "Underwater Maneuvering Units",
         "type": "Standard",
         "abbreviation": "UMU",
-        "rule": "A unit with the UMU special ability uses the submersible movement "rule"s when it is submerged in water instead of the normal underwater movement "rule"s (see Submersible Movement, p. 36).",
+        "rule": "A unit with the UMU special ability uses the submersible movement rules when it is submerged in water instead of the normal underwater movement "rule"s (see Submersible Movement, p. 36).",
         "page": 79
     },
     {
