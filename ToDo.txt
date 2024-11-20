@@ -9,7 +9,6 @@ TODO: Formations have a faction (for logo and mechimages)
 TODO: Ready Icons in play unit werden erst nach dem tabwechsel aktuell
 TODO: Import units from mul directly somehow (have mul open, select a unit and export it to ASCard)
 TODO: Scan QR codes to identify units on the table
-TODO: CV movement is missing "t" tracked, "h" hover,...
 TODO: Add a user id to created mechs and show only own mechs in assignment list
 TODO: Button für "alle Mechs zurücksetzen"
 TODO: Button für "alle Mechs löschen"
@@ -18,13 +17,16 @@ TODO: Shortcut bar irgendwo mit allen Mech-Ids zum schnellen Wechseln
 TODO: Alle Schriftarten sollten als em relativ definiert werden
 
 TODO: Show clan option to show/hide batchall
-TODO: Sounds für die + Buttons (Criticals und Heat)
-TODO: Link to Commanders edition for admin
+TODO: Sounds für die + Buttons (Criticals und Heat) --> Different sound when setting a field to 0
 
 TODO: Add option to auto roll on motive
 TODO: Add option to auto roll on crit
 
 TODO: CHECK / Sort all special abilities
-TODO: Create Table for special abilities overview links
-TODO: Create iFrame in play window to show individual special abilities
+TODO: Create <table> for special abilities overview links
 TODO: Add similar overview page for pilot abilities
+
+TODO: Create iFrame in play window to show individual special abilities:
+  https://stackoverflow.com/questions/22559756/changing-hover-to-touch-click-for-mobile-devices
+  Tap on special ability will open the iFrame (centered) and clicking on one specific ability will change the content of the iFrame
+  The string of the ability (between ","s) nees to translate to the link to the infopage
