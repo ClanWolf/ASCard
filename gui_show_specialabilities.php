@@ -1,8 +1,5 @@
 <!DOCTYPE html>
-
 <html lang="en">
-
-<!-- https://spikeybits.com/2017/04/more-special-abilities-you-need-to-know-for-alpha-strike.html -->
 
 <head>
 	<title>ClanWolf.net: AplhaStrike Card App (ASCard): Special abilities</title>
@@ -58,6 +55,26 @@
 	<script type="text/javascript" src="./scripts/passive-events-support/main.js"></script>
 
 	<script type="text/javascript" src="./scripts/jquery-3.7.1.min.js"></script>
+	<script type="text/javascript" src="./scripts/specialunitabilities.js"></script>
+
+	<script type="text/javascript">
+
+		// https://www.sitepoint.com/get-url-parameters-with-javascript/
+
+		const queryString = window.location.search;
+		console.log(queryString);
+
+		const urlParams = new URLSearchParams(queryString);
+
+		const product = urlParams.get('product')
+		console.log(product);
+
+		const color = urlParams.get('color')
+		console.log(color);
+
+		const newUser = urlParams.get('newuser')
+		console.log(newUser);
+	</script>
 </head>
 
 <body style="background-image: url('images/body-bg_2.jpg');">
