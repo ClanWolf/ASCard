@@ -31,11 +31,12 @@
 	<link rel="apple-touch-icon" href="./images/icon_180x180.png" type="image/png" sizes="180x180">
 
 	<!-- https://www.npmjs.com/package/passive-events-support?activeTab=readme -->
-    <script>
-        window.passiveSupport = {
-            debug: false,
-            events: ['touchstart', 'touchmove', 'wheel'],
-            listeners: [
+
+	<script>
+		window.passiveSupport = {
+			debug: false,
+			events: ['touchstart', 'touchmove', 'wheel'],
+			listeners: [
 				{
 					element: '.jspContainer',
 					event: 'touchstart',
@@ -51,10 +52,10 @@
 					event: 'wheel',
 					prevented: true
 				}
-            ]
-        }
-    </script>
-    <script type="text/javascript" src="./scripts/passive-events-support/main.js"></script>
+			]
+		}
+	</script>
+	<script type="text/javascript" src="./scripts/passive-events-support/main.js"></script>
 
 	<script type="text/javascript" src="./scripts/jquery-3.7.1.min.js"></script>
 </head>
@@ -81,73 +82,77 @@
 			<tr>
 				<!-- <td width="15%" nowrap align="center"> -->
 				<?php
-	                echo "					<td nowrap colspan='1' width='15%' style='color:#dcdcdc;' class='mechselect_button_normal' onclick='javascript:window.history.back();'>\n";
-                    echo "						<i style='font-size:2.5em;' class='fa-solid fa-caret-left'></i>\n";
-                    echo "					</td>\n";
+					echo "					<td nowrap colspan='1' width='15%' style='color:#dcdcdc;' class='mechselect_button_normal' onclick='javascript:window.history.back();'>\n";
+					echo "						<i style='font-size:2.5em;' class='fa-solid fa-caret-left'></i>\n";
+					echo "					</td>\n";
 
 					// <a href="javascript:window.history.back();"><< Back</a>
 					// <a href="./gui_select_unit.php"><< Back</a>
 				?>
 				<!-- </td> -->
 				<td width="85%" align="left">
-					<a href="#PRB" target="_SELF">PRB</a>&nbsp;&nbsp;
-					<a href="#AFC" target="_SELF">AFC</a>&nbsp;&nbsp;
-					<a href="#AT" target="_SELF">AT</a>&nbsp;&nbsp;
-					<a href="#AMP" target="_SELF">AMP</a>&nbsp;&nbsp;
-					<a href="#AECM" target="_SELF">AECM</a>&nbsp;&nbsp;
-					<a href="#AM" target="_SELF">AM</a>&nbsp;&nbsp;
-					<a href="#AMS" target="_SELF">AMS</a>&nbsp;&nbsp;
-					<a href="#ARM" target="_SELF">ARM</a>&nbsp;&nbsp;
-					<a href="#ARS" target="_SELF">ARS</a>&nbsp;&nbsp;
-					<a href="#ARTX" target="_SELF">ARTX</a>&nbsp;&nbsp;
-					<a href="#AC" target="_SELF">AC</a>&nbsp;&nbsp;
-					<a href="#BHJ" target="_SELF">BHJ</a>&nbsp;&nbsp;
-					<a href="#SHLD" target="_SELF">SHLD</a>&nbsp;&nbsp;
-					<a href="#BH" target="_SELF">BH</a>&nbsp;&nbsp;
-					<a href="#BT" target="_SELF">BT</a>&nbsp;&nbsp;
+					<table>
+						<tr>
+							<td><a href="#AC" target="_SELF">AC</a>&nbsp;&nbsp;</td>
+							<td><a href="#AECM" target="_SELF">AECM</a>&nbsp;&nbsp;</td>
+							<td><a href="#AFC" target="_SELF">AFC</a>&nbsp;&nbsp;</td>
+							<td><a href="#AM" target="_SELF">AM</a>&nbsp;&nbsp;</td>
+							<td><a href="#AMP" target="_SELF">AMP</a>&nbsp;&nbsp;</td>
+							<td><a href="#AMS" target="_SELF">AMS</a>&nbsp;&nbsp;</td>
+							<td><a href="#ARM" target="_SELF">ARM</a>&nbsp;&nbsp;</td>
+							<td><a href="#ARS" target="_SELF">ARS</a>&nbsp;&nbsp;</td>
+							<td><a href="#ARTX" target="_SELF">ARTX</a>&nbsp;&nbsp;</td>
+							<td><a href="#AT" target="_SELF">AT</a>&nbsp;&nbsp;</td>
+							<td><a href="#BH" target="_SELF">BH</a>&nbsp;&nbsp;</td>
+							<td><a href="#BHJ" target="_SELF">BHJ</a>&nbsp;&nbsp;</td>
+						</tr>
+					</table>
 					<a href="#BOMB" target="_SELF">BOMB</a>&nbsp;&nbsp;
 					<a href="#BRID" target="_SELF">BRID</a>&nbsp;&nbsp;
+					<a href="#BT" target="_SELF">BT</a>&nbsp;&nbsp;
+					<a href="#BTAS" target="_SELF">BTAS</a>&nbsp;&nbsp;
 					<a href="#CAP" target="_SELF">CAP</a>&nbsp;&nbsp;
-					<a href="#CK" target="_SELF">CK</a>&nbsp;&nbsp;
-					<a href="#CT" target="_SELF">CT</a>&nbsp;&nbsp;
 					<a href="#CASE" target="_SELF">CASE</a>&nbsp;&nbsp;
 					<a href="#CASEII" target="_SELF">CASEII</a>&nbsp;&nbsp;
-					<a href="#CRW" target="_SELF">CRW</a>&nbsp;&nbsp;
+					<a href="#CK" target="_SELF">CK</a>&nbsp;&nbsp;
+					<a href="#CNARC" target="_SELF">CNARC</a>&nbsp;&nbsp;
 					<a href="#CR" target="_SELF">CR</a>&nbsp;&nbsp;
+					<a href="#CRW" target="_SELF">CRW</a>&nbsp;&nbsp;
+					<a href="#CT" target="_SELF">CT</a>&nbsp;&nbsp;
 					<a href="#D" target="_SELF">D</a>&nbsp;&nbsp;
-					<a href="#DRO" target="_SELF">DRO</a>&nbsp;&nbsp;
 					<a href="#DCC" target="_SELF">DCC</a>&nbsp;&nbsp;
+					<a href="#DRO" target="_SELF">DRO</a>&nbsp;&nbsp;
 					<a href="#DUN" target="_SELF">DUN</a>&nbsp;&nbsp;
 					<a href="#ECM" target="_SELF">ECM</a>&nbsp;&nbsp;
-					<a href="#ES" target="_SELF">ES</a>&nbsp;&nbsp;
-					<a href="#ENG" target="_SELF">ENG</a>&nbsp;&nbsp;
 					<a href="#ENE" target="_SELF">ENE</a>&nbsp;&nbsp;
-					<a href="#SEAL" target="_SELF">SEAL</a>&nbsp;&nbsp;
+					<a href="#ENG" target="_SELF">ENG</a>&nbsp;&nbsp;
+					<a href="#ES" target="_SELF">ES</a>&nbsp;&nbsp;
+					<a href="#FD" target="_SELF">FD</a>&nbsp;&nbsp;
 					<a href="#FF" target="_SELF">FF</a>&nbsp;&nbsp;
 					<a href="#FLK" target="_SELF">FLK</a>&nbsp;&nbsp;
-					<a href="#FD" target="_SELF">FD</a>&nbsp;&nbsp;
-					<a href="#HT" target="_SELF">HT</a>&nbsp;&nbsp;
 					<a href="#HELI" target="_SELF">HELI</a>&nbsp;&nbsp;
+					<a href="#HT" target="_SELF">HT</a>&nbsp;&nbsp;
 					<a href="#IF" target="_SELF">IF</a>&nbsp;&nbsp;
 					<a href="#INARC" target="_SELF">INARC</a>&nbsp;&nbsp;
+					<a href="#LECM" target="_SELF">LECM</a>&nbsp;&nbsp;
 					<a href="#LG" target="_SELF">LG</a>&nbsp;&nbsp;
 					<a href="#LPRB" target="_SELF">LPRB</a>&nbsp;&nbsp;
-					<a href="#LECM" target="_SELF">LECM</a>&nbsp;&nbsp;
-					<a href="#LTAG" target="_SELF">LTAG</a>&nbsp;&nbsp;
 					<a href="#LRM" target="_SELF">LRM</a>&nbsp;&nbsp;
+					<a href="#LTAG" target="_SELF">LTAG</a>&nbsp;&nbsp;
 					<a href="#MAG" target="_SELF">MAG</a>&nbsp;&nbsp;
-					<a href="#MT" target="_SELF">MT</a>&nbsp;&nbsp;
+					<a href="#MDS" target="_SELF">MDS</a>&nbsp;&nbsp;
 					<a href="#MEC" target="_SELF">MEC</a>&nbsp;&nbsp;
 					<a href="#MEL" target="_SELF">MEL</a>&nbsp;&nbsp;
-					<a href="#MDS" target="_SELF">MDS</a>&nbsp;&nbsp;
-					<a href="#MSW" target="_SELF">MSW</a>&nbsp;&nbsp;
-					<a href="#MSL" target="_SELF">MSL</a>&nbsp;&nbsp;
 					<a href="#MHQ" target="_SELF">MHQ</a>&nbsp;&nbsp;
+					<a href="#MSL" target="_SELF">MSL</a>&nbsp;&nbsp;
+					<a href="#MSW" target="_SELF">MSW</a>&nbsp;&nbsp;
+					<a href="#MT" target="_SELF">MT</a>&nbsp;&nbsp;
+					<a href="#MTAS" target="_SELF">MTAS</a>&nbsp;&nbsp;
 					<a href="#MTN" target="_SELF">MTN</a>&nbsp;&nbsp;
-					<a href="#CNARC" target="_SELF">CNARC</a>&nbsp;&nbsp;
 					<a href="#OMNI" target="_SELF">OMNI</a>&nbsp;&nbsp;
 					<a href="#OVL" target="_SELF">OVL</a>&nbsp;&nbsp;
 					<a href="#PNT" target="_SELF">PNT</a>&nbsp;&nbsp;
+					<a href="#PRB" target="_SELF">PRB</a>&nbsp;&nbsp;
 					<a href="#PT" target="_SELF">PT</a>&nbsp;&nbsp;
 					<a href="#RAIL" target="_SELF">RAIL</a>&nbsp;&nbsp;
 					<a href="#RCA" target="_SELF">RCA</a>&nbsp;&nbsp;
@@ -156,16 +161,16 @@
 					<a href="#RFA" target="_SELF">RFA</a>&nbsp;&nbsp;
 					<a href="#RSD" target="_SELF">RSD</a>&nbsp;&nbsp;
 					<a href="#SAW" target="_SELF">SAW</a>&nbsp;&nbsp;
+					<a href="#SCAP" target="_SELF">SCAP</a>&nbsp;&nbsp;
+					<a href="#SDS" target="_SELF">SDS</a>&nbsp;&nbsp;
+					<a href="#SEAL" target="_SELF">SEAL</a>&nbsp;&nbsp;
+					<a href="#SHLD" target="_SELF">SHLD</a>&nbsp;&nbsp;
+					<a href="#SLG" target="_SELF">SLG</a>&nbsp;&nbsp;
 					<a href="#SRCH" target="_SELF">SRCH</a>&nbsp;&nbsp;
 					<a href="#SRM" target="_SELF">SRM</a>&nbsp;&nbsp;
 					<a href="#ST" target="_SELF">ST</a>&nbsp;&nbsp;
-					<a href="#SDS" target="_SELF">SDS</a>&nbsp;&nbsp;
 					<a href="#STL" target="_SELF">STL</a>&nbsp;&nbsp;
-					<a href="#SCAP" target="_SELF">SCAP</a>&nbsp;&nbsp;
-					<a href="#SLG" target="_SELF">SLG</a>&nbsp;&nbsp;
 					<a href="#TAG" target="_SELF">TAG</a>&nbsp;&nbsp;
-					<a href="#MTAS" target="_SELF">MTAS</a>&nbsp;&nbsp;
-					<a href="#BTAS" target="_SELF">BTAS</a>&nbsp;&nbsp;
 					<a href="#TOR" target="_SELF">TOR</a>&nbsp;&nbsp;
 					<a href="#TSM" target="_SELF">TSM</a>&nbsp;&nbsp;
 					<a href="#TUR" target="_SELF">TUR</a>&nbsp;&nbsp;
