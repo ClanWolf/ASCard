@@ -1,3 +1,5 @@
+{ "SpecialAbilities":
+
 [
   {
     "NAME": "Advanced Fire Control",
@@ -1208,3 +1210,5 @@
     "PAGE": "91"
   }
 ]
+
+}
