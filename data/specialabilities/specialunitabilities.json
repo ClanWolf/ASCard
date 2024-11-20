@@ -1,4 +1,4 @@
-[
+{ "SA":[
     {
         name: 'Advanced Fire Control',
         type: 'Standard',
@@ -313,4 +313,4 @@
         rule: 'A unit with this special ability possesses the Watchdog Composite Electronic Warfare System. For purposes of Alpha Strike, it is treated as if it has both the Light Active Probe (LPRB; see p. 82) and ECM special abilities.',
         pageNumber: 79
     }
-]
+]}
