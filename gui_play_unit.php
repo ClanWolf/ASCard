@@ -494,9 +494,9 @@
 	echo "</script>\n";
 ?>
 
-<iframe name="saveframe"></iframe>
+<iframe name="saveframe" id="iframe_save"></iframe>
 
-<iframe name="specialabilities"></iframe>
+<iframe name="specialabilities" id="iframe_specialabilities"></iframe>
 
 <div id="cover"></div>
 
