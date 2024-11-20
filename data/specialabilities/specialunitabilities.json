@@ -1,317 +1,1210 @@
-{ "SA":[
-    {
-        "name": "Advanced Fire Control",
-        "type": "Standard",
-        "abbreviation": "AFC",
-        "rule": "IndustrialMechs and support vehicles equipped with Advanced Fire Control do not suffer Target Number modifiers for their unit type.",
-        "page": 76
-    },
-    {
-        "name": "Amphibious",
-        "type": "Standard",
-        "abbreviation": "AMP",
-        "rule": "This ability makes a non-naval unit capable of water movement. Amphibious units pay a total of 4” per inch of water traversed and move as a surface naval unit in water, except that they freely move in and out of water areas.",
-        "page": 76
-    },
-    {
-        "name": "Angel ECM",
-        "type": "Standard",
-        "abbreviation": "AECM",
-        "rule": "An Angel ECM suite has the effects of standard ECM (see p. 77), but is treated as two standard ECM suites if using the ECM/ECCM optional rule (see p. 161).",
-        "page": 76
-    },
-    {
-        "name": "Anti-\"Mech",
-        "type": "Standard",
-        "abbreviation": "AM",
-        "rule": "Infantry units with the Anti-’Mech (AM) special ability can make a special attack against any ground units, landed VTOLs and WiGEs, or grounded aerospace units with which they are in base-to-base contact. Anti-’Mech Infantry attacks are treated as a physical attack (see p. 45).",
-        "page": 76
-    },
-    {
-        "name": "Anti-Missile System",
-        "type": "Standard",
-        "abbreviation": "AMS",
-        "rule": "A unit with an AMS reduces the damage by 1 point (to a minimum of 1) from any of the following attacks: standard weapon attack from a unit with the IF, SRM, or LRM special abilities, Indirect Fire attack using the IF special ability, or special weapon attack made using the SRM or LRM special abilities. AMS only works on attacks coming in the front arc, unless mounted in a turret (TUR).",
-        "page": 76
-    },
-    {
-        "name": "Armored Components",
-        "type": "Standard",
-        "abbreviation": "ARM",
-        "rule": "A unit with this ability ignores the first critical hit chance rolled against it during a single Alpha Strike scenario. The first time circumstances arise that would normally generate an opportunity for a critical hit (such as structure damage), the unit’s controlling player must strike off this ability as “spent” for the remainder of the scenario, and the attacker loses his first opportunity to roll for a critical hit.",
-        "page": 76
-    },
-    {
-        "name": "Armored Motive Systems",
-        "type": "Standard",
-        "abbreviation": "ARS",
-        "rule": "A unit with this special ability applies a –1 modifier on the Determining Motive Systems Damage roll (see Motive Systems Damage Table, p. 50).",
-        "page": 77
-    },
-    {
-        "name": "Barrier Armor Rating",
-        "type": "Standard",
-        "abbreviation": "BAR",
-        "rule": "The BAR special indicates a unit that is protected by substandard armor (or commercial-grade armor). Successful attacks against such units always trigger a roll for critical hits, regardless of whether or not the structure is damaged.",
-        "page": 77
-    },
-    {
-        "name": "Basic Fire Control",
-        "type": "Standard",
-        "abbreviation": "BFC",
-        "rule": "A support vehicle or IndustrialMech with this ability has an inferior targeting and tracking system, which adds a Target Number modifier of +1 for its attack. (This modifier is listed in the Attack Modifiers Table, see p. 44.)",
-        "page": 77
-    },
-    {
-        "name": "Battlemech HarJel",
-        "type": "Standard",
-        "abbreviation": "BHJ",
-        "rule": "A ’Mech protected by HarJel ignores the additional “hull breach” critical hit checks required for being attacked while underwater or in a vacuum. All other causes for critical hit rolls still apply as normal.",
-        "page": 77
-    },
-    {
-        "name": "Battlemech Shield",
-        "type": "Standard",
-        "abbreviation": "SHLD",
-        "rule": "Shield-bearing ’Mechs gain some protection against weapon and physical attacks at the expense of their own attack accuracy. To reflect this, shield-equipped units reduce the damage from most weapons and physical attacks by 1 point (to a minimum of 0). Indirect attacks, heat-causing attacks, and area-effect attacks (such as artillery and bombs) are not dampened by the shield and thus deliver full damage. All weapon attacks made by a ’Mech with this ability incur an additional +1 Target Number modifier.", 
-        "page": 77
-    },
-    {
-        "name": "Bomb",
-        "type": "Standard",
-        "abbreviation": "BOMB#",
-        "rule": "Conventional and aerospace fighters, fixed-wing support vehicles, and some battle armor can carry bombs. The number of bombs these units can carry are equal to the number in the ability’s notation (so a unit with BOMB4 carries up to 4 bombs). For most units, these bombs may be of any type, though battle armor units with this ability may only use cluster bombs (see p. 183). (As a special exception, Arrow IV missiles of all types may be carried as bombs, but a unit that uses Arrow IV bombs must count the first Arrow IV missile carried this way as 2 bombs. All remaining bombs are then counted normally.) Each bomb a unit carries reduces its Thrust value by 1. (Battle armor units with bombs suffer no effects on their Move ratings.) A bomb-carrying unit’s card should list how many bombs the unit is carrying in the scenario, which must be equal to or less than the number this ability enables it to carry.",
-        "page": 77
-    },
-    {
-        "name": "Cargo",
-        "type": "Standard",
-        "abbreviation": "CAR#",
-        "rule": "An infantry unit with the Cargo special ability can be carried by a unit with infantry transport space (noted by the IT# special ability). For these units, the number in the ability notation indicates the amount of cargo space it needs to be transported. For example, a squad of Elemental battle armor has a CAR5 special ability, and so would need a unit with IT5 (or higher) to transport it.", 
-        "page": 77
-    },
-    {
-        "name": "CASE",
-        "type": "Standard",
-        "abbreviation": "CASE",
-        "rule": "Units with this ability can minimize the catastrophic effects of an ammunition explosion and thus can survive Ammo Hit critical hits (see Ammo Hit, p. 50), but will suffer additional damage.",
-        "page": 77
-    },
-    {
-        "name": "CASE II",
-        "type": "Standard",
-        "abbreviation": "CASEII",
-        "rule": "Units with this ability have superior protection against ammunition explosions and can ignore Ammo Hit critical hits (see Ammo Hit, p. 50).", 
-        "page": 77
-    },
-    {
-        "name": "Electronic Countermeasures",
-        "type": "Standard",
-        "abbreviation": "ECM",
-        "rule": "See page 77. Effects Active Probes, Drones, Narc and iNarc systems (p. 136) and C3 networks (p.80) in a 12\" radius",
-        "page": 77
-    },
-    {
-        "name": "Elementary Engine",
-        "type": "Standard",
-        "abbreviation": "EE",
-        "rule": "Units with EE or FC specials use non-fusion engines for power and must have the SEAL special to operate underwater. Units with elementary engines (EE) may not operate in a vacuum, but units that have both fuel cell engines (FC) and the SEAL special may operate normally in a vacuum.<br> Heat-tracking units that use either of these engine types will suffer no heat buildup from an Engine Hit critical effect. Instead, for every turn after receiving an Engine Hit critical, if the unit makes a weapon attack, its controlling player must roll 2D6 in the End Phase of that game turn. On a roll of 12, the unit explodes and is destroyed.", 
-        "page": 77
-    },
-    {
-        "name": "Fuel Cell Engine",
-        "type": "Standard",
-        "abbreviation": "FC",
-        "rule": "Units with EE or FC specials use non-fusion engines for power and must have the SEAL special to operate underwater. Units with elementary engines (EE) may not operate in a vacuum, but units that have both fuel cell engines (FC) and the SEAL special may operate normally in a vacuum. Heat-tracking units that use either of these engine types will suffer no heat buildup from an Engine Hit critical effect. Instead, for every turn after receiving an Engine Hit critical, if the unit makes a weapon attack, its controlling player must roll 2D6 in the End Phase of that game turn. On a roll of 12, the unit explodes and is destroyed.",
-        "page": 77
-    },
-    {
-        "name": "Energy",
-        "type": "Standard",
-        "abbreviation": "ENE",
-        "rule": "A unit with this ability has little to no ammo to explode, and ignores Ammo Hit critical hits (see Ammo Hit, p. 50).",
-        "page": 77
-    },
-    {
-        "name": "Extended Mechanized",
-        "type": "Standard",
-        "abbreviation": "XMEC",
-        "rule": "Battle armor with this special ability may function as mechanized battle armor, and can ride on any type of ground unit (see Transporting Infantry, p. 38).",
-        "page": 78
-    },
-    {
-        "name": "Fire Resistant",
-        "type": "Standard",
-        "abbreviation": "FR",
-        "rule": "Units with this ability are not affected by infernos or other weapons that generate heat (HT#/#/#). If the heat-causing weapon deals damage in addition to causing heat, that damage still applies.",
-        "page": 78
-    },
-    {
-        "name": "Flak",
-        "type": "Standard",
-        "abbreviation": "FLK#/#/#",
-        "rule": "If a unit with this ability misses its Attack Roll by 2 points or less when attacking an airborne aerospace unit, VTOL, or WiGE target, the unit will deal damage to its target equal to its FLK rating at the appropriate range bracket.",
-        "page": 78
-    },
-    {
-        "name": "Heat",
-        "type": "Standard",
-        "abbreviation": "HT#/#/#",
-        "rule": "Units with this ability apply heat to the target’s Heat scale during the End Phase of the turn in which they deliver a successful weapon attack. If the target is a unit type that does not use a Heat Scale, the heat this ability would normally produce is added to the normal attack damage instead (see Applying Damage, p. 49). A unit with a Heat value at a range it does not normally deal damage at may make a special weapon attack in place of its standard weapon attack. This only deals the effects of the Heat special ability.",
-        "page": 78
-    },
-    {
-        "name": "Indirect Fire",
-        "type": "Standard",
-        "abbreviation": "IF#",
-        "rule": "The Indirect Fire special ability allows a unit to attack a target without having a valid LOS to it via arcing missiles over the intervening obstacles, similar to how mortars and artillery work. This attack requires a friendly unit with a valid LOS to act as a spotter. The numerical rating for this ability indicates the amount of damage a successful indirect attack will deliver. Because they attack when other weapons cannot, damage from an indirect attack applies in place of the unit’s normal weapon attack (see Indirect Fire, p. 41). Units with the IF# and LRM #/#/# specials may make use of all alternate munitions (see p. 143) and Special Pilot Abilities (see pp. 92-101) available to the LRM#/#/# special when making indirect fire attacks, but are limited to using the LRM special ability’s long range value if it is lower than the IF special ability value.",
-        "page": 78
-    },
-    {
-        "name": "Industrial Triple-Strength Myomers",
-        "type": "Standard",
-        "abbreviation": "I-TSM",
-        "rule": "’Mechs with Industrial TSM have enhanced musculature that delivers 1 point of additional damage on a successful standard- or melee-type physical attack, but these units also suffer a +2 Target Number modifier for all physical attacks due to the loss of fine motor control. (Industrial TSM also provides a movement boost, but this is already calculated in the unit’s Alpha Strike stats.)",
-        "page": 78
-    },
-    {
-        "name": "Infantry Transport",
-        "type": "Standard",
-        "abbreviation": "IT#",
-        "rule": "The numerical rating associated with this special ability indicates the amount of infantry transport space available. The unit may carry any number of infantry or battle armor units as long as these units’ total cargo requirement does not exceed the transporting unit’s infantry transport rating. Infantry Transport can be reduced and the same amount of Cargo Transport, Tons (CT#, see p. 84) added to a unit prior to the start of a game.",
-        "page": 78
-    },
-    {
-        "name": "Jump Jets, Weak",
-        "type": "Standard",
-        "abbreviation": "JMPW#",
-        "rule": "Note: The app does not consider this rule when calculating move or TMM. This unit has particularly underpowered, weak jump jets or overpowered, strong jump jets compared to their non-jump movement. Weak Jump Jets subtract the # from their TMM when using Jumping movement. Strong Jump Jets add the # to their TMM when using Jumping movement.",
-        "page": 78
-    },
-    {
-        "name": "Jump Jets, Strong",
-        "type": "Standard",
-        "abbreviation": "JMPS#",
-        "rule": "Note: The app does not consider this rule when calculating move or TMM.This unit has particularly underpowered, weak jump jets or overpowered, strong jump jets compared to their non-jump movement. Weak Jump Jets subtract the # from their TMM when using Jumping movement. Strong Jump Jets add the # to their TMM when using Jumping movement.",
-        "page": 78
-    },
-    {
-        "name": "Light ECM",
-        "type": "Standard",
-        "abbreviation": "LECM",
-        "rule": "Light ECM functions identically to ECM (see p. 77), but with a reduced radius. Light ECM only creates an ECM bubble with a 2” radius.",
-        "page": 78
-    },
-    {
-        "name": "Mechanized",
-        "type": "Standard",
-        "abbreviation": "MEC",
-        "rule": "Battle armor with this special ability may function as mechanized battle armor, and can ride on any ground unit type that has the Omni special ability (see Transporting Infantry, p. 38).",
-        "page": 78
-    },
-    {
-        "name": "Melee",
-        "type": "Standard",
-        "abbreviation": "MEL",
-        "rule": "This special ability indicates that the ’Mech is equipped with a physical attack weapon, and adds 1 additional point of physical attack damage on a successful Melee-type physical attack (see Resolving Physical Attacks, p. 45).",
-        "page": 78
-    },
-    {
-        "name": "Mimetic Armor System",
-        "type": "Standard",
-        "abbreviation": "MAS",
-        "rule": "Mimetic armors are similar to Stealth systems (see p. 79) in that they make a target more difficult to hit with weapon attacks (but not physical attacks). Unlike Stealth, to be effective mimetic armor requires its bearer to remain stationary. If a unit with the MAS special ability is immobile or remained at a standstill during the this turn’s Movement Phase, all non-physical attacks against that unit receive a +3 Target Number modifier for the remainder of the turn. LMAS functions the same way, but provides only a +2 modifier.",
-        "page": 78
-    },
-    {
-        "name": "Light Mimetic Armor System",
-        "type": "Standard",
-        "abbreviation": "LMAS",
-        "rule": "Mimetic armors are similar to Stealth systems (see p. 79) in that they make a target more difficult to hit with weapon attacks (but not physical attacks). Unlike Stealth, to be effective mimetic armor requires its bearer to remain stationary. If a unit with the MAS special ability is immobile or remained at a standstill during the this turn’s Movement Phase, all non-physical attacks against that unit receive a +3 Target Number modifier for the remainder of the turn. LMAS functions the same way, but provides only a +2 modifier.",
-        "page": 78
-    },
-    {
-        "name": "Off-Road",
-        "type": "Standard",
-        "abbreviation": "ORO",
-        "rule": "Lacking the rugged suspension of combat vehicles, ground-based support vehicles that use the wheeled (w) movement type must pay 2 inches of additional Move for every non-paved inch they move unless they possess the Off-Road special. This ability is not required for any other unit types, including support vehicles, that use movement modes other than wheeled.",
-        "page": 78
-    },
-    {
-        "name": "Omni",
-        "type": "Standard",
-        "abbreviation": "OMNI",
-        "rule": "Ground-based Omni units (’Mechs or vehicles) may transport a single battle armor unit using the mechanized battle armor rules (see Transporting Infantry, p. 38).",
-        "page": 78
-    },
-    {
-        "name": "Overheat Long",
-        "type": "Standard",
-        "abbreviation": "OVL",
-        "rule": "A unit with this special ability may overheat up to its OV value and apply that value to its Long range damage value as well as the unit’s Short and Medium range damage values. (A unit without this special ability may only apply the damage benefits of its Overheat capabilities to damage delivered in the Short and Medium range brackets.)",
-        "page": 78
-    },
-    {
-        "name": "Rear-Firing Weapons",
-        "type": "Standard",
-        "abbreviation": "RF#/#/#",
-        "rule": "See p.78 May fire in the rear facing but suffers increased TN when doing so. +1 for ground units.",
-        "page": 78
-    },
-    {
-        "name": "Stealth",
-        "type": "Standard",
-        "abbreviation": "STL",
-        "rule": "See p.79Makes this unit more difficult to hit. Effected by ECM.",
-        "page": 79
-    },
-    {
-        "name": "Submersible Movement Strong",
-        "type": "Standard",
-        "abbreviation": "SUBS#",
-        "rule": "This unit has particularly underpowered, weak submersible movement or overpowered, strong submersible movement compared to their non-submersible movement. Weak submersible movement subtracts the # from their TMM when using submersible movement. Strong submersible movement adds the # to their TMM when using submersible movement.",
-        "page": 79
-    },
-    {
-        "name": "Submersible Movement Weak",
-        "type": "Standard",
-        "abbreviation": "SUBW#",
-        "rule": "This unit has particularly underpowered, weak submersible movement or overpowered, strong submersible movement compared to their non-submersible movement. Weak submersible movement subtracts the # from their TMM when using submersible movement. Strong submersible movement adds the # to their TMM when using submersible movement.",
-        "page": 79
-    },
-    {
-        "name": "Torpedo",
-        "type": "Standard",
-        "abbreviation": "TOR#",
-        "rule": "Torpedo launchers may only be launched by units in water (or on the surface of a water feature), against targets that are also on or in water (this includes units like hovercraft and airborne WiGEs operating just above the surface of water). Torpedo special ability damage is given in range brackets like a standard weapon attack, and may be fired separately or combined with the standard weapon damage that a submerged unit may deliver in combat. Torpedo attacks ignore underwater range and damage modifiers that affect other weapons. For example, if a submergedunit, with damage values of 2/2/2 and a TOR 3/3 special, fires at a target that is in its underwater Short range bracket, it will deliver 4 points of total damage on a successful attack. (The base damage of 2 for its normal weapons is halved to 1, but the full TOR damage of 3 applies without reduction.)",
-        "page": 79
-    },
-    {
-        "name": "Triple-Strength Myomer",
-        "type": "Standard",
-        "abbreviation": "TSM",
-        "rule": "See p.79. Can move faster and deliver additional physical damage when running hot.",
-        "page": 79
-    },
-    {
-        "name": "Turret",
-        "type": "Standard",
-        "abbreviation": "TUR#",
-        "rule": "A unit with a turret has some (or all) of its weapons mounted with a 360-degree field of fire. Damage for all turret-mounted weapons are included in the base damage values for the unit, and then separately for the TUR special ability. Thus, when a unit with a turret wishes to make an attack outside of its normal forward field of fire, it must use the damage values for its TUR special ability in place of the unit’s standard damage values. Attacks made using the turret cannot be combined with any special attack ability not included in the unit’s TUR special ability. Some particularly large units—such as mobile structures and very large or super large vehicles—may feature multiple turrets. A unit with multiple turrets may use each turret individually to deliver its attacks (see Exceptionally Large Units, p. 64).",
-        "page": 79
-    },
-    {
-        "name": "Underwater Maneuvering Units",
-        "type": "Standard",
-        "abbreviation": "UMU",
-        "rule": "A unit with the UMU special ability uses the submersible movement rules when it is submerged in water instead of the normal underwater movement rules (see Submersible Movement, p. 36).",
-        "page": 79
-    },
-    {
-        "name": "Watchdog",
-        "type": "Standard",
-        "abbreviation": "WAT",
-        "rule": "A unit with this special ability possesses the Watchdog Composite Electronic Warfare System. For purposes of Alpha Strike, it is treated as if it has both the Light Active Probe (LPRB; see p. 82) and ECM special abilities.",
-        "page": 79
-    }
-]}
+[
+  {
+    "NAME": "Advanced Fire Control",
+    "ABBREVIATION": "AFC",
+    "TYPE": "Standard",
+    "RULE": "IndustrialMechs and support vehicles equipped with Advanced Fire Control do not suffer Target Number modifiers for their unit type.",
+    "SOURCE": "Alpha Strike Commanders Edition 7th",
+    "PAGE": "76"
+  },
+  {
+    "NAME": "Amphibious",
+    "ABBREVIATION": "AMP",
+    "TYPE": "Standard",
+    "RULE": "This ability makes a non-naval unit capable of water movement. Amphibious units pay a total of 4” per inch of water traversed and move as a surface naval unit in water, except that they freely move in and out of water areas.",
+    "SOURCE": "Alpha Strike Commanders Edition 7th",
+    "PAGE": "76"
+  },
+  {
+    "NAME": "Angel ECM",
+    "ABBREVIATION": "AECM",
+    "TYPE": "Standard",
+    "RULE": "An Angel ECM suite has the effects of standard ECM (see p. 77), but is treated as two standard ECM suites if using the ECM/ECCM optional rule (see p. 161).",
+    "SOURCE": "Alpha Strike Commanders Edition 7th",
+    "PAGE": "76"
+  },
+  {
+    "NAME": "Anti-Mech",
+    "ABBREVIATION": "AM",
+    "TYPE": "Standard",
+    "RULE": "Infantry units with the Anti-’Mech (AM) special ability can make a special attack against any ground units, landed VTOLs and WiGEs, or grounded aerospace units with which they are in base-to-base contact. Anti-’Mech Infantry attacks are treated as a physical attack (see p. 45).",
+    "SOURCE": "Alpha Strike Commanders Edition 7th",
+    "PAGE": "76"
+  },
+  {
+    "NAME": "Anti-Missile System",
+    "ABBREVIATION": "AMS",
+    "TYPE": "Standard",
+    "RULE": "A unit with an AMS reduces the damage by 1 point (to a minimum of 1) from any of the following attacks: standard weapon attack from a unit with the IF, SRM, or LRM special abilities, Indirect Fire attack using the IF special ability, or special weapon attack made using the SRM or LRM special abilities. AMS only works on attacks coming in the front arc, unless mounted in a turret (TUR).",
+    "SOURCE": "Alpha Strike Commanders Edition 7th",
+    "PAGE": "76"
+  },
+  {
+    "NAME": "Armored Components",
+    "ABBREVIATION": "ARM",
+    "TYPE": "Standard",
+    "RULE": "A unit with this ability ignores the first critical hit chance rolled against it during a single Alpha Strike scenario. The first time circumstances arise that would normally generate an opportunity for a critical hit (such as structure damage), the unit’s controlling player must strike off this ability as “spent” for the remainder of the scenario, and the attacker loses his first opportunity to roll for a critical hit.",
+    "SOURCE": "Alpha Strike Commanders Edition 7th",
+    "PAGE": "76"
+  },
+  {
+    "NAME": "Armored Motive System",
+    "ABBREVIATION": "ARS",
+    "TYPE": "Standard",
+    "RULE": "A unit with this special ability applies a –1 modifier on the Determining Motive Systems Damage roll (see Motive Systems Damage Table, p. 50).",
+    "SOURCE": "Alpha Strike Commanders Edition 7th",
+    "PAGE": "77"
+  },
+  {
+    "NAME": "Barrier Armor Rating",
+    "ABBREVIATION": "BAR",
+    "TYPE": "Standard",
+    "RULE": "The BAR special indicates a unit that is protected by substandard armor (or commercial-grade armor). Successful attacks against such units always trigger a roll for critical hits, regardless of whether or not the structure is damaged.",
+    "SOURCE": "Alpha Strike Commanders Edition 7th",
+    "PAGE": "77"
+  },
+  {
+    "NAME": "Basic Fire Control",
+    "ABBREVIATION": "BFC",
+    "TYPE": "Standard",
+    "RULE": "A support vehicle or IndustrialMech with this ability has an inferior targeting and tracking system, which adds a Target Number modifier of +1 for its attack. (This modifier is listed in the Attack Modifiers Table, see p. 44.)",
+    "SOURCE": "Alpha Strike Commanders Edition 7th",
+    "PAGE": "77"
+  },
+  {
+    "NAME": "BattleMech Harjel",
+    "ABBREVIATION": "BHJ",
+    "TYPE": "Standard",
+    "RULE": "A ’Mech protected by HarJel ignores the additional “hull breach” critical hit checks required for being attacked while underwater or in a vacuum. All other causes for critical hit rolls still apply as normal.",
+    "SOURCE": "Alpha Strike Commanders Edition 7th",
+    "PAGE": "77"
+  },
+  {
+    "NAME": "BattleMech Shield",
+    "ABBREVIATION": "SHLD",
+    "TYPE": "Standard",
+    "RULE": "Shield-bearing ’Mechs gain some protection against weapon and physical attacks at the expense of their own attack accuracy. To reflect this, shield-equipped units reduce the damage from most weapons and physical attacks by 1 point (to a minimum of 0). Indirect attacks, heat-causing attacks, and area-effect attacks (such as artillery and bombs) are not dampened by the shield and thus deliver full damage. All weapon attacks made by a ’Mech with this ability incur an additional +1 Target Number modifier.",
+    "SOURCE": "Alpha Strike Commanders Edition 7th",
+    "PAGE": "77"
+  },
+  {
+    "NAME": "Bomb",
+    "ABBREVIATION": "BOMB#",
+    "TYPE": "Standard",
+    "RULE": "Conventional and aerospace fighters, fixed-wing support vehicles, and some battle armor can carry bombs. The number of bombs these units can carry are equal to the number in the ability’s notation (so a unit with BOMB4 carries up to 4 bombs). For most units, these bombs may be of any type, though battle armor units with this ability may only use cluster bombs (see p. 183). (As a special exception, Arrow IV missiles of all types may be carried as bombs, but a unit that uses Arrow IV bombs must count the first Arrow IV missile carried this way as 2 bombs. All remaining bombs are then counted normally.) Each bomb a unit carries reduces its Thrust value by 1. (Battle armor units with bombs suffer no effects on their Move ratings.) A bomb-carrying unit’s card should list how many bombs the unit is carrying in the scenario, which must be equal to or less than the number this ability enables it to carry.",
+    "SOURCE": "Alpha Strike Commanders Edition 7th",
+    "PAGE": "77"
+  },
+  {
+    "NAME": "Cargo",
+    "ABBREVIATION": "CAR#",
+    "TYPE": "Standard",
+    "RULE": "An infantry unit with the Cargo special ability can be carried by a unit with infantry transport space (noted by the IT# special ability). For these units, the number in the ability notation indicates the amount of cargo space it needs to be transported. For example, a squad of Elemental battle armor has a CAR5 special ability, and so would need a unit with IT5 (or higher) to transport it.",
+    "SOURCE": "Alpha Strike Commanders Edition 7th",
+    "PAGE": "77"
+  },
+  {
+    "NAME": "Cellular Ammunition Storage Equipment",
+    "ABBREVIATION": "CASE",
+    "TYPE": "Standard",
+    "RULE": "Units with this ability can minimize the catastrophic effects of an ammunition explosion and thus can survive Ammo Hit critical hits (see Ammo Hit, p. 50), but will suffer additional damage.",
+    "SOURCE": "Alpha Strike Commanders Edition 7th",
+    "PAGE": "77"
+  },
+  {
+    "NAME": "Cellular Ammunition Storage Equipment II",
+    "ABBREVIATION": "CASEII",
+    "TYPE": "Standard",
+    "RULE": "Units with this ability have superior protection against ammunition explosions and can ignore Ammo Hit critical hits (see Ammo Hit, p. 50).",
+    "SOURCE": "Alpha Strike Commanders Edition 7th",
+    "PAGE": "77"
+  },
+  {
+    "NAME": "Electronic Countermeasures",
+    "ABBREVIATION": "ECM",
+    "TYPE": "Standard",
+    "RULE": "See page 77. Effects Active Probes, Drones, Narc and iNarc systems (p. 136) and C3 networks (p.80) in a 12&quot; radius.",
+    "SOURCE": "Alpha Strike Commanders Edition 7th",
+    "PAGE": "77"
+  },
+  {
+    "NAME": "Elementary Engine",
+    "ABBREVIATION": "EE",
+    "TYPE": "Standard",
+    "RULE": "Units with EE or FC specials use non-fusion engines for power and must have the SEAL special to operate underwater. Units with elementary engines (EE) may not operate in a vacuum, but units that have both fuel cell engines (FC) and the SEAL special may operate normally in a vacuum. Heat-tracking units that use either of these engine types will suffer no heat buildup from an Engine Hit critical effect. Instead, for every turn after receiving an Engine Hit critical, if the unit makes a weapon attack, its controlling player must roll 2D6 in the End Phase of that game turn. On a roll of 12, the unit explodes and is destroyed.",
+    "SOURCE": "Alpha Strike Commanders Edition 7th",
+    "PAGE": "77"
+  },
+  {
+    "NAME": "Fuel Cell Engine",
+    "ABBREVIATION": "FC",
+    "TYPE": "Standard",
+    "RULE": "Units with EE or FC specials use non-fusion engines for power and must have the SEAL special to operate underwater. Units with elementary engines (EE) may not operate in a vacuum, but units that have both fuel cell engines (FC) and the SEAL special may operate normally in a vacuum. Heat-tracking units that use either of these engine types will suffer no heat buildup from an Engine Hit critical effect. Instead, for every turn after receiving an Engine Hit critical, if the unit makes a weapon attack, its controlling player must roll 2D6 in the End Phase of that game turn. On a roll of 12, the unit explodes and is destroyed.",
+    "SOURCE": "Alpha Strike Commanders Edition 7th",
+    "PAGE": "77"
+  },
+  {
+    "NAME": "Energy",
+    "ABBREVIATION": "ENE",
+    "TYPE": "Standard",
+    "RULE": "A unit with this ability has little to no ammo to explode, and ignores Ammo Hit critical hits (see Ammo Hit, p. 50).",
+    "SOURCE": "Alpha Strike Commanders Edition 7th",
+    "PAGE": "77"
+  },
+  {
+    "NAME": "Extended Mechanized",
+    "ABBREVIATION": "XMEC",
+    "TYPE": "Standard",
+    "RULE": "Battle armor with this special ability may function as mechanized battle armor, and can ride on any type of ground unit (see Transporting Infantry, p. 38).",
+    "SOURCE": "Alpha Strike Commanders Edition 7th",
+    "PAGE": "78"
+  },
+  {
+    "NAME": "Fire Resistant",
+    "ABBREVIATION": "FR",
+    "TYPE": "Standard",
+    "RULE": "Units with this ability are not affected by infernos or other weapons that generate heat (HT#/#/#). If the heat-causing weapon deals damage in addition to causing heat, that damage still applies.",
+    "SOURCE": "Alpha Strike Commanders Edition 7th",
+    "PAGE": "78"
+  },
+  {
+    "NAME": "Flak",
+    "ABBREVIATION": "FLK#/#/#/#",
+    "TYPE": "Standard",
+    "RULE": "If a unit with this ability misses its Attack Roll by 2 points or less when attacking an airborne aerospace unit, VTOL, or WiGE target, the unit will deal damage to its target equal to its FLK rating at the appropriate range bracket.",
+    "SOURCE": "Alpha Strike Commanders Edition 7th",
+    "PAGE": "78"
+  },
+  {
+    "NAME": "Heat",
+    "ABBREVIATION": "HT#/#/#",
+    "TYPE": "Standard",
+    "RULE": "Units with this ability apply heat to the target’s Heat scale during the End Phase of the turn in which they deliver a successful weapon attack. If the target is a unit type that does not use a Heat Scale, the heat this ability would normally produce is added to the normal attack damage instead (see Applying Damage, p. 49). A unit with a Heat value at a range it does not normally deal damage at may make a special weapon attack in place of its standard weapon attack. This only deals the effects of the Heat special ability.",
+    "SOURCE": "Alpha Strike Commanders Edition 7th",
+    "PAGE": "78"
+  },
+  {
+    "NAME": "Indirect Fire",
+    "ABBREVIATION": "IF#",
+    "TYPE": "Standard",
+    "RULE": "The Indirect Fire special ability allows a unit to attack a target without having a valid LOS to it via arcing missiles over the intervening obstacles, similar to how mortars and artillery work. This attack requires a friendly unit with a valid LOS to act as a spotter. The numerical rating for this ability indicates the amount of damage a successful indirect attack will deliver. Because they attack when other weapons cannot, damage from an indirect attack applies in place of the unit’s normal weapon attack (see Indirect Fire, p. 41). Units with the IF# and LRM #/#/# specials may make use of all alternate munitions (see p. 143) and Special Pilot Abilities (see pp. 92-101) available to the LRM#/#/# special when making indirect fire attacks, but are limited to using the LRM special ability’s long range value if it is lower than the IF special ability value.",
+    "SOURCE": "Alpha Strike Commanders Edition 7th",
+    "PAGE": "78"
+  },
+  {
+    "NAME": "Industrial Triple-Strength Myomers",
+    "ABBREVIATION": "I-TSM",
+    "TYPE": "Standard",
+    "RULE": "Mechs with Industrial TSM have enhanced musculature that delivers 1 point of additional damage on a successful standard- or melee-type physical attack, but these units also suffer a +2 Target Number modifier for all physical attacks due to the loss of fine motor control. (Industrial TSM also provides a movement boost, but this is already calculated in the unit’s Alpha Strike stats.)",
+    "SOURCE": "Alpha Strike Commanders Edition 7th",
+    "PAGE": "78"
+  },
+  {
+    "NAME": "Infantry Transport",
+    "ABBREVIATION": "IT#",
+    "TYPE": "Standard",
+    "RULE": "The numerical rating associated with this special ability indicates the amount of infantry transport space available. The unit may carry any number of infantry or battle armor units as long as these units’ total cargo requirement does not exceed the transporting unit’s infantry transport rating. Infantry Transport can be reduced and the same amount of Cargo Transport, Tons (CT#, see p. 84) added to a unit prior to the start of a game.",
+    "SOURCE": "Alpha Strike Commanders Edition 7th",
+    "PAGE": "78"
+  },
+  {
+    "NAME": "Jump Jets Weak",
+    "ABBREVIATION": "JMPW#",
+    "TYPE": "Standard",
+    "RULE": "This unit has particularly underpowered, weak jump jets or overpowered, strong jump jets compared to their non-jump movement. Weak Jump Jets subtract the # from their TMM when using Jumping movement. Strong Jump Jets add the # to their TMM when using Jumping movement.",
+    "SOURCE": "Alpha Strike Commanders Edition 7th",
+    "PAGE": "78"
+  },
+  {
+    "NAME": "Jump Jets Strong",
+    "ABBREVIATION": "JMPS#",
+    "TYPE": "Standard",
+    "RULE": "This unit has particularly underpowered, weak jump jets or overpowered, strong jump jets compared to their non-jump movement. Weak Jump Jets subtract the # from their TMM when using Jumping movement. Strong Jump Jets add the # to their TMM when using Jumping movement.",
+    "SOURCE": "Alpha Strike Commanders Edition 7th",
+    "PAGE": "78"
+  },
+  {
+    "NAME": "Light ECM",
+    "ABBREVIATION": "LECM",
+    "TYPE": "Standard",
+    "RULE": "Light ECM functions identically to ECM (see p. 77), but with a reduced radius. Light ECM only creates an ECM bubble with a 2” radius.",
+    "SOURCE": "Alpha Strike Commanders Edition 7th",
+    "PAGE": "78"
+  },
+  {
+    "NAME": "Mechanized",
+    "ABBREVIATION": "MEC",
+    "TYPE": "Standard",
+    "RULE": "Battle armor with this special ability may function as mechanized battle armor, and can ride on any ground unit type that has the Omni special ability (see Transporting Infantry, p. 38).",
+    "SOURCE": "Alpha Strike Commanders Edition 7th",
+    "PAGE": "78"
+  },
+  {
+    "NAME": "Melee",
+    "ABBREVIATION": "MEL",
+    "TYPE": "Standard",
+    "RULE": "This special ability indicates that the ’Mech is equipped with a physical attack weapon, and adds 1 additional point of physical attack damage on a successful Melee-type physical attack (see Resolving Physical Attacks, p. 45).",
+    "SOURCE": "Alpha Strike Commanders Edition 7th",
+    "PAGE": "78"
+  },
+  {
+    "NAME": "Mimetic Armor System",
+    "ABBREVIATION": "MAS",
+    "TYPE": "Standard",
+    "RULE": "Mimetic armors are similar to Stealth systems (see p. 79) in that they make a target more difficult to hit with weapon attacks (but not physical attacks). Unlike Stealth, to be effective mimetic armor requires its bearer to remain stationary. If a unit with the MAS special ability is immobile or remained at a standstill during the this turn’s Movement Phase, all non-physical attacks against that unit receive a +3 Target Number modifier for the remainder of the turn. LMAS functions the same way, but provides only a +2 modifier.",
+    "SOURCE": "Alpha Strike Commanders Edition 7th",
+    "PAGE": "78"
+  },
+  {
+    "NAME": "Light Mimetic Armor System",
+    "ABBREVIATION": "LMAS",
+    "TYPE": "Standard",
+    "RULE": "Mimetic armors are similar to Stealth systems (see p. 79) in that they make a target more difficult to hit with weapon attacks (but not physical attacks). Unlike Stealth, to be effective mimetic armor requires its bearer to remain stationary. If a unit with the MAS special ability is immobile or remained at a standstill during the this turn’s Movement Phase, all non-physical attacks against that unit receive a +3 Target Number modifier for the remainder of the turn. LMAS functions the same way, but provides only a +2 modifier.",
+    "SOURCE": "Alpha Strike Commanders Edition 7th",
+    "PAGE": "78"
+  },
+  {
+    "NAME": "Off-Road",
+    "ABBREVIATION": "ORO",
+    "TYPE": "Standard",
+    "RULE": "Lacking the rugged suspension of combat vehicles, ground-based support vehicles that use the wheeled (w) movement type must pay 2 inches of additional Move for every non-paved inch they move unless they possess the Off-Road special. This ability is not required for any other unit types, including support vehicles, that use movement modes other than wheeled.",
+    "SOURCE": "Alpha Strike Commanders Edition 7th",
+    "PAGE": "78"
+  },
+  {
+    "NAME": "Omni",
+    "ABBREVIATION": "OMNI",
+    "TYPE": "Standard",
+    "RULE": "Ground-based Omni units (’Mechs or vehicles) may transport a single battle armor unit using the mechanized battle armor rules (see Transporting Infantry, p. 38).",
+    "SOURCE": "Alpha Strike Commanders Edition 7th",
+    "PAGE": "78"
+  },
+  {
+    "NAME": "Overheat Long",
+    "ABBREVIATION": "OVL",
+    "TYPE": "Standard",
+    "RULE": "A unit with this special ability may overheat up to its OV value and apply that value to its Long range damage value as well as the unit’s Short and Medium range damage values. (A unit without this special ability may only apply the damage benefits of its Overheat capabilities to damage delivered in the Short and Medium range brackets.)",
+    "SOURCE": "Alpha Strike Commanders Edition 7th",
+    "PAGE": "78"
+  },
+  {
+    "NAME": "Rear-Firing Weapons",
+    "ABBREVIATION": "REAR#/#/#/#",
+    "TYPE": "Standard",
+    "RULE": "See p.78. May fire in the rear facing but suffers increased TN when doing so. +1 for ground units.",
+    "SOURCE": "Alpha Strike Commanders Edition 7th",
+    "PAGE": "79"
+  },
+  {
+    "NAME": "Stealth",
+    "ABBREVIATION": "STL",
+    "TYPE": "Standard",
+    "RULE": "See p.79. Makes this unit more difficult to hit. Effected by ECM.",
+    "SOURCE": "Alpha Strike Commanders Edition 7th",
+    "PAGE": "79"
+  },
+  {
+    "NAME": "Submersible Movement Weak",
+    "ABBREVIATION": "SUBW#",
+    "TYPE": "Standard",
+    "RULE": "This unit has particularly underpowered, weak submersible movement or overpowered, strong submersible movement compared to their non-submersible movement. Weak submersible movement subtracts the # from their TMM when using submersible movement. Strong submersible movement adds the # to their TMM when using submersible movement.",
+    "SOURCE": "Alpha Strike Commanders Edition 7th",
+    "PAGE": "79"
+  },
+  {
+    "NAME": "Submersible Movement Strong",
+    "ABBREVIATION": "SUBS#",
+    "TYPE": "Standard",
+    "RULE": "This unit has particularly underpowered, weak submersible movement or overpowered, strong submersible movement compared to their non-submersible movement. Weak submersible movement subtracts the # from their TMM when using submersible movement. Strong submersible movement adds the # to their TMM when using submersible movement.",
+    "SOURCE": "Alpha Strike Commanders Edition 7th",
+    "PAGE": "79"
+  },
+  {
+    "NAME": "Torpedo",
+    "ABBREVIATION": "TOR#",
+    "TYPE": "Standard",
+    "RULE": "Torpedo launchers may only be launched by units in water (or on the surface of a water feature), against targets that are also on or in water (this includes units like hovercraft and airborne WiGEs operating just above the surface of water). Torpedo special ability damage is given in range brackets like a standard weapon attack, and may be fired separately or combined with the standard weapon damage that a submerged unit may deliver in combat. Torpedo attacks ignore underwater range and damage modifiers that affect other weapons. For example, if a submergedunit, with damage values of 2/2/2 and a TOR 3/3 special, fires at a target that is in its underwater Short range bracket, it will deliver 4 points of total damage on a successful attack. (The base damage of 2 for its normal weapons is halved to 1, but the full TOR damage of 3 applies without reduction.)",
+    "SOURCE": "Alpha Strike Commanders Edition 7th",
+    "PAGE": "79"
+  },
+  {
+    "NAME": "Triple-Strength Myomer",
+    "ABBREVIATION": "TSM",
+    "TYPE": "Standard",
+    "RULE": "See p.79. Can move faster and deliver additional physical damage when running hot.",
+    "SOURCE": "Alpha Strike Commanders Edition 7th",
+    "PAGE": "79"
+  },
+  {
+    "NAME": "Turret",
+    "ABBREVIATION": "TUR#",
+    "TYPE": "Standard",
+    "RULE": "A unit with a turret has some (or all) of its weapons mounted with a 360-degree field of fire. Damage for all turret-mounted weapons are included in the base damage values for the unit, and then separately for the TUR special ability. Thus, when a unit with a turret wishes to make an attack outside of its normal forward field of fire, it must use the damage values for its TUR special ability in place of the unit’s standard damage values. Attacks made using the turret cannot be combined with any special attack ability not included in the unit’s TUR special ability. Some particularly large units—such as mobile structures and very large or super large vehicles—may feature multiple turrets. A unit with multiple turrets may use each turret individually to deliver its attacks (see Exceptionally Large Units, p. 64).",
+    "SOURCE": "Alpha Strike Commanders Edition 7th",
+    "PAGE": "79"
+  },
+  {
+    "NAME": "Underwater Maneuvering Units",
+    "ABBREVIATION": "UMU",
+    "TYPE": "Standard",
+    "RULE": "A unit with the UMU special ability uses the submersible movement rules when it is submerged in water instead of the normal underwater movement rules (see Submersible Movement, p. 36).",
+    "SOURCE": "Alpha Strike Commanders Edition 7th",
+    "PAGE": "80"
+  },
+  {
+    "NAME": "Watchdog",
+    "ABBREVIATION": "WAT",
+    "TYPE": "Standard",
+    "RULE": "A unit with this special ability possesses the Watchdog Composite Electronic Warfare System. For purposes of Alpha Strike, it is treated as if it has both the Light Active Probe (LPRB; see p. 82) and ECM special abilities.",
+    "SOURCE": "Alpha Strike Commanders Edition 7th",
+    "PAGE": "80"
+  },
+  {
+    "NAME": "C3 Boosted Systems (Master)",
+    "ABBREVIATION": "C3BSM#",
+    "TYPE": "C3 Networks",
+    "RULE": "wip",
+    "SOURCE": "Alpha Strike Commanders Edition 7th",
+    "PAGE": "80"
+  },
+  {
+    "NAME": "C3 Boosted Systems (Slave)",
+    "ABBREVIATION": "C3BSS#",
+    "TYPE": "C3 Networks",
+    "RULE": "wip",
+    "SOURCE": "Alpha Strike Commanders Edition 7th",
+    "PAGE": "80"
+  },
+  {
+    "NAME": "C3 Emergency Master Computer",
+    "ABBREVIATION": "C3EM#",
+    "TYPE": "C3 Networks",
+    "RULE": "wip",
+    "SOURCE": "Alpha Strike Commanders Edition 7th",
+    "PAGE": "80"
+  },
+  {
+    "NAME": "C3 Master Computer",
+    "ABBREVIATION": "C3M#",
+    "TYPE": "C3 Networks",
+    "RULE": "wip",
+    "SOURCE": "Alpha Strike Commanders Edition 7th",
+    "PAGE": "82"
+  },
+  {
+    "NAME": "C3 Remote Sensor",
+    "ABBREVIATION": "C3RS",
+    "TYPE": "C3 Networks",
+    "RULE": "wip",
+    "SOURCE": "Alpha Strike Commanders Edition 7th",
+    "PAGE": "82"
+  },
+  {
+    "NAME": "C3 Slave Computer",
+    "ABBREVIATION": "C3S",
+    "TYPE": "C3 Networks",
+    "RULE": "wip",
+    "SOURCE": "Alpha Strike Commanders Edition 7th",
+    "PAGE": "82"
+  },
+  {
+    "NAME": "C3 Improved Computer",
+    "ABBREVIATION": "C3I",
+    "TYPE": "C3 Networks",
+    "RULE": "wip",
+    "SOURCE": "Alpha Strike Commanders Edition 7th",
+    "PAGE": "82"
+  },
+  {
+    "NAME": "Active Probe",
+    "ABBREVIATION": "PRB",
+    "TYPE": "Optional Special Abilities",
+    "RULE": "wip",
+    "SOURCE": "Alpha Strike Commanders Edition 7th",
+    "PAGE": "82"
+  },
+  {
+    "NAME": "Advanced Tactical Analysis Computer",
+    "ABBREVIATION": "ATAC#",
+    "TYPE": "Optional Special Abilities",
+    "RULE": "wip",
+    "SOURCE": "Alpha Strike Commanders Edition 7th",
+    "PAGE": "82"
+  },
+  {
+    "NAME": "Aerospace Transport",
+    "ABBREVIATION": "AT#",
+    "TYPE": "Optional Special Abilities",
+    "RULE": "wip",
+    "SOURCE": "Alpha Strike Commanders Edition 7th",
+    "PAGE": "82"
+  },
+  {
+    "NAME": "Artillery",
+    "ABBREVIATION": "ARTX-#",
+    "TYPE": "Optional Special Abilities",
+    "RULE": "wip",
+    "SOURCE": "Alpha Strike Commanders Edition 7th",
+    "PAGE": "82"
+  },
+  {
+    "NAME": "Anti-Penetrative Ablation Armor",
+    "ABBREVIATION": "ABA",
+    "TYPE": "Optional Special Abilities",
+    "RULE": "wip",
+    "SOURCE": "Alpha Strike Commanders Edition 7th",
+    "PAGE": "83"
+  },
+  {
+    "NAME": "Autocannon",
+    "ABBREVIATION": "AC#/#/#/#",
+    "TYPE": "Optional Special Abilities",
+    "RULE": "wip",
+    "SOURCE": "Alpha Strike Commanders Edition 7th",
+    "PAGE": "83"
+  },
+  {
+    "NAME": "Ballistic-Reinforced Armor",
+    "ABBREVIATION": "BRA",
+    "TYPE": "Optional Special Abilities",
+    "RULE": "wip",
+    "SOURCE": "Alpha Strike Commanders Edition 7th",
+    "PAGE": "83"
+  },
+  {
+    "NAME": "BattleMech Harjel",
+    "ABBREVIATION": "BHJ",
+    "TYPE": "Optional Special Abilities",
+    "RULE": "wip",
+    "SOURCE": "Alpha Strike Commanders Edition 7th",
+    "PAGE": "83"
+  },
+  {
+    "NAME": "BattleMech Harjel II",
+    "ABBREVIATION": "BHJ2",
+    "TYPE": "Optional Special Abilities",
+    "RULE": "wip",
+    "SOURCE": "Alpha Strike Commanders Edition 7th",
+    "PAGE": "83"
+  },
+  {
+    "NAME": "BattleMech Harjel III",
+    "ABBREVIATION": "BHJ3",
+    "TYPE": "Optional Special Abilities",
+    "RULE": "wip",
+    "SOURCE": "Alpha Strike Commanders Edition 7th",
+    "PAGE": "83"
+  },
+  {
+    "NAME": "Bimodal Land-Air BattleMech",
+    "ABBREVIATION": "BIM(#A)",
+    "TYPE": "Optional Special Abilities",
+    "RULE": "wip",
+    "SOURCE": "Alpha Strike Commanders Edition 7th",
+    "PAGE": "83"
+  },
+  {
+    "NAME": "Bloodhound Active Probe",
+    "ABBREVIATION": "BH",
+    "TYPE": "Optional Special Abilities",
+    "RULE": "wip",
+    "SOURCE": "Alpha Strike Commanders Edition 7th",
+    "PAGE": "83"
+  },
+  {
+    "NAME": "Booby Trap",
+    "ABBREVIATION": "BT",
+    "TYPE": "Optional Special Abilities",
+    "RULE": "wip",
+    "SOURCE": "Alpha Strike Commanders Edition 7th",
+    "PAGE": "83"
+  },
+  {
+    "NAME": "Bridgelayer",
+    "ABBREVIATION": "BRID",
+    "TYPE": "Optional Special Abilities",
+    "RULE": "wip",
+    "SOURCE": "Alpha Strike Commanders Edition 7th",
+    "PAGE": "83"
+  },
+  {
+    "NAME": "Capital Weapons",
+    "ABBREVIATION": "CAP",
+    "TYPE": "Optional Special Abilities",
+    "RULE": "wip",
+    "SOURCE": "Alpha Strike Commanders Edition 7th",
+    "PAGE": "84"
+  },
+  {
+    "NAME": "Cargo Transport, Kilotons",
+    "ABBREVIATION": "CK#",
+    "TYPE": "Optional Special Abilities",
+    "RULE": "wip",
+    "SOURCE": "Alpha Strike Commanders Edition 7th",
+    "PAGE": "84"
+  },
+  {
+    "NAME": "Cargo Transport, Tons",
+    "ABBREVIATION": "CT#",
+    "TYPE": "Optional Special Abilities",
+    "RULE": "wip",
+    "SOURCE": "Alpha Strike Commanders Edition 7th",
+    "PAGE": "84"
+  },
+  {
+    "NAME": "Crew",
+    "ABBREVIATION": "CRW#",
+    "TYPE": "Optional Special Abilities",
+    "RULE": "wip",
+    "SOURCE": "Alpha Strike Commanders Edition 7th",
+    "PAGE": "84"
+  },
+  {
+    "NAME": "Critical-Resistant",
+    "ABBREVIATION": "CR",
+    "TYPE": "Optional Special Abilities",
+    "RULE": "wip",
+    "SOURCE": "Alpha Strike Commanders Edition 7th",
+    "PAGE": "84"
+  },
+  {
+    "NAME": "Direct Neural Control System",
+    "ABBREVIATION": "DN",
+    "TYPE": "Optional Special Abilities",
+    "RULE": "wip",
+    "SOURCE": "Alpha Strike Commanders Edition 7th",
+    "PAGE": "84"
+  },
+  {
+    "NAME": "Door",
+    "ABBREVIATION": "D#",
+    "TYPE": "Optional Special Abilities",
+    "RULE": "wip",
+    "SOURCE": "Alpha Strike Commanders Edition 7th",
+    "PAGE": "84"
+  },
+  {
+    "NAME": "Drone",
+    "ABBREVIATION": "DRO",
+    "TYPE": "Optional Special Abilities",
+    "RULE": "wip",
+    "SOURCE": "Alpha Strike Commanders Edition 7th",
+    "PAGE": "84"
+  },
+  {
+    "NAME": "Drone Carrier Control System",
+    "ABBREVIATION": "DCC#",
+    "TYPE": "Optional Special Abilities",
+    "RULE": "wip",
+    "SOURCE": "Alpha Strike Commanders Edition 7th",
+    "PAGE": "85"
+  },
+  {
+    "NAME": "Dune Buggy",
+    "ABBREVIATION": "DUN",
+    "TYPE": "Optional Special Abilities",
+    "RULE": "wip",
+    "SOURCE": "Alpha Strike Commanders Edition 7th",
+    "PAGE": "85"
+  },
+  {
+    "NAME": "Ejection Seat",
+    "ABBREVIATION": "ES",
+    "TYPE": "Optional Special Abilities",
+    "RULE": "wip",
+    "SOURCE": "Alpha Strike Commanders Edition 7th",
+    "PAGE": "85"
+  },
+  {
+    "NAME": "Engineering",
+    "ABBREVIATION": "ENG",
+    "TYPE": "Optional Special Abilities",
+    "RULE": "wip",
+    "SOURCE": "Alpha Strike Commanders Edition 7th",
+    "PAGE": "85"
+  },
+  {
+    "NAME": "Environmental Sealing",
+    "ABBREVIATION": "SEAL",
+    "TYPE": "Optional Special Abilities",
+    "RULE": "wip",
+    "SOURCE": "Alpha Strike Commanders Edition 7th",
+    "PAGE": "85"
+  },
+  {
+    "NAME": "Firefighter",
+    "ABBREVIATION": "FF",
+    "TYPE": "Optional Special Abilities",
+    "RULE": "wip",
+    "SOURCE": "Alpha Strike Commanders Edition 7th",
+    "PAGE": "85"
+  },
+  {
+    "NAME": "Flight Deck",
+    "ABBREVIATION": "FD",
+    "TYPE": "Optional Special Abilities",
+    "RULE": "wip",
+    "SOURCE": "Alpha Strike Commanders Edition 7th",
+    "PAGE": "85"
+  },
+  {
+    "NAME": "Glider ProtoMech",
+    "ABBREVIATION": "GLD",
+    "TYPE": "Optional Special Abilities",
+    "RULE": "wip",
+    "SOURCE": "Alpha Strike Commanders Edition 7th",
+    "PAGE": "85"
+  },
+  {
+    "NAME": "Helipad",
+    "ABBREVIATION": "HELI",
+    "TYPE": "Optional Special Abilities",
+    "RULE": "wip",
+    "SOURCE": "Alpha Strike Commanders Edition 7th",
+    "PAGE": "85"
+  },
+  {
+    "NAME": "Hyperpulse Generator",
+    "ABBREVIATION": "HPG",
+    "TYPE": "Optional Special Abilities",
+    "RULE": "wip",
+    "SOURCE": "Alpha Strike Commanders Edition 7th",
+    "PAGE": "85"
+  },
+  {
+    "NAME": "Impact-Resistant Armor",
+    "ABBREVIATION": "IRA",
+    "TYPE": "Optional Special Abilities",
+    "RULE": "wip",
+    "SOURCE": "Alpha Strike Commanders Edition 7th",
+    "PAGE": "86"
+  },
+  {
+    "NAME": "Improved ATM",
+    "ABBREVIATION": "IATM#/#/#",
+    "TYPE": "Optional Special Abilities",
+    "RULE": "wip",
+    "SOURCE": "Alpha Strike Commanders Edition 7th",
+    "PAGE": "86"
+  },
+  {
+    "NAME": "Improved NARC Missile Beacon",
+    "ABBREVIATION": "INARC#",
+    "TYPE": "Optional Special Abilities",
+    "RULE": "wip",
+    "SOURCE": "Alpha Strike Commanders Edition 7th",
+    "PAGE": "86"
+  },
+  {
+    "NAME": "Land-Air BattleMech",
+    "ABBREVIATION": "LAM (#G/#A)",
+    "TYPE": "Optional Special Abilities",
+    "RULE": "wip",
+    "SOURCE": "Alpha Strike Commanders Edition 7th",
+    "PAGE": "86"
+  },
+  {
+    "NAME": "Large",
+    "ABBREVIATION": "LG",
+    "TYPE": "Optional Special Abilities",
+    "RULE": "wip",
+    "SOURCE": "Alpha Strike Commanders Edition 7th",
+    "PAGE": "86"
+  },
+  {
+    "NAME": "Light Active Probe",
+    "ABBREVIATION": "LPRB",
+    "TYPE": "Optional Special Abilities",
+    "RULE": "wip",
+    "SOURCE": "Alpha Strike Commanders Edition 7th",
+    "PAGE": "86"
+  },
+  {
+    "NAME": "Light Target Acquisition Gear",
+    "ABBREVIATION": "LTAG",
+    "TYPE": "Optional Special Abilities",
+    "RULE": "wip",
+    "SOURCE": "Alpha Strike Commanders Edition 7th",
+    "PAGE": "86"
+  },
+  {
+    "NAME": "Long Range Missiles",
+    "ABBREVIATION": "LRM#/#/#/#",
+    "TYPE": "Optional Special Abilities",
+    "RULE": "wip",
+    "SOURCE": "Alpha Strike Commanders Edition 7th",
+    "PAGE": "86"
+  },
+  {
+    "NAME": "Maglev",
+    "ABBREVIATION": "MAG",
+    "TYPE": "Optional Special Abilities",
+    "RULE": "wip",
+    "SOURCE": "Alpha Strike Commanders Edition 7th",
+    "PAGE": "86"
+  },
+  {
+    "NAME": "Magnetic Clamp System (2 Units)",
+    "ABBREVIATION": "MCS",
+    "TYPE": "Optional Special Abilities",
+    "RULE": "wip",
+    "SOURCE": "Alpha Strike Commanders Edition 7th",
+    "PAGE": "87"
+  },
+  {
+    "NAME": "Magnetic Clamp System (1 Unit)",
+    "ABBREVIATION": "UCS",
+    "TYPE": "Optional Special Abilities",
+    "RULE": "wip",
+    "SOURCE": "Alpha Strike Commanders Edition 7th",
+    "PAGE": "87"
+  },
+  {
+    "NAME": "Mech Transport",
+    "ABBREVIATION": "MT#",
+    "TYPE": "Optional Special Abilities",
+    "RULE": "wip",
+    "SOURCE": "Alpha Strike Commanders Edition 7th",
+    "PAGE": "87"
+  },
+  {
+    "NAME": "Mine Dispenser",
+    "ABBREVIATION": "MDS#",
+    "TYPE": "Optional Special Abilities",
+    "RULE": "wip",
+    "SOURCE": "Alpha Strike Commanders Edition 7th",
+    "PAGE": "87"
+  },
+  {
+    "NAME": "Minesweeper",
+    "ABBREVIATION": "MSW",
+    "TYPE": "Optional Special Abilities",
+    "RULE": "wip",
+    "SOURCE": "Alpha Strike Commanders Edition 7th",
+    "PAGE": "87"
+  },
+  {
+    "NAME": "Missile",
+    "ABBREVIATION": "MSL#/#/#/#",
+    "TYPE": "Optional Special Abilities",
+    "RULE": "wip",
+    "SOURCE": "Alpha Strike Commanders Edition 7th",
+    "PAGE": "87"
+  },
+  {
+    "NAME": "Mobile Army Surgical Hospital",
+    "ABBREVIATION": "MASH#",
+    "TYPE": "Optional Special Abilities",
+    "RULE": "wip",
+    "SOURCE": "Alpha Strike Commanders Edition 7th",
+    "PAGE": "87"
+  },
+  {
+    "NAME": "Mobile Field Base",
+    "ABBREVIATION": "MFB",
+    "TYPE": "Optional Special Abilities",
+    "RULE": "wip",
+    "SOURCE": "Alpha Strike Commanders Edition 7th",
+    "PAGE": "87"
+  },
+  {
+    "NAME": "Mobile Headquarters",
+    "ABBREVIATION": "MHQ#",
+    "TYPE": "Optional Special Abilities",
+    "RULE": "wip",
+    "SOURCE": "Alpha Strike Commanders Edition 7th",
+    "PAGE": "87"
+  },
+  {
+    "NAME": "Mountain Troops",
+    "ABBREVIATION": "MTN",
+    "TYPE": "Optional Special Abilities",
+    "RULE": "wip",
+    "SOURCE": "Alpha Strike Commanders Edition 7th",
+    "PAGE": "87"
+  },
+  {
+    "NAME": "Compact NARC Missile Beacon",
+    "ABBREVIATION": "CNARC#",
+    "TYPE": "Optional Special Abilities",
+    "RULE": "wip",
+    "SOURCE": "Alpha Strike Commanders Edition 7th",
+    "PAGE": "87"
+  },
+  {
+    "NAME": "Standard NARC Missile Beacon",
+    "ABBREVIATION": "SNARC#",
+    "TYPE": "Optional Special Abilities",
+    "RULE": "wip",
+    "SOURCE": "Alpha Strike Commanders Edition 7th",
+    "PAGE": "87"
+  },
+  {
+    "NAME": "Naval C3",
+    "ABBREVIATION": "NC3",
+    "TYPE": "Optional Special Abilities",
+    "RULE": "wip",
+    "SOURCE": "Alpha Strike Commanders Edition 7th",
+    "PAGE": "87"
+  },
+  {
+    "NAME": "Nova Composite EW System",
+    "ABBREVIATION": "NOVA",
+    "TYPE": "Optional Special Abilities",
+    "RULE": "wip",
+    "SOURCE": "Alpha Strike Commanders Edition 7th",
+    "PAGE": "87"
+  },
+  {
+    "NAME": "Paratroops",
+    "ABBREVIATION": "PAR",
+    "TYPE": "Optional Special Abilities",
+    "RULE": "wip",
+    "SOURCE": "Alpha Strike Commanders Edition 7th",
+    "PAGE": "87"
+  },
+  {
+    "NAME": "Point Defense",
+    "ABBREVIATION": "PNT#",
+    "TYPE": "Optional Special Abilities",
+    "RULE": "wip",
+    "SOURCE": "Alpha Strike Commanders Edition 7th",
+    "PAGE": "87"
+  },
+  {
+    "NAME": "ProtoMech Transport",
+    "ABBREVIATION": "PT#",
+    "TYPE": "Optional Special Abilities",
+    "RULE": "wip",
+    "SOURCE": "Alpha Strike Commanders Edition 7th",
+    "PAGE": "88"
+  },
+  {
+    "NAME": "Prototype Case",
+    "ABBREVIATION": "CASEP",
+    "TYPE": "Optional Special Abilities",
+    "RULE": "wip",
+    "SOURCE": "Alpha Strike Commanders Edition 7th",
+    "PAGE": "88"
+  },
+  {
+    "NAME": "Prototype Triple-Strength Myomer",
+    "ABBREVIATION": "TSMX",
+    "TYPE": "Optional Special Abilities",
+    "RULE": "wip",
+    "SOURCE": "Alpha Strike Commanders Edition 7th",
+    "PAGE": "88"
+  },
+  {
+    "NAME": "Quadvee",
+    "ABBREVIATION": "QV",
+    "TYPE": "Optional Special Abilities",
+    "RULE": "wip",
+    "SOURCE": "Alpha Strike Commanders Edition 7th",
+    "PAGE": "88"
+  },
+  {
+    "NAME": "Radical Heat Sink System",
+    "ABBREVIATION": "RHS",
+    "TYPE": "Optional Special Abilities",
+    "RULE": "wip",
+    "SOURCE": "Alpha Strike Commanders Edition 7th",
+    "PAGE": "88"
+  },
+  {
+    "NAME": "Rail",
+    "ABBREVIATION": "RAIL",
+    "TYPE": "Optional Special Abilities",
+    "RULE": "wip",
+    "SOURCE": "Alpha Strike Commanders Edition 7th",
+    "PAGE": "88"
+  },
+  {
+    "NAME": "Reactive Armor",
+    "ABBREVIATION": "RCA",
+    "TYPE": "Optional Special Abilities",
+    "RULE": "wip",
+    "SOURCE": "Alpha Strike Commanders Edition 7th",
+    "PAGE": "88"
+  },
+  {
+    "NAME": "Recon",
+    "ABBREVIATION": "RCN",
+    "TYPE": "Optional Special Abilities",
+    "RULE": "wip",
+    "SOURCE": "Alpha Strike Commanders Edition 7th",
+    "PAGE": "88"
+  },
+  {
+    "NAME": "Re-Engineered Lasers",
+    "ABBREVIATION": "REL",
+    "TYPE": "Optional Special Abilities",
+    "RULE": "wip",
+    "SOURCE": "Alpha Strike Commanders Edition 7th",
+    "PAGE": "88"
+  },
+  {
+    "NAME": "Reflective Armor",
+    "ABBREVIATION": "RFA",
+    "TYPE": "Optional Special Abilities",
+    "RULE": "wip",
+    "SOURCE": "Alpha Strike Commanders Edition 7th",
+    "PAGE": "88"
+  },
+  {
+    "NAME": "Remote Sensor Dispenser",
+    "ABBREVIATION": "RSD#",
+    "TYPE": "Optional Special Abilities",
+    "RULE": "wip",
+    "SOURCE": "Alpha Strike Commanders Edition 7th",
+    "PAGE": "88"
+  },
+  {
+    "NAME": "Risc Advanced Point Defense System",
+    "ABBREVIATION": "RAMS",
+    "TYPE": "Optional Special Abilities",
+    "RULE": "wip",
+    "SOURCE": "Alpha Strike Commanders Edition 7th",
+    "PAGE": "89"
+  },
+  {
+    "NAME": "Risc Emergency Coolant System",
+    "ABBREVIATION": "ECS",
+    "TYPE": "Optional Special Abilities",
+    "RULE": "wip",
+    "SOURCE": "Alpha Strike Commanders Edition 7th",
+    "PAGE": "89"
+  },
+  {
+    "NAME": "Risc Viral Jammers: Decoy Jammers",
+    "ABBREVIATION": "DJ",
+    "TYPE": "Optional Special Abilities",
+    "RULE": "wip",
+    "SOURCE": "Alpha Strike Commanders Edition 7th",
+    "PAGE": "89"
+  },
+  {
+    "NAME": "Risc Viral Jammers: Homing Jammers",
+    "ABBREVIATION": "HJ",
+    "TYPE": "Optional Special Abilities",
+    "RULE": "wip",
+    "SOURCE": "Alpha Strike Commanders Edition 7th",
+    "PAGE": "89"
+  },
+  {
+    "NAME": "Robotic Drone",
+    "ABBREVIATION": "RBT",
+    "TYPE": "Optional Special Abilities",
+    "RULE": "wip",
+    "SOURCE": "Alpha Strike Commanders Edition 7th",
+    "PAGE": "89"
+  },
+  {
+    "NAME": "Saw",
+    "ABBREVIATION": "SAW",
+    "TYPE": "Optional Special Abilities",
+    "RULE": "wip",
+    "SOURCE": "Alpha Strike Commanders Edition 7th",
+    "PAGE": "89"
+  },
+  {
+    "NAME": "SDS Drone Control System",
+    "ABBREVIATION": "SDCS",
+    "TYPE": "Optional Special Abilities",
+    "RULE": "wip",
+    "SOURCE": "Alpha Strike Commanders Edition 7th",
+    "PAGE": "89"
+  },
+  {
+    "NAME": "SDS Jammer",
+    "ABBREVIATION": "JAM",
+    "TYPE": "Optional Special Abilities",
+    "RULE": "wip",
+    "SOURCE": "Alpha Strike Commanders Edition 7th",
+    "PAGE": "89"
+  },
+  {
+    "NAME": "Searchlight",
+    "ABBREVIATION": "SRCH",
+    "TYPE": "Optional Special Abilities",
+    "RULE": "wip",
+    "SOURCE": "Alpha Strike Commanders Edition 7th",
+    "PAGE": "90"
+  },
+  {
+    "NAME": "Short Range Missiles",
+    "ABBREVIATION": "SRM#/#",
+    "TYPE": "Optional Special Abilities",
+    "RULE": "wip",
+    "SOURCE": "Alpha Strike Commanders Edition 7th",
+    "PAGE": "90"
+  },
+  {
+    "NAME": "Small Craft Transport",
+    "ABBREVIATION": "ST#",
+    "TYPE": "Optional Special Abilities",
+    "RULE": "wip",
+    "SOURCE": "Alpha Strike Commanders Edition 7th",
+    "PAGE": "90"
+  },
+  {
+    "NAME": "Space Defense System: Capital",
+    "ABBREVIATION": "SDS-C#/#/#/#",
+    "TYPE": "Optional Special Abilities",
+    "RULE": "wip",
+    "SOURCE": "Alpha Strike Commanders Edition 7th",
+    "PAGE": "90"
+  },
+  {
+    "NAME": "Space Defense System: Missiles",
+    "ABBREVIATION": "SDS-CM#/#/#/#",
+    "TYPE": "Optional Special Abilities",
+    "RULE": "wip",
+    "SOURCE": "Alpha Strike Commanders Edition 7th",
+    "PAGE": "90"
+  },
+  {
+    "NAME": "Space Defense System: Sub-Capital",
+    "ABBREVIATION": "SDS-SC#/#/#/#",
+    "TYPE": "Optional Special Abilities",
+    "RULE": "wip",
+    "SOURCE": "Alpha Strike Commanders Edition 7th",
+    "PAGE": "90"
+  },
+  {
+    "NAME": "Space Operations Adaptation",
+    "ABBREVIATION": "SOA",
+    "TYPE": "Optional Special Abilities",
+    "RULE": "wip",
+    "SOURCE": "Alpha Strike Commanders Edition 7th",
+    "PAGE": "90"
+  },
+  {
+    "NAME": "Sub-Capital",
+    "ABBREVIATION": "SCAP",
+    "TYPE": "Optional Special Abilities",
+    "RULE": "wip",
+    "SOURCE": "Alpha Strike Commanders Edition 7th",
+    "PAGE": "90"
+  },
+  {
+    "NAME": "Super Large",
+    "ABBREVIATION": "SLG",
+    "TYPE": "Optional Special Abilities",
+    "RULE": "wip",
+    "SOURCE": "Alpha Strike Commanders Edition 7th",
+    "PAGE": "90"
+  },
+  {
+    "NAME": "Target Acquisition Gear",
+    "ABBREVIATION": "TAG",
+    "TYPE": "Optional Special Abilities",
+    "RULE": "wip",
+    "SOURCE": "Alpha Strike Commanders Edition 7th",
+    "PAGE": "90"
+  },
+  {
+    "NAME": "Taser Mech",
+    "ABBREVIATION": "MTAS#",
+    "TYPE": "Optional Special Abilities",
+    "RULE": "wip",
+    "SOURCE": "Alpha Strike Commanders Edition 7th",
+    "PAGE": "90"
+  },
+  {
+    "NAME": "Taser BattleArmor",
+    "ABBREVIATION": "BTAS#",
+    "TYPE": "Optional Special Abilities",
+    "RULE": "wip",
+    "SOURCE": "Alpha Strike Commanders Edition 7th",
+    "PAGE": "90"
+  },
+  {
+    "NAME": "Tight-Stream Electromagnetic Pulse Weapons",
+    "ABBREVIATION": "TSEMP#",
+    "TYPE": "Optional Special Abilities",
+    "RULE": "wip",
+    "SOURCE": "Alpha Strike Commanders Edition 7th",
+    "PAGE": "90"
+  },
+  {
+    "NAME": "Trailer Hitch",
+    "ABBREVIATION": "HTC",
+    "TYPE": "Optional Special Abilities",
+    "RULE": "wip",
+    "SOURCE": "Alpha Strike Commanders Edition 7th",
+    "PAGE": "90"
+  },
+  {
+    "NAME": "Trenchworks/Fieldworks",
+    "ABBREVIATION": "TRN",
+    "TYPE": "Optional Special Abilities",
+    "RULE": "wip",
+    "SOURCE": "Alpha Strike Commanders Edition 7th",
+    "PAGE": "91"
+  },
+  {
+    "NAME": "Triple-Strength Implants",
+    "ABBREVIATION": "TSI",
+    "TYPE": "Optional Special Abilities",
+    "RULE": "wip",
+    "SOURCE": "Alpha Strike Commanders Edition 7th",
+    "PAGE": "91"
+  },
+  {
+    "NAME": "Variable-Range Targeting",
+    "ABBREVIATION": "VRT",
+    "TYPE": "Optional Special Abilities",
+    "RULE": "wip",
+    "SOURCE": "Alpha Strike Commanders Edition 7th",
+    "PAGE": "91"
+  },
+  {
+    "NAME": "Vehicle Transport: Medium",
+    "ABBREVIATION": "VTM#",
+    "TYPE": "Optional Special Abilities",
+    "RULE": "wip",
+    "SOURCE": "Alpha Strike Commanders Edition 7th",
+    "PAGE": "91"
+  },
+  {
+    "NAME": "Vehicle Transport: Heavy",
+    "ABBREVIATION": "VTH#",
+    "TYPE": "Optional Special Abilities",
+    "RULE": "wip",
+    "SOURCE": "Alpha Strike Commanders Edition 7th",
+    "PAGE": "91"
+  },
+  {
+    "NAME": "Vehicle Transport: Superheavy",
+    "ABBREVIATION": "VTS#",
+    "TYPE": "Optional Special Abilities",
+    "RULE": "wip",
+    "SOURCE": "Alpha Strike Commanders Edition 7th",
+    "PAGE": "91"
+  },
+  {
+    "NAME": "Very Large",
+    "ABBREVIATION": "VLG",
+    "TYPE": "Optional Special Abilities",
+    "RULE": "wip",
+    "SOURCE": "Alpha Strike Commanders Edition 7th",
+    "PAGE": "91"
+  },
+  {
+    "NAME": "Very-Short Takeoff And Landing",
+    "ABBREVIATION": "VSTOL",
+    "TYPE": "Optional Special Abilities",
+    "RULE": "wip",
+    "SOURCE": "Alpha Strike Commanders Edition 7th",
+    "PAGE": "91"
+  },
+  {
+    "NAME": "Virtual Reality Piloting Pod",
+    "ABBREVIATION": "VR",
+    "TYPE": "Optional Special Abilities",
+    "RULE": "wip",
+    "SOURCE": "Alpha Strike Commanders Edition 7th",
+    "PAGE": "91"
+  }
+]
