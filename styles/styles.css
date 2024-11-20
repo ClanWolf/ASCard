@@ -71,7 +71,19 @@ body {
 .fullscreen {
 	height: 100%;
 }
-iframe {
+#iframe_specialabilities {
+	display: none; /* none, block */
+	visibility: hidden; /* hidden, visible */
+	position: absolute;
+	background-color: red;
+	left: 80;
+	top: 80;
+	width: 800px;
+	height: 300px;
+	border: none;
+	z-index: 9999;
+}
+#iframe_save {
 	display: none; /* none, block */
 	visibility: hidden; /* hidden, visible */
 	position: absolute;
