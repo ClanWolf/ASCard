@@ -23,3 +23,8 @@ TODO: Link to Commanders edition for admin
 
 TODO: Add option to auto roll on motive
 TODO: Add option to auto roll on crit
+
+TODO: CHECK / Sort all special abilities
+TODO: Create Table for special abilities overview links
+TODO: Create iFrame in play window to show individual special abilities
+TODO: Add similar overview page for pilot abilities
