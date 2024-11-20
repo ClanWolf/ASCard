@@ -3,7 +3,7 @@
         "name": "Advanced Fire Control",
         "type": "Standard",
         "abbreviation": "AFC",
-        "rule": "IndustrialMechs and support vehicles equipped with Advanced Fire Control do not suffer Target Number modifiers for their unit "type".",
+        "rule": "IndustrialMechs and support vehicles equipped with Advanced Fire Control do not suffer Target Number modifiers for their unit type.",
         "page": 76
     },
     {
@@ -17,7 +17,7 @@
         "name": "Angel ECM",
         "type": "Standard",
         "abbreviation": "AECM",
-        "rule": "An Angel ECM suite has the effects of standard ECM (see p. 77), but is treated as two standard ECM suites if using the ECM/ECCM optional "rule" (see p. 161).",
+        "rule": "An Angel ECM suite has the effects of standard ECM (see p. 77), but is treated as two standard ECM suites if using the ECM/ECCM optional rule (see p. 161).",
         "page": 76
     },
     {
