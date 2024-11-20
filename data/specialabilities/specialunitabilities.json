@@ -135,7 +135,7 @@
         "name": "Extended Mechanized",
         "type": "Standard",
         "abbreviation": "XMEC",
-        "rule": "Battle armor with this special ability may function as mechanized battle armor, and can ride on any "type" of ground unit (see Transporting Infantry, p. 38).",
+        "rule": "Battle armor with this special ability may function as mechanized battle armor, and can ride on any type of ground unit (see Transporting Infantry, p. 38).",
         "page": 78
     },
     {
@@ -156,7 +156,7 @@
         "name": "Heat",
         "type": "Standard",
         "abbreviation": "HT#/#/#",
-        "rule": "Units with this ability apply heat to the target’s Heat scale during the End Phase of the turn in which they deliver a successful weapon attack. If the target is a unit "type" that does not use a Heat Scale, the heat this ability would normally produce is added to the normal attack damage instead (see Applying Damage, p. 49). A unit with a Heat value at a range it does not normally deal damage at may make a special weapon attack in place of its standard weapon attack. This only deals the effects of the Heat special ability.",
+        "rule": "Units with this ability apply heat to the target’s Heat scale during the End Phase of the turn in which they deliver a successful weapon attack. If the target is a unit type that does not use a Heat Scale, the heat this ability would normally produce is added to the normal attack damage instead (see Applying Damage, p. 49). A unit with a Heat value at a range it does not normally deal damage at may make a special weapon attack in place of its standard weapon attack. This only deals the effects of the Heat special ability.",
         "page": 78
     },
     {
@@ -170,7 +170,7 @@
         "name": "Industrial Triple-Strength Myomers",
         "type": "Standard",
         "abbreviation": "I-TSM",
-        "rule": "’Mechs with Industrial TSM have enhanced musculature that delivers 1 point of additional damage on a successful standard- or melee-"type" physical attack, but these units also suffer a +2 Target Number modifier for all physical attacks due to the loss of fine motor control. (Industrial TSM also provides a movement boost, but this is already calculated in the unit’s Alpha Strike stats.)",
+        "rule": "’Mechs with Industrial TSM have enhanced musculature that delivers 1 point of additional damage on a successful standard- or melee-type physical attack, but these units also suffer a +2 Target Number modifier for all physical attacks due to the loss of fine motor control. (Industrial TSM also provides a movement boost, but this is already calculated in the unit’s Alpha Strike stats.)",
         "page": 78
     },
     {
@@ -205,14 +205,14 @@
         "name": "Mechanized",
         "type": "Standard",
         "abbreviation": "MEC",
-        "rule": "Battle armor with this special ability may function as mechanized battle armor, and can ride on any ground unit "type" that has the Omni special ability (see Transporting Infantry, p. 38).",
+        "rule": "Battle armor with this special ability may function as mechanized battle armor, and can ride on any ground unit type that has the Omni special ability (see Transporting Infantry, p. 38).",
         "page": 78
     },
     {
         "name": "Melee",
         "type": "Standard",
         "abbreviation": "MEL",
-        "rule": "This special ability indicates that the ’Mech is equipped with a physical attack weapon, and adds 1 additional point of physical attack damage on a successful Melee-"type" physical attack (see Resolving Physical Attacks, p. 45).",
+        "rule": "This special ability indicates that the ’Mech is equipped with a physical attack weapon, and adds 1 additional point of physical attack damage on a successful Melee-type physical attack (see Resolving Physical Attacks, p. 45).",
         "page": 78
     },
     {
@@ -233,7 +233,7 @@
         "name": "Off-Road",
         "type": "Standard",
         "abbreviation": "ORO",
-        "rule": "Lacking the rugged suspension of combat vehicles, ground-based support vehicles that use the wheeled (w) movement "type" must pay 2 inches of additional Move for every non-paved inch they move unless they possess the Off-Road special. This ability is not required for any other unit "type"s, including support vehicles, that use movement modes other than wheeled.",
+        "rule": "Lacking the rugged suspension of combat vehicles, ground-based support vehicles that use the wheeled (w) movement type must pay 2 inches of additional Move for every non-paved inch they move unless they possess the Off-Road special. This ability is not required for any other unit "type"s, including support vehicles, that use movement modes other than wheeled.",
         "page": 78
     },
     {
