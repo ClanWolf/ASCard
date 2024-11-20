@@ -80,16 +80,15 @@
 	<div class="topnav" id="nav">
 		<table class="options" cellspacing=10 cellpadding=10 border=0px>
 			<tr>
-				<!-- <td width="15%" nowrap align="center"> -->
-				<?php
-					echo "					<td nowrap colspan='1' width='15%' style='color:#dcdcdc;' class='mechselect_button_normal' onclick='javascript:window.history.back();'>\n";
-					echo "						<i style='font-size:2.5em;' class='fa-solid fa-caret-left'></i>\n";
-					echo "					</td>\n";
-
-					// <a href="javascript:window.history.back();"><< Back</a>
-					// <a href="./gui_select_unit.php"><< Back</a>
-				?>
-				<!-- </td> -->
+<?php
+	echo "					<td>\n";
+	echo "						<table width='100%'><tr>\n";
+	echo "							<td nowrap colspan='1' width='15%' style='color:#dcdcdc;' class='mechselect_button_normal' onclick='javascript:window.history.back();'>\n";
+	echo "								<i style='font-size:2.5em;' class='fa-solid fa-caret-left'></i>\n";
+	echo "							</td>\n";
+	echo "						</tr></table>\n";
+	echo "					</td>\n";
+?>
 				<td width="85%" align="left">
 					<table>
 						<tr>
@@ -106,19 +105,21 @@
 							<td><a href="#BH" target="_SELF">BH</a>&nbsp;&nbsp;</td>
 							<td><a href="#BHJ" target="_SELF">BHJ</a>&nbsp;&nbsp;</td>
 						</tr>
+						<tr>
+							<td><a href="#BOMB" target="_SELF">BOMB</a>&nbsp;&nbsp;</td>
+							<td><a href="#BRID" target="_SELF">BRID</a>&nbsp;&nbsp;</td>
+							<td><a href="#BT" target="_SELF">BT</a>&nbsp;&nbsp;</td>
+							<td><a href="#BTAS" target="_SELF">BTAS</a>&nbsp;&nbsp;</td>
+							<td><a href="#CAP" target="_SELF">CAP</a>&nbsp;&nbsp;</td>
+							<td><a href="#CASE" target="_SELF">CASE</a>&nbsp;&nbsp;</td>
+							<td><a href="#CASEII" target="_SELF">CASEII</a>&nbsp;&nbsp;</td>
+							<td><a href="#CK" target="_SELF">CK</a>&nbsp;&nbsp;</td>
+							<td><a href="#CNARC" target="_SELF">CNARC</a>&nbsp;&nbsp;</td>
+							<td><a href="#CR" target="_SELF">CR</a>&nbsp;&nbsp;</td>
+							<td><a href="#CRW" target="_SELF">CRW</a>&nbsp;&nbsp;</td>
+							<td><a href="#CT" target="_SELF">CT</a>&nbsp;&nbsp;</td>
+						</tr>
 					</table>
-					<a href="#BOMB" target="_SELF">BOMB</a>&nbsp;&nbsp;
-					<a href="#BRID" target="_SELF">BRID</a>&nbsp;&nbsp;
-					<a href="#BT" target="_SELF">BT</a>&nbsp;&nbsp;
-					<a href="#BTAS" target="_SELF">BTAS</a>&nbsp;&nbsp;
-					<a href="#CAP" target="_SELF">CAP</a>&nbsp;&nbsp;
-					<a href="#CASE" target="_SELF">CASE</a>&nbsp;&nbsp;
-					<a href="#CASEII" target="_SELF">CASEII</a>&nbsp;&nbsp;
-					<a href="#CK" target="_SELF">CK</a>&nbsp;&nbsp;
-					<a href="#CNARC" target="_SELF">CNARC</a>&nbsp;&nbsp;
-					<a href="#CR" target="_SELF">CR</a>&nbsp;&nbsp;
-					<a href="#CRW" target="_SELF">CRW</a>&nbsp;&nbsp;
-					<a href="#CT" target="_SELF">CT</a>&nbsp;&nbsp;
 					<a href="#D" target="_SELF">D</a>&nbsp;&nbsp;
 					<a href="#DCC" target="_SELF">DCC</a>&nbsp;&nbsp;
 					<a href="#DRO" target="_SELF">DRO</a>&nbsp;&nbsp;
@@ -437,19 +438,19 @@
 						The recon ability works in conjunction with the Mobile Headquarters (MHQ#) ability. Every unit with the recon special confers a +1 initiative bonus to itself and 3 other units.
 					</p>
 					<p id="REAR"><strong>Rear-firing weapons (REAR#/#/#/#)</strong><br>
-                        Although rear-facing weapons are common enough on larger and less flexible units like mobile structures and DropShips, several smaller units also feature secondary weapons mounted in their rear fields of fire. ’Mechs, vehicles, and fighters that possess such weaponry feature the REAR (#/#/#/#) special unit ability to reflect this. As with most other special weapon abilities, the numbers associated with this ability indicate the damage that the unit can inflict at each range bracket.
-                    </p>
-                    <p>
-                        Ground Units:<br>Any ground unit with rear-facing weapons may decide to use them against any targets that begin the Combat Phase outside of the unit’s normal firing arc. This rear attack is resolved using all of the same rules as a normal weapon attack, but applies an additional +1 Target Number modifier.
-                    </p>
-                    <p>
-                        Airborne Units:<br>The same rules apply for fighter units as for ground units. However, a fighter may only use its rear-facing weapons against units that are specifically tailing them (see p. 185), and are within range of its rear weapons. Thus, if a fighter has rear-firing weapons that only delivers damage to the Short range bracket, it may only use these weapons against tailing enemies at Short range.
-                    </p>
-                    <p>
-                        Combining Forward (or Turret) and Rearward Attacks:<br>A unit attempting a REAR attack may still deliver normal forwardfiring attacks in the same turn, but its ability to do so is reduced. To reflect this, if a unit makes an attack using the REAR special ability, for every point of REAR damage it can inflict, its forward-arc (or turret-based) damage for that turn must be reduced by the same amount. This damage reduction is applied before the use of any additional damage made possible by overheating.
-                    </p>
-                    <p>
-                        Additional Restrictions:<br>Overheat damage cannot be applied to REAR attacks, nor can a REAR attack deliberately reduce its damage values to improve forward-firing (or turret-based) weapon attacks. Finally, REAR attacks cannot make use of other special attack abilities, such as heat, indirect fire, flak, or artillery. [...]
+						Although rear-facing weapons are common enough on larger and less flexible units like mobile structures and DropShips, several smaller units also feature secondary weapons mounted in their rear fields of fire. ’Mechs, vehicles, and fighters that possess such weaponry feature the REAR (#/#/#/#) special unit ability to reflect this. As with most other special weapon abilities, the numbers associated with this ability indicate the damage that the unit can inflict at each range bracket.
+					</p>
+					<p>
+						Ground Units:<br>Any ground unit with rear-facing weapons may decide to use them against any targets that begin the Combat Phase outside of the unit’s normal firing arc. This rear attack is resolved using all of the same rules as a normal weapon attack, but applies an additional +1 Target Number modifier.
+					</p>
+					<p>
+						Airborne Units:<br>The same rules apply for fighter units as for ground units. However, a fighter may only use its rear-facing weapons against units that are specifically tailing them (see p. 185), and are within range of its rear weapons. Thus, if a fighter has rear-firing weapons that only delivers damage to the Short range bracket, it may only use these weapons against tailing enemies at Short range.
+					</p>
+					<p>
+						Combining Forward (or Turret) and Rearward Attacks:<br>A unit attempting a REAR attack may still deliver normal forwardfiring attacks in the same turn, but its ability to do so is reduced. To reflect this, if a unit makes an attack using the REAR special ability, for every point of REAR damage it can inflict, its forward-arc (or turret-based) damage for that turn must be reduced by the same amount. This damage reduction is applied before the use of any additional damage made possible by overheating.
+					</p>
+					<p>
+						Additional Restrictions:<br>Overheat damage cannot be applied to REAR attacks, nor can a REAR attack deliberately reduce its damage values to improve forward-firing (or turret-based) weapon attacks. Finally, REAR attacks cannot make use of other special attack abilities, such as heat, indirect fire, flak, or artillery. [...]
 					</p>
 					<p id="RFA"><strong>Reflective Armor (RFA)</strong><br>
 						A unit with reflective armor is resistant to damage from energy weapons, including flamers, but is much more susceptible to physical attacks, area-effect weapons, and armor-penetrating hits. If a unit with this special is struck by an air-to-ground strafing attack, or by a weapon attack by a unit with the ENE special, or by an attack using the HT special, reduce this damage (or heat) by half before applying it. (Round this damage down, to a minimum of 1 point of damage or heat applied from that attack type.) If, on the other hand, a unit with this ability suffers damage from any physical attack, an area-effect attack, or by any attack using the ART, BOMB, FLK, or MSL specials, double the damage applied by that attack.
