@@ -5,11 +5,11 @@ function getSpecialUnitAbilities() {
 
 	$.getJSON(cache_url, function (json) {
 		json.SpecialAbilities.sort(function(a, b) {
-			if (a.Name < b.Name) return -1;
-			if (a.Name > b.Name) return 1;
+			if (a.NAME < b.NAME) return -1;
+			if (a.NAME > b.NAME) return 1;
 		});
 		$.each(json.SpecialAbilities, function (i, specialAbility) {
-			var name = specialAbility.name;
+			var name = specialAbility.NAME;
 			console.log(name);
 		});
 	}).then(function data() {
