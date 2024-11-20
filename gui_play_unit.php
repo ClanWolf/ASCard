@@ -496,6 +496,8 @@
 
 <iframe name="saveframe"></iframe>
 
+<iframe name="specialabilities"></iframe>
+
 <div id="cover"></div>
 
 <div id="header">
