@@ -67,6 +67,20 @@
 	$array_WPNS_PREP = array();
 	$array_HT_PREP = array();
 
+	$array_CV_ENGN = array();
+	$array_CV_FRCTRL = array();
+	$array_CV_WPNS = array();
+	$array_CV_MOTV_A = array();
+	$array_CV_MOTV_B = array();
+	$array_CV_MOTV_C = array();
+
+	$array_CV_ENGN_PREP = array();
+	$array_CV_FRCTRL_PREP = array();
+	$array_CV_WPNS_PREP = array();
+	$array_CV_MOTV_A_PREP = array();
+	$array_CV_MOTV_B_PREP = array();
+	$array_CV_MOTV_C_PREP = array();
+
 	$array_MV_MOD = array();
 	$array_DMG_SHORT_MOD = array();
 	$array_DMG_MEDIUM_MOD = array();
@@ -231,6 +245,20 @@
 							$array_FRCTRL_PREP[$mechcount] = $row["crit_fc_PREP"];
 							$array_MP_PREP[$mechcount] = $row["crit_mp_PREP"];
 							$array_WPNS_PREP[$mechcount] = $row["crit_weapons_PREP"];
+
+							$array_CV_ENGN[$mechcount] = $row["crit_CV_engine"];
+							$array_CV_FRCTRL[$mechcount] = $row["crit_CV_firecontrol"];
+							$array_CV_WPNS[$mechcount] = $row["crit_CV_weapons"];
+							$array_CV_MOTV_A[$mechcount] = $row["crit_CV_motiveA"];
+							$array_CV_MOTV_B[$mechcount] = $row["crit_CV_motiveB"];
+							$array_CV_MOTV_C[$mechcount] = $row["crit_CV_motiveC"];
+							$array_CV_ENGN_PREP[$mechcount] = $row["crit_CV_engine_PREP"];
+							$array_CV_FRCTRL_PREP[$mechcount] = $row["crit_CV_firecontrol_PREP"];
+							$array_CV_WPNS_PREP[$mechcount] = $row["crit_CV_weapons_PREP"];
+							$array_CV_MOTV_A_PREP[$mechcount] = $row["crit_CV_motiveA_PREP"];
+							$array_CV_MOTV_B_PREP[$mechcount] = $row["crit_CV_motiveB_PREP"];
+							$array_CV_MOTV_C_PREP[$mechcount] = $row["crit_CV_motiveC_PREP"];
+
 							$array_HT_PREP[$mechcount] = $row["heat_PREP"];
 							$array_USEDOVERHEAT[$mechcount] = $row["usedoverheat"];
 							$array_CURRENTTMM[$mechcount] = $row["currenttmm"];

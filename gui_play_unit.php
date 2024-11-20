@@ -1,20 +1,14 @@
 <?php
-session_start();
+	// https://www.php-einfach.de/php-tutorial/php-sessions/
+	session_start();
 
-// https://stackoverflow.com/questions/22911552/php-blank-white-page-no-errors
-// php.ini: error_reporting=~E_ALL & ~E_DEPRECATED & ~E_STRICT & ~E_NOTICE & ~WARNING
-//ini_set('display_startup_errors',1);
-//ini_set('display_errors',1);
-//error_reporting(-1);
-
-// https://www.php-einfach.de/php-tutorial/php-sessions/
 	require('./logger.php');
 	if (!isset($_SESSION['playerid'])) {
 		echo "Not logged in... redirecting.<br>";
 		echo "<meta http-equiv='refresh' content='0;url=./login.php?auto=1'>";
 		header("Location: ./login.php?auto=1");
-		//die("Check position 5");
 	}
+
 	$pid = $_SESSION['playerid'];
 	$gid = $_SESSION['gameid'];
 	$pimage = $_SESSION['playerimage'];
@@ -28,10 +22,58 @@ session_start();
 
 	$opt4 = $_SESSION['option4'];
 	$showDistancesHexes = $opt4;
+
+	function textTruncate($text, $chars=25) {
+		if (strlen($text) <= $chars) {
+			return $text;
+		}
+		$text = $text." ";
+		$text = substr($text,0,$chars);
+		$text = $text."...";
+		return $text;
+	}
+	function getMechMULImageByName($mechname) {
+		$image = "images/mechs/Generic_Mech.gif";
+
+		$dir = 'images/mechs_mul/';
+		$startChar = mb_substr($mechname, 0, 3); // use first 3 chars to list files to keep the result list as small as possible
+		if ($startChar == "ELE") {
+			// echo "<script>console.log('SEARCHING: >>" . $startChar . "<<');</script>";
+			$startChar = "Ele";
+		}
+
+		$files = glob($dir."{$startChar}*.png");
+		foreach ($files as &$img) {
+			// echo "<script>console.log('>>" . trim($img) . "<<');</script>";
+
+			$imagenametrimmed_a = basename(strtolower(str_replace(' ', '', trim($img))), ".png");
+			$imagenametrimmed = str_replace("'", "", $imagenametrimmed_a);
+
+			// echo "<script>console.log('MECHNAME: >>" . $mechname . "<<');</script>";
+
+			$mechnametrimmed_a = str_replace('ELE ', 'Elemental ', trim($mechname));
+			$mechnametrimmed_b = str_replace('BA ', 'Battle Armor ', trim($mechnametrimmed_a));
+			$mechnametrimmed_c = str_replace('&apos;', '', trim($mechnametrimmed_b));
+			$mechnametrimmed_d = str_replace(' ', '', trim($mechnametrimmed_c));
+			$mechnametrimmed_e = str_replace('[CV]', '', trim($mechnametrimmed_d));
+			$mechnametrimmed_f = str_replace('[BA]', '', trim($mechnametrimmed_e));
+			$mechnametrimmed_g = str_replace('[BM]', '', trim($mechnametrimmed_f));
+			$mechnametrimmed_h = str_replace('Rec.', 'Reconnaissance', trim($mechnametrimmed_g));
+			$mechnametrimmed_i = str_replace('Veh.', 'Vehicle', trim($mechnametrimmed_h));
+			$mechnametrimmed = strtolower($mechnametrimmed_i);
+
+			// echo "<script>console.log('SEARCHING: >>" . $imagenametrimmed . " ? " . $mechnametrimmed . "<<');</script>";
+
+			if (strpos($imagenametrimmed,$mechnametrimmed) !== false) {
+				// echo "<script>console.log('FOUND: >>" . $imagenametrimmed . " ? " . $mechnametrimmed . "<<');</script>";
+				$image = str_replace(' ', '%20', trim($img));
+				break;
+			}
+		}
+		return $image;
+	}
 ?>
-
 <!DOCTYPE html>
-
 <html lang="en">
 
 <head>
@@ -90,7 +132,6 @@ session_start();
 	<script type="text/javascript" src="./scripts/howler.min.js"></script>
 	<script type="text/javascript" src="./scripts/cookies.js"></script>
 	<script type="text/javascript" src="./scripts/functions.js"></script>
-	<!-- <script type="text/javascript" src="./scripts/qrcode.js"></script> -->
 
 	<style>
 		.options {
@@ -106,7 +147,8 @@ session_start();
 </head>
 
 <body>
-	<script>
+<!--
+//	<script>
 //		var movementcache = 0;
 //		var firedcache = 0;
 //
@@ -121,7 +163,7 @@ session_start();
 //				document.getElementById("AMM").innerHTML = "0";
 //			}
 //		}
-
+//
 //		function changeMovementFlag(index, fln) {
 //			if (context != null) {
 //				playTapSound();
@@ -253,7 +295,7 @@ session_start();
 //			//console.log("Final 3: " + url);
 //			window.frames['saveframe'].location.replace(url);
 //		}
-
+//
 //		function setMovementFlags(index, movement, weaponsfired) {
 //			if (context != null) {
 //				playTapSound();
@@ -343,21 +385,19 @@ session_start();
 //			firedcache = weaponsfired;
 //			setFireValues(movement, weaponsfired);
 //		}
-	</script>
-
+//	</script>
+-->
 <?php
 	$file = file_get_contents('./version.txt', true);
 	$version = $file;
 	if (!isset($_GET["unit"])) {
 		echo "<meta http-equiv='refresh' content='0;url=./gui_select_unit.php'> ";
 		header("Location: ./gui_select_unit.php");
-		//die("Check position 1");
 	}
 	$unitid = $_GET["unit"];
 	if (empty($unitid)) {
 		echo "<meta http-equiv='refresh' content='0;url=./gui_select_unit.php'> ";
 		header("Location: ./gui_select_unit.php");
-		//die("Check position 2");
 	}
 	if (isset($_GET["chosenmech"])) {
 		$chosenMechIndex = $_GET["chosenmech"];
@@ -370,9 +410,9 @@ session_start();
 	require('./db_getdata.php');
 
 	echo "<script>\n";
-	echo "  var chosenmechindex = ".$chosenMechIndex.";\n";
-	echo "  var chosenmechdbid = ".$array_MECH_DBID[$chosenMechIndex].";\n";
-	echo "  var mechmodel = '".$array_MECH_MODEL[$chosenMechIndex]."';\n";
+	echo "	var chosenmechindex = ".$chosenMechIndex.";\n";
+	echo "	var chosenmechdbid = ".$array_MECH_DBID[$chosenMechIndex].";\n";
+	echo "	var mechmodel = '".$array_MECH_MODEL[$chosenMechIndex]."';\n";
 	echo "	var shortdamage = ".$array_DMG_SHORT[$chosenMechIndex].";\n";
 	echo "	var mediumdamage = ".$array_DMG_MEDIUM[$chosenMechIndex].";\n";
 	echo "	var longdamage = ".$array_DMG_LONG[$chosenMechIndex].";\n";
@@ -384,14 +424,50 @@ session_start();
 	}
 	echo "	var maximalarmorpoints = ".$array_A_MAX[$chosenMechIndex].";\n";
 	echo "	var maximalstructurepoints = ".$array_S_MAX[$chosenMechIndex].";\n";
+
+	echo "	var currentA = ".$array_A[$chosenMechIndex].";\n";
+	echo "	var currentS = ".$array_S[$chosenMechIndex].";\n";
+
 	echo "	var originalmechimage = '".$array_MECH_IMG_URL[$chosenMechIndex]."';\n";
 	echo "	var deadmechimage = 'skull.png';\n";
 	echo "	var originalTMM = $array_TMM[$chosenMechIndex];\n";
-	echo "  var unitType = '$array_TP[$chosenMechIndex]';\n";
-	echo "  var ENGN_PREP = $array_ENGN_PREP[$chosenMechIndex];\n";
-	echo "  var FCTL_PREP = $array_FRCTRL_PREP[$chosenMechIndex];\n";
-	echo "  var MP_PREP = $array_MP_PREP[$chosenMechIndex];\n";
-	echo "  var WPNS_PREP = $array_WPNS_PREP[$chosenMechIndex];\n";
+	echo "	var unitType = '$array_TP[$chosenMechIndex]';\n";
+	echo "	var ENGN_PREP = $array_ENGN_PREP[$chosenMechIndex];\n";
+	echo "	var FCTL_PREP = $array_FRCTRL_PREP[$chosenMechIndex];\n";
+	echo "	var MP_PREP = $array_MP_PREP[$chosenMechIndex];\n";
+	echo "	var WPNS_PREP = $array_WPNS_PREP[$chosenMechIndex];\n";
+
+	if ($array_CV_ENGN_PREP[$chosenMechIndex] != null) {
+		echo "	var CV_ENGN_PREP = $array_CV_ENGN_PREP[$chosenMechIndex];\n";
+	} else {
+		echo "	var CV_ENGN_PREP = 0;\n";
+	}
+	if ($array_CV_FRCTRL_PREP[$chosenMechIndex] != null) {
+		echo "	var CV_FCTL_PREP = $array_CV_FRCTRL_PREP[$chosenMechIndex];\n";
+	} else {
+		echo "	var CV_FCTL_PREP = 0;\n";
+	}
+	if ($array_CV_WPNS_PREP[$chosenMechIndex] != null) {
+		echo "	var CV_WPNS_PREP = $array_CV_WPNS_PREP[$chosenMechIndex];\n";
+	} else {
+		echo "	var CV_WPNS_PREP = 0;\n";
+	}
+	if ($array_CV_MOTV_A_PREP[$chosenMechIndex] != null) {
+		echo "	var CV_MOTVA_PREP = $array_CV_MOTV_A_PREP[$chosenMechIndex];\n";
+	} else {
+		echo "	var CV_MOTVA_PREP = 0;\n";
+	}
+	if ($array_CV_MOTV_B_PREP[$chosenMechIndex] != null) {
+		echo "	var CV_MOTVB_PREP = $array_CV_MOTV_B_PREP[$chosenMechIndex];\n";
+	} else {
+		echo "	var CV_MOTVB_PREP = 0;\n";
+	}
+	if ($array_CV_MOTV_C_PREP[$chosenMechIndex] != null) {
+		echo "	var CV_MOTVC_PREP = $array_CV_MOTV_C_PREP[$chosenMechIndex];\n";
+	} else {
+		echo "	var CV_MOTVC_PREP = 0;\n";
+	}
+
 	echo "	var HT_PREP = $array_HT_PREP[$chosenMechIndex];\n";
 	if ($array_MVTYPE[$chosenMechIndex] != null) {
 		echo "	var MV_TYPE = '$array_MVTYPE[$chosenMechIndex]';\n";
@@ -411,25 +487,13 @@ session_start();
 
 	echo "	var playerId = ".$pid.";\n";
 	if ($showDistancesHexes != null) {
-		echo "  var showDistancesHexes = ".$showDistancesHexes.";\n";
+		echo "	var showDistancesHexes = ".$showDistancesHexes.";\n";
 	} else {
-		echo "  var showDistancesHexes = 0;\n";
+		echo "	var showDistancesHexes = 0;\n";
 	}
 	echo "</script>\n";
-
-	function textTruncate($text, $chars=25) {
-        if (strlen($text) <= $chars) {
-            return $text;
-        }
-        $text = $text." ";
-        $text = substr($text,0,$chars);
-        //$text = substr($text,0,strrpos($text,' '));
-        $text = $text."...";
-        return $text;
-    }
 ?>
 
-<!-- <iframe name="saveframe" src="./save_dummy.htm"></iframe> -->
 <iframe name="saveframe"></iframe>
 
 <div id="cover"></div>
@@ -440,15 +504,10 @@ session_start();
 			<td nowrap onclick="location.href='./index.html'" width="60px" style="width:100px;background:rgba(50,50,50,1.0);text-align:center;vertical-align:middle;">
 				<div><a style="color:#eee;" href="./index.html">&nbsp;&nbsp;&nbsp;<i class="fa fa-arrow-left" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;</a></div>
 			</td>
-			<!-- <td nowrap onclick="location.href='./gui_select_unit.php'" width="100px" style="width: 100px;background:rgba(56,87,26,1.0);text-align:center;vertical-align:middle;">
-				<div><a style="color: #eee;" href="./gui_select_unit.php">&nbsp;&nbsp;&nbsp;<i class="fas fa-redo"></i>&nbsp;&nbsp;&nbsp;</a></div>
-			</td>
-			-->
 			<td nowrap onclick="location.href='./gui_select_unit.php'" style="width:100px;background:rgba(56,87,26,1.0);">
 				<div style='vertical-align:middle;font-size:28px;color:#eee;'>&nbsp;&nbsp;&nbsp;G<?php echo $gid ?>&nbsp;R<?php echo $CURRENTROUND ?>&nbsp;&nbsp;&nbsp;</div>
 			</td>
 			<td style="width:5px;">&nbsp;</td>
-
 <?php
 	$size = sizeof($array_MECH_MODEL);
 	for ($i11 = 1; $i11 <= sizeof($array_MECH_MODEL); $i11++) {
@@ -525,81 +584,39 @@ session_start();
 			$currentMechFired = $wpnsfired;
 
 			if ($array_ACTIVE_BID[$i4] == "1") {
-				echo "<td width='".$width."%' nowrap><table width='100%' cellspacing='0' cellpadding='0' class='mechselect_button_active_play_left'><tr><td nowrap width='30px' align='center' valign='center'><div style='display:inline-block;height:100%;vertical-align:middle;'><img id='mechstatusimagemenu' style='vertical-align:middle;' src='".$array_MECH_IMG_STATUS[$i4]."' height='25px' width='23px'><br><span style='color:#ccffff;font-size:15px;'>&nbsp;&nbsp;".$mn."&nbsp;&nbsp;</span></div></td><td>&nbsp;</td><td nowrap><div><img src='./images/ranks/".$factionid."/".$array_PILOT_RANK[$i4].".png' width='18px' height='18px'>&nbsp;<span style='font-size:24px'>".$array_PILOT[$i4]."</span>&nbsp;&nbsp;<img src='".$mechstatusimage."' height='21px'>".$heatimage[$i4]."<br><span style='font-size:14px;'>".textTruncate($memodel, 18)."</span></div></td><td align='left' style='align:left;' nowrap width='100%'><img src='images/mech_indicator.png' height='42px;'></td></tr></table></td>\r\n";
+				echo "			<td width='".$width."%' nowrap><table width='100%' cellspacing='0' cellpadding='0' class='mechselect_button_active_play_left'><tr><td nowrap width='30px' align='center' valign='center'><div style='display:inline-block;height:100%;vertical-align:middle;'><img id='mechstatusimagemenu' style='vertical-align:middle;' src='".$array_MECH_IMG_STATUS[$i4]."' height='25px' width='23px'><br><span style='color:#ccffff;font-size:15px;'>&nbsp;&nbsp;".$mn."&nbsp;&nbsp;</span></div></td><td>&nbsp;</td><td nowrap><div><img src='./images/ranks/".$factionid."/".$array_PILOT_RANK[$i4].".png' width='18px' height='18px'>&nbsp;<span style='font-size:24px'>".$array_PILOT[$i4]."</span>&nbsp;&nbsp;<img src='".$mechstatusimage."' height='21px'>".$heatimage[$i4]."<br><span style='font-size:14px;'>".textTruncate($memodel, 18)."</span></div></td><td align='left' style='align:left;' nowrap width='100%'><img src='images/mech_indicator.png' height='42px;'></td></tr></table></td>\r\n";
 				$atLeastOneValidMechInUnit = $atLeastOneValidMechInUnit + 1;
 			}
 		} else {
 			if ($array_ACTIVE_BID[$i4] == "1") {
-				echo "<td width='".$width."%' nowrap onclick=\"location.href='".$meli."'\"><table width='100%' cellspacing='0' cellpadding='0' class='mechselect_button_normal_play_left'><tr><td nowrap width='30px' align='center' valign='center'><div style='display:inline-block;height:100%;vertical-align:middle;'><img style='vertical-align:middle;' src='".$array_MECH_IMG_STATUS[$i4]."' height='25px' width='23px'><br><span style='color:#ccffff;font-size:15px;'>&nbsp;&nbsp;".$mn."&nbsp;&nbsp;</span></div></td><td>&nbsp;</td><td nowrap width='100%'><div><img src='./images/ranks/".$factionid."/".$array_PILOT_RANK[$i4].".png' width='18px' height='18px'>&nbsp;<a style='font-size:24px' href='".$meli."'>".$array_PILOT[$i4]."</a>&nbsp;&nbsp;<img src='".$mechstatusimage."' height='21px'>".$heatimage[$i4]."<br><span style='font-size:14px;'>".textTruncate($memodel, 18)."</span></div></td></tr></table></td>\r\n";
+				echo "			<td width='".$width."%' nowrap onclick=\"location.href='".$meli."'\"><table width='100%' cellspacing='0' cellpadding='0' class='mechselect_button_normal_play_left'><tr><td nowrap width='30px' align='center' valign='center'><div style='display:inline-block;height:100%;vertical-align:middle;'><img style='vertical-align:middle;' src='".$array_MECH_IMG_STATUS[$i4]."' height='25px' width='23px'><br><span style='color:#ccffff;font-size:15px;'>&nbsp;&nbsp;".$mn."&nbsp;&nbsp;</span></div></td><td>&nbsp;</td><td nowrap width='100%'><div><img src='./images/ranks/".$factionid."/".$array_PILOT_RANK[$i4].".png' width='18px' height='18px'>&nbsp;<a style='font-size:24px' href='".$meli."'>".$array_PILOT[$i4]."</a>&nbsp;&nbsp;<img src='".$mechstatusimage."' height='21px'>".$heatimage[$i4]."<br><span style='font-size:14px;'>".textTruncate($memodel, 18)."</span></div></td></tr></table></td>\r\n";
 				$atLeastOneValidMechInUnit = $atLeastOneValidMechInUnit + 1;
 			} else {
-				echo "<td style='display:none;visibility:hidden;' width='".$width."%' nowrap onclick=\"location.href='".$meli."'\"><table width='100%' cellspacing='0' cellpadding='0' class='mechselect_button_normal_play_left'><tr><td nowrap width='30px' align='center' valign='center'><div style='display:inline-block;height:100%;vertical-align:middle;'><img style='vertical-align:middle;' src='".$array_MECH_IMG_STATUS[$i4]."' height='25px' width='23px'><br><span style='color:#ccffff;font-size:15px;'>&nbsp;&nbsp;".$mn."&nbsp;&nbsp;</span></div></td><td>&nbsp;</td><td nowrap width='100%'><div><img src='./images/ranks/".$factionid."/".$array_PILOT_RANK[$i4].".png' width='18px' height='18px'>&nbsp;<a style='font-size:24px' href='".$meli."'>".$array_PILOT[$i4]."</a>&nbsp;&nbsp;<img src='".$mechstatusimage."' height='21px'>".$heatimage[$i4]."<br><span style='font-size:14px;'>".textTruncate($memodel, 18)."</span></div></td></tr></table></td>\r\n";
+				echo "			<td style='display:none;visibility:hidden;' width='".$width."%' nowrap onclick=\"location.href='".$meli."'\"><table width='100%' cellspacing='0' cellpadding='0' class='mechselect_button_normal_play_left'><tr><td nowrap width='30px' align='center' valign='center'><div style='display:inline-block;height:100%;vertical-align:middle;'><img style='vertical-align:middle;' src='".$array_MECH_IMG_STATUS[$i4]."' height='25px' width='23px'><br><span style='color:#ccffff;font-size:15px;'>&nbsp;&nbsp;".$mn."&nbsp;&nbsp;</span></div></td><td>&nbsp;</td><td nowrap width='100%'><div><img src='./images/ranks/".$factionid."/".$array_PILOT_RANK[$i4].".png' width='18px' height='18px'>&nbsp;<a style='font-size:24px' href='".$meli."'>".$array_PILOT[$i4]."</a>&nbsp;&nbsp;<img src='".$mechstatusimage."' height='21px'>".$heatimage[$i4]."<br><span style='font-size:14px;'>".textTruncate($memodel, 18)."</span></div></td></tr></table></td>\r\n";
 			}
 		}
-		echo "<td style='width:5px;'>&nbsp;</td>";
+		echo "			<td style='width:5px;'>&nbsp;</td>\r\n";
 	}
 	if ($atLeastOneValidMechInUnit == 0) {
-		echo "<meta http-equiv='refresh' content='0;url=./gui_select_unit.php'> ";
+		echo "<meta http-equiv='refresh' content='0;url=./gui_select_unit.php'>\r\n";
 		header("Location: ./gui_select_unit.php");
 	}
-
-	function getMechMULImageByName($mechname) {
-		$image = "images/mechs/Generic_Mech.gif";
-
-		$dir = 'images/mechs_mul/';
-		$startChar = mb_substr($mechname, 0, 3); // use first 3 chars to list files to keep the result list as small as possible
-		if ($startChar == "ELE") {
-			// echo "<script>console.log('SEARCHING: >>" . $startChar . "<<');</script>";
-			$startChar = "Ele";
-		}
-
-		$files = glob($dir."{$startChar}*.png");
-		foreach ($files as &$img) {
-			// echo "<script>console.log('>>" . trim($img) . "<<');</script>";
-
-			$imagenametrimmed_a = basename(strtolower(str_replace(' ', '', trim($img))), ".png");
-			$imagenametrimmed = str_replace("'", "", $imagenametrimmed_a);
-
-			// echo "<script>console.log('MECHNAME: >>" . $mechname . "<<');</script>";
-
-			$mechnametrimmed_a = str_replace('ELE ', 'Elemental ', trim($mechname));
-			$mechnametrimmed_b = str_replace('BA ', 'Battle Armor ', trim($mechnametrimmed_a));
-			$mechnametrimmed_c = str_replace('&apos;', '', trim($mechnametrimmed_b));
-			$mechnametrimmed_d = str_replace(' ', '', trim($mechnametrimmed_c));
-			$mechnametrimmed_e = str_replace('[CV]', '', trim($mechnametrimmed_d));
-			$mechnametrimmed_f = str_replace('[BA]', '', trim($mechnametrimmed_e));
-			$mechnametrimmed_g = str_replace('[BM]', '', trim($mechnametrimmed_f));
-			$mechnametrimmed_h = str_replace('Rec.', 'Reconnaissance', trim($mechnametrimmed_g));
-			$mechnametrimmed_i = str_replace('Veh.', 'Vehicle', trim($mechnametrimmed_h));
-			$mechnametrimmed = strtolower($mechnametrimmed_i);
-
-			// echo "<script>console.log('SEARCHING: >>" . $imagenametrimmed . " ? " . $mechnametrimmed . "<<');</script>";
-
-			if (strpos($imagenametrimmed,$mechnametrimmed) !== false) {
-				// echo "<script>console.log('FOUND: >>" . $imagenametrimmed . " ? " . $mechnametrimmed . "<<');</script>";
-				$image = str_replace(' ', '%20', trim($img));
-				break;
-			}
-		}
-		return $image;
-	}
 ?>
-
 			<td style="width:100px;" style="width:100px;" nowrap width="100px" style="background:rgba(50,50,50,1.0);text-align:center;vertical-align:middle;display:block;"><img src='./images/player/<?=$pimage?>' width='60px' height='60px'></td>
 		</tr>
 
 <?php
 	if ($playMode) {
-		echo "		<tr><td colspan='999' style='background:#050505;height:5px;'></td></tr>";
+		echo "		<tr><td colspan='999' style='background:#050505;height:5px;'></td></tr>\r\n";
 	} else {
-		echo "		<tr><td colspan='999' style='background:#da8e25;height:5px;'></td></tr>";
+		echo "		<tr><td colspan='999' style='background:#da8e25;height:5px;'></td></tr>\r\n";
 	}
 ?>
 
 	</table>
 </div>
 
-<div id="pilotimage"><?php echo "<img src='".$array_PILOT_IMG_URL[$chosenMechIndex]."' width='80px' height='80px'>" ?></div>
+<div><?php echo "<img src='".$array_PILOT_IMG_URL[$chosenMechIndex]."' id='pilotimage' width='80px' height='80px'>" ?></div>
 <div id="faction" align="center"><?php echo "<img src='./images/factions/".$FACTION_IMG_URL."' width='50px' height='50px'>" ?></div>
 <div id="mech_number" align="center" onclick='javascript:hideTopRightPanel();'>#<?= $array_MECH_NUMBER[$chosenMechIndex] ?><br><?= strtoupper($UNIT) ?></div>
 
@@ -648,27 +665,26 @@ session_start();
 
 	if (!$playable) {
 		if ($hideNotOwnedMech) {
-			echo "<div id='blockNotOwnedMechs'></div>";
+			echo "<div id='blockNotOwnedMechs'></div>\r\n";
 		}
 	}
 
-	echo "<script type='text/javascript'>\n";
+	echo "<script type='text/javascript'>\r\n";
 	if ($showplayerdata_topleft == 1) {
 		// show top left pilot info
-		echo "  $('#pilotimage').show();\n";
-		echo "  $('#faction').show();\n";
-		echo "  $('#pilotrank').show();\n";
-		echo "  $('#topleft').show();\n";
+		echo "	$('#pilotimage').show();\r\n";
+		echo "	$('#faction').show();\r\n";
+		echo "	$('#pilotrank').show();\r\n";
+		echo "	$('#topleft').show();\r\n";
 	} else {
 		// do not show pilot information
-		echo "  $('#pilotimage').hide();\n";
-		echo "  $('#faction').hide();\n";
-		echo "  $('#pilotrank').hide();\n";
-		echo "  $('#topleft').hide();\n";
+		echo "	$('#pilotimage').hide();\r\n";
+		echo "	$('#faction').hide();\r\n";
+		echo "	$('#pilotrank').hide();\r\n";
+		echo "	$('#topleft').hide();\r\n";
 	}
-	//echo "  console.log('Current structure damage: $array_S[$chosenMechIndex]');\n";
-	echo "  setStructuralDamageCache($array_S[$chosenMechIndex]);\n";
-	echo "</script>\n";
+	echo "	setStructuralDamageCache($array_S[$chosenMechIndex]);\r\n";
+	echo "</script>\r\n";
 ?>
 
 <div id="pv" onclick='javascript:hideTopRightPanel();'>
@@ -703,19 +719,17 @@ session_start();
 							<td nowrap style="text-align:center;" class="datalabel"><label class='bigcheck'><input onchange="setRangeToLong();" type='checkbox' class='bigcheck' name='ToHitLong' id='ToHitLong' value='no'/><span class='bigcheck-target'></span></label></td>
 						</tr>
 						<tr>
-
-						<?php
-						if ($showDistancesHexes == 1) {
-							echo "<td nowrap style='text-align:center;' class='datalabel_thin_small'>&#60;3<span style='font-size:0.6em;'>&#11043;</span></td>";
-							echo "<td nowrap style='text-align:center;' class='datalabel_thin_small'>&#60;12<span style='font-size:0.6em;'>&#11043;</span></td>";
-							echo "<td nowrap style='text-align:center;' class='datalabel_thin_small'>&#60;21<span style='font-size:0.6em;'>&#11043;</span></td>";
-						} else {
-							echo "<td nowrap style='text-align:center;' class='datalabel_thin_small'>&#60;6&quot;</td>";
-							echo "<td nowrap style='text-align:center;' class='datalabel_thin_small'>&#60;24&quot;</td>";
-							echo "<td nowrap style='text-align:center;' class='datalabel_thin_small'>&#60;42&quot;</td>";
-						}
-						?>
-
+<?php
+if ($showDistancesHexes == 1) {
+	echo "							<td nowrap style='text-align:center;' class='datalabel_thin_small'>&#60;3<span style='font-size:0.6em;'>&#11043;</span></td>\r\n";
+	echo "							<td nowrap style='text-align:center;' class='datalabel_thin_small'>&#60;12<span style='font-size:0.6em;'>&#11043;</span></td>\r\n";
+	echo "							<td nowrap style='text-align:center;' class='datalabel_thin_small'>&#60;21<span style='font-size:0.6em;'>&#11043;</span></td>\r\n";
+} else {
+	echo "							<td nowrap style='text-align:center;' class='datalabel_thin_small'>&#60;6&quot;</td>\r\n";
+	echo "							<td nowrap style='text-align:center;' class='datalabel_thin_small'>&#60;24&quot;</td>\r\n";
+	echo "							<td nowrap style='text-align:center;' class='datalabel_thin_small'>&#60;42&quot;</td>\r\n";
+}
+?>
 						</tr>
 						<tr>
 							<td nowrap style="text-align:center;" class="datalabel" colspan="3"><hr></td>
@@ -724,12 +738,6 @@ session_start();
 							<td nowrap style="text-align:center;" class="datalabel"><label class='bigcheck'><input type='checkbox' onchange="setCover();" class='bigcheck' name='ToHitCover' id='ToHitCover' value='no'/><span class='bigcheck-target'></span></label></td>
 							<td nowrap style="text-align:left;" class="datalabel_thin_small" colspan="2">Par. cover</td>
 						</tr>
-						<!--
-						<tr>
-							<td nowrap style="text-align:center;" class="datalabel"><label class='bigcheck'><input type='checkbox' onchange="setForrest();" class='bigcheck' name='ToHitForrest' id='ToHitForrest' value='no'/><span class='bigcheck-target'></span></label></td>
-							<td nowrap style="text-align:left;" class="datalabel_thin_small" colspan="2">Forrest</td>
-						</tr>
-						-->
 						<tr>
 							<td nowrap style="text-align:center;" class="datalabel" colspan="3"><hr></td>
 						</tr>
@@ -771,24 +779,20 @@ session_start();
 							<td onclick="toggleTargetingComputer();" nowrap style="text-align:center;" width="5%" id="targetcomp" rowspan="2">&nbsp;&nbsp;&nbsp;<i class="fa-solid fa-circle-left" style="color:#999;font-size:40px;"></i>&nbsp;&nbsp;&nbsp;</td>
 							<td nowrap class="datalabel" width="12%">TP:</td>
 							<td nowrap class="datavalue" width="25%" id="unit_type" colspan="3"><?php echo "$array_TP[$chosenMechIndex]"; ?> <span class='datalabel_thin_small'><?php echo "$array_SZ[$chosenMechIndex]"; ?>/<?php echo "$array_TON[$chosenMechIndex]"; ?></span></td>
-							<!-- <td nowrap class="datalabel" width="12%">SZ:</td> -->
-							<!-- <td nowrap class="datavalue_thin" width="12%" colspan="2">(<?php echo "$array_SZ[$chosenMechIndex]"; ?>)</td> -->
 							<td id="tmmLabel" nowrap class="datalabel" width="12%">TMM:</td>
 							<td nowrap class="datavalue" width="13%" id="TMM"><?php echo "$array_TMM[$chosenMechIndex]"; ?></td>
 							<td nowrap class="datalabel" width="12%">MV:</td>
 							<td nowrap class="datavalue" style="text-transform: none;" width="13%" id="mv_points">
-							<!-- <script>console.log('MVT: <?= $array_MVTYPE[$chosenMechIndex] ?>');</script> -->
-							<?php echo "$array_MV[$chosenMechIndex]&rdquo;$array_MVTYPE[$chosenMechIndex]";
-								if ($array_MVJ[$chosenMechIndex] != null) {
-									echo "/$array_MVJ[$chosenMechIndex]&rdquo;&nbsp;j\r\n";
-								} else {
-									echo "\r\n";
-								}
-							?>
+								<?php echo "$array_MV[$chosenMechIndex]&rdquo;$array_MVTYPE[$chosenMechIndex]";
+									if ($array_MVJ[$chosenMechIndex] != null) {
+										echo "/$array_MVJ[$chosenMechIndex]&rdquo;&nbsp;j\r\n";
+									} else {
+										echo "\r\n";
+									}
+								?>
 							</td>
 						</tr>
 						<tr>
-							<!-- <td nowrap class="datalabel" width="12%" colspan="1">&nbsp;</td> -->
 							<td nowrap class="datavalue_small_special" width="50%" colspan="4" style="text-align:left;" valign="middle" onclick="javascript:window.open('http://www.masterunitlist.info/Unit/Details/<?php echo $array_MECH_MULID[$chosenMechIndex] ?>');"><?php echo "$array_ROLE[$chosenMechIndex]"; ?>&nbsp;<i class="fa-solid fa-square-up-right"></i></td>
 							<td nowrap class="datalabel" width="13%" colspan="1" valign="middle" >AMM:</td>
 							<td nowrap class="datavalue" width="12%" colspan="1" valign="middle" style="top:0px;bottom:0px;vertical-align:middle;"><span class="datavalue" id="AMM">0</span></td>
@@ -830,11 +834,10 @@ session_start();
 					<table width="100%">
 						<tr>
 							<td nowrap class="datalabel" width="5%">OV:</td>
-							<!-- <td nowrap class="datavalue" width="15%" style="text-align: center;"><?php echo "$array_OV[$chosenMechIndex]"; ?></td> -->
 							<td nowrap width="25%" class="datalabel_thin">
 <?php
 	for ($i1 = 1; $i1 <= $array_OV[$chosenMechIndex]; $i1++) {
-		echo "<label class='bigcheck'><input onchange='readCircles($array_MECH_DBID[$chosenMechIndex]);' type='checkbox' class='bigcheck' name='UOV".$i1."' id='UOV".$i1."' value='yes'/><span class='bigcheck-target'></span></label>&nbsp;\r\n";
+		echo "								<label class='bigcheck'><input onchange='readCircles($array_MECH_DBID[$chosenMechIndex]);' type='checkbox' class='bigcheck' name='UOV".$i1."' id='UOV".$i1."' value='yes'/><span class='bigcheck-target'></span></label>&nbsp;\r\n";
 	}
 ?>
 							</td>
@@ -847,7 +850,6 @@ session_start();
 								<label class="bigcheck"><input onchange="readCircles(<?= $array_MECH_DBID[$chosenMechIndex] ?>, <?= $array_A_MAX[$chosenMechIndex] ?>, <?= $array_S_MAX[$chosenMechIndex] ?>);" type="checkbox" class="bigcheck" name="H3" id="H3" value="yes"/><span class="bigcheck-target"></span></label>
 								<label class="bigcheck"><input onchange="readCircles(<?= $array_MECH_DBID[$chosenMechIndex] ?>, <?= $array_A_MAX[$chosenMechIndex] ?>, <?= $array_S_MAX[$chosenMechIndex] ?>);" type="checkbox" class="bigcheck" name="H4" id="H4" value="yes"/><span class="bigcheck-target"></span></label>
 							</td>
-							<!-- <td class="datalabel" width="5%" style="text-align: right;">&nbsp;&nbsp;&nbsp;(SD)</td> -->
 						</tr>
 					</table>
 				</div>
@@ -859,7 +861,7 @@ session_start();
 							<td nowrap width="95%" class="datalabel_thin">
 <?php
 	for ($i1 = 1; $i1 <= $array_A_MAX[$chosenMechIndex]; $i1++) {
-		echo "<label class='bigcheck'><input onchange='readCircles($array_MECH_DBID[$chosenMechIndex]);' type='checkbox' class='bigcheck' name='A".$i1."' value='yes'/><span class='bigcheck-target'></span></label>&nbsp;\r\n";
+		echo "							<label class='bigcheck'><input onchange='readCircles($array_MECH_DBID[$chosenMechIndex]);' type='checkbox' class='bigcheck' name='A".$i1."' value='yes'/><span class='bigcheck-target'></span></label>&nbsp;\r\n";
 		if ($i1 == 10) {
             echo "<br>\n";
         }
@@ -872,7 +874,7 @@ session_start();
 							<td nowrap width="95%" class="datalabel_thin">
 <?php
 	for ($i2 = 1; $i2 <= $array_S_MAX[$chosenMechIndex]; $i2++) {
-		echo "<label class='bigcheck'><input onchange='readCircles($array_MECH_DBID[$chosenMechIndex]);' type='checkbox' class='bigcheck' name='S".$i2."' value='yes'/><span class='bigcheck-target'></span></label>&nbsp;\r\n";
+		echo "							<label class='bigcheck'><input onchange='readCircles($array_MECH_DBID[$chosenMechIndex]);' type='checkbox' class='bigcheck' name='S".$i2."' value='yes'/><span class='bigcheck-target'></span></label>&nbsp;\r\n";
 		if ($i2 == 10) {
 			echo "<br>\n";
 		}
@@ -891,7 +893,7 @@ session_start();
 								<table>
 									<tr>
 										<td nowrap width="99%" class="datavalue_thin" style="text-align: left;" id="sa_field">
-											<?php echo "$array_SPCL[$chosenMechIndex]"; ?>
+											<?php echo "$array_SPCL[$chosenMechIndex]\r\n"; ?>
 										</td>
 										<td nowrap width="1%" class="datavalue_thin" style="text-align: right;" align="right">
 											<a href="https://www.clanwolf.net/apps/ASCard/gui_show_specialabilities.php"><i class="fas fa-info-circle"></i></a>
@@ -911,7 +913,7 @@ session_start();
 					<table width="100%" cellpadding="0" cellspacing="0">
 						<tr>
 							<td nowrap rowspan="3" style="vertical-align: middle;" valign="middle" align="center" width="15px">
-								<div onclick="location.href='gui_select_unit.php';" style="padding: 0 15 0 15;" id="phasebutton" name="phasebutton"><img id="phasebuttonimage" src=<?php echo "'$currentPhaseButton'"; ?> style='height:50px;'></div> <!-- <a href=<?php echo "'$currentmeli'"; ?>> </a> -->
+								<div onclick="location.href='gui_select_unit.php';" style="padding: 0 15 0 15;" id="phasebutton" name="phasebutton"><img id="phasebuttonimage" src=<?php echo "'$currentPhaseButton'"; ?> style='height:50px;'></div>
 							</td>
 							<td nowrap width="65%" class="datalabel_thin">
 								<table cellspacing="2" cellpadding="0">
@@ -941,11 +943,11 @@ session_start();
 									<td><label class='bigcheck'><input type='checkbox' onchange='readCircles2(<?= $array_MECH_DBID[$chosenMechIndex] ?>, <?= $array_A_MAX[$chosenMechIndex] ?>, <?= $array_S_MAX[$chosenMechIndex] ?>, -1, 1);' class='bigcheck' name='WF5_WEAPONSFIRED2' id='WF5_WEAPONSFIRED2' value='no'/><span class='bigcheck-target'></span></label>&nbsp;</td>
 									<td><label class='bigcheck'><input type='checkbox' onchange='readCircles2(<?= $array_MECH_DBID[$chosenMechIndex] ?>, <?= $array_A_MAX[$chosenMechIndex] ?>, <?= $array_S_MAX[$chosenMechIndex] ?>, -1, 2);' class='bigcheck' name='WF6_WEAPONSFIRED2' id='WF6_WEAPONSFIRED2' value='no'/><span class='bigcheck-target'></span></label>&nbsp;</td>
 									<td nowrap rowspan='2' class="datavalue" style="text-align: right;" align="right"><span style="font-family:'Pathway Gothic One',sans-serif;font-size:60%;text-transform:uppercase;color:#999;">&nbsp;&nbsp;&nbsp;WEAPONS</span></td>
-                                </tr>
-                                <tr>
-                                    <td align="center"><img src="./images/buttons/holdfire.png" height='17px' style="border: 0px solid #000000;"></td>
-                                    <td align="center"><img src="./images/buttons/fireweapons.png" height='17px' style="border: 0px solid #000000;"></td>
-                                </tr>
+								</tr>
+								<tr>
+									<td align="center"><img src="./images/buttons/holdfire.png" height='17px' style="border: 0px solid #000000;"></td>
+									<td align="center"><img src="./images/buttons/fireweapons.png" height='17px' style="border: 0px solid #000000;"></td>
+								</tr>
 							</table>
 							</td>
 							<td id="INFOFIRED" nowrap width="20%" class="datalabel"></td>
@@ -1025,37 +1027,38 @@ session_start();
 					<table width="100%">
 						<tr>
 							<td nowrap class="datalabel" width="5%" style="text-align: right;">EN:&nbsp;</td>
-							<td nowrap valign="middle"><a style="padding-right:5px;" href="javascript:increaseENGN_PREP();"><i class="fas fa-plus-square"></i></a></td>
-							<td nowrap class="datalabel_thin" id="label_ENGN_PREP" align="center"><?= $array_ENGN_PREP[$chosenMechIndex] ?></td>
+							<td nowrap valign="middle"><a style="padding-right:5px;" href="javascript:increaseENGN_CV_PREP();"><i class="fas fa-plus-square"></i></a></td>
+							<td nowrap class="datalabel_thin" id="label_CV_ENGN_PREP" align="center"><?= $array_CV_ENGN_PREP[$chosenMechIndex] ?></td>
 							<td nowrap class="datalabel">&nbsp;</td>
 							<td nowrap width="55%" style="text-align: left;" class="datalabel_thin">
-								<label class="bigcheck"><input onchange="111readCircles(<?= $array_MECH_DBID[$chosenMechIndex] ?>, <?= $array_A_MAX[$chosenMechIndex] ?>, <?= $array_S_MAX[$chosenMechIndex] ?>);" type="checkbox" class="bigcheck" name="CD_E_1" id="CD_E_1" value="yes"/><span class="bigcheck-target"></span></label>
+								<label class="bigcheck"><input onchange="readCircles(<?= $array_MECH_DBID[$chosenMechIndex] ?>, <?= $array_A_MAX[$chosenMechIndex] ?>, <?= $array_S_MAX[$chosenMechIndex] ?>);" type="checkbox" class="bigcheck" name="CD_CV-E_1" id="CD_CV-E_1" value="yes"/><span class="bigcheck-target"></span></label>
+								<label class="bigcheck"><input onchange="readCircles(<?= $array_MECH_DBID[$chosenMechIndex] ?>, <?= $array_A_MAX[$chosenMechIndex] ?>, <?= $array_S_MAX[$chosenMechIndex] ?>);" type="checkbox" class="bigcheck" name="CD_CV-E_2" id="CD_CV-E_2" value="yes"/><span class="bigcheck-target"></span></label>
 							</td>
 							<td nowrap class="datalabel_thin_small" colspan="2" width="5%" style="text-align: right;">½ MV, ½ DMG</td>
 						</tr>
 						<tr>
 							<td nowrap class="datalabel" width="5%" style="text-align: right;">FC:&nbsp;</td>
-							<td nowrap valign="middle"><a style="padding-right:5px;" href="javascript:increaseFCTL_PREP();"><i class="fas fa-plus-square"></i></a></td>
-							<td nowrap class="datalabel_thin" id="label_FCTL_PREP" align="center"><?= $array_FRCTRL_PREP[$chosenMechIndex] ?></td>
+							<td nowrap valign="middle"><a style="padding-right:5px;" href="javascript:increaseFCTL_CV_PREP();"><i class="fas fa-plus-square"></i></a></td>
+							<td nowrap class="datalabel_thin" id="label_CV_FCTL_PREP" align="center"><?= $array_CV_FRCTRL_PREP[$chosenMechIndex] ?></td>
 							<td nowrap class="datalabel">&nbsp;</td>
 							<td nowrap width="90%" colspan='2' style="text-align: left;" class="datalabel_thin">
-								<label class="bigcheck"><input onchange="111readCircles(<?= $array_MECH_DBID[$chosenMechIndex] ?>, <?= $array_A_MAX[$chosenMechIndex] ?>, <?= $array_S_MAX[$chosenMechIndex] ?>);" type="checkbox" class="bigcheck" name="CD_FC_1" id="CD_FC_1" value="yes"/><span class="bigcheck-target"></span></label>
-								<label class="bigcheck"><input onchange="111readCircles(<?= $array_MECH_DBID[$chosenMechIndex] ?>, <?= $array_A_MAX[$chosenMechIndex] ?>, <?= $array_S_MAX[$chosenMechIndex] ?>);" type="checkbox" class="bigcheck" name="CD_FC_2" id="CD_FC_2" value="yes"/><span class="bigcheck-target"></span></label>
-								<label class="bigcheck"><input onchange="111readCircles(<?= $array_MECH_DBID[$chosenMechIndex] ?>, <?= $array_A_MAX[$chosenMechIndex] ?>, <?= $array_S_MAX[$chosenMechIndex] ?>);" type="checkbox" class="bigcheck" name="CD_FC_3" id="CD_FC_3" value="yes"/><span class="bigcheck-target"></span></label>
-								<label class="bigcheck"><input onchange="111readCircles(<?= $array_MECH_DBID[$chosenMechIndex] ?>, <?= $array_A_MAX[$chosenMechIndex] ?>, <?= $array_S_MAX[$chosenMechIndex] ?>);" type="checkbox" class="bigcheck" name="CD_FC_4" id="CD_FC_4" value="yes"/><span class="bigcheck-target"></span></label>
+								<label class="bigcheck"><input onchange="readCircles(<?= $array_MECH_DBID[$chosenMechIndex] ?>, <?= $array_A_MAX[$chosenMechIndex] ?>, <?= $array_S_MAX[$chosenMechIndex] ?>);" type="checkbox" class="bigcheck" name="CD_CV-FC_1" id="CD_CV-FC_1" value="yes"/><span class="bigcheck-target"></span></label>
+								<label class="bigcheck"><input onchange="readCircles(<?= $array_MECH_DBID[$chosenMechIndex] ?>, <?= $array_A_MAX[$chosenMechIndex] ?>, <?= $array_S_MAX[$chosenMechIndex] ?>);" type="checkbox" class="bigcheck" name="CD_CV-FC_2" id="CD_CV-FC_2" value="yes"/><span class="bigcheck-target"></span></label>
+								<label class="bigcheck"><input onchange="readCircles(<?= $array_MECH_DBID[$chosenMechIndex] ?>, <?= $array_A_MAX[$chosenMechIndex] ?>, <?= $array_S_MAX[$chosenMechIndex] ?>);" type="checkbox" class="bigcheck" name="CD_CV-FC_3" id="CD_CV-FC_3" value="yes"/><span class="bigcheck-target"></span></label>
+								<label class="bigcheck"><input onchange="readCircles(<?= $array_MECH_DBID[$chosenMechIndex] ?>, <?= $array_A_MAX[$chosenMechIndex] ?>, <?= $array_S_MAX[$chosenMechIndex] ?>);" type="checkbox" class="bigcheck" name="CD_CV-FC_4" id="CD_CV-FC_4" value="yes"/><span class="bigcheck-target"></span></label>
 							</td>
 							<td nowrap class="datalabel_thin_small" width="5%" style="text-align: right;">+2 TO-HIT</td>
 						</tr>
 						<tr>
 							<td nowrap class="datalabel" width="5%" style="text-align:right;">WN:&nbsp;</td>
-							<td nowrap valign="middle"><a style="padding-right:5px;" href="javascript:increaseWPNS_PREP();"><i class="fas fa-plus-square"></i></a></td>
-							<td nowrap class="datalabel_thin" id="label_WPNS_PREP" align="center"><?= $array_WPNS_PREP[$chosenMechIndex] ?></td>
+							<td nowrap valign="middle"><a style="padding-right:5px;" href="javascript:increaseWPNS_CV_PREP();"><i class="fas fa-plus-square"></i></a></td>
+							<td nowrap class="datalabel_thin" id="label_CV_WPNS_PREP" align="center"><?= $array_CV_WPNS_PREP[$chosenMechIndex] ?></td>
 							<td nowrap class="datalabel">&nbsp;</td>
 							<td nowrap width="55%" colspan='2' style="text-align: left;" class="datalabel_thin">
-								<label class="bigcheck"><input onchange="111readCircles(<?= $array_MECH_DBID[$chosenMechIndex] ?>, <?= $array_A_MAX[$chosenMechIndex] ?>, <?= $array_S_MAX[$chosenMechIndex] ?>);" type="checkbox" class="bigcheck" name="CD_W_1" id="CD_W_1" value="yes"/><span class="bigcheck-target"></span></label>
-								<label class="bigcheck"><input onchange="111readCircles(<?= $array_MECH_DBID[$chosenMechIndex] ?>, <?= $array_A_MAX[$chosenMechIndex] ?>, <?= $array_S_MAX[$chosenMechIndex] ?>);" type="checkbox" class="bigcheck" name="CD_W_2" id="CD_W_2" value="yes"/><span class="bigcheck-target"></span></label>
-								<label class="bigcheck"><input onchange="111readCircles(<?= $array_MECH_DBID[$chosenMechIndex] ?>, <?= $array_A_MAX[$chosenMechIndex] ?>, <?= $array_S_MAX[$chosenMechIndex] ?>);" type="checkbox" class="bigcheck" name="CD_W_3" id="CD_W_3" value="yes"/><span class="bigcheck-target"></span></label>
-								<label class="bigcheck"><input onchange="111readCircles(<?= $array_MECH_DBID[$chosenMechIndex] ?>, <?= $array_A_MAX[$chosenMechIndex] ?>, <?= $array_S_MAX[$chosenMechIndex] ?>);" type="checkbox" class="bigcheck" name="CD_W_4" id="CD_W_4" value="yes"/><span class="bigcheck-target"></span></label>
+								<label class="bigcheck"><input onchange="readCircles(<?= $array_MECH_DBID[$chosenMechIndex] ?>, <?= $array_A_MAX[$chosenMechIndex] ?>, <?= $array_S_MAX[$chosenMechIndex] ?>);" type="checkbox" class="bigcheck" name="CD_CV-W_1" id="CD_CV-W_1" value="yes"/><span class="bigcheck-target"></span></label>
+								<label class="bigcheck"><input onchange="readCircles(<?= $array_MECH_DBID[$chosenMechIndex] ?>, <?= $array_A_MAX[$chosenMechIndex] ?>, <?= $array_S_MAX[$chosenMechIndex] ?>);" type="checkbox" class="bigcheck" name="CD_CV-W_2" id="CD_CV-W_2" value="yes"/><span class="bigcheck-target"></span></label>
+								<label class="bigcheck"><input onchange="readCircles(<?= $array_MECH_DBID[$chosenMechIndex] ?>, <?= $array_A_MAX[$chosenMechIndex] ?>, <?= $array_S_MAX[$chosenMechIndex] ?>);" type="checkbox" class="bigcheck" name="CD_CV-W_3" id="CD_CV-W_3" value="yes"/><span class="bigcheck-target"></span></label>
+								<label class="bigcheck"><input onchange="readCircles(<?= $array_MECH_DBID[$chosenMechIndex] ?>, <?= $array_A_MAX[$chosenMechIndex] ?>, <?= $array_S_MAX[$chosenMechIndex] ?>);" type="checkbox" class="bigcheck" name="CD_CV-W_4" id="CD_CV-W_4" value="yes"/><span class="bigcheck-target"></span></label>
 							</td>
 							<td nowrap class="datalabel_thin_small" width="5%" style="text-align: right;">-1 DMG</td>
 						</tr>
@@ -1065,42 +1068,42 @@ session_start();
 								<table width="100%" cellpadding="0" cellspacing="0">
 									<tr>
 										<td nowrap colspan="2" width="33%" style="text-align:center;" class="datalabel_thin">
-											<label class="bigcheck"><input onchange="111readCircles(<?= $array_MECH_DBID[$chosenMechIndex] ?>, <?= $array_A_MAX[$chosenMechIndex] ?>, <?= $array_S_MAX[$chosenMechIndex] ?>);" type="checkbox" class="bigcheck" name="CD_W_1" id="CD_W_1" value="yes"/><span class="bigcheck-target"></span></label>
-											<label class="bigcheck"><input onchange="111readCircles(<?= $array_MECH_DBID[$chosenMechIndex] ?>, <?= $array_A_MAX[$chosenMechIndex] ?>, <?= $array_S_MAX[$chosenMechIndex] ?>);" type="checkbox" class="bigcheck" name="CD_W_2" id="CD_W_2" value="yes"/><span class="bigcheck-target"></span></label>
+											<label class="bigcheck"><input onchange="readCircles(<?= $array_MECH_DBID[$chosenMechIndex] ?>, <?= $array_A_MAX[$chosenMechIndex] ?>, <?= $array_S_MAX[$chosenMechIndex] ?>);" type="checkbox" class="bigcheck" name="CD_CV-MA_1" id="CD_CV-MA_1" value="yes"/><span class="bigcheck-target"></span></label>
+											<label class="bigcheck"><input onchange="readCircles(<?= $array_MECH_DBID[$chosenMechIndex] ?>, <?= $array_A_MAX[$chosenMechIndex] ?>, <?= $array_S_MAX[$chosenMechIndex] ?>);" type="checkbox" class="bigcheck" name="CD_CV-MA_2" id="CD_CV-MA_2" value="yes"/><span class="bigcheck-target"></span></label>
 										</td>
 										<td nowrap width="32%" style="text-align:center;" class="datalabel_thin">
-											<label class="bigcheck"><input onchange="111readCircles(<?= $array_MECH_DBID[$chosenMechIndex] ?>, <?= $array_A_MAX[$chosenMechIndex] ?>, <?= $array_S_MAX[$chosenMechIndex] ?>);" type="checkbox" class="bigcheck" name="CD_W_3" id="CD_W_3" value="yes"/><span class="bigcheck-target"></span></label>
-											<label class="bigcheck"><input onchange="111readCircles(<?= $array_MECH_DBID[$chosenMechIndex] ?>, <?= $array_A_MAX[$chosenMechIndex] ?>, <?= $array_S_MAX[$chosenMechIndex] ?>);" type="checkbox" class="bigcheck" name="CD_W_4" id="CD_W_4" value="yes"/><span class="bigcheck-target"></span></label>
+											<label class="bigcheck"><input onchange="readCircles(<?= $array_MECH_DBID[$chosenMechIndex] ?>, <?= $array_A_MAX[$chosenMechIndex] ?>, <?= $array_S_MAX[$chosenMechIndex] ?>);" type="checkbox" class="bigcheck" name="CD_CV-MB_1" id="CD_CV-MB_1" value="yes"/><span class="bigcheck-target"></span></label>
+											<label class="bigcheck"><input onchange="readCircles(<?= $array_MECH_DBID[$chosenMechIndex] ?>, <?= $array_A_MAX[$chosenMechIndex] ?>, <?= $array_S_MAX[$chosenMechIndex] ?>);" type="checkbox" class="bigcheck" name="CD_CV-MB_2" id="CD_CV-MB_2" value="yes"/><span class="bigcheck-target"></span></label>
 										</td>
 										<td nowrap width="33%" style="text-align:center;" class="datalabel_thin">
-											<label class="bigcheck"><input onchange="111readCircles(<?= $array_MECH_DBID[$chosenMechIndex] ?>, <?= $array_A_MAX[$chosenMechIndex] ?>, <?= $array_S_MAX[$chosenMechIndex] ?>);" type="checkbox" class="bigcheck" name="CD_W_3" id="CD_W_3" value="yes"/><span class="bigcheck-target"></span></label>
+											<label class="bigcheck"><input onchange="readCircles(<?= $array_MECH_DBID[$chosenMechIndex] ?>, <?= $array_A_MAX[$chosenMechIndex] ?>, <?= $array_S_MAX[$chosenMechIndex] ?>);" type="checkbox" class="bigcheck" name="CD_CV-MC_1" id="CD_CV-MC_1" value="yes"/><span class="bigcheck-target"></span></label>
 										</td>
 									</tr>
 									<tr>
 										<td nowrap width="33%" colspan="2" style="text-align:center;" class="datalabel_thin">
 											<table width="100%" cellpadding="0" cellspacing="0">
 												<tr>
-													<td nowrap style="text-align:right;" class="datalabel_thin_small" id="label_WPNS_PREP" valign="middle">-2 MV</td>
-													<td nowrap style="text-align:right;"><a style="padding-right:5px;" valign="middle" href="javascript:increaseWPNS_PREP();"><i class="fas fa-plus-square"></i></a></td>
-													<td nowrap style="text-align:left;" class="datalabel_thin" id="label_WPNS_PREP" valign="middle"><?= $array_WPNS_PREP[$chosenMechIndex] ?></td>
+													<td nowrap style="text-align:right;" class="datalabel_thin_small" valign="middle">-2 MV</td>
+													<td nowrap style="text-align:right;"><a style="padding-right:5px;" valign="middle" href="javascript:increaseMOTIVEA_PREP();"><i class="fas fa-plus-square"></i></a></td>
+													<td nowrap style="text-align:left;" class="datalabel_thin" id="label_CV_MOTIVA_PREP" valign="middle"><?= $array_CV_MOTV_A_PREP[$chosenMechIndex] ?></td>
 												</tr>
 											</table>
 										</td>
 										<td nowrap width="32%" style="text-align:center;" class="datalabel_thin">
 											<table width="100%" cellpadding="0" cellspacing="0">
 												<tr>
-													<td nowrap style="text-align:right;" class="datalabel_thin_small" id="label_WPNS_PREP" valign="middle">½ MV</td>
-													<td nowrap style="text-align:right;"><a style="padding-right:5px;" valign="middle" href="javascript:increaseWPNS_PREP();"><i class="fas fa-plus-square"></i></a></td>
-													<td nowrap style="text-align:left;" class="datalabel_thin" id="label_WPNS_PREP" valign="middle"><?= $array_WPNS_PREP[$chosenMechIndex] ?></td>
+													<td nowrap style="text-align:right;" class="datalabel_thin_small" valign="middle">½ MV</td>
+													<td nowrap style="text-align:right;"><a style="padding-right:5px;" valign="middle" href="javascript:increaseMOTIVEB_PREP();"><i class="fas fa-plus-square"></i></a></td>
+													<td nowrap style="text-align:left;" class="datalabel_thin" id="label_CV_MOTIVB_PREP" valign="middle"><?= $array_CV_MOTV_B_PREP[$chosenMechIndex] ?></td>
 												</tr>
 											</table>
 										</td>
 										<td nowrap width="33%" style="text-align:center;" class="datalabel_thin">
 											<table width="100%" cellpadding="0" cellspacing="0">
 												<tr>
-													<td nowrap style="text-align:right;" class="datalabel_thin_small" id="label_WPNS_PREP" valign="middle">0 MV</td>
-													<td nowrap style="text-align:right;"><a style="padding-right:5px;" valign="middle" href="javascript:increaseWPNS_PREP();"><i class="fas fa-plus-square"></i></a></td>
-													<td nowrap style="text-align:left;" class="datalabel_thin" id="label_WPNS_PREP" valign="middle"><?= $array_WPNS_PREP[$chosenMechIndex] ?></td>
+													<td nowrap style="text-align:right;" class="datalabel_thin_small" valign="middle">0 MV</td>
+													<td nowrap style="text-align:right;"><a style="padding-right:5px;" valign="middle" href="javascript:increaseMOTIVEC_PREP();"><i class="fas fa-plus-square"></i></a></td>
+													<td nowrap style="text-align:left;" class="datalabel_thin" id="label_CV_MOTIVC_PREP" valign="middle"><?= $array_CV_MOTV_C_PREP[$chosenMechIndex] ?></td>
 												</tr>
 											</table>
 										</td>
@@ -1110,7 +1113,6 @@ session_start();
 						</tr>
 					</table>
 				</div>
-
 			</td>
 			<td valign='bottom' style='font-size:0px;'>
 				<a onclick='showInfoBar();'    id="InfoButton" href='#' style='font-size:0;'><img style='margin:0;padding:0;' src='./images/selector_02-info.png'     width='50px'></a><br>
@@ -1176,10 +1178,10 @@ session_start();
 						<table cellspacing="0" cellpadding="0">
 							<tr>
 								<td rowspan="2">
-									<?php echo "<img src='".$array_PILOT_IMG_URL[$chosenMechIndex]."' width='84px' height='84px' style='border: 1px solid #000000;'>" ?>
+									<?php echo "<img src='".$array_PILOT_IMG_URL[$chosenMechIndex]."' width='84px' height='84px' style='border: 1px solid #000000;'>\r\n" ?>
 								</td>
 								<td style='background-color:#000000;' align='right'>
-									<?php echo "<img src='./images/factions/".$FACTION_IMG_URL."' width='40px' height='40px' style='border: 1px solid #000000;'>" ?>
+									<?php echo "<img src='./images/factions/".$FACTION_IMG_URL."' width='40px' height='40px' style='border: 1px solid #000000;'>\r\n" ?>
 								</td>
 							</tr>
 							<tr>
@@ -1238,15 +1240,24 @@ session_start();
 				<td align="right" valign="bottom">
 <?php
 	if ($array_TP[$chosenMechIndex] != "BA") {
-		echo "                  <div id='criticalhit'></div>\r\n";
+		echo "					<div id='criticalhit'>CRIT:<br>-</div>\r\n";
 	} else {
-		echo "                  <div id='criticalhit' style='display:none;'></div>\r\n";
+		echo "					<div id='criticalhit' style='display:none;'>CRIT:<br>-</div>\r\n";
+	}
+
+		echo "					<div id='dice' valign='middle' align='center'>\r\n";
+		echo "						<img id='die1' src='./images/dice/d6_0.png' width='65px' height='65px'>\r\n";
+		echo "						<img id='die2' src='./images/dice/d6_0.png' width='65px' height='65px'>\r\n";
+		echo "					</div>\r\n";
+
+	if ($array_TP[$chosenMechIndex] == "CV") {
+		echo "					<br><div id='motivehit'>MOTV:<br>-</div>\r\n";
+		echo "					<div id='motivedice' valign='middle' align='center'>\r\n";
+		echo "						<img id='die3' src='./images/dice/bd6_0.png' width='65px' height='65px'>\r\n";
+		echo "						<img id='die4' src='./images/dice/bd6_0.png' width='65px' height='65px''>\r\n";
+		echo "					</div>\r\n";
 	}
 ?>
-					<div id="dice" valign="middle" align="center">
-						<img id="die1" src="./images/dice/d6_0.png" width="65px" height="65px">
-						<img id="die2" src="./images/dice/d6_0.png" width="65px" height="65px">
-					</div>
 				</td>
 			</tr>
 		</table>
@@ -1271,7 +1282,7 @@ session_start();
 	$("#destroyedIndicator").hide();
 	$("#crippledIndicator").hide();
 	$("#shutdownIndicator").hide();
-	setCircles(<?=$array_HT[$chosenMechIndex]?>,<?=$array_A[$chosenMechIndex]?>,<?=$array_S[$chosenMechIndex]?>,<?=$array_ENGN[$chosenMechIndex]?>,<?=$array_FRCTRL[$chosenMechIndex]?>,<?=$array_MP[$chosenMechIndex]?>,<?=$array_WPNS[$chosenMechIndex]?>,<?=$array_USEDOVERHEAT[$chosenMechIndex]?>,<?=$array_MVMT[$chosenMechIndex]?>,<?=$array_WPNSFIRED[$chosenMechIndex]?>,2,0,'<?=$array_MECH_STATUSSTRING[$chosenMechIndex]?>');
+	setCircles(<?=$array_HT[$chosenMechIndex]?>,<?=$array_A[$chosenMechIndex]?>,<?=$array_S[$chosenMechIndex]?>,<?=$array_ENGN[$chosenMechIndex]?>,<?=$array_FRCTRL[$chosenMechIndex]?>,<?=$array_MP[$chosenMechIndex]?>,<?=$array_WPNS[$chosenMechIndex]?>,<?=$array_CV_ENGN[$chosenMechIndex]?>,<?=$array_CV_FRCTRL[$chosenMechIndex]?>,<?=$array_CV_WPNS[$chosenMechIndex]?>,<?=$array_CV_MOTV_A[$chosenMechIndex]?>,<?=$array_CV_MOTV_B[$chosenMechIndex]?>,<?=$array_CV_MOTV_C[$chosenMechIndex]?>,<?=$array_USEDOVERHEAT[$chosenMechIndex]?>,<?=$array_MVMT[$chosenMechIndex]?>,<?=$array_WPNSFIRED[$chosenMechIndex]?>,2,0,'<?=$array_MECH_STATUSSTRING[$chosenMechIndex]?>');
 </script>
 
 <div id="footer"></div>
@@ -1281,7 +1292,11 @@ session_start();
 <div align="center" id="settings">
 	<a href="./gui_support.php"><i class="fa-solid fa-handshake-simple"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 	<a href="javascript:showMech()"><i class="fas fa-eye"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	<!-- <a href="https://www.clanwolf.net/static/files/Rulebooks/CAT35860%20-%20AlphaStrike%20CommandersEdition.pdf" target="_blank"><i class="fas fa-bookmark"></i></a>&nbsp;&nbsp; -->
+<?php
+	if ($pid == 2) { // Meldric
+		echo "	<a href='https://www.clanwolf.net/static/files/Rulebooks/CAT35680%20-%20AlphaStrike%20CommandersEdition.pdf' target='_blank'><i class='fas fa-bookmark'></i></a>&nbsp;&nbsp;\n";
+	}
+?>
 	<!-- <a href="#" onclick="javascript:window.location.reload(true)"><i class="fas fa-redo"></i></a>&nbsp;&nbsp; -->
 	<a href="javascript:textSize(0)"><i class="fas fa-minus-square"></i></a>&nbsp;&nbsp;
 	<a href="javascript:textSize(1)"><i class="fas fa-plus-square"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -1297,8 +1312,8 @@ session_start();
 
 <script>
 	document.addEventListener('readystatechange', event => {
-	    if (event.target.readyState === "complete") {
-    		$("#cover").fadeOut(175, "linear", function() {
+		if (event.target.readyState === "complete") {
+			$("#cover").fadeOut(175, "linear", function() {
 				$("#cover").hide();
 				document.getElementById("cover").style.visibility = "hidden";
 			});
@@ -1533,7 +1548,6 @@ session_start();
 //		}
 //	}
 ?>
-
 </body>
 
 </html>

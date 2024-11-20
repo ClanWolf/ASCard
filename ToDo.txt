@@ -7,7 +7,7 @@ TODO: Fix table names according to unit/formation changes
 TODO: Add a pilot card to chosen units (Choose special pilot abilities from list with cost)
 TODO: Formations have a faction (for logo and mechimages)
 TODO: Ready Icons in play unit werden erst nach dem tabwechsel aktuell
-TODO: Import units from mul directly somehow
+TODO: Import units from mul directly somehow (have mul open, select a unit and export it to ASCard)
 TODO: Scan QR codes to identify units on the table
 TODO: CV movement is missing "t" tracked, "h" hover,...
 TODO: Add a user id to created mechs and show only own mechs in assignment list
@@ -21,4 +21,5 @@ TODO: Show clan option to show/hide batchall
 TODO: Sounds für die + Buttons (Criticals und Heat)
 TODO: Link to Commanders edition for admin
 
-TODO: Automatically roll motive roll on CV: Show motive and crit roll for CV (--> add values for t tracked from the table)
+TODO: Add option to auto roll on motive
+TODO: Add option to auto roll on crit

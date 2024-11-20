@@ -597,4 +597,78 @@ INSERT INTO clanwolf.asc_pilot (name,`rank`,pilot_imageurl,Updated) VALUES
 	 ('Remy','MW','images/pilots/f_064.png','2024-10-27 17:20:22.0'),
 	 ('Atlas','MW','images/pilots/m_103.png','2024-11-01 02:52:47.0'),
 	 ('Titan','MW','images/pilots/m_072.png','2024-11-01 02:53:55.0'),
-	 ('Ameer','MW','images/pilots/m_004.png','2024-11-05 14:56:03.0');
+	 ('Ameer','MW','images/pilots/m_004.png','2024-11-05 14:56:03.0'),
+	 ('Chandler','MW','images/pilots/m_125.png','2024-11-06 17:11:58.0'),
+	 ('Erick','MW','images/pilots/m_074.png','2024-11-06 19:49:11.0'),
+	 ('Wayne','MW','images/pilots/m_104.png','2024-11-07 16:55:57.0'),
+	 ('Philip','MW','images/pilots/m_174.png','2024-11-07 18:48:30.0'),
+	 ('Annie','MW','images/pilots/f_043.png','2024-11-07 19:24:57.0');
+INSERT INTO clanwolf.asc_pilot (name,`rank`,pilot_imageurl,Updated) VALUES
+	 ('Jayce','MW','images/pilots/m_165.png','2024-11-07 19:26:17.0'),
+	 ('Marc','MW','images/pilots/m_103.png','2024-11-08 01:22:52.0'),
+	 ('Andrew','MW','images/pilots/m_086.png','2024-11-08 22:08:29.0'),
+	 ('Harlan','MW','images/pilots/m_116.png','2024-11-08 22:12:03.0'),
+	 ('James','MW','images/pilots/m_082.png','2024-11-08 22:12:43.0'),
+	 ('Lukas','MW','images/pilots/m_012.png','2024-11-08 22:13:52.0'),
+	 ('Ameer','MW','images/pilots/m_003.png','2024-11-08 22:15:39.0'),
+	 ('Maddox','MW','images/pilots/m_161.png','2024-11-09 11:37:18.0'),
+	 ('Saige','MW','images/pilots/f_007.png','2024-11-09 11:39:58.0'),
+	 ('Dash','MW','images/pilots/m_077.png','2024-11-09 15:28:08.0');
+INSERT INTO clanwolf.asc_pilot (name,`rank`,pilot_imageurl,Updated) VALUES
+	 ('Leo','MW','images/pilots/m_025.png','2024-11-09 15:30:03.0'),
+	 ('Eli','MW','images/pilots/m_091.png','2024-11-09 15:30:56.0'),
+	 ('Kaden','MW','images/pilots/m_104.png','2024-11-09 15:31:18.0'),
+	 ('Amir','MW','images/pilots/m_066.png','2024-11-09 15:32:34.0'),
+	 ('Isabella','MW','images/pilots/f_049.png','2024-11-09 15:33:09.0'),
+	 ('Edison','MW','images/pilots/m_055.png','2024-11-09 15:33:57.0'),
+	 ('Reina','MW','images/pilots/f_004.png','2024-11-09 15:34:30.0'),
+	 ('Johnathan','MW','images/pilots/m_001.png','2024-11-09 15:35:21.0'),
+	 ('Avalynn','MW','images/pilots/f_004.png','2024-11-09 15:36:57.0'),
+	 ('Mallory','MW','images/pilots/f_035.png','2024-11-09 15:38:39.0');
+INSERT INTO clanwolf.asc_pilot (name,`rank`,pilot_imageurl,Updated) VALUES
+	 ('Marvin','MW','images/pilots/m_069.png','2024-11-09 15:39:03.0'),
+	 ('Ramon','MW','images/pilots/m_034.png','2024-11-09 19:27:30.0'),
+	 ('Justin Xiang','MW','images/pilots/m_162.png','2024-11-09 21:59:48.0'),
+	 ('Gray Noton','MW','images/pilots/f_044.png','2024-11-09 22:01:16.0'),
+	 ('Aaden','MW','images/pilots/m_142.png','2024-11-09 23:58:41.0'),
+	 ('Archer','MW','images/pilots/m_026.png','2024-11-10 14:35:09.0'),
+	 ('Bruce','MW','images/pilots/m_126.png','2024-11-10 18:31:41.0'),
+	 ('Jazmine','MW','images/pilots/f_069.png','2024-11-10 20:46:28.0'),
+	 ('Emilio','MW','images/pilots/m_150.png','2024-11-11 01:02:16.0'),
+	 ('Liam','MW','images/pilots/m_019.png','2024-11-11 15:12:31.0');
+INSERT INTO clanwolf.asc_pilot (name,`rank`,pilot_imageurl,Updated) VALUES
+	 ('Atlas','MW','images/pilots/m_093.png','2024-11-11 18:45:41.0'),
+	 ('Damon','MW','images/pilots/m_047.png','2024-11-11 18:50:10.0'),
+	 ('London','MW','images/pilots/m_047.png','2024-11-11 18:51:06.0'),
+	 ('Stanley','MW','images/pilots/m_150.png','2024-11-11 18:52:29.0'),
+	 ('Jocelyn','MW','images/pilots/f_001.png','2024-11-11 19:17:59.0'),
+	 ('Otto','MW','images/pilots/m_058.png','2024-11-11 19:22:49.0'),
+	 ('Alvaro','MW','images/pilots/m_014.png','2024-11-11 19:49:54.0'),
+	 ('Hendrix','MW','images/pilots/m_045.png','2024-11-11 19:57:09.0'),
+	 ('Braelynn','MW','images/pilots/f_018.png','2024-11-11 20:15:17.0'),
+	 ('Ares','MW','images/pilots/m_124.png','2024-11-11 20:21:34.0');
+INSERT INTO clanwolf.asc_pilot (name,`rank`,pilot_imageurl,Updated) VALUES
+	 ('Trent','MW','images/pilots/m_060.png','2024-11-11 20:47:00.0'),
+	 ('Aubrielle','MW','images/pilots/f_044.png','2024-11-11 22:17:35.0'),
+	 ('Toby','MW','images/pilots/m_076.png','2024-11-11 22:17:45.0'),
+	 ('Declan','MW','images/pilots/m_024.png','2024-11-11 22:17:52.0'),
+	 ('Mohamed','MW','images/pilots/m_111.png','2024-11-11 22:18:04.0'),
+	 ('Alessandro','MW','images/pilots/m_093.png','2024-11-11 22:18:14.0'),
+	 ('Danny','MW','images/pilots/m_076.png','2024-11-11 22:29:15.0'),
+	 ('Abigail','MW','images/pilots/f_022.png','2024-11-11 22:29:19.0'),
+	 ('Mina','MW','images/pilots/f_054.png','2024-11-11 22:41:51.0'),
+	 ('Jabari','MW','images/pilots/m_111.png','2024-11-11 22:41:59.0');
+INSERT INTO clanwolf.asc_pilot (name,`rank`,pilot_imageurl,Updated) VALUES
+	 ('Faith','MW','images/pilots/f_029.png','2024-11-11 22:57:00.0'),
+	 ('Kristina','MW','images/pilots/f_040.png','2024-11-11 22:57:05.0'),
+	 ('Zariyah','MW','images/pilots/f_060.png','2024-11-11 22:57:10.0'),
+	 ('Bennett','MW','images/pilots/m_156.png','2024-11-11 22:57:16.0'),
+	 ('Kylie','MW','images/pilots/f_037.png','2024-11-11 23:05:05.0'),
+	 ('Rashad','MW','images/pilots/m_007.png','2024-11-12 07:09:49.0'),
+	 ('Bodie','MW','images/pilots/m_141.png','2024-11-12 07:09:55.0'),
+	 ('Kiana','MW','images/pilots/f_005.png','2024-11-13 20:10:50.0'),
+	 ('Romina','MW','images/pilots/f_031.png','2024-11-13 20:12:55.0'),
+	 ('Sebastian','MW','images/pilots/m_166.png','2024-11-13 20:15:25.0');
+INSERT INTO clanwolf.asc_pilot (name,`rank`,pilot_imageurl,Updated) VALUES
+	 ('Brody','MW','images/pilots/m_049.png','2024-11-15 22:24:31.0'),
+	 ('Irene','MW','images/pilots/f_062.png','2024-11-17 16:22:40.0');

@@ -88,6 +88,14 @@ function readCircles2(index, a_max, s_max, mv_bt_id, f_bt_id) {
 	var fc = 0;
 	var mp = 0;
 	var w = 0;
+
+	var e_cv = 0;  // CV (Combat vehicle: Engine)
+	var fc_cv = 0; // CV (Combat vehicle: Firecontrol)
+	var w_cv = 0;  // CV (Combat vehicle: Weapons)
+	var ma_cv = 0; // CV (Combat vehicle: Motive A)
+	var mb_cv = 0; // CV (Combat vehicle: Motive B)
+	var mc_cv = 0; // CV (Combat vehicle: Motive C)
+
 	var uov = 0; // used overheat
 
 	var mvmnt = 0;
@@ -101,14 +109,22 @@ function readCircles2(index, a_max, s_max, mv_bt_id, f_bt_id) {
 	[].forEach.call(list, function (el1) {
 		na = el1.name;
 		if (typeof na != 'undefined') {
-			if (na.substring(0, 1) == "H"      && el1.checked) { h++;   }
-			if (na.substring(0, 1) == "A"      && el1.checked) { a++;   }
-			if (na.substring(0, 1) == "S"      && el1.checked) { s++;   }
-			if (na.substring(0, 5) == "CD_E_"  && el1.checked) { e++;   }
-			if (na.substring(0, 6) == "CD_FC_" && el1.checked) { fc++;  }
-			if (na.substring(0, 6) == "CD_MP_" && el1.checked) { mp++;  }
-			if (na.substring(0, 5) == "CD_W_"  && el1.checked) { w++;   }
-			if (na.substring(0, 3) == "UOV"    && el1.checked) { uov++; }
+			if (na.substring(0, 1) == "H"         && el1.checked) { h++;     }
+			if (na.substring(0, 1) == "A"         && el1.checked) { a++;     }
+			if (na.substring(0, 1) == "S"         && el1.checked) { s++;     }
+			if (na.substring(0, 5) == "CD_E_"     && el1.checked) { e++;     }
+			if (na.substring(0, 6) == "CD_FC_"    && el1.checked) { fc++;    }
+			if (na.substring(0, 6) == "CD_MP_"    && el1.checked) { mp++;    }
+			if (na.substring(0, 5) == "CD_W_"     && el1.checked) { w++;     }
+
+			if (na.substring(0, 8) == "CD_CV-E_"  && el1.checked) { e_cv++;  }
+			if (na.substring(0, 9) == "CD_CV-FC_" && el1.checked) { fc_cv++; }
+			if (na.substring(0, 8) == "CD_CV-W_"  && el1.checked) { w_cv++;  }
+			if (na.substring(0, 9) == "CD_CV-MA_" && el1.checked) { ma_cv++; }
+			if (na.substring(0, 9) == "CD_CV-MB_" && el1.checked) { mb_cv++; }
+			if (na.substring(0, 9) == "CD_CV-MC_" && el1.checked) { mc_cv++; }
+
+			if (na.substring(0, 3) == "UOV"       && el1.checked) { uov++;   }
 		}
 	});
 
@@ -349,31 +365,41 @@ function readCircles2(index, a_max, s_max, mv_bt_id, f_bt_id) {
 	//console.log("range: " + tc_rangeValueReading);
 
 	if (mvmnt <= 0 && wpnsf > 0) {
-		// console.log("MVMNT:" + mvmnt);
-		// console.log("WPNSF:" + wpnsf);
 		wpnsf = 0; // If weaponsfired was clicked without a movement specified, the weapons value will NOT be saved
 		playErrorSound();
 	}
 
-	setCircles(h, a, s, e, fc, mp, w, uov, mvmnt, wpnsf, tc_rangeValueReading, tc_partialCoverReading, mechstatusstring);
-	var url="./save.php?index="+index+"&h="+h+"&a="+a+"&s="+s+"&e="+e+"&fc="+fc+"&mp="+mp+"&w="+w+"&mstat="+mechstatusimage+"&mstatstr="+mechstatusstring+"&uov="+uov+"&mvmnt="+mvmnt+"&wpnsf="+wpnsf;
+	setCircles(h, a, s, e, fc, mp, w, e_cv, fc_cv, w_cv, ma_cv, mb_cv, mc_cv, uov, mvmnt, wpnsf, tc_rangeValueReading, tc_partialCoverReading, mechstatusstring);
+	var url="./save.php?index="+index+"&h="+h+"&a="+a+"&s="+s+"&e="+e+"&fc="+fc+"&mp="+mp+"&w="+w+"&e_cv="+e_cv+"&fc_cv="+fc_cv+"&w_cv="+w_cv+"&ma_cv="+ma_cv+"&mb_cv="+mb_cv+"&mc_cv="+mc_cv+"&mstat="+mechstatusimage+"&mstatstr="+mechstatusstring+"&uov="+uov+"&mvmnt="+mvmnt+"&wpnsf="+wpnsf;
 	// alert(url);
 	window.frames['saveframe'].location.replace(url);
 
-	//console.log("Structural damage: " + s);
-	//console.log("Structural damage cache: " + structuralDamageCache);
-	if (s > structuralDamageCache) {
-		showDiceBar();
+	if (currentUnitType == "CV") {
+		//console.log("Current A:" + currentA + " --> new A: " + a);
+		//console.log("Current S:" + currentS + " --> new S: " + s);
+		if ((a > currentA) || (s > currentS)) {
+			showDiceBar();
+		}
+	} else {
+		if (currentUnitType != "BA") {
+			if (s > structuralDamageCache) {
+				showDiceBar();
+			}
+		}
 	}
+
+	currentA = a;
+	currentS = s;
+
 	structuralDamageCache = s;
-	//console.log("New structural damage cache: " + structuralDamageCache);
 }
 
 function setStructuralDamageCache(value) {
 	structuralDamageCache = value;
 }
 
-function setCircles(h, a, s, e, fc, mp, w, uov, mvmnt, wpnsf, tc_rangeValueReading, tc_partialCoverReading, mechstatusstring) {
+// SetCircles is called from gui_play_unit.php as well!
+function setCircles(h, a, s, e, fc, mp, w, e_cv, fc_cv, w_cv, ma_cv, mb_cv, mc_cv, uov, mvmnt, wpnsf, tc_rangeValueReading, tc_partialCoverReading, mechstatusstring) {
 	var na1 = "";
 
 	tc_heat = h;
@@ -386,9 +412,15 @@ function setCircles(h, a, s, e, fc, mp, w, uov, mvmnt, wpnsf, tc_rangeValueReadi
 	var fc_c = 0;
 	var mp_c = 0;
 	var w_c = 0;
-	var uov_c = 0;
 
-	//console.log("uov: " + uov);
+	var e_cv_c = 0;
+	var fc_cv_c = 0;
+	var w_cv_c = 0;
+	var ma_cv_c = 0;
+	var mb_cv_c = 0;
+	var mc_cv_c = 0;
+
+	var uov_c = 0;
 
 	mechstatus = 1;
 	updatedshortvalue = 0;
@@ -402,18 +434,24 @@ function setCircles(h, a, s, e, fc, mp, w, uov, mvmnt, wpnsf, tc_rangeValueReadi
 	[].forEach.call(list, function (el1) {
 		na1 = el1.name;
 		if (typeof na1 != 'undefined') {
-			if (na1.substring(0, 1) == "H")      { h_c++;   if (h_c<=h)     { el1.checked = true; }}
-			if (na1.substring(0, 1) == "A")      { a_c++;   if (a_c<=a)     { el1.checked = true; }}
-			if (na1.substring(0, 1) == "S")      { s_c++;   if (s_c<=s)     { el1.checked = true; }}
-			if (na1.substring(0, 5) == "CD_E_")  { e_c++;   if (e_c<=e)     { el1.checked = true; }}
-			if (na1.substring(0, 6) == "CD_FC_") { fc_c++;  if (fc_c<=fc)   { el1.checked = true; }}
-			if (na1.substring(0, 6) == "CD_MP_") { mp_c++;  if (mp_c<=mp)   { el1.checked = true; }}
-			if (na1.substring(0, 5) == "CD_W_")  { w_c++;   if (w_c<=w)     { el1.checked = true; }}
-			if (na1.substring(0, 3) == "UOV")    { uov_c++; if (uov_c<=uov) { el1.checked = true; }}
+			if (na1.substring(0, 1) == "H")         { h_c++;    if (h_c<=h)          { el1.checked = true; }}
+			if (na1.substring(0, 1) == "A")         { a_c++;    if (a_c<=a)          { el1.checked = true; }}
+			if (na1.substring(0, 1) == "S")         { s_c++;    if (s_c<=s)          { el1.checked = true; }}
+			if (na1.substring(0, 5) == "CD_E_")     { e_c++;    if (e_c<=e)          { el1.checked = true; }}
+			if (na1.substring(0, 6) == "CD_FC_")    { fc_c++;   if (fc_c<=fc)        { el1.checked = true; }}
+			if (na1.substring(0, 6) == "CD_MP_")    { mp_c++;   if (mp_c<=mp)        { el1.checked = true; }}
+			if (na1.substring(0, 5) == "CD_W_")     { w_c++;    if (w_c<=w)          { el1.checked = true; }}
+			if (na1.substring(0, 3) == "UOV")       { uov_c++;  if (uov_c<=uov)      { el1.checked = true; }}
+
+			if (na1.substring(0, 8) == "CD_CV-E_")  { e_cv_c++;  if (e_cv_c<=e_cv)   { el1.checked = true; }}
+			if (na1.substring(0, 9) == "CD_CV-FC_") { fc_cv_c++; if (fc_cv_c<=fc_cv) { el1.checked = true; }}
+			if (na1.substring(0, 8) == "CD_CV-W_")  { w_cv_c++;  if (w_cv_c<=w_cv)   { el1.checked = true; }}
+			if (na1.substring(0, 9) == "CD_CV-MA_") { ma_cv_c++; if (ma_cv_c<=ma_cv) { el1.checked = true; }}
+			if (na1.substring(0, 9) == "CD_CV-MB_") { mb_cv_c++; if (mb_cv_c<=mb_cv) { el1.checked = true; }}
+			if (na1.substring(0, 9) == "CD_CV-MC_") { mc_cv_c++; if (mc_cv_c<=mc_cv) { el1.checked = true; }}
 		}
 	});
 
-	//console.log("range2: " + tc_rangeValueReading);
 	if (tc_rangeValueReading == 0) {
 		document.getElementById("ToHitShort").checked = true;
 		document.getElementById("ToHitMedium").checked = false;
@@ -903,7 +941,9 @@ function setCircles(h, a, s, e, fc, mp, w, uov, mvmnt, wpnsf, tc_rangeValueReadi
 		document.getElementById('INFOFIRED').innerHTML = "FIRE";
 	}
 
-	document.getElementById('movementtokenimage').src="./images/dice/" + movementdiestring;
+	if (movementdiestring != "") {
+		document.getElementById('movementtokenimage').src="./images/dice/" + movementdiestring;
+	}
 
 	if (mvmnt == 0 && wpnsf == 0) {
 		document.getElementById('phasebuttonimage').src="./images/top-right_phase01.png";
@@ -965,8 +1005,10 @@ function textSize(dec) {
 function increaseENGN_PREP() {
 	//console.log("ENGN_PREP: " + ENGN_PREP);
 	ENGN_PREP = ENGN_PREP + 1;
-	if (ENGN_PREP > 2) {
+	if (ENGN_PREP > 1) {
 		ENGN_PREP = 0;
+	} else {
+		playTapSound();
 	}
 	document.getElementById("label_ENGN_PREP").innerHTML = ENGN_PREP;
 	var url="./save_PREP.php?index="+chosenmechdbid+"&desc=ENGN_PREP&value="+ENGN_PREP;
@@ -975,8 +1017,10 @@ function increaseENGN_PREP() {
 function increaseFCTL_PREP() {
 	//console.log("FCTL_PREP: " + FCTL_PREP);
 	FCTL_PREP = FCTL_PREP + 1;
-	if (FCTL_PREP > 4) {
+	if (FCTL_PREP > 1) {
 		FCTL_PREP = 0;
+	} else {
+		playTapSound();
 	}
 	document.getElementById("label_FCTL_PREP").innerHTML = FCTL_PREP;
 	var url="./save_PREP.php?index="+chosenmechdbid+"&desc=FCTL_PREP&value="+FCTL_PREP;
@@ -985,8 +1029,10 @@ function increaseFCTL_PREP() {
 function increaseMP_PREP() {
 	//console.log("MP_PREP: " + MP_PREP);
 	MP_PREP = MP_PREP + 1;
-	if (MP_PREP > 4) {
+	if (MP_PREP > 1) {
 		MP_PREP = 0;
+	} else {
+		playTapSound();
 	}
 	document.getElementById("label_MP_PREP").innerHTML = MP_PREP;
 	var url="./save_PREP.php?index="+chosenmechdbid+"&desc=MP_PREP&value="+MP_PREP;
@@ -995,11 +1041,86 @@ function increaseMP_PREP() {
 function increaseWPNS_PREP() {
 	//console.log("WPNS_PREP: " + WPNS_PREP);
 	WPNS_PREP = WPNS_PREP + 1;
-	if (WPNS_PREP > 4) {
+	if (WPNS_PREP > 1) {
 		WPNS_PREP = 0;
+	} else {
+		playTapSound();
 	}
 	document.getElementById("label_WPNS_PREP").innerHTML = WPNS_PREP;
 	var url="./save_PREP.php?index="+chosenmechdbid+"&desc=WPNS_PREP&value="+WPNS_PREP;
+	window.frames['saveframe'].location.replace(url);
+}
+
+function increaseENGN_CV_PREP() {
+	//console.log("CV_ENGN_PREP: " + CV_ENGN_PREP);
+	CV_ENGN_PREP = CV_ENGN_PREP + 1;
+	if (CV_ENGN_PREP > 1) {
+		CV_ENGN_PREP = 0;
+	} else {
+		playTapSound();
+	}
+	document.getElementById("label_CV_ENGN_PREP").innerHTML = CV_ENGN_PREP;
+	var url="./save_PREP.php?index="+chosenmechdbid+"&desc=CV_ENGN_PREP&value="+CV_ENGN_PREP;
+	window.frames['saveframe'].location.replace(url);
+}
+function increaseFCTL_CV_PREP() {
+	//console.log("CV_FCTL_PREP: " + CV_FCTL_PREP);
+	CV_FCTL_PREP = CV_FCTL_PREP + 1;
+	if (CV_FCTL_PREP > 1) {
+		CV_FCTL_PREP = 0;
+	} else {
+		playTapSound();
+	}
+	document.getElementById("label_CV_FCTL_PREP").innerHTML = CV_FCTL_PREP;
+	var url="./save_PREP.php?index="+chosenmechdbid+"&desc=CV_FCTL_PREP&value="+CV_FCTL_PREP;
+	window.frames['saveframe'].location.replace(url);
+}
+function increaseWPNS_CV_PREP() {
+	//console.log("CV_WPNS_PREP: " + CV_WPNS_PREP);
+	CV_WPNS_PREP = CV_WPNS_PREP + 1;
+	if (CV_WPNS_PREP > 1) {
+		CV_WPNS_PREP = 0;
+	} else {
+		playTapSound();
+	}
+	document.getElementById("label_CV_WPNS_PREP").innerHTML = CV_WPNS_PREP;
+	var url="./save_PREP.php?index="+chosenmechdbid+"&desc=CV_WPNS_PREP&value="+CV_WPNS_PREP;
+	window.frames['saveframe'].location.replace(url);
+}
+function increaseMOTIVEA_PREP() {
+	//console.log("CV_MOTVA_PREP: " + CV_MOTVA_PREP);
+	CV_MOTVA_PREP = CV_MOTVA_PREP + 1;
+	if (CV_MOTVA_PREP > 1) {
+		CV_MOTVA_PREP = 0;
+	} else {
+		playTapSound();
+	}
+	document.getElementById("label_CV_MOTIVA_PREP").innerHTML = CV_MOTVA_PREP;
+	var url="./save_PREP.php?index="+chosenmechdbid+"&desc=CV_MOTVA_PREP&value="+CV_MOTVA_PREP;
+	window.frames['saveframe'].location.replace(url);
+}
+function increaseMOTIVEB_PREP() {
+	//console.log("CV_MOTVB_PREP: " + CV_MOTVB_PREP);
+	CV_MOTVB_PREP = CV_MOTVB_PREP + 1;
+	if (CV_MOTVB_PREP > 1) {
+		CV_MOTVB_PREP = 0;
+	} else {
+		playTapSound();
+	}
+	document.getElementById("label_CV_MOTIVB_PREP").innerHTML = CV_MOTVB_PREP;
+	var url="./save_PREP.php?index="+chosenmechdbid+"&desc=CV_MOTVB_PREP&value="+CV_MOTVB_PREP;
+	window.frames['saveframe'].location.replace(url);
+}
+function increaseMOTIVEC_PREP() {
+	//console.log("CV_MOTVC_PREP: " + CV_MOTVC_PREP);
+	CV_MOTVC_PREP = CV_MOTVC_PREP + 1;
+	if (CV_MOTVC_PREP > 1) {
+		CV_MOTVC_PREP = 0;
+	} else {
+		playTapSound();
+	}
+	document.getElementById("label_CV_MOTIVC_PREP").innerHTML = CV_MOTVC_PREP;
+	var url="./save_PREP.php?index="+chosenmechdbid+"&desc=CV_MOTVC_PREP&value="+CV_MOTVC_PREP;
 	window.frames['saveframe'].location.replace(url);
 }
 
@@ -1008,6 +1129,8 @@ function increaseHT_PREP() {
 	HT_PREP = HT_PREP + 1;
 	if (HT_PREP > 4) {
 		HT_PREP = 0;
+	} else {
+		playTapSound();
 	}
 	document.getElementById("label_HT_PREP").innerHTML = HT_PREP;
 	var url="./save_PREP.php?index="+chosenmechdbid+"&desc=HT_PREP&value="+HT_PREP;
@@ -1022,12 +1145,24 @@ function rolldice() {
 	ccc++;
 	var die_01 = rand(1, 6);
 	var die_02 = rand(1, 6);
+	var die_03 = rand(1, 6); // Motive roll for CV
+	var die_04 = rand(1, 6); // Motive roll for CV
+
 	var res = die_01 + die_02;
+	var res_motive = die_03 + die_04;
+
 	var die_01_image = document.getElementById("die1");
 	var die_02_image = document.getElementById("die2");
+	var die_03_image = document.getElementById("die3");
+	var die_04_image = document.getElementById("die4");
 
 	die_01_image.src = "./images/dice/d6_" + die_01 + ".png";
 	die_02_image.src = "./images/dice/d6_" + die_02 + ".png";
+
+	if (die_03_image != null) {
+		die_03_image.src = "./images/dice/bd6_" + die_03 + ".png";
+		die_04_image.src = "./images/dice/bd6_" + die_04 + ".png";
+	}
 
 	rolling--;
 
@@ -1037,32 +1172,63 @@ function rolldice() {
 
 		var resMes = "";
 		if (t == "BM") {
-			     if (res ==  2) { resMes = "<br>CRIT: Ammo hit<br>[BM]"; }
-			else if (res ==  3) { resMes = "<br>CRIT: Engine hit<br>[BM]"; }
-			else if (res ==  4) { resMes = "<br>CRIT: Fire control hit<br>[BM]"; }
-			else if (res ==  5) { resMes = "<br>CRIT: No critical hit<br>[BM]"; }
-			else if (res ==  6) { resMes = "<br>CRIT: Weapon hit<br>[BM]"; }
-			else if (res ==  7) { resMes = "<br>CRIT: Movement points hit<br>[BM]"; }
-			else if (res ==  8) { resMes = "<br>CRIT: Weapon hit<br>[BM]"; }
-			else if (res ==  9) { resMes = "<br>CRIT: No critical hit<br>[BM]"; }
-			else if (res == 10) { resMes = "<br>CRIT: Fire control hit<br>[BM]"; }
-			else if (res == 11) { resMes = "<br>CRIT: Engine hit<br>[BM]"; }
-			else if (res == 12) { resMes = "<br>CRIT: Unit destroyed<br>[BM]"; }
-		} else if (t == "CV") {
-			     if (res ==  2) { resMes = "<br>MOTV: No effect<br>CRIT: Ammo hit<br>[CV]"; }
-            else if (res ==  3) { resMes = "<br>MOTV: No effect<br>CRIT: Crew stunned<br>[CV]"; }
-            else if (res ==  4) { resMes = "<br>MOTV: No effect<br>CRIT: Fire control hit<br>[CV]"; }
-            else if (res ==  5) { resMes = "<br>MOTV: No effect<br>CRIT: Fire control hit<br>[CV]"; }
-            else if (res ==  6) { resMes = "<br>MOTV: No effect<br>CRIT: No critical hit<br>[CV]"; }
-            else if (res ==  7) { resMes = "<br>MOTV: No effect<br>CRIT: No critical hit<br>[CV]"; }
-            else if (res ==  8) { resMes = "<br>MOTV: No effect<br>CRIT: No critical hit<br>[CV]"; }
-            else if (res ==  9) { resMes = "<br>MOTV: -2 MV / -1 TMM<br>CRIT: Weapon hit<br>[CV]"; }
-            else if (res == 10) { resMes = "<br>MOTV: -2 MV / -1 TMM<br>CRIT: Weapon hit<br>[CV]"; }
-            else if (res == 11) { resMes = "<br>MOTV: ½ MV / ½ TMM<br>CRIT: Crew killed<br>[CV]"; }
-            else if (res == 12) { resMes = "<br>MOTV: Immobilized<br>CRIT: Engine hit<br>[CV]"; }
-		}
+			     if (res ==  2) { resMes = "Ammo hit"; }
+			else if (res ==  3) { resMes = "Engine hit"; }
+			else if (res ==  4) { resMes = "Fire control hit"; }
+			else if (res ==  5) { resMes = "No critical hit"; }
+			else if (res ==  6) { resMes = "Weapon hit"; }
+			else if (res ==  7) { resMes = "Movement points hit"; }
+			else if (res ==  8) { resMes = "Weapon hit"; }
+			else if (res ==  9) { resMes = "No critical hit"; }
+			else if (res == 10) { resMes = "Fire control hit"; }
+			else if (res == 11) { resMes = "Engine hit"; }
+			else if (res == 12) { resMes = "Unit destroyed"; }
 
-		document.getElementById("criticalhit").innerHTML=res + " (+2t CHECK): " + resMes;
+			document.getElementById("criticalhit").innerHTML="[BM] CRIT " + res + ":<br>" + resMes;
+
+		} else if (t == "CV") {
+
+			var add_mv_type = 0;
+			if (MV_TYPE == "h") {
+				add_mv_type = 1;
+			} else if (MV_TYPE == "w") {
+				add_mv_type = 1;
+			} else if (MV_TYPE == "t") {
+				add_mv_type = 0;
+			}
+
+			     if (res ==  2) { resMes = "Ammo hit"; }
+            else if (res ==  3) { resMes = "Crew stunned"; }
+            else if (res ==  4) { resMes = "Fire control hit"; }
+            else if (res ==  5) { resMes = "Fire control hit"; }
+            else if (res ==  6) { resMes = "No critical hit"; }
+            else if (res ==  7) { resMes = "No critical hit"; }
+            else if (res ==  8) { resMes = "No critical hit"; }
+            else if (res ==  9) { resMes = "Weapon hit"; }
+            else if (res == 10) { resMes = "Weapon hit"; }
+            else if (res == 11) { resMes = "Crew killed"; }
+            else if (res == 12) { resMes = "Engine hit"; }
+
+            var criticalHitString = "[CV] CRIT " + res + ":<br>" + resMes;
+			document.getElementById("criticalhit").innerHTML=criticalHitString;
+
+			     if (res_motive + add_mv_type ==  2) { resMes = "No effect"; }
+            else if (res_motive + add_mv_type ==  3) { resMes = "No effect"; }
+            else if (res_motive + add_mv_type ==  4) { resMes = "No effect"; }
+            else if (res_motive + add_mv_type ==  5) { resMes = "No effect"; }
+            else if (res_motive + add_mv_type ==  6) { resMes = "No effect"; }
+            else if (res_motive + add_mv_type ==  7) { resMes = "No effect"; }
+            else if (res_motive + add_mv_type ==  8) { resMes = "No effect"; }
+            else if (res_motive + add_mv_type ==  9) { resMes = "-2 MV / -1 TMM"; }
+            else if (res_motive + add_mv_type == 10) { resMes = "-2 MV / -1 TMM"; }
+            else if (res_motive + add_mv_type == 11) { resMes = "½ MV / ½ TMM"; }
+            else if (res_motive + add_mv_type == 12) { resMes = "Immobilized"; }
+
+			var res_motive_final = res_motive + add_mv_type;
+            var motiveString = "[CV] MOTV " + res_motive +  " (+" + add_mv_type + MV_TYPE + ") -> " + res_motive_final + ":<br>" + resMes;
+
+			document.getElementById("motivehit").innerHTML=motiveString;
+		}
 		ccc = 1;
 	}
 }
@@ -1523,10 +1689,6 @@ $(window).resize(function() {
 	mechimage.style.height="" + $(document).height() * 0.8 + "px";
 });
 
-//$(window).load(function() {
-//     alert("hi 2");
-//});
-
 $(document).ready(function() {
 //	$("#cover").click(function(event) {
 //		$("#cover").fadeOut(350, "linear", function() {
@@ -1594,6 +1756,16 @@ $(document).ready(function() {
 	});
 
 	$("#dice").click(function(event) {
+		if (rolling === 0) {
+			playDiceSound();
+			for (i = 1; i < 12; i++) {
+				rolling++;
+				setTimeout("rolldice(i)", i * 80);
+			}
+		}
+	});
+
+	$("#motivedice").click(function(event) {
 		if (rolling === 0) {
 			playDiceSound();
 			for (i = 1; i < 12; i++) {

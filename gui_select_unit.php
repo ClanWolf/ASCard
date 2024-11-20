@@ -249,7 +249,6 @@ session_start();
 </head>
 
 <body>
-	<!-- <iframe name="saveframe" src="./save_dummy.htm"></iframe> -->
 	<iframe name="saveframe"></iframe>
 
 	<div id="cover"></div>

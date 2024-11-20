@@ -13,6 +13,14 @@
 	$fc       = isset($_GET["fc"]) ? $_GET["fc"] : "";
 	$mp       = isset($_GET["mp"]) ? $_GET["mp"] : "";
 	$w        = isset($_GET["w"]) ? $_GET["w"] : "";
+
+	$e_cv     = isset($_GET["e_cv"]) ? $_GET["e_cv"] : "";
+	$fc_cv    = isset($_GET["fc_cv"]) ? $_GET["fc_cv"] : "";
+	$w_cv     = isset($_GET["w_cv"]) ? $_GET["w_cv"] : "";
+	$ma_cv    = isset($_GET["ma_cv"]) ? $_GET["ma_cv"] : "";
+	$mb_cv    = isset($_GET["mb_cv"]) ? $_GET["mb_cv"] : "";
+	$mc_cv    = isset($_GET["mc_cv"]) ? $_GET["mc_cv"] : "";
+
 	$mstat    = isset($_GET["mstat"]) ? $_GET["mstat"] : "";
 	$mstatstr = isset($_GET["mstatstr"]) ? $_GET["mstatstr"] : "";
 	$uov      = isset($_GET["uov"]) ? $_GET["uov"] : "";
@@ -35,6 +43,14 @@
 		echo $fc."<br>";
 		echo $mp."<br>";
 		echo $w."<br>";
+
+		echo $e_cv."<br>";
+		echo $fc_cv."<br>";
+		echo $w_cv."<br>";
+		echo $ma_cv."<br>";
+		echo $mb_cv."<br>";
+		echo $mc_cv."<br>";
+
 		echo $mstat."<br>";
 		echo $mstatstr."<br>";
 		echo $uov."<br>";
@@ -42,7 +58,7 @@
 		echo $wpnsf."<br>";
 		echo "<br>";
 
-		$sql = "UPDATE asc_mechstatus SET heat=".$h.",armor=".$a.",structure=".$s.",crit_engine=".$e.",crit_fc=".$fc.",crit_mp=".$mp.",crit_weapons=".$w.",usedoverheat=".$uov." WHERE mechid=".$index;
+		$sql = "UPDATE asc_mechstatus SET heat=".$h.",armor=".$a.",structure=".$s.",crit_engine=".$e.",crit_fc=".$fc.",crit_mp=".$mp.",crit_weapons=".$w.",crit_CV_engine=".$e_cv.",crit_CV_firecontrol=".$fc_cv.",crit_CV_weapons=".$w_cv.",crit_CV_motiveA=".$ma_cv.",crit_CV_motiveB=".$mb_cv.",crit_CV_motiveC=".$mc_cv.",usedoverheat=".$uov." WHERE mechid=".$index;
 		echo "Statement: " . $sql;
 
 		if (mysqli_query($conn, $sql)) {
