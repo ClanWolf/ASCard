@@ -233,7 +233,7 @@
         "name": "Off-Road",
         "type": "Standard",
         "abbreviation": "ORO",
-        "rule": "Lacking the rugged suspension of combat vehicles, ground-based support vehicles that use the wheeled (w) movement type must pay 2 inches of additional Move for every non-paved inch they move unless they possess the Off-Road special. This ability is not required for any other unit "type"s, including support vehicles, that use movement modes other than wheeled.",
+        "rule": "Lacking the rugged suspension of combat vehicles, ground-based support vehicles that use the wheeled (w) movement type must pay 2 inches of additional Move for every non-paved inch they move unless they possess the Off-Road special. This ability is not required for any other unit types, including support vehicles, that use movement modes other than wheeled.",
         "page": 78
     },
     {
