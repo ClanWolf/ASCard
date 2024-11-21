@@ -18,5 +18,5 @@ function getSpecialUnitAbilities() {
 }
 
 function showSpecialUnitAbility(sa) {
-	//alert("working: " + sa);
+	alert("working: " + sa);
 }

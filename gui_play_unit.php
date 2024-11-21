@@ -929,6 +929,7 @@ if ($showDistancesHexes == 1) {
 									<tr>
 										<td nowrap width="99%" class="datavalue_thin" style="text-align: left;" id="sa_field">
 											<?php
+												$allSpecialAbilities = "";
 												$parts = explode(',', $array_SPCL[$chosenMechIndex]);
 												$i = 1;
 												foreach ($parts as $part) {
@@ -936,17 +937,19 @@ if ($showDistancesHexes == 1) {
 													preg_match($re, $part, $matches);
 													if ($i > 1) {
 														echo ", ";
+														$allSpecialAbilities = $allSpecialAbilities."|";
 													}
-													if ($i == 7) {
+													if ($i == 8) {
 														echo "<br>";
 													}
 													echo "<span class='datavalue_thin' onclick='javascript:showSpecialAbility(\"".$matches[0]."\");'>".$part."</span>";
+													$allSpecialAbilities = $allSpecialAbilities.$matches[0];
 													$i++;
 												}
 											?>
 										</td>
 										<td nowrap width="1%" class="datavalue_thin" style="text-align: right;" align="right">
-											<a href="https://www.clanwolf.net/apps/ASCard/gui_show_specialabilities.php"><i class="fas fa-info-circle"></i></a>
+											<a href="javascript:showSpecialAbility('<?= $allSpecialAbilities ?>');"><i class="fas fa-info-circle"></i></a>
 										</td>
 									</tr>
 								</table>
