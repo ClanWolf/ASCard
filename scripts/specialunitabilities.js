@@ -16,3 +16,7 @@ function getSpecialUnitAbilities() {
 		document.getElementById("units").innerHTML = optionList;
 	});
 }
+
+function showSpecialUnitAbility(sa) {
+	//alert("working: " + sa);
+}

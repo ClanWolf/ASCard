@@ -147,8 +147,32 @@
 </head>
 
 <body>
-<!--
-//	<script>
+	<script>
+		var listenerAdded = false;
+		var sa = "";
+
+		function showSpecialAbility(p) {
+			document.getElementById("specialabilitiescontainer").style.visibility = "visible";
+			document.getElementById("specialabilitiescontainer").style.display = "block";
+
+			sa = p;
+			var myIframe = document.getElementById('specialabilitiesframe');
+			if (listenerAdded == false) {
+				myIframe.addEventListener("load", function() {
+					document.getElementById("specialabilitiesframe").contentWindow.showSpecialUnitAbility(sa);
+				});
+				listenerAdded = true;
+			}
+			myIframe.src = './gui_show_specialabilities.php';
+		}
+
+		function closeSpecialAbilitiesFrame() {
+			var myIframe = document.getElementById('specialabilitiesframe');
+			document.getElementById("specialabilitiescontainer").style.visibility = "hidden";
+			document.getElementById("specialabilitiescontainer").style.display = "none";
+			myIframe.src = 'about:blank';
+		}
+
 //		var movementcache = 0;
 //		var firedcache = 0;
 //
@@ -385,8 +409,7 @@
 //			firedcache = weaponsfired;
 //			setFireValues(movement, weaponsfired);
 //		}
-//	</script>
--->
+	</script>
 <?php
 	$file = file_get_contents('./version.txt', true);
 	$version = $file;
@@ -496,7 +519,17 @@
 
 <iframe name="saveframe" id="iframe_save"></iframe>
 
-<iframe name="specialabilities" id="iframe_specialabilities"></iframe>
+<div id="specialabilitiescontainer" style="display:none;visibility:hidden;">
+	<br>
+	<br>
+	<table width="100%" height="70%">
+		<tr>
+			<td width="20%" align="right" valign="top" class="datalabel">&nbsp;</td>
+			<td width="60%"><iframe id="specialabilitiesframe" name="specialabilitiesframe" width="100%" height="100%"></iframe></td>
+			<td width="20%" align="left" valign="top"><a href="javascript:closeSpecialAbilitiesFrame();"><i class="fa-solid fa-xmark" style="font-size:3em;"></i></a></td>
+		</tr>
+	</table>
+</div>
 
 <div id="cover"></div>
 
@@ -895,7 +928,22 @@ if ($showDistancesHexes == 1) {
 								<table>
 									<tr>
 										<td nowrap width="99%" class="datavalue_thin" style="text-align: left;" id="sa_field">
-											<?php echo "$array_SPCL[$chosenMechIndex]\r\n"; ?>
+											<?php
+												$parts = explode(',', $array_SPCL[$chosenMechIndex]);
+												$i = 1;
+												foreach ($parts as $part) {
+													$re = '/^[A-Z]+/m';
+													preg_match($re, $part, $matches);
+													if ($i > 1) {
+														echo ", ";
+													}
+													if ($i == 7) {
+														echo "<br>";
+													}
+													echo "<span class='datavalue_thin' onclick='javascript:showSpecialAbility(\"".$matches[0]."\");'>".$part."</span>";
+													$i++;
+												}
+											?>
 										</td>
 										<td nowrap width="1%" class="datavalue_thin" style="text-align: right;" align="right">
 											<a href="https://www.clanwolf.net/apps/ASCard/gui_show_specialabilities.php"><i class="fas fa-info-circle"></i></a>

@@ -71,17 +71,19 @@ body {
 .fullscreen {
 	height: 100%;
 }
-#iframe_specialabilities {
-	display: none; /* none, block */
-	visibility: hidden; /* hidden, visible */
-	position: absolute;
-	background-color: red;
-	left: 80;
-	top: 80;
-	width: 800px;
-	height: 300px;
+iframe {
+
 	border: none;
-	z-index: 9999;
+}
+#iframe_specialabilities {
+	position: absolute;
+	display:block;
+	visibility: visible; /* hidden, visible */
+	background-color: transparent;
+    width: 100px;
+    height: 50px;
+    margin: 0 auto;
+	z-index: 9990;
 }
 #iframe_save {
 	display: none; /* none, block */
@@ -92,7 +94,6 @@ body {
 	top: 80;
 	width: 800px;
 	height: 300px;
-	border: none;
 	z-index: 9999;
 }
 table {
@@ -145,6 +146,18 @@ a:hover {
 	background-color: #000000;
 	/* background-image: url('images/body-bg_1.jpg'); */
 	z-index:110;
+}
+#specialabilitiescontainer {
+	text-align: center;
+	position: fixed;
+	display: block;
+	border: 50px;
+	margin: auto;
+	width: 100%;
+	height: 100%;
+	background: transparent;
+	background-color: rgba(0, 0, 0, 0.75);
+	z-index:1000;
 }
 #destroyedIndicator {
 	text-align: center;
@@ -853,6 +866,14 @@ input[type='checkbox'].bigcheck:checked + span.bigcheck-target:after {
 svg {
 	height: 500px;
 	width: 100%;
+}
+@keyframes turn {
+0% {
+    transform: rotate(0)
+}
+100% {
+    transform:rotate(1080deg);
+}
 }
 .st0, .st1, .st2, .st3 {
 	fill: none;

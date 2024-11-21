@@ -249,7 +249,7 @@ session_start();
 </head>
 
 <body>
-	<iframe name="saveframe"></iframe>
+	<iframe name="saveframe" id="iframe_save"></iframe>
 
 	<div id="cover"></div>
 

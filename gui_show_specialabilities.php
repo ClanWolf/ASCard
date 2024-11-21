@@ -56,25 +56,6 @@
 
 	<script type="text/javascript" src="./scripts/jquery-3.7.1.min.js"></script>
 	<script type="text/javascript" src="./scripts/specialunitabilities.js"></script>
-
-	<script type="text/javascript">
-
-		// https://www.sitepoint.com/get-url-parameters-with-javascript/
-
-		const queryString = window.location.search;
-		console.log(queryString);
-
-		const urlParams = new URLSearchParams(queryString);
-
-		const product = urlParams.get('product')
-		console.log(product);
-
-		const color = urlParams.get('color')
-		console.log(color);
-
-		const newUser = urlParams.get('newuser')
-		console.log(newUser);
-	</script>
 </head>
 
 <body style="background-image: url('images/body-bg_2.jpg');">
@@ -218,7 +199,7 @@
 			<circle class="st1" cx="500" cy="500" r="237.7">
 				<animateTransform attributeType="xml" attributeName="transform" type="rotate" from="0 500 500" to="360 500 500" dur="40s" repeatCount="indefinite"></animateTransform>
 			</circle>
-			<circle class="st2" cx="500" cy="500" r="366.8" transform="rotate(0 500 500)" ;="">
+			<circle class="st2" cx="500" cy="500" r="366.8">
 				<animateTransform attributeType="xml" attributeName="transform" type="rotate" from="0 500 500" to="-360 500 500" dur="50s" repeatCount="indefinite"></animateTransform>
 			</circle>
 			<circle class="st3" cx="500" cy="500" r="395.1"></circle>
