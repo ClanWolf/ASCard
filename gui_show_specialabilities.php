@@ -28,7 +28,6 @@
 	<link rel="apple-touch-icon" href="./images/icon_180x180.png" type="image/png" sizes="180x180">
 
 	<!-- https://www.npmjs.com/package/passive-events-support?activeTab=readme -->
-
 	<script>
 		window.passiveSupport = {
 			debug: false,
