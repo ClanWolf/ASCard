@@ -199,21 +199,6 @@ session_start();
 			margin-left: auto;
 			margin-right: auto;
 		}
-		.box {
-			width: 80%;
-			background-color: #transparent;
-			top: 50%;
-			left: 50%;
-		}
-		.options {
-			border-radius: 5px;
-			border-style: solid;
-			border-width: 3px;
-			padding: 5px;
-			background: rgba(60,60,60,0.75);
-			color: #ddd;
-			border-color: #aaa;
-		}
 		input, select {
 			width: 80px;
 			vertical-align: middle;
@@ -246,7 +231,7 @@ session_start();
 <body>
 	<script>
 		$(function() {
-			$('.scroll-pane').jScrollPane();
+			$('.scroll-pane').jScrollPane({autoReinitialise: true});
 		});
 		$(document).ready(function() {
 			$("#cover").hide();

@@ -98,25 +98,6 @@ session_start();
 			margin-left: auto;
 			margin-right: auto;
 		}
-		.box {
-			width: 400px;
-			height: 200px;
-			background-color: #transparent;
-			position: fixed;
-			margin-left: -200px;
-			margin-top: -100px;
-			top: 50%;
-			left: 50%;
-		}
-		.options {
-			border-radius: 5px;
-			border-style: solid;
-			border-width: 3px;
-			padding: 5px;
-			background: rgba(60,60,60,0.75);
-			color: #ddd;
-			border-color: #aaa;
-		}
 	</style>
 </head>
 
@@ -184,16 +165,19 @@ session_start();
 			<tr>
 				<td align="center" class='datalabel'>
 					<p>Round was not changed!</p>
-					<p style="font-family:'Pathway Gothic One',sans-serif,bold;font-size:40px;color:yellow;">Units to be checked:</p>
+					<p style="font-family:'Pathway Gothic One',sans-serif,bold;font-size:40px;color:yellow;">Check units!</p>
+
+
+					<!--
 					<p>
 						<?php
 							$strs = explode(',', $mechIDsNotFinished, );
-	                        foreach ($strs as $item) {
-	                            $strs2 = explode('|', $item, );
-	                            $unitId = $strs2[0];
-	                            $mechId = $strs2[1];
-	                            $mechName = $strs2[2];
-	                            $pilotName = $strs2[3];
+							foreach ($strs as $item) {
+								$strs2 = explode('|', $item, );
+								$unitId = $strs2[0];
+								$mechId = $strs2[1];
+								$mechName = $strs2[2];
+								$pilotName = $strs2[3];
 
 								echo $pilotName.": <a href='https://www.clanwolf.net/apps/ASCard/gui_play_unit.php?unit=".$unitId."'>".$mechName."</a><br>";
 							}
@@ -202,6 +186,9 @@ session_start();
 					<p>
 					Links will open the unit, not individual mechs.
 					</p>
+					-->
+
+
 				</td>
 			</tr>
 		</table>

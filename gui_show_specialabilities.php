@@ -1,3 +1,7 @@
+<?php
+	$sa = isset($_GET['sa']) ? $_GET['sa'] : "";
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -57,26 +61,93 @@
 	<script type="text/javascript" src="./scripts/specialunitabilities.js"></script>
 </head>
 
-<body style="background-image: url('images/body-bg_2.jpg');">
-	<div class="hudcenteranimation">
-		<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 1000 1000" style="enable-background:new 0 0 1000 1000;" xml:space="preserve">
-			<circle class="st0" cx="500" cy="500" r="302.8">
-				<animateTransform attributeType="xml" attributeName="transform" type="rotate" from="0 500 500" to="360 500 500" dur="100s" repeatCount="indefinite"></animateTransform>
-			</circle>
-			<circle class="st1" cx="500" cy="500" r="237.7">
-				<animateTransform attributeType="xml" attributeName="transform" type="rotate" from="0 500 500" to="360 500 500" dur="40s" repeatCount="indefinite"></animateTransform>
-			</circle>
-			<circle class="st2" cx="500" cy="500" r="366.8">
-				<animateTransform attributeType="xml" attributeName="transform" type="rotate" from="0 500 500" to="-360 500 500" dur="50s" repeatCount="indefinite"></animateTransform>
-			</circle>
-			<circle class="st3" cx="500" cy="500" r="395.1"></circle>
-		</svg>
-	</div>
-
+<body>
 	<div class="content" id="cont">
+		<div id="specialabilitiescontainer_standalone">
+			<div class="hudcenteranimation">
+				<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 1000 1000" style="enable-background:new 0 0 1000 1000;" xml:space="preserve">
+					<circle class="st0" cx="500" cy="500" r="302.8">
+						<animateTransform attributeType="xml" attributeName="transform" type="rotate" from="0 500 500" to="360 500 500" dur="100s" repeatCount="indefinite"></animateTransform>
+					</circle>
+					<circle class="st1" cx="500" cy="500" r="237.7">
+						<animateTransform attributeType="xml" attributeName="transform" type="rotate" from="0 500 500" to="360 500 500" dur="40s" repeatCount="indefinite"></animateTransform>
+					</circle>
+					<circle class="st2" cx="500" cy="500" r="366.8">
+						<animateTransform attributeType="xml" attributeName="transform" type="rotate" from="0 500 500" to="-360 500 500" dur="50s" repeatCount="indefinite"></animateTransform>
+					</circle>
+					<circle class="st3" cx="500" cy="500" r="395.1"></circle>
+				</svg>
+			</div>
 
+			<br>
+
+			<table width="100%" height="80%">
+				<tr>
+					<td width="5%" align="right" valign="top" class="datalabel">&nbsp;</td>
+					<td width="90%">
+						<table class="options" width="100%" style="height:100%;" cellspacing=4 cellpadding=8 border=0px>
+							<tr>
+								<td id="alphabeticalNavigation" align="center" valign="middle" colspan="2" class="datalabel" style="font-size:1.6em;">
+									A B C D E F G H I J K L M N O P Q R S T U V W X Y Z
+								</td>
+							</tr>
+							<tr>
+								<td id="specialunitabilitiesNavigation" align="center" valign="middle" colspan="2" class="datalabel">
+									NAV
+								</td>
+							</tr>
+							<tr>
+								<td class="datavalue_thin" colspan="2"><hr></td>
+							</tr>
+							<tr>
+								<td class="datalabel" id="sa_name" align="left" width="90%" style="font-size:1.4em;">...</td><td nowrap class="datalabel" id="sa_abbreviation" align="right" width="10%" style="font-size:1.4em;">...</td>
+							</tr>
+							<tr>
+								<td nowrap class="datavalue_thinflow" id="sa_type" colspan="2" align="right" style="font-size:0.75em;">...</td>
+							</tr>
+							<tr>
+								<td class="datavalue_thin" colspan="2"><hr></td>
+							</tr>
+							<tr>
+								<td height="100%" colspan="2" align="left" valign="top">
+									<div class='scroll-pane' width="100%" style="width:100%;">
+										<table width="100%"><tr><td class="datavalue_thinflow" id="sa_rule">...</td></tr></table>
+									</div>
+								</td>
+							</tr>
+
+							<!--
+							<tr>
+								<td class="datavalue_thin" colspan="2"><hr></td>
+							</tr>
+							<tr>
+								<td nowrap class="datavalue_thinflow" id="sa_source" align="left" width="90%">...</td><td nowrap class="datavalue_thinflow" id="sa_page" align="right" width="10%">...</td>
+							</tr>
+							-->
+
+							<tr>
+								<td class="datavalue_thin" colspan="2"><hr></td>
+							</tr>
+							<tr>
+								<td nowrap class="datavalue_thin" colspan="2" align="center"><a href="javascript:history.back();">BACK</a></td>
+							</tr>
+						</table>
+					</td>
+					<td width="5%" align="right" valign="top" class="datalabel">&nbsp;</td>
+				</tr>
+			</table>
+		</div>
 
 	</div>
+
+<script>
+	document.addEventListener('readystatechange', event => {
+		if (event.target.readyState === "complete") {
+			// console.log("<?= $sa ?>");
+			showSpecialUnitAbility("<?= $sa ?>");
+		}
+	});
+</script>
 
 </body>
 

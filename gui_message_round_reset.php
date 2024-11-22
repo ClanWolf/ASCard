@@ -96,25 +96,6 @@ session_start();
 			margin-left: auto;
 			margin-right: auto;
 		}
-		.box {
-			width: 400px;
-			height: 200px;
-			background-color: #transparent;
-			position: fixed;
-			margin-left: -200px;
-			margin-top: -100px;
-			top: 50%;
-			left: 50%;
-		}
-		.options {
-			border-radius: 5px;
-			border-style: solid;
-			border-width: 3px;
-			padding: 5px;
-			background: rgba(60,60,60,0.75);
-			color: #ddd;
-			border-color: #aaa;
-		}
 	</style>
 </head>
 

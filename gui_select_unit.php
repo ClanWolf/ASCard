@@ -237,14 +237,14 @@ session_start();
 			background: rgba(70,70,70,0.75);;
 		}
 		.scroll-pane {
-            width: 100%;
-            height: 280px;
-            overflow: auto;
-        }
-        .horizontal-only {
-            height: auto;
-            max-height: 280px;
-        }
+			width: 100%;
+			height: 280px;
+			overflow: auto;
+		}
+		.horizontal-only {
+			height: auto;
+			max-height: 280px;
+		}
 	</style>
 </head>
 
@@ -258,7 +258,7 @@ session_start();
 			$("#cover").hide();
 		});
 		$(function() {
-            $('.scroll-pane').jScrollPane();
+            $('.scroll-pane').jScrollPane({autoReinitialise: true});
         });
 		function finalizeRound(playerId) {
 			var url="./save_finalize_round.php?pid=" + playerId;
@@ -588,13 +588,13 @@ session_start();
 	foreach ($mechsInAllUnits as &$mechsInSingleUnit) {
 		echo "			<td width='33%' style='background-color:#333333;' valign='top'>\n";
 		echo "				<div class='scroll-pane'>\n";
-		echo "				<table cellspacing=1 cellpadding=0 border=0px style='border-collapse: collapse;'>\n";
+		echo "					<table cellspacing=1 cellpadding=0 border=0px style='border-collapse: collapse;'>\n";
 		foreach ($mechsInSingleUnit as &$mech) {
-			echo "					<tr>\n";
-			echo "						".$mech."\n";
-			echo "					</tr>\n";
+			echo "						<tr>\n";
+			echo "							".$mech."\n";
+			echo "						</tr>\n";
 		}
-		echo "				</table>\n";
+		echo "					</table>\n";
 		echo "				</div>\n";
 		echo "			</td>\n";
 	}

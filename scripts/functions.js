@@ -67,8 +67,6 @@ function setSize(name, value) {
 }
 
 function readCircles(index3, a_max3, s_max3) {
-	//console.log("a_max3=" + a_max3);
-	//console.log("s_max3=" + s_max3);
 	readCircles2(index3, a_max3, s_max3, -1, -1);
 }
 

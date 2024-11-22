@@ -118,16 +118,6 @@ session_start();
 			padding: 5px;
 			margin: 5px;
 		}
-		.box {
-			width: 500px;
-			height: 200px;
-			background-color: #694007;
-			position: fixed;
-			margin-left: -250px;
-			margin-top: -100px;
-			top: 50%;
-			left: 50%;
-		}
 	</style>
 </head>
 

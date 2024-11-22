@@ -91,6 +91,7 @@
 	<link rel="manifest" href="./manifest.json">
 	<link rel="stylesheet" type="text/css" href="./fontawesome/css/all.min.css" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="./styles/styles.css">
+	<link rel="stylesheet" type="text/css" href="./styles/jquery.jscrollpane.css">
 	<link rel="icon" href="./favicon.png" type="image/png">
 	<link rel="shortcut icon" href="./images/icon_196x196.png" type="image/png" sizes="196x196">
 	<link rel="apple-touch-icon" href="./images/icon_57x57.png" type="image/png" sizes="57x57">
@@ -129,48 +130,41 @@
 	<script type="text/javascript" src="./scripts/passive-events-support/main.js"></script>
 
 	<script type="text/javascript" src="./scripts/jquery-3.7.1.min.js"></script>
+	<script type="text/javascript" src="./scripts/jquery.jscrollpane.min.js"></script>
+	<script type="text/javascript" src="./scripts/jquery.mousewheel.js"></script>
 	<script type="text/javascript" src="./scripts/howler.min.js"></script>
 	<script type="text/javascript" src="./scripts/cookies.js"></script>
 	<script type="text/javascript" src="./scripts/functions.js"></script>
+	<script type="text/javascript" src="./scripts/specialunitabilities.js"></script>
 
 	<style>
-		.options {
-			border-radius: 5px;
-			border-style: solid;
-			border-width: 3px;
-			padding: 5px;
-			background: rgba(60,60,60,0.75);
-			color: #ddd;
-			border-color: #aaa;
+		.scroll-pane {
+			width: 100%;
+			height: 200px;
+			overflow: auto;
+		}
+		.horizontal-only {
+			height: auto;
+			max-height: 200px;
 		}
 	</style>
 </head>
 
 <body>
 	<script>
-		var listenerAdded = false;
-		var sa = "";
+		$(function() {
+			$('.scroll-pane').jScrollPane({autoReinitialise: true});
+		});
 
 		function showSpecialAbility(p) {
 			document.getElementById("specialabilitiescontainer").style.visibility = "visible";
-			document.getElementById("specialabilitiescontainer").style.display = "block";
+			document.getElementById("linkToCompleteAbilitiesList").href = "gui_show_specialabilities.php?sa=" + p;
 
-			sa = p;
-			var myIframe = document.getElementById('specialabilitiesframe');
-			if (listenerAdded == false) {
-				myIframe.addEventListener("load", function() {
-					document.getElementById("specialabilitiesframe").contentWindow.showSpecialUnitAbility(sa);
-				});
-				listenerAdded = true;
-			}
-			myIframe.src = './gui_show_specialabilities.php';
+			showSpecialUnitAbility(p);
 		}
 
-		function closeSpecialAbilitiesFrame() {
-			var myIframe = document.getElementById('specialabilitiesframe');
+		function closeSpecialAbilities() {
 			document.getElementById("specialabilitiescontainer").style.visibility = "hidden";
-			document.getElementById("specialabilitiescontainer").style.display = "none";
-			myIframe.src = 'about:blank';
 		}
 
 //		var movementcache = 0;
@@ -519,14 +513,62 @@
 
 <iframe name="saveframe" id="iframe_save"></iframe>
 
-<div id="specialabilitiescontainer" style="display:none;visibility:hidden;">
+<div id="specialabilitiescontainer" style="visibility:hidden;" onclick="javascript:closeSpecialAbilities();">
+
+	<div class="hudcenteranimation">
+		<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 1000 1000" style="enable-background:new 0 0 1000 1000;" xml:space="preserve">
+			<circle class="st0" cx="500" cy="500" r="302.8">
+				<animateTransform attributeType="xml" attributeName="transform" type="rotate" from="0 500 500" to="360 500 500" dur="100s" repeatCount="indefinite"></animateTransform>
+			</circle>
+			<circle class="st1" cx="500" cy="500" r="237.7">
+				<animateTransform attributeType="xml" attributeName="transform" type="rotate" from="0 500 500" to="360 500 500" dur="40s" repeatCount="indefinite"></animateTransform>
+			</circle>
+			<circle class="st2" cx="500" cy="500" r="366.8">
+				<animateTransform attributeType="xml" attributeName="transform" type="rotate" from="0 500 500" to="-360 500 500" dur="50s" repeatCount="indefinite"></animateTransform>
+			</circle>
+			<circle class="st3" cx="500" cy="500" r="395.1"></circle>
+		</svg>
+	</div>
+
 	<br>
 	<br>
 	<table width="100%" height="70%">
 		<tr>
-			<td width="20%" align="right" valign="top" class="datalabel">&nbsp;</td>
-			<td width="60%"><iframe id="specialabilitiesframe" name="specialabilitiesframe" width="100%" height="100%"></iframe></td>
-			<td width="20%" align="left" valign="top"><a href="javascript:closeSpecialAbilitiesFrame();"><i class="fa-solid fa-xmark" style="font-size:3em;"></i></a></td>
+			<td width="10%" align="right" valign="top" class="datalabel">&nbsp;</td>
+			<td width="80%">
+				<table class="options" width="100%" style="height:100%;" cellspacing=4 cellpadding=8 border=0px>
+					<tr>
+						<td class="datalabel" id="sa_name" align="left" width="90%" style="font-size:1.4em;">...</td><td nowrap class="datalabel" id="sa_abbreviation" align="right" width="10%" style="font-size:1.4em;">...</td>
+					</tr>
+					<tr>
+						<td nowrap class="datavalue_thinflow" id="sa_type" colspan="2" align="right" style="font-size:0.75em;">...</td>
+					</tr>
+					<tr>
+						<td class="datavalue_thin" colspan="2"><hr></td>
+					</tr>
+					<tr>
+						<td height="100%" colspan="2" align="left" valign="top">
+							<div class='scroll-pane' width="100%" style="width:100%;">
+								<table width="100%"><tr><td class="datavalue_thinflow" id="sa_rule">...</td></tr></table>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td class="datavalue_thin" colspan="2"><hr></td>
+					</tr>
+					<tr>
+						<td nowrap class="datavalue_thinflow" id="sa_source" align="left" width="90%">...</td><td nowrap class="datavalue_thinflow" id="sa_page" align="right" width="10%">...</td>
+					</tr>
+					<tr>
+						<td class="datavalue_thin" colspan="2"><hr></td>
+					</tr>
+					<tr>
+						<td nowrap class="datavalue_thin" colspan="2" align="center"><a id="linkToCompleteAbilitiesList" href="#">Show complete list...</a></td>
+					</tr>
+				</table>
+			</td>
+			<td width="10%" align="right" valign="top" class="datalabel">&nbsp;</td>
+			<!-- <td width="10%" align="left" valign="top"><a href="javascript:closeSpecialAbilities();">&nbsp;&nbsp;&nbsp;<i class="fa-solid fa-xmark" style="font-size:3em;"></i></a></td> -->
 		</tr>
 	</table>
 </div>
@@ -933,23 +975,59 @@ if ($showDistancesHexes == 1) {
 												$parts = explode(',', $array_SPCL[$chosenMechIndex]);
 												$i = 1;
 												foreach ($parts as $part) {
-													$re = '/^[A-Z]+/m';
-													preg_match($re, $part, $matches);
+
+													// These special abilities are special, because they have "-" or "("
+													// in the name so that the regular expression down there does not
+													// catch them correctly. Remove this if the re is fixed
+													$saParameter = "";
+													if (substr($part, 0, 3) === "ART") {
+														$saParameter = "ART";
+													} else if (substr($part, 0, 3) === "BIM") {
+														$saParameter = "BIM";
+													} else if (substr($part, 0, 3) === "LAM") {
+														$saParameter = "LAM";
+													} else if (substr($part, 0, 5) === "I-TSM") {
+														$saParameter = "I-TSM";
+													} else if (substr($part, 0, 5) === "SDS-C") {
+														$saParameter = "SDS-C";
+													} else if (substr($part, 0, 6) === "SDS-CM") {
+														$saParameter = "SDS-CM";
+													} else if (substr($part, 0, 6) === "SDS-SC") {
+														$saParameter = "SDS-SC";
+													} else {
+														// This re removed all "#" and "/" from the names
+														// also all "-" and "(", ")" should be removed to match
+														// them in the javascript to display the ability
+														$re = '/^[A-Z][A-Z3][A-Z]*/m';
+														preg_match($re, $part, $matches);
+														$saParameter = $matches[0];
+													}
+
 													if ($i > 1) {
 														echo ", ";
-														$allSpecialAbilities = $allSpecialAbilities."|";
+													}
+
+													$pos = strpos($allSpecialAbilities, $saParameter);
+													if ($pos !== false) {
+														// String is already in the list
+													} else {
+														if ($i > 1) {
+															$allSpecialAbilities = $allSpecialAbilities."|";
+														}
+														$allSpecialAbilities = $allSpecialAbilities.$saParameter;
 													}
 													if ($i == 8) {
 														echo "<br>";
 													}
-													echo "<span class='datavalue_thin' onclick='javascript:showSpecialAbility(\"".$matches[0]."\");'>".$part."</span>";
-													$allSpecialAbilities = $allSpecialAbilities.$matches[0];
+													echo "<span class='datavalue_thin' onclick='javascript:showSpecialAbility(\"".$saParameter."\");'>".$part."</span>";
 													$i++;
 												}
 											?>
 										</td>
 										<td nowrap width="1%" class="datavalue_thin" style="text-align: right;" align="right">
+											<!--
 											<a href="javascript:showSpecialAbility('<?= $allSpecialAbilities ?>');"><i class="fas fa-info-circle"></i></a>
+											-->
 										</td>
 									</tr>
 								</table>

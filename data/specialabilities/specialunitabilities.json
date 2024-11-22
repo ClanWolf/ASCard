@@ -1,6 +1,4 @@
-{ "SpecialAbilities":
-
-[
+{ "SpecialUnitAbilities": [
   {
     "NAME": "Advanced Fire Control",
     "ABBREVIATION": "AFC",
@@ -70,14 +68,6 @@
     "ABBREVIATION": "BFC",
     "TYPE": "Standard",
     "RULE": "A support vehicle or IndustrialMech with this ability has an inferior targeting and tracking system, which adds a Target Number modifier of +1 for its attack. (This modifier is listed in the Attack Modifiers Table, see p. 44.)",
-    "SOURCE": "Alpha Strike Commanders Edition 7th",
-    "PAGE": "77"
-  },
-  {
-    "NAME": "BattleMech Harjel",
-    "ABBREVIATION": "BHJ",
-    "TYPE": "Standard",
-    "RULE": "A ’Mech protected by HarJel ignores the additional “hull breach” critical hit checks required for being attacked while underwater or in a vacuum. All other causes for critical hit rolls still apply as normal.",
     "SOURCE": "Alpha Strike Commanders Edition 7th",
     "PAGE": "77"
   },
@@ -699,7 +689,7 @@
   },
   {
     "NAME": "Land-Air BattleMech",
-    "ABBREVIATION": "LAM (#G/#A)",
+    "ABBREVIATION": "LAM(#G/#A)",
     "TYPE": "Optional Special Abilities",
     "RULE": "wip",
     "SOURCE": "Alpha Strike Commanders Edition 7th",

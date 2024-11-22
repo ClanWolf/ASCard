@@ -1,0 +1,11 @@
+{ "SpecialPilotAbilities": [
+  {
+	"NAME": "Advanced Fire Control",
+	"ABBREVIATION": "AFC",
+	"TYPE": "Standard",
+	"RULE": "IndustrialMechs and support vehicles equipped with Advanced Fire Control do not suffer Target Number modifiers for their unit type.",
+	"SOURCE": "Alpha Strike Commanders Edition 7th",
+	"PAGE": "76"
+  }
+  ]
+  }

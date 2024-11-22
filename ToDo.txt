@@ -1,32 +1,32 @@
 
+// HIGH
+TODO: Finish the crits for CVs
+TODO: Indikator für gemountete Elementare / Infanterie
+TODO: Add a user id to created mechs and show only own mechs in assignment list
+
+// NORMAL
+TODO: Alle Schriftarten sollten als em relativ definiert werden
+TODO: Button für "alle Mechs zurücksetzen"
+TODO: Button für "alle Mechs löschen"
 TODO: Add images for AF (Aerial fighters)
-TODO: Show only one name for clan mechs (choose in options which one) ?
+TODO: Add a pilot card to chosen units (Choose special pilot abilities from list with cost)
+TODO: Editor for formations: Formations have a faction (for logo and mechimages)
+TODO: Ready Icons in play unit werden erst nach dem tabwechsel aktuell
+TODO: Show clan option to show/hide batchall
+TODO: Sounds für die + Buttons (Criticals und Heat) --> Different sound when setting a field to 0
+TODO: Add option to auto roll on motive
+TODO: Add option to auto roll on crit
+TODO: Add all text description for Special Abilities
+TODO: Add similar json / overview page for pilot abilities
+
+// NICE TO HAVE
+TODO: Do not allow jumping if the unit does not have j movement
+TODO: Show only one name for clan mechs (choose in options which one)
+TODO: Import units from mul directly somehow (have mul open, select a unit and export it to ASCard)
+TODO: Scan QR codes to identify units on the table
+TODO: Shortcut bar irgendwo mit allen Mech-Ids zum schnellen Wechseln
+
+// OTHER
 TODO: Why does the play unit page sometimes randomly takes over 1 sec to load?
 TODO: Fix parameter names on all pages from "mech" to "unit" and "unit" to "formation"
 TODO: Fix table names according to unit/formation changes
-TODO: Add a pilot card to chosen units (Choose special pilot abilities from list with cost)
-TODO: Formations have a faction (for logo and mechimages)
-TODO: Ready Icons in play unit werden erst nach dem tabwechsel aktuell
-TODO: Import units from mul directly somehow (have mul open, select a unit and export it to ASCard)
-TODO: Scan QR codes to identify units on the table
-TODO: Add a user id to created mechs and show only own mechs in assignment list
-TODO: Button für "alle Mechs zurücksetzen"
-TODO: Button für "alle Mechs löschen"
-TODO: Indikator für gemountete Elementare / Infanterie
-TODO: Shortcut bar irgendwo mit allen Mech-Ids zum schnellen Wechseln
-TODO: Alle Schriftarten sollten als em relativ definiert werden
-
-TODO: Show clan option to show/hide batchall
-TODO: Sounds für die + Buttons (Criticals und Heat) --> Different sound when setting a field to 0
-
-TODO: Add option to auto roll on motive
-TODO: Add option to auto roll on crit
-
-TODO: CHECK / Sort all special abilities
-TODO: Create <table> for special abilities overview links
-TODO: Add similar overview page for pilot abilities
-
-TODO: Create iFrame in play window to show individual special abilities:
-  https://stackoverflow.com/questions/22559756/changing-hover-to-touch-click-for-mobile-devices
-  Tap on special ability will open the iFrame (centered) and clicking on one specific ability will change the content of the iFrame
-  The string of the ability (between ","s) nees to translate to the link to the infopage
