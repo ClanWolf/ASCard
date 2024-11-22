@@ -220,11 +220,6 @@ session_start();
         $(document).ready(function() {
             $("#cover").hide();
         });
-
-        function finalizeRound(playerId) {
-            var url="./save_finalize_round.php?pid=" + playerId;
-            window.frames["saveframe"].location.replace(url);
-        }
         function resetRound(playerId) {
             var url="./save_reset_round.php?pid=" + playerId;
             window.frames["saveframe"].location.replace(url);

@@ -103,11 +103,6 @@ session_start();
 		$(document).ready(function() {
 			$("#cover").hide();
 		});
-
-		function finalizeRound(playerId) {
-            var url="./save_finalize_round.php?pid=" + playerId;
-            window.frames["saveframe"].location.replace(url);
-        }
 	</script>
 
 	<div id="cover"></div>

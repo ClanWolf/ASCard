@@ -260,10 +260,6 @@ session_start();
 		$(function() {
             $('.scroll-pane').jScrollPane({autoReinitialise: true});
         });
-		function finalizeRound(playerId) {
-			var url="./save_finalize_round.php?pid=" + playerId;
-			window.frames["saveframe"].location.replace(url);
-		}
 	</script>
 
 <?php

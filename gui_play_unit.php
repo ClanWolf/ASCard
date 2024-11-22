@@ -1044,7 +1044,7 @@ if ($showDistancesHexes == 1) {
 					<table width="100%" cellpadding="0" cellspacing="0">
 						<tr>
 							<td nowrap rowspan="3" style="vertical-align: middle;" valign="middle" align="center" width="15px">
-								<div onclick="location.href='gui_select_unit.php';" style="padding: 0 15 0 15;" id="phasebutton" name="phasebutton"><img id="phasebuttonimage" src=<?php echo "'$currentPhaseButton'"; ?> style='height:50px;'></div>
+								<div onclick="location.href='save_finalize_round.php?pid=<?= $pid?>';" style="padding: 0 15 0 15;" id="phasebutton" name="phasebutton"><img id="phasebuttonimage" src=<?php echo "'$currentPhaseButton'"; ?> style='height:50px;'></div>
 							</td>
 							<td nowrap width="65%" class="datalabel_thin">
 								<table cellspacing="2" cellpadding="0">

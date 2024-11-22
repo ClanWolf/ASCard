@@ -26,9 +26,7 @@ session_start();
 		}
 	}
 ?>
-
 <!DOCTYPE html>
-
 <html lang="en">
 
 <head>
@@ -42,6 +40,8 @@ session_start();
 	<meta name="mobile-web-app-capable" content="yes">
 	<meta name="apple-mobile-web-app-capable" content="yes">
 	<meta name="viewport" content="width=device-width, initial-scale=0.75, minimum-scale=0.75, maximum-scale=1.85, user-scalable=yes" />
+
+	<meta http-equiv="refresh" content="2; URL=gui_select_unit.php">
 
 	<link rel="manifest" href="./manifest.json">
 	<!-- <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css"> -->
@@ -107,7 +107,6 @@ session_start();
 	</script>
 
 	<div id="cover"></div>
-
 <?php
 	if ($playMode) {
 		$buttonWidth = "34%";
@@ -115,7 +114,6 @@ session_start();
 		$buttonWidth = "17%";
 	}
 ?>
-
 	<div id="header">
 		<table style="width:100%;height:60px;border:none;border-collapse:collapse;background:rgba(50,50,50,1.0);" cellspacing="0" cellpadding="0">
 			<tr>

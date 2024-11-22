@@ -1856,6 +1856,11 @@ $(document).ready(function() {
 		}
 	}
 
+	function finalizeRound(playerId) {
+		var url="./save_finalize_round.php?pid=" + playerId;
+		window.frames["saveframe"].location.replace(url);
+	}
+
 //	$("#cover").fadeOut(350, "linear", function() {
 //		$("#cover").hide();
 //		document.getElementById("cover").style.visibility = "hidden";
