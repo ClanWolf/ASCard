@@ -153,7 +153,8 @@
 <body>
 	<script>
 		$(function() {
-			$('.scroll-pane').jScrollPane({autoReinitialise: true});
+			//$('.scroll-pane').jScrollPane({autoReinitialise: true});
+			$('.scroll-pane').jScrollPane();
 		});
 
 		function showSpecialAbility(p) {
@@ -538,10 +539,13 @@
 			<td width="80%">
 				<table class="options" width="100%" style="height:100%;" cellspacing=4 cellpadding=8 border=0px>
 					<tr>
-						<td class="datalabel" id="sa_name" align="left" width="90%" style="font-size:1.4em;">...</td><td nowrap class="datalabel" id="sa_abbreviation" align="right" width="10%" style="font-size:1.4em;">...</td>
+						<td class="datalabel" id="sa_name" align="left" width="90%" style="font-size:1.2em;">...</td><td nowrap class="datalabel" id="sa_abbreviation" align="right" width="10%" style="font-size:1.2em;">...</td>
 					</tr>
 					<tr>
-						<td nowrap class="datavalue_thinflow" id="sa_type" colspan="2" align="right" style="font-size:0.75em;">...</td>
+						<td class="datavalue_thinflow" style="font-size:0.75em;" align="left">
+							<span  id="sa_source">...</span>, <span id="sa_page">...</span>
+						</td>
+						<td nowrap class="datavalue_thinflow" id="sa_type">...</td>
 					</tr>
 					<tr>
 						<td class="datavalue_thin" colspan="2"><hr></td>
@@ -552,12 +556,6 @@
 								<table width="100%"><tr><td class="datavalue_thinflow" id="sa_rule">...</td></tr></table>
 							</div>
 						</td>
-					</tr>
-					<tr>
-						<td class="datavalue_thin" colspan="2"><hr></td>
-					</tr>
-					<tr>
-						<td nowrap class="datavalue_thinflow" id="sa_source" align="left" width="90%">...</td><td nowrap class="datavalue_thinflow" id="sa_page" align="right" width="10%">...</td>
 					</tr>
 					<tr>
 						<td class="datavalue_thin" colspan="2"><hr></td>

@@ -210,6 +210,7 @@ session_start();
 	<script type="text/javascript" src="./scripts/jquery.mousewheel.js"></script>
 	<script type="text/javascript" src="./scripts/howler.min.js"></script>
 	<script type="text/javascript" src="./scripts/cookies.js"></script>
+	<script type="text/javascript" src="./scripts/functions.js"></script>
 
 	<style>
 		html, body {
@@ -258,8 +259,13 @@ session_start();
 			$("#cover").hide();
 		});
 		$(function() {
-            $('.scroll-pane').jScrollPane({autoReinitialise: true});
+			//$('.scroll-pane').jScrollPane({autoReinitialise: true});
+			$('.scroll-pane').jScrollPane();
         });
+		function finalizeRound(playerId) {
+			var url="./save_finalize_round.php?pid=" + playerId;
+			window.frames["saveframe"].location.replace(url);
+		}
 	</script>
 
 <?php

@@ -30,5 +30,3 @@ TODO: Shortcut bar irgendwo mit allen Mech-Ids zum schnellen Wechseln
 TODO: Why does the play unit page sometimes randomly takes over 1 sec to load?
 TODO: Fix parameter names on all pages from "mech" to "unit" and "unit" to "formation"
 TODO: Fix table names according to unit/formation changes
-
-TODO: Umleitung nach Runde beenden auf den letzten Mech

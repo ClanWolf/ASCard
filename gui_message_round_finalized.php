@@ -103,6 +103,7 @@ session_start();
 	<script>
 		$(document).ready(function() {
 			$("#cover").hide();
+			// setTimeout(function() { window.history.go(-1) }, 2000);
 		});
 	</script>
 

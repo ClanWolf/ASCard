@@ -103,7 +103,10 @@
 								<td class="datalabel" id="sa_name" align="left" width="90%" style="font-size:1.4em;">...</td><td nowrap class="datalabel" id="sa_abbreviation" align="right" width="10%" style="font-size:1.4em;">...</td>
 							</tr>
 							<tr>
-								<td nowrap class="datavalue_thinflow" id="sa_type" colspan="2" align="right" style="font-size:0.75em;">...</td>
+								<td class="datavalue_thinflow" style="font-size:0.75em;" align="left">
+									<span  id="sa_source">...</span>, <span id="sa_page">...</span>
+								</td>
+								<td nowrap class="datavalue_thinflow" id="sa_type">...</td>
 							</tr>
 							<tr>
 								<td class="datavalue_thin" colspan="2"><hr></td>
@@ -129,7 +132,7 @@
 								<td class="datavalue_thin" colspan="2"><hr></td>
 							</tr>
 							<tr>
-								<td nowrap class="datavalue_thin" colspan="2" align="center"><a href="javascript:history.back();">BACK</a></td>
+								<td nowrap class="datavalue_thin" colspan="2" align="center"><a href="gui_play_unit.php">Units</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:history.back();">BACK</a></td>
 							</tr>
 						</table>
 					</td>

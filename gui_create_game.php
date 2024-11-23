@@ -205,7 +205,8 @@ session_start();
 <body>
 	<script>
 		$(function() {
-			$('.scroll-pane').jScrollPane({autoReinitialise: true});
+			//$('.scroll-pane').jScrollPane({autoReinitialise: true});
+			$('.scroll-pane').jScrollPane();
 		});
 		$(document).ready(function() {
 			$("#cover").hide();
