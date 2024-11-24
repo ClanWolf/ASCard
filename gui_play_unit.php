@@ -140,12 +140,12 @@
 	<style>
 		.scroll-pane {
 			width: 100%;
-			height: 200px;
+			height: 100px;
 			overflow: auto;
 		}
 		.horizontal-only {
 			height: auto;
-			max-height: 200px;
+			max-height: 100px;
 		}
 	</style>
 </head>
@@ -561,7 +561,7 @@
 						<td class="datavalue_thin" colspan="2"><hr></td>
 					</tr>
 					<tr>
-						<td nowrap class="datavalue_thin" colspan="2" align="center"><a id="linkToCompleteAbilitiesList" href="#">Show complete list...</a></td>
+						<td nowrap class="datavalue_thin" colspan="2" align="center"><a id="linkToCompleteAbilitiesList" href="#">Show all</a></td>
 					</tr>
 				</table>
 			</td>
@@ -718,9 +718,6 @@
 </div>
 
 <?php
-	echo "<div id='mechalive_status_div'>\n";
-	echo "	<img id='mechalive_status' src='./images/vitalmonitor.gif' width='140px' height='120px'>\n";
-	echo "</div>\n";
 	echo "<div id='player_image'>\n";
 	echo "	<img src='./images/player/".$pimage."' width='60px' height='60px'>\n";
 	echo "</div>\n";
@@ -871,7 +868,7 @@ if ($showDistancesHexes == 1) {
 							<td nowrap class="datavalue_small_special" width="50%" colspan="4" style="text-align:left;" valign="middle" onclick="javascript:window.open('http://www.masterunitlist.info/Unit/Details/<?php echo $array_MECH_MULID[$chosenMechIndex] ?>');"><?php echo "$array_ROLE[$chosenMechIndex]"; ?>&nbsp;<i class="fa-solid fa-square-up-right"></i></td>
 							<td nowrap class="datalabel" width="13%" colspan="1" valign="middle" >AMM:</td>
 							<td nowrap class="datavalue" width="12%" colspan="1" valign="middle" style="top:0px;bottom:0px;vertical-align:middle;"><span class="datavalue" id="AMM">0</span></td>
-							<td nowrap class="datalabel" width="12%" colspan="1">SKILL:</td>
+							<td nowrap class="datalabel" width="12%" colspan="1">SKL:</td>
 							<td nowrap class="datavalue" width="12%" colspan="1" valign="middle" id="skillfield" style="top:0px;bottom:0px;vertical-align:middle;"><?php echo "$array_SKILL[$chosenMechIndex]"; ?></td>
 						</tr>
 					</table>
@@ -1062,7 +1059,7 @@ if ($showDistancesHexes == 1) {
 									</tr>
 								</table>
 							</td>
-							<td id="INFOMOVED" nowrap width="20%" class="datalabel"></td>
+							<td id="INFOMOVED" nowrap width="20%" class="datalabel_thin"></td>
 						</tr>
 						<tr style='margin:2px;height:2px;padding:2px;line-height:2px;font-size:2px;'><td colspan='2' style='margin:2px;height:2px;padding:2px;line-height:2px;font-size:2px;'><hr style='margin:2px;'></td></tr>
 						<tr>
@@ -1079,7 +1076,7 @@ if ($showDistancesHexes == 1) {
 								</tr>
 							</table>
 							</td>
-							<td id="INFOFIRED" nowrap width="20%" class="datalabel"></td>
+							<td id="INFOFIRED" nowrap width="20%" class="datalabel_thin"></td>
 						</tr>
 					</table>
 				</div>
@@ -1419,11 +1416,11 @@ if ($showDistancesHexes == 1) {
 <div id="bottomleft"><img src="./images/bottom-left.png" width="200px"></div>
 
 <div align="center" id="settings">
-	<a href="./gui_support.php"><i class="fa-solid fa-handshake-simple"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	<a href="./gui_support.php"><i class="fa-solid fa-handshake-simple"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 	<a href="javascript:showMech()"><i class="fas fa-eye"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 <?php
 	if ($pid == 2) { // Meldric
-		echo "	<a href='https://www.clanwolf.net/static/files/Rulebooks/CAT35680%20-%20AlphaStrike%20CommandersEdition.pdf' target='_blank'><i class='fas fa-bookmark'></i></a>&nbsp;&nbsp;\n";
+		// echo "	<a href='https://www.clanwolf.net/static/files/Rulebooks/CAT35680%20-%20AlphaStrike%20CommandersEdition.pdf' target='_blank'><i class='fas fa-bookmark'></i></a>&nbsp;&nbsp;\n";
 	}
 ?>
 	<!-- <a href="#" onclick="javascript:window.location.reload(true)"><i class="fas fa-redo"></i></a>&nbsp;&nbsp; -->

@@ -1,11 +1,11 @@
 { "SpecialPilotAbilities": [
-  {
-	"NAME": "Advanced Fire Control",
-	"ABBREVIATION": "AFC",
-	"TYPE": "Standard",
-	"RULE": "IndustrialMechs and support vehicles equipped with Advanced Fire Control do not suffer Target Number modifiers for their unit type.",
-	"SOURCE": "Alpha Strike Commanders Edition 7th",
-	"PAGE": "76"
-  }
-  ]
-  }
+	{
+		"NAME": "ANIMAL MIMICRY",
+		"UNITTYPE": "’Mechs, ProtoMechs (only if the model has four legs)",
+		"SPACOST": "2 points",
+		"RULE": "The pilot with this SPA has combined an exceptional understanding of animal behavior with his own natural aptitude at the controls to give the movements of his machine an uncanny— even frightening—resemblance to that of a wild animal. This ability, which works only with ’Mech and ProtoMech units where the model has four legs, reduces the unit’s Move cost for passing through ultra-heavy woods terrain, ultra-heavy jungle terrain, or any buildings by 2 inches per inch of movement. Furthermore, any enemy units that come within 6 inches of this unit must make a 2D6 roll, and will become Intimidated on a roll result of 8 or less. Units that are Intimidated in this fashion reduce their Move by half (round down) and suffer a +1 Target Number modifier for all attacks made against the animal-mimicking unit until after the next Movement Phase.",
+		"SOURCE": "Alpha Strike Commanders Edition 7th",
+		"PAGE": "??"
+	}
+]
+}

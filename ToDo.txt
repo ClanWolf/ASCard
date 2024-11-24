@@ -16,6 +16,7 @@ TODO: Show clan option to show/hide batchall
 TODO: Sounds für die + Buttons (Criticals und Heat) --> Different sound when setting a field to 0
 TODO: Add option to auto roll on motive
 TODO: Add option to auto roll on crit
+TODO: Add option to not show any mech image in play unit
 TODO: Add all text description for Special Abilities
 TODO: Add similar json / overview page for pilot abilities
 
