@@ -319,16 +319,16 @@ session_start();
 			<tr>
 				<td nowrap class="datalabel" style='text-align:left;' colspan='3'>Assign to formation: <select required name='UNITID' id='UNITID' size='1' style='width:250px;'>
 <?php
-	$sql_asc_playersunits = "SELECT SQL_NO_CACHE * FROM asc_unit where playerid=".$pid;
-	$result_asc_playersunits = mysqli_query($conn, $sql_asc_playersunits);
-	if (mysqli_num_rows($result_asc_playersunits) > 0) {
-		while($rowUnits = mysqli_fetch_assoc($result_asc_playersunits)) {
-			$unitid = $rowUnits['unitid'];
-			$forcename = $rowUnits['forcename'];
-			if ($paramunitid == $unitid) {
-				echo "										<option value='".$unitid."' selected>".$forcename."</option>\n";
+	$sql_asc_playersformations = "SELECT SQL_NO_CACHE * FROM asc_formation where playerid=".$pid;
+	$result_asc_playersformations = mysqli_query($conn, $sql_asc_playersformations);
+	if (mysqli_num_rows($result_asc_playersformations) > 0) {
+		while($rowFormation = mysqli_fetch_assoc($result_asc_playersformations)) {
+			$formationid = $rowFormation['unitid'];
+			$formationname = $rowFormation['formationname'];
+			if ($paramunitid == $formationid) {
+				echo "										<option value='".$formationid."' selected>".$formationname."</option>\n";
 			} else {
-				echo "										<option value='".$unitid."'>".$forcename."</option>\n";
+				echo "										<option value='".$formationid."'>".$formationname."</option>\n";
 			}
 		}
 	}

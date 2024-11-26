@@ -45,15 +45,15 @@ session_start();
 				// Success
 				$newplayerid = mysqli_insert_id($conn);
 
-				$sqlinsertunit = "INSERT INTO asc_unit (factionid, forcename, playerid) VALUES ";
-				$sqlinsertunit = $sqlinsertunit . "(1, 'Command', ".$newplayerid."), ";
-				$sqlinsertunit = $sqlinsertunit . "(1, 'Battle', ".$newplayerid."), ";
-				$sqlinsertunit = $sqlinsertunit . "(1, 'Striker', ".$newplayerid.")";
-				if (mysqli_query($conn, $sqlinsertunit)) {
+				$sqlinsertformation = "INSERT INTO asc_formation (factionid, formationname, playerid) VALUES ";
+				$sqlinsertformation = $sqlinsertformation . "(1, 'Command', ".$newplayerid."), ";
+				$sqlinsertformation = $sqlinsertformation . "(1, 'Battle', ".$newplayerid."), ";
+				$sqlinsertformation = $sqlinsertformation . "(1, 'Striker', ".$newplayerid.")";
+				if (mysqli_query($conn, $sqlinsertformation)) {
 					// Success inserting units for new player
 				} else {
 					// Error
-					echo "Error: " . $sqlinsertunit . "<br>" . mysqli_error($conn);
+					echo "Error: " . $sqlinsertformation . "<br>" . mysqli_error($conn);
 				}
 
 				// Create options entry for new user
@@ -88,7 +88,7 @@ session_start();
 		}
 
 		$playersUnits = array();
-		$sql_asc_findunits = "SELECT SQL_NO_CACHE * FROM asc_unit where playerid=".$deleteplayerid.";";
+		$sql_asc_findunits = "SELECT SQL_NO_CACHE * FROM asc_formation where playerid=".$deleteplayerid.";";
 		$result_asc_findunits = mysqli_query($conn, $sql_asc_findunits);
 		if (mysqli_num_rows($result_asc_findunits) > 0) {
 			// this user has units. Get unit ids to clean up mechs and pilots
@@ -107,12 +107,12 @@ session_start();
 			}
 		}
 
-		$sqldeleteunits = "DELETE FROM asc_unit WHERE playerid = ".$deleteplayerid;
-		if (mysqli_query($conn, $sqldeleteunits)) {
+		$sqldeleteformations = "DELETE FROM asc_formation WHERE playerid = ".$deleteplayerid;
+		if (mysqli_query($conn, $sqldeleteformations)) {
 			// Success
 		} else {
 			// Error
-			echo "Error: " . $sqldeleteunits . "<br>" . mysqli_error($conn);
+			echo "Error: " . $sqldeleteformations . "<br>" . mysqli_error($conn);
 		}
 
 		$sqldeleteoptions = "DELETE FROM asc_options WHERE playerid = ".$deleteplayerid;
@@ -121,6 +121,38 @@ session_start();
 		} else {
 			// Error
 			echo "Error: " . $sqldeleteoptions . "<br>" . mysqli_error($conn);
+		}
+
+		$sqldeletepilots = "DELETE FROM asc_pilot WHERE playerid = ".$deleteplayerid;
+		if (mysqli_query($conn, $sqldeletepilots)) {
+			// Success
+		} else {
+			// Error
+			echo "Error: " . $sqldeletepilots . "<br>" . mysqli_error($conn);
+		}
+
+		$sqldeletemechstatus = "DELETE FROM asc_mechstatus WHERE playerid = ".$deleteplayerid;
+		if (mysqli_query($conn, $sqldeletemechstatus)) {
+			// Success
+		} else {
+			// Error
+			echo "Error: " . $sqldeletemechstatus . "<br>" . mysqli_error($conn);
+		}
+
+		$sqldeletemechs = "DELETE FROM asc_mech WHERE playerid = ".$deleteplayerid;
+		if (mysqli_query($conn, $sqldeletemechs)) {
+			// Success
+		} else {
+			// Error
+			echo "Error: " . $sqldeletemechs . "<br>" . mysqli_error($conn);
+		}
+
+		$sqldeleteassigns = "DELETE FROM asc_assign WHERE playerid = ".$deleteplayerid;
+		if (mysqli_query($conn, $sqldeleteassigns)) {
+			// Success
+		} else {
+			// Error
+			echo "Error: " . $sqldeleteassigns . "<br>" . mysqli_error($conn);
 		}
 
 		echo "<meta http-equiv='refresh' content='0;url=./gui_create_player.php'>";
@@ -344,14 +376,16 @@ session_start();
 				</td>
 				<td class='datalabel' colspan="1" align="right">PW:</td>
 				<td class='datalabel' colspan="1">
-					<input autocomplete="new-password" required type="password" id="NewPlayerPassword" style="width: 220px;"><br>
+					<!-- <input autocomplete="new-password" required type="password" id="NewPlayerPassword" style="width: 220px;"><br> -->
+					<input autocomplete="new-password" required type="text" id="NewPlayerPassword" style="width: 220px;"><br>
 				</td>
 				<td class='datalabel' width='10px'></td>
 			</tr>
 			<tr>
 				<td class='datalabel' colspan="1" align="right">Confirm PW:</td>
 				<td class='datalabel' colspan="1">
-					<input autocomplete="new-password" required type="password" id="NewPlayerPasswordConfirm" style="width: 220px;"><br>
+					<!-- <input autocomplete="new-password" required type="password" id="NewPlayerPasswordConfirm" style="width: 220px;"><br> -->
+					<input autocomplete="new-password" required type="text" id="NewPlayerPasswordConfirm" style="width: 220px;"><br>
 				</td>
 				<td width='10px'></td>
 			</tr>
@@ -371,7 +405,7 @@ session_start();
 			$filename = "./images/player/".$row['image'];
 
 			echo "							<tr>\n";
-			echo "								<td nowrap class='datalabel' style='text-align:left;';><a href='gui_edit_player.php?playerid=".$row['playerid']."'><i class='fas fa-edit'></i></a>&nbsp;&nbsp;&nbsp;".$row['playerid']."</td>\n";
+			echo "								<td nowrap onclick='location.href=\"gui_edit_player.php?playerid=".$row['playerid']."\"' class='datalabel' style='text-align:left;';><i class='fas fa-edit'></i>&nbsp;&nbsp;&nbsp;".$row['playerid']."</td>\n";
 			echo "								<td nowrap class='datalabel' style='text-align:left;vertical-align:middle;' valign='middle'>\n";
 			if (file_exists($filename)) {
 				echo "										<img src='./images/player/".$row['image']."' width='30px' height='30px'>\n";
@@ -382,19 +416,27 @@ session_start();
 			echo "								</td>\n";
 			echo "								<td nowrap class='datalabel' style='text-align:left;' colspan='2'>" . $row['name'] . "</td>\n";
 			if ($row['playerid'] != "1" && $row['playerid'] != "2" && $row['playerid'] != "3") {
-				echo "								<td width='10px' nowrap>\n";
-				echo "									<span style='font-size:16px;'>\n";
 				if ($playMode) {
+					echo "								<td width='10px' nowrap>\n";
+					echo "									<span style='font-size:16px;'>\n";
 					echo "										\n";
+					echo "									</span>\n";
+					echo "								</td>\n";
 				} else {
 					if ($pid == 2) { // Meldric (only admin may delete player)
-						echo "										<a href='#' onClick='saveNewPlayer(".$row['playerid'].",\"".$row['image']."\");'><i class='fas fa-minus-square'></i></a>\n";
+						echo "								<td onclick='javascript:saveNewPlayer(".$row['playerid'].",\"".$row['image']."\");' width='10px' nowrap>\n";
+                        echo "									<span style='font-size:16px;'>\n";
+						echo "										    <i class='fas fa-minus-square'></i>\n";
+	                    echo "									</span>\n";
+                        echo "								</td>\n";
 					} else {
-						echo "										<i class=\"fas fa-ban\"></i>\n";
+						echo "								<td width='10px' nowrap>\n";
+                        echo "									<span style='font-size:16px;'>\n";
+						echo "										\n";
+	                    echo "									</span>\n";
+                        echo "								</td>\n";
 					}
 				}
-				echo "									</span>\n";
-				echo "								</td>\n";
 			} else {
 				echo "								<td width='10%'></td>\n";
 			}

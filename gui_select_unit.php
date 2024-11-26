@@ -63,11 +63,11 @@ session_start();
 		$overallpv = -1;
 		$overalltonnage = -1;
 		$sqlselectoverallpv = "";
-		$sqlselectoverallpv = $sqlselectoverallpv . "SELECT asc_mech.mech_tonnage, asc_mech.as_pv from asc_assign, asc_mech, asc_unit ";
-		$sqlselectoverallpv = $sqlselectoverallpv . "WHERE asc_assign.unitid = asc_unit.unitid ";
+		$sqlselectoverallpv = $sqlselectoverallpv . "SELECT asc_mech.mech_tonnage, asc_mech.as_pv from asc_assign, asc_mech, asc_formation ";
+		$sqlselectoverallpv = $sqlselectoverallpv . "WHERE asc_assign.unitid = asc_formation.unitid ";
 		$sqlselectoverallpv = $sqlselectoverallpv . "AND asc_assign.mechid = asc_mech.mechid ";
 		$sqlselectoverallpv = $sqlselectoverallpv . "AND asc_mech.active_bid = 1 ";
-		$sqlselectoverallpv = $sqlselectoverallpv . "AND asc_unit.playerid = ".$pid.";";
+		$sqlselectoverallpv = $sqlselectoverallpv . "AND asc_formation.playerid = ".$pid.";";
 		if (mysqli_query($conn, $sqlselectoverallpv)) {
 			// Success
 			$result_sqlselectoverallpv = mysqli_query($conn, $sqlselectoverallpv);
@@ -210,7 +210,7 @@ session_start();
 	<script type="text/javascript" src="./scripts/jquery.mousewheel.js"></script>
 	<script type="text/javascript" src="./scripts/howler.min.js"></script>
 	<script type="text/javascript" src="./scripts/cookies.js"></script>
-	<script type="text/javascript" src="./scripts/functions.js"></script>
+<!-- <script type="text/javascript" src="./scripts/functions.js"></script> -->
 
 	<style>
 		html, body {
@@ -324,7 +324,7 @@ session_start();
 
 	$addMechToUnitLinkArray = array();
 	$assignMechToUnitLinkArray = array();
-	$mechsInAllUnits = array();
+	$mechsInAllFormations = array();
 	$pointvaluetotal = 0;
 	$pointvaluetotalactivebid = 0;
 	$tonnagetotal = 0;
@@ -332,18 +332,17 @@ session_start();
 
 	$readyToFinalizeRound = 1;
 
-	//echo "		<td nowrap style='width:170px;height:70px;' class='mechselect_button_active'>".$pname."</td>";
-	// Select units for this player
-	if (!($stmtUnits = $conn->prepare("SELECT SQL_NO_CACHE * FROM asc_unit where playerid = ".$pid." ORDER BY unitid;"))) {
+	// Select formations for this player
+	if (!($stmtFormations = $conn->prepare("SELECT SQL_NO_CACHE * FROM asc_formation where playerid = ".$pid." ORDER BY unitid;"))) {
 		echo "Prepare failed: (" . $conn->errno . ")" . $conn->error;
 	}
-	if ($stmtUnits->execute()) {
-		$resUnits = $stmtUnits->get_result();
+	if ($stmtFormations->execute()) {
+		$resFormations = $stmtFormations->get_result();
 
-		while ($rowUnit = $resUnits->fetch_assoc()) {
-			$unitidSelected = $rowUnit['unitid'];
-			$factionidSelected = $rowUnit['factionid'];
-			$forcenameSelected = $rowUnit['forcename'];
+		while ($rowFormation = $resFormations->fetch_assoc()) {
+			$formationidSelected = $rowFormation['unitid'];
+			$factionidSelected = $rowFormation['factionid'];
+			$formationnameSelected = $rowFormation['formationname'];
 
 			// Select faction logo
 			if (!($stmtFactionLogo = $conn->prepare("SELECT SQL_NO_CACHE * FROM asc_faction where factionid = ".$factionidSelected." ORDER BY factionid;"))) {
@@ -356,22 +355,22 @@ session_start();
 				}
 			}
 
-			array_push($addMechToUnitLinkArray, "gui_create_unit.php?unitid=".$unitidSelected."&unitname=".$forcenameSelected);
-			array_push($assignMechToUnitLinkArray, "gui_assign_unit.php?unitid=".$unitidSelected."&unitname=".$forcenameSelected);
+			array_push($addMechToUnitLinkArray, "gui_create_unit.php?unitid=".$formationidSelected."&unitname=".$formationnameSelected);
+			array_push($assignMechToUnitLinkArray, "gui_assign_unit.php?unitid=".$formationidSelected."&unitname=".$formationnameSelected);
 
-			$sql_asc_checkunitassignments = "SELECT SQL_NO_CACHE * FROM asc_assign where unitid=".$unitidSelected.";";
+			$sql_asc_checkunitassignments = "SELECT SQL_NO_CACHE * FROM asc_assign where unitid=".$formationidSelected.";";
 			$result_asc_checkunitassignments = mysqli_query($conn, $sql_asc_checkunitassignments);
 			if (mysqli_num_rows($result_asc_checkunitassignments) > 0) {
-				echo "			<td nowrap style='width:270px;height:40px;' onclick='location.href=\"gui_play_unit.php?unit=".$unitidSelected."\"' class='unitselect_button_normal'>\n";
+				echo "			<td nowrap style='width:270px;height:40px;' onclick='location.href=\"gui_play_unit.php?unit=".$formationidSelected."\"' class='unitselect_button_normal'>\n";
 				echo "				<table style='width:100%;' cellspacing=0 cellpadding=0>\n";
 				echo "					<tr>\n";
 				if (!$playMode) {
 					echo "						<td style='text-align:left;'>\n";
-					echo "							<a href='gui_edit_formation.php?unit=".$unitidSelected."'><i class='fas fa-edit'></i></a>\n";
+					echo "							<a href='gui_edit_formation.php?unit=".$formationidSelected."'><i class='fas fa-edit'></i></a>\n";
 					echo "						</td>\n";
 				}
 				echo "						<td style='text-align:center;'>\n";
-				echo "							<a href='gui_play_unit.php?unit=".$unitidSelected."'>".$forcenameSelected."</a>\n";
+				echo "							<a href='gui_play_unit.php?unit=".$formationidSelected."'>".$formationnameSelected."</a>\n";
 				echo "						</td>\n";
 				echo "						<td style='text-align:right;'>\n";
 				echo "							<img src='./images/factions/".$unitlogo."' width='20px' style='border:1px solid;'>\n";
@@ -381,11 +380,11 @@ session_start();
 				echo "			</td>\n";
 			} else {
 				echo "			<td nowrap style='background-color:#444444;width:270px;height:40px;' class='mechselect_button_active'>\n";
-				echo "				".$forcenameSelected."\n";
+				echo "				".$formationnameSelected."\n";
 				echo "			</td>\n";
 			}
 
-			$mechsInSingleUnit = array();
+			$mechsInSingleFormation = array();
 			$c = 0;
 			while ($rowUnitAssignment = $result_asc_checkunitassignments->fetch_assoc()) {
 
@@ -424,30 +423,30 @@ session_start();
 						}
 
 						$mechRoundStatusImage = "";
-                        if ($mechHasMoved == 0 && $mechHasFired == 0) {
-                            $mechRoundStatusImage = "./images/top-right_phase01.png";
-                            if ($mechstatus != "destroyed" && $activebid != 0) {
-                                $readyToFinalizeRound = 0;
-								// echo "<script>console.log('negating!".$readyToFinalizeRound."');</script>";
-                            }
-                        }
-                        if ($mechHasMoved == 0 && $mechHasFired > 0) {
-                            $mechRoundStatusImage = "./images/top-right_phase01.png";
-                            if ($mechstatus != "destroyed" && $activebid != 0) {
-                                $readyToFinalizeRound = 0;
-                                // echo "<script>console.log('negating!".$readyToFinalizeRound."');</script>";
-                            }
-                        }
-                        if ($mechHasMoved > 0 && $mechHasFired == 0) {
-                            $mechRoundStatusImage = "./images/top-right_phase02.png";
+						if ($mechHasMoved == 0 && $mechHasFired == 0) {
+							$mechRoundStatusImage = "./images/top-right_phase01.png";
 							if ($mechstatus != "destroyed" && $activebid != 0) {
-							    $readyToFinalizeRound = 0;
-                                // echo "<script>console.log('negating!".$readyToFinalizeRound."');</script>";
+								$readyToFinalizeRound = 0;
+								// echo "<script>console.log('negating!".$readyToFinalizeRound."');</script>";
 							}
-                        }
-                        if ($mechHasMoved > 0 && $mechHasFired > 0) {
-                            $mechRoundStatusImage = "./images/top-right_phase03.png";
-                        }
+						}
+						if ($mechHasMoved == 0 && $mechHasFired > 0) {
+							$mechRoundStatusImage = "./images/top-right_phase01.png";
+							if ($mechstatus != "destroyed" && $activebid != 0) {
+								$readyToFinalizeRound = 0;
+								// echo "<script>console.log('negating!".$readyToFinalizeRound."');</script>";
+							}
+						}
+						if ($mechHasMoved > 0 && $mechHasFired == 0) {
+							$mechRoundStatusImage = "./images/top-right_phase02.png";
+							if ($mechstatus != "destroyed" && $activebid != 0) {
+								$readyToFinalizeRound = 0;
+								// echo "<script>console.log('negating!".$readyToFinalizeRound."');</script>";
+							}
+						}
+						if ($mechHasMoved > 0 && $mechHasFired > 0) {
+							$mechRoundStatusImage = "./images/top-right_phase03.png";
+						}
 					}
 				}
 
@@ -523,43 +522,42 @@ session_start();
 
 
 
-				if ($activebid == "1") {
-					$mechDetailString = $mechDetailString."			<td nowrap onclick='location.href=\"gui_play_unit.php?unit=".$unitidSelected."&chosenmech=".$c."\"' style='background-color:".$bidcolor."' class='mechselect_button_active' align='right' valign='center'><div style='display:inline-block;height:100%;vertical-align:middle;'><img style='vertical-align:middle;' src='".$mechstatusimage."' height='24px'><br><span style='font-size:14px;'>".$numStr."</span></div></td>\n";
-					$mechDetailString = $mechDetailString."			<td nowrap onclick='location.href=\"gui_play_unit.php?unit=".$unitidSelected."&chosenmech=".$c."\"' style='width:100%;background-color:".$bidcolor."' class='mechselect_button_active'>\n";
-				} else {
-					$mechDetailString = $mechDetailString."			<td nowrap style='background-color:".$bidcolor."' class='mechselect_button_active' align='right' valign='center'><div style='display:inline-block;height:100%;vertical-align:middle;'><img style='vertical-align:middle;' src='".$mechstatusimage."' height='24px'><br><span style='font-size:14px;'>".$numStr."</span></div></td>\n";
-					$mechDetailString = $mechDetailString."			<td nowrap style='width:100%;background-color:".$bidcolor."' class='mechselect_button_active'>\n";
-				}
+				$mechDetailString = $mechDetailString."			<td nowrap onclick='location.href=\"gui_play_unit.php?unit=".$formationidSelected."&chosenmech=".$c."\"' style='background-color:".$bidcolor."' class='mechselect_button_active' align='right' valign='center'><div style='display:inline-block;height:100%;vertical-align:middle;'><img style='vertical-align:middle;' src='".$mechstatusimage."' height='24px'><br><span style='font-size:14px;'>".$numStr."</span></div></td>\n";
+				$mechDetailString = $mechDetailString."			<td nowrap style='width:100%;background-color:".$bidcolor."' class='mechselect_button_active'>\n";
 				$mechDetailString = $mechDetailString."				<table width='100%' cellspacing=0 cellpadding=0 border=0px>\n";
 				$mechDetailString = $mechDetailString."					<tr>\n";
 
 				if ($activebid == "1") {
-					$mechDetailString = $mechDetailString."						<td nowrap width='99%' align='left' style='color:#AAAAAA;background-color:".$bidcolor."text-align:left;'><a href=gui_play_unit.php?unit=".$unitidSelected."&chosenmech=".$c."> <span style='font-size:24px;'>";
+					$mechDetailString = $mechDetailString."						<td nowrap onclick='location.href=\"gui_play_unit.php?unit=".$formationidSelected."&chosenmech=".$c."\"' width='99%' align='left' style='color:#AAAAAA;background-color:".$bidcolor."text-align:left;'><span style='font-size:24px;'>";
 				} else {
-					$mechDetailString = $mechDetailString."						<td nowrap width='99%' align='left' style='color:#AAAAAA;background-color:".$bidcolor."text-align:left;'><a href='' target='_SELF'> <span style='font-size:24px;'>";
+					$mechDetailString = $mechDetailString."						<td nowrap width='99%' align='left' style='color:#AAAAAA;background-color:".$bidcolor."text-align:left;'><span style='font-size:24px;'>";
 				}
 				$mechDetailString = $mechDetailString."						<img src='./images/ranks/".$factionidSelected."/".$pilotrank.".png' width='16px' height='16px'>";
-				$mechDetailString = $mechDetailString."						".$pilotname."</span> <span style='font-weight:normal;font-size:20px;color:#ffc677;'> ".$mechpointvalue."/".$mechtonnage."t</span></a></span>\n";
+				$mechDetailString = $mechDetailString."						".$pilotname."</span><span style='font-weight:normal;font-size:20px;color:#ffc677;'> ".$mechpointvalue."/".$mechtonnage."t</span></span>\n";
 				$mechDetailString = $mechDetailString."							<br><span style='font-size:15px;'>".textTruncate($mechchassisname, 18)."</span>\n";
 				$mechDetailString = $mechDetailString."						</td>\n";
 
-				$mechDetailString = $mechDetailString."						<td nowrap width='1%' valign='top' style='background-color:".$bidcolor."text-align:right;'>\n";
-				$mechDetailString = $mechDetailString."							<span style='font-size:12px;'>\n";
-
 				if ($playMode) {
+					$mechDetailString = $mechDetailString."						<td nowrap width='1%' valign='top' style='background-color:".$bidcolor."text-align:right;'>\n";
+					$mechDetailString = $mechDetailString."							<span style='font-size:12px;'>\n";
 					$mechDetailString = $mechDetailString."								&nbsp;&nbsp;<img width='25px' src='".$mechRoundStatusImage."'>\n";
+					$mechDetailString = $mechDetailString."							</span>\n";
+					$mechDetailString = $mechDetailString."						</td>\n";
 				} else {
-					$mechDetailString = $mechDetailString."								<a href='./gui_select_unit.php?dm=1&mechid=".$assignedMechID."&pilotid=".$assignedPilotID."'><i class='fas fa-minus-square'></i></a>\n";
+					$mechDetailString = $mechDetailString."						<td onclick='location.href=\"gui_select_unit.php?dm=1&mechid=".$assignedMechID."&pilotid=".$assignedPilotID."\"' nowrap width='1%' valign='top' style='background-color:".$bidcolor."text-align:right;'>\n";
+					$mechDetailString = $mechDetailString."							<span style='font-size:12px;'>\n";
+					$mechDetailString = $mechDetailString."								<i class='fas fa-minus-square'></i>\n";
+					$mechDetailString = $mechDetailString."							</span>\n";
+					$mechDetailString = $mechDetailString."						</td>\n";
 				}
-				$mechDetailString = $mechDetailString."							</span>\n";
-				$mechDetailString = $mechDetailString."						</td>\n";
+
 				$mechDetailString = $mechDetailString."					</tr>\n";
 				$mechDetailString = $mechDetailString."				</table>\n";
 				$mechDetailString = $mechDetailString."			</td>\n";
 
-				array_push($mechsInSingleUnit, $mechDetailString);
+				array_push($mechsInSingleFormation, $mechDetailString);
 			}
-			array_push($mechsInAllUnits, $mechsInSingleUnit);
+			array_push($mechsInAllFormations, $mechsInSingleFormation);
 		}
 	}
 
@@ -587,11 +585,11 @@ session_start();
 //	}
 	echo "		<tr>\n";
 
-	foreach ($mechsInAllUnits as &$mechsInSingleUnit) {
+	foreach ($mechsInAllFormations as &$mechsInSingleFormation) {
 		echo "			<td width='33%' style='background-color:#333333;' valign='top'>\n";
 		echo "				<div class='scroll-pane'>\n";
 		echo "					<table cellspacing=1 cellpadding=0 border=0px style='border-collapse: collapse;'>\n";
-		foreach ($mechsInSingleUnit as &$mech) {
+		foreach ($mechsInSingleFormation as &$mech) {
 			echo "						<tr>\n";
 			echo "							".$mech."\n";
 			echo "						</tr>\n";
@@ -609,14 +607,16 @@ session_start();
 	echo "			</td>\n";
 	echo "		</tr>\n";
 
-	if ($readyToFinalizeRound == 1) {
-		echo "<script>\n";
-		echo "document.getElementById('FinalizeRoundButton').style.backgroundColor = '#517d25';";
-		echo "</script>\n";
-	} else {
-		echo "<script>\n";
-		echo "document.getElementById('FinalizeRoundButton').style.backgroundColor = '#5c0700';";
-        echo "</script>\n";
+	if ($playMode) {
+		if ($readyToFinalizeRound == 1) {
+			echo "<script>\n";
+			echo "document.getElementById('FinalizeRoundButton').style.backgroundColor = '#517d25';";
+			echo "</script>\n";
+		} else {
+			echo "<script>\n";
+			echo "document.getElementById('FinalizeRoundButton').style.backgroundColor = '#5c0700';";
+	        echo "</script>\n";
+		}
 	}
 ?>
 	</table>

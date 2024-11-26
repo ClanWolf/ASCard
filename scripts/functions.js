@@ -1666,15 +1666,4 @@ $(document).ready(function() {
 			allDataAreaReds[i].style.backgroundColor="rgba(70,0,0,0.60)";
 		}
 	}
-
-	function finalizeRound(playerId) {
-		var url="./save_finalize_round.php?pid=" + playerId;
-		window.frames["saveframe"].location.replace(url);
-	}
-
-	//	$("#cover").fadeOut(350, "linear", function() {
-	//		$("#cover").hide();
-	//		document.getElementById("cover").style.visibility = "hidden";
-	//	});
-
 });

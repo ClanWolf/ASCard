@@ -17,13 +17,13 @@
 
 	if (!empty($pid)) {
 		// asc_player       --> round = round + 1
-		// asc_unit         --> unitids for playerid
-		// asc_assign       --> mechid, roundmoved and roundfired for unitids
+		// asc_formation    --> formationids (formerly unitids) for playerid
+		// asc_assign       --> mechid, roundmoved and roundfired for formationids (former unitids)
 		// asc_mechstatus   --> prepvalues for the criticals mit mechids
 
 		// - select player, update round = round + 1
-		// - select all unitids for the playerid
-		// - select all mechids (+ moved and fired) from assign with the unitids
+		// - select all formationids (former unitids) for the playerid
+		// - select all mechids (+ moved and fired) from assign with the formationids (former unitids)
 		// - select all prepvalues != 0 from mechstatus with mechids
 
 		$finishedMechsInThisRound = 0;
@@ -41,16 +41,16 @@
 		echo "Currentround: " . $currentRound . "<br>";
 		echo "Nextround: " . $nextRound . "<br><br>";
 
-		$unitIds = "";
-		$sql_asc_unit = "SELECT SQL_NO_CACHE * FROM asc_unit where playerid = ".$pid.";";
-		$result_asc_unit = mysqli_query($conn, $sql_asc_unit);
-		if (mysqli_num_rows($result_asc_unit) > 0) {
-			while($row = mysqli_fetch_assoc($result_asc_unit)) {
-				$unitId = $row["unitid"];
-				if ($unitIds == "") {
-					$unitIds = $unitIds.$unitId;
+		$formationIds = "";
+		$sql_asc_formation = "SELECT SQL_NO_CACHE * FROM asc_formation where playerid = ".$pid.";";
+		$result_asc_formation = mysqli_query($conn, $sql_asc_formation);
+		if (mysqli_num_rows($result_asc_formation) > 0) {
+			while($row = mysqli_fetch_assoc($result_asc_formation)) {
+				$formationId = $row["unitid"];
+				if ($formationIds == "") {
+					$formationIds = $formationIds.$formationId;
 				} else {
-					$unitIds = $unitIds.",".$unitId;
+					$formationIds = $formationIds.",".$formationId;
 				}
 			}
 		}
@@ -60,7 +60,7 @@
 		$sql_allActiveMechsCount = "";
 		$sql_allActiveMechsCount = $sql_allActiveMechsCount . "SELECT SQL_NO_CACHE a.id, a.unitid, a.mechid, a.pilotid, a.round_moved, a.round_fired, m.active_bid, m.mech_status ";
 		$sql_allActiveMechsCount = $sql_allActiveMechsCount . "FROM clanwolf.asc_assign a, clanwolf.asc_mech m ";
-		$sql_allActiveMechsCount = $sql_allActiveMechsCount . "WHERE unitid in (".$unitIds.") ";
+		$sql_allActiveMechsCount = $sql_allActiveMechsCount . "WHERE unitid in (".$formationIds.") ";
 		$sql_allActiveMechsCount = $sql_allActiveMechsCount . "AND a.mechid = m.mechid ";
 		$sql_allActiveMechsCount = $sql_allActiveMechsCount . "AND m.mech_status != 'destroyed' ";
 		$sql_allActiveMechsCount = $sql_allActiveMechsCount . "AND m.active_bid = 1 ";
@@ -78,7 +78,7 @@
 		$sql_allActiveMechsFinishedCount = "";
 		$sql_allActiveMechsFinishedCount = $sql_allActiveMechsFinishedCount . "SELECT SQL_NO_CACHE * ";
 		$sql_allActiveMechsFinishedCount = $sql_allActiveMechsFinishedCount . "FROM clanwolf.asc_assign a, clanwolf.asc_mech m ";
-		$sql_allActiveMechsFinishedCount = $sql_allActiveMechsFinishedCount . "WHERE unitid in (".$unitIds.") ";
+		$sql_allActiveMechsFinishedCount = $sql_allActiveMechsFinishedCount . "WHERE unitid in (".$formationIds.") ";
 		$sql_allActiveMechsFinishedCount = $sql_allActiveMechsFinishedCount . "AND a.mechid = m.mechid ";
 		$sql_allActiveMechsFinishedCount = $sql_allActiveMechsFinishedCount . "AND m.mech_status != 'destroyed' ";
 		$sql_allActiveMechsFinishedCount = $sql_allActiveMechsFinishedCount . "AND m.active_bid = 1 ";
@@ -98,7 +98,7 @@
 		$sql_allActiveMechIDsNOTFinished = "";
 		$sql_allActiveMechIDsNOTFinished = $sql_allActiveMechIDsNOTFinished . "SELECT SQL_NO_CACHE * ";
 		$sql_allActiveMechIDsNOTFinished = $sql_allActiveMechIDsNOTFinished . "FROM clanwolf.asc_assign a, clanwolf.asc_mech m, clanwolf.asc_pilot p ";
-		$sql_allActiveMechIDsNOTFinished = $sql_allActiveMechIDsNOTFinished . "WHERE unitid in (".$unitIds.") ";
+		$sql_allActiveMechIDsNOTFinished = $sql_allActiveMechIDsNOTFinished . "WHERE unitid in (".$formationIds.") ";
 		$sql_allActiveMechIDsNOTFinished = $sql_allActiveMechIDsNOTFinished . "AND a.mechid = m.mechid ";
 		$sql_allActiveMechIDsNOTFinished = $sql_allActiveMechIDsNOTFinished . "AND a.pilotid = p.pilotid ";
 		$sql_allActiveMechIDsNOTFinished = $sql_allActiveMechIDsNOTFinished . "AND m.mech_status != 'destroyed' ";
@@ -108,22 +108,22 @@
 		$result_allActiveMechIDsNOTFinished = mysqli_query($conn, $sql_allActiveMechIDsNOTFinished);
 		if (mysqli_num_rows($result_allActiveMechIDsNOTFinished) > 0) {
 			while($row_allActiveMechIDsNOTFinished = mysqli_fetch_assoc($result_allActiveMechIDsNOTFinished)) {
-				$unitId = $row_allActiveMechIDsNOTFinished["unitid"];
+				$formationId = $row_allActiveMechIDsNOTFinished["unitid"];
 				$mechId = $row_allActiveMechIDsNOTFinished["mechid"];
 				$mechModel = $row_allActiveMechIDsNOTFinished["as_model"];
 				$pilotName = $row_allActiveMechIDsNOTFinished["name"];
 
 				if ($allActiveMechIDsNOTFinished == "") {
-                    $allActiveMechIDsNOTFinished = $allActiveMechIDsNOTFinished.$unitId."|".$mechId."|".$mechModel."|".$pilotName;
+                    $allActiveMechIDsNOTFinished = $allActiveMechIDsNOTFinished.$formationId."|".$mechId."|".$mechModel."|".$pilotName;
                 } else {
-                    $allActiveMechIDsNOTFinished = $allActiveMechIDsNOTFinished.",".$unitId."|".$mechId."|".$mechModel."|".$pilotName;
+                    $allActiveMechIDsNOTFinished = $allActiveMechIDsNOTFinished.",".$formationId."|".$mechId."|".$mechModel."|".$pilotName;
                 }
 			}
 		}
 
 		if ($allActiveMechsCount == $allActiveMechsFinishedCount) {
 			// all Mechs did move and fired in this round and the round can be finalized
-			$sql_asc_assign = "SELECT SQL_NO_CACHE * FROM asc_assign where unitid in (".$unitIds.");";
+			$sql_asc_assign = "SELECT SQL_NO_CACHE * FROM asc_assign where unitid in (".$formationIds.");";
 			echo $sql_asc_assign;
 			$result_asc_assign = mysqli_query($conn, $sql_asc_assign);
 			if (mysqli_num_rows($result_asc_assign) > 0) {

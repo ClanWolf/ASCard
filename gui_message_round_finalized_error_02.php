@@ -168,29 +168,6 @@ session_start();
 				<td align="center" class='datalabel'>
 					<p>Round was not changed!</p>
 					<p style="font-family:'Pathway Gothic One',sans-serif,bold;font-size:40px;color:yellow;">Check units!</p>
-
-
-					<!--
-					<p>
-						<?php
-							$strs = explode(',', $mechIDsNotFinished, );
-							foreach ($strs as $item) {
-								$strs2 = explode('|', $item, );
-								$unitId = $strs2[0];
-								$mechId = $strs2[1];
-								$mechName = $strs2[2];
-								$pilotName = $strs2[3];
-
-								echo $pilotName.": <a href='https://www.clanwolf.net/apps/ASCard/gui_play_unit.php?unit=".$unitId."'>".$mechName."</a><br>";
-							}
-						?>
-					</p>
-					<p>
-					Links will open the unit, not individual mechs.
-					</p>
-					-->
-
-
 				</td>
 			</tr>
 		</table>

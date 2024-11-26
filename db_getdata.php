@@ -12,7 +12,6 @@
 	$FACTION = "DEFAULT";
 	$FACTION_IMG_URL = "...";
 	$UNIT = "DEFAULT";
-	//$UNIT_IMG_URL = "...";
 
 	$GAMEID = -1;
 
@@ -103,20 +102,19 @@
 //	mysqli_free_result($result_asc_game);
 
 	// Unit
-	// unitid; factionid; forcename; --parentforceid--; unit_imageurl; playable
-	$sql_asc_unit = "SELECT SQL_NO_CACHE * FROM asc_unit;";
-	$result_asc_unit = mysqli_query($conn, $sql_asc_unit);
-	if (mysqli_num_rows($result_asc_unit) > 0) {
-		while($row = mysqli_fetch_assoc($result_asc_unit)) {
+	// unitid; factionid; formationname; --parentforceid--; unit_imageurl; playable
+	$sql_asc_formation = "SELECT SQL_NO_CACHE * FROM asc_formation;";
+	$result_asc_formation = mysqli_query($conn, $sql_asc_formation);
+	if (mysqli_num_rows($result_asc_formation) > 0) {
+		while($row = mysqli_fetch_assoc($result_asc_formation)) {
 			if ($row["unitid"] == $unitid) {
-				$UNIT = $row["forcename"];
-				//$UNIT_IMG_URL = $row["unit_imageurl"];
+				$UNIT = $row["formationname"];
 				$factionid = $row["factionid"];
 				$unitplayerid = $row["playerid"];
 			}
 		}
 	}
-	mysqli_free_result($result_asc_unit);
+	mysqli_free_result($result_asc_formation);
 
 	// Use MUL Images
 	$sql_asc_useMULImages = "SELECT SQL_NO_CACHE * FROM asc_options where playerid = " . $unitplayerid . ";";

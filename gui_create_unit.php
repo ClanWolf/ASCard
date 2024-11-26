@@ -252,10 +252,11 @@ session_start();
 
 		$sql_insertpilot = "";
 		$sql_insertpilot = $sql_insertpilot."INSERT INTO asc_pilot ";
-		$sql_insertpilot = $sql_insertpilot."(name, pilot_imageurl) ";
+		$sql_insertpilot = $sql_insertpilot."(name, pilot_imageurl, playerid) ";
 		$sql_insertpilot = $sql_insertpilot."VALUES (";
-		$sql_insertpilot = $sql_insertpilot."'".$PN."', ";      // Pilotname
-		$sql_insertpilot = $sql_insertpilot."'".$PI."'";        // Pilot image
+		$sql_insertpilot = $sql_insertpilot."'".$PN."',";      // Pilotname
+		$sql_insertpilot = $sql_insertpilot."'".$PI."',";      // Pilot image
+		$sql_insertpilot = $sql_insertpilot."".$pid."";        // Player id
 		$sql_insertpilot = $sql_insertpilot.")";
 		if (mysqli_query($conn, $sql_insertpilot)) {
 			// Success
@@ -267,11 +268,12 @@ session_start();
 
 		$sql_insertassign = "";
 		$sql_insertassign = $sql_insertassign."INSERT INTO asc_assign ";
-		$sql_insertassign = $sql_insertassign."(unitid, mechid, pilotid) ";
+		$sql_insertassign = $sql_insertassign."(unitid, mechid, pilotid, playerid) ";
 		$sql_insertassign = $sql_insertassign."VALUES (";
-		$sql_insertassign = $sql_insertassign.$UNITID.", ";
-		$sql_insertassign = $sql_insertassign.$newmechid.", ";
-		$sql_insertassign = $sql_insertassign.$newpilotid;
+		$sql_insertassign = $sql_insertassign.$UNITID.",";
+		$sql_insertassign = $sql_insertassign.$newmechid.",";
+		$sql_insertassign = $sql_insertassign.$newpilotid.",";
+		$sql_insertassign = $sql_insertassign.$pid;
 		$sql_insertassign = $sql_insertassign.")";
 		if (mysqli_query($conn, $sql_insertassign)) {
 			// Success
@@ -282,9 +284,10 @@ session_start();
 
 		$sql_insertmechstatus = "";
 		$sql_insertmechstatus = $sql_insertmechstatus."INSERT INTO asc_mechstatus ";
-		$sql_insertmechstatus = $sql_insertmechstatus."(mechid, heat, armor, structure, crit_engine, crit_fc, crit_mp, crit_weapons) ";
+		$sql_insertmechstatus = $sql_insertmechstatus."(mechid, playerid, heat, armor, structure, crit_engine, crit_fc, crit_mp, crit_weapons) ";
 		$sql_insertmechstatus = $sql_insertmechstatus."VALUES (";
-		$sql_insertmechstatus = $sql_insertmechstatus.$newmechid.", ";
+		$sql_insertmechstatus = $sql_insertmechstatus.$newmechid.",";
+		$sql_insertmechstatus = $sql_insertmechstatus.$pid.",";
 		$sql_insertmechstatus = $sql_insertmechstatus."0, ";
 		$sql_insertmechstatus = $sql_insertmechstatus."0, ";
 		$sql_insertmechstatus = $sql_insertmechstatus."0, ";
@@ -689,16 +692,16 @@ session_start();
 			<tr>
 				<td nowrap class="datalabel" style='text-align:left;' colspan='4'>Add to formation: <select required name='UNITID' id='UNITID' size='1' style='width:200px;'>
 <?php
-	$sql_asc_playersunits = "SELECT SQL_NO_CACHE * FROM asc_unit where playerid=".$pid;
-	$result_asc_playersunits = mysqli_query($conn, $sql_asc_playersunits);
-	if (mysqli_num_rows($result_asc_playersunits) > 0) {
-		while($rowUnits = mysqli_fetch_assoc($result_asc_playersunits)) {
-			$unitid = $rowUnits['unitid'];
-			$forcename = $rowUnits['forcename'];
-			if ($paramunitid == $unitid) {
-				echo "										<option value='".$unitid."' selected>".$forcename."</option>\n";
+	$sql_asc_playersformations = "SELECT SQL_NO_CACHE * FROM asc_formation where playerid=".$pid;
+	$result_asc_playersformations = mysqli_query($conn, $sql_asc_playersformations);
+	if (mysqli_num_rows($result_asc_playersformations) > 0) {
+		while($rowFormations = mysqli_fetch_assoc($result_asc_playersformations)) {
+			$formationid = $rowFormations['unitid'];
+			$formationname = $rowFormations['formationname'];
+			if ($paramunitid == $formationid) {
+				echo "										<option value='".$formationid."' selected>".$formationname."</option>\n";
 			} else {
-				echo "										<option value='".$unitid."'>".$forcename."</option>\n";
+				echo "										<option value='".$formationid."'>".$formationname."</option>\n";
 			}
 		}
 	}

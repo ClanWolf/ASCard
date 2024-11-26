@@ -31,3 +31,20 @@ TODO: Shortcut bar irgendwo mit allen Mech-Ids zum schnellen Wechseln
 TODO: Why does the play unit page sometimes randomly takes over 1 sec to load?
 TODO: Fix parameter names on all pages from "mech" to "unit" and "unit" to "formation"
 TODO: Fix table names according to unit/formation changes
+
+
+
+
+// TODO: DELETE all formation / pilots / assigns / mechstatus (unitstatus) of players if the player is deleted. Now only formations are
+// TODO: DELETE options if player is deleted
+// TODO: Add PlayerID to unit, pilot and assigns
+
+pilot      has playerid
+assign     has playerid
+mech       has playerid (will become unit)
+unit       has playerid
+mechstatus has playerid
+
+// TODO: When clicking into a scroll pane, it always scrolls up at the first try... only works at second click
+
+// TODO: Delete players only for admins
