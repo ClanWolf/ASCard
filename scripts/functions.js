@@ -375,7 +375,11 @@ function setCircles(h, a, s, e, fc, mp, w, e_cv, fc_cv, w_cv, ma_cv, mb_cv, mc_c
 	}
 
 	var updatedmovementpointsground = movementpointsground;
-	var updatemovementpointsjump = movementpointsjump;
+	var updatedmovementpointsjump = movementpointsjump;
+
+	var updatedshortdamage = shortdamage;
+	var updatedmediumdamage = mediumdamage;
+	var updatedlongdamage = longdamage;
 
 	var radioMV2_moved2_standstill = document.getElementById("MV2_moved2_standstill");
 	var radioMV10_moved10_hulldown = document.getElementById("MV10_moved10_hulldown");
@@ -442,128 +446,217 @@ function setCircles(h, a, s, e, fc, mp, w, e_cv, fc_cv, w_cv, ma_cv, mb_cv, mc_c
 		radioWF6_WEAPONSFIRED2.checked = true;
 	}
 
-	if (e == 0) {
-		//
-	} else if (e == 1) {
-		enginehit = 1;
-	} else if (e == 2) {
-		enginehit = 1;
-	}
-	if (h == 0) {
+
+
+
+
+
+
+
+
+	console.log("Jump: " + updatedmovementpointsjump);
+	//console.log("UnitType: " + unitType);
+	if (unitType == "CV") {
+		if (e_cv == 0) {
+			//
+		} else if (e_cv == 1) {
+			enginehit = 1;
+			if (updatedshortdamage > 0) { updatedshortdamage = Math.ceil(updatedshortdamage / 2); }
+			if (updatedmediumdamage > 0) { updatedmediumdamage = Math.ceil(updatedmediumdamage / 2); }
+			if (updatedlongdamage > 0) { Math.ceil(updatedlongdamage = updatedlongdamage / 2); }
+			if (updatedmovementpointsground > 0 ) { updatedmovementpointsground = Math.ceil(updatedmovementpointsground / 2); }
+			if (updatedmovementpointsjump > 0 ) { updatedmovementpointsjump = Math.ceil(updatedmovementpointsjump / 2); }
+		} else if (e_cv == 2) {
+			enginehit = 1;
+		}
+
 		updatedshortvalue = 0;
 		updatedmediumvalue = 2;
 		updatedlongvalue = 4;
-	} else if (h == 1) {
-		updatedshortvalue = updatedshortvalue + 1;
-		updatedmediumvalue = updatedmediumvalue + 1;
-		updatedlongvalue = updatedlongvalue + 1;
-	} else if (h == 2) {
-		updatedshortvalue = updatedshortvalue + 2;
-		updatedmediumvalue = updatedmediumvalue + 2;
-		updatedlongvalue = updatedlongvalue + 2;
-	} else if (h == 3) {
-		updatedshortvalue = updatedshortvalue + 3;
-		updatedmediumvalue = updatedmediumvalue + 3;
-		updatedlongvalue = updatedlongvalue + 3;
-	} else if (h == 4) {
-		updatedshortvalue = updatedshortvalue + 4;
-		updatedmediumvalue = updatedmediumvalue + 4;
-		updatedlongvalue = updatedlongvalue + 4;
-	}
-	if (fc == 0) {
-		//
-	} else if (fc == 1) {
-		updatedshortvalue = updatedshortvalue + 2;
-		updatedmediumvalue = updatedmediumvalue + 2;
-		updatedlongvalue = updatedlongvalue + 2;
-	} else if (fc == 2) {
-		updatedshortvalue = updatedshortvalue + 4;
-		updatedmediumvalue = updatedmediumvalue + 4;
-		updatedlongvalue = updatedlongvalue + 4;
-	} else if (fc == 3) {
-		updatedshortvalue = updatedshortvalue + 6;
-		updatedmediumvalue = updatedmediumvalue + 6;
-		updatedlongvalue = updatedlongvalue + 6;
-	} else if (fc == 4) {
-		updatedshortvalue = updatedshortvalue + 8;
-		updatedmediumvalue = updatedmediumvalue + 8;
-		updatedlongvalue = updatedlongvalue + 8;
-	}
 
-	var updatedshortdamage = shortdamage;
-	var updatedmediumdamage = mediumdamage;
-	var updatedlongdamage = longdamage;
+		if (fc_cv == 0) {
+			//
+		} else if (fc_cv == 1) {
+			updatedshortvalue = updatedshortvalue + 2;
+			updatedmediumvalue = updatedmediumvalue + 2;
+			updatedlongvalue = updatedlongvalue + 2;
+		} else if (fc_cv == 2) {
+			updatedshortvalue = updatedshortvalue + 4;
+			updatedmediumvalue = updatedmediumvalue + 4;
+			updatedlongvalue = updatedlongvalue + 4;
+		} else if (fc_cv == 3) {
+			updatedshortvalue = updatedshortvalue + 6;
+			updatedmediumvalue = updatedmediumvalue + 6;
+			updatedlongvalue = updatedlongvalue + 6;
+		} else if (fc_cv == 4) {
+			updatedshortvalue = updatedshortvalue + 8;
+			updatedmediumvalue = updatedmediumvalue + 8;
+			updatedlongvalue = updatedlongvalue + 8;
+		}
 
-	if (w == 0) {
-		//
-	} else if (w == 1) {
-		updatedshortdamage = updatedshortdamage - 1;
-		updatedmediumdamage = updatedmediumdamage - 1;
-		updatedlongdamage = updatedlongdamage - 1;
-	} else if (w == 2) {
-		updatedshortdamage = updatedshortdamage - 2;
-		updatedmediumdamage = updatedmediumdamage - 2;
-		updatedlongdamage = updatedlongdamage - 2;
-	} else if (w == 3) {
-		updatedshortdamage = updatedshortdamage - 3;
-		updatedmediumdamage = updatedmediumdamage - 3;
- 		updatedlongdamage = updatedlongdamage - 3;
-	} else if (w == 4) {
-		updatedshortdamage = updatedshortdamage - 4;
-		updatedmediumdamage = updatedmediumdamage - 4;
-		updatedlongdamage = updatedlongdamage - 4;
-	}
-	if (updatedshortdamage < 0) updatedshortdamage = 0;
-	if (updatedmediumdamage < 0) updatedmediumdamage = 0;
-	if (updatedlongdamage < 0) updatedlongdamage = 0;
+		if (w_cv == 0) {
+		    //
+		} else if (w_cv == 1) {
+			updatedshortdamage = updatedshortdamage - 1;
+			updatedmediumdamage = updatedmediumdamage - 1;
+			updatedlongdamage = updatedlongdamage - 1;
+		} else if (w_cv == 2) {
+			updatedshortdamage = updatedshortdamage - 2;
+			updatedmediumdamage = updatedmediumdamage - 2;
+			updatedlongdamage = updatedlongdamage - 2;
+		} else if (w_cv == 3) {
+			updatedshortdamage = updatedshortdamage - 3;
+			updatedmediumdamage = updatedmediumdamage - 3;
+			updatedlongdamage = updatedlongdamage - 3;
+		} else if (w_cv == 4) {
+			updatedshortdamage = updatedshortdamage - 4;
+			updatedmediumdamage = updatedmediumdamage - 4;
+			updatedlongdamage = updatedlongdamage - 4;
+		}
+		if (updatedshortdamage < 0) updatedshortdamage = 0;
+		if (updatedmediumdamage < 0) updatedmediumdamage = 0;
+		if (updatedlongdamage < 0) updatedlongdamage = 0;
 
-	if (updatedshortdamage > 0) { updatedshortdamage = updatedshortdamage + uov; }
-	if (updatedmediumdamage > 0) { updatedmediumdamage = updatedmediumdamage + uov; }
-	if (document.getElementById('sa_field').innerText.indexOf('OVL') !== -1) {
-		if (updatedlongdamage > 0) { updatedlongdamage = updatedlongdamage + uov; }
-	} else {
-		if (updatedlongdamage > 0) { updatedlongdamage = updatedlongdamage; }
+
+
+
+		// movement
+
+
+	} if (unitType == "BM") {
+		if (e == 0) {
+			//
+		} else if (e == 1) {
+			enginehit = 1;
+		} else if (e == 2) {
+			enginehit = 1;
+		}
+		if (h == 0) {
+			updatedshortvalue = 0;
+			updatedmediumvalue = 2;
+			updatedlongvalue = 4;
+		} else if (h == 1) {
+			updatedshortvalue = updatedshortvalue + 1;
+			updatedmediumvalue = updatedmediumvalue + 1;
+			updatedlongvalue = updatedlongvalue + 1;
+		} else if (h == 2) {
+			updatedshortvalue = updatedshortvalue + 2;
+			updatedmediumvalue = updatedmediumvalue + 2;
+			updatedlongvalue = updatedlongvalue + 2;
+		} else if (h == 3) {
+			updatedshortvalue = updatedshortvalue + 3;
+			updatedmediumvalue = updatedmediumvalue + 3;
+			updatedlongvalue = updatedlongvalue + 3;
+		} else if (h == 4) {
+			updatedshortvalue = updatedshortvalue + 4;
+			updatedmediumvalue = updatedmediumvalue + 4;
+			updatedlongvalue = updatedlongvalue + 4;
+		}
+		if (fc == 0) {
+			//
+		} else if (fc == 1) {
+			updatedshortvalue = updatedshortvalue + 2;
+			updatedmediumvalue = updatedmediumvalue + 2;
+			updatedlongvalue = updatedlongvalue + 2;
+		} else if (fc == 2) {
+			updatedshortvalue = updatedshortvalue + 4;
+			updatedmediumvalue = updatedmediumvalue + 4;
+			updatedlongvalue = updatedlongvalue + 4;
+		} else if (fc == 3) {
+			updatedshortvalue = updatedshortvalue + 6;
+			updatedmediumvalue = updatedmediumvalue + 6;
+			updatedlongvalue = updatedlongvalue + 6;
+		} else if (fc == 4) {
+			updatedshortvalue = updatedshortvalue + 8;
+			updatedmediumvalue = updatedmediumvalue + 8;
+			updatedlongvalue = updatedlongvalue + 8;
+		}
+
+		if (w == 0) {
+			//
+		} else if (w == 1) {
+			updatedshortdamage = updatedshortdamage - 1;
+			updatedmediumdamage = updatedmediumdamage - 1;
+			updatedlongdamage = updatedlongdamage - 1;
+		} else if (w == 2) {
+			updatedshortdamage = updatedshortdamage - 2;
+			updatedmediumdamage = updatedmediumdamage - 2;
+			updatedlongdamage = updatedlongdamage - 2;
+		} else if (w == 3) {
+			updatedshortdamage = updatedshortdamage - 3;
+			updatedmediumdamage = updatedmediumdamage - 3;
+			updatedlongdamage = updatedlongdamage - 3;
+		} else if (w == 4) {
+			updatedshortdamage = updatedshortdamage - 4;
+			updatedmediumdamage = updatedmediumdamage - 4;
+			updatedlongdamage = updatedlongdamage - 4;
+		}
+		if (updatedshortdamage < 0) updatedshortdamage = 0;
+		if (updatedmediumdamage < 0) updatedmediumdamage = 0;
+		if (updatedlongdamage < 0) updatedlongdamage = 0;
+
+		if (updatedshortdamage > 0) { updatedshortdamage = updatedshortdamage + uov; }
+		if (updatedmediumdamage > 0) { updatedmediumdamage = updatedmediumdamage + uov; }
+		if (document.getElementById('sa_field').innerText.indexOf('OVL') !== -1) {
+			if (updatedlongdamage > 0) { updatedlongdamage = updatedlongdamage + uov; }
+		} else {
+			if (updatedlongdamage > 0) { updatedlongdamage = updatedlongdamage; }
+		}
+
+		if (mp == 0) { // Critical movement point hits
+			//
+		} else if (mp == 1) {
+			updatedmovementpointsground = Math.ceil(updatedmovementpointsground / 2);
+			updatedmovementpointsjump = Math.ceil(updatedmovementpointsjump / 2);
+		} else if (mp == 2) {
+			updatedmovementpointsground = Math.ceil(updatedmovementpointsground / 4);
+			updatedmovementpointsjump = Math.ceil(updatedmovementpointsjump / 4);
+		} else if (mp == 3) {
+			updatedmovementpointsground = Math.ceil(updatedmovementpointsground / 8);
+			updatedmovementpointsjump = Math.ceil(updatedmovementpointsjump / 8);
+		} else if (mp == 4) {
+			updatedmovementpointsground = Math.ceil(updatedmovementpointsground / 16);
+			updatedmovementpointsjump = Math.ceil(updatedmovementpointsjump / 16);
+		}
+		if (h == 1) {
+			updatedmovementpointsground = updatedmovementpointsground - 2;
+		} else if (h == 2) {
+			updatedmovementpointsground = updatedmovementpointsground - 4;
+		} else if (h == 3) {
+			updatedmovementpointsground = updatedmovementpointsground - 6;
+		} else if (h == 4) {
+			updatedmovementpointsground = 0;
+			updatedmovementpointsjump = 0;
+		}
+		if (updatedmovementpointsground < 0) {
+			updatedmovementpointsground = 0;
+		}
+		if (updatedmovementpointsjump < 0) {
+			updatedmovementpointsjump = 0;
+		}
 	}
 
 	document.getElementById("dmgshort_s").innerHTML = updatedshortdamage;
 	document.getElementById("dmgmedium_s").innerHTML = updatedmediumdamage;
 	document.getElementById("dmglong_s").innerHTML = updatedlongdamage;
 
-	if (mp == 0) { // Critical movement point hits
-		//
-	} else if (mp == 1) {
-		updatedmovementpointsground = Math.ceil(updatedmovementpointsground / 2);
-		updatemovementpointsjump = Math.ceil(updatemovementpointsjump / 2);
-	} else if (mp == 2) {
-		updatedmovementpointsground = Math.ceil(updatedmovementpointsground / 4);
-		updatemovementpointsjump = Math.ceil(updatemovementpointsjump / 4);
-	} else if (mp == 3) {
-		updatedmovementpointsground = Math.ceil(updatedmovementpointsground / 8);
-		updatemovementpointsjump = Math.ceil(updatemovementpointsjump / 8);
-	} else if (mp == 4) {
-		updatedmovementpointsground = Math.ceil(updatedmovementpointsground / 16);
-		updatemovementpointsjump = Math.ceil(updatemovementpointsjump / 16);
-	}
-	if (h == 1) {
-		updatedmovementpointsground = updatedmovementpointsground - 2;
-	} else if (h == 2) {
-		updatedmovementpointsground = updatedmovementpointsground - 4;
-	} else if (h == 3) {
-		updatedmovementpointsground = updatedmovementpointsground - 6;
-	} else if (h == 4) {
-		updatedmovementpointsground = 0;
-		updatemovementpointsjump = 0;
-	}
-	if (updatedmovementpointsground < 0) {
-		updatedmovementpointsground = 0;
-	}
-    if (updatemovementpointsjump < 0) {
-		updatemovementpointsjump = 0;
-	}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 	if (showDistancesHexes == 1) {
 		var updatedmovementpointsgroundHexes =  Math.ceil(updatedmovementpointsground / 2);
-		var updatedmovementpointsjumpHexes = Math.ceil(updatemovementpointsjump / 2);
+		var updatedmovementpointsjumpHexes = Math.ceil(updatedmovementpointsjump / 2);
 
 		var mvstring = updatedmovementpointsgroundHexes + "<span style='font-size:0.6em;'>&#11043;</span>"; // Unicode for Hexagon
 		mvstring = mvstring + MV_TYPE;
@@ -574,8 +667,8 @@ function setCircles(h, a, s, e, fc, mp, w, e_cv, fc_cv, w_cv, ma_cv, mb_cv, mc_c
 	} else {
 		var mvstring = updatedmovementpointsground + "&rdquo;";
 		mvstring = mvstring + MV_TYPE;
-		if (updatemovementpointsjump > 0) {
-			mvstring = mvstring + "/" + updatemovementpointsjump + "&rdquo;j";
+		if (updatedmovementpointsjump > 0) {
+			mvstring = mvstring + "/" + updatedmovementpointsjump + "&rdquo;j";
 		}
 		document.getElementById("mv_points").innerHTML = mvstring;
 	}
