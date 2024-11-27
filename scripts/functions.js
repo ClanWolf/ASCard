@@ -306,7 +306,11 @@ function setCircles(h, a, s, e, fc, mp, w, e_cv, fc_cv, w_cv, ma_cv, mb_cv, mc_c
 	var na1 = "";
 
 	tc_heat = h;
-	tc_firecontrolDamage = fc * 2;
+	if (unitType == "CV") {
+		tc_firecontrolDamage = fc_cv * 2;
+	} else if (unitType == "BM") {
+		tc_firecontrolDamage = fc * 2;
+	}
 
 	var h_c = 0;
 	var a_c = 0;
@@ -380,6 +384,9 @@ function setCircles(h, a, s, e, fc, mp, w, e_cv, fc_cv, w_cv, ma_cv, mb_cv, mc_c
 	var updatedshortdamage = shortdamage;
 	var updatedmediumdamage = mediumdamage;
 	var updatedlongdamage = longdamage;
+	var shortdamageZeroStar = false;
+	var mediumdamageZeroStar = false;
+	var longdamageZeroStar = false;
 
 	var radioMV2_moved2_standstill = document.getElementById("MV2_moved2_standstill");
 	var radioMV10_moved10_hulldown = document.getElementById("MV10_moved10_hulldown");
@@ -453,21 +460,16 @@ function setCircles(h, a, s, e, fc, mp, w, e_cv, fc_cv, w_cv, ma_cv, mb_cv, mc_c
 
 
 
-
-	console.log("Jump: " + updatedmovementpointsjump);
-	//console.log("UnitType: " + unitType);
 	if (unitType == "CV") {
 		if (e_cv == 0) {
 			//
-		} else if (e_cv == 1) {
+		} else if (e_cv => 1) {
 			enginehit = 1;
 			if (updatedshortdamage > 0) { updatedshortdamage = Math.ceil(updatedshortdamage / 2); }
 			if (updatedmediumdamage > 0) { updatedmediumdamage = Math.ceil(updatedmediumdamage / 2); }
 			if (updatedlongdamage > 0) { Math.ceil(updatedlongdamage = updatedlongdamage / 2); }
 			if (updatedmovementpointsground > 0 ) { updatedmovementpointsground = Math.ceil(updatedmovementpointsground / 2); }
 			if (updatedmovementpointsjump > 0 ) { updatedmovementpointsjump = Math.ceil(updatedmovementpointsjump / 2); }
-		} else if (e_cv == 2) {
-			enginehit = 1;
 		}
 
 		updatedshortvalue = 0;
@@ -513,14 +515,46 @@ function setCircles(h, a, s, e, fc, mp, w, e_cv, fc_cv, w_cv, ma_cv, mb_cv, mc_c
 			updatedmediumdamage = updatedmediumdamage - 4;
 			updatedlongdamage = updatedlongdamage - 4;
 		}
+		if (updatedshortdamage == 0) {
+			shortdamageZeroStar = true;
+		}
+		if (updatedmediumdamage == 0) {
+			mediumdamageZeroStar = true;
+		}
+		if (updatedlongdamage == 0) {
+			longdamageZeroStar = true;
+		}
+		if (updatedshortdamage == -1) {
+			shortdamageZeroStar = false;
+			updatedshortdamage = 0;
+		}
+		if (updatedmediumdamage == -1) {
+			mediumdamageZeroStar = false;
+			updatedmediumdamage = 0;
+		}
+		if (updatedlongdamage == -1) {
+			longdamageZeroStar = false;
+			updatedlongdamage = 0;
+		}
 		if (updatedshortdamage < 0) updatedshortdamage = 0;
 		if (updatedmediumdamage < 0) updatedmediumdamage = 0;
 		if (updatedlongdamage < 0) updatedlongdamage = 0;
 
-
-
-
 		// movement
+
+
+
+// 2D6 -->
+// 2–8    No effect
+// 9–10   −2” Move, −1 TMM*      (* A unit reduced to 0” (or less) Move is immobilized)
+// 11     −50% Move, −50% TMM*†  († If a fractional Move rating results, round it down. There is a minimum Move loss of 2” and TMM loss of 1.)
+// 12+    Unit immobilized
+
+//ma_cv
+//mb_cv
+//mc_cv
+
+
 
 
 	} if (unitType == "BM") {
@@ -591,6 +625,29 @@ function setCircles(h, a, s, e, fc, mp, w, e_cv, fc_cv, w_cv, ma_cv, mb_cv, mc_c
 			updatedmediumdamage = updatedmediumdamage - 4;
 			updatedlongdamage = updatedlongdamage - 4;
 		}
+
+		if (updatedshortdamage == 0) {
+			shortdamageZeroStar = true;
+		}
+		if (updatedmediumdamage == 0) {
+			mediumdamageZeroStar = true;
+		}
+		if (updatedlongdamage == 0) {
+			longdamageZeroStar = true;
+		}
+		if (updatedshortdamage == -1) {
+			shortdamageZeroStar = false;
+			updatedshortdamage = 0;
+		}
+		if (updatedmediumdamage == -1) {
+			mediumdamageZeroStar = false;
+			updatedmediumdamage = 0;
+		}
+		if (updatedlongdamage == -1) {
+			longdamageZeroStar = false;
+			updatedlongdamage = 0;
+		}
+
 		if (updatedshortdamage < 0) updatedshortdamage = 0;
 		if (updatedmediumdamage < 0) updatedmediumdamage = 0;
 		if (updatedlongdamage < 0) updatedlongdamage = 0;
@@ -636,11 +693,21 @@ function setCircles(h, a, s, e, fc, mp, w, e_cv, fc_cv, w_cv, ma_cv, mb_cv, mc_c
 		}
 	}
 
-	document.getElementById("dmgshort_s").innerHTML = updatedshortdamage;
-	document.getElementById("dmgmedium_s").innerHTML = updatedmediumdamage;
-	document.getElementById("dmglong_s").innerHTML = updatedlongdamage;
-
-
+	if (shortdamageZeroStar && shortdamage > 0) {
+		document.getElementById("dmgshort_s").innerHTML = updatedshortdamage + "*";
+	} else {
+		document.getElementById("dmgshort_s").innerHTML = updatedshortdamage;
+	}
+	if (mediumdamageZeroStar && mediumdamage > 0) {
+		document.getElementById("dmgmedium_s").innerHTML = updatedmediumdamage + "*";
+	} else {
+		document.getElementById("dmgmedium_s").innerHTML = updatedmediumdamage;
+	}
+	if (longdamageZeroStar && longdamage > 0) {
+		document.getElementById("dmglong_s").innerHTML = updatedlongdamage + "*";
+	} else {
+		document.getElementById("dmglong_s").innerHTML = updatedlongdamage;
+	}
 
 
 
@@ -780,6 +847,9 @@ function setCircles(h, a, s, e, fc, mp, w, e_cv, fc_cv, w_cv, ma_cv, mb_cv, mc_c
 		mechstatus = 4;
 	}
 	if (e == 2) {
+		mechstatus = 4;
+	}
+	if (e_cv == 2) {
 		mechstatus = 4;
 	}
 	if (mechstatusstring == 'crippled') {

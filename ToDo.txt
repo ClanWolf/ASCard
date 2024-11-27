@@ -2,7 +2,7 @@
 // HIGH
 TODO: Finish the crits for CVs
 TODO: Indikator für gemountete Elementare / Infanterie
-TODO: Add a user id to created mechs and show only own mechs in assignment list
+TODO: Add a playerid to created mechs and show only own mechs in assignment list
 
 // NORMAL
 TODO: Alle Schriftarten sollten als em relativ definiert werden
@@ -34,17 +34,5 @@ TODO: Fix table names according to unit/formation changes
 
 
 
+TODO: Delete players only for admins (admin from the user table flag, not fixed user id)
 
-// TODO: DELETE all formation / pilots / assigns / mechstatus (unitstatus) of players if the player is deleted. Now only formations are
-// TODO: DELETE options if player is deleted
-// TODO: Add PlayerID to unit, pilot and assigns
-
-pilot      has playerid
-assign     has playerid
-mech       has playerid (will become unit)
-unit       has playerid
-mechstatus has playerid
-
-// TODO: When clicking into a scroll pane, it always scrolls up at the first try... only works at second click
-
-// TODO: Delete players only for admins
