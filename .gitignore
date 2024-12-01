@@ -1,4 +1,5 @@
 /.idea/
 /fontawesome/
 config.php
+config_neuerServer.php
 createPW.php
