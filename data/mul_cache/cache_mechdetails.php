@@ -20,7 +20,7 @@
 //		} else {
 //			echo "Saving " . $filename_arr[$key] . "... ";
 //			// echo $content;
-//			$filename = "/var/www/vhosts/clanwolf.net/httpdocs/apps/ASCard/cache/mul/mechdetails/" . $i . ".json";
+//			$filename = "/var/www/vhosts/ascard.net/httpdocs/app/cache/mul/mechdetails/" . $i . ".json";
 //			$fileHandle = fopen($filename, 'w');
 //			fwrite($fileHandle, $content);
 //			fclose($fileHandle);
@@ -28,8 +28,6 @@
 //		}
 //	}
 ?>
-
-// https://www.clanwolf.net/path/cache_mechdetails.php?startindex=100
 
 <?php
 	echo "ASCard App - caching mech details from MUL<br>";
@@ -54,7 +52,7 @@
 		} else {
 			echo "Saving " . $filename_arr[$key] . "... ";
 			// echo $content;
-			$filename = "/var/www/vhosts/clanwolf.net/httpdocs/apps/ASCard/cache/mul/mechdetails/" . $i . ".json";
+			$filename = "/var/www/vhosts/ascard.net/httpdocs/app/cache/mul/mechdetails/" . $i . ".json";
 			$fileHandle = fopen($filename, 'w');
 			fwrite($fileHandle, $content);
 			fclose($fileHandle);

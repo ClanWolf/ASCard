@@ -107,7 +107,7 @@
 	$result_asc_formation = mysqli_query($conn, $sql_asc_formation);
 	if (mysqli_num_rows($result_asc_formation) > 0) {
 		while($row = mysqli_fetch_assoc($result_asc_formation)) {
-			if ($row["unitid"] == $unitid) {
+			if ($row["formationid"] == $unitid) {
 				$UNIT = $row["formationname"];
 				$factionid = $row["factionid"];
 				$unitplayerid = $row["playerid"];
@@ -139,14 +139,14 @@
 	mysqli_free_result($result_asc_playerround);
 
 	// Faction
-	// factionid; name; --factiontype--; faction_imageurl
+	// factionid; name; --factiontype--; factionimage
 	$sql_asc_faction = "SELECT SQL_NO_CACHE * FROM asc_faction where factionid=".$factionid.";";
 	$result_asc_faction = mysqli_query($conn, $sql_asc_faction);
 	if (mysqli_num_rows($result_asc_faction) > 0) {
 		while($row = mysqli_fetch_assoc($result_asc_faction)) {
 			if ($row["factionid"] == $factionid) {
 				$FACTION = $row["name"];
-				$FACTION_IMG_URL = $row["faction_imageurl"];
+				$FACTION_IMG_URL = $row["factionimage"];
 			}
 		}
 	}

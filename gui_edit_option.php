@@ -64,7 +64,7 @@ session_start();
 <html lang="en">
 
 <head>
-	<title>ClanWolf.net: AplhaStrike Card App (ASCard): Options</title>
+	<title>ASCard.net AplhaStrike Card App (clanwolf.net): Options</title>
 	<meta charset="utf-8">
 	<!-- <meta http-equiv="expires" content="0"> -->
 	<!-- <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"> -->
@@ -262,10 +262,10 @@ session_start();
 			</tr>
 
             <?php
-            	if ($pid == 2) { // Meldric (only admin may refresh the cache)
+            	if ($pid == 1) { // Meldric (only admin may refresh the cache)
             		echo "<tr><td colspan='2'><hr></td></tr>\n";
 	                echo "<tr>\n";
-	                echo "	<td nowrap colspan='2' style='color:#dcdcdc;' class='mechselect_button_normal' onclick='window.open(\"https://www.clanwolf.net/apps/ASCard/data/mul_cache/cache.php\");'>\n";
+	                echo "	<td nowrap colspan='2' style='color:#dcdcdc;' class='mechselect_button_normal' onclick='window.open(\"https://www.ascard.net/app/data/mul_cache/cache.php\");'>\n";
 	                echo "		&nbsp;&nbsp;&nbsp;Update unit cache from MUL&nbsp;&nbsp;&nbsp;\n";
 	                echo "	</td>\n";
 	                echo "</tr>\n";

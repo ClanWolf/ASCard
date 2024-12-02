@@ -308,7 +308,7 @@ function setCircles(h, a, s, e, fc, mp, w, e_cv, fc_cv, w_cv, ma_cv, mb_cv, mc_c
 	tc_heat = h;
 	if (unitType == "CV") {
 		tc_firecontrolDamage = fc_cv * 2;
-	} else if (unitType == "BM") {
+	} else if (unitType == "BM" || unitType == "BA") {
 		tc_firecontrolDamage = fc * 2;
 	}
 
@@ -1448,6 +1448,8 @@ function showInfoBar() {
 		$("#dicebar").hide();
 		$("#infobar").show();
 		$("#soundboard").hide();
+
+		showTopRightPanel();
 	}
 }
 
@@ -1463,6 +1465,8 @@ function showSoundBoard() {
 		$("#dicebar").hide();
 		$("#infobar").hide();
 		$("#soundboard").show();
+
+		showTopRightPanel();
 	}
 }
 
@@ -1478,6 +1482,8 @@ function showDiceBar() {
 		$("#movebar").hide();
 		$("#dicebar").show();
 		$("#soundboard").hide();
+
+		showTopRightPanel();
 
 		if (rolling === 0) {
 			playDiceSound();
@@ -1608,6 +1614,16 @@ function updateOverAllToHitValue(skipTap) {
 	var result = 0;
 	tc_skill = parseInt(document.getElementById("skillfield").innerText);
 
+	//console.log("tc_enemyTMM          : " + tc_enemyTMM);
+	//console.log("tc_amm               : " + tc_amm);
+	//console.log("tc_skill             : " + tc_skill);
+	//console.log("tc_rangeValue        : " + tc_rangeValue);
+	//console.log("tc_partialCover      : " + tc_partialCover);
+	//console.log("tc_wood              : " + tc_wood);
+	//console.log("tc_heat              : " + tc_heat);
+	//console.log("tc_other             : " + tc_other);
+	//console.log("tc_firecontrolDamage : " + tc_firecontrolDamage);
+
 	result += tc_enemyTMM;
 	result += tc_amm;
 	result += tc_skill;
@@ -1656,6 +1672,11 @@ function hideTopRightPanel() {
 	$("#topright").fadeOut(300, "linear");
 	$("#pv").fadeOut(300, "linear");
 	$("#mech_number").fadeOut(300, "linear");
+}
+function showTopRightPanel() {
+	$("#topright").fadeIn(300, "linear");
+	$("#pv").fadeIn(300, "linear");
+	$("#mech_number").fadeIn(300, "linear");
 }
 
 $(window).resize(function() {

@@ -77,7 +77,7 @@
 <html lang="en">
 
 <head>
-	<title>ClanWolf.net: AplhaStrike Card App (ASCard)</title>
+	<title>ASCard.net AplhaStrike Card App (clanwolf.net)</title>
 	<meta charset="utf-8">
 	<!-- <meta http-equiv="expires" content="0"> -->
 	<!-- <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"> -->
@@ -1418,11 +1418,6 @@ if ($showDistancesHexes == 1) {
 <div align="center" id="settings">
 	<a href="./gui_support.php"><i class="fa-solid fa-handshake-simple"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 	<a href="javascript:showMech()"><i class="fas fa-eye"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<?php
-	if ($pid == 2) { // Meldric
-		// echo "	<a href='https://www.clanwolf.net/static/files/Rulebooks/CAT35680%20-%20AlphaStrike%20CommandersEdition.pdf' target='_blank'><i class='fas fa-bookmark'></i></a>&nbsp;&nbsp;\n";
-	}
-?>
 	<!-- <a href="#" onclick="javascript:window.location.reload(true)"><i class="fas fa-redo"></i></a>&nbsp;&nbsp; -->
 	<a href="javascript:textSize(0)"><i class="fas fa-minus-square"></i></a>&nbsp;&nbsp;
 	<a href="javascript:textSize(1)"><i class="fas fa-plus-square"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;

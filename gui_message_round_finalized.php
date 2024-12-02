@@ -27,10 +27,11 @@ session_start();
 	}
 ?>
 <!DOCTYPE html>
+
 <html lang="en">
 
 <head>
-	<title>ClanWolf.net: AplhaStrike Card App (ASCard): Message</title>
+	<title>ASCard.net AplhaStrike Card App (clanwolf.net): Message</title>
 	<meta charset="utf-8">
 	<!-- <meta http-equiv="expires" content="0"> -->
 	<!-- <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"> -->

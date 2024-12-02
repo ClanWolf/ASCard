@@ -112,7 +112,7 @@ session_start();
 <html lang="en">
 
 <head>
-	<title>ClanWolf.net: AplhaStrike Card App (ASCard): Unit assignment</title>
+	<title>ASCard.net AplhaStrike Card App (clanwolf.net): Unit assignment</title>
 	<meta charset="utf-8">
 	<!-- <meta http-equiv="expires" content="0"> -->
 	<!-- <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"> -->
@@ -323,7 +323,7 @@ session_start();
 	$result_asc_playersformations = mysqli_query($conn, $sql_asc_playersformations);
 	if (mysqli_num_rows($result_asc_playersformations) > 0) {
 		while($rowFormation = mysqli_fetch_assoc($result_asc_playersformations)) {
-			$formationid = $rowFormation['unitid'];
+			$formationid = $rowFormation['formationid'];
 			$formationname = $rowFormation['formationname'];
 			if ($paramunitid == $formationid) {
 				echo "										<option value='".$formationid."' selected>".$formationname."</option>\n";
@@ -352,7 +352,7 @@ session_start();
 		echo "				<td colspan='3'>Delete selected unit from Hangar (!)</td>\n";
 		echo "				<td align='right'>\n";
 
-		if ($pid == 2) { // Meldric (only admin may delete units)
+		if ($pid == 1) { // Meldric (only admin may delete units)
 			echo "					<a href='#' onClick='deleteStoredMech();'><i class='fas fa-minus-square'></i></a>\n";
 		} else {
 			echo "					<i class=\"fas fa-ban\"></i>\n";

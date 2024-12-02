@@ -1,4 +1,9 @@
 <?php
+
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 session_start();
 // https://www.php-einfach.de/php-tutorial/php-sessions/
 	require('./logger.php');
@@ -64,7 +69,7 @@ session_start();
 		$overalltonnage = -1;
 		$sqlselectoverallpv = "";
 		$sqlselectoverallpv = $sqlselectoverallpv . "SELECT asc_mech.mech_tonnage, asc_mech.as_pv from asc_assign, asc_mech, asc_formation ";
-		$sqlselectoverallpv = $sqlselectoverallpv . "WHERE asc_assign.unitid = asc_formation.unitid ";
+		$sqlselectoverallpv = $sqlselectoverallpv . "WHERE asc_assign.unitid = asc_formation.formationid ";
 		$sqlselectoverallpv = $sqlselectoverallpv . "AND asc_assign.mechid = asc_mech.mechid ";
 		$sqlselectoverallpv = $sqlselectoverallpv . "AND asc_mech.active_bid = 1 ";
 		$sqlselectoverallpv = $sqlselectoverallpv . "AND asc_formation.playerid = ".$pid.";";
@@ -121,14 +126,16 @@ session_start();
 			echo "Error: " . $sqlfindwinner . "<br>" . mysqli_error($conn);
 		}
 
-		// set winner flag for lowest bid
-		$sqlsetwinner = "UPDATE asc_player set bid_winner=1 WHERE playerid = " . $winnerplayerid . ";";
-		if (mysqli_query($conn, $sqlsetwinner)) {
-			// Success
-			//echo "Error: " . $sqlsetwinner . "<br>";
-		} else {
-			// Error
-			echo "Error: " . $sqlsetwinner . "<br>" . mysqli_error($conn);
+		if (isset($winnerplayerid)) {
+			// set winner flag for lowest bid
+			$sqlsetwinner = "UPDATE asc_player set bid_winner=1 WHERE playerid = " . $winnerplayerid . ";";
+			if (mysqli_query($conn, $sqlsetwinner)) {
+				// Success
+				//echo "Error: " . $sqlsetwinner . "<br>";
+			} else {
+				// Error
+				echo "Error: " . $sqlsetwinner . "<br>" . mysqli_error($conn);
+			}
 		}
 
 		//echo "<meta http-equiv='refresh' content='0;url=./gui_select_unit.php'>";
@@ -152,7 +159,7 @@ session_start();
 <html lang="en">
 
 <head>
-	<title>ClanWolf.net: AplhaStrike Card App (ASCard): Unit selector</title>
+	<title>ASCard.net AplhaStrike Card App (clanwolf.net): Unit selector</title>
 	<meta charset="utf-8">
 	<!-- <meta http-equiv="expires" content="0"> -->
 	<!-- <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"> -->
@@ -333,14 +340,14 @@ session_start();
 	$readyToFinalizeRound = 1;
 
 	// Select formations for this player
-	if (!($stmtFormations = $conn->prepare("SELECT SQL_NO_CACHE * FROM asc_formation where playerid = ".$pid." ORDER BY unitid;"))) {
+	if (!($stmtFormations = $conn->prepare("SELECT SQL_NO_CACHE * FROM asc_formation where playerid = ".$pid." ORDER BY formationid;"))) {
 		echo "Prepare failed: (" . $conn->errno . ")" . $conn->error;
 	}
 	if ($stmtFormations->execute()) {
 		$resFormations = $stmtFormations->get_result();
 
 		while ($rowFormation = $resFormations->fetch_assoc()) {
-			$formationidSelected = $rowFormation['unitid'];
+			$formationidSelected = $rowFormation['formationid'];
 			$factionidSelected = $rowFormation['factionid'];
 			$formationnameSelected = $rowFormation['formationname'];
 
@@ -351,7 +358,7 @@ session_start();
 			if ($stmtFactionLogo->execute()) {
 				$resFactionLogo = $stmtFactionLogo->get_result();
 				while ($rowFactionLogo = $resFactionLogo->fetch_assoc()) {
-					$unitlogo = $rowFactionLogo['faction_imageurl'];
+					$unitlogo = $rowFactionLogo['factionimage'];
 				}
 			}
 

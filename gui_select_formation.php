@@ -29,7 +29,7 @@ session_start();
 <html lang="en">
 
 <head>
-	<title>ClanWolf.net: AplhaStrike Card App (ASCard): Enemies</title>
+	<title>ASCard.net AplhaStrike Card App (clanwolf.net): Formations</title>
 	<meta charset="utf-8">
 	<!-- <meta http-equiv="expires" content="0"> -->
 	<!-- <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"> -->
@@ -196,7 +196,7 @@ session_start();
 				if ($stmtUnits->execute()) {
 					$resFormations = $stmtFormations->get_result();
 					while ($rowFormation = $resFormations->fetch_assoc()) {
-						$formationidSelected = $rowFormation['unitid'];
+						$formationidSelected = $rowFormation['formationid'];
 						$factionidSelected = $rowFormation['factionid'];
 						$formationnameSelected = $rowFormation['formationname'];
 
@@ -207,7 +207,7 @@ session_start();
 						if ($stmtFactionLogo->execute()) {
 							$resFactionLogo = $stmtFactionLogo->get_result();
 							while ($rowFactionLogo = $resFactionLogo->fetch_assoc()) {
-								$unitlogo = $rowFactionLogo['faction_imageurl'];
+								$unitlogo = $rowFactionLogo['factionimage'];
 							}
 						}
 
@@ -297,7 +297,7 @@ session_start();
 				echo "<td nowrap style='height:40px;padding-left:20px;padding-right:20px;$selectBorder' class='mechselect_button_active'>".$playername."&nbsp;(R".$currRound.")</td>\n";
 
 				// Select units for this player
-				if (!($stmtFormations = $conn->prepare("SELECT SQL_NO_CACHE * FROM asc_formation where playerid = ".$playerid." ORDER BY unitid;"))) {
+				if (!($stmtFormations = $conn->prepare("SELECT SQL_NO_CACHE * FROM asc_formation where playerid = ".$playerid." ORDER BY formationid;"))) {
 					echo "Prepare failed: (" . $conn->errno . ")" . $conn->error;
 				}
 				if ($stmtFormations->execute()) {
@@ -314,7 +314,7 @@ session_start();
 						if ($stmtFactionLogo->execute()) {
 							$resFactionLogo = $stmtFactionLogo->get_result();
 							while ($rowFactionLogo = $resFactionLogo->fetch_assoc()) {
-								$unitlogo = $rowFactionLogo['faction_imageurl'];
+								$unitlogo = $rowFactionLogo['factionimage'];
 							}
 						}
 

@@ -1,6 +1,6 @@
 function getSpecialUnitAbilities(sa) {
 	// Read special abilities from json file
-	var cache_url = 'https://www.clanwolf.net/apps/ASCard/data/specialabilities/specialunitabilities.json';
+	var cache_url = 'https://www.ascard.net/app/data/specialabilities/specialunitabilities.json';
 	var match = null;
 	var alphabetNavigation = "";
 	var subNavigation = "";

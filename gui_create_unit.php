@@ -311,7 +311,7 @@ session_start();
 <html lang="en">
 
 <head>
-	<title>ClanWolf.net: AplhaStrike Card App (ASCard): Unit creator</title>
+	<title>ASCard.net AplhaStrike Card App (clanwolf.net): Unit creator</title>
 	<meta charset="utf-8">
 	<!-- <meta http-equiv="expires" content="0"> -->
 	<!-- <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"> -->
@@ -696,7 +696,7 @@ session_start();
 	$result_asc_playersformations = mysqli_query($conn, $sql_asc_playersformations);
 	if (mysqli_num_rows($result_asc_playersformations) > 0) {
 		while($rowFormations = mysqli_fetch_assoc($result_asc_playersformations)) {
-			$formationid = $rowFormations['unitid'];
+			$formationid = $rowFormations['formationid'];
 			$formationname = $rowFormations['formationname'];
 			if ($paramunitid == $formationid) {
 				echo "										<option value='".$formationid."' selected>".$formationname."</option>\n";

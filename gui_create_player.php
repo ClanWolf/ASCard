@@ -1,4 +1,9 @@
 <?php
+
+//ini_set('display_errors', 1);
+//ini_set('display_startup_errors', 1);
+//error_reporting(E_ALL);
+
 session_start();
 // https://www.php-einfach.de/php-tutorial/php-sessions/
 	require('./logger.php');
@@ -34,13 +39,15 @@ session_start();
 
 		$hashedpw = password_hash($newplayerpassword, PASSWORD_DEFAULT);
 
-		$sql_asc_checkusername = "SELECT SQL_NO_CACHE * FROM asc_player where username=".$newplayername.";";
+		$sql_asc_checkusername = "SELECT SQL_NO_CACHE * FROM asc_player where name='".$newplayername."'";
+		echo "Select: " . $sql_asc_checkusername;
+
 		$result_asc_checkusername = mysqli_query($conn, $sql_asc_checkusername);
 		if (mysqli_num_rows($result_asc_checkusername) > 0) {
 			// a user with that name already exists
 		} else {
 			// new user can be inserted
-			$sql = "INSERT INTO asc_player (name, password, image) VALUES ('".$newplayername."', '".$hashedpw."', '".$newplayername.".png')";
+			$sql = "INSERT INTO asc_player (name, password, admin, image) VALUES ('".$newplayername."', '".$hashedpw."', 0, '".$newplayername.".png')";
 			if (mysqli_query($conn, $sql)) {
 				// Success
 				$newplayerid = mysqli_insert_id($conn);
@@ -87,17 +94,17 @@ session_start();
 			echo "Error: " . $sqldelete . "<br>" . mysqli_error($conn);
 		}
 
-		$playersUnits = array();
-		$sql_asc_findunits = "SELECT SQL_NO_CACHE * FROM asc_formation where playerid=".$deleteplayerid.";";
-		$result_asc_findunits = mysqli_query($conn, $sql_asc_findunits);
-		if (mysqli_num_rows($result_asc_findunits) > 0) {
+		$playersFormations = array();
+		$sql_asc_findformations = "SELECT SQL_NO_CACHE * FROM asc_formation where playerid=".$deleteplayerid.";";
+		$result_asc_findformations = mysqli_query($conn, $sql_asc_findformations);
+		if (mysqli_num_rows($result_asc_findformations) > 0) {
 			// this user has units. Get unit ids to clean up mechs and pilots
-			while ($rowUnit = $result_asc_findunits->fetch_assoc()) {
-				array_push($playersUnits, $rowUnit['unitid']);
+			while ($rowFormation = $result_asc_findformations->fetch_assoc()) {
+				array_push($playersFormations, $rowFormation['formationid']);
 			}
 		}
 
-		foreach ($playersUnits as &$unitid) {
+		foreach ($playersFormations as &$unitid) {
 			$sqlupdateunit = "update asc_assign set unitid=null where unitid = ".$unitid;
 			if (mysqli_query($conn, $sqlupdateunit)) {
 				// Success
@@ -164,7 +171,7 @@ session_start();
 <html lang="en">
 
 <head>
-	<title>ClanWolf.net: AplhaStrike Card App (ASCard): Player creator</title>
+	<title>ASCard.net AplhaStrike Card App (clanwolf.net): Player creator</title>
 	<meta charset="utf-8">
 	<!-- <meta http-equiv="expires" content="0"> -->
 	<!-- <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"> -->
@@ -415,7 +422,7 @@ session_start();
 			}
 			echo "								</td>\n";
 			echo "								<td nowrap class='datalabel' style='text-align:left;' colspan='2'>" . $row['name'] . "</td>\n";
-			if ($row['playerid'] != "1" && $row['playerid'] != "2" && $row['playerid'] != "3") {
+			if ($row['playerid'] != "1" && $row['playerid'] != "2" && $row['playerid'] != "3" && $row['playerid'] != "4") {
 				if ($playMode) {
 					echo "								<td width='10px' nowrap>\n";
 					echo "									<span style='font-size:16px;'>\n";
@@ -423,7 +430,7 @@ session_start();
 					echo "									</span>\n";
 					echo "								</td>\n";
 				} else {
-					if ($pid == 2) { // Meldric (only admin may delete player)
+					if ($pid == 1) { // Meldric (only admin may delete player)
 						echo "								<td onclick='javascript:saveNewPlayer(".$row['playerid'].",\"".$row['image']."\");' width='10px' nowrap>\n";
                         echo "									<span style='font-size:16px;'>\n";
 						echo "										    <i class='fas fa-minus-square'></i>\n";

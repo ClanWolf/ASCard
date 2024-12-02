@@ -43,7 +43,7 @@ function getMechList(filter, tech, minTon, maxTon, category, unittypeString) {
 			url = url + '&Types=19';                    // Combat vehicles / Tanks
 		}
 
-	var cache_url = 'https://www.clanwolf.net/apps/ASCard/cache/mul/';
+	var cache_url = 'cache/mul/';
 		if (tech == '2') {
 			cache_url = cache_url + 'Clan';
 		} else {
@@ -145,7 +145,7 @@ function getMechDetails(id) {
 	}
 
 	var url = corsproxyprefix + 'http://www.masterunitlist.info/Unit/QuickDetails?id=' + id;
-	var cache_details_url = 'https://www.clanwolf.net/apps/ASCard/cache/mul/mechdetails/' + id + '.json';
+	var cache_details_url = 'cache/mul/mechdetails/' + id + '.json';
 
 	// $.getJSON(url, function (json) {
 	$.getJSON(cache_details_url, function (json) {

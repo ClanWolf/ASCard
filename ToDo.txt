@@ -1,8 +1,16 @@
 
+
+
+
+Funktioniert das Hinzufügen von Units wieder (CORS Proxy Problem)
+
 // HIGH
 TODO: Finish the crits for CVs
+TODO: Add finalize round for CVs
 TODO: Indikator für gemountete Elementare / Infanterie
-TODO: Add a playerid to created mechs and show only own mechs in assignment list
+TODO: Show only owned units in assignment list
+TODO: Add big name of the mech somewhere on the card (?)
+TODO: Show jump only if a unit can jump
 
 // NORMAL
 TODO: Alle Schriftarten sollten als em relativ definiert werden

@@ -1,4 +1,9 @@
 <?php
+
+//ini_set('display_errors', 1);
+//ini_set('display_startup_errors', 1);
+//error_reporting(E_ALL);
+
 session_start();
 // https://www.php-einfach.de/php-tutorial/php-sessions/
 	require('./logger.php');
@@ -33,25 +38,25 @@ session_start();
 			$OWNERPLAYERID = $row["ownerPlayerId"];
 			$ACCESSCODE = $row["accessCode"];
 			$LOCKED = $row["locked"];
-			$DESC = $row["description"];
+			$BACKGROUND = $row["background"];
 		}
 	} else {
 		// this player does not have a game yet
 		if (endsWith($pname, 's')) {
-			$description = $pname . "&#039; game";
+			$background = $pname . "&#039; game";
 		} else {
-			$description = $pname . "&#039;s game";
+			$background = $pname . "&#039;s game";
 		}
 		$accesscodeGenerated = substr(str_shuffle("0123456789"), 0, 4);
-		$sqlinsertgame = "INSERT INTO asc_game (ownerPlayerId, accessCode, locked, description) VALUES ";
-		$sqlinsertgame = $sqlinsertgame . "(".$pid.", '".$accesscodeGenerated."', false, '".$description."');";
+		$sqlinsertgame = "INSERT INTO asc_game (ownerPlayerId, accessCode, locked, background) VALUES ";
+		$sqlinsertgame = $sqlinsertgame . "(".$pid.", '".$accesscodeGenerated."', false, '".$background."')";
 		if (mysqli_query($conn, $sqlinsertgame)) {
 			// Success inserting new game for this player
 			$GAMEID = mysqli_insert_id($conn);
 			$OWNERPLAYERID = $pid;
 			$ACCESSCODE = $accesscodeGenerated;
 			$LOCKED = 0;
-			$DESC = $description;
+			$BACKGROUND = $background;
 		} else {
 			// Error
 			echo "Error: " . $sqlinsertgame . "<br>" . mysqli_error($conn);
@@ -83,9 +88,9 @@ session_start();
         	$kownerplayerid = $rowGamesList["ownerPlayerId"];
         	$kaccesscode = $rowGamesList["accessCode"];
         	$klocked = $rowGamesList["locked"];
-        	$kdesc = $rowGamesList["description"];
+        	$kbackground = $rowGamesList["background"];
 
-			$array_availableGamesToJoin[$ii] = $kdesc . " (" . $kgameid . ")";
+			$array_availableGamesToJoin[$ii] = $kbackground . " (" . $kgameid . ")";
 			$array_availableGamesToJoinAccessCode[$ii] = $kaccesscode;
 
 			$ii++;
@@ -106,7 +111,7 @@ session_start();
 <html lang="en">
 
 <head>
-	<title>ClanWolf.net: AplhaStrike Card App (ASCard): Game creator</title>
+	<title>ASCard.net AplhaStrike Card App (clanwolf.net): Game creator</title>
 	<meta charset="utf-8">
 	<!-- <meta http-equiv="expires" content="0"> -->
 	<!-- <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"> -->
@@ -283,7 +288,7 @@ session_start();
 				<td valign="top" width="75%">
 					<table width="100%" border="0" cellspacing="0" cellpadding="0">
 						<tr>
-							<td class='datalabel' nowrap colspan="3" align="left">&quot;<?php echo $DESC; ?>&quot; [ID: <?php echo $GAMEID; ?>]
+							<td class='datalabel' nowrap colspan="3" align="left">&quot;<?php echo $BACKGROUND; ?>&quot; [ID: <?php echo $GAMEID; ?>]
 							<?php if ($LOCKED == 0) {
 								echo "&nbsp;&nbsp;&nbsp;<a href='#' onClick='unlockGame();'><i class='fa-solid fa-lock'></i></i></a>";
 							} else {

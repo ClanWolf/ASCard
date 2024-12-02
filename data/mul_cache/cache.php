@@ -267,7 +267,7 @@
 
 	// ---------------------------------------------------
 
-	$jsonFiles = glob('/var/www/vhosts/clanwolf.net/httpdocs/apps/ASCard/cache/mul/*.json');
+	$jsonFiles = glob('/var/www/vhosts/ascard.net/httpdocs/app/cache/mul/*.json');
 	foreach($jsonFiles as $jsonFile) {
 		if(is_file($jsonFile)) {
 			echo "delete: " . $jsonFile . "<br>";
@@ -288,7 +288,7 @@
 		} else {
 			echo "Saving " . $filename_arr[$key] . "... ";
 			// echo $content;
-			$filename = "/var/www/vhosts/clanwolf.net/httpdocs/apps/ASCard/cache/mul/" . $filename_arr[$key];
+			$filename = "/var/www/vhosts/ascard.net/httpdocs/app/cache/mul/" . $filename_arr[$key];
 			$fileHandle = fopen($filename, 'w');
 			fwrite($fileHandle, $content);
 			fclose($fileHandle);
@@ -296,74 +296,74 @@
 
 //			// Clan
 //			if (substr($filename_arr[$key], 0, 4) == 'Clan') {
-//				$filename_all_Clan = "/var/www/vhosts/clanwolf.net/httpdocs/apps/ASCard/cache/mul/Clan_ALL.json";
+//				$filename_all_Clan = "/var/www/vhosts/ascard.net/httpdocs/app/cache/mul/Clan_ALL.json";
 //				file_put_contents($filename_all_Clan, $content, FILE_APPEND);
 //				// echo "saved Clan ALL.<br>";
 //
 //				if (strpos($filename_arr[$key], '_2') > 0) {
 //					// BA
-//					$filename_Clan_BA = "/var/www/vhosts/clanwolf.net/httpdocs/apps/ASCard/cache/mul/Clan_BA.json";
+//					$filename_Clan_BA = "/var/www/vhosts/ascard.net/httpdocs/app/cache/mul/Clan_BA.json";
 //					file_put_contents($filename_Clan_BA, $content, FILE_APPEND);
 //					// echo "saved Clan BA.<br>";
 //				} else if (strpos($filename_arr[$key], '_20') > 0 || strpos($filename_arr[$key], '_25') > 0 || strpos($filename_arr[$key], '_30') > 0 || strpos($filename_arr[$key], '_35') > 0) {
 //					// LIGHT
-//					$filename_Clan_LIGHT = "/var/www/vhosts/clanwolf.net/httpdocs/apps/ASCard/cache/mul/Clan_LIGHT.json";
+//					$filename_Clan_LIGHT = "/var/www/vhosts/ascard.net/httpdocs/app/cache/mul/Clan_LIGHT.json";
 //					file_put_contents($filename_Clan_LIGHT, $content, FILE_APPEND);
 //					// echo "saved Clan LIGHT.<br>";
 //				} else if (strpos($filename_arr[$key], '_40') > 0 || strpos($filename_arr[$key], '_45') > 0 || strpos($filename_arr[$key], '_50') > 0 || strpos($filename_arr[$key], '_55') > 0) {
 //					// MEDIUM
-//					$filename_Clan_MEDIUM = "/var/www/vhosts/clanwolf.net/httpdocs/apps/ASCard/cache/mul/Clan_MEDIUM.json";
+//					$filename_Clan_MEDIUM = "/var/www/vhosts/ascard.net/httpdocs/app/cache/mul/Clan_MEDIUM.json";
 //					file_put_contents($filename_Clan_MEDIUM, $content, FILE_APPEND);
 //					//echo "saved Clan MEDIUM.<br>";
 //				} else if (strpos($filename_arr[$key], '_60') > 0 || strpos($filename_arr[$key], '_65') > 0 || strpos($filename_arr[$key], '_70') > 0 || strpos($filename_arr[$key], '_75') > 0) {
 //					// HEAVY
-//					$filename_Clan_HEAVY = "/var/www/vhosts/clanwolf.net/httpdocs/apps/ASCard/cache/mul/Clan_HEAVY.json";
+//					$filename_Clan_HEAVY = "/var/www/vhosts/ascard.net/httpdocs/app/cache/mul/Clan_HEAVY.json";
 //					file_put_contents($filename_Clan_HEAVY, $content, FILE_APPEND);
 //					// echo "saved Clan HEAVY.<br>";
 //				} else if (strpos($filename_arr[$key], '_80') > 0 || strpos($filename_arr[$key], '_85') > 0 || strpos($filename_arr[$key], '_90') > 0 || strpos($filename_arr[$key], '_95') > 0 || strpos($filename_arr[$key], '_100') > 0) {
 //					// ASSAULT
-//					$filename_Clan_ASSAULT = "/var/www/vhosts/clanwolf.net/httpdocs/apps/ASCard/cache/mul/Clan_ASSAULT.json";
+//					$filename_Clan_ASSAULT = "/var/www/vhosts/ascard.net/httpdocs/app/cache/mul/Clan_ASSAULT.json";
 //					file_put_contents($filename_Clan_ASSAULT, $content, FILE_APPEND);
 //					// echo "saved Clan ASSAULT.<br>";
 //				} else {
 //					// SUPERHEAVY
-//					$filename_Clan_SUPERHEAVY = "/var/www/vhosts/clanwolf.net/httpdocs/apps/ASCard/cache/mul/Clan_SUPERHEAVY.json";
+//					$filename_Clan_SUPERHEAVY = "/var/www/vhosts/ascard.net/httpdocs/app/cache/mul/Clan_SUPERHEAVY.json";
 //					file_put_contents($filename_Clan_SUPERHEAVY, $content, FILE_APPEND);
 //					// echo "saved Clan SUPERHEAVY.<br>";
 //				}
 //			} else {
-//				$filename_all_IS = "/var/www/vhosts/clanwolf.net/httpdocs/apps/ASCard/cache/mul/IS_ALL.json";
+//				$filename_all_IS = "/var/www/vhosts/ascard.net/httpdocs/app/cache/mul/IS_ALL.json";
 //				file_put_contents($filename_all_IS, $content, FILE_APPEND);
 //                // echo "saved IS ALL.<br>";
 //
 //				if (strpos($filename_arr[$key], '_2') > 0) {
 //					// BA
-//					$filename_IS_BA = "/var/www/vhosts/clanwolf.net/httpdocs/apps/ASCard/cache/mul/IS_BA.json";
+//					$filename_IS_BA = "/var/www/vhosts/ascard.net/httpdocs/app/cache/mul/IS_BA.json";
 //					file_put_contents($filename_IS_BA, $content, FILE_APPEND);
 //					// echo "saved IS BA.<br>";
 //				} else if (strpos($filename_arr[$key], '_20') > 0 || strpos($filename_arr[$key], '_25') > 0 || strpos($filename_arr[$key], '_30') > 0 || strpos($filename_arr[$key], '_35') > 0) {
 //					// LIGHT
-//					$filename_IS_LIGHT = "/var/www/vhosts/clanwolf.net/httpdocs/apps/ASCard/cache/mul/IS_LIGHT.json";
+//					$filename_IS_LIGHT = "/var/www/vhosts/ascard.net/httpdocs/app/cache/mul/IS_LIGHT.json";
 //					file_put_contents($filename_IS_LIGHT, $content, FILE_APPEND);
 //					// echo "saved IS LIGHT.<br>";
 //				} else if (strpos($filename_arr[$key], '_40') > 0 || strpos($filename_arr[$key], '_45') > 0 || strpos($filename_arr[$key], '_50') > 0 || strpos($filename_arr[$key], '_55') > 0) {
 //					// MEDIUM
-//					$filename_IS_MEDIUM = "/var/www/vhosts/clanwolf.net/httpdocs/apps/ASCard/cache/mul/IS_MEDIUM.json";
+//					$filename_IS_MEDIUM = "/var/www/vhosts/ascard.net/httpdocs/app/cache/mul/IS_MEDIUM.json";
 //					file_put_contents($filename_IS_MEDIUM, $content, FILE_APPEND);
 //					// echo "saved IS MEDIUM.<br>";
 //				} else if (strpos($filename_arr[$key], '_60') > 0 || strpos($filename_arr[$key], '_65') > 0 || strpos($filename_arr[$key], '_70') > 0 || strpos($filename_arr[$key], '_75') > 0) {
 //					// HEAVY
-//					$filename_IS_HEAVY = "/var/www/vhosts/clanwolf.net/httpdocs/apps/ASCard/cache/mul/IS_HEAVY.json";
+//					$filename_IS_HEAVY = "/var/www/vhosts/ascard.net/httpdocs/app/cache/mul/IS_HEAVY.json";
 //					file_put_contents($filename_IS_HEAVY, $content, FILE_APPEND);
 //					// echo "saved IS HEAVY.<br>";
 //				} else if (strpos($filename_arr[$key], '_80') > 0 || strpos($filename_arr[$key], '_85') > 0 || strpos($filename_arr[$key], '_90') > 0 || strpos($filename_arr[$key], '_95') > 0 || strpos($filename_arr[$key], '_100') > 0) {
 //					// ASSAULT
-//					$filename_IS_ASSAULT = "/var/www/vhosts/clanwolf.net/httpdocs/apps/ASCard/cache/mul/IS_ASSAULT.json";
+//					$filename_IS_ASSAULT = "/var/www/vhosts/ascard.net/httpdocs/app/cache/mul/IS_ASSAULT.json";
 //					file_put_contents($filename_IS_ASSAULT, $content, FILE_APPEND);
 //					// echo "saved IS ASSAULT.<br>";
 //				} else {
 //					// SUPERHEAVY
-//					$filename_IS_SUPERHEAVY = "/var/www/vhosts/clanwolf.net/httpdocs/apps/ASCard/cache/mul/IS_SUPERHEAVY.json";
+//					$filename_IS_SUPERHEAVY = "/var/www/vhosts/ascard.net/httpdocs/app/cache/mul/IS_SUPERHEAVY.json";
 //					$fileContent = file_get_contents($filename_IS_SUPERHEAVY, true);
 //                    $mergedContent = json_encode(array_merge(json_decode($fileContent, true), json_decode($content, true)));
 //					$fileHandle = fopen($filename_IS_SUPERHEAVY, 'w');
@@ -379,10 +379,10 @@
 
 	echo "<br>";
 	echo "Saving cache version... ";
-	$cacheversionfilename = "/var/www/vhosts/clanwolf.net/httpdocs/apps/ASCard/cache/mul/cache.version";
+	$cacheversionfilename = "/var/www/vhosts/ascard.net/httpdocs/app/cache/mul/cache.version";
 	$cacheversionfileHandle = fopen($cacheversionfilename, 'w');
 	fwrite($cacheversionfileHandle, date('M Y'));
 	fclose($cacheversionfileHandle);
 	echo "saved.<br>";
-	echo "<br><br><a href='https://www.clanwolf.net/apps/ASCard/data/mul_cache/cache_mechdetails_caller.htm'>Update Mechdetails (slow!)</a>";
+	echo "<br><br><a href='https://www.ascard.net/app/data/mul_cache/cache_mechdetails_caller.htm'>Update Mechdetails (slow!)</a>";
 ?>
