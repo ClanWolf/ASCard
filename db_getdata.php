@@ -160,7 +160,7 @@
 	$result_asc = mysqli_query($conn, $sql_asc);
 	if (mysqli_num_rows($result_asc) > 0) {
 		while($row = mysqli_fetch_assoc($result_asc)) {
-			if ($row["unitid"] == $unitid) {
+			if ($row["formationid"] == $unitid) {
 				$mechcount++;
 				// echo "<script>console.log('Mech-ID: ".$mechid."');</script>";
 				// echo "<script>console.log('Pilot-ID: ".$pilotid."');</script>";

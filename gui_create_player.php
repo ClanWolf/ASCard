@@ -105,7 +105,7 @@ session_start();
 		}
 
 		foreach ($playersFormations as &$unitid) {
-			$sqlupdateunit = "update asc_assign set unitid=null where unitid = ".$unitid;
+			$sqlupdateunit = "update asc_assign set formationid=null where formationid = ".$unitid;
 			if (mysqli_query($conn, $sqlupdateunit)) {
 				// Success
 			} else {

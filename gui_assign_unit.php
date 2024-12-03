@@ -34,7 +34,7 @@ session_start();
 		$UNITID = isset($_GET["UNITID"]) ? $_GET["UNITID"] : "";
 		$MECHID = isset($_GET["MECHID"]) ? $_GET["MECHID"] : "";
 
-		$sql_update_assignment = "UPDATE asc_assign set unitid = ".$UNITID." where mechid = ".$MECHID;
+		$sql_update_assignment = "UPDATE asc_assign set formationid = ".$UNITID." where mechid = ".$MECHID;
 		if (mysqli_query($conn, $sql_update_assignment)) {
 			// Success
 		} else {
@@ -296,7 +296,7 @@ session_start();
 					Existing units: <select required name='existingMechs' id='existingMechs' size='1' onchange="" style='width:400px;'>
 						<option value="0"><<< Select a unit >>></option>
 <?php
-	$sql_asc_mechs = "select m.mechid, m.mech_number, m.as_model, p.name from asc_assign a, asc_mech m, asc_pilot p where a.unitid is null and a.mechid = m.mechid and a.pilotid = p.pilotid";
+	$sql_asc_mechs = "select m.mechid, m.mech_number, m.as_model, p.name from asc_assign a, asc_mech m, asc_pilot p where a.formationid is null and a.mechid = m.mechid and a.pilotid = p.pilotid and m.playerid=".$pid;
 	$result_asc_mechs = mysqli_query($conn, $sql_asc_mechs);
 	if (mysqli_num_rows($result_asc_mechs) > 0) {
 		while($rowMechs = mysqli_fetch_assoc($result_asc_mechs)) {

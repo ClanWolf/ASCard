@@ -268,7 +268,7 @@ session_start();
 
 		$sql_insertassign = "";
 		$sql_insertassign = $sql_insertassign."INSERT INTO asc_assign ";
-		$sql_insertassign = $sql_insertassign."(unitid, mechid, pilotid, playerid) ";
+		$sql_insertassign = $sql_insertassign."(formationid, mechid, pilotid, playerid) ";
 		$sql_insertassign = $sql_insertassign."VALUES (";
 		$sql_insertassign = $sql_insertassign.$UNITID.",";
 		$sql_insertassign = $sql_insertassign.$newmechid.",";

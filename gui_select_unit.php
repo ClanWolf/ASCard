@@ -43,7 +43,7 @@ session_start();
 		// the mech and the pilot are kept in the database for later re-assignment
 		// the model number probably stays the same
 		//$sqldeleteassignment = "DELETE FROM asc_assign WHERE pilotid = ".$pilotid." and mechid = " . $mechid . ";";
-		$sqldeleteassignment = "UPDATE asc_assign set unitid=null WHERE pilotid = ".$pilotid." and mechid = " . $mechid . ";";
+		$sqldeleteassignment = "UPDATE asc_assign set formationid=null WHERE pilotid = ".$pilotid." and mechid = " . $mechid . ";";
 		if (mysqli_query($conn, $sqldeleteassignment)) {
 			// Success
 		} else {
@@ -69,7 +69,7 @@ session_start();
 		$overalltonnage = -1;
 		$sqlselectoverallpv = "";
 		$sqlselectoverallpv = $sqlselectoverallpv . "SELECT asc_mech.mech_tonnage, asc_mech.as_pv from asc_assign, asc_mech, asc_formation ";
-		$sqlselectoverallpv = $sqlselectoverallpv . "WHERE asc_assign.unitid = asc_formation.formationid ";
+		$sqlselectoverallpv = $sqlselectoverallpv . "WHERE asc_assign.formationid = asc_formation.formationid ";
 		$sqlselectoverallpv = $sqlselectoverallpv . "AND asc_assign.mechid = asc_mech.mechid ";
 		$sqlselectoverallpv = $sqlselectoverallpv . "AND asc_mech.active_bid = 1 ";
 		$sqlselectoverallpv = $sqlselectoverallpv . "AND asc_formation.playerid = ".$pid.";";
@@ -365,7 +365,7 @@ session_start();
 			array_push($addMechToUnitLinkArray, "gui_create_unit.php?unitid=".$formationidSelected."&unitname=".$formationnameSelected);
 			array_push($assignMechToUnitLinkArray, "gui_assign_unit.php?unitid=".$formationidSelected."&unitname=".$formationnameSelected);
 
-			$sql_asc_checkunitassignments = "SELECT SQL_NO_CACHE * FROM asc_assign where unitid=".$formationidSelected.";";
+			$sql_asc_checkunitassignments = "SELECT SQL_NO_CACHE * FROM asc_assign where formationid=".$formationidSelected.";";
 			$result_asc_checkunitassignments = mysqli_query($conn, $sql_asc_checkunitassignments);
 			if (mysqli_num_rows($result_asc_checkunitassignments) > 0) {
 				echo "			<td nowrap style='width:270px;height:40px;' onclick='location.href=\"gui_play_unit.php?unit=".$formationidSelected."\"' class='unitselect_button_normal'>\n";

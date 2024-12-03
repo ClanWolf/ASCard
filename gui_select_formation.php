@@ -1,4 +1,9 @@
 <?php
+
+//ini_set('display_errors', 1);
+//ini_set('display_startup_errors', 1);
+//error_reporting(E_ALL);
+
 session_start();
 // https://www.php-einfach.de/php-tutorial/php-sessions/
 	require('./logger.php');
@@ -211,7 +216,7 @@ session_start();
 							}
 						}
 
-						$sql_asc_checkunitassignments = "SELECT SQL_NO_CACHE * FROM asc_assign where unitid=".$formationidSelected.";";
+						$sql_asc_checkunitassignments = "SELECT SQL_NO_CACHE * FROM asc_assign where formationid=".$formationidSelected.";";
 						$result_asc_checkunitassignments = mysqli_query($conn, $sql_asc_checkunitassignments);
 						if (mysqli_num_rows($result_asc_checkunitassignments) > 0) {
 							echo "	<td nowrap style='background-color:#b43c3e;width:170px;height:40px;' onclick='location.href=\"gui_play_unit.php?unit=".$formationidSelected."\"' class='unitselect_button_normal'>\n";
@@ -303,7 +308,7 @@ session_start();
 				if ($stmtFormations->execute()) {
 					$resFormations = $stmtFormations->get_result();
 					while ($rowFormation = $resFormations->fetch_assoc()) {
-						$formationidSelected = $rowFormation['unitid'];
+						$formationidSelected = $rowFormation['formationid'];
 						$factionidSelected = $rowFormation['factionid'];
 						$formationnameSelected = $rowFormation['formationname'];
 
@@ -318,7 +323,7 @@ session_start();
 							}
 						}
 
-						$sql_asc_checkunitassignments = "SELECT SQL_NO_CACHE * FROM asc_assign where unitid=".$formationidSelected.";";
+						$sql_asc_checkunitassignments = "SELECT SQL_NO_CACHE * FROM asc_assign where formationid=".$formationidSelected.";";
 						$result_asc_checkunitassignments = mysqli_query($conn, $sql_asc_checkunitassignments);
 						if (mysqli_num_rows($result_asc_checkunitassignments) > 0) {
 							echo "<td nowrap style='width:170px;height:40px;$selectBorder' onclick='location.href=\"gui_play_unit.php?unit=".$formationidSelected."\"' class='unitselect_button_normal'>\n";

@@ -212,7 +212,7 @@ session_start();
 						echo "</select><br>";
 					?>
 					<!-- <input type="text" size="20" maxlength="80"  style='width:250px;height=60px;' id="pn" name="pn" required autocomplete="userName"><br> -->
-					<input type="text" size="20" style='width:250px;height=60px;' maxlength="32" id="pw" name="pw" required autocomplete="current-password"><br><br>
+					<input type="text" size="20" style='width:250px;height=60px;border:0px;' maxlength="32" id="pw" name="pw" required autocomplete="current-password"><br><br>
 					<input type="submit" id="submitbutton" size="50" style="width:250px;height=60px;" value="LOGIN"><br>
 				</td>
 			</tr>

@@ -38,6 +38,7 @@ session_start();
 			$OWNERPLAYERID = $row["ownerPlayerId"];
 			$ACCESSCODE = $row["accessCode"];
 			$LOCKED = $row["locked"];
+			$TITLE = $row["title"];
 			$BACKGROUND = $row["background"];
 		}
 	} else {
@@ -47,15 +48,17 @@ session_start();
 		} else {
 			$background = $pname . "&#039;s game";
 		}
+		$title = $background;
 		$accesscodeGenerated = substr(str_shuffle("0123456789"), 0, 4);
-		$sqlinsertgame = "INSERT INTO asc_game (ownerPlayerId, accessCode, locked, background) VALUES ";
-		$sqlinsertgame = $sqlinsertgame . "(".$pid.", '".$accesscodeGenerated."', false, '".$background."')";
+		$sqlinsertgame = "INSERT INTO asc_game (ownerPlayerId, accessCode, locked, title, background) VALUES ";
+		$sqlinsertgame = $sqlinsertgame . "(".$pid.", '".$accesscodeGenerated."', false, '".$title."', '".$background."')";
 		if (mysqli_query($conn, $sqlinsertgame)) {
 			// Success inserting new game for this player
 			$GAMEID = mysqli_insert_id($conn);
 			$OWNERPLAYERID = $pid;
 			$ACCESSCODE = $accesscodeGenerated;
 			$LOCKED = 0;
+			$TITLE = $title;
 			$BACKGROUND = $background;
 		} else {
 			// Error
@@ -84,13 +87,14 @@ session_start();
 	if (mysqli_num_rows($result_asc_gameslist) > 0) {
 		$ii = 0;
 		while($rowGamesList = mysqli_fetch_assoc($result_asc_gameslist)) {
-		    $kgameid = $rowGamesList["gameid"];
-        	$kownerplayerid = $rowGamesList["ownerPlayerId"];
-        	$kaccesscode = $rowGamesList["accessCode"];
-        	$klocked = $rowGamesList["locked"];
-        	$kbackground = $rowGamesList["background"];
+			$kgameid = $rowGamesList["gameid"];
+			$kownerplayerid = $rowGamesList["ownerPlayerId"];
+			$kaccesscode = $rowGamesList["accessCode"];
+			$klocked = $rowGamesList["locked"];
+			$ktitle = $rowGamesList["title"];
+			$kbackground = $rowGamesList["background"];
 
-			$array_availableGamesToJoin[$ii] = $kbackground . " (" . $kgameid . ")";
+			$array_availableGamesToJoin[$ii] = $ktitle . " (" . $kgameid . ")";
 			$array_availableGamesToJoinAccessCode[$ii] = $kaccesscode;
 
 			$ii++;
