@@ -3,6 +3,10 @@
 
 Update license disclaimer to current situation
 
+allow deleting of my own units in assign gui
+
+add random click for player image while creating player
+
 // HIGH
 TODO: Finish the crits for CVs
 TODO: Add finalize round for CVs

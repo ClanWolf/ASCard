@@ -15,6 +15,8 @@ session_start();
 	$gid = $_SESSION['gameid'];
 	$pimage = $_SESSION['playerimage'];
 
+	$isAdmin = $_SESSION['isAdmin'];
+
 	$opt1 = isset($_GET["opt1"]) ? $_GET["opt1"] : "";
 	$opt2 = isset($_GET["opt2"]) ? $_GET["opt2"] : "";
 	$opt3 = isset($_GET["opt3"]) ? $_GET["opt3"] : "";
@@ -210,6 +212,9 @@ session_start();
 		echo "				<td nowrap onclick=\"location.href='./gui_create_unit.php'\" width='17%'><div class='mechselect_button_normal'><a href='./gui_create_unit.php'>ADD</a><br><span style='font-size:16px;'>Create a unit</span></div></td><td style='width:5px;'>&nbsp;</td>\n";
 		echo "				<td nowrap onclick=\"location.href='./gui_create_player.php'\" width='17%'><div class='mechselect_button_normal'><a href='./gui_create_player.php'>PLAYER</a><br><span style='font-size:16px;'>Manage players</span></div></td><td style='width:5px;'>&nbsp;</td>\n";
 		echo "				<td nowrap onclick=\"location.href='./gui_create_game.php'\" width='17%'><div class='mechselect_button_normal'><a href='./gui_create_game.php'>GAME</a><br><span style='font-size:16px;'>Game settings</span></div></td><td style='width:5px;'>&nbsp;</td>\n";
+	}
+	if ($isAdmin) {
+		echo "				<td nowrap onclick=\"location.href='./gui_admin.php'\" width='17%'><div class='mechselect_button_normal'><a href='./gui_create_game.php'>ADM</a><br><span style='font-size:16px;'>Admin</span></div></td><td style='width:5px;'>&nbsp;</td>\n";
 	}
 ?>
 

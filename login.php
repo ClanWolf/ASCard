@@ -38,6 +38,7 @@ session_start();
 					// var_dump($password_db);
 					if (password_verify($password, $password_db)) {
 						$_SESSION['playerid'] = $row['playerid'];
+						$_SESSION['isAdmin'] = $row['admin'];
 						$_SESSION['name'] = $row['name'];
 						$_SESSION['email'] = $row['email'];
 						$_SESSION['playerimage'] = $row['image'];
