@@ -205,7 +205,7 @@ session_start();
 					echo "<tr>\n";
 					echo "  <td align='left' class='datalabel'>Update unit cache from MUL</td>\n";
 					echo "	<td onclick='window.open(\"https://www.ascard.net/app/data/mul_cache/cache.php\");'>\n";
-					echo "		<i class='fa-solid fa-cloud-arrow-down'></i>\n";
+					echo "		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class='fa-solid fa-cloud-arrow-down'></i>\n";
 					echo "	</td>\n";
 					echo "</tr>\n";
 				}

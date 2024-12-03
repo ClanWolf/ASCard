@@ -32,16 +32,16 @@ session_start();
 		}
 	}
 
-	$paramunitid = isset($_GET["unitid"]) ? $_GET["unitid"] : "";
-	$paramunitname = isset($_GET["unitname"]) ? $_GET["unitname"] : "";
+	$paramformationid = isset($_GET["formationid"]) ? $_GET["formationid"] : "";
+	$paramformationname = isset($_GET["formationname"]) ? $_GET["formationname"] : "";
 	$assignmech = isset($_GET["assignmech"]) ? $_GET["assignmech"] : "";
 	$deletestoredmech = isset($_GET["deletestoredmech"]) ? $_GET["deletestoredmech"] : "";
 
 	if ($assignmech == 1) {
-		$UNITID = isset($_GET["UNITID"]) ? $_GET["UNITID"] : "";
+		$FORMATIONID = isset($_GET["FORMATIONID"]) ? $_GET["FORMATIONID"] : "";
 		$MECHID = isset($_GET["MECHID"]) ? $_GET["MECHID"] : "";
 
-		$sql_update_assignment = "UPDATE asc_assign set formationid = ".$UNITID." where mechid = ".$MECHID;
+		$sql_update_assignment = "UPDATE asc_assign set formationid = ".$FORMATIONID." where mechid = ".$MECHID;
 		if (mysqli_query($conn, $sql_update_assignment)) {
 			// Success
 		} else {
@@ -109,8 +109,6 @@ session_start();
 			echo "Error: " . $sqldeleteassign . "<br>" . mysqli_error($conn);
 			logMsg("Error: " . $sqldeleteassign . ": " . mysqli_error($conn));
 		}
-
-		//echo "<meta http-equiv='refresh' content='0;url=./gui_select_unit.php'>";
 	}
 ?>
 
@@ -119,7 +117,7 @@ session_start();
 <html lang="en">
 
 <head>
-	<title>ASCard.net AplhaStrike Card App (clanwolf.net): Unit assignment</title>
+	<title>ASCard.net AplhaStrike Card App (clanwolf.net): Assignment</title>
 	<meta charset="utf-8">
 	<!-- <meta http-equiv="expires" content="0"> -->
 	<!-- <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"> -->
@@ -212,15 +210,15 @@ session_start();
 			var url="./gui_assign_unit.php?assignmech=1";
 
 			// Assign existing mech
-			var UNITID = document.getElementById('UNITID').value;
+			var FORMATIONID = document.getElementById('FORMATIONID').value;
 			var MECHID = document.getElementById('existingMechs').value;
 
 			if (MECHID == 0) {
-				alert("Select a stored unit!");
+				alert("Select a stored unit first!");
 				return;
 			}
 
-			url=url+"&UNITID="+encodeURIComponent(UNITID);
+			url=url+"&FORMATIONID="+encodeURIComponent(FORMATIONID);
 			url=url+"&MECHID="+encodeURIComponent(MECHID);
 
 			// alert(url);
@@ -234,7 +232,7 @@ session_start();
 			var MECHID = document.getElementById('existingMechs').value;
 
 			if (MECHID == 0) {
-				alert("Select a stored unit!");
+				alert("Select a stored unit first!");
 				return;
 			}
 
@@ -325,7 +323,7 @@ session_start();
 				</td>
 			</tr>
 			<tr>
-				<td nowrap class="datalabel" style='text-align:left;' colspan='3'>Assign to formation: <select required name='UNITID' id='UNITID' size='1' style='width:250px;'>
+				<td nowrap class="datalabel" style='text-align:left;' colspan='3'>Assign to formation: <select required name='FORMATIONID' id='FORMATIONID' size='1' style='width:250px;'>
 <?php
 	$sql_asc_playersformations = "SELECT SQL_NO_CACHE * FROM asc_formation where playerid=".$pid;
 	$result_asc_playersformations = mysqli_query($conn, $sql_asc_playersformations);
@@ -333,7 +331,7 @@ session_start();
 		while($rowFormation = mysqli_fetch_assoc($result_asc_playersformations)) {
 			$formationid = $rowFormation['formationid'];
 			$formationname = $rowFormation['formationname'];
-			if ($paramunitid == $formationid) {
+			if ($paramformationid == $formationid) {
 				echo "										<option value='".$formationid."' selected>".$formationname."</option>\n";
 			} else {
 				echo "										<option value='".$formationid."'>".$formationname."</option>\n";

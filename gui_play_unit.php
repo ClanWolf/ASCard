@@ -414,12 +414,12 @@ session_start();
 <?php
 	$file = file_get_contents('./version.txt', true);
 	$version = $file;
-	if (!isset($_GET["unit"])) {
+	if (!isset($_GET["formationid"])) {
 		echo "<meta http-equiv='refresh' content='0;url=./gui_select_unit.php'> ";
 		header("Location: ./gui_select_unit.php");
 	}
-	$unitid = $_GET["unit"];
-	if (empty($unitid)) {
+	$formationid = $_GET["formationid"];
+	if (empty($formationid)) {
 		echo "<meta http-equiv='refresh' content='0;url=./gui_select_unit.php'> ";
 		header("Location: ./gui_select_unit.php");
 	}
@@ -654,7 +654,7 @@ session_start();
 			$mn = $array_MECH_NUMBER[$i4];
 		}
 
-		$meli="./gui_play_unit.php?unit=".$unitid."&chosenmech=".$i4;
+		$meli="./gui_play_unit.php?formationid=".$formationid."&chosenmech=".$i4;
 		if ($chosenMechIndex == $i4) {
 			$locmeli = $meli;
 			$currentMechStatusImage = $mechstatusimage;
@@ -699,7 +699,7 @@ session_start();
 
 <div><?php echo "<img src='".$array_PILOT_IMG_URL[$chosenMechIndex]."' id='pilotimage' width='80px' height='80px'>" ?></div>
 <div id="faction" align="center"><?php echo "<img src='./images/factions/".$FACTION_IMG_URL."' width='50px' height='50px'>" ?></div>
-<div id="mech_number" align="center" onclick='javascript:hideTopRightPanel();'>#<?= $array_MECH_NUMBER[$chosenMechIndex] ?><br><?= strtoupper($UNIT) ?></div>
+<div id="mech_number" align="center" onclick='javascript:hideTopRightPanel();'>#<?= $array_MECH_NUMBER[$chosenMechIndex] ?><br><?= strtoupper($FORMATION) ?></div>
 
 <?php
 	if ($useMULImages == 0) {
@@ -712,7 +712,7 @@ session_start();
 ?>
 
 <div id="topleft">
-	<span style="font-size: 18px; color: #eeeeee;"><?php echo "$UNIT"; ?></span>
+	<span style="font-size: 18px; color: #eeeeee;"><?php echo "$FORMATION"; ?></span>
 	<br>
 	<span style="font-size: 30px; color: #da8e25;"><?php echo "$array_PILOT[$chosenMechIndex]"; ?></span>
 	<br>
@@ -730,7 +730,7 @@ session_start();
 	echo "<div id='pilotrank'>\n";
 	echo "  <img src='./images/ranks/".$factionid."/".$array_PILOT_RANK[$chosenMechIndex].".png' width='30px' height='30px'>\n";
 	echo "</div>\n";
-	if ($pid == $unitplayerid) {
+	if ($pid == $formationplayerid) {
 		// Current Mech is playable by current user
 		$playable = true;
 	} else {
@@ -974,54 +974,58 @@ if ($showDistancesHexes == 1) {
 											<?php
 												$allSpecialAbilities = "";
 												$parts = explode(',', $array_SPCL[$chosenMechIndex]);
-												$i = 1;
-												foreach ($parts as $part) {
+												if (sizeof($parts) > 1) {
+													$i = 1;
+													foreach ($parts as $part) {
 
-													// These special abilities are special, because they have "-" or "("
-													// in the name so that the regular expression down there does not
-													// catch them correctly. Remove this if the re is fixed
-													$saParameter = "";
-													if (substr($part, 0, 3) === "ART") {
-														$saParameter = "ART";
-													} else if (substr($part, 0, 3) === "BIM") {
-														$saParameter = "BIM";
-													} else if (substr($part, 0, 3) === "LAM") {
-														$saParameter = "LAM";
-													} else if (substr($part, 0, 5) === "I-TSM") {
-														$saParameter = "I-TSM";
-													} else if (substr($part, 0, 5) === "SDS-C") {
-														$saParameter = "SDS-C";
-													} else if (substr($part, 0, 6) === "SDS-CM") {
-														$saParameter = "SDS-CM";
-													} else if (substr($part, 0, 6) === "SDS-SC") {
-														$saParameter = "SDS-SC";
-													} else {
-														// This re removed all "#" and "/" from the names
-														// also all "-" and "(", ")" should be removed to match
-														// them in the javascript to display the ability
-														$re = '/^[A-Z][A-Z3][A-Z]*/m';
-														preg_match($re, $part, $matches);
-														$saParameter = $matches[0];
-													}
-
-													if ($i > 1) {
-														echo ", ";
-													}
-
-													$pos = strpos($allSpecialAbilities, $saParameter);
-													if ($pos !== false) {
-														// String is already in the list
-													} else {
-														if ($i > 1) {
-															$allSpecialAbilities = $allSpecialAbilities."|";
+														// These special abilities are special, because they have "-" or "("
+														// in the name so that the regular expression down there does not
+														// catch them correctly. Remove this if the re is fixed
+														$saParameter = "";
+														if (substr($part, 0, 3) === "ART") {
+															$saParameter = "ART";
+														} else if (substr($part, 0, 3) === "BIM") {
+															$saParameter = "BIM";
+														} else if (substr($part, 0, 3) === "LAM") {
+															$saParameter = "LAM";
+														} else if (substr($part, 0, 5) === "I-TSM") {
+															$saParameter = "I-TSM";
+														} else if (substr($part, 0, 5) === "SDS-C") {
+															$saParameter = "SDS-C";
+														} else if (substr($part, 0, 6) === "SDS-CM") {
+															$saParameter = "SDS-CM";
+														} else if (substr($part, 0, 6) === "SDS-SC") {
+															$saParameter = "SDS-SC";
+														} else {
+															// This re removed all "#" and "/" from the names
+															// also all "-" and "(", ")" should be removed to match
+															// them in the javascript to display the ability
+															$re = '/^[A-Z][A-Z3][A-Z]*/m';
+															preg_match($re, $part, $matches);
+															$saParameter = $matches[0];
 														}
-														$allSpecialAbilities = $allSpecialAbilities.$saParameter;
+
+														if ($i > 1) {
+															echo ", ";
+														}
+
+														if ($saParameter != null) {
+															$pos = strpos($allSpecialAbilities, $saParameter);
+															if ($pos !== false) {
+																// String is already in the list
+															} else {
+																if ($i > 1) {
+																	$allSpecialAbilities = $allSpecialAbilities."|";
+																}
+																$allSpecialAbilities = $allSpecialAbilities.$saParameter;
+															}
+															if ($i == 8) {
+																echo "<br>";
+															}
+															echo "<span class='datavalue_thin' onclick='javascript:showSpecialAbility(\"".$saParameter."\");'>".$part."</span>";
+															$i++;
+														}
 													}
-													if ($i == 8) {
-														echo "<br>";
-													}
-													echo "<span class='datavalue_thin' onclick='javascript:showSpecialAbility(\"".$saParameter."\");'>".$part."</span>";
-													$i++;
 												}
 											?>
 										</td>
@@ -1302,7 +1306,7 @@ if ($showDistancesHexes == 1) {
 		<table width="220px">
 			<tr>
 				<td id='pilotinfo' align="right" valign="bottom">
-					<span style="font-size: 18px; color: #eeeeee;"><?php echo "$UNIT"; ?></span><br>
+					<span style="font-size: 18px; color: #eeeeee;"><?php echo "$FORMATION"; ?></span><br>
 					<span style="font-size: 30px; color: #da8e25;"><?php echo "$array_PILOT[$chosenMechIndex]"; ?></span><br>
 					<span style="font-size: 20px; color: #aaaaaa;"><?php echo "$array_MECH_MODEL[$chosenMechIndex]" ?></span><br><br>
 					<!-- Mechwarriors are highly trained and effective warriors.<br><br> -->

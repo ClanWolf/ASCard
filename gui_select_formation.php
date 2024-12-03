@@ -198,7 +198,7 @@ session_start();
 				//echo "	<td nowrap style='background-color:#148dee;width:170px;height:40px;' class='mechselect_button_active'>jkjj</td>\n";
 
 				// Select units for this player
-				if (!($stmtFormations = $conn->prepare("SELECT SQL_NO_CACHE * FROM asc_formation where playerid = ".$playerid." ORDER BY unitid;"))) {
+				if (!($stmtFormations = $conn->prepare("SELECT SQL_NO_CACHE * FROM asc_formation where playerid = ".$playerid." ORDER BY formationid;"))) {
 					echo "Prepare failed: (" . $conn->errno . ")" . $conn->error;
 				}
 				if ($stmtUnits->execute()) {
@@ -215,21 +215,21 @@ session_start();
 						if ($stmtFactionLogo->execute()) {
 							$resFactionLogo = $stmtFactionLogo->get_result();
 							while ($rowFactionLogo = $resFactionLogo->fetch_assoc()) {
-								$unitlogo = $rowFactionLogo['factionimage'];
+								$factionlogo = $rowFactionLogo['factionimage'];
 							}
 						}
 
-						$sql_asc_checkunitassignments = "SELECT SQL_NO_CACHE * FROM asc_assign where formationid=".$formationidSelected.";";
-						$result_asc_checkunitassignments = mysqli_query($conn, $sql_asc_checkunitassignments);
-						if (mysqli_num_rows($result_asc_checkunitassignments) > 0) {
-							echo "	<td nowrap style='background-color:#b43c3e;width:170px;height:40px;' onclick='location.href=\"gui_play_unit.php?unit=".$formationidSelected."\"' class='unitselect_button_normal'>\n";
+						$sql_asc_checkformationassignments = "SELECT SQL_NO_CACHE * FROM asc_assign where formationid=".$formationidSelected.";";
+						$result_asc_checkformationassignments = mysqli_query($conn, $sql_asc_checkformationassignments);
+						if (mysqli_num_rows($result_asc_checkformationassignments) > 0) {
+							echo "	<td nowrap style='background-color:#b43c3e;width:170px;height:40px;' onclick='location.href=\"gui_play_unit.php?formationid=".$formationidSelected."\"' class='unitselect_button_normal'>\n";
 							echo "		<table cellspacing='0' cellpadding='0'>\n";
 							echo "			<tr>\n";
 							echo "				<td width='90%' style='text-align:left;'>\n";
-							echo "					<a href='gui_play_unit.php?unit=".$formationidSelected."'>".$formationnameSelected."</a>\n";
+							echo "					<a href='gui_play_unit.php?formationid=".$formationidSelected."'>".$formationnameSelected."</a>\n";
 							echo "				</td>\n";
 							echo "				<td width='10%' style='text-align:right;'>\n";
-							echo "					<img src='./images/factions/".$unitlogo."' width='20px' style='border:1px solid;'>\n";
+							echo "					<img src='./images/factions/".$factionlogo."' width='20px' style='border:1px solid;'>\n";
 							echo "				</td>\n";
 							echo "			</tr>\n";
 							echo "		</table>\n";
@@ -322,21 +322,21 @@ session_start();
 						if ($stmtFactionLogo->execute()) {
 							$resFactionLogo = $stmtFactionLogo->get_result();
 							while ($rowFactionLogo = $resFactionLogo->fetch_assoc()) {
-								$unitlogo = $rowFactionLogo['factionimage'];
+								$factionlogo = $rowFactionLogo['factionimage'];
 							}
 						}
 
-						$sql_asc_checkunitassignments = "SELECT SQL_NO_CACHE * FROM asc_assign where formationid=".$formationidSelected.";";
-						$result_asc_checkunitassignments = mysqli_query($conn, $sql_asc_checkunitassignments);
-						if (mysqli_num_rows($result_asc_checkunitassignments) > 0) {
-							echo "<td nowrap style='width:170px;height:40px;$selectBorder' onclick='location.href=\"gui_play_unit.php?unit=".$formationidSelected."\"' class='unitselect_button_normal'>\n";
+						$sql_asc_checkformationassignments = "SELECT SQL_NO_CACHE * FROM asc_assign where formationid=".$formationidSelected.";";
+						$result_asc_checkformationassignments = mysqli_query($conn, $sql_asc_checkformationassignments);
+						if (mysqli_num_rows($result_asc_checkformationassignments) > 0) {
+							echo "<td nowrap style='width:170px;height:40px;$selectBorder' onclick='location.href=\"gui_play_unit.php?formationid=".$formationidSelected."\"' class='unitselect_button_normal'>\n";
 							echo "	<table cellspacing='0' cellpadding='0'>\n";
 							echo "		<tr>\n";
 							echo "			<td width='90%' style='text-align:left;'>\n";
-							echo "				<a href='gui_play_unit.php?unit=".$formationidSelected."'>".$formationnameSelected."</a>\n";
+							echo "				<a href='gui_play_unit.php?formationid=".$formationidSelected."'>".$formationnameSelected."</a>\n";
 							echo "			</td>\n";
 							echo "			<td width='10%' style='text-align:right;'>\n";
-							echo "				<img src='./images/factions/".$unitlogo."' width='20px' style='border:1px solid;'>\n";
+							echo "				<img src='./images/factions/".$factionlogo."' width='20px' style='border:1px solid;'>\n";
 							echo "			</td>\n";
 							echo "		</tr>\n";
 							echo "	</table>\n";

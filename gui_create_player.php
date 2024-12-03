@@ -106,8 +106,8 @@ session_start();
 			}
 		}
 
-		foreach ($playersFormations as &$unitid) {
-			$sqlupdateassignment = "update asc_assign set formationid=null where formationid = ".$unitid;
+		foreach ($playersFormations as &$formationid) {
+			$sqlupdateassignment = "update asc_assign set formationid=null where formationid = ".$formationid;
 			if (mysqli_query($conn, $sqlupdateassignment)) {
 				// Success
 			} else {

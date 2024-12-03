@@ -15,7 +15,7 @@ session_start();
 		//die("Check position 9");
 	}
 
-	// Get data on units from db
+	// Get data from db
 	$opt3 = $_SESSION['option3'];
 	$playMode = $opt3;
 
@@ -34,7 +34,7 @@ session_start();
 		return $data;
 	}
 
-	function getMechImageByName($mechname, $unittype) { // BM=BattleMech, BA=BattleArmor, CV=CombatVehicle
+	function getMechImageByName($unitname, $unittype) { // BM=BattleMech, BA=BattleArmor, CV=CombatVehicle
 		if ($unittype == "CV") {
 			$image = "images/mechs/Generic_Tank.gif";
 		} else if ($unittype == "BA") {
@@ -47,8 +47,8 @@ session_start();
 		foreach ($files as &$img) {
 			$imagenametrimmed = basename(strtolower(str_replace(' ', '', trim($img))), ".png");
 			$imagename = basename(str_replace(' ', '', trim($img)));
-			$mechnametrimmed = strtolower(str_replace(' ', '', trim($mechname)));
-			if (strpos($mechnametrimmed, $imagenametrimmed) !== false) {
+			$unitnametrimmed = strtolower(str_replace(' ', '', trim($unitname)));
+			if (strpos($unitnametrimmed, $imagenametrimmed) !== false) {
 				$image = str_replace(' ', '%20', trim($img));
 				break;
 			}
@@ -60,8 +60,8 @@ session_start();
 	$gid = $_SESSION['gameid'];
 	$pimage = $_SESSION['playerimage'];
 	$hideNotOwnedMech = $_SESSION['option1'];
-	$paramunitid = isset($_GET["unitid"]) ? $_GET["unitid"] : "";
-	$paramunitname = isset($_GET["unitname"]) ? $_GET["unitname"] : "";
+	$paramformationid = isset($_GET["formationid"]) ? $_GET["formationid"] : "";
+	$paramformationname = isset($_GET["formationname"]) ? $_GET["formationname"] : "";
 	$addmech = isset($_GET["am"]) ? $_GET["am"] : "";
 
 	$sql_asc_playerround = "SELECT SQL_NO_CACHE * FROM asc_player where playerid = " . $pid . ";";
@@ -92,7 +92,7 @@ session_start();
 		$PN = isset($_GET["PN"]) ? $_GET["PN"] : "";
 		$PI = isset($_GET["PI"]) ? $_GET["PI"] : "";
 		$SKILL = isset($_GET["SKILL"]) ? $_GET["SKILL"] : "";
-		$UNITID = isset($_GET["UNITID"]) ? $_GET["UNITID"] : "";
+		$FORMATIONID = isset($_GET["FORMATIONID"]) ? $_GET["FORMATIONID"] : "";
 		$MULID = isset($_GET["MULID"]) ? $_GET["MULID"] : "";
 		$MODEL = isset($_GET["MODEL"]) ? $_GET["MODEL"] : "";
 		$TECH = isset($_GET["TECH"]) ? $_GET["TECH"] : "";
@@ -118,7 +118,7 @@ session_start();
 		$PN = urldecode($PN);
 		$PI = urldecode($PI);
 		$SKILL = urldecode($SKILL);
-		$UNITID = urldecode($UNITID);
+		$FORMATIONID = urldecode($FORMATIONID);
 		$MULID = urldecode($MULID);
 		$MODEL = urldecode($MODEL);
 
@@ -204,7 +204,7 @@ session_start();
 		//    ASSIGN
 		//    ----------------
 		//    id
-		//    unitid
+		//    formationid
 		//    mechid
 		//    pilotid
 
@@ -277,7 +277,7 @@ session_start();
 		$sql_insertassign = $sql_insertassign."INSERT INTO asc_assign ";
 		$sql_insertassign = $sql_insertassign."(formationid, mechid, pilotid, playerid) ";
 		$sql_insertassign = $sql_insertassign."VALUES (";
-		$sql_insertassign = $sql_insertassign.$UNITID.",";
+		$sql_insertassign = $sql_insertassign.FORMATIONID.",";
 		$sql_insertassign = $sql_insertassign.$newmechid.",";
 		$sql_insertassign = $sql_insertassign.$newpilotid.",";
 		$sql_insertassign = $sql_insertassign.$pid;
@@ -447,7 +447,7 @@ session_start();
 			var PN = document.getElementById('PN').value;
 			var PI = finalPilotImage;
 			var SKILL = document.getElementById('SKILL').value;
-			var UNITID = document.getElementById('UNITID').value;
+			var FORMATIONID = document.getElementById('FORMATIONID').value;
 
 			var adjustedPV = adjustPointValue(PVA, SKILL);
 
@@ -514,7 +514,7 @@ session_start();
 			url=url+"&SKILL="+encodeURIComponent(SKILL);
 			url=url+"&MULID="+encodeURIComponent(MULID);
 			url=url+"&MODEL="+encodeURIComponent(MODEL);
-			url=url+"&UNITID="+encodeURIComponent(UNITID);
+			url=url+"&FORMATIONID="+encodeURIComponent(FORMATIONID);
 			url=url+"&TECH="+encodeURIComponent(TECH);
 			url=url+"&MVTYPE="+encodeURIComponent(MVType);
 
@@ -699,7 +699,7 @@ session_start();
 				</td>
 			</tr>
 			<tr>
-				<td nowrap class="datalabel" style='text-align:left;' colspan='4'>Add to formation: <select required name='UNITID' id='UNITID' size='1' style='width:200px;'>
+				<td nowrap class="datalabel" style='text-align:left;' colspan='4'>Add to formation: <select required name='FORMATIONID' id='FORMATIONID' size='1' style='width:200px;'>
 <?php
 	$sql_asc_playersformations = "SELECT SQL_NO_CACHE * FROM asc_formation where playerid=".$pid;
 	$result_asc_playersformations = mysqli_query($conn, $sql_asc_playersformations);
@@ -707,7 +707,7 @@ session_start();
 		while($rowFormations = mysqli_fetch_assoc($result_asc_playersformations)) {
 			$formationid = $rowFormations['formationid'];
 			$formationname = $rowFormations['formationname'];
-			if ($paramunitid == $formationid) {
+			if ($paramformationid == $formationid) {
 				echo "										<option value='".$formationid."' selected>".$formationname."</option>\n";
 			} else {
 				echo "										<option value='".$formationid."'>".$formationname."</option>\n";

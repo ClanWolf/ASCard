@@ -139,9 +139,6 @@ session_start();
 				echo "Error: " . $sqlsetwinner . "<br>" . mysqli_error($conn);
 			}
 		}
-
-		//echo "<meta http-equiv='refresh' content='0;url=./gui_select_unit.php'>";
-
 	}
 
 	function textTruncate($text, $chars=25) {
@@ -161,7 +158,7 @@ session_start();
 <html lang="en">
 
 <head>
-	<title>ASCard.net AplhaStrike Card App (clanwolf.net): Unit selector</title>
+	<title>ASCard.net AplhaStrike Card App (clanwolf.net): Roster</title>
 	<meta charset="utf-8">
 	<!-- <meta http-equiv="expires" content="0"> -->
 	<!-- <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"> -->
@@ -336,8 +333,8 @@ session_start();
 		<tr>
 <?php
 
-	$addMechToUnitLinkArray = array();
-	$assignMechToUnitLinkArray = array();
+	$addMechToFormationLinkArray = array();
+	$assignMechToFormationLinkArray = array();
 	$mechsInAllFormations = array();
 	$pointvaluetotal = 0;
 	$pointvaluetotalactivebid = 0;
@@ -365,29 +362,29 @@ session_start();
 			if ($stmtFactionLogo->execute()) {
 				$resFactionLogo = $stmtFactionLogo->get_result();
 				while ($rowFactionLogo = $resFactionLogo->fetch_assoc()) {
-					$unitlogo = $rowFactionLogo['factionimage'];
+					$factionlogo = $rowFactionLogo['factionimage'];
 				}
 			}
 
-			array_push($addMechToUnitLinkArray, "gui_create_unit.php?unitid=".$formationidSelected."&unitname=".$formationnameSelected);
-			array_push($assignMechToUnitLinkArray, "gui_assign_unit.php?unitid=".$formationidSelected."&unitname=".$formationnameSelected);
+			array_push($addMechToFormationLinkArray, "gui_create_unit.php?formationid=".$formationidSelected."&formationname=".$formationnameSelected);
+			array_push($assignMechToFormationLinkArray, "gui_assign_unit.php?formationid=".$formationidSelected."&formationname=".$formationnameSelected);
 
-			$sql_asc_checkunitassignments = "SELECT SQL_NO_CACHE * FROM asc_assign where formationid=".$formationidSelected.";";
-			$result_asc_checkunitassignments = mysqli_query($conn, $sql_asc_checkunitassignments);
-			if (mysqli_num_rows($result_asc_checkunitassignments) > 0) {
-				echo "			<td nowrap style='width:270px;height:40px;' onclick='location.href=\"gui_play_unit.php?unit=".$formationidSelected."\"' class='unitselect_button_normal'>\n";
+			$sql_asc_checkformationassignments = "SELECT SQL_NO_CACHE * FROM asc_assign where formationid=".$formationidSelected.";";
+			$result_asc_checkformationassignments = mysqli_query($conn, $sql_asc_checkformationassignments);
+			if (mysqli_num_rows($result_asc_checkformationassignments) > 0) {
+				echo "			<td nowrap style='width:270px;height:40px;' onclick='location.href=\"gui_play_unit.php?formationid=".$formationidSelected."\"' class='unitselect_button_normal'>\n";
 				echo "				<table style='width:100%;' cellspacing=0 cellpadding=0>\n";
 				echo "					<tr>\n";
 				if (!$playMode) {
 					echo "						<td style='text-align:left;'>\n";
-					echo "							<a href='gui_edit_formation.php?unit=".$formationidSelected."'><i class='fas fa-edit'></i></a>\n";
+					echo "							<a href='gui_edit_formation.php?formationid=".$formationidSelected."'><i class='fas fa-edit'></i></a>\n";
 					echo "						</td>\n";
 				}
 				echo "						<td style='text-align:center;'>\n";
-				echo "							<a href='gui_play_unit.php?unit=".$formationidSelected."'>".$formationnameSelected."</a>\n";
+				echo "							<a href='gui_play_unit.php?formationid=".$formationidSelected."'>".$formationnameSelected."</a>\n";
 				echo "						</td>\n";
 				echo "						<td style='text-align:right;'>\n";
-				echo "							<img src='./images/factions/".$unitlogo."' width='20px' style='border:1px solid;'>\n";
+				echo "							<img src='./images/factions/".$factionlogo."' width='20px' style='border:1px solid;'>\n";
 				echo "						</td>\n";
 				echo "					</tr>\n";
 				echo "				</table>\n";
@@ -400,7 +397,7 @@ session_start();
 
 			$mechsInSingleFormation = array();
 			$c = 0;
-			while ($rowUnitAssignment = $result_asc_checkunitassignments->fetch_assoc()) {
+			while ($rowUnitAssignment = $result_asc_checkformationassignments->fetch_assoc()) {
 
 				$c++;
 				$assignedMechID = $rowUnitAssignment['mechid'];
@@ -494,20 +491,6 @@ session_start();
 
 				$mechDetailString = "";
 
-//				$mechDetailString = $mechDetailString."						<td nowrap width='1%' onclick='location.href=\"\"' style='background-color:#121212;text-align:right;'>\n";
-//				$mechDetailString = $mechDetailString."							<span style='font-size:16px;'>\n";
-//				if (!$playMode) {
-//					$mechDetailString = $mechDetailString."								\n";
-//				} else {
-//					if ($activebid == "1") {
-//						$mechDetailString = $mechDetailString."								<span><a href='./gui_select_unit.php?activebid=0&mechid=".$assignedMechID."'>&nbsp;&nbsp;&nbsp;<i class='fas fa-arrow-circle-left' aria-hidden='true' style='font-size:40;color:#741300;'></i></a>&nbsp;&nbsp;&nbsp;</span>\n";
-//					} else {
-//						$mechDetailString = $mechDetailString."								<span><a href='./gui_select_unit.php?activebid=1&mechid=".$assignedMechID."'>&nbsp;&nbsp;&nbsp;<i class='fas fa-arrow-circle-right' aria-hidden='true' style='font-size:40;color:#2f7c2f;'></i></a>&nbsp;&nbsp;&nbsp;</span>\n";
-//					}
-//				}
-//				$mechDetailString = $mechDetailString."							</span>\n";
-//				$mechDetailString = $mechDetailString."						</td>\n";
-
 				if ($activebid == "1") {
 					$mechDetailString = $mechDetailString."						<td nowrap width='1%' onclick=\"location.href='gui_select_unit.php?activebid=0&mechid=".$assignedMechID."'\" style='background-color:#121212;text-align:right;'>\n";
 					$mechDetailString = $mechDetailString."							<span style='font-size:16px;'>\n";
@@ -536,13 +519,13 @@ session_start();
 
 
 
-				$mechDetailString = $mechDetailString."			<td nowrap onclick='location.href=\"gui_play_unit.php?unit=".$formationidSelected."&chosenmech=".$c."\"' style='background-color:".$bidcolor."' class='mechselect_button_active' align='right' valign='center'><div style='display:inline-block;height:100%;vertical-align:middle;'><img style='vertical-align:middle;' src='".$mechstatusimage."' height='24px'><br><span style='font-size:14px;'>".$numStr."</span></div></td>\n";
+				$mechDetailString = $mechDetailString."			<td nowrap onclick='location.href=\"gui_play_unit.php?formationid=".$formationidSelected."&chosenmech=".$c."\"' style='background-color:".$bidcolor."' class='mechselect_button_active' align='right' valign='center'><div style='display:inline-block;height:100%;vertical-align:middle;'><img style='vertical-align:middle;' src='".$mechstatusimage."' height='24px'><br><span style='font-size:14px;'>".$numStr."</span></div></td>\n";
 				$mechDetailString = $mechDetailString."			<td nowrap style='width:100%;background-color:".$bidcolor."' class='mechselect_button_active'>\n";
 				$mechDetailString = $mechDetailString."				<table width='100%' cellspacing=0 cellpadding=0 border=0px>\n";
 				$mechDetailString = $mechDetailString."					<tr>\n";
 
 				if ($activebid == "1") {
-					$mechDetailString = $mechDetailString."						<td nowrap onclick='location.href=\"gui_play_unit.php?unit=".$formationidSelected."&chosenmech=".$c."\"' width='99%' align='left' style='color:#AAAAAA;background-color:".$bidcolor."text-align:left;'><span style='font-size:24px;'>";
+					$mechDetailString = $mechDetailString."						<td nowrap onclick='location.href=\"gui_play_unit.php?formationid=".$formationidSelected."&chosenmech=".$c."\"' width='99%' align='left' style='color:#AAAAAA;background-color:".$bidcolor."text-align:left;'><span style='font-size:24px;'>";
 				} else {
 					$mechDetailString = $mechDetailString."						<td nowrap width='99%' align='left' style='color:#AAAAAA;background-color:".$bidcolor."text-align:left;'><span style='font-size:24px;'>";
 				}
@@ -584,16 +567,16 @@ session_start();
 //	if (!$playMode) {
 //		echo "		<tr>\n";
 //		echo "			<td nowrap style='text-align:center;width:200px;height:30px;background-color:#transparent;'>\n";
-//		echo "				<a href='".$assignMechToUnitLinkArray[0]."'><i class='fas fa-plus-square'></i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\n";
-//		echo "				<a href='".$addMechToUnitLinkArray[0]."'><i class='fas fa-asterisk'></i></a>\n";
+//		echo "				<a href='".$assignMechToFormationLinkArray[0]."'><i class='fas fa-plus-square'></i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\n";
+//		echo "				<a href='".$addMechToFormationLinkArray[0]."'><i class='fas fa-asterisk'></i></a>\n";
 //		echo "			</td>\n";
 //		echo "			<td nowrap style='text-align:center;width:200px;height:30px;background-color:#transparent;'>\n";
-//		echo "				<a href='".$assignMechToUnitLinkArray[1]."'><i class='fas fa-plus-square'></i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\n";
-//		echo "				<a href='".$addMechToUnitLinkArray[1]."'><i class='fas fa-asterisk'></i></a>\n";
+//		echo "				<a href='".$assignMechToFormationLinkArray[1]."'><i class='fas fa-plus-square'></i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\n";
+//		echo "				<a href='".$addMechToFormationLinkArray[1]."'><i class='fas fa-asterisk'></i></a>\n";
 //		echo "			</td>\n";
 //		echo "			<td nowrap style='text-align:center;width:200px;height:30px;background-color:#transparent;'>\n";
-//		echo "				<a href='".$assignMechToUnitLinkArray[2]."'><i class='fas fa-plus-square'></i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\n";
-//		echo "				<a href='".$addMechToUnitLinkArray[2]."'><i class='fas fa-asterisk'></i></a>\n";
+//		echo "				<a href='".$assignMechToFormationLinkArray[2]."'><i class='fas fa-plus-square'></i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\n";
+//		echo "				<a href='".$addMechToFormationLinkArray[2]."'><i class='fas fa-asterisk'></i></a>\n";
 //		echo "			</td>\n";
 //		echo "		</tr>\n";
 //	}

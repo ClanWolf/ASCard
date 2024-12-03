@@ -11,7 +11,7 @@
 
 	$FACTION = "DEFAULT";
 	$FACTION_IMG_URL = "...";
-	$UNIT = "DEFAULT";
+	$FORMATION = "DEFAULT";
 
 	$GAMEID = -1;
 
@@ -107,17 +107,17 @@
 	$result_asc_formation = mysqli_query($conn, $sql_asc_formation);
 	if (mysqli_num_rows($result_asc_formation) > 0) {
 		while($row = mysqli_fetch_assoc($result_asc_formation)) {
-			if ($row["formationid"] == $unitid) {
-				$UNIT = $row["formationname"];
+			if ($row["formationid"] == $formationid) {
+				$FORMATION = $row["formationname"];
 				$factionid = $row["factionid"];
-				$unitplayerid = $row["playerid"];
+				$formationplayerid = $row["playerid"];
 			}
 		}
 	}
 	mysqli_free_result($result_asc_formation);
 
 	// Use MUL Images
-	$sql_asc_useMULImages = "SELECT SQL_NO_CACHE * FROM asc_options where playerid = " . $unitplayerid . ";";
+	$sql_asc_useMULImages = "SELECT SQL_NO_CACHE * FROM asc_options where playerid = " . $formationplayerid . ";";
 	$result_asc_useMULImages = mysqli_query($conn, $sql_asc_useMULImages);
 	if (mysqli_num_rows($result_asc_useMULImages) > 0) {
 		while($row33 = mysqli_fetch_assoc($result_asc_useMULImages)) {
@@ -128,7 +128,7 @@
 
 	// Game
 	// currentround from player
-	$sql_asc_playerround = "SELECT SQL_NO_CACHE * FROM asc_player where playerid = " . $unitplayerid . ";";
+	$sql_asc_playerround = "SELECT SQL_NO_CACHE * FROM asc_player where playerid = " . $formationplayerid . ";";
 	$result_asc_playerround = mysqli_query($conn, $sql_asc_playerround);
 	if (mysqli_num_rows($result_asc_playerround) > 0) {
 		while($row = mysqli_fetch_assoc($result_asc_playerround)) {
@@ -145,7 +145,7 @@
 	if (mysqli_num_rows($result_asc_faction) > 0) {
 		while($row = mysqli_fetch_assoc($result_asc_faction)) {
 			if ($row["factionid"] == $factionid) {
-				$FACTION = $row["name"];
+				$FACTION = $row["factionname"];
 				$FACTION_IMG_URL = $row["factionimage"];
 			}
 		}
@@ -159,7 +159,7 @@
 	$result_asc = mysqli_query($conn, $sql_asc);
 	if (mysqli_num_rows($result_asc) > 0) {
 		while($row = mysqli_fetch_assoc($result_asc)) {
-			if ($row["formationid"] == $unitid) {
+			if ($row["formationid"] == $formationid) {
 				$mechcount++;
 				// echo "<script>console.log('Mech-ID: ".$mechid."');</script>";
 				// echo "<script>console.log('Pilot-ID: ".$pilotid."');</script>";
