@@ -1,7 +1,11 @@
 <?php
-	// https://www.php-einfach.de/php-tutorial/php-sessions/
-	session_start();
 
+//ini_set('display_errors', 1);
+//ini_set('display_startup_errors', 1);
+//error_reporting(E_ALL);
+
+session_start();
+// https://www.php-einfach.de/php-tutorial/php-sessions/
 	require('./logger.php');
 	if (!isset($_SESSION['playerid'])) {
 		echo "Not logged in... redirecting.<br>";
@@ -13,6 +17,8 @@
 	$gid = $_SESSION['gameid'];
 	$pimage = $_SESSION['playerimage'];
 	$hideNotOwnedMech = $_SESSION['option1'];
+
+	$isAdmin = $_SESSION['isAdmin'];
 
 	$opt2 = $_SESSION['option2'];
 	$showplayerdata_topleft = $opt2;
@@ -219,7 +225,7 @@
 //							//alert("First movement has to be specified!");
 //							el1.checked = false;
 //						} else {
-//							fired = 1; // not fired on purpose to cool down (or the unit sprinted)
+//							fired = 1; // not fired on purpose to cool down (or sprinted)
 //						}
 //					}
 //					if (na == "WF6_WEAPONSFIRED" && el1.checked == true) {

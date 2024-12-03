@@ -7,6 +7,14 @@ allow deleting of my own units in assign gui
 
 add random click for player image while creating player
 
+Move some columns from mech/unit to mechstatus, because they are gamespecific!
+- mounted unit
+- active bid
+
+move bidding columns from player to a new table to link them to the command
+
+add buttons to move a unit from formation one to next
+
 // HIGH
 TODO: Finish the crits for CVs
 TODO: Add finalize round for CVs

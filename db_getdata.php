@@ -15,7 +15,7 @@
 
 	$GAMEID = -1;
 
-	// Store in arrays to keep the mech- and pilotdata of the current unit
+	// Store in arrays to keep the mech- and pilotdata
 	$array_PILOT = array();
 	$array_PILOT_RANK = array();
 	$array_PILOT_IMG_URL = array();
@@ -101,8 +101,8 @@
 //	}
 //	mysqli_free_result($result_asc_game);
 
-	// Unit
-	// unitid; factionid; formationname; --parentforceid--; unit_imageurl; playable
+	// Formation
+	// formationid; factionid; formationname; --parentforceid--; formation_imageurl; playable
 	$sql_asc_formation = "SELECT SQL_NO_CACHE * FROM asc_formation;";
 	$result_asc_formation = mysqli_query($conn, $sql_asc_formation);
 	if (mysqli_num_rows($result_asc_formation) > 0) {
@@ -150,11 +150,10 @@
 			}
 		}
 	}
-//	$UNIT_PARENTS = $FACTION_TYPE." ".$FACTION.",<br>".$UNIT_PARENTS;
 	mysqli_free_result($result_asc_faction);
 
 	// Alpha Strike Cards
-	// id; unitid; mechid; pilotid
+	// id; formationid; mechid; pilotid
 	$mechcount = 0;
 	$sql_asc = "SELECT SQL_NO_CACHE * FROM asc_assign;";
 	$result_asc = mysqli_query($conn, $sql_asc);

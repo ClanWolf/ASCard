@@ -17,13 +17,13 @@
 
 	if (!empty($pid)) {
 		// asc_player       --> round = round + 1
-		// asc_formation    --> formationids (formerly unitids) for playerid
-		// asc_assign       --> mechid, roundmoved and roundfired for formationids (former unitids)
+		// asc_formation    --> formationids for playerid
+		// asc_assign       --> mechid, roundmoved and roundfired for formationids
 		// asc_mechstatus   --> prepvalues for the criticals mit mechids
 
 		// - select player, update round = round + 1
-		// - select all formationids (former unitids) for the playerid
-		// - select all mechids (+ moved and fired) from assign with the formationids (former unitids)
+		// - select all formationids for the playerid
+		// - select all mechids (+ moved and fired) from assign with the formationids
 		// - select all prepvalues != 0 from mechstatus with mechids
 
 		$finishedMechsInThisRound = 0;
@@ -55,7 +55,7 @@
 			}
 		}
 
-		// select the number of mechs that are active bid and in the players units
+		// select the number of mechs that are active bid and in the players formations
 		$allActiveMechsCount = 0;
 		$sql_allActiveMechsCount = "";
 		$sql_allActiveMechsCount = $sql_allActiveMechsCount . "SELECT SQL_NO_CACHE a.assignid, a.formationid, a.mechid, a.pilotid, a.round_moved, a.round_fired, m.active_bid, m.mech_status ";
@@ -73,7 +73,7 @@
 			}
 		}
 
-		// select the number of mechs that are active bid and in the players units AND have moved and fired
+		// select the number of mechs that are active bid and in the players formations AND have moved and fired
 		$allActiveMechsFinishedCount = 0;
 		$sql_allActiveMechsFinishedCount = "";
 		$sql_allActiveMechsFinishedCount = $sql_allActiveMechsFinishedCount . "SELECT SQL_NO_CACHE * ";
@@ -92,7 +92,7 @@
 			}
 		}
 
-		// select the mechs that are active bid and in the players units AND have !!!! NOT !!!! moved and fired
+		// select the mechs that are active bid and in the players formations AND have !!!! NOT !!!! moved and fired
 		// To list them in the error message
 		$allActiveMechIDsNOTFinished = "";
 		$sql_allActiveMechIDsNOTFinished = "";
