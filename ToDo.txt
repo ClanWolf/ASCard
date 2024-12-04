@@ -15,6 +15,8 @@ move bidding columns from player to a new table to link them to the command
 
 add buttons to move a unit from formation one to next
 
+Show player gui only if admin
+
 // HIGH
 TODO: Finish the crits for CVs
 TODO: Add finalize round for CVs
@@ -43,16 +45,11 @@ TODO: Add similar json / overview page for pilot abilities
 // NICE TO HAVE
 TODO: Do not allow jumping if the unit does not have j movement
 TODO: Show only one name for clan mechs (choose in options which one)
+TODO: Add a large text with Mechname on play unit screen
 TODO: Import units from mul directly somehow (have mul open, select a unit and export it to ASCard)
 TODO: Scan QR codes to identify units on the table
 TODO: Shortcut bar irgendwo mit allen Mech-Ids zum schnellen Wechseln
 
 // OTHER
-TODO: Why does the play unit page sometimes randomly takes over 1 sec to load?
-TODO: Fix parameter names on all pages from "mech" to "unit" and "unit" to "formation"
-TODO: Fix table names according to unit/formation changes
-
-
-
-TODO: Delete players only for admins (admin from the user table flag, not fixed user id)
-
+TODO: Fix parameter names on all pages from "mech" to "unit"
+TODO: Fix table names according to mech -> unit

@@ -434,7 +434,7 @@ session_start();
 					echo "									</span>\n";
 					echo "								</td>\n";
 				} else {
-					if ($pid == 1) { // Meldric (only admin may delete player)
+					if ($isAdmin) { // only admins may delete players
 						echo "								<td onclick='javascript:saveNewPlayer(".$row['playerid'].",\"".$row['image']."\");' width='10px' nowrap>\n";
                         echo "									<span style='font-size:16px;'>\n";
 						echo "										    <i class='fas fa-minus-square'></i>\n";

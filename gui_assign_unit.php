@@ -358,11 +358,11 @@ session_start();
 		echo "				<td colspan='3'>Delete selected unit from Hangar (!)</td>\n";
 		echo "				<td align='right'>\n";
 
-		if ($pid == 1) { // Meldric (only admin may delete units)
+		//if ($isAdmin) { // only admins may delete units
 			echo "					<a href='#' onClick='deleteStoredMech();'><i class='fas fa-minus-square'></i></a>\n";
-		} else {
-			echo "					<i class=\"fas fa-ban\"></i>\n";
-		}
+		//} else {
+		//	echo "					<i class=\"fas fa-ban\"></i>\n";
+		//}
 
 		echo "				</td>\n";
 		echo "			</tr>\n";
