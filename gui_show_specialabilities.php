@@ -15,7 +15,7 @@
 	<!-- <meta http-equiv="expires" content="0"> -->
 	<!-- <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"> -->
 	<meta name="description" content="Cards app for the AlphaStrike TableTop (BattleTech).">
-	<meta name="keywords" content="BattleTech, AlphaStrike, Mech">
+	<meta name="keywords" content="BattleTech, AlphaStrike">
 	<meta name="robots" content="noindex,nofollow">
 	<meta name="mobile-web-app-capable" content="yes">
 	<meta name="apple-mobile-web-app-capable" content="yes">

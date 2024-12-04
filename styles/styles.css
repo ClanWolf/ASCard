@@ -353,7 +353,7 @@ a:hover {
 	width: 60px;
 	height: 60px;
 }
-#blockNotOwnedMechs {
+#blockNotOwnedUnits {
 	z-index: 700;
 	position: absolute;
 	top: 50px;
@@ -486,14 +486,14 @@ a:hover {
 	bottom: 46px;
 	color: #000000;
 }
-#mech_number {
+#unit_number {
 	z-index: 100;
 	position: absolute;
 	display: inline-block;
 	text-align: right;
 	vertical-align: middle;
 	padding: 0px;
-	/* background-image: url('../images/mech_number.png'); */
+
 	/* background-size: cover; */
 	width: 140px;
 	/* height: 80px; */
@@ -549,7 +549,7 @@ a:hover {
 	right: 0px;
 	text-align: right;
 }
-#mech {
+#unit {
 	z-index: 1;
 	position: absolute;
 	margin-right: auto 0;
@@ -559,7 +559,7 @@ a:hover {
 	object-fit: contain;
 	overflow: visible;
 }
-#mechimage {
+#unitimage {
 	width: 100%;
 	height: auto !important;
 }
@@ -622,14 +622,14 @@ a:hover {
 	text-align: center;
 }
 
-.mechselect_button_normal {
+.unitselect_button_normal {
 	font-size: 100%;
 	padding: 3px;
 	background-color: #da8e25;
 	color: #000000;
 	text-align: center;
 }
-.mechselect_button_normal:hover {
+.unitselect_button_normal:hover {
 	font-size: 100%;
 	padding: 3px;
 	background-color: #925a0a;
@@ -637,28 +637,28 @@ a:hover {
 	text-align: center;
 }
 
-.mechselect_button_normal_left {
+.unitselect_button_normal_left {
 	font-size: 100%;
 	padding: 3px;
 	background-color: #da8e25;
 	color: #000000;
 	text-align: left;
 }
-.mechselect_button_normal_left:hover {
+.unitselect_button_normal_left:hover {
 	font-size: 100%;
 	padding: 3px;
 	background-color: #925a0a;
 	color: #000000;
 	text-align: left;
 }
-.mechselect_button_active {
+.unitselect_button_active {
 	font-size: 100%;
 	padding: 3px;
 	background-color: #694007;
 	color: #ffffff;
 	text-align: center;
 }
-.mechselect_button_active_left {
+.unitselect_button_active_left {
 	font-size: 100%;
 	padding: 3px;
 	background-color: #694007;
@@ -666,21 +666,21 @@ a:hover {
 	text-align: left;
 }
 
-.mechselect_button_normal_play_left {
+.unitselect_button_normal_play_left {
 	font-size: 100%;
 	padding: 3px;
 	background-color: #556b8f;
 	color: #000000;
 	text-align: left;
 }
-.mechselect_button_normal_play_left:hover {
+.unitselect_button_normal_play_left:hover {
 	font-size: 100%;
 	padding: 3px;
 	background-color: #425470;
 	color: #000000;
 	text-align: left;
 }
-.mechselect_button_active_play_left {
+.unitselect_button_active_play_left {
 	font-size: 100%;
 	padding: 3px;
 	background-color: #2b3649;
@@ -688,28 +688,28 @@ a:hover {
 	text-align: left;
 }
 
-.unitselect_button_normal {
+.formationselect_button_normal {
 	font-size: 100%;
 	padding: 3px;
 	background-color: #565656;
 	color: #000000;
 	text-align: center;
  }
- .unitselect_button_normal:hover {
+ .formationselect_button_normal:hover {
 	font-size: 100%;
 	padding: 3px;
 	background-color: #656565;
 	color: #000000;
 	text-align: center;
  }
- .unitselect_button_normal_left {
+ .formationselect_button_normal_left {
 	font-size: 100%;
 	padding: 3px;
 	background-color: #565656;
 	color: #000000;
 	text-align: left;
  }
-.unitselect_button_normal_left:hover {
+.formationselect_button_normal_left:hover {
 	font-size: 100%;
 	padding: 3px;
 	background-color: #656565;

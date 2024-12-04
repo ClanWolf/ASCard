@@ -1,8 +1,8 @@
 <?php
 
-//ini_set('display_errors', 1);
-//ini_set('display_startup_errors', 1);
-//error_reporting(E_ALL);
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 
 session_start();
 // https://www.php-einfach.de/php-tutorial/php-sessions/
@@ -34,15 +34,15 @@ session_start();
 		return $data;
 	}
 
-	function getMechImageByName($unitname, $unittype) { // BM=BattleMech, BA=BattleArmor, CV=CombatVehicle
+	function getUnitImageByName($unitname, $unittype) { // BM, BA=BattleArmor, CV=CombatVehicle
 		if ($unittype == "CV") {
-			$image = "images/mechs/Generic_Tank.gif";
+			$image = "images/units/Generic_Tank.gif";
 		} else if ($unittype == "BA") {
-			$image = "images/mechs/Generic_Battlearmor.gif";
+			$image = "images/units/Generic_Battlearmor.gif";
 		} else {
-			$image = "images/mechs/Generic_Mech.gif";
+			$image = "images/units/Generic_Mech.gif";
 		}
-		$dir = 'images/mechs/';
+		$dir = 'images/units/';
 		$files = glob($dir.'*.png');
 		foreach ($files as &$img) {
 			$imagenametrimmed = basename(strtolower(str_replace(' ', '', trim($img))), ".png");
@@ -59,10 +59,10 @@ session_start();
 	$pid = $_SESSION['playerid'];
 	$gid = $_SESSION['gameid'];
 	$pimage = $_SESSION['playerimage'];
-	$hideNotOwnedMech = $_SESSION['option1'];
+	$hideNotOwnedUnit = $_SESSION['option1'];
 	$paramformationid = isset($_GET["formationid"]) ? $_GET["formationid"] : "";
 	$paramformationname = isset($_GET["formationname"]) ? $_GET["formationname"] : "";
-	$addmech = isset($_GET["am"]) ? $_GET["am"] : "";
+	$addunit = isset($_GET["am"]) ? $_GET["am"] : "";
 
 	$sql_asc_playerround = "SELECT SQL_NO_CACHE * FROM asc_player where playerid = " . $pid . ";";
 	$result_asc_playerround = mysqli_query($conn, $sql_asc_playerround);
@@ -72,7 +72,7 @@ session_start();
 		}
 	}
 
-	if ($addmech == 1) {
+	if ($addunit == 1) {
 		$TON = isset($_GET["TON"]) ? $_GET["TON"] : "";
 		$MNU = isset($_GET["MNU"]) ? $_GET["MNU"] : "";
 		$TP = isset($_GET["TP"]) ? $_GET["TP"] : "";
@@ -122,8 +122,8 @@ session_start();
 		$MULID = urldecode($MULID);
 		$MODEL = urldecode($MODEL);
 
-		$MECHIMAGE = getMechImageByName($MODEL, $TP);
-		$MECHSTATUSIMAGE = "";
+		$UNITIMAGE = getUnitImageByName($MODEL, $TP);
+		$UNITSTATUSIMAGE = "";
 
 		if ($TECH == "1" && $TP == "BA") {
 			//$TON = $TON * 4;
@@ -136,23 +136,20 @@ session_start();
 			$MODEL = str_replace("Battle Armor", "BA", $MODEL);
 			$MODEL = str_replace("Reconnaissance", "Rec.", $MODEL);
             $MODEL = str_replace(" [BA]", "", $MODEL);
-			$MECHSTATUSIMAGE = "images/DD_BA_01.png";
-		} else if($TP == "BM") { // BM -> Battlemech
-			// This is a MECH
+			$UNITSTATUSIMAGE = "images/DD_BA_01.png";
+		} else if($TP == "BM") { // BM
 			$MODEL = str_replace("Reconnaissance", "Rec.", $MODEL);
             $MODEL = str_replace(" [BM]", "", $MODEL);
-			$MECHSTATUSIMAGE = "images/DD_BM_01.png";
+			$UNITSTATUSIMAGE = "images/DD_BM_01.png";
 		} else if ($TP == "CV") { // CV -> Combat vehicle
-			// This is a VEHICLE
 			$MODEL = str_replace("Reconnaissance", "Rec.", $MODEL);
 			$MODEL = str_replace("Vehicle", "Veh.", $MODEL);
 			$MODEL = str_replace(" [CV]", "", $MODEL);
-			$MECHSTATUSIMAGE = "images/DD_CV_01.png";
+			$UNITSTATUSIMAGE = "images/DD_CV_01.png";
 		} else if ($TP == "AF") { // AF -> Aerial fighter
-			// This is a fighter
 			$MODEL = str_replace("Reconnaissance", "Rec.", $MODEL);
             $MODEL = str_replace(" [AF]", "", $MODEL);
-            $MECHSTATUSIMAGE = "images/DD_CV_01.png";
+            $UNITSTATUSIMAGE = "images/DD_CV_01.png";
 		} else {
 			// Anything else
 			$MODEL = str_replace("Reconnaissance", "Rec.", $MODEL);
@@ -160,16 +157,16 @@ session_start();
             $MODEL = str_replace(" [BM]", "", $MODEL);
             $MODEL = str_replace(" [CV]", "", $MODEL);
             $MODEL = str_replace(" [AF]", "", $MODEL);
-			$MECHSTATUSIMAGE = "images/DD_BM_01.png"; // Find another image here
+			$UNITSTATUSIMAGE = "images/DD_BM_01.png"; // Find another image here
 		}
 
-		//    MECH
+		//    UNIT
 		//    ----------------
-		//    mechid
-		//    mech_number
+		//    unitid
+		//    unit_number
 		//    tech
 		//    mulid
-		//    mech_tonnage
+		//    unit_tonnage
 		//    as_model
 		//    as_pv
 		//    as_tp
@@ -192,7 +189,7 @@ session_start();
 		//    as_structure
 		//    as_threshold
 		//    as_specials
-		//    mech_imageurl
+		//    unit_imageurl
 		//
 		//    PILOT
 		//    ----------------
@@ -205,56 +202,56 @@ session_start();
 		//    ----------------
 		//    id
 		//    formationid
-		//    mechid
+		//    unitid
 		//    pilotid
 
-		$sql_insertmech = "";
-		$sql_insertmech = $sql_insertmech."INSERT INTO asc_mech ";
-		$sql_insertmech = $sql_insertmech."(mech_number, tech, mulid, mech_tonnage, as_model, as_pv, as_tp, as_sz, as_tmm, as_mv, as_mvj, as_role, as_skill, as_short, as_short_min, as_medium, as_medium_min, as_long, as_long_min, as_extreme, as_extreme_min, as_ov, as_armor, as_structure, as_threshold, as_specials, mech_imageurl, mech_statusimageurl, playerid, as_mvtype) ";
-		$sql_insertmech = $sql_insertmech."VALUES (";
-		$sql_insertmech = $sql_insertmech."'".$MNU."', ";           // mech_number
-		$sql_insertmech = $sql_insertmech."'".$TECH."', ";          // tech
-		$sql_insertmech = $sql_insertmech."'".$MULID."', ";         // mulid
-		$sql_insertmech = $sql_insertmech."'".$TON."', ";           // mech_tonnage
-		$sql_insertmech = $sql_insertmech."'".$MODEL."', ";         // as_model
-		$sql_insertmech = $sql_insertmech."'".$PVA."', ";           // as_pv
-		$sql_insertmech = $sql_insertmech."'".$TP."', ";            // as_tp
-		$sql_insertmech = $sql_insertmech."'".$SZ."', ";            // as_sz
-		$sql_insertmech = $sql_insertmech."'".$TMM."', ";           // as_tmm
-		$sql_insertmech = $sql_insertmech."'".$MVG."', ";           // as_mv
+		$sql_insertunit = "";
+		$sql_insertunit = $sql_insertunit."INSERT INTO asc_unit ";
+		$sql_insertunit = $sql_insertunit."(unit_number, tech, mulid, unit_tonnage, as_model, as_pv, as_tp, as_sz, as_tmm, as_mv, as_mvj, as_role, as_skill, as_short, as_short_min, as_medium, as_medium_min, as_long, as_long_min, as_extreme, as_extreme_min, as_ov, as_armor, as_structure, as_threshold, as_specials, unit_imageurl, unit_statusimageurl, playerid, as_mvtype) ";
+		$sql_insertunit = $sql_insertunit."VALUES (";
+		$sql_insertunit = $sql_insertunit."'".$MNU."', ";           // unit_number
+		$sql_insertunit = $sql_insertunit."'".$TECH."', ";          // tech
+		$sql_insertunit = $sql_insertunit."'".$MULID."', ";         // mulid
+		$sql_insertunit = $sql_insertunit."'".$TON."', ";           // unit_tonnage
+		$sql_insertunit = $sql_insertunit."'".$MODEL."', ";         // as_model
+		$sql_insertunit = $sql_insertunit."'".$PVA."', ";           // as_pv
+		$sql_insertunit = $sql_insertunit."'".$TP."', ";            // as_tp
+		$sql_insertunit = $sql_insertunit."'".$SZ."', ";            // as_sz
+		$sql_insertunit = $sql_insertunit."'".$TMM."', ";           // as_tmm
+		$sql_insertunit = $sql_insertunit."'".$MVG."', ";           // as_mv
 		if ($MVJ == 0) {
-			$sql_insertmech = $sql_insertmech."null, ";             // as_mvj
+			$sql_insertunit = $sql_insertunit."null, ";             // as_mvj
 		} else {
-			$sql_insertmech = $sql_insertmech."'".$MVJ."', ";       // as_mvj
+			$sql_insertunit = $sql_insertunit."'".$MVJ."', ";       // as_mvj
 		}
-		$sql_insertmech = $sql_insertmech."'".$ROLE."', ";          // as_role
-		$sql_insertmech = $sql_insertmech."'".$SKILL."', ";         // as_skill
-		$sql_insertmech = $sql_insertmech."'".$DMGS."', ";          // as_short
-		$sql_insertmech = $sql_insertmech."0, ";                    // as_short_min
-		$sql_insertmech = $sql_insertmech."'".$DMGM."', ";          // as_medium
-		$sql_insertmech = $sql_insertmech."0, ";                    // as_medium_min
-		$sql_insertmech = $sql_insertmech."'".$DMGL."', ";          // as_long
-		$sql_insertmech = $sql_insertmech."0, ";                    // as_long_min
-		$sql_insertmech = $sql_insertmech."0, ";                    // as_extreme
-		$sql_insertmech = $sql_insertmech."0, ";                    // as_extreme_min
-		$sql_insertmech = $sql_insertmech."'".$OV."', ";            // as_ov
-		$sql_insertmech = $sql_insertmech."'".$A."', ";             // as_armor
-		$sql_insertmech = $sql_insertmech."'".$S."', ";             // as_structure
-		$sql_insertmech = $sql_insertmech."0, ";                    // as_threshold
-		$sql_insertmech = $sql_insertmech."'".$SPCL."', ";          // as_specials
-		$sql_insertmech = $sql_insertmech."'".$MECHIMAGE."', ";     // mech_imageurl
-		$sql_insertmech = $sql_insertmech."'".$MECHSTATUSIMAGE."', "; // mech_statusimageurl
+		$sql_insertunit = $sql_insertunit."'".$ROLE."', ";          // as_role
+		$sql_insertunit = $sql_insertunit."'".$SKILL."', ";         // as_skill
+		$sql_insertunit = $sql_insertunit."'".$DMGS."', ";          // as_short
+		$sql_insertunit = $sql_insertunit."0, ";                    // as_short_min
+		$sql_insertunit = $sql_insertunit."'".$DMGM."', ";          // as_medium
+		$sql_insertunit = $sql_insertunit."0, ";                    // as_medium_min
+		$sql_insertunit = $sql_insertunit."'".$DMGL."', ";          // as_long
+		$sql_insertunit = $sql_insertunit."0, ";                    // as_long_min
+		$sql_insertunit = $sql_insertunit."0, ";                    // as_extreme
+		$sql_insertunit = $sql_insertunit."0, ";                    // as_extreme_min
+		$sql_insertunit = $sql_insertunit."'".$OV."', ";            // as_ov
+		$sql_insertunit = $sql_insertunit."'".$A."', ";             // as_armor
+		$sql_insertunit = $sql_insertunit."'".$S."', ";             // as_structure
+		$sql_insertunit = $sql_insertunit."0, ";                    // as_threshold
+		$sql_insertunit = $sql_insertunit."'".$SPCL."', ";          // as_specials
+		$sql_insertunit = $sql_insertunit."'".$UNITIMAGE."', ";     // unit_imageurl
+		$sql_insertunit = $sql_insertunit."'".$UNITSTATUSIMAGE."', "; // unit_statusimageurl
 
-		$sql_insertmech = $sql_insertmech."'".$pid."', "; // playerid
-		$sql_insertmech = $sql_insertmech."'".$MVTYPE."'"; // as_mvtype h = hover, w = wheeled, t = tracked
+		$sql_insertunit = $sql_insertunit."'".$pid."', "; // playerid
+		$sql_insertunit = $sql_insertunit."'".$MVTYPE."'"; // as_mvtype h = hover, w = wheeled, t = tracked
 
-		$sql_insertmech = $sql_insertmech.")";
-		if (mysqli_query($conn, $sql_insertmech)) {
+		$sql_insertunit = $sql_insertunit.")";
+		if (mysqli_query($conn, $sql_insertunit)) {
 			// Success
-			$newmechid = mysqli_insert_id($conn);
+			$newunitid = mysqli_insert_id($conn);
 		} else {
 			// Error
-			echo "Error: " . $sql_insertmech . "<br>" . mysqli_error($conn);
+			echo "Error: " . $sql_insertunit . "<br>" . mysqli_error($conn);
 		}
 
 		$sql_insertpilot = "";
@@ -275,10 +272,10 @@ session_start();
 
 		$sql_insertassign = "";
 		$sql_insertassign = $sql_insertassign."INSERT INTO asc_assign ";
-		$sql_insertassign = $sql_insertassign."(formationid, mechid, pilotid, playerid) ";
+		$sql_insertassign = $sql_insertassign."(formationid, unitid, pilotid, playerid) ";
 		$sql_insertassign = $sql_insertassign."VALUES (";
-		$sql_insertassign = $sql_insertassign.FORMATIONID.",";
-		$sql_insertassign = $sql_insertassign.$newmechid.",";
+		$sql_insertassign = $sql_insertassign.$FORMATIONID.",";
+		$sql_insertassign = $sql_insertassign.$newunitid.",";
 		$sql_insertassign = $sql_insertassign.$newpilotid.",";
 		$sql_insertassign = $sql_insertassign.$pid;
 		$sql_insertassign = $sql_insertassign.")";
@@ -289,27 +286,27 @@ session_start();
 			echo "Error: " . $sql_insertassign . "<br>" . mysqli_error($conn);
 		}
 
-		$sql_insertmechstatus = "";
-		$sql_insertmechstatus = $sql_insertmechstatus."INSERT INTO asc_mechstatus ";
-		$sql_insertmechstatus = $sql_insertmechstatus."(mechid, playerid, heat, armor, structure, crit_engine, crit_fc, crit_mp, crit_weapons) ";
-		$sql_insertmechstatus = $sql_insertmechstatus."VALUES (";
-		$sql_insertmechstatus = $sql_insertmechstatus.$newmechid.",";
-		$sql_insertmechstatus = $sql_insertmechstatus.$pid.",";
-		$sql_insertmechstatus = $sql_insertmechstatus."0, ";
-		$sql_insertmechstatus = $sql_insertmechstatus."0, ";
-		$sql_insertmechstatus = $sql_insertmechstatus."0, ";
-		$sql_insertmechstatus = $sql_insertmechstatus."0, ";
-		$sql_insertmechstatus = $sql_insertmechstatus."0, ";
-		$sql_insertmechstatus = $sql_insertmechstatus."0, ";
-		$sql_insertmechstatus = $sql_insertmechstatus."0";
-		$sql_insertmechstatus = $sql_insertmechstatus.")";
-		if (mysqli_query($conn, $sql_insertmechstatus)) {
+		$sql_insertunitstatus = "";
+		$sql_insertunitstatus = $sql_insertunitstatus."INSERT INTO asc_unitstatus ";
+		$sql_insertunitstatus = $sql_insertunitstatus."(unitid, playerid, heat, armor, structure, crit_engine, crit_fc, crit_mp, crit_weapons) ";
+		$sql_insertunitstatus = $sql_insertunitstatus."VALUES (";
+		$sql_insertunitstatus = $sql_insertunitstatus.$newunitid.",";
+		$sql_insertunitstatus = $sql_insertunitstatus.$pid.",";
+		$sql_insertunitstatus = $sql_insertunitstatus."0, ";
+		$sql_insertunitstatus = $sql_insertunitstatus."0, ";
+		$sql_insertunitstatus = $sql_insertunitstatus."0, ";
+		$sql_insertunitstatus = $sql_insertunitstatus."0, ";
+		$sql_insertunitstatus = $sql_insertunitstatus."0, ";
+		$sql_insertunitstatus = $sql_insertunitstatus."0, ";
+		$sql_insertunitstatus = $sql_insertunitstatus."0";
+		$sql_insertunitstatus = $sql_insertunitstatus.")";
+		if (mysqli_query($conn, $sql_insertunitstatus)) {
 			// Success
 		} else {
 			// Error
-			echo "Error: " . $sql_insertmechstatus . "<br>" . mysqli_error($conn);
+			echo "Error: " . $sql_insertunitstatus . "<br>" . mysqli_error($conn);
 		}
-		echo "<meta http-equiv='refresh' content='0;url=./gui_select_unit.php?activebid=1&mechid=" . $newmechid . "'>";
+		echo "<meta http-equiv='refresh' content='0;url=./gui_select_unit.php?activebid=1&unitid=" . $newunitid . "'>";
 	}
 ?>
 
@@ -323,7 +320,7 @@ session_start();
 	<!-- <meta http-equiv="expires" content="0"> -->
 	<!-- <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"> -->
 	<meta name="description" content="Cards app for the AlphaStrike TableTop (BattleTech).">
-	<meta name="keywords" content="BattleTech, AlphaStrike, Mech">
+	<meta name="keywords" content="BattleTech, AlphaStrike">
 	<meta name="robots" content="noindex,nofollow">
 	<meta name="mobile-web-app-capable" content="yes">
 	<meta name="apple-mobile-web-app-capable" content="yes">
@@ -418,14 +415,14 @@ session_start();
 ?>
 		$(document).ready(function() {
 			$("#cover").hide();
-			fetchMechList();
+			fetchUnitList();
 			document.getElementById("units").selectedIndex = "1";
 		});
 
-		function storeNewMech() {
+		function storeNewUnit() {
 			var url="./gui_create_unit.php?am=1";
 
-			// Store new mech
+			// Store new unit
 
 			var TON = document.getElementById("F_TON").value;
 			var TECH = document.getElementById("TECH").value;
@@ -460,13 +457,8 @@ session_start();
 			MODEL = MODEL.replace(/"/g,"&quot;");
 			MODEL = MODEL.replace(/'/g,"&apos;");
 
-			if ("<<< Select Mech >>>" == MODEL) {
-				alert("Select a Mech Model!");
-				return;
-			}
-
-			if ("<<< Select BA >>>" == MODEL) {
-				alert("Select a BA Model!");
+			if ("<<< Select unit >>>" == MODEL) {
+				alert("Select a Unit!");
 				return;
 			}
 
@@ -527,12 +519,12 @@ session_start();
 
 <?php
 	if ($playMode) {
-		$buttonWidth = "34%"; // 3 columns in the middle
+		$buttonWidth = "33.3%"; // 3 columns in the middle
 	} else {
 		if ($isAdmin) {
-			$buttonWidth = "15%"; // 7 columns
+			$buttonWidth = "14.5%"; // 7 columns
 		} else {
-			$buttonWidth = "17%"; // 6 columns
+			$buttonWidth = "20.4%"; // 5 columns
 		}
 	}
 ?>
@@ -547,25 +539,25 @@ session_start();
 					<div style='vertical-align:middle;font-size:28px;color:#eee;'>&nbsp;&nbsp;&nbsp;G<?php echo $gid ?>&nbsp;R<?php echo $CURRENTROUND ?>&nbsp;&nbsp;&nbsp;</div>
 				</td>
 				<td style="width:5px;">&nbsp;</td>
-				<td nowrap onclick="location.href='./gui_select_unit.php'" width="<?php echo $buttonWidth ?>"><div class='mechselect_button_normal'><a href='./gui_select_unit.php'>ROSTER</a><br><span style='font-size:16px;'>Choose a unit</span></div></td>
+				<td nowrap onclick="location.href='./gui_select_unit.php'" width="<?php echo $buttonWidth ?>"><div class='unitselect_button_normal'><a href='./gui_select_unit.php'>ROSTER</a><br><span style='font-size:16px;'>Choose a unit</span></div></td>
 				<td style="width:5px;">&nbsp;</td>
 
 <?php
 	if ($playMode) {
-		echo "				<td nowrap onclick=\"location.href='./gui_select_formation.php'\" width=".$buttonWidth."><div class='mechselect_button_normal'><a href='./gui_select_formation.php'>CHALLENGE</a><br><span style='font-size:16px;'>Batchall & bidding</span></div></td><td style='width:5px;'>&nbsp;</td>\n";
+		echo "				<td nowrap onclick=\"location.href='./gui_select_formation.php'\" width=".$buttonWidth."><div class='unitselect_button_normal'><a href='./gui_select_formation.php'>CHALLENGE</a><br><span style='font-size:16px;'>Batchall & bidding</span></div></td><td style='width:5px;'>&nbsp;</td>\n";
 	}
 	if (!$playMode) {
-		echo "				<td nowrap onclick=\"location.href='./gui_assign_unit.php'\" width=".$buttonWidth."><div class='mechselect_button_normal'><a href='./gui_assign_unit.php'>ASSIGN</a><br><span style='font-size:16px;'>Assign unit</span></div></td><td style='width:5px;'>&nbsp;</td>\n";
-		echo "				<td nowrap onclick=\"location.href='./gui_create_unit.php'\" width=".$buttonWidth."><div class='mechselect_button_active'><a href='./gui_create_unit.php'>ADD</a><br><span style='font-size:16px;'>Create a unit</span></div></td><td style='width:5px;'>&nbsp;</td>\n";
-		echo "				<td nowrap onclick=\"location.href='./gui_create_player.php'\" width=".$buttonWidth."><div class='mechselect_button_normal'><a href='./gui_create_player.php'>PLAYER</a><br><span style='font-size:16px;'>Manage players</span></div></td><td style='width:5px;'>&nbsp;</td>\n";
-		echo "				<td nowrap onclick=\"location.href='./gui_create_game.php'\" width=".$buttonWidth."><div class='mechselect_button_normal'><a href='./gui_create_game.php'>GAME</a><br><span style='font-size:16px;'>Game settings</span></div></td><td style='width:5px;'>&nbsp;</td>\n";
+		echo "				<td nowrap onclick=\"location.href='./gui_assign_unit.php'\" width=".$buttonWidth."><div class='unitselect_button_normal'><a href='./gui_assign_unit.php'>ASSIGN</a><br><span style='font-size:16px;'>Assign unit</span></div></td><td style='width:5px;'>&nbsp;</td>\n";
+		echo "				<td nowrap onclick=\"location.href='./gui_create_unit.php'\" width=".$buttonWidth."><div class='unitselect_button_active'><a href='./gui_create_unit.php'>ADD</a><br><span style='font-size:16px;'>Create a unit</span></div></td><td style='width:5px;'>&nbsp;</td>\n";
+		echo "				<td nowrap onclick=\"location.href='./gui_create_game.php'\" width=".$buttonWidth."><div class='unitselect_button_normal'><a href='./gui_create_game.php'>GAME</a><br><span style='font-size:16px;'>Game settings</span></div></td><td style='width:5px;'>&nbsp;</td>\n";
 		if ($isAdmin) {
-			echo "				<td nowrap onclick=\"location.href='./gui_admin.php'\" width=".$buttonWidth."><div class='mechselect_button_normal'><a href='./gui_admin.php'>ADMIN</a><br><span style='font-size:16px;'>Administration</span></div></td><td style='width:5px;'>&nbsp;</td>\n";
+			echo "				<td nowrap onclick=\"location.href='./gui_create_player.php'\" width=".$buttonWidth."><div class='unitselect_button_normal'><a href='./gui_create_player.php'>PLAYER</a><br><span style='font-size:16px;'>Manage players</span></div></td><td style='width:5px;'>&nbsp;</td>\n";
+			echo "				<td nowrap onclick=\"location.href='./gui_admin.php'\" width=".$buttonWidth."><div class='unitselect_button_normal'><a href='./gui_admin.php'>ADMIN</a><br><span style='font-size:16px;'>Administration</span></div></td><td style='width:5px;'>&nbsp;</td>\n";
 		}
 	}
 ?>
 
-				<td nowrap onclick="location.href='./gui_edit_option.php'" width="<?php echo $buttonWidth ?>"><div class='mechselect_button_normal'><a href='./gui_edit_option.php'>OPTIONS</a><br><span style='font-size:16px;'>Change options</span></div></td>
+				<td nowrap onclick="location.href='./gui_edit_option.php'" width="<?php echo $buttonWidth ?>"><div class='unitselect_button_normal'><a href='./gui_edit_option.php'>OPTIONS</a><br><span style='font-size:16px;'>Change options</span></div></td>
 				<td style="width:5px;">&nbsp;</td>
 				<td style="width: 60px;" nowrap width="60px" style="background: rgba(50,50,50,1.0); text-align: center; vertical-align: middle;"><img src='./images/player/<?=$pimage?>' height='60px'></td>
 			</tr>
@@ -581,19 +573,19 @@ session_start();
 		<table class="options" cellspacing=4 cellpadding=4 border=0px>
 			<tr>
 				<td nowrap class="datalabel" style='text-align:left;' colspan='5'>
-					Tech: <select required name='tech' id='tech' size='1' onchange="fetchMechList();">
+					Tech: <select required name='tech' id='tech' size='1' onchange="fetchUnitList();">
 						<option value="2">Clan</option>
 						<option value="1">IS</option>
 					</select>
 
-					Type: <select required style='width:75px;' name='unittype' id='unittype' size='1' onchange="fetchMechList();">
+					Type: <select required style='width:75px;' name='unittype' id='unittype' size='1' onchange="fetchUnitList();">
 						<option value="BA">BA</option>
 						<option value="BM">BM</option>
 						<option value="CV">CV</option>
 						<!-- <option value="AF">AF</option> -->
 					</select>
 
-					<span id='weightBlock'>Weight: <select required style='width:145px;' name='tonnage' id='tonnage' size='1' onchange="fetchMechList();">
+					<span id='weightBlock'>Weight: <select required style='width:145px;' name='tonnage' id='tonnage' size='1' onchange="fetchUnitList();">
 						<option value="LIGHT">LIGHT</option>
 						<option value="MEDIUM">MEDIUM</option>
 						<option value="HEAVY">HEAVY</option>
@@ -642,13 +634,13 @@ session_start();
 						<!-- <option value="200">200</option> -->
 					</select></span>
 
-					Filter: <input required style='width:150px;' type="text" id="NameFilter" name="NameFilter" onchange="fetchMechList();">
+					Filter: <input required style='width:150px;' type="text" id="NameFilter" name="NameFilter" onchange="fetchUnitList();">
 				</td>
 			</tr>
 			<tr>
 				<td nowrap class="datalabel" style='text-align:left;' colspan='5'>
-					<!-- will be filled by 'fetchMechList();' -->
-					<select required name='units' id='units' size='1' onchange="mechSelected();" style="width:300px"></select>
+					<!-- will be filled by 'fetchUnitList();' -->
+					<select required name='units' id='units' size='1' onchange="unitSelected();" style="width:300px"></select>
 				</td>
 			</tr>
 			<tr>
@@ -718,7 +710,7 @@ session_start();
 					</select>
 				</td>
 				<td align="right">
-					<a href='#' onClick='storeNewMech();'><i class='fas fa-plus-square'></i></a>
+					<a href='#' onClick='storeNewUnit();'><i class='fas fa-plus-square'></i></a>
 				</td>
 			</tr>
 		</table>

@@ -12,9 +12,9 @@
 	$opts = array('http'=>array('header' => "User-Agent:MyAgent/1.0\r\n"));
 	$context = stream_context_create($opts);
 
-	// Some Mechs have Technologies=3 (like the Wulfen) --> "Mixed". Technology needs to check for 2,3 for Clan and 1,3 for IS, 57 for Primitive
-	// Types=18: Mechs
-	// Types=19: Combat vehicles / Tanks
+	// Some Units have Technologies=3 (like the Wulfen) --> "Mixed". Technology needs to check for 2,3 for Clan and 1,3 for IS, 57 for Primitive
+	// Types=18: BMs
+	// Types=19: CV, Combat vehicles / Tanks
 	// http://www.masterunitlist.info/Unit/Quicklist?Name=&HasBV=false&MinBV=&MaxBV=&MinIntro=&MaxIntro=&MinCost=&MaxCost=&HasRole=&HasBFAbility=&MinPV=&MaxPV=&Technologies=2&Technologies=3&BookAuto=&FactionAuto=&MinTons=30&MaxTons=30&Types=18
 
 	$url_arr = array(
@@ -384,5 +384,5 @@
 	fwrite($cacheversionfileHandle, date('M Y'));
 	fclose($cacheversionfileHandle);
 	echo "saved.<br>";
-	echo "<br><br><a href='https://www.ascard.net/app/data/mul_cache/cache_mechdetails_caller.htm'>Update Mechdetails (slow!)</a>";
+	echo "<br><br><a href='https://www.ascard.net/app/data/mul_cache/cache_unitdetails_caller.htm'>Update Unitdetails (slow!)</a>";
 ?>

@@ -16,7 +16,7 @@ session_start();
 	$pid = $_SESSION['playerid'];
 	$gid = $_SESSION['gameid'];
 	$pimage = $_SESSION['playerimage'];
-	$hideNotOwnedMech = $_SESSION['option1'];
+	$hideNotOwnedUnit = $_SESSION['option1'];
 
 	$isAdmin = $_SESSION['isAdmin'];
 
@@ -38,11 +38,11 @@ session_start();
 		$text = $text."...";
 		return $text;
 	}
-	function getMechMULImageByName($mechname) {
-		$image = "images/mechs/Generic_Mech.gif";
+	function getMULImageByName($unitname) {
+		$image = "images/units/Generic_Mech.gif";
 
-		$dir = 'images/mechs_mul/';
-		$startChar = mb_substr($mechname, 0, 3); // use first 3 chars to list files to keep the result list as small as possible
+		$dir = 'images/units_mul/';
+		$startChar = mb_substr($unitname, 0, 3); // use first 3 chars to list files to keep the result list as small as possible
 		if ($startChar == "ELE") {
 			// echo "<script>console.log('SEARCHING: >>" . $startChar . "<<');</script>";
 			$startChar = "Ele";
@@ -55,23 +55,23 @@ session_start();
 			$imagenametrimmed_a = basename(strtolower(str_replace(' ', '', trim($img))), ".png");
 			$imagenametrimmed = str_replace("'", "", $imagenametrimmed_a);
 
-			// echo "<script>console.log('MECHNAME: >>" . $mechname . "<<');</script>";
+			// echo "<script>console.log('UNITNAME: >>" . $unitname . "<<');</script>";
 
-			$mechnametrimmed_a = str_replace('ELE ', 'Elemental ', trim($mechname));
-			$mechnametrimmed_b = str_replace('BA ', 'Battle Armor ', trim($mechnametrimmed_a));
-			$mechnametrimmed_c = str_replace('&apos;', '', trim($mechnametrimmed_b));
-			$mechnametrimmed_d = str_replace(' ', '', trim($mechnametrimmed_c));
-			$mechnametrimmed_e = str_replace('[CV]', '', trim($mechnametrimmed_d));
-			$mechnametrimmed_f = str_replace('[BA]', '', trim($mechnametrimmed_e));
-			$mechnametrimmed_g = str_replace('[BM]', '', trim($mechnametrimmed_f));
-			$mechnametrimmed_h = str_replace('Rec.', 'Reconnaissance', trim($mechnametrimmed_g));
-			$mechnametrimmed_i = str_replace('Veh.', 'Vehicle', trim($mechnametrimmed_h));
-			$mechnametrimmed = strtolower($mechnametrimmed_i);
+			$unitnametrimmed_a = str_replace('ELE ', 'Elemental ', trim($unitname));
+			$unitnametrimmed_b = str_replace('BA ', 'Battle Armor ', trim($unitnametrimmed_a));
+			$unitnametrimmed_c = str_replace('&apos;', '', trim($unitnametrimmed_b));
+			$unitnametrimmed_d = str_replace(' ', '', trim($unitnametrimmed_c));
+			$unitnametrimmed_e = str_replace('[CV]', '', trim($unitnametrimmed_d));
+			$unitnametrimmed_f = str_replace('[BA]', '', trim($unitnametrimmed_e));
+			$unitnametrimmed_g = str_replace('[BM]', '', trim($unitnametrimmed_f));
+			$unitnametrimmed_h = str_replace('Rec.', 'Reconnaissance', trim($unitnametrimmed_g));
+			$unitnametrimmed_i = str_replace('Veh.', 'Vehicle', trim($unitnametrimmed_h));
+			$unitnametrimmed = strtolower($unitnametrimmed_i);
 
-			// echo "<script>console.log('SEARCHING: >>" . $imagenametrimmed . " ? " . $mechnametrimmed . "<<');</script>";
+			// echo "<script>console.log('SEARCHING: >>" . $imagenametrimmed . " ? " . $unitnametrimmed . "<<');</script>";
 
-			if (strpos($imagenametrimmed,$mechnametrimmed) !== false) {
-				// echo "<script>console.log('FOUND: >>" . $imagenametrimmed . " ? " . $mechnametrimmed . "<<');</script>";
+			if (strpos($imagenametrimmed,$unitnametrimmed) !== false) {
+				// echo "<script>console.log('FOUND: >>" . $imagenametrimmed . " ? " . $unitnametrimmed . "<<');</script>";
 				$image = str_replace(' ', '%20', trim($img));
 				break;
 			}
@@ -88,7 +88,7 @@ session_start();
 	<!-- <meta http-equiv="expires" content="0"> -->
 	<!-- <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"> -->
 	<meta name="description" content="Cards app for the AlphaStrike TableTop (BattleTech).">
-	<meta name="keywords" content="BattleTech, AlphaStrike, Mech">
+	<meta name="keywords" content="BattleTech, AlphaStrike">
 	<meta name="robots" content="noindex,nofollow">
 	<meta name="mobile-web-app-capable" content="yes">
 	<meta name="apple-mobile-web-app-capable" content="yes">
@@ -423,88 +423,88 @@ session_start();
 		echo "<meta http-equiv='refresh' content='0;url=./gui_select_unit.php'> ";
 		header("Location: ./gui_select_unit.php");
 	}
-	if (isset($_GET["chosenmech"])) {
-		$chosenMechIndex = $_GET["chosenmech"];
-		if (empty($chosenMechIndex)) {
-			$chosenMechIndex = 1;
+	if (isset($_GET["chosenunit"])) {
+		$chosenUnitIndex = $_GET["chosenunit"];
+		if (empty($chosenUnitIndex)) {
+			$chosenUnitIndex = 1;
 		}
 	} else {
-		$chosenMechIndex = 1;
+		$chosenUnitIndex = 1;
 	}
 	require('./db_getdata.php');
 
 	echo "<script>\n";
-	echo "	var chosenmechindex = ".$chosenMechIndex.";\n";
-	echo "	var chosenmechdbid = ".$array_MECH_DBID[$chosenMechIndex].";\n";
-	echo "	var mechmodel = '".$array_MECH_MODEL[$chosenMechIndex]."';\n";
-	echo "	var shortdamage = ".$array_DMG_SHORT[$chosenMechIndex].";\n";
-	echo "	var mediumdamage = ".$array_DMG_MEDIUM[$chosenMechIndex].";\n";
-	echo "	var longdamage = ".$array_DMG_LONG[$chosenMechIndex].";\n";
-	echo "	var movementpointsground = ".$array_MV[$chosenMechIndex].";\n";
-	if ($array_MVJ[$chosenMechIndex] != null) {
-		echo "	var movementpointsjump = ".$array_MVJ[$chosenMechIndex].";\n";
+	echo "	var chosenunitindex = ".$chosenUnitIndex.";\n";
+	echo "	var chosenunitdbid = ".$array_UNIT_DBID[$chosenUnitIndex].";\n";
+	echo "	var unitmodel = '".$array_UNIT_MODEL[$chosenUnitIndex]."';\n";
+	echo "	var shortdamage = ".$array_DMG_SHORT[$chosenUnitIndex].";\n";
+	echo "	var mediumdamage = ".$array_DMG_MEDIUM[$chosenUnitIndex].";\n";
+	echo "	var longdamage = ".$array_DMG_LONG[$chosenUnitIndex].";\n";
+	echo "	var movementpointsground = ".$array_MV[$chosenUnitIndex].";\n";
+	if ($array_MVJ[$chosenUnitIndex] != null) {
+		echo "	var movementpointsjump = ".$array_MVJ[$chosenUnitIndex].";\n";
 	} else {
 		echo "	var movementpointsjump = 0;\n";
 	}
-	echo "	var maximalarmorpoints = ".$array_A_MAX[$chosenMechIndex].";\n";
-	echo "	var maximalstructurepoints = ".$array_S_MAX[$chosenMechIndex].";\n";
+	echo "	var maximalarmorpoints = ".$array_A_MAX[$chosenUnitIndex].";\n";
+	echo "	var maximalstructurepoints = ".$array_S_MAX[$chosenUnitIndex].";\n";
 
-	echo "	var currentA = ".$array_A[$chosenMechIndex].";\n";
-	echo "	var currentS = ".$array_S[$chosenMechIndex].";\n";
+	echo "	var currentA = ".$array_A[$chosenUnitIndex].";\n";
+	echo "	var currentS = ".$array_S[$chosenUnitIndex].";\n";
 
-	echo "	var originalmechimage = '".$array_MECH_IMG_URL[$chosenMechIndex]."';\n";
-	echo "	var deadmechimage = 'skull.png';\n";
-	echo "	var originalTMM = $array_TMM[$chosenMechIndex];\n";
-	echo "	var unitType = '$array_TP[$chosenMechIndex]';\n";
-	echo "	var ENGN_PREP = $array_ENGN_PREP[$chosenMechIndex];\n";
-	echo "	var FCTL_PREP = $array_FRCTRL_PREP[$chosenMechIndex];\n";
-	echo "	var MP_PREP = $array_MP_PREP[$chosenMechIndex];\n";
-	echo "	var WPNS_PREP = $array_WPNS_PREP[$chosenMechIndex];\n";
+	echo "	var originalunitimage = '".$array_UNIT_IMG_URL[$chosenUnitIndex]."';\n";
+	echo "	var deadunitimage = 'skull.png';\n";
+	echo "	var originalTMM = $array_TMM[$chosenUnitIndex];\n";
+	echo "	var unitType = '$array_TP[$chosenUnitIndex]';\n";
+	echo "	var ENGN_PREP = $array_ENGN_PREP[$chosenUnitIndex];\n";
+	echo "	var FCTL_PREP = $array_FRCTRL_PREP[$chosenUnitIndex];\n";
+	echo "	var MP_PREP = $array_MP_PREP[$chosenUnitIndex];\n";
+	echo "	var WPNS_PREP = $array_WPNS_PREP[$chosenUnitIndex];\n";
 
-	if ($array_CV_ENGN_PREP[$chosenMechIndex] != null) {
-		echo "	var CV_ENGN_PREP = $array_CV_ENGN_PREP[$chosenMechIndex];\n";
+	if ($array_CV_ENGN_PREP[$chosenUnitIndex] != null) {
+		echo "	var CV_ENGN_PREP = $array_CV_ENGN_PREP[$chosenUnitIndex];\n";
 	} else {
 		echo "	var CV_ENGN_PREP = 0;\n";
 	}
-	if ($array_CV_FRCTRL_PREP[$chosenMechIndex] != null) {
-		echo "	var CV_FCTL_PREP = $array_CV_FRCTRL_PREP[$chosenMechIndex];\n";
+	if ($array_CV_FRCTRL_PREP[$chosenUnitIndex] != null) {
+		echo "	var CV_FCTL_PREP = $array_CV_FRCTRL_PREP[$chosenUnitIndex];\n";
 	} else {
 		echo "	var CV_FCTL_PREP = 0;\n";
 	}
-	if ($array_CV_WPNS_PREP[$chosenMechIndex] != null) {
-		echo "	var CV_WPNS_PREP = $array_CV_WPNS_PREP[$chosenMechIndex];\n";
+	if ($array_CV_WPNS_PREP[$chosenUnitIndex] != null) {
+		echo "	var CV_WPNS_PREP = $array_CV_WPNS_PREP[$chosenUnitIndex];\n";
 	} else {
 		echo "	var CV_WPNS_PREP = 0;\n";
 	}
-	if ($array_CV_MOTV_A_PREP[$chosenMechIndex] != null) {
-		echo "	var CV_MOTVA_PREP = $array_CV_MOTV_A_PREP[$chosenMechIndex];\n";
+	if ($array_CV_MOTV_A_PREP[$chosenUnitIndex] != null) {
+		echo "	var CV_MOTVA_PREP = $array_CV_MOTV_A_PREP[$chosenUnitIndex];\n";
 	} else {
 		echo "	var CV_MOTVA_PREP = 0;\n";
 	}
-	if ($array_CV_MOTV_B_PREP[$chosenMechIndex] != null) {
-		echo "	var CV_MOTVB_PREP = $array_CV_MOTV_B_PREP[$chosenMechIndex];\n";
+	if ($array_CV_MOTV_B_PREP[$chosenUnitIndex] != null) {
+		echo "	var CV_MOTVB_PREP = $array_CV_MOTV_B_PREP[$chosenUnitIndex];\n";
 	} else {
 		echo "	var CV_MOTVB_PREP = 0;\n";
 	}
-	if ($array_CV_MOTV_C_PREP[$chosenMechIndex] != null) {
-		echo "	var CV_MOTVC_PREP = $array_CV_MOTV_C_PREP[$chosenMechIndex];\n";
+	if ($array_CV_MOTV_C_PREP[$chosenUnitIndex] != null) {
+		echo "	var CV_MOTVC_PREP = $array_CV_MOTV_C_PREP[$chosenUnitIndex];\n";
 	} else {
 		echo "	var CV_MOTVC_PREP = 0;\n";
 	}
 
-	echo "	var HT_PREP = $array_HT_PREP[$chosenMechIndex];\n";
-	if ($array_MVTYPE[$chosenMechIndex] != null) {
-		echo "	var MV_TYPE = '$array_MVTYPE[$chosenMechIndex]';\n";
+	echo "	var HT_PREP = $array_HT_PREP[$chosenUnitIndex];\n";
+	if ($array_MVTYPE[$chosenUnitIndex] != null) {
+		echo "	var MV_TYPE = '$array_MVTYPE[$chosenUnitIndex]';\n";
 	} else {
 		echo "	var MV_TYPE = '';\n";
 	}
-	if ($array_MOUNTED_UNITID[$chosenMechIndex] != null) {
-		echo "	var MOUNTED_UNITID = ".$array_MOUNTED_UNITID[$chosenMechIndex].";\n";
+	if ($array_MOUNTED_UNITID[$chosenUnitIndex] != null) {
+		echo "	var MOUNTED_UNITID = ".$array_MOUNTED_UNITID[$chosenUnitIndex].";\n";
 	} else {
 		echo "	var MOUNTED_UNITID = 0;\n";
 	}
-	if ($array_MOUNTED_ON_UNITID[$chosenMechIndex] != null) {
-		echo "	var MOUNTED_ON_UNITID = ".$array_MOUNTED_ON_UNITID[$chosenMechIndex].";\n";
+	if ($array_MOUNTED_ON_UNITID[$chosenUnitIndex] != null) {
+		echo "	var MOUNTED_ON_UNITID = ".$array_MOUNTED_ON_UNITID[$chosenUnitIndex].";\n";
 	} else {
 		echo "	var MOUNTED_ON_UNITID = 0;\n";
 	}
@@ -590,25 +590,25 @@ session_start();
 			</td>
 			<td style="width:5px;">&nbsp;</td>
 <?php
-	$size = sizeof($array_MECH_MODEL);
-	for ($i11 = 1; $i11 <= sizeof($array_MECH_MODEL); $i11++) {
+	$size = sizeof($array_UNIT_MODEL);
+	for ($i11 = 1; $i11 <= sizeof($array_UNIT_MODEL); $i11++) {
 		if ($array_ACTIVE_BID[$i11] == "0") {
 			$size = $size - 1;
 		}
 	}
 	$width = ceil(100 / $size);
 	$heatimage = array();
-	$currentMechStatusImage = "./images/check_red.png";
+	$currentUnitStatusImage = "./images/check_red.png";
 	$currentmeli = "";
 	$currentPhaseButton = "./images/top-right_phase01.png";
 
-	$currentMechMovement = 0;
-	$currentMechFired = 0;
+	$currentUnitMovement = 0;
+	$currentUnitFired = 0;
 
-	$atLeastOneValidMechInUnit = 0;
+	$atLeastOneValidUnitInFormation = 0;
 
-	for ($i4 = 1; $i4 <= sizeof($array_MECH_MODEL); $i4++) {
-		$mechstatusimage = "./images/check_red.png";
+	for ($i4 = 1; $i4 <= sizeof($array_UNIT_MODEL); $i4++) {
+		$unitstatusimage = "./images/check_red.png";
 		$mvmt = $array_MVMT[$i4];
 		$wpnsfired = $array_WPNSFIRED[$i4];
 
@@ -619,25 +619,25 @@ session_start();
 		}
 		$phaseButton = "./images/top-right_phase01.png";
 		if ($mvmt == 0 && $wpnsfired == 0) {
-			$mechstatusimage = "./images/check_red.png";
+			$unitstatusimage = "./images/check_red.png";
 			$phaseButton = "./images/top-right_phase01.png";
 		}
 		if ($mvmt > 0 && $wpnsfired == 0) {
-			$mechstatusimage = "./images/check_yellow.png";
+			$unitstatusimage = "./images/check_yellow.png";
 			$phaseButton = "./images/top-right_phase02.png";
 		}
 		if ($mvmt > 0 && ($wpnsfired == 1 || $wpnsfired == 2 || $wpnsfired == 3 || $wpnsfired == 4)) {
-			$mechstatusimage = "./images/check_green.png";
+			$unitstatusimage = "./images/check_green.png";
 			$phaseButton = "./images/top-right_phase03.png";
 		}
 		if ($mvmt == 0 && ($wpnsfired == 1 || $wpnsfired == 2 || $wpnsfired == 3 || $wpnsfired == 4)) {
 			// Error! Unit has fired but no movement was specified! Ask again!
 		}
-		if ($array_MECH_IMG_STATUS[$i4] == "images/DD_BM_04.png") {
+		if ($array_UNIT_IMG_STATUS[$i4] == "images/DD_BM_04.png") {
 			$phaseButton = "./images/top-right_phase00.png";
 		}
 
-		$memodel = $array_MECH_MODEL[$i4];
+		$memodel = $array_UNIT_MODEL[$i4];
 		$maxLength = 30;
 		if (strlen($memodel) > $maxLength) {
 			$memodel = substr($memodel, 0, $maxLength - 3);
@@ -648,37 +648,37 @@ session_start();
 			$memodel = "--- BIDDEN AWAY ---";
 		}
 
-		if ($array_MECH_NUMBER[$i4] == "") {
+		if ($array_UNIT_NUMBER[$i4] == "") {
 			$mn = "-";
 		} else {
-			$mn = $array_MECH_NUMBER[$i4];
+			$mn = $array_UNIT_NUMBER[$i4];
 		}
 
-		$meli="./gui_play_unit.php?formationid=".$formationid."&chosenmech=".$i4;
-		if ($chosenMechIndex == $i4) {
+		$meli="./gui_play_unit.php?formationid=".$formationid."&chosenunit=".$i4;
+		if ($chosenUnitIndex == $i4) {
 			$locmeli = $meli;
-			$currentMechStatusImage = $mechstatusimage;
+			$currentUnitStatusImage = $unitstatusimage;
 			$currentmeli = $meli;
 			$currentPhaseButton = $phaseButton;
 
-			$currentMechMovement = $mvmt;
-			$currentMechFired = $wpnsfired;
+			$currentUnitMovement = $mvmt;
+			$currentUnitFired = $wpnsfired;
 
 			if ($array_ACTIVE_BID[$i4] == "1") {
-				echo "			<td width='".$width."%' nowrap><table width='100%' cellspacing='0' cellpadding='0' class='mechselect_button_active_play_left'><tr><td nowrap width='30px' align='center' valign='center'><div style='display:inline-block;height:100%;vertical-align:middle;'><img id='mechstatusimagemenu' style='vertical-align:middle;' src='".$array_MECH_IMG_STATUS[$i4]."' height='25px' width='23px'><br><span style='color:#ccffff;font-size:15px;'>&nbsp;&nbsp;".$mn."&nbsp;&nbsp;</span></div></td><td>&nbsp;</td><td nowrap><div><img src='./images/ranks/".$factionid."/".$array_PILOT_RANK[$i4].".png' width='18px' height='18px'>&nbsp;<span style='font-size:24px'>".$array_PILOT[$i4]."</span>&nbsp;&nbsp;<img src='".$mechstatusimage."' height='21px'>".$heatimage[$i4]."<br><span style='font-size:14px;'>".textTruncate($memodel, 18)."</span></div></td><td align='left' style='align:left;' nowrap width='100%'><img src='images/mech_indicator.png' height='42px;'></td></tr></table></td>\r\n";
-				$atLeastOneValidMechInUnit = $atLeastOneValidMechInUnit + 1;
+				echo "			<td width='".$width."%' nowrap><table width='100%' cellspacing='0' cellpadding='0' class='unitselect_button_active_play_left'><tr><td nowrap width='30px' align='center' valign='center'><div style='display:inline-block;height:100%;vertical-align:middle;'><img id='unitstatusimagemenu' style='vertical-align:middle;' src='".$array_UNIT_IMG_STATUS[$i4]."' height='25px' width='23px'><br><span style='color:#ccffff;font-size:15px;'>&nbsp;&nbsp;".$mn."&nbsp;&nbsp;</span></div></td><td>&nbsp;</td><td nowrap><div><img src='./images/ranks/".$factionid."/".$array_PILOT_RANK[$i4].".png' width='18px' height='18px'>&nbsp;<span style='font-size:24px'>".$array_PILOT[$i4]."</span>&nbsp;&nbsp;<img src='".$unitstatusimage."' height='21px'>".$heatimage[$i4]."<br><span style='font-size:14px;'>".textTruncate($memodel, 18)."</span></div></td><td align='left' style='align:left;' nowrap width='100%'><img src='images/unit_indicator.png' height='42px;'></td></tr></table></td>\r\n";
+				$atLeastOneValidUnitInFormation = $atLeastOneValidUnitInFormation + 1;
 			}
 		} else {
 			if ($array_ACTIVE_BID[$i4] == "1") {
-				echo "			<td width='".$width."%' nowrap onclick=\"location.href='".$meli."'\"><table width='100%' cellspacing='0' cellpadding='0' class='mechselect_button_normal_play_left'><tr><td nowrap width='30px' align='center' valign='center'><div style='display:inline-block;height:100%;vertical-align:middle;'><img style='vertical-align:middle;' src='".$array_MECH_IMG_STATUS[$i4]."' height='25px' width='23px'><br><span style='color:#ccffff;font-size:15px;'>&nbsp;&nbsp;".$mn."&nbsp;&nbsp;</span></div></td><td>&nbsp;</td><td nowrap width='100%'><div><img src='./images/ranks/".$factionid."/".$array_PILOT_RANK[$i4].".png' width='18px' height='18px'>&nbsp;<a style='font-size:24px' href='".$meli."'>".$array_PILOT[$i4]."</a>&nbsp;&nbsp;<img src='".$mechstatusimage."' height='21px'>".$heatimage[$i4]."<br><span style='font-size:14px;'>".textTruncate($memodel, 18)."</span></div></td></tr></table></td>\r\n";
-				$atLeastOneValidMechInUnit = $atLeastOneValidMechInUnit + 1;
+				echo "			<td width='".$width."%' nowrap onclick=\"location.href='".$meli."'\"><table width='100%' cellspacing='0' cellpadding='0' class='unitselect_button_normal_play_left'><tr><td nowrap width='30px' align='center' valign='center'><div style='display:inline-block;height:100%;vertical-align:middle;'><img style='vertical-align:middle;' src='".$array_UNIT_IMG_STATUS[$i4]."' height='25px' width='23px'><br><span style='color:#ccffff;font-size:15px;'>&nbsp;&nbsp;".$mn."&nbsp;&nbsp;</span></div></td><td>&nbsp;</td><td nowrap width='100%'><div><img src='./images/ranks/".$factionid."/".$array_PILOT_RANK[$i4].".png' width='18px' height='18px'>&nbsp;<a style='font-size:24px' href='".$meli."'>".$array_PILOT[$i4]."</a>&nbsp;&nbsp;<img src='".$unitstatusimage."' height='21px'>".$heatimage[$i4]."<br><span style='font-size:14px;'>".textTruncate($memodel, 18)."</span></div></td></tr></table></td>\r\n";
+				$atLeastOneValidUnitInFormation = $atLeastOneValidUnitInFormation + 1;
 			} else {
-				echo "			<td style='display:none;visibility:hidden;' width='".$width."%' nowrap onclick=\"location.href='".$meli."'\"><table width='100%' cellspacing='0' cellpadding='0' class='mechselect_button_normal_play_left'><tr><td nowrap width='30px' align='center' valign='center'><div style='display:inline-block;height:100%;vertical-align:middle;'><img style='vertical-align:middle;' src='".$array_MECH_IMG_STATUS[$i4]."' height='25px' width='23px'><br><span style='color:#ccffff;font-size:15px;'>&nbsp;&nbsp;".$mn."&nbsp;&nbsp;</span></div></td><td>&nbsp;</td><td nowrap width='100%'><div><img src='./images/ranks/".$factionid."/".$array_PILOT_RANK[$i4].".png' width='18px' height='18px'>&nbsp;<a style='font-size:24px' href='".$meli."'>".$array_PILOT[$i4]."</a>&nbsp;&nbsp;<img src='".$mechstatusimage."' height='21px'>".$heatimage[$i4]."<br><span style='font-size:14px;'>".textTruncate($memodel, 18)."</span></div></td></tr></table></td>\r\n";
+				echo "			<td style='display:none;visibility:hidden;' width='".$width."%' nowrap onclick=\"location.href='".$meli."'\"><table width='100%' cellspacing='0' cellpadding='0' class='unitselect_button_normal_play_left'><tr><td nowrap width='30px' align='center' valign='center'><div style='display:inline-block;height:100%;vertical-align:middle;'><img style='vertical-align:middle;' src='".$array_UNIT_IMG_STATUS[$i4]."' height='25px' width='23px'><br><span style='color:#ccffff;font-size:15px;'>&nbsp;&nbsp;".$mn."&nbsp;&nbsp;</span></div></td><td>&nbsp;</td><td nowrap width='100%'><div><img src='./images/ranks/".$factionid."/".$array_PILOT_RANK[$i4].".png' width='18px' height='18px'>&nbsp;<a style='font-size:24px' href='".$meli."'>".$array_PILOT[$i4]."</a>&nbsp;&nbsp;<img src='".$unitstatusimage."' height='21px'>".$heatimage[$i4]."<br><span style='font-size:14px;'>".textTruncate($memodel, 18)."</span></div></td></tr></table></td>\r\n";
 			}
 		}
 		echo "			<td style='width:5px;'>&nbsp;</td>\r\n";
 	}
-	if ($atLeastOneValidMechInUnit == 0) {
+	if ($atLeastOneValidUnitInFormation == 0) {
 		echo "<meta http-equiv='refresh' content='0;url=./gui_select_unit.php'>\r\n";
 		header("Location: ./gui_select_unit.php");
 	}
@@ -697,26 +697,26 @@ session_start();
 	</table>
 </div>
 
-<div><?php echo "<img src='".$array_PILOT_IMG_URL[$chosenMechIndex]."' id='pilotimage' width='80px' height='80px'>" ?></div>
+<div><?php echo "<img src='".$array_PILOT_IMG_URL[$chosenUnitIndex]."' id='pilotimage' width='80px' height='80px'>" ?></div>
 <div id="faction" align="center"><?php echo "<img src='./images/factions/".$FACTION_IMG_URL."' width='50px' height='50px'>" ?></div>
-<div id="mech_number" align="center" onclick='javascript:hideTopRightPanel();'>#<?= $array_MECH_NUMBER[$chosenMechIndex] ?><br><?= strtoupper($FORMATION) ?></div>
+<div id="unit_number" align="center" onclick='javascript:hideTopRightPanel();'>#<?= $array_UNIT_NUMBER[$chosenUnitIndex] ?><br><?= strtoupper($FORMATION) ?></div>
 
 <?php
 	if ($useMULImages == 0) {
-		echo "<div id='mech'><img id='mechimage' src='" . $array_MECH_IMG_URL[$chosenMechIndex] . "'></div>\n";
+		echo "<div id='unit'><img id='unitimage' src='" . $array_UNIT_IMG_URL[$chosenUnitIndex] . "'></div>\n";
 	} else if ($useMULImages == 1) {
-		echo "<div id='mech'><img id='mechimage' src='" . getMechMULImageByName($array_MECH_MODEL[$chosenMechIndex]) . "'></div>\n";
+		echo "<div id='unit'><img id='unitimage' src='" . getMULImageByName($array_UNIT_MODEL[$chosenUnitIndex]) . "'></div>\n";
 	}
-	echo "<script>var mechImageURL='".$array_MECH_IMG_URL[$chosenMechIndex]."';</script>\n";
-	echo "<script>var mechImageURLMUL='".getMechMULImageByName($array_MECH_MODEL[$chosenMechIndex])."';</script>\n";
+	echo "<script>var unitImageURL='".$array_UNIT_IMG_URL[$chosenUnitIndex]."';</script>\n";
+	echo "<script>var unitImageURLMUL='".getMULImageByName($array_UNIT_MODEL[$chosenUnitIndex])."';</script>\n";
 ?>
 
 <div id="topleft">
 	<span style="font-size: 18px; color: #eeeeee;"><?php echo "$FORMATION"; ?></span>
 	<br>
-	<span style="font-size: 30px; color: #da8e25;"><?php echo "$array_PILOT[$chosenMechIndex]"; ?></span>
+	<span style="font-size: 30px; color: #da8e25;"><?php echo "$array_PILOT[$chosenUnitIndex]"; ?></span>
 	<br>
-	<span style="font-size: 20px; color: #aaaaaa;"><?php echo "$array_MECH_MODEL[$chosenMechIndex]" ?></span>
+	<span style="font-size: 20px; color: #aaaaaa;"><?php echo "$array_UNIT_MODEL[$chosenUnitIndex]" ?></span>
 </div>
 
 <div id="topright" onclick='javascript:hideTopRightPanel();'>
@@ -728,22 +728,22 @@ session_start();
 	echo "	<img src='./images/player/".$pimage."' width='60px' height='60px'>\n";
 	echo "</div>\n";
 	echo "<div id='pilotrank'>\n";
-	echo "  <img src='./images/ranks/".$factionid."/".$array_PILOT_RANK[$chosenMechIndex].".png' width='30px' height='30px'>\n";
+	echo "  <img src='./images/ranks/".$factionid."/".$array_PILOT_RANK[$chosenUnitIndex].".png' width='30px' height='30px'>\n";
 	echo "</div>\n";
 	if ($pid == $formationplayerid) {
-		// Current Mech is playable by current user
+		// Current Unit is playable by current user
 		$playable = true;
 	} else {
 		$playable = false;
 	}
 
-	if ($array_ACTIVE_BID[$chosenMechIndex] == "0") {
+	if ($array_ACTIVE_BID[$chosenUnitIndex] == "0") {
 		$playable = false;
 	}
 
 	if (!$playable) {
-		if ($hideNotOwnedMech) {
-			echo "<div id='blockNotOwnedMechs'></div>\r\n";
+		if ($hideNotOwnedUnit) {
+			echo "<div id='blockNotOwnedUnits'></div>\r\n";
 		}
 	}
 
@@ -761,13 +761,13 @@ session_start();
 		echo "	$('#pilotrank').hide();\r\n";
 		echo "	$('#topleft').hide();\r\n";
 	}
-	echo "	setStructuralDamageCache($array_S[$chosenMechIndex]);\r\n";
+	echo "	setStructuralDamageCache($array_S[$chosenUnitIndex]);\r\n";
 	echo "</script>\r\n";
 ?>
 
 <div id="pv" onclick='javascript:hideTopRightPanel();'>
 	<span style="font-size: 22px; color: #aaaaaa; vertical-align: middle;">PV:&nbsp;</span>
-	<span style="font-size: 36px; color: #da8e25; vertical-align: middle; font-weight: bold;"><?php echo "$array_PV[$chosenMechIndex]"; ?></span>
+	<span style="font-size: 36px; color: #da8e25; vertical-align: middle; font-weight: bold;"><?php echo "$array_PV[$chosenUnitIndex]"; ?></span>
 </div>
 
 <div class="datatable">
@@ -856,14 +856,14 @@ if ($showDistancesHexes == 1) {
 						<tr>
 							<td onclick="toggleTargetingComputer();" nowrap style="text-align:center;" width="5%" id="targetcomp" rowspan="2">&nbsp;&nbsp;&nbsp;<i class="fa-solid fa-circle-left" style="color:#999;font-size:40px;"></i>&nbsp;&nbsp;&nbsp;</td>
 							<td nowrap class="datalabel" width="12%">TP:</td>
-							<td nowrap class="datavalue" width="25%" id="unit_type" colspan="3"><?php echo "$array_TP[$chosenMechIndex]"; ?> <span class='datalabel_thin_small'><?php echo "$array_SZ[$chosenMechIndex]"; ?>/<?php echo "$array_TON[$chosenMechIndex]"; ?></span></td>
+							<td nowrap class="datavalue" width="25%" id="unit_type" colspan="3"><?php echo "$array_TP[$chosenUnitIndex]"; ?> <span class='datalabel_thin_small'><?php echo "$array_SZ[$chosenUnitIndex]"; ?>/<?php echo "$array_TON[$chosenUnitIndex]"; ?></span></td>
 							<td id="tmmLabel" nowrap class="datalabel" width="12%">TMM:</td>
-							<td nowrap class="datavalue" width="13%" id="TMM"><?php echo "$array_TMM[$chosenMechIndex]"; ?></td>
+							<td nowrap class="datavalue" width="13%" id="TMM"><?php echo "$array_TMM[$chosenUnitIndex]"; ?></td>
 							<td nowrap class="datalabel" width="12%">MV:</td>
 							<td nowrap class="datavalue" style="text-transform: none;" width="13%" id="mv_points">
-								<?php echo "$array_MV[$chosenMechIndex]&rdquo;$array_MVTYPE[$chosenMechIndex]";
-									if ($array_MVJ[$chosenMechIndex] != null) {
-										echo "/$array_MVJ[$chosenMechIndex]&rdquo;&nbsp;j\r\n";
+								<?php echo "$array_MV[$chosenUnitIndex]&rdquo;$array_MVTYPE[$chosenUnitIndex]";
+									if ($array_MVJ[$chosenUnitIndex] != null) {
+										echo "/$array_MVJ[$chosenUnitIndex]&rdquo;&nbsp;j\r\n";
 									} else {
 										echo "\r\n";
 									}
@@ -871,11 +871,11 @@ if ($showDistancesHexes == 1) {
 							</td>
 						</tr>
 						<tr>
-							<td nowrap class="datavalue_small_special" width="50%" colspan="4" style="text-align:left;" valign="middle" onclick="javascript:window.open('http://www.masterunitlist.info/Unit/Details/<?php echo $array_MECH_MULID[$chosenMechIndex] ?>');"><?php echo "$array_ROLE[$chosenMechIndex]"; ?>&nbsp;<i class="fa-solid fa-square-up-right"></i></td>
+							<td nowrap class="datavalue_small_special" width="50%" colspan="4" style="text-align:left;" valign="middle" onclick="javascript:window.open('http://www.masterunitlist.info/Unit/Details/<?php echo $array_UNIT_MULID[$chosenUnitIndex] ?>');"><?php echo "$array_ROLE[$chosenUnitIndex]"; ?>&nbsp;<i class="fa-solid fa-square-up-right"></i></td>
 							<td nowrap class="datalabel" width="13%" colspan="1" valign="middle" >AMM:</td>
 							<td nowrap class="datavalue" width="12%" colspan="1" valign="middle" style="top:0px;bottom:0px;vertical-align:middle;"><span class="datavalue" id="AMM">0</span></td>
 							<td nowrap class="datalabel" width="12%" colspan="1">SKL:</td>
-							<td nowrap class="datavalue" width="12%" colspan="1" valign="middle" id="skillfield" style="top:0px;bottom:0px;vertical-align:middle;"><?php echo "$array_SKILL[$chosenMechIndex]"; ?></td>
+							<td nowrap class="datavalue" width="12%" colspan="1" valign="middle" id="skillfield" style="top:0px;bottom:0px;vertical-align:middle;"><?php echo "$array_SKILL[$chosenUnitIndex]"; ?></td>
 						</tr>
 					</table>
 				</div>
@@ -885,11 +885,11 @@ if ($showDistancesHexes == 1) {
 						<tr>
 							<td nowrap class="datalabel" width="10%" style="text-align: left;">DMG:</td>
 							<td nowrap class="datalabel_thin" width="15%" style="text-align: center;" id="minrollshort">S (+0)</td>
-							<td nowrap class="datavalue" width="15%" style="text-align: center;" id="dmgshort_s"><?php echo "$array_DMG_SHORT[$chosenMechIndex]"; ?></td>
+							<td nowrap class="datavalue" width="15%" style="text-align: center;" id="dmgshort_s"><?php echo "$array_DMG_SHORT[$chosenUnitIndex]"; ?></td>
 							<td nowrap class="datalabel_thin" width="15%" style="text-align: center;" id="minrollmedium">M (+2)</td>
-							<td nowrap class="datavalue" width="15%" style="text-align: center;" id="dmgmedium_s"><?php echo "$array_DMG_MEDIUM[$chosenMechIndex]"; ?></td>
+							<td nowrap class="datavalue" width="15%" style="text-align: center;" id="dmgmedium_s"><?php echo "$array_DMG_MEDIUM[$chosenUnitIndex]"; ?></td>
 							<td nowrap class="datalabel_thin" width="15%" style="text-align: center;" id="minrolllong">L (+4)</td>
-							<td nowrap class="datavalue" width="15%" style="text-align: center;" id="dmglong_s"><?php echo "$array_DMG_LONG[$chosenMechIndex]"; ?></td>
+							<td nowrap class="datavalue" width="15%" style="text-align: center;" id="dmglong_s"><?php echo "$array_DMG_LONG[$chosenUnitIndex]"; ?></td>
 						</tr>
 					</table>
 				</div>
@@ -902,7 +902,7 @@ if ($showDistancesHexes == 1) {
 					</table>
 				</div>
 <?php
-	if ($array_TP[$chosenMechIndex] == "BA" || $array_TP[$chosenMechIndex] == "CV") {
+	if ($array_TP[$chosenUnitIndex] == "BA" || $array_TP[$chosenUnitIndex] == "CV") {
 		// Do not show the heat block for all Battle Armor and combat vehicle units
 		echo "				<div class='dataarea' style='display:none;'>\r\n";
 	} else {
@@ -914,19 +914,19 @@ if ($showDistancesHexes == 1) {
 							<td nowrap class="datalabel" width="5%">OV:</td>
 							<td nowrap width="25%" class="datalabel_thin">
 <?php
-	for ($i1 = 1; $i1 <= $array_OV[$chosenMechIndex]; $i1++) {
-		echo "								<label class='bigcheck'><input onchange='readCircles($array_MECH_DBID[$chosenMechIndex]);' type='checkbox' class='bigcheck' name='UOV".$i1."' id='UOV".$i1."' value='yes'/><span class='bigcheck-target'></span></label>&nbsp;\r\n";
+	for ($i1 = 1; $i1 <= $array_OV[$chosenUnitIndex]; $i1++) {
+		echo "								<label class='bigcheck'><input onchange='readCircles($array_UNIT_DBID[$chosenUnitIndex]);' type='checkbox' class='bigcheck' name='UOV".$i1."' id='UOV".$i1."' value='yes'/><span class='bigcheck-target'></span></label>&nbsp;\r\n";
 	}
 ?>
 							</td>
 							<td nowrap class="datalabel" width="15%" style="text-align: right;">&nbsp;&nbsp;&nbsp;HT:&nbsp;&nbsp;</td>
 							<td nowrap width="2%" valign="middle"><a style="padding-right:5px;" valign="middle" href="javascript:increaseHT_PREP();"><i class="fas fa-plus-square"></i></a></td>
-							<td nowrap class="datalabel_thin" width="2%" id="label_HT_PREP" align="center"><?= $array_HT_PREP[$chosenMechIndex] ?></td>
+							<td nowrap class="datalabel_thin" width="2%" id="label_HT_PREP" align="center"><?= $array_HT_PREP[$chosenUnitIndex] ?></td>
 							<td nowrap width="36%" style="text-align: right;" id="ht_field" class="datalabel_thin">
-								<label class="bigcheck"><input onchange="readCircles(<?= $array_MECH_DBID[$chosenMechIndex] ?>, <?= $array_A_MAX[$chosenMechIndex] ?>, <?= $array_S_MAX[$chosenMechIndex] ?>);" type="checkbox" class="bigcheck" name="H1" id="H1" value="yes"/><span class="bigcheck-target"></span></label>
-								<label class="bigcheck"><input onchange="readCircles(<?= $array_MECH_DBID[$chosenMechIndex] ?>, <?= $array_A_MAX[$chosenMechIndex] ?>, <?= $array_S_MAX[$chosenMechIndex] ?>);" type="checkbox" class="bigcheck" name="H2" id="H2" value="yes"/><span class="bigcheck-target"></span></label>
-								<label class="bigcheck"><input onchange="readCircles(<?= $array_MECH_DBID[$chosenMechIndex] ?>, <?= $array_A_MAX[$chosenMechIndex] ?>, <?= $array_S_MAX[$chosenMechIndex] ?>);" type="checkbox" class="bigcheck" name="H3" id="H3" value="yes"/><span class="bigcheck-target"></span></label>
-								<label class="bigcheck"><input onchange="readCircles(<?= $array_MECH_DBID[$chosenMechIndex] ?>, <?= $array_A_MAX[$chosenMechIndex] ?>, <?= $array_S_MAX[$chosenMechIndex] ?>);" type="checkbox" class="bigcheck" name="H4" id="H4" value="yes"/><span class="bigcheck-target"></span></label>
+								<label class="bigcheck"><input onchange="readCircles(<?= $array_UNIT_DBID[$chosenUnitIndex] ?>, <?= $array_A_MAX[$chosenUnitIndex] ?>, <?= $array_S_MAX[$chosenUnitIndex] ?>);" type="checkbox" class="bigcheck" name="H1" id="H1" value="yes"/><span class="bigcheck-target"></span></label>
+								<label class="bigcheck"><input onchange="readCircles(<?= $array_UNIT_DBID[$chosenUnitIndex] ?>, <?= $array_A_MAX[$chosenUnitIndex] ?>, <?= $array_S_MAX[$chosenUnitIndex] ?>);" type="checkbox" class="bigcheck" name="H2" id="H2" value="yes"/><span class="bigcheck-target"></span></label>
+								<label class="bigcheck"><input onchange="readCircles(<?= $array_UNIT_DBID[$chosenUnitIndex] ?>, <?= $array_A_MAX[$chosenUnitIndex] ?>, <?= $array_S_MAX[$chosenUnitIndex] ?>);" type="checkbox" class="bigcheck" name="H3" id="H3" value="yes"/><span class="bigcheck-target"></span></label>
+								<label class="bigcheck"><input onchange="readCircles(<?= $array_UNIT_DBID[$chosenUnitIndex] ?>, <?= $array_A_MAX[$chosenUnitIndex] ?>, <?= $array_S_MAX[$chosenUnitIndex] ?>);" type="checkbox" class="bigcheck" name="H4" id="H4" value="yes"/><span class="bigcheck-target"></span></label>
 							</td>
 						</tr>
 					</table>
@@ -938,8 +938,8 @@ if ($showDistancesHexes == 1) {
 							<td nowrap width="5%" class="datalabel">A:</td>
 							<td nowrap width="95%" class="datalabel_thin">
 <?php
-	for ($i1 = 1; $i1 <= $array_A_MAX[$chosenMechIndex]; $i1++) {
-		echo "							<label class='bigcheck'><input onchange='readCircles($array_MECH_DBID[$chosenMechIndex]);' type='checkbox' class='bigcheck' name='A".$i1."' value='yes'/><span class='bigcheck-target'></span></label>&nbsp;\r\n";
+	for ($i1 = 1; $i1 <= $array_A_MAX[$chosenUnitIndex]; $i1++) {
+		echo "							<label class='bigcheck'><input onchange='readCircles($array_UNIT_DBID[$chosenUnitIndex]);' type='checkbox' class='bigcheck' name='A".$i1."' value='yes'/><span class='bigcheck-target'></span></label>&nbsp;\r\n";
 		if ($i1 == 10) {
             echo "<br>\n";
         }
@@ -951,8 +951,8 @@ if ($showDistancesHexes == 1) {
 							<td nowrap width="5%" class="datalabel">S:</td>
 							<td nowrap width="95%" class="datalabel_thin">
 <?php
-	for ($i2 = 1; $i2 <= $array_S_MAX[$chosenMechIndex]; $i2++) {
-		echo "							<label class='bigcheck'><input onchange='readCircles($array_MECH_DBID[$chosenMechIndex]);' type='checkbox' class='bigcheck' name='S".$i2."' value='yes'/><span class='bigcheck-target'></span></label>&nbsp;\r\n";
+	for ($i2 = 1; $i2 <= $array_S_MAX[$chosenUnitIndex]; $i2++) {
+		echo "							<label class='bigcheck'><input onchange='readCircles($array_UNIT_DBID[$chosenUnitIndex]);' type='checkbox' class='bigcheck' name='S".$i2."' value='yes'/><span class='bigcheck-target'></span></label>&nbsp;\r\n";
 		if ($i2 == 10) {
 			echo "<br>\n";
 		}
@@ -973,7 +973,7 @@ if ($showDistancesHexes == 1) {
 										<td nowrap width="99%" class="datavalue_thin" style="text-align: left;" id="sa_field">
 											<?php
 												$allSpecialAbilities = "";
-												$parts = explode(',', $array_SPCL[$chosenMechIndex]);
+												$parts = explode(',', $array_SPCL[$chosenUnitIndex]);
 												if (sizeof($parts) > 1) {
 													$i = 1;
 													foreach ($parts as $part) {
@@ -1061,11 +1061,11 @@ if ($showDistancesHexes == 1) {
 										<td align="center"><img src="./images/buttons/mov05.png" height='17px' style="border: 0px solid #000000;"></td>
 									</tr>
 									<tr>
-										<td><label class='bigcheck'><input type='checkbox' onchange='readCircles2(<?= $array_MECH_DBID[$chosenMechIndex] ?>, <?= $array_A_MAX[$chosenMechIndex] ?>, <?= $array_S_MAX[$chosenMechIndex] ?>, 2, -1);' class='bigcheck' name='MV2_moved2_standstill' id='MV2_moved2_standstill' value='no'/><span class='bigcheck-target'></span></label>&nbsp;</td>
-										<td><label class='bigcheck'><input type='checkbox' onchange='readCircles2(<?= $array_MECH_DBID[$chosenMechIndex] ?>, <?= $array_A_MAX[$chosenMechIndex] ?>, <?= $array_S_MAX[$chosenMechIndex] ?>, 10,-1);' class='bigcheck' name='MV10_moved10_hulldown' id='MV10_moved10_hulldown' value='no'/><span class='bigcheck-target'></span></label>&nbsp;</td>
-										<td><label class='bigcheck'><input type='checkbox' onchange='readCircles2(<?= $array_MECH_DBID[$chosenMechIndex] ?>, <?= $array_A_MAX[$chosenMechIndex] ?>, <?= $array_S_MAX[$chosenMechIndex] ?>, 3, -1);' class='bigcheck' name='MV3_moved3_moved' id='MV3_moved3_moved' value='no'/><span class='bigcheck-target'></span></label>&nbsp;</td>
-										<td><label class='bigcheck'><input type='checkbox' onchange='readCircles2(<?= $array_MECH_DBID[$chosenMechIndex] ?>, <?= $array_A_MAX[$chosenMechIndex] ?>, <?= $array_S_MAX[$chosenMechIndex] ?>, 9, -1);' class='bigcheck' name='MV9_moved9_sprinted' id='MV9_moved9_sprinted' value='no'/><span class='bigcheck-target'></span></label>&nbsp;</td>
-										<td><label class='bigcheck'><input type='checkbox' onchange='readCircles2(<?= $array_MECH_DBID[$chosenMechIndex] ?>, <?= $array_A_MAX[$chosenMechIndex] ?>, <?= $array_S_MAX[$chosenMechIndex] ?>, 4, -1);' class='bigcheck' name='MV4_moved4_jumped' id='MV4_moved4_jumped' value='no'/><span class='bigcheck-target'></span></label>&nbsp;</td>
+										<td><label class='bigcheck'><input type='checkbox' onchange='readCircles2(<?= $array_UNIT_DBID[$chosenUnitIndex] ?>, <?= $array_A_MAX[$chosenUnitIndex] ?>, <?= $array_S_MAX[$chosenUnitIndex] ?>, 2, -1);' class='bigcheck' name='MV2_moved2_standstill' id='MV2_moved2_standstill' value='no'/><span class='bigcheck-target'></span></label>&nbsp;</td>
+										<td><label class='bigcheck'><input type='checkbox' onchange='readCircles2(<?= $array_UNIT_DBID[$chosenUnitIndex] ?>, <?= $array_A_MAX[$chosenUnitIndex] ?>, <?= $array_S_MAX[$chosenUnitIndex] ?>, 10,-1);' class='bigcheck' name='MV10_moved10_hulldown' id='MV10_moved10_hulldown' value='no'/><span class='bigcheck-target'></span></label>&nbsp;</td>
+										<td><label class='bigcheck'><input type='checkbox' onchange='readCircles2(<?= $array_UNIT_DBID[$chosenUnitIndex] ?>, <?= $array_A_MAX[$chosenUnitIndex] ?>, <?= $array_S_MAX[$chosenUnitIndex] ?>, 3, -1);' class='bigcheck' name='MV3_moved3_moved' id='MV3_moved3_moved' value='no'/><span class='bigcheck-target'></span></label>&nbsp;</td>
+										<td><label class='bigcheck'><input type='checkbox' onchange='readCircles2(<?= $array_UNIT_DBID[$chosenUnitIndex] ?>, <?= $array_A_MAX[$chosenUnitIndex] ?>, <?= $array_S_MAX[$chosenUnitIndex] ?>, 9, -1);' class='bigcheck' name='MV9_moved9_sprinted' id='MV9_moved9_sprinted' value='no'/><span class='bigcheck-target'></span></label>&nbsp;</td>
+										<td><label class='bigcheck'><input type='checkbox' onchange='readCircles2(<?= $array_UNIT_DBID[$chosenUnitIndex] ?>, <?= $array_A_MAX[$chosenUnitIndex] ?>, <?= $array_S_MAX[$chosenUnitIndex] ?>, 4, -1);' class='bigcheck' name='MV4_moved4_jumped' id='MV4_moved4_jumped' value='no'/><span class='bigcheck-target'></span></label>&nbsp;</td>
 									</tr>
 								</table>
 							</td>
@@ -1076,8 +1076,8 @@ if ($showDistancesHexes == 1) {
 							<td nowrap width="65%" id="firecontainer" class="datalabel_thin">
 							<table cellspacing="2" cellpadding="0">
 								<tr>
-									<td><label class='bigcheck'><input type='checkbox' onchange='readCircles2(<?= $array_MECH_DBID[$chosenMechIndex] ?>, <?= $array_A_MAX[$chosenMechIndex] ?>, <?= $array_S_MAX[$chosenMechIndex] ?>, -1, 1);' class='bigcheck' name='WF5_WEAPONSFIRED2' id='WF5_WEAPONSFIRED2' value='no'/><span class='bigcheck-target'></span></label>&nbsp;</td>
-									<td><label class='bigcheck'><input type='checkbox' onchange='readCircles2(<?= $array_MECH_DBID[$chosenMechIndex] ?>, <?= $array_A_MAX[$chosenMechIndex] ?>, <?= $array_S_MAX[$chosenMechIndex] ?>, -1, 2);' class='bigcheck' name='WF6_WEAPONSFIRED2' id='WF6_WEAPONSFIRED2' value='no'/><span class='bigcheck-target'></span></label>&nbsp;</td>
+									<td><label class='bigcheck'><input type='checkbox' onchange='readCircles2(<?= $array_UNIT_DBID[$chosenUnitIndex] ?>, <?= $array_A_MAX[$chosenUnitIndex] ?>, <?= $array_S_MAX[$chosenUnitIndex] ?>, -1, 1);' class='bigcheck' name='WF5_WEAPONSFIRED2' id='WF5_WEAPONSFIRED2' value='no'/><span class='bigcheck-target'></span></label>&nbsp;</td>
+									<td><label class='bigcheck'><input type='checkbox' onchange='readCircles2(<?= $array_UNIT_DBID[$chosenUnitIndex] ?>, <?= $array_A_MAX[$chosenUnitIndex] ?>, <?= $array_S_MAX[$chosenUnitIndex] ?>, -1, 2);' class='bigcheck' name='WF6_WEAPONSFIRED2' id='WF6_WEAPONSFIRED2' value='no'/><span class='bigcheck-target'></span></label>&nbsp;</td>
 									<td nowrap rowspan='2' class="datavalue" style="text-align: right;" align="right"><span style="font-family:'Pathway Gothic One',sans-serif;font-size:60%;text-transform:uppercase;color:#999;">&nbsp;&nbsp;&nbsp;WEAPONS</span></td>
 								</tr>
 								<tr>
@@ -1091,7 +1091,7 @@ if ($showDistancesHexes == 1) {
 					</table>
 				</div>
 <?php
-	if ($array_TP[$chosenMechIndex] == "BA" || $array_TP[$chosenMechIndex] == "CV") {
+	if ($array_TP[$chosenUnitIndex] == "BA" || $array_TP[$chosenUnitIndex] == "CV") {
 		// Do not show the normal critical block for all Battle Armor and combat vehicle units
 		echo "				<div class='dataarea' style='display:none;'>\r\n";
 	} else {
@@ -1102,57 +1102,57 @@ if ($showDistancesHexes == 1) {
 						<tr>
 							<td nowrap class="datalabel" width="5%" style="text-align: right;">EN:&nbsp;</td>
 							<td nowrap valign="middle"><a style="padding-right:5px;" valign="middle" href="javascript:increaseENGN_PREP();"><i class="fas fa-plus-square"></i></a></td>
-							<td nowrap class="datalabel_thin" id="label_ENGN_PREP" align="center"><?= $array_ENGN_PREP[$chosenMechIndex] ?></td>
+							<td nowrap class="datalabel_thin" id="label_ENGN_PREP" align="center"><?= $array_ENGN_PREP[$chosenUnitIndex] ?></td>
 							<td nowrap class="datalabel">&nbsp;</td>
 							<td nowrap width="55%" style="text-align: left;" class="datalabel_thin">
-								<label class="bigcheck"><input onchange="readCircles(<?= $array_MECH_DBID[$chosenMechIndex] ?>, <?= $array_A_MAX[$chosenMechIndex] ?>, <?= $array_S_MAX[$chosenMechIndex] ?>);" type="checkbox" class="bigcheck" name="CD_E_1" id="CD_E_1" value="yes"/><span class="bigcheck-target"></span></label>
-								<label class="bigcheck"><input onchange="readCircles(<?= $array_MECH_DBID[$chosenMechIndex] ?>, <?= $array_A_MAX[$chosenMechIndex] ?>, <?= $array_S_MAX[$chosenMechIndex] ?>);" type="checkbox" class="bigcheck" name="CD_E_2" id="CD_E_2" value="yes"/><span class="bigcheck-target"></span></label>
+								<label class="bigcheck"><input onchange="readCircles(<?= $array_UNIT_DBID[$chosenUnitIndex] ?>, <?= $array_A_MAX[$chosenUnitIndex] ?>, <?= $array_S_MAX[$chosenUnitIndex] ?>);" type="checkbox" class="bigcheck" name="CD_E_1" id="CD_E_1" value="yes"/><span class="bigcheck-target"></span></label>
+								<label class="bigcheck"><input onchange="readCircles(<?= $array_UNIT_DBID[$chosenUnitIndex] ?>, <?= $array_A_MAX[$chosenUnitIndex] ?>, <?= $array_S_MAX[$chosenUnitIndex] ?>);" type="checkbox" class="bigcheck" name="CD_E_2" id="CD_E_2" value="yes"/><span class="bigcheck-target"></span></label>
 							</td>
 							<td nowrap class="datalabel_thin_small" width="5%" style="text-align: right;">+1 HT</td>
 						</tr>
 						<tr>
 							<td nowrap class="datalabel" width="5%" style="text-align: right;">FC:&nbsp;</td>
 							<td nowrap valign="middle"><a style="padding-right:5px;" valign="middle" href="javascript:increaseFCTL_PREP();"><i class="fas fa-plus-square"></i></a></td>
-							<td nowrap class="datalabel_thin" id="label_FCTL_PREP" align="center"><?= $array_FRCTRL_PREP[$chosenMechIndex] ?></td>
+							<td nowrap class="datalabel_thin" id="label_FCTL_PREP" align="center"><?= $array_FRCTRL_PREP[$chosenUnitIndex] ?></td>
 							<td nowrap class="datalabel">&nbsp;</td>
 							<td nowrap width="90%" style="text-align: left;" class="datalabel_thin">
-								<label class="bigcheck"><input onchange="readCircles(<?= $array_MECH_DBID[$chosenMechIndex] ?>, <?= $array_A_MAX[$chosenMechIndex] ?>, <?= $array_S_MAX[$chosenMechIndex] ?>);" type="checkbox" class="bigcheck" name="CD_FC_1" id="CD_FC_1" value="yes"/><span class="bigcheck-target"></span></label>
-								<label class="bigcheck"><input onchange="readCircles(<?= $array_MECH_DBID[$chosenMechIndex] ?>, <?= $array_A_MAX[$chosenMechIndex] ?>, <?= $array_S_MAX[$chosenMechIndex] ?>);" type="checkbox" class="bigcheck" name="CD_FC_2" id="CD_FC_2" value="yes"/><span class="bigcheck-target"></span></label>
-								<label class="bigcheck"><input onchange="readCircles(<?= $array_MECH_DBID[$chosenMechIndex] ?>, <?= $array_A_MAX[$chosenMechIndex] ?>, <?= $array_S_MAX[$chosenMechIndex] ?>);" type="checkbox" class="bigcheck" name="CD_FC_3" id="CD_FC_3" value="yes"/><span class="bigcheck-target"></span></label>
-								<label class="bigcheck"><input onchange="readCircles(<?= $array_MECH_DBID[$chosenMechIndex] ?>, <?= $array_A_MAX[$chosenMechIndex] ?>, <?= $array_S_MAX[$chosenMechIndex] ?>);" type="checkbox" class="bigcheck" name="CD_FC_4" id="CD_FC_4" value="yes"/><span class="bigcheck-target"></span></label>
+								<label class="bigcheck"><input onchange="readCircles(<?= $array_UNIT_DBID[$chosenUnitIndex] ?>, <?= $array_A_MAX[$chosenUnitIndex] ?>, <?= $array_S_MAX[$chosenUnitIndex] ?>);" type="checkbox" class="bigcheck" name="CD_FC_1" id="CD_FC_1" value="yes"/><span class="bigcheck-target"></span></label>
+								<label class="bigcheck"><input onchange="readCircles(<?= $array_UNIT_DBID[$chosenUnitIndex] ?>, <?= $array_A_MAX[$chosenUnitIndex] ?>, <?= $array_S_MAX[$chosenUnitIndex] ?>);" type="checkbox" class="bigcheck" name="CD_FC_2" id="CD_FC_2" value="yes"/><span class="bigcheck-target"></span></label>
+								<label class="bigcheck"><input onchange="readCircles(<?= $array_UNIT_DBID[$chosenUnitIndex] ?>, <?= $array_A_MAX[$chosenUnitIndex] ?>, <?= $array_S_MAX[$chosenUnitIndex] ?>);" type="checkbox" class="bigcheck" name="CD_FC_3" id="CD_FC_3" value="yes"/><span class="bigcheck-target"></span></label>
+								<label class="bigcheck"><input onchange="readCircles(<?= $array_UNIT_DBID[$chosenUnitIndex] ?>, <?= $array_A_MAX[$chosenUnitIndex] ?>, <?= $array_S_MAX[$chosenUnitIndex] ?>);" type="checkbox" class="bigcheck" name="CD_FC_4" id="CD_FC_4" value="yes"/><span class="bigcheck-target"></span></label>
 							</td>
 							<td nowrap class="datalabel_thin_small" width="5%" style="text-align: right;">+2 TO-HIT</td>
 						</tr>
 						<tr>
 							<td nowrap class="datalabel" width="5%" style="text-align: right;">MP:&nbsp;</td>
 							<td nowrap valign="middle"><a style="padding-right:5px;" valign="middle" href="javascript:increaseMP_PREP();"><i class="fas fa-plus-square"></i></a></td>
-							<td nowrap class="datalabel_thin" id="label_MP_PREP" align="center"><?= $array_MP_PREP[$chosenMechIndex] ?></td>
+							<td nowrap class="datalabel_thin" id="label_MP_PREP" align="center"><?= $array_MP_PREP[$chosenUnitIndex] ?></td>
 							<td nowrap class="datalabel">&nbsp;</td>
 							<td nowrap width="55%" style="text-align: left;" class="datalabel_thin">
-								<label class="bigcheck"><input onchange="readCircles(<?= $array_MECH_DBID[$chosenMechIndex] ?>, <?= $array_A_MAX[$chosenMechIndex] ?>, <?= $array_S_MAX[$chosenMechIndex] ?>);" type="checkbox" class="bigcheck" name="CD_MP_1" id="CD_MP_1" value="yes"/><span class="bigcheck-target"></span></label>
-								<label class="bigcheck"><input onchange="readCircles(<?= $array_MECH_DBID[$chosenMechIndex] ?>, <?= $array_A_MAX[$chosenMechIndex] ?>, <?= $array_S_MAX[$chosenMechIndex] ?>);" type="checkbox" class="bigcheck" name="CD_MP_2" id="CD_MP_2" value="yes"/><span class="bigcheck-target"></span></label>
-								<label class="bigcheck"><input onchange="readCircles(<?= $array_MECH_DBID[$chosenMechIndex] ?>, <?= $array_A_MAX[$chosenMechIndex] ?>, <?= $array_S_MAX[$chosenMechIndex] ?>);" type="checkbox" class="bigcheck" name="CD_MP_3" id="CD_MP_3" value="yes"/><span class="bigcheck-target"></span></label>
-								<label class="bigcheck"><input onchange="readCircles(<?= $array_MECH_DBID[$chosenMechIndex] ?>, <?= $array_A_MAX[$chosenMechIndex] ?>, <?= $array_S_MAX[$chosenMechIndex] ?>);" type="checkbox" class="bigcheck" name="CD_MP_4" id="CD_MP_4" value="yes"/><span class="bigcheck-target"></span></label>
+								<label class="bigcheck"><input onchange="readCircles(<?= $array_UNIT_DBID[$chosenUnitIndex] ?>, <?= $array_A_MAX[$chosenUnitIndex] ?>, <?= $array_S_MAX[$chosenUnitIndex] ?>);" type="checkbox" class="bigcheck" name="CD_MP_1" id="CD_MP_1" value="yes"/><span class="bigcheck-target"></span></label>
+								<label class="bigcheck"><input onchange="readCircles(<?= $array_UNIT_DBID[$chosenUnitIndex] ?>, <?= $array_A_MAX[$chosenUnitIndex] ?>, <?= $array_S_MAX[$chosenUnitIndex] ?>);" type="checkbox" class="bigcheck" name="CD_MP_2" id="CD_MP_2" value="yes"/><span class="bigcheck-target"></span></label>
+								<label class="bigcheck"><input onchange="readCircles(<?= $array_UNIT_DBID[$chosenUnitIndex] ?>, <?= $array_A_MAX[$chosenUnitIndex] ?>, <?= $array_S_MAX[$chosenUnitIndex] ?>);" type="checkbox" class="bigcheck" name="CD_MP_3" id="CD_MP_3" value="yes"/><span class="bigcheck-target"></span></label>
+								<label class="bigcheck"><input onchange="readCircles(<?= $array_UNIT_DBID[$chosenUnitIndex] ?>, <?= $array_A_MAX[$chosenUnitIndex] ?>, <?= $array_S_MAX[$chosenUnitIndex] ?>);" type="checkbox" class="bigcheck" name="CD_MP_4" id="CD_MP_4" value="yes"/><span class="bigcheck-target"></span></label>
 							</td>
 							<td nowrap class="datalabel_thin_small" width="5%" style="text-align: right;">½ MV</td>
 						</tr>
 						<tr>
 							<td nowrap class="datalabel" width="5%" style="text-align: right;">WN:&nbsp;</td>
 							<td nowrap valign="middle"><a style="padding-right:5px;" valign="middle" href="javascript:increaseWPNS_PREP();"><i class="fas fa-plus-square"></i></a></td>
-							<td nowrap class="datalabel_thin" id="label_WPNS_PREP" align="center"><?= $array_WPNS_PREP[$chosenMechIndex] ?></td>
+							<td nowrap class="datalabel_thin" id="label_WPNS_PREP" align="center"><?= $array_WPNS_PREP[$chosenUnitIndex] ?></td>
 							<td nowrap class="datalabel">&nbsp;</td>
 							<td nowrap width="55%" style="text-align: left;" class="datalabel_thin">
-								<label class="bigcheck"><input onchange="readCircles(<?= $array_MECH_DBID[$chosenMechIndex] ?>, <?= $array_A_MAX[$chosenMechIndex] ?>, <?= $array_S_MAX[$chosenMechIndex] ?>);" type="checkbox" class="bigcheck" name="CD_W_1" id="CD_W_1" value="yes"/><span class="bigcheck-target"></span></label>
-								<label class="bigcheck"><input onchange="readCircles(<?= $array_MECH_DBID[$chosenMechIndex] ?>, <?= $array_A_MAX[$chosenMechIndex] ?>, <?= $array_S_MAX[$chosenMechIndex] ?>);" type="checkbox" class="bigcheck" name="CD_W_2" id="CD_W_2" value="yes"/><span class="bigcheck-target"></span></label>
-								<label class="bigcheck"><input onchange="readCircles(<?= $array_MECH_DBID[$chosenMechIndex] ?>, <?= $array_A_MAX[$chosenMechIndex] ?>, <?= $array_S_MAX[$chosenMechIndex] ?>);" type="checkbox" class="bigcheck" name="CD_W_3" id="CD_W_3" value="yes"/><span class="bigcheck-target"></span></label>
-								<label class="bigcheck"><input onchange="readCircles(<?= $array_MECH_DBID[$chosenMechIndex] ?>, <?= $array_A_MAX[$chosenMechIndex] ?>, <?= $array_S_MAX[$chosenMechIndex] ?>);" type="checkbox" class="bigcheck" name="CD_W_4" id="CD_W_4" value="yes"/><span class="bigcheck-target"></span></label>
+								<label class="bigcheck"><input onchange="readCircles(<?= $array_UNIT_DBID[$chosenUnitIndex] ?>, <?= $array_A_MAX[$chosenUnitIndex] ?>, <?= $array_S_MAX[$chosenUnitIndex] ?>);" type="checkbox" class="bigcheck" name="CD_W_1" id="CD_W_1" value="yes"/><span class="bigcheck-target"></span></label>
+								<label class="bigcheck"><input onchange="readCircles(<?= $array_UNIT_DBID[$chosenUnitIndex] ?>, <?= $array_A_MAX[$chosenUnitIndex] ?>, <?= $array_S_MAX[$chosenUnitIndex] ?>);" type="checkbox" class="bigcheck" name="CD_W_2" id="CD_W_2" value="yes"/><span class="bigcheck-target"></span></label>
+								<label class="bigcheck"><input onchange="readCircles(<?= $array_UNIT_DBID[$chosenUnitIndex] ?>, <?= $array_A_MAX[$chosenUnitIndex] ?>, <?= $array_S_MAX[$chosenUnitIndex] ?>);" type="checkbox" class="bigcheck" name="CD_W_3" id="CD_W_3" value="yes"/><span class="bigcheck-target"></span></label>
+								<label class="bigcheck"><input onchange="readCircles(<?= $array_UNIT_DBID[$chosenUnitIndex] ?>, <?= $array_A_MAX[$chosenUnitIndex] ?>, <?= $array_S_MAX[$chosenUnitIndex] ?>);" type="checkbox" class="bigcheck" name="CD_W_4" id="CD_W_4" value="yes"/><span class="bigcheck-target"></span></label>
 							</td>
 							<td nowrap class="datalabel_thin_small" width="5%" style="text-align: right;">-1 DMG</td>
 						</tr>
 					</table>
 				</div>
 <?php
-	if ($array_TP[$chosenMechIndex] == "CV") {
+	if ($array_TP[$chosenUnitIndex] == "CV") {
 		// Do not show the normal critical block for all Battle Armor and combat vehicle units
 		// Do show the vehicle critical block for combat vehicles
 		echo "				<div class='dataarea'>\r\n";
@@ -1164,37 +1164,37 @@ if ($showDistancesHexes == 1) {
 						<tr>
 							<td nowrap class="datalabel" width="5%" style="text-align: right;">EN:&nbsp;</td>
 							<td nowrap valign="middle"><a style="padding-right:5px;" href="javascript:increaseENGN_CV_PREP();"><i class="fas fa-plus-square"></i></a></td>
-							<td nowrap class="datalabel_thin" id="label_CV_ENGN_PREP" align="center"><?= $array_CV_ENGN_PREP[$chosenMechIndex] ?></td>
+							<td nowrap class="datalabel_thin" id="label_CV_ENGN_PREP" align="center"><?= $array_CV_ENGN_PREP[$chosenUnitIndex] ?></td>
 							<td nowrap class="datalabel">&nbsp;</td>
 							<td nowrap width="55%" style="text-align: left;" class="datalabel_thin">
-								<label class="bigcheck"><input onchange="readCircles(<?= $array_MECH_DBID[$chosenMechIndex] ?>, <?= $array_A_MAX[$chosenMechIndex] ?>, <?= $array_S_MAX[$chosenMechIndex] ?>);" type="checkbox" class="bigcheck" name="CD_CV-E_1" id="CD_CV-E_1" value="yes"/><span class="bigcheck-target"></span></label>
-								<label class="bigcheck"><input onchange="readCircles(<?= $array_MECH_DBID[$chosenMechIndex] ?>, <?= $array_A_MAX[$chosenMechIndex] ?>, <?= $array_S_MAX[$chosenMechIndex] ?>);" type="checkbox" class="bigcheck" name="CD_CV-E_2" id="CD_CV-E_2" value="yes"/><span class="bigcheck-target"></span></label>
+								<label class="bigcheck"><input onchange="readCircles(<?= $array_UNIT_DBID[$chosenUnitIndex] ?>, <?= $array_A_MAX[$chosenUnitIndex] ?>, <?= $array_S_MAX[$chosenUnitIndex] ?>);" type="checkbox" class="bigcheck" name="CD_CV-E_1" id="CD_CV-E_1" value="yes"/><span class="bigcheck-target"></span></label>
+								<label class="bigcheck"><input onchange="readCircles(<?= $array_UNIT_DBID[$chosenUnitIndex] ?>, <?= $array_A_MAX[$chosenUnitIndex] ?>, <?= $array_S_MAX[$chosenUnitIndex] ?>);" type="checkbox" class="bigcheck" name="CD_CV-E_2" id="CD_CV-E_2" value="yes"/><span class="bigcheck-target"></span></label>
 							</td>
 							<td nowrap class="datalabel_thin_small" colspan="2" width="5%" style="text-align: right;">½ MV, ½ DMG</td>
 						</tr>
 						<tr>
 							<td nowrap class="datalabel" width="5%" style="text-align: right;">FC:&nbsp;</td>
 							<td nowrap valign="middle"><a style="padding-right:5px;" href="javascript:increaseFCTL_CV_PREP();"><i class="fas fa-plus-square"></i></a></td>
-							<td nowrap class="datalabel_thin" id="label_CV_FCTL_PREP" align="center"><?= $array_CV_FRCTRL_PREP[$chosenMechIndex] ?></td>
+							<td nowrap class="datalabel_thin" id="label_CV_FCTL_PREP" align="center"><?= $array_CV_FRCTRL_PREP[$chosenUnitIndex] ?></td>
 							<td nowrap class="datalabel">&nbsp;</td>
 							<td nowrap width="90%" colspan='2' style="text-align: left;" class="datalabel_thin">
-								<label class="bigcheck"><input onchange="readCircles(<?= $array_MECH_DBID[$chosenMechIndex] ?>, <?= $array_A_MAX[$chosenMechIndex] ?>, <?= $array_S_MAX[$chosenMechIndex] ?>);" type="checkbox" class="bigcheck" name="CD_CV-FC_1" id="CD_CV-FC_1" value="yes"/><span class="bigcheck-target"></span></label>
-								<label class="bigcheck"><input onchange="readCircles(<?= $array_MECH_DBID[$chosenMechIndex] ?>, <?= $array_A_MAX[$chosenMechIndex] ?>, <?= $array_S_MAX[$chosenMechIndex] ?>);" type="checkbox" class="bigcheck" name="CD_CV-FC_2" id="CD_CV-FC_2" value="yes"/><span class="bigcheck-target"></span></label>
-								<label class="bigcheck"><input onchange="readCircles(<?= $array_MECH_DBID[$chosenMechIndex] ?>, <?= $array_A_MAX[$chosenMechIndex] ?>, <?= $array_S_MAX[$chosenMechIndex] ?>);" type="checkbox" class="bigcheck" name="CD_CV-FC_3" id="CD_CV-FC_3" value="yes"/><span class="bigcheck-target"></span></label>
-								<label class="bigcheck"><input onchange="readCircles(<?= $array_MECH_DBID[$chosenMechIndex] ?>, <?= $array_A_MAX[$chosenMechIndex] ?>, <?= $array_S_MAX[$chosenMechIndex] ?>);" type="checkbox" class="bigcheck" name="CD_CV-FC_4" id="CD_CV-FC_4" value="yes"/><span class="bigcheck-target"></span></label>
+								<label class="bigcheck"><input onchange="readCircles(<?= $array_UNIT_DBID[$chosenUnitIndex] ?>, <?= $array_A_MAX[$chosenUnitIndex] ?>, <?= $array_S_MAX[$chosenUnitIndex] ?>);" type="checkbox" class="bigcheck" name="CD_CV-FC_1" id="CD_CV-FC_1" value="yes"/><span class="bigcheck-target"></span></label>
+								<label class="bigcheck"><input onchange="readCircles(<?= $array_UNIT_DBID[$chosenUnitIndex] ?>, <?= $array_A_MAX[$chosenUnitIndex] ?>, <?= $array_S_MAX[$chosenUnitIndex] ?>);" type="checkbox" class="bigcheck" name="CD_CV-FC_2" id="CD_CV-FC_2" value="yes"/><span class="bigcheck-target"></span></label>
+								<label class="bigcheck"><input onchange="readCircles(<?= $array_UNIT_DBID[$chosenUnitIndex] ?>, <?= $array_A_MAX[$chosenUnitIndex] ?>, <?= $array_S_MAX[$chosenUnitIndex] ?>);" type="checkbox" class="bigcheck" name="CD_CV-FC_3" id="CD_CV-FC_3" value="yes"/><span class="bigcheck-target"></span></label>
+								<label class="bigcheck"><input onchange="readCircles(<?= $array_UNIT_DBID[$chosenUnitIndex] ?>, <?= $array_A_MAX[$chosenUnitIndex] ?>, <?= $array_S_MAX[$chosenUnitIndex] ?>);" type="checkbox" class="bigcheck" name="CD_CV-FC_4" id="CD_CV-FC_4" value="yes"/><span class="bigcheck-target"></span></label>
 							</td>
 							<td nowrap class="datalabel_thin_small" width="5%" style="text-align: right;">+2 TO-HIT</td>
 						</tr>
 						<tr>
 							<td nowrap class="datalabel" width="5%" style="text-align:right;">WN:&nbsp;</td>
 							<td nowrap valign="middle"><a style="padding-right:5px;" href="javascript:increaseWPNS_CV_PREP();"><i class="fas fa-plus-square"></i></a></td>
-							<td nowrap class="datalabel_thin" id="label_CV_WPNS_PREP" align="center"><?= $array_CV_WPNS_PREP[$chosenMechIndex] ?></td>
+							<td nowrap class="datalabel_thin" id="label_CV_WPNS_PREP" align="center"><?= $array_CV_WPNS_PREP[$chosenUnitIndex] ?></td>
 							<td nowrap class="datalabel">&nbsp;</td>
 							<td nowrap width="55%" colspan='2' style="text-align: left;" class="datalabel_thin">
-								<label class="bigcheck"><input onchange="readCircles(<?= $array_MECH_DBID[$chosenMechIndex] ?>, <?= $array_A_MAX[$chosenMechIndex] ?>, <?= $array_S_MAX[$chosenMechIndex] ?>);" type="checkbox" class="bigcheck" name="CD_CV-W_1" id="CD_CV-W_1" value="yes"/><span class="bigcheck-target"></span></label>
-								<label class="bigcheck"><input onchange="readCircles(<?= $array_MECH_DBID[$chosenMechIndex] ?>, <?= $array_A_MAX[$chosenMechIndex] ?>, <?= $array_S_MAX[$chosenMechIndex] ?>);" type="checkbox" class="bigcheck" name="CD_CV-W_2" id="CD_CV-W_2" value="yes"/><span class="bigcheck-target"></span></label>
-								<label class="bigcheck"><input onchange="readCircles(<?= $array_MECH_DBID[$chosenMechIndex] ?>, <?= $array_A_MAX[$chosenMechIndex] ?>, <?= $array_S_MAX[$chosenMechIndex] ?>);" type="checkbox" class="bigcheck" name="CD_CV-W_3" id="CD_CV-W_3" value="yes"/><span class="bigcheck-target"></span></label>
-								<label class="bigcheck"><input onchange="readCircles(<?= $array_MECH_DBID[$chosenMechIndex] ?>, <?= $array_A_MAX[$chosenMechIndex] ?>, <?= $array_S_MAX[$chosenMechIndex] ?>);" type="checkbox" class="bigcheck" name="CD_CV-W_4" id="CD_CV-W_4" value="yes"/><span class="bigcheck-target"></span></label>
+								<label class="bigcheck"><input onchange="readCircles(<?= $array_UNIT_DBID[$chosenUnitIndex] ?>, <?= $array_A_MAX[$chosenUnitIndex] ?>, <?= $array_S_MAX[$chosenUnitIndex] ?>);" type="checkbox" class="bigcheck" name="CD_CV-W_1" id="CD_CV-W_1" value="yes"/><span class="bigcheck-target"></span></label>
+								<label class="bigcheck"><input onchange="readCircles(<?= $array_UNIT_DBID[$chosenUnitIndex] ?>, <?= $array_A_MAX[$chosenUnitIndex] ?>, <?= $array_S_MAX[$chosenUnitIndex] ?>);" type="checkbox" class="bigcheck" name="CD_CV-W_2" id="CD_CV-W_2" value="yes"/><span class="bigcheck-target"></span></label>
+								<label class="bigcheck"><input onchange="readCircles(<?= $array_UNIT_DBID[$chosenUnitIndex] ?>, <?= $array_A_MAX[$chosenUnitIndex] ?>, <?= $array_S_MAX[$chosenUnitIndex] ?>);" type="checkbox" class="bigcheck" name="CD_CV-W_3" id="CD_CV-W_3" value="yes"/><span class="bigcheck-target"></span></label>
+								<label class="bigcheck"><input onchange="readCircles(<?= $array_UNIT_DBID[$chosenUnitIndex] ?>, <?= $array_A_MAX[$chosenUnitIndex] ?>, <?= $array_S_MAX[$chosenUnitIndex] ?>);" type="checkbox" class="bigcheck" name="CD_CV-W_4" id="CD_CV-W_4" value="yes"/><span class="bigcheck-target"></span></label>
 							</td>
 							<td nowrap class="datalabel_thin_small" width="5%" style="text-align: right;">-1 DMG</td>
 						</tr>
@@ -1204,15 +1204,15 @@ if ($showDistancesHexes == 1) {
 								<table width="100%" cellpadding="0" cellspacing="0">
 									<tr>
 										<td nowrap colspan="2" width="33%" style="text-align:center;" class="datalabel_thin">
-											<label class="bigcheck"><input onchange="readCircles(<?= $array_MECH_DBID[$chosenMechIndex] ?>, <?= $array_A_MAX[$chosenMechIndex] ?>, <?= $array_S_MAX[$chosenMechIndex] ?>);" type="checkbox" class="bigcheck" name="CD_CV-MA_1" id="CD_CV-MA_1" value="yes"/><span class="bigcheck-target"></span></label>
-											<label class="bigcheck"><input onchange="readCircles(<?= $array_MECH_DBID[$chosenMechIndex] ?>, <?= $array_A_MAX[$chosenMechIndex] ?>, <?= $array_S_MAX[$chosenMechIndex] ?>);" type="checkbox" class="bigcheck" name="CD_CV-MA_2" id="CD_CV-MA_2" value="yes"/><span class="bigcheck-target"></span></label>
+											<label class="bigcheck"><input onchange="readCircles(<?= $array_UNIT_DBID[$chosenUnitIndex] ?>, <?= $array_A_MAX[$chosenUnitIndex] ?>, <?= $array_S_MAX[$chosenUnitIndex] ?>);" type="checkbox" class="bigcheck" name="CD_CV-MA_1" id="CD_CV-MA_1" value="yes"/><span class="bigcheck-target"></span></label>
+											<label class="bigcheck"><input onchange="readCircles(<?= $array_UNIT_DBID[$chosenUnitIndex] ?>, <?= $array_A_MAX[$chosenUnitIndex] ?>, <?= $array_S_MAX[$chosenUnitIndex] ?>);" type="checkbox" class="bigcheck" name="CD_CV-MA_2" id="CD_CV-MA_2" value="yes"/><span class="bigcheck-target"></span></label>
 										</td>
 										<td nowrap width="32%" style="text-align:center;" class="datalabel_thin">
-											<label class="bigcheck"><input onchange="readCircles(<?= $array_MECH_DBID[$chosenMechIndex] ?>, <?= $array_A_MAX[$chosenMechIndex] ?>, <?= $array_S_MAX[$chosenMechIndex] ?>);" type="checkbox" class="bigcheck" name="CD_CV-MB_1" id="CD_CV-MB_1" value="yes"/><span class="bigcheck-target"></span></label>
-											<label class="bigcheck"><input onchange="readCircles(<?= $array_MECH_DBID[$chosenMechIndex] ?>, <?= $array_A_MAX[$chosenMechIndex] ?>, <?= $array_S_MAX[$chosenMechIndex] ?>);" type="checkbox" class="bigcheck" name="CD_CV-MB_2" id="CD_CV-MB_2" value="yes"/><span class="bigcheck-target"></span></label>
+											<label class="bigcheck"><input onchange="readCircles(<?= $array_UNIT_DBID[$chosenUnitIndex] ?>, <?= $array_A_MAX[$chosenUnitIndex] ?>, <?= $array_S_MAX[$chosenUnitIndex] ?>);" type="checkbox" class="bigcheck" name="CD_CV-MB_1" id="CD_CV-MB_1" value="yes"/><span class="bigcheck-target"></span></label>
+											<label class="bigcheck"><input onchange="readCircles(<?= $array_UNIT_DBID[$chosenUnitIndex] ?>, <?= $array_A_MAX[$chosenUnitIndex] ?>, <?= $array_S_MAX[$chosenUnitIndex] ?>);" type="checkbox" class="bigcheck" name="CD_CV-MB_2" id="CD_CV-MB_2" value="yes"/><span class="bigcheck-target"></span></label>
 										</td>
 										<td nowrap width="33%" style="text-align:center;" class="datalabel_thin">
-											<label class="bigcheck"><input onchange="readCircles(<?= $array_MECH_DBID[$chosenMechIndex] ?>, <?= $array_A_MAX[$chosenMechIndex] ?>, <?= $array_S_MAX[$chosenMechIndex] ?>);" type="checkbox" class="bigcheck" name="CD_CV-MC_1" id="CD_CV-MC_1" value="yes"/><span class="bigcheck-target"></span></label>
+											<label class="bigcheck"><input onchange="readCircles(<?= $array_UNIT_DBID[$chosenUnitIndex] ?>, <?= $array_A_MAX[$chosenUnitIndex] ?>, <?= $array_S_MAX[$chosenUnitIndex] ?>);" type="checkbox" class="bigcheck" name="CD_CV-MC_1" id="CD_CV-MC_1" value="yes"/><span class="bigcheck-target"></span></label>
 										</td>
 									</tr>
 									<tr>
@@ -1221,7 +1221,7 @@ if ($showDistancesHexes == 1) {
 												<tr>
 													<td nowrap style="text-align:right;" class="datalabel_thin_small" valign="middle">-2 MV</td>
 													<td nowrap style="text-align:right;"><a style="padding-right:5px;" valign="middle" href="javascript:increaseMOTIVEA_PREP();"><i class="fas fa-plus-square"></i></a></td>
-													<td nowrap style="text-align:left;" class="datalabel_thin" id="label_CV_MOTIVA_PREP" valign="middle"><?= $array_CV_MOTV_A_PREP[$chosenMechIndex] ?></td>
+													<td nowrap style="text-align:left;" class="datalabel_thin" id="label_CV_MOTIVA_PREP" valign="middle"><?= $array_CV_MOTV_A_PREP[$chosenUnitIndex] ?></td>
 												</tr>
 											</table>
 										</td>
@@ -1230,7 +1230,7 @@ if ($showDistancesHexes == 1) {
 												<tr>
 													<td nowrap style="text-align:right;" class="datalabel_thin_small" valign="middle">½ MV</td>
 													<td nowrap style="text-align:right;"><a style="padding-right:5px;" valign="middle" href="javascript:increaseMOTIVEB_PREP();"><i class="fas fa-plus-square"></i></a></td>
-													<td nowrap style="text-align:left;" class="datalabel_thin" id="label_CV_MOTIVB_PREP" valign="middle"><?= $array_CV_MOTV_B_PREP[$chosenMechIndex] ?></td>
+													<td nowrap style="text-align:left;" class="datalabel_thin" id="label_CV_MOTIVB_PREP" valign="middle"><?= $array_CV_MOTV_B_PREP[$chosenUnitIndex] ?></td>
 												</tr>
 											</table>
 										</td>
@@ -1239,7 +1239,7 @@ if ($showDistancesHexes == 1) {
 												<tr>
 													<td nowrap style="text-align:right;" class="datalabel_thin_small" valign="middle">0 MV</td>
 													<td nowrap style="text-align:right;"><a style="padding-right:5px;" valign="middle" href="javascript:increaseMOTIVEC_PREP();"><i class="fas fa-plus-square"></i></a></td>
-													<td nowrap style="text-align:left;" class="datalabel_thin" id="label_CV_MOTIVC_PREP" valign="middle"><?= $array_CV_MOTV_C_PREP[$chosenMechIndex] ?></td>
+													<td nowrap style="text-align:left;" class="datalabel_thin" id="label_CV_MOTIVC_PREP" valign="middle"><?= $array_CV_MOTV_C_PREP[$chosenUnitIndex] ?></td>
 												</tr>
 											</table>
 										</td>
@@ -1307,14 +1307,13 @@ if ($showDistancesHexes == 1) {
 			<tr>
 				<td id='pilotinfo' align="right" valign="bottom">
 					<span style="font-size: 18px; color: #eeeeee;"><?php echo "$FORMATION"; ?></span><br>
-					<span style="font-size: 30px; color: #da8e25;"><?php echo "$array_PILOT[$chosenMechIndex]"; ?></span><br>
-					<span style="font-size: 20px; color: #aaaaaa;"><?php echo "$array_MECH_MODEL[$chosenMechIndex]" ?></span><br><br>
-					<!-- Mechwarriors are highly trained and effective warriors.<br><br> -->
+					<span style="font-size: 30px; color: #da8e25;"><?php echo "$array_PILOT[$chosenUnitIndex]"; ?></span><br>
+					<span style="font-size: 20px; color: #aaaaaa;"><?php echo "$array_UNIT_MODEL[$chosenUnitIndex]" ?></span><br><br>
 					<div id="pilotinfo" valign="bottom" align="right">
 						<table cellspacing="0" cellpadding="0">
 							<tr>
 								<td rowspan="2">
-									<?php echo "<img src='".$array_PILOT_IMG_URL[$chosenMechIndex]."' width='84px' height='84px' style='border: 1px solid #000000;'>\r\n" ?>
+									<?php echo "<img src='".$array_PILOT_IMG_URL[$chosenUnitIndex]."' width='84px' height='84px' style='border: 1px solid #000000;'>\r\n" ?>
 								</td>
 								<td style='background-color:#000000;' align='right'>
 									<?php echo "<img src='./images/factions/".$FACTION_IMG_URL."' width='40px' height='40px' style='border: 1px solid #000000;'>\r\n" ?>
@@ -1322,7 +1321,7 @@ if ($showDistancesHexes == 1) {
 							</tr>
 							<tr>
 								<td valign='bottom' align='right'>
-									<img src='./images/ranks/<?php echo $factionid ?>/<?php echo $array_PILOT_RANK[$chosenMechIndex] ?>.png' style='border: 1px solid #000000;' width='40px' height='40px'>
+									<img src='./images/ranks/<?php echo $factionid ?>/<?php echo $array_PILOT_RANK[$chosenUnitIndex] ?>.png' style='border: 1px solid #000000;' width='40px' height='40px'>
 								</td>
 							</tr>
 						</table>
@@ -1375,7 +1374,7 @@ if ($showDistancesHexes == 1) {
 			<tr>
 				<td align="right" valign="bottom">
 <?php
-	if ($array_TP[$chosenMechIndex] != "BA") {
+	if ($array_TP[$chosenUnitIndex] != "BA") {
 		echo "					<div id='criticalhit'>CRIT:<br>-</div>\r\n";
 	} else {
 		echo "					<div id='criticalhit' style='display:none;'>CRIT:<br>-</div>\r\n";
@@ -1386,7 +1385,7 @@ if ($showDistancesHexes == 1) {
 		echo "						<img id='die2' src='./images/dice/d6_0.png' width='65px' height='65px'>\r\n";
 		echo "					</div>\r\n";
 
-	if ($array_TP[$chosenMechIndex] == "CV") {
+	if ($array_TP[$chosenUnitIndex] == "CV") {
 		echo "					<br><div id='motivehit'>MOTV:<br>-</div>\r\n";
 		echo "					<div id='motivedice' valign='middle' align='center'>\r\n";
 		echo "						<img id='die3' src='./images/dice/bd6_0.png' width='65px' height='65px'>\r\n";
@@ -1418,7 +1417,7 @@ if ($showDistancesHexes == 1) {
 	$("#destroyedIndicator").hide();
 	$("#crippledIndicator").hide();
 	$("#shutdownIndicator").hide();
-	setCircles(<?=$array_HT[$chosenMechIndex]?>,<?=$array_A[$chosenMechIndex]?>,<?=$array_S[$chosenMechIndex]?>,<?=$array_ENGN[$chosenMechIndex]?>,<?=$array_FRCTRL[$chosenMechIndex]?>,<?=$array_MP[$chosenMechIndex]?>,<?=$array_WPNS[$chosenMechIndex]?>,<?=$array_CV_ENGN[$chosenMechIndex]?>,<?=$array_CV_FRCTRL[$chosenMechIndex]?>,<?=$array_CV_WPNS[$chosenMechIndex]?>,<?=$array_CV_MOTV_A[$chosenMechIndex]?>,<?=$array_CV_MOTV_B[$chosenMechIndex]?>,<?=$array_CV_MOTV_C[$chosenMechIndex]?>,<?=$array_USEDOVERHEAT[$chosenMechIndex]?>,<?=$array_MVMT[$chosenMechIndex]?>,<?=$array_WPNSFIRED[$chosenMechIndex]?>,2,0,'<?=$array_MECH_STATUSSTRING[$chosenMechIndex]?>');
+	setCircles(<?=$array_HT[$chosenUnitIndex]?>,<?=$array_A[$chosenUnitIndex]?>,<?=$array_S[$chosenUnitIndex]?>,<?=$array_ENGN[$chosenUnitIndex]?>,<?=$array_FRCTRL[$chosenUnitIndex]?>,<?=$array_MP[$chosenUnitIndex]?>,<?=$array_WPNS[$chosenUnitIndex]?>,<?=$array_CV_ENGN[$chosenUnitIndex]?>,<?=$array_CV_FRCTRL[$chosenUnitIndex]?>,<?=$array_CV_WPNS[$chosenUnitIndex]?>,<?=$array_CV_MOTV_A[$chosenUnitIndex]?>,<?=$array_CV_MOTV_B[$chosenUnitIndex]?>,<?=$array_CV_MOTV_C[$chosenUnitIndex]?>,<?=$array_USEDOVERHEAT[$chosenUnitIndex]?>,<?=$array_MVMT[$chosenUnitIndex]?>,<?=$array_WPNSFIRED[$chosenUnitIndex]?>,2,0,'<?=$array_UNIT_STATUSSTRING[$chosenUnitIndex]?>');
 </script>
 
 <div id="footer"></div>
@@ -1427,7 +1426,7 @@ if ($showDistancesHexes == 1) {
 
 <div align="center" id="settings">
 	<a href="./gui_support.php"><i class="fa-solid fa-handshake-simple"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	<a href="javascript:showMech()"><i class="fas fa-eye"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	<a href="javascript:showUnit()"><i class="fas fa-eye"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 	<!-- <a href="#" onclick="javascript:window.location.reload(true)"><i class="fas fa-redo"></i></a>&nbsp;&nbsp; -->
 	<a href="javascript:textSize(0)"><i class="fas fa-minus-square"></i></a>&nbsp;&nbsp;
 	<a href="javascript:textSize(1)"><i class="fas fa-plus-square"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -1454,8 +1453,8 @@ if ($showDistancesHexes == 1) {
 
 <?php
 //	echo "<script>\n";
-//	echo "	setMovementFlags($array_MECH_DBID[$chosenMechIndex], $array_MVMT[$chosenMechIndex], $array_WPNSFIRED[$chosenMechIndex]);\n";
-//	echo "	setFireValues($array_MVMT[$chosenMechIndex], $array_WPNSFIRED[$chosenMechIndex]);\n";
+//	echo "	setMovementFlags($array_UNIT_DBID[$chosenUnitIndex], $array_MVMT[$chosenUnitIndex], $array_WPNSFIRED[$chosenUnitIndex]);\n";
+//	echo "	setFireValues($array_MVMT[$chosenUnitIndex], $array_WPNSFIRED[$chosenUnitIndex]);\n";
 //	echo "</script>\n";
 //
 //	if ($movd==1) {
@@ -1471,7 +1470,7 @@ if ($showDistancesHexes == 1) {
 //			echo "					<table width='100%' class='options' style='margin-left: auto;margin-right: auto;' cellspacing=4 cellpadding=4 border=0px>\n";
 ////			echo "						<tr>\n";
 ////			echo "							<td nowrap align='left' class='datalabel' style='vertical-align:top;'>\n";
-////			echo "								<label class='bigcheck'><input onchange='changeMovementFlag($array_MECH_DBID[$chosenMechIndex], 1);' type='checkbox' class='bigcheck' name='MV1_IMMOBILE' value='yes'/><span class='bigcheck-target'></span></label>\n";
+////			echo "								<label class='bigcheck'><input onchange='changeMovementFlag($array_UNIT_DBID[$chosenUnitIndex], 1);' type='checkbox' class='bigcheck' name='MV1_IMMOBILE' value='yes'/><span class='bigcheck-target'></span></label>\n";
 ////			echo "							</td>\n";
 ////			echo "							<td nowrap align='left' class='datalabel'>\n";
 ////			echo "								&nbsp;&nbsp;&nbsp;Immobile\n";
@@ -1485,7 +1484,7 @@ if ($showDistancesHexes == 1) {
 ////			echo "						</tr>\n";
 //			echo "						<tr>\n";
 //			echo "							<td nowrap align='left' class='datalabel' style='vertical-align:top;'>\n";
-//			echo "								<label class='bigcheck'><input onchange='changeMovementFlag($array_MECH_DBID[$chosenMechIndex], 2);' type='checkbox' class='bigcheck' name='MV2_STANDSTILL' value='yes'/><span class='bigcheck-target'></span></label>\n";
+//			echo "								<label class='bigcheck'><input onchange='changeMovementFlag($array_UNIT_DBID[$chosenUnitIndex], 2);' type='checkbox' class='bigcheck' name='MV2_STANDSTILL' value='yes'/><span class='bigcheck-target'></span></label>\n";
 //			echo "							</td>\n";
 //			echo "							<td nowrap align='left' class='datalabel'>\n";
 //			echo "								&nbsp;&nbsp;&nbsp;Stationary\n";
@@ -1499,7 +1498,7 @@ if ($showDistancesHexes == 1) {
 //			echo "						</tr>\n";
 //			echo "						<tr>\n";
 //			echo "							<td nowrap align='left' class='datalabel' style='vertical-align:top;'>\n";
-//			echo "								<label class='bigcheck'><input onchange='changeMovementFlag($array_MECH_DBID[$chosenMechIndex], 10);' type='checkbox' class='bigcheck' name='MV10_HULLDOWN' value='yes'/><span class='bigcheck-target'></span></label>\n";
+//			echo "								<label class='bigcheck'><input onchange='changeMovementFlag($array_UNIT_DBID[$chosenUnitIndex], 10);' type='checkbox' class='bigcheck' name='MV10_HULLDOWN' value='yes'/><span class='bigcheck-target'></span></label>\n";
 //			echo "							</td>\n";
 //			echo "							<td nowrap align='left' class='datalabel'>\n";
 //			echo "								&nbsp;&nbsp;&nbsp;Hulldown\n";
@@ -1513,7 +1512,7 @@ if ($showDistancesHexes == 1) {
 //			echo "						</tr>\n";
 //			echo "						<tr>\n";
 //			echo "							<td nowrap align='left' class='datalabel' style='vertical-align:top;'>\n";
-//			echo "								<label class='bigcheck'><input onchange='changeMovementFlag($array_MECH_DBID[$chosenMechIndex], 3);' type='checkbox' class='bigcheck' name='MV3_MOVED' value='yes'/><span class='bigcheck-target'></span></label>\n";
+//			echo "								<label class='bigcheck'><input onchange='changeMovementFlag($array_UNIT_DBID[$chosenUnitIndex], 3);' type='checkbox' class='bigcheck' name='MV3_MOVED' value='yes'/><span class='bigcheck-target'></span></label>\n";
 //			echo "							</td>\n";
 //			echo "							<td nowrap align='left' class='datalabel'>\n";
 //			echo "								&nbsp;&nbsp;&nbsp;Walked\n";
@@ -1527,7 +1526,7 @@ if ($showDistancesHexes == 1) {
 //			echo "						</tr>\n";
 //			echo "						<tr>\n";
 //			echo "							<td nowrap align='left' class='datalabel' style='vertical-align:top;'>\n";
-//			echo "								<label class='bigcheck'><input onchange='changeMovementFlag($array_MECH_DBID[$chosenMechIndex], 9);' type='checkbox' class='bigcheck' name='MV9_SPRINTED' value='yes'/><span class='bigcheck-target'></span></label>\n";
+//			echo "								<label class='bigcheck'><input onchange='changeMovementFlag($array_UNIT_DBID[$chosenUnitIndex], 9);' type='checkbox' class='bigcheck' name='MV9_SPRINTED' value='yes'/><span class='bigcheck-target'></span></label>\n";
 //			echo "							</td>\n";
 //			echo "							<td nowrap align='left' class='datalabel'>\n";
 //			echo "								&nbsp;&nbsp;&nbsp;Sprinted\n";
@@ -1541,7 +1540,7 @@ if ($showDistancesHexes == 1) {
 //			echo "						</tr>\n";
 //			echo "						<tr>\n";
 //			echo "							<td nowrap align='left' class='datalabel' style='vertical-align:top;'>\n";
-//			echo "								<label class='bigcheck'><input onchange='changeMovementFlag($array_MECH_DBID[$chosenMechIndex], 4);' type='checkbox' class='bigcheck' name='MV4_JUMPED' value='yes'/><span class='bigcheck-target'></span></label>\n";
+//			echo "								<label class='bigcheck'><input onchange='changeMovementFlag($array_UNIT_DBID[$chosenUnitIndex], 4);' type='checkbox' class='bigcheck' name='MV4_JUMPED' value='yes'/><span class='bigcheck-target'></span></label>\n";
 //			echo "							</td>\n";
 //			echo "							<td nowrap align='left' class='datalabel'>\n";
 //			echo "								&nbsp;&nbsp;&nbsp;Jumped\n";
@@ -1552,7 +1551,7 @@ if ($showDistancesHexes == 1) {
 //			echo "							<td nowrap align='left' class='datavalue_small'>\n";
 //			echo "								&nbsp;&nbsp;&nbsp;TMM ";
 //
-//			if ($array_TP[$chosenMechIndex] == "BA") {
+//			if ($array_TP[$chosenUnitIndex] == "BA") {
 //				// BA do not use the modifier for jumping
 //				echo "#+SPCL\n";
 //			} else {
@@ -1569,16 +1568,16 @@ if ($showDistancesHexes == 1) {
 //			echo "							    <table width='100%' cellspacing='1'>\n"; // style='background-color:#754743;'
 //			echo "									<tr>\n";
 //			echo "										<td colspan='1' width='50%' nowrap align='center' valign='top' class='datalabel' style='vertical-align:top;text-align:center'>\n";
-//			echo "											<label class='bigcheck'><input onchange='changeMovementFlag($array_MECH_DBID[$chosenMechIndex], 5);' type='checkbox' class='bigcheck' name='WF5_WEAPONSFIRED' id='WF5_WEAPONSFIRED' value='yes'/><span class='bigcheck-target'></span></label>&nbsp;&nbsp;&nbsp;HOLD FIRE\n";
+//			echo "											<label class='bigcheck'><input onchange='changeMovementFlag($array_UNIT_DBID[$chosenUnitIndex], 5);' type='checkbox' class='bigcheck' name='WF5_WEAPONSFIRED' id='WF5_WEAPONSFIRED' value='yes'/><span class='bigcheck-target'></span></label>&nbsp;&nbsp;&nbsp;HOLD FIRE\n";
 // 			echo "										</td>\n";
 //			echo "										<td colspan='1' width='50%' nowrap align='center' valign='top' class='datalabel' style='vertical-align:top;text-align:center'>\n";
-//			echo "											<label class='bigcheck'><input onchange='changeMovementFlag($array_MECH_DBID[$chosenMechIndex], 6);' type='checkbox' class='bigcheck' name='WF6_WEAPONSFIRED' id='WF6_WEAPONSFIRED'value='yes'/><span class='bigcheck-target'></span></label>&nbsp;&nbsp;&nbsp;FIRE\n";
+//			echo "											<label class='bigcheck'><input onchange='changeMovementFlag($array_UNIT_DBID[$chosenUnitIndex], 6);' type='checkbox' class='bigcheck' name='WF6_WEAPONSFIRED' id='WF6_WEAPONSFIRED'value='yes'/><span class='bigcheck-target'></span></label>&nbsp;&nbsp;&nbsp;FIRE\n";
 // 			echo "										</td>\n";
 ////			echo "										<td colspan='3' width='25%' nowrap align='center' valign='top' class='datalabel' style='vertical-align:top;text-align:center'>\n";
-////			echo "											<label class='bigcheck'><input onchange='changeMovementFlag($array_MECH_DBID[$chosenMechIndex], 7);' type='checkbox' class='bigcheck' name='WF7_WEAPONSFIRED' value='yes'/><span class='bigcheck-target'></span></label>\n";
+////			echo "											<label class='bigcheck'><input onchange='changeMovementFlag($array_UNIT_DBID[$chosenUnitIndex], 7);' type='checkbox' class='bigcheck' name='WF7_WEAPONSFIRED' value='yes'/><span class='bigcheck-target'></span></label>\n";
 //// 			echo "										</td>\n";
 ////			echo "										<td colspan='3' width='25%' nowrap align='center' valign='top' class='datalabel' style='vertical-align:top;text-align:center'>\n";
-////			echo "											<label class='bigcheck'><input onchange='changeMovementFlag($array_MECH_DBID[$chosenMechIndex], 8);' type='checkbox' class='bigcheck' name='WF8_WEAPONSFIRED' value='yes'/><span class='bigcheck-target'></span></label>\n";
+////			echo "											<label class='bigcheck'><input onchange='changeMovementFlag($array_UNIT_DBID[$chosenUnitIndex], 8);' type='checkbox' class='bigcheck' name='WF8_WEAPONSFIRED' value='yes'/><span class='bigcheck-target'></span></label>\n";
 //// 			echo "										</td>\n";
 ////			echo "									</tr>\n";
 ////			echo "									<tr>\n";
@@ -1589,10 +1588,10 @@ if ($showDistancesHexes == 1) {
 ////			echo "											FIRED\n";
 //// 			echo "										</td>\n";
 ////			echo "										<td colspan='3' width='25%' nowrap align='center' valign='top' class='datalabel' style='vertical-align:top;text-align:center'>\n";
-////			echo "											<label class='bigcheck'><input onchange='changeMovementFlag($array_MECH_DBID[$chosenMechIndex], 7);' type='checkbox' class='bigcheck' name='WF7_WEAPONSFIRED' value='yes'/><span class='bigcheck-target'></span></label>\n";
+////			echo "											<label class='bigcheck'><input onchange='changeMovementFlag($array_UNIT_DBID[$chosenUnitIndex], 7);' type='checkbox' class='bigcheck' name='WF7_WEAPONSFIRED' value='yes'/><span class='bigcheck-target'></span></label>\n";
 //// 			echo "										</td>\n";
 ////			echo "										<td colspan='3' width='25%' nowrap align='center' valign='top' class='datalabel' style='vertical-align:top;text-align:center'>\n";
-////			echo "											<label class='bigcheck'><input onchange='changeMovementFlag($array_MECH_DBID[$chosenMechIndex], 8);' type='checkbox' class='bigcheck' name='WF8_WEAPONSFIRED' value='yes'/><span class='bigcheck-target'></span></label>\n";
+////			echo "											<label class='bigcheck'><input onchange='changeMovementFlag($array_UNIT_DBID[$chosenUnitIndex], 8);' type='checkbox' class='bigcheck' name='WF8_WEAPONSFIRED' value='yes'/><span class='bigcheck-target'></span></label>\n";
 ////			echo "										</td>\n";
 //			echo "									</tr>\n";
 ////			echo "									<tr>\n";
@@ -1665,14 +1664,14 @@ if ($showDistancesHexes == 1) {
 //			echo "</div>\n";
 //
 //			echo "<script>\n";
-////			if ($array_MVMT[$chosenMechIndex] != null) {
-////				echo "	movement = $array_MVMT[$chosenMechIndex]\n";
+////			if ($array_MVMT[$chosenUnitIndex] != null) {
+////				echo "	movement = $array_MVMT[$chosenUnitIndex]\n";
 ////			}
-////			if ($array_WPNSFIRED[$chosenMechIndex] != null) {
-////				echo "	weaponsfired = $array_WPNSFIRED[$chosenMechIndex]\n";
+////			if ($array_WPNSFIRED[$chosenUnitIndex] != null) {
+////				echo "	weaponsfired = $array_WPNSFIRED[$chosenUnitIndex]\n";
 ////			}
-//			echo "	setMovementFlags($array_MECH_DBID[$chosenMechIndex], $array_MVMT[$chosenMechIndex], $array_WPNSFIRED[$chosenMechIndex]);\n";
-//			echo "	setFireValues($array_MVMT[$chosenMechIndex], $array_WPNSFIRED[$chosenMechIndex]);\n";
+//			echo "	setMovementFlags($array_UNIT_DBID[$chosenUnitIndex], $array_MVMT[$chosenUnitIndex], $array_WPNSFIRED[$chosenUnitIndex]);\n";
+//			echo "	setFireValues($array_MVMT[$chosenUnitIndex], $array_WPNSFIRED[$chosenUnitIndex]);\n";
 //			echo "  document.getElementById('editMovementValues').style.visibility='visible';\n";
 //			echo " 	$('#editMovementValues').show();\n";
 //			echo "</script>\n";

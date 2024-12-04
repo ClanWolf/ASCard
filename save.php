@@ -58,32 +58,32 @@
 		echo $wpnsf."<br>";
 		echo "<br>";
 
-		$sql = "UPDATE asc_mechstatus SET heat=".$h.",armor=".$a.",structure=".$s.",crit_engine=".$e.",crit_fc=".$fc.",crit_mp=".$mp.",crit_weapons=".$w.",crit_CV_engine=".$e_cv.",crit_CV_firecontrol=".$fc_cv.",crit_CV_weapons=".$w_cv.",crit_CV_motiveA=".$ma_cv.",crit_CV_motiveB=".$mb_cv.",crit_CV_motiveC=".$mc_cv.",usedoverheat=".$uov." WHERE mechid=".$index;
+		$sql = "UPDATE asc_unitstatus SET heat=".$h.",armor=".$a.",structure=".$s.",crit_engine=".$e.",crit_fc=".$fc.",crit_mp=".$mp.",crit_weapons=".$w.",crit_CV_engine=".$e_cv.",crit_CV_firecontrol=".$fc_cv.",crit_CV_weapons=".$w_cv.",crit_CV_motiveA=".$ma_cv.",crit_CV_motiveB=".$mb_cv.",crit_CV_motiveC=".$mc_cv.",usedoverheat=".$uov." WHERE unitid=".$index;
 		echo "Statement: " . $sql;
 
 		if (mysqli_query($conn, $sql)) {
 			echo "<br>";
-			echo "Record (asc_mechstatus) updated successfully";
+			echo "Record (asc_unitstatus) updated successfully";
 			mysqli_commit($conn);
 		} else {
 			echo "<br>";
-			echo "Error (asc_mechstatus) updating record: " . mysqli_error($conn);
+			echo "Error (asc_unitstatus) updating record: " . mysqli_error($conn);
 		}
 
-		$sql2 = "UPDATE asc_mech SET mech_statusimageurl='".$mstat."',mech_status='".$mstatstr."' WHERE mechid=".$index;
-		echo "<br><br>UPDATE asc_mech SET mech_statusimageurl='".$mstat."',mech_status='".$mstatstr."' WHERE mechid=".$index;
+		$sql2 = "UPDATE asc_unit SET unit_statusimageurl='".$mstat."',unit_status='".$mstatstr."' WHERE unitid=".$index;
+		echo "<br><br>UPDATE asc_unit SET unit_statusimageurl='".$mstat."',unit_status='".$mstatstr."' WHERE unitid=".$index;
 
 		if (mysqli_query($conn, $sql2)) {
 			echo "<br>";
-			echo "Record (asc_mech) updated successfully";
+			echo "Record (asc_unit) updated successfully";
 			mysqli_commit($conn);
 		} else {
 			echo "<br>";
-			echo "Error (asc_mech) updating record: " . mysqli_error($conn);
+			echo "Error (asc_unit) updating record: " . mysqli_error($conn);
 		}
 
-		$sql3 = "UPDATE asc_assign SET round_moved=".$mvmnt.",round_fired=".$wpnsf." WHERE mechid=".$index;
-		echo "UPDATE asc_assign<br>SET round_moved=".$mvmnt.",round_fired=".$wpnsf." WHERE mechid=".$index;
+		$sql3 = "UPDATE asc_assign SET round_moved=".$mvmnt.",round_fired=".$wpnsf." WHERE unitid=".$index;
+		echo "UPDATE asc_assign<br>SET round_moved=".$mvmnt.",round_fired=".$wpnsf." WHERE unitid=".$index;
 
 		if (mysqli_query($conn, $sql3)) {
 			echo "<br>";

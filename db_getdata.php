@@ -2,7 +2,7 @@
 	require('./db.php');
 
 	$factionid = 0;
-	$mechid = 0;
+	$unitid = 0;
 	$pilotid = 0;
 
 	$useMULImages = 0;
@@ -15,7 +15,7 @@
 
 	$GAMEID = -1;
 
-	// Store in arrays to keep the mech- and pilotdata
+	// Store in arrays to keep the unit- and pilotdata
 	$array_PILOT = array();
 	$array_PILOT_RANK = array();
 	$array_PILOT_IMG_URL = array();
@@ -23,12 +23,12 @@
 	$array_MVMT = array();
 	$array_WPNSFIRED = array();
 
-	$array_MECH_DBID = array();
-	$array_MECH_MULID = array();
-	$array_MECH_NUMBER = array();
-	$array_MECH_IMG_URL = array();
-	$array_MECH_IMG_STATUS = array();
-	$array_MECH_STATUSSTRING = array();
+	$array_UNIT_DBID = array();
+	$array_UNIT_MULID = array();
+	$array_UNIT_NUMBER = array();
+	$array_UNIT_IMG_URL = array();
+	$array_UNIT_IMG_STATUS = array();
+	$array_UNIT_STATUSSTRING = array();
 	$array_TECH = array();
 	$array_PV = array();
 	$array_TP = array();
@@ -153,118 +153,118 @@
 	mysqli_free_result($result_asc_faction);
 
 	// Alpha Strike Cards
-	// id; formationid; mechid; pilotid
-	$mechcount = 0;
+	// id; formationid; unitid; pilotid
+	$unitcount = 0;
 	$sql_asc = "SELECT SQL_NO_CACHE * FROM asc_assign;";
 	$result_asc = mysqli_query($conn, $sql_asc);
 	if (mysqli_num_rows($result_asc) > 0) {
 		while($row = mysqli_fetch_assoc($result_asc)) {
 			if ($row["formationid"] == $formationid) {
-				$mechcount++;
-				// echo "<script>console.log('Mech-ID: ".$mechid."');</script>";
+				$unitcount++;
+				// echo "<script>console.log('Unit-ID: ".$unitid."');</script>";
 				// echo "<script>console.log('Pilot-ID: ".$pilotid."');</script>";
-				$mechid = $row["mechid"];
+				$unitid = $row["unitid"];
 				$pilotid = $row["pilotid"];
 
-				$array_MVMT[$mechcount] = $row["round_moved"];
-				$array_WPNSFIRED[$mechcount] = $row["round_fired"];
+				$array_MVMT[$unitcount] = $row["round_moved"];
+				$array_WPNSFIRED[$unitcount] = $row["round_fired"];
 
-				// Mech
-				// mechid; mulid; mech_tonnage; custom_name; as_name; as_model;
+				// Unit
+				// unitid; mulid; unit_tonnage; custom_name; as_name; as_model;
 				// as_pv; as_tp; as_sz; as_tmm; as_mv; as_role; as_skill;
 				// as_short; as_short_min; as_medium; as_medium_min;
 				// as_long; as_long_min; as_extreme; as_extreme_min;
 				// as_ov; as_armor; as_structure; as_threshold; as_specials;
-				// mech_imageurl
+				// unit_imageurl
 				// and active_bid=1
-				$sql_asc_mech = "SELECT SQL_NO_CACHE * FROM asc_mech where mechid=".$mechid." order by mech_tonnage desc;";
-				$result_asc_mech = mysqli_query($conn, $sql_asc_mech);
-				if (mysqli_num_rows($result_asc_mech) > 0) {
-					while($row = mysqli_fetch_assoc($result_asc_mech)) {
-						if ($row["mechid"] == $mechid) {
+				$sql_asc_unit = "SELECT SQL_NO_CACHE * FROM asc_unit where unitid=".$unitid." order by unit_tonnage desc;";
+				$result_asc_unit = mysqli_query($conn, $sql_asc_unit);
+				if (mysqli_num_rows($result_asc_unit) > 0) {
+					while($row = mysqli_fetch_assoc($result_asc_unit)) {
+						if ($row["unitid"] == $unitid) {
 
 							$clan = "";
 							if ($row["tech"] == "2") {
 								//$clan = "c ";
 							}
 
-							$array_MECH_DBID[$mechcount] = $row["mechid"];
-							$array_MECH_MULID[$mechcount] = $row["mulid"];
-							$array_MECH_NUMBER[$mechcount] = $row["mech_number"];
-							$array_MECH_MODEL[$mechcount] = $clan.$row["as_model"];
-							$array_MECH_IMG_URL[$mechcount] = $row["mech_imageurl"];
-							$array_MECH_IMG_STATUS[$mechcount] = $row["mech_statusimageurl"];
-							$array_MECH_STATUSSTRING[$mechcount] = $row["mech_status"];
-							$array_TECH[$mechcount] = $row["tech"];
-							$array_PV[$mechcount] = $row["as_pv"];
-							$array_TP[$mechcount] = $row["as_tp"];
-							$array_SZ[$mechcount] = $row["as_sz"];
-							$array_TON[$mechcount] = $row["mech_tonnage"];
-							$array_TMM[$mechcount] = $row["as_tmm"];
-							$array_MV[$mechcount] = $row["as_mv"];
-							$array_MVJ[$mechcount] = $row["as_mvj"];
-							$array_MVTYPE[$mechcount] = $row["as_mvtype"];
-							$array_ROLE[$mechcount] = $row["as_role"];
-							$array_SKILL[$mechcount] = $row["as_skill"];
-							$array_DMG_SHORT[$mechcount] = $row["as_short"];
-							$array_DMG_MEDIUM[$mechcount] = $row["as_medium"];
-							$array_DMG_LONG[$mechcount] = $row["as_long"];
-							$array_OV[$mechcount] = $row["as_ov"];
-							$array_SPCL[$mechcount] = $row["as_specials"];
-							$array_A_MAX[$mechcount] = $row["as_armor"];
-							$array_S_MAX[$mechcount] = $row["as_structure"];
+							$array_UNIT_DBID[$unitcount] = $row["unitid"];
+							$array_UNIT_MULID[$unitcount] = $row["mulid"];
+							$array_UNIT_NUMBER[$unitcount] = $row["unit_number"];
+							$array_UNIT_MODEL[$unitcount] = $clan.$row["as_model"];
+							$array_UNIT_IMG_URL[$unitcount] = $row["unit_imageurl"];
+							$array_UNIT_IMG_STATUS[$unitcount] = $row["unit_statusimageurl"];
+							$array_UNIT_STATUSSTRING[$unitcount] = $row["unit_status"];
+							$array_TECH[$unitcount] = $row["tech"];
+							$array_PV[$unitcount] = $row["as_pv"];
+							$array_TP[$unitcount] = $row["as_tp"];
+							$array_SZ[$unitcount] = $row["as_sz"];
+							$array_TON[$unitcount] = $row["unit_tonnage"];
+							$array_TMM[$unitcount] = $row["as_tmm"];
+							$array_MV[$unitcount] = $row["as_mv"];
+							$array_MVJ[$unitcount] = $row["as_mvj"];
+							$array_MVTYPE[$unitcount] = $row["as_mvtype"];
+							$array_ROLE[$unitcount] = $row["as_role"];
+							$array_SKILL[$unitcount] = $row["as_skill"];
+							$array_DMG_SHORT[$unitcount] = $row["as_short"];
+							$array_DMG_MEDIUM[$unitcount] = $row["as_medium"];
+							$array_DMG_LONG[$unitcount] = $row["as_long"];
+							$array_OV[$unitcount] = $row["as_ov"];
+							$array_SPCL[$unitcount] = $row["as_specials"];
+							$array_A_MAX[$unitcount] = $row["as_armor"];
+							$array_S_MAX[$unitcount] = $row["as_structure"];
 
-							$array_MOUNTED_UNITID[$mechcount] = $row["mounted_unitid"];
-                            $array_MOUNTED_ON_UNITID[$mechcount] = $row["mounted_on_unitid"];
+							$array_MOUNTED_UNITID[$unitcount] = $row["mounted_unitid"];
+                            $array_MOUNTED_ON_UNITID[$unitcount] = $row["mounted_on_unitid"];
 
-							$array_ACTIVE_BID[$mechcount] = $row["active_bid"];
+							$array_ACTIVE_BID[$unitcount] = $row["active_bid"];
 						}
 					}
 				}
-				mysqli_free_result($result_asc_mech);
+				mysqli_free_result($result_asc_unit);
 
-				// Mechstatus
-				// mechstatusid; mechid; heat; armor; structure;
+				// Unitstatus
+				// unitstatusid; unitid; heat; armor; structure;
 				// crit_engine; crit_fc; crit_mp; crit_weapons
-				$sql_asc_mechstatus = "SELECT SQL_NO_CACHE * FROM asc_mechstatus where mechid=".$mechid.";";
-				$result_asc_mechstatus = mysqli_query($conn, $sql_asc_mechstatus);
-				if (mysqli_num_rows($result_asc_mechstatus) > 0) {
-					while($row = mysqli_fetch_assoc($result_asc_mechstatus)) {
-						if ($row["mechid"] == $mechid) {
-							$array_HT[$mechcount] = $row["heat"];
-							$array_A[$mechcount] = $row["armor"];
-							$array_S[$mechcount] = $row["structure"];
-							$array_ENGN[$mechcount] = $row["crit_engine"];
-							$array_FRCTRL[$mechcount] = $row["crit_fc"];
-							$array_MP[$mechcount] = $row["crit_mp"];
-							$array_WPNS[$mechcount] = $row["crit_weapons"];
-							$array_ENGN_PREP[$mechcount] = $row["crit_engine_PREP"];
-							$array_FRCTRL_PREP[$mechcount] = $row["crit_fc_PREP"];
-							$array_MP_PREP[$mechcount] = $row["crit_mp_PREP"];
-							$array_WPNS_PREP[$mechcount] = $row["crit_weapons_PREP"];
+				$sql_asc_unitstatus = "SELECT SQL_NO_CACHE * FROM asc_unitstatus where unitid=".$unitid.";";
+				$result_asc_unitstatus = mysqli_query($conn, $sql_asc_unitstatus);
+				if (mysqli_num_rows($result_asc_unitstatus) > 0) {
+					while($row = mysqli_fetch_assoc($result_asc_unitstatus)) {
+						if ($row["unitid"] == $unitid) {
+							$array_HT[$unitcount] = $row["heat"];
+							$array_A[$unitcount] = $row["armor"];
+							$array_S[$unitcount] = $row["structure"];
+							$array_ENGN[$unitcount] = $row["crit_engine"];
+							$array_FRCTRL[$unitcount] = $row["crit_fc"];
+							$array_MP[$unitcount] = $row["crit_mp"];
+							$array_WPNS[$unitcount] = $row["crit_weapons"];
+							$array_ENGN_PREP[$unitcount] = $row["crit_engine_PREP"];
+							$array_FRCTRL_PREP[$unitcount] = $row["crit_fc_PREP"];
+							$array_MP_PREP[$unitcount] = $row["crit_mp_PREP"];
+							$array_WPNS_PREP[$unitcount] = $row["crit_weapons_PREP"];
 
-							$array_CV_ENGN[$mechcount] = $row["crit_CV_engine"];
-							$array_CV_FRCTRL[$mechcount] = $row["crit_CV_firecontrol"];
-							$array_CV_WPNS[$mechcount] = $row["crit_CV_weapons"];
-							$array_CV_MOTV_A[$mechcount] = $row["crit_CV_motiveA"];
-							$array_CV_MOTV_B[$mechcount] = $row["crit_CV_motiveB"];
-							$array_CV_MOTV_C[$mechcount] = $row["crit_CV_motiveC"];
-							$array_CV_ENGN_PREP[$mechcount] = $row["crit_CV_engine_PREP"];
-							$array_CV_FRCTRL_PREP[$mechcount] = $row["crit_CV_firecontrol_PREP"];
-							$array_CV_WPNS_PREP[$mechcount] = $row["crit_CV_weapons_PREP"];
-							$array_CV_MOTV_A_PREP[$mechcount] = $row["crit_CV_motiveA_PREP"];
-							$array_CV_MOTV_B_PREP[$mechcount] = $row["crit_CV_motiveB_PREP"];
-							$array_CV_MOTV_C_PREP[$mechcount] = $row["crit_CV_motiveC_PREP"];
+							$array_CV_ENGN[$unitcount] = $row["crit_CV_engine"];
+							$array_CV_FRCTRL[$unitcount] = $row["crit_CV_firecontrol"];
+							$array_CV_WPNS[$unitcount] = $row["crit_CV_weapons"];
+							$array_CV_MOTV_A[$unitcount] = $row["crit_CV_motiveA"];
+							$array_CV_MOTV_B[$unitcount] = $row["crit_CV_motiveB"];
+							$array_CV_MOTV_C[$unitcount] = $row["crit_CV_motiveC"];
+							$array_CV_ENGN_PREP[$unitcount] = $row["crit_CV_engine_PREP"];
+							$array_CV_FRCTRL_PREP[$unitcount] = $row["crit_CV_firecontrol_PREP"];
+							$array_CV_WPNS_PREP[$unitcount] = $row["crit_CV_weapons_PREP"];
+							$array_CV_MOTV_A_PREP[$unitcount] = $row["crit_CV_motiveA_PREP"];
+							$array_CV_MOTV_B_PREP[$unitcount] = $row["crit_CV_motiveB_PREP"];
+							$array_CV_MOTV_C_PREP[$unitcount] = $row["crit_CV_motiveC_PREP"];
 
-							$array_HT_PREP[$mechcount] = $row["heat_PREP"];
-							$array_USEDOVERHEAT[$mechcount] = $row["usedoverheat"];
-							$array_CURRENTTMM[$mechcount] = $row["currenttmm"];
+							$array_HT_PREP[$unitcount] = $row["heat_PREP"];
+							$array_USEDOVERHEAT[$unitcount] = $row["usedoverheat"];
+							$array_CURRENTTMM[$unitcount] = $row["currenttmm"];
 
-							// echo "<script>console.log('".$sql_asc_mechstatus." --- ".$row["heat"]."');</script>";
+							// echo "<script>console.log('".$sql_asc_unitstatus." --- ".$row["heat"]."');</script>";
 						}
 					}
 				}
-				mysqli_free_result($result_asc_mechstatus);
+				mysqli_free_result($result_asc_unitstatus);
 
 				// Pilot
 				// pilotid; rank; name; callsign; --health--;
@@ -274,9 +274,9 @@
 				if (mysqli_num_rows($result_asc_pilot) > 0) {
 					while($row = mysqli_fetch_assoc($result_asc_pilot)) {
 						if ($row["pilotid"] == $pilotid) {
-							$array_PILOT_RANK[$mechcount] = $row["rank"];
-							$array_PILOT[$mechcount] = $row["name"];
-							$array_PILOT_IMG_URL[$mechcount] = $row["pilot_imageurl"];
+							$array_PILOT_RANK[$unitcount] = $row["rank"];
+							$array_PILOT[$unitcount] = $row["name"];
+							$array_PILOT_IMG_URL[$unitcount] = $row["pilot_imageurl"];
 						}
 					}
 				}

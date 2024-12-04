@@ -1,17 +1,17 @@
 <?php
-	function getMechImageByName($mechname) {
+	function getUnitImageByName($unitname) {
 		$image = "Generic.png";
-		$dir = 'images/mechs/';
+		$dir = 'images/units/';
 		$files = glob($dir.'*.png');
 		foreach ($files as &$img) {
 
 			$imagenametrimmed = basename(strtolower(str_replace(' ', '', trim($img))), ".png");
 			$imagename = basename(str_replace(' ', '', trim($img)));
-			$mechnametrimmed = strtolower(str_replace(' ', '', trim($mechname)));
+			$unitnametrimmed = strtolower(str_replace(' ', '', trim($unitname)));
 
-			echo $imagenametrimmed." | ".$mechnametrimmed."<br>";
+			echo $imagenametrimmed." | ".$unitnametrimmed."<br>";
 
-			if (strpos($mechnametrimmed, $imagenametrimmed) !== false) {
+			if (strpos($unitnametrimmed, $imagenametrimmed) !== false) {
 				$image = $imagename;
 				break;
 			}
@@ -20,5 +20,5 @@
 		return $image;
 	}
 
-	$name = getMechImageByName("Vulture (Mad Dog) G");
+	$name = getUnitImageByName("Vulture (Mad Dog) G");
 ?>

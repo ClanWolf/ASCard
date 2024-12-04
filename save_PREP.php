@@ -23,37 +23,37 @@
 		echo "<br>\r\n";
 
 		if ($desc == "ENGN_PREP") {
-			$sql = "UPDATE asc_mechstatus SET crit_engine_PREP=".$value." WHERE mechid=".$index;
+			$sql = "UPDATE asc_unitstatus SET crit_engine_PREP=".$value." WHERE unitid=".$index;
 		}
 		if ($desc == "FCTL_PREP") {
-			$sql = "UPDATE asc_mechstatus SET crit_fc_PREP=".$value." WHERE mechid=".$index;
+			$sql = "UPDATE asc_unitstatus SET crit_fc_PREP=".$value." WHERE unitid=".$index;
 		}
 		if ($desc == "MP_PREP") {
-			$sql = "UPDATE asc_mechstatus SET crit_mp_PREP=".$value." WHERE mechid=".$index;
+			$sql = "UPDATE asc_unitstatus SET crit_mp_PREP=".$value." WHERE unitid=".$index;
 		}
 		if ($desc == "WPNS_PREP") {
-			$sql = "UPDATE asc_mechstatus SET crit_weapons_PREP=".$value." WHERE mechid=".$index;
+			$sql = "UPDATE asc_unitstatus SET crit_weapons_PREP=".$value." WHERE unitid=".$index;
 		}
 		if ($desc == "CV_ENGN_PREP") {
-			$sql = "UPDATE asc_mechstatus SET crit_CV_engine_PREP=".$value." WHERE mechid=".$index;
+			$sql = "UPDATE asc_unitstatus SET crit_CV_engine_PREP=".$value." WHERE unitid=".$index;
 		}
 		if ($desc == "CV_FCTL_PREP") {
-			$sql = "UPDATE asc_mechstatus SET crit_CV_firecontrol_PREP=".$value." WHERE mechid=".$index;
+			$sql = "UPDATE asc_unitstatus SET crit_CV_firecontrol_PREP=".$value." WHERE unitid=".$index;
 		}
 		if ($desc == "CV_WPNS_PREP") {
-			$sql = "UPDATE asc_mechstatus SET crit_CV_weapons_PREP=".$value." WHERE mechid=".$index;
+			$sql = "UPDATE asc_unitstatus SET crit_CV_weapons_PREP=".$value." WHERE unitid=".$index;
 		}
 		if ($desc == "CV_MOTVA_PREP") {
-			$sql = "UPDATE asc_mechstatus SET crit_CV_motiveA_PREP=".$value." WHERE mechid=".$index;
+			$sql = "UPDATE asc_unitstatus SET crit_CV_motiveA_PREP=".$value." WHERE unitid=".$index;
 		}
 		if ($desc == "CV_MOTVB_PREP") {
-			$sql = "UPDATE asc_mechstatus SET crit_CV_motiveB_PREP=".$value." WHERE mechid=".$index;
+			$sql = "UPDATE asc_unitstatus SET crit_CV_motiveB_PREP=".$value." WHERE unitid=".$index;
 		}
 		if ($desc == "CV_MOTVC_PREP") {
-			$sql = "UPDATE asc_mechstatus SET crit_CV_motiveC_PREP=".$value." WHERE mechid=".$index;
+			$sql = "UPDATE asc_unitstatus SET crit_CV_motiveC_PREP=".$value." WHERE unitid=".$index;
 		}
 		if ($desc == "HT_PREP") {
-			$sql = "UPDATE asc_mechstatus SET heat_PREP=".$value." WHERE mechid=".$index;
+			$sql = "UPDATE asc_unitstatus SET heat_PREP=".$value." WHERE unitid=".$index;
 		}
 		echo $sql;
 

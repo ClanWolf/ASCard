@@ -29,7 +29,7 @@ var rolling = 0;
 var ccc = 1;
 var structuralDamageCache = 0;
 
-var mechstatus = 1; // 1: green (untouched) | 2: yellow (hit) | 3: red (crit) | 4: black (wrecked) | 9: crippled
+var unitstatus = 1; // 1: green (untouched) | 2: yellow (hit) | 3: red (crit) | 4: black (wrecked) | 9: crippled
 var enginehit = 0;
 var updatedshortvalue = 0;
 var updatedmediumvalue = 2;
@@ -55,7 +55,7 @@ var sound_08 = null;
 var sound_09 = null;
 var sound_SB = null;
 
-var showingMech = false;
+var showingUnit = false;
 
 var skipTapSample = false;
 
@@ -99,9 +99,9 @@ function readCircles2(index, a_max, s_max, mv_bt_id, f_bt_id) {
 	var mvmnt = 0;
 	var wpnsf = 0;
 
-	var mechstatus = 1;
-	var mechstatusstring = "fresh";
-	var mechstatusimage = "images/DD_BM_01.png";
+	var unitstatus = 1;
+	var unitstatusstring = "fresh";
+	var unitstatusimage = "images/DD_BM_01.png";
 
 	var list = document.getElementsByClassName("bigcheck");
 	[].forEach.call(list, function (el1) {
@@ -200,45 +200,45 @@ function readCircles2(index, a_max, s_max, mv_bt_id, f_bt_id) {
 		s = s - 1;
 		a = a + 1;
 	}
-	// mechstatusstring: fresh, damaged, critical, crippled, destroyed
+	// unitstatusstring: fresh, damaged, critical, crippled, destroyed
 
 	var currentUnitType = document.getElementById('unit_type').innerText;
 	currentUnitType = currentUnitType.substring(0, currentUnitType.indexOf(' ')); // Cut off size and tonnage
-	mechstatus = 1;
-	mechstatusstring = "fresh";
-	mechstatusimage = "images/DD_" + currentUnitType + "_01.png";
+	unitstatus = 1;
+	unitstatusstring = "fresh";
+	unitstatusimage = "images/DD_" + currentUnitType + "_01.png";
 	if (a > 0) {
-		mechstatus = 2;
-		mechstatusstring = "damaged";
-		mechstatusimage = "images/DD_" + currentUnitType + "_02.png";
+		unitstatus = 2;
+		unitstatusstring = "damaged";
+		unitstatusimage = "images/DD_" + currentUnitType + "_02.png";
 	}
 	if (s > 0) {
-		mechstatus = 3;
-		mechstatusstring = "critical";
-		mechstatusimage = "images/DD_" + currentUnitType + "_03.png";
+		unitstatus = 3;
+		unitstatusstring = "critical";
+		unitstatusimage = "images/DD_" + currentUnitType + "_03.png";
 	}
 	if (a == maximalarmorpoints && maximalstructurepoints == 1) {
-		mechstatus = 9;
-		mechstatusstring = "crippled";
-		mechstatusimage = "images/DD_" + currentUnitType + "_03.png";
+		unitstatus = 9;
+		unitstatusstring = "crippled";
+		unitstatusimage = "images/DD_" + currentUnitType + "_03.png";
 	}
 	if (s > maximalstructurepoints / 2) {
-		mechstatus = 9;
-		mechstatusstring = "crippled";
-		mechstatusimage = "images/DD_" + currentUnitType + "_03.png";
+		unitstatus = 9;
+		unitstatusstring = "crippled";
+		unitstatusimage = "images/DD_" + currentUnitType + "_03.png";
 	}
 	if (s == maximalstructurepoints) {
-		mechstatus = 4;
-		mechstatusstring = "destroyed";
-		mechstatusimage = "images/DD_" + currentUnitType + "_04.png";
+		unitstatus = 4;
+		unitstatusstring = "destroyed";
+		unitstatusimage = "images/DD_" + currentUnitType + "_04.png";
 	}
 	if (e == 2) {
-		mechstatus = 4;
-		mechstatusstring = "destroyed";
-		mechstatusimage = "images/DD_" + currentUnitType + "_04.png";
+		unitstatus = 4;
+		unitstatusstring = "destroyed";
+		unitstatusimage = "images/DD_" + currentUnitType + "_04.png";
 	}
 
-	document.getElementById('mechstatusimagemenu').src=mechstatusimage;
+	document.getElementById('unitstatusimagemenu').src=unitstatusimage;
 
 	if (mvmnt == 9) {
 		wpnsf = 1;
@@ -270,8 +270,8 @@ function readCircles2(index, a_max, s_max, mv_bt_id, f_bt_id) {
 		playErrorSound();
 	}
 
-	setCircles(h, a, s, e, fc, mp, w, e_cv, fc_cv, w_cv, ma_cv, mb_cv, mc_cv, uov, mvmnt, wpnsf, tc_rangeValueReading, tc_partialCoverReading, mechstatusstring);
-	var url="./save.php?index="+index+"&h="+h+"&a="+a+"&s="+s+"&e="+e+"&fc="+fc+"&mp="+mp+"&w="+w+"&e_cv="+e_cv+"&fc_cv="+fc_cv+"&w_cv="+w_cv+"&ma_cv="+ma_cv+"&mb_cv="+mb_cv+"&mc_cv="+mc_cv+"&mstat="+mechstatusimage+"&mstatstr="+mechstatusstring+"&uov="+uov+"&mvmnt="+mvmnt+"&wpnsf="+wpnsf;
+	setCircles(h, a, s, e, fc, mp, w, e_cv, fc_cv, w_cv, ma_cv, mb_cv, mc_cv, uov, mvmnt, wpnsf, tc_rangeValueReading, tc_partialCoverReading, unitstatusstring);
+	var url="./save.php?index="+index+"&h="+h+"&a="+a+"&s="+s+"&e="+e+"&fc="+fc+"&mp="+mp+"&w="+w+"&e_cv="+e_cv+"&fc_cv="+fc_cv+"&w_cv="+w_cv+"&ma_cv="+ma_cv+"&mb_cv="+mb_cv+"&mc_cv="+mc_cv+"&mstat="+unitstatusimage+"&mstatstr="+unitstatusstring+"&uov="+uov+"&mvmnt="+mvmnt+"&wpnsf="+wpnsf;
 	// alert(url);
 	window.frames['saveframe'].location.replace(url);
 
@@ -297,7 +297,7 @@ function setStructuralDamageCache(value) {
 }
 
 // SetCircles is called from gui_play_unit.php as well!
-function setCircles(h, a, s, e, fc, mp, w, e_cv, fc_cv, w_cv, ma_cv, mb_cv, mc_cv, uov, mvmnt, wpnsf, tc_rangeValueReading, tc_partialCoverReading, mechstatusstring) {
+function setCircles(h, a, s, e, fc, mp, w, e_cv, fc_cv, w_cv, ma_cv, mb_cv, mc_cv, uov, mvmnt, wpnsf, tc_rangeValueReading, tc_partialCoverReading, unitstatusstring) {
 
 	$("#crippledIndicator").hide();
 	$("#shutdownIndicator").hide();
@@ -329,7 +329,7 @@ function setCircles(h, a, s, e, fc, mp, w, e_cv, fc_cv, w_cv, ma_cv, mb_cv, mc_c
 
 	var uov_c = 0;
 
-	mechstatus = 1;
+	unitstatus = 1;
 	updatedshortvalue = 0;
 	updatedmediumvalue = 2;
 	updatedlongvalue = 4;
@@ -742,7 +742,6 @@ function setCircles(h, a, s, e, fc, mp, w, e_cv, fc_cv, w_cv, ma_cv, mb_cv, mc_c
 
 	//console.log("TMM ------------>");
 	var tmpTMM = originalTMM;
-	//console.log("Mech: " + mechmodel);
 	//console.log("Starting with TMM: " + tmpTMM);
 	if (mvmnt == 0) {                            // -------------- 0:   NOT MOVED YET
 		if (h > 1 && h < 4) { tmpTMM = tmpTMM - 1; }
@@ -838,22 +837,22 @@ function setCircles(h, a, s, e, fc, mp, w, e_cv, fc_cv, w_cv, ma_cv, mb_cv, mc_c
 	}
 
 	if (a > 1) {
-		mechstatus = 2;
+		unitstatus = 2;
 	}
 	if (s > 1) {
-		mechstatus = 3;
+		unitstatus = 3;
 	}
 	if (s == maximalstructurepoints) {
-		mechstatus = 4;
+		unitstatus = 4;
 	}
 	if (e == 2) {
-		mechstatus = 4;
+		unitstatus = 4;
 	}
 	if (e_cv == 2) {
-		mechstatus = 4;
+		unitstatus = 4;
 	}
-	if (mechstatusstring == 'crippled') {
-		mechstatus = 9;
+	if (unitstatusstring == 'crippled') {
+		unitstatus = 9;
 	}
 
 	var temp0 = "./images/temp_0.png";
@@ -862,36 +861,36 @@ function setCircles(h, a, s, e, fc, mp, w, e_cv, fc_cv, w_cv, ma_cv, mb_cv, mc_c
 	var temp3 = "./images/temp_3.png";
 	var temp4 = "./images/temp_4.png";
 
-	if (mechstatus == 9) {
-		// Mech crippled
+	if (unitstatus == 9) {
+		// Unit crippled
 		$("#crippledIndicator").show();
 	}
 	if (h == 4) {
-		// Mech destroyed
+		// Unit destroyed
 		$("#crippledIndicator").hide();
 		$("#shutdownIndicator").show();
 	}
-	if (mechstatus == 4) {
-		// Mech destroyed
+	if (unitstatus == 4) {
+		// Unit destroyed
 		$("#shutdownIndicator").hide();
 		$("#crippledIndicator").hide();
 		$("#destroyedIndicator").show();
 	}
 
 	if (h == 0) {
-		document.getElementById('heatimage_' + chosenmechindex).src=temp0;
+		document.getElementById('heatimage_' + chosenunitindex).src=temp0;
 	}
 	if (h == 1) {
-		document.getElementById('heatimage_' + chosenmechindex).src=temp1;
+		document.getElementById('heatimage_' + chosenunitindex).src=temp1;
 	}
 	if (h == 2) {
-		document.getElementById('heatimage_' + chosenmechindex).src=temp2;
+		document.getElementById('heatimage_' + chosenunitindex).src=temp2;
 	}
 	if (h == 3) {
-		document.getElementById('heatimage_' + chosenmechindex).src=temp3;
+		document.getElementById('heatimage_' + chosenunitindex).src=temp3;
 	}
-	if (h == 4 && mechstatus != 4) {
-		document.getElementById('heatimage_' + chosenmechindex).src=temp4;
+	if (h == 4 && unitstatus != 4) {
+		document.getElementById('heatimage_' + chosenunitindex).src=temp4;
 	}
 
 	var tmmDiceValue = document.getElementById("TMM").innerHTML;
@@ -1010,7 +1009,7 @@ function increaseENGN_PREP() {
 		playTapSound();
 	}
 	document.getElementById("label_ENGN_PREP").innerHTML = ENGN_PREP;
-	var url="./save_PREP.php?index="+chosenmechdbid+"&desc=ENGN_PREP&value="+ENGN_PREP;
+	var url="./save_PREP.php?index="+chosenunitdbid+"&desc=ENGN_PREP&value="+ENGN_PREP;
 	window.frames['saveframe'].location.replace(url);
 }
 function increaseFCTL_PREP() {
@@ -1021,7 +1020,7 @@ function increaseFCTL_PREP() {
 		playTapSound();
 	}
 	document.getElementById("label_FCTL_PREP").innerHTML = FCTL_PREP;
-	var url="./save_PREP.php?index="+chosenmechdbid+"&desc=FCTL_PREP&value="+FCTL_PREP;
+	var url="./save_PREP.php?index="+chosenunitdbid+"&desc=FCTL_PREP&value="+FCTL_PREP;
 	window.frames['saveframe'].location.replace(url);
 }
 function increaseMP_PREP() {
@@ -1032,7 +1031,7 @@ function increaseMP_PREP() {
 		playTapSound();
 	}
 	document.getElementById("label_MP_PREP").innerHTML = MP_PREP;
-	var url="./save_PREP.php?index="+chosenmechdbid+"&desc=MP_PREP&value="+MP_PREP;
+	var url="./save_PREP.php?index="+chosenunitdbid+"&desc=MP_PREP&value="+MP_PREP;
 	window.frames['saveframe'].location.replace(url);
 }
 function increaseWPNS_PREP() {
@@ -1043,7 +1042,7 @@ function increaseWPNS_PREP() {
 		playTapSound();
 	}
 	document.getElementById("label_WPNS_PREP").innerHTML = WPNS_PREP;
-	var url="./save_PREP.php?index="+chosenmechdbid+"&desc=WPNS_PREP&value="+WPNS_PREP;
+	var url="./save_PREP.php?index="+chosenunitdbid+"&desc=WPNS_PREP&value="+WPNS_PREP;
 	window.frames['saveframe'].location.replace(url);
 }
 
@@ -1055,7 +1054,7 @@ function increaseENGN_CV_PREP() {
 		playTapSound();
 	}
 	document.getElementById("label_CV_ENGN_PREP").innerHTML = CV_ENGN_PREP;
-	var url="./save_PREP.php?index="+chosenmechdbid+"&desc=CV_ENGN_PREP&value="+CV_ENGN_PREP;
+	var url="./save_PREP.php?index="+chosenunitdbid+"&desc=CV_ENGN_PREP&value="+CV_ENGN_PREP;
 	window.frames['saveframe'].location.replace(url);
 }
 function increaseFCTL_CV_PREP() {
@@ -1066,7 +1065,7 @@ function increaseFCTL_CV_PREP() {
 		playTapSound();
 	}
 	document.getElementById("label_CV_FCTL_PREP").innerHTML = CV_FCTL_PREP;
-	var url="./save_PREP.php?index="+chosenmechdbid+"&desc=CV_FCTL_PREP&value="+CV_FCTL_PREP;
+	var url="./save_PREP.php?index="+chosenunitdbid+"&desc=CV_FCTL_PREP&value="+CV_FCTL_PREP;
 	window.frames['saveframe'].location.replace(url);
 }
 function increaseWPNS_CV_PREP() {
@@ -1077,7 +1076,7 @@ function increaseWPNS_CV_PREP() {
 		playTapSound();
 	}
 	document.getElementById("label_CV_WPNS_PREP").innerHTML = CV_WPNS_PREP;
-	var url="./save_PREP.php?index="+chosenmechdbid+"&desc=CV_WPNS_PREP&value="+CV_WPNS_PREP;
+	var url="./save_PREP.php?index="+chosenunitdbid+"&desc=CV_WPNS_PREP&value="+CV_WPNS_PREP;
 	window.frames['saveframe'].location.replace(url);
 }
 function increaseMOTIVEA_PREP() {
@@ -1088,7 +1087,7 @@ function increaseMOTIVEA_PREP() {
 		playTapSound();
 	}
 	document.getElementById("label_CV_MOTIVA_PREP").innerHTML = CV_MOTVA_PREP;
-	var url="./save_PREP.php?index="+chosenmechdbid+"&desc=CV_MOTVA_PREP&value="+CV_MOTVA_PREP;
+	var url="./save_PREP.php?index="+chosenunitdbid+"&desc=CV_MOTVA_PREP&value="+CV_MOTVA_PREP;
 	window.frames['saveframe'].location.replace(url);
 }
 function increaseMOTIVEB_PREP() {
@@ -1099,7 +1098,7 @@ function increaseMOTIVEB_PREP() {
 		playTapSound();
 	}
 	document.getElementById("label_CV_MOTIVB_PREP").innerHTML = CV_MOTVB_PREP;
-	var url="./save_PREP.php?index="+chosenmechdbid+"&desc=CV_MOTVB_PREP&value="+CV_MOTVB_PREP;
+	var url="./save_PREP.php?index="+chosenunitdbid+"&desc=CV_MOTVB_PREP&value="+CV_MOTVB_PREP;
 	window.frames['saveframe'].location.replace(url);
 }
 function increaseMOTIVEC_PREP() {
@@ -1110,7 +1109,7 @@ function increaseMOTIVEC_PREP() {
 		playTapSound();
 	}
 	document.getElementById("label_CV_MOTIVC_PREP").innerHTML = CV_MOTVC_PREP;
-	var url="./save_PREP.php?index="+chosenmechdbid+"&desc=CV_MOTVC_PREP&value="+CV_MOTVC_PREP;
+	var url="./save_PREP.php?index="+chosenunitdbid+"&desc=CV_MOTVC_PREP&value="+CV_MOTVC_PREP;
 	window.frames['saveframe'].location.replace(url);
 }
 
@@ -1122,7 +1121,7 @@ function increaseHT_PREP() {
 		playTapSound();
 	}
 	document.getElementById("label_HT_PREP").innerHTML = HT_PREP;
-	var url="./save_PREP.php?index="+chosenmechdbid+"&desc=HT_PREP&value="+HT_PREP;
+	var url="./save_PREP.php?index="+chosenunitdbid+"&desc=HT_PREP&value="+HT_PREP;
 	window.frames['saveframe'].location.replace(url);
 }
 
@@ -1238,7 +1237,7 @@ function changeWallpaper() {
 		// Set use MUL images to 1 on database (white background + MUL images)
 		var url="./save_UseMULImages.php?playerId="+playerId+"&useMulImages=1";
 		window.frames['saveframe'].location.replace(url);
-		document.getElementById("mechimage").src=mechImageURLMUL;
+		document.getElementById("unitimage").src=unitImageURLMUL;
 		const allDataAreas = document.getElementsByClassName("dataarea");
 		for (let i = 0; i < allDataAreas.length; i++) {
 			allDataAreas[i].style.backgroundColor="rgba(255,255,255,0.85)"
@@ -1260,7 +1259,7 @@ function changeWallpaper() {
 		// Set use MUL images to 0 on database (dark background + alternative images)
 		var url="./save_UseMULImages.php?playerId="+playerId+"&useMulImages=0";
 		window.frames['saveframe'].location.replace(url);
-		document.getElementById("mechimage").src=mechImageURL;
+		document.getElementById("unitimage").src=unitImageURL;
 		const allDataAreas = document.getElementsByClassName("dataarea");
 		for (let i = 0; i < allDataAreas.length; i++) {
 			allDataAreas[i].style.backgroundColor="rgba(70,70,70,0.85)"
@@ -1280,8 +1279,8 @@ function changeWallpaper() {
 	}
 }
 
-function showMech() {
-	if (!showingMech) {
+function showUnit() {
+	if (!showingUnit) {
 		$("#movementtoken").fadeOut(500, "linear");
 		$(".dataarea").each(function() {
 			$(this).fadeOut(500, "linear");
@@ -1289,9 +1288,9 @@ function showMech() {
 		$(".dataarea_red").each(function() {
 			$(this).fadeOut(500, "linear");
 		});
-		showingMech = true;
+		showingUnit = true;
 	} else {
-		showingMech = false;
+		showingUnit = false;
 		location.reload();
 	}
 }
@@ -1671,17 +1670,17 @@ function hideShutdownIndicator() {
 function hideTopRightPanel() {
 	$("#topright").fadeOut(300, "linear");
 	$("#pv").fadeOut(300, "linear");
-	$("#mech_number").fadeOut(300, "linear");
+	$("#unit_number").fadeOut(300, "linear");
 }
 function showTopRightPanel() {
 	$("#topright").fadeIn(300, "linear");
 	$("#pv").fadeIn(300, "linear");
-	$("#mech_number").fadeIn(300, "linear");
+	$("#unit_number").fadeIn(300, "linear");
 }
 
 $(window).resize(function() {
-	var mechimage = document.getElementById("mechimage");
-	mechimage.style.height="" + $(document).height() * 0.8 + "px";
+	var unitimage = document.getElementById("unitimage");
+	unitimage.style.height="" + $(document).height() * 0.8 + "px";
 });
 
 $(document).ready(function() {
@@ -1701,8 +1700,8 @@ $(document).ready(function() {
 	document.getElementById("ToHitMedium").checked = true;
 	document.getElementById("ToHitLong").checked = false;
 
-	var mechimage = document.getElementById("mechimage");
-	mechimage.style.height="" + ($(document).height() * 0.8 + "px");
+	var unitimage = document.getElementById("unitimage");
+	unitimage.style.height="" + ($(document).height() * 0.8 + "px");
 
 	var list = document.getElementsByClassName("bigcheck");
 	[].forEach.call(list, function (el1) {
@@ -1811,7 +1810,7 @@ $(document).ready(function() {
 		// Set use MUL images to 1 on database (white background + MUL images)
 		var url="./save_UseMULImages.php?playerId="+playerId+"&useMulImages=1";
 		window.frames['saveframe'].location.replace(url);
-		document.getElementById("mechimage").src=mechImageURLMUL;
+		document.getElementById("unitimage").src=unitImageURLMUL;
 		const allDataAreas = document.getElementsByClassName("dataarea");
 		for (let i = 0; i < allDataAreas.length; i++) {
 			allDataAreas[i].style.backgroundColor="rgba(255,255,255,0.90)";
@@ -1832,7 +1831,7 @@ $(document).ready(function() {
 		// Set use MUL images to 0 on database (dark background + alternative images)
 		var url="./save_UseMULImages.php?playerId="+playerId+"&useMulImages=0";
 		window.frames['saveframe'].location.replace(url);
-		document.getElementById("mechimage").src=mechImageURL;
+		document.getElementById("unitimage").src=unitImageURL;
 		const allDataAreas = document.getElementsByClassName("dataarea");
 		for (let i = 0; i < allDataAreas.length; i++) {
 			allDataAreas[i].style.backgroundColor="rgba(70,70,70,0.85)";

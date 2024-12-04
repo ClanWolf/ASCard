@@ -83,7 +83,7 @@ session_start();
 	<!-- <meta http-equiv="expires" content="0"> -->
 	<!-- <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"> -->
 	<meta name="description" content="Cards app for the AlphaStrike TableTop (BattleTech).">
-	<meta name="keywords" content="BattleTech, AlphaStrike, Mech">
+	<meta name="keywords" content="BattleTech, AlphaStrike">
 	<meta name="robots" content="noindex,nofollow">
 	<meta name="mobile-web-app-capable" content="yes">
 	<meta name="apple-mobile-web-app-capable" content="yes">
@@ -203,10 +203,10 @@ session_start();
 
 		<table class="box" cellspacing=10 cellpadding=10 border=0px>
 			<tr>
-				<td class='mechselect_button_active'>
+				<td class='unitselect_button_active'>
 					<img src="./images/icon_144x144.png">
 				</td>
-				<td class='mechselect_button_active'>
+				<td class='unitselect_button_active'>
 					<?php
 						echo "<select style='width:260px;height=60px;' name='pn' size='1' maxlength='80' id='pn'>";
 						echo $userlist;

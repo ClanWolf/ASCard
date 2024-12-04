@@ -8,7 +8,7 @@ var corsproxyprefix5 = "https://jsonp.afeld.me/?url=";
 
 var corsproxyprefix = corsproxyprefix5;
 
-function getMechList(filter, tech, minTon, maxTon, category, unittypeString) {
+function getUnitList(filter, tech, minTon, maxTon, category, unittypeString) {
 
 	//console.log (filter);
 
@@ -39,7 +39,7 @@ function getMechList(filter, tech, minTon, maxTon, category, unittypeString) {
 			url = url + '&MinTons='				+ minTon;
 			url = url + '&MaxTons='				+ maxTon;
 			url = url + '&Types=17';                    // Aerospace
-			url = url + '&Types=18';                    // Mechs
+			url = url + '&Types=18';                    // BM
 			url = url + '&Types=19';                    // Combat vehicles / Tanks
 		}
 
@@ -122,7 +122,7 @@ function getMechList(filter, tech, minTon, maxTon, category, unittypeString) {
 	});
 }
 
-function getMechDetails(id) {
+function getUnitDetails(id) {
 	if (id == "<<< Select unit >>>") {
 		document.getElementById("TP").value="";
 		document.getElementById("SZ").value="";
@@ -145,7 +145,7 @@ function getMechDetails(id) {
 	}
 
 	var url = corsproxyprefix + 'http://www.masterunitlist.info/Unit/QuickDetails?id=' + id;
-	var cache_details_url = 'cache/mul/mechdetails/' + id + '.json';
+	var cache_details_url = 'cache/mul/unitdetails/' + id + '.json';
 
 	// $.getJSON(url, function (json) {
 	$.getJSON(cache_details_url, function (json) {
@@ -180,13 +180,13 @@ function getMechDetails(id) {
 	});
 }
 
-function mechSelected() {
+function unitSelected() {
 	var e = document.getElementById("units");
 	var id = e.options[e.selectedIndex].value;
-	getMechDetails(id);
+	getUnitDetails(id);
 }
 
-function fetchMechList() {
+function fetchUnitList() {
 	var tech = document.getElementById("tech");
 	var techid = tech.options[tech.selectedIndex].value;
 	var unittype = document.getElementById("unittype");
@@ -214,18 +214,18 @@ function fetchMechList() {
 	// console.log(tonnagevalue);
 
 	if (unittypevalue == "BA") {
-		getMechList(filter, techid, 0, 2, 'BA', unittypevalue);
+		getUnitList(filter, techid, 0, 2, 'BA', unittypevalue);
 	} else if (tonnagevalue == 'LIGHT') {
-		getMechList(filter, techid, 20, 35, 'LIGHT', unittypevalue);
+		getUnitList(filter, techid, 20, 35, 'LIGHT', unittypevalue);
 	} else if (tonnagevalue == 'MEDIUM') {
-		getMechList(filter, techid, 40, 55, 'MEDIUM', unittypevalue);
+		getUnitList(filter, techid, 40, 55, 'MEDIUM', unittypevalue);
 	} else if (tonnagevalue == 'HEAVY') {
-		getMechList(filter, techid, 60, 75, 'HEAVY', unittypevalue);
+		getUnitList(filter, techid, 60, 75, 'HEAVY', unittypevalue);
 	} else if (tonnagevalue == 'ASSAULT') {
-		getMechList(filter, techid, 80, 100, 'ASSAULT', unittypevalue);
+		getUnitList(filter, techid, 80, 100, 'ASSAULT', unittypevalue);
 	} else if (tonnagevalue == 'SUPERHEAVY') {
-		getMechList(filter, techid, 105, 200, 'SUPERHEAVY', unittypevalue);
+		getUnitList(filter, techid, 105, 200, 'SUPERHEAVY', unittypevalue);
 //	} else {
-//		getMechList(filter, techid, tonnagevalue, tonnagevalue, '');
+//		getUnitList(filter, techid, tonnagevalue, tonnagevalue, '');
 	}
 }
