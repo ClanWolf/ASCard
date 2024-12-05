@@ -271,7 +271,7 @@ function readCircles2(index, a_max, s_max, mv_bt_id, f_bt_id) {
 	}
 
 	setCircles(h, a, s, e, fc, mp, w, e_cv, fc_cv, w_cv, ma_cv, mb_cv, mc_cv, uov, mvmnt, wpnsf, tc_rangeValueReading, tc_partialCoverReading, unitstatusstring);
-	var url="./save.php?index="+index+"&h="+h+"&a="+a+"&s="+s+"&e="+e+"&fc="+fc+"&mp="+mp+"&w="+w+"&e_cv="+e_cv+"&fc_cv="+fc_cv+"&w_cv="+w_cv+"&ma_cv="+ma_cv+"&mb_cv="+mb_cv+"&mc_cv="+mc_cv+"&mstat="+unitstatusimage+"&mstatstr="+unitstatusstring+"&uov="+uov+"&mvmnt="+mvmnt+"&wpnsf="+wpnsf;
+	var url="./save.php?index="+index+"&h="+h+"&a="+a+"&s="+s+"&e="+e+"&fc="+fc+"&mp="+mp+"&w="+w+"&e_cv="+e_cv+"&fc_cv="+fc_cv+"&w_cv="+w_cv+"&ma_cv="+ma_cv+"&mb_cv="+mb_cv+"&mc_cv="+mc_cv+"&mstat="+unitstatusimage+"&mstatstr="+unitstatusstring+"&uov="+uov+"&mvmnt="+mvmnt+"&wpnsf="+wpnsf+"&currentRound="+currentRound+"&gameid="+gameid;
 	// alert(url);
 	window.frames['saveframe'].location.replace(url);
 
@@ -1009,7 +1009,7 @@ function increaseENGN_PREP() {
 		playTapSound();
 	}
 	document.getElementById("label_ENGN_PREP").innerHTML = ENGN_PREP;
-	var url="./save_PREP.php?index="+chosenunitdbid+"&desc=ENGN_PREP&value="+ENGN_PREP;
+	var url="./save_PREP.php?index="+chosenunitdbid+"&desc=ENGN_PREP&value="+ENGN_PREP+"&currentRound="+currentRound+"&gameid="+gameid;
 	window.frames['saveframe'].location.replace(url);
 }
 function increaseFCTL_PREP() {
@@ -1020,7 +1020,7 @@ function increaseFCTL_PREP() {
 		playTapSound();
 	}
 	document.getElementById("label_FCTL_PREP").innerHTML = FCTL_PREP;
-	var url="./save_PREP.php?index="+chosenunitdbid+"&desc=FCTL_PREP&value="+FCTL_PREP;
+	var url="./save_PREP.php?index="+chosenunitdbid+"&desc=FCTL_PREP&value="+FCTL_PREP+"&currentRound="+currentRound+"&gameid="+gameid;
 	window.frames['saveframe'].location.replace(url);
 }
 function increaseMP_PREP() {
@@ -1031,7 +1031,7 @@ function increaseMP_PREP() {
 		playTapSound();
 	}
 	document.getElementById("label_MP_PREP").innerHTML = MP_PREP;
-	var url="./save_PREP.php?index="+chosenunitdbid+"&desc=MP_PREP&value="+MP_PREP;
+	var url="./save_PREP.php?index="+chosenunitdbid+"&desc=MP_PREP&value="+MP_PREP+"&currentRound="+currentRound+"&gameid="+gameid;
 	window.frames['saveframe'].location.replace(url);
 }
 function increaseWPNS_PREP() {
@@ -1042,7 +1042,7 @@ function increaseWPNS_PREP() {
 		playTapSound();
 	}
 	document.getElementById("label_WPNS_PREP").innerHTML = WPNS_PREP;
-	var url="./save_PREP.php?index="+chosenunitdbid+"&desc=WPNS_PREP&value="+WPNS_PREP;
+	var url="./save_PREP.php?index="+chosenunitdbid+"&desc=WPNS_PREP&value="+WPNS_PREP+"&currentRound="+currentRound+"&gameid="+gameid;
 	window.frames['saveframe'].location.replace(url);
 }
 
@@ -1054,7 +1054,7 @@ function increaseENGN_CV_PREP() {
 		playTapSound();
 	}
 	document.getElementById("label_CV_ENGN_PREP").innerHTML = CV_ENGN_PREP;
-	var url="./save_PREP.php?index="+chosenunitdbid+"&desc=CV_ENGN_PREP&value="+CV_ENGN_PREP;
+	var url="./save_PREP.php?index="+chosenunitdbid+"&desc=CV_ENGN_PREP&value="+CV_ENGN_PREP+"&currentRound="+currentRound+"&gameid="+gameid;
 	window.frames['saveframe'].location.replace(url);
 }
 function increaseFCTL_CV_PREP() {
@@ -1065,7 +1065,7 @@ function increaseFCTL_CV_PREP() {
 		playTapSound();
 	}
 	document.getElementById("label_CV_FCTL_PREP").innerHTML = CV_FCTL_PREP;
-	var url="./save_PREP.php?index="+chosenunitdbid+"&desc=CV_FCTL_PREP&value="+CV_FCTL_PREP;
+	var url="./save_PREP.php?index="+chosenunitdbid+"&desc=CV_FCTL_PREP&value="+CV_FCTL_PREP+"&currentRound="+currentRound+"&gameid="+gameid;
 	window.frames['saveframe'].location.replace(url);
 }
 function increaseWPNS_CV_PREP() {
@@ -1076,7 +1076,7 @@ function increaseWPNS_CV_PREP() {
 		playTapSound();
 	}
 	document.getElementById("label_CV_WPNS_PREP").innerHTML = CV_WPNS_PREP;
-	var url="./save_PREP.php?index="+chosenunitdbid+"&desc=CV_WPNS_PREP&value="+CV_WPNS_PREP;
+	var url="./save_PREP.php?index="+chosenunitdbid+"&desc=CV_WPNS_PREP&value="+CV_WPNS_PREP+"&currentRound="+currentRound+"&gameid="+gameid;
 	window.frames['saveframe'].location.replace(url);
 }
 function increaseMOTIVEA_PREP() {
@@ -1087,7 +1087,7 @@ function increaseMOTIVEA_PREP() {
 		playTapSound();
 	}
 	document.getElementById("label_CV_MOTIVA_PREP").innerHTML = CV_MOTVA_PREP;
-	var url="./save_PREP.php?index="+chosenunitdbid+"&desc=CV_MOTVA_PREP&value="+CV_MOTVA_PREP;
+	var url="./save_PREP.php?index="+chosenunitdbid+"&desc=CV_MOTVA_PREP&value="+CV_MOTVA_PREP+"&currentRound="+currentRound+"&gameid="+gameid;
 	window.frames['saveframe'].location.replace(url);
 }
 function increaseMOTIVEB_PREP() {
@@ -1098,7 +1098,7 @@ function increaseMOTIVEB_PREP() {
 		playTapSound();
 	}
 	document.getElementById("label_CV_MOTIVB_PREP").innerHTML = CV_MOTVB_PREP;
-	var url="./save_PREP.php?index="+chosenunitdbid+"&desc=CV_MOTVB_PREP&value="+CV_MOTVB_PREP;
+	var url="./save_PREP.php?index="+chosenunitdbid+"&desc=CV_MOTVB_PREP&value="+CV_MOTVB_PREP+"&currentRound="+currentRound+"&gameid="+gameid;
 	window.frames['saveframe'].location.replace(url);
 }
 function increaseMOTIVEC_PREP() {
@@ -1109,7 +1109,7 @@ function increaseMOTIVEC_PREP() {
 		playTapSound();
 	}
 	document.getElementById("label_CV_MOTIVC_PREP").innerHTML = CV_MOTVC_PREP;
-	var url="./save_PREP.php?index="+chosenunitdbid+"&desc=CV_MOTVC_PREP&value="+CV_MOTVC_PREP;
+	var url="./save_PREP.php?index="+chosenunitdbid+"&desc=CV_MOTVC_PREP&value="+CV_MOTVC_PREP+"&currentRound="+currentRound+"&gameid="+gameid;
 	window.frames['saveframe'].location.replace(url);
 }
 
@@ -1121,7 +1121,7 @@ function increaseHT_PREP() {
 		playTapSound();
 	}
 	document.getElementById("label_HT_PREP").innerHTML = HT_PREP;
-	var url="./save_PREP.php?index="+chosenunitdbid+"&desc=HT_PREP&value="+HT_PREP;
+	var url="./save_PREP.php?index="+chosenunitdbid+"&desc=HT_PREP&value="+HT_PREP+"&currentRound="+currentRound+"&gameid="+gameid;
 	window.frames['saveframe'].location.replace(url);
 }
 

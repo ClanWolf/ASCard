@@ -1,8 +1,8 @@
 <?php
 
-//ini_set('display_errors', 1);
-//ini_set('display_startup_errors', 1);
-//error_reporting(E_ALL);
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 
 session_start();
 // https://www.php-einfach.de/php-tutorial/php-sessions/
@@ -431,9 +431,12 @@ session_start();
 	} else {
 		$chosenUnitIndex = 1;
 	}
+
 	require('./db_getdata.php');
 
 	echo "<script>\n";
+	echo "	var currentRound = ".$CURRENTROUND.";\n";
+	echo "	var gameid = ".$gid.";\n";
 	echo "	var chosenunitindex = ".$chosenUnitIndex.";\n";
 	echo "	var chosenunitdbid = ".$array_UNIT_DBID[$chosenUnitIndex].";\n";
 	echo "	var unitmodel = '".$array_UNIT_MODEL[$chosenUnitIndex]."';\n";

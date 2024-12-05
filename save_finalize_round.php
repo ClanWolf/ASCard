@@ -59,12 +59,15 @@
 		// select the number of units that are active bid and in the players formations
 		$allActiveUnitsCount = 0;
 		$sql_allActiveUnitsCount = "";
-		$sql_allActiveUnitsCount = $sql_allActiveUnitsCount . "SELECT SQL_NO_CACHE a.assignid, a.formationid, a.unitid, a.pilotid, a.round_moved, a.round_fired, u.active_bid, u.unit_status ";
-		$sql_allActiveUnitsCount = $sql_allActiveUnitsCount . "FROM asc_assign a, asc_unit u ";
+		$sql_allActiveUnitsCount = $sql_allActiveUnitsCount . "SELECT SQL_NO_CACHE a.assignid, a.formationid, a.unitid, a.pilotid, a.round_moved, a.round_fired, s.active_bid, s.unit_status ";
+		$sql_allActiveUnitsCount = $sql_allActiveUnitsCount . "FROM asc_assign a, asc_unit u, asc_unitstatus s ";
 		$sql_allActiveUnitsCount = $sql_allActiveUnitsCount . "WHERE formationid in (".$formationIds.") ";
 		$sql_allActiveUnitsCount = $sql_allActiveUnitsCount . "AND a.unitid = u.unitid ";
-		$sql_allActiveUnitsCount = $sql_allActiveUnitsCount . "AND u.unit_status != 'destroyed' ";
-		$sql_allActiveUnitsCount = $sql_allActiveUnitsCount . "AND u.active_bid = 1 ";
+		$sql_allActiveUnitsCount = $sql_allActiveUnitsCount . "AND a.unitid = s.unitid ";
+		$sql_allActiveUnitsCount = $sql_allActiveUnitsCount . "AND s.round = ".$currentRound." "; // round
+		$sql_allActiveUnitsCount = $sql_allActiveUnitsCount . "AND s.gameid = ".$gameid." "; // gameid
+		$sql_allActiveUnitsCount = $sql_allActiveUnitsCount . "AND s.unit_status != 'destroyed' ";
+		$sql_allActiveUnitsCount = $sql_allActiveUnitsCount . "AND s.active_bid = 1 ";
 
 		echo $sql_allActiveUnitsCount;
 		$result_allActiveUnitsCount = mysqli_query($conn, $sql_allActiveUnitsCount);
@@ -78,11 +81,14 @@
 		$allActiveUnitsFinishedCount = 0;
 		$sql_allActiveUnitsFinishedCount = "";
 		$sql_allActiveUnitsFinishedCount = $sql_allActiveUnitsFinishedCount . "SELECT SQL_NO_CACHE * ";
-		$sql_allActiveUnitsFinishedCount = $sql_allActiveUnitsFinishedCount . "FROM asc_assign a, asc_unit u ";
+		$sql_allActiveUnitsFinishedCount = $sql_allActiveUnitsFinishedCount . "FROM asc_assign a, asc_unit u, asc_unitstatus s ";
 		$sql_allActiveUnitsFinishedCount = $sql_allActiveUnitsFinishedCount . "WHERE formationid in (".$formationIds.") ";
 		$sql_allActiveUnitsFinishedCount = $sql_allActiveUnitsFinishedCount . "AND a.unitid = u.unitid ";
-		$sql_allActiveUnitsFinishedCount = $sql_allActiveUnitsFinishedCount . "AND u.unit_status != 'destroyed' ";
-		$sql_allActiveUnitsFinishedCount = $sql_allActiveUnitsFinishedCount . "AND u.active_bid = 1 ";
+		$sql_allActiveUnitsFinishedCount = $sql_allActiveUnitsFinishedCount . "AND a.unitid = s.unitid ";
+		$sql_allActiveUnitsFinishedCount = $sql_allActiveUnitsFinishedCount . "AND s.round = ".$currentRound." "; // round
+		$sql_allActiveUnitsFinishedCount = $sql_allActiveUnitsFinishedCount . "AND s.gameid = ".$gameid." "; // gameid
+		$sql_allActiveUnitsFinishedCount = $sql_allActiveUnitsFinishedCount . "AND s.unit_status != 'destroyed' ";
+		$sql_allActiveUnitsFinishedCount = $sql_allActiveUnitsFinishedCount . "AND s.active_bid = 1 ";
 		$sql_allActiveUnitsFinishedCount = $sql_allActiveUnitsFinishedCount . "AND a.round_moved > 0 ";
 		$sql_allActiveUnitsFinishedCount = $sql_allActiveUnitsFinishedCount . "AND a.round_fired > 0 ";
 		echo $sql_allActiveUnitsFinishedCount;
@@ -98,12 +104,15 @@
 		$allActiveUnitIDsNOTFinished = "";
 		$sql_allActiveUnitIDsNOTFinished = "";
 		$sql_allActiveUnitIDsNOTFinished = $sql_allActiveUnitIDsNOTFinished . "SELECT SQL_NO_CACHE * ";
-		$sql_allActiveUnitIDsNOTFinished = $sql_allActiveUnitIDsNOTFinished . "FROM asc_assign a, asc_unit u, asc_pilot p ";
+		$sql_allActiveUnitIDsNOTFinished = $sql_allActiveUnitIDsNOTFinished . "FROM asc_assign a, asc_unit u, asc_pilot p, asc_unitstatus s ";
 		$sql_allActiveUnitIDsNOTFinished = $sql_allActiveUnitIDsNOTFinished . "WHERE formationid in (".$formationIds.") ";
 		$sql_allActiveUnitIDsNOTFinished = $sql_allActiveUnitIDsNOTFinished . "AND a.unitid = u.unitid ";
+		$sql_allActiveUnitIDsNOTFinished = $sql_allActiveUnitIDsNOTFinished . "AND a.unitid = s.unitid ";
+		$sql_allActiveUnitIDsNOTFinished = $sql_allActiveUnitIDsNOTFinished . "AND s.round = ".$currentRound." "; // round
+		$sql_allActiveUnitIDsNOTFinished = $sql_allActiveUnitIDsNOTFinished . "AND s.gameid = ".$gameid." "; // gameid
 		$sql_allActiveUnitIDsNOTFinished = $sql_allActiveUnitIDsNOTFinished . "AND a.pilotid = p.pilotid ";
-		$sql_allActiveUnitIDsNOTFinished = $sql_allActiveUnitIDsNOTFinished . "AND u.unit_status != 'destroyed' ";
-		$sql_allActiveUnitIDsNOTFinished = $sql_allActiveUnitIDsNOTFinished . "AND u.active_bid = 1 ";
+		$sql_allActiveUnitIDsNOTFinished = $sql_allActiveUnitIDsNOTFinished . "AND s.unit_status != 'destroyed' ";
+		$sql_allActiveUnitIDsNOTFinished = $sql_allActiveUnitIDsNOTFinished . "AND s.active_bid = 1 ";
 		$sql_allActiveUnitIDsNOTFinished = $sql_allActiveUnitIDsNOTFinished . "AND (a.round_moved = 0 OR a.round_fired = 0) ";
 		echo $sql_allActiveUnitIDsNOTFinished;
 		$result_allActiveUnitIDsNOTFinished = mysqli_query($conn, $sql_allActiveUnitIDsNOTFinished);
@@ -134,7 +143,7 @@
 					$roundFired = $row["round_fired"];
 
 					// Unitstatus
-					$sql_asc_unitstatus = "SELECT SQL_NO_CACHE * FROM asc_unitstatus where unitid=".$unitId.";";
+					$sql_asc_unitstatus = "SELECT SQL_NO_CACHE * FROM asc_unitstatus where unitid=".$unitId." and round=".$currentRound." AND gameid=".$gameid.";";
 					$result_asc_unitstatus = mysqli_query($conn, $sql_asc_unitstatus);
 					if (mysqli_num_rows($result_asc_unitstatus) > 0) {
 						while($row = mysqli_fetch_assoc($result_asc_unitstatus)) {
@@ -153,11 +162,38 @@
 							$armor = $row["armor"];
 							$structure = $row["structure"];
 
+							$CV_ENGN = $row["crit_CV_engine"];
+							$CV_FRCTRL = $row["crit_CV_firecontrol"];
+							$CV_WPNS = $row["crit_CV_weapons"];
+							$CV_MOTA = $row["crit_CV_motiveA"];
+							$CV_MOTB = $row["crit_CV_motiveB"];
+							$CV_MOTC = $row["crit_CV_motiveC"];
+							$CV_ENGN_PREP = $row["crit_CV_engine_PREP"];
+							$CV_FRCTRL_PREP = $row["crit_CV_firecontrol_PREP"];
+							$CV_WPNS_PREP = $row["crit_CV_weapons_PREP"];
+							$CV_MOTA_PREP = $row["crit_CV_motiveA_PREP"];
+							$CV_MOTB_PREP = $row["crit_CV_motiveB_PREP"];
+							$CV_MOTC_PREP = $row["crit_CV_motiveC_PREP"];
+
 							$finalHeat = $heat + $usedOverHeat + $HT_PREP;
 							$final_ENGN = $ENGN + $ENGN_PREP;
 							$final_FRCTRL = $FRCTRL + $FRCTRL_PREP;
 							$final_MP = $MP + $MP_PREP;
 							$final_WPNS = $WPNS + $WPNS_PREP;
+
+							$final_CV_ENGN = $CV_ENGN + $CV_ENGN_PREP;
+							$final_CV_FRCTRL = $CV_FRCTRL + $CV_FRCTRL_PREP;
+							$final_CV_WPNS = $CV_WPNS + $CV_WPNS_PREP;
+							$final_CV_MOTA = $CV_MOTA + $CV_MOTA_PREP;
+							$final_CV_MOTB = $CV_MOTB + $CV_MOTB_PREP;
+							$final_CV_MOTC = $CV_MOTC + $CV_MOTC_PREP;
+
+							if ($final_CV_ENGN > 2) { $final_CV_ENGN = 2; }
+							if ($final_CV_FRCTRL > 4) { $final_CV_FRCTRL = 4; }
+							if ($final_CV_WPNS > 4) { $final_CV_WPNS = 4; }
+							if ($final_CV_MOTA > 2) { $final_CV_MOTA = 2; }
+							if ($final_CV_MOTB > 2) { $final_CV_MOTB = 2; }
+							if ($final_CV_MOTC > 1) { $final_CV_MOTC = 1; }
 
 							if ($finalHeat > 4) { $finalHeat = 4; }
 							if ($final_ENGN > 2) { $final_ENGN = 2; }
@@ -186,43 +222,23 @@
 								}
 							}
 
-							$sqlUpdateUnitStatus = "";
-							$sqlUpdateUnitStatus = $sqlUpdateUnitStatus . "UPDATE asc_unitstatus ";
-							$sqlUpdateUnitStatus = $sqlUpdateUnitStatus . "SET ";
-							$sqlUpdateUnitStatus = $sqlUpdateUnitStatus . "crit_engine_PREP=0, crit_fc_PREP=0, crit_mp_PREP=0, crit_weapons_PREP=0, heat_PREP=0, usedoverheat=0, ";
-							$sqlUpdateUnitStatus = $sqlUpdateUnitStatus . "crit_engine=".$final_ENGN.", crit_fc=".$final_FRCTRL.", crit_mp=".$final_MP.", crit_weapons=".$final_WPNS.", heat=".$finalHeat." ";
-							$sqlUpdateUnitStatus = $sqlUpdateUnitStatus . "where unitid=".$unitId.";";
-							echo $sqlUpdateUnitStatus."<br><br>";
-
 							$sqlInsertNewUnitStatus = "";
 							$sqlInsertNewUnitStatus = $sqlInsertNewUnitStatus . "INSERT INTO asc_unitstatus (unitid,playerid,gameid,round,heat,armor,`structure`,crit_engine,crit_fc,crit_mp,crit_weapons,usedoverheat,";
-							$sqlInsertNewUnitStatus = $sqlInsertNewUnitStatus . "   crit_engine_PREP,crit_fc_PREP,crit_mp_PREP,crit_weapons_PREP,heat_PREP,crit_CV_engine,crit_CV_firecontrol,crit_CV_weapons,crit_CV_motiveA,crit_CV_motiveB,crit_CV_motiveC,";
+							$sqlInsertNewUnitStatus = $sqlInsertNewUnitStatus . "   crit_engine_PREP,crit_fc_PREP,crit_mp_PREP,crit_weapons_PREP,heat_PREP,     crit_CV_engine,crit_CV_firecontrol,crit_CV_weapons,crit_CV_motiveA,crit_CV_motiveB,crit_CV_motiveC,";
 							$sqlInsertNewUnitStatus = $sqlInsertNewUnitStatus . "   crit_CV_engine_PREP,crit_CV_firecontrol_PREP,crit_CV_weapons_PREP,crit_CV_motiveA_PREP,crit_CV_motiveB_PREP,crit_CV_motiveC_PREP) ";
 							$sqlInsertNewUnitStatus = $sqlInsertNewUnitStatus . "VALUES ";
-							$sqlInsertNewUnitStatus = $sqlInsertNewUnitStatus . "(".$unitId."9999,".$pid.",".$gameid.",".$nextRound.",".$finalHeat.",".$armor.",".$structure.",".$final_ENGN.",".$final_FRCTRL.",".$final_MP.",".$final_WPNS.",0,"; // until currentTMM
-							$sqlInsertNewUnitStatus = $sqlInsertNewUnitStatus . "   0,0,0,0,0,  0,0,0,0,0,0,"; // crit PREP (0-5) -> stay 0!, CV Crit (last Block) -> fill with CV values
+							$sqlInsertNewUnitStatus = $sqlInsertNewUnitStatus . "(".$unitId.",".$pid.",".$gameid.",".$nextRound.",".$finalHeat.",".$armor.",".$structure.",".$final_ENGN.",".$final_FRCTRL.",".$final_MP.",".$final_WPNS.",0,"; // until currentTMM
+							$sqlInsertNewUnitStatus = $sqlInsertNewUnitStatus . "   0,0,0,0,0,  ".$final_CV_ENGN.",".$final_CV_FRCTRL.",".$final_CV_WPNS.",".$final_CV_MOTA.",".$final_CV_MOTB.",".$final_CV_MOTC.","; // crit PREP (0-5) -> stay 0!, CV Crit (last Block) -> fill with CV values
 							$sqlInsertNewUnitStatus = $sqlInsertNewUnitStatus . "   0,0,0,0,0,0); "; // CV PREP -> stay 0!
 							echo $sqlInsertNewUnitStatus."<br><br>";
 
-							if (mysqli_query($conn, $sqlUpdateUnitStatus)) {
-								echo "<br>";
-								echo "Record (asc_unitstatus) updated successfully<br>";
-								mysqli_commit($conn);
-							} else {
-								echo "<br>";
-								echo "Error (asc_unitstatus) updating record: " . mysqli_error($conn) . "<br>";
-
-								echo "<script>top.window.location = './gui_message_round_finalized_error_01.php'</script>";
-								die('ERROR 1');
-							}
 							if (mysqli_query($conn, $sqlInsertNewUnitStatus)) {
 								echo "<br>";
-								echo "Record (asc_unitstatus) inserted successfully<br>";
+								echo "Record unitstatus inserted successfully<br>";
 								mysqli_commit($conn);
 							} else {
 								echo "<br>";
-								echo "Error (asc_unitstatus) insert record: " . mysqli_error($conn) . "<br>";
-
+								echo "Error unitstatus insert record: " . mysqli_error($conn) . "<br>";
 								echo "<script>top.window.location = './gui_message_round_finalized_error_01.php'</script>";
 								die('ERROR 1');
 							}

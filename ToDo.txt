@@ -1,17 +1,24 @@
 
 
 
+
+
+
 Update license disclaimer to current situation
 
 add random click for player image while creating player
 
-Move some columns from mech/unit to mechstatus, because they are gamespecific!
-- mounted unit
-- active bid
-
 reset bidding on command change, no change if round >1
 
 add buttons to move a unit from formation one to next
+
+add movement tables and often used information under a button
+
+Kampfreport generieren aus Unit_Status (Zustand pro Runde Gegner gegenüber) -> HTML bzw PDF
+
+
+Button SPIEL BEENDEN ergänzen
+
 
 // HIGH
 TODO: Finish the crits for CVs
@@ -45,5 +52,4 @@ TODO: Scan QR codes to identify units on the table
 TODO: Shortcut bar irgendwo mit allen Mech-Ids zum schnellen Wechseln
 
 // OTHER
-TODO: Fix parameter names on all pages from "mech" to "unit"
-TODO: Fix table names according to mech -> unit
+-

@@ -1,8 +1,8 @@
 <?php
 
-//ini_set('display_errors', 1);
-//ini_set('display_startup_errors', 1);
-//error_reporting(E_ALL);
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 
 session_start();
 // https://www.php-einfach.de/php-tutorial/php-sessions/
@@ -58,7 +58,7 @@ session_start();
 
 	if ($togglebid == "1" || $togglebid == "0") {
 		$unitid = isset($_GET["unitid"]) ? $_GET["unitid"] : "";
-		$sqltogglebid = "UPDATE asc_unit set active_bid=".$togglebid." WHERE unitid = ".$unitid.";";
+		$sqltogglebid = "UPDATE asc_unitstatus set active_bid=".$togglebid." WHERE unitid=".$unitid." and round=".$CURRENTROUND." and gameid=".$gid.";";
 		if (mysqli_query($conn, $sqltogglebid)) {
 			// Success
 			//echo "Error: " . $sqltogglebid . "<br>";
@@ -70,10 +70,13 @@ session_start();
 		$overallpv = -1;
 		$overalltonnage = -1;
 		$sqlselectoverallpv = "";
-		$sqlselectoverallpv = $sqlselectoverallpv . "SELECT asc_unit.unit_tonnage, asc_unit.as_pv from asc_assign, asc_unit, asc_formation ";
+		$sqlselectoverallpv = $sqlselectoverallpv . "SELECT asc_unit.unit_tonnage, asc_unit.as_pv from asc_assign, asc_unit, asc_unitstatus, asc_formation ";
 		$sqlselectoverallpv = $sqlselectoverallpv . "WHERE asc_assign.formationid = asc_formation.formationid ";
 		$sqlselectoverallpv = $sqlselectoverallpv . "AND asc_assign.unitid = asc_unit.unitid ";
-		$sqlselectoverallpv = $sqlselectoverallpv . "AND asc_unit.active_bid = 1 ";
+		$sqlselectoverallpv = $sqlselectoverallpv . "AND asc_assign.unitid = asc_unitstatus.unitid ";
+		$sqlselectoverallpv = $sqlselectoverallpv . "AND asc_unitstatus.round = ".$CURRENTROUND." "; // runde
+		$sqlselectoverallpv = $sqlselectoverallpv . "AND asc_unitstatus.gameid = ".$gid." "; // gameid
+		$sqlselectoverallpv = $sqlselectoverallpv . "AND asc_unitstatus.active_bid = 1 ";
 		$sqlselectoverallpv = $sqlselectoverallpv . "AND asc_formation.playerid = ".$pid.";";
 		if (mysqli_query($conn, $sqlselectoverallpv)) {
 			// Success
@@ -324,11 +327,19 @@ session_start();
 	<div id="liberapay"><a href="./gui_support.php"><i class="fa-solid fa-handshake-simple"></i></a></div>
 	<div id="disclaimer"><a href="./gui_disclaimer.php">Disclaimer</a></div>
 
-
+	<br>
 
 	<table align="center" width="85%" cellspacing=2 cellpadding=2 border=0px>
 		<tr>
-			<td colspan="4" nowrap style='width:270px;height:30px;' onclick='location.href=\"#\"'class='formationselect_button_normal'><a href='#'>COMMAND</a></td>\n";
+		<?php
+		if (!$playMode) {
+			echo "						<td colspan='4' nowrap style='width:270px;height:30px;text-align:center;' onclick='location.href=\"gui_edit_command.php\"' class='formationselect_button_normal'>\n";
+			echo "							<a href='gui_edit_command.php'><i class='fas fa-edit'></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;COMMAND</a>\n";
+			echo "						</td>\n";
+		} else {
+			echo "						<td colspan='4' nowrap style='width:270px;height:30px;text-align:center;' class='formationselect_button_normal'><a href='#'>COMMAND</a></td>\n";
+		}
+		?>
 		</tr>
 		<tr>
 <?php
@@ -372,7 +383,7 @@ session_start();
 			$sql_asc_checkformationassignments = "SELECT SQL_NO_CACHE * FROM asc_assign where formationid=".$formationidSelected.";";
 			$result_asc_checkformationassignments = mysqli_query($conn, $sql_asc_checkformationassignments);
 			if (mysqli_num_rows($result_asc_checkformationassignments) > 0) {
-				echo "			<td nowrap style='width:270px;height:40px;' onclick='location.href=\"gui_play_unit.php?formationid=".$formationidSelected."\"' class='formationselect_button_normal'>\n";
+				echo "			<td nowrap style='width:270px;height:30px;' onclick='location.href=\"gui_play_unit.php?formationid=".$formationidSelected."\"' class='formationselect_button_normal'>\n";
 				echo "				<table style='width:100%;' cellspacing=0 cellpadding=0>\n";
 				echo "					<tr>\n";
 				if (!$playMode) {
@@ -390,7 +401,7 @@ session_start();
 				echo "				</table>\n";
 				echo "			</td>\n";
 			} else {
-				echo "			<td nowrap style='background-color:#444444;width:270px;height:40px;' class='formationselect_button_active'>\n";
+				echo "			<td nowrap style='background-color:#444444;width:270px;height:40px;text-align:center;' class='formationselect_button_active'>\n";
 				echo "				".$formationnameSelected."\n";
 				echo "			</td>\n";
 			}
@@ -406,6 +417,16 @@ session_start();
 				$unitHasMoved = $rowUnitAssignment['round_moved'];
 				$unitHasFired = $rowUnitAssignment['round_fired'];
 
+				$sql_asc_unitstatus = "SELECT SQL_NO_CACHE * FROM asc_unitstatus where unitid=".$assignedUnitID." and round=".$CURRENTROUND." and gameid=".$gid.";";
+				$result_asc_unitstatus = mysqli_query($conn, $sql_asc_unitstatus);
+				if (mysqli_num_rows($result_asc_unitstatus) > 0) {
+					while($rowUnitStatus = mysqli_fetch_assoc($result_asc_unitstatus)) {
+						$unitstatus = $rowUnitStatus['unit_status'];
+						$unitstatusimage = $rowUnitStatus['unit_statusimageurl'];
+						$activebid = $rowUnitStatus['active_bid'];
+					}
+				}
+
 				$sql_asc_unit = "SELECT SQL_NO_CACHE * FROM asc_unit where unitid=".$assignedUnitID." order by unit_tonnage desc;";
 				$result_asc_unit = mysqli_query($conn, $sql_asc_unit);
 				if (mysqli_num_rows($result_asc_unit) > 0) {
@@ -419,11 +440,8 @@ session_start();
 
 						$unitnumber = $rowUnit['unit_number'];
 						$unitchassisname = $clan.$rowUnit['as_model'];
-						$unitstatusimage = $rowUnit['unit_statusimageurl'];
 						$unitpointvalue = $rowUnit['as_pv'];
 						$unittonnage = $rowUnit['unit_tonnage'];
-						$activebid = $rowUnit['active_bid'];
-						$unitstatus = $rowUnit['unit_status'];
 
 						$pointvaluetotal = $pointvaluetotal + intval($unitpointvalue);
 						$tonnagetotal = $tonnagetotal + intval($unittonnage);

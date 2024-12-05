@@ -1,6 +1,10 @@
 <?php
+
+	ini_set('display_errors', 1);
+	ini_set('display_startup_errors', 1);
+	error_reporting(E_ALL);
+
 	session_start();
-	ini_set("display_errors", 1); error_reporting(E_ALL);
 
 	require('./logger.php');
 	require_once('./db.php');
@@ -27,6 +31,9 @@
 	$mvmnt    = isset($_GET["mvmnt"]) ? $_GET["mvmnt"] : "";
 	$wpnsf    = isset($_GET["wpnsf"]) ? $_GET["wpnsf"] : "";
 
+	$currRound = isset($_GET["currentRound"]) ? $_GET["currentRound"] : "";
+	$gameid = isset($_GET["gameid"]) ? $_GET["gameid"] : "";
+
 	echo "<!DOCTYPE html>\n";
 	echo "<html lang='en'>\n";
 	echo "<body>\n";
@@ -34,6 +41,8 @@
 
 	if (!empty($index)) {
 		echo "SAVING DATA...<br>";
+
+		echo "CurrentRound: ".$currRound;
 
 		echo $index."<br>";
 		echo $h."<br>";
@@ -58,29 +67,29 @@
 		echo $wpnsf."<br>";
 		echo "<br>";
 
-		$sql = "UPDATE asc_unitstatus SET heat=".$h.",armor=".$a.",structure=".$s.",crit_engine=".$e.",crit_fc=".$fc.",crit_mp=".$mp.",crit_weapons=".$w.",crit_CV_engine=".$e_cv.",crit_CV_firecontrol=".$fc_cv.",crit_CV_weapons=".$w_cv.",crit_CV_motiveA=".$ma_cv.",crit_CV_motiveB=".$mb_cv.",crit_CV_motiveC=".$mc_cv.",usedoverheat=".$uov." WHERE unitid=".$index;
+		$sql = "UPDATE asc_unitstatus SET unit_statusimageurl='".$mstat."',unit_status='".$mstatstr."',heat=".$h.",armor=".$a.",structure=".$s.",crit_engine=".$e.",crit_fc=".$fc.",crit_mp=".$mp.",crit_weapons=".$w.",crit_CV_engine=".$e_cv.",crit_CV_firecontrol=".$fc_cv.",crit_CV_weapons=".$w_cv.",crit_CV_motiveA=".$ma_cv.",crit_CV_motiveB=".$mb_cv.",crit_CV_motiveC=".$mc_cv.",usedoverheat=".$uov." WHERE unitid=".$index." AND round=".$currRound." AND gameid=".$gameid.";";
 		echo "Statement: " . $sql;
 
 		if (mysqli_query($conn, $sql)) {
 			echo "<br>";
-			echo "Record (asc_unitstatus) updated successfully";
+			echo "Record unitstatus updated successfully";
 			mysqli_commit($conn);
 		} else {
 			echo "<br>";
-			echo "Error (asc_unitstatus) updating record: " . mysqli_error($conn);
+			echo "Error unitstatus updating record: " . mysqli_error($conn);
 		}
 
-		$sql2 = "UPDATE asc_unit SET unit_statusimageurl='".$mstat."',unit_status='".$mstatstr."' WHERE unitid=".$index;
-		echo "<br><br>UPDATE asc_unit SET unit_statusimageurl='".$mstat."',unit_status='".$mstatstr."' WHERE unitid=".$index;
-
-		if (mysqli_query($conn, $sql2)) {
-			echo "<br>";
-			echo "Record (asc_unit) updated successfully";
-			mysqli_commit($conn);
-		} else {
-			echo "<br>";
-			echo "Error (asc_unit) updating record: " . mysqli_error($conn);
-		}
+//		$sql2 = "UPDATE asc_unit SET unit_statusimageurl='".$mstat."',unit_status='".$mstatstr."' WHERE unitid=".$index;
+//		echo "Statement 2: " . $sql2;
+//
+//		if (mysqli_query($conn, $sql2)) {
+//			echo "<br>";
+//			echo "Record (asc_unit) updated successfully";
+//			mysqli_commit($conn);
+//		} else {
+//			echo "<br>";
+//			echo "Error (asc_unit) updating record: " . mysqli_error($conn);
+//		}
 
 		$sql3 = "UPDATE asc_assign SET round_moved=".$mvmnt.",round_fired=".$wpnsf." WHERE unitid=".$index;
 		echo "UPDATE asc_assign<br>SET round_moved=".$mvmnt.",round_fired=".$wpnsf." WHERE unitid=".$index;

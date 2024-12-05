@@ -207,7 +207,7 @@ session_start();
 
 		$sql_insertunit = "";
 		$sql_insertunit = $sql_insertunit."INSERT INTO asc_unit ";
-		$sql_insertunit = $sql_insertunit."(unit_number, tech, mulid, unit_tonnage, as_model, as_pv, as_tp, as_sz, as_tmm, as_mv, as_mvj, as_role, as_skill, as_short, as_short_min, as_medium, as_medium_min, as_long, as_long_min, as_extreme, as_extreme_min, as_ov, as_armor, as_structure, as_threshold, as_specials, unit_imageurl, unit_statusimageurl, playerid, as_mvtype) ";
+		$sql_insertunit = $sql_insertunit."(unit_number, tech, mulid, unit_tonnage, as_model, as_pv, as_tp, as_sz, as_tmm, as_mv, as_mvj, as_role, as_skill, as_short, as_short_min, as_medium, as_medium_min, as_long, as_long_min, as_extreme, as_extreme_min, as_ov, as_armor, as_structure, as_threshold, as_specials, playerid, as_mvtype) ";
 		$sql_insertunit = $sql_insertunit."VALUES (";
 		$sql_insertunit = $sql_insertunit."'".$MNU."', ";           // unit_number
 		$sql_insertunit = $sql_insertunit."'".$TECH."', ";          // tech
@@ -239,8 +239,8 @@ session_start();
 		$sql_insertunit = $sql_insertunit."'".$S."', ";             // as_structure
 		$sql_insertunit = $sql_insertunit."0, ";                    // as_threshold
 		$sql_insertunit = $sql_insertunit."'".$SPCL."', ";          // as_specials
-		$sql_insertunit = $sql_insertunit."'".$UNITIMAGE."', ";     // unit_imageurl
-		$sql_insertunit = $sql_insertunit."'".$UNITSTATUSIMAGE."', "; // unit_statusimageurl
+//		$sql_insertunit = $sql_insertunit."'".$UNITIMAGE."', ";     // unit_imageurl
+//		$sql_insertunit = $sql_insertunit."'".$UNITSTATUSIMAGE."', "; // unit_statusimageurl
 
 		$sql_insertunit = $sql_insertunit."'".$pid."', "; // playerid
 		$sql_insertunit = $sql_insertunit."'".$MVTYPE."'"; // as_mvtype h = hover, w = wheeled, t = tracked
@@ -288,17 +288,21 @@ session_start();
 
 		$sql_insertunitstatus = "";
 		$sql_insertunitstatus = $sql_insertunitstatus."INSERT INTO asc_unitstatus ";
-		$sql_insertunitstatus = $sql_insertunitstatus."(unitid, playerid, heat, armor, structure, crit_engine, crit_fc, crit_mp, crit_weapons) ";
+		$sql_insertunitstatus = $sql_insertunitstatus."(unitid, playerid, gameid, round, heat, armor, structure, crit_engine, crit_fc, crit_mp, crit_weapons, unit_imageurl, unit_statusimageurl) ";
 		$sql_insertunitstatus = $sql_insertunitstatus."VALUES (";
 		$sql_insertunitstatus = $sql_insertunitstatus.$newunitid.",";
 		$sql_insertunitstatus = $sql_insertunitstatus.$pid.",";
+		$sql_insertunitstatus = $sql_insertunitstatus.$gid.",";
+		$sql_insertunitstatus = $sql_insertunitstatus.$CURRENTROUND.",";
 		$sql_insertunitstatus = $sql_insertunitstatus."0, ";
 		$sql_insertunitstatus = $sql_insertunitstatus."0, ";
 		$sql_insertunitstatus = $sql_insertunitstatus."0, ";
 		$sql_insertunitstatus = $sql_insertunitstatus."0, ";
 		$sql_insertunitstatus = $sql_insertunitstatus."0, ";
 		$sql_insertunitstatus = $sql_insertunitstatus."0, ";
-		$sql_insertunitstatus = $sql_insertunitstatus."0";
+		$sql_insertunitstatus = $sql_insertunitstatus."0, ";
+		$sql_insertunitstatus = $sql_insertunitstatus."'".$UNITIMAGE."', ";        // unit_imageurl
+		$sql_insertunitstatus = $sql_insertunitstatus."'".$UNITSTATUSIMAGE."'";  // unit_statusimageurl
 		$sql_insertunitstatus = $sql_insertunitstatus.")";
 		if (mysqli_query($conn, $sql_insertunitstatus)) {
 			// Success

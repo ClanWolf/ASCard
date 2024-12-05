@@ -71,7 +71,7 @@ session_start();
 <html lang="en">
 
 <head>
-	<title>ASCard.net AplhaStrike Card App (clanwolf.net): Options</title>
+	<title>ASCard.net AplhaStrike Card App (clanwolf.net): Administration</title>
 	<meta charset="utf-8">
 	<!-- <meta http-equiv="expires" content="0"> -->
 	<!-- <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"> -->

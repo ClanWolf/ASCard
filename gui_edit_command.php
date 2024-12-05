@@ -35,7 +35,7 @@ session_start();
 <html lang="en">
 
 <head>
-	<title>ASCard.net AplhaStrike Card App (clanwolf.net): Edit Formation</title>
+	<title>ASCard.net AplhaStrike Card App (clanwolf.net): Edit Command</title>
 	<meta charset="utf-8">
 	<!-- <meta http-equiv="expires" content="0"> -->
 	<!-- <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"> -->
@@ -167,7 +167,7 @@ session_start();
 
 	<table align="center" cellspacing=2 cellpadding=2 border=0px>
 
-EDIT FORMATION
+EDIT COMMANDS
 
 	</table>
 </body>

@@ -175,8 +175,6 @@
 				// as_short; as_short_min; as_medium; as_medium_min;
 				// as_long; as_long_min; as_extreme; as_extreme_min;
 				// as_ov; as_armor; as_structure; as_threshold; as_specials;
-				// unit_imageurl
-				// and active_bid=1
 				$sql_asc_unit = "SELECT SQL_NO_CACHE * FROM asc_unit where unitid=".$unitid." order by unit_tonnage desc;";
 				$result_asc_unit = mysqli_query($conn, $sql_asc_unit);
 				if (mysqli_num_rows($result_asc_unit) > 0) {
@@ -193,8 +191,6 @@
 							$array_UNIT_NUMBER[$unitcount] = $row["unit_number"];
 							$array_UNIT_MODEL[$unitcount] = $clan.$row["as_model"];
 							$array_UNIT_IMG_URL[$unitcount] = $row["unit_imageurl"];
-							$array_UNIT_IMG_STATUS[$unitcount] = $row["unit_statusimageurl"];
-							$array_UNIT_STATUSSTRING[$unitcount] = $row["unit_status"];
 							$array_TECH[$unitcount] = $row["tech"];
 							$array_PV[$unitcount] = $row["as_pv"];
 							$array_TP[$unitcount] = $row["as_tp"];
@@ -213,11 +209,6 @@
 							$array_SPCL[$unitcount] = $row["as_specials"];
 							$array_A_MAX[$unitcount] = $row["as_armor"];
 							$array_S_MAX[$unitcount] = $row["as_structure"];
-
-							$array_MOUNTED_UNITID[$unitcount] = $row["mounted_unitid"];
-                            $array_MOUNTED_ON_UNITID[$unitcount] = $row["mounted_on_unitid"];
-
-							$array_ACTIVE_BID[$unitcount] = $row["active_bid"];
 						}
 					}
 				}
@@ -226,7 +217,7 @@
 				// Unitstatus
 				// unitstatusid; unitid; heat; armor; structure;
 				// crit_engine; crit_fc; crit_mp; crit_weapons
-				$sql_asc_unitstatus = "SELECT SQL_NO_CACHE * FROM asc_unitstatus where unitid=".$unitid.";";
+				$sql_asc_unitstatus = "SELECT SQL_NO_CACHE * FROM asc_unitstatus where unitid=".$unitid." and round=".$CURRENTROUND." and gameid=".$GAMEID.";";
 				$result_asc_unitstatus = mysqli_query($conn, $sql_asc_unitstatus);
 				if (mysqli_num_rows($result_asc_unitstatus) > 0) {
 					while($row = mysqli_fetch_assoc($result_asc_unitstatus)) {
@@ -242,6 +233,10 @@
 							$array_FRCTRL_PREP[$unitcount] = $row["crit_fc_PREP"];
 							$array_MP_PREP[$unitcount] = $row["crit_mp_PREP"];
 							$array_WPNS_PREP[$unitcount] = $row["crit_weapons_PREP"];
+
+							$array_ACTIVE_BID[$unitcount] = $row["active_bid"];
+							$array_UNIT_IMG_STATUS[$unitcount] = $row["unit_statusimageurl"];
+							$array_UNIT_STATUSSTRING[$unitcount] = $row["unit_status"];
 
 							$array_CV_ENGN[$unitcount] = $row["crit_CV_engine"];
 							$array_CV_FRCTRL[$unitcount] = $row["crit_CV_firecontrol"];
@@ -259,6 +254,9 @@
 							$array_HT_PREP[$unitcount] = $row["heat_PREP"];
 							$array_USEDOVERHEAT[$unitcount] = $row["usedoverheat"];
 							$array_CURRENTTMM[$unitcount] = $row["currenttmm"];
+
+							$array_MOUNTED_UNITID[$unitcount] = $row["mounted_unitid"];
+                            $array_MOUNTED_ON_UNITID[$unitcount] = $row["mounted_on_unitid"];
 
 							// echo "<script>console.log('".$sql_asc_unitstatus." --- ".$row["heat"]."');</script>";
 						}

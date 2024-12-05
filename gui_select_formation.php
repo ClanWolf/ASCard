@@ -163,10 +163,9 @@ session_start();
 	<div id="liberapay"><a href="./gui_support.php"><i class="fa-solid fa-handshake-simple"></i></a></div>
 	<div id="disclaimer"><a href="./gui_disclaimer.php">Disclaimer</a></div>
 
-	<br>
+
 
 	<table align="center" cellspacing=2 cellpadding=2 border=0px>
-
 <?php
 	if (!($stmt = $conn->prepare("SELECT SQL_NO_CACHE * FROM asc_player where bid_pv is not null and bid_pv > 0 and opfor = 1 and gameid = ".$gid." ORDER BY bid_pv asc;"))) {
 		echo "Prepare failed: (" . $conn->errno . ") " . $conn->error;
@@ -226,7 +225,7 @@ session_start();
 							echo "		<table cellspacing='0' cellpadding='0'>\n";
 							echo "			<tr>\n";
 							echo "				<td width='90%' style='text-align:left;'>\n";
-							echo "					<a href='gui_play_unit.php?formationid=".$formationidSelected."'>".$formationnameSelected."</a>\n";
+							echo "					<a href='gui_play_unit.php?formationid=".$formationidSelected."'>&nbsp;&nbsp;&nbsp;".$formationnameSelected."</a>\n";
 							echo "				</td>\n";
 							echo "				<td width='10%' style='text-align:right;'>\n";
 							echo "					<img src='./images/factions/".$factionlogo."' width='20px' style='border:1px solid;'>\n";
@@ -333,7 +332,7 @@ session_start();
 							echo "	<table cellspacing='0' cellpadding='0'>\n";
 							echo "		<tr>\n";
 							echo "			<td width='90%' style='text-align:left;'>\n";
-							echo "				<a href='gui_play_unit.php?formationid=".$formationidSelected."'>".$formationnameSelected."</a>\n";
+							echo "				<a href='gui_play_unit.php?formationid=".$formationidSelected."'>&nbsp;&nbsp;&nbsp;".$formationnameSelected."</a>\n";
 							echo "			</td>\n";
 							echo "			<td width='10%' style='text-align:right;'>\n";
 							echo "				<img src='./images/factions/".$factionlogo."' width='20px' style='border:1px solid;'>\n";
@@ -345,7 +344,7 @@ session_start();
 							echo "<td nowrap style='background-color:#444444;width:170px;height:40px;$selectBorder' class='formationselect_button_active'>\n";
 							echo "	<table cellspacing='0' cellpadding='0'>\n";
 							echo "		<tr>\n";
-							echo "			<td width='90%' style='text-align:left;'>\n";
+							echo "			<td width='90%' style='text-align:center;'>\n";
 							echo "				".$formationnameSelected."\n";
 							echo "			</td>\n";
 							echo "			<td width='10%' style='text-align:right;'>\n";

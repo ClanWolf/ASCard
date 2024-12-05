@@ -1,0 +1,4 @@
+INSERT INTO ascard.asc_unit (playerid,mulid,tech,unit_number,unit_tonnage,unit_imageurl,as_model,as_pv,as_tp,as_sz,as_tmm,as_mv,as_mvj,as_role,as_skill,as_short,as_short_min,as_medium,as_medium_min,as_long,as_long_min,as_extreme,as_extreme_min,as_ov,as_armor,as_structure,as_threshold,as_specials,as_mvtype,Updated) VALUES
+	 (4,7570,2,'32',20,'images/units/Generic_Mech.gif','Baboon (Howler) 6',28,'BM',1,3,14,NULL,'Striker',3,2,0,2,0,0,0,0,0,0,2,2,0,'CASEII,SRM2/2,TUR(2/2/-,SRM2/2)','','2024-12-05 00:12:01.0'),
+	 (1,1985,2,'66',75,'images/units/Timberwolf.png','Mad Cat (Timber Wolf) Prime',65,'BM',3,2,10,NULL,'Brawler',3,5,0,5,0,4,0,0,0,1,8,4,0,'CASE,IF2,LRM1/1/2,OMNI','','2024-12-05 22:57:56.0'),
+	 (1,3183,2,'77',70,'images/units/Summoner.png','Thor (Summoner) Prime',52,'BM',3,2,10,10,'Sniper',3,4,0,4,0,4,0,0,0,0,6,4,0,'CASE,FLK1/1/1,IF1,OMNI','','2024-12-05 22:57:50.0');

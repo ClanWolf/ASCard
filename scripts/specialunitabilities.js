@@ -20,7 +20,7 @@ function getSpecialUnitAbilities(sa) {
 			}
 
 			if (shortenedSA.substring(0, 1) != currentLetter) {
-				console.log(shortenedSA + " - " + shortenedSA.substring(0, 1) + " - " + currentLetter);
+				// console.log(shortenedSA + " - " + shortenedSA.substring(0, 1) + " - " + currentLetter);
 				currentLetter = shortenedSA.substring(0, 1);
 				alphabetNavigation = alphabetNavigation + "<a style='font-size:1.3em;' href='gui_show_specialabilities.php?sa=" + shortenedSA + "'>" + currentLetter + "</a>&nbsp;&nbsp;&nbsp;";
 			}
