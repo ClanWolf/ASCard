@@ -33,6 +33,7 @@
 		$result_asc_playerRound = mysqli_query($conn, $sql_asc_playerRound);
 		if (mysqli_num_rows($result_asc_playerRound) > 0) {
 			while($row = mysqli_fetch_assoc($result_asc_playerRound)) {
+				$gameid = $row["gameid"];
 				$currentRound = $row["round"];
 			}
 		}
@@ -149,6 +150,9 @@
 							$WPNS = $row["crit_weapons"];
 							$usedOverHeat = $row["usedoverheat"];
 
+							$armor = $row["armor"];
+							$structure = $row["structure"];
+
 							$finalHeat = $heat + $usedOverHeat + $HT_PREP;
 							$final_ENGN = $ENGN + $ENGN_PREP;
 							$final_FRCTRL = $FRCTRL + $FRCTRL_PREP;
@@ -189,6 +193,17 @@
 							$sqlUpdateUnitStatus = $sqlUpdateUnitStatus . "crit_engine=".$final_ENGN.", crit_fc=".$final_FRCTRL.", crit_mp=".$final_MP.", crit_weapons=".$final_WPNS.", heat=".$finalHeat." ";
 							$sqlUpdateUnitStatus = $sqlUpdateUnitStatus . "where unitid=".$unitId.";";
 							echo $sqlUpdateUnitStatus."<br><br>";
+
+							$sqlInsertNewUnitStatus = "";
+							$sqlInsertNewUnitStatus = $sqlInsertNewUnitStatus . "INSERT INTO asc_unitstatus (unitid,playerid,gameid,round,heat,armor,`structure`,crit_engine,crit_fc,crit_mp,crit_weapons,usedoverheat,";
+							$sqlInsertNewUnitStatus = $sqlInsertNewUnitStatus . "   crit_engine_PREP,crit_fc_PREP,crit_mp_PREP,crit_weapons_PREP,heat_PREP,crit_CV_engine,crit_CV_firecontrol,crit_CV_weapons,crit_CV_motiveA,crit_CV_motiveB,crit_CV_motiveC,";
+							$sqlInsertNewUnitStatus = $sqlInsertNewUnitStatus . "   crit_CV_engine_PREP,crit_CV_firecontrol_PREP,crit_CV_weapons_PREP,crit_CV_motiveA_PREP,crit_CV_motiveB_PREP,crit_CV_motiveC_PREP) ";
+							$sqlInsertNewUnitStatus = $sqlInsertNewUnitStatus . "VALUES ";
+							$sqlInsertNewUnitStatus = $sqlInsertNewUnitStatus . "(".$unitId."9999,".$pid.",".$gameid.",".$nextRound.",".$finalHeat.",".$armor.",".$structure.",".$final_ENGN.",".$final_FRCTRL.",".$final_MP.",".$final_WPNS.",0,"; // until currentTMM
+							$sqlInsertNewUnitStatus = $sqlInsertNewUnitStatus . "   0,0,0,0,0,  0,0,0,0,0,0,"; // crit PREP (0-5) -> stay 0!, CV Crit (last Block) -> fill with CV values
+							$sqlInsertNewUnitStatus = $sqlInsertNewUnitStatus . "   0,0,0,0,0,0); "; // CV PREP -> stay 0!
+							echo $sqlInsertNewUnitStatus."<br><br>";
+
 							if (mysqli_query($conn, $sqlUpdateUnitStatus)) {
 								echo "<br>";
 								echo "Record (asc_unitstatus) updated successfully<br>";
@@ -196,6 +211,17 @@
 							} else {
 								echo "<br>";
 								echo "Error (asc_unitstatus) updating record: " . mysqli_error($conn) . "<br>";
+
+								echo "<script>top.window.location = './gui_message_round_finalized_error_01.php'</script>";
+								die('ERROR 1');
+							}
+							if (mysqli_query($conn, $sqlInsertNewUnitStatus)) {
+								echo "<br>";
+								echo "Record (asc_unitstatus) inserted successfully<br>";
+								mysqli_commit($conn);
+							} else {
+								echo "<br>";
+								echo "Error (asc_unitstatus) insert record: " . mysqli_error($conn) . "<br>";
 
 								echo "<script>top.window.location = './gui_message_round_finalized_error_01.php'</script>";
 								die('ERROR 1');

@@ -324,11 +324,11 @@ session_start();
 	<div id="liberapay"><a href="./gui_support.php"><i class="fa-solid fa-handshake-simple"></i></a></div>
 	<div id="disclaimer"><a href="./gui_disclaimer.php">Disclaimer</a></div>
 
-	<br>
+
 
 	<table align="center" width="85%" cellspacing=2 cellpadding=2 border=0px>
 		<tr>
-			<td colspan="4" nowrap style='width:270px;height:40px;' onclick='location.href=\"#\"'class='formationselect_button_normal'><a href='#'>COMMAND</a></td>\n";
+			<td colspan="4" nowrap style='width:270px;height:30px;' onclick='location.href=\"#\"'class='formationselect_button_normal'><a href='#'>COMMAND</a></td>\n";
 		</tr>
 		<tr>
 <?php

@@ -3,25 +3,20 @@
 
 Update license disclaimer to current situation
 
-allow deleting of my own units in assign gui
-
 add random click for player image while creating player
 
 Move some columns from mech/unit to mechstatus, because they are gamespecific!
 - mounted unit
 - active bid
 
-move bidding columns from player to a new table to link them to the command
+reset bidding on command change, no change if round >1
 
 add buttons to move a unit from formation one to next
-
-Show player gui only if admin
 
 // HIGH
 TODO: Finish the crits for CVs
 TODO: Add finalize round for CVs
 TODO: Indikator für gemountete Elementare / Infanterie
-TODO: Show only owned units in assignment list
 TODO: Add big name of the mech somewhere on the card (?)
 TODO: Show jump only if a unit can jump
 TODO: Add a faction selection while creating a user. this will be the default faction for formations and commands
@@ -43,7 +38,6 @@ TODO: Add all text description for Special Abilities
 TODO: Add similar json / overview page for pilot abilities
 
 // NICE TO HAVE
-TODO: Do not allow jumping if the unit does not have j movement
 TODO: Show only one name for clan mechs (choose in options which one)
 TODO: Add a large text with Mechname on play unit screen
 TODO: Import units from mul directly somehow (have mul open, select a unit and export it to ASCard)
