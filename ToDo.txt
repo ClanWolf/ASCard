@@ -16,6 +16,13 @@ add movement tables and often used information under a button
 
 Kampfreport generieren aus Unit_Status (Zustand pro Runde Gegner gegenüber) -> HTML bzw PDF
 
+Edit commands (set faction, name and backgroundtext)
+Edit users (set faction, name and backgroundtext)
+Edit formations (set faction, name and backgroundtext)
+
+
+Add a name field to every unit, add a name parsed from unit name on creation and show this name in the unit card as big string (limited to 25 chars?)
+
 
 Button SPIEL BEENDEN ergänzen
 
