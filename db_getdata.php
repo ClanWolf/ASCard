@@ -26,6 +26,7 @@
 	$array_UNIT_DBID = array();
 	$array_UNIT_MULID = array();
 	$array_UNIT_NUMBER = array();
+	$array_UNIT_NAME = array();
 	$array_UNIT_IMG_URL = array();
 	$array_UNIT_IMG_STATUS = array();
 	$array_UNIT_STATUSSTRING = array();
@@ -189,6 +190,7 @@
 							$array_UNIT_DBID[$unitcount] = $row["unitid"];
 							$array_UNIT_MULID[$unitcount] = $row["mulid"];
 							$array_UNIT_NUMBER[$unitcount] = $row["unit_number"];
+							$array_UNIT_NAME[$unitcount] = $row["unit_name"];
 							$array_UNIT_MODEL[$unitcount] = $clan.$row["as_model"];
 							$array_UNIT_IMG_URL[$unitcount] = $row["unit_imageurl"];
 							$array_TECH[$unitcount] = $row["tech"];

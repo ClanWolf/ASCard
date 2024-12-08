@@ -726,6 +726,10 @@ session_start();
 	<img id='toprightimage' onclick='javascript:hideTopRightPanel();' src='./images/top-right_02.png' style='height:125px;'>
 </div>
 
+<div id="unitname">
+    <?= strtoupper($array_UNIT_NAME[$chosenUnitIndex]); ?>
+</div>
+
 <?php
 	echo "<div id='player_image'>\n";
 	echo "	<img src='./images/player/".$pimage."' width='60px' height='60px'>\n";

@@ -260,6 +260,48 @@ a:hover {
 	top: 52px;
 	left: 140px;
 }
+#unitname {
+	position: absolute;
+	padding: 20px;
+	top: 52px;
+	font-family: Arial;
+	font-size: 95px;
+	color: red;
+	z-index: 3;
+	text-shadow:
+		-2px   -2px yellow,
+		-2px -1.5px yellow,
+		-2px   -1px yellow,
+		-2px -0.5px yellow,
+		-2px    0px yellow,
+		-2px  0.5px yellow,
+		-2px    1px yellow,
+		-2px  1.5px yellow,
+		-2px    2px yellow,
+		-1.5px  2px yellow,
+		-1px    2px yellow,
+		-0.5px  2px yellow,
+		0px     2px yellow,
+		0.5px   2px yellow,
+		1px     2px yellow,
+		1.5px   2px yellow,
+		2px     2px yellow,
+		2px   1.5px yellow,
+		2px     1px yellow,
+		2px   0.5px yellow,
+		2px     0px yellow,
+		2px  -0.5px yellow,
+		2px    -1px yellow,
+		2px  -1.5px yellow,
+		2px    -2px yellow,
+		1.5px  -2px yellow,
+		1px    -2px yellow,
+		0.5px  -2px yellow,
+		0px    -2px yellow,
+		-0.5px -2px yellow,
+		-1px   -2px yellow,
+		-1.5px -2px yellow;
+}
 #faction {
 	z-index: 3;
 	position: absolute;
