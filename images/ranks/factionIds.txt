@@ -15,21 +15,21 @@
 15      x Clan Nova Cat
 
 
-CW		LA		CS		DC		WD		LC		FS		FWL					CC
-------------------------------------------------------------------------------------------------------
-MW						Heishi							Private				Shia-ben-bing
-SCom					Gunjin							Private First		San-ben-bing
-SCpt					Go-cho							Corporal			Si-ben-bing
-SCol					Gunsho							Sergeant			Yi-si-ben-bing
-GCom					Shujin							Staff Sergeant		Sao-wei
-Khan					Kashira							Master Sergeant		Sang-wei
-						Sho-ko							Sergeant Major		Sao-shao
-						Chu-i							Lieutenant Junior	Zhong-shao
-						Tai-i							Lieutenant Senior	Sang-shao
-						Sho-sa							Captain				Jiang-jun
-						Chu-sa							Force Commander		Sang-jiang-jun
-						Tai-sa							Lieutenant Colonel
-						Sho-sho							Colonel
-						Tai-sho							General
-						Tai-shu							Marshal
+CW		LA		CS		DC		WD		LC		FS		FWL			CC
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+MW						Heishi								Private			Shia-ben-bing
+SCom						Gunjin								Private First		San-ben-bing
+SCpt						Go-cho								Corporal		Si-ben-bing
+SCol						Gunsho								Sergeant		Yi-si-ben-bing
+GCom						Shujin								Staff Sergeant		Sao-wei
+saKhan						Kashira								Master Sergeant		Sang-wei
+Khan						Sho-ko								Sergeant Major		Sao-shao
+						Chu-i								Lieutenant Junior	Zhong-shao
+						Tai-i								Lieutenant Senior	Sang-shao
+						Sho-sa								Captain			Jiang-jun
+						Chu-sa								Force Commander		Sang-jiang-jun
+						Tai-sa								Lieutenant Colonel
+						Sho-sho								Colonel
+						Tai-sho								General
+						Tai-shu								Marshal
 														Captain-General
