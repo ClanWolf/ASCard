@@ -12,6 +12,8 @@
 12	x Clan Smoke Jaguar
 13	x Clan Wolf in Exile
 14	x Clan Snow Raven
+15      x Clan Nova Cat
+
 
 CW		LA		CS		DC		WD		LC		FS		FWL					CC
 ------------------------------------------------------------------------------------------------------
