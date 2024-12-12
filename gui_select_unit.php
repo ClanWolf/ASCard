@@ -1,8 +1,8 @@
 <?php
 
-//ini_set('display_errors', 1);
-//ini_set('display_startup_errors', 1);
-//error_reporting(E_ALL);
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 
 session_start();
 // https://www.php-einfach.de/php-tutorial/php-sessions/
@@ -24,6 +24,9 @@ session_start();
 	$playMode = $opt3;
 
 	$isAdmin = $_SESSION['isAdmin'];
+
+	$update_logintime = "UPDATE asc_player SET last_login=now() WHERE playerid = ".$pid;
+	$result_update_logintime = mysqli_query($conn, $update_logintime);
 
 	$sql_asc_playerround = "SELECT SQL_NO_CACHE * FROM asc_player where playerid = " . $pid . ";";
 	$result_asc_playerround = mysqli_query($conn, $sql_asc_playerround);
@@ -319,7 +322,7 @@ session_start();
 
 				<td nowrap onclick="location.href='./gui_edit_option.php'" width="<?php echo $buttonWidth ?>"><div class='unitselect_button_normal'><a href='./gui_edit_option.php'>OPTIONS</a><br><span style='font-size:16px;'>Change options</span></div></td>
 				<td style="width:5px;">&nbsp;</td>
-				<td style="width: 60px;" nowrap width="60px" style="background: rgba(50,50,50,1.0); text-align: center; vertical-align: middle;"><img src='./images/player/<?=$pimage?>' height='60px'></td>
+				<td nowrap onclick="location.href='gui_show_playerlist.php'" style="width: 60px;" nowrap width="60px" style="background: rgba(50,50,50,1.0); text-align: center; vertical-align: middle;"><img src='./images/player/<?=$pimage?>' height='60px'></td>
 			</tr>
 		</table>
 	</div>
@@ -442,6 +445,13 @@ session_start();
 						$unitchassisname = $clan.$rowUnit['as_model'];
 						$unitpointvalue = $rowUnit['as_pv'];
 						$unittonnage = $rowUnit['unit_tonnage'];
+						$unittype = $rowUnit['as_tp'];
+
+						// Unitstatusimage will be set to "_01.png" when the round is reset to 1
+						// This is cleaned up here
+						if ($unitstatusimage == "_01.png") {
+							$unitstatusimage = "images/DD_".$unittype."_01.png";
+						}
 
 						$pointvaluetotal = $pointvaluetotal + intval($unitpointvalue);
 						$tonnagetotal = $tonnagetotal + intval($unittonnage);
@@ -510,25 +520,33 @@ session_start();
 				$unitDetailString = "";
 
 				if ($activebid == "1") {
-					$unitDetailString = $unitDetailString."						<td nowrap width='1%' onclick=\"location.href='gui_select_unit.php?activebid=0&unitid=".$assignedUnitID."'\" style='background-color:#121212;text-align:right;'>\n";
-					$unitDetailString = $unitDetailString."							<span style='font-size:16px;'>\n";
 					if (!$playMode) {
-						$unitDetailString = $unitDetailString."								\n";
+						$unitDetailString = $unitDetailString."						<td nowrap width='1%' onclick=\"location.href='gui_edit_unit.php?unitid=".$assignedUnitID."'\" style='background-color:#444;color:#aaa;text-align:right;'>\n";
+						$unitDetailString = $unitDetailString."							<span style='font-size:16px;'>\n";
+						$unitDetailString = $unitDetailString."								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class='fas fa-edit'></i>&nbsp;&nbsp;&nbsp;\n";
+						$unitDetailString = $unitDetailString."							</span>\n";
+						$unitDetailString = $unitDetailString."						</td>\n";
 					} else {
-						$unitDetailString = $unitDetailString."								<span>&nbsp;&nbsp;&nbsp;<i class='fas fa-arrow-circle-left' aria-hidden='true' style='font-size:40;color:#741300;'></i>&nbsp;&nbsp;&nbsp;</span>\n";
+						$unitDetailString = $unitDetailString."						<td nowrap width='1%' onclick=\"location.href='gui_select_unit.php?activebid=0&unitid=".$assignedUnitID."'\" style='background-color:#121212;text-align:right;'>\n";
+						$unitDetailString = $unitDetailString."							<span style='font-size:16px;'>\n";
+						$unitDetailString = $unitDetailString."								&nbsp;&nbsp;&nbsp;<i class='fas fa-arrow-circle-left' aria-hidden='true' style='font-size:40;color:#741300;'></i>&nbsp;&nbsp;&nbsp;\n";
+						$unitDetailString = $unitDetailString."							</span>\n";
+						$unitDetailString = $unitDetailString."						</td>\n";
 					}
-					$unitDetailString = $unitDetailString."							</span>\n";
-					$unitDetailString = $unitDetailString."						</td>\n";
 				} else {
-					$unitDetailString = $unitDetailString."						<td nowrap width='1%' onclick=\"location.href='gui_select_unit.php?activebid=1&unitid=".$assignedUnitID."'\" style='background-color:#121212;text-align:right;'>\n";
-					$unitDetailString = $unitDetailString."							<span style='font-size:16px;'>\n";
 					if (!$playMode) {
-						$unitDetailString = $unitDetailString."								\n";
+						$unitDetailString = $unitDetailString."						<td nowrap width='1%' onclick=\"location.href='gui_edit_unit.php?unitid=".$assignedUnitID."'\" style='background-color:#444;color:#aaa;text-align:right;'>\n";
+						$unitDetailString = $unitDetailString."							<span style='font-size:16px;'>\n";
+						$unitDetailString = $unitDetailString."								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class='fas fa-edit'></i>&nbsp;&nbsp;&nbsp;\n";
+						$unitDetailString = $unitDetailString."							</span>\n";
+						$unitDetailString = $unitDetailString."						</td>\n";
 					} else {
-						$unitDetailString = $unitDetailString."								<span>&nbsp;&nbsp;&nbsp;<i class='fas fa-arrow-circle-right' aria-hidden='true' style='font-size:40;color:#2f7c2f;'></i>&nbsp;&nbsp;&nbsp;</span>\n";
+						$unitDetailString = $unitDetailString."						<td nowrap width='1%' onclick=\"location.href='gui_select_unit.php?activebid=1&unitid=".$assignedUnitID."'\" style='background-color:#121212;text-align:right;'>\n";
+						$unitDetailString = $unitDetailString."							<span style='font-size:16px;'>\n";
+						$unitDetailString = $unitDetailString."								&nbsp;&nbsp;&nbsp;<i class='fas fa-arrow-circle-right' aria-hidden='true' style='font-size:40;color:#2f7c2f;'></i>&nbsp;&nbsp;&nbsp;\n";
+						$unitDetailString = $unitDetailString."							</span>\n";
+						$unitDetailString = $unitDetailString."						</td>\n";
 					}
-					$unitDetailString = $unitDetailString."							</span>\n";
-					$unitDetailString = $unitDetailString."						</td>\n";
 				}
 
 				$unitDetailString = $unitDetailString."			<td nowrap onclick='location.href=\"gui_play_unit.php?formationid=".$formationidSelected."&chosenunit=".$c."\"' style='background-color:".$bidcolor."' class='unitselect_button_active' align='right' valign='center'><div style='display:inline-block;height:100%;vertical-align:middle;'><img style='vertical-align:middle;' src='".$unitstatusimage."' height='24px'><br><span style='font-size:14px;'>".$numStr."</span></div></td>\n";

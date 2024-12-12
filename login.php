@@ -40,7 +40,7 @@ session_start();
 						$_SESSION['playerid'] = $row['playerid'];
 						$_SESSION['isAdmin'] = $row['admin'];
 						$_SESSION['name'] = $row['name'];
-						$_SESSION['email'] = $row['email'];
+						//$_SESSION['email'] = $row['email'];
 						$_SESSION['playerimage'] = $row['image'];
 						$_SESSION['gameid'] = $row['gameid'];
 						// getting options from database

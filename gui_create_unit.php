@@ -75,6 +75,7 @@ session_start();
 	if ($addunit == 1) {
 		$TON = isset($_GET["TON"]) ? $_GET["TON"] : "";
 		$MNU = isset($_GET["MNU"]) ? $_GET["MNU"] : "";
+		$UNITNAME = isset($_GET["UNITNAME"]) ? $_GET["UNITNAME"] : "";
 		$TP = isset($_GET["TP"]) ? $_GET["TP"] : "";
 		$SZ = isset($_GET["SZ"]) ? $_GET["SZ"] : "";
 		$TMM = isset($_GET["TMM"]) ? $_GET["TMM"] : "";
@@ -101,6 +102,7 @@ session_start();
 
 		$TON = urldecode($TON);
 		$MNU = urldecode($MNU);
+		$UNITNAME = urldecode($UNITNAME);
 		$TP = urldecode($TP);
 		$SZ = urldecode($SZ);
 		$TMM = urldecode($TMM);
@@ -207,9 +209,10 @@ session_start();
 
 		$sql_insertunit = "";
 		$sql_insertunit = $sql_insertunit."INSERT INTO asc_unit ";
-		$sql_insertunit = $sql_insertunit."(unit_number, tech, mulid, unit_tonnage, as_model, as_pv, as_tp, as_sz, as_tmm, as_mv, as_mvj, as_role, as_skill, as_short, as_short_min, as_medium, as_medium_min, as_long, as_long_min, as_extreme, as_extreme_min, as_ov, as_armor, as_structure, as_threshold, as_specials, unit_imageurl, playerid, as_mvtype) ";
+		$sql_insertunit = $sql_insertunit."(unit_number, unit_name, tech, mulid, unit_tonnage, as_model, as_pv, as_tp, as_sz, as_tmm, as_mv, as_mvj, as_role, as_skill, as_short, as_short_min, as_medium, as_medium_min, as_long, as_long_min, as_extreme, as_extreme_min, as_ov, as_armor, as_structure, as_threshold, as_specials, unit_imageurl, playerid, as_mvtype) ";
 		$sql_insertunit = $sql_insertunit."VALUES (";
 		$sql_insertunit = $sql_insertunit."'".$MNU."', ";           // unit_number
+		$sql_insertunit = $sql_insertunit."'".$UNITNAME."', ";      // unit_name
 		$sql_insertunit = $sql_insertunit."'".$TECH."', ";          // tech
 		$sql_insertunit = $sql_insertunit."'".$MULID."', ";         // mulid
 		$sql_insertunit = $sql_insertunit."'".$TON."', ";           // unit_tonnage
@@ -288,7 +291,7 @@ session_start();
 
 		$sql_insertunitstatus = "";
 		$sql_insertunitstatus = $sql_insertunitstatus."INSERT INTO asc_unitstatus ";
-		$sql_insertunitstatus = $sql_insertunitstatus."(unitid, playerid, gameid, round, heat, armor, structure, crit_engine, crit_fc, crit_mp, crit_weapons, unit_statusimageurl) ";
+		$sql_insertunitstatus = $sql_insertunitstatus."(unitid, playerid, gameid, round, heat, armor, structure, crit_engine, crit_fc, crit_mp, crit_weapons, unit_statusimageurl, initial_status) ";
 		$sql_insertunitstatus = $sql_insertunitstatus."VALUES (";
 		$sql_insertunitstatus = $sql_insertunitstatus.$newunitid.",";
 		$sql_insertunitstatus = $sql_insertunitstatus.$pid.",";
@@ -302,7 +305,8 @@ session_start();
 		$sql_insertunitstatus = $sql_insertunitstatus."0, ";
 		$sql_insertunitstatus = $sql_insertunitstatus."0, ";
 //		$sql_insertunitstatus = $sql_insertunitstatus."'".$UNITIMAGE."', ";        // unit_imageurl
-		$sql_insertunitstatus = $sql_insertunitstatus."'".$UNITSTATUSIMAGE."'";  // unit_statusimageurl
+		$sql_insertunitstatus = $sql_insertunitstatus."'".$UNITSTATUSIMAGE."', ";  // unit_statusimageurl
+		$sql_insertunitstatus = $sql_insertunitstatus."1 ";
 		$sql_insertunitstatus = $sql_insertunitstatus.")";
 		if (mysqli_query($conn, $sql_insertunitstatus)) {
 			// Success
@@ -432,6 +436,7 @@ session_start();
 			var TECH = document.getElementById("TECH").value;
 			//var TON = document.getElementById('tonnage').value;
 			var MNU = document.getElementById('MNU').value;
+			var UNITNAME = document.getElementById('UNITNAME').value;
 			var TP = document.getElementById('TP').value;
 			var SZ = document.getElementById('SZ').value;
 			var TMM = document.getElementById('TMM').value;
@@ -460,6 +465,10 @@ session_start();
 			var MODEL = selText;
 			MODEL = MODEL.replace(/"/g,"&quot;");
 			MODEL = MODEL.replace(/'/g,"&apos;");
+
+			if (UNITNAME != "") {
+				UNITNAME = UNITNAME.length > 15 ? UNITNAME.substring(0, 12) + "..." : UNITNAME.substring(0, length);
+			}
 
 			if ("<<< Select unit >>>" == MODEL) {
 				alert("Select a Unit!");
@@ -491,6 +500,7 @@ session_start();
 			}
 			url=url+"&TON="+encodeURIComponent(TON);
 			url=url+"&MNU="+encodeURIComponent(MNU);
+			url=url+"&UNITNAME="+encodeURIComponent(UNITNAME);
 			url=url+"&TP="+encodeURIComponent(TP);
 			url=url+"&SZ="+encodeURIComponent(SZ);
 			url=url+"&TMM="+encodeURIComponent(TMM);
@@ -563,7 +573,7 @@ session_start();
 
 				<td nowrap onclick="location.href='./gui_edit_option.php'" width="<?php echo $buttonWidth ?>"><div class='unitselect_button_normal'><a href='./gui_edit_option.php'>OPTIONS</a><br><span style='font-size:16px;'>Change options</span></div></td>
 				<td style="width:5px;">&nbsp;</td>
-				<td style="width: 60px;" nowrap width="60px" style="background: rgba(50,50,50,1.0); text-align: center; vertical-align: middle;"><img src='./images/player/<?=$pimage?>' height='60px'></td>
+				<td nowrap onclick="location.href='gui_show_playerlist.php'" style="width: 60px;" nowrap width="60px" style="background: rgba(50,50,50,1.0); text-align: center; vertical-align: middle;"><img src='./images/player/<?=$pimage?>' height='60px'></td>
 			</tr>
 		</table>
 	</div>
@@ -692,6 +702,11 @@ session_start();
 				</td>
 				<td>
 					<a href='#' onClick='createPilot();'><i class="fas fa-redo"></i></a>
+				</td>
+			</tr>
+			<tr>
+				<td nowrap colspan="5" class="datalabel" style='text-align:left;'>
+					Unitname: <input required type="text" id="UNITNAME" name="UNITNAME" style='width:250px'> (max. 15)
 				</td>
 			</tr>
 			<tr>

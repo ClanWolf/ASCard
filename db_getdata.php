@@ -56,6 +56,8 @@
 	$array_MOUNTED_UNITID = array();
 	$array_MOUNTED_ON_UNITID = array();
 
+	$array_NARCED = array();
+
 	$array_ENGN = array();
 	$array_FRCTRL = array();
 	$array_MP = array();
@@ -236,8 +238,14 @@
 							$array_MP_PREP[$unitcount] = $row["crit_mp_PREP"];
 							$array_WPNS_PREP[$unitcount] = $row["crit_weapons_PREP"];
 
+							$array_NARCED[$unitcount] = $row["active_narc"];
 							$array_ACTIVE_BID[$unitcount] = $row["active_bid"];
 							$array_UNIT_IMG_STATUS[$unitcount] = $row["unit_statusimageurl"];
+
+							if ($array_UNIT_IMG_STATUS[$unitcount] == "_01.png") {
+								$array_UNIT_IMG_STATUS[$unitcount] = "images/DD_".$array_TP[$unitcount]."_01.png";
+							}
+
 							$array_UNIT_STATUSSTRING[$unitcount] = $row["unit_status"];
 
 							$array_CV_ENGN[$unitcount] = $row["crit_CV_engine"];

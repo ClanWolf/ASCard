@@ -166,6 +166,13 @@
 							$armor = $row["armor"];
 							$structure = $row["structure"];
 
+							$active_bid = $row["active_bid"];
+							$active_narc = $row["active_narc"];
+							$unit_status = $row["unit_status"];
+							$unit_statusimageurl = $row["unit_statusimageurl"];
+							$mounted_unitid = $row["mounted_unitid"];
+							$mounted_on_unitid = $row["mounted_on_unitid"];
+
 							$CV_ENGN = $row["crit_CV_engine"];
 							$CV_FRCTRL = $row["crit_CV_firecontrol"];
 							$CV_WPNS = $row["crit_CV_weapons"];
@@ -229,11 +236,14 @@
 							$sqlInsertNewUnitStatus = "";
 							$sqlInsertNewUnitStatus = $sqlInsertNewUnitStatus . "INSERT INTO asc_unitstatus (unitid,playerid,gameid,round,heat,armor,`structure`,crit_engine,crit_fc,crit_mp,crit_weapons,usedoverheat,";
 							$sqlInsertNewUnitStatus = $sqlInsertNewUnitStatus . "   crit_engine_PREP,crit_fc_PREP,crit_mp_PREP,crit_weapons_PREP,heat_PREP,     crit_CV_engine,crit_CV_firecontrol,crit_CV_weapons,crit_CV_motiveA,crit_CV_motiveB,crit_CV_motiveC,";
-							$sqlInsertNewUnitStatus = $sqlInsertNewUnitStatus . "   crit_CV_engine_PREP,crit_CV_firecontrol_PREP,crit_CV_weapons_PREP,crit_CV_motiveA_PREP,crit_CV_motiveB_PREP,crit_CV_motiveC_PREP) ";
+							$sqlInsertNewUnitStatus = $sqlInsertNewUnitStatus . "   crit_CV_engine_PREP,crit_CV_firecontrol_PREP,crit_CV_weapons_PREP,crit_CV_motiveA_PREP,crit_CV_motiveB_PREP,crit_CV_motiveC_PREP, ";
+							$sqlInsertNewUnitStatus = $sqlInsertNewUnitStatus . "   active_bid,active_narc,unit_status,unit_statusimageurl,mounted_unitid,mounted_on_unitid) ";
 							$sqlInsertNewUnitStatus = $sqlInsertNewUnitStatus . "VALUES ";
 							$sqlInsertNewUnitStatus = $sqlInsertNewUnitStatus . "(".$unitId.",".$pid.",".$gameid.",".$nextRound.",".$finalHeat.",".$armor.",".$structure.",".$final_ENGN.",".$final_FRCTRL.",".$final_MP.",".$final_WPNS.",0,"; // until currentTMM
 							$sqlInsertNewUnitStatus = $sqlInsertNewUnitStatus . "   0,0,0,0,0,  ".$final_CV_ENGN.",".$final_CV_FRCTRL.",".$final_CV_WPNS.",".$final_CV_MOTA.",".$final_CV_MOTB.",".$final_CV_MOTC.","; // crit PREP (0-5) -> stay 0!, CV Crit (last Block) -> fill with CV values
-							$sqlInsertNewUnitStatus = $sqlInsertNewUnitStatus . "   0,0,0,0,0,0); "; // CV PREP -> stay 0!
+							$sqlInsertNewUnitStatus = $sqlInsertNewUnitStatus . "   0,0,0,0,0,0,";  // CV PREP -> stay 0!
+							$sqlInsertNewUnitStatus = $sqlInsertNewUnitStatus . "   ".$active_bid.",".$active_narc.",'".$unit_status."','".$unit_statusimageurl."',".$mounted_unitid.",".$mounted_on_unitid;
+							$sqlInsertNewUnitStatus = $sqlInsertNewUnitStatus . "); ";
 							echo $sqlInsertNewUnitStatus."<br><br>";
 
 							if (mysqli_query($conn, $sqlInsertNewUnitStatus)) {

@@ -49,6 +49,14 @@ session_start();
 			echo "Error: " . $sql_update_assignment . "<br>" . mysqli_error($conn);
 			logMsg("Error: " . $sql_update_assignment . ": " . mysqli_error($conn));
 		}
+		$sql_update_unitstatus = "UPDATE asc_unitstatus set round = ".$CURRENTROUND." where initial_status=1 and unitid = ".$UNITID;
+		if (mysqli_query($conn, $sql_update_unitstatus)) {
+			// Success
+		} else {
+			// Error
+			echo "Error: " . $sql_update_unitstatus . "<br>" . mysqli_error($conn);
+			logMsg("Error: " . $sql_update_unitstatus . ": " . mysqli_error($conn));
+		}
 		echo "<meta http-equiv='refresh' content='0;url=./gui_select_unit.php?activebid=1&unitid=" . $UNITID . "'>";
 	}
 
@@ -285,7 +293,7 @@ session_start();
 ?>
 				<td nowrap onclick="location.href='./gui_edit_option.php'" width="<?php echo $buttonWidth ?>"><div class='unitselect_button_normal'><a href='./gui_edit_option.php'>OPTIONS</a><br><span style='font-size:16px;'>Change options</span></div></td>
 				<td style="width:5px;">&nbsp;</td>
-				<td style="width: 60px;" nowrap width="60px" style="background: rgba(50,50,50,1.0); text-align: center; vertical-align: middle;"><img src='./images/player/<?=$pimage?>' height='60px'></td>
+				<td nowrap onclick="location.href='gui_show_playerlist.php'" style="width: 60px;" nowrap width="60px" style="background: rgba(50,50,50,1.0); text-align: center; vertical-align: middle;"><img src='./images/player/<?=$pimage?>' height='60px'></td>
 			</tr>
 		</table>
 	</div>

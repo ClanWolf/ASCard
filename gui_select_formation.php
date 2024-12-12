@@ -155,7 +155,7 @@ session_start();
 
 				<td nowrap onclick="location.href='./gui_edit_option.php'" width="<?php echo $buttonWidth ?>"><div class='unitselect_button_normal'><a href='./gui_edit_option.php'>OPTIONS</a><br><span style='font-size:16px;'>Change options</span></div></td>
 				<td style="width:5px;">&nbsp;</td>
-				<td style="width: 60px;" nowrap width="60px" style="background: rgba(50,50,50,1.0); text-align: center; vertical-align: middle;"><img src='./images/player/<?=$pimage?>' height='60px'></td>
+				<td nowrap onclick="location.href='gui_show_playerlist.php'" style="width: 60px;" nowrap width="60px" style="background: rgba(50,50,50,1.0); text-align: center; vertical-align: middle;"><img src='./images/player/<?=$pimage?>' height='60px'></td>
 			</tr>
 		</table>
 	</div>
@@ -218,7 +218,7 @@ session_start();
 							}
 						}
 
-						$sql_asc_checkformationassignments = "SELECT SQL_NO_CACHE * FROM asc_assign where formationid=".$formationidSelected.";";
+						$sql_asc_checkformationassignments = "SELECT SQL_NO_CACHE * FROM asc_assign a, asc_unitstatus us where a.formationid=".$formationidSelected." and a.unitid=us.unitid and us.round=".$CURRENTROUND." and us.active_bid=1;";
 						$result_asc_checkformationassignments = mysqli_query($conn, $sql_asc_checkformationassignments);
 						if (mysqli_num_rows($result_asc_checkformationassignments) > 0) {
 							echo "	<td nowrap style='background-color:#b43c3e;width:170px;height:40px;' onclick='location.href=\"gui_play_unit.php?formationid=".$formationidSelected."\"' class='unitselect_button_normal'>\n";
@@ -325,7 +325,8 @@ session_start();
 							}
 						}
 
-						$sql_asc_checkformationassignments = "SELECT SQL_NO_CACHE * FROM asc_assign where formationid=".$formationidSelected.";";
+						//$sql_asc_checkformationassignments = "SELECT SQL_NO_CACHE * FROM asc_assign where formationid=".$formationidSelected.";";
+						$sql_asc_checkformationassignments = "SELECT SQL_NO_CACHE * FROM asc_assign a, asc_unitstatus us where a.formationid=".$formationidSelected." and a.unitid=us.unitid and us.round=".$CURRENTROUND." and us.active_bid=1;";
 						$result_asc_checkformationassignments = mysqli_query($conn, $sql_asc_checkformationassignments);
 						if (mysqli_num_rows($result_asc_checkformationassignments) > 0) {
 							echo "<td nowrap style='width:170px;height:40px;$selectBorder' onclick='location.href=\"gui_play_unit.php?formationid=".$formationidSelected."\"' class='formationselect_button_normal'>\n";

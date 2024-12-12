@@ -9,30 +9,32 @@
 	require('./logger.php');
 	require_once('./db.php');
 
-	$index    = isset($_GET["index"]) ? $_GET["index"] : "";
-	$h        = isset($_GET["h"]) ? $_GET["h"] : "";
-	$a        = isset($_GET["a"]) ? $_GET["a"] : "";
-	$s        = isset($_GET["s"]) ? $_GET["s"] : "";
-	$e        = isset($_GET["e"]) ? $_GET["e"] : "";
-	$fc       = isset($_GET["fc"]) ? $_GET["fc"] : "";
-	$mp       = isset($_GET["mp"]) ? $_GET["mp"] : "";
-	$w        = isset($_GET["w"]) ? $_GET["w"] : "";
+	$index     = isset($_GET["index"]) ? $_GET["index"] : "";
+	$h         = isset($_GET["h"]) ? $_GET["h"] : "";
+	$a         = isset($_GET["a"]) ? $_GET["a"] : "";
+	$s         = isset($_GET["s"]) ? $_GET["s"] : "";
+	$e         = isset($_GET["e"]) ? $_GET["e"] : "";
+	$fc        = isset($_GET["fc"]) ? $_GET["fc"] : "";
+	$mp        = isset($_GET["mp"]) ? $_GET["mp"] : "";
+	$w         = isset($_GET["w"]) ? $_GET["w"] : "";
 
-	$e_cv     = isset($_GET["e_cv"]) ? $_GET["e_cv"] : "";
-	$fc_cv    = isset($_GET["fc_cv"]) ? $_GET["fc_cv"] : "";
-	$w_cv     = isset($_GET["w_cv"]) ? $_GET["w_cv"] : "";
-	$ma_cv    = isset($_GET["ma_cv"]) ? $_GET["ma_cv"] : "";
-	$mb_cv    = isset($_GET["mb_cv"]) ? $_GET["mb_cv"] : "";
-	$mc_cv    = isset($_GET["mc_cv"]) ? $_GET["mc_cv"] : "";
+	$e_cv      = isset($_GET["e_cv"]) ? $_GET["e_cv"] : "";
+	$fc_cv     = isset($_GET["fc_cv"]) ? $_GET["fc_cv"] : "";
+	$w_cv      = isset($_GET["w_cv"]) ? $_GET["w_cv"] : "";
+	$ma_cv     = isset($_GET["ma_cv"]) ? $_GET["ma_cv"] : "";
+	$mb_cv     = isset($_GET["mb_cv"]) ? $_GET["mb_cv"] : "";
+	$mc_cv     = isset($_GET["mc_cv"]) ? $_GET["mc_cv"] : "";
 
-	$mstat    = isset($_GET["mstat"]) ? $_GET["mstat"] : "";
-	$mstatstr = isset($_GET["mstatstr"]) ? $_GET["mstatstr"] : "";
-	$uov      = isset($_GET["uov"]) ? $_GET["uov"] : "";
-	$mvmnt    = isset($_GET["mvmnt"]) ? $_GET["mvmnt"] : "";
-	$wpnsf    = isset($_GET["wpnsf"]) ? $_GET["wpnsf"] : "";
+	$mstat     = isset($_GET["mstat"]) ? $_GET["mstat"] : "";
+	$mstatstr  = isset($_GET["mstatstr"]) ? $_GET["mstatstr"] : "";
+	$uov       = isset($_GET["uov"]) ? $_GET["uov"] : "";
+	$mvmnt     = isset($_GET["mvmnt"]) ? $_GET["mvmnt"] : "";
+	$wpnsf     = isset($_GET["wpnsf"]) ? $_GET["wpnsf"] : "";
 
 	$currRound = isset($_GET["currentRound"]) ? $_GET["currentRound"] : "";
-	$gameid = isset($_GET["gameid"]) ? $_GET["gameid"] : "";
+
+	$narc      = isset($_GET["narc"]) ? $_GET["narc"] : "";
+	$gameid    = isset($_GET["gameid"]) ? $_GET["gameid"] : "";
 
 	echo "<!DOCTYPE html>\n";
 	echo "<html lang='en'>\n";
@@ -65,9 +67,10 @@
 		echo $uov."<br>";
 		echo $mvmnt."<br>";
 		echo $wpnsf."<br>";
+		echo $narc."<br>";
 		echo "<br>";
 
-		$sql = "UPDATE asc_unitstatus SET unit_statusimageurl='".$mstat."',unit_status='".$mstatstr."',heat=".$h.",armor=".$a.",structure=".$s.",crit_engine=".$e.",crit_fc=".$fc.",crit_mp=".$mp.",crit_weapons=".$w.",crit_CV_engine=".$e_cv.",crit_CV_firecontrol=".$fc_cv.",crit_CV_weapons=".$w_cv.",crit_CV_motiveA=".$ma_cv.",crit_CV_motiveB=".$mb_cv.",crit_CV_motiveC=".$mc_cv.",usedoverheat=".$uov." WHERE unitid=".$index." AND round=".$currRound." AND gameid=".$gameid.";";
+		$sql = "UPDATE asc_unitstatus SET unit_statusimageurl='".$mstat."',unit_status='".$mstatstr."',heat=".$h.",armor=".$a.",structure=".$s.",crit_engine=".$e.",crit_fc=".$fc.",crit_mp=".$mp.",crit_weapons=".$w.",crit_CV_engine=".$e_cv.",crit_CV_firecontrol=".$fc_cv.",crit_CV_weapons=".$w_cv.",crit_CV_motiveA=".$ma_cv.",crit_CV_motiveB=".$mb_cv.",crit_CV_motiveC=".$mc_cv.",usedoverheat=".$uov.",active_narc=".$narc." WHERE unitid=".$index." AND round=".$currRound." AND gameid=".$gameid.";";
 		echo "Statement: " . $sql;
 
 		if (mysqli_query($conn, $sql)) {

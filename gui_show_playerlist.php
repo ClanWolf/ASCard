@@ -12,18 +12,16 @@ session_start();
 		echo "Not logged in... redirecting.<br>";
 		echo "<meta http-equiv='refresh' content='0;url=./login.php?auto=1'>";
 		header("Location: ./login.php?auto=1");
-		//die("Check position 8");
+		//die("Check position 6");
 	}
 
-	// Get data from db
 	$pid = $_SESSION['playerid'];
 	$gid = $_SESSION['gameid'];
 	$pimage = $_SESSION['playerimage'];
-
-	$isAdmin = $_SESSION['isAdmin'];
-
 	$opt3 = $_SESSION['option3'];
 	$playMode = $opt3;
+
+	$isAdmin = $_SESSION['isAdmin'];
 
 	$sql_asc_playerround = "SELECT SQL_NO_CACHE * FROM asc_player where playerid = " . $pid . ";";
 	$result_asc_playerround = mysqli_query($conn, $sql_asc_playerround);
@@ -34,11 +32,10 @@ session_start();
 	}
 ?>
 <!DOCTYPE html>
-
 <html lang="en">
 
 <head>
-	<title>ASCard.net AplhaStrike Card App (clanwolf.net): Message</title>
+	<title>ASCard.net AplhaStrike Card App (clanwolf.net): Edit Player</title>
 	<meta charset="utf-8">
 	<!-- <meta http-equiv="expires" content="0"> -->
 	<!-- <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"> -->
@@ -49,12 +46,13 @@ session_start();
 	<meta name="apple-mobile-web-app-capable" content="yes">
 	<meta name="viewport" content="width=device-width, initial-scale=0.75, minimum-scale=0.75, maximum-scale=1.85, user-scalable=yes" />
 
-	<meta http-equiv="refresh" content="2; URL=gui_select_unit.php">
+	<meta http-equiv="refresh" content="10" />
 
 	<link rel="manifest" href="./manifest.json">
 	<!-- <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css"> -->
 	<link rel="stylesheet" type="text/css" href="./fontawesome/css/all.min.css" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="./styles/styles.css">
+	<link rel="stylesheet" type="text/css" href="./styles/jquery.jscrollpane.css">
 	<link rel="icon" href="./favicon.png" type="image/png">
 	<link rel="shortcut icon" href="./images/icon_196x196.png" type="image/png" sizes="196x196">
 	<link rel="apple-touch-icon" href="./images/icon_57x57.png" type="image/png" sizes="57x57">
@@ -93,6 +91,8 @@ session_start();
 	<script type="text/javascript" src="./scripts/passive-events-support/main.js"></script>
 
 	<script type="text/javascript" src="./scripts/jquery-3.7.1.min.js"></script>
+	<script type="text/javascript" src="./scripts/jquery.jscrollpane.min.js"></script>
+	<script type="text/javascript" src="./scripts/jquery.mousewheel.js"></script>
 	<script type="text/javascript" src="./scripts/howler.min.js"></script>
 	<script type="text/javascript" src="./scripts/cookies.js"></script>
 
@@ -104,14 +104,43 @@ session_start();
 			margin-left: auto;
 			margin-right: auto;
 		}
+		input, select {
+			width: 80px;
+			vertical-align: middle;
+			color: #ddd;
+			border-width: 0px;
+			padding: 2px;
+			font-family: 'Pathway Gothic One', sans-serif;
+		}
+		select:focus, textarea:focus, input:focus {
+			outline: none;
+		}
+		select:invalid, input:invalid {
+			background: rgba(40,40,40,0.75);;
+		}
+		select:valid, input:valid {
+			background: rgba(70,70,70,0.75);;
+		}
+		.scroll-pane {
+			width: 100%;
+			height: 200px;
+			overflow: auto;
+		}
+		.horizontal-only {
+			height: auto;
+			max-height: 200px;
+		}
 	</style>
 </head>
 
 <body>
 	<script>
+		$(function() {
+			//$('.scroll-pane').jScrollPane({autoReinitialise: true});
+			$('.scroll-pane').jScrollPane();
+		});
 		$(document).ready(function() {
 			$("#cover").hide();
-			// setTimeout(function() { window.history.go(-1) }, 2000);
 		});
 	</script>
 
@@ -133,10 +162,10 @@ session_start();
 		<table style="width:100%;height:60px;border:none;border-collapse:collapse;background:rgba(50,50,50,1.0);" cellspacing="0" cellpadding="0">
 			<tr>
 				<td nowrap onclick="location.href='./logout.php'" style="width: 80px;background: rgba(50,50,50,1.0); text-align: center; vertical-align: middle;">
-					<div><a style="color:#eee;" href="./logout.php">&nbsp;&nbsp;&nbsp;<i class="fas fa-power-off" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;</a></div>
+					<div><a style="color: #eee;" href="./logout.php">&nbsp;&nbsp;&nbsp;<i class="fas fa-power-off" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;</a></div>
 				</td>
-				<td nowrap onclick="location.href='./gui_select_unit.php'" style="width: 100px;background:rgba(81,125,37,1.0);">
-					<div style='vertical-align:middle;font-size:28px;color:#fff;'>&nbsp;&nbsp;&nbsp;G<?php echo $gid ?>&nbsp;R<?php echo $CURRENTROUND ?>&nbsp;&nbsp;&nbsp;</div>
+				<td nowrap onclick="location.href='./gui_select_unit.php'" style="width: 100px;background:rgba(56,87,26,1.0);">
+					<div style='vertical-align:middle;font-size:28px;color:#eee;'>&nbsp;&nbsp;&nbsp;G<?php echo $gid ?>&nbsp;R<?php echo $CURRENTROUND ?>&nbsp;&nbsp;&nbsp;</div>
 				</td>
 				<td style="width:5px;">&nbsp;</td>
 				<td nowrap onclick="location.href='./gui_select_unit.php'" width="<?php echo $buttonWidth ?>"><div class='unitselect_button_normal'><a href='./gui_select_unit.php'>ROSTER</a><br><span style='font-size:16px;'>Choose a unit</span></div></td>
@@ -149,9 +178,9 @@ session_start();
 	if (!$playMode) {
 		echo "				<td nowrap onclick=\"location.href='./gui_assign_unit.php'\" width=".$buttonWidth."><div class='unitselect_button_normal'><a href='./gui_assign_unit.php'>ASSIGN</a><br><span style='font-size:16px;'>Assign unit</span></div></td><td style='width:5px;'>&nbsp;</td>\n";
 		echo "				<td nowrap onclick=\"location.href='./gui_create_unit.php'\" width=".$buttonWidth."><div class='unitselect_button_normal'><a href='./gui_create_unit.php'>ADD</a><br><span style='font-size:16px;'>Create a unit</span></div></td><td style='width:5px;'>&nbsp;</td>\n";
-		echo "				<td nowrap onclick=\"location.href='./gui_create_game.php'\" width=".$buttonWidth."><div class='unitselect_button_active'><a href='./gui_create_game.php'>GAME</a><br><span style='font-size:16px;'>Game settings</span></div></td><td style='width:5px;'>&nbsp;</td>\n";
+		echo "				<td nowrap onclick=\"location.href='./gui_create_game.php'\" width=".$buttonWidth."><div class='unitselect_button_normal'><a href='./gui_create_game.php'>GAME</a><br><span style='font-size:16px;'>Game settings</span></div></td><td style='width:5px;'>&nbsp;</td>\n";
 		if ($isAdmin) {
-			echo "				<td nowrap onclick=\"location.href='./gui_create_player.php'\" width=".$buttonWidth."><div class='unitselect_button_normal'><a href='./gui_create_player.php'>PLAYER</a><br><span style='font-size:16px;'>Manage players</span></div></td><td style='width:5px;'>&nbsp;</td>\n";
+			echo "				<td nowrap onclick=\"location.href='./gui_create_player.php'\" width=".$buttonWidth."><div class='unitselect_button_active'><a href='./gui_create_player.php'>PLAYER</a><br><span style='font-size:16px;'>Manage players</span></div></td><td style='width:5px;'>&nbsp;</td>\n";
 			echo "				<td nowrap onclick=\"location.href='./gui_admin.php'\" width=".$buttonWidth."><div class='unitselect_button_normal'><a href='./gui_admin.php'>ADMIN</a><br><span style='font-size:16px;'>Administration</span></div></td><td style='width:5px;'>&nbsp;</td>\n";
 		}
 	}
@@ -169,16 +198,95 @@ session_start();
 
 	<br>
 
-	<div>
-		<table class="options" cellspacing=4 cellpadding=4 border=0px>
-			<tr>
-				<td align="center" class='datalabel'>
-					<p>Round successfully finalized.<br><br>You are now in round:</p>
-					<p style="font-family:'Pathway Gothic One',sans-serif,bold;font-size:75px;color:green;"><?= $CURRENTROUND ?></p>
-				</td>
-			</tr>
-		</table>
-	</div>
+	<table class="options" cellspacing="2" cellpadding="2" border="0px" width="50%">
+
+<?php
+	if (!($stmt = $conn->prepare("SELECT SQL_NO_CACHE * FROM asc_player ORDER BY last_login desc"))) {
+		echo "Prepare failed: (" . $conn->errno . ") " . $conn->error;
+	}
+
+	function timeDiff($firstTime,$lastTime) {
+		// echo "jetzt:".$lastTime." - lastlogin:".$firstTime." = ".$timeDiff."<br>";
+
+		$firstTime=strtotime($firstTime);
+		$lastTime=strtotime($lastTime);
+		$timeDiff=($lastTime - $firstTime);
+
+		// echo $lastTime." - ".$firstTime." = ".$timeDiff."<br>";
+
+		return $timeDiff;
+	}
+
+	if ($stmt->execute()) {
+		$res = $stmt->get_result();
+		$myOwnLine = "";
+		$userList = "";
+
+		while ($row = $res->fetch_assoc()) {
+			$filename = "./images/player/".$row['image'];
+			$last_login = $row['last_login'];
+
+			if ($row['playerid'] == $pid) {
+				$myOwnLine .= "							<tr>\n";
+				$myOwnLine .= "								<td>\n";
+				if (file_exists($filename)) {
+					$myOwnLine .= "										<img src='./images/player/".$row['image']."' width='30px' height='30px'>\n";
+				} else {
+					$myOwnLine .= "										<img src='./images/pilots/000_no_avatar.png' width='30px' height='30px'>\n";
+					copy("./images/pilots/000_no_avatar.png", "./images/player/".$row['image']);
+				}
+				$myOwnLine .= "								</td>\n";
+				$myOwnLine .= "								<td colspan='3'>".$row['name']."</td>\n";
+				$myOwnLine .= "								<td onclick=\"location.href='./gui_edit_player.php?pid=".$pid."'\" width='10' align='right' valign='middle'><i class='fas fa-edit'></i></td>\n";
+				$myOwnLine .= "							</tr>\n";
+				$myOwnLine .= "							<tr>\n";
+				$myOwnLine .= "								<td colspan='5'><hr></td>\n";
+				$myOwnLine .= "							</tr>\n";
+			} else {
+				$diff = timeDiff($last_login, date('Y-m-d H:i:s'));
+				$statusIcon = "<span style='color:black;'><i class='fa-solid fa-circle'></i></span>";
+
+				if ($diff < 60 * 60 * 5) { // 5 hours
+					$statusIcon = "<span style='color:red;'><i class='fa-solid fa-circle'></i></span>";
+				}
+				if ($diff < 60 * 60) { // 1 hour
+					$statusIcon = "<span style='color:yellow;'><i class='fa-solid fa-circle'></i></span>";
+				}
+				if ($diff < 60 * 15) { // 15 minutes
+					$statusIcon = "<span style='color:green;'><i class='fa-solid fa-circle'></i></span>";
+				}
+
+				$userList .= "							<tr>\n";
+				$userList .= "								<td nowrap class='datalabel' width='10%' style='font-size:10px; text-align:left;';>".$statusIcon."</td>\n";
+				$userList .= "								<td nowrap class='datalabel' width='10%' style='text-align:left;vertical-align:middle;' valign='middle'>\n";
+				if (file_exists($filename)) {
+					$userList .= "										<img src='./images/player/".$row['image']."' width='30px' height='30px'>\n";
+				} else {
+					$userList .= "										<img src='./images/pilots/000_no_avatar.png' width='30px' height='30px'>\n";
+					copy("./images/pilots/000_no_avatar.png", "./images/player/".$row['image']);
+				}
+				$userList .= "								</td>\n";
+				$userList .= "								<td nowrap class='datalabel' width='60%' style='text-align:left;' colspan='2'>" . $row['name'] . "</td>\n";
+				$userList .= "								<td width='20%' nowrap align='right'>\n";
+				$userList .= "									".$last_login."\n";
+				$userList .= "								</td>\n";
+				$userList .= "							</tr>\n";
+			}
+		}
+		echo $myOwnLine;
+		echo "							<tr>\n";
+		echo "								<td colspan='5'>\n";
+		echo "									<div class=\"scroll-pane\">\n";
+		echo "										<table width='100%' cellspacing='2' cellpadding='2' border='0px'>\n";
+		echo $userList;
+		echo "										</table>\n";
+		echo "									</div>\n";
+		echo "								</td>\n";
+		echo "							</tr>\n";
+	}
+?>
+
+	</table>
 </body>
 
 </html>

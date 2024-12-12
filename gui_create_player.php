@@ -54,10 +54,20 @@ session_start();
 				// Success
 				$newplayerid = mysqli_insert_id($conn);
 
-				$sqlinsertformation = "INSERT INTO asc_formation (factionid, formationname, playerid) VALUES ";
-				$sqlinsertformation = $sqlinsertformation . "(1, 'Command', ".$newplayerid."), ";
-				$sqlinsertformation = $sqlinsertformation . "(1, 'Battle', ".$newplayerid."), ";
-				$sqlinsertformation = $sqlinsertformation . "(1, 'Striker', ".$newplayerid.")";
+				$sqlinsertcommand = "INSERT INTO asc_command (playerid, factionid, type, commandname, commandbackground) VALUES ";
+				$sqlinsertcommand = $sqlinsertcommand . "(".$newplayerid.", 1, 'custom', 'Commandname', 'Commandbackground')";
+				if (mysqli_query($conn, $sqlinsertcommand)) {
+					// Success inserting formations for new player
+				} else {
+					// Error
+					echo "Error: " . $sqlinsertcommand . "<br>" . mysqli_error($conn);
+				}
+				$newcommandid = mysqli_insert_id($conn);
+
+				$sqlinsertformation = "INSERT INTO asc_formation (factionid, commandid, formationname, playerid) VALUES ";
+				$sqlinsertformation = $sqlinsertformation . "(1, ".$newcommandid.", 'Command', ".$newplayerid."), ";
+				$sqlinsertformation = $sqlinsertformation . "(1, ".$newcommandid.", 'Battle', ".$newplayerid."), ";
+				$sqlinsertformation = $sqlinsertformation . "(1, ".$newcommandid.", 'Striker', ".$newplayerid.")";
 				if (mysqli_query($conn, $sqlinsertformation)) {
 					// Success inserting formations for new player
 				} else {
@@ -351,7 +361,7 @@ session_start();
 
 				<td nowrap onclick="location.href='./gui_edit_option.php'" width="<?php echo $buttonWidth ?>"><div class='unitselect_button_normal'><a href='./gui_edit_option.php'>OPTIONS</a><br><span style='font-size:16px;'>Change options</span></div></td>
 				<td style="width:5px;">&nbsp;</td>
-				<td style="width: 60px;" nowrap width="60px" style="background: rgba(50,50,50,1.0); text-align: center; vertical-align: middle;"><img src='./images/player/<?=$pimage?>' height='60px'></td>
+				<td nowrap onclick="location.href='gui_show_playerlist.php'" style="width: 60px;" nowrap width="60px" style="background: rgba(50,50,50,1.0); text-align: center; vertical-align: middle;"><img src='./images/player/<?=$pimage?>' height='60px'></td>
 			</tr>
 		</table>
 	</div>
@@ -436,16 +446,16 @@ session_start();
 				} else {
 					if ($isAdmin) { // only admins may delete players
 						echo "								<td onclick='javascript:saveNewPlayer(".$row['playerid'].",\"".$row['image']."\");' width='10px' nowrap>\n";
-                        echo "									<span style='font-size:16px;'>\n";
+						echo "									<span style='font-size:16px;'>\n";
 						echo "										    <i class='fas fa-minus-square'></i>\n";
-	                    echo "									</span>\n";
-                        echo "								</td>\n";
+						echo "									</span>\n";
+						echo "								</td>\n";
 					} else {
 						echo "								<td width='10px' nowrap>\n";
-                        echo "									<span style='font-size:16px;'>\n";
+						echo "									<span style='font-size:16px;'>\n";
 						echo "										\n";
-	                    echo "									</span>\n";
-                        echo "								</td>\n";
+						echo "									</span>\n";
+						echo "								</td>\n";
 					}
 				}
 			} else {

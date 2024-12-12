@@ -1,62 +1,24 @@
 
-
-
-
-
-
-Update license disclaimer to current situation
-
-add random click for player image while creating player
+See:
+https://github.com/orgs/ClanWolf/projects/6/views/1
 
 reset bidding on command change, no change if round >1
-
-add buttons to move a unit from formation one to next
-
-add movement tables and often used information under a button
-
-Kampfreport generieren aus Unit_Status (Zustand pro Runde Gegner gegenüber) -> HTML bzw PDF
-
-Edit commands (set faction, name and backgroundtext)
-Edit users (set faction, name and backgroundtext)
-Edit formations (set faction, name and backgroundtext)
-
-
-Add a name field to every unit, add a name parsed from unit name on creation and show this name in the unit card as big string (limited to 25 chars?)
-
-
-Button SPIEL BEENDEN ergänzen
-
 
 // HIGH
 TODO: Finish the crits for CVs
 TODO: Add finalize round for CVs
-TODO: Indikator für gemountete Elementare / Infanterie
-TODO: Add big name of the mech somewhere on the card (?)
-TODO: Show jump only if a unit can jump
-TODO: Add a faction selection while creating a user. this will be the default faction for formations and commands
 
 // NORMAL
 TODO: Alle Schriftarten sollten als em relativ definiert werden
 TODO: Button für "alle Mechs zurücksetzen"
 TODO: Button für "alle Mechs löschen"
-TODO: Add images for AF (Aerial fighters)
 TODO: Add a pilot card to chosen units (Choose special pilot abilities from list with cost)
-TODO: Editor for formations: Formations have a faction (for logo and mechimages)
-TODO: Ready Icons in play unit werden erst nach dem tabwechsel aktuell
-TODO: Show clan option to show/hide batchall
-TODO: Sounds für die + Buttons (Criticals und Heat) --> Different sound when setting a field to 0
+
 TODO: Add option to auto roll on motive
 TODO: Add option to auto roll on crit
 TODO: Add option to not show any mech image in play unit
-TODO: Add all text description for Special Abilities
 TODO: Add similar json / overview page for pilot abilities
 
 // NICE TO HAVE
-TODO: Show only one name for clan mechs (choose in options which one)
-TODO: Add a large text with Mechname on play unit screen
 TODO: Import units from mul directly somehow (have mul open, select a unit and export it to ASCard)
 TODO: Scan QR codes to identify units on the table
-TODO: Shortcut bar irgendwo mit allen Mech-Ids zum schnellen Wechseln
-
-// OTHER
--

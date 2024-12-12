@@ -686,7 +686,8 @@ session_start();
 		header("Location: ./gui_select_unit.php");
 	}
 ?>
-			<td style="width:100px;" style="width:100px;" nowrap width="100px" style="background:rgba(50,50,50,1.0);text-align:center;vertical-align:middle;display:block;"><img src='./images/player/<?=$pimage?>' width='60px' height='60px'></td>
+			<!-- <td style="width:100px;" style="width:100px;" nowrap width="100px" style="background:rgba(50,50,50,1.0);text-align:center;vertical-align:middle;display:block;"><img src='./images/player/<?=$pimage?>' width='60px' height='60px'></td> -->
+			<td nowrap onclick="location.href='gui_show_playerlist.php'" style="width: 60px;" nowrap width="60px" style="background: rgba(50,50,50,1.0); text-align: center; vertical-align: middle;"><img src='./images/player/<?=$pimage?>' height='60px'></td>
 		</tr>
 
 <?php
@@ -731,7 +732,7 @@ session_start();
 </div>
 
 <?php
-	echo "<div id='player_image'>\n";
+	echo "<div id='player_image' onclick='location.href=\"gui_show_playerlist.php\"'>\n";
 	echo "	<img src='./images/player/".$pimage."' width='60px' height='60px'>\n";
 	echo "</div>\n";
 	echo "<div id='pilotrank'>\n";
@@ -761,12 +762,14 @@ session_start();
 		echo "	$('#faction').show();\r\n";
 		echo "	$('#pilotrank').show();\r\n";
 		echo "	$('#topleft').show();\r\n";
+		echo "	$('#unitname').hide();\r\n";
 	} else {
 		// do not show pilot information
 		echo "	$('#pilotimage').hide();\r\n";
 		echo "	$('#faction').hide();\r\n";
 		echo "	$('#pilotrank').hide();\r\n";
 		echo "	$('#topleft').hide();\r\n";
+		echo "	$('#unitname').show();\r\n";
 	}
 	echo "	setStructuralDamageCache($array_S[$chosenUnitIndex]);\r\n";
 	echo "</script>\r\n";
@@ -953,10 +956,13 @@ if ($showDistancesHexes == 1) {
 	}
 ?>
 							</td>
+							<td nowrap width="5%" class="datalabel_thin">
+								NARC
+							</td>
 						</tr>
 						<tr>
 							<td nowrap width="5%" class="datalabel">S:</td>
-							<td nowrap width="95%" class="datalabel_thin">
+							<td nowrap width="90%" class="datalabel_thin">
 <?php
 	for ($i2 = 1; $i2 <= $array_S_MAX[$chosenUnitIndex]; $i2++) {
 		echo "							<label class='bigcheck'><input onchange='readCircles($array_UNIT_DBID[$chosenUnitIndex]);' type='checkbox' class='bigcheck' name='S".$i2."' value='yes'/><span class='bigcheck-target'></span></label>&nbsp;\r\n";
@@ -965,6 +971,9 @@ if ($showDistancesHexes == 1) {
 		}
 	}
 ?>
+							</td>
+							<td nowrap width="5%" class="datalabel_thin">
+								<label class='bigcheck'><input onchange='readCircles(<?= $array_UNIT_DBID[$chosenUnitIndex] ?>);' type='checkbox' class='bigcheck' name='NARC' value='yes'/><span class='bigcheck-target'></span></label>&nbsp;
 							</td>
 						</tr>
 					</table>
@@ -981,7 +990,7 @@ if ($showDistancesHexes == 1) {
 											<?php
 												$allSpecialAbilities = "";
 												$parts = explode(',', $array_SPCL[$chosenUnitIndex]);
-												if (sizeof($parts) > 1) {
+												if (sizeof($parts) >= 1) {
 													$i = 1;
 													foreach ($parts as $part) {
 
@@ -1424,7 +1433,7 @@ if ($showDistancesHexes == 1) {
 	$("#destroyedIndicator").hide();
 	$("#crippledIndicator").hide();
 	$("#shutdownIndicator").hide();
-	setCircles(<?=$array_HT[$chosenUnitIndex]?>,<?=$array_A[$chosenUnitIndex]?>,<?=$array_S[$chosenUnitIndex]?>,<?=$array_ENGN[$chosenUnitIndex]?>,<?=$array_FRCTRL[$chosenUnitIndex]?>,<?=$array_MP[$chosenUnitIndex]?>,<?=$array_WPNS[$chosenUnitIndex]?>,<?=$array_CV_ENGN[$chosenUnitIndex]?>,<?=$array_CV_FRCTRL[$chosenUnitIndex]?>,<?=$array_CV_WPNS[$chosenUnitIndex]?>,<?=$array_CV_MOTV_A[$chosenUnitIndex]?>,<?=$array_CV_MOTV_B[$chosenUnitIndex]?>,<?=$array_CV_MOTV_C[$chosenUnitIndex]?>,<?=$array_USEDOVERHEAT[$chosenUnitIndex]?>,<?=$array_MVMT[$chosenUnitIndex]?>,<?=$array_WPNSFIRED[$chosenUnitIndex]?>,2,0,'<?=$array_UNIT_STATUSSTRING[$chosenUnitIndex]?>');
+	setCircles(<?=$array_HT[$chosenUnitIndex]?>,<?=$array_A[$chosenUnitIndex]?>,<?=$array_S[$chosenUnitIndex]?>,<?=$array_ENGN[$chosenUnitIndex]?>,<?=$array_FRCTRL[$chosenUnitIndex]?>,<?=$array_MP[$chosenUnitIndex]?>,<?=$array_WPNS[$chosenUnitIndex]?>,<?=$array_CV_ENGN[$chosenUnitIndex]?>,<?=$array_CV_FRCTRL[$chosenUnitIndex]?>,<?=$array_CV_WPNS[$chosenUnitIndex]?>,<?=$array_CV_MOTV_A[$chosenUnitIndex]?>,<?=$array_CV_MOTV_B[$chosenUnitIndex]?>,<?=$array_CV_MOTV_C[$chosenUnitIndex]?>,<?=$array_USEDOVERHEAT[$chosenUnitIndex]?>,<?=$array_MVMT[$chosenUnitIndex]?>,<?=$array_WPNSFIRED[$chosenUnitIndex]?>,2,0,'<?=$array_UNIT_STATUSSTRING[$chosenUnitIndex]?>', <?=$array_NARCED[$chosenUnitIndex]?>);
 </script>
 
 <div id="footer"></div>

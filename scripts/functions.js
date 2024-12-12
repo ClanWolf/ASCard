@@ -95,6 +95,7 @@ function readCircles2(index, a_max, s_max, mv_bt_id, f_bt_id) {
 	var mc_cv = 0; // CV (Combat vehicle: Motive C)
 
 	var uov = 0; // used overheat
+	var NARCed = 0;
 
 	var mvmnt = 0;
 	var wpnsf = 0;
@@ -123,6 +124,8 @@ function readCircles2(index, a_max, s_max, mv_bt_id, f_bt_id) {
 			if (na.substring(0, 9) == "CD_CV-MC_" && el1.checked) { mc_cv++; }
 
 			if (na.substring(0, 3) == "UOV"       && el1.checked) { uov++;   }
+
+			if (na.substring(0, 4) == "NARC"      && el1.checked) { NARCed = 1; }
 		}
 	});
 
@@ -270,9 +273,9 @@ function readCircles2(index, a_max, s_max, mv_bt_id, f_bt_id) {
 		playErrorSound();
 	}
 
-	setCircles(h, a, s, e, fc, mp, w, e_cv, fc_cv, w_cv, ma_cv, mb_cv, mc_cv, uov, mvmnt, wpnsf, tc_rangeValueReading, tc_partialCoverReading, unitstatusstring);
-	var url="./save.php?index="+index+"&h="+h+"&a="+a+"&s="+s+"&e="+e+"&fc="+fc+"&mp="+mp+"&w="+w+"&e_cv="+e_cv+"&fc_cv="+fc_cv+"&w_cv="+w_cv+"&ma_cv="+ma_cv+"&mb_cv="+mb_cv+"&mc_cv="+mc_cv+"&mstat="+unitstatusimage+"&mstatstr="+unitstatusstring+"&uov="+uov+"&mvmnt="+mvmnt+"&wpnsf="+wpnsf+"&currentRound="+currentRound+"&gameid="+gameid;
-	// alert(url);
+	setCircles(h, a, s, e, fc, mp, w, e_cv, fc_cv, w_cv, ma_cv, mb_cv, mc_cv, uov, mvmnt, wpnsf, tc_rangeValueReading, tc_partialCoverReading, unitstatusstring, NARCed);
+	var url="./save.php?index="+index+"&h="+h+"&a="+a+"&s="+s+"&e="+e+"&fc="+fc+"&mp="+mp+"&w="+w+"&e_cv="+e_cv+"&fc_cv="+fc_cv+"&w_cv="+w_cv+"&ma_cv="+ma_cv+"&mb_cv="+mb_cv+"&mc_cv="+mc_cv+"&mstat="+unitstatusimage+"&mstatstr="+unitstatusstring+"&uov="+uov+"&mvmnt="+mvmnt+"&wpnsf="+wpnsf+"&currentRound="+currentRound+"&narc="+NARCed+"&gameid="+gameid;
+	//alert(url);
 	window.frames['saveframe'].location.replace(url);
 
 	if (currentUnitType == "CV") {
@@ -297,7 +300,7 @@ function setStructuralDamageCache(value) {
 }
 
 // SetCircles is called from gui_play_unit.php as well!
-function setCircles(h, a, s, e, fc, mp, w, e_cv, fc_cv, w_cv, ma_cv, mb_cv, mc_cv, uov, mvmnt, wpnsf, tc_rangeValueReading, tc_partialCoverReading, unitstatusstring) {
+function setCircles(h, a, s, e, fc, mp, w, e_cv, fc_cv, w_cv, ma_cv, mb_cv, mc_cv, uov, mvmnt, wpnsf, tc_rangeValueReading, tc_partialCoverReading, unitstatusstring, NARCed) {
 
 	$("#crippledIndicator").hide();
 	$("#shutdownIndicator").hide();
@@ -356,6 +359,8 @@ function setCircles(h, a, s, e, fc, mp, w, e_cv, fc_cv, w_cv, ma_cv, mb_cv, mc_c
 			if (na1.substring(0, 9) == "CD_CV-MA_") { ma_cv_c++; if (ma_cv_c<=ma_cv) { el1.checked = true; }}
 			if (na1.substring(0, 9) == "CD_CV-MB_") { mb_cv_c++; if (mb_cv_c<=mb_cv) { el1.checked = true; }}
 			if (na1.substring(0, 9) == "CD_CV-MC_") { mc_cv_c++; if (mc_cv_c<=mc_cv) { el1.checked = true; }}
+
+			if (na1.substring(0, 4) == "NARC")      {            if (NARCed==1)      { el1.checked = true; }}
 		}
 	});
 
@@ -1005,6 +1010,7 @@ function increaseENGN_PREP() {
 	ENGN_PREP = ENGN_PREP + 1;
 	if (ENGN_PREP > 1) {
 		ENGN_PREP = 0;
+		playTCClickSound();
 	} else {
 		playTapSound();
 	}
@@ -1016,6 +1022,7 @@ function increaseFCTL_PREP() {
 	FCTL_PREP = FCTL_PREP + 1;
 	if (FCTL_PREP > 1) {
 		FCTL_PREP = 0;
+		playTCClickSound();
 	} else {
 		playTapSound();
 	}
@@ -1027,6 +1034,7 @@ function increaseMP_PREP() {
 	MP_PREP = MP_PREP + 1;
 	if (MP_PREP > 1) {
 		MP_PREP = 0;
+		playTCClickSound();
 	} else {
 		playTapSound();
 	}
@@ -1038,6 +1046,7 @@ function increaseWPNS_PREP() {
 	WPNS_PREP = WPNS_PREP + 1;
 	if (WPNS_PREP > 1) {
 		WPNS_PREP = 0;
+		playTCClickSound();
 	} else {
 		playTapSound();
 	}
@@ -1050,6 +1059,7 @@ function increaseENGN_CV_PREP() {
 	CV_ENGN_PREP = CV_ENGN_PREP + 1;
 	if (CV_ENGN_PREP > 1) {
 		CV_ENGN_PREP = 0;
+		playTCClickSound();
 	} else {
 		playTapSound();
 	}
@@ -1061,6 +1071,7 @@ function increaseFCTL_CV_PREP() {
 	CV_FCTL_PREP = CV_FCTL_PREP + 1;
 	if (CV_FCTL_PREP > 1) {
 		CV_FCTL_PREP = 0;
+		playTCClickSound();
 	} else {
 		playTapSound();
 	}
@@ -1072,6 +1083,7 @@ function increaseWPNS_CV_PREP() {
 	CV_WPNS_PREP = CV_WPNS_PREP + 1;
 	if (CV_WPNS_PREP > 1) {
 		CV_WPNS_PREP = 0;
+		playTCClickSound();
 	} else {
 		playTapSound();
 	}
@@ -1083,6 +1095,7 @@ function increaseMOTIVEA_PREP() {
 	CV_MOTVA_PREP = CV_MOTVA_PREP + 1;
 	if (CV_MOTVA_PREP > 1) {
 		CV_MOTVA_PREP = 0;
+		playTCClickSound();
 	} else {
 		playTapSound();
 	}
@@ -1094,6 +1107,7 @@ function increaseMOTIVEB_PREP() {
 	CV_MOTVB_PREP = CV_MOTVB_PREP + 1;
 	if (CV_MOTVB_PREP > 1) {
 		CV_MOTVB_PREP = 0;
+		playTCClickSound();
 	} else {
 		playTapSound();
 	}
@@ -1105,6 +1119,7 @@ function increaseMOTIVEC_PREP() {
 	CV_MOTVC_PREP = CV_MOTVC_PREP + 1;
 	if (CV_MOTVC_PREP > 1) {
 		CV_MOTVC_PREP = 0;
+		playTCClickSound();
 	} else {
 		playTapSound();
 	}
@@ -1117,6 +1132,7 @@ function increaseHT_PREP() {
 	HT_PREP = HT_PREP + 1;
 	if (HT_PREP > 4) {
 		HT_PREP = 0;
+		playTCClickSound();
 	} else {
 		playTapSound();
 	}
