@@ -177,7 +177,7 @@ a:hover {
 	height: 100%;
 	background: transparent;
 	background-color: rgba(0, 0, 0, 0.75);
-	z-index:1010;
+	z-index:1060;
 }
 #specialabilitiescontainer_standalone {
 	text-align: center;
@@ -222,7 +222,18 @@ a:hover {
 	top: 100;
 	pointer-events:none;
 	background: transparent;
-	z-index:1000;
+	z-index:1005;
+}
+#narcIndicator {
+	text-align: center;
+	position: fixed;
+	margin: 0 auto;
+	width: 100%;
+	height: 250px;
+	top: 100;
+	pointer-events:none;
+	background: transparent;
+	z-index:1010;
 }
 #header {
 	position: relative;
@@ -265,42 +276,42 @@ a:hover {
 	padding: 20px;
 	top: 52px;
 	font-family: Arial;
-	font-size: 95px;
-	color: red;
+	font-size: 72px;
+	color: #999;
 	z-index: 3;
 	text-shadow:
-		-2px   -2px yellow,
-		-2px -1.5px yellow,
-		-2px   -1px yellow,
-		-2px -0.5px yellow,
-		-2px    0px yellow,
-		-2px  0.5px yellow,
-		-2px    1px yellow,
-		-2px  1.5px yellow,
-		-2px    2px yellow,
-		-1.5px  2px yellow,
-		-1px    2px yellow,
-		-0.5px  2px yellow,
-		0px     2px yellow,
-		0.5px   2px yellow,
-		1px     2px yellow,
-		1.5px   2px yellow,
-		2px     2px yellow,
-		2px   1.5px yellow,
-		2px     1px yellow,
-		2px   0.5px yellow,
-		2px     0px yellow,
-		2px  -0.5px yellow,
-		2px    -1px yellow,
-		2px  -1.5px yellow,
-		2px    -2px yellow,
-		1.5px  -2px yellow,
-		1px    -2px yellow,
-		0.5px  -2px yellow,
-		0px    -2px yellow,
-		-0.5px -2px yellow,
-		-1px   -2px yellow,
-		-1.5px -2px yellow;
+		-2px   -2px black,
+		-2px -1.5px black,
+		-2px   -1px black,
+		-2px -0.5px black,
+		-2px    0px black,
+		-2px  0.5px black,
+		-2px    1px black,
+		-2px  1.5px black,
+		-2px    2px black,
+		-1.5px  2px black,
+		-1px    2px black,
+		-0.5px  2px black,
+		0px     2px black,
+		0.5px   2px black,
+		1px     2px black,
+		1.5px   2px black,
+		2px     2px black,
+		2px   1.5px black,
+		2px     1px black,
+		2px   0.5px black,
+		2px     0px black,
+		2px  -0.5px black,
+		2px    -1px black,
+		2px  -1.5px black,
+		2px    -2px black,
+		1.5px  -2px black,
+		1px    -2px black,
+		0.5px  -2px black,
+		0px    -2px black,
+		-0.5px -2px black,
+		-1px   -2px black,
+		-1.5px -2px black;
 }
 #faction {
 	z-index: 3;
@@ -850,7 +861,7 @@ input[type='checkbox'].bigcheck:checked + span.bigcheck-target:after {
 	vertical-align: middle;
 	color: #999;
 	padding-right: 5px;
-	background-image:repeating-linear-gradient(45deg, #444444 0%, #444444 2%, #aaaa00 2%, #aaaa00 4%, #444444 4%);
+	background-image:repeating-linear-gradient(315deg, #222 0%, #222 10%, #108af9 10%, #108af9 20%, #222 20%);
 }
 .datalabel_thin {
 	font-family: 'Pathway Gothic One', sans-serif;
@@ -888,7 +899,7 @@ input[type='checkbox'].bigcheck:checked + span.bigcheck-target:after {
 }
 .datavalue_small_special {
 	vertical-align: middle;
-	color: #8ec76b;
+	color: #ddd;
 	text-transform: uppercase;
 }
 .datavalue_thin {

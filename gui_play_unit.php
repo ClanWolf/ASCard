@@ -791,7 +791,7 @@ session_start();
 								<table>
 									<tr>
 										<td width="10%" nowrap style="text-align:center;vertical-align:top;" valign="top" class="datalabel">TC</td>
-										<td width="90%" nowrap align="right" id="ToHitResult" style="font-size:72px;color:#da8e25;vertical-align:middle;text-align:right;font-weight:bold;">5</td>
+										<td width="90%" nowrap align="right" id="ToHitResult" class="datalabel" style="color:#da8e25;vertical-align:middle;text-align:right;font-weight:bold;">5</td>
 									</tr>
 								</table>
 							</td>
@@ -820,14 +820,14 @@ if ($showDistancesHexes == 1) {
 ?>
 						</tr>
 						<tr>
-							<td nowrap style="text-align:center;" class="datalabel" colspan="3"><hr></td>
+							<td nowrap style="text-align:center;" class="datalabel" colspan="3" style="margin:2px;height:2px;padding:2px;line-height:2px;font-size:2px;"><hr style="margin:2px;"></td>
 						</tr>
 						<tr>
 							<td nowrap style="text-align:center;" class="datalabel"><label class='bigcheck'><input type='checkbox' onchange="setCover();" class='bigcheck' name='ToHitCover' id='ToHitCover' value='no'/><span class='bigcheck-target'></span></label></td>
 							<td nowrap style="text-align:left;" class="datalabel_thin_small" colspan="2">Par. cover</td>
 						</tr>
 						<tr>
-							<td nowrap style="text-align:center;" class="datalabel" colspan="3"><hr></td>
+							<td nowrap style="text-align:center;" class="datalabel" colspan="3" style="margin:2px;height:2px;padding:2px;line-height:2px;font-size:2px;"><hr style="margin:2px;"></td>
 						</tr>
 						<tr>
 							<td colspan="3" align="center">
@@ -881,7 +881,7 @@ if ($showDistancesHexes == 1) {
 							</td>
 						</tr>
 						<tr>
-							<td nowrap class="datavalue_small_special" width="50%" colspan="4" style="text-align:left;" valign="middle" onclick="javascript:window.open('http://www.masterunitlist.info/Unit/Details/<?php echo $array_UNIT_MULID[$chosenUnitIndex] ?>');"><?php echo "$array_ROLE[$chosenUnitIndex]"; ?>&nbsp;<i class="fa-solid fa-square-up-right"></i></td>
+							<td nowrap class="datavalue_small_special" width="50%" colspan="4" style="text-align:left;" valign="middle" onclick="javascript:window.open('http://www.masterunitlist.info/Unit/Details/<?php echo $array_UNIT_MULID[$chosenUnitIndex] ?>');"><?php echo "$array_ROLE[$chosenUnitIndex]"; ?>&nbsp;&nbsp;<i class="fa-solid fa-square-up-right"></i></td>
 							<td nowrap class="datalabel" width="13%" colspan="1" valign="middle" >AMM:</td>
 							<td nowrap class="datavalue" width="12%" colspan="1" valign="middle" style="top:0px;bottom:0px;vertical-align:middle;"><span class="datavalue" id="AMM">0</span></td>
 							<td nowrap class="datalabel" width="12%" colspan="1">SKL:</td>
@@ -956,8 +956,8 @@ if ($showDistancesHexes == 1) {
 	}
 ?>
 							</td>
-							<td nowrap width="5%" class="datalabel_thin">
-								NARC
+							<td align="center" nowrap width="5%" class="datalabel_thin">
+								<span id="narcDesc" onclick="javascript:changeNARCDesc();"><?= $array_NARCDESC[$chosenUnitIndex] ?></span>
 							</td>
 						</tr>
 						<tr>
@@ -972,8 +972,8 @@ if ($showDistancesHexes == 1) {
 	}
 ?>
 							</td>
-							<td nowrap width="5%" class="datalabel_thin">
-								<label class='bigcheck'><input onchange='readCircles(<?= $array_UNIT_DBID[$chosenUnitIndex] ?>);' type='checkbox' class='bigcheck' name='NARC' value='yes'/><span class='bigcheck-target'></span></label>&nbsp;
+							<td align="center" style="text-align:center; margin:0 auto" nowrap width="5%" class="datalabel_thin">
+								<label class='bigcheck'><input onchange='readCircles(<?= $array_UNIT_DBID[$chosenUnitIndex] ?>);' type='checkbox' class='bigcheck' name='NARC' value='yes'/><span class='bigcheck-target'></span></label>
 							</td>
 						</tr>
 					</table>
@@ -1424,6 +1424,10 @@ if ($showDistancesHexes == 1) {
 <div id="shutdownIndicator">
 	<img style="pointer-events:auto;" src='./images/heat.png' onclick="javascript:hideShutdownIndicator();" height='250px'>
 </div>
+<div id="narcIndicator">
+	<img style="pointer-events:auto;" src='./images/narc.png' onclick="javascript:hideNarcIndicator();" height='250px'>
+</div>
+
 
 <script type="text/javascript">
 	$("#infobar").hide();
@@ -1433,6 +1437,7 @@ if ($showDistancesHexes == 1) {
 	$("#destroyedIndicator").hide();
 	$("#crippledIndicator").hide();
 	$("#shutdownIndicator").hide();
+	$("#narcIndicator").hide();
 	setCircles(<?=$array_HT[$chosenUnitIndex]?>,<?=$array_A[$chosenUnitIndex]?>,<?=$array_S[$chosenUnitIndex]?>,<?=$array_ENGN[$chosenUnitIndex]?>,<?=$array_FRCTRL[$chosenUnitIndex]?>,<?=$array_MP[$chosenUnitIndex]?>,<?=$array_WPNS[$chosenUnitIndex]?>,<?=$array_CV_ENGN[$chosenUnitIndex]?>,<?=$array_CV_FRCTRL[$chosenUnitIndex]?>,<?=$array_CV_WPNS[$chosenUnitIndex]?>,<?=$array_CV_MOTV_A[$chosenUnitIndex]?>,<?=$array_CV_MOTV_B[$chosenUnitIndex]?>,<?=$array_CV_MOTV_C[$chosenUnitIndex]?>,<?=$array_USEDOVERHEAT[$chosenUnitIndex]?>,<?=$array_MVMT[$chosenUnitIndex]?>,<?=$array_WPNSFIRED[$chosenUnitIndex]?>,2,0,'<?=$array_UNIT_STATUSSTRING[$chosenUnitIndex]?>', <?=$array_NARCED[$chosenUnitIndex]?>);
 </script>
 

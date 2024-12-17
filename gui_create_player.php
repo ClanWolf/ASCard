@@ -1,8 +1,8 @@
 <?php
 
-//ini_set('display_errors', 1);
-//ini_set('display_startup_errors', 1);
-//error_reporting(E_ALL);
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 
 session_start();
 // https://www.php-einfach.de/php-tutorial/php-sessions/
@@ -38,6 +38,7 @@ session_start();
 		// save new user
 		$newplayername = isset($_GET["npn"]) ? $_GET["npn"] : "";
 		$newplayerpassword = isset($_GET["npp"]) ? $_GET["npp"] : "";
+		$newplayerfactionid = isset($_GET["npf"]) ? $_GET["npf"] : "";
 
 		$hashedpw = password_hash($newplayerpassword, PASSWORD_DEFAULT);
 
@@ -49,13 +50,13 @@ session_start();
 			// a user with that name already exists
 		} else {
 			// new user can be inserted
-			$sql = "INSERT INTO asc_player (name, password, admin, image) VALUES ('".$newplayername."', '".$hashedpw."', 0, '".$newplayername.".png')";
+			$sql = "INSERT INTO asc_player (name, password, admin, factionid, image) VALUES ('".$newplayername."', '".$hashedpw."', 0, ".$newplayerfactionid.", '".$newplayername.".png')";
 			if (mysqli_query($conn, $sql)) {
 				// Success
 				$newplayerid = mysqli_insert_id($conn);
 
 				$sqlinsertcommand = "INSERT INTO asc_command (playerid, factionid, type, commandname, commandbackground) VALUES ";
-				$sqlinsertcommand = $sqlinsertcommand . "(".$newplayerid.", 1, 'custom', 'Commandname', 'Commandbackground')";
+				$sqlinsertcommand = $sqlinsertcommand . "(".$newplayerid.", ".$newplayerfactionid.", 'custom', 'Commandname', 'Commandbackground')";
 				if (mysqli_query($conn, $sqlinsertcommand)) {
 					// Success inserting formations for new player
 				} else {
@@ -65,9 +66,9 @@ session_start();
 				$newcommandid = mysqli_insert_id($conn);
 
 				$sqlinsertformation = "INSERT INTO asc_formation (factionid, commandid, formationname, playerid) VALUES ";
-				$sqlinsertformation = $sqlinsertformation . "(1, ".$newcommandid.", 'Command', ".$newplayerid."), ";
-				$sqlinsertformation = $sqlinsertformation . "(1, ".$newcommandid.", 'Battle', ".$newplayerid."), ";
-				$sqlinsertformation = $sqlinsertformation . "(1, ".$newcommandid.", 'Striker', ".$newplayerid.")";
+				$sqlinsertformation = $sqlinsertformation . "(".$newplayerfactionid.", ".$newcommandid.", 'Command', ".$newplayerid."), ";
+				$sqlinsertformation = $sqlinsertformation . "(".$newplayerfactionid.", ".$newcommandid.", 'Battle', ".$newplayerid."), ";
+				$sqlinsertformation = $sqlinsertformation . "(".$newplayerfactionid.", ".$newcommandid.", 'Striker', ".$newplayerid.")";
 				if (mysqli_query($conn, $sqlinsertformation)) {
 					// Success inserting formations for new player
 				} else {
@@ -295,6 +296,7 @@ session_start();
 				var npn = document.getElementById('NewPlayerName').value;
 				var npp = document.getElementById('NewPlayerPassword').value;
 				var nppc = document.getElementById('NewPlayerPasswordConfirm').value;
+				var npf = document.getElementById('NewPlayerFaction').value;
 
 				if ("" == npn) {
 					alert("Name may not be empty!");
@@ -303,7 +305,7 @@ session_start();
 				if (npp == nppc) {
 					// alert("Saving new player: " + id + " (" + NewPlayerName + ")");
 					var url = "./gui_create_player.php?s=1&npn=" + npn;
-					url = url + "&npp=" + npp;
+					url = url + "&npp=" + npp + "&npf=" + npf;
 					window.location = url;
 				} else {
 					alert("Passwords do not match!");
@@ -392,7 +394,7 @@ session_start();
 				</td>
 			</tr>
 			<tr>
-				<td class='datalabel' width='10px' colspan="2" rowspan="2" valign="top" align="left">
+				<td class='datalabel' width='10px' colspan="2" rowspan="3" valign="top" align="left">
 					<img src='./images/pilots/000_no_avatar.png' width='60px' height='60px'>
 				</td>
 				<td class='datalabel' colspan="1" align="right">PW:</td>
@@ -410,6 +412,31 @@ session_start();
 				</td>
 				<td width='10px'></td>
 			</tr>
+
+			<tr>
+				<td class='datalabel' colspan="1" align="right">Faction:</td>
+				<td class='datalabel' colspan="1">
+				<select required name='NewPlayerFaction' id='NewPlayerFaction' size='1' style='width:220px;'>
+					<option  value="3" selected>ComStar [CS]</option>
+					<option  value="1">Clan Wolf [CW]</option>
+					<option value="13">Clan Wolf in Exile [CWiE]</option>
+					<option  value="9">Clan Jade Falcon [CJF]</option>
+					<option  value="5">Clan Ghostbear [CGB]</option>
+					<option value="12">Clan Smoke Jaguar [CSJ]</option>
+					<option value="14">Clan Snow Raven [CSR]</option>
+					<option value="15">Clan Nova Cat [CNC]</option>
+					<option  value="2">Lyran Alliance [LA]</option>
+					<option  value="7">Lyran Commonwealth [LC]</option>
+					<option  value="4">Draconis Combine [DC]</option>
+					<option  value="8">Federated Suns [FS]</option>
+					<option value="10">Free Worlds League [FWL]</option>
+					<option value="11">Capellan Confederation [CC]</option>
+					<option  value="6">Wolfs Dragoons [M-WD]</option>
+				</select>
+				</td>
+				<td width='10px'></td>
+			</tr>
+
 			<tr><td class='datalabel' colspan="6"><hr></td></tr>
 			<tr>
 				<td colspan="5">

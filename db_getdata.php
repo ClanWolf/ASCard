@@ -11,6 +11,7 @@
 
 	$FACTION = "DEFAULT";
 	$FACTION_IMG_URL = "...";
+	$COMMAND = "DEFAULT";
 	$FORMATION = "DEFAULT";
 
 	$GAMEID = -1;
@@ -57,6 +58,7 @@
 	$array_MOUNTED_ON_UNITID = array();
 
 	$array_NARCED = array();
+	$array_NARCDESC = array();
 
 	$array_ENGN = array();
 	$array_FRCTRL = array();
@@ -239,6 +241,7 @@
 							$array_WPNS_PREP[$unitcount] = $row["crit_weapons_PREP"];
 
 							$array_NARCED[$unitcount] = $row["active_narc"];
+							$array_NARCDESC[$unitcount] = $row["narc_desc"];
 							$array_ACTIVE_BID[$unitcount] = $row["active_bid"];
 							$array_UNIT_IMG_STATUS[$unitcount] = $row["unit_statusimageurl"];
 

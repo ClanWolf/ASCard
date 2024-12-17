@@ -427,6 +427,7 @@ session_start();
 						$unitstatus = $rowUnitStatus['unit_status'];
 						$unitstatusimage = $rowUnitStatus['unit_statusimageurl'];
 						$activebid = $rowUnitStatus['active_bid'];
+						$activenarc = $rowUnitStatus['active_narc'];
 					}
 				}
 
@@ -565,13 +566,17 @@ session_start();
 				$unitDetailString = $unitDetailString."						</td>\n";
 
 				if ($playMode) {
-					$unitDetailString = $unitDetailString."						<td nowrap width='1%' valign='top' style='background-color:".$bidcolor."text-align:right;'>\n";
+					if ($activenarc == "1") {
+						$unitDetailString = $unitDetailString."						<td nowrap width='1%' valign='top' class='datalabel_disabled_dashed' style='background-color:".$bidcolor."text-align:right;'>\n";
+					} else {
+						$unitDetailString = $unitDetailString."						<td nowrap width='1%' valign='top' style='background-color:".$bidcolor."text-align:right;'>\n";
+					}
 					$unitDetailString = $unitDetailString."							<span style='font-size:12px;'>\n";
 					$unitDetailString = $unitDetailString."								&nbsp;&nbsp;<img width='25px' src='".$unitRoundStatusImage."'>\n";
 					$unitDetailString = $unitDetailString."							</span>\n";
 					$unitDetailString = $unitDetailString."						</td>\n";
 				} else {
-					$unitDetailString = $unitDetailString."						<td onclick='location.href=\"gui_select_unit.php?dm=1&unitid=".$assignedUnitID."&pilotid=".$assignedPilotID."\"' nowrap width='1%' valign='top' style='background-color:".$bidcolor."text-align:right;'>\n";
+					$unitDetailString = $unitDetailString."						<td onclick='location.href=\"gui_select_unit.php?dm=1&unitid=".$assignedUnitID."&pilotid=".$assignedPilotID."\"' nowrap width='1%' valign='middle' style='background-color:".$bidcolor."text-align:right;'>\n";
 					$unitDetailString = $unitDetailString."							<span style='font-size:12px;'>\n";
 					$unitDetailString = $unitDetailString."								<i class='fas fa-minus-square'></i>\n";
 					$unitDetailString = $unitDetailString."							</span>\n";
