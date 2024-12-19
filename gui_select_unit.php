@@ -332,7 +332,7 @@ session_start();
 
 	<br>
 
-	<table align="center" width="85%" cellspacing=2 cellpadding=2 border=0px>
+	<table align="center" width="90%" cellspacing=2 cellpadding=2 border=0px>
 		<tr>
 		<?php
 		if (!$playMode) {
@@ -558,11 +558,12 @@ session_start();
 				if ($activebid == "1") {
 					$unitDetailString = $unitDetailString."						<td nowrap onclick='location.href=\"gui_play_unit.php?formationid=".$formationidSelected."&chosenunit=".$c."\"' width='99%' align='left' style='color:#AAAAAA;background-color:".$bidcolor."text-align:left;'><span style='font-size:24px;'>";
 				} else {
-					$unitDetailString = $unitDetailString."						<td nowrap width='99%' align='left' style='color:#AAAAAA;background-color:".$bidcolor."text-align:left;'><span style='font-size:24px;'>";
+					$unitDetailString = $unitDetailString."						<td nowrap width='99%' align='left' style='color:#AAAAAA;background-color:".$bidcolor."text-align:left;overflow:hidden;white-space:nowrap;text-overflow:ellipsis'><span style='font-size:24px;'>";
 				}
 				$unitDetailString = $unitDetailString."						<img src='./images/ranks/".$factionidSelected."/".$pilotrank.".png' width='16px' height='16px'>";
 				$unitDetailString = $unitDetailString."						".$pilotname."</span><span style='font-weight:normal;font-size:20px;color:#ffc677;'> ".$unitpointvalue."/".$unittonnage."t</span></span>\n";
-				$unitDetailString = $unitDetailString."							<br><span style='font-size:15px;'>".textTruncate($unitchassisname, 18)."</span>\n";
+				// $unitDetailString = $unitDetailString."							<br><span style='font-size:15px;'>".textTruncate($unitchassisname, 18)."</span>\n";
+				$unitDetailString = $unitDetailString."							<br><span style='font-size:16px;'>".$unitchassisname."</span>\n";
 				$unitDetailString = $unitDetailString."						</td>\n";
 
 				if ($playMode) {

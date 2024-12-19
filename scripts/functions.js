@@ -3,12 +3,14 @@ var fontsizeLabel = 12;
 var minSize = 20;
 var maxSize = 60;
 
+var fontsizeLabelBigFactor = 1.8;
 var fontsizeLabelthinFactor = 0.6;
 var fontsizeLabelthinSmallFactor = 0.6;
 var fontsizeValueFactor = 1.2;
 var fontsizeValueThinFactor = 0.6;
 var fontsizeCircleFactor = 0.85;
 
+var fontsizeLabelBig = fontsizeLabel * fontsizeLabelBigFactor;
 var fontsizeLabelthin = fontsizeLabel * fontsizeLabelthinFactor;
 var fontsizeLabelthinSmall = fontsizeLabel * fontsizeLabelthinSmallFactor;
 var fontsizeValue = fontsizeLabel * fontsizeValueFactor;
@@ -412,6 +414,7 @@ function setCircles(h, a, s, e, fc, mp, w, e_cv, fc_cv, w_cv, ma_cv, mb_cv, mc_c
 	tc_amm = 0;
 	document.getElementById("tmmLabel").innerHTML = "TMM:";
 	document.getElementById("AMM").innerHTML = "0";
+	document.getElementById("TC_AMM").innerHTML = "0";
 	document.getElementById("firepanel").style.display = "block";
 	document.getElementById("firepanel").style.visibility = "visible";
 	document.getElementById("firepanelhidden").style.display = "none";
@@ -420,17 +423,20 @@ function setCircles(h, a, s, e, fc, mp, w, e_cv, fc_cv, w_cv, ma_cv, mb_cv, mc_c
 		radioMV2_moved2_standstill.checked = true;
 		if (unitType != "BA") {
 			document.getElementById("AMM").innerHTML = "-1";
+			document.getElementById("TC_AMM").innerHTML = "-1";
 			tc_amm = -1;
 		}
 	}
 	if (mvmnt == 3) { // walked
 		radioMV3_moved3_moved.checked = true;
 		document.getElementById("AMM").innerHTML = "0";
+		document.getElementById("TC_AMM").innerHTML = "0";
 		tc_amm = 0;
 	}
 	if (mvmnt == 10) { // hulldown
 		radioMV10_moved10_hulldown.checked = true;
 		document.getElementById("AMM").innerHTML = "0";
+		document.getElementById("TC_AMM").innerHTML = "0";
 		updatedmovementpointsground = updatedmovementpointsground - 4;
 		document.getElementById("tmmLabel").innerHTML = "TMM*:";
 		tc_amm = 0;
@@ -438,6 +444,7 @@ function setCircles(h, a, s, e, fc, mp, w, e_cv, fc_cv, w_cv, ma_cv, mb_cv, mc_c
 	if (mvmnt == 9) { // sprinted
 		radioMV9_moved9_sprinted.checked = true;
 		document.getElementById("AMM").innerHTML = "0";
+		document.getElementById("TC_AMM").innerHTML = "0";
 		updatedmovementpointsground = updatedmovementpointsground + (updatedmovementpointsground / 2);
 		document.getElementById("firepanel").style.display = "none";
 		document.getElementById("firepanel").style.visibility = "hidden";
@@ -449,6 +456,7 @@ function setCircles(h, a, s, e, fc, mp, w, e_cv, fc_cv, w_cv, ma_cv, mb_cv, mc_c
 		radioMV4_moved4_jumped.checked = true;
 		if (unitType != "BA") {
 			document.getElementById("AMM").innerHTML = "2";
+			document.getElementById("TC_AMM").innerHTML = "2";
 			tc_amm = 2;
 		}
 	}
@@ -982,6 +990,7 @@ function textSize(dec) {
 		fontsizeLabel = maxSize;
 	}
 
+	fontsizeLabelBig = fontsizeLabel * fontsizeLabelBigFactor;
 	fontsizeLabelthin = fontsizeLabel * fontsizeLabelthinFactor;
 	fontsizeLabelthinSmall = fontsizeLabel * fontsizeLabelthinSmallFactor;
 	fontsizeValue = fontsizeLabel * fontsizeValueFactor;
@@ -989,6 +998,7 @@ function textSize(dec) {
 	fontsizeCircle = fontsizeLabel * fontsizeCircleFactor;
 
 	setSize("datalabel", fontsizeLabel);
+	setSize("datalabel_big", fontsizeLabelBig);
 	setSize("datalabel_button", fontsizeLabel);
 	setSize("datalabel_disabled_solid", fontsizeLabel);
 	setSize("datalabel_disabled_dashed", fontsizeLabel);
@@ -1003,6 +1013,7 @@ function textSize(dec) {
 	setSize("bigcheck-target", fontsizeCircle);
 
 	setCookie("fontsizeLabel", fontsizeLabel, 365);
+	setCookie("fontsizelabelBig", fontsizeLabelBig, 365);
 	setCookie("fontsizeLabelthin", fontsizeLabelthin, 365);
 	setCookie("fontsizeLabelthinSmall", fontsizeLabelthin, 365);
 	setCookie("fontsizeValue", fontsizeValue, 365);
@@ -1264,8 +1275,7 @@ function changeWallpaper() {
 		}
 		const allDataAreaReds = document.getElementsByClassName("dataarea_red");
 		for (let i = 0; i < allDataAreaReds.length; i++) {
-			//allDataAreaReds[i].style.backgroundColor="rgba(255,255,255,0.85)";
-			allDataAreaReds[i].style.backgroundColor="rgba(10,10,10,0.70)";
+			allDataAreaReds[i].style.backgroundColor="rgba(10,10,10,0.65)";
 		}
 		const allDataValues = document.getElementsByClassName("datavalue");
 		for (let i = 0; i < allDataValues.length; i++) {
@@ -1817,6 +1827,7 @@ $(document).ready(function() {
 		if (fontsizeLabel > maxSize) {
 			fontsizeLabel = maxSize;
 		}
+		fontsizeLabelBig = fontsizeLabel * fontsizeLabelBigFactor;
 		fontsizeLabelthin = fontsizeLabel * fontsizeLabelthinFactor;
 		fontsizeLabelthinSmall = fontsizeLabel * fontsizeLabelthinSmallFactor;
 		fontsizeValue = fontsizeLabel * fontsizeValueFactor;
@@ -1824,6 +1835,7 @@ $(document).ready(function() {
 		fontsizeCircle = fontsizeLabel * fontsizeCircleFactor;
 
 		setSize("datalabel", fontsizeLabel);
+		setSize("datalabel_big", fontsizeLabelBig);
 		setSize("datalabel_button", fontsizeLabel);
 		setSize("datalabel_disabled_solid", fontsizeLabel);
 		setSize("datalabel_disabled_dashed", fontsizeLabel);
@@ -1868,7 +1880,7 @@ $(document).ready(function() {
 		}
 		const allDataAreaReds = document.getElementsByClassName("dataarea_red");
 		for (let i = 0; i < allDataAreaReds.length; i++) {
-			allDataAreaReds[i].style.backgroundColor="rgba(10,10,10,0.70)";
+			allDataAreaReds[i].style.backgroundColor="rgba(10,10,10,0.65)";
 		}
 	} else {
 		// Set use MUL images to 0 on database (dark background + alternative images)

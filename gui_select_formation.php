@@ -165,9 +165,9 @@ session_start();
 
 
 
-	<table align="center" cellspacing=2 cellpadding=2 border=0px>
+	<table align="center" width="90%" cellspacing=2 cellpadding=2 border=0px>
 <?php
-	if (!($stmt = $conn->prepare("SELECT SQL_NO_CACHE * FROM asc_player where bid_pv is not null and bid_pv > 0 and opfor = 1 and gameid = ".$gid." ORDER BY bid_pv asc;"))) {
+	if (!($stmt = $conn->prepare("SELECT SQL_NO_CACHE * FROM asc_player where bid_pv is not null and bid_pv>0 and opfor=1 and gameid=".$gid." ORDER BY bid_pv asc;"))) {
 		echo "Prepare failed: (" . $conn->errno . ") " . $conn->error;
 	}
 	if ($stmt->execute()) {

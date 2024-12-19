@@ -789,7 +789,8 @@ span.bigcheck-target {
 	margin-right: 0px;
 	padding-left: -20px;
 	padding-right: 0px;
-	font-size: 80%;
+	font-size: 100%;
+	/* vertical-align:middle; */
 }
 input[type='checkbox'].bigcheck {
 	position: relative;
@@ -819,23 +820,44 @@ input[type='checkbox'].bigcheck:checked + span.bigcheck-target:after {
 	border-radius: 12px;
 	border-style: solid;
 	border-width: 6px;
-	padding: 3px;
+	padding: 5px;
 	background: rgba(70,70,70,0.85);
-	margin-top: 3px;
-	margin-bottom: 3px;
-	margin-left: 3px;
-	margin-right: 3px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	margin-left: 5px;
+	margin-right: 5px;
 }
 .dataarea_red {
 	border-radius: 12px;
 	border-style: solid;
 	border-width: 6px;
-	padding: 3px;
+	padding: 0px;
 	background: rgba(70,0,0,0.65);
-	margin-top: 3px;
-	margin-bottom: 3px;
-	margin-left: 3px;
-	margin-right: 3px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	margin-left: 5px;
+	margin-right: 5px;
+}
+.dataarea_content {
+	border-radius: 0px;
+	border-style: solid;
+	border-top-width: 0px;
+	border-bottom-width: 0px;
+	border: 0px;
+	padding: 5px;
+	margin: 0px;
+}
+.dataarea_divider_horizontal {
+	border-radius: 0px;
+	border-style: solid;
+	border-bottom-style: dashed;
+	border-top-width: 0px;
+	border-bottom-width: 3px;
+	border-top-width: 0px;
+	border-left-width: 0px;
+	border-right-width: 0px;
+	padding: 2px;
+	margin: 0px;
 }
 .datalabel {
 	font-family: 'Pathway Gothic One', sans-serif;
@@ -861,7 +883,7 @@ input[type='checkbox'].bigcheck:checked + span.bigcheck-target:after {
 	vertical-align: middle;
 	color: #999;
 	padding-right: 5px;
-	background-image:repeating-linear-gradient(315deg, #222 0%, #222 10%, #108af9 10%, #108af9 20%, #222 20%);
+	background-image:repeating-linear-gradient(315deg, #222 0%, #222 15%, #108af9 15%, #108af9 30%, #222 30%);
 }
 .datalabel_thin {
 	font-family: 'Pathway Gothic One', sans-serif;
@@ -923,6 +945,17 @@ input[type='checkbox'].bigcheck:checked + span.bigcheck-target:after {
 	text-align: center;
 	padding-top: 5px;
 	padding-bottom: 0px;
+}
+
+/* Glow ------------------------------------------------------------------------------------------------------------- */
+
+@keyframes glow {
+	from {
+		background-color: #2b3649;
+	}
+	to {
+		background-color: #556b8f;
+	}
 }
 
 /* SVG animation ---------------------------------------------------------------------------------------------------- */

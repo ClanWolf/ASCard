@@ -1,0 +1,55 @@
+INSERT INTO ascard.asc_pilot (playerid,name,`rank`,pilot_imageurl,Updated) VALUES
+	 (4,'Samara','MW','images/pilots/f_051.png','2024-12-03 01:57:38.0'),
+	 (1,'Patrick','MW','images/pilots/m_118.png','2024-12-05 15:12:44.0'),
+	 (1,'Richard','MW','images/pilots/m_075.png','2024-12-05 16:52:38.0'),
+	 (1,'Rachel','MW','images/pilots/f_024.png','2024-12-06 21:42:32.0'),
+	 (1,'Kaison','MW','images/pilots/m_071.png','2024-12-07 00:13:37.0'),
+	 (1,'Maddox','MW','images/pilots/m_139.png','2024-12-07 00:17:33.0'),
+	 (1,'Flynn','MW','images/pilots/m_049.png','2024-12-07 00:46:33.0'),
+	 (1,'Trinity','MW','images/pilots/f_063.png','2024-12-09 10:41:09.0'),
+	 (1,'Ridge','MW','images/pilots/m_101.png','2024-12-09 10:51:03.0'),
+	 (9,'Drummond','SCol','images/pilots/m_131.png','2024-12-13 10:03:49.0');
+INSERT INTO ascard.asc_pilot (playerid,name,`rank`,pilot_imageurl,Updated) VALUES
+	 (9,'Brian','MW','images/pilots/m_076.png','2024-12-09 13:06:09.0'),
+	 (9,'Justice','MW','images/pilots/m_083.png','2024-12-09 13:06:32.0'),
+	 (9,'Cash','MW','images/pilots/m_103.png','2024-12-09 13:08:26.0'),
+	 (9,'Nash','MW','images/pilots/m_010.png','2024-12-09 13:09:07.0'),
+	 (9,'Adelaide','SCom','images/pilots/f_048.png','2024-12-13 09:21:17.0'),
+	 (9,'Jalen','MW','images/pilots/m_109.png','2024-12-09 13:11:25.0'),
+	 (9,'Kingston','MW','images/pilots/m_002.png','2024-12-09 13:11:46.0'),
+	 (9,'Jayce','MW','images/pilots/m_156.png','2024-12-09 13:18:06.0'),
+	 (9,'Gianna','MW','images/pilots/f_014.png','2024-12-09 13:18:37.0'),
+	 (9,'Aidan','SCom','images/pilots/m_035.png','2024-12-13 09:20:39.0');
+INSERT INTO ascard.asc_pilot (playerid,name,`rank`,pilot_imageurl,Updated) VALUES
+	 (9,'Jaxen','MW','images/pilots/m_075.png','2024-12-09 13:57:42.0'),
+	 (9,'Mack','MW','images/pilots/m_012.png','2024-12-09 13:58:04.0'),
+	 (9,'Oscar','MW','images/pilots/m_163.png','2024-12-09 13:59:06.0'),
+	 (9,'Arianna','MW','images/pilots/f_054.png','2024-12-09 13:59:34.0'),
+	 (12,'Shiloh','MW','images/pilots/f_056.png','2024-12-09 16:29:36.0'),
+	 (12,'Jasmine','MW','images/pilots/f_023.png','2024-12-09 16:33:24.0'),
+	 (11,'Adrian','MW','images/pilots/m_051.png','2024-12-09 16:59:27.0'),
+	 (11,'Kiara','MW','images/pilots/f_016.png','2024-12-09 17:00:49.0'),
+	 (11,'Reese','MW','images/pilots/f_007.png','2024-12-09 17:02:48.0'),
+	 (4,'Eden','MW','images/pilots/m_153.png','2024-12-09 17:05:12.0');
+INSERT INTO ascard.asc_pilot (playerid,name,`rank`,pilot_imageurl,Updated) VALUES
+	 (11,'Juliet','MW','images/pilots/f_011.png','2024-12-09 17:05:27.0'),
+	 (11,'Maxwell','MW','images/pilots/m_125.png','2024-12-09 17:06:43.0'),
+	 (11,'Kamden','MW','images/pilots/m_141.png','2024-12-09 17:09:57.0'),
+	 (2,'Leandro','MW','images/pilots/m_161.png','2024-12-09 20:04:40.0'),
+	 (9,'Gracelynn','MW','images/pilots/f_042.png','2024-12-12 09:21:00.0'),
+	 (11,'Zayn','MW','images/pilots/m_084.png','2024-12-12 14:25:52.0'),
+	 (9,'Fletcher','MW','images/pilots/m_077.png','2024-12-12 15:17:34.0'),
+	 (10,'Garrett','MW','images/pilots/m_048.png','2024-12-12 15:34:42.0'),
+	 (10,'Finn','MW','images/pilots/m_083.png','2024-12-12 15:35:32.0'),
+	 (10,'Winter','MW','images/pilots/f_014.png','2024-12-12 15:39:21.0');
+INSERT INTO ascard.asc_pilot (playerid,name,`rank`,pilot_imageurl,Updated) VALUES
+	 (10,'Cayden','MW','images/pilots/m_034.png','2024-12-12 15:41:46.0'),
+	 (11,'Azalea','MW','images/pilots/f_055.png','2024-12-13 12:37:36.0'),
+	 (11,'Lylah','MW','images/pilots/f_047.png','2024-12-13 12:38:04.0'),
+	 (11,'Gerardo','MW','images/pilots/m_011.png','2024-12-13 12:38:53.0'),
+	 (11,'Jagger','MW','images/pilots/m_054.png','2024-12-13 12:40:06.0'),
+	 (11,'Porter','MW','images/pilots/m_149.png','2024-12-13 12:40:28.0'),
+	 (11,'Raylan','MW','images/pilots/m_110.png','2024-12-13 12:42:00.0'),
+	 (11,'Kason','MW','images/pilots/m_133.png','2024-12-13 13:15:04.0'),
+	 (2,'Aaden','MW','images/pilots/m_086.png','2024-12-13 23:32:42.0'),
+	 (11,'Jairo','MW','images/pilots/m_054.png','2024-12-14 19:17:52.0');
