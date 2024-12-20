@@ -668,12 +668,12 @@ session_start();
 			$currentUnitFired = $wpnsfired;
 
 			if ($array_ACTIVE_BID[$i4] == "1") {
-				echo "			<td width='".$width."%' nowrap><table width='100%' cellspacing='0' cellpadding='0' class='unitselect_button_active_play_left' style='animation: glow 1s infinite alternate;'><tr><td nowrap width='30px' align='center' valign='center'><div style='display:inline-block;height:100%;vertical-align:middle;'><img id='unitstatusimagemenu' style='vertical-align:middle;' src='".$array_UNIT_IMG_STATUS[$i4]."' height='25px' width='23px'><br><span style='color:#ccffff;font-size:15px;'>&nbsp;&nbsp;".$mn."&nbsp;&nbsp;</span></div></td><td>&nbsp;</td><td nowrap><div><img src='./images/ranks/".$factionid."/".$array_PILOT_RANK[$i4].".png' width='18px' height='18px'>&nbsp;<span style='font-size:24px'>".$array_PILOT[$i4]."</span>&nbsp;&nbsp;<img src='".$unitstatusimage."' height='21px'>".$heatimage[$i4]."<br><span style='font-size:14px;'>".textTruncate($memodel, 18)."</span></div></td><td align='left' style='align:left;' nowrap width='100%'><img src='images/unit_indicator.png' height='42px;'></td></tr></table></td>\r\n";
+				echo "			<td width='".$width."%' nowrap><table width='100%' height='100%' cellspacing='0' cellpadding='0' class='unitselect_button_active_play_left' style='animation: glow 1s infinite alternate;'><tr><td nowrap width='30px' align='center' valign='center'><div style='display:inline-block;height:100%;vertical-align:middle;'><img id='unitstatusimagemenu' style='vertical-align:middle;' src='".$array_UNIT_IMG_STATUS[$i4]."' height='25px' width='23px'><br><span style='color:#ccffff;font-size:15px;'>&nbsp;&nbsp;".$mn."&nbsp;&nbsp;</span></div></td><td>&nbsp;</td><td nowrap><div><img src='./images/ranks/".$factionid."/".$array_PILOT_RANK[$i4].".png' width='18px' height='18px'>&nbsp;<span style='font-size:24px'>".$array_PILOT[$i4]."</span>&nbsp;&nbsp;<img src='".$unitstatusimage."' height='21px'>".$heatimage[$i4]."<br><span style='font-size:14px;'>".textTruncate($memodel, 18)."</span></div></td><td align='left' style='align:left;' nowrap width='100%'><img src='images/unit_indicator.png' height='42px;'></td></tr></table></td>\r\n";
 				$atLeastOneValidUnitInFormation = $atLeastOneValidUnitInFormation + 1;
 			}
 		} else {
 			if ($array_ACTIVE_BID[$i4] == "1") {
-				echo "			<td width='".$width."%' nowrap onclick=\"location.href='".$meli."'\"><table width='100%' cellspacing='0' cellpadding='0' class='unitselect_button_normal_play_left'><tr><td nowrap width='30px' align='center' valign='center'><div style='display:inline-block;height:100%;vertical-align:middle;'><img style='vertical-align:middle;' src='".$array_UNIT_IMG_STATUS[$i4]."' height='25px' width='23px'><br><span style='color:#ccffff;font-size:15px;'>&nbsp;&nbsp;".$mn."&nbsp;&nbsp;</span></div></td><td>&nbsp;</td><td nowrap width='100%'><div><img src='./images/ranks/".$factionid."/".$array_PILOT_RANK[$i4].".png' width='18px' height='18px'>&nbsp;<a style='font-size:24px' href='".$meli."'>".$array_PILOT[$i4]."</a>&nbsp;&nbsp;<img src='".$unitstatusimage."' height='21px'>".$heatimage[$i4]."<br><span style='font-size:14px;'>".textTruncate($memodel, 18)."</span></div></td></tr></table></td>\r\n";
+				echo "			<td width='".$width."%' nowrap onclick=\"location.href='".$meli."'\"><table width='100%' height='100%' cellspacing='0' cellpadding='0' class='unitselect_button_normal_play_left'><tr><td nowrap width='30px' align='center' valign='center'><div style='display:inline-block;height:100%;vertical-align:middle;'><img style='vertical-align:middle;' src='".$array_UNIT_IMG_STATUS[$i4]."' height='25px' width='23px'><br><span style='color:#ccffff;font-size:15px;'>&nbsp;&nbsp;".$mn."&nbsp;&nbsp;</span></div></td><td>&nbsp;</td><td nowrap width='100%'><div><img src='./images/ranks/".$factionid."/".$array_PILOT_RANK[$i4].".png' width='18px' height='18px'>&nbsp;<a style='font-size:24px' href='".$meli."'>".$array_PILOT[$i4]."</a>&nbsp;&nbsp;<img src='".$unitstatusimage."' height='21px'>".$heatimage[$i4]."<br><span style='font-size:14px;'>".textTruncate($memodel, 18)."</span></div></td></tr></table></td>\r\n";
 				$atLeastOneValidUnitInFormation = $atLeastOneValidUnitInFormation + 1;
 			} else {
 				echo "			<td style='display:none;visibility:hidden;' width='".$width."%' nowrap onclick=\"location.href='".$meli."'\"><table width='100%' cellspacing='0' cellpadding='0' class='unitselect_button_normal_play_left'><tr><td nowrap width='30px' align='center' valign='center'><div style='display:inline-block;height:100%;vertical-align:middle;'><img style='vertical-align:middle;' src='".$array_UNIT_IMG_STATUS[$i4]."' height='25px' width='23px'><br><span style='color:#ccffff;font-size:15px;'>&nbsp;&nbsp;".$mn."&nbsp;&nbsp;</span></div></td><td>&nbsp;</td><td nowrap width='100%'><div><img src='./images/ranks/".$factionid."/".$array_PILOT_RANK[$i4].".png' width='18px' height='18px'>&nbsp;<a style='font-size:24px' href='".$meli."'>".$array_PILOT[$i4]."</a>&nbsp;&nbsp;<img src='".$unitstatusimage."' height='21px'>".$heatimage[$i4]."<br><span style='font-size:14px;'>".textTruncate($memodel, 18)."</span></div></td></tr></table></td>\r\n";
@@ -687,7 +687,7 @@ session_start();
 	}
 ?>
 			<!-- <td style="width:100px;" style="width:100px;" nowrap width="100px" style="background:rgba(50,50,50,1.0);text-align:center;vertical-align:middle;display:block;"><img src='./images/player/<?=$pimage?>' width='60px' height='60px'></td> -->
-			<td nowrap onclick="location.href='gui_show_playerlist.php'" style="width: 60px;" nowrap width="60px" style="background: rgba(50,50,50,1.0); text-align: center; vertical-align: middle;"><img src='./images/player/<?=$pimage?>' height='60px'></td>
+			<td nowrap onclick="location.href='gui_show_playerlist.php'" style="width: 60px;" width="60px" style="background: rgba(50,50,50,1.0); text-align: center; vertical-align: middle;"><img src='./images/player/<?=$pimage?>' style='height:auto;display:block;' width='60px' height='60px'></td>
 		</tr>
 
 <?php
@@ -732,9 +732,9 @@ session_start();
 </div>
 
 <?php
-	echo "<div id='player_image' onclick='location.href=\"gui_show_playerlist.php\"'>\n";
-	echo "	<img src='./images/player/".$pimage."' width='60px' height='60px'>\n";
-	echo "</div>\n";
+	//echo "<div id='player_image' onclick='location.href=\"gui_show_playerlist.php\"'>\n";
+	//echo "	<img src='./images/player/".$pimage."' width='60px' height='60px'>\n";
+	//echo "</div>\n";
 	echo "<div id='pilotrank'>\n";
 	echo "  <img src='./images/ranks/".$factionid."/".$array_PILOT_RANK[$chosenUnitIndex].".png' width='30px' height='30px'>\n";
 	echo "</div>\n";
@@ -788,14 +788,14 @@ session_start();
 					<div class="dataarea_content">
 						<table width="100%">
 							<tr>
-								<td nowrap width="1%" style="text-align:center;vertical-align:top;color:#fff;" class="datalabel_thin_small" rowspan="1" valign="top"><b>S</b></td>
+								<td nowrap width="1%" style="text-align:left;vertical-align:middle;color:#fff;" class="datalabel_thin_small" rowspan="1" valign="top"><b>S.</b>&nbsp;&nbsp;&nbsp;</td>
 								<td colspan="1" id="TC_SKILL" class="datalabel" width="20%" align="right">
 									<?php echo "$array_SKILL[$chosenUnitIndex]"; ?>
 								</td>
 								<td nowrap width="90%" rowspan="3" colspan="2" align="right" id="ToHitResult" class="datalabel_big" style="color:#da8e25;vertical-align:top;text-align:right;font-weight:bold;">5</td>
 							</tr>
 							<tr>
-								<td nowrap width="1%" style="text-align:center;vertical-align:top;color:#fff;" class="datalabel_thin_small" rowspan="1" valign="top"><b>A</b></td>
+								<td nowrap width="1%" style="text-align:left;vertical-align:middle;color:#fff;" class="datalabel_thin_small" rowspan="1" valign="top"><b>A.</b>&nbsp;&nbsp;&nbsp;</td>
 								<td colspan="1" id="TC_AMM" class="datalabel" width="20%" align="right">
 									0
 								</td>
@@ -806,13 +806,13 @@ session_start();
 					<div class="dataarea_content">
 						<table width="100%">
 							<tr>
-								<td nowrap width="1%" style="text-align:center;vertical-align:top;color:#fff;" class="datalabel_thin_small" rowspan="1" valign="top"><b>T</b></td>
+								<td nowrap width="1%" style="text-align:left;vertical-align:middle;color:#fff;" class="datalabel_thin_small" rowspan="1" valign="top"><b>T.</b>&nbsp;&nbsp;&nbsp;</td>
 								<td colspan="3" align="center">
 									<table width="100%">
 										<tr>
 											<td width="90%" nowrap style="text-align:left;" class="datalabel_thin_small">TMM</td>
 											<td width="1px" nowrap style="text-align:right;" valign="middle"><a style="padding-right:5px;" valign="middle" href="javascript:reduceEnemyTMM();"><i class="fas fa-minus-square"></i></a></td>
-											<td width="50px" nowrap style="text-align:center;" class="datalabel" id="EnemyTMM" align="center">2</td>
+											<td width="50px" nowrap style="text-align:center;min-width:25px;" class="datalabel" id="EnemyTMM" align="center">2</td>
 											<td width="1px" nowrap style="text-align:left;" valign="middle"><a style="padding-right:5px;" valign="middle" href="javascript:increaseEnemyTMM();"><i class="fas fa-plus-square"></i></a></td>
 										</tr>
 									</table>
@@ -824,19 +824,19 @@ session_start();
 					<div class="dataarea_content">
 						<table width="100%">
 							<tr>
-								<td nowrap width="1%" style="text-align:center;vertical-align:top;color:#fff;" class="datalabel_thin_small" rowspan="2" valign="top"><b>O</b></td>
+								<td nowrap width="1%" style="text-align:left;vertical-align:middle;color:#fff;" class="datalabel_thin_small" rowspan="2" valign="top"><b>O.</b>&nbsp;&nbsp;&nbsp;</td>
 								<td colspan="3" align="center">
 									<table width="100%">
 										<tr>
 											<td width="90%" nowrap style="text-align:left;" class="datalabel_thin_small">Other</td>
 											<td width="1px" nowrap style="text-align:right;" valign="middle"><a style="padding-right:5px;" valign="middle" href="javascript:reduceOther();"><i class="fas fa-minus-square"></i></a></td>
-											<td width="50px" nowrap style="text-align:center;" class="datalabel" id="Other" align="center">0</td>
+											<td width="50px" nowrap style="text-align:center;min-width:25px;" class="datalabel" id="Other" align="center">0</td>
 											<td width="1px" nowrap style="text-align:left;" valign="middle"><a style="padding-right:5px;" valign="middle" href="javascript:increaseOther();"><i class="fas fa-plus-square"></i></a></td>
 										</tr>
 										<tr>
 											<td width="90%" nowrap style="text-align:left;" class="datalabel_thin_small">Forrest</td>
 											<td width="1px" nowrap style="text-align:right;" valign="middle"><a style="padding-right:5px;" valign="middle" href="javascript:reduceForrest();"><i class="fas fa-minus-square"></i></a></td>
-											<td width="50px" nowrap style="text-align:center;" class="datalabel" id="Forrest" align="center">0</td>
+											<td width="50px" nowrap style="text-align:center;min-width:25px;" class="datalabel" id="Forrest" align="center">0</td>
 											<td width="1px" nowrap style="text-align:left;" valign="middle"><a style="padding-right:5px;" valign="middle" href="javascript:increaseForrest();"><i class="fas fa-plus-square"></i></a></td>
 										</tr>
 									</table>
@@ -852,18 +852,18 @@ session_start();
 					<div class="dataarea_content">
 						<table width="100%">
 							<tr>
-								<td nowrap width="1%" style="text-align:center;vertical-align:top;color:#fff;" class="datalabel_thin_small" rowspan="1" valign="top"><b>R</b></td>
+								<td nowrap width="1%" style="text-align:left;vertical-align:middle;color:#fff;" class="datalabel_thin_small" rowspan="1" valign="top"><b>R.</b>&nbsp;&nbsp;&nbsp;</td>
 								<td colspan="4">
-									<table>
+									<table width="100%">
 										<tr>
-											<td nowrap style="text-align:center;" class="datalabel_thin_small">S</td>
-											<td nowrap style="text-align:center;" class="datalabel_thin_small">M</td>
-											<td nowrap style="text-align:center;" class="datalabel_thin_small">L</td>
+											<td nowrap width="30%" style="text-align:center;" class="datalabel_thin_small">S</td>
+											<td nowrap width="40%" style="text-align:center;" class="datalabel_thin_small">M</td>
+											<td nowrap width="30%" style="text-align:center;" class="datalabel_thin_small">L</td>
 										</tr>
 										<tr>
-											<td nowrap style="text-align:center;" class="datalabel"><label class='bigcheck'><input onchange="setRangeToShort();" type='checkbox' class='bigcheck' name='ToHitShort' id='ToHitShort' value='no'/><span class='bigcheck-target'></span></label></td>
-											<td nowrap style="text-align:center;" class="datalabel"><label class='bigcheck'><input onchange="setRangeToMedium();" type='checkbox' class='bigcheck' name='ToHitMedium' id='ToHitMedium' value='yes'/><span class='bigcheck-target'></span></label></td>
-											<td nowrap style="text-align:center;" class="datalabel"><label class='bigcheck'><input onchange="setRangeToLong();" type='checkbox' class='bigcheck' name='ToHitLong' id='ToHitLong' value='no'/><span class='bigcheck-target'></span></label></td>
+											<td nowrap width="30%" style="text-align:center;" class="datalabel"><label class='bigcheck'><input onchange="setRangeToShort();" type='checkbox' class='bigcheck' name='ToHitShort' id='ToHitShort' value='no'/><span class='bigcheck-target'></span></label></td>
+											<td nowrap width="40%"  style="text-align:center;" class="datalabel"><label class='bigcheck'><input onchange="setRangeToMedium();" type='checkbox' class='bigcheck' name='ToHitMedium' id='ToHitMedium' value='yes'/><span class='bigcheck-target'></span></label></td>
+											<td nowrap width="30%" style="text-align:center;" class="datalabel"><label class='bigcheck'><input onchange="setRangeToLong();" type='checkbox' class='bigcheck' name='ToHitLong' id='ToHitLong' value='no'/><span class='bigcheck-target'></span></label></td>
 										</tr>
 										<tr>
 <?php
@@ -907,7 +907,7 @@ if ($showDistancesHexes == 1) {
 							</td>
 						</tr>
 						<tr>
-							<td nowrap class="datavalue_small_special" width="50%" colspan="4" style="text-align:left;" valign="middle" onclick="javascript:window.open('http://www.masterunitlist.info/Unit/Details/<?php echo $array_UNIT_MULID[$chosenUnitIndex] ?>');"><?php echo "$array_ROLE[$chosenUnitIndex]"; ?>&nbsp;&nbsp;<i class="fa-solid fa-square-up-right"></i></td>
+							<td nowrap class="datavalue_small_special" width="50%" colspan="4" style="text-align:center;" valign="middle" onclick="javascript:window.open('http://www.masterunitlist.info/Unit/Details/<?php echo $array_UNIT_MULID[$chosenUnitIndex] ?>');"><?php echo "$array_ROLE[$chosenUnitIndex]"; ?>&nbsp;&nbsp;<i class="fa-solid fa-square-up-right"></i></td>
 							<td nowrap class="datalabel" width="13%" colspan="1" valign="middle" >AMM:</td>
 							<td nowrap class="datavalue" width="12%" colspan="1" valign="middle" style="top:0px;bottom:0px;vertical-align:middle;"><span class="datavalue" id="AMM">0</span></td>
 							<td nowrap class="datalabel" width="12%" colspan="1">SKL:</td>

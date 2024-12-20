@@ -322,7 +322,7 @@ session_start();
 
 				<td nowrap onclick="location.href='./gui_edit_option.php'" width="<?php echo $buttonWidth ?>"><div class='unitselect_button_normal'><a href='./gui_edit_option.php'>OPTIONS</a><br><span style='font-size:16px;'>Change options</span></div></td>
 				<td style="width:5px;">&nbsp;</td>
-				<td nowrap onclick="location.href='gui_show_playerlist.php'" style="width: 60px;" nowrap width="60px" style="background: rgba(50,50,50,1.0); text-align: center; vertical-align: middle;"><img src='./images/player/<?=$pimage?>' height='60px'></td>
+				<td nowrap onclick="location.href='gui_show_playerlist.php'" style="width: 60px;" nowrap width="60px" style="background: rgba(50,50,50,1.0); text-align: center; vertical-align: middle;"><img src='./images/player/<?=$pimage?>' height='60px' style='height:auto;display:block;' width='60px' height='60px'></td>
 			</tr>
 		</table>
 	</div>
@@ -568,9 +568,9 @@ session_start();
 
 				if ($playMode) {
 					if ($activenarc == "1") {
-						$unitDetailString = $unitDetailString."						<td nowrap width='1%' valign='top' class='datalabel_disabled_dashed' style='background-color:".$bidcolor."text-align:right;'>\n";
+						$unitDetailString = $unitDetailString."						<td nowrap width='1%' class='datalabel_disabled_dashed' style='vertical-align:middle;text-align:right;'>\n";
 					} else {
-						$unitDetailString = $unitDetailString."						<td nowrap width='1%' valign='top' style='background-color:".$bidcolor."text-align:right;'>\n";
+						$unitDetailString = $unitDetailString."						<td nowrap width='1%' style='background-color:".$bidcolor.";vertical-align:middle;text-align:right;'>\n";
 					}
 					$unitDetailString = $unitDetailString."							<span style='font-size:12px;'>\n";
 					$unitDetailString = $unitDetailString."								&nbsp;&nbsp;<img width='25px' src='".$unitRoundStatusImage."'>\n";

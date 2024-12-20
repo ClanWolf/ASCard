@@ -710,6 +710,7 @@ a:hover {
 	background-color: #694007;
 	color: #ffffff;
 	text-align: center;
+	/* height:100% */
 }
 .unitselect_button_active_left {
 	font-size: 100%;
@@ -833,6 +834,11 @@ input[type='checkbox'].bigcheck:checked + span.bigcheck-target:after {
 	border-width: 6px;
 	padding: 0px;
 	background: rgba(70,0,0,0.65);
+	/* background-image: linear-gradient(to left, transparent, black); */
+	background-image: linear-gradient(to left, black, black);
+	background-size: 15% 100%;
+	background-position: left top;
+	background-repeat: no-repeat;
 	margin-top: 5px;
 	margin-bottom: 5px;
 	margin-left: 5px;
@@ -882,7 +888,6 @@ input[type='checkbox'].bigcheck:checked + span.bigcheck-target:after {
 	font-family: 'Pathway Gothic One', sans-serif;
 	vertical-align: middle;
 	color: #999;
-	padding-right: 5px;
 	background-image:repeating-linear-gradient(315deg, #222 0%, #222 15%, #108af9 15%, #108af9 30%, #222 30%);
 }
 .datalabel_thin {
@@ -954,7 +959,7 @@ input[type='checkbox'].bigcheck:checked + span.bigcheck-target:after {
 		background-color: #2b3649;
 	}
 	to {
-		background-color: #556b8f;
+		background-color: #7f97b5;
 	}
 }
 

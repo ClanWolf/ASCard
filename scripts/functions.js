@@ -1285,6 +1285,10 @@ function changeWallpaper() {
 		for (let i = 0; i < allDataValueThins.length; i++) {
 			allDataValueThins[i].style.color="#000"
 		}
+		const allDataValueSmallSpecials = document.getElementsByClassName("datavalue_small_special");
+		for (let i = 0; i < allDataValueSmallSpecials.length; i++) {
+		    allDataValueSmallSpecials[i].style.color="#000"
+		}
 	} else {
 		// Set use MUL images to 0 on database (dark background + alternative images)
 		var url="./save_UseMULImages.php?playerId="+playerId+"&useMulImages=0";
@@ -1305,6 +1309,10 @@ function changeWallpaper() {
 		const allDataValueThins = document.getElementsByClassName("datavalue_thin");
 		for (let i = 0; i < allDataValueThins.length; i++) {
 			allDataValueThins[i].style.color="#ccc"
+		}
+		const allDataValueSmallSpecials = document.getElementsByClassName("datavalue_small_special");
+		for (let i = 0; i < allDataValueSmallSpecials.length; i++) {
+		    allDataValueSmallSpecials[i].style.color="#ccc"
 		}
 	}
 }
@@ -1882,6 +1890,10 @@ $(document).ready(function() {
 		for (let i = 0; i < allDataAreaReds.length; i++) {
 			allDataAreaReds[i].style.backgroundColor="rgba(10,10,10,0.65)";
 		}
+		const allDataValueSmallSpecials = document.getElementsByClassName("datavalue_small_special");
+		for (let i = 0; i < allDataValueSmallSpecials.length; i++) {
+		    allDataValueSmallSpecials[i].style.color="#000"
+		}
 	} else {
 		// Set use MUL images to 0 on database (dark background + alternative images)
 		var url="./save_UseMULImages.php?playerId="+playerId+"&useMulImages=0";
@@ -1902,6 +1914,10 @@ $(document).ready(function() {
 		const allDataAreaReds = document.getElementsByClassName("dataarea_red");
 		for (let i = 0; i < allDataAreaReds.length; i++) {
 			allDataAreaReds[i].style.backgroundColor="rgba(70,0,0,0.60)";
+		}
+		const allDataValueSmallSpecials = document.getElementsByClassName("datavalue_small_special");
+		for (let i = 0; i < allDataValueSmallSpecials.length; i++) {
+		    allDataValueSmallSpecials[i].style.color="#ccc"
 		}
 	}
 });
