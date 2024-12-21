@@ -1009,7 +1009,7 @@ if ($showDistancesHexes == 1) {
 				<div class="dataarea">
 					<table width="100%">
 						<tr>
-							<td nowrap width="10%" class="datalabel" width="100%">SP:</td>
+							<td nowrap width="10%" class="datalabel" width="100%">SA:</td>
 							<td nowrap width="90%" class="datavalue_thin" style="text-align: left;">
 								<table>
 									<tr>
