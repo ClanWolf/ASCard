@@ -789,13 +789,15 @@ session_start();
 						<table width="100%">
 							<tr>
 								<td nowrap width="1%" style="text-align:left;vertical-align:middle;color:#fff;" class="datalabel_thin_small" rowspan="1" valign="top"><b>S.</b>&nbsp;&nbsp;&nbsp;</td>
+								<td colspan="1" class="datalabel_thin_small" width="20%" align="left">Skill</td>
 								<td colspan="1" id="TC_SKILL" class="datalabel" width="20%" align="right">
 									<?php echo "$array_SKILL[$chosenUnitIndex]"; ?>
 								</td>
-								<td nowrap width="90%" rowspan="2" colspan="2" align="right" id="ToHitResult" class="datalabel_big" style="color:#da8e25;vertical-align:top;text-align:right;font-weight:bold;">5</td>
+								<td nowrap width="90%" rowspan="2" colspan="1" align="right" id="ToHitResult" class="datalabel_big" style="color:#da8e25;vertical-align:top;text-align:right;font-weight:bold;">5</td>
 							</tr>
 							<tr>
 								<td nowrap width="1%" style="text-align:left;vertical-align:middle;color:#fff;" class="datalabel_thin_small" rowspan="1" valign="top"><b>A.</b>&nbsp;&nbsp;&nbsp;</td>
+								<td colspan="1" class="datalabel_thin_small" width="20%" align="left">AMM</td>
 								<td colspan="1" id="TC_AMM" class="datalabel" width="20%" align="right">
 									0
 								</td>
