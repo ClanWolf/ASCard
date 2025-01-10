@@ -128,14 +128,14 @@
 				$pilotName = $row_allActiveUnitIDsNOTFinished["name"];
 
 				if ($allActiveUnitIDsNOTFinished == "") {
-                    $allActiveUnitIDsNOTFinished = $allActiveUnitIDsNOTFinished.$formationId."|".$unitId."|".$unitModel."|".$pilotName;
-                } else {
-                    $allActiveUnitIDsNOTFinished = $allActiveUnitIDsNOTFinished.",".$formationId."|".$unitId."|".$unitModel."|".$pilotName;
-                }
+					$allActiveUnitIDsNOTFinished = $allActiveUnitIDsNOTFinished.$formationId."|".$unitId."|".$unitModel."|".$pilotName;
+				} else {
+					$allActiveUnitIDsNOTFinished = $allActiveUnitIDsNOTFinished.",".$formationId."|".$unitId."|".$unitModel."|".$pilotName;
+				}
 			}
 		}
 
-		if ($allActiveUnitsCount == $allActiveUnitsFinishedCount) {
+		if ($allActiveUnitsCount > 0 && $allActiveUnitsCount == $allActiveUnitsFinishedCount) {
 			// all Units did move and fired in this round and the round can be finalized
 			$sql_asc_assign = "SELECT SQL_NO_CACHE * FROM asc_assign where formationid in (".$formationIds.");";
 			echo $sql_asc_assign;
