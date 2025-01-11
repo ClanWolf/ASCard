@@ -411,6 +411,7 @@ session_start();
 
 			$unitsInSingleFormation = array();
 			$c = 0;
+
 			while ($rowUnitAssignment = $result_asc_checkformationassignments->fetch_assoc()) {
 
 				$c++;
@@ -433,6 +434,7 @@ session_start();
 
 				$sql_asc_unit = "SELECT SQL_NO_CACHE * FROM asc_unit where unitid=".$assignedUnitID." order by unit_tonnage desc;";
 				$result_asc_unit = mysqli_query($conn, $sql_asc_unit);
+
 				if (mysqli_num_rows($result_asc_unit) > 0) {
 					while($rowUnit = mysqli_fetch_assoc($result_asc_unit)) {
 
@@ -641,15 +643,15 @@ session_start();
 	echo "		</tr>\n";
 
 	if ($playMode) {
-		if ($readyToFinalizeRound == 1) {
+		// if ($readyToFinalizeRound == 1) {
 			echo "<script>\n";
 			echo "document.getElementById('FinalizeRoundButton').style.backgroundColor = '#517d25';";
 			echo "</script>\n";
-		} else {
-			echo "<script>\n";
-			echo "document.getElementById('FinalizeRoundButton').style.backgroundColor = '#5c0700';";
-	        echo "</script>\n";
-		}
+		// } else {
+		//	echo "<script>\n";
+		//	echo "document.getElementById('FinalizeRoundButton').style.backgroundColor = '#5c0700';";
+		//  echo "</script>\n";
+		//}
 	}
 ?>
 	</table>
