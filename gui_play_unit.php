@@ -674,12 +674,12 @@ session_start();
 		} else {
 			if ($array_ACTIVE_BID[$i4] == "1") {
 				echo "			<td width='".$width."%' nowrap onclick=\"location.href='".$meli."'\"><table width='100%' height='100%' cellspacing='0' cellpadding='0' class='unitselect_button_normal_play_left'><tr><td nowrap width='30px' align='center' valign='center'><div style='display:inline-block;height:100%;vertical-align:middle;'><img style='vertical-align:middle;' src='".$array_UNIT_IMG_STATUS[$i4]."' height='25px' width='23px'><br><span style='color:#ccffff;font-size:15px;'>&nbsp;&nbsp;".$mn."&nbsp;&nbsp;</span></div></td><td>&nbsp;</td><td nowrap width='100%'><div><img src='./images/ranks/".$factionid."/".$array_PILOT_RANK[$i4].".png' width='18px' height='18px'>&nbsp;<a style='font-size:24px' href='".$meli."'>".$array_PILOT[$i4]."</a>&nbsp;&nbsp;<img src='".$unitstatusimage."' height='21px'>".$heatimage[$i4]."<br><span style='font-size:14px;'>".textTruncate($memodel, 18)."</span></div></td></tr></table></td>\r\n";
+				echo "			<td style='width:5px;'>&nbsp;</td>\r\n";
 				$atLeastOneValidUnitInFormation = $atLeastOneValidUnitInFormation + 1;
 			} else {
 				echo "			<td style='display:none;visibility:hidden;' width='".$width."%' nowrap onclick=\"location.href='".$meli."'\"><table width='100%' cellspacing='0' cellpadding='0' class='unitselect_button_normal_play_left'><tr><td nowrap width='30px' align='center' valign='center'><div style='display:inline-block;height:100%;vertical-align:middle;'><img style='vertical-align:middle;' src='".$array_UNIT_IMG_STATUS[$i4]."' height='25px' width='23px'><br><span style='color:#ccffff;font-size:15px;'>&nbsp;&nbsp;".$mn."&nbsp;&nbsp;</span></div></td><td>&nbsp;</td><td nowrap width='100%'><div><img src='./images/ranks/".$factionid."/".$array_PILOT_RANK[$i4].".png' width='18px' height='18px'>&nbsp;<a style='font-size:24px' href='".$meli."'>".$array_PILOT[$i4]."</a>&nbsp;&nbsp;<img src='".$unitstatusimage."' height='21px'>".$heatimage[$i4]."<br><span style='font-size:14px;'>".textTruncate($memodel, 18)."</span></div></td></tr></table></td>\r\n";
 			}
 		}
-		echo "			<td style='width:5px;'>&nbsp;</td>\r\n";
 	}
 	if ($atLeastOneValidUnitInFormation == 0) {
 		echo "<meta http-equiv='refresh' content='0;url=./gui_select_unit.php'>\r\n";
@@ -687,6 +687,10 @@ session_start();
 	}
 ?>
 			<!-- <td style="width:100px;" style="width:100px;" nowrap width="100px" style="background:rgba(50,50,50,1.0);text-align:center;vertical-align:middle;display:block;"><img src='./images/player/<?=$pimage?>' width='60px' height='60px'></td> -->
+			<td nowrap onclick="location.href=''" width="60px" style="width:60px;min-width:60px;background:rgba(1,70,1,1.0);text-align:center;vertical-align:middle;">
+				<div><a style="color:#eee;" href=""><i class="fa-solid fa-angles-right"></i></a></div>
+			</td>
+			<td style='width:5px;'>&nbsp;</td>
 			<td nowrap onclick="location.href='gui_show_playerlist.php'" style="width: 60px;" width="60px" style="background: rgba(50,50,50,1.0); text-align: center; vertical-align: middle;"><img src='./images/player/<?=$pimage?>' style='height:auto;display:block;' width='60px' height='60px'></td>
 		</tr>
 
@@ -893,8 +897,8 @@ if ($showDistancesHexes == 1) {
 					<table width="100%">
 						<tr>
 							<td onclick="toggleTargetingComputer();" nowrap style="text-align:center;" width="5%" id="targetcomp" rowspan="2">&nbsp;&nbsp;&nbsp;<i class="fa-solid fa-circle-left" style="color:#999;font-size:40px;"></i>&nbsp;&nbsp;&nbsp;</td>
-							<td nowrap class="datalabel" width="12%">TP:</td>
-							<td nowrap class="datavalue" width="25%" id="unit_type" colspan="3"><?php echo "$array_TP[$chosenUnitIndex]"; ?> <span class='datalabel_thin_small'><?php echo "$array_SZ[$chosenUnitIndex]"; ?>/<?php echo "$array_TON[$chosenUnitIndex]"; ?></span></td>
+							<!-- <td nowrap class="datalabel" width="12%">TP:</td> -->
+							<td nowrap class="datavalue" width="25%" id="unit_type" colspan="4"><?php echo "$array_TP[$chosenUnitIndex]"; ?>/<?php echo "$array_SZ[$chosenUnitIndex]"; ?><span class='datalabel_thin_small' style='text-transform:lowercase;'> (<?php echo "$array_TON[$chosenUnitIndex]"; ?>t)</span></td>
 							<td id="tmmLabel" nowrap class="datalabel" width="12%">TMM:</td>
 							<td nowrap class="datavalue" width="13%" id="TMM"><?php echo "$array_TMM[$chosenUnitIndex]"; ?></td>
 							<td nowrap class="datalabel" width="12%">MV:</td>
@@ -909,7 +913,7 @@ if ($showDistancesHexes == 1) {
 							</td>
 						</tr>
 						<tr>
-							<td nowrap class="datavalue_small_special" width="50%" colspan="4" style="text-align:center;" valign="middle" onclick="javascript:window.open('http://www.masterunitlist.info/Unit/Details/<?php echo $array_UNIT_MULID[$chosenUnitIndex] ?>');"><?php echo "$array_ROLE[$chosenUnitIndex]"; ?>&nbsp;&nbsp;<i class="fa-solid fa-square-up-right"></i></td>
+							<td nowrap class="datavalue_small_special" width="50%" colspan="4" style="text-align:left;" valign="middle" onclick="javascript:window.open('http://www.masterunitlist.info/Unit/Details/<?php echo $array_UNIT_MULID[$chosenUnitIndex] ?>');"><?php echo "$array_ROLE[$chosenUnitIndex]"; ?>&nbsp;&nbsp;<i class="fa-solid fa-square-up-right"></i></td>
 							<td nowrap class="datalabel" width="13%" colspan="1" valign="middle" >AMM:</td>
 							<td nowrap class="datavalue" width="12%" colspan="1" valign="middle" style="top:0px;bottom:0px;vertical-align:middle;"><span class="datavalue" id="AMM">0</span></td>
 							<td nowrap class="datalabel" width="12%" colspan="1">SKL:</td>

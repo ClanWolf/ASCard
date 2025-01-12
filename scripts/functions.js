@@ -208,7 +208,7 @@ function readCircles2(index, a_max, s_max, mv_bt_id, f_bt_id) {
 	// unitstatusstring: fresh, damaged, critical, crippled, destroyed
 
 	var currentUnitType = document.getElementById('unit_type').innerText;
-	currentUnitType = currentUnitType.substring(0, currentUnitType.indexOf(' ')); // Cut off size and tonnage
+	currentUnitType = currentUnitType.substring(0, currentUnitType.indexOf('/')); // Cut off size and tonnage
 	unitstatus = 1;
 	unitstatusstring = "fresh";
 	unitstatusimage = "images/DD_" + currentUnitType + "_01.png";
@@ -1023,7 +1023,7 @@ function textSize(dec) {
 
 function increaseENGN_PREP() {
 	ENGN_PREP = ENGN_PREP + 1;
-	if (ENGN_PREP > 1) {
+	if (ENGN_PREP > 2) {
 		ENGN_PREP = 0;
 		playTCClickSound();
 	} else {
@@ -1035,7 +1035,7 @@ function increaseENGN_PREP() {
 }
 function increaseFCTL_PREP() {
 	FCTL_PREP = FCTL_PREP + 1;
-	if (FCTL_PREP > 1) {
+	if (FCTL_PREP > 4) {
 		FCTL_PREP = 0;
 		playTCClickSound();
 	} else {
@@ -1047,7 +1047,7 @@ function increaseFCTL_PREP() {
 }
 function increaseMP_PREP() {
 	MP_PREP = MP_PREP + 1;
-	if (MP_PREP > 1) {
+	if (MP_PREP > 4) {
 		MP_PREP = 0;
 		playTCClickSound();
 	} else {
@@ -1059,7 +1059,7 @@ function increaseMP_PREP() {
 }
 function increaseWPNS_PREP() {
 	WPNS_PREP = WPNS_PREP + 1;
-	if (WPNS_PREP > 1) {
+	if (WPNS_PREP > 4) {
 		WPNS_PREP = 0;
 		playTCClickSound();
 	} else {
@@ -1072,7 +1072,7 @@ function increaseWPNS_PREP() {
 
 function increaseENGN_CV_PREP() {
 	CV_ENGN_PREP = CV_ENGN_PREP + 1;
-	if (CV_ENGN_PREP > 1) {
+	if (CV_ENGN_PREP > 2) {
 		CV_ENGN_PREP = 0;
 		playTCClickSound();
 	} else {
@@ -1084,7 +1084,7 @@ function increaseENGN_CV_PREP() {
 }
 function increaseFCTL_CV_PREP() {
 	CV_FCTL_PREP = CV_FCTL_PREP + 1;
-	if (CV_FCTL_PREP > 1) {
+	if (CV_FCTL_PREP > 4) {
 		CV_FCTL_PREP = 0;
 		playTCClickSound();
 	} else {
@@ -1096,7 +1096,7 @@ function increaseFCTL_CV_PREP() {
 }
 function increaseWPNS_CV_PREP() {
 	CV_WPNS_PREP = CV_WPNS_PREP + 1;
-	if (CV_WPNS_PREP > 1) {
+	if (CV_WPNS_PREP > 4) {
 		CV_WPNS_PREP = 0;
 		playTCClickSound();
 	} else {
@@ -1108,7 +1108,7 @@ function increaseWPNS_CV_PREP() {
 }
 function increaseMOTIVEA_PREP() {
 	CV_MOTVA_PREP = CV_MOTVA_PREP + 1;
-	if (CV_MOTVA_PREP > 1) {
+	if (CV_MOTVA_PREP > 2) {
 		CV_MOTVA_PREP = 0;
 		playTCClickSound();
 	} else {
@@ -1120,7 +1120,7 @@ function increaseMOTIVEA_PREP() {
 }
 function increaseMOTIVEB_PREP() {
 	CV_MOTVB_PREP = CV_MOTVB_PREP + 1;
-	if (CV_MOTVB_PREP > 1) {
+	if (CV_MOTVB_PREP > 2) {
 		CV_MOTVB_PREP = 0;
 		playTCClickSound();
 	} else {
@@ -1186,7 +1186,7 @@ function rolldice() {
 	rolling--;
 
 	if (ccc == 12) {
-		var t = document.getElementById("unit_type").innerHTML.slice(0, 2);
+		var t = document.getElementById("unit_type").innerHTML.substring(0, 2);
 
 		var resMes = "";
 		if (t == "BM") {

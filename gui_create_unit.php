@@ -594,7 +594,7 @@ session_start();
 
 					Type: <select required style='width:75px;' name='unittype' id='unittype' size='1' onchange="fetchUnitList();">
 						<option value="BA">BA</option>
-						<option value="BM">BM</option>
+						<option value="BM" selected="selected">BM</option>
 						<option value="CV">CV</option>
 						<!-- <option value="AF">AF</option> -->
 					</select>
@@ -602,7 +602,7 @@ session_start();
 					<span id='weightBlock'>Weight: <select required style='width:145px;' name='tonnage' id='tonnage' size='1' onchange="fetchUnitList();">
 						<option value="LIGHT">LIGHT</option>
 						<option value="MEDIUM">MEDIUM</option>
-						<option value="HEAVY">HEAVY</option>
+						<option value="HEAVY" selected="selected">HEAVY</option>
 						<option value="ASSAULT">ASSAULT</option>
 						<option value="SUPERHEAVY">SUPERHEAVY</option>
 
