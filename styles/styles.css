@@ -90,10 +90,10 @@ iframe {
 	visibility: hidden; /* hidden, visible */
 	position: absolute;
 	background-color: red;
-	left: 80;
-	top: 80;
+	left: 10;
+	top: 10;
 	width: 800px;
-	height: 300px;
+	height: 100px;
 	z-index: 9999;
 }
 table {

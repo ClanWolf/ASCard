@@ -238,21 +238,30 @@ session_start();
 	<iframe name="saveframe" id="iframe_save"></iframe>
 
 	<script>
+		function randomIntFromInterval(min, max) { // min and max included
+			return Math.floor(Math.random() * (max - min + 1) + min);
+		}
 		$(document).ready(function() {
 			$("#cover").hide();
 		});
 		function resetGame(playerId) {
-			var url="./save_reset_game.php?pid=" + playerId;
+			var url="./save_game_reset.php?pid=" + playerId;
 			window.frames["saveframe"].location.replace(url);
 		}
 		function saveGameInfo(playerId) {
-		alert("saving info!");
-			var url="./save_gameinfo.php?pid=" + playerId;
-			window.frames["saveframe"].location.replace(url);
+			alert("saving info!");
+			//var url="./save_game_info.php?pid=" + playerId;
+			//window.frames["saveframe"].location.replace(url);
 		}
-		function saveGameAccessCode(playerId) {
-		alert("saving code!");
-			var url="./save_gameAccessCode.php?pid=" + playerId;
+		function saveGameLock(gameId) {
+			alert("saving lock!");
+			//var url="./save_game_lock.php?gid=" + gameId;
+			//window.frames["saveframe"].location.replace(url);
+		}
+		function saveGameAccessCode(gameId) {
+			const rndInt = randomIntFromInterval(1000, 9999);
+			document.getElementById("accesscode").innerHTML = rndInt;
+			var url="./save_game_accesscode.php?gid=" + gameId + "&rndint=" + rndInt;
 			window.frames["saveframe"].location.replace(url);
 		}
 	</script>
@@ -310,7 +319,7 @@ session_start();
 	<br>
 
 	<div id="header">
-		<table width="55%" align="center" class="options" cellspacing="4" cellpadding="4" border="0px">
+		<table align="center" class="options" cellspacing="4" cellpadding="4" border="0px">
 			<tr>
 				<td valign="top" width="70%">
 					<form>
@@ -323,7 +332,7 @@ session_start();
 									echo "<a href='#' onClick='lockGame();'><i class='fa-solid fa-lock-open'></i></a>&nbsp;&nbsp;&nbsp;";
 								} ?>
 								</td>
-								<td class='datalabel' nowrap colspan="2" align="left">
+								<td colspan="3" class='datalabel' nowrap colspan="2" align="left">
 									<input onchange="javascript:saveGameInfo(<?php echo $pid ?>);" type="text" id="GameTitle" style="width:250px;">  [ID: <?php echo $GAMEID; ?>]
 									<script type="text/javascript">document.getElementById("GameTitle").setAttribute('value','<?php echo $TITLE; ?>');</script>
 								</td>
@@ -331,7 +340,7 @@ session_start();
 
 							<tr>
 								<td></td>
-								<td class='datalabel' nowrap colspan="2" align="left">
+								<td colspan="3" class='datalabel' nowrap colspan="2" align="left">
 										<input onchange="javascript:saveGameInfo(<?php echo $pid ?>);" type="text" id="GameBackground" style="width:300px;">
 										<script type="text/javascript">document.getElementById("GameBackground").setAttribute('value','<?php echo $BACKGROUND; ?>');</script>
 									<br><br>
@@ -339,9 +348,14 @@ session_start();
 							</tr>
 
 							<tr>
-								<td nowrap align="left" width="3%" onclick="javascript:saveGameAccessCode(<?php echo $pid ?>);"><a href='#' onClick='javascript:saveGameAccessCode(<?php echo $pid ?>);'><i class="fa-solid fa-rotate-right"></i></a>&nbsp;&nbsp;&nbsp;</td>
+								<td nowrap align="left" width="3%"><a href='#' onClick='javascript:saveGameAccessCode(<?php echo $gid ?>);'><i class="fa-solid fa-rotate-right"></i></a>&nbsp;&nbsp;&nbsp;</td>
 								<td class='datalabel' nowrap align="left" width="3%">Access code:</td>
-								<td class='datalabel' nowrap align="left" width="94%"><?php echo $ACCESSCODE; ?>
+								<td class='datalabel' nowrap align="left" width="94%" id="accesscode">
+									<?php echo $ACCESSCODE; ?>
+								</td>
+								<td class='datalabel' nowrap align="right" width="94%">
+									<a href='#' onClick='saveGameInfo(<?php echo $pid ?>);'><i class='fa-solid fa-save'></i></a>&nbsp;&nbsp;&nbsp;
+								</td>
 							</tr>
 						</table>
 					</form>
@@ -367,21 +381,27 @@ session_start();
 						<table cellspacing="0" cellpadding="0" border="0px" width="100%">
 							<?php
 								if ($gid == $hgid) { // I am a member of my own hosted game, so I am joined nowhere else
-									echo "<tr>\n";
-									echo "	<td colspan='1' class='datalabel' nowrap align='left'>Join:</td>\n";
-									echo "	<td colspan='1' class='datalabel' nowrap align='left'>\n";
-									echo "	<select required name='game' id='game' size='1' onchange='' style='width: 220px;'>\n";
+									if (sizeOf($array_joinedUsers) == 0) {
+										echo "<tr>\n";
+										echo "	<td colspan='1' class='datalabel' nowrap align='left'>Join:</td>\n";
+										echo "	<td colspan='1' class='datalabel' nowrap align='left'>\n";
+										echo "	<select required name='game' id='game' size='1' onchange='' style='width: 220px;'>\n";
 
-									for ($i661 = 1; $i661 < sizeof($array_availableGamesToJoin); $i661++) { // ignore the first one, dummy game
-										echo "<option value='" . $array_availableGamesToJoin[$i661] . "'>" . $array_availableGamesToJoin[$i661] . "</option>\n";
+										for ($i661 = 1; $i661 < sizeof($array_availableGamesToJoin); $i661++) { // ignore the first one, dummy game
+											echo "<option value='".$array_availableGamesToJoin[$i661]."'>".$array_availableGamesToJoin[$i661]."</option>\n";
+										}
+
+										echo "	</select>\n";
+										echo "	</td>\n";
+										echo "	<td colspan='1' class='datalabel' nowrap align='right'>Code:</td>\n";
+										echo "	<td colspan='1' class='datalabel' nowrap align='center'><input autocomplete='autocomplete_off_hack_xfr4!k' required type='text' id='AccessCode' style='width: 100px;'></td>\n";
+										echo "	<td colspan='1' class='datalabel' nowrap align='right'><a href='#' onClick='joinGame();'><i class='fas fa-plus-square'></i></a></td>\n";
+										echo "</tr>\n";
+									} else {
+										echo "<tr>\n";
+										echo "	<td colspan='5' class='datalabel' nowrap align='center'>Can not join a game. There are still players in your game.</td>\n";
+										echo "</tr>\n";
 									}
-
-									echo "	</select>\n";
-									echo "	</td>\n";
-									echo "	<td colspan='1' class='datalabel' nowrap align='right'>Code:</td>\n";
-									echo "	<td colspan='1' class='datalabel' nowrap align='center'><input autocomplete='autocomplete_off_hack_xfr4!k' required type='text' id='AccessCode' style='width: 100px;'></td>\n";
-									echo "	<td colspan='1' class='datalabel' nowrap align='right'><a href='#' onClick='joinGame();'><i class='fas fa-plus-square'></i></a></td>\n";
-									echo "</tr>\n";
 								} else {
 									echo "<tr>\n";
 									echo "	<td colspan='1' class='datalabel' nowrap align='left'>Leave:</td>\n";
