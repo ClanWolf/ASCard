@@ -44,6 +44,7 @@ session_start();
 						$_SESSION['name'] = $row['name'];
 						$_SESSION['playerimage'] = $row['image'];
 						$_SESSION['gameid'] = $row['gameid'];
+						$_SESSION['hostedgameid'] = $row['hostedgameid'];
 						// getting options from database
 						$sql_asc_options = "SELECT SQL_NO_CACHE * FROM asc_options WHERE playerid = ".$_SESSION['playerid'];
 						$result_asc_options = mysqli_query($conn, $sql_asc_options);

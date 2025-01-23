@@ -17,6 +17,7 @@ session_start();
 	// Get data from db
 	$pid = $_SESSION['playerid'];
 	$gid = $_SESSION['gameid'];
+	$hgid = $_SESSION['hostedgameid'];
 	$pname = $_SESSION['name'];
 	$pimage = $_SESSION['playerimage'];
 	$opt3 = $_SESSION['option3'];
@@ -46,9 +47,9 @@ session_start();
 	} else {
 		// this player does not have a game yet
 		if (endsWith($pname, 's')) {
-			$background = $pname . "&#039; game";
+			$background = $pname . " game";
 		} else {
-			$background = $pname . "&#039;s game";
+			$background = $pname . "s game";
 		}
 		$title = $background;
 		$accesscodeGenerated = substr(str_shuffle("0123456789"), 0, 4);
@@ -62,6 +63,14 @@ session_start();
 			$LOCKED = 0;
 			$TITLE = $title;
 			$BACKGROUND = $background;
+
+			$sqlupdateplayer = "UPDATE asc_player set hostedgameid = ".$GAMEID." WHERE playerid=".$pid;
+			if (mysqli_query($conn, $sqlupdateplayer)) {
+				// Success updating player with new gameid for his own game
+			} else {
+				// Error
+				echo "Error: " . $sqlupdateplayer . "<br>" . mysqli_error($conn);
+			}
 		} else {
 			// Error
 			echo "Error: " . $sqlinsertgame . "<br>" . mysqli_error($conn);
@@ -203,7 +212,7 @@ session_start();
 		}
 		.scroll-pane {
 			width: 100%;
-			height: 100px;
+			height: 140px;
 			overflow: auto;
 		}
 		.horizontal-only {
@@ -228,15 +237,25 @@ session_start();
 
 	<iframe name="saveframe" id="iframe_save"></iframe>
 
-    <script>
-        $(document).ready(function() {
-            $("#cover").hide();
-        });
-        function resetRound(playerId) {
-            var url="./save_reset_round.php?pid=" + playerId;
-            window.frames["saveframe"].location.replace(url);
-        }
-    </script>
+	<script>
+		$(document).ready(function() {
+			$("#cover").hide();
+		});
+		function resetGame(playerId) {
+			var url="./save_reset_game.php?pid=" + playerId;
+			window.frames["saveframe"].location.replace(url);
+		}
+		function saveGameInfo(playerId) {
+		alert("saving info!");
+			var url="./save_gameinfo.php?pid=" + playerId;
+			window.frames["saveframe"].location.replace(url);
+		}
+		function saveGameAccessCode(playerId) {
+		alert("saving code!");
+			var url="./save_gameAccessCode.php?pid=" + playerId;
+			window.frames["saveframe"].location.replace(url);
+		}
+	</script>
 
 <?php
 	if ($playMode) {
@@ -291,86 +310,103 @@ session_start();
 	<br>
 
 	<div id="header">
-		<table width="60%" align="center" class="options" cellspacing="4" cellpadding="4" border="0px">
+		<table width="55%" align="center" class="options" cellspacing="4" cellpadding="4" border="0px">
 			<tr>
-				<td valign="top" width="75%">
-					<table width="100%" border="0" cellspacing="0" cellpadding="0">
-						<tr>
-							<td class='datalabel' nowrap colspan="3" align="left">&quot;<?php echo $BACKGROUND; ?>&quot; [ID: <?php echo $GAMEID; ?>]
-							<?php if ($LOCKED == 0) {
-								echo "&nbsp;&nbsp;&nbsp;<a href='#' onClick='unlockGame();'><i class='fa-solid fa-lock'></i></i></a>";
-							} else {
-								echo "&nbsp;&nbsp;&nbsp;<a href='#' onClick='lockGame();'><i class='fa-solid fa-lock-open'></i></a>";
-							} ?>
-							</td>
-						</tr>
-						<tr>
-							<td class='datalabel' nowrap align="left" width="3%">Access code:</td><td nowrap align="left" width="3%">&nbsp;&nbsp;&nbsp;<i class="fa-solid fa-rotate-right"></i></td><td class='datalabel' nowrap align="left" width="94%">&nbsp;&nbsp;&nbsp;<?php echo $ACCESSCODE; ?>
-						</tr>
-					</table>
+				<td valign="top" width="70%">
+					<form>
+						<table border="0" cellspacing="2" cellpadding="2">
+							<tr>
+								<td class='datalabel' nowrap colspan="1" align="left">
+								<?php if ($LOCKED == 0) {
+									echo "<a href='#' onClick='unlockGame();'><i class='fa-solid fa-lock'></i></i></a>&nbsp;&nbsp;&nbsp;";
+								} else {
+									echo "<a href='#' onClick='lockGame();'><i class='fa-solid fa-lock-open'></i></a>&nbsp;&nbsp;&nbsp;";
+								} ?>
+								</td>
+								<td class='datalabel' nowrap colspan="2" align="left">
+									<input onchange="javascript:saveGameInfo(<?php echo $pid ?>);" type="text" id="GameTitle" style="width:250px;">  [ID: <?php echo $GAMEID; ?>]
+									<script type="text/javascript">document.getElementById("GameTitle").setAttribute('value','<?php echo $TITLE; ?>');</script>
+								</td>
+							</tr>
+
+							<tr>
+								<td></td>
+								<td class='datalabel' nowrap colspan="2" align="left">
+										<input onchange="javascript:saveGameInfo(<?php echo $pid ?>);" type="text" id="GameBackground" style="width:300px;">
+										<script type="text/javascript">document.getElementById("GameBackground").setAttribute('value','<?php echo $BACKGROUND; ?>');</script>
+									<br><br>
+								</td>
+							</tr>
+
+							<tr>
+								<td nowrap align="left" width="3%" onclick="javascript:saveGameAccessCode(<?php echo $pid ?>);"><a href='#' onClick='javascript:saveGameAccessCode(<?php echo $pid ?>);'><i class="fa-solid fa-rotate-right"></i></a>&nbsp;&nbsp;&nbsp;</td>
+								<td class='datalabel' nowrap align="left" width="3%">Access code:</td>
+								<td class='datalabel' nowrap align="left" width="94%"><?php echo $ACCESSCODE; ?>
+							</tr>
+						</table>
+					</form>
 				</td>
-				<td class='datalabel' nowrap valign="top" align="left" width="25%" rowspan="3">
-					Joined players:<br><br>
+				<td class='datalabel' nowrap valign="top" align="left" width="30%" rowspan="1">
 					<div class="scroll-pane">
 						<table width="100%" border="0" cellspacing="0" cellpadding="0">
 						<?php
 						foreach ($array_joinedUsers as &$value) {
-							echo "<tr><td nowrap align='left' width='3%'><i class='fas fa-minus-square'></i></td><td class='datalabel'>&nbsp;&nbsp;&nbsp;" . $value . "</td><td nowrap align='right' width='3%'>&nbsp;&nbsp;&nbsp;<i class='fas fa-minus-square'></i></td></tr>";
+							echo "<tr><td class='datalabel'>".$value."</td><td nowrap align='right' width='3%'>&nbsp;&nbsp;&nbsp;<i class='fas fa-minus-square'></i>&nbsp;&nbsp;&nbsp;</td></tr>\n";
 						}
 						?>
 						</table>
 					</div>
 				</td>
 			</tr>
-			<tr><td colspan="1"><hr></td></tr>
+
+			<tr><td colspan="2"><hr></td></tr>
+
 			<tr>
-				<td class='datalabel' colspan="1">
+				<td class='datalabel' colspan="2">
 					<form autocomplete="autocomplete_off_hack_xfr4!k">
 						<table cellspacing="0" cellpadding="0" border="0px" width="100%">
-							<tr>
-								<td colspan="1" class='datalabel' nowrap align="left">Join:</td>
-								<td colspan="1" class='datalabel' nowrap align="left">
-								<select required name='game' id='game' size='1' onchange="" style="width: 220px;">
-								<?php
-									for ($i661 = 1; $i661 < sizeof($array_availableGamesToJoin); $i661++) { // ignore the first one, dummy game
-										echo "<option value='" . $array_availableGamesToJoin[$i661] . "'>" . $array_availableGamesToJoin[$i661] . "</option>";
-									}
-								?>
-								</select>
-								</td>
-								<td colspan="1" class='datalabel' nowrap align="right">Code:</td>
-								<td colspan="1" class='datalabel' nowrap align="center"><input autocomplete="autocomplete_off_hack_xfr4!k" required type="text" id="AccessCode" style="width: 100px;"></td>
-								<td colspan="1" class='datalabel' nowrap align="right"><a href="#" onClick="joinGame();"><i class="fas fa-plus-square"></i></a></td>
-							</tr>
-							<tr>
-								<td colspan="1" class='datalabel' nowrap align="left">Leave:</td>
-								<?php
-								if ($gid == 1) {
-									echo "<td colspan='6' class='datalabel' nowrap align='left'>I am NOT in any game.</td>";
-								} else {
-									echo "<td colspan='6' class='datalabel' nowrap align='left'><a href='#' onClick='leaveGame();'><i class='fas fa-minus-square'></i>&nbsp;&nbsp;&nbsp;(Game " . $gid . ")</a></td>";
-								}
-								?>
-							</tr>
+							<?php
+								if ($gid == $hgid) { // I am a member of my own hosted game, so I am joined nowhere else
+									echo "<tr>\n";
+									echo "	<td colspan='1' class='datalabel' nowrap align='left'>Join:</td>\n";
+									echo "	<td colspan='1' class='datalabel' nowrap align='left'>\n";
+									echo "	<select required name='game' id='game' size='1' onchange='' style='width: 220px;'>\n";
 
+									for ($i661 = 1; $i661 < sizeof($array_availableGamesToJoin); $i661++) { // ignore the first one, dummy game
+										echo "<option value='" . $array_availableGamesToJoin[$i661] . "'>" . $array_availableGamesToJoin[$i661] . "</option>\n";
+									}
+
+									echo "	</select>\n";
+									echo "	</td>\n";
+									echo "	<td colspan='1' class='datalabel' nowrap align='right'>Code:</td>\n";
+									echo "	<td colspan='1' class='datalabel' nowrap align='center'><input autocomplete='autocomplete_off_hack_xfr4!k' required type='text' id='AccessCode' style='width: 100px;'></td>\n";
+									echo "	<td colspan='1' class='datalabel' nowrap align='right'><a href='#' onClick='joinGame();'><i class='fas fa-plus-square'></i></a></td>\n";
+									echo "</tr>\n";
+								} else {
+									echo "<tr>\n";
+									echo "	<td colspan='1' class='datalabel' nowrap align='left'>Leave:</td>\n";
+									echo "  <td colspan='3' class='datalabel' nowrap align='left'>Game ".$gid."</td>\n";
+									echo "	<td colspan='1' class='datalabel' nowrap align='right'><a href='#' onClick='leaveGame();'><i class='fas fa-minus-square'></i></a></td>\n";
+									echo "</tr>\n";
+								}
+							?>
 						</table>
 					</form>
 				</td>
 			</tr>
 
-			<tr>
-				<td align='left' class='datalabel'>RESET Round (to 1)</td>
-				<td onclick='javascript:resetRound(<?php echo $pid ?>);'>
-					<i class='fa-solid fa-cloud-arrow-down'></i>
-				</td>
-			</tr>
 			<tr><td colspan="2"><hr></td></tr>
-			<tr>
-				<td align='left' class='datalabel'>RESET all Units (Remove damage)</td>
-				<td onclick=''>
-					<i class='fa-solid fa-cloud-arrow-down'></i>
-				</td>
-			</tr>
+
+			<td colspan="2">
+				<table align="left" cellspacing="0" cellpadding="0" border="0px">
+					<tr>
+						<td class='datalabel' onclick='javascript:resetGame(<?php echo $pid ?>);'>
+							<a href='#' onClick='javascript:resetGame(<?php echo $pid ?>);'><i class="fas fa-fast-backward"></i></a>&nbsp;&nbsp;
+						</td>
+						<td align='left' class='datalabel'>RESET Game (Set round to 1 / Repair all units)</td>
+					</tr>
+				</table>
+			</td>
 		</table>
 	</div>
 

@@ -669,6 +669,7 @@ session_start();
 
 			if ($array_ACTIVE_BID[$i4] == "1") {
 				echo "			<td width='".$width."%' nowrap><table width='100%' height='100%' cellspacing='0' cellpadding='0' class='unitselect_button_active_play_left' style='animation: glow 1s infinite alternate;'><tr><td nowrap width='30px' align='center' valign='center'><div style='display:inline-block;height:100%;vertical-align:middle;'><img id='unitstatusimagemenu' style='vertical-align:middle;' src='".$array_UNIT_IMG_STATUS[$i4]."' height='25px' width='23px'><br><span style='color:#ccffff;font-size:15px;'>&nbsp;&nbsp;".$mn."&nbsp;&nbsp;</span></div></td><td>&nbsp;</td><td nowrap><div><img src='./images/ranks/".$factionid."/".$array_PILOT_RANK[$i4].".png' width='18px' height='18px'>&nbsp;<span style='font-size:24px'>".$array_PILOT[$i4]."</span>&nbsp;&nbsp;<img src='".$unitstatusimage."' height='21px'>".$heatimage[$i4]."<br><span style='font-size:14px;'>".textTruncate($memodel, 18)."</span></div></td><td align='left' style='align:left;' nowrap width='100%'><img src='images/unit_indicator.png' height='42px;'></td></tr></table></td>\r\n";
+				echo "			<td style='width:5px;'>&nbsp;</td>\r\n";
 				$atLeastOneValidUnitInFormation = $atLeastOneValidUnitInFormation + 1;
 			}
 		} else {

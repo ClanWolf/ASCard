@@ -918,16 +918,16 @@ function setCircles(h, a, s, e, fc, mp, w, e_cv, fc_cv, w_cv, ma_cv, mb_cv, mc_c
 		document.getElementById('INFOMOVED').innerHTML = "";
 	} else if (mvmnt == "2") { // stationary
 		movementdiestring = movementdiestring + "bd6_" + tmmDiceValue + ".png";
-		document.getElementById('INFOMOVED').innerHTML = "STD";
+		document.getElementById('INFOMOVED').innerHTML = "STAND";
 	} else if (mvmnt == "3") { // walked
 		movementdiestring = movementdiestring + "d6_" + tmmDiceValue + ".png";
-		document.getElementById('INFOMOVED').innerHTML = "WLK";
+		document.getElementById('INFOMOVED').innerHTML = "MOVE";
 	} else if (mvmnt == "10") { // hulldown
 		movementdiestring = movementdiestring + "bd6_" + tmmDiceValue + ".png";
 		document.getElementById('INFOMOVED').innerHTML = "HDWN";
 	}  else if (mvmnt == "4") { // jumped
 		movementdiestring = movementdiestring + "rd6_" + tmmDiceValue + ".png";
-		document.getElementById('INFOMOVED').innerHTML = "JMP";
+		document.getElementById('INFOMOVED').innerHTML = "JUMP";
 	} else if (mvmnt == "9") { // sprinted
 		movementdiestring = movementdiestring + "yd6_" + tmmDiceValue + ".png";
 		var e1 = document.getElementById("WF5_WEAPONSFIRED");

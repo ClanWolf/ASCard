@@ -175,6 +175,14 @@ session_start();
 			echo "Error: " . $sqldeleteassigns . "<br>" . mysqli_error($conn);
 		}
 
+		$sqldeletegame = "DELETE FROM asc_game WHERE ownerplayerid = ".$deleteplayerid;
+		if (mysqli_query($conn, $sqldeletegame)) {
+			// Success
+		} else {
+			// Error
+			echo "Error: " . $sqldeletegame . "<br>" . mysqli_error($conn);
+		}
+
 		echo "<meta http-equiv='refresh' content='0;url=./gui_create_player.php'>";
 	}
 ?>

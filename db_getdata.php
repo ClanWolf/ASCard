@@ -15,6 +15,7 @@
 	$FORMATION = "DEFAULT";
 
 	$GAMEID = -1;
+	$HOSTEDGAMEID = -1;
 
 	// Store in arrays to keep the unit- and pilotdata
 	$array_PILOT = array();
@@ -138,6 +139,7 @@
 	if (mysqli_num_rows($result_asc_playerround) > 0) {
 		while($row = mysqli_fetch_assoc($result_asc_playerround)) {
 			$GAMEID = $row["gameid"];
+			$HOSTEDGAMEID = $row["hostedgameid"];
 			$CURRENTROUND = $row["round"];
 		}
 	}
