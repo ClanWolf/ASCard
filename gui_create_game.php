@@ -248,10 +248,12 @@ session_start();
 			var url="./save_game_reset.php?pid=" + playerId;
 			window.frames["saveframe"].location.replace(url);
 		}
-		function saveGameInfo(playerId) {
+		function saveGameInfo(gameId) {
 			alert("saving info!");
-			//var url="./save_game_info.php?pid=" + playerId;
-			//window.frames["saveframe"].location.replace(url);
+			var gt = document.getElementById("GameTitle").value;
+			var gbg = document.getElementById("GameBackground").value;
+			var url="./save_game_info.php?gid=" + gameId + "&gt=" + encodeURIComponent(gt) + "&gbg=" + encodeURIComponent(gbg);
+			window.frames["saveframe"].location.replace(url);
 		}
 		function saveGameLock(gameId) {
 			alert("saving lock!");
@@ -333,7 +335,7 @@ session_start();
 								} ?>
 								</td>
 								<td colspan="3" class='datalabel' nowrap colspan="2" align="left">
-									<input onchange="javascript:saveGameInfo(<?php echo $pid ?>);" type="text" id="GameTitle" style="width:250px;">  [ID: <?php echo $GAMEID; ?>]
+									<input onchange="javascript:saveGameInfo(<?php echo $gid ?>);" type="text" id="GameTitle" style="width:250px;">  [ID: <?php echo $GAMEID; ?>]
 									<script type="text/javascript">document.getElementById("GameTitle").setAttribute('value','<?php echo $TITLE; ?>');</script>
 								</td>
 							</tr>
@@ -341,7 +343,7 @@ session_start();
 							<tr>
 								<td></td>
 								<td colspan="3" class='datalabel' nowrap colspan="2" align="left">
-										<input onchange="javascript:saveGameInfo(<?php echo $pid ?>);" type="text" id="GameBackground" style="width:300px;">
+										<input onchange="javascript:saveGameInfo(<?php echo $gid ?>);" type="text" id="GameBackground" style="width:300px;">
 										<script type="text/javascript">document.getElementById("GameBackground").setAttribute('value','<?php echo $BACKGROUND; ?>');</script>
 									<br><br>
 								</td>
@@ -354,7 +356,7 @@ session_start();
 									<?php echo $ACCESSCODE; ?>
 								</td>
 								<td class='datalabel' nowrap align="right" width="94%">
-									<a href='#' onClick='saveGameInfo(<?php echo $pid ?>);'><i class='fa-solid fa-save'></i></a>&nbsp;&nbsp;&nbsp;
+									<a href='#' onClick='saveGameInfo(<?php echo $gid ?>);'><i class='fa-solid fa-save'></i></a>&nbsp;&nbsp;&nbsp;
 								</td>
 							</tr>
 						</table>
