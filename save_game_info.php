@@ -12,6 +12,8 @@
 	$gid = isset($_GET["gid"]) ? $_GET["gid"] : "";
 	$gameTitle = isset($_GET["gt"]) ? $_GET["gt"] : "";
 	$gameBackground = isset($_GET["gbg"]) ? $_GET["gbg"] : "";
+	$gy = isset($_GET["gy"]) ? $_GET["gy"] : "";
+	$ge = isset($_GET["ge"]) ? $_GET["ge"] : "";
 
 	echo "<!DOCTYPE html>\n";
 	echo "<html lang='en'>\n";
@@ -22,7 +24,7 @@
 	echo "<br>\n";
 
 	if (!empty($gid)) {
-		$update_gameinfo = "UPDATE asc_game SET title = ".$gameTitle.", background=".$gameBackground." WHERE gameid=".$gid;
+		$update_gameinfo = "UPDATE asc_game SET title = '".$gameTitle."', background='".$gameBackground."', yearInGame='".$gy."', era='".$ge."' WHERE gameid=".$gid;
 		if (mysqli_query($conn, $update_gameinfo)) {
 			echo "<br>";
 			echo "Game info updated successfully<br>";

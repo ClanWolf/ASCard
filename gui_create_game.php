@@ -43,6 +43,8 @@ session_start();
 			$LOCKED = $row["locked"];
 			$TITLE = $row["title"];
 			$BACKGROUND = $row["background"];
+			$GAMEERA = $row["era"];
+			$GAMEYEAR = $row["yearInGame"];
 		}
 	} else {
 		// this player does not have a game yet
@@ -63,6 +65,8 @@ session_start();
 			$LOCKED = 0;
 			$TITLE = $title;
 			$BACKGROUND = $background;
+			$GAMEERA = 'SUCCESSION WARS';
+			$GAMEYEAR = '3025';
 
 			$sqlupdateplayer = "UPDATE asc_player set hostedgameid = ".$GAMEID." WHERE playerid=".$pid;
 			if (mysqli_query($conn, $sqlupdateplayer)) {
@@ -78,6 +82,7 @@ session_start();
 	}
 
 	$array_joinedUsers = array();
+	$array_joinedUserIds = array();
 	$sql_asc_playerround = "SELECT SQL_NO_CACHE * FROM asc_player;";
 	$result_asc_playerround = mysqli_query($conn, $sql_asc_playerround);
 	if (mysqli_num_rows($result_asc_playerround) > 0) {
@@ -86,6 +91,7 @@ session_start();
 			if ($GAMEID == $row["gameid"]) {
 				// this player is joined in the game of the currently logged in player
 				$array_joinedUsers[$i] = $row["name"];
+				$array_joinedUserIds[$i] = $row["playerid"];
 				$i++;
 			}
 		}
@@ -154,11 +160,11 @@ session_start();
 	<link rel="apple-touch-icon" href="./images/icon_180x180.png" type="image/png" sizes="180x180">
 
 	<!-- https://www.npmjs.com/package/passive-events-support?activeTab=readme -->
-    <script>
-        window.passiveSupport = {
-            debug: false,
-            events: ['touchstart', 'touchmove', 'wheel'],
-            listeners: [
+	<script>
+		window.passiveSupport = {
+			debug: false,
+			events: ['touchstart', 'touchmove', 'wheel'],
+			listeners: [
 				{
 					element: '.jspContainer',
 					event: 'touchstart',
@@ -174,10 +180,10 @@ session_start();
 					event: 'wheel',
 					prevented: true
 				}
-            ]
-        }
-    </script>
-    <script type="text/javascript" src="./scripts/passive-events-support/main.js"></script>
+			]
+		}
+	</script>
+	<script type="text/javascript" src="./scripts/passive-events-support/main.js"></script>
 
 	<script type="text/javascript" src="./scripts/jquery-3.7.1.min.js"></script>
 	<script type="text/javascript" src="./scripts/jquery.jscrollpane.min.js"></script>
@@ -212,7 +218,7 @@ session_start();
 		}
 		.scroll-pane {
 			width: 100%;
-			height: 140px;
+			height: 180px;
 			overflow: auto;
 		}
 		.horizontal-only {
@@ -238,6 +244,9 @@ session_start();
 	<iframe name="saveframe" id="iframe_save"></iframe>
 
 	<script>
+<?php
+	echo "		var lockedStatus = $LOCKED;\n";
+?>
 		function randomIntFromInterval(min, max) { // min and max included
 			return Math.floor(Math.random() * (max - min + 1) + min);
 		}
@@ -249,21 +258,37 @@ session_start();
 			window.frames["saveframe"].location.replace(url);
 		}
 		function saveGameInfo(gameId) {
-			alert("saving info!");
 			var gt = document.getElementById("GameTitle").value;
 			var gbg = document.getElementById("GameBackground").value;
-			var url="./save_game_info.php?gid=" + gameId + "&gt=" + encodeURIComponent(gt) + "&gbg=" + encodeURIComponent(gbg);
+			var gy = document.getElementById("GameYear").value;
+			var ge = document.getElementById("GameEra").value;
+			var url="./save_game_info.php?gid="+gameId+"&gt="+encodeURIComponent(gt)+"&gbg="+encodeURIComponent(gbg)+"&gy="+encodeURIComponent(gy)+"&ge="+encodeURIComponent(ge);
 			window.frames["saveframe"].location.replace(url);
 		}
-		function saveGameLock(gameId) {
-			alert("saving lock!");
-			//var url="./save_game_lock.php?gid=" + gameId;
-			//window.frames["saveframe"].location.replace(url);
+		function saveGameLock(gameId, locked) {
+			var newLockedStatus = 1;
+			if (lockedStatus == 1) {
+				newLockedStatus = 0;
+			}
+			if (newLockedStatus == 1) {
+				lockedStatus = 1;
+				document.getElementById("lockstatusicon").innerHTML = "<i class='fa-solid fa-lock'>";
+			} else {
+				lockedStatus = 0;
+				document.getElementById("lockstatusicon").innerHTML = "<i class='fa-solid fa-lock-open'>";
+			}
+			var url="./save_game_lock.php?gid=" + gameId + "&locked=" + newLockedStatus;
+			window.frames["saveframe"].location.replace(url);
 		}
 		function saveGameAccessCode(gameId) {
 			const rndInt = randomIntFromInterval(1000, 9999);
 			document.getElementById("accesscode").innerHTML = rndInt;
-			var url="./save_game_accesscode.php?gid=" + gameId + "&rndint=" + rndInt;
+			var url="./save_game_accesscode.php?gid="+gameId+"&rndint="+rndInt;
+			window.frames["saveframe"].location.replace(url);
+		}
+		function saveRemovedUserFromGame(gameId, userId) {
+			// alert(gameId + " --- " + userId);
+			var url="./save_game_reset.php?gid="+gameId+"&pId="+userId+"&leaveCurrentGame=1";
 			window.frames["saveframe"].location.replace(url);
 		}
 	</script>
@@ -328,13 +353,13 @@ session_start();
 						<table border="0" cellspacing="2" cellpadding="2">
 							<tr>
 								<td class='datalabel' nowrap colspan="1" align="left">
-								<?php if ($LOCKED == 0) {
-									echo "<a href='#' onClick='unlockGame();'><i class='fa-solid fa-lock'></i></i></a>&nbsp;&nbsp;&nbsp;";
+								<?php if ($LOCKED == 1) {
+									echo "<a href='#' onClick='saveGameLock(".$GAMEID.", 0);'><span id='lockstatusicon'><i class='fa-solid fa-lock'></i></span></a>";
 								} else {
-									echo "<a href='#' onClick='lockGame();'><i class='fa-solid fa-lock-open'></i></a>&nbsp;&nbsp;&nbsp;";
+									echo "<a href='#' onClick='saveGameLock(".$GAMEID.", 1);'><span id='lockstatusicon'><i class='fa-solid fa-lock-open'></i></span></a>";
 								} ?>
 								</td>
-								<td colspan="3" class='datalabel' nowrap colspan="2" align="left">
+								<td colspan="3" class='datalabel' nowrap align="left">
 									<input onchange="javascript:saveGameInfo(<?php echo $gid ?>);" type="text" id="GameTitle" style="width:250px;">  [ID: <?php echo $GAMEID; ?>]
 									<script type="text/javascript">document.getElementById("GameTitle").setAttribute('value','<?php echo $TITLE; ?>');</script>
 								</td>
@@ -342,7 +367,7 @@ session_start();
 
 							<tr>
 								<td></td>
-								<td colspan="3" class='datalabel' nowrap colspan="2" align="left">
+								<td colspan="3" class='datalabel' nowrap align="left">
 										<input onchange="javascript:saveGameInfo(<?php echo $gid ?>);" type="text" id="GameBackground" style="width:300px;">
 										<script type="text/javascript">document.getElementById("GameBackground").setAttribute('value','<?php echo $BACKGROUND; ?>');</script>
 									<br><br>
@@ -350,7 +375,45 @@ session_start();
 							</tr>
 
 							<tr>
-								<td nowrap align="left" width="3%"><a href='#' onClick='javascript:saveGameAccessCode(<?php echo $gid ?>);'><i class="fa-solid fa-rotate-right"></i></a>&nbsp;&nbsp;&nbsp;</td>
+								<td></td>
+								<td colspan="2" class='datalabel' nowrap align="left">
+									Era: <select required style='width:180px;' name='GameEra' id='GameEra' size='1' onchange="javascript:saveGameInfo(<?php echo $gid ?>);">
+										<option value="STAR LEAGUE">STAR LEAGUE</option>
+										<option value="SUCCESSION WARS">SUCCESSION WARS</option>
+										<option value="CLAN INVASION">CLAN INVASION</option>
+										<option value="CIVIL WAR">CIVIL WAR</option>
+										<option value="JIHAD">JIHAD</option>
+										<option value="DARK AGE">DARK AGE</option>
+										<option value="ILCLAN">ILCLAN</option>
+									</select>
+									<script type="text/javascript">
+										if ('<?php echo $GAMEERA; ?>' == 'STAR LEAGUE') {
+											document.getElementById('GameEra').selectedIndex = 0;
+										} else if ('<?php echo $GAMEERA; ?>' == 'SUCCESSION WARS') {
+											document.getElementById('GameEra').selectedIndex = 1;
+										} else if ('<?php echo $GAMEERA; ?>' == 'CLAN INVASION') {
+											document.getElementById('GameEra').selectedIndex = 2;
+										} else if ('<?php echo $GAMEERA; ?>' == 'CIVIL WAR') {
+											document.getElementById('GameEra').selectedIndex = 3;
+										} else if ('<?php echo $GAMEERA; ?>' == 'JIHAD') {
+											document.getElementById('GameEra').selectedIndex = 4;
+										} else if ('<?php echo $GAMEERA; ?>' == 'DARK AGE') {
+											document.getElementById('GameEra').selectedIndex = 5;
+										} else if ('<?php echo $GAMEERA; ?>' == 'ILCLAN') {
+											document.getElementById('GameEra').selectedIndex = 6;
+										}
+									</script>
+									<br><br>
+								</td>
+								<td colspan="1" class='datalabel' nowrap align="left">
+									Year: <input onchange="javascript:saveGameInfo(<?php echo $gid ?>);" type="text" id="GameYear" style="width:60px;">
+									<script type="text/javascript">document.getElementById("GameYear").setAttribute('value','<?php echo $GAMEYEAR; ?>');</script>
+									<br><br>
+								</td>
+							</tr>
+
+							<tr>
+								<td nowrap align="left" width="3%"><a href='#' onClick='javascript:saveGameAccessCode(<?php echo $gid ?>);'><i class="fa-solid fa-rotate-right"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
 								<td class='datalabel' nowrap align="left" width="3%">Access code:</td>
 								<td class='datalabel' nowrap align="left" width="94%" id="accesscode">
 									<?php echo $ACCESSCODE; ?>
@@ -365,11 +428,16 @@ session_start();
 				<td class='datalabel' nowrap valign="top" align="left" width="30%" rowspan="1">
 					<div class="scroll-pane">
 						<table width="100%" border="0" cellspacing="0" cellpadding="0">
-						<?php
-						foreach ($array_joinedUsers as &$value) {
-							echo "<tr><td class='datalabel'>".$value."</td><td nowrap align='right' width='3%'>&nbsp;&nbsp;&nbsp;<i class='fas fa-minus-square'></i>&nbsp;&nbsp;&nbsp;</td></tr>\n";
-						}
-						?>
+<?php
+//foreach ($array_joinedUsers as &$value) {
+//	echo "							<tr><td class='datalabel'>".$value."</td><td nowrap align='right' width='3%'>&nbsp;&nbsp;&nbsp;<span onclick='javascript:saveRemovedUserFromGame(".$gid.",\"".$value."\");'><a href='#'><i class='fas fa-minus-square'></i>&nbsp;&nbsp;&nbsp;</a></span></td></tr>\n";
+//}
+for($i=1; $i <= count($array_joinedUsers); $i++) {
+	$joinedUserName = $array_joinedUsers[$i];
+	$joinedUserId = $array_joinedUserIds[$i];
+	echo "							<tr><td class='datalabel'>".$joinedUserName."</td><td nowrap align='right' width='3%'>&nbsp;&nbsp;&nbsp;<span style='font-size:16px;color:#ddd;' onclick='javascript:saveRemovedUserFromGame(".$gid.",\"".$joinedUserId."\");'><i class='fas fa-minus-square'></i>&nbsp;&nbsp;&nbsp;</span></td></tr>\n";
+}
+?>
 						</table>
 					</div>
 				</td>
@@ -384,32 +452,32 @@ session_start();
 							<?php
 								if ($gid == $hgid) { // I am a member of my own hosted game, so I am joined nowhere else
 									if (sizeOf($array_joinedUsers) == 0) {
-										echo "<tr>\n";
-										echo "	<td colspan='1' class='datalabel' nowrap align='left'>Join:</td>\n";
-										echo "	<td colspan='1' class='datalabel' nowrap align='left'>\n";
-										echo "	<select required name='game' id='game' size='1' onchange='' style='width: 220px;'>\n";
+										echo "							<tr>\n";
+										echo "								<td colspan='1' class='datalabel' nowrap align='left'>Join:</td>\n";
+										echo "								<td colspan='1' class='datalabel' nowrap align='left'>\n";
+										echo "									<select required name='game' id='game' size='1' onchange='' style='width: 220px;'>\n";
 
 										for ($i661 = 1; $i661 < sizeof($array_availableGamesToJoin); $i661++) { // ignore the first one, dummy game
-											echo "<option value='".$array_availableGamesToJoin[$i661]."'>".$array_availableGamesToJoin[$i661]."</option>\n";
+											echo "										<option value='".$array_availableGamesToJoin[$i661]."'>".$array_availableGamesToJoin[$i661]."</option>\n";
 										}
 
-										echo "	</select>\n";
-										echo "	</td>\n";
-										echo "	<td colspan='1' class='datalabel' nowrap align='right'>Code:</td>\n";
-										echo "	<td colspan='1' class='datalabel' nowrap align='center'><input autocomplete='autocomplete_off_hack_xfr4!k' required type='text' id='AccessCode' style='width: 100px;'></td>\n";
-										echo "	<td colspan='1' class='datalabel' nowrap align='right'><a href='#' onClick='joinGame();'><i class='fas fa-plus-square'></i></a></td>\n";
-										echo "</tr>\n";
+										echo "									</select>\n";
+										echo "								</td>\n";
+										echo "								<td colspan='1' class='datalabel' nowrap align='right'>Code:</td>\n";
+										echo "								<td colspan='1' class='datalabel' nowrap align='center'><input autocomplete='autocomplete_off_hack_xfr4!k' required type='text' id='AccessCode' style='width: 100px;'></td>\n";
+										echo "								<td colspan='1' class='datalabel' nowrap align='right'><a href='#' onClick='joinGame();'><i class='fas fa-plus-square'></i></a></td>\n";
+										echo "							</tr>\n";
 									} else {
-										echo "<tr>\n";
-										echo "	<td colspan='5' class='datalabel' nowrap align='center'>Can not join a game. There are still players in your game.</td>\n";
-										echo "</tr>\n";
+										echo "							<tr>\n";
+										echo "								<td colspan='5' class='datalabel' nowrap align='center'>You can not join! There are still players in your game.</td>\n";
+										echo "							</tr>\n";
 									}
 								} else {
-									echo "<tr>\n";
-									echo "	<td colspan='1' class='datalabel' nowrap align='left'>Leave:</td>\n";
-									echo "  <td colspan='3' class='datalabel' nowrap align='left'>Game ".$gid."</td>\n";
-									echo "	<td colspan='1' class='datalabel' nowrap align='right'><a href='#' onClick='leaveGame();'><i class='fas fa-minus-square'></i></a></td>\n";
-									echo "</tr>\n";
+									echo "							<tr>\n";
+									echo "								<td colspan='1' class='datalabel' nowrap align='left'>Leave:</td>\n";
+									echo "								<td colspan='3' class='datalabel' nowrap align='left'>Game ".$gid."</td>\n";
+									echo "								<td colspan='1' class='datalabel' nowrap align='right'><a href='#' onClick='leaveGame();'><i class='fas fa-minus-square'></i></a></td>\n";
+									echo "							</tr>\n";
 								}
 							?>
 						</table>
@@ -423,7 +491,7 @@ session_start();
 				<table align="left" cellspacing="0" cellpadding="0" border="0px">
 					<tr>
 						<td class='datalabel' onclick='javascript:resetGame(<?php echo $pid ?>);'>
-							<a href='#' onClick='javascript:resetGame(<?php echo $pid ?>);'><i class="fas fa-fast-backward"></i></a>&nbsp;&nbsp;
+							&nbsp;&nbsp;<a href='#' onClick='javascript:resetGame(<?php echo $pid ?>);'><i class="fas fa-fast-backward"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 						</td>
 						<td align='left' class='datalabel'>RESET Game (Set round to 1 / Repair all units)</td>
 					</tr>

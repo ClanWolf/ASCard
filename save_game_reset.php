@@ -9,17 +9,29 @@
 	require('./logger.php');
 	require_once('./db.php');
 
-	$pid = isset($_GET["pid"]) ? $_GET["pid"] : "";
+	$gid = isset($_GET["gid"]) ? $_GET["gid"] : "";
+	$pid__ = isset($_GET["pid"]) ? $_GET["pid"] : "";
+	$leaveCurrentGame = isset($_GET["leaveCurrentGame"]) ? $_GET["leaveCurrentGame"] : "";
 
 	echo "<!DOCTYPE html>\n";
 	echo "<html lang='en'>\n";
 	echo "<body>\n";
-	echo "<p style='font-family:Arial,sans-serif;font-size:14px;color:yellow;'>";
+	echo "<p style='font-family:Arial,sans-serif;font-size:14px;color:yellow;'>\n";
 
-	echo "RESETING ROUND for playerid ".$pid."...<br>";
-	echo "<br>";
+	echo "RESETING ROUND for playerid ".$pid."...<br>\n";
+	echo "<br>\n";
 
 	if (!empty($pid)) {
+		echo "<p>\n";
+    	if ($leaveCurrentGame) {
+			echo "Leave current game!\n";
+		} else {
+			echo "Stay in game!\n";
+		}
+		echo "</p>\n";
+
+		echo "Reseting playerid ".$pid.".\n";
+
 		$sqlDeleteUnitstatusEntries = "";
 		$sqlDeleteUnitstatusEntries = $sqlDeleteUnitstatusEntries . "DELETE from asc_unitstatus ";
 		$sqlDeleteUnitstatusEntries = $sqlDeleteUnitstatusEntries . "WHERE playerid=".$pid." ";
@@ -28,12 +40,12 @@
 		echo $sqlDeleteUnitstatusEntries;
 
 		if (mysqli_query($conn, $sqlDeleteUnitstatusEntries)) {
-			echo "<br>";
-			echo "Records (asc_unitstatus) deleted successfully<br>";
+			echo "<br>\n";
+			echo "Records (asc_unitstatus) deleted successfully<br>\n";
 		} else {
-			echo "<br>";
-			echo "Error (asc_unitstatus) deleting records: " . mysqli_error($conn) . "<br>";
-			echo "<script>top.window.location = './gui_message_round_reset_error_01.php'</script>";
+			echo "<br>\n";
+			echo "Error (asc_unitstatus) deleting records: " . mysqli_error($conn) . "<br>\n";
+			echo "<script>top.window.location = './gui_message_round_reset_error_01.php'</script>\n";
 			die('ERROR 17');
 		}
 
@@ -122,9 +134,12 @@
 			echo "<script>top.window.location = './gui_message_round_reset_error_01.php'</script>";
 			die('ERROR 7');
 		}
+	} else {
+		echo "Not reseting, no playerid given.";
 	}
 
 	echo "</p>\n";
+
 	echo "</body>\n";
 	echo "</html>\n";
 ?>

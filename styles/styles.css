@@ -86,13 +86,13 @@ iframe {
 	z-index: 9990;
 }
 #iframe_save {
-	display: none; /* none, block */
-	visibility: hidden; /* hidden, visible */
-	position: absolute;
+	display: block; /* none, block */
+	visibility: visible; /* hidden, visible */
+	position: fixed;
 	background-color: red;
-	left: 10;
-	top: 10;
-	width: 800px;
+	left: 5px;
+	bottom: 5px;
+	width: 500px;
 	height: 100px;
 	z-index: 9999;
 }
