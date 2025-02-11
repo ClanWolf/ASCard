@@ -429,14 +429,11 @@ session_start();
 					<div class="scroll-pane">
 						<table width="100%" border="0" cellspacing="0" cellpadding="0">
 <?php
-//foreach ($array_joinedUsers as &$value) {
-//	echo "							<tr><td class='datalabel'>".$value."</td><td nowrap align='right' width='3%'>&nbsp;&nbsp;&nbsp;<span onclick='javascript:saveRemovedUserFromGame(".$gid.",\"".$value."\");'><a href='#'><i class='fas fa-minus-square'></i>&nbsp;&nbsp;&nbsp;</a></span></td></tr>\n";
-//}
-for($i=1; $i <= count($array_joinedUsers); $i++) {
-	$joinedUserName = $array_joinedUsers[$i];
-	$joinedUserId = $array_joinedUserIds[$i];
-	echo "							<tr><td class='datalabel'>".$joinedUserName."</td><td nowrap align='right' width='3%'>&nbsp;&nbsp;&nbsp;<span style='font-size:16px;color:#ddd;' onclick='javascript:saveRemovedUserFromGame(".$gid.",\"".$joinedUserId."\");'><i class='fas fa-minus-square'></i>&nbsp;&nbsp;&nbsp;</span></td></tr>\n";
-}
+	for($i=1; $i <= count($array_joinedUsers); $i++) {
+		$joinedUserName = $array_joinedUsers[$i];
+		$joinedUserId = $array_joinedUserIds[$i];
+		echo "							<tr><td class='datalabel'>".$joinedUserName."</td><td nowrap align='right' width='3%'>&nbsp;&nbsp;&nbsp;<span style='font-size:16px;color:#ddd;' onclick='javascript:saveRemovedUserFromGame(".$gid.",\"".$joinedUserId."\");'><i class='fas fa-minus-square'></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>\n";
+	}
 ?>
 						</table>
 					</div>
@@ -491,7 +488,7 @@ for($i=1; $i <= count($array_joinedUsers); $i++) {
 				<table align="left" cellspacing="0" cellpadding="0" border="0px">
 					<tr>
 						<td class='datalabel' onclick='javascript:resetGame(<?php echo $pid ?>);'>
-							&nbsp;&nbsp;<a href='#' onClick='javascript:resetGame(<?php echo $pid ?>);'><i class="fas fa-fast-backward"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							&nbsp;&nbsp;<a href='#' onClick='javascript:resetGame(<?php echo $pid ?>);'><i class="fas fa-fast-backward"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;
 						</td>
 						<td align='left' class='datalabel'>RESET Game (Set round to 1 / Repair all units)</td>
 					</tr>

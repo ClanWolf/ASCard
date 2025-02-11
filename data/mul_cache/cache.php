@@ -274,6 +274,13 @@
 			unlink($jsonFile);
 		}
 	}
+	$csvFiles = glob('/var/www/vhosts/ascard.net/httpdocs/app/cache/mul/catalog.csv');
+	foreach($csvFiles as $csvFile) {
+		if(is_file($csvFile)) {
+			echo "delete: " . $csvFile . "<br>";
+			unlink($csvFile);
+		}
+	}
 
 	// ---------------------------------------------------
 
@@ -293,6 +300,40 @@
 			fwrite($fileHandle, $content);
 			fclose($fileHandle);
 			echo "saved.<br>";
+
+			if ($filename_arr[$key] === 'IS_BA.json'
+				|| $filename_arr[$key] === 'IS_LIGHT.json'
+				|| $filename_arr[$key] === 'IS_MEDIUM.json'
+				|| $filename_arr[$key] === 'IS_HEAVY.json'
+				|| $filename_arr[$key] === 'IS_ASSAULT.json'
+				|| $filename_arr[$key] === 'IS_SUPERHEAVY.json'
+				|| $filename_arr[$key] === 'CLAN_BA.json'
+				|| $filename_arr[$key] === 'CLAN_LIGHT.json'
+				|| $filename_arr[$key] === 'CLAN_MEDIUM.json'
+				|| $filename_arr[$key] === 'CLAN_HEAVY.json'
+				|| $filename_arr[$key] === 'CLAN_ASSAULT.json'
+				|| $filename_arr[$key] === 'CLAN_SUPERHEAVY.json'
+				) {
+
+				$catalogfilename = "/var/www/vhosts/ascard.net/httpdocs/app/cache/mul/catalog.csv";
+				$unitsJson = json_decode($content);
+				foreach($unitsJson as $unitList) {
+					foreach($unitList as $unit) {
+						if ($unit->Id != "") {
+							file_put_contents($catalogfilename,
+							$unit->Id.";"
+								.trim($unit->Name).";"
+								.$unit->BFType.";"
+								.$unit->BFSize.";"
+								.$unit->Technology->Id.";"
+								.$unit->Tonnage.";"
+								.$unit->BattleValue
+								.PHP_EOL, FILE_APPEND | LOCK_EX);
+						}
+					}
+				}
+			}
+			echo "catalog saved.";
 
 //			// Clan
 //			if (substr($filename_arr[$key], 0, 4) == 'Clan') {

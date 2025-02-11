@@ -86,8 +86,8 @@ iframe {
 	z-index: 9990;
 }
 #iframe_save {
-	display: block; /* none, block */
-	visibility: visible; /* hidden, visible */
+	display: none; /* none, block */
+	visibility: hidden; /* hidden, visible */
 	position: fixed;
 	background-color: red;
 	left: 5px;

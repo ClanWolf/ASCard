@@ -7,9 +7,9 @@
 		document.getElementById("error").innerHTML = "";
 
 		for (let i = 0; i < 20000;) {
-            await fetch("https://www.clanwolf.net/apps/ASCard/data/mul_cache/cache_unitdetails.php?startindex=" + i).
+            await fetch("https://www.ascard.net/app/data/mul_cache/cache_unitdetails.php?startindex=" + i).
 				catch(error => {
-                    document.getElementById("error").innerHTML = error + " index: " + i ;
+                    document.getElementById("error").innerHTML = error + ". Index: " + i ;
 				})
 				i += 200;
 				document.getElementById("num").innerHTML = i;

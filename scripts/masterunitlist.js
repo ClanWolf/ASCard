@@ -60,7 +60,7 @@ function getUnitList(filter, tech, minTon, maxTon, category, unittypeString) {
 		}
 		cache_url = cache_url + '.json';
 
-	console.log("URL: " + url);
+	//console.log("URL: " + url);
 	console.log("Cache: " + cache_url);
 
 	$.getJSON(cache_url, function (json) {
@@ -100,8 +100,17 @@ function getUnitList(filter, tech, minTon, maxTon, category, unittypeString) {
 			}
 		});
 	}).then(function data() {
+		if (filter != "") { // If filter is set, user is looking for a specific unit
+			if (optionList == "<option><<< Select unit >>></option>") {
+				// The unit in the filter did not return any matches. Search other brackets!
+				console.log(filter + " has not returned any matches in category " + category + "!");
+			} else {
+				// Units where found with this filter
+				console.log(filter + " matched!");
+			}
+		}
+
 		document.getElementById("units").innerHTML = optionList;
-		// document.getElementById("url").innerHTML=url;
 
 		document.getElementById("TP").value="";
 		document.getElementById("SZ").value="";
@@ -187,6 +196,9 @@ function unitSelected() {
 }
 
 function fetchUnitList() {
+
+	// console.log("Fetching units!");
+
 	var tech = document.getElementById("tech");
 	var techid = tech.options[tech.selectedIndex].value;
 	var unittype = document.getElementById("unittype");
