@@ -12,11 +12,19 @@ function getUnitList(filter, tech, minTon, maxTon, category, unittypeString) {
 
 	//console.log (filter);
 
+	if (filter.length < 3) {
+		filter = "";
+	}
+
 	var optionList = '';
 	optionList = optionList + "<option><<< Select unit >>></option>";
 
 	var url = corsproxyprefix + 'http://www.masterunitlist.info/Unit/QuickList';
-		url = url + '?Name='					+ filter;
+		if (filter.length >= 3) {
+			url = url + '?Name='				+ filter;
+		} else {
+			url = url + '?Name=';
+		}
 		url = url + '&HasBV=false';
 		url = url + '&MinBV=';
 		url = url + '&MaxBV=';
@@ -45,7 +53,7 @@ function getUnitList(filter, tech, minTon, maxTon, category, unittypeString) {
 
 	var cache_url = 'cache/mul/';
 		if (tech == '2') {
-			cache_url = cache_url + 'Clan';
+			cache_url = cache_url + 'CLAN';
 		} else {
 			cache_url = cache_url + 'IS';
 		}
@@ -90,24 +98,55 @@ function getUnitList(filter, tech, minTon, maxTon, category, unittypeString) {
 				variant = "";
 			}
 			if (unit.BFSize != "0") {
-				var unitString = unit.Id + "> " + unit.Name + variant + unittypename;
+				var eraUnit = unit.EraId;
+				var eraFilter = document.getElementById("CreateUnitEra").value;
+				var unitString = unit.Id + "> " + unit.Tonnage + "t | " + unit.Name + variant + unittypename;
 				var unitStringLowerCase = unitString.toLowerCase();
 				var filterLowerCase = filter.toLowerCase();
 
 				if (unitStringLowerCase.includes(filterLowerCase)) {
-					optionList = optionList + "<option value=" + unitString + "</option>";
+					// console.log("Era unit: " + eraUnit);
+					// console.log("Era selected: " + eraFilter);
+					if (eraFilter == 0 || eraUnit == eraFilter) {
+						optionList = optionList + "<option value=" + unitString + "</option>";
+					}
 				}
 			}
 		});
 	}).then(function data() {
-		if (filter != "") { // If filter is set, user is looking for a specific unit
+		if (filter != "" && filter.length >= 3) { // If filter is set, user is looking for a specific unit
+
+			document.getElementById("NameFilter").style.color="#fff";
+
 			if (optionList == "<option><<< Select unit >>></option>") {
 				// The unit in the filter did not return any matches. Search other brackets!
 				console.log(filter + " has not returned any matches in category " + category + "!");
+
+				(async () => {
+					const response = await fetch("https://www.ascard.net/app/cache/mul/catalog.csv");
+					const data = await response.text();
+					const lines = data.split("\n");
+					let i = 0;
+					while (i < lines.length) {
+						if (lines[i] != "") {
+							const line = lines[i].split(";");
+							// console.log(line[1]);
+							if (filter.length >= 3 && line[1] !== undefined && line[1].includes(filter)) {
+								console.log("Found matching entry in catalog: " + lines[i]);
+								console.log("Break search, set filter values.");
+								// Set filter to new values
+								break;
+							}
+						}
+						i++;
+					}
+				})();
 			} else {
 				// Units where found with this filter
 				console.log(filter + " matched!");
 			}
+		} else {
+			document.getElementById("NameFilter").style.color="#f00";
 		}
 
 		document.getElementById("units").innerHTML = optionList;
@@ -197,7 +236,13 @@ function unitSelected() {
 
 function fetchUnitList() {
 
-	// console.log("Fetching units!");
+	//console.log("fetchUnitList");
+
+	setCookie("UnitFilter_Tech", document.getElementById("tech").value, 365);
+	setCookie("UnitFilter_Type", document.getElementById("unittype").value, 365);
+	setCookie("UnitFilter_Weight", document.getElementById("tonnage").value, 365);
+	setCookie("UnitFilter_String", document.getElementById("NameFilter").value, 365);
+	setCookie("UnitFilter_Era", document.getElementById("CreateUnitEra").value, 365);
 
 	var tech = document.getElementById("tech");
 	var techid = tech.options[tech.selectedIndex].value;

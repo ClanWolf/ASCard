@@ -3,6 +3,10 @@
 	error_reporting(E_ALL);
 	ini_set('error_reporting', E_ALL);
 
+	set_time_limit(600);
+	ob_end_flush();
+	ob_implicit_flush();
+
 	echo "ASCard App - caching units from MUL<br>";
 	echo "-------------------------------------------<br>";
 	echo date('M Y') . "<br>";
@@ -144,125 +148,125 @@
 	);
 
 	$filename_arr = array(
-		'Clan_2.json',
-		'Clan_20.json',
-		'Clan_25.json',
-		'Clan_30.json',
-		'Clan_35.json',
-		'Clan_40.json',
-		'Clan_45.json',
-		'Clan_50.json',
-		'Clan_55.json',
-		'Clan_60.json',
-		'Clan_65.json',
-		'Clan_70.json',
-		'Clan_75.json',
-		'Clan_80.json',
-		'Clan_85.json',
-		'Clan_90.json',
-		'Clan_95.json',
-		'Clan_100.json',
-		'Clan_105.json',
-		'Clan_110.json',
-		'Clan_115.json',
-		'Clan_120.json',
-		'Clan_125.json',
-		'Clan_130.json',
-		'Clan_135.json',
-		'Clan_140.json',
-		'Clan_145.json',
-		'Clan_150.json',
-		'Clan_155.json',
-		'Clan_160.json',
-		'Clan_165.json',
-		'Clan_170.json',
-		'Clan_175.json',
-		'Clan_180.json',
-		'Clan_185.json',
-		'Clan_190.json',
-		'Clan_195.json',
-		'Clan_200.json',
-		'Clan_BA.json',
-        'Clan_LIGHT.json',
-        'Clan_MEDIUM.json',
-        'Clan_HEAVY.json',
-        'Clan_ASSAULT.json',
-        'Clan_SUPERHEAVY.json',
-        'Clan_LIGHT_BM.json',
-        'Clan_MEDIUM_BM.json',
-        'Clan_HEAVY_BM.json',
-        'Clan_ASSAULT_BM.json',
-        'Clan_SUPERHEAVY_BM.json',
-        'Clan_LIGHT_CV.json',
-        'Clan_MEDIUM_CV.json',
-        'Clan_HEAVY_CV.json',
-        'Clan_ASSAULT_CV.json',
-        'Clan_SUPERHEAVY_CV.json',
-        'Clan_LIGHT_AF.json',
-        'Clan_MEDIUM_AF.json',
-        'Clan_HEAVY_AF.json',
-        'Clan_ASSAULT_AF.json',
-        'Clan_SUPERHEAVY_AF.json',
+		'CLAN_2',
+		'CLAN_20',
+		'CLAN_25',
+		'CLAN_30',
+		'CLAN_35',
+		'CLAN_40',
+		'CLAN_45',
+		'CLAN_50',
+		'CLAN_55',
+		'CLAN_60',
+		'CLAN_65',
+		'CLAN_70',
+		'CLAN_75',
+		'CLAN_80',
+		'CLAN_85',
+		'CLAN_90',
+		'CLAN_95',
+		'CLAN_100',
+		'CLAN_105',
+		'CLAN_110',
+		'CLAN_115',
+		'CLAN_120',
+		'CLAN_125',
+		'CLAN_130',
+		'CLAN_135',
+		'CLAN_140',
+		'CLAN_145',
+		'CLAN_150',
+		'CLAN_155',
+		'CLAN_160',
+		'CLAN_165',
+		'CLAN_170',
+		'CLAN_175',
+		'CLAN_180',
+		'CLAN_185',
+		'CLAN_190',
+		'CLAN_195',
+		'CLAN_200',
+		'CLAN_BA',
+		'CLAN_LIGHT',
+		'CLAN_MEDIUM',
+		'CLAN_HEAVY',
+		'CLAN_ASSAULT',
+		'CLAN_SUPERHEAVY',
+		'CLAN_LIGHT_BM',
+		'CLAN_MEDIUM_BM',
+		'CLAN_HEAVY_BM',
+		'CLAN_ASSAULT_BM',
+		'CLAN_SUPERHEAVY_BM',
+		'CLAN_LIGHT_CV',
+		'CLAN_MEDIUM_CV',
+		'CLAN_HEAVY_CV',
+		'CLAN_ASSAULT_CV',
+		'CLAN_SUPERHEAVY_CV',
+		'CLAN_LIGHT_AF',
+		'CLAN_MEDIUM_AF',
+		'CLAN_HEAVY_AF',
+		'CLAN_ASSAULT_AF',
+		'CLAN_SUPERHEAVY_AF',
 
-		'IS_2.json',
-		'IS_20.json',
-		'IS_25.json',
-		'IS_30.json',
-		'IS_35.json',
-		'IS_40.json',
-		'IS_45.json',
-		'IS_50.json',
-		'IS_55.json',
-		'IS_60.json',
-		'IS_65.json',
-		'IS_70.json',
-		'IS_75.json',
-		'IS_80.json',
-		'IS_85.json',
-		'IS_90.json',
-		'IS_95.json',
-		'IS_100.json',
-		'IS_105.json',
-		'IS_110.json',
-		'IS_115.json',
-		'IS_120.json',
-		'IS_125.json',
-		'IS_130.json',
-		'IS_135.json',
-		'IS_140.json',
-		'IS_145.json',
-		'IS_150.json',
-		'IS_155.json',
-		'IS_160.json',
-		'IS_165.json',
-		'IS_170.json',
-		'IS_175.json',
-		'IS_180.json',
-		'IS_185.json',
-		'IS_190.json',
-		'IS_195.json',
-		'IS_200.json',
-		'IS_BA.json',
-		'IS_LIGHT.json',
-		'IS_MEDIUM.json',
-		'IS_HEAVY.json',
-		'IS_ASSAULT.json',
-		'IS_SUPERHEAVY.json',
-        'IS_LIGHT_BM.json',
-        'IS_MEDIUM_BM.json',
-        'IS_HEAVY_BM.json',
-        'IS_ASSAULT_BM.json',
-        'IS_SUPERHEAVY_BM.json',
-        'IS_LIGHT_CV.json',
-        'IS_MEDIUM_CV.json',
-        'IS_HEAVY_CV.json',
-        'IS_ASSAULT_CV.json',
-        'IS_SUPERHEAVY_CV.json',
-        'IS_LIGHT_AF.json',
-        'IS_MEDIUM_AF.json',
-        'IS_HEAVY_AF.json',
-        'IS_ASSAULT_AF.json',
-        'IS_SUPERHEAVY_AF.json'
+		'IS_2',
+		'IS_20',
+		'IS_25',
+		'IS_30',
+		'IS_35',
+		'IS_40',
+		'IS_45',
+		'IS_50',
+		'IS_55',
+		'IS_60',
+		'IS_65',
+		'IS_70',
+		'IS_75',
+		'IS_80',
+		'IS_85',
+		'IS_90',
+		'IS_95',
+		'IS_100',
+		'IS_105',
+		'IS_110',
+		'IS_115',
+		'IS_120',
+		'IS_125',
+		'IS_130',
+		'IS_135',
+		'IS_140',
+		'IS_145',
+		'IS_150',
+		'IS_155',
+		'IS_160',
+		'IS_165',
+		'IS_170',
+		'IS_175',
+		'IS_180',
+		'IS_185',
+		'IS_190',
+		'IS_195',
+		'IS_200',
+		'IS_BA',
+		'IS_LIGHT',
+		'IS_MEDIUM',
+		'IS_HEAVY',
+		'IS_ASSAULT',
+		'IS_SUPERHEAVY',
+		'IS_LIGHT_BM',
+		'IS_MEDIUM_BM',
+		'IS_HEAVY_BM',
+		'IS_ASSAULT_BM',
+		'IS_SUPERHEAVY_BM',
+		'IS_LIGHT_CV',
+		'IS_MEDIUM_CV',
+		'IS_HEAVY_CV',
+		'IS_ASSAULT_CV',
+		'IS_SUPERHEAVY_CV',
+		'IS_LIGHT_AF',
+		'IS_MEDIUM_AF',
+		'IS_HEAVY_AF',
+		'IS_ASSAULT_AF',
+		'IS_SUPERHEAVY_AF'
 	);
 
 	// ---------------------------------------------------
@@ -274,7 +278,7 @@
 			unlink($jsonFile);
 		}
 	}
-	$csvFiles = glob('/var/www/vhosts/ascard.net/httpdocs/app/cache/mul/catalog.csv');
+	$csvFiles = glob('/var/www/vhosts/ascard.net/httpdocs/app/cache/mul/*.csv');
 	foreach($csvFiles as $csvFile) {
 		if(is_file($csvFile)) {
 			echo "delete: " . $csvFile . "<br>";
@@ -295,126 +299,60 @@
 		} else {
 			echo "Saving " . $filename_arr[$key] . "... ";
 			// echo $content;
-			$filename = "/var/www/vhosts/ascard.net/httpdocs/app/cache/mul/" . $filename_arr[$key];
+			$filename = "/var/www/vhosts/ascard.net/httpdocs/app/cache/mul/".$filename_arr[$key].".json";
 			$fileHandle = fopen($filename, 'w');
 			fwrite($fileHandle, $content);
 			fclose($fileHandle);
 			echo "saved.<br>";
 
-			if ($filename_arr[$key] === 'IS_BA.json'
-				|| $filename_arr[$key] === 'IS_LIGHT.json'
-				|| $filename_arr[$key] === 'IS_MEDIUM.json'
-				|| $filename_arr[$key] === 'IS_HEAVY.json'
-				|| $filename_arr[$key] === 'IS_ASSAULT.json'
-				|| $filename_arr[$key] === 'IS_SUPERHEAVY.json'
-				|| $filename_arr[$key] === 'CLAN_BA.json'
-				|| $filename_arr[$key] === 'CLAN_LIGHT.json'
-				|| $filename_arr[$key] === 'CLAN_MEDIUM.json'
-				|| $filename_arr[$key] === 'CLAN_HEAVY.json'
-				|| $filename_arr[$key] === 'CLAN_ASSAULT.json'
-				|| $filename_arr[$key] === 'CLAN_SUPERHEAVY.json'
+			if ($filename_arr[$key] === 'IS_BA'
+				|| $filename_arr[$key] === 'IS_LIGHT'
+				|| $filename_arr[$key] === 'IS_MEDIUM'
+				|| $filename_arr[$key] === 'IS_HEAVY'
+				|| $filename_arr[$key] === 'IS_ASSAULT'
+				|| $filename_arr[$key] === 'IS_SUPERHEAVY'
+				|| $filename_arr[$key] === 'CLAN_BA'
+				|| $filename_arr[$key] === 'CLAN_LIGHT'
+				|| $filename_arr[$key] === 'CLAN_MEDIUM'
+				|| $filename_arr[$key] === 'CLAN_HEAVY'
+				|| $filename_arr[$key] === 'CLAN_ASSAULT'
+				|| $filename_arr[$key] === 'CLAN_SUPERHEAVY'
 				) {
 
+				$dataentry = "";
 				$catalogfilename = "/var/www/vhosts/ascard.net/httpdocs/app/cache/mul/catalog.csv";
 				$unitsJson = json_decode($content);
+
 				foreach($unitsJson as $unitList) {
 					foreach($unitList as $unit) {
-						if ($unit->Id != "") {
-							file_put_contents($catalogfilename,
-							$unit->Id.";"
+						if (!empty($unit->Id) && $unit->Id > 0 && $unit->Id != "") {
+							$dataentry = $dataentry.$unit->Id.";"
 								.trim($unit->Name).";"
 								.$unit->BFType.";"
 								.$unit->BFSize.";"
 								.$unit->Technology->Id.";"
 								.$unit->Tonnage.";"
 								.$unit->BattleValue
-								.PHP_EOL, FILE_APPEND | LOCK_EX);
+								.PHP_EOL;
+						} else {
+							// $dataentry = $dataentry."FAILEDMATCH".PHP_EOL;
 						}
 					}
 				}
+
+				$catalogfileHandle = fopen($catalogfilename, "a");
+				fwrite($catalogfileHandle, $dataentry);
+				fclose($catalogfileHandle);
+
+//				$filename_sub_csv = "/var/www/vhosts/ascard.net/httpdocs/app/cache/mul/".$filename_arr[$key].".csv";
+//				$fileHandle_sub_csv = fopen($filename_sub_csv, 'w');
+//				fwrite($fileHandle_sub_csv, $dataentry);
+//				fclose($fileHandle_sub_csv);
+
+				echo "saved.<br>";
+				flush();
 			}
 			echo "catalog saved.";
-
-//			// Clan
-//			if (substr($filename_arr[$key], 0, 4) == 'Clan') {
-//				$filename_all_Clan = "/var/www/vhosts/ascard.net/httpdocs/app/cache/mul/Clan_ALL.json";
-//				file_put_contents($filename_all_Clan, $content, FILE_APPEND);
-//				// echo "saved Clan ALL.<br>";
-//
-//				if (strpos($filename_arr[$key], '_2') > 0) {
-//					// BA
-//					$filename_Clan_BA = "/var/www/vhosts/ascard.net/httpdocs/app/cache/mul/Clan_BA.json";
-//					file_put_contents($filename_Clan_BA, $content, FILE_APPEND);
-//					// echo "saved Clan BA.<br>";
-//				} else if (strpos($filename_arr[$key], '_20') > 0 || strpos($filename_arr[$key], '_25') > 0 || strpos($filename_arr[$key], '_30') > 0 || strpos($filename_arr[$key], '_35') > 0) {
-//					// LIGHT
-//					$filename_Clan_LIGHT = "/var/www/vhosts/ascard.net/httpdocs/app/cache/mul/Clan_LIGHT.json";
-//					file_put_contents($filename_Clan_LIGHT, $content, FILE_APPEND);
-//					// echo "saved Clan LIGHT.<br>";
-//				} else if (strpos($filename_arr[$key], '_40') > 0 || strpos($filename_arr[$key], '_45') > 0 || strpos($filename_arr[$key], '_50') > 0 || strpos($filename_arr[$key], '_55') > 0) {
-//					// MEDIUM
-//					$filename_Clan_MEDIUM = "/var/www/vhosts/ascard.net/httpdocs/app/cache/mul/Clan_MEDIUM.json";
-//					file_put_contents($filename_Clan_MEDIUM, $content, FILE_APPEND);
-//					//echo "saved Clan MEDIUM.<br>";
-//				} else if (strpos($filename_arr[$key], '_60') > 0 || strpos($filename_arr[$key], '_65') > 0 || strpos($filename_arr[$key], '_70') > 0 || strpos($filename_arr[$key], '_75') > 0) {
-//					// HEAVY
-//					$filename_Clan_HEAVY = "/var/www/vhosts/ascard.net/httpdocs/app/cache/mul/Clan_HEAVY.json";
-//					file_put_contents($filename_Clan_HEAVY, $content, FILE_APPEND);
-//					// echo "saved Clan HEAVY.<br>";
-//				} else if (strpos($filename_arr[$key], '_80') > 0 || strpos($filename_arr[$key], '_85') > 0 || strpos($filename_arr[$key], '_90') > 0 || strpos($filename_arr[$key], '_95') > 0 || strpos($filename_arr[$key], '_100') > 0) {
-//					// ASSAULT
-//					$filename_Clan_ASSAULT = "/var/www/vhosts/ascard.net/httpdocs/app/cache/mul/Clan_ASSAULT.json";
-//					file_put_contents($filename_Clan_ASSAULT, $content, FILE_APPEND);
-//					// echo "saved Clan ASSAULT.<br>";
-//				} else {
-//					// SUPERHEAVY
-//					$filename_Clan_SUPERHEAVY = "/var/www/vhosts/ascard.net/httpdocs/app/cache/mul/Clan_SUPERHEAVY.json";
-//					file_put_contents($filename_Clan_SUPERHEAVY, $content, FILE_APPEND);
-//					// echo "saved Clan SUPERHEAVY.<br>";
-//				}
-//			} else {
-//				$filename_all_IS = "/var/www/vhosts/ascard.net/httpdocs/app/cache/mul/IS_ALL.json";
-//				file_put_contents($filename_all_IS, $content, FILE_APPEND);
-//                // echo "saved IS ALL.<br>";
-//
-//				if (strpos($filename_arr[$key], '_2') > 0) {
-//					// BA
-//					$filename_IS_BA = "/var/www/vhosts/ascard.net/httpdocs/app/cache/mul/IS_BA.json";
-//					file_put_contents($filename_IS_BA, $content, FILE_APPEND);
-//					// echo "saved IS BA.<br>";
-//				} else if (strpos($filename_arr[$key], '_20') > 0 || strpos($filename_arr[$key], '_25') > 0 || strpos($filename_arr[$key], '_30') > 0 || strpos($filename_arr[$key], '_35') > 0) {
-//					// LIGHT
-//					$filename_IS_LIGHT = "/var/www/vhosts/ascard.net/httpdocs/app/cache/mul/IS_LIGHT.json";
-//					file_put_contents($filename_IS_LIGHT, $content, FILE_APPEND);
-//					// echo "saved IS LIGHT.<br>";
-//				} else if (strpos($filename_arr[$key], '_40') > 0 || strpos($filename_arr[$key], '_45') > 0 || strpos($filename_arr[$key], '_50') > 0 || strpos($filename_arr[$key], '_55') > 0) {
-//					// MEDIUM
-//					$filename_IS_MEDIUM = "/var/www/vhosts/ascard.net/httpdocs/app/cache/mul/IS_MEDIUM.json";
-//					file_put_contents($filename_IS_MEDIUM, $content, FILE_APPEND);
-//					// echo "saved IS MEDIUM.<br>";
-//				} else if (strpos($filename_arr[$key], '_60') > 0 || strpos($filename_arr[$key], '_65') > 0 || strpos($filename_arr[$key], '_70') > 0 || strpos($filename_arr[$key], '_75') > 0) {
-//					// HEAVY
-//					$filename_IS_HEAVY = "/var/www/vhosts/ascard.net/httpdocs/app/cache/mul/IS_HEAVY.json";
-//					file_put_contents($filename_IS_HEAVY, $content, FILE_APPEND);
-//					// echo "saved IS HEAVY.<br>";
-//				} else if (strpos($filename_arr[$key], '_80') > 0 || strpos($filename_arr[$key], '_85') > 0 || strpos($filename_arr[$key], '_90') > 0 || strpos($filename_arr[$key], '_95') > 0 || strpos($filename_arr[$key], '_100') > 0) {
-//					// ASSAULT
-//					$filename_IS_ASSAULT = "/var/www/vhosts/ascard.net/httpdocs/app/cache/mul/IS_ASSAULT.json";
-//					file_put_contents($filename_IS_ASSAULT, $content, FILE_APPEND);
-//					// echo "saved IS ASSAULT.<br>";
-//				} else {
-//					// SUPERHEAVY
-//					$filename_IS_SUPERHEAVY = "/var/www/vhosts/ascard.net/httpdocs/app/cache/mul/IS_SUPERHEAVY.json";
-//					$fileContent = file_get_contents($filename_IS_SUPERHEAVY, true);
-//                    $mergedContent = json_encode(array_merge(json_decode($fileContent, true), json_decode($content, true)));
-//					$fileHandle = fopen($filename_IS_SUPERHEAVY, 'w');
-//					fwrite($fileHandle, $mergedContent);
-//					fclose($fileHandle);
-//
-//					// file_put_contents($filename_IS_SUPERHEAVY, $content, FILE_APPEND);
-//					// echo "saved IS SUPERHEAVY.<br>";
-//				}
-//			}
 		}
 	}
 

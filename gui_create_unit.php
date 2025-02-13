@@ -377,6 +377,7 @@ session_start();
 
 	<script type="text/javascript" src="./scripts/jquery-3.7.1.min.js"></script>
 	<script type="text/javascript" src="./scripts/basic.js"></script>
+	<script type="text/javascript" src="./scripts/cookies.js"></script>
 	<script type="text/javascript" src="./scripts/masterunitlist.js"></script>
 	<script type="text/javascript" src="./scripts/adjustPointValue.js"></script>
 
@@ -586,20 +587,23 @@ session_start();
 	<form autocomplete="off">
 		<table class="options" cellspacing=4 cellpadding=4 border=0px>
 			<tr>
-				<td nowrap class="datalabel" style='text-align:left;' colspan='5'>
-					Tech: <select required name='tech' id='tech' size='1' onchange="fetchUnitList();">
+				<td nowrap class="datalabel" style='text-align:left;' colspan='1'>
+					Tech:
+				</td>
+				<td nowrap class="datalabel" style='text-align:left;' colspan='4'>
+					<select required name='tech' id='tech' size='1'>
 						<option value="2">Clan</option>
 						<option value="1">IS</option>
 					</select>
 
-					Type: <select required style='width:75px;' name='unittype' id='unittype' size='1' onchange="fetchUnitList();">
+					Type: <select required style='width:75px;' name='unittype' id='unittype' size='1'>
 						<option value="BA">BA</option>
 						<option value="BM" selected="selected">BM</option>
 						<option value="CV">CV</option>
 						<!-- <option value="AF">AF</option> -->
 					</select>
 
-					<span id='weightBlock'>Weight: <select required style='width:145px;' name='tonnage' id='tonnage' size='1' onchange="fetchUnitList();">
+					<span id='weightBlock'>Weight: <select required style='width:145px;' name='tonnage' id='tonnage' size='1'>
 						<option value="LIGHT">LIGHT</option>
 						<option value="MEDIUM">MEDIUM</option>
 						<option value="HEAVY" selected="selected">HEAVY</option>
@@ -648,13 +652,38 @@ session_start();
 						<!-- <option value="200">200</option> -->
 					</select></span>
 
-					Filter: <input required style='width:150px;' type="text" id="NameFilter" name="NameFilter" onchange="fetchUnitList();">
+					Filter: <input required style='width:150px;' type="text" id="NameFilter" name="NameFilter">
 				</td>
 			</tr>
 			<tr>
-				<td nowrap class="datalabel" style='text-align:left;' colspan='5'>
+				<td nowrap class="datalabel" style='text-align:left;' colspan='1'>
+					Era:
+				</td>
+				<td nowrap class="datalabel" style='text-align:left;' colspan='4'>
+					<select required style='width:350px;' name='CreateUnitEra' id='CreateUnitEra' size='1'>
+						<option value="0">ALL</option>
+						<option value="9">2005-2570: AGE OF WAR</option>
+						<option value="10">2571-2780: STAR LEAGUE</option>
+						<option value="11">2781-2900: EARLY SUCCESSION WARS</option>
+						<option value="255">2901-3019: LATE SUCCESSION WARS - LOSTECH</option>
+						<option value="256">3020-3049: LATE SUCCESSION WARS - RENAISSANCE</option>
+						<option value="13">3050-3061: CLAN INVASION</option>
+						<option value="247">3052-3067: CIVIL WAR</option>
+						<option value="14">3068-3080: JIHAD</option>
+						<option value="15">3081-3100: EARLY REPUBLIC</option>
+						<option value="254">3101-3130: LATE REPUBLIC</option>
+						<option value="16">3131-3150: DARK AGE</option>
+						<option value="257">3151-9999: ILCLAN</option>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<td nowrap class="datalabel" style='text-align:left;' colspan='1'>
+				</td>
+				<td nowrap class="datalabel" style='text-align:left;' colspan='4'>
+					<br>
 					<!-- will be filled by 'fetchUnitList();' -->
-					<select required name='units' id='units' size='1' onchange="unitSelected();" style="width:300px"></select>
+					<select required name='units' id='units' size='1' onchange="unitSelected();" style="width:350px"></select>
 				</td>
 			</tr>
 			<tr>
@@ -736,6 +765,39 @@ session_start();
 	</form>
 
 	<script>
+		let filterTech = getCookie("UnitFilter_Tech");
+		let filterType = getCookie("UnitFilter_Type");
+		let filterWeight = getCookie("UnitFilter_Weight");
+		let filterString = getCookie("UnitFilter_String");
+		let filterEra = getCookie("UnitFilter_Era");
+
+		if (filterTech != undefined && filterTech != "") {
+			//console.log("Found cookie filter tech: " + filterTech);
+			document.getElementById("tech").value = filterTech;
+		}
+		if (filterType != undefined && filterType != "") {
+			//console.log("Found cookie filter type: " + filterType);
+			document.getElementById("unittype").value = filterType;
+		}
+		if (filterWeight != undefined && filterWeight != "") {
+			//console.log("Found cookie filter weight: " + filterWeight);
+			document.getElementById("tonnage").value = filterWeight;
+		}
+		if (filterString != undefined && filterString != "") {
+			//console.log("Found cookie filter string: " + filterString);
+			document.getElementById("NameFilter").value = filterString;
+		}
+		if (filterEra != undefined && filterEra != "") {
+			//console.log("Found cookie filter era: " + filterEra);
+			document.getElementById("CreateUnitEra").value = filterEra;
+		}
+
+		document.getElementById("tech").setAttribute("onchange", "fetchUnitList();");
+		document.getElementById("unittype").setAttribute("onchange", "fetchUnitList();");
+		document.getElementById("tonnage").setAttribute("onchange", "fetchUnitList();");
+		document.getElementById("NameFilter").setAttribute("onchange", "fetchUnitList();");
+		document.getElementById("CreateUnitEra").setAttribute("onchange", "fetchUnitList();");
+
 		var finalPilotName = "";
 		var finalPilotImage = "";
 

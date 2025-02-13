@@ -1,3 +1,2298 @@
+7387;Clan Interface Armor (Sqd4);BA;1;3;0.2;37
+8828;Clan Interface Armor (Sqd5);BA;1;3;0.2;50
+9191;Clan Interface Armor (Sqd6);BA;1;3;0.2;65
+3673;Aerie PA(L) (Salvage) (Sqd4);BA;1;2;0.4;27
+3674;Aerie PA(L) (Sqd4);BA;1;2;0.4;27
+8600;Aerie PA(L) (Salvage) (Sqd5);BA;1;2;0.4;37
+8601;Aerie PA(L) (Sqd5);BA;1;2;0.4;37
+9244;Hantu  AIX-210 (Sqd4);BA;1;2;0.4;44
+8964;Aerie PA(L) (Salvage) (Sqd6);BA;1;2;0.4;47
+8965;Aerie PA(L) (Sqd6);BA;1;2;0.4;47
+7204;Resgate PA(L) (Spotter) (Sqd4);BA;1;2;0.4;54
+9245;Hantu  AIX-210 (Sqd5);BA;1;2;0.4;59
+4909;Resgate PA(L) (Sqd4);BA;1;2;0.4;61
+7202;Resgate PA(L) (Interdictor) (Sqd4);BA;1;2;0.4;61
+7203;Resgate PA(L) (Scout) (Sqd4);BA;1;2;0.4;61
+9246;Hantu  AIX-210 (Sqd6);BA;1;2;0.4;72
+8806;Resgate PA(L) (Spotter) (Sqd5);BA;1;2;0.4;73
+8659;Resgate PA(L) (Sqd5);BA;1;2;0.4;82
+8804;Resgate PA(L) (Interdictor) (Sqd5);BA;1;2;0.4;82
+8805;Resgate PA(L) (Scout) (Sqd5);BA;1;2;0.4;82
+9169;Resgate PA(L) (Spotter) (Sqd6);BA;1;2;0.4;94
+7205;Resgate PA(L) (Support) (Sqd4);BA;1;2;0.4;94
+9023;Resgate PA(L) (Sqd6);BA;1;2;0.4;105
+9167;Resgate PA(L) (Interdictor) (Sqd6);BA;1;2;0.4;105
+9168;Resgate PA(L) (Scout) (Sqd6);BA;1;2;0.4;105
+8807;Resgate PA(L) (Support) (Sqd5);BA;1;2;0.4;127
+9170;Resgate PA(L) (Support) (Sqd6);BA;1;2;0.4;203
+5560;Tornado PA(L) P17 "Hurricane" (Sqd4);BA;1;3;0.4;212
+8706;Tornado PA(L) P17 "Hurricane" (Sqd5);BA;1;3;0.4;285
+9070;Tornado PA(L) P17 "Hurricane" (Sqd6);BA;1;3;0.4;367
+5838;Constable Pacification Suit [ECM] (Sqd4);BA;1;2;0.75;123
+5842;Constable Pacification Suit [TAG] (Sqd4);BA;1;2;0.75;123
+5841;Constable Pacification Suit [Sensor] (Sqd4);BA;1;2;0.75;130
+6308;Sea Fox Amphibious Armor (Sqd4);BA;1;3;0.75;130
+5839;Constable Pacification Suit [LMG] (Sqd4);BA;1;2;0.75;143
+8717;Constable Pacification Suit [ECM] (Sqd5);BA;1;2;0.75;166
+8721;Constable Pacification Suit [TAG] (Sqd5);BA;1;2;0.75;166
+8720;Constable Pacification Suit [Sensor] (Sqd5);BA;1;2;0.75;175
+8733;Sea Fox Amphibious Armor (Sqd5);BA;1;3;0.75;175
+5840;Constable Pacification Suit [SRM] (Sqd4);BA;1;2;0.75;184
+8718;Constable Pacification Suit [LMG] (Sqd5);BA;1;2;0.75;193
+5170;Sylph Battle Armor XR (Sqd4);BA;1;2;0.75;195
+1274;Gray Death Scout Suit "The Willow Wisps" (Sqd4);BA;1;3;0.75;201
+3147;Sylph Battle Armor (Upgrade) (Sqd4);BA;1;2;0.75;213
+9081;Constable Pacification Suit [ECM] (Sqd6);BA;1;2;0.75;213
+9084;Constable Pacification Suit [TAG] (Sqd6);BA;1;2;0.75;213
+9096;Sea Fox Amphibious Armor (Sqd6);BA;1;3;0.75;226
+8719;Constable Pacification Suit [SRM] (Sqd5);BA;1;2;0.75;247
+9082;Constable Pacification Suit [LMG] (Sqd6);BA;1;2;0.75;248
+8677;Sylph Battle Armor XR (Sqd5);BA;1;2;0.75;263
+8524;Gray Death Scout Suit "The Willow Wisps" (Sqd5);BA;1;3;0.75;271
+3146;Sylph Battle Armor (Sqd4);BA;1;2;0.75;280
+8588;Sylph Battle Armor (Upgrade) (Sqd5);BA;1;2;0.75;286
+9083;Constable Pacification Suit [SRM] (Sqd6);BA;1;2;0.75;318
+9216;Constable Pacification Suit [Sensor] (Sqd6);BA;1;2;0.75;318
+9041;Sylph Battle Armor XR (Sqd6);BA;1;2;0.75;338
+8888;Gray Death Scout Suit "The Willow Wisps" (Sqd6);BA;1;3;0.75;348
+8952;Sylph Battle Armor (Upgrade) (Sqd6);BA;1;2;0.75;368
+8587;Sylph Battle Armor (Sqd5);BA;1;2;0.75;377
+8951;Sylph Battle Armor (Sqd6);BA;1;2;0.75;485
+5171;Sylph Battle Armor (Enhanced) (Sqd4);BA;1;2;0.8;164
+8678;Sylph Battle Armor (Enhanced) (Sqd5);BA;1;2;0.8;221
+8384;Sylph Battle Armor "Tinkerbelle" (Sqd4);BA;1;2;0.8;271
+9042;Sylph Battle Armor (Enhanced) (Sqd6);BA;1;2;0.8;284
+7671;Water Elemental Mining Suit (Sqd5);BA;1;2;1;142
+9253;Elemental Battle Armor (Headhunter) (Sqd3);BA;1;2;1;155
+3677;Afreet Medium Battle Armor (Hell's Horses) (Sqd4);BA;1;2;1;164
+6234;Buraq Fast Battle Armor (Hunter-Killer) (Sqd4);BA;1;2;1;168
+16;Afreet Medium Battle Armor (Interdictor) (Sqd4);BA;1;2;1;189
+9211;Salamander Battle Armor (Sqd3);BA;1;2;1;191
+6233;Buraq Fast Battle Armor (Sqd4);BA;1;2;1;199
+3351;Undine Battle Armor (Sqd4);BA;1;2;1;203
+8030;Longinus C Battle Armor [PPC] (Sqd4);ba;1;3;1;203
+9210;Elemental Battle Armor [MG] (Sqd3);BA;1;2;1;208
+9206;Elemental Battle Armor [Flamer] (Sqd3);BA;1;2;1;208
+9207;Elemental Battle Armor [HMG] (Sqd3);BA;1;2;1;213
+953;Elemental Battle Armor (Space) [Flamer] (Sqd4);BA;1;2;1;216
+954;Elemental Battle Armor (Space) [MG] (Sqd4);BA;1;2;1;216
+3679;Afreet Medium Battle Armor (Sqd4);BA;1;2;1;217
+9205;Elemental Battle Armor [ERMicroL] (Sqd3);BA;1;2;1;219
+8602;Afreet Medium Battle Armor (Hell's Horses) (Sqd5);BA;1;2;1;221
+952;Elemental Battle Armor (Headhunter) (Sqd4);BA;1;2;1;223
+8723;Buraq Fast Battle Armor (Hunter-Killer) (Sqd5);BA;1;2;1;226
+9506;Cavalier II Battle Armor [Flamer] (Sqd4);BA;1;3;1;229
+9208;Elemental Battle Armor [Laser] (Sqd3);BA;1;2;1;230
+3957;Clan Medium Battle Armor "Rabid" (Sqd4);BA;1;2;1;241
+9209;Elemental Battle Armor [MicroPL] (Sqd3);BA;1;2;1;247
+3955;Clan Medium Battle Armor (Laser)  "Volk" (Sqd4);BA;1;2;1;250
+8020;Cavalier II Battle Armor [SRM] (Sqd4);BA;1;3;1;252
+8478;Afreet Medium Battle Armor (Interdictor) (Sqd5);BA;1;2;1;255
+9437;Callisto Battle Armor A [Bearhunter] (Sqd4);BA;1;2;1;256
+9382;Dragoon Battle Armor (Advanced) (Sqd4);BA;1;3;1;257
+7307;Surat (Gray Death) Solahma Suit (Sqd4);BA;1;3;1;265
+8457;Elemental III Battle Armor [Flamer] (Sqd4);BA;1;2;1;266
+6368;Oni Battle Armor [Bearhunter] (Sqd4);BA;1;3;1;267
+8722;Buraq Fast Battle Armor (Sqd5);BA;1;2;1;268
+3956;Clan Medium Battle Armor (Naval) "Bär" (Sqd4);BA;1;2;1;269
+955;Elemental Battle Armor (Space) [MicroPL] (Sqd4);BA;1;2;1;272
+9443;Callisto Battle Armor A [HMG] (Sqd4);BA;1;2;1;272
+9214;Longinus C Battle Armor [PPC] (Sqd5);ba;1;3;1;273
+8596;Undine Battle Armor (Sqd5);BA;1;2;1;273
+635;Clan Medium Battle Armor "Rache" (Sqd4);BA;1;2;1;276
+2789;Salamander Battle Armor (Sqd4);BA;1;2;1;276
+9440;Callisto Battle Armor A [ER Laser] (Sqd4);BA;1;2;1;280
+6729;Gray Death Strike Suit (Harjel) (Sqd4);BA;1;3;1;285
+8966;Afreet Medium Battle Armor (Hell's Horses) (Sqd6);BA;1;2;1;285
+9086;Buraq Fast Battle Armor (Hunter-Killer) (Sqd6);BA;1;2;1;290
+6237;Wraith Battle Armor (Anti-Infantry) (Sqd4);BA;1;2;1;290
+6236;Wraith Battle Armor (Sqd4);BA;1;2;1;291
+8490;Elemental Battle Armor (Space) [Flamer] (Sqd5);BA;1;2;1;291
+8491;Elemental Battle Armor (Space) [MG] (Sqd5);BA;1;2;1;291
+2788;Salamander Battle Armor (Laser) (Sqd4);BA;1;2;1;292
+8604;Afreet Medium Battle Armor (Sqd5);BA;1;2;1;292
+2787;Salamander Battle Armor (Anti-Infantry) (Sqd4);BA;1;2;1;293
+8019;Cavalier II Battle Armor [PPC] (Sqd4);BA;1;3;1;293
+9204;Elemental Battle Armor [AP Gauss] (Sqd3);BA;1;2;1;297
+950;Elemental Battle Armor (Fire) [Flamer] (Sqd4);BA;1;2;1;299
+6367;Oni Battle Armor [Narc] (Sqd4);BA;1;3;1;299
+958;Elemental Battle Armor [Flamer] (Sqd4);BA;1;2;1;300
+961;Elemental Battle Armor [MG] (Sqd4);BA;1;2;1;300
+8489;Elemental Battle Armor (Headhunter) (Sqd5);BA;1;2;1;300
+959;Elemental Battle Armor [HMG] (Sqd4);BA;1;2;1;308
+9513;Cavalier II Battle Armor [Flamer] (Sqd5);BA;1;3;1;308
+9438;Callisto Battle Armor A [Bearhunter] (Sqd5);BA;1;2;1;315
+957;Elemental Battle Armor [ERMicroL] (Sqd4);BA;1;2;1;316
+8458;Elemental III Battle Armor [MicroPL] (Sqd4);BA;1;2;1;323
+8611;Clan Medium Battle Armor "Rabid" (Sqd5);BA;1;2;1;325
+3678;Afreet Medium Battle Armor (Jade Falcon) (Sqd4);BA;1;2;1;326
+8843;Afreet Medium Battle Armor (Interdictor) (Sqd6);BA;1;2;1;327
+4236;Gray Death Strike Suit (Prototype) (Sqd4);BA;1;3;1;328
+5615;Purifier Terra Battle Armor [MRR] (Sqd4);BA;1;3;1;328
+6235;Buraq Fast Battle Armor (Support) (Sqd4);BA;1;2;1;330
+960;Elemental Battle Armor [Laser] (Sqd4);BA;1;2;1;332
+3352;Undine Battle Armor (Upgrade) (Sqd4);BA;1;2;1;336
+9444;Callisto Battle Armor A [HMG] (Sqd5);BA;1;2;1;337
+8609;Clan Medium Battle Armor (Laser)  "Volk" (Sqd5);BA;1;2;1;337
+9519;Cavalier II Battle Armor [SRM] (Sqd5);BA;1;3;1;339
+5617;Purifier Terra Battle Armor [AP Gauss] (Sqd4);BA;1;3;1;344
+9085;Buraq Fast Battle Armor (Sqd6);BA;1;2;1;345
+9383;Dragoon Battle Armor (Advanced) (Sqd5);BA;1;3;1;346
+9441;Callisto Battle Armor A [ER Laser] (Sqd5);BA;1;2;1;347
+6366;Oni Battle Armor [PPC] (Sqd4);BA;1;3;1;347
+8960;Undine Battle Armor (Sqd6);BA;1;2;1;352
+4123;Elemental II Battle Armor (Sqd4);BA;1;2;1;354
+951;Elemental Battle Armor (Fire) [MicroPL] (Sqd4);BA;1;2;1;355
+962;Elemental Battle Armor [MicroPL] (Sqd4);BA;1;2;1;356
+8018;Cavalier II Battle Armor [MRR] (Sqd4);BA;1;3;1;357
+8835;Elemental III Battle Armor [Flamer] (Sqd5);BA;1;2;1;357
+8822;Surat (Gray Death) Solahma Suit (Sqd5);BA;1;3;1;357
+8740;Oni Battle Armor [Bearhunter] (Sqd5);BA;1;3;1;359
+8610;Clan Medium Battle Armor (Naval) "Bär" (Sqd5);BA;1;2;1;362
+8492;Elemental Battle Armor (Space) [MicroPL] (Sqd5);BA;1;2;1;366
+5616;Purifier Terra Battle Armor [SPL] (Sqd4);BA;1;3;1;368
+8485;Clan Medium Battle Armor "Rache" (Sqd5);BA;1;2;1;372
+8584;Salamander Battle Armor (Sqd5);BA;1;2;1;372
+8854;Elemental Battle Armor (Space) [Flamer] (Sqd6);BA;1;2;1;374
+8855;Elemental Battle Armor (Space) [MG] (Sqd6);BA;1;2;1;374
+8029;Longinus C Battle Armor [MRR] (Sqd4);ba;1;3;1;376
+8968;Afreet Medium Battle Armor (Sqd6);BA;1;2;1;376
+9439;Callisto Battle Armor A [Bearhunter] (Sqd6);BA;1;2;1;380
+9357;TinStar Battle Armor (Original) (Sqd4);ba;1;3;1;382
+9446;Callisto Battle Armor B [MRR] (Sqd4);BA;1;2;1;383
+8784;Gray Death Strike Suit (HarJel) (Sqd5);BA;1;3;1;383
+8853;Elemental Battle Armor (Headhunter) (Sqd6);BA;1;2;1;386
+6365;Oni Battle Armor [MRR] (Sqd4);BA;1;3;1;387
+8726;Wraith Battle Armor (Anti-Infantry) (Sqd5);BA;1;2;1;391
+8725;Wraith Battle Armor (Sqd5);BA;1;2;1;392
+8582;Salamander Battle Armor (Anti-Infantry) (Sqd5);BA;1;2;1;394
+8583;Salamander Battle Armor (Laser) (Sqd5);BA;1;2;1;394
+9517;Cavalier II Battle Armor [PPC] (Sqd5);BA;1;3;1;395
+9514;Cavalier II Battle Armor [Flamer] (Sqd6);BA;1;3;1;396
+8456;Elemental III Battle Armor [AP Gauss] (Sqd4);BA;1;2;1;396
+8739;Oni Battle Armor [Narc] (Sqd5);BA;1;3;1;402
+8487;Elemental Battle Armor (Fire) [Flamer] (Sqd5);BA;1;2;1;403
+8495;Elemental Battle Armor [Flamer] (Sqd5);BA;1;2;1;404
+8498;Elemental Battle Armor [MG] (Sqd5);BA;1;2;1;404
+9449;Callisto Battle Armor B [SRM] (Sqd4);BA;1;2;1;404
+9445;Callisto Battle Armor A [HMG] (Sqd6);BA;1;2;1;408
+8496;Elemental Battle Armor [HMG] (Sqd5);BA;1;2;1;415
+8975;Clan Medium Battle Armor "Rabid" (Sqd6);BA;1;2;1;418
+9442;Callisto Battle Armor A [ER Laser] (Sqd6);BA;1;2;1;422
+5614;Purifier Terra Battle Armor [ERSL] (Sqd4);BA;1;3;1;424
+8494;Elemental Battle Armor [ERMicroL] (Sqd5);BA;1;2;1;426
+949;Elemental Battle Armor (Fire) [AP Gauss] (Sqd4);BA;1;2;1;428
+956;Elemental Battle Armor [AP Gauss] (Sqd4);BA;1;2;1;428
+8973;Clan Medium Battle Armor (Laser) "Volk" (Sqd6);BA;1;2;1;433
+8836;Elemental III Battle Armor [MicroPL] (Sqd5);BA;1;2;1;434
+9520;Cavalier II Battle Armor [SRM] (Sqd6);BA;1;3;1;436
+8603;Afreet Medium Battle Armor (Jade Falcon) (Sqd5);BA;1;2;1;439
+8711;Purifier Terra Battle Armor [MRR] (Sqd5);BA;1;3;1;441
+8625;Gray Death Strike Suit (Prototype) (Sqd5);BA;1;3;1;443
+8724;Buraq Fast Battle Armor (Support) (Sqd5);BA;1;2;1;444
+9384;Dragoon Battle Armor (Advanced) (Sqd6);BA;1;3;1;445
+8497;Elemental Battle Armor [Laser] (Sqd5);BA;1;2;1;447
+8597;Undine Battle Armor (Upgrade) (Sqd5);BA;1;2;1;452
+9198;Elemental III Battle Armor [Flamer] (Sqd6);BA;1;2;1;459
+9185;Surat (Gray Death) Solahma Suit (Sqd6);BA;1;3;1;459
+9103;Oni Battle Armor [Bearhunter] (Sqd6);BA;1;3;1;462
+8713;Purifier Terra Battle Armor [AP Gauss] (Sqd5);BA;1;3;1;463
+8974;Clan Medium Battle Armor (Naval) "Bär" (Sqd6);BA;1;2;1;465
+8738;Oni Battle Armor [PPC] (Sqd5);BA;1;3;1;467
+8856;Elemental Battle Armor (Space) [MicroPL] (Sqd6);BA;1;2;1;471
+8616;Elemental II Battle Armor (Sqd5);BA;1;2;1;477
+8849;Clan Medium Battle Armor "Rache" (Sqd6);BA;1;2;1;478
+8948;Salamander Battle Armor (Sqd6);BA;1;2;1;479
+8488;Elemental Battle Armor (Fire) [MicroPL] (Sqd5);BA;1;2;1;479
+8499;Elemental Battle Armor [MicroPL] (Sqd5);BA;1;2;1;480
+9515;Cavalier II Battle Armor [MRR] (Sqd5);BA;1;3;1;481
+9147;Gray Death Strike Suit (HarJel) (Sqd6);BA;1;3;1;493
+8712;Purifier Terra Battle Armor [SPL] (Sqd5);BA;1;3;1;495
+9089;Wraith Battle Armor (Anti-Infantry) (Sqd6);BA;1;2;1;502
+9088;Wraith Battle Armor (Sqd6);BA;1;2;1;503
+9213;Longinus C Battle Armor [MRR] (Sqd5);ba;1;3;1;506
+8946;Salamander Battle Armor (Anti-Infantry) (Sqd6);BA;1;2;1;506
+8947;Salamander Battle Armor (Laser) (Sqd6);BA;1;2;1;506
+9518;Cavalier II Battle Armor [PPC] (Sqd6);BA;1;3;1;507
+9447;Callisto Battle Armor B [MRR] (Sqd5);BA;1;2;1;510
+9358;TinStar Battle Armor (Original) (Sqd5);ba;1;3;1;515
+9102;Oni Battle Armor [Narc] (Sqd6);BA;1;3;1;517
+8851;Elemental Battle Armor (Fire) [Flamer] (Sqd6);BA;1;2;1;518
+8859;Elemental Battle Armor [Flamer] (Sqd6);BA;1;2;1;520
+8862;Elemental Battle Armor [MG] (Sqd6);BA;1;2;1;520
+8737;Oni Battle Armor [MRR] (Sqd5);BA;1;3;1;521
+8834;Elemental III Battle Armor [AP Gauss] (Sqd5);BA;1;2;1;532
+9450;Callisto Battle Armor B [SRM] (Sqd5);BA;1;2;1;533
+8860;Elemental Battle Armor [HMG] (Sqd6);BA;1;2;1;534
+8858;Elemental Battle Armor [ERMicroL] (Sqd6);BA;1;2;1;548
+9531;Longinus C Battle Armor [PPC] (Sqd6);ba;1;3;1;554
+9199;Elemental III Battle Armor [MicroPL] (Sqd6);BA;1;2;1;558
+8967;Afreet Medium Battle Armor (Jade Falcon) (Sqd6);BA;1;2;1;565
+9075;Purifier Terra Battle Armor [MRR] (Sqd6);BA;1;3;1;568
+8989;Gray Death Strike Suit (Prototype) (Sqd6);BA;1;3;1;569
+9087;Buraq Fast Battle Armor (Support) (Sqd6);BA;1;2;1;571
+8710;Purifier Terra Battle Armor [ERSL] (Sqd5);BA;1;3;1;571
+8861;Elemental Battle Armor [Laser] (Sqd6);BA;1;2;1;575
+8486;Elemental Battle Armor (Fire) [AP Gauss] (Sqd5);BA;1;2;1;576
+8493;Elemental Battle Armor [AP Gauss] (Sqd5);BA;1;2;1;577
+8961;Undine Battle Armor (Upgrade) (Sqd6);BA;1;2;1;581
+9077;Purifier Terra Battle Armor [AP Gauss] (Sqd6);BA;1;3;1;595
+9101;Oni Battle Armor [PPC] (Sqd6);BA;1;3;1;601
+8980;Elemental II Battle Armor (Sqd6);BA;1;2;1;613
+8852;Elemental Battle Armor (Fire) [MicroPL] (Sqd6);BA;1;2;1;615
+8863;Elemental Battle Armor [MicroPL] (Sqd6);BA;1;2;1;617
+9516;Cavalier II Battle Armor [MRR] (Sqd6);BA;1;3;1;618
+9076;Purifier Terra Battle Armor [SPL] (Sqd6);BA;1;3;1;637
+9448;Callisto Battle Armor B [MRR] (Sqd6);BA;1;2;1;651
+9529;Longinus C Battle Armor [MRR] (Sqd6);ba;1;3;1;651
+9359;TinStar Battle Armor (Original) (Sqd6);ba;0;3;1;662
+9100;Oni Battle Armor [MRR] (Sqd6);BA;1;3;1;670
+9451;Callisto Battle Armor B [SRM] (Sqd6);BA;1;2;1;676
+9197;Elemental III Battle Armor [AP Gauss] (Sqd6);BA;1;2;1;684
+9074;Purifier Terra Battle Armor [ERSL] (Sqd6);BA;1;3;1;734
+8850;Elemental Battle Armor (Fire) [AP Gauss] (Sqd6);BA;1;2;1;740
+8857;Elemental Battle Armor [AP Gauss] (Sqd6);BA;1;2;1;742
+8383;Undine Battle Armor "Sebastian" (Sqd4);BA;1;2;1.5;229
+4124;Elemental II Battle Armor X (Sqd4);BA;1;2;1.5;230
+4932;Rogue Bear Heavy Battle Armor HR (Sqd4);BA;1;3;1.5;250
+3228;Thunderbird Battle Armor [AP Gauss] (Sqd4);BA;1;2;1.5;260
+4930;Rogue Bear Heavy Battle Armor (Hybrid) (Sqd4);BA;1;3;1.5;270
+3230;Thunderbird Battle Armor [Pulse Laser] (Sqd4);BA;1;2;1.5;272
+8385;Gnome Battle Armor "Dwarf" (Sqd4);BA;1;3;1.5;276
+6242;Black Wolf Battle Armor [Plasma] (Sqd4);BA;1;2;1.5;280
+6240;Black Wolf Battle Armor [Heavy Flamer] (Sqd4);BA;1;2;1.5;289
+6241;Black Wolf Battle Armor [Heavy Mortar] (Sqd4);BA;1;2;1.5;294
+9212;Gnome Battle Armor (Sqd3);BA;1;2;1.5;299
+3229;Thunderbird Battle Armor [ER Laser] (Sqd4);BA;1;2;1.5;300
+6243;Black Wolf Battle Armor [LB-X] (Sqd4);BA;1;2;1.5;303
+8617;Elemental II Battle Armor X (Sqd5);BA;1;2;1.5;310
+6737;Thunderbird Battle Armor (Upgrade) [LB-X] (Sqd4);BA;1;2;1.5;323
+8662;Rogue Bear Heavy Battle Armor HR (Sqd5);BA;1;3;1.5;336
+6738;Thunderbird Battle Armor (Upgrade) [Pulse Laser] (Sqd4);BA;1;2;1.5;339
+7357;Thunderbird II Battle Armor (Sqd4);BA;1;2;1.5;345
+4931;Rogue Bear Heavy Battle Armor (Sqd4);BA;1;2;1.5;346
+6239;Black Wolf Battle Armor [ERSPL] (Sqd4);BA;1;2;1.5;348
+8589;Thunderbird Battle Armor [AP Gauss] (Sqd5);BA;1;2;1.5;350
+1217;Gnome Battle Armor (Upgrade) [Bearhunter] (Sqd4);BA;1;2;1.5;354
+8660;Rogue Bear Heavy Battle Armor (Hybrid) (Sqd5);BA;1;3;1.5;363
+8591;Thunderbird Battle Armor [Pulse Laser] (Sqd5);BA;1;2;1.5;366
+6736;Thunderbird Battle Armor (Upgrade) [ER Laser] (Sqd4);BA;1;2;1.5;367
+7391;Grenadier II Battle Armor B (Sqd4);BA;1;3;1.5;370
+4005;Corona Heavy Battle Armor (SRM) (Sqd4);BA;1;2;1.5;373
+7389;Grenadier II Battle Armor A (Sqd4);BA;1;3;1.5;377
+8730;Black Wolf Battle Armor [Plasma] (Sqd5);BA;1;2;1.5;377
+8728;Black Wolf Battle Armor [Heavy Flamer] (Sqd5);BA;1;2;1.5;389
+1218;Gnome Battle Armor (Upgrade) [MRR] (Sqd4);BA;1;2;1.5;391
+8729;Black Wolf Battle Armor [Heavy Mortar] (Sqd5);BA;1;2;1.5;396
+6734;Rogue Bear Heavy Battle Armor (Upgrade) (Sqd4);BA;1;2;1.5;396
+8981;Elemental II Battle Armor X (Sqd6);BA;1;2;1.5;399
+8590;Thunderbird Battle Armor [ER Laser] (Sqd5);BA;1;2;1.5;404
+8731;Black Wolf Battle Armor [LB-X] (Sqd5);BA;1;2;1.5;407
+1219;Gnome Battle Armor (Upgrade) [Pulse Laser] (Sqd4);BA;1;2;1.5;408
+1216;Gnome Battle Armor (Sqd4);BA;1;2;1.5;431
+9026;Rogue Bear Heavy Battle Armor HR (Sqd6);BA;1;3;1.5;432
+8792;Thunderbird Battle Armor (Upgrade) [LB-X] (Sqd5);BA;1;2;1.5;435
+9414;Stormbird Battle Armor (Jade Falcon) (Sqd4);ba;1;2;1.5;436
+8953;Thunderbird Battle Armor [AP Gauss] (Sqd6);BA;1;2;1.5;450
+1215;Gnome Battle Armor (LRM) (Sqd4);BA;1;2;1.5;454
+8793;Thunderbird Battle Armor (Upgrade) [Pulse Laser] (Sqd5);BA;1;2;1.5;457
+8823;Thunderbird II Battle Armor (Sqd5);BA;1;2;1.5;464
+8661;Rogue Bear Heavy Battle Armor (Sqd5);BA;1;2;1.5;466
+9024;Rogue Bear Heavy Battle Armor (Hybrid) (Sqd6);BA;1;3;1.5;467
+8727;Black Wolf Battle Armor [ERSPL] (Sqd5);BA;1;2;1.5;468
+9412;Stormbird Battle Armor (Sqd4);BA;1;2;1.5;470
+8955;Thunderbird Battle Armor [Pulse Laser] (Sqd6);BA;1;2;1.5;471
+9200;Rhino Battle Armor (Sqd4);BA;1;2;1.5;473
+8519;Gnome Battle Armor (Upgrade) [Bearhunter] (Sqd5);BA;1;2;1.5;476
+9093;Black Wolf Battle Armor [Plasma] (Sqd6);BA;1;2;1.5;485
+4006;Corona Heavy Battle Armor (Sqd4);BA;1;2;1.5;495
+8791;Thunderbird Battle Armor (Upgrade) [ER Laser] (Sqd5);BA;1;2;1.5;495
+8831;Grenadier II Battle Armor B (Sqd5);BA;1;3;1.5;499
+9091;Black Wolf Battle Armor [Heavy Flamer] (Sqd6);BA;1;2;1.5;500
+8612;Corona Heavy Battle Armor (SRM) (Sqd5);BA;1;2;1.5;502
+8830;Grenadier II Battle Armor A (Sqd5);BA;1;3;1.5;508
+9092;Black Wolf Battle Armor [Heavy Mortar] (Sqd6);BA;1;2;1.5;509
+8954;Thunderbird Battle Armor [ER Laser] (Sqd6);BA;1;2;1.5;519
+9094;Black Wolf Battle Armor [LB-X] (Sqd6);BA;1;2;1.5;524
+8520;Gnome Battle Armor (Upgrade) [MRR] (Sqd5);BA;1;2;1.5;526
+8789;Rogue Bear Heavy Battle Armor (Upgrade) (Sqd5);BA;1;2;1.5;533
+8521;Gnome Battle Armor (Upgrade) [Pulse Laser] (Sqd5);BA;1;2;1.5;549
+9155;Thunderbird Battle Armor (Upgrade) [LB-X] (Sqd6);BA;1;2;1.5;560
+4912;Rhino Battle Armor (Sqd5);BA;1;2;1.5;568
+8518;Gnome Battle Armor (Sqd5);BA;1;2;1.5;580
+9415;Stormbird Battle Armor (Jade Falcon) (Sqd5);BA;1;2;1.5;587
+9156;Thunderbird Battle Armor (Upgrade) [Pulse Laser] (Sqd6);BA;1;2;1.5;588
+9186;Thunderbird II Battle Armor (Sqd6);BA;1;2;1.5;596
+9025;Rogue Bear Heavy Battle Armor (Sqd6);BA;1;2;1.5;599
+9090;Black Wolf Battle Armor [ERSPL] (Sqd6);BA;1;2;1.5;602
+8517;Gnome Battle Armor (LRM) (Sqd5);BA;1;2;1.5;611
+8883;Gnome Battle Armor (Upgrade) [Bearhunter] (Sqd6);BA;1;2;1.5;612
+6587;Cuchulainn Support Armor (Sqd4);BA;1;2;1.5;621
+9411;Stormbird Battle Armor (Sqd5);ba;1;2;1.5;633
+9154;Thunderbird Battle Armor (Upgrade) [ER Laser] (Sqd6);BA;1;2;1.5;636
+9194;Grenadier II Battle Armor B (Sqd6);BA;1;3;1.5;641
+8976;Corona Heavy Battle Armor (SRM) (Sqd6);BA;1;2;1.5;646
+9193;Grenadier II Battle Armor A (Sqd6);BA;1;3;1.5;653
+8613;Corona Heavy Battle Armor (Sqd5);BA;1;2;1.5;667
+8884;Gnome Battle Armor (Upgrade) [MRR] (Sqd6);BA;1;2;1.5;676
+9152;Rogue Bear Heavy Battle Armor (Upgrade) (Sqd6);BA;1;2;1.5;685
+8885;Gnome Battle Armor (Upgrade) [Pulse Laser] (Sqd6);BA;1;2;1.5;706
+9201;Rhino Battle Armor (Sqd6);BA;1;2;1.5;731
+8882;Gnome Battle Armor (Sqd6);BA;1;2;1.5;747
+9416;Stormbird Battle Armor (Jade Falcon) (Sqd6);ba;1;2;1.5;754
+8881;Gnome Battle Armor (LRM) (Sqd6);BA;1;2;1.5;785
+9413;Stormbird Battle Armor (Sqd6);ba;1;2;1.5;813
+8768;Cuchulainn Support Armor (Sqd5);BA;1;2;1.5;836
+8977;Corona Heavy Battle Armor (Sqd6);BA;1;2;1.5;857
+9131;Cuchulainn Support Armor (Sqd6);BA;1;2;1.5;1075
+6593;Fenrir II Assault Battle Armor [AI] (Sqd4);BA;1;3;2;344
+4222;Golem Assault Armor (Fast Assault) (Sqd4);BA;1;2;2;367
+1623;Ironhold Assault Battle Armor (Sqd4);BA;1;2;2;398
+6742;Ironhold Assault Battle Armor (Anti-Tank) (Sqd4);BA;1;2;2;447
+8773;Fenrir II Assault Battle Armor [AI] (Sqd5);BA;1;3;2;462
+6592;Fenrir II Assault Battle Armor [SRM] (Sqd4);BA;1;3;2;467
+1419;Hauberk Battle Armor U15 (Sqd4);BA;1;3;2;483
+3478;Warg Assault Battle Armor (Sqd4);BA;1;2;2;486
+8621;Golem Assault Armor (Fast Assault) (Sqd5);BA;1;2;2;494
+8539;Ironhold Assault Battle Armor (Sqd5);BA;1;2;2;536
+4223;Golem Assault Armor (Rock Golem) (Sqd4);BA;1;2;2;545
+1622;Ironhold Assault Battle Armor (Fire) (Sqd4);BA;1;2;2;562
+6748;Warg Assault Battle Armor (Reactive) (Sqd4);BA;1;2;2;563
+9136;Fenrir II Assault Battle Armor [AI] (Sqd6);BA;1;3;2;592
+8797;Ironhold Assault Battle Armor (Anti-Tank) (Sqd5);BA;1;2;2;601
+7359;Tortoise II Battle Armor [C3] (Sqd4);BA;1;3;2;619
+8772;Fenrir II Assault Battle Armor [SRM] (Sqd5);BA;1;3;2;628
+1739;Kanazuchi Assault Battle Armor "Cyclops" (Sqd4);BA;1;3;2;630
+8985;Golem Assault Armor (Fast Assault) (Sqd6);BA;1;2;2;635
+4224;Golem Assault Armor (Sqd4);BA;1;2;2;650
+8531;Hauberk Battle Armor U15 (Sqd5);BA;1;3;2;650
+8599;Warg Assault Battle Armor (Sqd5);BA;1;2;2;655
+1228;Golem Assault Armor (Support) (Sqd4);BA;1;2;2;685
+8903;Ironhold Assault Battle Armor (Sqd6);BA;1;2;2;689
+8622;Golem Assault Armor (Rock Golem) (Sqd5);BA;1;2;2;734
+7362;Tortoise II Battle Armor [aSRM] (Sqd4);BA;1;3;2;742
+7360;Tortoise II Battle Armor [LRM] (Sqd4);BA;1;3;2;745
+8538;Ironhold Assault Battle Armor (Fire) (Sqd5);BA;1;2;2;756
+8802;Warg Assault Battle Armor (Reactive) (Sqd5);BA;1;2;2;756
+9160;Ironhold Assault Battle Armor (Anti-Tank) (Sqd6);BA;1;2;2;773
+7361;Tortoise II Battle Armor [SRM] (Sqd4);BA;1;3;2;788
+9135;Fenrir II Assault Battle Armor [SRM] (Sqd6);BA;1;3;2;808
+8824;Tortoise II Battle Armor [C3] (Sqd5);BA;1;3;2;833
+8895;Hauberk Battle Armor U15 (Sqd6);BA;1;3;2;835
+8963;Warg Assault Battle Armor (Sqd6);BA;1;2;2;842
+8555;Kanazuchi Assault Battle Armor "Cyclops" (Sqd5);BA;1;3;2;848
+8623;Golem Assault Armor (Sqd5);BA;1;2;2;875
+8522;Golem Assault Armor (Support) (Sqd5);BA;1;2;2;922
+8986;Golem Assault Armor (Rock Golem) (Sqd6);BA;1;2;2;944
+8902;Ironhold Assault Battle Armor (Fire) (Sqd6);BA;1;2;2;973
+9165;Warg Assault Battle Armor (Reactive) (Sqd6);BA;1;2;2;975
+8827;Tortoise II Battle Armor [aSRM] (Sqd5);BA;1;3;2;998
+8825;Tortoise II Battle Armor [LRM] (Sqd5);BA;1;3;2;1003
+8826;Tortoise II Battle Armor [SRM] (Sqd5);BA;1;3;2;1061
+9187;Tortoise II Battle Armor [C3] (Sqd6);BA;1;3;2;1071
+8919;Kanazuchi Assault Battle Armor "Cyclops" (Sqd6);BA;1;3;2;1090
+8987;Golem Assault Armor (Sqd6);BA;1;2;2;1125
+8886;Golem Assault Armor (Support) (Sqd6);BA;1;2;2;1185
+9190;Tortoise II Battle Armor [aSRM] (Sqd6);BA;1;3;2;1284
+9188;Tortoise II Battle Armor [LRM] (Sqd6);BA;1;3;2;1289
+9189;Tortoise II Battle Armor [SRM] (Sqd6);BA;1;3;2;1364
+5136;Stinger IIC 2;BM;1;2;20;0
+134;Asshur Fast Reconnaissance Vehicle (Proto AC);CV;1;2;20;333
+2316;Odin Scout Tank (Spotter);CV;1;2;20;338
+9360;Skulker Wheeled Scout Tank C;CV;1;3;20;445
+7739;Butcherbird (Ion Sparrow) A;BM;1;2;20;501
+7568;Baboon (Howler) 4;BM;1;2;20;506
+7570;Baboon (Howler) 6;BM;1;2;20;550
+2185;Minion Advanced Tactical Vehicle "Silver Bullet";CV;1;3;20;560
+8127;Stinger C;bm;1;2;20;592
+2980;Snow Fox 2;BM;1;2;20;604
+7740;Butcherbird (Ion Sparrow) B;BM;1;2;20;626
+838;Dasher (Fire Moth) A;BM;1;2;20;639
+189;Baboon (Howler);BM;1;2;20;645
+9335;Kamisori Light Tank R;cv;1;3;20;669
+7601;Locust C;BM;1;3;20;672
+6244;Nacon Armored Scout;CV;1;2;20;690
+2317;Odin Scout Tank;CV;1;2;20;691
+257;Bashkir B;AF;1;2;20;697
+8200;Locust LCT-7S;BM;1;3;20;706
+5135;Stinger IIC;BM;1;2;20;730
+840;Dasher (Fire Moth) C;BM;1;2;20;741
+8128;Stinger C 2;bm;1;2;20;754
+7496;Wasp C;BM;1;3;20;755
+190;Baboon (Howler) 2;BM;1;2;20;757
+256;Bashkir A;AF;1;2;20;763
+844;Dasher (Fire Moth) H;BM;1;2;20;779
+2979;Snow Fox;BM;1;2;20;807
+842;Dasher (Fire Moth) E;BM;1;2;20;822
+7879;Snow Fox (Omni) A;BM;1;2;20;831
+7581;Dasher (Fire Moth) P;BM;1;2;20;841
+2536;Piranha 2;BM;1;2;20;853
+3795;Bashkir E;AF;1;2;20;877
+845;Dasher (Fire Moth) K;BM;1;2;20;884
+7738;Butcherbird (Ion Sparrow) Prime;BM;1;2;20;885
+7741;Butcherbird (Ion Sparrow) C;BM;1;2;20;889
+2981;Snow Fox 3;BM;1;2;20;903
+133;Asshur Artillery Spotter;CV;1;2;20;930
+135;Asshur Fast Reconnaissance Vehicle;CV;1;2;20;952
+2535;Piranha;BM;1;2;20;998
+259;Bashkir D;AF;1;2;20;1009
+2534;Piranha 4;BM;1;2;20;1063
+839;Dasher (Fire Moth) B;BM;1;2;20;1064
+258;Bashkir C;AF;1;2;20;1069
+260;Bashkir Prime;AF;1;2;20;1108
+7742;Butcherbird (Ion Sparrow) D;BM;1;2;20;1121
+8122;Piranha 5;BM;1;2;20;1132
+7579;Dasher (Fire Moth) J;BM;1;2;20;1140
+2537;Piranha 3;BM;1;2;20;1142
+5833;Bashkir Z;AF;1;2;20;1151
+7582;Dasher (Fire Moth) R;BM;1;3;20;1160
+7580;Dasher (Fire Moth) M;BM;1;2;20;1200
+7880;Snow Fox (Omni) B;BM;1;2;20;1249
+846;Dasher (Fire Moth) Prime;BM;1;2;20;1251
+7578;Dasher (Fire Moth) I;BM;1;2;20;1260
+191;Baboon (Howler) 3 "Devil";BM;1;2;20;1277
+7577;Dasher (Fire Moth) T;BM;1;2;20;1305
+7569;Baboon (Howler) 5;BM;1;2;20;1363
+837;Dasher (Fire Moth) (Aletha);BM;1;2;20;1388
+843;Dasher (Fire Moth) F;BM;1;2;20;1461
+7878;Snow Fox (Omni) Prime;BM;1;2;20;1464
+8014;Seydlitz C;af;1;3;20;1691
+6946;Dasher (Fire Moth) G;BM;1;2;20;2041
+841;Dasher (Fire Moth) D;BM;1;2;20;2307
+904;Donar Assault Helicopter (Close Support);CV;1;2;21;582
+905;Donar Assault Helicopter (Recon);CV;1;2;21;808
+906;Donar Assault Helicopter;CV;1;2;21;915
+1764;Kestrel VTOL (Clan);CV;1;2;25;166
+6245;Anat APC;CV;1;2;25;308
+9560;Scorpion Light Tank C;CV;1;2;25;354
+8013;Medium Strike Fighter Defender II C;cf;1;2;25;376
+3140;Swift C;AF;1;2;25;562
+9473;J. Edgar Light Hover Tank (Chemical);CV;1;3;25;570
+1827;Koshi (Mist Lynx) A;BM;1;2;25;608
+6538;Gossamer VTOL (XL);CV;1;2;25;663
+2193;Mithras Light Tank;CV;1;2;25;670
+7557;Koshi (Mist Lynx) I;BM;1;2;25;689
+1602;Icestorm;BM;1;2;25;728
+2192;Mithras Light Tank (ERLL);CV;1;2;25;750
+6547;Koshi (Standard);BM;1;2;25;760
+1919;Locust IIC 6;BM;1;2;25;776
+6549;Koshi (Standard) 3;BM;1;2;25;777
+5638;Cephalus B;BM;1;3;25;785
+1917;Locust IIC 4;BM;1;2;25;795
+6750;Balac Strike VTOL (Hybrid);CV;1;2;25;797
+3929;Cephalus A;BM;1;3;25;809
+1063;Fire Falcon A;BM;1;2;25;822
+1066;Fire Falcon D;BM;1;2;25;826
+1833;Koshi (Mist Lynx) G;BM;1;2;25;834
+6488;Red Kite Attack VTOL;CV;1;3;25;835
+3634;Zephyros Infantry Support Vehicle;CV;1;2;25;840
+1830;Koshi (Mist Lynx) D;BM;1;2;25;842
+3633;Zephyros Infantry Support Vehicle (Dual Turret);CV;1;2;25;844
+8183;Fire Falcon R;BM;1;3;25;846
+1603;Icestorm 2;BM;1;2;25;868
+1836;Koshi (Mist Lynx) Prime;BM;1;2;25;871
+1918;Locust IIC 5;BM;1;2;25;878
+5642;Cephalus U;BM;1;3;25;878
+7560;Koshi (Mist Lynx) L;BM;1;2;25;901
+61;Arbalest 3;BM;1;2;25;921
+209;Balac Strike VTOL (Spotter);CV;1;2;25;934
+1915;Locust IIC 2;BM;1;2;25;937
+6548;Koshi (Standard) 2;BM;1;2;25;948
+7561;Koshi (Mist Lynx) M;BM;1;2;25;961
+5643;Koshi (Mist Lynx) Z;BM;1;2;25;970
+7556;Koshi (Mist Lynx) T;BM;1;2;25;971
+7559;Koshi (Mist Lynx) K;BM;1;2;25;976
+7562;Koshi (Mist Lynx) N;BM;1;2;25;976
+678;Commando IIC;BM;1;2;25;978
+1916;Locust IIC 3;BM;1;2;25;980
+1920;Locust IIC 7;BM;1;2;25;980
+1834;Koshi (Mist Lynx) H;BM;1;2;25;982
+7687;Sabre SB-27b-EC;;0;3;25;987
+5744;Chaeronea 4;AF;1;2;25;988
+315;Bear Cub 2;BM;1;2;25;988
+1831;Koshi (Mist Lynx) E;BM;1;2;25;997
+1065;Fire Falcon C;BM;1;2;25;1004
+723;Crimson Hawk 3;BM;1;2;25;1029
+62;Arbalest;BM;1;2;25;1029
+3930;Cephalus Prime;BM;1;3;25;1038
+314;Bear Cub;BM;1;2;25;1052
+1835;Koshi (Mist Lynx) P;BM;1;2;25;1064
+316;Bear Cub 3;BM;1;2;25;1086
+6537;Gossamer VTOL;CV;1;2;25;1091
+1067;Fire Falcon E;BM;1;2;25;1094
+60;Arbalest 2;BM;1;2;25;1098
+1914;Locust IIC;BM;1;2;25;1100
+677;Commando COM-7S2 (Freyr);BM;1;3;25;1105
+1921;Locust IIC 8;BM;1;2;25;1119
+1922;Locust IIC 9;BM;1;3;25;1133
+1068;Fire Falcon F;BM;1;2;25;1135
+1069;Fire Falcon H;BM;1;2;25;1162
+1832;Koshi (Mist Lynx) F;BM;1;2;25;1173
+1828;Koshi (Mist Lynx) B;BM;1;2;25;1209
+5639;Cephalus C;BM;1;3;25;1209
+3935;Chaeronea;AF;1;2;25;1233
+8413;Star Python;BM;1;2;25;1234
+8203;Locust IIC 10;BM;1;2;25;1248
+8180;Fire Falcon G;BM;1;2;25;1269
+722;Crimson Hawk 2;BM;1;2;25;1271
+210;Balac Strike VTOL;CV;1;2;25;1271
+208;Balac Strike VTOL (LRM);CV;1;2;25;1278
+5641;Cephalus E;BM;1;3;25;1284
+5097;Solitaire;BM;1;2;25;1284
+721;Crimson Hawk;BM;1;2;25;1285
+1829;Koshi (Mist Lynx) C;BM;1;2;25;1320
+8011;Cheetah IIC;af;1;2;25;1339
+6944;Crimson Hawk 4;BM;1;2;25;1372
+3936;Chaeronea 2;AF;1;2;25;1384
+7603;Mongoose C;BM;1;2;25;1386
+2655;Raptor RTX1-OR;BM;1;3;25;1393
+5640;Cephalus D;BM;1;3;25;1450
+3937;Chaeronea 3;AF;1;2;25;1450
+1070;Fire Falcon Prime;BM;1;2;25;1451
+5655;Solitaire 2;BM;1;2;25;1471
+8367;Gunsmith CH11-NGC "Cinderella";BM;1;3;25;1519
+1064;Fire Falcon B;BM;1;2;25;1570
+2794;Sangihe Shrike-Thrush "Nanook";AF;1;3;25;1592
+7604;Mongoose C 2;BM;1;2;25;1620
+8179;Fire Falcon T;BM;1;2;25;1661
+8182;Fire Falcon L;BM;1;2;25;1665
+8181;Fire Falcon I;BM;1;2;25;1678
+7558;Koshi (Mist Lynx) J;BM;1;2;25;1704
+3774;Badger Tracked Transport "Booze Cruiser";;0;2;30;0
+4001;Corax C 2;;0;2;30;0
+4781;Pack Hunter (Zane);;0;2;30;0
+5547;Uller (Kit Fox) (Rood);;0;2;30;0
+5336;Vandal E;AF;1;2;30;418
+197;Badger (C) Tracked Transport F;CV;1;2;30;441
+196;Badger (C) Tracked Transport E;CV;1;2;30;474
+192;Badger (C) Tracked Transport A;CV;1;2;30;492
+195;Badger (C) Tracked Transport D;CV;1;2;30;506
+198;Badger (C) Tracked Transport H;CV;1;2;30;516
+3386;Vandal Prime;AF;1;2;30;525
+194;Badger (C) Tracked Transport C;CV;1;2;30;537
+193;Badger (C) Tracked Transport B;CV;1;2;30;540
+4315;Hephaestus Scout Tank C;CV;1;2;30;577
+199;Badger (C) Tracked Transport Prime;CV;1;2;30;602
+9341;Galleon Light Tank C;CV;1;2;30;633
+34;Anhur Transport (BA);CV;1;2;30;637
+6541;Kite Reconnaissance Vehicle;CV;1;3;30;671
+7298;Strix Stealth VTOL;CV;1;3;30;688
+8104;Valkyrie VLK-QD5;BM;1;3;30;690
+7653;Issedone C;;0;3;30;704
+35;Anhur Transport;CV;1;2;30;720
+7654;Issedone D;;0;2;30;753
+4313;Hephaestus Scout Tank A;CV;1;2;30;768
+4316;Hephaestus Scout Tank Prime;CV;1;2;30;777
+9461;Javelin JVN-12N;BM;1;3;30;795
+3361;UrbanMech IIC;BM;1;2;30;798
+3382;Vandal A;AF;1;2;30;837
+5726;Hephaestus Scout Tank D;CV;1;2;30;850
+3362;UrbanMech IIC 2;BM;1;2;30;855
+6260;Wulfen D;BM;1;3;30;859
+3383;Vandal B;AF;1;2;30;878
+6246;Skadi Swift Attack VTOL;CV;1;2;30;923
+7701;Valkyrie C;BM;1;3;30;936
+8052;Kite Reconnaissance Vehicle (Fusion);cv;1;2;30;943
+4314;Hephaestus Scout Tank B;CV;1;2;30;957
+7746;Uller (Kit Fox) V;BM;1;2;30;974
+6256;Wulfen Prime;BM;1;3;30;983
+7632;Uller (Kit Fox) BLO;BM;1;3;30;988
+3385;Vandal D;AF;1;2;30;1010
+9635;Jackalope JLP-BD-L "Harvey";bm;1;3;30;1028
+7650;Issedone Prime;;0;2;30;1033
+33;Anhur (P-Stealth);CV;1;3;30;1035
+1379;Hankyu (Arctic Cheetah) B;BM;1;2;30;1076
+1381;Hankyu (Arctic Cheetah) D;BM;1;2;30;1080
+1382;Hankyu (Arctic Cheetah) E;BM;1;2;30;1084
+7651;Issedone A;;0;2;30;1084
+3347;Uller (Kit Fox) Prime;BM;1;2;30;1085
+3341;Uller (Kit Fox) B;BM;1;2;30;1087
+7652;Issedone B;;0;2;30;1095
+7745;Uller (Kit Fox) K;BM;1;2;30;1109
+1378;Hankyu (Arctic Cheetah) A;BM;1;2;30;1117
+9420;Onuris Attack VTOL C;cv;1;2;30;1131
+3343;Uller (Kit Fox) D;BM;1;2;30;1142
+3342;Uller (Kit Fox) C;BM;1;2;30;1147
+7541;Vixen (Incubus) 7;BM;1;2;30;1175
+7744;Uller (Kit Fox) J;BM;1;2;30;1178
+8351;Hankyu (Arctic Cheetah) J;BM;1;2;30;1179
+9637;Jackalope JLP-NH "Tepoztēcatl";bm;1;3;30;1208
+2011;Mandrill;BM;1;2;30;1209
+3346;Uller (Kit Fox) H;BM;1;2;30;1214
+3345;Uller (Kit Fox) F;BM;1;2;30;1219
+6931;Uller (Kit Fox) R;BM;1;2;30;1232
+4000;Corax C;AF;1;2;30;1233
+6711;Jackalope JLP-C;BM;1;3;30;1253
+2395;Pack Hunter 4;BM;1;2;30;1257
+9634;Jackalope JLP-KB;bm;1;3;30;1259
+4363;Incubus II;BM;1;2;30;1261
+1383;Hankyu (Arctic Cheetah) H;BM;1;2;30;1264
+5540;Pack Hunter II (Isis);BM;1;2;30;1276
+1082;Firefly C;BM;1;2;30;1290
+1029;Falcon FLC-6C;BM;1;2;30;1290
+5658;Hellion E;BM;1;2;30;1292
+8350;Hankyu (Arctic Cheetah) I;BM;1;2;30;1299
+3340;Uller (Kit Fox) A;BM;1;2;30;1310
+3384;Vandal C;AF;1;2;30;1312
+3443;Vixen (Incubus) 3;BM;1;2;30;1324
+1384;Hankyu (Arctic Cheetah) Prime;BM;1;2;30;1334
+6713;Jackalope JLP-KW "Wolpertinger";BM;1;3;30;1334
+6259;Wulfen C;BM;1;3;30;1334
+9636;Jackalope JLP-IC;bm;1;2;30;1337
+3348;Uller (Kit Fox) S;BM;1;2;30;1342
+9421;Onuris Attack VTOL D;cv;1;2;30;1349
+3445;Vixen (Incubus) 5;BM;1;2;30;1364
+5486;Uller (Kit Fox) G;BM;1;2;30;1368
+2392;Pack Hunter;BM;1;2;30;1369
+6940;Hankyu (Arctic Cheetah) F;BM;1;2;30;1394
+6672;Jackalope JLP-BD;BM;1;2;30;1395
+7743;Uller (Kit Fox) T;BM;1;2;30;1397
+3344;Uller (Kit Fox) E;BM;1;2;30;1415
+8349;Hankyu (Arctic Cheetah) T;BM;1;2;30;1429
+3350;Uller (Kit Fox) W;BM;1;2;30;1431
+2398;Pack Hunter II 3;BM;1;2;30;1438
+6935;Pack Hunter II 4;BM;1;2;30;1447
+2397;Pack Hunter II 2;BM;1;2;30;1457
+3349;Uller (Kit Fox) U;BM;1;2;30;1486
+6712;Jackalope JLP-KA;BM;1;2;30;1488
+7605;Drift Shag;BM;1;2;30;1512
+4303;Hellion A;BM;1;2;30;1543
+9417;Onuris Attack VTOL Prime;cv;1;2;30;1551
+6262;Wulfen H;BM;1;3;30;1556
+7543;Vixen (Incubus) 8;BM;1;2;30;1557
+4304;Hellion B;BM;1;2;30;1569
+3444;Vixen (Incubus) 4;BM;1;2;30;1581
+5659;Hellion F;BM;1;2;30;1594
+3441;Vixen (Incubus);BM;1;2;30;1596
+2393;Pack Hunter 2;BM;1;2;30;1598
+8008;Vixen (Incubus) 6;BM;1;2;30;1599
+6939;Hellion G;BM;1;3;30;1614
+6257;Wulfen A;BM;1;3;30;1615
+9418;Onuris Attack VTOL A;CV;1;2;30;1624
+8326;Hellion T;BM;1;2;30;1637
+4882;Pwwka S-PW-1LAM;BM;1;3;30;1638
+7440;Pack Hunter 5;BM;1;3;30;1644
+5746;Corax CRX-OR;AF;1;3;30;1667
+9422;Onuris Attack VTOL E;cv;1;2;30;1676
+8327;Hellion P;BM;1;2;30;1685
+7571;Devil;BM;1;2;30;1691
+9419;Onuris Attack VTOL B;CV;1;2;30;1744
+2394;Pack Hunter 3;BM;1;2;30;1747
+5657;Hellion D;BM;1;2;30;1761
+2396;Pack Hunter II;BM;1;2;30;1794
+6258;Wulfen B;BM;1;3;30;1806
+6261;Wulfen E;BM;1;3;30;1839
+1380;Hankyu (Arctic Cheetah) C;BM;1;2;30;1840
+7544;Vixen (Incubus) 9;BM;1;3;30;1849
+4306;Hellion Prime;BM;1;2;30;1873
+3442;Vixen (Incubus) 2;BM;1;2;30;1913
+6932;Uller (Kit Fox) I;BM;1;2;30;1936
+4305;Hellion C;BM;1;2;30;2095
+4310;Hephaestus Jump Tank (Anti-Infantry);;0;2;35;0
+5844;Ostscout IIC;BM;1;3;35;520
+3654;Zorya Light Tank;CV;1;2;35;562
+3652;Zorya Light Tank (Ammo);CV;1;2;35;575
+3653;Zorya Light Tank (ATM);CV;1;2;35;693
+3139;Svantovit Infantry Fighting Vehicle;CV;1;2;35;698
+1612;Indra Infantry Transport (BA);CV;1;2;35;728
+1700;Jenner IIC 3;BM;1;2;35;788
+6252;Arion;BM;1;2;35;849
+3138;Svantovit Infantry Fighting Vehicle (Original);CV;1;2;35;889
+1613;Indra Infantry Transport;CV;1;2;35;897
+7881;Cazador;BM;1;2;35;921
+9562;Hunter Light Support Tank (Cell);CV;1;3;35;939
+3137;Svantovit Infantry Fighting Vehicle (ATM) "Masada";CV;1;2;35;988
+6923;Panther PNT-12KC;BM;1;3;35;1036
+7676;Night Hawk NTK-2Q-EC;BM;1;3;35;1041
+4311;Hephaestus Jump Tank;CV;1;2;35;1044
+1698;Jenner IIC;BM;1;2;35;1047
+1701;Jenner IIC 4;BM;1;2;35;1052
+6247;Skanda Light Tank;CV;1;2;35;1078
+2473;Peregrine (Horned Owl) 2;BM;1;2;35;1191
+2475;Peregrine (Horned Owl) 4;BM;1;2;35;1198
+7452;Ostscout OTT-12R;BM;1;3;35;1209
+2391;Owens OW-1R;BM;1;3;35;1215
+2597;Puma (Adder) J;BM;1;2;35;1222
+7589;Puma (Adder) TC;BM;1;2;35;1247
+2594;Puma (Adder) D;BM;1;2;35;1255
+2595;Puma (Adder) E;BM;1;2;35;1272
+7481;Puma (Adder) K;BM;1;2;35;1281
+8222;Panther PNT-14R;BM;1;3;35;1291
+2428;Parash;BM;1;2;35;1300
+707;Cougar D;BM;1;2;35;1309
+711;Cougar H;BM;1;2;35;1323
+6952;Cougar-X 2;BM;1;3;35;1335
+7677;Talon TLN-5W-EC;BM;1;3;35;1364
+2593;Puma (Adder) C;BM;1;2;35;1372
+2230;Morrigan 3;BM;1;3;35;1390
+6455;Yinghuochong YHC-3E;BM;1;3;35;1401
+709;Cougar F;BM;1;2;35;1401
+6263;Eyrie;BM;1;2;35;1401
+1699;Jenner IIC 2;BM;1;2;35;1406
+6953;Cougar-X 3;BM;1;3;35;1410
+2592;Puma (Adder) B;BM;1;2;35;1422
+7483;Puma (Adder) S;BM;1;2;35;1427
+2472;Peregrine (Horned Owl);BM;1;2;35;1434
+2591;Puma (Adder) A;BM;1;2;35;1437
+8058;Skanda Light Tank (TSEMP);cv;1;3;35;1437
+3762;Avar E;AF;1;2;35;1438
+2313;Ocelot;BM;1;2;35;1439
+8248;Jenner IIC 5;BM;1;2;35;1440
+708;Cougar E;BM;1;2;35;1442
+710;Cougar G;BM;1;2;35;1453
+2596;Puma (Adder) H;BM;1;2;35;1453
+6925;Ocelot 4;BM;1;2;35;1468
+7748;Peregrine (Horned Owl) 6;BM;1;2;35;1475
+9375;Spector SPR-6F;BM;1;3;35;1476
+712;Cougar Prime;BM;1;2;35;1485
+6951;Cougar-X;BM;1;3;35;1516
+2476;Peregrine (Horned Owl) 5;BM;1;2;35;1523
+2427;Parash 2;BM;1;2;35;1523
+2231;Morrigan;BM;1;2;35;1523
+2474;Peregrine (Horned Owl) 3;BM;1;2;35;1545
+7479;Puma (Adder) I;BM;1;2;35;1575
+5600;Wight WGT-4NC "Dezgra";BM;1;3;35;1578
+3570;Wolfhound IIC "Grinner";BM;1;2;35;1579
+2315;Ocelot 3;BM;1;2;35;1594
+9374;Firestarter FS9-N "Mirage II";BM;1;3;35;1660
+5108;Spirit;BM;1;2;35;1673
+9252;Tiburon 2;BM;1;2;35;1691
+704;Cougar A;BM;1;2;35;1697
+7749;Peregrine (Horned Owl) 7;BM;1;2;35;1725
+2314;Ocelot 2;BM;1;2;35;1734
+7482;Puma (Adder) L;BM;1;2;35;1738
+6928;Cougar I;BM;1;2;35;1738
+157;Avar C;AF;1;2;35;1747
+8325;Cougar T;BM;1;2;35;1748
+7375;Parash 3;BM;1;2;35;1753
+6924;Owens OW-1G;BM;1;3;35;1761
+158;Avar D;AF;1;2;35;1765
+5665;Spirit 2;BM;1;2;35;1773
+705;Cougar B;BM;1;2;35;1774
+6613;Jaguar 2;BM;1;2;35;1780
+4013;Cougar-XR;BM;1;3;35;1783
+706;Cougar C;BM;1;2;35;1785
+9243;Longshot LNG-2 (Reskov);bm;1;3;35;1787
+6612;Jaguar;BM;1;2;35;1791
+6552;Tiburon;BM;1;2;35;1841
+6394;Rokurokubi RK-4X;BM;1;3;35;1858
+2229;Morrigan 2;BM;1;2;35;1874
+6926;Morrigan 5;BM;1;2;35;1904
+7425;Wolfhound (Lucian Finn);BM;1;2;35;1941
+5416;Wolfhound WLF-1 (Allard);BM;1;2;35;1941
+9240;Rattlesnake JR7-31R (Gideon);bm;1;3;35;1959
+6927;Morrigan 4;BM;1;3;35;2063
+159;Avar Prime;AF;1;2;35;2068
+2598;Puma (Adder) Prime;BM;1;2;35;2083
+156;Avar B;AF;1;2;35;2142
+155;Avar A;AF;1;2;35;2151
+7478;Puma (Adder) T;BM;1;2;35;2182
+3961;Clint IIC (Original);;0;2;40;0
+4848;Pouncer (Oren);;0;2;40;0
+8155;Arctic Wolf II (Lana);;0;2;40;0
+848;Dasher II;BM;2;2;40;522
+7674;Zephyr Hovertank EC;CV;2;3;40;967
+9346;Phantom G;BM;2;2;40;975
+2485;Phantom E;BM;2;2;40;975
+9388;Hetzer Wheeled Assault Gun C;CV;2;2;40;1051
+1712;Joust Medium Tank BE701;CV;2;2;40;1077
+8160;Sentinel STN-6S;BM;2;3;40;1089
+2482;Phantom B;BM;2;2;40;1096
+8159;Griffin IIC 9;BM;2;3;40;1106
+9314;Hermes II HER-7A;BM;2;3;40;1121
+9345;Phantom T;BM;2;2;40;1138
+109;Ares Medium Tank;CV;2;2;40;1151
+2487;Phantom Prime;BM;2;2;40;1159
+2486;Phantom H;BM;2;2;40;1178
+9350;Phantom L;BM;2;2;40;1178
+5747;Issus 3;AF;1;2;40;1184
+6917;Strider SR1-OH;BM;2;3;40;1192
+108;Ares Medium Tank (Plasma);CV;2;2;40;1201
+7584;Dragonfly (Viper) J;BM;2;2;40;1259
+8392;Battle Cobra J;BM;2;2;40;1272
+4850;Pouncer F;BM;2;2;40;1308
+1711;Joust Medium Tank BE700;CV;2;2;40;1315
+99;Arctic Wolf;BM;2;2;40;1330
+7588;Dragonfly (Viper) R;BM;2;2;40;1335
+700;Corvis;BM;2;2;40;1336
+3092;Strider SR1-OR;BM;2;3;40;1339
+1314;Griffin IIC 5;BM;2;2;40;1344
+919;Dragonfly (Viper) C;BM;2;2;40;1344
+9351;Phantom R;BM;2;3;40;1365
+4818;Phantom F;BM;2;2;40;1375
+8391;Battle Cobra I;BM;2;2;40;1385
+9349;Phantom K;BM;2;2;40;1387
+652;Clint IIC;BM;2;2;40;1395
+2481;Phantom A;BM;2;2;40;1410
+927;Dragonfly (Viper) U;BM;2;2;40;1417
+7586;Dragonfly (Viper) L;BM;2;2;40;1417
+7606;Coyotl B;BM;2;2;40;1447
+7882;Tolva;BM;2;2;40;1449
+926;Dragonfly (Viper) Prime;BM;2;2;40;1450
+701;Corvis 2;BM;2;2;40;1455
+9265;Pouncer X;BM;2;3;40;1455
+261;Battle Cobra A;BM;2;2;40;1466
+1315;Griffin IIC 6;BM;2;2;40;1468
+6337;Scarecrow UCU-F4r;BM;2;3;40;1472
+6336;Scarecrow UCU-F4;BM;2;3;40;1475
+1313;Griffin IIC 4;BM;2;2;40;1475
+270;Battle Cobra C;BM;2;2;40;1484
+4202;Garuda Heavy VTOL;CV;2;2;40;1484
+273;Battle Cobra Prime;BM;2;2;40;1487
+274;Battle Cobra X;BM;2;2;40;1492
+6920;Dasher II 3;BM;2;3;40;1496
+8369;Clint IIC 2L "Leia";BM;2;3;40;1497
+271;Battle Cobra F;BM;2;2;40;1507
+100;Arctic Wolf 2;BM;2;2;40;1511
+1311;Griffin IIC 2;BM;2;2;40;1516
+1505;Hermes II HER-7S;BM;2;3;40;1525
+1312;Griffin IIC 3;BM;2;2;40;1532
+7585;Dragonfly (Viper) K;BM;2;2;40;1545
+921;Dragonfly (Viper) E;BM;2;2;40;1561
+9262;Pouncer T;BM;2;3;40;1573
+923;Dragonfly (Viper) G;BM;2;2;40;1574
+925;Dragonfly (Viper) I;BM;2;2;40;1580
+2484;Phantom D;BM;2;2;40;1581
+101;Arctic Wolf A;BM;2;2;40;1587
+2483;Phantom C;BM;2;2;40;1590
+272;Battle Cobra H;BM;2;2;40;1592
+8390;Battle Cobra G;BM;2;2;40;1593
+6963;Batu E;AF;1;2;40;1602
+1310;Griffin IIC;BM;2;2;40;1608
+1636;Issus (Erika);AF;1;2;40;1612
+7776;Carrion Crow A;bm;2;2;40;1622
+2561;Pouncer E;BM;2;2;40;1632
+103;Arctic Wolf Prime;BM;2;2;40;1641
+104;Arctic Wolf II A;BM;2;2;40;1645
+2559;Pouncer C;BM;2;2;40;1653
+8389;Battle Cobra T;BM;2;2;40;1666
+8368;Calliope CAL-1MAFW "Snow White";bm;2;3;40;1668
+105;Arctic Wolf II B;BM;2;2;40;1678
+922;Dragonfly (Viper) F;BM;2;2;40;1689
+5644;Dragonfly (Viper) Z;BM;2;2;40;1692
+7583;Dragonfly (Viper) T;BM;2;2;40;1704
+9347;Phantom I;BM;2;2;40;1713
+4528;Lobo;BM;2;2;40;1715
+4380;Issus 2;AF;1;2;40;1722
+924;Dragonfly (Viper) H;BM;2;2;40;1732
+1317;Griffin IIC 8;BM;2;2;40;1736
+6919;Dasher II 4;BM;2;3;40;1749
+9264;Pouncer W;BM;2;2;40;1751
+713;Coyotl A;BM;2;2;40;1753
+2773;Sai S-4C;AF;1;2;40;1778
+920;Dragonfly (Viper) D;BM;2;2;40;1779
+9263;Pouncer I;BM;2;2;40;1781
+2562;Pouncer H;BM;2;2;40;1784
+102;Arctic Wolf J;BM;2;2;40;1786
+7655;Pella;;0;2;40;1793
+9261;Pouncer G;BM;2;2;40;1808
+5669;Lobo 3;BM;2;2;40;1824
+7778;Carrion Crow C;BM;2;2;40;1826
+918;Dragonfly (Viper) B;BM;2;2;40;1830
+4379;Issus;AF;1;2;40;1831
+2558;Pouncer B;BM;2;2;40;1836
+7607;Coyotl C;BM;2;2;40;1851
+5668;Lobo 2;BM;2;2;40;1869
+653;Clint IIC 2;BM;2;2;40;1890
+262;Battle Cobra B;BM;2;2;40;1892
+9348;Phantom J;BM;2;2;40;1902
+8352;Kontio;BM;2;2;40;1912
+106;Arctic Wolf II C;BM;2;2;40;1913
+7779;Carrion Crow D;BM;2;2;40;1930
+1316;Griffin IIC 7;BM;2;2;40;1952
+714;Coyotl Prime;BM;2;2;40;1974
+305;Batu A;AF;1;2;40;1975
+7608;Coyotl D;BM;2;2;40;1980
+917;Dragonfly (Viper) A;BM;2;2;40;1989
+7587;Dragonfly (Viper) M;BM;2;2;40;2054
+2557;Pouncer A;BM;2;2;40;2081
+7777;Carrion Crow B;BM;2;2;40;2083
+5431;Yurei S-YR-1LAM;BM;2;3;40;2106
+307;Batu C;AF;1;2;40;2109
+107;Arctic Wolf II Prime;BM;2;2;40;2111
+847;Dasher II 2;BM;2;2;40;2239
+2560;Pouncer D;BM;2;2;40;2246
+7775;Carrion Crow Prime;BM;2;2;40;2397
+308;Batu D;AF;1;2;40;2435
+309;Batu Prime;AF;1;2;40;2495
+2563;Pouncer Prime;BM;2;2;40;2557
+306;Batu B;AF;1;2;40;2651
+3809;Batu Z;AF;1;2;40;3143
+5160;Sulla (MG);;0;2;45;0
+6338;Antlion LK-3D;BM;2;3;45;859
+326;Bellona Hover Tank;CV;2;2;45;1018
+7688;Tomahawk THK-63-EC;;0;3;45;1038
+7506;Fenris (Ice Ferret) I;BM;2;3;45;1096
+7507;Fenris (Ice Ferret) G;BM;2;2;45;1196
+7678;Phoenix Hawk PXH-1-EC;BM;2;3;45;1206
+1048;Fenris (Ice Ferret) C;BM;2;2;45;1211
+5314;Tyr Infantry Support Tank;CV;2;2;45;1260
+325;Bellona Hover Tank (Laser);CV;2;2;45;1262
+1046;Fenris (Ice Ferret) A;BM;2;2;45;1323
+1284;Great Wyrm;BM;2;2;45;1331
+6553;Stalking Spider II;BM;2;2;45;1362
+7590;Shadow Cat TC;BM;2;2;45;1378
+1052;Fenris (Ice Ferret) L;BM;2;2;45;1380
+7752;Phoenix Hawk C;BM;2;2;45;1396
+5807;Phoenix Hawk PXH-4L (Sante);BM;2;3;45;1442
+1047;Fenris (Ice Ferret) B;BM;2;2;45;1461
+1288;Grendel (Mongrel) C;BM;2;2;45;1465
+2913;Shadow Hawk IIC 3;BM;2;2;45;1471
+7780;Hatchetman HCT-8S;BM;2;3;45;1479
+9242;Rattlesnake II RSN-2;BM;2;3;45;1480
+1050;Fenris (Ice Ferret) E;BM;2;2;45;1483
+3602;Wyvern IIC 2;BM;2;2;45;1537
+1054;Fenris (Ice Ferret) U;BM;2;2;45;1549
+4742;Ogotai A;AF;1;2;45;1551
+2579;Preta C-PRT-OS Caelestis;BM;2;3;45;1566
+9266;Vindicator VND-7L;BM;2;3;45;1566
+3269;Tomahawk CH;AF;1;2;45;1589
+8036;Bellona Hover Tank (XL);cv;2;2;45;1603
+9233;Night Chanter A;bm;2;2;45;1604
+5675;Pinion 3;BM;2;2;45;1611
+2915;Shadow Hawk IIC 5;BM;2;2;45;1614
+1051;Fenris (Ice Ferret) H;BM;2;2;45;1619
+3601;Wyvern IIC;BM;2;2;45;1624
+3427;Vindicator VND-3LD (Dao);BM;2;3;45;1639
+8388;Blackjack C;BM;2;2;45;1639
+9232;Night Chanter Prime;bm;2;2;45;1645
+4829;Pinion;BM;2;2;45;1646
+3268;Tomahawk C;AF;1;2;45;1648
+1049;Fenris (Ice Ferret) D;BM;2;2;45;1653
+4830;Pinion 2;BM;2;2;45;1657
+7656;Ogotai Prime;;0;2;45;1665
+1285;Great Wyrm 2;BM;2;2;45;1667
+7458;Grendel (Mongrel) I;BM;2;2;45;1675
+1053;Fenris (Ice Ferret) Prime;BM;2;2;45;1678
+7511;Hammerhead;BM;2;2;45;1686
+8329;Shadow Hawk IIC 11;BM;2;2;45;1692
+2914;Shadow Hawk IIC 4;BM;2;2;45;1698
+1108;Firestarter FS9-OR;BM;2;3;45;1713
+2911;Shadow Hawk IIC;BM;2;2;45;1732
+7486;Hierofalcon B;BM;2;2;45;1737
+7457;Grendel (Mongrel) M;BM;2;2;45;1744
+8328;Shadow Hawk IIC 10;BM;2;2;45;1760
+6380;Cizin Hover Tank;CV;2;2;45;1762
+2912;Shadow Hawk IIC 2;BM;2;2;45;1763
+1247;Goshawk II 2;BM;2;2;45;1767
+7504;Fenris (Ice Ferret) K;BM;2;2;45;1769
+7505;Fenris (Ice Ferret) J;BM;2;2;45;1771
+7508;Fenris (Ice Ferret) F;BM;2;2;45;1771
+1283;Great Wyrm (Aemelia);BM;2;2;45;1772
+3118;Sulla B;AF;1;2;45;1801
+2891;Shadow Cat J;BM;2;2;45;1802
+6911;Shadow Hawk IIC 9;BM;2;2;45;1803
+1290;Grendel (Mongrel) E;BM;2;2;45;1806
+7460;Grendel (Mongrel) J;BM;2;2;45;1811
+7657;Ogotai B;;0;2;45;1817
+3120;Sulla D;AF;1;2;45;1821
+7503;Fenris (Ice Ferret) T;BM;2;2;45;1825
+1249;Goshawk II;BM;2;2;45;1849
+7708;Shadow Cat T;BM;2;2;45;1852
+6816;Sulla F;AF;1;2;45;1871
+7484;Hierofalcon Prime;BM;2;2;45;1878
+7376;Goshawk II RISC;BM;2;3;45;1886
+1287;Grendel (Mongrel) B;BM;2;2;45;1903
+2916;Shadow Hawk IIC 6;BM;2;2;45;1907
+6381;Cizin Hover Tank (Support);CV;2;2;45;1932
+7456;Grendel (Mongrel) T;BM;2;2;45;1936
+7986;Goshawk II 4;BM;2;2;45;1936
+3117;Sulla A;AF;1;2;45;1939
+2918;Shadow Hawk IIC 8;BM;2;2;45;1940
+9241;Rattlesnake II RSN-1;bm;2;3;45;1962
+7485;Hierofalcon A;BM;2;2;45;1963
+1292;Grendel (Mongrel) H;BM;2;2;45;1965
+7487;Hierofalcon C;BM;2;2;45;1983
+7294;Beowulf IIC PR;BM;2;3;45;1992
+1291;Grendel (Mongrel) F;BM;2;2;45;1997
+2917;Shadow Hawk IIC 7;BM;2;2;45;1999
+7492;Shadow Cat III A;BM;2;2;45;2005
+7491;Shadow Cat III Prime;BM;2;2;45;2021
+1286;Grendel (Mongrel) A;BM;2;2;45;2031
+3818;Beowulf IIC;BM;2;2;45;2048
+5162;Sulla E;AF;1;2;45;2066
+6913;Shadow Cat E;BM;2;2;45;2084
+1248;Goshawk II 3;BM;2;2;45;2115
+7494;Shadow Cat III C;BM;2;2;45;2153
+2890;Shadow Cat H;BM;2;2;45;2155
+2892;Shadow Cat Prime;BM;2;2;45;2156
+7493;Shadow Cat III B;BM;2;2;45;2183
+7488;Hierofalcon D;BM;2;2;45;2183
+7753;Phoenix Hawk C 2;BM;2;3;45;2187
+2889;Shadow Cat C;BM;2;2;45;2199
+7459;Grendel (Mongrel) G;BM;2;2;45;2209
+1289;Grendel (Mongrel) D;BM;2;2;45;2212
+2887;Shadow Cat A;BM;2;2;45;2220
+1293;Grendel (Mongrel) Prime;BM;2;2;45;2290
+7704;Shadow Cat D;BM;2;2;45;2298
+7706;Shadow Cat I;BM;2;2;45;2408
+2888;Shadow Cat B;BM;2;2;45;2420
+7707;Shadow Cat M;BM;2;2;45;2438
+3121;Sulla Prime;AF;1;2;45;2489
+3119;Sulla C;AF;1;2;45;2547
+6912;Shadow Cat F;BM;2;3;45;2997
+3821;Black Hawk (Nova) (Phelan 2);;0;2;50;0
+3822;Black Hawk (Nova) (Phelan);;0;2;50;0
+8178;Hellhound (Conjurer) (Helmer);;0;2;50;0
+6543;Cardinal Transport (RAF);CV;2;3;50;582
+5096;Sokar Urban Combat Tank;CV;2;2;50;599
+6542;Cardinal Transport;CV;2;2;50;641
+9311;Condor Heavy Hover Tank C;CV;2;2;50;804
+536;Chalchiuhtotolin Support Tank (Bombast Laser);CV;2;2;50;912
+226;Bandit (C) Hovercraft G;CV;2;2;50;915
+1879;Lightning LTN-G16-P (Branson);AF;2;3;50;1021
+1845;Ku Wheeled Assault Tank (IFV) "Turhan II";CV;2;2;50;1042
+228;Bandit (C) Hovercraft Prime;CV;2;2;50;1054
+537;Chalchiuhtotolin Support Tank;CV;2;2;50;1057
+224;Bandit (C) Hovercraft E;CV;2;2;50;1063
+1846;Ku Wheeled Assault Tank;CV;2;2;50;1091
+223;Bandit (C) Hovercraft D;CV;2;2;50;1093
+225;Bandit (C) Hovercraft F;CV;2;2;50;1119
+220;Bandit (C) Hovercraft A;CV;2;2;50;1145
+2123;Maxim Heavy Hover Transport (Clan);CV;2;2;50;1147
+1746;Kanga-X Jump Tank;CV;2;2;50;1154
+221;Bandit (C) Hovercraft B;CV;2;2;50;1162
+3938;Chalchiuhtotolin Support Tank (Chemical Laser);CV;2;2;50;1177
+5330;Ursus PR;BM;2;3;50;1194
+227;Bandit (C) Hovercraft H;CV;2;2;50;1209
+2972;SM Tank Destroyer SM1A;CV;2;2;50;1214
+222;Bandit (C) Hovercraft C;CV;2;2;50;1231
+9308;Condor Heavy Hover Tank (Ultra);CV;2;3;50;1252
+992;Epona Pursuit Tank B;CV;2;2;50;1255
+5329;Ursus 3;BM;2;2;50;1284
+6758;Eldingar Hover Sled (HMMHV) "HumHov";CV;2;2;50;1289
+9470;Drillson Heavy Hover Tank C;CV;2;2;50;1295
+8374;Hunchback HBK-LGN-Pin "Anastasia";BM;2;3;50;1307
+8373;Ghost GST-10A "Aurora";BM;2;3;50;1371
+947;Eldingar Hover Sled;CV;2;2;50;1402
+7680;Starslayer STY-2C-EC;BM;2;3;50;1407
+344;Black Hawk (Nova) U;BM;2;2;50;1413
+1358;Hachiman Fire Support Tank (AAA);CV;2;2;50;1418
+995;Epona Pursuit Tank E;CV;2;2;50;1436
+4018;Crimson Langur C;BM;2;2;50;1437
+338;Black Hawk (Nova) D;BM;2;2;50;1450
+7679;Enfield END-6J-EC;BM;2;3;50;1470
+8377;Tessen 'TSN-X-4R "Rapunzel";BM;2;3;50;1474
+6508;Sarath SRTH-1OB;BM;2;3;50;1475
+996;Epona Pursuit Tank Prime;CV;2;2;50;1477
+1359;Hachiman Fire Support Tank;CV;2;2;50;1484
+6756;Chalchiuhtotolin Support Tank (XL);CV;2;2;50;1498
+9565;SM Tank Destroyer SM1B;CV;2;3;50;1512
+337;Black Hawk (Nova) C;BM;2;2;50;1515
+9471;Drillson Heavy Hover Tank C 2;CV;2;2;50;1516
+8130;Hunchback IIC 5;BM;2;2;50;1534
+4188;Fulcrum Heavy Hover Tank (Hybrid);CV;2;3;50;1543
+336;Black Hawk (Nova) B;BM;2;2;50;1543
+8375;Hunchback HBK-LGN-Pin "Drizella";BM;2;3;50;1544
+7500;Trebuchet TBT-9N;BM;2;3;50;1550
+993;Epona Pursuit Tank C;CV;2;2;50;1563
+4182;Fox CS-1;BM;2;3;50;1574
+8164;Black Hawk (Nova) T;BM;2;2;50;1579
+2971;SM Tank Destroyer SM1;CV;2;2;50;1585
+9352;Nightsky NGS-7S;BM;2;3;50;1591
+2973;SM Tank Destroyer SM3;CV;2;2;50;1593
+8169;Black Hawk (Nova) R;BM;2;3;50;1597
+7612;Omni-Corvis B;BM;2;2;50;1640
+3047;Stalking Spider 3;BM;2;2;50;1643
+6248;Hadur Fast Support Vehicle;CV;2;2;50;1667
+987;Enforcer III ENF-7X MUSE COMPACT;BM;2;3;50;1670
+7610;Omni-Corvis Prime;BM;2;2;50;1678
+1568;Hunchback IIC;BM;2;2;50;1679
+1157;Fulcrum Heavy Hovertank X;CV;2;3;50;1686
+6264;Gravedigger GDR-1D;BM;2;3;50;1707
+1477;Hellhound (Conjurer) 5;BM;2;2;50;1722
+6507;Sarath SRTH-1OA;BM;2;3;50;1738
+1475;Hellhound (Conjurer) 3;BM;2;2;50;1764
+994;Epona Pursuit Tank D;CV;2;2;50;1773
+3322;Turk B;AF;2;2;50;1774
+9430;Hellhound II-P (Hellcat-P);bm;2;2;50;1777
+3363;Ursus;BM;2;2;50;1778
+8051;Hadur Fast Support Vehicle (Reactive);cv;2;2;50;1785
+9409;Hellhound II (Hellcat);bm;2;2;50;1801
+1473;Hellhound (Conjurer);BM;2;2;50;1813
+7404;Centurion CN9-YLW3 "Yen-lo-wang";BM;2;3;50;1815
+8165;Black Hawk (Nova) G;BM;2;2;50;1822
+341;Black Hawk (Nova) H;BM;2;2;50;1832
+948;Eldingar Hover Sled (Streak);CV;2;2;50;1843
+5308;Turk E;AF;2;2;50;1845
+7512;Hellhound (Conjurer) 7;BM;2;2;50;1845
+6618;Mongrel MGL-T1;BM;2;3;50;1860
+5676;Crimson Langur D;BM;2;2;50;1867
+1569;Hunchback IIC 2;BM;2;2;50;1869
+6400;Avalanche AVL-1ON;BM;2;3;50;1873
+8353;Hunchback C;BM;2;2;50;1893
+8167;Black Hawk (Nova) K;BM;2;2;50;1932
+6619;Mongrel MGL-T2;BM;2;2;50;1949
+1570;Hunchback IIC 3;BM;2;2;50;1951
+4019;Crimson Langur Prime;BM;2;2;50;1952
+3321;Turk A;AF;2;2;50;1956
+991;Epona Pursuit Tank A;CV;2;2;50;1976
+340;Black Hawk (Nova) F;BM;2;2;50;1976
+7611;Omni-Corvis A;BM;2;2;50;1977
+699;Corsair CSR-X12 RIGID NIGHT;AF;2;3;50;2000
+4016;Crimson Langur A;BM;2;2;50;2003
+2292;Nobori-nin (Huntsman) D;BM;2;2;50;2007
+385;Blackjack BJ2-OR;BM;2;3;50;2010
+8378;Trebuchet TBT-7MM "Merida";BM;2;3;50;2028
+1864;Legionnaire LGN-2X1 MUSE FIRE;BM;2;3;50;2032
+2289;Nobori-nin (Huntsman) A;BM;2;2;50;2034
+6401;Avalanche AVL-1OR;BM;2;3;50;2043
+5677;Crimson Langur E;BM;2;2;50;2051
+3364;Ursus 2;BM;2;2;50;2054
+3046;Stalking Spider 2;BM;2;2;50;2056
+343;Black Hawk (Nova) S;BM;2;2;50;2056
+3365;Ursus II;BM;2;2;50;2069
+6404;Wendigo A;BM;2;2;50;2072
+339;Black Hawk (Nova) E;BM;2;2;50;2078
+7609;Fox;BM;2;2;50;2091
+1571;Hunchback IIC 4;BM;2;2;50;2097
+1474;Hellhound (Conjurer) 2;BM;2;2;50;2097
+7782;Nobori-nin (Huntsman) E;BM;2;2;50;2104
+7781;Nobori-nin (Huntsman) T;BM;2;2;50;2105
+5601;Chameleon CLN-7VQ "Q-'Mech";BM;2;3;50;2105
+2296;Nobori-nin (Huntsman) Prime;BM;2;2;50;2108
+6402;Wendigo Prime;BM;2;2;50;2122
+7883;Rhino;BM;2;3;50;2124
+8265;SM5 Field Commander (Prototype) Prime;CV;2;3;50;2147
+2290;Nobori-nin (Huntsman) B;BM;2;2;50;2156
+6555;Black Hawk (Standard) 2;BM;2;2;50;2161
+1476;Hellhound (Conjurer) 4;BM;2;2;50;2164
+6901;Trebuchet TBT-9R;BM;2;3;50;2165
+8168;Black Hawk (Nova) L;BM;2;2;50;2177
+6554;Black Hawk (Standard);BM;2;2;50;2183
+7513;Hellhound (Conjurer) 8;BM;2;3;50;2197
+8365;Agrotera AGT-UA "Ariel";bm;2;3;50;2199
+2291;Nobori-nin (Huntsman) C;BM;2;2;50;2199
+4017;Crimson Langur B;BM;2;2;50;2210
+9315;Starslayer STY-4C;BM;2;3;50;2218
+9429;Hellhound (Conjurer) 6;bm;2;2;50;2223
+6909;Black Hawk (Nova) I;BM;2;2;50;2224
+3323;Turk C;AF;2;2;50;2226
+3045;Stalking Spider;BM;2;2;50;2232
+7784;Nobori-nin (Huntsman) I;BM;2;2;50;2277
+8050;Hadur Fast Support Vehicle (LRM);cv;2;2;50;2294
+8166;Black Hawk (Nova) J;BM;2;2;50;2295
+3324;Turk D;AF;2;2;50;2295
+6556;Black Hawk (Standard) 3;BM;2;2;50;2317
+8129;Firestorm;BM;2;3;50;2330
+6408;Wendigo VP Prime;BM;2;2;50;2360
+6904;Nobori-nin (Huntsman) F;BM;2;3;50;2367
+6405;Wendigo B;BM;2;2;50;2369
+7783;Nobori-nin (Huntsman) G;BM;2;2;50;2377
+6409;Wendigo VP A;BM;2;2;50;2414
+335;Black Hawk (Nova) A;BM;2;2;50;2422
+2294;Nobori-nin (Huntsman) H;BM;2;2;50;2495
+2295;Nobori-nin (Huntsman) N;BM;2;2;50;2556
+6406;Wendigo C;BM;2;2;50;2623
+8205;Stormwolf A;BM;2;2;50;2655
+342;Black Hawk (Nova) Prime;BM;2;2;50;2663
+3325;Turk Prime;AF;2;2;50;2668
+6910;Black Hawk (Nova) X;BM;2;2;50;2761
+8204;Stormwolf Prime;BM;2;2;50;2788
+8208;Stormwolf D;BM;2;2;50;3122
+8207;Stormwolf C;BM;2;2;50;3261
+8206;Stormwolf B;BM;2;2;50;3286
+5379;Waneta S-WN-1LAM;;0;3;55;0
+6249;Aesir Medium AA Vehicle;CV;2;2;55;768
+3188;Thor Artillery Vehicle (Clan);CV;2;2;55;830
+4126;Enyo Strike Tank (ER Pulse);CV;2;2;55;1130
+4128;Enyo Strike Tank XR;CV;2;2;55;1144
+2895;Shadow Hawk C;BM;2;3;55;1309
+6900;Fennec FEC-5CM;BM;2;3;55;1445
+6253;Cyllaros;BM;2;2;55;1450
+7591;Ryoken (Stormcrow) (Attwater);BM;2;2;55;1482
+5315;Tyre 3;AF;2;2;55;1499
+6250;Aesir Medium AA Vehicle (HAG);CV;2;2;55;1505
+9431;Hoplite HOP-5C;bm;2;3;55;1520
+5732;Enyo Strike Tank (LB-X) "Sholef";CV;2;2;55;1527
+4127;Enyo Strike Tank;CV;2;2;55;1527
+826;Dark Crow 4;BM;2;2;55;1538
+7622;Naja KTO-19b-EC;BM;2;2;55;1557
+824;Dark Crow 2;BM;2;2;55;1575
+5816;Pariah (Septicemia) F;BM;2;2;55;1586
+827;Dark Crow;BM;2;2;55;1594
+5078;Slagmaiden SLG-X;BM;2;3;55;1602
+3082;Stooping Hawk G;BM;2;2;55;1657
+370;Black Lanner X;BM;2;2;55;1672
+3080;Stooping Hawk E;BM;2;2;55;1674
+3122;Sun Cobra;BM;2;2;55;1677
+825;Dark Crow 3;BM;2;2;55;1681
+4562;Mad Cat III 2;BM;2;2;55;1697
+1540;Hoplite C;BM;2;2;55;1736
+9540;Gladiator GLD-7R/SF;bm;2;3;55;1748
+8187;Black Lanner I;BM;2;3;55;1803
+366;Black Lanner D;BM;2;2;55;1809
+3590;Wraith TR2-X "Alexander";BM;2;3;55;1816
+3339;Tyre (Michiko);AF;2;2;55;1834
+5317;Tyre 2;AF;2;2;55;1837
+3079;Stooping Hawk D;BM;2;2;55;1838
+5316;Tyre;AF;2;2;55;1852
+2752;Ryoken (Stormcrow) D;BM;2;2;55;1863
+6899;Griffin GRF-6S2;BM;2;3;55;1870
+1544;Hoplite HOP-4X;BM;2;3;55;1880
+7621;Naja;BM;2;2;55;1880
+2751;Ryoken (Stormcrow) C;BM;2;2;55;1881
+5818;Pariah (Septicemia) UW;BM;2;2;55;1913
+9396;Dervish DV-11DK;BM;2;3;55;1919
+2582;Prowler PWR-1X1;BM;2;3;55;1922
+368;Black Lanner H;BM;2;2;55;1928
+8186;Black Lanner G;BM;2;2;55;1929
+5019;Pariah (Septicemia) A;BM;2;2;55;1935
+7709;Goshawk (Vapor Eagle) 6;BM;2;2;55;1959
+8311;Rime Otter B;BM;2;2;55;1961
+364;Black Lanner B;BM;2;2;55;1961
+3081;Stooping Hawk F;BM;2;2;55;1988
+1244;Goshawk (Vapor Eagle) 2;BM;2;2;55;1989
+8313;Rime Otter D;BM;2;2;55;1998
+7554;Ryoken (Stormcrow) K;BM;2;2;55;2001
+2581;Prowler PWR-1X;BM;2;3;55;2019
+8188;Black Lanner J;BM;2;2;55;2022
+6975;Bakeneko BKN-1K;BM;2;3;55;2022
+7623;Sun Bear Prime;BM;2;2;55;2022
+8184;Black Lanner T;BM;2;2;55;2040
+8381;Wraith TR2-P "Pocahontas";BM;2;3;55;2051
+2756;Ryoken (Stormcrow) H;BM;2;2;55;2061
+6897;Mad Cat III 4;BM;2;2;55;2061
+1246;Goshawk (Vapor Eagle) 4;BM;2;2;55;2069
+5819;Pariah (Septicemia) Z;BM;2;2;55;2072
+2757;Ryoken (Stormcrow) Prime;BM;2;2;55;2073
+4891;Rabid Coyote;BM;2;2;55;2081
+5682;Rabid Coyote 2;BM;2;2;55;2083
+6898;Mad Cat III 5;BM;2;2;55;2095
+6267;Gyrfalcon 2;BM;2;2;55;2105
+2753;Ryoken (Stormcrow) E;BM;2;2;55;2110
+3077;Stooping Hawk B;BM;2;2;55;2111
+9541;Gladiator GLD-9SF;bm;2;3;55;2119
+5550;Grim Reaper GRM-R (Einar);BM;2;3;55;2121
+7437;Griffin C;BM;2;3;55;2131
+7625;Sun Bear B;BM;2;2;55;2144
+3083;Stooping Hawk Prime;BM;2;2;55;2147
+7694;Gyrfalcon 5;BM;2;2;55;2151
+2755;Ryoken (Stormcrow) G;BM;2;2;55;2152
+8185;Black Lanner F;BM;2;2;55;2154
+8309;Rime Otter Prime;BM;2;2;55;2169
+7555;Ryoken (Stormcrow) P;BM;2;2;55;2213
+2754;Ryoken (Stormcrow) F;BM;2;2;55;2227
+5021;Pariah (Septicemia) C;BM;2;2;55;2227
+6268;Gyrfalcon 3;BM;2;2;55;2228
+4563;Mad Cat III X;BM;2;2;55;2232
+5814;Pariah (Septicemia) C-Z;BM;2;2;55;2264
+369;Black Lanner Prime;BM;2;2;55;2268
+7550;Ryoken (Stormcrow) T;BM;2;2;55;2280
+2750;Ryoken (Stormcrow) B;BM;2;2;55;2281
+7553;Ryoken (Stormcrow) J;BM;2;2;55;2300
+5817;Pariah (Septicemia) US;BM;2;2;55;2308
+363;Black Lanner A;BM;2;2;55;2308
+5020;Pariah (Septicemia) B;BM;2;2;55;2310
+5487;Ryoken (Stormcrow) I;BM;2;2;55;2319
+2749;Ryoken (Stormcrow) A;BM;2;2;55;2319
+3076;Stooping Hawk A;BM;2;2;55;2319
+367;Black Lanner E;BM;2;2;55;2331
+8316;Scorpion C;BM;2;3;55;2331
+5813;Pariah (Septicemia) B-Z;BM;2;2;55;2349
+8310;Rime Otter A;BM;2;2;55;2358
+6815;Wusun D;AF;2;2;55;2362
+6266;Gyrfalcon;BM;2;2;55;2367
+3594;Wusun C;AF;2;2;55;2368
+1243;Goshawk (Vapor Eagle);BM;2;2;55;2368
+3592;Wusun A;AF;2;2;55;2372
+7592;Ryoken (Stormcrow) TC;BM;2;2;55;2373
+5488;Ryoken (Stormcrow) (Kotare);BM;2;2;55;2382
+5812;Pariah (Septicemia) A-Z;BM;2;2;55;2388
+5543;Mad Cat III (Eve);BM;2;2;55;2393
+6893;Sun Cobra 2;BM;2;2;55;2394
+4561;Mad Cat III;BM;2;2;55;2400
+7624;Sun Bear A;BM;2;2;55;2418
+6892;Thunder Fox TFT-F11;BM;2;3;55;2426
+3078;Stooping Hawk C;BM;2;2;55;2435
+3593;Wusun B;AF;2;2;55;2453
+3595;Wusun Prime;AF;2;2;55;2453
+1245;Goshawk (Vapor Eagle) 3;BM;2;2;55;2466
+7382;Ryoken III-XP (Skinwalker) D;BM;2;3;55;2483
+5024;Pariah (Septicemia) Prime;BM;2;2;55;2511
+6896;Mad Cat III 3;BM;2;2;55;2515
+365;Black Lanner C;BM;2;2;55;2523
+8452;Ryoken III (Skinwalker) D;BM;2;2;55;2545
+7710;Goshawk (Vapor Eagle) 5;BM;2;2;55;2572
+5815;Pariah (Septicemia) D-Z;BM;2;2;55;2704
+7620;Lynx C;BM;2;2;55;2712
+5380;Waneta S-WN-2LAM;BM;2;3;55;2713
+8312;Rime Otter C;BM;2;2;55;2718
+5022;Pariah (Septicemia) D;BM;2;2;55;2718
+8448;Ryoken III (Skinwalker) Prime;BM;2;2;55;2809
+8450;Ryoken III (Skinwalker) B;BM;2;2;55;2851
+5820;Ryoken (Stormcrow) Z;BM;2;2;55;2855
+7711;Goshawk (Vapor Eagle) 7;BM;2;2;55;2876
+5023;Pariah (Septicemia) E;BM;2;2;55;2950
+7378;Ryoken III-XP (Skinwalker) Prime;BM;2;3;55;3013
+8453;Ryoken III (Skinwalker) E;BM;2;2;55;3102
+8451;Ryoken III (Skinwalker) C;BM;2;2;55;3175
+8449;Ryoken III (Skinwalker) A;BM;2;2;55;3500
+7380;Ryoken III-XP (Skinwalker) B;BM;2;3;55;3613
+8454;Ryoken III (Skinwalker) F;BM;2;2;55;3704
+6269;Gyrfalcon 4;BM;2;2;55;3716
+7379;Ryoken III-XP (Skinwalker) A;BM;2;3;55;3777
+7381;Ryoken III-XP (Skinwalker) C;BM;2;3;55;4387
+4738;Nuberu Anti-Aircraft Tank 2 "Numantia";;0;2;60;0
+1848;Kuma 3;BM;3;2;60;625
+2520;Pike Support Vehicle (Clan);CV;3;2;60;892
+9256;Bulldog Medium Tank (Chemical);CV;3;3;60;999
+9425;SRM Carrier C;CV;3;2;60;1098
+4737;Nuberu Anti-Aircraft Tank;CV;3;2;60;1100
+2342;Oro Heavy Tank;CV;3;2;60;1116
+3267;Tokugawa Heavy Tank Yumi;CV;3;3;60;1127
+7675;Manticore Heavy Tank EC;CV;3;3;60;1147
+7352;Boreas A;BM;3;2;60;1221
+8382;Vulpes VLP-1DX "Beast";BM;3;3;60;1223
+9426;LRM Carrier C;cv;3;2;60;1266
+7353;Boreas B;BM;3;2;60;1331
+2693;Rifleman C;BM;3;3;60;1335
+9424;Pike Support Vehicle (Plasma);cv;3;2;60;1367
+1326;Grigori C-GRG-OS Caelestis;BM;3;3;60;1378
+7355;Boreas D;BM;3;2;60;1394
+7371;Notos A;BM;3;2;60;1469
+2341;Oro Heavy Tank (HAG);CV;3;2;60;1492
+7354;Boreas C;BM;3;2;60;1502
+7373;Notos C;BM;3;2;60;1572
+7351;Boreas Prime;BM;3;2;60;1583
+9389;Eurus MBT Prime;CV;3;2;60;1668
+2099;Matador 2;BM;3;2;60;1728
+2567;Predator;BM;3;2;60;1754
+9393;Eurus MBT D;CV;3;2;60;1770
+7374;Notos D;BM;3;2;60;1777
+7372;Notos B;BM;3;2;60;1788
+3439;Visigoth D;AF;2;2;60;1810
+1170;Galahad (Glass Spider);BM;3;2;60;1825
+9392;Eurus MBT C;CV;3;2;60;1856
+6888;Kuma 4;BM;3;2;60;1865
+9319;Merlin C;BM;3;2;60;1870
+7576;Rifleman C 3;BM;3;2;60;1871
+6272;Vulture Mk III (Mad Dog Mk III) A;BM;3;2;60;1880
+3468;Vulture (Mad Dog) C;BM;3;2;60;1892
+7659;Goth A;;0;2;60;1898
+7444;Sojourner A;BM;3;2;60;1911
+3466;Vulture (Mad Dog) A;BM;3;2;60;1923
+1963;Lupus A;BM;3;2;60;1927
+1849;Kuma;BM;3;2;60;1952
+7660;Goth B;;0;2;60;1955
+7626;Lancelot C;BM;3;2;60;1960
+7727;Vulture (Mad Dog) DD;BM;3;2;60;1970
+1964;Lupus B;BM;3;2;60;1985
+6885;Shadow Cat II 4;BM;3;2;60;1986
+9390;Eurus MBT A;CV;3;2;60;1986
+7658;Goth Prime;;0;2;60;1993
+2098;Matador;BM;3;2;60;2006
+2708;Rifleman RFL-X3 MUSE WIND;BM;3;3;60;2012
+7629;Lupus D;BM;3;2;60;2030
+3470;Vulture (Mad Dog) E;BM;3;2;60;2031
+1171;Galahad (Glass Spider) 2;BM;3;2;60;2038
+7728;Vulture (Mad Dog) I;BM;3;2;60;2042
+7661;Goth C;;0;2;60;2062
+2894;Shadow Cat II;BM;3;2;60;2064
+8355;Ostroc OSR-6R;BM;3;3;60;2095
+3472;Vulture (Mad Dog) H;BM;3;2;60;2097
+8417;Lancelot LNC25-09;BM;3;3;60;2099
+3197;Thresher (Edward);BM;3;3;60;2104
+2893;Shadow Cat II 2;BM;3;2;60;2106
+6558;Vulture Mk IV (Mad Dog Mk IV) Prime;BM;3;2;60;2110
+4300;Hellfire;BM;3;2;60;2114
+7662;Goth D;;0;2;60;2126
+5685;Hellfire 3;BM;3;2;60;2138
+7370;Notos Prime;BM;3;2;60;2139
+3440;Visigoth Prime;AF;2;2;60;2139
+9391;Eurus MBT B;CV;3;2;60;2147
+2694;Rifleman C 2;BM;3;2;60;2150
+2568;Predator 2;BM;3;2;60;2159
+6559;Vulture Mk IV (Mad Dog Mk IV) A;BM;3;2;60;2177
+5355;Vision Quest VQ-1NC;BM;3;3;60;2180
+7729;Vulture (Mad Dog) V;BM;3;2;60;2182
+547;Champion C;BM;3;2;60;2191
+3825;Black Hawk-KU BHKU-OR;BM;3;3;60;2193
+9497;Hybrid Rifleman RFL-3N (Sneede II);BM;3;3;60;2198
+9320;Quickdraw QKD-9G;BM;3;3;60;2224
+6346;Vulpes VLP-1D;BM;3;3;60;2225
+7446;Sojourner C;BM;3;2;60;2235
+8446;Grand Dragon DRG-12K;BM;3;3;60;2265
+8163;Ostsol C;BM;3;2;60;2277
+3467;Vulture (Mad Dog) B;BM;3;2;60;2284
+6274;Vulture Mk III (Mad Dog Mk III) C;BM;3;2;60;2299
+3471;Vulture (Mad Dog) F;BM;3;2;60;2300
+1847;Kuma 2;BM;3;2;60;2309
+8131;Galahad (Glass Spider) 4;BM;3;2;60;2309
+3198;Thresher;BM;3;2;60;2314
+3199;Thresher 2;BM;3;2;60;2337
+6562;Vulture Mk IV (Mad Dog Mk IV) D;BM;3;2;60;2346
+3473;Vulture (Mad Dog) Prime;BM;3;2;60;2351
+4301;Hellfire 2;BM;3;2;60;2370
+346;Black Hawk-KU BHKU-O (Albert);BM;3;3;60;2377
+6886;Shadow Cat II 3;BM;3;2;60;2387
+7445;Sojourner B;BM;3;2;60;2397
+7633;Vulture Mk III (Mad Dog Mk III) BLO;BM;3;3;60;2397
+6275;Vulture Mk III (Mad Dog Mk III) D;BM;3;2;60;2421
+1965;Lupus Prime;BM;3;2;60;2428
+3469;Vulture (Mad Dog) D;BM;3;2;60;2447
+7447;Sojourner D;BM;3;2;60;2452
+7638;Vision Quest;BM;3;2;60;2458
+3474;Vulture (Mad Dog) U;BM;3;2;60;2488
+7443;Sojourner Prime;BM;3;2;60;2491
+6891;Vulture (Mad Dog) G;BM;3;2;60;2503
+1172;Galahad (Glass Spider) 3;BM;3;2;60;2508
+3438;Visigoth C;AF;2;2;60;2533
+3437;Visigoth B;AF;2;2;60;2534
+7628;Lupus C;BM;3;2;60;2535
+7726;Vulture (Mad Dog) T;BM;3;2;60;2555
+7639;Vision Quest 2;BM;3;2;60;2556
+7627;Lancelot C 2;BM;3;2;60;2571
+6273;Vulture Mk III (Mad Dog Mk III) B;BM;3;2;60;2572
+6561;Vulture Mk IV (Mad Dog Mk IV) C;BM;3;2;60;2584
+6560;Vulture Mk IV (Mad Dog Mk IV) B;BM;3;2;60;2649
+7593;Vulture (Mad Dog) S;BM;3;2;60;2676
+6271;Vulture Mk III (Mad Dog Mk III) Prime;BM;3;2;60;2729
+3436;Visigoth A;AF;2;2;60;2987
+5354;Visigoth E;AF;2;2;60;3192
+7502;Thresher Mk II;BM;3;2;60;3364
+5651;Fire Scorpion (Original);;0;2;65;0
+5559;Ironsides CX-19;AF;2;3;65;0
+4257;Ha Otoko HR (Refit);;0;3;65;0
+1634;Ishtar Heavy Fire Support Tank (Original);CV;3;2;65;1072
+736;Crossbow D;BM;3;2;65;1154
+2711;Rifleman IIC 2;BM;3;2;65;1345
+1635;Ishtar Heavy Fire Support Tank;CV;3;2;65;1404
+1071;Fire Scorpion;BM;3;2;65;1546
+4258;Ha Otoko HR;BM;3;3;65;1547
+732;Crossbow C;BM;3;2;65;1557
+737;Crossbow E;BM;3;2;65;1558
+8419;Rifleman IIC 10;BM;3;2;65;1587
+1924;Loki (Hellbringer) B;BM;3;2;65;1592
+6384;Sekhmet Assault Vehicle;CV;3;2;65;1606
+7682;Exterminator EXT-4Db-EC;BM;3;3;65;1611
+182;Axel Heavy Tank IIC;CV;3;2;65;1612
+1633;Ishtar Heavy Fire Support Tank (Gauss);CV;3;2;65;1616
+3231;Thunderbolt C;BM;3;3;65;1671
+731;Crossbow B;BM;3;2;65;1687
+738;Crossbow H;BM;3;2;65;1707
+8237;Crossbow G;BM;3;2;65;1725
+8235;Crossbow T;BM;3;2;65;1729
+2712;Rifleman IIC 3;BM;3;2;65;1733
+1072;Fire Scorpion 2;BM;3;2;65;1749
+7681;Cestus CTS-6Y-EC;BM;3;3;65;1783
+730;Crossbow A;BM;3;2;65;1797
+6279;Loki Mk II (Hel) B;BM;3;2;65;1798
+739;Crossbow Prime;BM;3;2;65;1829
+492;Cauldron-Born (Ebon Jaguar) C;BM;3;2;65;1831
+5489;Loki (Hellbringer) F;BM;3;2;65;1839
+8245;Crossbow J;BM;3;2;65;1839
+1890;Linebacker E;BM;3;2;65;1846
+7526;Linebacker T;BM;3;2;65;1851
+7525;Linebacker I;BM;3;2;65;1853
+8236;Crossbow F;BM;3;2;65;1854
+740;Crossbow U;BM;3;2;65;1856
+1355;Ha Otoko;BM;3;2;65;1873
+1073;Fire Scorpion 3;BM;3;2;65;1904
+1747;Karhu (Syngman);BM;3;3;65;1924
+4523;Linebacker F;BM;3;2;65;1928
+6879;Loki (Hellbringer) G;BM;3;3;65;1943
+1923;Loki (Hellbringer) A;BM;3;2;65;1948
+1928;Loki (Hellbringer) H;BM;3;2;65;1952
+496;Cauldron-Born (Ebon Jaguar) Prime;BM;3;2;65;1952
+8194;Thunderbolt TDR-12R;BM;3;3;65;1975
+8192;Thunderbolt TDR-9W;BM;3;3;65;1985
+7689;Ironsides IRN-SD1b-EC;;0;3;65;1996
+183;Axel Heavy Tank IIC (XL);CV;3;2;65;2003
+216;Balius U;BM;3;2;65;2014
+212;Balius B;BM;3;2;65;2029
+1889;Linebacker D;BM;3;2;65;2039
+1887;Linebacker B;BM;3;2;65;2048
+8238;Crossbow W;BM;3;2;65;2051
+9504;Jinggau JN-G9CCr;BM;3;3;65;2058
+1888;Linebacker C;BM;3;2;65;2075
+1925;Loki (Hellbringer) C;BM;3;2;65;2076
+9573;Loki Mk II (Hel) T;BM;3;2;65;2077
+1750;Karhu C;BM;3;2;65;2092
+1891;Linebacker H;BM;3;2;65;2097
+213;Balius C;BM;3;2;65;2103
+3772;Axman AXM-6X;BM;3;3;65;2132
+1926;Loki (Hellbringer) D;BM;3;2;65;2140
+2713;Rifleman IIC 4;BM;3;2;65;2140
+6883;Balius E;BM;3;2;65;2156
+215;Balius Prime;BM;3;2;65;2157
+8195;Thunderbolt C 2;BM;3;2;65;2170
+8056;Sekhmet Assault Vehicle (Streak);cv;3;2;65;2178
+8005;Tempest C;BM;3;3;65;2179
+6277;Loki Mk II (Hel) Prime;BM;3;2;65;2189
+7594;Loki (Hellbringer) M;BM;3;2;65;2200
+211;Balius A;BM;3;2;65;2201
+3696;Ammon;AF;2;2;65;2202
+2716;Rifleman IIC 7;BM;3;2;65;2205
+1354;Ha Otoko 3;BM;3;2;65;2206
+9571;Loki Mk II (Hel) C;BM;3;2;65;2214
+8209;Cauldron-Born (Ebon Jaguar) T;BM;3;3;65;2219
+493;Cauldron-Born (Ebon Jaguar) D;BM;3;2;65;2228
+6278;Loki Mk II (Hel) A;BM;3;2;65;2249
+2715;Rifleman IIC 6;BM;3;2;65;2251
+1886;Linebacker A;BM;3;2;65;2264
+8234;Crusader CRD-10S;BM;3;2;65;2264
+7400;Lament LMT-2R (Manes);BM;3;3;65;2297
+6415;Dragon II DRG-11R;BM;3;3;65;2300
+1927;Loki (Hellbringer) E;BM;3;2;65;2304
+5686;Arcas 3;BM;3;2;65;2305
+2710;Rifleman IIC;BM;3;2;65;2307
+2714;Rifleman IIC 5;BM;3;2;65;2343
+1356;Ha Otoko 2;BM;3;2;65;2348
+495;Cauldron-Born (Ebon Jaguar) H;BM;3;2;65;2359
+9572;Loki Mk II (Hel) D;BM;3;2;65;2370
+5862;Cauldron-Born (Ebon Jaguar) (Samantha);BM;3;2;65;2372
+1892;Linebacker Prime;BM;3;2;65;2390
+494;Cauldron-Born (Ebon Jaguar) E;BM;3;2;65;2391
+7442;Loki (Hellbringer) J;BM;3;2;65;2415
+214;Balius D;BM;3;2;65;2417
+490;Cauldron-Born (Ebon Jaguar) A;BM;3;2;65;2429
+6880;Linebacker G;BM;3;2;65;2433
+498;Cauldron-Born (Ebon Jaguar) X;BM;3;2;65;2435
+9574;Loki Mk II (Hel) E;BM;3;2;65;2443
+7441;Loki (Hellbringer) T;BM;3;2;65;2444
+6724;Lament LMT-4RC;BM;3;3;65;2474
+8109;Scourge SCG-WX1;BM;3;3;65;2480
+3717;Arcas;BM;3;2;65;2484
+1752;Karhu Prime;BM;3;2;65;2488
+9575;Loki Mk II (Hel) F;BM;3;2;65;2512
+491;Cauldron-Born (Ebon Jaguar) B;BM;3;2;65;2535
+2717;Rifleman IIC 8;BM;3;2;65;2541
+3697;Ammon XR;AF;2;2;65;2549
+1748;Karhu A;BM;3;2;65;2560
+6628;Ursa URA-2C;BM;3;2;65;2570
+7790;Axman AXM-5N;BM;3;3;65;2575
+497;Cauldron-Born (Ebon Jaguar) U;BM;3;2;65;2593
+5753;Ammon 2;AF;2;2;65;2628
+1929;Loki (Hellbringer) Prime;BM;3;2;65;2654
+8210;Cauldron-Born (Ebon Jaguar) F;BM;3;2;65;2681
+9503;Jinggau JN-G7Lr;BM;3;3;65;2703
+8012;Lucifer III C;af;2;3;65;2709
+9502;Jinggau JN-G8Ar;BM;3;3;65;2730
+9501;Jinggau JN-G9B;BM;3;3;65;2747
+1749;Karhu B;BM;3;2;65;2787
+8418;Rifleman IIC 9;BM;3;2;65;2794
+3718;Arcas 2;BM;3;2;65;2835
+8211;Cauldron-Born (Ebon Jaguar) G;BM;3;2;65;2849
+6882;Karhu G;BM;3;2;65;2895
+7435;Dominator 2;BM;3;2;65;2906
+7434;Dominator;BM;3;2;65;3018
+1751;Karhu D;BM;3;2;65;3118
+5222;Thor (Summoner) (Aidan);;0;2;70;0
+5223;Thor (Summoner) (Marthe);;0;2;70;0
+9496;Warhammer WHM-X7-2 "The Lich";;0;3;70;0
+5385;Warhammer WHM-7M (GioAvanti);;0;3;70;0
+7672;Kokou Defense Tank;CV;3;2;70;1189
+8049;Bardiche Heavy Strike Tank C;cv;3;3;70;1291
+5736;Shoden Assault Vehicle (LB-X);CV;3;2;70;1314
+5056;Shoden Assault Vehicle;CV;3;2;70;1412
+5057;Shoden Assault Vehicle (Streak);CV;3;2;70;1425
+7673;Kokou Defense Tank (XL);CV;3;2;70;1474
+6800;Winston Combat Vehicle (XXL);CV;3;3;70;1621
+9487;JagerMech JM7-DD;BM;3;3;70;1690
+3479;Warhammer C;BM;3;3;70;1728
+798;Daikyu DAI-01 (Tabitha);BM;3;3;70;1804
+3499;Warhammer WHM-X7 "The Lich";BM;3;3;70;1807
+90;Archer C;BM;3;3;70;1811
+6798;Winston Combat Vehicle (Support);CV;3;3;70;1830
+170;Avatar AV1-OR;BM;3;3;70;1833
+5691;Bowman 4;BM;3;2;70;1854
+9489;Viper VP-7;BM;3;3;70;1864
+7399;Dragoon AEM-05C;BM;3;3;70;1893
+2301;Nova Cat C;BM;3;2;70;1944
+7683;Excalibur EXC-B2b-EC;BM;3;3;70;2008
+4645;Minsk MNK-101;BM;3;3;70;2024
+8422;Nova Cat M;BM;3;2;70;2024
+7640;Minsk;BM;3;2;70;2028
+7564;Warhammer WHM-10K;BM;3;3;70;2033
+2302;Nova Cat D;BM;3;2;70;2084
+8395;Doom Courser B;BM;3;2;70;2091
+1188;Gallowglas WD;BM;3;2;70;2094
+3883;Caesar CES-3R "Archangel";BM;3;3;70;2098
+8394;Doom Courser A;BM;3;2;70;2139
+3174;Thor (Summoner) A;BM;3;2;70;2145
+8396;Doom Courser C;BM;3;2;70;2147
+7565;Warhammer C 2;BM;3;3;70;2157
+3175;Thor (Summoner) B;BM;3;2;70;2159
+8387;Archer C 2;BM;3;2;70;2167
+5240;Thunderbolt IIC 2;BM;3;2;70;2174
+5490;Thor (Summoner) F;BM;3;2;70;2186
+2303;Nova Cat E;BM;3;2;70;2191
+1333;Grizzly 2;BM;3;2;70;2195
+1118;Flamberge C;BM;3;2;70;2206
+6876;Thor (Summoner) AA;BM;3;2;70;2216
+1332;Grizzly;BM;3;2;70;2219
+6874;Avatar AV1-OJ;BM;3;3;70;2223
+9491;Viper VP-9;BM;3;3;70;2244
+3182;Thor (Summoner) M;BM;3;2;70;2251
+1119;Flamberge Prime;BM;3;2;70;2266
+8393;Doom Courser Prime;BM;3;2;70;2283
+3183;Thor (Summoner) Prime;BM;3;2;70;2298
+3857;Bowman;BM;3;2;70;2308
+4806;Persepolis;AF;2;2;70;2323
+9432;Grizzly 3;bm;3;3;70;2331
+1661;Jagatai C;AF;2;2;70;2337
+5861;Grasshopper (Reynolds);BM;3;3;70;2344
+1115;Flamberge 3;BM;3;2;70;2346
+6284;Thor II (Grand Summoner) C;BM;3;2;70;2351
+6283;Thor II (Grand Summoner) B;BM;3;2;70;2354
+7490;Thor (Summoner) T;BM;3;2;70;2355
+6873;Flamberge D;BM;3;3;70;2357
+7641;Minsk 2;BM;3;2;70;2363
+72;Archer (Wolf);BM;3;2;70;2365
+1345;Guillotine IIC;BM;3;2;70;2377
+3176;Thor (Summoner) C;BM;3;2;70;2379
+7731;Archer ARC-7C;BM;3;3;70;2408
+3179;Thor (Summoner) G;BM;3;2;70;2452
+6869;Nova Cat H;BM;3;2;70;2452
+8397;Doom Courser D;BM;3;2;70;2453
+1114;Flamberge 2;BM;3;2;70;2468
+6282;Thor II (Grand Summoner) A;BM;3;2;70;2473
+5239;Thunderbolt IIC;BM;3;2;70;2475
+3184;Thor (Summoner) Q;BM;3;2;70;2479
+3181;Thor (Summoner) HH;BM;3;2;70;2490
+2300;Nova Cat B;BM;3;2;70;2492
+407;Blood Reaper 2;BM;3;2;70;2521
+2305;Nova Cat G;BM;3;2;70;2522
+2306;Nova Cat Prime;BM;3;2;70;2530
+3180;Thor (Summoner) H;BM;3;2;70;2536
+6281;Thor II (Grand Summoner) Prime;BM;3;2;70;2554
+6799;Winston Combat Vehicle (TSEMP);CV;3;3;70;2565
+3858;Bowman 2;BM;3;2;70;2567
+7548;War Crow C;BM;3;2;70;2572
+1116;Flamberge A;BM;3;2;70;2575
+1659;Jagatai A;AF;2;2;70;2607
+3178;Thor (Summoner) E;BM;3;2;70;2612
+2299;Nova Cat A;BM;3;2;70;2629
+4386;Jagatai E;AF;2;2;70;2634
+7426;Thor II (Grand Summoner) E;BM;3;2;70;2638
+3177;Thor (Summoner) D;BM;3;2;70;2643
+2013;Mangonel MNL-3W;BM;3;2;70;2657
+6871;Mangonel MNL-4S;BM;3;3;70;2659
+408;Blood Reaper;BM;3;2;70;2665
+7489;Thor (Summoner) J;BM;3;2;70;2666
+9490;Viper VP-8;BM;3;3;70;2679
+2304;Nova Cat F;BM;3;2;70;2706
+1346;Guillotine IIC 2;BM;3;2;70;2721
+1117;Flamberge B;BM;3;2;70;2750
+1660;Jagatai B;AF;2;2;70;2758
+5690;Bowman 3;BM;3;2;70;2767
+7566;Warhammer C 3;BM;3;2;70;2772
+5821;Thor (Summoner) Z;BM;3;2;70;2783
+7547;War Crow B;BM;3;2;70;2787
+1663;Jagatai Prime;AF;2;2;70;2827
+7545;War Crow Prime;BM;3;2;70;2835
+9576;Blood Reaper 3;BM;3;2;70;2837
+8421;Nova Cat T;BM;3;2;70;2855
+1662;Jagatai D;AF;2;2;70;2864
+6285;Thor II (Grand Summoner) D;BM;3;2;70;2878
+6870;Nova Cat I;BM;3;3;70;2918
+4387;Jagatai X;AF;2;2;70;2978
+7358;Persepolis 2;AF;2;2;70;2989
+7546;War Crow A;BM;3;2;70;3030
+3185;Thor (Summoner) U;BM;3;2;70;3092
+7982;Caesar CES-5D;BM;3;3;70;3123
+4591;Marauder MAD-3R (Faber);;0;3;75;0
+4592;Marauder MAD-3R (Wilson);;0;3;75;0
+5349;Vidar Heavy Defense Tank (ER Laser);;0;2;75;0
+5422;Woodsman Arrow IV;;0;2;75;0
+4557;Mad Cat (Timber Wolf) "Great White";;0;2;75;0
+4558;Mad Cat (Timber Wolf) (Connor);;0;2;75;0
+4559;Mad Cat (Timber Wolf) (Vlad);;0;2;75;0
+6386;SM2 Heavy Artillery Vehicle;CV;3;2;75;1028
+5348;Vidar Heavy Defense Tank;CV;3;2;75;1396
+6387;SM2 Heavy Artillery Vehicle (LTC);CV;3;2;75;1422
+3747;Athena Combat Vehicle XR;CV;3;2;75;1427
+2032;Marauder C;BM;3;3;75;1711
+6254;Harpagos;BM;3;2;75;1721
+2758;Ryoken II;BM;3;2;75;1801
+137;Athena Combat Vehicle;CV;3;2;75;1855
+7645;Woodsman D;BM;3;2;75;1902
+6863;Sphinx 4;BM;3;2;75;1952
+3826;Black Knight BL-6-RR;BM;3;3;75;1954
+6866;Marauder MAD-9D;BM;3;3;75;1967
+9236;Spirit Walker A;bm;3;2;75;1990
+6416;Shiro SH-1V;BM;3;3;75;2016
+8317;Orion C 2;BM;3;3;75;2026
+7684;Redback;BM;3;3;75;2076
+6565;Jade Hawk JHK-04;BM;3;3;75;2102
+9237;Spirit Walker Prime;bm;3;2;75;2115
+8111;OmniMarauder MAD-BR-OA;BM;3;3;75;2127
+2264;Night Gyr B;BM;3;2;75;2140
+2759;Ryoken II 2;BM;3;2;75;2141
+6564;Jade Hawk JHK-03;BM;3;3;75;2160
+1979;Mad Cat (Timber Wolf) B;BM;3;2;75;2224
+3878;Burrock;BM;3;2;75;2230
+7644;Woodsman C;BM;3;2;75;2230
+7534;Marauder MAD-11D;BM;3;3;75;2263
+6350;Black Knight BLK-NT-4D;BM;3;3;75;2280
+8061;Götterdämmerung GTD-20C;BM;3;3;75;2285
+7642;Masauwu;BM;3;2;75;2299
+2760;Ryoken II 3;BM;3;2;75;2336
+7998;Orion C;BM;3;3;75;2343
+7719;Inferno INF-NOR;BM;3;3;75;2360
+2340;Orion IIC;BM;3;2;75;2392
+4871;Prometheus;BM;3;3;75;2401
+2764;Sabutai A;AF;3;2;75;2406
+6571;Mad Cat Mk IV (Savage Wolf) A;BM;3;2;75;2413
+7643;Woodsman B;BM;3;2;75;2414
+3434;Viper (Black Python) 3;BM;3;2;75;2421
+6351;Black Knight BLK-NT-5H;BM;3;3;75;2423
+2269;Night Gyr H;BM;3;2;75;2428
+1982;Mad Cat (Timber Wolf) E;BM;3;2;75;2444
+136;Athena Combat Vehicle (HAG);CV;3;2;75;2444
+6567;Jade Hawk 2;BM;3;3;75;2455
+6867;Maelstrom MTR-7K;BM;3;3;75;2462
+1986;Mad Cat (Timber Wolf) S;BM;3;2;75;2462
+2265;Night Gyr C;BM;3;2;75;2468
+6568;Jade Hawk 3;BM;3;3;75;2498
+1980;Mad Cat (Timber Wolf) C;BM;3;2;75;2500
+7536;Marauder (Red Hunter-3146);BM;3;3;75;2509
+6289;Warwolf B;BM;3;2;75;2518
+3433;Viper (Black Python) 2;BM;3;2;75;2520
+6566;Jade Hawk;BM;3;3;75;2523
+6417;Shiro SH-2P;BM;3;3;75;2570
+7791;Black Knight BL-18-KNT;BM;3;3;75;2585
+3435;Viper (Black Python) 4;BM;3;2;75;2594
+6572;Mad Cat Mk IV (Savage Wolf) B;BM;3;2;75;2606
+7635;Mad Cat (Timber Wolf) BLO;BM;3;3;75;2611
+3587;Woodsman Prime;BM;3;2;75;2623
+1987;Mad Cat (Timber Wolf) U;BM;3;2;75;2627
+1984;Mad Cat (Timber Wolf) H;BM;3;2;75;2627
+6862;Tundra Wolf 5;BM;3;2;75;2645
+2767;Sabutai D;AF;3;2;75;2647
+6575;Mad Cat Mk IV (Savage Wolf) PR 2;BM;3;2;75;2666
+2263;Night Gyr A;BM;3;2;75;2680
+1981;Mad Cat (Timber Wolf) D;BM;3;2;75;2682
+6574;Mad Cat Mk IV (Savage Wolf) PR;BM;3;2;75;2702
+7795;White Raven 2;BM;3;2;75;2703
+6287;Warwolf Prime;BM;3;2;75;2706
+7535;Marauder (Bounty Hunter-3138);BM;3;3;75;2708
+7517;Mad Cat (Timber Wolf) T;BM;3;2;75;2714
+2267;Night Gyr E;BM;3;2;75;2717
+1985;Mad Cat (Timber Wolf) Prime;BM;3;2;75;2737
+7515;Mad Cat (Timber Wolf) M;BM;3;2;75;2741
+3586;Woodsman A;BM;3;2;75;2741
+7403;Orion IIC (Burton);BM;3;2;75;2746
+3006;Sphinx 2;BM;3;2;75;2753
+1983;Mad Cat (Timber Wolf) F;BM;3;2;75;2764
+8398;Night Gyr T;BM;3;2;75;2767
+6290;Warwolf C;BM;3;2;75;2776
+6570;Mad Cat Mk IV (Savage Wolf) Prime;BM;3;2;75;2781
+8400;Night Gyr X;BM;3;2;75;2781
+7518;Mad Cat (Timber Wolf) W;BM;3;2;75;2791
+6573;Mad Cat Mk IV (Savage Wolf) C;BM;3;2;75;2796
+5803;Mad Cat (Timber Wolf) (Bounty Hunter 2);BM;3;2;75;2799
+3432;Viper (Black Python);BM;3;2;75;2813
+1976;Mad Cat (Timber Wolf) (Bounty Hunter);BM;3;2;75;2829
+2270;Night Gyr Prime;BM;3;2;75;2830
+8110;OmniMarauder MAD-BR-O;BM;3;3;75;2836
+7384;Triskelion TRK-4V;BM;3;3;75;2837
+1978;Mad Cat (Timber Wolf) A;BM;3;2;75;2854
+7516;Mad Cat (Timber Wolf) N;BM;3;2;75;2862
+5694;Burrock 2;BM;3;2;75;2864
+3318;Tundra Wolf 4;BM;3;2;75;2873
+5758;Huscarl HSCL-1-OR;AF;3;3;75;2879
+3007;Sphinx;BM;3;2;75;2883
+2266;Night Gyr D;BM;3;2;75;2889
+1977;Mad Cat (Timber Wolf) (Pryde);BM;3;2;75;2900
+7595;Mad Cat (Timber Wolf) TC;BM;3;2;75;2903
+5822;Mad Cat (Timber Wolf) Z;BM;3;2;75;2923
+7792;Viper (Black Python) 5;BM;3;2;75;2925
+7794;White Raven;BM;3;2;75;2941
+2268;Night Gyr F;BM;3;2;75;2958
+2362;Ostrogoth C;AF;3;2;75;2973
+6954;Cave Lion;BM;3;2;75;3044
+8399;Night Gyr G;BM;3;2;75;3069
+2765;Sabutai B;AF;3;2;75;3086
+2766;Sabutai C;AF;3;2;75;3099
+6288;Warwolf A;BM;3;2;75;3100
+8219;Ryoken II (Tassa);BM;3;2;75;3103
+3315;Tundra Wolf;BM;3;2;75;3131
+4965;Sabutai E;AF;3;2;75;3159
+6810;Ostrogoth D;AF;3;2;75;3168
+2361;Ostrogoth B;AF;3;2;75;3171
+6291;Warwolf H;BM;3;2;75;3184
+2768;Sabutai Prime;AF;3;2;75;3210
+2360;Ostrogoth A;AF;3;2;75;3265
+4966;Sabutai X;AF;3;2;75;3277
+3317;Tundra Wolf 3;BM;3;2;75;3292
+8445;Flashman FLS-10E;BM;3;3;75;3349
+6864;Sphinx 3;BM;3;2;75;3396
+3316;Tundra Wolf 2;BM;3;2;75;3626
+2363;Ostrogoth Prime;AF;3;2;75;3720
+5834;Sabutai Z;AF;3;2;75;3974
+464;Carnivore Assault Tank (Second Line);CV;4;2;80;1248
+4673;Morrigu Fire Support Vehicle (Laser);CV;4;2;80;1324
+2010;Man O' War (Gargoyle) Prime;BM;4;2;80;1537
+859;Demolisher Heavy Tank (Clan);CV;4;2;80;1563
+7754;Man O' War (Gargoyle) T;BM;4;2;80;1632
+7691;Rhino Fire Support Tank EC;CV;4;3;80;1679
+4674;Morrigu Fire Support Vehicle;CV;4;2;80;1685
+6802;Fury Command Tank (Fury IIIm);CV;4;3;80;1720
+6251;Gurzil Support Tank;CV;4;2;80;1765
+173;Awesome AWS-11M;BM;4;3;80;1801
+2249;Naga C;BM;4;2;80;1805
+6801;Fury Command Tank (Fury III);CV;4;3;80;1827
+9322;Naga II Prime;BM;4;2;80;1840
+2251;Naga Prime;BM;4;2;80;1840
+2003;Man O' War (Gargoyle) B;BM;4;2;80;1843
+2250;Naga D;BM;4;2;80;1860
+9578;Naga T;BM;4;2;80;1885
+7755;Man O' War (Gargoyle) F;BM;4;2;80;1894
+6419;Hatamoto-Godai HTM-30Z;BM;4;3;80;1899
+3403;Victor C;BM;4;3;80;1925
+2247;Naga A;BM;4;2;80;1988
+465;Carnivore Assault Tank;CV;4;2;80;1997
+2248;Naga B;BM;4;2;80;2021
+6858;Warhammer IIC 11;BM;4;2;80;2021
+7501;Awesome AWS-11H;BM;4;3;80;2036
+2966;Slayer SL-CX1;AF;3;3;80;2037
+2511;Phoenix Hawk IIC;BM;4;2;80;2057
+5738;Morrigu Fire Support Vehicle (HAG);CV;4;2;80;2059
+9579;Spartan SPT-N4;BM;4;3;80;2108
+7757;Man O' War (Gargoyle) J;BM;4;2;80;2134
+2007;Man O' War (Gargoyle) G;BM;4;2;80;2156
+9323;Naga II A;BM;4;2;80;2160
+3768;Awesome AWS-8Q (Smith);BM;4;3;80;2166
+7423;Awesome (Jeff X. Mink);BM;4;3;80;2166
+9325;Naga II C;BM;4;2;80;2177
+7667;Kublai E;;0;3;80;2181
+7759;Man O' War (Gargoyle) K;BM;4;3;80;2182
+2009;Man O' War (Gargoyle) M;BM;4;2;80;2182
+2008;Man O' War (Gargoyle) H;BM;4;2;80;2183
+3504;Warhammer IIC 5;BM;4;2;80;2185
+429;Bruin 2;BM;4;2;80;2200
+6679;Doloire DLR-OA;BM;4;3;80;2218
+2517;Phoenix Hawk IIC 7;BM;4;2;80;2219
+7438;Goliath C;BM;4;2;80;2222
+6681;Doloire DLR-OC;BM;4;3;80;2242
+1683;Jengiz C;AF;3;2;80;2246
+2006;Man O' War (Gargoyle) E;BM;4;2;80;2257
+7666;Qasar D;;0;2;80;2261
+7668;Kublai F;;0;3;80;2270
+7455;Zeus ZEU-11S;BM;4;3;80;2280
+9326;Naga II H;BM;4;2;80;2284
+463;Carnivore Assault Tank (HAG);CV;4;2;80;2286
+6859;Warhammer IIC 10;BM;4;2;80;2290
+7758;Man O' War (Gargoyle) P;BM;4;2;80;2320
+9324;Naga II B;BM;4;2;80;2347
+2515;Phoenix Hawk IIC 5;BM;4;2;80;2350
+1055;Fensalir Combat WiGE (HAG);CV;4;3;80;2356
+7669;Kublai G;;0;3;80;2376
+3507;Warhammer IIC 8;BM;4;2;80;2380
+3502;Warhammer IIC 3;BM;4;2;80;2382
+3503;Warhammer IIC 4;BM;4;2;80;2386
+2004;Man O' War (Gargoyle) C;BM;4;2;80;2417
+2513;Phoenix Hawk IIC 3;BM;4;2;80;2448
+7397;Awesome AWS-10KM (Cameron);BM;4;3;80;2466
+8196;Phoenix Hawk IIC 9;BM;4;2;80;2469
+3501;Warhammer IIC 2;BM;4;2;80;2482
+2514;Phoenix Hawk IIC 4;BM;4;2;80;2483
+2516;Phoenix Hawk IIC 6;BM;4;2;80;2490
+459;Canis;BM;4;2;80;2498
+2005;Man O' War (Gargoyle) D;BM;4;2;80;2499
+7646;Spartan C;BM;4;2;80;2514
+7756;Man O' War (Gargoyle) I;BM;4;2;80;2516
+4129;Epimetheus Prime;BM;4;2;80;2517
+6809;Jengiz F;AF;3;2;80;2560
+6678;Doloire DLR-O;BM;4;3;80;2561
+8427;Star Crusader B;BM;4;2;80;2565
+3500;Warhammer IIC;BM;4;2;80;2570
+2001;Man O' War (Gargoyle) (Conal);BM;4;2;80;2580
+5228;Thug THG-11E (Reich);BM;4;3;80;2612
+430;Bruin;BM;4;2;80;2630
+9327;Naga II W;BM;4;2;80;2655
+3505;Warhammer IIC 6;BM;4;2;80;2661
+6857;Warhammer IIC 12;BM;4;2;80;2680
+2002;Man O' War (Gargoyle) A;BM;4;2;80;2689
+7498;Warhammer IIC 13;BM;4;2;80;2715
+8470;Awesome C;BM;4;2;80;2737
+7663;Qasar A;;0;2;80;2754
+9397;Charger C;BM;4;3;80;2756
+8197;Phoenix Hawk IIC 10;BM;4;3;80;2762
+6861;Man O' War (Gargoyle) X;BM;4;2;80;2800
+3508;Warhammer IIC 9;BM;4;2;80;2819
+460;Canis 2;BM;4;2;80;2822
+6680;Doloire DLR-OB;BM;4;3;80;2836
+2518;Phoenix Hawk IIC 8;BM;4;2;80;2881
+4883;Qasar Prime;AF;3;2;80;2882
+2512;Phoenix Hawk IIC 2;BM;4;2;80;2892
+8426;Star Crusader A;BM;4;2;80;2904
+7664;Qasar B;;0;2;80;2905
+3506;Warhammer IIC 7;BM;4;2;80;2915
+1684;Jengiz D;AF;3;2;80;2941
+4397;Jengiz E;AF;3;2;80;2983
+1685;Jengiz Prime;AF;3;2;80;3015
+6682;Doloire DLR-OD;BM;4;3;80;3071
+4398;Jengiz X;AF;3;2;80;3166
+1681;Jengiz A;AF;3;2;80;3206
+7665;Qasar C;;0;2;80;3259
+8425;Star Crusader Prime;BM;4;2;80;3325
+1682;Jengiz B;AF;3;2;80;3558
+1551;Huitzilopochtli Assault Tank "Huey";CV;4;2;85;1132
+1550;Huitzilopochtli Assault Tank "Huey" (AAA);CV;4;2;85;1454
+8043;Huitzilopochtli Assault Tank "Huey" (Streak);cv;4;2;85;1520
+8042;Huitzilopochtli Assault Tank "Huey" (LRM);cv;4;2;85;1567
+9370;SturmFeur Heavy Tank (Cell);CV;4;3;85;1822
+7690;Rapier RPR-100b-EC;;0;3;85;1822
+6357;Templar III TLR2-OD;BM;4;3;85;2108
+9404;BattleMaster BLR-6R;BM;4;3;85;2181
+856;Deimos Prime;BM;4;2;85;2188
+9372;SturmFeur Heavy Tank (Assault);CV;4;3;85;2199
+4983;Savage Coyote B;BM;4;2;85;2284
+4766;Osteon A;BM;4;2;85;2291
+3224;Thunder Stallion;BM;4;2;85;2306
+2092;Masakari (Warhawk) B;BM;4;2;85;2320
+5425;Xerxes;AF;3;2;85;2350
+2066;Marauder IIC 2;BM;4;2;85;2358
+6853;Omen 2;BM;4;2;85;2380
+2069;Marauder IIC 5;BM;4;2;85;2386
+5828;Osteon G;BM;4;2;85;2388
+852;Deimos 2;BM;4;2;85;2394
+2091;Masakari (Warhawk) A;BM;4;2;85;2399
+6852;Templar TLR1-OR;BM;4;3;85;2423
+2067;Marauder IIC 3;BM;4;2;85;2445
+8444;Stalker STK-9F;BM;4;3;85;2469
+2094;Masakari (Warhawk) D;BM;4;2;85;2474
+5426;Xerxes 2;AF;3;2;85;2479
+5830;Osteon (Jaguar);BM;4;2;85;2528
+7477;BattleMaster C 3;BM;4;2;85;2532
+7979;BattleMaster C 2;BM;4;3;85;2538
+5705;Savage Coyote J;BM;4;2;85;2554
+2072;Marauder IIC 8;BM;4;2;85;2554
+3225;Thunder Stallion 2 "Fire Stallion";BM;4;2;85;2575
+5825;Osteon D;BM;4;2;85;2587
+7537;Marauder IIC 9;BM;4;2;85;2595
+2096;Masakari (Warhawk) H;BM;4;2;85;2601
+7720;Thunder Stallion 4;BM;4;2;85;2607
+4985;Savage Coyote Prime;BM;4;2;85;2613
+5823;Osteon B;BM;4;3;85;2625
+3226;Thunder Stallion 3;BM;4;2;85;2631
+2070;Marauder IIC 6;BM;4;2;85;2646
+5829;Osteon U;BM;4;2;85;2647
+857;Deimos S;BM;4;2;85;2664
+2065;Marauder IIC;BM;4;2;85;2680
+6856;Deimos D;BM;4;2;85;2682
+5119;Stalker STK-3F (Jamison);BM;4;2;85;2707
+5827;Osteon F;BM;4;2;85;2716
+7955;Templar III TLR-2J "Arthur";BM;4;3;85;2722
+8403;Jade Phoenix E;BM;4;2;85;2734
+855;Deimos C;BM;4;2;85;2737
+8294;Jade Phoenix A;BM;4;2;85;2739
+5760;Xerxes 3;AF;3;2;85;2743
+284;BattleMaster BLR-1G (Red Corsair);BM;4;2;85;2745
+2318;Omen;BM;4;2;85;2750
+5826;Osteon E;BM;4;2;85;2762
+5491;Masakari (Warhawk) F;BM;4;2;85;2775
+3836;Blood Kite;BM;4;2;85;2776
+853;Deimos A;BM;4;2;85;2785
+2876;Seraph C-SRP-OS Caelestis;BM;4;3;85;2788
+5706;Savage Coyote W;BM;4;2;85;2792
+2071;Marauder IIC 7;BM;4;2;85;2843
+9354;Gunslinger GUN-3ERD;BM;4;3;85;2844
+4982;Savage Coyote A;BM;4;2;85;2852
+8401;Jade Phoenix C;BM;4;2;85;2854
+7538;Marauder IIC 10;BM;4;2;85;2877
+2095;Masakari (Warhawk) E;BM;4;2;85;2895
+8338;Masakari (Warhawk) G;BM;4;2;85;2909
+3475;Wakazashi;BM;4;2;85;2909
+8002;Shogun C 2;BM;4;2;85;2914
+9463;Shogun C 3;BM;4;2;85;2935
+8337;Masakari (Warhawk) T;BM;4;3;85;2938
+854;Deimos B;BM;4;2;85;2965
+8402;Jade Phoenix D;BM;4;2;85;2986
+2093;Masakari (Warhawk) C;BM;4;2;85;2998
+8295;Jade Phoenix B;BM;4;2;85;2998
+303;BattleMaster C;BM;4;2;85;3025
+8339;Masakari (Warhawk) I;BM;4;2;85;3026
+2931;Shogun C;BM;4;2;85;3032
+4767;Osteon Prime;BM;4;2;85;3073
+5831;Savage Coyote Z;BM;4;2;85;3080
+3837;Blood Kite 2;BM;4;2;85;3122
+5824;Osteon C;BM;4;2;85;3139
+4984;Savage Coyote C;BM;4;2;85;3189
+2097;Masakari (Warhawk) Prime;BM;4;2;85;3194
+8293;Jade Phoenix Prime;BM;4;2;85;3277
+9505;Deimos H;BM;4;2;85;3344
+4605;Masakari (Warhawk) (Tara);;0;2;85;3428
+2068;Marauder IIC 4;BM;4;2;85;3447
+6855;Deimos E;BM;4;3;85;3620
+8340;Masakari (Warhawk) L;BM;4;2;85;3695
+7385;Lich UABM-2R;BM;4;3;90;1719
+6846;Sunder SD1-OF;BM;4;3;90;1854
+9580;Mauler MAL-4R;BM;4;3;90;2050
+2590;Pulverizer PUL-2V;BM;4;3;90;2065
+7647;Pulverizer PUL-3R;BM;4;3;90;2068
+6516;Juliano JLN-5A;BM;4;3;90;2105
+8363;Regent D;BM;4;2;90;2116
+7685;Emperor EMP-6A-EC;BM;4;3;90;2165
+9485;Star Adder (Blood Asp) I;BM;4;3;90;2242
+965;Emperor EMP-6A (Nerran);BM;4;3;90;2247
+8357;Cyclops C;BM;4;2;90;2252
+1779;Kingfisher A;BM;4;2;90;2261
+401;Star Adder (Blood Asp) C;BM;4;2;90;2270
+8010;Yu Huang Y-H12GC;BM;4;3;90;2298
+8261;Kingfisher G;BM;4;2;90;2319
+8262;Kingfisher I;BM;4;2;90;2348
+1782;Kingfisher D;BM;4;2;90;2364
+402;Star Adder (Blood Asp) D;BM;4;2;90;2396
+1786;Kingfisher Prime;BM;4;2;90;2401
+8359;Regent Prime;BM;4;2;90;2437
+1783;Kingfisher E;BM;4;2;90;2443
+3130;Sunder SD1-OR;BM;4;3;90;2462
+1780;Kingfisher B;BM;4;2;90;2472
+8065;Juliano JLN-5C;BM;4;3;90;2473
+6849;Mad Cat Mk II 5;BM;4;2;90;2491
+7648;Pulverizer;BM;4;2;90;2506
+1785;Kingfisher H;BM;4;2;90;2525
+8443;Alpha Wolf C;BM;4;3;90;2535
+8362;Regent C;BM;4;3;90;2561
+1784;Kingfisher F;BM;4;2;90;2568
+6845;Sunder SD1-OG;BM;4;3;90;2594
+8260;Kingfisher T;BM;4;2;90;2637
+1781;Kingfisher C;BM;4;2;90;2644
+406;Star Adder (Blood Asp) Prime;BM;4;2;90;2654
+6848;Mad Cat Mk II 6;BM;4;2;90;2663
+8442;Alpha Wolf B;BM;4;3;90;2672
+7309;Highlander HGN-732 (Jorgensson);BM;4;3;90;2682
+4564;Mad Cat Mk II (Enhanced);BM;4;2;90;2732
+2319;Onager;BM;4;2;90;2732
+3133;Supernova 2;BM;4;2;90;2741
+8361;Regent B;BM;4;2;90;2744
+1787;Kingfisher X;BM;4;2;90;2761
+6634;Viking IIC;BM;4;2;90;2780
+3132;Supernova;BM;4;2;90;2801
+5715;Mad Cat Mk II 2;BM;4;2;90;2822
+6847;Onager 2;BM;4;2;90;2847
+6519;Shikra SKR-4M;AF;3;3;90;2849
+2273;Night Wolf;BM;4;2;90;2878
+400;Star Adder (Blood Asp) B;BM;4;2;90;2885
+404;Star Adder (Blood Asp) F;BM;4;2;90;2908
+7670;Chippewa IIC 2;;0;2;90;2914
+5003;Scytha X;AF;3;2;90;2926
+1525;Highlander IIC 2;BM;4;2;90;2928
+9433;Highlander IIC 4;bm;4;2;90;2958
+6850;Mad Cat Mk II 4;BM;4;2;90;2962
+8440;Alpha Wolf Prime;BM;4;3;90;2966
+1524;Highlander IIC;BM;4;2;90;2979
+1523;Highlander IIC 3;BM;4;2;90;3001
+9486;Star Adder (Blood Asp) T;BM;4;3;90;3069
+8132;Supernova 5;BM;4;2;90;3075
+2849;Scytha A;AF;3;2;90;3134
+4565;Mad Cat Mk II;BM;4;2;90;3135
+3135;Supernova 4;BM;4;2;90;3158
+5716;Mad Cat Mk II 3;BM;4;2;90;3168
+403;Star Adder (Blood Asp) E;BM;4;2;90;3179
+405;Star Adder (Blood Asp) G;BM;4;2;90;3192
+5004;Scytha XR;AF;3;2;90;3213
+6808;Scytha F;AF;3;2;90;3223
+2853;Scytha Prime;AF;3;2;90;3232
+2852;Scytha D;AF;3;2;90;3276
+8441;Alpha Wolf A;BM;4;3;90;3359
+8360;Regent A;BM;4;2;90;3412
+590;Chippewa IIC;AF;3;2;90;3431
+3134;Supernova 3;BM;4;2;90;3448
+399;Star Adder (Blood Asp) A;BM;4;2;90;3452
+2851;Scytha C;AF;3;2;90;3498
+2850;Scytha B;AF;3;2;90;3517
+5002;Scytha E;AF;3;2;90;3553
+9400;Ontos Heavy Tank (Chemical Laser);CV;4;3;95;1572
+4293;Heimdall Ground Monitor Tank Prime;CV;4;2;95;1943
+6804;Heimdall Ground Monitor Tank D;CV;4;2;95;1990
+3784;Banshee BNC-11X;BM;4;3;95;2030
+5743;Heimdall Ground Monitor Tank C;CV;4;2;95;2131
+8464;Gladiator-B (Executioner-B) A;BM;4;2;95;2194
+6424;Tenshi TN-10-OR;BM;4;3;95;2237
+4292;Heimdall Ground Monitor Tank A;CV;4;2;95;2244
+5742;Heimdall Ground Monitor Tank B;CV;4;2;95;2254
+3333;Turkina U;BM;4;2;95;2478
+8213;Turkina M;BM;4;2;95;2495
+7539;Nightstar NSR-10D;BM;4;3;95;2539
+7714;Gladiator (Executioner) T;BM;4;2;95;2558
+8246;Banshee BNC-12S;BM;4;3;95;2562
+783;Cygnus 3;BM;4;2;95;2569
+6843;Cygnus 4;BM;4;2;95;2570
+781;Cygnus;BM;4;2;95;2583
+4351;Hydaspes 3;AF;3;2;95;2611
+9398;Sagittaire SGT-14R;BM;4;3;95;2626
+1206;Gladiator (Executioner) D;BM;4;2;95;2698
+3331;Turkina H;BM;4;2;95;2712
+8463;Gladiator-B (Executioner-B) Prime;BM;4;2;95;2721
+1205;Gladiator (Executioner) C;BM;4;2;95;2740
+1211;Gladiator (Executioner) Prime;BM;4;2;95;2749
+8344;Mastodon B;BM;4;2;95;2793
+3328;Turkina C;BM;4;2;95;2798
+4723;Nightstar NSR-9J (Brubaker);BM;4;3;95;2838
+6293;Shrike 2;BM;4;2;95;2846
+8343;Mastodon A;BM;4;2;95;2856
+9508;Albatross C "Sooty Albatross";BM;4;3;95;2885
+7712;Gladiator (Executioner) J;BM;4;2;95;2891
+3326;Turkina A;BM;4;2;95;2906
+1204;Gladiator (Executioner) B;BM;4;2;95;2940
+3332;Turkina Prime;BM;4;2;95;2944
+8346;Mastodon D;BM;4;2;95;2961
+6292;Shrike;BM;4;2;95;2969
+8466;Gladiator-B (Executioner-B) C;BM;4;2;95;2979
+1207;Gladiator (Executioner) E;BM;4;2;95;2988
+1480;Hellstar 3;BM;4;2;95;3025
+6837;Hauptmann HA1-OT;BM;4;3;95;3031
+1210;Gladiator (Executioner) P;BM;4;2;95;3052
+3334;Turkina X;BM;4;2;95;3056
+1208;Gladiator (Executioner) H;BM;4;2;95;3059
+8212;Turkina T;BM;4;2;95;3080
+1481;Hellstar;BM;4;2;95;3084
+8345;Mastodon C;BM;4;2;95;3092
+8342;Mastodon Prime;BM;4;2;95;3109
+1203;Gladiator (Executioner) A;BM;4;2;95;3112
+1209;Gladiator (Executioner) K;BM;4;2;95;3125
+7713;Gladiator (Executioner) L;BM;4;2;95;3132
+3329;Turkina D;BM;4;2;95;3132
+3330;Turkina E;BM;4;2;95;3147
+8465;Gladiator-B (Executioner-B) B;BM;4;2;95;3157
+6840;Gladiator (Executioner) I;BM;4;2;95;3339
+782;Cygnus 2;BM;4;2;95;3361
+7596;Gladiator (Executioner) TC;BM;4;2;95;3363
+4353;Hydaspes 2;AF;3;2;95;3385
+3327;Turkina B;BM;4;2;95;3420
+7619;Nightstar NSR-9J (Holt);BM;4;2;95;3433
+9215;Shrike "Black Rose";BM;4;2;95;3487
+1479;Hellstar 2;BM;4;2;95;3545
+6842;Gladiator (Executioner) F;BM;4;2;95;3606
+1593;Hydaspes (Algar);AF;3;2;95;3636
+6294;Shrike 3;BM;4;2;95;3698
+4352;Hydaspes;AF;3;2;95;3701
+6841;Gladiator (Executioner) G;BM;4;2;95;3825
+5832;Turkina Z;BM;4;2;95;3935
+4538;Long-Range Shuttlecraft KR-61C;;0;2;100;0
+3880;Bus S-7AC;;0;2;100;0
+4044;Daishi (Dire Wolf) "Lone Wolf";;0;2;100;0
+5061;Shuttle ST-46C;;0;2;100;0
+3686;Aithon Assault Transport 2;;0;2;100;0
+4597;Mars Assault Vehicle (Original);;0;2;100;0
+3685;Aithon Assault Transport;CV;4;2;100;1666
+9458;Behemoth Heavy Tank (Kurita Upgrade);CV;4;3;100;1789
+2828;Schwerer Gustav;BM;4;3;100;1796
+4069;Demolisher II Heavy Tank II-X;CV;4;3;100;1927
+2080;Mars Assault Vehicle (ATM);CV;4;2;100;1948
+1841;Kraken (Bane);BM;4;2;100;1950
+6726;Malice MAL-XV;BM;4;3;100;1996
+6725;Malice MAL-XP;BM;4;3;100;2016
+71;Archangel C-ANG-OS Caelestis;BM;4;3;100;2026
+2082;Mars Assault Vehicle;CV;4;2;100;2076
+3815;Behemoth (Stone Rhino) 5;BM;4;2;100;2157
+5604;Grand Titan T-IT-N14R "Vengeance";BM;4;3;100;2237
+8067;Kodiak II 3;BM;4;3;100;2238
+8243;Kraken (Bane) 6;BM;4;2;100;2339
+3750;Atlas C;BM;4;3;100;2340
+44;Annihilator C "Gausszilla";BM;4;2;100;2455
+7398;Atlas II AS7-D-H (Devlin);BM;4;3;100;2491
+1842;Kraken (Bane) 2;BM;4;2;100;2502
+2083;Mars Assault Vehicle (XL);CV;4;2;100;2520
+43;Annihilator C;BM;4;2;100;2520
+1804;Kodiak (Cale);BM;4;3;100;2535
+2081;Mars Assault Vehicle (HAG);CV;4;2;100;2545
+8242;Kraken (Bane) 5;BM;4;2;100;2554
+6358;Atlas III AS7-D3;BM;4;3;100;2564
+8386;Annihilator ANH-5W;BM;4;3;100;2595
+8459;Atlas II AS7-DK-H;BM;4;3;100;2599
+3814;Behemoth (Stone Rhino) 4;BM;4;2;100;2601
+8432;Atlas C 3;BM;4;2;100;2606
+814;Daishi (Dire Wolf) B;BM;4;2;100;2609
+1807;Kodiak 3;BM;4;2;100;2615
+6824;Xanthos XNT-7O;BM;4;3;100;2620
+4046;Daishi (Dire Wolf) X;BM;4;2;100;2645
+8066;King Crab KGC-009C;BM;4;3;100;2652
+6831;Berserker BRZ-D4;BM;4;3;100;2659
+8241;Amarok 3;BM;4;2;100;2675
+7649;Storm Giant;BM;4;2;100;2676
+6304;Tomahawk II A;BM;4;2;100;2697
+8320;Iron Cheetah A;BM;4;2;100;2708
+1844;Kraken (Bane) 4;BM;4;2;100;2709
+818;Daishi (Dire Wolf) Prime;BM;4;2;100;2712
+9464;Pillager PLG-6Z;BM;4;3;100;2714
+45;Annihilator C 2;BM;4;2;100;2722
+1808;Kodiak 4;BM;4;2;100;2728
+8431;Atlas C 2;BM;4;2;100;2736
+7519;Marauder II MAD-10D;BM;4;3;100;2741
+6299;Tomahawk A;BM;4;2;100;2762
+7310;Atlas II AS7-D-H (Kerensky);BM;4;2;100;2777
+1725;Jupiter;BM;4;2;100;2784
+8433;Atlas AS8-S;BM;4;3;100;2789
+7449;Behemoth (Stone Rhino) 8;BM;4;2;100;2804
+6833;Daishi (Dire Wolf) E;BM;4;2;100;2814
+5724;Scylla 3;BM;4;2;100;2820
+5723;Scylla 2;BM;4;2;100;2839
+813;Daishi (Dire Wolf) A;BM;4;2;100;2855
+1806;Kodiak 2;BM;4;2;100;2856
+7686;Devastator DVS-2-EC;BM;4;3;100;2859
+8323;Iron Cheetah D;BM;4;2;100;2871
+6359;Atlas III AS7-D2;BM;4;3;100;2890
+5145;Storm Giant 2;BM;4;2;100;2891
+4463;Kraken (Bane) XR;BM;4;2;100;2894
+5000;Scylla;BM;4;2;100;2897
+810;Daishi (Dire Wolf) "Prometheus";BM;4;2;100;2900
+8322;Iron Cheetah C;BM;4;2;100;2915
+7448;Behemoth (Stone Rhino) 7;BM;4;2;100;2916
+2054;Marauder II C;BM;4;2;100;2916
+8364;Kodiak 6;BM;4;2;100;2922
+1805;Kodiak;BM;4;2;100;2927
+6306;Tomahawk II C;BM;4;2;100;2938
+1843;Kraken (Bane) 3;BM;4;2;100;2941
+821;Daishi (Dire Wolf) W;BM;4;2;100;2951
+6829;Jupiter 4;BM;4;2;100;2955
+3816;Behemoth (Stone Rhino) 6;BM;4;2;100;2981
+6727;Malice MAL-YZ;BM;4;3;100;2982
+6301;Tomahawk C;BM;4;2;100;2985
+819;Daishi (Dire Wolf) S;BM;4;2;100;2985
+817;Daishi (Dire Wolf) H;BM;4;2;100;2992
+318;Behemoth (Stone Rhino);BM;4;2;100;3001
+811;Daishi (Dire Wolf) "Widowmaker";BM;4;2;100;3041
+1801;Kirghiz Prime;AF;3;2;100;3046
+812;Daishi (Dire Wolf) (Hohiro);BM;4;2;100;3048
+6295;Kodiak II;BM;4;2;100;3066
+1809;Kodiak 5;BM;4;2;100;3067
+1606;Imp C;BM;4;2;100;3070
+320;Behemoth (Stone Rhino) 3;BM;4;2;100;3072
+1727;Jupiter 3;BM;4;2;100;3074
+6298;Tomahawk Prime;BM;4;2;100;3101
+319;Behemoth (Stone Rhino) 2;BM;4;2;100;3107
+7734;Crucible;BM;4;2;100;3108
+6296;Kodiak II 2;BM;4;2;100;3147
+8319;Iron Cheetah Prime;BM;4;2;100;3155
+9377;Devastator DVS-11;BM;4;3;100;3170
+8239;Amarok;BM;4;2;100;3185
+7736;Crucible 3;BM;4;2;100;3230
+1799;Kirghiz C;AF;3;2;100;3231
+1726;Jupiter 2;BM;4;2;100;3278
+8321;Iron Cheetah B;BM;4;2;100;3303
+8133;Daishi (Dire Wolf) T;BM;4;2;100;3317
+6300;Tomahawk B;BM;4;2;100;3323
+6303;Tomahawk II Prime;BM;4;2;100;3334
+8240;Amarok 2;BM;4;2;100;3351
+820;Daishi (Dire Wolf) U;BM;4;2;100;3360
+1797;Kirghiz A;AF;3;2;100;3368
+816;Daishi (Dire Wolf) D;BM;4;2;100;3403
+8324;Iron Cheetah L;BM;4;2;100;3416
+6305;Tomahawk II B;BM;4;2;100;3513
+7735;Crucible 2;BM;4;2;100;3598
+815;Daishi (Dire Wolf) C;BM;4;2;100;3610
+1800;Kirghiz D;AF;3;2;100;3649
+8244;Kraken (Bane) 7;BM;4;2;100;3740
+2053;Marauder II (Bounty Hunter);BM;4;2;100;3767
+1798;Kirghiz B;AF;3;2;100;3935
+4450;Kirghiz E;AF;3;2;100;4023
+6684;Poseidon PSD-V2;BM;4;3;125;3677
+6687;Ares ARS-V1B Hades;BM;4;3;135;2839
+6688;Ares ARS-V1C Aphrodite;BM;4;3;135;2903
+6686;Ares ARS-V1A Hera;BM;4;3;135;2944
+6689;Ares ARS-V1D Hephaestus;BM;4;3;135;2960
+9500;Ares ARS-V1E Apollo;BM;4;3;135;2986
+6685;Ares ARS-V1 Zeus;BM;4;3;135;3247
+4477;Landing Craft Mark VII-C;;0;2;150;0
+6607;Gulltoppr OmniMonitor A;CV;4;3;190;3704
+6579;Gunboat NL-45;;0;2;190;4343
+4101;Dropshuttle K-1C;;0;2;200;0
 4652;Mole Mining Exoskeleton;;0;1;0;0
 4695;NAIS Power Suit;;0;1;0;0
 4779;PAB-27 Exoskeleton;;0;1;0;0
