@@ -174,6 +174,18 @@ session_start();
 			document.getElementById("specialabilitiescontainer").style.visibility = "hidden";
 		}
 
+		function showGameMenu() {
+			if (document.getElementById("gamemenu").style.visibility == "visible") {
+				document.getElementById("gamemenu").style.visibility = "hidden";
+				document.getElementById("gamemenu").style.display = "none";
+				document.getElementById("gamemenubutton").innerHTML = "<i style='color:#eee;' class='fa-solid fa-angles-down'></i>";
+			} else {
+				document.getElementById("gamemenu").style.visibility = "visible";
+				document.getElementById("gamemenu").style.display = "block";
+				document.getElementById("gamemenubutton").innerHTML = "<i style='color:#eee;' class='fa-solid fa-angles-up'></i>";
+			}
+		}
+
 //		var movementcache = 0;
 //		var firedcache = 0;
 //
@@ -580,6 +592,16 @@ session_start();
 	</table>
 </div>
 
+<div id="gamemenu">
+	<table width="100%">
+		<tr>
+			<td>
+				<p>GAME MENU</p>
+			</td>
+		</tr>
+	</table>
+</div>
+
 <div id="cover"></div>
 
 <div id="header">
@@ -688,8 +710,8 @@ session_start();
 	}
 ?>
 			<!-- <td style="width:100px;" style="width:100px;" nowrap width="100px" style="background:rgba(50,50,50,1.0);text-align:center;vertical-align:middle;display:block;"><img src='./images/player/<?=$pimage?>' width='60px' height='60px'></td> -->
-			<td nowrap onclick="location.href=''" width="60px" style="width:60px;min-width:60px;background:rgba(1,70,1,1.0);text-align:center;vertical-align:middle;">
-				<div><a style="color:#eee;" href=""><i class="fa-solid fa-angles-right"></i></a></div>
+			<td nowrap onclick="javascript:showGameMenu();" width="60px" style="width:60px;min-width:60px;background:rgba(56,87,26,1.0);text-align:center;vertical-align:middle;">
+				<div id="gamemenubutton"><i style="color:#eee;" class="fa-solid fa-angles-down"></i></div>
 			</td>
 			<td style='width:5px;'>&nbsp;</td>
 			<td nowrap onclick="location.href='gui_show_playerlist.php'" style="width: 60px;" width="60px" style="background: rgba(50,50,50,1.0); text-align: center; vertical-align: middle;"><img src='./images/player/<?=$pimage?>' style='height:auto;display:block;' width='60px' height='60px'></td>

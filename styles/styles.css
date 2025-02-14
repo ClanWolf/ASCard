@@ -167,6 +167,20 @@ a:hover {
 	/* background-image: url('images/body-bg_1.jpg'); */
 	z-index:110;
 }
+#gamemenu {
+	position: fixed;
+	display: none; /* none, block */
+	visibility: hidden; /* hidden, visible */
+	height: 100%;
+	width: 100%;
+	top: 65px;
+	left: 0px;
+	right: 0px;
+	background: rgba(60,60,60,0.75);
+	/* background-color: #ff0000; */
+	/* background-image: url('images/body-bg_1.jpg'); */
+	z-index:210;
+}
 #specialabilitiescontainer {
 	text-align: center;
 	position: fixed;

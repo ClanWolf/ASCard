@@ -146,6 +146,38 @@ function getUnitList(filter, tech, minTon, maxTon, category, unittypeString) {
 									// All values are set, we can set the filters
 									console.log("Break search, set filter values.");
 
+									document.getElementById("tech").setAttribute("onchange", "");
+									document.getElementById("unittype").setAttribute("onchange", "");
+									document.getElementById("tonnage").setAttribute("onchange", "");
+									document.getElementById("NameFilter").setAttribute("onchange", "");
+									document.getElementById("CreateUnitEra").setAttribute("onchange", "");
+
+									document.getElementById("tech").value = detectedUnitTech;
+									document.getElementById("unittype").value = detectedUnitType;
+									if (detectedUnitSize == 1) {
+										document.getElementById("tonnage").value = "LIGHT";
+									} else if (detectedUnitSize == 2) {
+										document.getElementById("tonnage").value = "MEDIUM";
+									} else if (detectedUnitSize == 3) {
+										document.getElementById("tonnage").value = "HEAVY";
+									} else if (detectedUnitSize == 4) {
+										document.getElementById("tonnage").value = "ASSAULT";
+									} else if (detectedUnitSize == 5) {
+										document.getElementById("tonnage").value = "SUPERHEAVY";
+									}
+
+									document.getElementById("tonnage").style.color="#ffa72c";
+									document.getElementById("tech").style.color="#ffa72c";
+									document.getElementById("unittype").style.color="#ffa72c";
+
+									document.getElementById("tech").setAttribute("onchange", "fetchUnitList();");
+									document.getElementById("unittype").setAttribute("onchange", "fetchUnitList();");
+									document.getElementById("tonnage").setAttribute("onchange", "fetchUnitList();");
+									document.getElementById("NameFilter").setAttribute("onchange", "fetchUnitList();");
+									document.getElementById("CreateUnitEra").setAttribute("onchange", "fetchUnitList();");
+
+									fetchUnitList();
+
 									break;
 								} else {
 									console.log("Not viable unit found, continue search.");
@@ -161,6 +193,9 @@ function getUnitList(filter, tech, minTon, maxTon, category, unittypeString) {
 			}
 		} else {
 			document.getElementById("NameFilter").style.color="#f00";
+			document.getElementById("tonnage").style.color="#fff";
+			document.getElementById("tech").style.color="#fff";
+			document.getElementById("unittype").style.color="#fff";
 		}
 
 		document.getElementById("units").innerHTML = optionList;
