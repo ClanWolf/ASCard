@@ -132,10 +132,24 @@ function getUnitList(filter, tech, minTon, maxTon, category, unittypeString) {
 							const line = lines[i].split(";");
 							// console.log(line[1]);
 							if (filter.length >= 3 && line[1] !== undefined && line[1].includes(filter)) {
+								let detectedUnitType = line[2];
+								let detectedUnitSize = line[3];
+								let detectedUnitTech = line[4];
+
 								console.log("Found matching entry in catalog: " + lines[i]);
-								console.log("Break search, set filter values.");
+								console.log("Type: " + detectedUnitType);
+								console.log("Size: " + detectedUnitSize);
+								console.log("Tech: " + detectedUnitTech);
+
 								// Set filter to new values
-								break;
+								if (detectedUnitType != "" && detectedUnitSize != "" && detectedUnitTech != "") {
+									// All values are set, we can set the filters
+									console.log("Break search, set filter values.");
+
+									break;
+								} else {
+									console.log("Not viable unit found, continue search.");
+								}
 							}
 						}
 						i++;

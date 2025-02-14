@@ -378,13 +378,19 @@ session_start();
 								<td></td>
 								<td colspan="2" class='datalabel' nowrap align="left">
 									Era: <select required style='width:180px;' name='GameEra' id='GameEra' size='1' onchange="javascript:saveGameInfo(<?php echo $gid ?>);">
-										<option value="STAR LEAGUE">STAR LEAGUE</option>
-										<option value="SUCCESSION WARS">SUCCESSION WARS</option>
-										<option value="CLAN INVASION">CLAN INVASION</option>
-										<option value="CIVIL WAR">CIVIL WAR</option>
-										<option value="JIHAD">JIHAD</option>
-										<option value="DARK AGE">DARK AGE</option>
-										<option value="ILCLAN">ILCLAN</option>
+										<option value="0">ALL</option>
+										<option value="9">2005-2570: AGE OF WAR</option>
+										<option value="10">2571-2780: STAR LEAGUE</option>
+										<option value="11">2781-2900: EARLY SUCCESSION WARS</option>
+										<option value="255">2901-3019: LATE SUCCESSION WARS - LOSTECH</option>
+										<option value="256">3020-3049: LATE SUCCESSION WARS - RENAISSANCE</option>
+										<option value="13">3050-3061: CLAN INVASION</option>
+										<option value="247">3052-3067: CIVIL WAR</option>
+										<option value="14">3068-3080: JIHAD</option>
+										<option value="15">3081-3100: EARLY REPUBLIC</option>
+										<option value="254">3101-3130: LATE REPUBLIC</option>
+										<option value="16">3131-3150: DARK AGE</option>
+										<option value="257">3151-9999: ILCLAN</option>
 									</select>
 									<script type="text/javascript">
 										if ('<?php echo $GAMEERA; ?>' == 'STAR LEAGUE') {

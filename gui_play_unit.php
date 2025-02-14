@@ -1187,7 +1187,7 @@ if ($showDistancesHexes == 1) {
 							<td nowrap class="datalabel_thin_small" width="5%" style="text-align: right;">½ MV</td>
 						</tr>
 						<tr>
-							<td nowrap class="datalabel" width="5%" style="text-align: right;">WN:&nbsp;</td>
+							<td nowrap class="datalabel" width="5%" style="text-align: right;">W:&nbsp;</td>
 							<td nowrap valign="middle"><a style="padding-right:5px;" valign="middle" href="javascript:increaseWPNS_PREP();"><i class="fas fa-plus-square"></i></a></td>
 							<td nowrap class="datalabel_thin" id="label_WPNS_PREP" align="center"><?= $array_WPNS_PREP[$chosenUnitIndex] ?></td>
 							<td nowrap class="datalabel">&nbsp;</td>
@@ -1236,7 +1236,7 @@ if ($showDistancesHexes == 1) {
 							<td nowrap class="datalabel_thin_small" width="5%" style="text-align: right;">+2 TO-HIT</td>
 						</tr>
 						<tr>
-							<td nowrap class="datalabel" width="5%" style="text-align:right;">WN:&nbsp;</td>
+							<td nowrap class="datalabel" width="5%" style="text-align:right;">W:&nbsp;</td>
 							<td nowrap valign="middle"><a style="padding-right:5px;" href="javascript:increaseWPNS_CV_PREP();"><i class="fas fa-plus-square"></i></a></td>
 							<td nowrap class="datalabel_thin" id="label_CV_WPNS_PREP" align="center"><?= $array_CV_WPNS_PREP[$chosenUnitIndex] ?></td>
 							<td nowrap class="datalabel">&nbsp;</td>
