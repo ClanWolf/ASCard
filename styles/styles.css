@@ -171,7 +171,7 @@ a:hover {
 	position: fixed;
 	display: none; /* none, block */
 	visibility: hidden; /* hidden, visible */
-	height: 20%;
+	height: 100%;
 	width: 100%;
 	top: 65px;
 	left: 0px;

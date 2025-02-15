@@ -143,26 +143,6 @@
 	}
 	mysqli_free_result($result_asc_playerformations);
 
-	// Units in player formations
-	for ($cc = 0; $cc < sizeof($array_PLAYER_FORMATION_IDS); $cc++) {
-		$unitdata = array();
-		$currentformationid = $array_PLAYER_FORMATION_IDS[$cc];
-//		$sql_asc_playerunitsinformation = "SELECT SQL_NO_CACHE * FROM asc_assign where formationid=".$currentformationid.";";
-//		$result_asc_playerunitsinformation = mysqli_query($conn, $sql_asc_playerunitsinformation);
-//		if (mysqli_num_rows($result_asc_playerunitsinformation) > 0) {
-//			$units_in_formation = array();
-//			while($row = mysqli_fetch_assoc($result_asc_playerunitsinformation)) {
-//				$unitdata['unitid'] = $row["unitid"];
-//				$unitdata['round_moved'] = $row["round_moved"];
-//				$unitdata['round_fired'] = $row["round_fired"];
-//
-//				$units_in_formation[$unitdata['unitid']] = $unitdata;
-//			}
-//			$array_PLAYER_UNITS_IN_FORMATION[$currentformationid] = $units_in_formation;
-//		}
-//		mysqli_free_result($result_asc_playerunitsinformation);
-	}
-
 	// Use MUL Images
 	$sql_asc_useMULImages = "SELECT SQL_NO_CACHE * FROM asc_options where playerid = " . $formationplayerid . ";";
 	$result_asc_useMULImages = mysqli_query($conn, $sql_asc_useMULImages);
@@ -185,6 +165,43 @@
 		}
 	}
 	mysqli_free_result($result_asc_playerround);
+
+	// Units in player formations
+	for ($cc = 0; $cc < sizeof($array_PLAYER_FORMATION_IDS); $cc++) {
+		$unitdata = array();
+		$currentformationid = $array_PLAYER_FORMATION_IDS[$cc];
+		$sql_asc_playerunitsinformation = "SELECT SQL_NO_CACHE * FROM asc_assign where formationid=".$currentformationid.";";
+		$result_asc_playerunitsinformation = mysqli_query($conn, $sql_asc_playerunitsinformation);
+		if (mysqli_num_rows($result_asc_playerunitsinformation) > 0) {
+			$units_in_formation = array();
+			while($row = mysqli_fetch_assoc($result_asc_playerunitsinformation)) {
+				$unitdata['unitid'] = $row["unitid"];
+				$unitdata['round_moved'] = $row["round_moved"];
+				$unitdata['round_fired'] = $row["round_fired"];
+
+				// Select faction logo
+				$sql_asc_playerformationfaction = "SELECT SQL_NO_CACHE * FROM asc_faction where factionid = ".$array_PLAYER_FORMATION_FACTIONIDS[$cc]." ORDER BY factionid;";
+				$result_asc_playerformationfaction = mysqli_query($conn, $sql_asc_playerformationfaction);
+				if (mysqli_num_rows($result_asc_playerformationfaction) > 0) {
+					while($row = mysqli_fetch_assoc($result_asc_playerformationfaction)) {
+						$unitdata['faction_logo'] = $row["factionimage"];
+					}
+				}
+
+				$sql_currentunitstatus = "SELECT SQL_NO_CACHE * FROM asc_unitstatus where unitid=".$unitdata['unitid']." and round=".$CURRENTROUND." and gameid=".$gid.";";
+				$result_currentunitstatus = mysqli_query($conn, $sql_currentunitstatus);
+				if (mysqli_num_rows($result_currentunitstatus) > 0) {
+					while($row = mysqli_fetch_assoc($result_currentunitstatus)) {
+						$unitdata['status_image'] = $row["unit_statusimageurl"];
+					}
+				}
+
+				$units_in_formation[$unitdata['unitid']] = $unitdata;
+			}
+			$array_PLAYER_UNITS_IN_FORMATION[$currentformationid] = $units_in_formation;
+		}
+		mysqli_free_result($result_asc_playerunitsinformation);
+	}
 
 	// Faction
 	// factionid; name; --factiontype--; factionimage

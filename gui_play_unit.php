@@ -601,20 +601,21 @@ session_start();
 		<tr>
 <?php
 	for ($cc = 0; $cc < sizeof($array_PLAYER_FORMATION_IDS); $cc++) {
+		$currFormId = $array_PLAYER_FORMATION_IDS[$cc];
+		$unitArray = $array_PLAYER_UNITS_IN_FORMATION[$currFormId];
+
 		echo "			<td nowrap style='width:270px;height:30px;' onclick='location.href=\"gui_play_unit.php?formationid=".$array_PLAYER_FORMATION_IDS[$cc]."\"' class='formationselect_button_normal'>\n";
 		echo "				<table style='width:100%;' cellspacing=0 cellpadding=0>\n";
 		echo "					<tr>\n";
-		echo "						<td style='text-align:center;'>\n";
+		echo "						<td style='text-align:center;vertical-align:top;'>\n";
 		echo "							<a href='gui_play_unit.php?formationid=".$array_PLAYER_FORMATION_IDS[$cc]."'>".$array_PLAYER_FORMATION_NAMES[$cc]."</a>\n";
-
-//		php> $myhashmap = array();
-//		php> $myhashmap['mykey1'] = 'myvalue1';
-//		php> $myhashmap['mykey2'] = 'myvalue2';
-//		php> echo $myhashmap['mykey2'];
-//		myvalue2
-
-		// echo " 							<p>".$array_PLAYER_UNITS_IN_FORMATION[$array_PLAYER_FORMATION_IDS[$cc]]."</p>";
-
+		echo "						</td>\n";
+		echo "					</tr>\n";
+		echo "					<tr>\n";
+		echo "						<td style='text-align:left;'>\n";
+		foreach($unitArray as $item) {
+			echo "<img src='https://www.ascard.net/app/".$item["status_image"]."' width='35px'>";
+		}
 		echo "						</td>\n";
 		echo "					</tr>\n";
 		echo "				</table>\n";
