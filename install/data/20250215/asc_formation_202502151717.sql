@@ -40,4 +40,8 @@ INSERT INTO ascard.asc_formation (factionid,commandid,formationname,playerid,Upd
 	 (8,8,'Striker',21,'2025-01-10 23:18:35.0'),
 	 (3,9,'Command',22,'2025-01-12 02:36:59.0'),
 	 (3,9,'Battle',22,'2025-01-12 02:36:59.0'),
-	 (3,9,'Striker',22,'2025-01-12 02:36:59.0');
+	 (3,9,'Striker',22,'2025-01-12 02:36:59.0'),
+	 (2,11,'Command',24,'2025-02-15 00:16:09.0');
+INSERT INTO ascard.asc_formation (factionid,commandid,formationname,playerid,Updated) VALUES
+	 (2,11,'Battle',24,'2025-02-15 00:16:09.0'),
+	 (2,11,'Striker',24,'2025-02-15 00:16:09.0');

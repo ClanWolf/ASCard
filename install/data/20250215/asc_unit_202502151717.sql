@@ -59,34 +59,25 @@ INSERT INTO ascard.asc_unit (playerid,mulid,tech,unit_number,unit_name,unit_tonn
 	 (2,2902,1,'127','',55,'images/units/Generic_Mech.gif','Shadow Hawk SHD-2Hb',41,'BM',2,2,10,6,'Skirmisher',3,3,0,3,0,1,0,0,0,0,5,5,0,'CASE,FLK1/1/1,JMPW1','',0,0,'2024-12-31 11:56:41.0'),
 	 (2,2492,1,'128','',45,'images/units/Generic_Mech.gif','Phoenix Hawk PXH-1b &quot;Special&quot;',34,'BM',2,2,12,12,'Skirmisher',3,2,0,2,0,2,0,0,0,1,4,2,0,'CASE,ECM','',0,0,'2024-12-31 11:58:13.0'),
 	 (2,3010,1,'124','',30,'images/units/Generic_Mech.gif','Spider SDR-5V',25,'BM',1,3,16,16,'Scout',3,1,0,1,0,0,0,0,0,0,2,3,0,'ENE','',0,0,'2024-12-31 12:01:18.0'),
-	 (1,1985,2,'1','Timber Wolf Prime',75,'images/units/Timberwolf.png','Mad Cat (Timber Wolf) Prime',65,'BM',3,2,10,NULL,'Brawler',3,5,0,5,0,4,0,0,0,1,8,4,0,'CASE,IF2,LRM1/1/2,OMNI','',0,0,'2025-01-10 19:55:34.0'),
 	 (11,924,2,'','',40,'images/units/Generic_Mech.gif','Dragonfly (Viper) H',46,'BM',2,3,16,16,'Striker',3,3,0,3,0,0,0,0,0,1,4,2,0,'AMS,CASE,OMNI','',0,0,'2025-01-04 21:34:34.0'),
 	 (11,6840,2,'','',95,'images/units/Executioner.png','Gladiator (Executioner) I',58,'BM',4,2,12,8,'Skirmisher',4,6,0,6,0,0,0,0,0,0,9,5,0,'CASE,ECM,OMNI,JMPW1','',0,0,'2025-01-04 21:39:22.0'),
 	 (11,8352,2,'','',40,'images/units/Generic_Mech.gif','Kontio',52,'BM',2,3,18,NULL,'Striker',4,4,0,4,0,0,0,0,0,1,5,2,0,'ECM,ENE,MEL,STL,TSM','',0,0,'2025-01-04 21:39:47.0'),
-	 (11,714,2,'','',40,'images/units/Generic_Mech.gif','Coyotl Prime',48,'BM',2,3,14,NULL,'Striker',4,4,0,4,0,3,0,0,0,0,5,2,0,'CASE,IF1,OMNI','',0,0,'2025-01-04 21:40:33.0');
+	 (11,714,2,'','',40,'images/units/Generic_Mech.gif','Coyotl Prime',48,'BM',2,3,14,NULL,'Striker',4,4,0,4,0,3,0,0,0,0,5,2,0,'CASE,IF1,OMNI','',0,0,'2025-01-04 21:40:33.0'),
+	 (11,6946,2,'','',20,'images/units/Dasher.png','Dasher (Fire Moth) G',42,'BM',1,4,30,NULL,'Striker',3,4,0,4,0,0,0,0,0,1,1,1,0,'CASE,OMNI','',0,0,'2025-01-04 21:41:00.0');
 INSERT INTO ascard.asc_unit (playerid,mulid,tech,unit_number,unit_name,unit_tonnage,unit_imageurl,as_model,as_pv,as_tp,as_sz,as_tmm,as_mv,as_mvj,as_role,as_skill,as_short,as_short_min,as_medium,as_medium_min,as_long,as_long_min,as_extreme,as_extreme_min,as_ov,as_armor,as_structure,as_threshold,as_specials,as_mvtype,commander,subcommander,Updated) VALUES
-	 (11,6946,2,'','',20,'images/units/Dasher.png','Dasher (Fire Moth) G',42,'BM',1,4,30,NULL,'Striker',3,4,0,4,0,0,0,0,0,1,1,1,0,'CASE,OMNI','',0,0,'2025-01-04 21:41:00.0'),
 	 (11,920,2,'','',40,'images/units/Generic_Mech.gif','Dragonfly (Viper) D',50,'BM',2,3,16,16,'Striker',3,4,0,4,0,0,0,0,0,0,4,2,0,'CASE,IF0&#42;,OMNI','',0,0,'2025-01-04 21:41:49.0'),
-	 (1,3183,2,'23','Summoner',70,'images/units/Summoner.png','Thor (Summoner) Prime',52,'BM',3,2,10,10,'Sniper',3,4,0,4,0,4,0,0,0,0,6,4,0,'CASE,FLK1/1/1,IF1,OMNI','',0,0,'2025-01-10 21:01:49.0'),
-	 (1,1287,2,'565','Mongrel',45,'images/units/Generic_Mech.gif','Grendel (Mongrel) B',72,'BM',2,3,14,14,'Striker',1,4,0,4,0,1,0,0,0,0,5,2,0,'CASE,OMNI','',0,0,'2025-01-10 21:10:09.0'),
-	 (1,9390,2,'','',60,'images/units/Generic_Tank.gif','Eurus MBT A',55,'CV',3,2,12,NULL,'Skirmisher',3,7,0,7,0,0,0,0,0,0,6,3,0,'CASE,CR,OMNI,SRCH,TUR(7/7/-)','t',0,0,'2025-01-10 21:59:23.0'),
-	 (1,8966,2,'','',1,'images/units/Generic_Battlearmor.gif','Afreet Medium BA (Hell&apos;s Horses) (Sqd6)',18,'BA',1,1,8,8,'Scout',3,2,0,0,0,0,0,0,0,0,1,2,0,'AM,CAR6,MEC','',0,0,'2025-01-10 22:07:06.0'),
 	 (19,100,2,'1','Milam',40,'images/units/Generic_Mech.gif','Arctic Wolf 2',49,'BM',2,3,14,NULL,'Striker',3,4,0,4,0,2,0,0,0,1,3,2,0,'CASE,SNARC,SRM3/3','',0,0,'2025-01-10 23:31:00.0'),
-	 (21,189,2,'1','Baboon',20,'images/units/Generic_Mech.gif','Baboon (Howler)',24,'BM',1,3,14,NULL,'Missile Boat',3,1,0,1,0,1,0,0,0,0,2,2,0,'CASE,IF1','',0,0,'2025-01-10 23:31:19.0'),
 	 (19,8965,2,'2','',0,'images/units/Generic_Battlearmor.gif','Aerie PA(L) (Sqd6)',12,'BA',1,1,6,6,'Ambusher',3,1,0,0,0,0,0,0,0,0,0,2,0,'AM,CAR6,MEC,SOA,STL','',0,0,'2025-01-10 23:47:13.0'),
-	 (21,3473,2,'2','Michael Hawkins',60,'images/units/Maddog.png','Vulture (Mad Dog) Prime',66,'BM',3,2,10,NULL,'Missile Boat',1,4,0,4,0,4,0,0,0,2,5,3,0,'CASE,IF2,LRM1/1/2,OMNI','',0,0,'2025-01-11 00:02:25.0');
-INSERT INTO ascard.asc_unit (playerid,mulid,tech,unit_number,unit_name,unit_tonnage,unit_imageurl,as_model,as_pv,as_tp,as_sz,as_tmm,as_mv,as_mvj,as_role,as_skill,as_short,as_short_min,as_medium,as_medium_min,as_long,as_long_min,as_extreme,as_extreme_min,as_ov,as_armor,as_structure,as_threshold,as_specials,as_mvtype,commander,subcommander,Updated) VALUES
-	 (21,2003,2,'3','Gargoyle B',80,'images/units/Gargoyle.png','Man O&apos; War (Gargoyle) B',57,'BM',4,2,10,NULL,'Sniper',2,3,0,3,0,3,0,0,0,0,7,4,0,'CASE,IF1,OMNI','',0,0,'2025-01-11 00:11:53.0'),
 	 (20,2782,1,'','',80,'images/units/Generic_Mech.gif','Salamander PPR-5S',55,'BM',4,1,8,NULL,'Missile Boat',3,3,0,5,0,4,0,0,0,0,8,4,0,'CASE,IF4,LRM2/3/4','',0,0,'2025-01-11 11:44:24.0'),
 	 (20,3473,2,'','',60,'images/units/Maddog.png','Vulture (Mad Dog) Prime',50,'BM',3,2,10,NULL,'Missile Boat',3,4,0,4,0,4,0,0,0,2,5,3,0,'CASE,IF2,LRM1/1/2,OMNI','',0,0,'2025-01-11 11:45:48.0'),
 	 (20,3644,1,'','',80,'images/units/Generic_Mech.gif','Zeus ZEU-9S',48,'BM',4,1,8,NULL,'Sniper',3,3,0,4,0,3,0,0,0,0,7,6,0,'CASE,IF1,REAR1/1/-','',0,0,'2025-01-11 11:46:29.0'),
 	 (20,247,1,'','',95,'images/units/Banshee.png','Banshee BNC-5S',42,'BM',4,1,8,NULL,'Sniper',4,4,0,4,0,4,0,0,0,1,8,4,0,'REAR1/1/-','',0,0,'2025-01-11 11:48:50.0'),
 	 (20,3563,1,'','',35,'images/units/Generic_Mech.gif','Wolfhound WLF-2',34,'BM',1,2,12,NULL,'Striker',3,3,0,3,0,1,0,0,0,0,4,3,0,'ENE,REAR1/1/-','',0,0,'2025-01-11 11:51:07.0'),
 	 (20,3462,1,'','',40,'images/units/Generic_Mech.gif','Vulcan VT-5S',29,'BM',2,3,16,12,'Striker',4,2,0,2,0,1,0,0,0,0,3,2,0,'CASE,JMPW1','',0,0,'2025-01-11 11:52:19.0'),
-	 (20,3426,1,'','',45,'images/units/Vindicator.png','Vindicator VND-3L',27,'BM',2,1,8,8,'Brawler',4,2,0,2,0,2,0,0,0,0,5,4,0,'CASE,IF0&#42;','',0,0,'2025-01-11 11:53:10.0'),
-	 (20,829,1,'','',25,'images/units/Generic_Mech.gif','Dart DRT-4S',23,'BM',1,3,18,NULL,'Scout',4,2,0,2,0,0,0,0,0,0,2,2,0,'ENE','',0,0,'2025-01-11 11:54:34.0'),
-	 (20,1033,1,'','',75,'images/units/Generic_Mech.gif','Falconer FLC-8R',48,'BM',3,2,10,10,'Skirmisher',3,3,0,4,0,3,0,0,0,1,6,3,0,'-','',0,0,'2025-01-11 11:55:47.0');
+	 (20,3426,1,'','',45,'images/units/Vindicator.png','Vindicator VND-3L',27,'BM',2,1,8,8,'Brawler',4,2,0,2,0,2,0,0,0,0,5,4,0,'CASE,IF0&#42;','',0,0,'2025-01-11 11:53:10.0');
 INSERT INTO ascard.asc_unit (playerid,mulid,tech,unit_number,unit_name,unit_tonnage,unit_imageurl,as_model,as_pv,as_tp,as_sz,as_tmm,as_mv,as_mvj,as_role,as_skill,as_short,as_short_min,as_medium,as_medium_min,as_long,as_long_min,as_extreme,as_extreme_min,as_ov,as_armor,as_structure,as_threshold,as_specials,as_mvtype,commander,subcommander,Updated) VALUES
+	 (20,829,1,'','',25,'images/units/Generic_Mech.gif','Dart DRT-4S',23,'BM',1,3,18,NULL,'Scout',4,2,0,2,0,0,0,0,0,0,2,2,0,'ENE','',0,0,'2025-01-11 11:54:34.0'),
+	 (20,1033,1,'','',75,'images/units/Generic_Mech.gif','Falconer FLC-8R',48,'BM',3,2,10,10,'Skirmisher',3,3,0,4,0,3,0,0,0,1,6,3,0,'-','',0,0,'2025-01-11 11:55:47.0'),
 	 (20,450,1,'','',55,'images/units/Generic_Mech.gif','Bushwacker BSW-X1',33,'BM',2,2,10,NULL,'Skirmisher',4,3,0,3,0,2,0,0,0,0,5,3,0,'AC1/1/-,CASE,IF1','',0,0,'2025-01-11 11:57:24.0'),
 	 (20,275,1,'','',30,'images/units/Generic_Mech.gif','Battle Hawk BH-K305',24,'BM',1,2,10,10,'Striker',4,3,0,3,0,0,0,0,0,0,3,1,0,'AMS','',0,0,'2025-01-11 11:59:07.0'),
 	 (20,1536,1,'','',35,'images/units/Generic_Mech.gif','Hollander BZK-F3',24,'BM',1,2,10,NULL,'Sniper',3,2,0,2,0,2,0,0,0,0,2,3,0,'-','',0,0,'2025-01-11 12:00:28.0'),
@@ -94,10 +85,10 @@ INSERT INTO ascard.asc_unit (playerid,mulid,tech,unit_number,unit_name,unit_tonn
 	 (19,3673,2,'2','2',0,'images/units/Generic_Battlearmor.gif','Aerie PA(L) (Salvage) (Sqd4)',12,'BA',1,1,6,6,'Ambusher',3,0,0,0,0,0,0,0,0,0,0,2,0,'CAR4,SOA,STL','',0,0,'2025-01-11 12:50:30.0'),
 	 (19,5639,3,'2','3',25,'images/units/Generic_Mech.gif','Cephalus C',35,'BM',1,4,20,NULL,'Scout',3,0,0,0,0,0,0,0,0,0,3,1,0,'CR,ECM,ENE,HT1/1/1,MHQ1,NOVA,OMNI,PRB,RCN,STL','',0,0,'2025-01-11 12:57:33.0'),
 	 (20,3220,1,'','Ari 2',100,'images/units/Generic_Mech.gif','Thunder Hawk TDK-7KMA',59,'BM',4,1,6,NULL,'Missile Boat',4,5,0,5,0,3,0,0,0,0,10,4,0,'ARTAIS-1','',0,0,'2025-01-11 17:20:39.0'),
-	 (20,3300,1,'','Ari 3 - Tebu...',50,'images/units/Generic_Mech.gif','Trebuchet TBT-7M',37,'BM',2,2,10,10,'Missile Boat',3,3,0,3,0,2,0,0,0,0,4,2,0,'CASE,IF1,LRM1/1/1,SNARC','',0,0,'2025-01-11 17:24:55.0'),
-	 (20,2814,1,'','Ari 4 - Scar...',30,'images/units/Generic_Mech.gif','Scarabus SCB-9T',34,'BM',1,4,20,NULL,'Scout',3,2,0,1,0,0,0,0,0,0,3,1,0,'ECM,ENE,MEL,TAG,TSM','',0,0,'2025-01-11 17:29:35.0'),
-	 (2,2811,1,'','',35,'images/units/Generic_Tank.gif','Saxon APC',30,'CV',1,4,20,NULL,'Scout',3,0,0,0,0,0,0,0,0,0,5,2,0,'IT5,SRCH,TUR(0&#42;/-/-)','h',0,0,'2025-01-11 19:19:04.0');
+	 (20,3300,1,'','Ari 3 - Tebu...',50,'images/units/Generic_Mech.gif','Trebuchet TBT-7M',37,'BM',2,2,10,10,'Missile Boat',3,3,0,3,0,2,0,0,0,0,4,2,0,'CASE,IF1,LRM1/1/1,SNARC','',0,0,'2025-01-11 17:24:55.0');
 INSERT INTO ascard.asc_unit (playerid,mulid,tech,unit_number,unit_name,unit_tonnage,unit_imageurl,as_model,as_pv,as_tp,as_sz,as_tmm,as_mv,as_mvj,as_role,as_skill,as_short,as_short_min,as_medium,as_medium_min,as_long,as_long_min,as_extreme,as_extreme_min,as_ov,as_armor,as_structure,as_threshold,as_specials,as_mvtype,commander,subcommander,Updated) VALUES
+	 (20,2814,1,'','Ari 4 - Scar...',30,'images/units/Generic_Mech.gif','Scarabus SCB-9T',34,'BM',1,4,20,NULL,'Scout',3,2,0,1,0,0,0,0,0,0,3,1,0,'ECM,ENE,MEL,TAG,TSM','',0,0,'2025-01-11 17:29:35.0'),
+	 (2,2811,1,'','',35,'images/units/Generic_Tank.gif','Saxon APC',30,'CV',1,4,20,NULL,'Scout',3,0,0,0,0,0,0,0,0,0,5,2,0,'IT5,SRCH,TUR(0&#42;/-/-)','h',0,0,'2025-01-11 19:19:04.0'),
 	 (11,3452,1,'','',75,'images/units/Generic_Tank.gif','Von Luckner Heavy Tank VNL-K65N',36,'CV',3,1,6,NULL,'Juggernaut',3,5,0,4,0,0,0,0,0,0,6,4,0,'AC2/2/-,REAR0&#42;/1/1,SRCH,SRM2/2,TUR(4/4/-,SRM2/2,AC2/2/-)','t',0,0,'2025-01-12 10:12:57.0'),
 	 (11,3452,1,'','',75,'images/units/Generic_Tank.gif','Von Luckner Heavy Tank VNL-K65N',36,'CV',3,1,6,NULL,'Juggernaut',3,5,0,4,0,0,0,0,0,0,6,4,0,'AC2/2/-,REAR0&#42;/1/1,SRCH,SRM2/2,TUR(4/4/-,SRM2/2,AC2/2/-)','t',0,0,'2025-01-12 10:13:35.0'),
 	 (11,2021,1,'','',60,'images/units/Generic_Tank.gif','Manticore Heavy Tank',34,'CV',3,1,8,NULL,'Brawler',3,3,0,3,0,2,0,0,0,0,6,3,0,'IF1,SRCH,TUR(2/3/2,IF1)','t',0,0,'2025-01-12 10:14:04.0'),
@@ -105,5 +96,23 @@ INSERT INTO ascard.asc_unit (playerid,mulid,tech,unit_number,unit_name,unit_tonn
 	 (11,2827,1,'','',80,'images/units/Generic_Tank.gif','Schrek PPC Carrier',30,'CV',4,1,6,NULL,'Sniper',3,3,0,3,0,3,0,0,0,0,4,4,0,'ENE,SRCH,TUR(3/3/3)','t',0,0,'2025-01-12 10:15:27.0'),
 	 (11,2827,1,'','',80,'images/units/Generic_Tank.gif','Schrek PPC Carrier',30,'CV',4,1,6,NULL,'Sniper',3,3,0,3,0,3,0,0,0,0,4,4,0,'ENE,SRCH,TUR(3/3/3)','t',0,0,'2025-01-12 10:16:10.0'),
 	 (11,2827,1,'','',80,'images/units/Generic_Tank.gif','Schrek PPC Carrier',30,'CV',4,1,6,NULL,'Sniper',3,3,0,3,0,3,0,0,0,0,4,4,0,'ENE,SRCH,TUR(3/3/3)','t',0,0,'2025-01-12 10:16:52.0'),
-	 (11,3515,1,'','',21,'images/units/Generic_Tank.gif','Warrior Attack Helicopter H-7C',24,'CV',1,3,18,NULL,'Sniper',3,1,0,2,0,1,0,0,0,0,1,2,0,'ATMO,EE,IF1,SRCH','',0,0,'2025-01-12 10:18:00.0'),
-	 (11,3515,1,'','',21,'images/units/Generic_Tank.gif','Warrior Attack Helicopter H-7C',24,'CV',1,3,18,NULL,'Sniper',3,1,0,2,0,1,0,0,0,0,1,2,0,'ATMO,EE,IF1,SRCH','',0,0,'2025-01-12 10:18:29.0');
+	 (11,3515,1,'','',21,'images/units/Generic_Tank.gif','Warrior Attack Helicopter H-7C',24,'CV',1,3,18,NULL,'Sniper',3,1,0,2,0,1,0,0,0,0,1,2,0,'ATMO,EE,IF1,SRCH','',0,0,'2025-01-12 10:18:00.0');
+INSERT INTO ascard.asc_unit (playerid,mulid,tech,unit_number,unit_name,unit_tonnage,unit_imageurl,as_model,as_pv,as_tp,as_sz,as_tmm,as_mv,as_mvj,as_role,as_skill,as_short,as_short_min,as_medium,as_medium_min,as_long,as_long_min,as_extreme,as_extreme_min,as_ov,as_armor,as_structure,as_threshold,as_specials,as_mvtype,commander,subcommander,Updated) VALUES
+	 (11,3515,1,'','',21,'images/units/Generic_Tank.gif','Warrior Attack Helicopter H-7C',24,'CV',1,3,18,NULL,'Sniper',3,1,0,2,0,1,0,0,0,0,1,2,0,'ATMO,EE,IF1,SRCH','',0,0,'2025-01-12 10:18:29.0'),
+	 (21,74,1,'1','',70,'images/units/Generic_Mech.gif','Archer ARC-2R',39,'BM',3,1,8,NULL,'Missile Boat',4,2,0,3,0,3,0,0,0,1,7,6,0,'IF2,LRM1/2/2,REAR1/1/-','',0,0,'2025-02-10 17:44:35.0'),
+	 (21,140,1,'2','',100,'images/units/Generic_Mech.gif','Atlas AS7-D',62,'BM',4,1,6,NULL,'Juggernaut',3,5,0,5,0,2,0,0,0,0,10,8,0,'AC2/2/-,IF1,LRM1/1/1,REAR1/1/-','',0,0,'2025-02-10 17:45:29.0'),
+	 (21,388,1,'3','',45,'images/units/Generic_Mech.gif','Blackjack BJ-3',30,'BM',2,1,8,8,'Brawler',4,3,0,3,0,2,0,0,0,1,5,4,0,'ENE','',0,0,'2025-02-10 17:46:57.0'),
+	 (21,2332,1,'4','',75,'images/units/Generic_Mech.gif','Orion ON1-K',47,'BM',3,1,8,NULL,'Brawler',3,3,0,3,0,1,0,0,0,1,8,6,0,'IF1','',0,0,'2025-02-10 17:47:39.0'),
+	 (21,3485,1,'6','',70,'images/units/Warhammer.png','Warhammer WHM-6D',43,'BM',3,1,8,NULL,'Brawler',3,3,0,3,0,2,0,0,0,0,7,6,0,'ENE','',0,0,'2025-02-10 17:48:44.0'),
+	 (21,2491,1,'','',45,'images/units/Generic_Mech.gif','Phoenix Hawk PXH-1',26,'BM',2,2,12,12,'Skirmisher',4,2,0,2,0,0,0,0,0,0,4,4,0,'-','',0,0,'2025-02-10 17:52:02.0'),
+	 (20,1901,1,'','',20,'images/units/Generic_Mech.gif','Locust LCT-1V',18,'BM',1,3,16,NULL,'Scout',4,1,0,1,0,0,0,0,0,0,2,2,0,'-','',0,0,'2025-02-11 14:41:00.0'),
+	 (20,593,1,'','',40,'images/units/Cicada.png','Cicada CDA-3C',26,'BM',2,3,14,NULL,'Scout',3,2,0,1,0,1,0,0,0,0,2,3,0,'-','',0,0,'2025-02-11 14:41:31.0'),
+	 (20,3238,1,'','',65,'images/units/Generic_Mech.gif','Thunderbolt TDR-5S',43,'BM',3,1,8,NULL,'Brawler',3,3,0,3,0,1,0,0,0,1,7,5,0,'IF1','',0,0,'2025-02-11 14:42:38.0');
+INSERT INTO ascard.asc_unit (playerid,mulid,tech,unit_number,unit_name,unit_tonnage,unit_imageurl,as_model,as_pv,as_tp,as_sz,as_tmm,as_mv,as_mvj,as_role,as_skill,as_short,as_short_min,as_medium,as_medium_min,as_long,as_long_min,as_extreme,as_extreme_min,as_ov,as_armor,as_structure,as_threshold,as_specials,as_mvtype,commander,subcommander,Updated) VALUES
+	 (20,3642,1,'','',80,'images/units/Generic_Mech.gif','Zeus ZEU-6S',42,'BM',4,1,8,NULL,'Sniper',3,3,0,3,0,2,0,0,0,0,6,6,0,'IF1,REAR1/1/-','',0,0,'2025-02-11 14:43:56.0'),
+	 (20,1936,1,'','',85,'images/units/Generic_Mech.gif','Longbow LGB-7Q',63,'BM',4,1,6,NULL,'Missile Boat',2,3,0,4,0,3,0,0,0,0,8,7,0,'IF3,LRM2/3/3','',0,0,'2025-02-11 14:44:28.0'),
+	 (20,147,1,'','',100,'images/units/Generic_Mech.gif','Atlas AS7-RS',58,'BM',4,1,6,NULL,'Juggernaut',3,3,0,4,0,1,0,0,0,1,10,8,0,'IF1','',0,0,'2025-02-11 14:44:54.0'),
+	 (1,1985,2,'32','Porter',75,'images/units/Timberwolf.png','75t | Mad Cat (Timber Wolf) Prime',76,'BM',3,2,10,NULL,'Brawler',2,5,0,5,0,4,0,0,0,1,8,4,0,'CASE,IF2,LRM1/1/2,OMNI','',0,0,'2025-02-14 17:18:56.0'),
+	 (1,3183,2,'11','Judah',70,'images/units/Summoner.png','70t | Thor (Summoner) Prime',52,'BM',3,2,10,10,'Sniper',3,4,0,4,0,4,0,0,0,0,6,4,0,'CASE,FLK1/1/1,IF1,OMNI','',0,0,'2025-02-14 17:19:49.0'),
+	 (1,213,2,'1134','Mitchell',65,'images/units/Generic_Mech.gif','65t | Balius C',55,'BM',3,2,12,NULL,'Skirmisher',3,6,0,4,0,2,0,0,0,1,7,4,0,'CASE,OMNI,REAR2/2/-','',0,0,'2025-02-14 17:20:16.0'),
+	 (1,9391,2,'','',60,'images/units/Generic_Tank.gif','60t | Eurus MBT B',46,'CV',3,2,10,NULL,'Brawler',3,5,0,4,0,3,0,0,0,0,6,3,0,'CASE,CR,FLK3/2/2,OMNI,SRCH,TUR(5/4/3,FLK3/2/2)','t',0,0,'2025-02-14 18:27:04.0');

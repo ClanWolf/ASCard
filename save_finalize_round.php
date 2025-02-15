@@ -256,6 +256,19 @@
 								echo "<script>top.window.location = './gui_message_round_finalized_error_01.php'</script>";
 								die('ERROR 1');
 							}
+
+							$sqlInsertNewUnitStatusArchive = str_replace('asc_unitstatus', 'asc_unitstatus_archive', $sqlInsertNewUnitStatus);
+
+							if (mysqli_query($conn, $sqlInsertNewUnitStatusArchive)) {
+								echo "<br>";
+								echo "Record unitstatus archive inserted successfully<br>";
+								mysqli_commit($conn);
+							} else {
+								echo "<br>";
+								echo "Error unitstatus archive insert record: " . mysqli_error($conn) . "<br>";
+								echo "<script>top.window.location = './gui_message_round_finalized_error_01.php'</script>";
+								die('ERROR 1');
+							}
 						}
 					}
 

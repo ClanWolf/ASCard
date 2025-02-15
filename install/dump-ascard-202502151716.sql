@@ -34,7 +34,7 @@ CREATE TABLE `asc_assign` (
   `Updated` timestamp NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   PRIMARY KEY (`assignid`),
   UNIQUE KEY `id` (`assignid`)
-) ENGINE=InnoDB AUTO_INCREMENT=77 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=171 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -53,7 +53,7 @@ CREATE TABLE `asc_command` (
   `commandbackground` varchar(500) DEFAULT NULL,
   `Updated` timestamp NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   PRIMARY KEY (`commandid`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -90,7 +90,7 @@ CREATE TABLE `asc_formation` (
   `Updated` timestamp NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   PRIMARY KEY (`formationid`),
   UNIQUE KEY `unitid` (`formationid`)
-) ENGINE=InnoDB AUTO_INCREMENT=49 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=70 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -114,7 +114,30 @@ CREATE TABLE `asc_game` (
   `finished` timestamp NULL DEFAULT NULL,
   `Updated` timestamp NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   PRIMARY KEY (`gameid`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `asc_game_archiv`
+--
+
+DROP TABLE IF EXISTS `asc_game_archiv`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `asc_game_archiv` (
+  `gameid` int(11) NOT NULL,
+  `ownerPlayerId` int(11) NOT NULL,
+  `title` varchar(300) DEFAULT NULL,
+  `background` varchar(255) DEFAULT NULL,
+  `era` enum('STAR LEAGUE','SUCCESSION WARS','CLAN INVASION','CIVIL WAR','JIHAD','DARK AGE','ILCLAN') DEFAULT NULL,
+  `yearInGame` varchar(4) DEFAULT NULL,
+  `accessCode` varchar(10) NOT NULL,
+  `locked` tinyint(1) NOT NULL,
+  `scheduled` timestamp NULL DEFAULT NULL,
+  `started` timestamp NULL DEFAULT NULL,
+  `finished` timestamp NULL DEFAULT NULL,
+  `Updated` timestamp NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -135,7 +158,7 @@ CREATE TABLE `asc_options` (
   `Updated` timestamp NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   PRIMARY KEY (`optionid`),
   UNIQUE KEY `optionid` (`optionid`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -154,7 +177,7 @@ CREATE TABLE `asc_pilot` (
   `Updated` timestamp NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   PRIMARY KEY (`pilotid`),
   UNIQUE KEY `pilotid` (`pilotid`)
-) ENGINE=InnoDB AUTO_INCREMENT=78 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=172 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -171,7 +194,9 @@ CREATE TABLE `asc_player` (
   `admin` tinyint(4) DEFAULT NULL,
   `image` varchar(100) NOT NULL,
   `factionid` int(11) DEFAULT NULL,
-  `gameid` int(11) DEFAULT 1,
+  `hostedgameid` int(11) NOT NULL DEFAULT 0,
+  `gameid` int(11) NOT NULL DEFAULT 0,
+  `teamid` int(11) NOT NULL DEFAULT 1 COMMENT 'Replace the OpFor mechanic',
   `commandid` int(11) DEFAULT NULL,
   `opfor` tinyint(1) NOT NULL DEFAULT 0,
   `bid_pv` int(11) DEFAULT -1,
@@ -182,7 +207,7 @@ CREATE TABLE `asc_player` (
   `Updated` timestamp NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   PRIMARY KEY (`playerid`),
   UNIQUE KEY `playerid` (`playerid`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -229,7 +254,7 @@ CREATE TABLE `asc_unit` (
   `Updated` timestamp NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   PRIMARY KEY (`unitid`),
   UNIQUE KEY `mechid` (`unitid`)
-) ENGINE=InnoDB AUTO_INCREMENT=78 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=172 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -245,6 +270,7 @@ CREATE TABLE `asc_unitstatus` (
   `unitid` int(11) DEFAULT NULL,
   `playerid` int(11) DEFAULT NULL,
   `gameid` int(11) DEFAULT NULL,
+  `teamid` int(11) NOT NULL DEFAULT 1,
   `round` int(11) DEFAULT 1,
   `heat` int(11) DEFAULT NULL,
   `armor` int(11) DEFAULT NULL,
@@ -254,8 +280,13 @@ CREATE TABLE `asc_unitstatus` (
   `crit_mp` int(11) DEFAULT NULL,
   `crit_weapons` int(11) DEFAULT NULL,
   `usedoverheat` int(11) NOT NULL DEFAULT 0,
-  `currenttmm` int(11) DEFAULT NULL,
   `heat_PREP` int(11) DEFAULT 0,
+  `current_tmm` int(11) DEFAULT NULL,
+  `current_movement` int(11) DEFAULT NULL,
+  `current_damage_SHORT` int(11) DEFAULT NULL,
+  `current_damage_MEDIUM` int(11) DEFAULT NULL,
+  `current_damage_LONG` int(11) DEFAULT NULL,
+  `current_damage_EXTREME` int(11) DEFAULT NULL,
   `crit_engine_PREP` int(11) DEFAULT 0,
   `crit_fc_PREP` int(11) DEFAULT 0,
   `crit_mp_PREP` int(11) DEFAULT 0,
@@ -282,7 +313,64 @@ CREATE TABLE `asc_unitstatus` (
   `Updated` timestamp NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   PRIMARY KEY (`mechstatusid`),
   UNIQUE KEY `mechstatusid` (`mechstatusid`)
-) ENGINE=InnoDB AUTO_INCREMENT=146 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=561 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `asc_unitstatus_archiv`
+--
+
+DROP TABLE IF EXISTS `asc_unitstatus_archiv`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `asc_unitstatus_archiv` (
+  `mechstatusid` int(11) NOT NULL,
+  `initial_status` tinyint(1) DEFAULT 0,
+  `unitid` int(11) DEFAULT NULL,
+  `playerid` int(11) DEFAULT NULL,
+  `gameid` int(11) DEFAULT NULL,
+  `teamid` int(11) NOT NULL DEFAULT 1,
+  `round` int(11) DEFAULT 1,
+  `heat` int(11) DEFAULT NULL,
+  `armor` int(11) DEFAULT NULL,
+  `structure` int(11) DEFAULT NULL,
+  `crit_engine` int(11) DEFAULT NULL,
+  `crit_fc` int(11) DEFAULT NULL,
+  `crit_mp` int(11) DEFAULT NULL,
+  `crit_weapons` int(11) DEFAULT NULL,
+  `usedoverheat` int(11) NOT NULL DEFAULT 0,
+  `heat_PREP` int(11) DEFAULT 0,
+  `current_tmm` int(11) DEFAULT NULL,
+  `current_movement` int(11) DEFAULT NULL,
+  `current_damage_SHORT` int(11) DEFAULT NULL,
+  `current_damage_MEDIUM` int(11) DEFAULT NULL,
+  `current_damage_LONG` int(11) DEFAULT NULL,
+  `current_damage_EXTREME` int(11) DEFAULT NULL,
+  `crit_engine_PREP` int(11) DEFAULT 0,
+  `crit_fc_PREP` int(11) DEFAULT 0,
+  `crit_mp_PREP` int(11) DEFAULT 0,
+  `crit_weapons_PREP` int(11) DEFAULT 0,
+  `crit_CV_engine` int(11) DEFAULT 0,
+  `crit_CV_firecontrol` int(11) DEFAULT 0,
+  `crit_CV_weapons` int(11) DEFAULT 0,
+  `crit_CV_motiveA` int(11) DEFAULT 0,
+  `crit_CV_motiveB` int(11) DEFAULT 0,
+  `crit_CV_motiveC` int(11) DEFAULT 0,
+  `crit_CV_engine_PREP` int(11) DEFAULT 0,
+  `crit_CV_firecontrol_PREP` int(11) DEFAULT 0,
+  `crit_CV_weapons_PREP` int(11) DEFAULT 0,
+  `crit_CV_motiveA_PREP` int(11) DEFAULT 0,
+  `crit_CV_motiveB_PREP` int(11) DEFAULT 0,
+  `crit_CV_motiveC_PREP` int(11) DEFAULT 0,
+  `active_bid` tinyint(1) NOT NULL DEFAULT 1,
+  `active_narc` tinyint(5) DEFAULT 0,
+  `narc_desc` varchar(100) DEFAULT 'NARC',
+  `unit_status` varchar(100) DEFAULT 'fresh',
+  `unit_statusimageurl` varchar(100) DEFAULT 'images/DD_BM_01.png',
+  `mounted_unitid` int(11) DEFAULT 0,
+  `mounted_on_unitid` int(11) DEFAULT 0,
+  `Updated` timestamp NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -298,4 +386,4 @@ CREATE TABLE `asc_unitstatus` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-12-18 10:20:48
+-- Dump completed on 2025-02-15 17:16:17

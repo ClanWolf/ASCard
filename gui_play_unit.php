@@ -606,6 +606,15 @@ session_start();
 		echo "					<tr>\n";
 		echo "						<td style='text-align:center;'>\n";
 		echo "							<a href='gui_play_unit.php?formationid=".$array_PLAYER_FORMATION_IDS[$cc]."'>".$array_PLAYER_FORMATION_NAMES[$cc]."</a>\n";
+
+//		php> $myhashmap = array();
+//		php> $myhashmap['mykey1'] = 'myvalue1';
+//		php> $myhashmap['mykey2'] = 'myvalue2';
+//		php> echo $myhashmap['mykey2'];
+//		myvalue2
+
+		// echo " 							<p>".$array_PLAYER_UNITS_IN_FORMATION[$array_PLAYER_FORMATION_IDS[$cc]]."</p>";
+
 		echo "						</td>\n";
 		echo "					</tr>\n";
 		echo "				</table>\n";

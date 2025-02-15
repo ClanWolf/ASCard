@@ -1,5 +1,5 @@
 INSERT INTO ascard.asc_game (ownerPlayerId,title,background,era,yearInGame,accessCode,locked,scheduled,started,finished,Updated) VALUES
-	 (1,'Meldrics game1','An invasion assault on Northwind12','JIHAD','3059','2811',1,NULL,NULL,NULL,'2025-02-06 18:01:42.0'),
+	 (1,'Tallassias game','Tallassias game','SUCCESSION WARS','3030','4844',0,NULL,NULL,NULL,'2025-02-11 19:13:14.0'),
 	 (2,'Nimrods game','This planet will be mine','CLAN INVASION','3052','6529',0,NULL,NULL,NULL,'2025-01-22 23:41:43.0'),
 	 (4,'Eriks game','Fire and fury','CLAN INVASION','3052','0396',0,NULL,NULL,NULL,'2025-01-22 23:41:43.0'),
 	 (9,'Kharns game','Kharns game','CLAN INVASION','3052','6170',0,NULL,NULL,NULL,'2025-02-06 17:26:09.0'),
