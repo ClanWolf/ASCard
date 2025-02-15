@@ -597,20 +597,31 @@ session_start();
 </div>
 
 <div id="gamemenu">
+	<br>
 	<table align="center" width="100%" cellspacing=2 cellpadding=2 border=0px>
 		<tr>
 <?php
 	for ($cc = 0; $cc < sizeof($array_PLAYER_FORMATION_IDS); $cc++) {
 		$currFormId = $array_PLAYER_FORMATION_IDS[$cc];
 		$unitArray = $array_PLAYER_UNITS_IN_FORMATION[$currFormId];
+		if ($unitArray != null) {
+			echo "			<td nowrap style='width:270px;height:30px;vertical-align:middle;' onclick='location.href=\"gui_play_unit.php?formationid=".$array_PLAYER_FORMATION_IDS[$cc]."\"' class='formationselect_button_normal'>\n";
+			echo "				<table style='width:100%;' cellspacing=0 cellpadding=0>\n";
+			echo "					<tr>\n";
+			echo "						<td style='text-align:center;vertical-align:top;'>\n";
+			echo "							<a href='gui_play_unit.php?formationid=".$array_PLAYER_FORMATION_IDS[$cc]."'>".$array_PLAYER_FORMATION_NAMES[$cc]."</a>\n";
+			echo "						</td>\n";
+			echo "					</tr>\n";
+		} else {
+			echo "			<td nowrap style='background-color:#444444;width:270px;height:40px;text-align:center;' class='formationselect_button_active'>\n";
+			echo "				<table style='width:100%;' cellspacing=0 cellpadding=0>\n";
+			echo "					<tr>\n";
+			echo "						<td style='text-align:center;vertical-align:top;'>\n";
+			echo "							".$array_PLAYER_FORMATION_NAMES[$cc]."\n";
+			echo "						</td>\n";
+			echo "					</tr>\n";
+		}
 
-		echo "			<td nowrap style='width:270px;height:30px;' onclick='location.href=\"gui_play_unit.php?formationid=".$array_PLAYER_FORMATION_IDS[$cc]."\"' class='formationselect_button_normal'>\n";
-		echo "				<table style='width:100%;' cellspacing=0 cellpadding=0>\n";
-		echo "					<tr>\n";
-		echo "						<td style='text-align:center;vertical-align:top;'>\n";
-		echo "							<a href='gui_play_unit.php?formationid=".$array_PLAYER_FORMATION_IDS[$cc]."'>".$array_PLAYER_FORMATION_NAMES[$cc]."</a>\n";
-		echo "						</td>\n";
-		echo "					</tr>\n";
 		echo "					<tr>\n";
 		echo "						<td style='text-align:left;'>\n";
 		foreach($unitArray as $item) {
@@ -621,7 +632,7 @@ session_start();
 		echo "				</table>\n";
 		echo "			</td>\n";
 	}
-	echo "  		<td nowrap onclick='javascript:finalizeRound(".$pid.");' id='FinalizeRoundButton' style='text-align:center;width:100px;background:rgba(81,125,37,1.0);' rowspan='2'><div style='vertical-align:middle;font-size:42px;color:#eee;'>&nbsp;&nbsp;&nbsp;<i class='fas fa-redo'></i>&nbsp;&nbsp;&nbsp;</div></td>\n";
+	echo "  		<td nowrap onclick='location.href=\"save_finalize_round.php?pid=".$pid."\"' id='FinalizeRoundButton' style='text-align:center;width:100px;background:rgba(81,125,37,1.0);' rowspan='2'><div style='color:#eee;'><i class='fas fa-redo'></i></div></td>\n";
 ?>
 		</tr>
 	</table>
@@ -1144,7 +1155,7 @@ if ($showDistancesHexes == 1) {
 					<table width="100%" cellpadding="0" cellspacing="0">
 						<tr>
 							<td nowrap rowspan="3" style="vertical-align: middle;" valign="middle" align="center" width="15px">
-								<div onclick="location.href='save_finalize_round.php?pid=<?= $pid?>';" style="padding: 0 15 0 15;" id="phasebutton" name="phasebutton"><img id="phasebuttonimage" src=<?php echo "'$currentPhaseButton'"; ?> style='height:50px;'></div>
+								<div style="padding: 0 15 0 15;" id="phasebutton" name="phasebutton"><img id="phasebuttonimage" src=<?php echo "'$currentPhaseButton'"; ?> style='height:50px;'></div>
 							</td>
 							<td nowrap width="65%" class="datalabel_thin">
 								<table cellspacing="2" cellpadding="0">
