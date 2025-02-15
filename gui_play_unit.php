@@ -41,10 +41,14 @@ session_start();
 	function getMULImageByName($unitname) {
 		$image = "images/units/Generic_Mech.gif";
 
+		$arr = explode('t | ', $unitname);
+		$unitname = $arr[1];
+		echo "<script>console.log('SEARCHING: >>".$unitname."<<');</script>";
+
 		$dir = 'images/units_mul/';
 		$startChar = mb_substr($unitname, 0, 3); // use first 3 chars to list files to keep the result list as small as possible
 		if ($startChar == "ELE") {
-			// echo "<script>console.log('SEARCHING: >>" . $startChar . "<<');</script>";
+			//echo "<script>console.log('SEARCHING: >>" . $startChar . "<<');</script>";
 			$startChar = "Ele";
 		}
 
@@ -582,7 +586,7 @@ session_start();
 						<td class="datavalue_thin" colspan="2"><hr></td>
 					</tr>
 					<tr>
-						<td nowrap class="datavalue_thin" colspan="2" align="center"><a id="linkToCompleteAbilitiesList" href="#">Show all</a></td>
+						<td nowrap class="datavalue_thin" colspan="2" align="center"><a id="linkToCompleteAbilitiesList" href="#">Show all</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#">CLOSE</a></td>
 					</tr>
 				</table>
 			</td>
@@ -593,11 +597,22 @@ session_start();
 </div>
 
 <div id="gamemenu">
-	<table width="100%">
+	<table align="center" width="100%" cellspacing=2 cellpadding=2 border=0px>
 		<tr>
-			<td>
-				<p>GAME MENU</p>
-			</td>
+<?php
+	for ($cc = 0; $cc < sizeof($array_PLAYER_FORMATION_IDS); $cc++) {
+		echo "			<td nowrap style='width:270px;height:30px;' onclick='location.href=\"gui_play_unit.php?formationid=".$array_PLAYER_FORMATION_IDS[$cc]."\"' class='formationselect_button_normal'>\n";
+		echo "				<table style='width:100%;' cellspacing=0 cellpadding=0>\n";
+		echo "					<tr>\n";
+		echo "						<td style='text-align:center;'>\n";
+		echo "							<a href='gui_play_unit.php?formationid=".$array_PLAYER_FORMATION_IDS[$cc]."'>".$array_PLAYER_FORMATION_NAMES[$cc]."</a>\n";
+		echo "						</td>\n";
+		echo "					</tr>\n";
+		echo "				</table>\n";
+		echo "			</td>\n";
+	}
+	echo "  		<td nowrap onclick='javascript:finalizeRound(".$pid.");' id='FinalizeRoundButton' style='text-align:center;width:100px;background:rgba(81,125,37,1.0);' rowspan='2'><div style='vertical-align:middle;font-size:42px;color:#eee;'>&nbsp;&nbsp;&nbsp;<i class='fas fa-redo'></i>&nbsp;&nbsp;&nbsp;</div></td>\n";
+?>
 		</tr>
 	</table>
 </div>
@@ -716,7 +731,6 @@ session_start();
 			<td style='width:5px;'>&nbsp;</td>
 			<td nowrap onclick="location.href='gui_show_playerlist.php'" style="width: 60px;" width="60px" style="background: rgba(50,50,50,1.0); text-align: center; vertical-align: middle;"><img src='./images/player/<?=$pimage?>' style='height:auto;display:block;' width='60px' height='60px'></td>
 		</tr>
-
 <?php
 	if ($playMode) {
 		echo "		<tr><td colspan='999' style='background:#050505;height:5px;'></td></tr>\r\n";
@@ -724,7 +738,6 @@ session_start();
 		echo "		<tr><td colspan='999' style='background:#da8e25;height:5px;'></td></tr>\r\n";
 	}
 ?>
-
 	</table>
 </div>
 

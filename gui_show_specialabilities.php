@@ -152,7 +152,7 @@
 								<td class="datavalue_thin" colspan="2"><hr></td>
 							</tr>
 							<tr>
-								<td nowrap class="datavalue_thin" colspan="2" align="center"><a href="gui_play_unit.php">Units</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:history.back();">BACK</a></td>
+								<td nowrap class="datavalue_thin" colspan="2" align="center"><a href="gui_play_unit.php">Units</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:history.back();">BACK</a></td>
 							</tr>
 						</table>
 					</td>

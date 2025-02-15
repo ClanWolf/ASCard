@@ -171,26 +171,28 @@ a:hover {
 	position: fixed;
 	display: none; /* none, block */
 	visibility: hidden; /* hidden, visible */
-	height: 100%;
+	height: 20%;
 	width: 100%;
 	top: 65px;
 	left: 0px;
 	right: 0px;
-	background: rgba(60,60,60,0.75);
-	/* background-color: #ff0000; */
-	/* background-image: url('images/body-bg_1.jpg'); */
+	/* bottom: 0px; */
+	background: transparent;
+	background-color: rgba(20, 20, 20, 0.85);
 	z-index:210;
 }
 #specialabilitiescontainer {
 	text-align: center;
 	position: fixed;
 	display: block;
-	border: 50px;
-	margin: auto;
 	width: 100%;
 	height: 100%;
+	top: 65px;
+	left: 0px;
+	right: 0px;
+	bottom: 0px;
 	background: transparent;
-	background-color: rgba(0, 0, 0, 0.75);
+	background-color: rgba(20, 20, 20, 0.85);
 	z-index:1060;
 }
 #specialabilitiescontainer_standalone {

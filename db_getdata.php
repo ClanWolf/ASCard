@@ -22,6 +22,11 @@
 	$array_PILOT_RANK = array();
 	$array_PILOT_IMG_URL = array();
 
+	$array_PLAYER_FORMATION_IDS = array();
+	$array_PLAYER_FORMATION_FACTIONIDS = array();
+	$array_PLAYER_FORMATION_COMMANDIDS = array();
+	$array_PLAYER_FORMATION_NAMES = array();
+
 	$array_MVMT = array();
 	$array_WPNSFIRED = array();
 
@@ -121,6 +126,21 @@
 		}
 	}
 	mysqli_free_result($result_asc_formation);
+
+	// Player formations
+	$formationscount = 0;
+	$sql_asc_playerformations = "SELECT SQL_NO_CACHE * FROM asc_formation where playerid = ".$pid." ORDER BY formationid;";
+	$result_asc_playerformations = mysqli_query($conn, $sql_asc_playerformations);
+	if (mysqli_num_rows($result_asc_playerformations) > 0) {
+		while($row = mysqli_fetch_assoc($result_asc_playerformations)) {
+			$array_PLAYER_FORMATION_IDS[$formationscount] = $row["formationid"];
+			$array_PLAYER_FORMATION_FACTIONIDS[$formationscount] = $row["factionid"];
+			$array_PLAYER_FORMATION_COMMANDIDS[$formationscount] = $row["commandid"];
+			$array_PLAYER_FORMATION_NAMES[$formationscount] = $row["formationname"];
+			$formationscount++;
+		}
+	}
+	mysqli_free_result($result_asc_playerformations);
 
 	// Use MUL Images
 	$sql_asc_useMULImages = "SELECT SQL_NO_CACHE * FROM asc_options where playerid = " . $formationplayerid . ";";
