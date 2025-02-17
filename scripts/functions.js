@@ -227,7 +227,7 @@ function readCircles2(index, a_max, s_max, mv_bt_id, f_bt_id) {
 		unitstatusstring = "crippled";
 		unitstatusimage = "images/DD_" + currentUnitType + "_03.png";
 	}
-	if (s > maximalstructurepoints / 2) {
+	if (s >= maximalstructurepoints / 2) {
 		unitstatus = 9;
 		unitstatusstring = "crippled";
 		unitstatusimage = "images/DD_" + currentUnitType + "_03.png";

@@ -193,6 +193,7 @@
 				if (mysqli_num_rows($result_currentunitstatus) > 0) {
 					while($row = mysqli_fetch_assoc($result_currentunitstatus)) {
 						$unitdata['status_image'] = $row["unit_statusimageurl"];
+						$unitdata['active_bid'] = $row["active_bid"];
 					}
 				}
 
