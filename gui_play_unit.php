@@ -183,10 +183,12 @@ session_start();
 				document.getElementById("gamemenu").style.visibility = "hidden";
 				document.getElementById("gamemenu").style.display = "none";
 				document.getElementById("gamemenubutton").innerHTML = "<i style='color:#eee;' class='fa-solid fa-angles-down'></i>";
+				playTCCloseSound();
 			} else {
 				document.getElementById("gamemenu").style.visibility = "visible";
 				document.getElementById("gamemenu").style.display = "block";
 				document.getElementById("gamemenubutton").innerHTML = "<i style='color:#eee;' class='fa-solid fa-angles-up'></i>";
+				playTapSound();
 			}
 		}
 
@@ -631,29 +633,38 @@ session_start();
 		$unitArray = $array_PLAYER_UNITS_IN_FORMATION[$currFormId];
 
 		echo "			<td style='text-align:left;background-color:#444444;' class='unitselect_button_active'>\n";
-		echo "				<table>\n";
+		echo "				<table style='border-collapse:collapse;' cellspacing=4 cellpadding=4>\n";
 		echo "					<tr>\n";
 
 		$count = 1;
 		foreach($unitArray as $item) {
-			if ($item['round_moved'] > 0 && $item['round_fired'] > 0) {
+			if ($item['round_moved'] == 0 && $item['round_fired'] == 0) {
 				$imagestatuslnk = "./images/top-right_phase01.png";
 			}
-			if ($item['round_moved'] > 0 && ($item['round_fired'] > 0 || $item['round_fired'] == 0)) {
+			if ($item['round_moved'] > 0 && $item['round_fired'] == 0) {
+				$imagestatuslnk = "./images/top-right_phase02.png";
+			}
+			if ($item['round_moved'] == 0 && $item['round_fired'] > 0) { // impossible state
 				$imagestatuslnk = "./images/top-right_phase02.png";
 			}
 			if ($item['round_moved'] > 0 && $item['round_fired'] > 0) {
 				$imagestatuslnk = "./images/top-right_phase03.png";
 			}
-			echo "			<td>\n";
+			echo "			<td align='center' style='background-color:#333333;padding:4px;border:2px solid #555;'>\n";
 			if ($array_UNIT_DBID[$chosenUnitIndex] == $item['unitid']) {
 				echo "				<img src='./images/chevron.png' width='40px'><br>\n";
 				echo "				<span style='display:inline-block;width:40px;align:center;'>&nbsp;</span>\n";
 			} else {
-				echo "				<a href='gui_play_unit.php?formationid=".$array_PLAYER_FORMATION_IDS[$cc]."&chosenunit=".$count."'><img src='https://www.ascard.net/app/".$item["status_image"]."' width='40px'></a><br>\n";
-				echo "				<span style='display:inline-block;width:40px;align:center;'><img style='display:block;margin-left:auto;margin-right:auto;height:auto;' src='".$imagestatuslnk."' width='20px'></span>\n";
+				if ($item['active_bid'] == 1) {
+					echo "				<a href='gui_play_unit.php?formationid=".$array_PLAYER_FORMATION_IDS[$cc]."&chosenunit=".$count."'><img src='https://www.ascard.net/app/".$item["status_image"]."' width='40px'></a><br>\n";
+					echo "				<span style='display:inline-block;width:40px;align:center;'><img style='display:block;margin-left:auto;margin-right:auto;height:auto;' src='".$imagestatuslnk."' width='20px'></span>\n";
+				} else {
+					echo "				NO<br>\n";
+					echo "				BID\n";
+				}
 			}
 			echo "			</td>\n";
+			echo " <td>&nbsp;</td>\n";
 			$count++;
 		}
 
@@ -665,7 +676,7 @@ session_start();
 		</tr>
 		<tr>
 			<td colspan="4" style='text-align:center;background-color:#444444;' class='unitselect_button_active'>
-				sdsd
+				Blue chevron represents currently selected unit.
 			</td>
 		</tr>
 	</table>
@@ -838,17 +849,14 @@ session_start();
 	} else {
 		$playable = false;
 	}
-
 	if ($array_ACTIVE_BID[$chosenUnitIndex] == "0") {
 		$playable = false;
 	}
-
 	if (!$playable) {
 		if ($hideNotOwnedUnit) {
 			echo "<div id='blockNotOwnedUnits'></div>\r\n";
 		}
 	}
-
 	echo "<script type='text/javascript'>\r\n";
 	if ($showplayerdata_topleft == 1) {
 		// show top left pilot info
@@ -897,9 +905,6 @@ session_start();
 								</td>
 							</tr>
 						</table>
-					<!-- </div>
-					<div class="dataarea_divider_horizontal"></div>
-					<div class="dataarea_content"> -->
 						<table width="100%">
 							<tr>
 								<td nowrap width="1%" style="text-align:left;vertical-align:middle;color:#fff;" class="datalabel_thin_small" rowspan="1" valign="top"><b>T.</b>&nbsp;&nbsp;&nbsp;</td>
@@ -983,198 +988,214 @@ if ($showDistancesHexes == 1) {
 			</td>
 
 			<td width="60%" valign="bottom">
+
 				<div class="dataarea">
-					<table width="100%">
-						<tr>
-							<td onclick="toggleTargetingComputer();" nowrap style="text-align:center;" width="5%" id="targetcomp" rowspan="2">&nbsp;&nbsp;&nbsp;<i class="fa-solid fa-circle-left" style="color:#999;font-size:40px;"></i>&nbsp;&nbsp;&nbsp;</td>
-							<!-- <td nowrap class="datalabel" width="12%">TP:</td> -->
-							<td nowrap class="datavalue" width="25%" id="unit_type" colspan="4"><?php echo "$array_TP[$chosenUnitIndex]"; ?>/<?php echo "$array_SZ[$chosenUnitIndex]"; ?><span class='datalabel_thin_small' style='text-transform:lowercase;'> (<?php echo "$array_TON[$chosenUnitIndex]"; ?>t)</span></td>
-							<td id="tmmLabel" nowrap class="datalabel" width="12%">TMM:</td>
-							<td nowrap class="datavalue" width="13%" id="TMM"><?php echo "$array_TMM[$chosenUnitIndex]"; ?></td>
-							<td nowrap class="datalabel" width="12%">MV:</td>
-							<td nowrap class="datavalue" style="text-transform: none;" width="13%" id="mv_points">
-								<?php echo "$array_MV[$chosenUnitIndex]&rdquo;$array_MVTYPE[$chosenUnitIndex]";
-									if ($array_MVJ[$chosenUnitIndex] != null) {
-										echo "/$array_MVJ[$chosenUnitIndex]&rdquo;&nbsp;j\r\n";
-									} else {
-										echo "\r\n";
-									}
-								?>
-							</td>
-						</tr>
-						<tr>
-							<td nowrap class="datavalue_small_special" width="50%" colspan="4" style="text-align:left;" valign="middle" onclick="javascript:window.open('http://www.masterunitlist.info/Unit/Details/<?php echo $array_UNIT_MULID[$chosenUnitIndex] ?>');"><?php echo "$array_ROLE[$chosenUnitIndex]"; ?>&nbsp;&nbsp;<i class="fa-solid fa-square-up-right"></i></td>
-							<td nowrap class="datalabel" width="13%" colspan="1" valign="middle" >AMM:</td>
-							<td nowrap class="datavalue" width="12%" colspan="1" valign="middle" style="top:0px;bottom:0px;vertical-align:middle;"><span class="datavalue" id="AMM">0</span></td>
-							<td nowrap class="datalabel" width="12%" colspan="1">SKL:</td>
-							<td nowrap class="datavalue" width="12%" colspan="1" valign="middle" id="skillfield" style="top:0px;bottom:0px;vertical-align:middle;"><?php echo "$array_SKILL[$chosenUnitIndex]"; ?></td>
-						</tr>
-					</table>
-				</div>
-
-				<div class="dataarea" id="firepanel">
-					<table width="100%">
-						<tr>
-							<td nowrap class="datalabel" width="10%" style="text-align: left;">DMG:</td>
-							<td nowrap class="datalabel_thin" width="15%" style="text-align: center;" id="minrollshort">S (+0)</td>
-							<td nowrap class="datavalue" width="15%" style="text-align: center;" id="dmgshort_s"><?php echo "$array_DMG_SHORT[$chosenUnitIndex]"; ?></td>
-							<td nowrap class="datalabel_thin" width="15%" style="text-align: center;" id="minrollmedium">M (+2)</td>
-							<td nowrap class="datavalue" width="15%" style="text-align: center;" id="dmgmedium_s"><?php echo "$array_DMG_MEDIUM[$chosenUnitIndex]"; ?></td>
-							<td nowrap class="datalabel_thin" width="15%" style="text-align: center;" id="minrolllong">L (+4)</td>
-							<td nowrap class="datavalue" width="15%" style="text-align: center;" id="dmglong_s"><?php echo "$array_DMG_LONG[$chosenUnitIndex]"; ?></td>
-						</tr>
-					</table>
-				</div>
-
-				<div class="dataarea" id="firepanelhidden" style="visibility: hidden;display:none">
-					<table width="100%">
-						<tr>
-							<td nowrap class="datavalue_thin" width="10%" style="text-align: center;">TRADE ABILITY TO FIRE FOR SPEED</td>
-						</tr>
-					</table>
-				</div>
-			</div>
+					<div class="dataarea_content">
+						<table width="100%">
+							<tr>
+								<td onclick="toggleTargetingComputer();" nowrap style="text-align:center;" width="5%" id="targetcomp" rowspan="2">&nbsp;&nbsp;&nbsp;<i class="fa-solid fa-circle-left" style="color:#999;font-size:40px;"></i>&nbsp;&nbsp;&nbsp;</td>
+								<!-- <td nowrap class="datalabel" width="12%">TP:</td> -->
+								<td nowrap class="datavalue" width="25%" id="unit_type" colspan="4"><?php echo "$array_TP[$chosenUnitIndex]"; ?>/<?php echo "$array_SZ[$chosenUnitIndex]"; ?><span class='datalabel_thin_small' style='text-transform:lowercase;'> (<?php echo "$array_TON[$chosenUnitIndex]"; ?>t)</span></td>
+								<td id="tmmLabel" nowrap class="datalabel" width="12%">TMM:</td>
+								<td nowrap class="datavalue" width="13%" id="TMM"><?php echo "$array_TMM[$chosenUnitIndex]"; ?></td>
+								<td nowrap class="datalabel" width="12%">MV:</td>
+								<td nowrap class="datavalue" style="text-transform: none;" width="13%" id="mv_points">
+									<?php echo "$array_MV[$chosenUnitIndex]&rdquo;$array_MVTYPE[$chosenUnitIndex]";
+										if ($array_MVJ[$chosenUnitIndex] != null) {
+											echo "/$array_MVJ[$chosenUnitIndex]&rdquo;&nbsp;j\r\n";
+										} else {
+											echo "\r\n";
+										}
+									?>
+								</td>
+							</tr>
+							<tr>
+								<td nowrap class="datavalue_small_special" width="50%" colspan="4" style="text-align:left;" valign="middle" onclick="javascript:window.open('http://www.masterunitlist.info/Unit/Details/<?php echo $array_UNIT_MULID[$chosenUnitIndex] ?>');"><?php echo "$array_ROLE[$chosenUnitIndex]"; ?>&nbsp;&nbsp;<i class="fa-solid fa-square-up-right"></i></td>
+								<td nowrap class="datalabel" width="13%" colspan="1" valign="middle" >AMM:</td>
+								<td nowrap class="datavalue" width="12%" colspan="1" valign="middle" style="top:0px;bottom:0px;vertical-align:middle;"><span class="datavalue" id="AMM">0</span></td>
+								<td nowrap class="datalabel" width="12%" colspan="1">SKL:</td>
+								<td nowrap class="datavalue" width="12%" colspan="1" valign="middle" id="skillfield" style="top:0px;bottom:0px;vertical-align:middle;"><?php echo "$array_SKILL[$chosenUnitIndex]"; ?></td>
+							</tr>
+						</table>
+					</div>
+					<div class="dataarea_divider_horizontal"></div>
+					<div class="dataarea_content" id="firepanel">
+						<table width="100%">
+							<tr>
+								<td nowrap class="datalabel" width="10%" style="text-align: left;">DMG:</td>
+								<td nowrap class="datalabel_thin" width="15%" style="text-align: center;" id="minrollshort">S (+0)</td>
+								<td nowrap class="datavalue" width="15%" style="text-align: center;" id="dmgshort_s"><?php echo "$array_DMG_SHORT[$chosenUnitIndex]"; ?></td>
+								<td nowrap class="datalabel_thin" width="15%" style="text-align: center;" id="minrollmedium">M (+2)</td>
+								<td nowrap class="datavalue" width="15%" style="text-align: center;" id="dmgmedium_s"><?php echo "$array_DMG_MEDIUM[$chosenUnitIndex]"; ?></td>
+								<td nowrap class="datalabel_thin" width="15%" style="text-align: center;" id="minrolllong">L (+4)</td>
+								<td nowrap class="datavalue" width="15%" style="text-align: center;" id="dmglong_s"><?php echo "$array_DMG_LONG[$chosenUnitIndex]"; ?></td>
+							</tr>
+						</table>
+						<div class="dataarea_divider_horizontal"></div>
+					</div>
+					<div class="dataarea_content" id="firepanelhidden" style="visibility: hidden;display:none">
+						<table width="100%">
+							<tr>
+								<td nowrap class="datavalue_thin" width="10%" style="text-align: center;">TRADE ABILITY TO FIRE FOR SPEED</td>
+							</tr>
+						</table>
+						<div class="dataarea_divider_horizontal"></div>
+					</div>
 <?php
 	if ($array_TP[$chosenUnitIndex] == "BA" || $array_TP[$chosenUnitIndex] == "CV") {
 		// Do not show the heat block for all Battle Armor and combat vehicle units
-		echo "				<div class='dataarea' style='display:none;'>\r\n";
+		echo "					<div class='dataarea_content' style='display:none;'>\r\n";
 	} else {
-		echo "				<div class='dataarea'>\r\n";
+		echo "					<div class='dataarea_content'>\r\n";
 	}
 ?>
-					<table width="100%">
-						<tr>
-							<td nowrap class="datalabel" width="5%">OV:</td>
-							<td nowrap width="25%" class="datalabel_thin">
+						<table width="100%">
+							<tr>
+								<td nowrap class="datalabel" width="5%">OV:</td>
+								<td nowrap width="25%" class="datalabel_thin">
 <?php
 	for ($i1 = 1; $i1 <= $array_OV[$chosenUnitIndex]; $i1++) {
-		echo "								<label class='bigcheck'><input onchange='readCircles($array_UNIT_DBID[$chosenUnitIndex]);' type='checkbox' class='bigcheck' name='UOV".$i1."' id='UOV".$i1."' value='yes'/><span class='bigcheck-target'></span></label>&nbsp;\r\n";
+		echo "									<label class='bigcheck'><input onchange='readCircles($array_UNIT_DBID[$chosenUnitIndex]);' type='checkbox' class='bigcheck' name='UOV".$i1."' id='UOV".$i1."' value='yes'/><span class='bigcheck-target'></span></label>&nbsp;\r\n";
 	}
 ?>
-							</td>
-							<td nowrap class="datalabel" width="15%" style="text-align: right;">&nbsp;&nbsp;&nbsp;HT:&nbsp;&nbsp;</td>
-							<td nowrap width="2%" valign="middle"><a style="padding-right:5px;" valign="middle" href="javascript:increaseHT_PREP();"><i class="fas fa-plus-square"></i></a></td>
-							<td nowrap class="datalabel_thin" width="2%" id="label_HT_PREP" align="center"><?= $array_HT_PREP[$chosenUnitIndex] ?></td>
-							<td nowrap width="36%" style="text-align: right;" id="ht_field" class="datalabel_thin">
-								<label class="bigcheck"><input onchange="readCircles(<?= $array_UNIT_DBID[$chosenUnitIndex] ?>, <?= $array_A_MAX[$chosenUnitIndex] ?>, <?= $array_S_MAX[$chosenUnitIndex] ?>);" type="checkbox" class="bigcheck" name="H1" id="H1" value="yes"/><span class="bigcheck-target"></span></label>
-								<label class="bigcheck"><input onchange="readCircles(<?= $array_UNIT_DBID[$chosenUnitIndex] ?>, <?= $array_A_MAX[$chosenUnitIndex] ?>, <?= $array_S_MAX[$chosenUnitIndex] ?>);" type="checkbox" class="bigcheck" name="H2" id="H2" value="yes"/><span class="bigcheck-target"></span></label>
-								<label class="bigcheck"><input onchange="readCircles(<?= $array_UNIT_DBID[$chosenUnitIndex] ?>, <?= $array_A_MAX[$chosenUnitIndex] ?>, <?= $array_S_MAX[$chosenUnitIndex] ?>);" type="checkbox" class="bigcheck" name="H3" id="H3" value="yes"/><span class="bigcheck-target"></span></label>
-								<label class="bigcheck"><input onchange="readCircles(<?= $array_UNIT_DBID[$chosenUnitIndex] ?>, <?= $array_A_MAX[$chosenUnitIndex] ?>, <?= $array_S_MAX[$chosenUnitIndex] ?>);" type="checkbox" class="bigcheck" name="H4" id="H4" value="yes"/><span class="bigcheck-target"></span></label>
-							</td>
-						</tr>
-					</table>
-				</div>
+								</td>
+								<td nowrap class="datalabel" width="15%" style="text-align: right;">&nbsp;&nbsp;&nbsp;HT:&nbsp;&nbsp;</td>
+								<td nowrap width="2%" valign="middle"><a style="padding-right:5px;" valign="middle" href="javascript:increaseHT_PREP();"><i class="fas fa-plus-square"></i></a></td>
+								<td nowrap class="datalabel_thin" width="2%" id="label_HT_PREP" align="center"><?= $array_HT_PREP[$chosenUnitIndex] ?></td>
+								<td nowrap width="36%" style="text-align: right;" id="ht_field" class="datalabel_thin">
+									<label class="bigcheck"><input onchange="readCircles(<?= $array_UNIT_DBID[$chosenUnitIndex] ?>, <?= $array_A_MAX[$chosenUnitIndex] ?>, <?= $array_S_MAX[$chosenUnitIndex] ?>);" type="checkbox" class="bigcheck" name="H1" id="H1" value="yes"/><span class="bigcheck-target"></span></label>
+									<label class="bigcheck"><input onchange="readCircles(<?= $array_UNIT_DBID[$chosenUnitIndex] ?>, <?= $array_A_MAX[$chosenUnitIndex] ?>, <?= $array_S_MAX[$chosenUnitIndex] ?>);" type="checkbox" class="bigcheck" name="H2" id="H2" value="yes"/><span class="bigcheck-target"></span></label>
+									<label class="bigcheck"><input onchange="readCircles(<?= $array_UNIT_DBID[$chosenUnitIndex] ?>, <?= $array_A_MAX[$chosenUnitIndex] ?>, <?= $array_S_MAX[$chosenUnitIndex] ?>);" type="checkbox" class="bigcheck" name="H3" id="H3" value="yes"/><span class="bigcheck-target"></span></label>
+									<label class="bigcheck"><input onchange="readCircles(<?= $array_UNIT_DBID[$chosenUnitIndex] ?>, <?= $array_A_MAX[$chosenUnitIndex] ?>, <?= $array_S_MAX[$chosenUnitIndex] ?>);" type="checkbox" class="bigcheck" name="H4" id="H4" value="yes"/><span class="bigcheck-target"></span></label>
+								</td>
+							</tr>
+						</table>
+						<div class="dataarea_divider_horizontal"></div>
+					</div>
 
-				<div class="dataarea">
-					<table width="100%">
-						<tr>
-							<td nowrap width="5%" class="datalabel">A:</td>
-							<td nowrap width="95%" class="datalabel_thin">
+					<div class="dataarea_content">
+						<table width="100%">
+							<tr>
+								<td nowrap width="5%" class="datalabel">A:</td>
+								<td nowrap width="95%" class="datalabel_thin">
 <?php
 	for ($i1 = 1; $i1 <= $array_A_MAX[$chosenUnitIndex]; $i1++) {
-		echo "							<label class='bigcheck'><input onchange='readCircles($array_UNIT_DBID[$chosenUnitIndex]);' type='checkbox' class='bigcheck' name='A".$i1."' value='yes'/><span class='bigcheck-target'></span></label>&nbsp;\r\n";
+		echo "								<label class='bigcheck'><input onchange='readCircles($array_UNIT_DBID[$chosenUnitIndex]);' type='checkbox' class='bigcheck' name='A".$i1."' value='yes'/><span class='bigcheck-target'></span></label>&nbsp;\r\n";
 		if ($i1 == 10) {
             echo "<br>\n";
         }
 	}
 ?>
-							</td>
-							<td align="center" nowrap width="5%" class="datalabel_thin">
-								<span id="narcDesc" onclick="javascript:changeNARCDesc();"><?= $array_NARCDESC[$chosenUnitIndex] ?></span>
-							</td>
-						</tr>
-						<tr>
-							<td nowrap width="5%" class="datalabel">S:</td>
-							<td nowrap width="90%" class="datalabel_thin">
+								</td>
+							</tr>
+							<tr>
+								<td nowrap width="5%" class="datalabel">S:</td>
+								<td nowrap width="95%" class="datalabel_thin">
 <?php
 	for ($i2 = 1; $i2 <= $array_S_MAX[$chosenUnitIndex]; $i2++) {
-		echo "							<label class='bigcheck'><input onchange='readCircles($array_UNIT_DBID[$chosenUnitIndex]);' type='checkbox' class='bigcheck' name='S".$i2."' value='yes'/><span class='bigcheck-target'></span></label>&nbsp;\r\n";
+		echo "								<label class='bigcheck'><input onchange='readCircles($array_UNIT_DBID[$chosenUnitIndex]);' type='checkbox' class='bigcheck' name='S".$i2."' value='yes'/><span class='bigcheck-target'></span></label>&nbsp;\r\n";
 		if ($i2 == 10) {
 			echo "<br>\n";
 		}
 	}
 ?>
-							</td>
-							<td align="center" style="text-align:center; margin:0 auto" nowrap width="5%" class="datalabel_thin">
-								<label class='bigcheck'><input onchange='readCircles(<?= $array_UNIT_DBID[$chosenUnitIndex] ?>);' type='checkbox' class='bigcheck' name='NARC' value='yes'/><span class='bigcheck-target'></span></label>
-							</td>
-						</tr>
-					</table>
-				</div>
+								</td>
+							</tr>
+						</table>
+					</div>
 
-				<div class="dataarea">
-					<table width="100%">
-						<tr>
-							<td nowrap width="10%" class="datalabel" width="100%">SA:</td>
-							<td nowrap width="90%" class="datavalue_thin" style="text-align: left;">
-								<table>
-									<tr>
-										<td nowrap width="99%" class="datavalue_thin" style="text-align: left;" id="sa_field">
-											<?php
-												$allSpecialAbilities = "";
-												$parts = explode(',', $array_SPCL[$chosenUnitIndex]);
-												if (sizeof($parts) >= 1) {
-													$i = 1;
-													foreach ($parts as $part) {
+					<div class="dataarea_divider_horizontal"></div>
 
-														// These special abilities are special, because they have "-" or "("
-														// in the name so that the regular expression down there does not
-														// catch them correctly. Remove this if the re is fixed
-														$saParameter = "";
-														if (substr($part, 0, 3) === "ART") {
-															$saParameter = "ART";
-														} else if (substr($part, 0, 3) === "BIM") {
-															$saParameter = "BIM";
-														} else if (substr($part, 0, 3) === "LAM") {
-															$saParameter = "LAM";
-														} else if (substr($part, 0, 5) === "I-TSM") {
-															$saParameter = "I-TSM";
-														} else if (substr($part, 0, 5) === "SDS-C") {
-															$saParameter = "SDS-C";
-														} else if (substr($part, 0, 6) === "SDS-CM") {
-															$saParameter = "SDS-CM";
-														} else if (substr($part, 0, 6) === "SDS-SC") {
-															$saParameter = "SDS-SC";
-														} else {
-															// This re removed all "#" and "/" from the names
-															// also all "-" and "(", ")" should be removed to match
-															// them in the javascript to display the ability
-															$re = '/^[A-Z][A-Z3][A-Z]*/m';
-															preg_match($re, $part, $matches);
-															$saParameter = $matches[0];
-														}
+					<div class="dataarea_content">
+						<table width="100%">
+							<tr>
+								<td nowrap width="90%" class="datavalue_thin" style="text-align: left;" colspan="2">
+									<table>
+										<tr>
+											<td nowrap width="99%" class="datavalue_thin" style="text-align: left;" id="sa_field" colspan="2">
+												<?php
+													$allSpecialAbilities = "";
+													$parts = explode(',', $array_SPCL[$chosenUnitIndex]);
+													if (sizeof($parts) >= 1) {
+														$i = 1;
+														foreach ($parts as $part) {
 
-														if ($i > 1) {
-															echo ", ";
-														}
-
-														if ($saParameter != null) {
-															$pos = strpos($allSpecialAbilities, $saParameter);
-															if ($pos !== false) {
-																// String is already in the list
+															// These special abilities are special, because they have "-" or "("
+															// in the name so that the regular expression down there does not
+															// catch them correctly. Remove this if the re is fixed
+															$saParameter = "";
+															if (substr($part, 0, 3) === "ART") {
+																$saParameter = "ART";
+															} else if (substr($part, 0, 3) === "BIM") {
+																$saParameter = "BIM";
+															} else if (substr($part, 0, 3) === "LAM") {
+																$saParameter = "LAM";
+															} else if (substr($part, 0, 5) === "I-TSM") {
+																$saParameter = "I-TSM";
+															} else if (substr($part, 0, 5) === "SDS-C") {
+																$saParameter = "SDS-C";
+															} else if (substr($part, 0, 6) === "SDS-CM") {
+																$saParameter = "SDS-CM";
+															} else if (substr($part, 0, 6) === "SDS-SC") {
+																$saParameter = "SDS-SC";
 															} else {
-																if ($i > 1) {
-																	$allSpecialAbilities = $allSpecialAbilities."|";
+																// This re removed all "#" and "/" from the names
+																// also all "-" and "(", ")" should be removed to match
+																// them in the javascript to display the ability
+																$re = '/^[A-Z][A-Z3][A-Z]*/m';
+																preg_match($re, $part, $matches);
+																$saParameter = $matches[0];
+															}
+
+															if ($i > 1) {
+																echo ", ";
+															}
+
+															if ($saParameter != null) {
+																$pos = strpos($allSpecialAbilities, $saParameter);
+																if ($pos !== false) {
+																	// String is already in the list
+																} else {
+																	if ($i > 1) {
+																		$allSpecialAbilities = $allSpecialAbilities."|";
+																	}
+																	$allSpecialAbilities = $allSpecialAbilities.$saParameter;
 																}
-																$allSpecialAbilities = $allSpecialAbilities.$saParameter;
+																if ($i == 8) {
+																	echo "<br>";
+																}
+																echo "<span class='datavalue_thin' onclick='javascript:showSpecialAbility(\"".$saParameter."\");'>".$part."</span>";
+																$i++;
 															}
-															if ($i == 8) {
-																echo "<br>";
-															}
-															echo "<span class='datavalue_thin' onclick='javascript:showSpecialAbility(\"".$saParameter."\");'>".$part."</span>";
-															$i++;
 														}
 													}
-												}
-											?>
-										</td>
-										<td nowrap width="1%" class="datavalue_thin" style="text-align: right;" align="right">
-											<!--
-											<a href="javascript:showSpecialAbility('<?= $allSpecialAbilities ?>');"><i class="fas fa-info-circle"></i></a>
-											-->
-										</td>
-									</tr>
-								</table>
+												?>
+											</td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+						</table>
+					</div>
+				</div>
+				<div class="dataarea">
+					<table width="100%" cellspacing=0 cellpadding=0>
+						<tr>
+							<td nowrap valign="middle" class="datavalue_thin" style="text-align:right;vertical-align:middle;">NARC:&nbsp;</td>
+							<td nowrap valign="middle" class="datavalue_thin" style="text-align:left;vertical-align:middle;">
+								<label class='bigcheck'><input onchange='readCircles(<?= $array_UNIT_DBID[$chosenUnitIndex] ?>);' type='checkbox' class='bigcheck' name='NARC' value='yes'/><span class='bigcheck-target'></span></label>
+							</td>
+							<td nowrap valign="middle" class="datavalue_thin" style="text-align:right;vertical-align:middle;">TAG:&nbsp;</td>
+							<td nowrap valign="middle" class="datavalue_thin" style="text-align:left;vertical-align:middle;">
+								<label class='bigcheck'><input onchange='readCircles(<?= $array_UNIT_DBID[$chosenUnitIndex] ?>);' type='checkbox' class='bigcheck' name='TAG' value='yes'/><span class='bigcheck-target'></span></label>
+							</td>
+							<td nowrap valign="middle" class="datavalue_thin" style="text-align:right;vertical-align:middle;">WATER:&nbsp;</td>
+							<td nowrap valign="middle" class="datavalue_thin" style="text-align:left;vertical-align:middle;">
+								<label class='bigcheck'><input onchange='readCircles(<?= $array_UNIT_DBID[$chosenUnitIndex] ?>);' type='checkbox' class='bigcheck' name='WATER' value='yes'/><span class='bigcheck-target'></span></label>
+							</td>
+							<td nowrap valign="middle" class="datavalue_thin" style="text-align:right;vertical-align:middle;">ROUTED:&nbsp;</td>
+							<td nowrap valign="middle" class="datavalue_thin" style="text-align:left;vertical-align:middle;">
+								<label class='bigcheck'><input onchange='readCircles(<?= $array_UNIT_DBID[$chosenUnitIndex] ?>);' type='checkbox' class='bigcheck' name='ROUTED' value='yes'/><span class='bigcheck-target'></span></label>
 							</td>
 						</tr>
 					</table>

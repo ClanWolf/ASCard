@@ -169,6 +169,7 @@ function readCircles2(index, a_max, s_max, mv_bt_id, f_bt_id) {
 	if (radioWF6_WEAPONSFIRED2.checked && f_bt_id == 2) { // weapons fired
 		wpnsf = 2;
 	}
+
 	if (f_bt_id == -1) {
 		if (radioWF5_WEAPONSFIRED2.checked) { wpnsf = 1; }
 		if (radioWF6_WEAPONSFIRED2.checked) { wpnsf = 2; }
@@ -272,7 +273,6 @@ function readCircles2(index, a_max, s_max, mv_bt_id, f_bt_id) {
 
 	if (mvmnt <= 0 && wpnsf > 0) {
 		wpnsf = 0; // If weaponsfired was clicked without a movement specified, the weapons value will NOT be saved
-		playErrorSound();
 	}
 
 	setCircles(h, a, s, e, fc, mp, w, e_cv, fc_cv, w_cv, ma_cv, mb_cv, mc_cv, uov, mvmnt, wpnsf, tc_rangeValueReading, tc_partialCoverReading, unitstatusstring, NARCed);
@@ -419,6 +419,7 @@ function setCircles(h, a, s, e, fc, mp, w, e_cv, fc_cv, w_cv, ma_cv, mb_cv, mc_c
 	document.getElementById("firepanel").style.visibility = "visible";
 	document.getElementById("firepanelhidden").style.display = "none";
 	document.getElementById("firepanelhidden").style.visibility = "hidden";
+
 	if (mvmnt == 2) { // Stationary (AMM -1)
 		radioMV2_moved2_standstill.checked = true;
 		if (unitType != "BA") {
@@ -916,6 +917,7 @@ function setCircles(h, a, s, e, fc, mp, w, e_cv, fc_cv, w_cv, ma_cv, mb_cv, mc_c
 	if (mvmnt == "0") { // not moved yet
 		movementdiestring = movementdiestring + "empty.png";
 		document.getElementById('INFOMOVED').innerHTML = "";
+		document.getElementById('firecontainer').className = "datalabel_thin_disabled";
 	} else if (mvmnt == "2") { // stationary
 		movementdiestring = movementdiestring + "bd6_" + tmmDiceValue + ".png";
 		document.getElementById('INFOMOVED').innerHTML = "STAND";
