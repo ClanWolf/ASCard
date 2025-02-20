@@ -1724,23 +1724,65 @@ function showMoveBar() {
 
 function hideSkull() {
 	$("#destroyedIndicator").fadeOut(300, "linear");
+	$("#crippledIndicator").fadeOut(300, "linear");
+	$("#shutdownIndicator").fadeOut(300, "linear");
+	$("#narcIndicator").fadeOut(300, "linear");
+	$("#tagIndicator").fadeOut(300, "linear");
+	$("#waterIndicator").fadeOut(300, "linear");
+	$("#routedIndicator").fadeOut(300, "linear");
 }
 function hideCrippled() {
+	$("#destroyedIndicator").fadeOut(300, "linear");
 	$("#crippledIndicator").fadeOut(300, "linear");
+	$("#shutdownIndicator").fadeOut(300, "linear");
+	$("#narcIndicator").fadeOut(300, "linear");
+	$("#tagIndicator").fadeOut(300, "linear");
+	$("#waterIndicator").fadeOut(300, "linear");
+	$("#routedIndicator").fadeOut(300, "linear");
 }
 function hideShutdownIndicator() {
+	$("#destroyedIndicator").fadeOut(300, "linear");
+	$("#crippledIndicator").fadeOut(300, "linear");
 	$("#shutdownIndicator").fadeOut(300, "linear");
+	$("#narcIndicator").fadeOut(300, "linear");
+	$("#tagIndicator").fadeOut(300, "linear");
+	$("#waterIndicator").fadeOut(300, "linear");
+	$("#routedIndicator").fadeOut(300, "linear");
 }
 function hideNarcIndicator() {
+	$("#destroyedIndicator").fadeOut(300, "linear");
+	$("#crippledIndicator").fadeOut(300, "linear");
+	$("#shutdownIndicator").fadeOut(300, "linear");
 	$("#narcIndicator").fadeOut(300, "linear");
+	$("#tagIndicator").fadeOut(300, "linear");
+	$("#waterIndicator").fadeOut(300, "linear");
+	$("#routedIndicator").fadeOut(300, "linear");
 }
 function hideTagIndicator() {
+	$("#destroyedIndicator").fadeOut(300, "linear");
+	$("#crippledIndicator").fadeOut(300, "linear");
+	$("#shutdownIndicator").fadeOut(300, "linear");
+	$("#narcIndicator").fadeOut(300, "linear");
 	$("#tagIndicator").fadeOut(300, "linear");
+	$("#waterIndicator").fadeOut(300, "linear");
+	$("#routedIndicator").fadeOut(300, "linear");
 }
 function hideWaterIndicator() {
+	$("#destroyedIndicator").fadeOut(300, "linear");
+	$("#crippledIndicator").fadeOut(300, "linear");
+	$("#shutdownIndicator").fadeOut(300, "linear");
+	$("#narcIndicator").fadeOut(300, "linear");
+	$("#tagIndicator").fadeOut(300, "linear");
 	$("#waterIndicator").fadeOut(300, "linear");
+	$("#routedIndicator").fadeOut(300, "linear");
 }
 function hideRoutedIndicator() {
+	$("#destroyedIndicator").fadeOut(300, "linear");
+	$("#crippledIndicator").fadeOut(300, "linear");
+	$("#shutdownIndicator").fadeOut(300, "linear");
+	$("#narcIndicator").fadeOut(300, "linear");
+	$("#tagIndicator").fadeOut(300, "linear");
+	$("#waterIndicator").fadeOut(300, "linear");
 	$("#routedIndicator").fadeOut(300, "linear");
 }
 function hideTopRightPanel() {

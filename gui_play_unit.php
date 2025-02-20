@@ -1564,22 +1564,22 @@ if ($showDistancesHexes == 1) {
 	<img style="pointer-events:auto;" src='./images/skull.png' onclick="javascript:hideSkull();" height='250px'>
 </div>
 <div id="crippledIndicator">
-	<img style="pointer-events:auto;" src='./images/crippled.png' onclick="javascript:hideCrippled();" height='250px'>
+	<img style="pointer-events:auto;" src='./images/crippled.png' onclick="javascript:hideCrippled();" height='400px'>
 </div>
 <div id="shutdownIndicator">
 	<img style="pointer-events:auto;" src='./images/heat.png' onclick="javascript:hideShutdownIndicator();" height='250px'>
 </div>
 <div id="narcIndicator">
-	<img style="pointer-events:auto;" src='./images/narc.png' onclick="javascript:hideNarcIndicator();" height='250px'>
+	<img style="pointer-events:auto;" src='./images/narc.png' onclick="javascript:hideNarcIndicator();" height='400px'>
 </div>
 <div id="tagIndicator">
-	<img style="pointer-events:auto;" src='./images/tag.png' onclick="javascript:hideTagIndicator();" height='250px'>
+	<img style="pointer-events:auto;" src='./images/tag.png' onclick="javascript:hideTagIndicator();" height='400px'>
 </div>
 <div id="waterIndicator">
-	<img style="pointer-events:auto;" src='./images/water.png' onclick="javascript:hideWaterIndicator();" height='250px'>
+	<img style="pointer-events:auto;" src='./images/water.png' onclick="javascript:hideWaterIndicator();" height='400px'>
 </div>
 <div id="routedIndicator">
-	<img style="pointer-events:auto;" src='./images/routed.png' onclick="javascript:hideRoutedIndicator();" height='250px'>
+	<img style="pointer-events:auto;" src='./images/routed.png' onclick="javascript:hideRoutedIndicator();" height='400px'>
 </div>
 
 <script type="text/javascript">
