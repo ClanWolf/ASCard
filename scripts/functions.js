@@ -314,6 +314,9 @@ function setCircles(h, a, s, e, fc, mp, w, e_cv, fc_cv, w_cv, ma_cv, mb_cv, mc_c
 	$("#shutdownIndicator").hide();
 	$("#destroyedIndicator").hide();
 	$("#narcIndicator").hide();
+	$("#tagIndicator").hide();
+	$("#waterIndicator").hide();
+	$("#routedIndicator").hide();
 
 	var na1 = "";
 
@@ -897,17 +900,20 @@ function setCircles(h, a, s, e, fc, mp, w, e_cv, fc_cv, w_cv, ma_cv, mb_cv, mc_c
 		$("#narcIndicator").show();
 	}
 	if (TAGed == 1) {
-		$("#narcIndicator").show();
+		$("#tagIndicator").show();
 	}
 	if (WATERed == 1) {
-		$("#narcIndicator").show();
+		$("#waterIndicator").show();
 	}
 	if (ROUTed == 1) {
-		$("#narcIndicator").show();
+		$("#routedIndicator").show();
 	}
 	if (unitstatus == 4) {
 		// Unit destroyed
 		$("#narcIndicator").hide();
+		$("#tagIndicator").hide();
+		$("#waterIndicator").hide();
+		$("#routedIndicator").hide();
 		$("#shutdownIndicator").hide();
 		$("#crippledIndicator").hide();
 		$("#destroyedIndicator").show();
@@ -1727,6 +1733,15 @@ function hideShutdownIndicator() {
 }
 function hideNarcIndicator() {
 	$("#narcIndicator").fadeOut(300, "linear");
+}
+function hideTagIndicator() {
+	$("#tagIndicator").fadeOut(300, "linear");
+}
+function hideWaterIndicator() {
+	$("#waterIndicator").fadeOut(300, "linear");
+}
+function hideRoutedIndicator() {
+	$("#routedIndicator").fadeOut(300, "linear");
 }
 function hideTopRightPanel() {
 	$("#topright").fadeOut(300, "linear");

@@ -1571,7 +1571,15 @@ if ($showDistancesHexes == 1) {
 <div id="narcIndicator">
 	<img style="pointer-events:auto;" src='./images/narc.png' onclick="javascript:hideNarcIndicator();" height='250px'>
 </div>
-
+<div id="tagIndicator">
+	<img style="pointer-events:auto;" src='./images/tag.png' onclick="javascript:hideTagIndicator();" height='250px'>
+</div>
+<div id="waterIndicator">
+	<img style="pointer-events:auto;" src='./images/water.png' onclick="javascript:hideWaterIndicator();" height='250px'>
+</div>
+<div id="routedIndicator">
+	<img style="pointer-events:auto;" src='./images/routed.png' onclick="javascript:hideRoutedIndicator();" height='250px'>
+</div>
 
 <script type="text/javascript">
 	$("#infobar").hide();
@@ -1582,6 +1590,9 @@ if ($showDistancesHexes == 1) {
 	$("#crippledIndicator").hide();
 	$("#shutdownIndicator").hide();
 	$("#narcIndicator").hide();
+	$("#tagIndicator").hide();
+	$("#waterIndicator").hide();
+	$("#routedIndicator").hide();
 	setCircles(<?=$array_HT[$chosenUnitIndex]?>,<?=$array_A[$chosenUnitIndex]?>,<?=$array_S[$chosenUnitIndex]?>,<?=$array_ENGN[$chosenUnitIndex]?>,<?=$array_FRCTRL[$chosenUnitIndex]?>,<?=$array_MP[$chosenUnitIndex]?>,<?=$array_WPNS[$chosenUnitIndex]?>,<?=$array_CV_ENGN[$chosenUnitIndex]?>,<?=$array_CV_FRCTRL[$chosenUnitIndex]?>,<?=$array_CV_WPNS[$chosenUnitIndex]?>,<?=$array_CV_MOTV_A[$chosenUnitIndex]?>,<?=$array_CV_MOTV_B[$chosenUnitIndex]?>,<?=$array_CV_MOTV_C[$chosenUnitIndex]?>,<?=$array_USEDOVERHEAT[$chosenUnitIndex]?>,<?=$array_MVMT[$chosenUnitIndex]?>,<?=$array_WPNSFIRED[$chosenUnitIndex]?>,2,0,'<?=$array_UNIT_STATUSSTRING[$chosenUnitIndex]?>', <?=$array_NARCED[$chosenUnitIndex]?>, <?=$array_TAGED[$chosenUnitIndex]?>, <?=$array_WATER[$chosenUnitIndex]?>, <?=$array_ROUTED[$chosenUnitIndex]?>);
 </script>
 
