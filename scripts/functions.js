@@ -98,6 +98,9 @@ function readCircles2(index, a_max, s_max, mv_bt_id, f_bt_id) {
 
 	var uov = 0; // used overheat
 	var NARCed = 0;
+	var TAGed = 0;
+	var WATERed = 0;
+	var ROUTed = 0;
 
 	var mvmnt = 0;
 	var wpnsf = 0;
@@ -127,7 +130,10 @@ function readCircles2(index, a_max, s_max, mv_bt_id, f_bt_id) {
 
 			if (na.substring(0, 3) == "UOV"       && el1.checked) { uov++;   }
 
-			if (na.substring(0, 4) == "NARC"      && el1.checked) { NARCed = 1; }
+			if (na.substring(0, 4) == "NARC"      && el1.checked) { NARCed  = 1; }
+			if (na.substring(0, 3) == "TAG"       && el1.checked) { TAGed   = 1; }
+			if (na.substring(0, 5) == "WATER"     && el1.checked) { WATERed = 1; }
+			if (na.substring(0, 6) == "ROUTED"    && el1.checked) { ROUTed  = 1; }
 		}
 	});
 
@@ -275,8 +281,8 @@ function readCircles2(index, a_max, s_max, mv_bt_id, f_bt_id) {
 		wpnsf = 0; // If weaponsfired was clicked without a movement specified, the weapons value will NOT be saved
 	}
 
-	setCircles(h, a, s, e, fc, mp, w, e_cv, fc_cv, w_cv, ma_cv, mb_cv, mc_cv, uov, mvmnt, wpnsf, tc_rangeValueReading, tc_partialCoverReading, unitstatusstring, NARCed);
-	var url="./save.php?index="+index+"&h="+h+"&a="+a+"&s="+s+"&e="+e+"&fc="+fc+"&mp="+mp+"&w="+w+"&e_cv="+e_cv+"&fc_cv="+fc_cv+"&w_cv="+w_cv+"&ma_cv="+ma_cv+"&mb_cv="+mb_cv+"&mc_cv="+mc_cv+"&mstat="+unitstatusimage+"&mstatstr="+unitstatusstring+"&uov="+uov+"&mvmnt="+mvmnt+"&wpnsf="+wpnsf+"&currentRound="+currentRound+"&narc="+NARCed+"&gameid="+gameid;
+	setCircles(h, a, s, e, fc, mp, w, e_cv, fc_cv, w_cv, ma_cv, mb_cv, mc_cv, uov, mvmnt, wpnsf, tc_rangeValueReading, tc_partialCoverReading, unitstatusstring, NARCed, TAGed, WATERed, ROUTed);
+	var url="./save.php?index="+index+"&h="+h+"&a="+a+"&s="+s+"&e="+e+"&fc="+fc+"&mp="+mp+"&w="+w+"&e_cv="+e_cv+"&fc_cv="+fc_cv+"&w_cv="+w_cv+"&ma_cv="+ma_cv+"&mb_cv="+mb_cv+"&mc_cv="+mc_cv+"&mstat="+unitstatusimage+"&mstatstr="+unitstatusstring+"&uov="+uov+"&mvmnt="+mvmnt+"&wpnsf="+wpnsf+"&currentRound="+currentRound+"&narc="+NARCed+"&tag="+TAGed+"&water="+WATERed+"&routed="+ROUTed+"&gameid="+gameid;
 	//alert(url);
 	window.frames['saveframe'].location.replace(url);
 
@@ -302,7 +308,7 @@ function setStructuralDamageCache(value) {
 }
 
 // SetCircles is called from gui_play_unit.php as well!
-function setCircles(h, a, s, e, fc, mp, w, e_cv, fc_cv, w_cv, ma_cv, mb_cv, mc_cv, uov, mvmnt, wpnsf, tc_rangeValueReading, tc_partialCoverReading, unitstatusstring, NARCed) {
+function setCircles(h, a, s, e, fc, mp, w, e_cv, fc_cv, w_cv, ma_cv, mb_cv, mc_cv, uov, mvmnt, wpnsf, tc_rangeValueReading, tc_partialCoverReading, unitstatusstring, NARCed, TAGed, WATERed, ROUTed) {
 
 	$("#crippledIndicator").hide();
 	$("#shutdownIndicator").hide();
@@ -364,6 +370,9 @@ function setCircles(h, a, s, e, fc, mp, w, e_cv, fc_cv, w_cv, ma_cv, mb_cv, mc_c
 			if (na1.substring(0, 9) == "CD_CV-MC_") { mc_cv_c++; if (mc_cv_c<=mc_cv) { el1.checked = true; }}
 
 			if (na1.substring(0, 4) == "NARC")      {            if (NARCed==1)      { el1.checked = true; }}
+			if (na1.substring(0, 3) == "TAG")       {            if (TAGed==1)       { el1.checked = true; }}
+			if (na1.substring(0, 5) == "WATER")     {            if (WATERed==1)     { el1.checked = true; }}
+			if (na1.substring(0, 6) == "ROUTED")    {            if (ROUTed==1)      { el1.checked = true; }}
 		}
 	});
 
@@ -885,6 +894,15 @@ function setCircles(h, a, s, e, fc, mp, w, e_cv, fc_cv, w_cv, ma_cv, mb_cv, mc_c
 		$("#shutdownIndicator").show();
 	}
 	if (NARCed == 1) {
+		$("#narcIndicator").show();
+	}
+	if (TAGed == 1) {
+		$("#narcIndicator").show();
+	}
+	if (WATERed == 1) {
+		$("#narcIndicator").show();
+	}
+	if (ROUTed == 1) {
 		$("#narcIndicator").show();
 	}
 	if (unitstatus == 4) {

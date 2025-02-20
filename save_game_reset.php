@@ -10,7 +10,7 @@
 	require_once('./db.php');
 
 	$gid = isset($_GET["gid"]) ? $_GET["gid"] : "";
-	$pid__ = isset($_GET["pid"]) ? $_GET["pid"] : "";
+	$pid = isset($_GET["pid"]) ? $_GET["pid"] : "";
 	$leaveCurrentGame = isset($_GET["leaveCurrentGame"]) ? $_GET["leaveCurrentGame"] : "";
 
 	echo "<!DOCTYPE html>\n";

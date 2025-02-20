@@ -179,7 +179,7 @@ a:hover {
 	/* bottom: 0px; */
 	background: transparent;
 	background-color: rgba(10, 10, 10, 0.90);
-	z-index:1010;
+	z-index:1100;
 }
 #specialabilitiescontainer {
 	text-align: center;

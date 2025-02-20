@@ -64,8 +64,11 @@
 	$array_MOUNTED_UNITID = array();
 	$array_MOUNTED_ON_UNITID = array();
 
-	$array_NARCED = array();
 	$array_NARCDESC = array();
+	$array_NARCED = array();
+	$array_TAGED = array();
+	$array_WATER = array();
+	$array_ROUTED = array();
 
 	$array_ENGN = array();
 	$array_FRCTRL = array();
@@ -301,8 +304,12 @@
 							$array_MP_PREP[$unitcount] = $row["crit_mp_PREP"];
 							$array_WPNS_PREP[$unitcount] = $row["crit_weapons_PREP"];
 
-							$array_NARCED[$unitcount] = $row["active_narc"];
 							$array_NARCDESC[$unitcount] = $row["narc_desc"];
+							$array_NARCED[$unitcount] = $row["active_narc"];
+							$array_TAGED[$unitcount] = $row["active_tag"];
+							$array_WATER[$unitcount] = $row["active_water"];
+							$array_ROUTED[$unitcount] = $row["active_routed"];
+
 							$array_ACTIVE_BID[$unitcount] = $row["active_bid"];
 							$array_UNIT_IMG_STATUS[$unitcount] = $row["unit_statusimageurl"];
 
