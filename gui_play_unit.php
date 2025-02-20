@@ -598,90 +598,6 @@ session_start();
 	</table>
 </div>
 
-<div id="gamemenu" onclick="javascript:showGameMenu();">
-	<br>
-	<table style="margin: 0 auto;" align="center" width="90%" cellspacing=2 cellpadding=2 border=0px>
-		<tr>
-<?php
-	for ($cc = 0; $cc < sizeof($array_PLAYER_FORMATION_IDS); $cc++) {
-		$currFormId = $array_PLAYER_FORMATION_IDS[$cc];
-		$unitArray = $array_PLAYER_UNITS_IN_FORMATION[$currFormId];
-
-		$active_units_found = false;
-		foreach($unitArray as $item) {
-			if ($item['active_bid'] == 1) {
-				$active_units_found = true;
-			}
-		}
-
-		if ($unitArray != null && $active_units_found) {
-			echo "			<td width='33%' nowrap style='width:270px;height:30px;vertical-align:middle;' onclick='location.href=\"gui_play_unit.php?formationid=".$array_PLAYER_FORMATION_IDS[$cc]."\"' class='formationselect_button_normal'>\n";
-			echo "				<a href='gui_play_unit.php?formationid=".$array_PLAYER_FORMATION_IDS[$cc]."'>".$array_PLAYER_FORMATION_NAMES[$cc]."</a>\n";
-			echo "			</td>\n";
-		} else {
-			echo "			<td width='33%' nowrap style='background-color:#444444;width:270px;height:40px;text-align:center;' class='formationselect_button_active'>\n";
-			echo "				".$array_PLAYER_FORMATION_NAMES[$cc]."\n";
-			echo "			</td>\n";
-		}
-	}
-	echo "			<td width='1%' nowrap onclick='location.href=\"save_finalize_round.php?pid=".$pid."\"' id='FinalizeRoundButton' style='text-align:center;background:rgba(81,125,37,1.0);' rowspan='2'><div style='color:#eee;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class='fas fa-redo'></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div></td>\n";
-	echo "		</tr>\n";
-	echo "		<tr>\n";
-
-	for ($cc = 0; $cc < sizeof($array_PLAYER_FORMATION_IDS); $cc++) {
-		$currFormId = $array_PLAYER_FORMATION_IDS[$cc];
-		$unitArray = $array_PLAYER_UNITS_IN_FORMATION[$currFormId];
-
-		echo "			<td style='text-align:left;background-color:#444444;' class='unitselect_button_active'>\n";
-		echo "				<table style='border-collapse:collapse;' cellspacing=4 cellpadding=4>\n";
-		echo "					<tr>\n";
-
-		$count = 1;
-		foreach($unitArray as $item) {
-			if ($item['round_moved'] == 0 && $item['round_fired'] == 0) {
-				$imagestatuslnk = "./images/top-right_phase01.png";
-			}
-			if ($item['round_moved'] > 0 && $item['round_fired'] == 0) {
-				$imagestatuslnk = "./images/top-right_phase02.png";
-			}
-			if ($item['round_moved'] == 0 && $item['round_fired'] > 0) { // impossible state
-				$imagestatuslnk = "./images/top-right_phase02.png";
-			}
-			if ($item['round_moved'] > 0 && $item['round_fired'] > 0) {
-				$imagestatuslnk = "./images/top-right_phase03.png";
-			}
-			echo "			<td align='center' style='background-color:#333333;padding:4px;border:2px solid #555;'>\n";
-			if ($array_UNIT_DBID[$chosenUnitIndex] == $item['unitid']) {
-				echo "				<img src='./images/chevron.png' width='40px'><br>\n";
-				echo "				<span style='display:inline-block;width:40px;align:center;'>&nbsp;</span>\n";
-			} else {
-				if ($item['active_bid'] == 1) {
-					echo "				<a href='gui_play_unit.php?formationid=".$array_PLAYER_FORMATION_IDS[$cc]."&chosenunit=".$count."'><img src='https://www.ascard.net/app/".$item["status_image"]."' width='40px'></a><br>\n";
-					echo "				<span style='display:inline-block;width:40px;align:center;'><img style='display:block;margin-left:auto;margin-right:auto;height:auto;' src='".$imagestatuslnk."' width='20px'></span>\n";
-				} else {
-					echo "				NO<br>\n";
-					echo "				BID\n";
-				}
-			}
-			echo "			</td>\n";
-			echo " <td>&nbsp;</td>\n";
-			$count++;
-		}
-
-		echo "					</tr>\n";
-		echo "				</table>\n";
-		echo "			</td>\n";
-	}
-?>
-		</tr>
-		<tr>
-			<td colspan="4" style='text-align:center;background-color:#444444;' class='unitselect_button_active'>
-				Blue chevron represents currently selected unit.
-			</td>
-		</tr>
-	</table>
-</div>
-
 <div id="cover"></div>
 
 <div id="header">
@@ -803,6 +719,91 @@ session_start();
 		echo "		<tr><td colspan='999' style='background:#da8e25;height:5px;'></td></tr>\r\n";
 	}
 ?>
+	</table>
+</div>
+
+<div id="gamemenu" onclick="javascript:showGameMenu();">
+	<br>
+	<table style="margin: 0 auto;" align="center" width="90%" cellspacing=2 cellpadding=2 border=0px>
+		<tr>
+<?php
+	for ($cc = 0; $cc < sizeof($array_PLAYER_FORMATION_IDS); $cc++) {
+		$currFormId = $array_PLAYER_FORMATION_IDS[$cc];
+		$unitArray = $array_PLAYER_UNITS_IN_FORMATION[$currFormId];
+
+		$active_units_found = false;
+		foreach($unitArray as $item) {
+			if ($item['active_bid'] == 1) {
+				$active_units_found = true;
+			}
+		}
+
+		if ($unitArray != null && $active_units_found) {
+			echo "			<td width='33%' nowrap style='width:270px;height:30px;vertical-align:middle;' onclick='location.href=\"gui_play_unit.php?formationid=".$array_PLAYER_FORMATION_IDS[$cc]."\"' class='formationselect_button_normal'>\n";
+			echo "				<a href='gui_play_unit.php?formationid=".$array_PLAYER_FORMATION_IDS[$cc]."'>".$array_PLAYER_FORMATION_NAMES[$cc]."</a>\n";
+			echo "			</td>\n";
+		} else {
+			echo "			<td width='33%' nowrap style='background-color:#444444;width:270px;height:40px;text-align:center;' class='formationselect_button_active'>\n";
+			echo "				".$array_PLAYER_FORMATION_NAMES[$cc]."\n";
+			echo "			</td>\n";
+		}
+	}
+	echo "			<td width='1%' nowrap onclick='location.href=\"save_finalize_round.php?pid=".$pid."\"' id='FinalizeRoundButton' style='text-align:center;background:rgba(81,125,37,1.0);' rowspan='2'><div style='color:#eee;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class='fas fa-redo'></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div></td>\n";
+	echo "		</tr>\n";
+	echo "		<tr>\n";
+
+	for ($cc = 0; $cc < sizeof($array_PLAYER_FORMATION_IDS); $cc++) {
+		$currFormId = $array_PLAYER_FORMATION_IDS[$cc];
+		$unitArray = $array_PLAYER_UNITS_IN_FORMATION[$currFormId];
+
+		echo "			<td style='text-align:left;background-color:#444444;' class='unitselect_button_active'>\n";
+		echo "				<table style='border-collapse:collapse;' cellspacing=4 cellpadding=4>\n";
+		echo "					<tr>\n";
+
+		$count = 1;
+		foreach($unitArray as $item) {
+			if ($item['round_moved'] == 0 && $item['round_fired'] == 0) {
+				$imagestatuslnk = "./images/top-right_phase01.png";
+			}
+			if ($item['round_moved'] > 0 && $item['round_fired'] == 0) {
+				$imagestatuslnk = "./images/top-right_phase02.png";
+			}
+			if ($item['round_moved'] == 0 && $item['round_fired'] > 0) { // impossible state
+				$imagestatuslnk = "./images/top-right_phase02.png";
+			}
+			if ($item['round_moved'] > 0 && $item['round_fired'] > 0) {
+				$imagestatuslnk = "./images/top-right_phase03.png";
+			}
+			echo "			<td align='center' valign='top' style='background-color:#333333;padding:4px;border:2px solid #555;'>\n";
+			if ($array_UNIT_DBID[$chosenUnitIndex] == $item['unitid']) {
+				echo "				<a href='gui_play_unit.php?formationid=".$array_PLAYER_FORMATION_IDS[$cc]."&chosenunit=".$count."'><img src='https://www.ascard.net/app/".$item["status_image"]."' width='40px'></a><br>\n";
+				echo "				<span style='display:inline-block;width:40px;align:center;'><img style='display:block;margin-left:auto;margin-right:auto;height:auto;' src='".$currentPhaseButton."' width='20px'></span>\n";
+				echo "				<br><img src='./images/chevron.png' width='40px'>\n";
+			} else {
+				if ($item['active_bid'] == 1) {
+					echo "				<a href='gui_play_unit.php?formationid=".$array_PLAYER_FORMATION_IDS[$cc]."&chosenunit=".$count."'><img src='https://www.ascard.net/app/".$item["status_image"]."' width='40px'></a><br>\n";
+					echo "				<span style='display:inline-block;width:40px;align:center;'><img style='display:block;margin-left:auto;margin-right:auto;height:auto;' src='".$imagestatuslnk."' width='20px'></span>\n";
+				} else {
+					echo "				NO<br>\n";
+					echo "				BID\n";
+				}
+			}
+			echo "			</td>\n";
+			echo " <td>&nbsp;</td>\n";
+			$count++;
+		}
+
+		echo "					</tr>\n";
+		echo "				</table>\n";
+		echo "			</td>\n";
+	}
+?>
+		</tr>
+		<tr>
+			<td colspan="4" style='text-align:center;background-color:#444444;' class='unitselect_button_active'>
+				Blue chevron represents currently selected unit.
+			</td>
+		</tr>
 	</table>
 </div>
 
