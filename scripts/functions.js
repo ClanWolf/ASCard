@@ -1209,12 +1209,12 @@ function rolldice() {
 	var die_03_image = document.getElementById("die3");
 	var die_04_image = document.getElementById("die4");
 
-	die_01_image.src = "./images/dice/d6_" + die_01 + ".png";
-	die_02_image.src = "./images/dice/d6_" + die_02 + ".png";
+	die_01_image.src = "./images/dice_dots/d6_" + die_01 + ".png";
+	die_02_image.src = "./images/dice_dots/d6_" + die_02 + ".png";
 
 	if (die_03_image != null) {
-		die_03_image.src = "./images/dice/bd6_" + die_03 + ".png";
-		die_04_image.src = "./images/dice/bd6_" + die_04 + ".png";
+		die_03_image.src = "./images/dice_dots/bd6_" + die_03 + ".png";
+		die_04_image.src = "./images/dice_dots/bd6_" + die_04 + ".png";
 	}
 
 	rolling--;
