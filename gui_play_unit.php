@@ -640,15 +640,18 @@ session_start();
 		}
 		$phaseButton = "./images/top-right_phase01.png";
 		if ($mvmt == 0 && $wpnsfired == 0) {
-			$unitstatusimage = "./images/check_red.png";
+			//$unitstatusimage = "./images/check_red.png";
+			$unitstatusimage = "./images/top-right_phase01.png";
 			$phaseButton = "./images/top-right_phase01.png";
 		}
 		if ($mvmt > 0 && $wpnsfired == 0) {
-			$unitstatusimage = "./images/check_yellow.png";
+			//$unitstatusimage = "./images/check_yellow.png";
+			$unitstatusimage = "./images/top-right_phase02.png";
 			$phaseButton = "./images/top-right_phase02.png";
 		}
 		if ($mvmt > 0 && ($wpnsfired == 1 || $wpnsfired == 2 || $wpnsfired == 3 || $wpnsfired == 4)) {
-			$unitstatusimage = "./images/check_green.png";
+			//$unitstatusimage = "./images/check_green.png";
+			$unitstatusimage = "./images/top-right_phase03.png";
 			$phaseButton = "./images/top-right_phase03.png";
 		}
 		if ($mvmt == 0 && ($wpnsfired == 1 || $wpnsfired == 2 || $wpnsfired == 3 || $wpnsfired == 4)) {
@@ -686,7 +689,7 @@ session_start();
 			$currentUnitFired = $wpnsfired;
 
 			if ($array_ACTIVE_BID[$i4] == "1") {
-				echo "			<td width='".$width."%' nowrap><table width='100%' height='100%' cellspacing='0' cellpadding='0' class='unitselect_button_active_play_left' style='animation: glow 1s infinite alternate;'><tr><td nowrap width='30px' align='center' valign='center'><div style='display:inline-block;height:100%;vertical-align:middle;'><img id='unitstatusimagemenu' style='vertical-align:middle;' src='".$array_UNIT_IMG_STATUS[$i4]."' height='25px' width='23px'><br><span style='color:#ccffff;font-size:15px;'>&nbsp;&nbsp;".$mn."&nbsp;&nbsp;</span></div></td><td>&nbsp;</td><td nowrap><div><img src='./images/ranks/".$factionid."/".$array_PILOT_RANK[$i4].".png' width='18px' height='18px'>&nbsp;<span style='font-size:24px'>".$array_PILOT[$i4]."</span>&nbsp;&nbsp;<img src='".$unitstatusimage."' height='21px'>".$heatimage[$i4]."<br><span style='font-size:14px;'>".textTruncate($memodel, 18)."</span></div></td><td align='left' style='align:left;' nowrap width='100%'><img src='images/unit_indicator.png' height='42px;'></td></tr></table></td>\r\n";
+				echo "			<td width='".$width."%' nowrap><table width='100%' height='100%' cellspacing='0' cellpadding='0' class='unitselect_button_active_play_left' style='animation: glow 1s infinite alternate;'><tr><td nowrap width='30px' align='center' valign='center'><div style='display:inline-block;height:100%;vertical-align:middle;'><img id='unitstatusimagemenu' style='vertical-align:middle;' src='".$array_UNIT_IMG_STATUS[$i4]."' height='25px' width='23px'><br><span style='color:#ccffff;font-size:15px;'>&nbsp;&nbsp;".$mn."&nbsp;&nbsp;</span></div></td><td>&nbsp;</td><td nowrap><div><img src='./images/ranks/".$factionid."/".$array_PILOT_RANK[$i4].".png' width='18px' height='18px'>&nbsp;<span style='font-size:24px'>".$array_PILOT[$i4]."</span>&nbsp;&nbsp;<img id='unitroundstatusimagemenu' src='".$unitstatusimage."' height='21px'>".$heatimage[$i4]."<br><span style='font-size:14px;'>".textTruncate($memodel, 18)."</span></div></td><td align='left' style='align:left;' nowrap width='100%'><img src='images/unit_indicator.png' height='42px;'></td></tr></table></td>\r\n";
 				echo "			<td style='width:5px;'>&nbsp;</td>\r\n";
 				$atLeastOneValidUnitInFormation = $atLeastOneValidUnitInFormation + 1;
 			}
@@ -777,7 +780,7 @@ session_start();
 			echo "			<td align='center' valign='top' style='background-color:#333333;padding:4px;border:2px solid #555;'>\n";
 			if ($array_UNIT_DBID[$chosenUnitIndex] == $item['unitid']) {
 				echo "				<a href='gui_play_unit.php?formationid=".$array_PLAYER_FORMATION_IDS[$cc]."&chosenunit=".$count."'><img src='https://www.ascard.net/app/".$item["status_image"]."' width='40px'></a><br>\n";
-				echo "				<span style='display:inline-block;width:40px;align:center;'><img style='display:block;margin-left:auto;margin-right:auto;height:auto;' src='".$currentPhaseButton."' width='20px'></span>\n";
+				echo "				<span style='display:inline-block;width:40px;align:center;'><img id='overviewcurrentunitstatus' style='display:block;margin-left:auto;margin-right:auto;height:auto;' src='".$currentPhaseButton."' width='20px'></span>\n";
 				echo "				<br><img src='./images/chevron.png' width='40px'>\n";
 			} else {
 				if ($item['active_bid'] == 1) {
@@ -1204,7 +1207,7 @@ if ($showDistancesHexes == 1) {
 			</td>
 			<td width="40%" valign="bottom" align="left">
 				<div id="movementtoken" width="100%" valign="top" align="left">
-					<img valign="top" id="movementtokenimage" src="./images/dice/yd6_4.png" height="70px">
+					<img valign="top" id="movementtokenimage" src="./images/dice/yd6_4.png" height="100px">
 				</div>
 				<div class="dataarea">
 					<table width="100%" cellpadding="0" cellspacing="0">
@@ -1564,22 +1567,22 @@ if ($showDistancesHexes == 1) {
 	<img style="pointer-events:auto;" src='./images/skull.png' onclick="javascript:hideSkull();" height='250px'>
 </div>
 <div id="crippledIndicator">
-	<img style="pointer-events:auto;" src='./images/crippled.png' onclick="javascript:hideCrippled();" height='400px'>
+	<img style="pointer-events:auto;" src='./images/crippled.png' onclick="javascript:hideCrippled();" height='350px'>
 </div>
 <div id="shutdownIndicator">
 	<img style="pointer-events:auto;" src='./images/heat.png' onclick="javascript:hideShutdownIndicator();" height='250px'>
 </div>
 <div id="narcIndicator">
-	<img style="pointer-events:auto;" src='./images/narc.png' onclick="javascript:hideNarcIndicator();" height='400px'>
+	<img style="pointer-events:auto;" src='./images/narc.png' onclick="javascript:hideNarcIndicator();" height='150px'>
 </div>
 <div id="tagIndicator">
-	<img style="pointer-events:auto;" src='./images/tag.png' onclick="javascript:hideTagIndicator();" height='400px'>
+	<img style="pointer-events:auto;" src='./images/tag.png' onclick="javascript:hideTagIndicator();" height='150px'>
 </div>
 <div id="waterIndicator">
-	<img style="pointer-events:auto;" src='./images/water.png' onclick="javascript:hideWaterIndicator();" height='400px'>
+	<img style="pointer-events:auto;" src='./images/water.png' onclick="javascript:hideWaterIndicator();" height='150px'>
 </div>
 <div id="routedIndicator">
-	<img style="pointer-events:auto;" src='./images/routed.png' onclick="javascript:hideRoutedIndicator();" height='400px'>
+	<img style="pointer-events:auto;" src='./images/routed.png' onclick="javascript:hideRoutedIndicator();" height='150px'>
 </div>
 
 <script type="text/javascript">

@@ -994,15 +994,23 @@ function setCircles(h, a, s, e, fc, mp, w, e_cv, fc_cv, w_cv, ma_cv, mb_cv, mc_c
 
 	if (mvmnt == 0 && wpnsf == 0) {
 		document.getElementById('phasebuttonimage').src="./images/top-right_phase01.png";
+		document.getElementById('overviewcurrentunitstatus').src="./images/top-right_phase01.png";
+		document.getElementById('unitroundstatusimagemenu').src="./images/top-right_phase01.png";
 	} else if (mvmnt > 0 && wpnsf == 0) {
 		document.getElementById('phasebuttonimage').src="./images/top-right_phase02.png";
+		document.getElementById('overviewcurrentunitstatus').src="./images/top-right_phase02.png";
+		document.getElementById('unitroundstatusimagemenu').src="./images/top-right_phase02.png";
 	} else if (mvmnt > 0 && wpnsf > 0) {
 		document.getElementById('phasebuttonimage').src="./images/top-right_phase03.png";
+		document.getElementById('overviewcurrentunitstatus').src="./images/top-right_phase03.png";
+		document.getElementById('unitroundstatusimagemenu').src="./images/top-right_phase03.png";
 	} else {
 		document.getElementById("WF5_WEAPONSFIRED2").checked = false;
 		document.getElementById("WF6_WEAPONSFIRED2").checked = false;
 		document.getElementById('INFOFIRED').innerHTML = "";
 		document.getElementById('phasebuttonimage').src="./images/top-right_phase01.png";
+		document.getElementById('overviewcurrentunitstatus').src="./images/top-right_phase01.png";
+		document.getElementById('unitroundstatusimagemenu').src="./images/top-right_phase01.png";
 	}
 	updateOverAllToHitValue(1);
 }
