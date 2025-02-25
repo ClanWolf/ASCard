@@ -191,6 +191,18 @@
 					}
 				}
 
+				$sql_currentunit = "SELECT SQL_NO_CACHE * FROM asc_unit where unitid=".$unitdata['unitid'].";";
+				$result_currentunit = mysqli_query($conn, $sql_currentunit);
+				if (mysqli_num_rows($result_currentunit) > 0) {
+					while($row = mysqli_fetch_assoc($result_currentunit)) {
+						if ($row["unit_number"] != null) {
+							$unitdata['unit_number'] = $row["unit_number"];
+						} else {
+							$unitdata['unit_number'] = "-";
+						}
+					}
+				}
+
 				$sql_currentunitstatus = "SELECT SQL_NO_CACHE * FROM asc_unitstatus where unitid=".$unitdata['unitid']." and round=".$CURRENTROUND." and gameid=".$gid.";";
 				$result_currentunitstatus = mysqli_query($conn, $sql_currentunitstatus);
 				if (mysqli_num_rows($result_currentunitstatus) > 0) {

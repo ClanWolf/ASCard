@@ -43,7 +43,7 @@ session_start();
 
 		$arr = explode('t | ', $unitname);
 		$unitname = $arr[1];
-		echo "<script>console.log('SEARCHING: >>".$unitname."<<');</script>";
+		// echo "<script>console.log('SEARCHING: >>".$unitname."<<');</script>";
 
 		$dir = 'images/units_mul/';
 		$startChar = mb_substr($unitname, 0, 3); // use first 3 chars to list files to keep the result list as small as possible
@@ -166,29 +166,32 @@ session_start();
 			//$('.scroll-pane').jScrollPane({autoReinitialise: true});
 			$('.scroll-pane').jScrollPane();
 		});
-
 		function showSpecialAbility(p) {
 			document.getElementById("specialabilitiescontainer").style.visibility = "visible";
 			document.getElementById("linkToCompleteAbilitiesList").href = "gui_show_specialabilities.php?sa=" + p;
 
 			showSpecialUnitAbility(p);
 		}
-
 		function closeSpecialAbilities() {
 			document.getElementById("specialabilitiescontainer").style.visibility = "hidden";
 		}
-
 		function showGameMenu() {
 			if (document.getElementById("gamemenu").style.visibility == "visible") {
-				document.getElementById("gamemenu").style.visibility = "hidden";
-				document.getElementById("gamemenu").style.display = "none";
-				document.getElementById("gamemenubutton").innerHTML = "<i style='color:#eee;' class='fa-solid fa-angles-down'></i>";
 				playTCCloseSound();
+				$("#gamemenu").fadeOut(300, "linear", function() {
+					// $("#gamemenu").hide();
+					document.getElementById("gamemenu").style.visibility = "hidden";
+					document.getElementById("gamemenu").style.display = "none";
+					document.getElementById("gamemenubutton").innerHTML = "<i style='color:#eee;' class='fa-solid fa-angles-down'></i>";
+				});
 			} else {
-				document.getElementById("gamemenu").style.visibility = "visible";
-				document.getElementById("gamemenu").style.display = "block";
-				document.getElementById("gamemenubutton").innerHTML = "<i style='color:#eee;' class='fa-solid fa-angles-up'></i>";
 				playTapSound();
+				document.getElementById("gamemenu").style.visibility = "visible";
+				$("#gamemenu").fadeIn(300, "linear", function() {
+					// $("#gamemenu").show();
+					document.getElementById("gamemenu").style.display = "block";
+					document.getElementById("gamemenubutton").innerHTML = "<i style='color:#eee;' class='fa-solid fa-angles-up'></i>";
+				});
 			}
 		}
 
@@ -781,11 +784,15 @@ session_start();
 			if ($array_UNIT_DBID[$chosenUnitIndex] == $item['unitid']) {
 				echo "				<a href='gui_play_unit.php?formationid=".$array_PLAYER_FORMATION_IDS[$cc]."&chosenunit=".$count."'><img src='https://www.ascard.net/app/".$item["status_image"]."' width='40px'></a><br>\n";
 				echo "				<span style='display:inline-block;width:40px;align:center;'><img id='overviewcurrentunitstatus' style='display:block;margin-left:auto;margin-right:auto;height:auto;' src='".$currentPhaseButton."' width='20px'></span>\n";
+				//echo "				<br><div style='transform:rotate(90deg);width:60px;text-align:right;'>".$item['unit_number']."</div>\n";
+				echo "				<br>".$item['unit_number']."\n";
 				echo "				<br><img src='./images/chevron.png' width='40px'>\n";
 			} else {
 				if ($item['active_bid'] == 1) {
 					echo "				<a href='gui_play_unit.php?formationid=".$array_PLAYER_FORMATION_IDS[$cc]."&chosenunit=".$count."'><img src='https://www.ascard.net/app/".$item["status_image"]."' width='40px'></a><br>\n";
 					echo "				<span style='display:inline-block;width:40px;align:center;'><img style='display:block;margin-left:auto;margin-right:auto;height:auto;' src='".$imagestatuslnk."' width='20px'></span>\n";
+					//echo "				<br><div style='transform:rotate(90deg);width:60px;text-align:right;'>".$item['unit_number']."</div>\n";
+					echo "				<br>".$item['unit_number']."\n";
 				} else {
 					echo "				NO<br>\n";
 					echo "				BID\n";
@@ -812,7 +819,7 @@ session_start();
 
 <div><?php echo "<img src='".$array_PILOT_IMG_URL[$chosenUnitIndex]."' id='pilotimage' width='80px' height='80px'>" ?></div>
 <div id="faction" align="center"><?php echo "<img src='./images/factions/".$FACTION_IMG_URL."' width='50px' height='50px'>" ?></div>
-<div id="unit_number" align="center" onclick='javascript:hideTopRightPanel();'>#<?= $array_UNIT_NUMBER[$chosenUnitIndex] ?><br><?= strtoupper($FORMATION) ?></div>
+<div id="unit_number" align="center" onclick='javascript:hideTopPanels();'>#<?= $array_UNIT_NUMBER[$chosenUnitIndex] ?><br><?= strtoupper($FORMATION) ?></div>
 
 <?php
 	if ($useMULImages == 0) {
@@ -832,8 +839,12 @@ session_start();
 	<span style="font-size: 20px; color: #aaaaaa;"><?php echo "$array_UNIT_MODEL[$chosenUnitIndex]" ?></span>
 </div>
 
-<div id="topright" onclick='javascript:hideTopRightPanel();'>
-	<img id='toprightimage' onclick='javascript:hideTopRightPanel();' src='./images/top-right_02.png' style='height:125px;'>
+<div id="topright_showbutton" onclick='javascript:showTopStatusInfo2();'>
+	<img id='toprightimagebutton' onclick='javascript:hideTopPanels();' src='./images/top-right_03.png' style='height:110px;'>
+</div>
+
+<div id="topright" onclick='javascript:hideTopPanels();'>
+	<img id='toprightimage' onclick='javascript:hideTopPanels();' src='./images/top-right_02.png' style='height:125px;'>
 </div>
 
 <div id="unitname">
@@ -881,7 +892,7 @@ session_start();
 	echo "</script>\r\n";
 ?>
 
-<div id="pv" onclick='javascript:hideTopRightPanel();'>
+<div id="pv" onclick='javascript:hideTopPanels();'>
 	<span style="font-size: 22px; color: #aaaaaa; vertical-align: middle;">PV:&nbsp;</span>
 	<span style="font-size: 36px; color: #da8e25; vertical-align: middle; font-weight: bold;"><?php echo "$array_PV[$chosenUnitIndex]"; ?></span>
 </div>
@@ -1187,19 +1198,19 @@ if ($showDistancesHexes == 1) {
 						<tr>
 							<td nowrap valign="middle" class="datavalue_thin" style="text-align:right;vertical-align:middle;">NARC:&nbsp;</td>
 							<td nowrap valign="middle" class="datavalue_thin" style="text-align:left;vertical-align:middle;">
-								<label class='bigcheck'><input onchange='readCircles(<?= $array_UNIT_DBID[$chosenUnitIndex] ?>);' type='checkbox' class='bigcheck' name='NARC' value='yes'/><span class='bigcheck-target'></span></label>
+								<label class='bigcheck'><input onchange='readCircles(<?= $array_UNIT_DBID[$chosenUnitIndex] ?>);' type='checkbox' class='bigcheck' name='NARC' id='NARC' value='yes'/><span class='bigcheck-target'></span></label>
 							</td>
 							<td nowrap valign="middle" class="datavalue_thin" style="text-align:right;vertical-align:middle;">TAG:&nbsp;</td>
 							<td nowrap valign="middle" class="datavalue_thin" style="text-align:left;vertical-align:middle;">
-								<label class='bigcheck'><input onchange='readCircles(<?= $array_UNIT_DBID[$chosenUnitIndex] ?>);' type='checkbox' class='bigcheck' name='TAG' value='yes'/><span class='bigcheck-target'></span></label>
+								<label class='bigcheck'><input onchange='readCircles(<?= $array_UNIT_DBID[$chosenUnitIndex] ?>);' type='checkbox' class='bigcheck' name='TAG' id='TAG' value='yes'/><span class='bigcheck-target'></span></label>
 							</td>
 							<td nowrap valign="middle" class="datavalue_thin" style="text-align:right;vertical-align:middle;">WATER:&nbsp;</td>
 							<td nowrap valign="middle" class="datavalue_thin" style="text-align:left;vertical-align:middle;">
-								<label class='bigcheck'><input onchange='readCircles(<?= $array_UNIT_DBID[$chosenUnitIndex] ?>);' type='checkbox' class='bigcheck' name='WATER' value='yes'/><span class='bigcheck-target'></span></label>
+								<label class='bigcheck'><input onchange='readCircles(<?= $array_UNIT_DBID[$chosenUnitIndex] ?>);' type='checkbox' class='bigcheck' name='WATER' id='WATER' value='yes'/><span class='bigcheck-target'></span></label>
 							</td>
 							<td nowrap valign="middle" class="datavalue_thin" style="text-align:right;vertical-align:middle;">ROUTED:&nbsp;</td>
 							<td nowrap valign="middle" class="datavalue_thin" style="text-align:left;vertical-align:middle;">
-								<label class='bigcheck'><input onchange='readCircles(<?= $array_UNIT_DBID[$chosenUnitIndex] ?>);' type='checkbox' class='bigcheck' name='ROUTED' value='yes'/><span class='bigcheck-target'></span></label>
+								<label class='bigcheck'><input onchange='readCircles(<?= $array_UNIT_DBID[$chosenUnitIndex] ?>);' type='checkbox' class='bigcheck' name='ROUTED' id='ROUTED' value='yes'/><span class='bigcheck-target'></span></label>
 							</td>
 						</tr>
 					</table>
@@ -1563,26 +1574,29 @@ if ($showDistancesHexes == 1) {
 	</div>
 </div>
 
+<div id="topmiddlebackground">
+	<img style="pointer-events:auto;height:100px;" src='./images/top-middle_01.png' onclick="javascript:hideTopPanels();">
+</div>
 <div id="destroyedIndicator">
 	<img style="pointer-events:auto;" src='./images/skull.png' onclick="javascript:hideSkull();" height='250px'>
 </div>
 <div id="crippledIndicator">
-	<img style="pointer-events:auto;" src='./images/crippled.png' onclick="javascript:hideCrippled();" height='350px'>
+	<img style="pointer-events:auto;height:160px;" src='./images/crippled.png' onclick="javascript:hideCrippled();">
 </div>
 <div id="shutdownIndicator">
 	<img style="pointer-events:auto;" src='./images/heat.png' onclick="javascript:hideShutdownIndicator();" height='250px'>
 </div>
 <div id="narcIndicator">
-	<img style="pointer-events:auto;" src='./images/narc.png' onclick="javascript:hideNarcIndicator();" height='150px'>
+	<img style="pointer-events:auto;" src='./images/narc.png' onclick="javascript:hideTopPanels();" height='50px'>
 </div>
 <div id="tagIndicator">
-	<img style="pointer-events:auto;" src='./images/tag.png' onclick="javascript:hideTagIndicator();" height='150px'>
+	<img style="pointer-events:auto;" src='./images/tag.png' onclick="javascript:hideTopPanels();" height='50px'>
 </div>
 <div id="waterIndicator">
-	<img style="pointer-events:auto;" src='./images/water.png' onclick="javascript:hideWaterIndicator();" height='150px'>
+	<img style="pointer-events:auto;" src='./images/water.png' onclick="javascript:hideTopPanels();" height='50px'>
 </div>
 <div id="routedIndicator">
-	<img style="pointer-events:auto;" src='./images/routed.png' onclick="javascript:hideRoutedIndicator();" height='150px'>
+	<img style="pointer-events:auto;" src='./images/routed.png' onclick="javascript:hideTopPanels();" height='50px'>
 </div>
 
 <script type="text/javascript">
@@ -1590,6 +1604,7 @@ if ($showDistancesHexes == 1) {
 	$("#dicebar").hide();
 	$("#movebar").hide();
 	$("#soundboard").hide();
+	$("#topmiddlebackground").hide();
 	$("#destroyedIndicator").hide();
 	$("#crippledIndicator").hide();
 	$("#shutdownIndicator").hide();

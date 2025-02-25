@@ -310,6 +310,7 @@ function setStructuralDamageCache(value) {
 // SetCircles is called from gui_play_unit.php as well!
 function setCircles(h, a, s, e, fc, mp, w, e_cv, fc_cv, w_cv, ma_cv, mb_cv, mc_cv, uov, mvmnt, wpnsf, tc_rangeValueReading, tc_partialCoverReading, unitstatusstring, NARCed, TAGed, WATERed, ROUTed) {
 
+	// $("#topmiddlebackground").hide();
 	$("#crippledIndicator").hide();
 	$("#shutdownIndicator").hide();
 	$("#destroyedIndicator").hide();
@@ -896,20 +897,12 @@ function setCircles(h, a, s, e, fc, mp, w, e_cv, fc_cv, w_cv, ma_cv, mb_cv, mc_c
 		// Unit shutdown
 		$("#shutdownIndicator").show();
 	}
-	if (NARCed == 1) {
-		$("#narcIndicator").show();
-	}
-	if (TAGed == 1) {
-		$("#tagIndicator").show();
-	}
-	if (WATERed == 1) {
-		$("#waterIndicator").show();
-	}
-	if (ROUTed == 1) {
-		$("#routedIndicator").show();
-	}
+
+	showTopStatusInfo(NARCed, TAGed, WATERed, ROUTed);
+
 	if (unitstatus == 4) {
 		// Unit destroyed
+		$("#topmiddlebackground").hide();
 		$("#narcIndicator").hide();
 		$("#tagIndicator").hide();
 		$("#waterIndicator").hide();
@@ -1015,6 +1008,65 @@ function setCircles(h, a, s, e, fc, mp, w, e_cv, fc_cv, w_cv, ma_cv, mb_cv, mc_c
 	updateOverAllToHitValue(1);
 }
 
+function showTopStatusInfo2() {
+	var na = document.getElementById("NARC").checked;
+	var ta = document.getElementById("TAG").checked;
+	var wa = document.getElementById("WATER").checked;
+	var ro = document.getElementById("ROUTED").checked;
+
+	showTopStatusInfo(na, ta, wa, ro);
+}
+
+function showTopStatusInfo(NARCed, TAGed, WATERed, ROUTed) {
+	var hideBG = true;
+
+	$("#topright").fadeIn(300, "linear");
+	$("#pv").fadeIn(300, "linear");
+	$("#unit_number").fadeIn(300, "linear");
+
+	if (NARCed == 1) {
+		hideBG = false;
+		if ($("#topmiddlebackground").is(":hidden")) {
+			$("#narcIndicator").fadeIn(200, "linear");
+			$("#topmiddlebackground").fadeIn(400, "linear");
+		} else {
+			$("#narcIndicator").show();
+		}
+	}
+	if (TAGed == 1) {
+		hideBG = false;
+		if ($("#topmiddlebackground").is(":hidden")) {
+			$("#tagIndicator").fadeIn(200, "linear");
+			$("#topmiddlebackground").fadeIn(400, "linear");
+		} else {
+			$("#tagIndicator").show();
+		}
+	}
+	if (WATERed == 1) {
+		hideBG = false;
+		if ($("#topmiddlebackground").is(":hidden")) {
+			$("#waterIndicator").fadeIn(200, "linear");
+			$("#topmiddlebackground").fadeIn(400, "linear");
+		} else {
+			$("#waterIndicator").show();
+		}
+	}
+	if (ROUTed == 1) {
+		hideBG = false;
+		if ($("#topmiddlebackground").is(":hidden")) {
+			$("#routedIndicator").fadeIn(200, "linear");
+			$("#topmiddlebackground").fadeIn(400, "linear");
+		} else {
+			$("#routedIndicator").show();
+		}
+	}
+
+	if (hideBG) {
+		$("#topmiddlebackground").fadeOut(500, "linear");
+		hideBG = false;
+	}
+}
+
 function textSize(dec) {
 	fontsizeLabel += (dec==1) ? 1 : (-1);
 
@@ -1103,7 +1155,6 @@ function increaseWPNS_PREP() {
 	var url="./save_prep.php?index="+chosenunitdbid+"&desc=WPNS_PREP&value="+WPNS_PREP+"&currentRound="+currentRound+"&gameid="+gameid;
 	window.frames['saveframe'].location.replace(url);
 }
-
 function increaseENGN_CV_PREP() {
 	CV_ENGN_PREP = CV_ENGN_PREP + 1;
 	if (CV_ENGN_PREP > 2) {
@@ -1520,7 +1571,7 @@ function showInfoBar() {
 		$("#infobar").show();
 		$("#soundboard").hide();
 
-		showTopRightPanel();
+		showTopPanels();
 	}
 }
 
@@ -1537,7 +1588,7 @@ function showSoundBoard() {
 		$("#infobar").hide();
 		$("#soundboard").show();
 
-		showTopRightPanel();
+		showTopPanels();
 	}
 }
 
@@ -1554,7 +1605,7 @@ function showDiceBar() {
 		$("#dicebar").show();
 		$("#soundboard").hide();
 
-		showTopRightPanel();
+		showTopPanels();
 
 		if (rolling === 0) {
 			playDiceSound();
@@ -1732,30 +1783,22 @@ function showMoveBar() {
 
 function hideSkull() {
 	$("#destroyedIndicator").fadeOut(300, "linear");
-	$("#crippledIndicator").fadeOut(300, "linear");
-	$("#shutdownIndicator").fadeOut(300, "linear");
-	$("#narcIndicator").fadeOut(300, "linear");
-	$("#tagIndicator").fadeOut(300, "linear");
-	$("#waterIndicator").fadeOut(300, "linear");
-	$("#routedIndicator").fadeOut(300, "linear");
 }
 function hideCrippled() {
-	$("#destroyedIndicator").fadeOut(300, "linear");
 	$("#crippledIndicator").fadeOut(300, "linear");
-	$("#shutdownIndicator").fadeOut(300, "linear");
-	$("#narcIndicator").fadeOut(300, "linear");
-	$("#tagIndicator").fadeOut(300, "linear");
-	$("#waterIndicator").fadeOut(300, "linear");
-	$("#routedIndicator").fadeOut(300, "linear");
 }
 function hideShutdownIndicator() {
-	$("#destroyedIndicator").fadeOut(300, "linear");
-	$("#crippledIndicator").fadeOut(300, "linear");
 	$("#shutdownIndicator").fadeOut(300, "linear");
+}
+function hideTopPanels() {
 	$("#narcIndicator").fadeOut(300, "linear");
 	$("#tagIndicator").fadeOut(300, "linear");
 	$("#waterIndicator").fadeOut(300, "linear");
 	$("#routedIndicator").fadeOut(300, "linear");
+	$("#topright").fadeOut(300, "linear");
+	$("#pv").fadeOut(300, "linear");
+	$("#unit_number").fadeOut(300, "linear");
+	$("#topmiddlebackground").fadeOut(300, "linear");
 }
 function hideNarcIndicator() {
 	$("#destroyedIndicator").fadeOut(300, "linear");
@@ -1798,12 +1841,17 @@ function hideTopRightPanel() {
 	$("#pv").fadeOut(300, "linear");
 	$("#unit_number").fadeOut(300, "linear");
 }
-function showTopRightPanel() {
+function showTopPanels() {
 	$("#topright").fadeIn(300, "linear");
 	$("#pv").fadeIn(300, "linear");
 	$("#unit_number").fadeIn(300, "linear");
-}
 
+	var na = document.getElementById("NARC").checked;
+	var ta = document.getElementById("TAG").checked;
+	var wa = document.getElementById("WATER").checked;
+	var ro = document.getElementById("ROUTED").checked;
+	showTopStatusInfo(na, ta, wa, ro);
+}
 function changeNARCDesc() {
 	var text = document.getElementById("narcDesc").innerHTML;
 	var narcdesc = text;
