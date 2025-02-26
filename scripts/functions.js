@@ -57,6 +57,8 @@ var sound_08 = null;
 var sound_09 = null;
 var sound_SB = null;
 
+var sound_Batchall = null;
+
 var showingUnit = false;
 
 var skipTapSample = false;
@@ -1423,6 +1425,13 @@ function playDiceSound() {
 		sound_dice = new Howl({ src: ['./audio/dice.mp3', './audio/dice.ogg'] });
 	}
 	sound_dice.play();
+}
+
+function playBatchallSound() {
+	if (sound_Batchall == null) {
+		sound_Batchall = new Howl({ scr: ['./audio/rp/batchall.mp3', './audio/rp/batchall.ogg'] });
+	}
+	sound_Batchall.play();
 }
 
 function playTapSound() {

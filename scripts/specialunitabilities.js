@@ -31,7 +31,7 @@ function getSpecialUnitAbilities(sa) {
 
 			if (shortenedSA == sa) {
 				match = specialAbility;
-				// console.log("Found: " + specialAbility.ABBREVIATION);
+				// console.log("Found: " + specialUnitAbility.ABBREVIATION);
 			}
 		});
 	}).then(function data() {

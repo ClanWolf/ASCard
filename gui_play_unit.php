@@ -167,19 +167,21 @@ session_start();
 			$('.scroll-pane').jScrollPane();
 		});
 		function showSpecialAbility(p) {
+			// If fadeIn is used here, css animation does not work anymore
+			playTapSound();
 			document.getElementById("specialabilitiescontainer").style.visibility = "visible";
 			document.getElementById("linkToCompleteAbilitiesList").href = "gui_show_specialabilities.php?sa=" + p;
-
 			showSpecialUnitAbility(p);
 		}
 		function closeSpecialAbilities() {
+			// If fadeIn is used here, css animation does not work anymore
+			playTCCloseSound();
 			document.getElementById("specialabilitiescontainer").style.visibility = "hidden";
 		}
 		function showGameMenu() {
 			if (document.getElementById("gamemenu").style.visibility == "visible") {
 				playTCCloseSound();
 				$("#gamemenu").fadeOut(300, "linear", function() {
-					// $("#gamemenu").hide();
 					document.getElementById("gamemenu").style.visibility = "hidden";
 					document.getElementById("gamemenu").style.display = "none";
 					document.getElementById("gamemenubutton").innerHTML = "<i style='color:#eee;' class='fa-solid fa-angles-down'></i>";
@@ -188,7 +190,6 @@ session_start();
 				playTapSound();
 				document.getElementById("gamemenu").style.visibility = "visible";
 				$("#gamemenu").fadeIn(300, "linear", function() {
-					// $("#gamemenu").show();
 					document.getElementById("gamemenu").style.display = "block";
 					document.getElementById("gamemenubutton").innerHTML = "<i style='color:#eee;' class='fa-solid fa-angles-up'></i>";
 				});

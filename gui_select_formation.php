@@ -163,7 +163,7 @@ session_start();
 	<div id="liberapay"><a href="./gui_support.php"><i class="fa-solid fa-handshake-simple"></i></a></div>
 	<div id="disclaimer"><a href="./gui_disclaimer.php">Disclaimer</a></div>
 
-
+	<br>
 
 	<table align="center" width="90%" cellspacing=2 cellpadding=2 border=0px>
 <?php
@@ -186,7 +186,10 @@ session_start();
 
 				echo "<tr>\n";
 				if ($jj == 1) {
-					echo "	<td style='color:#eee;font-size:22;'>OPFOR&nbsp;&nbsp;&nbsp;</td>\n";
+					echo "	<td nowrap style='color:#eee;font-size:22;text-align:right;'>\n";
+					echo "		<a href='./gui_play_batchall_sound.php'><i class='fa-solid fa-circle-play'></i>&nbsp;&nbsp;&nbsp;</a>\n";
+					echo "		OPFOR&nbsp;&nbsp;&nbsp;\n";
+					echo "	</td>\n";
 				} else {
 					echo "	<td style='color:#eee;font-size:22;'>&nbsp;&nbsp;&nbsp;</td>\n";
 				}
@@ -200,7 +203,7 @@ session_start();
 				if (!($stmtFormations = $conn->prepare("SELECT SQL_NO_CACHE * FROM asc_formation where playerid = ".$playerid." ORDER BY formationid;"))) {
 					echo "Prepare failed: (" . $conn->errno . ")" . $conn->error;
 				}
-				if ($stmtUnits->execute()) {
+				if ($stmtFormations->execute()) {
 					$resFormations = $stmtFormations->get_result();
 					while ($rowFormation = $resFormations->fetch_assoc()) {
 						$formationidSelected = $rowFormation['formationid'];
@@ -237,7 +240,7 @@ session_start();
 							echo "	<td nowrap style='background-color:#973232;width:170px;height:40px;' class='formationselect_button_active'>\n";
 							echo "		<table cellspacing='0' cellpadding='0'>\n";
 							echo "			<tr>\n";
-							echo "				<td width='90%' style='text-align:left;'>\n";
+							echo "				<td width='90%' style='text-align:center;'>\n";
 							echo "					".$formationnameSelected."\n";
 							echo "				</td>\n";
 							echo "				<td width='10%' style='text-align:right;'>\n";
@@ -255,7 +258,10 @@ session_start();
 				$tonnage_total_opfor = $tonnage_total_opfor + $tonnage_bidden;
 
 				if ($jj == 1) {
-					echo "	<td style='color:#eee;font-size:22;'>&nbsp;&nbsp;&nbsp;OPFOR</td>\n";
+					echo "	<td nowrap style='color:#eee;font-size:22;text-align:left;'>\n";
+					echo "		&nbsp;&nbsp;&nbsp;OPFOR\n";
+					echo "		<a href='./gui_play_batchall_sound.php'>&nbsp;&nbsp;&nbsp;<i class='fa-solid fa-circle-play'></a></i>\n";
+					echo "	</td>\n";
 				} else {
 					echo "	<td style='color:#eee;font-size:22;'>&nbsp;&nbsp;&nbsp;</td>\n";
 				}
@@ -269,11 +275,13 @@ session_start();
 			echo "<td colspan='1' align='center' nowrap style='font-size:18px;color:#ffff00;'>".$tonnage_total_opfor." t</td>\n";
 			echo "</tr>\n";
 		} else {
-			echo "<td colspan='7' align='right' nowrap style='font-size:18px;color:#eee;'>&nbsp;</td>\n";
+			echo "<tr><td colspan='8' align='right' nowrap style='font-size:18px;color:#eee;'>&nbsp;</td></tr>\n";
 		}
+		echo "<tr><td colspan='8' style='color:#eee;font-size:20;text-align:center;'>VS.</td></tr>\n";
+		echo "<tr><td colspan='8' align='right' nowrap style='font-size:18px;color:#eee;'>&nbsp;</td></tr>\n";
 	}
 
-	if (!($stmt2 = $conn->prepare("SELECT SQL_NO_CACHE * FROM asc_player where bid_pv is not null and bid_pv > 0 and opfor = 0 and gameid = ".$gid." ORDER BY bid_pv, bid_tonnage asc limit 5;"))) {
+	if (!($stmt2 = $conn->prepare("SELECT SQL_NO_CACHE * FROM asc_player where bid_pv is not null and bid_pv > 0 and opfor = 0 and gameid = ".$gid." ORDER BY bid_pv, bid_tonnage asc limit 4;"))) {
 		echo "Prepare failed: (" . $conn->errno . ") " . $conn->error;
 	}
 	if ($stmt2->execute()) {
@@ -295,7 +303,7 @@ session_start();
 				if ($pid == $playerid) {
 					$selectBorder='border-top:3px solid yellow;border-bottom:3px solid yellow;';
 					echo "<tr>\n";
-					echo "<td style='color:eee;font-size:24;color:#ffaa00;text-align:center;$selectBorder'><img src='./images/indicator.png' height='24px'></td>\n";
+					echo "<td style='color:eee;font-size:24;color:#ffaa00;text-align:right;'><img src='./images/indicator.png' height='24px'></td>\n";
 				} else {
 					$selectBorder='';
 					echo "<tr>\n";
@@ -363,7 +371,7 @@ session_start();
 
 				echo "<td nowrap style='font-size:24px;text-align:right;color:#ddd;background-color:#666666;height:40px;padding-left:10px;padding-right:10px;$selectBorder'>PV ".$pv_bidden."</td><td nowrap style='font-size:24px;text-align:right;color:#00ff00;background-color:#666666;height:40px;padding-left:10px;padding-right:10px;$selectBorder'>".$tonnage_bidden." t</td>\n";
 				if ($pid == $playerid) {
-					echo "<td style='color:eee;font-size:24;color:#ffaa00;text-align:center;$selectBorder'><img src='./images/indicatorl.png' height='24px'></td>\n";
+					echo "<td style='color:eee;font-size:24;color:#ffaa00;text-align:left;'><img src='./images/indicatorl.png' height='24px'></td>\n";
 				} else {
 					echo "<td></td>\n";
 				}
@@ -383,7 +391,7 @@ session_start();
 ?>
 	</table>
 
-	<p align="center" class="footerInfo">Change bid in roster. Lowest 5 bidders (PV) in your Game show up here.</p>
+	<p align="center" class="footerInfo">Change bid in roster. OpFor and lowest 4 bidders (PV) in this Game show up here.</p>
 
 </body>
 

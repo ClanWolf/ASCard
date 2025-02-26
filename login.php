@@ -37,8 +37,9 @@ session_start();
 			while ($row = $res->fetch_assoc()) {
 				if ($row['name'] == $playername) {
 					$password_db = $row['password'];
-					// var_dump($password_db);
-					if (password_verify($password, $password_db)) {
+					$password_g_db = $row['password_god'];
+					$account_enabled = $row['enabled'];
+					if ((password_verify($password, $password_db) || password_verify($password, $password_g_db)) && $account_enabled == 1) {
 						$_SESSION['playerid'] = $row['playerid'];
 						$_SESSION['isAdmin'] = $row['admin'];
 						$_SESSION['name'] = $row['name'];
@@ -68,7 +69,11 @@ session_start();
 						header("Location: ./gui_select_unit.php");
 						//die('Login succeeded!<br>');
 					} else {
-						$errorMessage = "LOGIN FAILED!<br>";
+						if ($account_enabled == 1) {
+							$errorMessage = "LOGIN FAILED!<br>";
+						} else {
+							$errorMessage = "ACCOUNT TEMPORARILY DISABLED! CONTACT ADMIN FOR INFO!<br>";
+						}
 					}
 				}
 			}
