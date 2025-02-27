@@ -8,6 +8,7 @@
 	$useMULImages = 0;
 
 	$CURRENTROUND = -1;
+	$ROUNDSOUTOFSYNC = false;
 
 	$FACTION = "DEFAULT";
 	$FACTION_IMG_URL = "...";
@@ -169,11 +170,25 @@
 	}
 	mysqli_free_result($result_asc_playerround);
 
+	// Check for current game if rounds are out of sync
+	$sql_asc_playerroundsingame = "SELECT SQL_NO_CACHE round FROM asc_player WHERE gameid = " . $GAMEID . ";";
+	$result_asc_playerroundsingame = mysqli_query($conn, $sql_asc_playerroundsingame);
+	if (mysqli_num_rows($result_asc_playerroundsingame) > 0) {
+		$lastGameId = -1;
+		while($row = mysqli_fetch_assoc($result_asc_playerroundsingame)) {
+			$cgid = $row['round'];
+			if ($lastGameId != -1 && $lastGameId != $cgid) {
+				$ROUNDSOUTOFSYNC = true;
+			}
+			$lastGameId = $cgid;
+		}
+	}
+
 	// Units in player formations
 	for ($cc = 0; $cc < sizeof($array_PLAYER_FORMATION_IDS); $cc++) {
 		$unitdata = array();
 		$currentformationid = $array_PLAYER_FORMATION_IDS[$cc];
-		$sql_asc_playerunitsinformation = "SELECT SQL_NO_CACHE * FROM asc_assign where formationid=".$currentformationid.";";
+		$sql_asc_playerunitsinformation = "SELECT SQL_NO_CACHE * FROM asc_assign WHERE formationid=".$currentformationid.";";
 		$result_asc_playerunitsinformation = mysqli_query($conn, $sql_asc_playerunitsinformation);
 		if (mysqli_num_rows($result_asc_playerunitsinformation) > 0) {
 			$units_in_formation = array();

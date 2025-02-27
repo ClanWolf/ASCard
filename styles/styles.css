@@ -220,6 +220,16 @@ a:hover {
 	background: transparent;
 	z-index:110;
 }
+#roundsyncmessage {
+	position: absolute;
+	margin: 0 auto;
+	width: 100%;
+	text-align: center;
+	padding:25px;
+	color:#ff0000;
+	font-size: 36px;
+	z-index:2400;
+}
 #destroyedIndicator {
 	text-align: center;
 	position: fixed;
@@ -476,9 +486,9 @@ a:hover {
 	height: 60px;
 }
 #blockNotOwnedUnits {
-	z-index: 700;
+	z-index: 2300;
 	position: absolute;
-	top: 50px;
+	top: 65px;
 	bottom: 40px;
 	left: 0px;
 	right: 0px;
@@ -792,14 +802,14 @@ a:hover {
 	font-size: 100%;
 	padding: 3px;
 	background-color: #556b8f;
-	color: #000000;
+	color: #ffffff;
 	text-align: left;
 }
 .unitselect_button_normal_play_left:hover {
 	font-size: 100%;
 	padding: 3px;
 	background-color: #425470;
-	color: #000000;
+	color: #ffffff;
 	text-align: left;
 }
 .unitselect_button_active_play_left {

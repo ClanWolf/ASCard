@@ -30,6 +30,11 @@ session_start();
 	$showDistancesHexes = $opt4;
 
 	function textTruncate($text, $chars=25) {
+		if (strpos($text, " | ") !== false) {
+		    $parts = explode(" | ", $text);
+		}
+		$text = $parts[1];
+
 		if (strlen($text) <= $chars) {
 			return $text;
 		}
@@ -456,6 +461,15 @@ session_start();
 
 	require('./db_getdata.php');
 
+	if ($array_ACTIVE_BID[$chosenUnitIndex] == 0) { // check if the chosen index is active bid. Advance if not
+		for ($x = 1; $x <= 20; $x++) {
+			if ($array_ACTIVE_BID[$x] == 1) {
+				$chosenUnitIndex = $x;
+				break;
+			}
+		}
+	}
+
 	echo "<script>\n";
 	echo "	var currentRound = ".$CURRENTROUND.";\n";
 	echo "	var gameid = ".$gid.";\n";
@@ -541,6 +555,20 @@ session_start();
 		echo "	var showDistancesHexes = 0;\n";
 	}
 	echo "</script>\n";
+
+	if ($pid == $formationplayerid) {
+		// Current Unit is playable by current user
+		$playable = true;
+		$owned = true;
+	} else {
+		$playable = false;
+		$owned = false;
+	}
+	if ($array_ACTIVE_BID[$chosenUnitIndex] == "0") {
+		$playable = false;
+	}
+
+	//echo "<script> console.log('Rounds are out of sync: ".$ROUNDSOUTOFSYNC."'); </script>\n";
 ?>
 
 <iframe name="saveframe" id="iframe_save"></iframe>
@@ -638,9 +666,9 @@ session_start();
 		$wpnsfired = $array_WPNSFIRED[$i4];
 
 		if ($array_TP[$i4] == "BA") {
-			$heatimage[$i4] = "<img id='heatimage_".$i4."' src='./images/temp_".$array_HT[$i4].".png' height='21px' width='0px'>";
+			$heatimage[$i4] = "<img id='heatimage_".$i4."' src='./images/temp_".$array_HT[$i4].".png' height='42px' width='0px'>";
 		} else {
-			$heatimage[$i4] = "<img id='heatimage_".$i4."' src='./images/temp_".$array_HT[$i4].".png' height='21px'>";
+			$heatimage[$i4] = "<img id='heatimage_".$i4."' src='./images/temp_".$array_HT[$i4].".png' height='42px'>";
 		}
 		$phaseButton = "./images/top-right_phase01.png";
 		if ($mvmt == 0 && $wpnsfired == 0) {
@@ -693,17 +721,22 @@ session_start();
 			$currentUnitFired = $wpnsfired;
 
 			if ($array_ACTIVE_BID[$i4] == "1") {
-				echo "			<td width='".$width."%' nowrap><table width='100%' height='100%' cellspacing='0' cellpadding='0' class='unitselect_button_active_play_left' style='animation: glow 1s infinite alternate;'><tr><td nowrap width='30px' align='center' valign='center'><div style='display:inline-block;height:100%;vertical-align:middle;'><img id='unitstatusimagemenu' style='vertical-align:middle;' src='".$array_UNIT_IMG_STATUS[$i4]."' height='25px' width='23px'><br><span style='color:#ccffff;font-size:15px;'>&nbsp;&nbsp;".$mn."&nbsp;&nbsp;</span></div></td><td>&nbsp;</td><td nowrap><div><img src='./images/ranks/".$factionid."/".$array_PILOT_RANK[$i4].".png' width='18px' height='18px'>&nbsp;<span style='font-size:24px'>".$array_PILOT[$i4]."</span>&nbsp;&nbsp;<img id='unitroundstatusimagemenu' src='".$unitstatusimage."' height='21px'>".$heatimage[$i4]."<br><span style='font-size:14px;'>".textTruncate($memodel, 18)."</span></div></td><td align='left' style='align:left;' nowrap width='100%'><img src='images/unit_indicator.png' height='42px;'></td></tr></table></td>\r\n";
+				// echo "			<td width='".$width."%' nowrap><table width='100%' height='100%' cellspacing='0' cellpadding='0' class='unitselect_button_active_play_left' style='animation: glow 1s infinite alternate;'><tr><td nowrap width='30px' align='center' valign='center'><div style='display:inline-block;height:100%;vertical-align:middle;'><img id='unitstatusimagemenu' style='vertical-align:middle;' src='".$array_UNIT_IMG_STATUS[$i4]."' height='25px' width='23px'><br><span style='color:#ccffff;font-size:15px;'>&nbsp;&nbsp;".$mn."&nbsp;&nbsp;</span></div></td><td>&nbsp;</td><td nowrap><div><img src='./images/ranks/".$factionid."/".$array_PILOT_RANK[$i4].".png' width='18px' height='18px'>&nbsp;<span style='font-size:24px'>".$array_PILOT[$i4]."</span><br><span style='font-size:14px;'>".textTruncate($memodel, 18)."</span></div></td><td align='right' style='align:right;' width='100%'><img id='unitroundstatusimagemenu' src='".$unitstatusimage."' height='21px'><br><img src='images/chevron.png' height='21px;'></td><td>".$heatimage[$i4]."</td></tr></table></td>\r\n";
+				// <td valign='top'>".$heatimage[$i4]."</td>
+				echo "			<td width='".$width."%' nowrap><table width='100%' height='100%' cellspacing='0' cellpadding='0' class='unitselect_button_active_play_left' style='animation: glow 1s infinite alternate;'><tr><td nowrap width='30px' align='center' valign='center'><div style='display:inline-block;height:100%;vertical-align:middle;'><img id='unitstatusimagemenu' style='vertical-align:middle;' src='".$array_UNIT_IMG_STATUS[$i4]."' height='25px' width='23px'><br><span style='color:#ccffff;font-size:15px;'>&nbsp;&nbsp;".$mn."&nbsp;&nbsp;</span></div></td><td>&nbsp;</td><td nowrap><div><span style='font-size:24px'>".textTruncate($memodel, 10)."</span><br><span style='font-size:14px;'>".$array_PILOT[$i4]."</span></div></td><td align='right' valign='middle' style='align:right;' width='100%'><img id='unitroundstatusimagemenu' src='".$unitstatusimage."' height='32px'><br><img src='images/chevron.png' height='21px;'></td></tr></table></td>\r\n";
 				echo "			<td style='width:5px;'>&nbsp;</td>\r\n";
 				$atLeastOneValidUnitInFormation = $atLeastOneValidUnitInFormation + 1;
 			}
 		} else {
 			if ($array_ACTIVE_BID[$i4] == "1") {
-				echo "			<td width='".$width."%' nowrap onclick=\"location.href='".$meli."'\"><table width='100%' height='100%' cellspacing='0' cellpadding='0' class='unitselect_button_normal_play_left'><tr><td nowrap width='30px' align='center' valign='center'><div style='display:inline-block;height:100%;vertical-align:middle;'><img style='vertical-align:middle;' src='".$array_UNIT_IMG_STATUS[$i4]."' height='25px' width='23px'><br><span style='color:#ccffff;font-size:15px;'>&nbsp;&nbsp;".$mn."&nbsp;&nbsp;</span></div></td><td>&nbsp;</td><td nowrap width='100%'><div><img src='./images/ranks/".$factionid."/".$array_PILOT_RANK[$i4].".png' width='18px' height='18px'>&nbsp;<a style='font-size:24px' href='".$meli."'>".$array_PILOT[$i4]."</a>&nbsp;&nbsp;<img src='".$unitstatusimage."' height='21px'>".$heatimage[$i4]."<br><span style='font-size:14px;'>".textTruncate($memodel, 18)."</span></div></td></tr></table></td>\r\n";
+				// echo "			<td width='".$width."%' nowrap onclick=\"location.href='".$meli."'\"><table width='100%' height='100%' cellspacing='0' cellpadding='0' class='unitselect_button_normal_play_left'><tr><td nowrap width='30px' align='center' valign='center'><div style='display:inline-block;height:100%;vertical-align:middle;'><img style='vertical-align:middle;' src='".$array_UNIT_IMG_STATUS[$i4]."' height='25px' width='23px'><br><span style='color:#ccffff;font-size:15px;'>&nbsp;&nbsp;".$mn."&nbsp;&nbsp;</span></div></td><td>&nbsp;</td><td nowrap width='100%'><div><img src='./images/ranks/".$factionid."/".$array_PILOT_RANK[$i4].".png' width='18px' height='18px'>&nbsp;<a style='font-size:24px' href='".$meli."'>".$array_PILOT[$i4]."</a><br><span style='font-size:14px;'>".textTruncate($memodel, 18)."</span></div></td><td align='right' style='align:right;' width='100%'><img id='unitroundstatusimagemenu' src='".$unitstatusimage."' height='21px'></td><td>".$heatimage[$i4]."</td></tr></table></td>\r\n";
+				// <td valign='top'>".$heatimage[$i4]."</td>
+				echo "			<td width='".$width."%' nowrap onclick=\"location.href='".$meli."'\"><table width='100%' height='100%' cellspacing='0' cellpadding='0' class='unitselect_button_normal_play_left'><tr><td nowrap width='30px' align='center' valign='center'><div style='display:inline-block;height:100%;vertical-align:middle;'><img style='vertical-align:middle;' src='".$array_UNIT_IMG_STATUS[$i4]."' height='25px' width='23px'><br><span style='color:#ccffff;font-size:15px;'>&nbsp;&nbsp;".$mn."&nbsp;&nbsp;</span></div></td><td>&nbsp;</td><td nowrap width='100%'><div><a style='font-size:24px' href='".$meli."'>".textTruncate($memodel, 10)."</a><br><span style='font-size:14px;'>".$array_PILOT[$i4]."</span></div></td><td align='right' valign='middle' style='align:right;' width='100%'><img id='unitroundstatusimagemenu' src='".$unitstatusimage."' height='32px'></td></tr></table></td>\r\n";
 				echo "			<td style='width:5px;'>&nbsp;</td>\r\n";
 				$atLeastOneValidUnitInFormation = $atLeastOneValidUnitInFormation + 1;
 			} else {
-				echo "			<td style='display:none;visibility:hidden;' width='".$width."%' nowrap onclick=\"location.href='".$meli."'\"><table width='100%' cellspacing='0' cellpadding='0' class='unitselect_button_normal_play_left'><tr><td nowrap width='30px' align='center' valign='center'><div style='display:inline-block;height:100%;vertical-align:middle;'><img style='vertical-align:middle;' src='".$array_UNIT_IMG_STATUS[$i4]."' height='25px' width='23px'><br><span style='color:#ccffff;font-size:15px;'>&nbsp;&nbsp;".$mn."&nbsp;&nbsp;</span></div></td><td>&nbsp;</td><td nowrap width='100%'><div><img src='./images/ranks/".$factionid."/".$array_PILOT_RANK[$i4].".png' width='18px' height='18px'>&nbsp;<a style='font-size:24px' href='".$meli."'>".$array_PILOT[$i4]."</a>&nbsp;&nbsp;<img src='".$unitstatusimage."' height='21px'>".$heatimage[$i4]."<br><span style='font-size:14px;'>".textTruncate($memodel, 18)."</span></div></td></tr></table></td>\r\n";
+				//echo "			<td style='display:none;visibility:hidden;' width='".$width."%' nowrap onclick=\"location.href='".$meli."'\"><table width='100%' cellspacing='0' cellpadding='0' class='unitselect_button_normal_play_left'><tr><td nowrap width='30px' align='center' valign='center'><div style='display:inline-block;height:100%;vertical-align:middle;'><img style='vertical-align:middle;' src='".$array_UNIT_IMG_STATUS[$i4]."' height='25px' width='23px'><br><span style='color:#ccffff;font-size:15px;'>&nbsp;&nbsp;".$mn."&nbsp;&nbsp;</span></div></td><td>&nbsp;</td><td nowrap width='100%'><div><img src='./images/ranks/".$factionid."/".$array_PILOT_RANK[$i4].".png' width='18px' height='18px'>&nbsp;<a style='font-size:24px' href='".$meli."'>".$array_PILOT[$i4]."</a>&nbsp;&nbsp;<img src='".$unitstatusimage."' height='21px'>".$heatimage[$i4]."<br><span style='font-size:14px;'>".textTruncate($memodel, 18)."</span></div></td></tr></table></td>\r\n";
+				echo "			<td style='display:none;visibility:hidden;' width='".$width."%' nowrap>&nbsp;</td>\r\n";
 			}
 		}
 	}
@@ -711,11 +744,16 @@ session_start();
 		echo "<meta http-equiv='refresh' content='0;url=./gui_select_unit.php'>\r\n";
 		header("Location: ./gui_select_unit.php");
 	}
+	if ($playable) {
+		echo "			<td nowrap onclick='javascript:showGameMenu();' width='60px' style='width:60px;min-width:60px;background:rgba(56,87,26,1.0);text-align:center;vertical-align:middle;'>\n";
+		echo "				<div id='gamemenubutton'><i style='color:#eee;' class='fa-solid fa-angles-down'></i></div>\n";
+		echo "			</td>\n";
+	} else {
+		echo "			<td nowrap width='60px' style='width:60px;min-width:60px;background:rgba(56,87,26,1.0);text-align:center;vertical-align:middle;'>\n";
+		echo "				<div id='gamemenubutton'><i style='color:#eee;' class='fa-regular fa-circle'></i></div>\n";
+		echo "			</td>\n";
+	}
 ?>
-			<!-- <td style="width:100px;" style="width:100px;" nowrap width="100px" style="background:rgba(50,50,50,1.0);text-align:center;vertical-align:middle;display:block;"><img src='./images/player/<?=$pimage?>' width='60px' height='60px'></td> -->
-			<td nowrap onclick="javascript:showGameMenu();" width="60px" style="width:60px;min-width:60px;background:rgba(56,87,26,1.0);text-align:center;vertical-align:middle;">
-				<div id="gamemenubutton"><i style="color:#eee;" class="fa-solid fa-angles-down"></i></div>
-			</td>
 			<td style='width:5px;'>&nbsp;</td>
 			<td nowrap onclick="location.href='gui_show_playerlist.php'" style="width: 60px;" width="60px" style="background: rgba(50,50,50,1.0); text-align: center; vertical-align: middle;"><img src='./images/player/<?=$pimage?>' style='height:auto;display:block;' width='60px' height='60px'></td>
 		</tr>
@@ -763,8 +801,8 @@ session_start();
 		$currFormId = $array_PLAYER_FORMATION_IDS[$cc];
 		$unitArray = $array_PLAYER_UNITS_IN_FORMATION[$currFormId];
 
-		echo "			<td style='text-align:left;background-color:#444444;' class='unitselect_button_active'>\n";
-		echo "				<table style='border-collapse:collapse;' cellspacing=4 cellpadding=4>\n";
+		echo "			<td style='text-align:center;background-color:#444444;' align='center' valign='top' class='unitselect_button_active'>\n";
+		echo "				<table style='margin:auto;border-collapse:collapse;' cellspacing=4 cellpadding=4>\n";
 		echo "					<tr>\n";
 
 		$count = 1;
@@ -781,25 +819,22 @@ session_start();
 			if ($item['round_moved'] > 0 && $item['round_fired'] > 0) {
 				$imagestatuslnk = "./images/top-right_phase03.png";
 			}
-			echo "			<td align='center' valign='top' style='background-color:#333333;padding:4px;border:2px solid #555;'>\n";
-			if ($array_UNIT_DBID[$chosenUnitIndex] == $item['unitid']) {
-				echo "				<a href='gui_play_unit.php?formationid=".$array_PLAYER_FORMATION_IDS[$cc]."&chosenunit=".$count."'><img src='https://www.ascard.net/app/".$item["status_image"]."' width='40px'></a><br>\n";
-				echo "				<span style='display:inline-block;width:40px;align:center;'><img id='overviewcurrentunitstatus' style='display:block;margin-left:auto;margin-right:auto;height:auto;' src='".$currentPhaseButton."' width='20px'></span>\n";
-				//echo "				<br><div style='transform:rotate(90deg);width:60px;text-align:right;'>".$item['unit_number']."</div>\n";
-				echo "				<br>".$item['unit_number']."\n";
-				echo "				<br><img src='./images/chevron.png' width='40px'>\n";
-			} else {
-				if ($item['active_bid'] == 1) {
+			if ($item['active_bid'] == 1) {
+				echo "			<td align='center' valign='top' style='background-color:#333333;padding:4px;border:2px solid #555;'>\n";
+				if ($array_UNIT_DBID[$chosenUnitIndex] == $item['unitid']) {
+					echo "				<a href='gui_play_unit.php?formationid=".$array_PLAYER_FORMATION_IDS[$cc]."&chosenunit=".$count."'><img src='https://www.ascard.net/app/".$item["status_image"]."' width='40px'></a><br>\n";
+					echo "				<span style='display:inline-block;width:40px;align:center;'><img id='overviewcurrentunitstatus' style='display:block;margin-left:auto;margin-right:auto;height:auto;' src='".$currentPhaseButton."' width='20px'></span>\n";
+					//echo "				<br><div style='transform:rotate(90deg);width:60px;text-align:right;'>".$item['unit_number']."</div>\n";
+					echo "				<br>".$item['unit_number']."\n";
+					echo "				<br><img src='./images/chevron.png' width='40px'>\n";
+				} else {
 					echo "				<a href='gui_play_unit.php?formationid=".$array_PLAYER_FORMATION_IDS[$cc]."&chosenunit=".$count."'><img src='https://www.ascard.net/app/".$item["status_image"]."' width='40px'></a><br>\n";
 					echo "				<span style='display:inline-block;width:40px;align:center;'><img style='display:block;margin-left:auto;margin-right:auto;height:auto;' src='".$imagestatuslnk."' width='20px'></span>\n";
 					//echo "				<br><div style='transform:rotate(90deg);width:60px;text-align:right;'>".$item['unit_number']."</div>\n";
 					echo "				<br>".$item['unit_number']."\n";
-				} else {
-					echo "				NO<br>\n";
-					echo "				BID\n";
 				}
+				echo "			</td>\n";
 			}
-			echo "			</td>\n";
 			echo " <td>&nbsp;</td>\n";
 			$count++;
 		}
@@ -823,6 +858,10 @@ session_start();
 <div id="unit_number" align="center" onclick='javascript:hideTopPanels();'>#<?= $array_UNIT_NUMBER[$chosenUnitIndex] ?><br><?= strtoupper($FORMATION) ?></div>
 
 <?php
+	if ($ROUNDSOUTOFSYNC == 1) {
+		echo "		<div id='roundsyncmessage'>ROUNDS ARE OUT OF SYNC!</div>\n";
+	}
+
 	if ($useMULImages == 0) {
 		echo "<div id='unit'><img id='unitimage' src='" . $array_UNIT_IMG_URL[$chosenUnitIndex] . "'></div>\n";
 	} else if ($useMULImages == 1) {
@@ -859,17 +898,8 @@ session_start();
 	echo "<div id='pilotrank'>\n";
 	echo "  <img src='./images/ranks/".$factionid."/".$array_PILOT_RANK[$chosenUnitIndex].".png' width='30px' height='30px'>\n";
 	echo "</div>\n";
-	if ($pid == $formationplayerid) {
-		// Current Unit is playable by current user
-		$playable = true;
-	} else {
-		$playable = false;
-	}
-	if ($array_ACTIVE_BID[$chosenUnitIndex] == "0") {
-		$playable = false;
-	}
 	if (!$playable) {
-		if ($hideNotOwnedUnit) {
+		if ($hideNotOwnedUnit && !$owned) {
 			echo "<div id='blockNotOwnedUnits'></div>\r\n";
 		}
 	}

@@ -915,19 +915,19 @@ function setCircles(h, a, s, e, fc, mp, w, e_cv, fc_cv, w_cv, ma_cv, mb_cv, mc_c
 	}
 
 	if (h == 0) {
-		document.getElementById('heatimage_' + chosenunitindex).src=temp0;
+		//document.getElementById('heatimage_' + chosenunitindex).src=temp0;
 	}
 	if (h == 1) {
-		document.getElementById('heatimage_' + chosenunitindex).src=temp1;
+		//document.getElementById('heatimage_' + chosenunitindex).src=temp1;
 	}
 	if (h == 2) {
-		document.getElementById('heatimage_' + chosenunitindex).src=temp2;
+		//document.getElementById('heatimage_' + chosenunitindex).src=temp2;
 	}
 	if (h == 3) {
-		document.getElementById('heatimage_' + chosenunitindex).src=temp3;
+		//document.getElementById('heatimage_' + chosenunitindex).src=temp3;
 	}
 	if (h == 4 && unitstatus != 4) {
-		document.getElementById('heatimage_' + chosenunitindex).src=temp4;
+		//document.getElementById('heatimage_' + chosenunitindex).src=temp4;
 	}
 
 	var tmmDiceValue = document.getElementById("TMM").innerHTML;
