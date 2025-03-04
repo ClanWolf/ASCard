@@ -436,7 +436,7 @@ session_start();
 				echo "				</table>\n";
 				echo "			</td>\n";
 			} else {
-				echo "			<td nowrap style='background-color:#444444;width:270px;height:40px;text-align:center;' class='formationselect_button_active'>\n";
+				echo "			<td nowrap style='background-color:#444444;width:270px;height:30px;text-align:center;' class='formationselect_button_active'>\n";
 				echo "				".$formationnameSelected."\n";
 				echo "			</td>\n";
 			}
@@ -601,7 +601,7 @@ session_start();
 				if ($activebid == "1") {
 					$unitDetailString = $unitDetailString."						<td nowrap onclick='location.href=\"gui_play_unit.php?formationid=".$formationidSelected."&chosenunit=".$c."\"' width='99%' align='left' valign='bottom' style='color:#AAAAAA;background-color:".$bidcolor."text-align:left;'><span style='font-size:24px;'>";
 				} else {
-					$unitDetailString = $unitDetailString."						<td nowrap width='99%' align='left' valign='bottom' style='color:#AAAAAA;background-color:".$bidcolor."text-align:left;overflow:hidden;white-space:nowrap;text-overflow:ellipsis'><span style='font-size:26px;'>";
+					$unitDetailString = $unitDetailString."						<td nowrap width='99%' align='left' valign='bottom' style='color:#AAAAAA;background-color:".$bidcolor."text-align:left;overflow:hidden;white-space:nowrap;text-overflow:ellipsis'><span style='font-size:24px;'>";
 				}
 				$unitDetailString = $unitDetailString."						".textTruncate($unitchassisname, 15)."</span><span style='font-weight:normal;font-size:20px;color:#ffc677;'> ".$unitpointvalue."/".$unittonnage."t</span>\n";
 				$unitDetailString = $unitDetailString."						<br><div style='font-size:18px;top:0px;bottom:0px;left:0px;right:0px;'><img style='vertical-align:bottom;padding-top:3px' src='./images/ranks/".$factionidSelected."/".$pilotrank.".png' width='16px' height='16px'>&nbsp;&nbsp;".$pilotname."</div>\n";
