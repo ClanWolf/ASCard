@@ -819,7 +819,14 @@ a:hover {
 	color: #ffffff;
 	text-align: left;
 }
-
+.formationselect_button_active {
+	font-size: 100%;
+	padding: 3px;
+	background-color: #694007;
+	color: #222222;
+	text-align: center;
+	/* height:100% */
+}
 .formationselect_button_normal {
 	font-size: 100%;
 	padding: 3px;

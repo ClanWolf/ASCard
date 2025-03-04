@@ -154,8 +154,8 @@ session_start();
 	function textTruncate($text, $chars=25) {
 		if (strpos($text, " | ") !== false) {
 			$parts = explode(" | ", $text);
+			$text = $parts[1];
 		}
-		$text = $parts[1];
 
 		if (strlen($text) <= $chars) {
 			return $text;
@@ -344,15 +344,18 @@ session_start();
 
 	<table align="center" width="90%" cellspacing=2 cellpadding=2 border=0px>
 		<tr>
-		<?php
-		if (!$playMode) {
-			echo "						<td colspan='4' nowrap style='width:270px;height:30px;text-align:center;' onclick='location.href=\"gui_edit_command.php\"' class='formationselect_button_normal'>\n";
-			echo "							<a href='gui_edit_command.php'><i class='fas fa-edit'></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;COMMAND</a>\n";
-			echo "						</td>\n";
-		} else {
-			echo "						<td colspan='4' nowrap style='width:270px;height:30px;text-align:center;' class='formationselect_button_normal'><a href='#'>COMMAND</a></td>\n";
-		}
-		?>
+<?php
+if (!$playMode) {
+	echo "						<td colspan='4' nowrap style='width:270px;height:30px;text-align:center;' onclick='location.href=\"gui_edit_command.php\"' class='formationselect_button_normal'>\n";
+	echo "							<a href='gui_edit_command.php'><i class='fas fa-edit'></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;COMMAND</a>\n";
+	echo "						</td>\n";
+} else {
+	echo "						<td colspan='4' nowrap style='width:270px;height:30px;text-align:center;' class='formationselect_button_normal'>\n";
+	echo "							<a href='#'>COMMAND</a>\n";
+	echo "							&nbsp;&nbsp;&nbsp;<span id='bidOverviewCommand'>(PV 10 / 100)</span>\n";
+	echo "						</td>\n";
+}
+?>
 		</tr>
 		<tr>
 <?php
@@ -422,22 +425,33 @@ session_start();
 				echo "				<table style='width:100%;' cellspacing=0 cellpadding=0>\n";
 				echo "					<tr>\n";
 				if (!$playMode) {
-					echo "						<td style='text-align:left;'>\n";
+					echo "						<td width='1%' style='text-align:left;'>\n";
 					echo "							<a href='gui_edit_formation.php?formationid=".$formationidSelected."'><i class='fas fa-edit'></i></a>\n";
 					echo "						</td>\n";
 				}
-				echo "						<td style='text-align:center;'>\n";
+				echo "						<td width='98%' style='text-align:center;'>\n";
 				echo "							<a href='gui_play_unit.php?formationid=".$formationidSelected."'>".$formationnameSelected."</a>\n";
+				echo "							&nbsp;&nbsp;&nbsp;<span id='bidOverviewFormation".$formationind."'>(PV 10 / 100)</span>\n";
 				echo "						</td>\n";
-				echo "						<td style='text-align:right;'>\n";
-				echo "							<img src='./images/factions/".$factionlogo."' width='20px' style='border:1px solid;'>\n";
+				echo "						<td width='1%' style='text-align:right;'>\n";
+				echo "							<img src='./images/factions/".$factionlogo."' width='20px' style='border:1px solid #000000;'>\n";
 				echo "						</td>\n";
 				echo "					</tr>\n";
 				echo "				</table>\n";
 				echo "			</td>\n";
 			} else {
-				echo "			<td nowrap style='background-color:#444444;width:270px;height:30px;text-align:center;' class='formationselect_button_active'>\n";
-				echo "				".$formationnameSelected."\n";
+				echo "			<td nowrap width='99%' style='background-color:#444444;width:270px;height:30px;text-align:center;' class='formationselect_button_active'>\n";
+				echo "				<table style='width:100%;' cellspacing=0 cellpadding=0>\n";
+				echo "					<tr>\n";
+				echo "						<td nowrap width='99%' style='text-align:center;'>\n";
+				echo "							".$formationnameSelected."\n";
+				echo "							&nbsp;&nbsp;&nbsp;<span id='bidOverviewFormation".$formationind."'>(PV 10 / 100)</span>\n";
+				echo "						</td>\n";
+				echo "						<td width='1%' style='text-align:right;'>\n";
+				echo "							<img src='./images/factions/".$factionlogo."' width='20px' style='border:1px solid #000000;'>\n";
+				echo "						</td>\n";
+				echo "					</tr>\n";
+				echo "				</table>\n";
 				echo "			</td>\n";
 			}
 
@@ -563,7 +577,7 @@ session_start();
 					if (!$playMode) {
 						$unitDetailString = $unitDetailString."						<td nowrap width='1%' onclick=\"location.href='gui_edit_unit.php?unitid=".$assignedUnitID."'\" style='background-color:#444;color:#aaa;text-align:right;'>\n";
 						$unitDetailString = $unitDetailString."							<span style='font-size:16px;'>\n";
-						$unitDetailString = $unitDetailString."								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class='fas fa-edit'></i>&nbsp;&nbsp;&nbsp;\n";
+						$unitDetailString = $unitDetailString."								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class='fas fa-edit'></i>&nbsp;&nbsp;&nbsp;\n";
 						$unitDetailString = $unitDetailString."							</span>\n";
 						$unitDetailString = $unitDetailString."						</td>\n";
 					} else {
@@ -577,7 +591,7 @@ session_start();
 					if (!$playMode) {
 						$unitDetailString = $unitDetailString."						<td nowrap width='1%' onclick=\"location.href='gui_edit_unit.php?unitid=".$assignedUnitID."'\" style='background-color:#444;color:#aaa;text-align:right;'>\n";
 						$unitDetailString = $unitDetailString."							<span style='font-size:16px;'>\n";
-						$unitDetailString = $unitDetailString."								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class='fas fa-edit'></i>&nbsp;&nbsp;&nbsp;\n";
+						$unitDetailString = $unitDetailString."								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class='fas fa-edit'></i>&nbsp;&nbsp;&nbsp;\n";
 						$unitDetailString = $unitDetailString."							</span>\n";
 						$unitDetailString = $unitDetailString."						</td>\n";
 					} else {
@@ -603,7 +617,8 @@ session_start();
 				} else {
 					$unitDetailString = $unitDetailString."						<td nowrap width='99%' align='left' valign='bottom' style='color:#AAAAAA;background-color:".$bidcolor."text-align:left;overflow:hidden;white-space:nowrap;text-overflow:ellipsis'><span style='font-size:24px;'>";
 				}
-				$unitDetailString = $unitDetailString."						".textTruncate($unitchassisname, 15)."</span><span style='font-weight:normal;font-size:20px;color:#ffc677;'> ".$unitpointvalue."/".$unittonnage."t</span>\n";
+				//$unitDetailString = $unitDetailString."						".textTruncate($unitchassisname, 15)."</span><span style='font-weight:normal;font-size:20px;color:#ffc677;'> ".$unitpointvalue."/".$unittonnage."t</span>\n";
+				$unitDetailString = $unitDetailString."						".textTruncate($unitchassisname, 10)."</span><span style='font-weight:normal;font-size:20px;color:#ffc677;'>&nbsp;&nbsp;PV&nbsp;".$unitpointvalue."</span> <span style='font-weight:normal;font-size:20px;color:#aaaaaa;'>(".$unittonnage."t)</span>\n";
 				$unitDetailString = $unitDetailString."						<br><div style='font-size:18px;top:0px;bottom:0px;left:0px;right:0px;'><img style='vertical-align:bottom;padding-top:3px' src='./images/ranks/".$factionidSelected."/".$pilotrank.".png' width='16px' height='16px'>&nbsp;&nbsp;".$pilotname."</div>\n";
 				$unitDetailString = $unitDetailString."						</td>\n";
 
@@ -675,36 +690,55 @@ session_start();
 	}
 	echo "		</tr>\n";
 
-
-
-
 	echo "		<tr>\n";
-	echo "			<td colspan='1' style='background-color:#333333;padding:1px;vertical-align:middle;' align='left'><div style='display:inline-block;'><span style='font-size:18px;color:#eeeeee;'>BID:&nbsp;</span><span style='font-size:18px;color:#ffc677;'>PV ".$pvformationbid[0]."</span><span style='font-size:18px;color:#eeeeee;'>&nbsp;/&nbsp;</span><span style='font-size:18px;color:#ffc677;'>".$tonnageformationbid[0]."t</span><span style='font-size:18px;color:#eeeeee;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style='font-size:18px;color:#eeeeee;'>PV ".$pvformation[0]."&nbsp;/&nbsp;".$tonnageformation[0]."t</span></div></td>\n";
-	echo "			<td colspan='1' style='background-color:#333333;padding:1px;vertical-align:middle;' align='left'><div style='display:inline-block;'><span style='font-size:18px;color:#eeeeee;'>BID:&nbsp;</span><span style='font-size:18px;color:#ffc677;'>PV ".$pvformationbid[1]."</span><span style='font-size:18px;color:#eeeeee;'>&nbsp;/&nbsp;</span><span style='font-size:18px;color:#ffc677;'>".$tonnageformationbid[1]."t</span><span style='font-size:18px;color:#eeeeee;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style='font-size:18px;color:#eeeeee;'>PV ".$pvformation[1]."&nbsp;/&nbsp;".$tonnageformation[1]."t</span></div></td>\n";
-	echo "			<td colspan='1' style='background-color:#333333;padding:1px;vertical-align:middle;' align='left'><div style='display:inline-block;'><span style='font-size:18px;color:#eeeeee;'>BID:&nbsp;</span><span style='font-size:18px;color:#ffc677;'>PV ".$pvformationbid[2]."</span><span style='font-size:18px;color:#eeeeee;'>&nbsp;/&nbsp;</span><span style='font-size:18px;color:#ffc677;'>".$tonnageformationbid[2]."t</span><span style='font-size:18px;color:#eeeeee;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style='font-size:18px;color:#eeeeee;'>PV ".$pvformation[2]."&nbsp;/&nbsp;".$tonnageformation[2]."t</span></div></td>\n";
+	echo "			<td colspan='1' style='background-color:#333333;padding:1px;vertical-align:middle;' align='center'><span style='font-size:18px;color:#aaaaaa;'><i class='fa-solid fa-weight-hanging fa-sm'></i>&nbsp;&nbsp;&nbsp;".$tonnageformationbid[0]."t</span><span style='font-size:18px;color:#eeeeee;'>&nbsp;/&nbsp;</span><span style='font-size:18px;color:#aaaaaa;'>".$tonnageformation[0]."t</span></td>\n";
+	echo "			<td colspan='1' style='background-color:#333333;padding:1px;vertical-align:middle;' align='center'><span style='font-size:18px;color:#aaaaaa;'><i class='fa-solid fa-weight-hanging fa-sm'></i>&nbsp;&nbsp;&nbsp;".$tonnageformationbid[1]."t</span><span style='font-size:18px;color:#eeeeee;'>&nbsp;/&nbsp;</span><span style='font-size:18px;color:#aaaaaa;'>".$tonnageformation[1]."t</span></td>\n";
+	echo "			<td colspan='1' style='background-color:#333333;padding:1px;vertical-align:middle;' align='center'><span style='font-size:18px;color:#aaaaaa;'><i class='fa-solid fa-weight-hanging fa-sm'></i>&nbsp;&nbsp;&nbsp;".$tonnageformationbid[2]."t</span><span style='font-size:18px;color:#eeeeee;'>&nbsp;/&nbsp;</span><span style='font-size:18px;color:#aaaaaa;'>".$tonnageformation[2]."t</span></td>\n";
 	echo "		</tr>\n";
 
-	echo "		<tr>\n";
-	echo "			<td colspan='4' style='background-color:#333333;padding:1px;vertical-align:middle;' align='center'>";
-	echo "				<span style='font-size:18px;color:#eeeeee;'>Bid:&nbsp;</span><span style='font-size:18px;color:#ffc677;'>PV ".$pointvaluetotalactivebid."</span><span style='font-size:18px;color:#eeeeee;'>&nbsp;/&nbsp;</span><span style='font-size:18px;color:#ffc677;'>".$tonnagetotalactivebid."t</span>";
-	echo "				<span style='font-size:18px;color:#eeeeee;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>";
-	echo "				<span style='font-size:18px;color:#eeeeee;'>TOTAL:&nbsp;PV ".$pointvaluetotal."&nbsp;/&nbsp;".$tonnagetotal."t</span>";
-	echo "			</td>\n";
-	echo "		</tr>\n";
+//	echo "		<tr>\n";
+//	echo "			<td colspan='1' style='background-color:#333333;padding:1px;vertical-align:middle;' align='left'><span style='font-size:18px;color:#eeeeee;'>BID:&nbsp;</span><span style='font-size:18px;color:#ffc677;'>PV ".$pvformationbid[0]."</span><span style='font-size:18px;color:#eeeeee;'>&nbsp;/&nbsp;</span><span style='font-size:18px;color:#ffc677;'>".$tonnageformationbid[0]."t</span><span style='font-size:18px;color:#eeeeee;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style='font-size:18px;color:#eeeeee;'>PV ".$pvformation[0]."&nbsp;/&nbsp;".$tonnageformation[0]."t</span></td>\n";
+//	echo "			<td colspan='1' style='background-color:#333333;padding:1px;vertical-align:middle;' align='left'><span style='font-size:18px;color:#eeeeee;'>BID:&nbsp;</span><span style='font-size:18px;color:#ffc677;'>PV ".$pvformationbid[1]."</span><span style='font-size:18px;color:#eeeeee;'>&nbsp;/&nbsp;</span><span style='font-size:18px;color:#ffc677;'>".$tonnageformationbid[1]."t</span><span style='font-size:18px;color:#eeeeee;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style='font-size:18px;color:#eeeeee;'>PV ".$pvformation[1]."&nbsp;/&nbsp;".$tonnageformation[1]."t</span></td>\n";
+//	echo "			<td colspan='1' style='background-color:#333333;padding:1px;vertical-align:middle;' align='left'><span style='font-size:18px;color:#eeeeee;'>BID:&nbsp;</span><span style='font-size:18px;color:#ffc677;'>PV ".$pvformationbid[2]."</span><span style='font-size:18px;color:#eeeeee;'>&nbsp;/&nbsp;</span><span style='font-size:18px;color:#ffc677;'>".$tonnageformationbid[2]."t</span><span style='font-size:18px;color:#eeeeee;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style='font-size:18px;color:#eeeeee;'>PV ".$pvformation[2]."&nbsp;/&nbsp;".$tonnageformation[2]."t</span></td>\n";
+//	echo "		</tr>\n";
+//	echo "		<tr>\n";
+//	echo "			<td colspan='4' style='background-color:#333333;padding:1px;vertical-align:middle;' align='center'>";
+//	echo "				<span style='font-size:18px;color:#eeeeee;'>Bid:&nbsp;</span><span style='font-size:18px;color:#ffc677;'>PV ".$pointvaluetotalactivebid."</span><span style='font-size:18px;color:#eeeeee;'>&nbsp;/&nbsp;</span><span style='font-size:18px;color:#ffc677;'>".$tonnagetotalactivebid."t</span>";
+//	echo "				<span style='font-size:18px;color:#eeeeee;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>";
+//	echo "				<span style='font-size:18px;color:#eeeeee;'>TOTAL:&nbsp;PV ".$pointvaluetotal."&nbsp;/&nbsp;".$tonnagetotal."t</span>";
+//	echo "			</td>\n";
+//	echo "		</tr>\n";
 
 	if ($playMode) {
 		// if ($readyToFinalizeRound == 1) {
-			echo "<script>\n";
-			echo "document.getElementById('FinalizeRoundButton').style.backgroundColor = '#517d25';";
-			echo "</script>\n";
+			echo "		<script>\n";
+			echo "			document.getElementById('FinalizeRoundButton').style.backgroundColor = '#517d25';";
+			echo "		</script>\n";
 		// } else {
-		//	echo "<script>\n";
-		//	echo "document.getElementById('FinalizeRoundButton').style.backgroundColor = '#5c0700';";
-		//  echo "</script>\n";
+		//	echo "		<script>\n";
+		//	echo "			document.getElementById('FinalizeRoundButton').style.backgroundColor = '#5c0700';";
+		//  echo "		</script>\n";
 		//}
 	}
+
+	echo "		</table>\n";
+
+	//	bidOverviewCommand
+	//	bidOverviewFormation0
+	//	bidOverviewFormation1
+	//	bidOverviewFormation2
+
+	echo "		<script>\n";
+	echo "			var bidinfoco = \"<span style='font-size:18px;color:#eeeeee;'></span><span style='font-size:18px;color:#ffc677;'>PV ".$pointvaluetotalactivebid."</span><span style='font-size:18px;color:#eeeeee;'>&nbsp;/&nbsp;</span><span style='font-size:18px;color:#eeeeee;'>".$pointvaluetotal."</span>\";\n";
+	echo "			var bidinfof0 = \"<span style='font-size:18px;color:#eeeeee;'></span><span style='font-size:18px;color:#ffc677;'>PV ".$pvformationbid[0]."</span><span style='font-size:18px;color:#eeeeee;'>&nbsp;/&nbsp;</span><span style='font-size:18px;color:#eeeeee;'>".$pvformation[0]."</span>\";\n";
+	echo "			var bidinfof1 = \"<span style='font-size:18px;color:#eeeeee;'></span><span style='font-size:18px;color:#ffc677;'>PV ".$pvformationbid[1]."</span><span style='font-size:18px;color:#eeeeee;'>&nbsp;/&nbsp;</span><span style='font-size:18px;color:#eeeeee;'>".$pvformation[1]."</span>\";\n";
+	echo "			var bidinfof2 = \"<span style='font-size:18px;color:#eeeeee;'></span><span style='font-size:18px;color:#ffc677;'>PV ".$pvformationbid[2]."</span><span style='font-size:18px;color:#eeeeee;'>&nbsp;/&nbsp;</span><span style='font-size:18px;color:#eeeeee;'>".$pvformation[2]."</span>\";\n";
+	echo "			document.getElementById('bidOverviewCommand').innerHTML = bidinfoco;\n";
+	echo "			document.getElementById('bidOverviewFormation0').innerHTML = bidinfof0;\n";
+	echo "			document.getElementById('bidOverviewFormation1').innerHTML = bidinfof1;\n";
+	echo "			document.getElementById('bidOverviewFormation2').innerHTML = bidinfof2;\n";
+	echo "		</script>\n";
 ?>
-	</table>
 
 <?php
 	if (!$playMode) {

@@ -4,11 +4,11 @@ var minSize = 20;
 var maxSize = 60;
 
 var fontsizeLabelBigFactor = 1.8;
-var fontsizeLabelthinFactor = 0.8;
-var fontsizeLabelthinSmallFactor = 0.8;
+var fontsizeLabelthinFactor = 0.75;
+var fontsizeLabelthinSmallFactor = 0.75;
 var fontsizeValueFactor = 1.2;
 var fontsizeValueThinFactor = 0.7;
-var fontsizeCircleFactor = 0.85;
+var fontsizeCircleFactor = 0.7;
 
 var fontsizeLabelBig = fontsizeLabel * fontsizeLabelBigFactor;
 var fontsizeLabelthin = fontsizeLabel * fontsizeLabelthinFactor;

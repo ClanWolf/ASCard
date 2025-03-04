@@ -200,6 +200,7 @@
 			$units_in_formation = array();
 			while($row = mysqli_fetch_assoc($result_asc_playerunitsinformation)) {
 				$unitdata['unitid'] = $row["unitid"];
+				$unitdata['pilotid'] = $row["pilotid"];
 				$unitdata['round_moved'] = $row["round_moved"];
 				$unitdata['round_fired'] = $row["round_fired"];
 
@@ -221,6 +222,15 @@
 						} else {
 							$unitdata['unit_number'] = "-";
 						}
+						$unitdata['size'] = $row["as_sz"];
+					}
+				}
+
+				$sql_currentunitpilot = "SELECT SQL_NO_CACHE * FROM asc_pilot where pilotid=".$unitdata['pilotid'].";";
+				$result_currentunitpilot = mysqli_query($conn, $sql_currentunitpilot);
+				if (mysqli_num_rows($result_currentunitpilot) > 0) {
+					while($row = mysqli_fetch_assoc($result_currentunitpilot)) {
+						$unitdata['pilot_image'] = $row["pilot_imageurl"];
 					}
 				}
 
@@ -230,6 +240,7 @@
 					while($row = mysqli_fetch_assoc($result_currentunitstatus)) {
 						$unitdata['status_image'] = $row["unit_statusimageurl"];
 						$unitdata['active_bid'] = $row["active_bid"];
+						$unitdata['status'] = $row["unit_status"];
 					}
 				}
 

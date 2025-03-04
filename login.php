@@ -145,7 +145,7 @@ session_start();
 				},
 				"position": "top",
 				"content": {
-					"message": "This app uses cookies to store options and values. No personal data is stored. To use the app, you need to confirm (DSGVO, 2022).",
+					"message": "This app uses cookies to store options and values. No personal data is stored. To use the app, you need to confirm (DSGVO, 2025).",
 					"dismiss": "Confirm",
 					"link": "Learn more..."
 				}
@@ -197,14 +197,14 @@ session_start();
 
 	<?php
 		if(isset($errorMessage)) {
-			echo "<table cellspacing=10 cellpadding=10 border=0px><tr><td><br>";
-			echo "<span style='color:red; font-size: 42px;'>";
-			echo $errorMessage;
-			echo "</span>";
-			echo "</td></tr></table>";
-			echo "<form id='f1' onsubmit='storeCredentials();' style='visibility:hidden;' action='?login=1&auto=0' method='post' autocomplete='on'>";
+			echo "<table cellspacing=10 cellpadding=10 border=0px><tr><td><br>\n";
+			echo "<span style='color:red; font-size: 42px;'>\n";
+			echo $errorMessage."\n";
+			echo "</span>\n";
+			echo "</td></tr></table>\n";
+			echo "<form id='f1' onsubmit='storeCredentials();' style='visibility:hidden;' action='?login=1&auto=0' method='post' autocomplete='on'>\n";
 		} else {
-			echo "<form id='f1' onsubmit='storeCredentials();' style='visibility:hidden;' action='?login=1&auto=1' method='post' autocomplete='on'>";
+			echo "<form id='f1' onsubmit='storeCredentials();' style='visibility:hidden;' action='?login=1&auto=1' method='post' autocomplete='on'>\n";
 		}
 	?>
 
@@ -215,12 +215,13 @@ session_start();
 				</td>
 				<td class='unitselect_button_active'>
 					<?php
-						echo "<select style='width:260px;height=60px;' name='pn' size='1' maxlength='80' id='pn'>";
-						echo $userlist;
-						echo "</select><br>";
+						echo "<input type='text' size='20' maxlength='80' style='width:250px;height=60px;' id='pn' name='pn' required autocomplete='userName'><br>\n";
+
+						// echo "<select style='width:260px;height=60px;' name='pn' size='1' maxlength='80' id='pn'>\n";
+						// echo $userlist."\n";
+						// echo "</select><br>\n";
 					?>
-					<!-- <input type="text" size="20" maxlength="80"  style='width:250px;height=60px;' id="pn" name="pn" required autocomplete="userName"><br> -->
-					<input type="text" size="20" style='width:250px;height=60px;border:0px;' maxlength="32" id="pw" name="pw" required autocomplete="current-password"><br><br>
+					<input type="password" size="20" style='width:250px;height=60px;border:0px;' maxlength="32" id="pw" name="pw" required autocomplete="new-password"><br><br>
 					<input type="submit" id="submitbutton" size="50" style="width:250px;height=60px;" value="LOGIN"><br>
 				</td>
 			</tr>

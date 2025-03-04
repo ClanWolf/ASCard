@@ -34,8 +34,8 @@ session_start();
 	function textTruncate($text, $chars=25) {
 		if (strpos($text, " | ") !== false) {
 			$parts = explode(" | ", $text);
+			$text = $parts[1];
 		}
-		$text = $parts[1];
 
 		if (strlen($text) <= $chars) {
 			return $text;
@@ -293,10 +293,11 @@ session_start();
 			echo "<td colspan='1' align='center' nowrap style='font-size:18px;color:#ffff00;'>".$tonnage_total_opfor." t</td>\n";
 			echo "</tr>\n";
 		} else {
-			echo "<tr><td colspan='8' align='right' nowrap style='font-size:18px;color:#eee;'>&nbsp;</td></tr>\n";
+			//echo "<tr><td colspan='8' align='right' nowrap style='font-size:18px;color:#eee;'>&nbsp;</td></tr>\n";
 		}
-		echo "<tr><td colspan='8' style='color:#eee;font-size:20;text-align:center;'>VS.</td></tr>\n";
-		echo "<tr><td colspan='8' align='right' nowrap style='font-size:18px;color:#eee;'>&nbsp;</td></tr>\n";
+		if ($jj > 0) {
+			echo "<tr><td colspan='8' style='color:#eee;font-size:20;text-align:center;'><div style='padding-top:10px;padding-bottom:10px;'>VS.</div></td></tr>\n";
+		}
 	}
 
 	if (!($stmt2 = $conn->prepare("SELECT SQL_NO_CACHE * FROM asc_player where bid_pv is not null and bid_pv > 0 and opfor = 0 and gameid = ".$gid." ORDER BY bid_pv, bid_tonnage asc limit 4;"))) {
