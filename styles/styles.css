@@ -224,8 +224,8 @@ a:hover {
 	position: absolute;
 	margin: 0 auto;
 	width: 100%;
+	top: 80px;
 	text-align: center;
-	padding:25px;
 	color:#ff0000;
 	font-size: 36px;
 	z-index:2400;

@@ -30,6 +30,24 @@ session_start();
 			$CURRENTROUND = $row["round"];
 		}
 	}
+
+	function textTruncate($text, $chars=25) {
+		if (strpos($text, " | ") !== false) {
+			$parts = explode(" | ", $text);
+		}
+		$text = $parts[1];
+
+		if (strlen($text) <= $chars) {
+			return $text;
+		}
+		$text = $text." ";
+        $textb = mb_convert_encoding($text, 'UTF-8', mb_list_encodings());
+		$textc = html_entity_decode($textb, ENT_QUOTES | ENT_HTML5, 'UTF-8');
+		$text = mb_substr($textc,0,$chars,'ASCII');
+		$text = $text."...";
+
+		return $text;
+	}
 ?>
 <!DOCTYPE html>
 <html lang="en">

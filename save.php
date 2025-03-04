@@ -9,6 +9,8 @@
 	require('./logger.php');
 	require_once('./db.php');
 
+	$pid = $_SESSION['playerid'];
+
 	$index     = isset($_GET["index"]) ? $_GET["index"] : "";
 	$h         = isset($_GET["h"]) ? $_GET["h"] : "";
 	$a         = isset($_GET["a"]) ? $_GET["a"] : "";
@@ -102,7 +104,7 @@
 //		}
 
 		$sql3 = "UPDATE asc_assign SET round_moved=".$mvmnt.",round_fired=".$wpnsf." WHERE unitid=".$index;
-		echo "UPDATE asc_assign<br>SET round_moved=".$mvmnt.",round_fired=".$wpnsf." WHERE unitid=".$index;
+		echo "Statement: " . $sql3;
 
 		if (mysqli_query($conn, $sql3)) {
 			echo "<br>";
@@ -111,6 +113,38 @@
 		} else {
 			echo "<br>";
 			echo "Error (asc_assign) updating record: " . mysqli_error($conn);
+		}
+
+		// Check if all units are destroyed
+		$sql4 = "SELECT SQL_NO_CACHE * FROM asc_unitstatus WHERE playerid=".$pid." AND active_bid=1 AND gameid=".$gameid." AND round=".$currRound." AND unit_status NOT LIKE '%destroyed%'";
+		echo "Statement: " . $sql4;
+		$result4 = mysqli_query($conn, $sql4);
+		if (mysqli_num_rows($result4) > 0) {
+			// There are units left that are not destroyed so the player is still in game
+			$sql7 = "UPDATE asc_player SET active_ingame=1 WHERE playerid=".$pid;
+			echo "Statement: " . $sql7;
+
+			if (mysqli_query($conn, $sql7)) {
+				echo "<br>";
+				echo "Record (player active in game) updated successfully";
+				mysqli_commit($conn);
+			} else {
+				echo "<br>";
+				echo "Error (player active in game) updating record: " . mysqli_error($conn);
+			}
+		} else {
+			// All units of this player in this game have been destroyed
+			$sql5 = "UPDATE asc_player SET active_ingame=0 WHERE playerid=".$pid;
+			echo "Statement: " . $sql5;
+
+			if (mysqli_query($conn, $sql5)) {
+				echo "<br>";
+				echo "Record (player active in game) updated successfully";
+				mysqli_commit($conn);
+			} else {
+				echo "<br>";
+				echo "Error (player active in game) updating record: " . mysqli_error($conn);
+			}
 		}
 	} else {
 		echo "WAITING FOR SAVE OPERATION...<br>";

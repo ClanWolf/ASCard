@@ -4,10 +4,10 @@ var minSize = 20;
 var maxSize = 60;
 
 var fontsizeLabelBigFactor = 1.8;
-var fontsizeLabelthinFactor = 0.6;
-var fontsizeLabelthinSmallFactor = 0.6;
+var fontsizeLabelthinFactor = 0.8;
+var fontsizeLabelthinSmallFactor = 0.8;
 var fontsizeValueFactor = 1.2;
-var fontsizeValueThinFactor = 0.6;
+var fontsizeValueThinFactor = 0.7;
 var fontsizeCircleFactor = 0.85;
 
 var fontsizeLabelBig = fontsizeLabel * fontsizeLabelBigFactor;
@@ -253,6 +253,7 @@ function readCircles2(index, a_max, s_max, mv_bt_id, f_bt_id) {
 	}
 
 	document.getElementById('unitstatusimagemenu').src=unitstatusimage;
+	document.getElementById('unitstatusimageoverview').src=unitstatusimage;
 
 	if (mvmnt == 9) {
 		wpnsf = 1;

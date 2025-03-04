@@ -113,6 +113,7 @@
 			}
 		}
 
+		// Update player
 		$sqlUpdatePlayerRound = "";
 		$sqlUpdatePlayerRound = $sqlUpdatePlayerRound . "UPDATE asc_player ";
 		$sqlUpdatePlayerRound = $sqlUpdatePlayerRound . "SET ";
@@ -124,13 +125,33 @@
 		if (mysqli_query($conn, $sqlUpdatePlayerRound)) {
 			echo "<br>";
 			echo "Record (asc_player) updated successfully<br>";
+		} else {
+			echo "<br>";
+			echo "Error (asc_player) updating record: " . mysqli_error($conn) . "<br>";
+			echo "<script>top.window.location = './gui_message_round_reset_error_01.php'</script>";
+			die('ERROR 7');
+		}
+
+		// Update Assignment
+		$sqlUpdateAssignment = "";
+		$sqlUpdateAssignment = $sqlUpdateAssignment . "UPDATE asc_assign ";
+		$sqlUpdateAssignment = $sqlUpdateAssignment . "SET ";
+		$sqlUpdateAssignment = $sqlUpdateAssignment . "round_moved=0, ";
+		$sqlUpdateAssignment = $sqlUpdateAssignment . "round_fired=0 ";
+		$sqlUpdateAssignment = $sqlUpdateAssignment . "where playerid=".$pid.";";
+
+		echo $sqlUpdateAssignment;
+
+		if (mysqli_query($conn, $sqlUpdateAssignment)) {
+			echo "<br>";
+			echo "Record (assignment) updated successfully<br>";
 			mysqli_commit($conn);
 
 			echo "<script>top.window.location = './gui_message_round_reset.php'</script>";
 			die('ERROR 6');
 		} else {
 			echo "<br>";
-			echo "Error (asc_player) updating record: " . mysqli_error($conn) . "<br>";
+			echo "Error (assignment) updating record: " . mysqli_error($conn) . "<br>";
 			echo "<script>top.window.location = './gui_message_round_reset_error_01.php'</script>";
 			die('ERROR 7');
 		}

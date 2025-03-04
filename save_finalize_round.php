@@ -103,37 +103,37 @@
 			}
 		}
 
-		// select the units that are active bid and in the players formations AND have !!!! NOT !!!! moved and fired
-		// To list them in the error message
-		$allActiveUnitIDsNOTFinished = "";
-		$sql_allActiveUnitIDsNOTFinished = "";
-		$sql_allActiveUnitIDsNOTFinished = $sql_allActiveUnitIDsNOTFinished . "SELECT SQL_NO_CACHE * ";
-		$sql_allActiveUnitIDsNOTFinished = $sql_allActiveUnitIDsNOTFinished . "FROM asc_assign a, asc_unit u, asc_pilot p, asc_unitstatus s ";
-		$sql_allActiveUnitIDsNOTFinished = $sql_allActiveUnitIDsNOTFinished . "WHERE formationid in (".$formationIds.") ";
-		$sql_allActiveUnitIDsNOTFinished = $sql_allActiveUnitIDsNOTFinished . "AND a.unitid = u.unitid ";
-		$sql_allActiveUnitIDsNOTFinished = $sql_allActiveUnitIDsNOTFinished . "AND a.unitid = s.unitid ";
-		$sql_allActiveUnitIDsNOTFinished = $sql_allActiveUnitIDsNOTFinished . "AND s.round = ".$currentRound." "; // round
-		$sql_allActiveUnitIDsNOTFinished = $sql_allActiveUnitIDsNOTFinished . "AND s.gameid = ".$gameid." "; // gameid
-		$sql_allActiveUnitIDsNOTFinished = $sql_allActiveUnitIDsNOTFinished . "AND a.pilotid = p.pilotid ";
-		$sql_allActiveUnitIDsNOTFinished = $sql_allActiveUnitIDsNOTFinished . "AND s.unit_status != 'destroyed' ";
-		$sql_allActiveUnitIDsNOTFinished = $sql_allActiveUnitIDsNOTFinished . "AND s.active_bid = 1 ";
-		$sql_allActiveUnitIDsNOTFinished = $sql_allActiveUnitIDsNOTFinished . "AND (a.round_moved = 0 OR a.round_fired = 0) ";
-		echo $sql_allActiveUnitIDsNOTFinished;
-		$result_allActiveUnitIDsNOTFinished = mysqli_query($conn, $sql_allActiveUnitIDsNOTFinished);
-		if (mysqli_num_rows($result_allActiveUnitIDsNOTFinished) > 0) {
-			while($row_allActiveUnitIDsNOTFinished = mysqli_fetch_assoc($result_allActiveUnitIDsNOTFinished)) {
-				$formationId = $row_allActiveUnitIDsNOTFinished["formationid"];
-				$unitId = $row_allActiveUnitIDsNOTFinished["unitid"];
-				$unitModel = $row_allActiveUnitIDsNOTFinished["as_model"];
-				$pilotName = $row_allActiveUnitIDsNOTFinished["name"];
-
-				if ($allActiveUnitIDsNOTFinished == "") {
-					$allActiveUnitIDsNOTFinished = $allActiveUnitIDsNOTFinished.$formationId."|".$unitId."|".$unitModel."|".$pilotName;
-				} else {
-					$allActiveUnitIDsNOTFinished = $allActiveUnitIDsNOTFinished.",".$formationId."|".$unitId."|".$unitModel."|".$pilotName;
-				}
-			}
-		}
+//		// select the units that are active bid and in the players formations AND have !!!! NOT !!!! moved and fired
+//		// To list them in the error message
+//		$allActiveUnitIDsNOTFinished = "";
+//		$sql_allActiveUnitIDsNOTFinished = "";
+//		$sql_allActiveUnitIDsNOTFinished = $sql_allActiveUnitIDsNOTFinished . "SELECT SQL_NO_CACHE * ";
+//		$sql_allActiveUnitIDsNOTFinished = $sql_allActiveUnitIDsNOTFinished . "FROM asc_assign a, asc_unit u, asc_pilot p, asc_unitstatus s ";
+//		$sql_allActiveUnitIDsNOTFinished = $sql_allActiveUnitIDsNOTFinished . "WHERE formationid in (".$formationIds.") ";
+//		$sql_allActiveUnitIDsNOTFinished = $sql_allActiveUnitIDsNOTFinished . "AND a.unitid = u.unitid ";
+//		$sql_allActiveUnitIDsNOTFinished = $sql_allActiveUnitIDsNOTFinished . "AND a.unitid = s.unitid ";
+//		$sql_allActiveUnitIDsNOTFinished = $sql_allActiveUnitIDsNOTFinished . "AND s.round = ".$currentRound." "; // round
+//		$sql_allActiveUnitIDsNOTFinished = $sql_allActiveUnitIDsNOTFinished . "AND s.gameid = ".$gameid." "; // gameid
+//		$sql_allActiveUnitIDsNOTFinished = $sql_allActiveUnitIDsNOTFinished . "AND a.pilotid = p.pilotid ";
+//		$sql_allActiveUnitIDsNOTFinished = $sql_allActiveUnitIDsNOTFinished . "AND s.unit_status != 'destroyed' ";
+//		$sql_allActiveUnitIDsNOTFinished = $sql_allActiveUnitIDsNOTFinished . "AND s.active_bid = 1 ";
+//		$sql_allActiveUnitIDsNOTFinished = $sql_allActiveUnitIDsNOTFinished . "AND (a.round_moved = 0 OR a.round_fired = 0) ";
+//		echo $sql_allActiveUnitIDsNOTFinished;
+//		$result_allActiveUnitIDsNOTFinished = mysqli_query($conn, $sql_allActiveUnitIDsNOTFinished);
+//		if (mysqli_num_rows($result_allActiveUnitIDsNOTFinished) > 0) {
+//			while($row_allActiveUnitIDsNOTFinished = mysqli_fetch_assoc($result_allActiveUnitIDsNOTFinished)) {
+//				$formationId = $row_allActiveUnitIDsNOTFinished["formationid"];
+//				$unitId = $row_allActiveUnitIDsNOTFinished["unitid"];
+//				$unitModel = $row_allActiveUnitIDsNOTFinished["as_model"];
+//				$pilotName = $row_allActiveUnitIDsNOTFinished["name"];
+//
+//				if ($allActiveUnitIDsNOTFinished == "") {
+//					$allActiveUnitIDsNOTFinished = $allActiveUnitIDsNOTFinished.$formationId."|".$unitId."|".$unitModel."|".$pilotName;
+//				} else {
+//					$allActiveUnitIDsNOTFinished = $allActiveUnitIDsNOTFinished.",".$formationId."|".$unitId."|".$unitModel."|".$pilotName;
+//				}
+//			}
+//		}
 
 		if ($allActiveUnitsCount > 0 && $allActiveUnitsCount == $allActiveUnitsFinishedCount) {
 			// all Units did move and fired in this round and the round can be finalized
@@ -253,7 +253,7 @@
 							if (mysqli_query($conn, $sqlInsertNewUnitStatus)) {
 								echo "<br>";
 								echo "Record unitstatus inserted successfully<br>";
-								mysqli_commit($conn);
+								//mysqli_commit($conn);
 							} else {
 								echo "<br>";
 								echo "Error unitstatus insert record: " . mysqli_error($conn) . "<br>";
@@ -266,7 +266,7 @@
 							if (mysqli_query($conn, $sqlInsertNewUnitStatusArchive)) {
 								echo "<br>";
 								echo "Record unitstatus archive inserted successfully<br>";
-								mysqli_commit($conn);
+								//mysqli_commit($conn);
 							} else {
 								echo "<br>";
 								echo "Error unitstatus archive insert record: " . mysqli_error($conn) . "<br>";
@@ -288,7 +288,7 @@
 					if (mysqli_query($conn, $sqlUpdateUnitMovementFiresStatus)) {
 						echo "<br>";
 						echo "Record (asc_assign) updated successfully<br>";
-						mysqli_commit($conn);
+						//mysqli_commit($conn);
 					} else {
 						echo "<br>";
 						echo "Error (asc_assign) updating record: " . mysqli_error($conn) . "<br>";
@@ -322,7 +322,8 @@
 				die('ERROR 4');
 			}
 		} else {
-			echo "<script>top.window.location = './gui_message_round_finalized_error_02.php?units=".$allActiveUnitIDsNOTFinished."'</script>";
+			// echo "<script>top.window.location = './gui_message_round_finalized_error_02.php?units=".$allActiveUnitIDsNOTFinished."'</script>";
+			echo "<script>top.window.location = './gui_message_round_finalized_error_02.php'</script>";
 			die('ERROR 5');
 		}
 	}

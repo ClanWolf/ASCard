@@ -171,16 +171,22 @@
 	mysqli_free_result($result_asc_playerround);
 
 	// Check for current game if rounds are out of sync
-	$sql_asc_playerroundsingame = "SELECT SQL_NO_CACHE round FROM asc_player WHERE gameid = " . $GAMEID . ";";
+	$sql_asc_playerroundsingame = "SELECT SQL_NO_CACHE * FROM asc_player WHERE gameid = " . $GAMEID . " AND active_ingame=1;";
 	$result_asc_playerroundsingame = mysqli_query($conn, $sql_asc_playerroundsingame);
 	if (mysqli_num_rows($result_asc_playerroundsingame) > 0) {
-		$lastGameId = -1;
+		$lastGameRoundId = -1;
 		while($row = mysqli_fetch_assoc($result_asc_playerroundsingame)) {
-			$cgid = $row['round'];
-			if ($lastGameId != -1 && $lastGameId != $cgid) {
-				$ROUNDSOUTOFSYNC = true;
+			//$currentGamePlayerId = $row['playerid'];
+			$currentGameRoundId = $row['round'];
+			$currentGameBidPV = $row['bid_pv'];
+			$currentActiveInGame = $row['active_ingame'];
+			if ($lastGameRoundId != -1 && $lastGameRoundId != $currentGameRoundId) {
+				if ($currentGameBidPV > -1 // Check if the current user has active bids in game
+				&& $currentActiveInGame) { // Check if the user to check still has units in the game
+					$ROUNDSOUTOFSYNC = true;
+				}
 			}
-			$lastGameId = $cgid;
+			$lastGameRoundId = $currentGameRoundId;
 		}
 	}
 

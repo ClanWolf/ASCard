@@ -39,7 +39,7 @@ session_start();
 	$deleteunit = isset($_GET["dm"]) ? $_GET["dm"] : "";
 	$togglebid = isset($_GET["activebid"]) ? $_GET["activebid"] : "";
 
-	if ($deleteunit=="1") {
+	if ($deleteunit == "1") {
 		$unitid = isset($_GET["unitid"]) ? $_GET["unitid"] : "";
 		$pilotid = isset($_GET["pilotid"]) ? $_GET["pilotid"] : "";
 
@@ -99,7 +99,11 @@ session_start();
 			echo "Error: " . $sqlselectoverallpv . "<br>" . mysqli_error($conn);
 		}
 
-		$sqlstoreoverallpv = "UPDATE asc_player set bid_pv=".$overallpv.", bid_tonnage=".$overalltonnage." WHERE playerid = " . $pid . ";";
+		if ($overallpv == -1) {
+			$sqlstoreoverallpv = "UPDATE asc_player set bid_pv=".$overallpv.", bid_tonnage=".$overalltonnage.", active_ingame=0 WHERE playerid = " . $pid . ";";
+		} else {
+			$sqlstoreoverallpv = "UPDATE asc_player set bid_pv=".$overallpv.", bid_tonnage=".$overalltonnage.", active_ingame=1 WHERE playerid = " . $pid . ";";
+		}
 		if (mysqli_query($conn, $sqlstoreoverallpv)) {
 			// Success
 			//echo "Error: " . $sqlstoreoverallpv . "<br>";
@@ -148,15 +152,22 @@ session_start();
 	}
 
 	function textTruncate($text, $chars=25) {
-        if (strlen($text) <= $chars) {
-            return $text;
-        }
-        $text = $text." ";
-        $text = substr($text,0,$chars);
-        //$text = substr($text,0,strrpos($text,' '));
-        $text = $text."...";
-        return $text;
-    }
+		if (strpos($text, " | ") !== false) {
+			$parts = explode(" | ", $text);
+		}
+		$text = $parts[1];
+
+		if (strlen($text) <= $chars) {
+			return $text;
+		}
+		$text = $text." ";
+        $textb = mb_convert_encoding($text, 'UTF-8', mb_list_encodings());
+		$textc = html_entity_decode($textb, ENT_QUOTES | ENT_HTML5, 'UTF-8');
+		$text = mb_substr($textc,0,$chars,'ASCII');
+		$text = $text."...";
+
+		return $text;
+	}
 ?>
 
 <!DOCTYPE html>
@@ -276,7 +287,8 @@ session_start();
         });
 		function finalizeRound(playerId) {
 			var url="./save_finalize_round.php?pid=" + playerId;
-			window.frames["saveframe"].location.replace(url);
+			//window.frames["saveframe"].location.replace(url);
+			window.location.href = url;
 		}
 	</script>
 
@@ -304,7 +316,6 @@ session_start();
 				<td style="width:5px;">&nbsp;</td>
 				<td nowrap onclick="location.href='./gui_select_unit.php'" width="<?php echo $buttonWidth ?>"><div class='unitselect_button_active'><a href='./gui_select_unit.php'>ROSTER</a><br><span style='font-size:16px;'>Choose a unit</span></div></td>
 				<td style="width:5px;">&nbsp;</td>
-
 <?php
 	if ($playMode) {
 		echo "				<td nowrap onclick=\"location.href='./gui_select_formation.php'\" width=".$buttonWidth."><div class='unitselect_button_normal'><a href='./gui_select_formation.php'>CHALLENGE</a><br><span style='font-size:16px;'>Batchall & bidding</span></div></td><td style='width:5px;'>&nbsp;</td>\n";
@@ -319,7 +330,6 @@ session_start();
 		}
 	}
 ?>
-
 				<td nowrap onclick="location.href='./gui_edit_option.php'" width="<?php echo $buttonWidth ?>"><div class='unitselect_button_normal'><a href='./gui_edit_option.php'>OPTIONS</a><br><span style='font-size:16px;'>Change options</span></div></td>
 				<td style="width:5px;">&nbsp;</td>
 				<td nowrap onclick="location.href='gui_show_playerlist.php'" style="width: 60px;" nowrap width="60px" style="background: rgba(50,50,50,1.0); text-align: center; vertical-align: middle;"><img src='./images/player/<?=$pimage?>' height='60px' style='height:auto;display:block;' width='60px' height='60px'></td>
@@ -346,7 +356,6 @@ session_start();
 		</tr>
 		<tr>
 <?php
-
 	$addUnitToFormationLinkArray = array();
 	$assignUnitToFormationLinkArray = array();
 	$unitsInAllFormations = array();
@@ -364,10 +373,16 @@ session_start();
 	if ($stmtFormations->execute()) {
 		$resFormations = $stmtFormations->get_result();
 
+		$formationind = 0;
 		while ($rowFormation = $resFormations->fetch_assoc()) {
 			$formationidSelected = $rowFormation['formationid'];
 			$factionidSelected = $rowFormation['factionid'];
 			$formationnameSelected = $rowFormation['formationname'];
+
+			$tonnageformation[$formationind] = 0;
+			$pvformation[$formationind] = 0;
+			$tonnageformationbid[$formationind] = 0;
+			$pvformationbid[$formationind] = 0;
 
 			// Select faction logo
 			if (!($stmtFactionLogo = $conn->prepare("SELECT SQL_NO_CACHE * FROM asc_faction where factionid = ".$factionidSelected." ORDER BY factionid;"))) {
@@ -385,7 +400,24 @@ session_start();
 
 			$sql_asc_checkformationassignments = "SELECT SQL_NO_CACHE * FROM asc_assign where formationid=".$formationidSelected.";";
 			$result_asc_checkformationassignments = mysqli_query($conn, $sql_asc_checkformationassignments);
-			if (mysqli_num_rows($result_asc_checkformationassignments) > 0) {
+
+			$formationsFound = 0;
+			$activeUnitsFound = 0;
+			foreach($result_asc_checkformationassignments as $rowCheckFormationAssignments) {
+			// while ($rowCheckFormationAssignments = $result_asc_checkformationassignments->fetch_assoc()) {
+				$formationsFound = $formationsFound + 1;
+				$cUnitId = $rowCheckFormationAssignments['unitid'];
+				$sql_checkactiveunits = "SELECT SQL_NO_CACHE * FROM asc_unitstatus where unitid=".$cUnitId." AND gameid=".$gid." AND round=".$CURRENTROUND;
+				$result_checkactiveunits = mysqli_query($conn, $sql_checkactiveunits);
+				while ($row_checkactiveunits = $result_checkactiveunits->fetch_assoc()) {
+					$uIsActiveBid = $row_checkactiveunits['active_bid'];
+					if ($uIsActiveBid == 1) {
+						$activeUnitsFound = $activeUnitsFound + 1;
+					}
+				}
+			}
+
+			if ($formationsFound > 0 && $activeUnitsFound > 0) {
 				echo "			<td nowrap style='width:270px;height:30px;' onclick='location.href=\"gui_play_unit.php?formationid=".$formationidSelected."\"' class='formationselect_button_normal'>\n";
 				echo "				<table style='width:100%;' cellspacing=0 cellpadding=0>\n";
 				echo "					<tr>\n";
@@ -412,7 +444,8 @@ session_start();
 			$unitsInSingleFormation = array();
 			$c = 0;
 
-			while ($rowUnitAssignment = $result_asc_checkformationassignments->fetch_assoc()) {
+			foreach($result_asc_checkformationassignments as $rowUnitAssignment) {
+			// while ($rowUnitAssignment = $result_asc_checkformationassignments->fetch_assoc()) {
 
 				$c++;
 				$assignedUnitID = $rowUnitAssignment['unitid'];
@@ -458,10 +491,14 @@ session_start();
 
 						$pointvaluetotal = $pointvaluetotal + intval($unitpointvalue);
 						$tonnagetotal = $tonnagetotal + intval($unittonnage);
+						$pvformation[$formationind] = $pvformation[$formationind] + intval($unitpointvalue);
+						$tonnageformation[$formationind] = $tonnageformation[$formationind] + intval($unittonnage);
 
 						if ($activebid == "1") {
 							$pointvaluetotalactivebid = $pointvaluetotalactivebid + intval($unitpointvalue);
 							$tonnagetotalactivebid = $tonnagetotalactivebid + intval($unittonnage);
+							$pvformationbid[$formationind] = $pvformationbid[$formationind] + intval($unitpointvalue);
+							$tonnageformationbid[$formationind] = $tonnageformationbid[$formationind] + intval($unittonnage);
 						}
 
 						$unitRoundStatusImage = "";
@@ -552,20 +589,22 @@ session_start();
 					}
 				}
 
-				$unitDetailString = $unitDetailString."			<td nowrap onclick='location.href=\"gui_play_unit.php?formationid=".$formationidSelected."&chosenunit=".$c."\"' style='background-color:".$bidcolor."' class='unitselect_button_active' align='right' valign='center'><div style='display:inline-block;height:100%;vertical-align:middle;'><img style='vertical-align:middle;' src='".$unitstatusimage."' height='24px'><br><span style='font-size:14px;'>".$numStr."</span></div></td>\n";
+				if ($activebid == "1") {
+					$unitDetailString = $unitDetailString."			<td nowrap onclick='location.href=\"gui_play_unit.php?formationid=".$formationidSelected."&chosenunit=".$c."\"' style='background-color:".$bidcolor."' class='unitselect_button_active' align='right' valign='center'><div style='display:inline-block;height:100%;vertical-align:middle;'><img style='vertical-align:middle;' src='".$unitstatusimage."' height='24px'><br><span style='font-size:14px;'>".$numStr."</span></div></td>\n";
+				} else {
+					$unitDetailString = $unitDetailString."			<td nowrap style='background-color:".$bidcolor."' class='unitselect_button_active' align='right' valign='center'><div style='display:inline-block;height:100%;vertical-align:middle;'><img style='vertical-align:middle;' src='".$unitstatusimage."' height='24px'><br><span style='font-size:14px;'>".$numStr."</span></div></td>\n";
+				}
 				$unitDetailString = $unitDetailString."			<td nowrap style='width:100%;background-color:".$bidcolor."' class='unitselect_button_active'>\n";
-				$unitDetailString = $unitDetailString."				<table width='100%' cellspacing=0 cellpadding=0 border=0px>\n";
+				$unitDetailString = $unitDetailString."				<table width='100%' height='100%' cellspacing=0 cellpadding=0 border=0px>\n";
 				$unitDetailString = $unitDetailString."					<tr>\n";
 
 				if ($activebid == "1") {
-					$unitDetailString = $unitDetailString."						<td nowrap onclick='location.href=\"gui_play_unit.php?formationid=".$formationidSelected."&chosenunit=".$c."\"' width='99%' align='left' style='color:#AAAAAA;background-color:".$bidcolor."text-align:left;'><span style='font-size:24px;'>";
+					$unitDetailString = $unitDetailString."						<td nowrap onclick='location.href=\"gui_play_unit.php?formationid=".$formationidSelected."&chosenunit=".$c."\"' width='99%' align='left' valign='bottom' style='color:#AAAAAA;background-color:".$bidcolor."text-align:left;'><span style='font-size:24px;'>";
 				} else {
-					$unitDetailString = $unitDetailString."						<td nowrap width='99%' align='left' style='color:#AAAAAA;background-color:".$bidcolor."text-align:left;overflow:hidden;white-space:nowrap;text-overflow:ellipsis'><span style='font-size:24px;'>";
+					$unitDetailString = $unitDetailString."						<td nowrap width='99%' align='left' valign='bottom' style='color:#AAAAAA;background-color:".$bidcolor."text-align:left;overflow:hidden;white-space:nowrap;text-overflow:ellipsis'><span style='font-size:26px;'>";
 				}
-				$unitDetailString = $unitDetailString."						<img src='./images/ranks/".$factionidSelected."/".$pilotrank.".png' width='16px' height='16px'>";
-				$unitDetailString = $unitDetailString."						".$pilotname."</span><span style='font-weight:normal;font-size:20px;color:#ffc677;'> ".$unitpointvalue."/".$unittonnage."t</span></span>\n";
-				// $unitDetailString = $unitDetailString."							<br><span style='font-size:15px;'>".textTruncate($unitchassisname, 18)."</span>\n";
-				$unitDetailString = $unitDetailString."							<br><span style='font-size:16px;'>".$unitchassisname."</span>\n";
+				$unitDetailString = $unitDetailString."						".textTruncate($unitchassisname, 15)."</span><span style='font-weight:normal;font-size:20px;color:#ffc677;'> ".$unitpointvalue."/".$unittonnage."t</span>\n";
+				$unitDetailString = $unitDetailString."						<br><div style='font-size:18px;top:0px;bottom:0px;left:0px;right:0px;'><img style='vertical-align:bottom;padding-top:3px' src='./images/ranks/".$factionidSelected."/".$pilotrank.".png' width='16px' height='16px'>&nbsp;&nbsp;".$pilotname."</div>\n";
 				$unitDetailString = $unitDetailString."						</td>\n";
 
 				if ($playMode) {
@@ -593,12 +632,13 @@ session_start();
 				array_push($unitsInSingleFormation, $unitDetailString);
 			}
 			array_push($unitsInAllFormations, $unitsInSingleFormation);
+			$formationind++;
 		}
 	}
 
 	if ($playMode) {
 		// FINALIZE ROUND
-		echo "  		<td nowrap onclick='javascript:finalizeRound(".$pid.");' id='FinalizeRoundButton' style='text-align:center;width:100px;background:rgba(81,125,37,1.0);' rowspan='2'><div style='color:#eee;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class='fas fa-redo'></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div></td>\n";
+		echo "  		<td nowrap onclick='javascript:finalizeRound(".$pid.");' id='FinalizeRoundButton' style='text-align:center;width:100px;background:rgba(81,125,37,1.0);' rowspan='3'><div style='color:#eee;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class='fas fa-redo'></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div></td>\n";
 	}
 
 	echo "		</tr>\n";
@@ -634,11 +674,21 @@ session_start();
 		echo "			</td>\n";
 	}
 	echo "		</tr>\n";
+
+
+
+
 	echo "		<tr>\n";
-	echo "			<td colspan='4' style='background-color:#333333;' align='center' valign='top'>";
-	echo "				<span style='font-size:20;color:#eeeeee;'>Bid:&nbsp;</span><span style='font-size:20;color:#ffc677;'>PV ".$pointvaluetotalactivebid."</span><span style='font-size:20;color:#eeeeee;'>&nbsp;/&nbsp;</span><span style='font-size:20;color:#ffc677;'>".$tonnagetotalactivebid."t</span>";
-	echo "				<span style='font-size:20;color:#eeeeee;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>";
-	echo "				<span style='font-size:20;color:#eeeeee;'>Total:&nbsp;PV ".$pointvaluetotal."&nbsp;/&nbsp;".$tonnagetotal."t</span>";
+	echo "			<td colspan='1' style='background-color:#333333;padding:1px;vertical-align:middle;' align='left'><div style='display:inline-block;'><span style='font-size:18px;color:#eeeeee;'>BID:&nbsp;</span><span style='font-size:18px;color:#ffc677;'>PV ".$pvformationbid[0]."</span><span style='font-size:18px;color:#eeeeee;'>&nbsp;/&nbsp;</span><span style='font-size:18px;color:#ffc677;'>".$tonnageformationbid[0]."t</span><span style='font-size:18px;color:#eeeeee;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style='font-size:18px;color:#eeeeee;'>PV ".$pvformation[0]."&nbsp;/&nbsp;".$tonnageformation[0]."t</span></div></td>\n";
+	echo "			<td colspan='1' style='background-color:#333333;padding:1px;vertical-align:middle;' align='left'><div style='display:inline-block;'><span style='font-size:18px;color:#eeeeee;'>BID:&nbsp;</span><span style='font-size:18px;color:#ffc677;'>PV ".$pvformationbid[1]."</span><span style='font-size:18px;color:#eeeeee;'>&nbsp;/&nbsp;</span><span style='font-size:18px;color:#ffc677;'>".$tonnageformationbid[1]."t</span><span style='font-size:18px;color:#eeeeee;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style='font-size:18px;color:#eeeeee;'>PV ".$pvformation[1]."&nbsp;/&nbsp;".$tonnageformation[1]."t</span></div></td>\n";
+	echo "			<td colspan='1' style='background-color:#333333;padding:1px;vertical-align:middle;' align='left'><div style='display:inline-block;'><span style='font-size:18px;color:#eeeeee;'>BID:&nbsp;</span><span style='font-size:18px;color:#ffc677;'>PV ".$pvformationbid[2]."</span><span style='font-size:18px;color:#eeeeee;'>&nbsp;/&nbsp;</span><span style='font-size:18px;color:#ffc677;'>".$tonnageformationbid[2]."t</span><span style='font-size:18px;color:#eeeeee;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style='font-size:18px;color:#eeeeee;'>PV ".$pvformation[2]."&nbsp;/&nbsp;".$tonnageformation[2]."t</span></div></td>\n";
+	echo "		</tr>\n";
+
+	echo "		<tr>\n";
+	echo "			<td colspan='4' style='background-color:#333333;padding:1px;vertical-align:middle;' align='center'>";
+	echo "				<span style='font-size:18px;color:#eeeeee;'>Bid:&nbsp;</span><span style='font-size:18px;color:#ffc677;'>PV ".$pointvaluetotalactivebid."</span><span style='font-size:18px;color:#eeeeee;'>&nbsp;/&nbsp;</span><span style='font-size:18px;color:#ffc677;'>".$tonnagetotalactivebid."t</span>";
+	echo "				<span style='font-size:18px;color:#eeeeee;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>";
+	echo "				<span style='font-size:18px;color:#eeeeee;'>TOTAL:&nbsp;PV ".$pointvaluetotal."&nbsp;/&nbsp;".$tonnagetotal."t</span>";
 	echo "			</td>\n";
 	echo "		</tr>\n";
 

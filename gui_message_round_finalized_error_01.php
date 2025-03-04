@@ -179,7 +179,7 @@ session_start();
 	</div>
 
 	<script language="JavaScript" type="text/javascript">
-		setTimeout("window.history.go(-1)",4000);
+		setTimeout("window.history.go(-1)",2500);
 	</script>
 </body>
 
