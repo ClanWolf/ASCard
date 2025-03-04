@@ -228,6 +228,7 @@ a:hover {
 	text-align: center;
 	color:#ff0000;
 	font-size: 36px;
+	pointer-events:none;
 	z-index:2400;
 }
 #destroyedIndicator {

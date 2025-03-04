@@ -431,7 +431,11 @@ if (!$playMode) {
 				}
 				echo "						<td width='98%' style='text-align:center;'>\n";
 				echo "							<a href='gui_play_unit.php?formationid=".$formationidSelected."'>".$formationnameSelected."</a>\n";
-				echo "							&nbsp;&nbsp;&nbsp;<span id='bidOverviewFormation".$formationind."'>(PV 10 / 100)</span>\n";
+				if (!$playMode) {
+					echo "							&nbsp;&nbsp;&nbsp;<span id='bidOverviewFormation".$formationind."'>&nbsp;</span>\n";
+				} else {
+					echo "							&nbsp;&nbsp;&nbsp;<span id='bidOverviewFormation".$formationind."'>(PV 10 / 100)</span>\n";
+				}
 				echo "						</td>\n";
 				echo "						<td width='1%' style='text-align:right;'>\n";
 				echo "							<img src='./images/factions/".$factionlogo."' width='20px' style='border:1px solid #000000;'>\n";
@@ -445,7 +449,11 @@ if (!$playMode) {
 				echo "					<tr>\n";
 				echo "						<td nowrap width='99%' style='text-align:center;'>\n";
 				echo "							".$formationnameSelected."\n";
-				echo "							&nbsp;&nbsp;&nbsp;<span id='bidOverviewFormation".$formationind."'>(PV 10 / 100)</span>\n";
+				if (!$playMode) {
+					echo "							&nbsp;&nbsp;&nbsp;<span id='bidOverviewFormation".$formationind."'>&nbsp;</span>\n";
+				} else {
+					echo "							&nbsp;&nbsp;&nbsp;<span id='bidOverviewFormation".$formationind."'>(PV 10 / 100)</span>\n";
+				}
 				echo "						</td>\n";
 				echo "						<td width='1%' style='text-align:right;'>\n";
 				echo "							<img src='./images/factions/".$factionlogo."' width='20px' style='border:1px solid #000000;'>\n";

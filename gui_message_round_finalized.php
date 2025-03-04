@@ -30,6 +30,7 @@ session_start();
 	if (mysqli_num_rows($result_asc_playerround) > 0) {
 		while($row = mysqli_fetch_assoc($result_asc_playerround)) {
 			$CURRENTROUND = $row["round"];
+			$LASTOPENEDUNIT = $row["last_unit_opened"];
 		}
 	}
 ?>
@@ -179,7 +180,9 @@ session_start();
 	</div>
 
 	<script language="JavaScript" type="text/javascript">
-		setTimeout("window.history.go(-1)", 2500);
+<?php
+	echo "		setTimeout(\"location.replace('".$LASTOPENEDUNIT."')\", 2500);\n";
+?>
 	</script>
 
 </body>

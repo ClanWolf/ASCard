@@ -106,6 +106,15 @@
 	$array_USEDOVERHEAT = array();
 	$array_CURRENTTMM = array();
 
+	$sql_update_last_visited_unit = "UPDATE asc_player set last_unit_opened = '".$latestUnitUrl."' where playerid = ".$pid;
+	if (mysqli_query($conn, $sql_update_last_visited_unit)) {
+		// Success
+	} else {
+		// Error
+		echo "Error: " . $sql_update_last_visited_unit . "<br>" . mysqli_error($conn);
+		logMsg("Error: " . $sql_update_last_visited_unit . ": " . mysqli_error($conn));
+	}
+
 //	// Game
 //	// currentround
 //	$sql_asc_game = "SELECT SQL_NO_CACHE * FROM asc_game where gameid = 1;";

@@ -254,6 +254,11 @@ function readCircles2(index, a_max, s_max, mv_bt_id, f_bt_id) {
 
 	document.getElementById('unitstatusimagemenu').src=unitstatusimage;
 	document.getElementById('unitstatusimageoverview').src=unitstatusimage;
+	if (unitstatusstring == "destroyed") {
+		document.getElementById('pilotimageoverview').src="./images/skull.png";
+	} else {
+		document.getElementById('pilotimageoverview').src=pilotimage;
+	}
 
 	if (mvmnt == 9) {
 		wpnsf = 1;

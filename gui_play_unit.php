@@ -463,6 +463,8 @@ session_start();
 		$chosenUnitIndex = 1;
 	}
 
+	// Store latest unit opened
+	$latestUnitUrl = basename($_SERVER['REQUEST_URI']);
 	require('./db_getdata.php');
 
 	if ($array_ACTIVE_BID[$chosenUnitIndex] == 0) { // check if the chosen index is active bid. Advance if not
@@ -503,6 +505,7 @@ session_start();
 	echo "	var FCTL_PREP = $array_FRCTRL_PREP[$chosenUnitIndex];\n";
 	echo "	var MP_PREP = $array_MP_PREP[$chosenUnitIndex];\n";
 	echo "	var WPNS_PREP = $array_WPNS_PREP[$chosenUnitIndex];\n";
+	echo "	var pilotimage = '$array_PILOT_IMG_URL[$chosenUnitIndex]';\n";
 
 	if ($array_CV_ENGN_PREP[$chosenUnitIndex] != null) {
 		echo "	var CV_ENGN_PREP = $array_CV_ENGN_PREP[$chosenUnitIndex];\n";
@@ -846,31 +849,31 @@ session_start();
 			if ($item['active_bid'] == 1) {
 				if ($array_UNIT_DBID[$chosenUnitIndex] == $item['unitid']) {
 					echo "			<td onclick='location.href=\"gui_play_unit.php?formationid=".$array_PLAYER_FORMATION_IDS[$cc]."&chosenunit=".$count."\"' align='center' valign='top' style='background-color:#333333;padding:4px;border:2px solid #555;'>\n";
-					echo "				<img src='./images/chevron.png' width='40px'>\n";
+					if ($item['status'] != "destroyed") {
+						echo "				<img style='border:4px solid #111;' id='pilotimageoverview' src='./".$item['pilot_image']."' width='40px'>\n";
+					} else {
+						echo "				<img style='border:0px solid #111;' id='pilotimageoverview' src='./images/skull.png' width='40px'>\n";
+					}
+					echo "				<br><img src='./images/chevron.png' width='40px'>\n";
 					echo "				<br>".$sizeString."<br>\n";
 					echo "				<img id='unitstatusimageoverview' src='https://www.ascard.net/app/".$item["status_image"]."' width='40px'><br>\n";
 					echo "				<span style='display:inline-block;width:40px;align:center;'><img id='overviewcurrentunitstatus' style='display:block;margin-left:auto;margin-right:auto;height:auto;' src='".$currentPhaseButton."' width='20px'></span>\n";
 					//echo "				<br><div style='transform:rotate(90deg);width:60px;text-align:right;'>".$item['unit_number']."</div>\n";
 					echo "				<br>".$item['unit_number']."\n";
-					if ($item['status'] != "destroyed") {
-						echo "				<br><br><img src='./".$item['pilot_image']."' width='40px'>\n";
-					} else {
-						echo "				<br><br><img src='./images/skull.png' width='40px'>\n";
-					}
 					echo "			</td>\n";
 				} else {
 					echo "			<td onclick='location.href=\"gui_play_unit.php?formationid=".$array_PLAYER_FORMATION_IDS[$cc]."&chosenunit=".$count."\"' align='center' valign='top' style='background-color:#333333;padding:4px;border:2px solid #555;'>\n";
-					echo "				<img src='./images/chevron_empty.png' width='40px'>\n";
+					if ($item['status'] != "destroyed") {
+						echo "				<img style='border:4px solid #111;' src='./".$item['pilot_image']."' width='40px'>\n";
+					} else {
+						echo "				<img style='border:0px solid #111;' src='./images/skull.png' width='40px'>\n";
+					}
+					echo "				<br><img src='./images/chevron_empty.png' width='40px'>\n";
 					echo "				<br>".$sizeString."<br>\n";
 					echo "				<img src='https://www.ascard.net/app/".$item["status_image"]."' width='40px'><br>\n";
 					echo "				<span style='display:inline-block;width:40px;align:center;'><img style='display:block;margin-left:auto;margin-right:auto;height:auto;' src='".$imagestatuslnk."' width='20px'></span>\n";
 					//echo "				<br><div style='transform:rotate(90deg);width:60px;text-align:right;'>".$item['unit_number']."</div>\n";
 					echo "				<br>".$item['unit_number']."\n";
-					if ($item['status'] != "destroyed") {
-						echo "				<br><br><img src='./".$item['pilot_image']."' width='40px'>\n";
-					} else {
-						echo "				<br><br><img src='./images/skull.png' width='40px'>\n";
-					}
 					echo "			</td>\n";
 				}
 			}
