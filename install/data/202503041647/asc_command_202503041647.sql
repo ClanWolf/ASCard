@@ -10,4 +10,6 @@ INSERT INTO ascard.asc_command (playerid,factionid,`type`,commandname,commandbac
 	 (23,12,'custom','Commandname','Commandbackground','2025-01-22 21:56:43.0'),
 	 (24,2,'custom','Commandname','Commandbackground','2025-02-15 00:16:09.0');
 INSERT INTO ascard.asc_command (playerid,factionid,`type`,commandname,commandbackground,Updated) VALUES
-	 (25,9,'custom','Commandname','Commandbackground','2025-02-25 10:07:58.0');
+	 (25,9,'custom','Commandname','Commandbackground','2025-02-25 10:07:58.0'),
+	 (26,12,'custom','Commandname','Commandbackground','2025-03-01 16:35:02.0'),
+	 (27,8,'custom','Commandname','Commandbackground','2025-03-04 11:50:38.0');
