@@ -282,8 +282,8 @@
 					$savefired = 0;
 					if ($finalHeat == 4) {
 						// The unit is effectively shut down, set movement to Standstill and fire
-						$savemoved = 11;
-						$savefired = 11;
+						$savemoved = 1; // Immobilized
+						$savefired = 1; // HOLD fire
 					}
 
 					// Update fired and moved for unitid in asc_assign
