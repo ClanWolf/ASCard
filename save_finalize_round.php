@@ -220,19 +220,21 @@
 							//console.log("Fire 1: hold fire");
 							//console.log("Fire 2: fired");
 							if ($roundFired == 1) { // 1 = hold fire!
-								if ($final_ENGN == 1) {
-									$finalHeat = 1;
-								} else if ($final_ENGN == 2) {
+								// if ($final_ENGN == 1) {
+								// 	$finalHeat = 1;
+								// } else
+								if ($final_ENGN == 2) {
 									$finalHeat = 4;
 								} else {
 									$finalHeat = 0;
 								}
 							} else {
-								if ($final_ENGN == 1) {
-									if ($finalHeat < 1) {
-										$finalHeat = 1;
-									}
-								} else if ($final_ENGN == 2) {
+								// if ($final_ENGN == 1) {
+								// 	if ($finalHeat < 1) {
+								// 		$finalHeat = 1;
+								// 	}
+								// } else
+								if ($final_ENGN == 2) {
 									$finalHeat = 4;
 								}
 							}
