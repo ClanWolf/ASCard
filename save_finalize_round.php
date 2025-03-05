@@ -278,11 +278,19 @@
 						}
 					}
 
+					$savemoved = 0;
+					$savefired = 0;
+					if ($finalHeat == 4) {
+						// The unit is effectively shut down, set movement to Standstill and fire
+						$savemoved = 11;
+						$savefired = 11;
+					}
+
 					// Update fired and moved for unitid in asc_assign
 					$sqlUpdateUnitMovementFiresStatus = "";
 					$sqlUpdateUnitMovementFiresStatus = $sqlUpdateUnitMovementFiresStatus . "UPDATE asc_assign ";
 					$sqlUpdateUnitMovementFiresStatus = $sqlUpdateUnitMovementFiresStatus . "SET ";
-					$sqlUpdateUnitMovementFiresStatus = $sqlUpdateUnitMovementFiresStatus . "round_moved=0, round_fired=0 ";
+					$sqlUpdateUnitMovementFiresStatus = $sqlUpdateUnitMovementFiresStatus . "round_moved=".$savemoved.", round_fired=".$savefired." ";
 					$sqlUpdateUnitMovementFiresStatus = $sqlUpdateUnitMovementFiresStatus . "where unitid=".$unitId.";";
 
 					echo $sqlUpdateUnitMovementFiresStatus;
