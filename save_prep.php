@@ -64,6 +64,9 @@
 		if ($desc == "HT_PREP") {
 			$sql = "UPDATE asc_unitstatus SET heat_PREP=".$value." WHERE unitid=".$index." AND round=".$currentRound." AND gameid=".$gameid.";";
 		}
+		if ($desc == "HT_PREP_ENGINEHIT") {
+			$sql = "UPDATE asc_unitstatus SET heat_PREP_ENGINEHIT=".$value." WHERE unitid=".$index." AND round=".$currentRound." AND gameid=".$gameid.";";
+		}
 		echo $sql;
 
 		if (mysqli_query($conn, $sql)) {

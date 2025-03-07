@@ -1149,7 +1149,7 @@ if ($showDistancesHexes == 1) {
 								</td>
 								<td nowrap class="datalabel" width="15%" style="text-align: right;">&nbsp;&nbsp;&nbsp;HT:&nbsp;&nbsp;</td>
 								<td nowrap width="2%" valign="middle"><a style="padding-right:5px;" valign="middle" href="javascript:increaseHT_PREP();"><i class="fas fa-plus-square"></i></a></td>
-								<td nowrap class="datalabel_thin" width="2%" id="label_HT_PREP" align="center"><?= $array_HT_PREP[$chosenUnitIndex] ?></td>
+								<td nowrap class="datalabel_thin" width="2%" id="label_HT_PREP" align="center"><?= $array_HT_PREP[$chosenUnitIndex] + $array_HT_PREP_ENGINEHIT[$chosenUnitIndex] ?></td>
 								<td nowrap width="36%" style="text-align: right;" id="ht_field" class="datalabel_thin">
 									<label class="bigcheck"><input onchange="readCircles(<?= $array_UNIT_DBID[$chosenUnitIndex] ?>, <?= $array_A_MAX[$chosenUnitIndex] ?>, <?= $array_S_MAX[$chosenUnitIndex] ?>);" type="checkbox" class="bigcheck" name="H1" id="H1" value="yes"/><span class="bigcheck-target"></span></label>
 									<label class="bigcheck"><input onchange="readCircles(<?= $array_UNIT_DBID[$chosenUnitIndex] ?>, <?= $array_A_MAX[$chosenUnitIndex] ?>, <?= $array_S_MAX[$chosenUnitIndex] ?>);" type="checkbox" class="bigcheck" name="H2" id="H2" value="yes"/><span class="bigcheck-target"></span></label>
@@ -1299,7 +1299,7 @@ if ($showDistancesHexes == 1) {
 							<td nowrap rowspan="3" style="vertical-align: middle;" valign="middle" align="center" width="15px">
 								<div style="padding: 0 15 0 15;" id="phasebutton" name="phasebutton"><img id="phasebuttonimage" src=<?php echo "'$currentPhaseButton'"; ?> style='height:50px;'></div>
 							</td>
-							<td nowrap width="65%" class="datalabel_thin">
+							<td nowrap width="65%" id="movementcontainer" class="datalabel_thin">
 								<table cellspacing="2" cellpadding="0">
 									<tr>
 										<td align="center"><img src="./images/buttons/mov01.png" height='17px' style="border: 0px solid #000000;"></td>
@@ -1319,20 +1319,20 @@ if ($showDistancesHexes == 1) {
 							</td>
 							<td id="INFOMOVED" nowrap width="20%" class="datalabel_thin"></td>
 						</tr>
-						<tr style='margin:2px;height:2px;padding:2px;line-height:2px;font-size:2px;'><td colspan='2' style='margin:2px;height:2px;padding:2px;line-height:2px;font-size:2px;'><hr style='margin:2px;'></td></tr>
+						<tr id="INFOLINE" style='margin:2px;height:2px;padding:2px;line-height:2px;font-size:2px;'><td colspan='2' style='margin:2px;height:2px;padding:2px;line-height:2px;font-size:2px;'><hr style='margin:2px;'></td></tr>
 						<tr>
 							<td nowrap width="65%" id="firecontainer" class="datalabel_thin">
-							<table cellspacing="2" cellpadding="0">
-								<tr>
-									<td><label class='bigcheck'><input type='checkbox' onchange='readCircles2(<?= $array_UNIT_DBID[$chosenUnitIndex] ?>, <?= $array_A_MAX[$chosenUnitIndex] ?>, <?= $array_S_MAX[$chosenUnitIndex] ?>, -1, 1);' class='bigcheck' name='WF5_WEAPONSFIRED2' id='WF5_WEAPONSFIRED2' value='no'/><span class='bigcheck-target'></span></label>&nbsp;</td>
-									<td><label class='bigcheck'><input type='checkbox' onchange='readCircles2(<?= $array_UNIT_DBID[$chosenUnitIndex] ?>, <?= $array_A_MAX[$chosenUnitIndex] ?>, <?= $array_S_MAX[$chosenUnitIndex] ?>, -1, 2);' class='bigcheck' name='WF6_WEAPONSFIRED2' id='WF6_WEAPONSFIRED2' value='no'/><span class='bigcheck-target'></span></label>&nbsp;</td>
-									<td nowrap rowspan='2' class="datavalue" style="text-align: right;" align="right"><span style="font-family:'Pathway Gothic One',sans-serif;font-size:60%;text-transform:uppercase;color:#999;">&nbsp;&nbsp;&nbsp;WEAPONS</span></td>
-								</tr>
-								<tr>
-									<td align="center"><img src="./images/buttons/holdfire.png" height='17px' style="border: 0px solid #000000;"></td>
-									<td align="center"><img src="./images/buttons/fireweapons.png" height='17px' style="border: 0px solid #000000;"></td>
-								</tr>
-							</table>
+								<table cellspacing="2" cellpadding="0">
+									<tr>
+										<td><label class='bigcheck'><input type='checkbox' onchange='readCircles2(<?= $array_UNIT_DBID[$chosenUnitIndex] ?>, <?= $array_A_MAX[$chosenUnitIndex] ?>, <?= $array_S_MAX[$chosenUnitIndex] ?>, -1, 1);' class='bigcheck' name='WF5_WEAPONSFIRED2' id='WF5_WEAPONSFIRED2' value='no'/><span class='bigcheck-target'></span></label>&nbsp;</td>
+										<td><label class='bigcheck'><input type='checkbox' onchange='readCircles2(<?= $array_UNIT_DBID[$chosenUnitIndex] ?>, <?= $array_A_MAX[$chosenUnitIndex] ?>, <?= $array_S_MAX[$chosenUnitIndex] ?>, -1, 2);' class='bigcheck' name='WF6_WEAPONSFIRED2' id='WF6_WEAPONSFIRED2' value='no'/><span class='bigcheck-target'></span></label>&nbsp;</td>
+										<td nowrap rowspan='2' class="datavalue" style="text-align: right;" align="right"><span style="font-family:'Pathway Gothic One',sans-serif;font-size:60%;text-transform:uppercase;color:#999;">&nbsp;&nbsp;&nbsp;WEAPONS</span></td>
+									</tr>
+									<tr>
+										<td align="center"><img src="./images/buttons/holdfire.png" height='17px' style="border: 0px solid #000000;"></td>
+										<td align="center"><img src="./images/buttons/fireweapons.png" height='17px' style="border: 0px solid #000000;"></td>
+									</tr>
+								</table>
 							</td>
 							<td id="INFOFIRED" nowrap width="20%" class="datalabel_thin"></td>
 						</tr>
@@ -1685,7 +1685,7 @@ if ($showDistancesHexes == 1) {
 	$("#tagIndicator").hide();
 	$("#waterIndicator").hide();
 	$("#routedIndicator").hide();
-	setCircles(<?=$array_HT[$chosenUnitIndex]?>,<?=$array_A[$chosenUnitIndex]?>,<?=$array_S[$chosenUnitIndex]?>,<?=$array_ENGN[$chosenUnitIndex]?>,<?=$array_FRCTRL[$chosenUnitIndex]?>,<?=$array_MP[$chosenUnitIndex]?>,<?=$array_WPNS[$chosenUnitIndex]?>,<?=$array_CV_ENGN[$chosenUnitIndex]?>,<?=$array_CV_FRCTRL[$chosenUnitIndex]?>,<?=$array_CV_WPNS[$chosenUnitIndex]?>,<?=$array_CV_MOTV_A[$chosenUnitIndex]?>,<?=$array_CV_MOTV_B[$chosenUnitIndex]?>,<?=$array_CV_MOTV_C[$chosenUnitIndex]?>,<?=$array_USEDOVERHEAT[$chosenUnitIndex]?>,<?=$array_MVMT[$chosenUnitIndex]?>,<?=$array_WPNSFIRED[$chosenUnitIndex]?>,2,0,'<?=$array_UNIT_STATUSSTRING[$chosenUnitIndex]?>', <?=$array_NARCED[$chosenUnitIndex]?>, <?=$array_TAGED[$chosenUnitIndex]?>, <?=$array_WATER[$chosenUnitIndex]?>, <?=$array_ROUTED[$chosenUnitIndex]?>);
+	setCircles(<?=$array_HT[$chosenUnitIndex]?>,<?=$array_HT_PREP_ENGINEHIT[$chosenUnitIndex]?>,<?=$array_A[$chosenUnitIndex]?>,<?=$array_S[$chosenUnitIndex]?>,<?=$array_ENGN[$chosenUnitIndex]?>,<?=$array_FRCTRL[$chosenUnitIndex]?>,<?=$array_MP[$chosenUnitIndex]?>,<?=$array_WPNS[$chosenUnitIndex]?>,<?=$array_CV_ENGN[$chosenUnitIndex]?>,<?=$array_CV_FRCTRL[$chosenUnitIndex]?>,<?=$array_CV_WPNS[$chosenUnitIndex]?>,<?=$array_CV_MOTV_A[$chosenUnitIndex]?>,<?=$array_CV_MOTV_B[$chosenUnitIndex]?>,<?=$array_CV_MOTV_C[$chosenUnitIndex]?>,<?=$array_USEDOVERHEAT[$chosenUnitIndex]?>,<?=$array_MVMT[$chosenUnitIndex]?>,<?=$array_WPNSFIRED[$chosenUnitIndex]?>,2,0,'<?=$array_UNIT_STATUSSTRING[$chosenUnitIndex]?>', <?=$array_NARCED[$chosenUnitIndex]?>, <?=$array_TAGED[$chosenUnitIndex]?>, <?=$array_WATER[$chosenUnitIndex]?>, <?=$array_ROUTED[$chosenUnitIndex]?>);
 </script>
 
 <div id="footer"></div>

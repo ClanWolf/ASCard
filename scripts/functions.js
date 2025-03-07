@@ -4,9 +4,9 @@ var minSize = 20;
 var maxSize = 60;
 
 var fontsizeLabelBigFactor = 1.8;
-var fontsizeLabelthinFactor = 0.75;
-var fontsizeLabelthinSmallFactor = 0.75;
-var fontsizeValueFactor = 1.2;
+var fontsizeLabelthinFactor = 0.7;
+var fontsizeLabelthinSmallFactor = 0.7;
+var fontsizeValueFactor = 1.15;
 var fontsizeValueThinFactor = 0.7;
 var fontsizeCircleFactor = 0.7;
 
@@ -58,9 +58,7 @@ var sound_09 = null;
 var sound_SB = null;
 
 var sound_Batchall = null;
-
 var showingUnit = false;
-
 var skipTapSample = false;
 
 function setSize(name, value) {
@@ -186,12 +184,12 @@ function readCircles2(index, a_max, s_max, mv_bt_id, f_bt_id) {
 	if (e == 1) {
 		if (enginehit == 0) {
 			enginehit = 1;
-			h = h + 1;
+			// h = h + 1;
 		}
 	} else {
 		if (enginehit == 1) {
 			enginehit = 0;
-			h = h - 1;
+			// h = h - 1;
 		}
 	}
 	if (h > 4) {
@@ -200,9 +198,9 @@ function readCircles2(index, a_max, s_max, mv_bt_id, f_bt_id) {
 	if (h < 0) {
 		h = 0;
 	}
-	if (e == 1 && h == 0) {
-		h = 1;
-	}
+//	if (e == 1 && h == 0) {
+//		h = 1;
+//	}
 	if (e == 2) {
 		h = 4;
 	}
@@ -289,8 +287,26 @@ function readCircles2(index, a_max, s_max, mv_bt_id, f_bt_id) {
 		wpnsf = 0; // If weaponsfired was clicked without a movement specified, the weapons value will NOT be saved
 	}
 
-	setCircles(h, a, s, e, fc, mp, w, e_cv, fc_cv, w_cv, ma_cv, mb_cv, mc_cv, uov, mvmnt, wpnsf, tc_rangeValueReading, tc_partialCoverReading, unitstatusstring, NARCed, TAGed, WATERed, ROUTed);
-	var url="./save.php?index="+index+"&h="+h+"&a="+a+"&s="+s+"&e="+e+"&fc="+fc+"&mp="+mp+"&w="+w+"&e_cv="+e_cv+"&fc_cv="+fc_cv+"&w_cv="+w_cv+"&ma_cv="+ma_cv+"&mb_cv="+mb_cv+"&mc_cv="+mc_cv+"&mstat="+unitstatusimage+"&mstatstr="+unitstatusstring+"&uov="+uov+"&mvmnt="+mvmnt+"&wpnsf="+wpnsf+"&currentRound="+currentRound+"&narc="+NARCed+"&tag="+TAGed+"&water="+WATERed+"&routed="+ROUTed+"&gameid="+gameid;
+	var heat_PREP_ENGINEHIT_value = 0;
+	if (wpnsf == 0) {
+		document.getElementById('INFOFIRED').innerHTML = "";
+		if (e < 2) { heat_PREP_ENGINEHIT_value = updateHT_PREP_silent(e, false); }
+	} else if (wpnsf == 1) {
+		document.getElementById('INFOFIRED').innerHTML = "HOLD";
+		if (e < 2) { heat_PREP_ENGINEHIT_value = updateHT_PREP_silent(e, false); }
+	} else if (wpnsf == 2) {
+		document.getElementById('INFOFIRED').innerHTML = "FIRE";
+		if (e < 2) { heat_PREP_ENGINEHIT_value = updateHT_PREP_silent(e, true); }
+	}
+	//console.log("Saving heat_PREP_ENGINEHIT_value: " + heat_PREP_ENGINEHIT_value);
+
+	if (h == 4) { // shutdown
+		mvmnt = 2;
+		wpnsf = 1;
+	}
+
+	setCircles(h, heat_PREP_ENGINEHIT_value, a, s, e, fc, mp, w, e_cv, fc_cv, w_cv, ma_cv, mb_cv, mc_cv, uov, mvmnt, wpnsf, tc_rangeValueReading, tc_partialCoverReading, unitstatusstring, NARCed, TAGed, WATERed, ROUTed);
+	var url="./save.php?index="+index+"&h="+h+"&hpeh="+heat_PREP_ENGINEHIT_value+"&a="+a+"&s="+s+"&e="+e+"&fc="+fc+"&mp="+mp+"&w="+w+"&e_cv="+e_cv+"&fc_cv="+fc_cv+"&w_cv="+w_cv+"&ma_cv="+ma_cv+"&mb_cv="+mb_cv+"&mc_cv="+mc_cv+"&mstat="+unitstatusimage+"&mstatstr="+unitstatusstring+"&uov="+uov+"&mvmnt="+mvmnt+"&wpnsf="+wpnsf+"&currentRound="+currentRound+"&narc="+NARCed+"&tag="+TAGed+"&water="+WATERed+"&routed="+ROUTed+"&gameid="+gameid;
 	//alert(url);
 	window.frames['saveframe'].location.replace(url);
 
@@ -316,7 +332,7 @@ function setStructuralDamageCache(value) {
 }
 
 // SetCircles is called from gui_play_unit.php as well!
-function setCircles(h, a, s, e, fc, mp, w, e_cv, fc_cv, w_cv, ma_cv, mb_cv, mc_cv, uov, mvmnt, wpnsf, tc_rangeValueReading, tc_partialCoverReading, unitstatusstring, NARCed, TAGed, WATERed, ROUTed) {
+function setCircles(h, heat_PREP_ENGINEHIT_value, a, s, e, fc, mp, w, e_cv, fc_cv, w_cv, ma_cv, mb_cv, mc_cv, uov, mvmnt, wpnsf, tc_rangeValueReading, tc_partialCoverReading, unitstatusstring, NARCed, TAGed, WATERed, ROUTed) {
 
 	// $("#topmiddlebackground").hide();
 	$("#crippledIndicator").hide();
@@ -758,7 +774,7 @@ function setCircles(h, a, s, e, fc, mp, w, e_cv, fc_cv, w_cv, ma_cv, mb_cv, mc_c
 
 
 	if (showDistancesHexes == 1) {
-		var updatedmovementpointsgroundHexes =  Math.ceil(updatedmovementpointsground / 2);
+		var updatedmovementpointsgroundHexes = Math.ceil(updatedmovementpointsground / 2);
 		var updatedmovementpointsjumpHexes = Math.ceil(updatedmovementpointsjump / 2);
 
 		var mvstring = updatedmovementpointsgroundHexes + "<span style='font-size:0.6em;'>&#11043;</span>"; // Unicode for Hexagon
@@ -904,6 +920,19 @@ function setCircles(h, a, s, e, fc, mp, w, e_cv, fc_cv, w_cv, ma_cv, mb_cv, mc_c
 	if (h == 4) {
 		// Unit shutdown
 		$("#shutdownIndicator").show();
+		$("#movementcontainer").hide();
+		$("#firecontainer").hide();
+		$("#INFOMOVED").hide();
+		$("#INFOLINE").hide();
+		$("#INFOFIRED").hide();
+	} else {
+		// Unit NOT in shutdown
+		$("#shutdownIndicator").hide();
+		$("#movementcontainer").show();
+		$("#firecontainer").show();
+		$("#INFOMOVED").show();
+		$("#INFOLINE").show();
+		$("#INFOFIRED").show();
 	}
 
 	showTopStatusInfo(NARCed, TAGed, WATERed, ROUTed);
@@ -981,14 +1010,6 @@ function setCircles(h, a, s, e, fc, mp, w, e_cv, fc_cv, w_cv, ma_cv, mb_cv, mc_c
 		elx.className='phase_button_selected';
 	}
 
-	if (wpnsf == 0) {
-		document.getElementById('INFOFIRED').innerHTML = "";
-	} else if (wpnsf == 1) {
-		document.getElementById('INFOFIRED').innerHTML = "HOLD";
-	} else if (wpnsf == 2) {
-		document.getElementById('INFOFIRED').innerHTML = "FIRE";
-	}
-
 	if (movementdiestring != "") {
 		document.getElementById('movementtokenimage').src="./images/dice/" + movementdiestring;
 	}
@@ -1013,6 +1034,13 @@ function setCircles(h, a, s, e, fc, mp, w, e_cv, fc_cv, w_cv, ma_cv, mb_cv, mc_c
 		document.getElementById('overviewcurrentunitstatus').src="./images/top-right_phase01.png";
 		document.getElementById('unitroundstatusimagemenu').src="./images/top-right_phase01.png";
 	}
+
+	if (h == 4) {
+		document.getElementById('phasebuttonimage').src="./images/heat.png";
+		document.getElementById('overviewcurrentunitstatus').src="./images/heat.png";
+		document.getElementById('unitroundstatusimagemenu').src="./images/heat.png";
+	}
+
 	updateOverAllToHitValue(1);
 }
 
@@ -1247,6 +1275,24 @@ function increaseHT_PREP() {
 	document.getElementById("label_HT_PREP").innerHTML = HT_PREP;
 	var url="./save_prep.php?index="+chosenunitdbid+"&desc=HT_PREP&value="+HT_PREP+"&currentRound="+currentRound+"&gameid="+gameid;
 	window.frames['saveframe'].location.replace(url);
+}
+
+function updateHT_PREP_silent(e, fired) {
+	var value = 0;
+	if (fired) {
+		HT_PREP_TEMP = HT_PREP + e;
+		value = e;
+	} else {
+		HT_PREP_TEMP = HT_PREP;
+	}
+	if (HT_PREP_TEMP < 0) {
+		HT_PREP_TEMP = 0;
+	}
+	if (HT_PREP_TEMP > 4) {
+		HT_PREP_TEMP = 4;
+	}
+	document.getElementById("label_HT_PREP").innerHTML = HT_PREP_TEMP;
+	return value;
 }
 
 function rand(min, max) {

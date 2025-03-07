@@ -59,6 +59,7 @@
 	$array_S_MAX = array();
 
 	$array_HT = array();
+	$array_HT_PREP_ENGINEHIT = array();
 	$array_A = array();
 	$array_S = array();
 
@@ -386,6 +387,7 @@
 							$array_CV_MOTV_C_PREP[$unitcount] = $row["crit_CV_motiveC_PREP"];
 
 							$array_HT_PREP[$unitcount] = $row["heat_PREP"];
+							$array_HT_PREP_ENGINEHIT[$unitcount] = $row["heat_PREP_ENGINEHIT"];
 							$array_USEDOVERHEAT[$unitcount] = $row["usedoverheat"];
 							$array_CURRENTTMM[$unitcount] = $row["currenttmm"];
 

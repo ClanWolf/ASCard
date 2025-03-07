@@ -484,6 +484,8 @@ if (!$playMode) {
 						$unitstatusimage = $rowUnitStatus['unit_statusimageurl'];
 						$activebid = $rowUnitStatus['active_bid'];
 						$activenarc = $rowUnitStatus['active_narc'];
+						$activewater = $rowUnitStatus['active_water'];
+						$heat = $rowUnitStatus['heat'];
 					}
 				}
 
@@ -547,6 +549,9 @@ if (!$playMode) {
 						}
 						if ($unitHasMoved > 0 && $unitHasFired > 0) {
 							$unitRoundStatusImage = "./images/top-right_phase03.png";
+						}
+						if ($heat == 4) {
+							$unitRoundStatusImage = "./images/heat.png";
 						}
 					}
 				}

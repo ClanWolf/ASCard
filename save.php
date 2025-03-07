@@ -13,6 +13,7 @@
 
 	$index     = isset($_GET["index"]) ? $_GET["index"] : "";
 	$h         = isset($_GET["h"]) ? $_GET["h"] : "";
+	$hpeh      = isset($_GET["hpeh"]) ? $_GET["hpeh"] : "";
 	$a         = isset($_GET["a"]) ? $_GET["a"] : "";
 	$s         = isset($_GET["s"]) ? $_GET["s"] : "";
 	$e         = isset($_GET["e"]) ? $_GET["e"] : "";
@@ -54,6 +55,7 @@
 
 		echo $index."<br>";
 		echo $h."<br>";
+		echo $hpeh."<br>";
 		echo $a."<br>";
 		echo $s."<br>";
 		echo $e."<br>";
@@ -79,7 +81,7 @@
 		echo $routed."<br>";
 		echo "<br>";
 
-		$sql = "UPDATE asc_unitstatus SET unit_statusimageurl='".$mstat."',unit_status='".$mstatstr."',heat=".$h.",armor=".$a.",structure=".$s.",crit_engine=".$e.",crit_fc=".$fc.",crit_mp=".$mp.",crit_weapons=".$w.",crit_CV_engine=".$e_cv.",crit_CV_firecontrol=".$fc_cv.",crit_CV_weapons=".$w_cv.",crit_CV_motiveA=".$ma_cv.",crit_CV_motiveB=".$mb_cv.",crit_CV_motiveC=".$mc_cv.",usedoverheat=".$uov.",active_narc=".$narc.", active_tag=".$tag.", active_water=".$water.", active_routed=".$routed." WHERE unitid=".$index." AND round=".$currRound." AND gameid=".$gameid.";";
+		$sql = "UPDATE asc_unitstatus SET unit_statusimageurl='".$mstat."',unit_status='".$mstatstr."',heat=".$h.",heat_PREP_ENGINEHIT=".$hpeh.",armor=".$a.",structure=".$s.",crit_engine=".$e.",crit_fc=".$fc.",crit_mp=".$mp.",crit_weapons=".$w.",crit_CV_engine=".$e_cv.",crit_CV_firecontrol=".$fc_cv.",crit_CV_weapons=".$w_cv.",crit_CV_motiveA=".$ma_cv.",crit_CV_motiveB=".$mb_cv.",crit_CV_motiveC=".$mc_cv.",usedoverheat=".$uov.",active_narc=".$narc.", active_tag=".$tag.", active_water=".$water.", active_routed=".$routed." WHERE unitid=".$index." AND round=".$currRound." AND gameid=".$gameid.";";
 		echo "Statement: " . $sql;
 
 		if (mysqli_query($conn, $sql)) {

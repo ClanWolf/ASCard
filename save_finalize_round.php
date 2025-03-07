@@ -157,6 +157,7 @@
 							$MP_PREP = $row["crit_mp_PREP"];
 							$WPNS_PREP = $row["crit_weapons_PREP"];
 							$HT_PREP = $row["heat_PREP"];
+							$HT_PREP_ENGINEHIT = $row["heat_PREP_ENGINEHIT"];
 							$ENGN = $row["crit_engine"];
 							$FRCTRL = $row["crit_fc"];
 							$MP = $row["crit_mp"];
@@ -190,7 +191,7 @@
 							$CV_MOTB_PREP = $row["crit_CV_motiveB_PREP"];
 							$CV_MOTC_PREP = $row["crit_CV_motiveC_PREP"];
 
-							$finalHeat = $heat + $usedOverHeat + $HT_PREP;
+							$finalHeat = $heat + $usedOverHeat + $HT_PREP + $HT_PREP_ENGINEHIT;
 							$final_ENGN = $ENGN + $ENGN_PREP;
 							$final_FRCTRL = $FRCTRL + $FRCTRL_PREP;
 							$final_MP = $MP + $MP_PREP;
@@ -239,6 +240,15 @@
 								}
 							}
 
+							if ($active_water == 1) { // in water
+								if ($roundFired == 2) { // fired
+									$finalHeat = $finalHeat - 1;
+									if ($finalHeat < 0) {
+										$finalHeat = 0;
+									}
+								}
+							}
+
 							$sqlInsertNewUnitStatus = "";
 							$sqlInsertNewUnitStatus = $sqlInsertNewUnitStatus . "INSERT INTO asc_unitstatus (unitid,playerid,gameid,round,heat,armor,`structure`,crit_engine,crit_fc,crit_mp,crit_weapons,usedoverheat,";
 							$sqlInsertNewUnitStatus = $sqlInsertNewUnitStatus . "   crit_engine_PREP,crit_fc_PREP,crit_mp_PREP,crit_weapons_PREP,heat_PREP,     crit_CV_engine,crit_CV_firecontrol,crit_CV_weapons,crit_CV_motiveA,crit_CV_motiveB,crit_CV_motiveC,";
@@ -282,7 +292,7 @@
 					$savefired = 0;
 					if ($finalHeat == 4) {
 						// The unit is effectively shut down, set movement to Standstill and fire
-						$savemoved = 1; // Immobilized
+						$savemoved = 2; // Immobilized
 						$savefired = 1; // HOLD fire
 					}
 
