@@ -947,6 +947,12 @@ function setCircles(h, heat_PREP_ENGINEHIT_value, a, s, e, fc, mp, w, e_cv, fc_c
 		$("#shutdownIndicator").hide();
 		$("#crippledIndicator").hide();
 		$("#destroyedIndicator").show();
+
+		$("#movementcontainer").hide();
+		$("#firecontainer").hide();
+		$("#INFOMOVED").hide();
+		$("#INFOLINE").hide();
+		$("#INFOFIRED").hide();
 	}
 
 	if (h == 0) {
@@ -1039,6 +1045,13 @@ function setCircles(h, heat_PREP_ENGINEHIT_value, a, s, e, fc, mp, w, e_cv, fc_c
 		document.getElementById('phasebuttonimage').src="./images/heat.png";
 		document.getElementById('overviewcurrentunitstatus').src="./images/heat.png";
 		document.getElementById('unitroundstatusimagemenu').src="./images/heat.png";
+	}
+
+	if (unitstatus == 4) {
+		// Unit destroyed
+		document.getElementById('phasebuttonimage').src="./images/skull.png";
+		document.getElementById('overviewcurrentunitstatus').src="./images/skull.png";
+		document.getElementById('unitroundstatusimagemenu').src="./images/skull.png";
 	}
 
 	updateOverAllToHitValue(1);
