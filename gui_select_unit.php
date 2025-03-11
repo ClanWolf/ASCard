@@ -233,7 +233,6 @@ session_start();
 	<script type="text/javascript" src="./scripts/jquery.mousewheel.js"></script>
 	<script type="text/javascript" src="./scripts/howler.min.js"></script>
 	<script type="text/javascript" src="./scripts/cookies.js"></script>
-<!-- <script type="text/javascript" src="./scripts/functions.js"></script> -->
 
 	<style>
 		html, body {

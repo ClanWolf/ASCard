@@ -224,12 +224,17 @@ a:hover {
 	position: absolute;
 	margin: 0 auto;
 	width: 100%;
-	top: 80px;
+	top: 120px;
+	padding-top: 15px;
+	padding-bottom: 15px;
+	border-top: 5px solid #000000;
+	border-bottom: 5px solid #000000;
 	text-align: center;
 	color:#ff0000;
 	font-size: 36px;
 	pointer-events:none;
-	z-index:2400;
+	background-image: repeating-linear-gradient(315deg, #222 0%, #222 15%, #ffa72c 15%, #ffa72c 30%, #222 30%);
+	z-index:2;
 }
 #destroyedIndicator {
 	text-align: center;
