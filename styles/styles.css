@@ -222,9 +222,10 @@ a:hover {
 }
 #roundsyncmessage {
 	position: absolute;
-	margin: 0 auto;
-	width: 100%;
-	top: 120px;
+	/* margin: 0 auto; */
+	width: 40%;
+	top: 160px;
+	left: -150px;
 	padding-top: 15px;
 	padding-bottom: 15px;
 	border-top: 5px solid #000000;
@@ -233,6 +234,7 @@ a:hover {
 	color:#ff0000;
 	font-size: 36px;
 	pointer-events:none;
+	transform: rotateY(0deg) rotate(-45deg);
 	background-image: repeating-linear-gradient(315deg, #222 0%, #222 15%, #ffa72c 15%, #ffa72c 30%, #222 30%);
 	z-index:2;
 }

@@ -387,7 +387,7 @@ if (!$playMode) {
 			$pvformationbid[$formationind] = 0;
 
 			// Select faction logo
-			if (!($stmtFactionLogo = $conn->prepare("SELECT SQL_NO_CACHE * FROM asc_faction where factionid = ".$factionidSelected." ORDER BY factionid;"))) {
+			if (!($stmtFactionLogo = $conn->prepare("SELECT SQL_NO_CACHE * FROM asc_faction WHERE factionid = ".$factionidSelected." ORDER BY factionid;"))) {
 				echo "Prepare failed: (" . $conn->errno . ")" . $conn->error;
 			}
 			if ($stmtFactionLogo->execute()) {
@@ -400,7 +400,30 @@ if (!$playMode) {
 			array_push($addUnitToFormationLinkArray, "gui_create_unit.php?formationid=".$formationidSelected."&formationname=".$formationnameSelected);
 			array_push($assignUnitToFormationLinkArray, "gui_assign_unit.php?formationid=".$formationidSelected."&formationname=".$formationnameSelected);
 
-			$sql_asc_checkformationassignments = "SELECT SQL_NO_CACHE * FROM asc_assign where formationid=".$formationidSelected.";";
+			$sql_asc_checkformationassignments = "SELECT "
+										."SQL_NO_CACHE "
+										."asc_assign.unitid, "
+										."asc_assign.pilotid, "
+										."asc_assign.round_moved, "
+										."asc_assign.round_fired, "
+										."asc_unit.commander, "
+										."asc_unit.subcommander, "
+										."asc_unit.unit_tonnage, "
+										."asc_unitstatus.active_bid "
+										."FROM "
+										."asc_assign, "
+										."asc_unit, "
+										."asc_unitstatus "
+										."WHERE asc_assign.formationid=".$formationidSelected." "
+										."AND asc_unit.unitid=asc_assign.unitid "
+										."AND asc_unit.unitid=asc_unitstatus.unitid "
+										."AND asc_unitstatus.round=".$CURRENTROUND." "
+										."AND asc_unitstatus.gameid=".$gid." "
+										."ORDER BY "
+										."  asc_unitstatus.active_bid DESC, "
+										."  asc_unit.commander DESC, "
+										."  asc_unit.subcommander DESC, "
+										."  asc_unit.unit_tonnage DESC;";
 			$result_asc_checkformationassignments = mysqli_query($conn, $sql_asc_checkformationassignments);
 
 			$formationsFound = 0;
@@ -475,7 +498,7 @@ if (!$playMode) {
 				$unitHasMoved = $rowUnitAssignment['round_moved'];
 				$unitHasFired = $rowUnitAssignment['round_fired'];
 
-				$sql_asc_unitstatus = "SELECT SQL_NO_CACHE * FROM asc_unitstatus where unitid=".$assignedUnitID." and round=".$CURRENTROUND." and gameid=".$gid.";";
+				$sql_asc_unitstatus = "SELECT SQL_NO_CACHE * FROM asc_unitstatus WHERE unitid=".$assignedUnitID." AND round=".$CURRENTROUND." AND gameid=".$gid.";";
 				$result_asc_unitstatus = mysqli_query($conn, $sql_asc_unitstatus);
 				if (mysqli_num_rows($result_asc_unitstatus) > 0) {
 					while($rowUnitStatus = mysqli_fetch_assoc($result_asc_unitstatus)) {
@@ -488,7 +511,18 @@ if (!$playMode) {
 					}
 				}
 
-				$sql_asc_unit = "SELECT SQL_NO_CACHE * FROM asc_unit where unitid=".$assignedUnitID." order by unit_tonnage desc;";
+				$sql_asc_unit = "SELECT "
+							."SQL_NO_CACHE "
+							."asc_unit.tech, asc_unit.unit_number, asc_unit.as_model, asc_unit.as_pv, asc_unit.unit_tonnage, asc_unit.as_tp, "
+							."asc_unit.commander, asc_unit.subcommander, "
+							."asc_unitstatus.active_bid "
+							."FROM "
+							."asc_unit, asc_unitstatus "
+							."WHERE asc_unit.unitid=".$assignedUnitID." "
+							."AND asc_unit.unitid=asc_unitstatus.unitid "
+							."AND asc_unitstatus.round=".$CURRENTROUND." "
+							."AND asc_unitstatus.gameid=".$gid." "
+							."ORDER BY asc_unitstatus.active_bid ASC, asc_unit.unit_tonnage DESC;";
 				$result_asc_unit = mysqli_query($conn, $sql_asc_unit);
 
 				if (mysqli_num_rows($result_asc_unit) > 0) {
@@ -505,6 +539,9 @@ if (!$playMode) {
 						$unitpointvalue = $rowUnit['as_pv'];
 						$unittonnage = $rowUnit['unit_tonnage'];
 						$unittype = $rowUnit['as_tp'];
+
+						$commander = $rowUnit['commander'];
+						$subcommander = $rowUnit['subcommander'];
 
 						// Unitstatusimage will be set to "_01.png" when the round is reset to 1
 						// This is cleaned up here
@@ -555,7 +592,7 @@ if (!$playMode) {
 					}
 				}
 
-				$sql_asc_pilot = "SELECT SQL_NO_CACHE * FROM asc_pilot where pilotid=".$assignedPilotID.";";
+				$sql_asc_pilot = "SELECT SQL_NO_CACHE * FROM asc_pilot WHERE pilotid=".$assignedPilotID.";";
 				$result_asc_pilot = mysqli_query($conn, $sql_asc_pilot);
 				if (mysqli_num_rows($result_asc_pilot) > 0) {
 					while($rowPilot = mysqli_fetch_assoc($result_asc_pilot)) {
@@ -631,7 +668,14 @@ if (!$playMode) {
 				}
 				//$unitDetailString = $unitDetailString."						".textTruncate($unitchassisname, 15)."</span><span style='font-weight:normal;font-size:20px;color:#ffc677;'> ".$unitpointvalue."/".$unittonnage."t</span>\n";
 				$unitDetailString = $unitDetailString."						".textTruncate($unitchassisname, 10)."</span><span style='font-weight:normal;font-size:20px;color:#ffc677;'>&nbsp;&nbsp;PV&nbsp;".$unitpointvalue."</span> <span style='font-weight:normal;font-size:20px;color:#aaaaaa;'>(".$unittonnage."t)</span>\n";
-				$unitDetailString = $unitDetailString."						<br><div style='font-size:18px;top:0px;bottom:0px;left:0px;right:0px;'><img style='vertical-align:bottom;padding-top:3px' src='./images/ranks/".$factionidSelected."/".$pilotrank.".png' width='16px' height='16px'>&nbsp;&nbsp;".$pilotname."</div>\n";
+				$unitDetailString = $unitDetailString."						<br>";
+				if ($commander == 1) {
+					$unitDetailString = $unitDetailString."						<div style='font-size:18px;top:0px;bottom:0px;left:0px;right:0px;'><img style='vertical-align:bottom;padding-top:3px' src='./images/command.png' width='16px' height='16px'>&nbsp;&nbsp;<img style='vertical-align:bottom;padding-top:3px' src='./images/ranks/".$factionidSelected."/".$pilotrank.".png' width='16px' height='16px'>&nbsp;&nbsp;".$pilotname."</div>\n";
+				} else if ($subcommander == 1) {
+					$unitDetailString = $unitDetailString."						<div style='font-size:18px;top:0px;bottom:0px;left:0px;right:0px;'><img style='vertical-align:bottom;padding-top:3px' src='./images/subcommand.png' width='16px' height='16px'>&nbsp;&nbsp;<img style='vertical-align:bottom;padding-top:3px' src='./images/ranks/".$factionidSelected."/".$pilotrank.".png' width='16px' height='16px'>&nbsp;&nbsp;".$pilotname."</div>\n";
+				} else {
+					$unitDetailString = $unitDetailString."						<div style='font-size:18px;top:0px;bottom:0px;left:0px;right:0px;'><img style='vertical-align:bottom;padding-top:3px' src='./images/ranks/".$factionidSelected."/".$pilotrank.".png' width='16px' height='16px'>&nbsp;&nbsp;".$pilotname."</div>\n";
+				}
 				$unitDetailString = $unitDetailString."						</td>\n";
 
 				if ($playMode) {

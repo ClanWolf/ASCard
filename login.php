@@ -217,9 +217,9 @@ session_start();
 					<?php
 						echo "<input type='text' size='20' maxlength='80' style='width:250px;height=60px;' id='pn' name='pn' required autocomplete='userName'><br>\n";
 
-						// echo "<select style='width:260px;height=60px;' name='pn' size='1' maxlength='80' id='pn'>\n";
-						// echo $userlist."\n";
-						// echo "</select><br>\n";
+//						echo "<select style='width:260px;height=60px;' name='pn' size='1' maxlength='80' id='pn'>\n";
+//						echo $userlist."\n";
+//						echo "</select><br>\n";
 					?>
 					<input type="password" size="20" style='width:250px;height=60px;border:0px;' maxlength="32" id="pw" name="pw" required autocomplete="new-password"><br><br>
 					<input type="submit" id="submitbutton" size="50" style="width:250px;height=60px;" value="LOGIN"><br>

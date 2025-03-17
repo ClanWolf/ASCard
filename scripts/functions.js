@@ -484,14 +484,17 @@ function setCircles(h, heat_PREP_ENGINEHIT_value, a, s, e, fc, mp, w, e_cv, fc_c
 		radioWF6_WEAPONSFIRED2.checked = true;
 	}
 
+	// -----------------------------------------------------------------------------------------------------------------
 
+	if (unitType == "BA") {
+		// No heat, no criticals for BattleArmor
+	}
 
+	else if (unitType == "CV") {
+		updatedshortvalue = 0;  // No heat for CV
+		updatedmediumvalue = 2; // No heat for CV
+		updatedlongvalue = 4;   // No heat for CV
 
-
-
-
-
-	if (unitType == "CV") {
 		if (e_cv == 0) {
 			//
 		} else if (e_cv => 1) {
@@ -502,49 +505,14 @@ function setCircles(h, heat_PREP_ENGINEHIT_value, a, s, e, fc, mp, w, e_cv, fc_c
 			if (updatedmovementpointsjump > 0 ) { updatedmovementpointsjump = Math.ceil(updatedmovementpointsjump / 2); }
 		}
 
-		updatedshortvalue = 0;
-		updatedmediumvalue = 2;
-		updatedlongvalue = 4;
+		updatedshortvalue = updatedshortvalue + (fc_cv * 2);
+		updatedmediumvalue = updatedmediumvalue + (fc_cv * 2);
+		updatedlongvalue = updatedlongvalue + (fc_cv * 2);
 
-		if (fc_cv == 0) {
-			//
-		} else if (fc_cv == 1) {
-			updatedshortvalue = updatedshortvalue + 2;
-			updatedmediumvalue = updatedmediumvalue + 2;
-			updatedlongvalue = updatedlongvalue + 2;
-		} else if (fc_cv == 2) {
-			updatedshortvalue = updatedshortvalue + 4;
-			updatedmediumvalue = updatedmediumvalue + 4;
-			updatedlongvalue = updatedlongvalue + 4;
-		} else if (fc_cv == 3) {
-			updatedshortvalue = updatedshortvalue + 6;
-			updatedmediumvalue = updatedmediumvalue + 6;
-			updatedlongvalue = updatedlongvalue + 6;
-		} else if (fc_cv == 4) {
-			updatedshortvalue = updatedshortvalue + 8;
-			updatedmediumvalue = updatedmediumvalue + 8;
-			updatedlongvalue = updatedlongvalue + 8;
-		}
+		updatedshortdamage = updatedshortdamage - w_cv;
+		updatedmediumdamage = updatedmediumdamage - w_cv;
+		updatedlongdamage = updatedlongdamage - w_cv;
 
-		if (w_cv == 0) {
-		    //
-		} else if (w_cv == 1) {
-			updatedshortdamage = updatedshortdamage - 1;
-			updatedmediumdamage = updatedmediumdamage - 1;
-			updatedlongdamage = updatedlongdamage - 1;
-		} else if (w_cv == 2) {
-			updatedshortdamage = updatedshortdamage - 2;
-			updatedmediumdamage = updatedmediumdamage - 2;
-			updatedlongdamage = updatedlongdamage - 2;
-		} else if (w_cv == 3) {
-			updatedshortdamage = updatedshortdamage - 3;
-			updatedmediumdamage = updatedmediumdamage - 3;
-			updatedlongdamage = updatedlongdamage - 3;
-		} else if (w_cv == 4) {
-			updatedshortdamage = updatedshortdamage - 4;
-			updatedmediumdamage = updatedmediumdamage - 4;
-			updatedlongdamage = updatedlongdamage - 4;
-		}
 		if (updatedshortdamage == 0) {
 			shortdamageZeroStar = true;
 		}
@@ -587,7 +555,11 @@ function setCircles(h, heat_PREP_ENGINEHIT_value, a, s, e, fc, mp, w, e_cv, fc_c
 
 
 
-	} if (unitType == "BM") {
+	}
+
+	// -----------------------------------------------------------------------------------------------------------------
+
+	else if (unitType == "BM") {
 		updatedshortvalue = 0 + h;
 		updatedmediumvalue = 2 + h;
 		updatedlongvalue = 4 + h;
@@ -621,7 +593,6 @@ function setCircles(h, heat_PREP_ENGINEHIT_value, a, s, e, fc, mp, w, e_cv, fc_c
 			longdamageZeroStar = false;
 			updatedlongdamage = 0;
 		}
-
 		if (updatedshortdamage < 0) updatedshortdamage = 0;
 		if (updatedmediumdamage < 0) updatedmediumdamage = 0;
 		if (updatedlongdamage < 0) updatedlongdamage = 0;
@@ -649,6 +620,7 @@ function setCircles(h, heat_PREP_ENGINEHIT_value, a, s, e, fc, mp, w, e_cv, fc_c
 			updatedmovementpointsground = Math.floor(updatedmovementpointsground / 16);
 			updatedmovementpointsjump = Math.floor(updatedmovementpointsjump / 16);
 		}
+
 		if (h == 1) {
 			updatedmovementpointsground = updatedmovementpointsground - 2;
 		} else if (h == 2) {
@@ -667,14 +639,7 @@ function setCircles(h, heat_PREP_ENGINEHIT_value, a, s, e, fc, mp, w, e_cv, fc_c
 		}
 	}
 
-
-
-
-
-
-
-
-
+	// -----------------------------------------------------------------------------------------------------------------
 
 	// Minimal Damage (*)
 	if (shortdamageZeroStar && shortdamage > 0) {

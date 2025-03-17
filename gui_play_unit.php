@@ -415,8 +415,21 @@ session_start();
 			<td nowrap onclick="location.href='./gui_select_unit.php'" style="width:100px;background:rgba(56,87,26,1.0);">
 				<div style='vertical-align:middle;font-size:28px;color:#eee;'>&nbsp;&nbsp;&nbsp;G<?php echo $gid ?>&nbsp;R<?php echo $CURRENTROUND ?>&nbsp;&nbsp;&nbsp;</div>
 			</td>
-			<td style="width:5px;">&nbsp;</td>
 <?php
+
+
+
+
+	echo "			<td nowrap onclick='' style='width:100px;background:rgba(44,19,118,1.0);'>\n";
+	echo "				<div style='vertical-align:middle;font-size:28px;color:#eee;'>&nbsp;&nbsp;&nbsp;<i class='fa-solid fa-circle-chevron-left'></i>&nbsp;&nbsp;&nbsp;</div>\n";
+	echo "			</td>\n";
+
+
+
+
+
+	echo "			<td style='width:5px;'>&nbsp;</td>\n";
+
 	$size = sizeof($array_UNIT_MODEL);
 	for ($i11 = 1; $i11 <= sizeof($array_UNIT_MODEL); $i11++) {
 		if ($array_ACTIVE_BID[$i11] == "0") {
@@ -526,6 +539,18 @@ session_start();
 		echo "<meta http-equiv='refresh' content='0;url=./gui_select_unit.php'>\r\n";
 		header("Location: ./gui_select_unit.php");
 	}
+
+
+
+
+	echo "			<td nowrap onclick='' style='width:100px;background:rgba(44,19,118,1.0);'>\n";
+	echo "				<div style='vertical-align:middle;font-size:28px;color:#eee;'>&nbsp;&nbsp;&nbsp;<i class='fa-solid fa-circle-chevron-right'></i>&nbsp;&nbsp;&nbsp;</div>\n";
+	echo "			</td>\n";
+
+
+
+
+
 	if ($playable) {
 		echo "			<td nowrap onclick='javascript:showGameMenu();' width='60px' style='width:60px;min-width:60px;background:rgba(56,87,26,1.0);text-align:center;vertical-align:middle;'>\n";
 		echo "				<div id='gamemenubutton'><i style='color:#eee;' class='fa-solid fa-angles-down'></i></div>\n";
