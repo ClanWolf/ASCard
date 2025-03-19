@@ -27,6 +27,7 @@
 	$array_PLAYER_FORMATION_FACTIONIDS = array();
 	$array_PLAYER_FORMATION_COMMANDIDS = array();
 	$array_PLAYER_FORMATION_NAMES = array();
+	$array_PLAYER_FORMATION_STARTINDS = array();
 	$array_PLAYER_UNITS_IN_FORMATION = array();
 
 	$array_MVMT = array();
@@ -148,10 +149,14 @@
 	$result_asc_playerformations = mysqli_query($conn, $sql_asc_playerformations);
 	if (mysqli_num_rows($result_asc_playerformations) > 0) {
 		while($row = mysqli_fetch_assoc($result_asc_playerformations)) {
-			$array_PLAYER_FORMATION_IDS[$formationscount] = $row["formationid"];
+			$foid = $row["formationid"];
+			$array_PLAYER_FORMATION_IDS[$formationscount] = $foid;
 			$array_PLAYER_FORMATION_FACTIONIDS[$formationscount] = $row["factionid"];
 			$array_PLAYER_FORMATION_COMMANDIDS[$formationscount] = $row["commandid"];
 			$array_PLAYER_FORMATION_NAMES[$formationscount] = $row["formationname"];
+
+			$array_PLAYER_FORMATION_STARTINDS[$foid] = $row["startindex"];
+
 			$formationscount++;
 		}
 	}
@@ -278,7 +283,33 @@
 	// Alpha Strike Cards
 	// id; formationid; unitid; pilotid
 	$unitcount = 0;
-	$sql_asc = "SELECT SQL_NO_CACHE * FROM asc_assign;";
+	//$sql_asc = "SELECT SQL_NO_CACHE * FROM asc_assign;";
+	$sql_asc = "SELECT "
+		."SQL_NO_CACHE "
+		."asc_assign.unitid, "
+		."asc_assign.formationid, "
+		."asc_assign.pilotid, "
+		."asc_assign.round_moved, "
+		."asc_assign.round_fired, "
+		."asc_unit.commander, "
+		."asc_unit.subcommander, "
+		."asc_unit.unit_tonnage, "
+		."asc_unitstatus.active_bid "
+		."FROM "
+		."asc_assign, "
+		."asc_unit, "
+		."asc_unitstatus "
+		."WHERE asc_assign.formationid=".$formationid." "
+		."AND asc_unit.unitid=asc_assign.unitid "
+		."AND asc_unit.unitid=asc_unitstatus.unitid "
+		."AND asc_unitstatus.round=".$CURRENTROUND." "
+		."AND asc_unitstatus.gameid=".$GAMEID." "
+		."ORDER BY "
+		."  asc_unitstatus.active_bid DESC, "
+		."  asc_unit.commander DESC, "
+		."  asc_unit.subcommander DESC, "
+		."  asc_unit.unit_tonnage DESC;";
+
 	$result_asc = mysqli_query($conn, $sql_asc);
 	if (mysqli_num_rows($result_asc) > 0) {
 		while($row = mysqli_fetch_assoc($result_asc)) {
@@ -392,7 +423,7 @@
 							$array_CURRENTTMM[$unitcount] = $row["currenttmm"];
 
 							$array_MOUNTED_UNITID[$unitcount] = $row["mounted_unitid"];
-                            $array_MOUNTED_ON_UNITID[$unitcount] = $row["mounted_on_unitid"];
+							$array_MOUNTED_ON_UNITID[$unitcount] = $row["mounted_on_unitid"];
 
 							// echo "<script>console.log('".$sql_asc_unitstatus." --- ".$row["heat"]."');</script>";
 						}

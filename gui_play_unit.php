@@ -416,20 +416,6 @@ session_start();
 				<div style='vertical-align:middle;font-size:28px;color:#eee;'>&nbsp;&nbsp;&nbsp;G<?php echo $gid ?>&nbsp;R<?php echo $CURRENTROUND ?>&nbsp;&nbsp;&nbsp;</div>
 			</td>
 <?php
-
-
-
-
-	echo "			<td nowrap onclick='' style='width:100px;background:rgba(44,19,118,1.0);'>\n";
-	echo "				<div style='vertical-align:middle;font-size:28px;color:#eee;'>&nbsp;&nbsp;&nbsp;<i class='fa-solid fa-circle-chevron-left'></i>&nbsp;&nbsp;&nbsp;</div>\n";
-	echo "			</td>\n";
-
-
-
-
-
-	echo "			<td style='width:5px;'>&nbsp;</td>\n";
-
 	$size = sizeof($array_UNIT_MODEL);
 	for ($i11 = 1; $i11 <= sizeof($array_UNIT_MODEL); $i11++) {
 		if ($array_ACTIVE_BID[$i11] == "0") {
@@ -443,7 +429,37 @@ session_start();
 		//header("Location: ./gui_select_unit.php");
 	}
 
-	$width = ceil(100 / $size);
+	$maxNumberOfTabs = 5;
+	$startIndex = intval($array_PLAYER_FORMATION_STARTINDS[$formationid]);
+	$showRightArrow = false;
+
+	// var_dump($size);
+	// var_dump($startIndex);
+
+
+
+
+
+
+	if ($size > $maxNumberOfTabs) {
+		$width = ceil(100 / $maxNumberOfTabs);
+		if ($startIndex > 1) {
+			echo "			<td nowrap onclick='' style='width:100px;'>\n";
+			echo "				<div style='vertical-align:middle;font-size:28px;color:#eee;'>&nbsp;&nbsp;&nbsp;<i class='fa-solid fa-circle-chevron-left'></i>&nbsp;&nbsp;".($startIndex-1)."&nbsp;&nbsp;</div>\n";
+			echo "			</td>\n";
+		}
+	} else {
+		$width = ceil(100 / $size);
+	}
+
+
+
+
+
+
+	echo "			<td style='width:5px;'>&nbsp;</td>\n";
+
+
 	$heatimage = array();
 	$currentUnitStatusImage = "./images/check_red.png";
 	$currentmeli = "";
@@ -451,10 +467,20 @@ session_start();
 
 	$currentUnitMovement = 0;
 	$currentUnitFired = 0;
-
 	$atLeastOneValidUnitInFormation = 0;
+	$ccount = 1;
 
-	for ($i4 = 1; $i4 <= sizeof($array_UNIT_MODEL); $i4++) {
+
+
+
+	// for ($i4 = 1; $i4 <= sizeof($array_UNIT_MODEL); $i4++) {
+	for ($i4 = $startIndex; $i4 <= sizeof($array_UNIT_MODEL); $i4++) {
+		if ($ccount > $maxNumberOfTabs) {
+			if ($size - $maxNumberOfTabs - ($startIndex - 1)) {
+				$showRightArrow = true;
+			}
+			break;
+		}
 		$unitstatusimage = "./images/check_red.png";
 		$mvmt = $array_MVMT[$i4];
 		$wpnsfired = $array_WPNSFIRED[$i4];
@@ -521,6 +547,7 @@ session_start();
 				echo "			<td width='".$width."%' nowrap><table height='100%' cellspacing='0' cellpadding='0' class='unitselect_button_active_play_left' style='animation: glow 1s infinite alternate;'><tr><td nowrap width='30px' align='center' valign='center'><div style='display:inline-block;height:100%;vertical-align:middle;'><img id='unitstatusimagemenu' style='vertical-align:middle;' src='".$array_UNIT_IMG_STATUS[$i4]."' height='25px' width='23px'><br><span style='color:#ccffff;font-size:18px;'>&nbsp;&nbsp;".$mn."&nbsp;&nbsp;</span></div></td><td>&nbsp;</td><td nowrap><div><span style='font-size:24px'>".textTruncate($memodel, 10)."</span><br><span style='font-size:18px;'>".$array_PILOT[$i4]."</span></div></td><td align='left' valign='middle' style='align:left;' width='100%'>&nbsp;&nbsp;<img id='unitroundstatusimagemenu' src='".$unitstatusimage."' height='32px'></td></tr></table></td>\r\n";
 				echo "			<td style='width:5px;'>&nbsp;</td>\r\n";
 				$atLeastOneValidUnitInFormation = $atLeastOneValidUnitInFormation + 1;
+				$ccount++;
 			}
 		} else {
 			if ($array_ACTIVE_BID[$i4] == "1") {
@@ -529,6 +556,7 @@ session_start();
 				echo "			<td width='".$width."%' nowrap onclick=\"location.href='".$meli."'\"><table height='100%' cellspacing='0' cellpadding='0' class='unitselect_button_normal_play_left'><tr><td nowrap width='30px' align='center' valign='center'><div style='display:inline-block;height:100%;vertical-align:middle;'><img style='vertical-align:middle;' src='".$array_UNIT_IMG_STATUS[$i4]."' height='25px' width='23px'><br><span style='color:#ccffff;font-size:18px;'>&nbsp;&nbsp;".$mn."&nbsp;&nbsp;</span></div></td><td>&nbsp;</td><td nowrap><div><a style='font-size:24px' href='".$meli."'>".textTruncate($memodel, 10)."</a><br><span style='font-size:18px;'>".$array_PILOT[$i4]."</span></div></td><td align='left' valign='middle' style='align:left;' width='100%'>&nbsp;&nbsp;<img id='unitroundstatusimagemenuinactiveunit' src='".$unitstatusimage."' height='32px'></td></tr></table></td>\r\n";
 				echo "			<td style='width:5px;'>&nbsp;</td>\r\n";
 				$atLeastOneValidUnitInFormation = $atLeastOneValidUnitInFormation + 1;
+				$ccount++;
 			} else {
 				//echo "			<td style='display:none;visibility:hidden;' width='".$width."%' nowrap onclick=\"location.href='".$meli."'\"><table width='100%' cellspacing='0' cellpadding='0' class='unitselect_button_normal_play_left'><tr><td nowrap width='30px' align='center' valign='center'><div style='display:inline-block;height:100%;vertical-align:middle;'><img style='vertical-align:middle;' src='".$array_UNIT_IMG_STATUS[$i4]."' height='25px' width='23px'><br><span style='color:#ccffff;font-size:15px;'>&nbsp;&nbsp;".$mn."&nbsp;&nbsp;</span></div></td><td>&nbsp;</td><td nowrap width='100%'><div><img src='./images/ranks/".$factionid."/".$array_PILOT_RANK[$i4].".png' width='18px' height='18px'>&nbsp;<a style='font-size:24px' href='".$meli."'>".$array_PILOT[$i4]."</a>&nbsp;&nbsp;<img src='".$unitstatusimage."' height='21px'>".$heatimage[$i4]."<br><span style='font-size:14px;'>".textTruncate($memodel, 18)."</span></div></td></tr></table></td>\r\n";
 				echo "			<td style='display:none;visibility:hidden;' width='".$width."%' nowrap>&nbsp;</td>\r\n";
@@ -543,9 +571,12 @@ session_start();
 
 
 
-	echo "			<td nowrap onclick='' style='width:100px;background:rgba(44,19,118,1.0);'>\n";
-	echo "				<div style='vertical-align:middle;font-size:28px;color:#eee;'>&nbsp;&nbsp;&nbsp;<i class='fa-solid fa-circle-chevron-right'></i>&nbsp;&nbsp;&nbsp;</div>\n";
-	echo "			</td>\n";
+
+	if ($showRightArrow) {
+		echo "			<td nowrap onclick=''>\n";
+		echo "				<div style='vertical-align:middle;font-size:28px;color:#eee;'>&nbsp;&nbsp;&nbsp;<i class='fa-solid fa-circle-chevron-right'></i>&nbsp;&nbsp;".($size - $maxNumberOfTabs - ($startIndex - 1))."&nbsp;&nbsp;</div>\n";
+		echo "			</td>\n";
+	}
 
 
 

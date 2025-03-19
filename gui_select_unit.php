@@ -684,9 +684,15 @@ if (!$playMode) {
 					} else {
 						$unitDetailString = $unitDetailString."						<td nowrap width='1%' style='background-color:".$bidcolor.";vertical-align:middle;text-align:right;'>\n";
 					}
-					$unitDetailString = $unitDetailString."							<span style='font-size:12px;'>\n";
-					$unitDetailString = $unitDetailString."								&nbsp;&nbsp;<img width='25px' src='".$unitRoundStatusImage."'>\n";
-					$unitDetailString = $unitDetailString."							</span>\n";
+					if ($activebid == "1") {
+						$unitDetailString = $unitDetailString."							<span style='font-size:12px;'>\n";
+						$unitDetailString = $unitDetailString."								&nbsp;&nbsp;<img width='25px' src='".$unitRoundStatusImage."'>\n";
+						$unitDetailString = $unitDetailString."							</span>\n";
+					} else {
+						$unitDetailString = $unitDetailString."							<span style='font-size:12px;'>\n";
+						$unitDetailString = $unitDetailString."								&nbsp;&nbsp;\n";
+						$unitDetailString = $unitDetailString."							</span>\n";
+					}
 					$unitDetailString = $unitDetailString."						</td>\n";
 				} else {
 					$unitDetailString = $unitDetailString."						<td onclick='location.href=\"gui_select_unit.php?dm=1&unitid=".$assignedUnitID."&pilotid=".$assignedPilotID."\"' nowrap width='1%' valign='middle' style='background-color:".$bidcolor."text-align:right;'>\n";
