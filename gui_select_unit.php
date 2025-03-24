@@ -1,8 +1,8 @@
 <?php
 
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
+//ini_set('display_errors', 1);
+//ini_set('display_startup_errors', 1);
+//error_reporting(E_ALL);
 
 session_start();
 // https://www.php-einfach.de/php-tutorial/php-sessions/
@@ -64,11 +64,19 @@ session_start();
 		$sqltogglebid = "UPDATE asc_unitstatus set active_bid=".$togglebid." WHERE unitid=".$unitid." and round=".$CURRENTROUND." and gameid=".$gid.";";
 		if (mysqli_query($conn, $sqltogglebid)) {
 			// Success
-			//echo "Error: " . $sqltogglebid . "<br>";
 		} else {
 			// Error
 			echo "Error: " . $sqltogglebid . "<br>" . mysqli_error($conn);
 		}
+
+//		// TODO: Reset startIndex for formation here, as bid has changed
+//		$sqlresetstartindex = "UPDATE asc_formation set startindex=1 WHERE formationid=". ... .";";
+//		if (mysqli_query($conn, $sqlresetstartindex)) {
+//			// Success
+//		} else {
+//			// Error
+//			echo "Error: " . $sqlresetstartindex . "<br>" . mysqli_error($conn);
+//		}
 
 		$overallpv = -1;
 		$overalltonnage = -1;
@@ -285,7 +293,7 @@ session_start();
 			$('.scroll-pane').jScrollPane();
         });
 		function finalizeRound(playerId) {
-			var url="./save_finalize_round.php?pid=" + playerId;
+			var url="./save_game_finalizeround.php?pid=" + playerId;
 			//window.frames["saveframe"].location.replace(url);
 			window.location.href = url;
 		}
@@ -400,30 +408,38 @@ if (!$playMode) {
 			array_push($addUnitToFormationLinkArray, "gui_create_unit.php?formationid=".$formationidSelected."&formationname=".$formationnameSelected);
 			array_push($assignUnitToFormationLinkArray, "gui_assign_unit.php?formationid=".$formationidSelected."&formationname=".$formationnameSelected);
 
+			// This select exists 3 times!
 			$sql_asc_checkformationassignments = "SELECT "
-										."SQL_NO_CACHE "
-										."asc_assign.unitid, "
-										."asc_assign.pilotid, "
-										."asc_assign.round_moved, "
-										."asc_assign.round_fired, "
-										."asc_unit.commander, "
-										."asc_unit.subcommander, "
-										."asc_unit.unit_tonnage, "
-										."asc_unitstatus.active_bid "
-										."FROM "
-										."asc_assign, "
-										."asc_unit, "
-										."asc_unitstatus "
-										."WHERE asc_assign.formationid=".$formationidSelected." "
-										."AND asc_unit.unitid=asc_assign.unitid "
-										."AND asc_unit.unitid=asc_unitstatus.unitid "
-										."AND asc_unitstatus.round=".$CURRENTROUND." "
-										."AND asc_unitstatus.gameid=".$gid." "
-										."ORDER BY "
-										."  asc_unitstatus.active_bid DESC, "
-										."  asc_unit.commander DESC, "
-										."  asc_unit.subcommander DESC, "
-										."  asc_unit.unit_tonnage DESC;";
+				."SQL_NO_CACHE "
+				."asc_assign.unitid, "
+				."asc_assign.pilotid, "
+				."asc_assign.round_moved, "
+				."asc_assign.round_fired, "
+				."asc_unit.unitid, "
+				."asc_unit.as_tp, "
+				."asc_unit.commander, "
+				."asc_unit.subcommander, "
+				."asc_unit.unit_tonnage, "
+				."asc_unitsortorder.sortorder, "
+				."asc_unitstatus.active_bid "
+				."FROM "
+				."asc_assign, "
+				."asc_unit, "
+				."asc_unitsortorder, "
+				."asc_unitstatus "
+				."WHERE asc_assign.formationid=".$formationidSelected." "
+				."AND asc_unitsortorder.unittype=asc_unit.as_tp "
+				."AND asc_unit.unitid=asc_assign.unitid "
+				."AND asc_unit.unitid=asc_unitstatus.unitid "
+				."AND asc_unitstatus.round=".$CURRENTROUND." "
+				."AND asc_unitstatus.gameid=".$gid." "
+				."ORDER BY "
+				."  asc_unitstatus.active_bid DESC, "
+				."  asc_unit.commander DESC, "
+				."  asc_unit.subcommander DESC, "
+				."  asc_unitsortorder.sortorder ASC, "
+				."  asc_unit.unit_tonnage DESC, "
+				."  asc_unit.unitid ASC;";
 			$result_asc_checkformationassignments = mysqli_query($conn, $sql_asc_checkformationassignments);
 
 			$formationsFound = 0;
@@ -715,7 +731,7 @@ if (!$playMode) {
 
 	if ($playMode) {
 		// FINALIZE ROUND
-		echo "  		<td nowrap onclick='javascript:finalizeRound(".$pid.");' id='FinalizeRoundButton' style='text-align:center;width:100px;background:rgba(81,125,37,1.0);' rowspan='3'><div style='color:#eee;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class='fas fa-redo'></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div></td>\n";
+		echo "  		<td nowrap onclick='javascript:finalizeRound(".$pid.");' id='FinalizeRoundButton' style='text-align:center;width:100px;background:rgba(81,125,37,1.0);' rowspan='4'><div style='color:#eee;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class='fas fa-redo'></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div></td>\n";
 	}
 
 	echo "		</tr>\n";

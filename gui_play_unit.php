@@ -441,11 +441,14 @@ session_start();
 
 
 
+
+
 	if ($size > $maxNumberOfTabs) {
 		$width = ceil(100 / $maxNumberOfTabs);
 		if ($startIndex > 1) {
-			echo "			<td nowrap onclick='' style='width:100px;'>\n";
-			echo "				<div style='vertical-align:middle;font-size:28px;color:#eee;'>&nbsp;&nbsp;&nbsp;<i class='fa-solid fa-circle-chevron-left'></i>&nbsp;&nbsp;".($startIndex-1)."&nbsp;&nbsp;</div>\n";
+			echo "			<td nowrap style='background-color:#293647;' onclick='javascript:updateFormationStartIndex(".$formationid.",".$startIndex.",\"down\");' style='width:100px;'>\n";
+			//echo "				<div style='vertical-align:middle;font-size:28px;color:#eee;'>&nbsp;&nbsp;&nbsp;<i class='fa-solid fa-circle-chevron-left'></i>&nbsp;&nbsp;".($startIndex-1)."&nbsp;&nbsp;</div>\n";
+			echo "				<div style='vertical-align:middle;font-size:22px;color:#eee;'>&nbsp;&nbsp;&nbsp;&nbsp;<i class='fa-solid fa-circle-chevron-left'></i>&nbsp;&nbsp;&nbsp;&nbsp;<br><span style='font-size:14px;'>".($startIndex-1)."</span></div>\n";
 			echo "			</td>\n";
 		}
 	} else {
@@ -544,7 +547,7 @@ session_start();
 				// echo "			<td width='".$width."%' nowrap><table width='100%' height='100%' cellspacing='0' cellpadding='0' class='unitselect_button_active_play_left' style='animation: glow 1s infinite alternate;'><tr><td nowrap width='30px' align='center' valign='center'><div style='display:inline-block;height:100%;vertical-align:middle;'><img id='unitstatusimagemenu' style='vertical-align:middle;' src='".$array_UNIT_IMG_STATUS[$i4]."' height='25px' width='23px'><br><span style='color:#ccffff;font-size:15px;'>&nbsp;&nbsp;".$mn."&nbsp;&nbsp;</span></div></td><td>&nbsp;</td><td nowrap><div><img src='./images/ranks/".$factionid."/".$array_PILOT_RANK[$i4].".png' width='18px' height='18px'>&nbsp;<span style='font-size:24px'>".$array_PILOT[$i4]."</span><br><span style='font-size:14px;'>".textTruncate($memodel, 18)."</span></div></td><td align='right' style='align:right;' width='100%'><img id='unitroundstatusimagemenu' src='".$unitstatusimage."' height='21px'><br><img src='images/chevron.png' height='21px;'></td><td>".$heatimage[$i4]."</td></tr></table></td>\r\n";
 				// <td valign='top'>".$heatimage[$i4]."</td>
 				//<img src='images/chevron.png' height='21px;'>
-				echo "			<td width='".$width."%' nowrap><table height='100%' cellspacing='0' cellpadding='0' class='unitselect_button_active_play_left' style='animation: glow 1s infinite alternate;'><tr><td nowrap width='30px' align='center' valign='center'><div style='display:inline-block;height:100%;vertical-align:middle;'><img id='unitstatusimagemenu' style='vertical-align:middle;' src='".$array_UNIT_IMG_STATUS[$i4]."' height='25px' width='23px'><br><span style='color:#ccffff;font-size:18px;'>&nbsp;&nbsp;".$mn."&nbsp;&nbsp;</span></div></td><td>&nbsp;</td><td nowrap><div><span style='font-size:24px'>".textTruncate($memodel, 10)."</span><br><span style='font-size:18px;'>".$array_PILOT[$i4]."</span></div></td><td align='left' valign='middle' style='align:left;' width='100%'>&nbsp;&nbsp;<img id='unitroundstatusimagemenu' src='".$unitstatusimage."' height='32px'></td></tr></table></td>\r\n";
+				echo "			<td width='".$width."%' nowrap><table height='100%' cellspacing='0' cellpadding='0' class='unitselect_button_active_play_left' style='animation: glow 1s infinite alternate;'><tr><td nowrap width='30px' align='center' valign='center'><div style='display:inline-block;height:100%;vertical-align:middle;'><img id='unitstatusimagemenu' style='vertical-align:middle;' src='".$array_UNIT_IMG_STATUS[$i4]."' height='25px' width='23px'><br><span style='color:#ccffff;font-size:18px;'>&nbsp;&nbsp;".$mn."&nbsp;&nbsp;</span></div></td><td>&nbsp;</td><td nowrap><div><span style='font-size:24px'>".textTruncate($memodel, 9)."</span><br><span style='font-size:18px;'>".$array_PILOT[$i4]."</span></div></td><td align='left' valign='middle' style='align:left;' width='100%'>&nbsp;&nbsp;<img id='unitroundstatusimagemenu' src='".$unitstatusimage."' height='24px'></td></tr></table></td>\r\n";
 				echo "			<td style='width:5px;'>&nbsp;</td>\r\n";
 				$atLeastOneValidUnitInFormation = $atLeastOneValidUnitInFormation + 1;
 				$ccount++;
@@ -553,7 +556,7 @@ session_start();
 			if ($array_ACTIVE_BID[$i4] == "1") {
 				// echo "			<td width='".$width."%' nowrap onclick=\"location.href='".$meli."'\"><table width='100%' height='100%' cellspacing='0' cellpadding='0' class='unitselect_button_normal_play_left'><tr><td nowrap width='30px' align='center' valign='center'><div style='display:inline-block;height:100%;vertical-align:middle;'><img style='vertical-align:middle;' src='".$array_UNIT_IMG_STATUS[$i4]."' height='25px' width='23px'><br><span style='color:#ccffff;font-size:15px;'>&nbsp;&nbsp;".$mn."&nbsp;&nbsp;</span></div></td><td>&nbsp;</td><td nowrap width='100%'><div><img src='./images/ranks/".$factionid."/".$array_PILOT_RANK[$i4].".png' width='18px' height='18px'>&nbsp;<a style='font-size:24px' href='".$meli."'>".$array_PILOT[$i4]."</a><br><span style='font-size:14px;'>".textTruncate($memodel, 18)."</span></div></td><td align='right' style='align:right;' width='100%'><img id='unitroundstatusimagemenuinactiveunit' src='".$unitstatusimage."' height='21px'></td><td>".$heatimage[$i4]."</td></tr></table></td>\r\n";
 				// <td valign='top'>".$heatimage[$i4]."</td>
-				echo "			<td width='".$width."%' nowrap onclick=\"location.href='".$meli."'\"><table height='100%' cellspacing='0' cellpadding='0' class='unitselect_button_normal_play_left'><tr><td nowrap width='30px' align='center' valign='center'><div style='display:inline-block;height:100%;vertical-align:middle;'><img style='vertical-align:middle;' src='".$array_UNIT_IMG_STATUS[$i4]."' height='25px' width='23px'><br><span style='color:#ccffff;font-size:18px;'>&nbsp;&nbsp;".$mn."&nbsp;&nbsp;</span></div></td><td>&nbsp;</td><td nowrap><div><a style='font-size:24px' href='".$meli."'>".textTruncate($memodel, 10)."</a><br><span style='font-size:18px;'>".$array_PILOT[$i4]."</span></div></td><td align='left' valign='middle' style='align:left;' width='100%'>&nbsp;&nbsp;<img id='unitroundstatusimagemenuinactiveunit' src='".$unitstatusimage."' height='32px'></td></tr></table></td>\r\n";
+				echo "			<td width='".$width."%' nowrap onclick=\"location.href='".$meli."'\"><table height='100%' cellspacing='0' cellpadding='0' class='unitselect_button_normal_play_left'><tr><td nowrap width='30px' align='center' valign='center'><div style='display:inline-block;height:100%;vertical-align:middle;'><img style='vertical-align:middle;' src='".$array_UNIT_IMG_STATUS[$i4]."' height='25px' width='23px'><br><span style='color:#ccffff;font-size:18px;'>&nbsp;&nbsp;".$mn."&nbsp;&nbsp;</span></div></td><td>&nbsp;</td><td nowrap><div><a style='font-size:24px' href='".$meli."'>".textTruncate($memodel, 9)."</a><br><span style='font-size:18px;'>".$array_PILOT[$i4]."</span></div></td><td align='left' valign='middle' style='align:left;' width='100%'>&nbsp;&nbsp;<img id='unitroundstatusimagemenuinactiveunit' src='".$unitstatusimage."' height='24px'></td></tr></table></td>\r\n";
 				echo "			<td style='width:5px;'>&nbsp;</td>\r\n";
 				$atLeastOneValidUnitInFormation = $atLeastOneValidUnitInFormation + 1;
 				$ccount++;
@@ -573,8 +576,9 @@ session_start();
 
 
 	if ($showRightArrow) {
-		echo "			<td nowrap onclick=''>\n";
-		echo "				<div style='vertical-align:middle;font-size:28px;color:#eee;'>&nbsp;&nbsp;&nbsp;<i class='fa-solid fa-circle-chevron-right'></i>&nbsp;&nbsp;".($size - $maxNumberOfTabs - ($startIndex - 1))."&nbsp;&nbsp;</div>\n";
+		echo "			<td nowrap style='background-color:#293647;' onclick='javascript:updateFormationStartIndex(".$formationid.",".$startIndex.",\"up\");' style='width:100px;'>\n";
+		//echo "				<div style='vertical-align:middle;font-size:28px;color:#eee;'>&nbsp;&nbsp;&nbsp;<i class='fa-solid fa-circle-chevron-right'></i>&nbsp;&nbsp;".($size - $maxNumberOfTabs - ($startIndex - 1))."&nbsp;&nbsp;</div>\n";
+		echo "				<div style='vertical-align:middle;font-size:22px;color:#eee;'>&nbsp;&nbsp;&nbsp;&nbsp;<i class='fa-solid fa-circle-chevron-right'></i>&nbsp;&nbsp;&nbsp;&nbsp;<br><span style='font-size:14px;'>".($size - $maxNumberOfTabs - ($startIndex - 1))."</span></div>\n";
 		echo "			</td>\n";
 	}
 
@@ -631,7 +635,7 @@ session_start();
 			echo "			</td>\n";
 		}
 	}
-	echo "			<td width='1%' nowrap onclick='location.href=\"save_finalize_round.php?pid=".$pid."\"' id='FinalizeRoundButton' style='text-align:center;background:rgba(81,125,37,1.0);' rowspan='2'><div style='color:#eee;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class='fas fa-redo'></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div></td>\n";
+	echo "			<td width='1%' nowrap onclick='location.href=\"save_game_finalizeround.php?pid=".$pid."\"' id='FinalizeRoundButton' style='text-align:center;background:rgba(81,125,37,1.0);' rowspan='2'><div style='color:#eee;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class='fas fa-redo'></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div></td>\n";
 	echo "		</tr>\n";
 	echo "		<tr>\n";
 
@@ -670,33 +674,39 @@ session_start();
 				$sizeString = "SH";
 			}
 			if ($item['active_bid'] == 1) {
+				if ($count == 6 || $count == 11) {
+					echo "		</tr>\n";
+					echo "		<tr>\n";
+				}
 				if ($array_UNIT_DBID[$chosenUnitIndex] == $item['unitid']) {
-					echo "			<td onclick='location.href=\"gui_play_unit.php?formationid=".$array_PLAYER_FORMATION_IDS[$cc]."&chosenunit=".$count."\"' align='center' valign='top' style='background-color:#333333;padding:4px;border:2px solid #555;'>\n";
-					echo "				<img src='./images/chevron.png' width='40px'>\n";
-					if ($item['status'] != "destroyed") {
-						echo "				<br><img style='border:4px solid #111;margin-bottom:15px;' id='pilotimageoverview' src='./".$item['pilot_image']."' width='40px'>\n";
-					} else {
-						echo "				<br><img style='border:0px solid #111;margin-bottom:15px;' id='pilotimageoverview' src='./images/skull.png' width='40px'>\n";
-					}
-					echo "				<br>".$sizeString."<br>\n";
-					echo "				<img id='unitstatusimageoverview' src='https://www.ascard.net/app/".$item["status_image"]."' width='40px'><br>\n";
-					echo "				<span style='display:inline-block;width:40px;align:center;'><img id='overviewcurrentunitstatus' style='display:block;margin-left:auto;margin-right:auto;height:auto;' src='".$currentPhaseButton."' width='32px'></span>\n";
+					echo "			<td onclick='location.href=\"gui_play_unit.php?formationid=".$array_PLAYER_FORMATION_IDS[$cc]."&chosenunit=".$count."\"' align='center' valign='top' style='background-color:#293647;padding:4px;border:2px solid #555;animation: glow 1s infinite alternate;'>\n";
+//					echo "				<img src='./images/chevron.png' width='32px'>\n";
+//					if ($item['status'] != "destroyed") {
+//						echo "				<br><img style='border:4px solid #111;margin-bottom:15px;' id='pilotimageoverview' src='./".$item['pilot_image']."' width='40px'>\n";
+//					} else {
+//						echo "				<br><img style='border:0px solid #111;margin-bottom:15px;' id='pilotimageoverview' src='./images/skull.png' width='40px'>\n";
+//					}
+//					echo "				<br>".$sizeString."<br>\n";
+//					echo "				<br>\n";
+					echo "				<img id='unitstatusimageoverview' src='https://www.ascard.net/app/".$item["status_image"]."' width='32px'><br>\n";
+					echo "				<span style='display:inline-block;width:40px;align:center;'><img id='overviewcurrentunitstatus' style='display:block;margin-left:auto;margin-right:auto;height:auto;' src='".$currentPhaseButton."' width='24px'></span>\n";
 					//echo "				<br><div style='transform:rotate(90deg);width:60px;text-align:right;'>".$item['unit_number']."</div>\n";
-					echo "				<br>".$item['unit_number']."\n";
+					echo "				<br><span style='font-size:15px'>".$item['unit_number']."</span>\n";
 					echo "			</td>\n";
 				} else {
 					echo "			<td onclick='location.href=\"gui_play_unit.php?formationid=".$array_PLAYER_FORMATION_IDS[$cc]."&chosenunit=".$count."\"' align='center' valign='top' style='background-color:#333333;padding:4px;border:2px solid #555;'>\n";
-					echo "				<img src='./images/chevron_empty.png' width='40px'>\n";
-					if ($item['status'] != "destroyed") {
-						echo "				<br><img style='border:4px solid #111;margin-bottom:15px;' src='./".$item['pilot_image']."' width='40px'>\n";
-					} else {
-						echo "				<br><img style='border:0px solid #111;margin-bottom:15px;' src='./images/skull.png' width='40px'>\n";
-					}
-					echo "				<br>".$sizeString."<br>\n";
-					echo "				<img src='https://www.ascard.net/app/".$item["status_image"]."' width='40px'><br>\n";
-					echo "				<span style='display:inline-block;width:40px;align:center;'><img style='display:block;margin-left:auto;margin-right:auto;height:auto;' src='".$imagestatuslnk."' width='32px'></span>\n";
+//					echo "				<img src='./images/chevron_empty.png' width='32px'>\n";
+//					if ($item['status'] != "destroyed") {
+//						echo "				<br><img style='border:4px solid #111;margin-bottom:15px;' src='./".$item['pilot_image']."' width='40px'>\n";
+//					} else {
+//						echo "				<br><img style='border:0px solid #111;margin-bottom:15px;' src='./images/skull.png' width='40px'>\n";
+//					}
+//					echo "				<br>".$sizeString."<br>\n";
+//					echo "				<br>\n";
+					echo "				<img src='https://www.ascard.net/app/".$item["status_image"]."' width='32px'><br>\n";
+					echo "				<span style='display:inline-block;width:40px;align:center;'><img style='display:block;margin-left:auto;margin-right:auto;height:auto;' src='".$imagestatuslnk."' width='24px'></span>\n";
 					//echo "				<br><div style='transform:rotate(90deg);width:60px;text-align:right;'>".$item['unit_number']."</div>\n";
-					echo "				<br>".$item['unit_number']."\n";
+					echo "				<br><span style='font-size:15px'>".$item['unit_number']."</span>\n";
 					echo "			</td>\n";
 				}
 			}
@@ -710,11 +720,13 @@ session_start();
 	}
 ?>
 		</tr>
+		<!--
 		<tr>
 			<td colspan="4" style='text-align:center;background-color:#444444;' class='unitselect_button_active'>
 				Blue chevron represents currently selected unit.
 			</td>
 		</tr>
+		-->
 	</table>
 </div>
 
@@ -1483,28 +1495,28 @@ if ($showDistancesHexes == 1) {
 </div>
 
 <div id="topmiddlebackground">
-	<img style="pointer-events:auto;height:100px;" src='./images/top-middle_01.png' onclick="javascript:hideTopPanels();">
+	<img style="visibility:hidden;pointer-events:auto;height:100px;" src='./images/top-middle_01.png' onclick="javascript:hideTopPanels();">
 </div>
 <div id="destroyedIndicator">
-	<img style="pointer-events:auto;" src='./images/skull.png' onclick="javascript:hideSkull();" height='250px'>
+	<img style="visibility:hidden;pointer-events:auto;" src='./images/skull.png' onclick="javascript:hideSkull();" height='250px'>
 </div>
 <div id="crippledIndicator">
-	<img style="pointer-events:auto;height:160px;" src='./images/crippled.png' onclick="javascript:hideCrippled();">
+	<img style="visibility:hidden;pointer-events:auto;height:160px;" src='./images/crippled.png' onclick="javascript:hideCrippled();">
 </div>
 <div id="shutdownIndicator">
-	<img style="pointer-events:auto;" src='./images/heat.png' onclick="javascript:hideShutdownIndicator();" height='250px'>
+	<img style="visibility:hidden;pointer-events:auto;" src='./images/heat.png' onclick="javascript:hideShutdownIndicator();" height='250px'>
 </div>
 <div id="narcIndicator">
-	<img style="pointer-events:auto;" src='./images/narc.png' onclick="javascript:hideTopPanels();" height='50px'>
+	<img style="visibility:hidden;pointer-events:auto;" src='./images/narc.png' onclick="javascript:hideTopPanels();" height='50px'>
 </div>
 <div id="tagIndicator">
-	<img style="pointer-events:auto;" src='./images/tag.png' onclick="javascript:hideTopPanels();" height='50px'>
+	<img style="visibility:hidden;pointer-events:auto;" src='./images/tag.png' onclick="javascript:hideTopPanels();" height='50px'>
 </div>
 <div id="waterIndicator">
-	<img style="pointer-events:auto;" src='./images/water.png' onclick="javascript:hideTopPanels();" height='50px'>
+	<img style="visibility:hidden;pointer-events:auto;" src='./images/water.png' onclick="javascript:hideTopPanels();" height='50px'>
 </div>
 <div id="routedIndicator">
-	<img style="pointer-events:auto;" src='./images/routed.png' onclick="javascript:hideTopPanels();" height='50px'>
+	<img style="visibility:hidden;pointer-events:auto;" src='./images/routed.png' onclick="javascript:hideTopPanels();" height='50px'>
 </div>
 
 <script type="text/javascript">

@@ -1,7 +1,7 @@
 <?php
 
-	error_reporting(E_ALL);
-	ini_set('error_reporting', E_ALL);
+//	error_reporting(E_ALL);
+//	ini_set('error_reporting', E_ALL);
 
 	set_time_limit(600);
 	ob_end_flush();

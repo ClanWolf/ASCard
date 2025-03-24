@@ -223,7 +223,7 @@ a:hover {
 #roundsyncmessage {
 	position: absolute;
 	/* margin: 0 auto; */
-	width: 40%;
+	width: 600px;
 	top: 160px;
 	left: -150px;
 	padding-top: 15px;

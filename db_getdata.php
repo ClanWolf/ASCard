@@ -209,7 +209,41 @@
 	for ($cc = 0; $cc < sizeof($array_PLAYER_FORMATION_IDS); $cc++) {
 		$unitdata = array();
 		$currentformationid = $array_PLAYER_FORMATION_IDS[$cc];
-		$sql_asc_playerunitsinformation = "SELECT SQL_NO_CACHE * FROM asc_assign WHERE formationid=".$currentformationid.";";
+
+		// This select exists 3 times!
+		$sql_asc_playerunitsinformation = "SELECT "
+			."SQL_NO_CACHE "
+			."asc_assign.unitid, "
+			."asc_assign.formationid, "
+			."asc_assign.pilotid, "
+			."asc_assign.round_moved, "
+			."asc_assign.round_fired, "
+			."asc_unit.unitid, "
+			."asc_unit.as_tp, "
+			."asc_unit.commander, "
+			."asc_unit.subcommander, "
+			."asc_unit.unit_tonnage, "
+			."asc_unitsortorder.sortorder, "
+			."asc_unitstatus.active_bid "
+			."FROM "
+			."asc_assign, "
+			."asc_unit, "
+			."asc_unitsortorder, "
+			."asc_unitstatus "
+			."WHERE asc_assign.formationid=".$currentformationid." "
+			."AND asc_unitsortorder.unittype=asc_unit.as_tp "
+			."AND asc_unit.unitid=asc_assign.unitid "
+			."AND asc_unit.unitid=asc_unitstatus.unitid "
+			."AND asc_unitstatus.round=".$CURRENTROUND." "
+			."AND asc_unitstatus.gameid=".$GAMEID." "
+			."ORDER BY "
+			."  asc_unitstatus.active_bid DESC, "
+			."  asc_unit.commander DESC, "
+			."  asc_unit.subcommander DESC, "
+			."  asc_unitsortorder.sortorder ASC, "
+			."  asc_unit.unit_tonnage DESC, "
+			."  asc_unit.unitid ASC;";
+
 		$result_asc_playerunitsinformation = mysqli_query($conn, $sql_asc_playerunitsinformation);
 		if (mysqli_num_rows($result_asc_playerunitsinformation) > 0) {
 			$units_in_formation = array();
@@ -283,7 +317,7 @@
 	// Alpha Strike Cards
 	// id; formationid; unitid; pilotid
 	$unitcount = 0;
-	//$sql_asc = "SELECT SQL_NO_CACHE * FROM asc_assign;";
+	// This select exists 3 times!
 	$sql_asc = "SELECT "
 		."SQL_NO_CACHE "
 		."asc_assign.unitid, "
@@ -291,15 +325,20 @@
 		."asc_assign.pilotid, "
 		."asc_assign.round_moved, "
 		."asc_assign.round_fired, "
+		."asc_unit.unitid, "
+		."asc_unit.as_tp, "
 		."asc_unit.commander, "
 		."asc_unit.subcommander, "
 		."asc_unit.unit_tonnage, "
+		."asc_unitsortorder.sortorder, "
 		."asc_unitstatus.active_bid "
 		."FROM "
 		."asc_assign, "
 		."asc_unit, "
+		."asc_unitsortorder, "
 		."asc_unitstatus "
 		."WHERE asc_assign.formationid=".$formationid." "
+		."AND asc_unitsortorder.unittype=asc_unit.as_tp "
 		."AND asc_unit.unitid=asc_assign.unitid "
 		."AND asc_unit.unitid=asc_unitstatus.unitid "
 		."AND asc_unitstatus.round=".$CURRENTROUND." "
@@ -308,7 +347,9 @@
 		."  asc_unitstatus.active_bid DESC, "
 		."  asc_unit.commander DESC, "
 		."  asc_unit.subcommander DESC, "
-		."  asc_unit.unit_tonnage DESC;";
+		."  asc_unitsortorder.sortorder ASC, "
+		."  asc_unit.unit_tonnage DESC, "
+		."  asc_unit.unitid ASC;";
 
 	$result_asc = mysqli_query($conn, $sql_asc);
 	if (mysqli_num_rows($result_asc) > 0) {

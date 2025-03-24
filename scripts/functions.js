@@ -226,11 +226,11 @@ function readCircles2(index, a_max, s_max, mv_bt_id, f_bt_id) {
 
 	document.getElementById('unitstatusimagemenu').src=unitstatusimage;
 	document.getElementById('unitstatusimageoverview').src=unitstatusimage;
-	if (unitstatusstring == "destroyed") {
-		document.getElementById('pilotimageoverview').src="./images/skull.png";
-	} else {
-		document.getElementById('pilotimageoverview').src=pilotimage;
-	}
+//	if (unitstatusstring == "destroyed") {
+//		document.getElementById('pilotimageoverview').src="./images/skull.png";
+//	} else {
+//		document.getElementById('pilotimageoverview').src=pilotimage;
+//	}
 
 	if (mvmnt == 9) {
 		wpnsf = 1;
@@ -280,7 +280,7 @@ function readCircles2(index, a_max, s_max, mv_bt_id, f_bt_id) {
 	}
 
 	// Save values to db
-	var url="./save.php?index="+index+"&h="+h+"&hpeh="+heat_PREP_ENGINEHIT_value+"&a="+a+"&s="+s+"&e="+e+"&fc="+fc+"&mp="+mp+"&w="+w+"&e_cv="+e_cv+"&fc_cv="+fc_cv+"&w_cv="+w_cv+"&ma_cv="+ma_cv+"&mb_cv="+mb_cv+"&mc_cv="+mc_cv+"&mstat="+unitstatusimage+"&mstatstr="+unitstatusstring+"&uov="+uov+"&mvmnt="+mvmnt+"&wpnsf="+wpnsf+"&currentRound="+currentRound+"&narc="+NARCed+"&tag="+TAGed+"&water="+WATERed+"&routed="+ROUTed+"&gameid="+gameid;
+	var url="./save_unit.php?index="+index+"&h="+h+"&hpeh="+heat_PREP_ENGINEHIT_value+"&a="+a+"&s="+s+"&e="+e+"&fc="+fc+"&mp="+mp+"&w="+w+"&e_cv="+e_cv+"&fc_cv="+fc_cv+"&w_cv="+w_cv+"&ma_cv="+ma_cv+"&mb_cv="+mb_cv+"&mc_cv="+mc_cv+"&mstat="+unitstatusimage+"&mstatstr="+unitstatusstring+"&uov="+uov+"&mvmnt="+mvmnt+"&wpnsf="+wpnsf+"&currentRound="+currentRound+"&narc="+NARCed+"&tag="+TAGed+"&water="+WATERed+"&routed="+ROUTed+"&gameid="+gameid;
 	window.frames['saveframe'].location.replace(url);
 	setCircles(h, heat_PREP_ENGINEHIT_value, a, s, e, fc, mp, w, e_cv, fc_cv, w_cv, ma_cv, mb_cv, mc_cv, uov, mvmnt, wpnsf, tc_rangeValueReading, tc_partialCoverReading, unitstatusstring, NARCed, TAGed, WATERed, ROUTed);
 
@@ -873,22 +873,30 @@ function setCircles(h, heat_PREP_ENGINEHIT_value, a, s, e, fc, mp, w, e_cv, fc_c
 	if (mvmnt == 0 && wpnsf == 0) {
 		document.getElementById('phasebuttonimage').src="./images/top-right_phase01.png";
 		document.getElementById('overviewcurrentunitstatus').src="./images/top-right_phase01.png";
-		document.getElementById('unitroundstatusimagemenu').src="./images/top-right_phase01.png";
+		if (document.getElementById('unitroundstatusimagemenu') != null) {
+			document.getElementById('unitroundstatusimagemenu').src="./images/top-right_phase01.png";
+		}
 	} else if (mvmnt > 0 && wpnsf == 0) {
 		document.getElementById('phasebuttonimage').src="./images/top-right_phase02.png";
 		document.getElementById('overviewcurrentunitstatus').src="./images/top-right_phase02.png";
-		document.getElementById('unitroundstatusimagemenu').src="./images/top-right_phase02.png";
+		if (document.getElementById('unitroundstatusimagemenu') != null) {
+			document.getElementById('unitroundstatusimagemenu').src="./images/top-right_phase02.png";
+		}
 	} else if (mvmnt > 0 && wpnsf > 0) {
 		document.getElementById('phasebuttonimage').src="./images/top-right_phase03.png";
 		document.getElementById('overviewcurrentunitstatus').src="./images/top-right_phase03.png";
-		document.getElementById('unitroundstatusimagemenu').src="./images/top-right_phase03.png";
+		if (document.getElementById('unitroundstatusimagemenu') != null) {
+			document.getElementById('unitroundstatusimagemenu').src="./images/top-right_phase03.png";
+		}
 	} else {
 		document.getElementById("WF5_WEAPONSFIRED2").checked = false;
 		document.getElementById("WF6_WEAPONSFIRED2").checked = false;
 		document.getElementById('INFOFIRED').innerHTML = "";
 		document.getElementById('phasebuttonimage').src="./images/top-right_phase01.png";
 		document.getElementById('overviewcurrentunitstatus').src="./images/top-right_phase01.png";
-		document.getElementById('unitroundstatusimagemenu').src="./images/top-right_phase01.png";
+		if (document.getElementById('unitroundstatusimagemenu') != null) {
+			document.getElementById('unitroundstatusimagemenu').src="./images/top-right_phase01.png";
+		}
 	}
 
 	if (unitstatus == 9) {
@@ -909,7 +917,9 @@ function setCircles(h, heat_PREP_ENGINEHIT_value, a, s, e, fc, mp, w, e_cv, fc_c
 		document.getElementById('movementtokenimage').src="./images/dice/shutdown.png";
 		document.getElementById('phasebuttonimage').src="./images/heat.png";
 		document.getElementById('overviewcurrentunitstatus').src="./images/heat.png";
-		document.getElementById('unitroundstatusimagemenu').src="./images/heat.png";
+		if (document.getElementById('unitroundstatusimagemenu') != null) {
+			document.getElementById('unitroundstatusimagemenu').src="./images/heat.png";
+		}
 	} else {
 		// Unit NOT in shutdown
 		$("#shutdownIndicator").hide();
@@ -940,7 +950,9 @@ function setCircles(h, heat_PREP_ENGINEHIT_value, a, s, e, fc, mp, w, e_cv, fc_c
 		document.getElementById('movementtokenimage').src="./images/dice/destroyed.png";
 		document.getElementById('phasebuttonimage').src="./images/skull.png";
 		document.getElementById('overviewcurrentunitstatus').src="./images/skull.png";
-		document.getElementById('unitroundstatusimagemenu').src="./images/skull.png";
+		if (document.getElementById('unitroundstatusimagemenu') != null) {
+			document.getElementById('unitroundstatusimagemenu').src="./images/skull.png";
+		}
 	}
 
 	updateOverAllToHitValue(1);
@@ -1045,6 +1057,11 @@ function textSize(dec) {
 	setCookie("savedBefore", "true", 365);
 }
 
+function updateFormationStartIndex(formationid, currentindex, op) {
+	var url="./save_formation_startindex.php?formationid="+formationid+"&currentindex="+currentindex+"&op="+op;
+	window.frames['saveframe'].location.replace(url);
+}
+
 function increaseENGN_PREP() {
 	ENGN_PREP = ENGN_PREP + 1;
 	if (ENGN_PREP > 2) {
@@ -1054,7 +1071,7 @@ function increaseENGN_PREP() {
 		playTapSound();
 	}
 	document.getElementById("label_ENGN_PREP").innerHTML = ENGN_PREP;
-	var url="./save_prep.php?index="+chosenunitdbid+"&desc=ENGN_PREP&value="+ENGN_PREP+"&currentRound="+currentRound+"&gameid="+gameid;
+	var url="./save_unit_prep.php?index="+chosenunitdbid+"&desc=ENGN_PREP&value="+ENGN_PREP+"&currentRound="+currentRound+"&gameid="+gameid;
 	window.frames['saveframe'].location.replace(url);
 }
 function increaseFCTL_PREP() {
@@ -1066,7 +1083,7 @@ function increaseFCTL_PREP() {
 		playTapSound();
 	}
 	document.getElementById("label_FCTL_PREP").innerHTML = FCTL_PREP;
-	var url="./save_prep.php?index="+chosenunitdbid+"&desc=FCTL_PREP&value="+FCTL_PREP+"&currentRound="+currentRound+"&gameid="+gameid;
+	var url="./save_unit_prep.php?index="+chosenunitdbid+"&desc=FCTL_PREP&value="+FCTL_PREP+"&currentRound="+currentRound+"&gameid="+gameid;
 	window.frames['saveframe'].location.replace(url);
 }
 function increaseMP_PREP() {
@@ -1078,7 +1095,7 @@ function increaseMP_PREP() {
 		playTapSound();
 	}
 	document.getElementById("label_MP_PREP").innerHTML = MP_PREP;
-	var url="./save_prep.php?index="+chosenunitdbid+"&desc=MP_PREP&value="+MP_PREP+"&currentRound="+currentRound+"&gameid="+gameid;
+	var url="./save_unit_prep.php?index="+chosenunitdbid+"&desc=MP_PREP&value="+MP_PREP+"&currentRound="+currentRound+"&gameid="+gameid;
 	window.frames['saveframe'].location.replace(url);
 }
 function increaseWPNS_PREP() {
@@ -1090,7 +1107,7 @@ function increaseWPNS_PREP() {
 		playTapSound();
 	}
 	document.getElementById("label_WPNS_PREP").innerHTML = WPNS_PREP;
-	var url="./save_prep.php?index="+chosenunitdbid+"&desc=WPNS_PREP&value="+WPNS_PREP+"&currentRound="+currentRound+"&gameid="+gameid;
+	var url="./save_unit_prep.php?index="+chosenunitdbid+"&desc=WPNS_PREP&value="+WPNS_PREP+"&currentRound="+currentRound+"&gameid="+gameid;
 	window.frames['saveframe'].location.replace(url);
 }
 function increaseENGN_CV_PREP() {
@@ -1102,7 +1119,7 @@ function increaseENGN_CV_PREP() {
 		playTapSound();
 	}
 	document.getElementById("label_CV_ENGN_PREP").innerHTML = CV_ENGN_PREP;
-	var url="./save_prep.php?index="+chosenunitdbid+"&desc=CV_ENGN_PREP&value="+CV_ENGN_PREP+"&currentRound="+currentRound+"&gameid="+gameid;
+	var url="./save_unit_prep.php?index="+chosenunitdbid+"&desc=CV_ENGN_PREP&value="+CV_ENGN_PREP+"&currentRound="+currentRound+"&gameid="+gameid;
 	window.frames['saveframe'].location.replace(url);
 }
 function increaseFCTL_CV_PREP() {
@@ -1114,7 +1131,7 @@ function increaseFCTL_CV_PREP() {
 		playTapSound();
 	}
 	document.getElementById("label_CV_FCTL_PREP").innerHTML = CV_FCTL_PREP;
-	var url="./save_prep.php?index="+chosenunitdbid+"&desc=CV_FCTL_PREP&value="+CV_FCTL_PREP+"&currentRound="+currentRound+"&gameid="+gameid;
+	var url="./save_unit_prep.php?index="+chosenunitdbid+"&desc=CV_FCTL_PREP&value="+CV_FCTL_PREP+"&currentRound="+currentRound+"&gameid="+gameid;
 	window.frames['saveframe'].location.replace(url);
 }
 function increaseWPNS_CV_PREP() {
@@ -1126,7 +1143,7 @@ function increaseWPNS_CV_PREP() {
 		playTapSound();
 	}
 	document.getElementById("label_CV_WPNS_PREP").innerHTML = CV_WPNS_PREP;
-	var url="./save_prep.php?index="+chosenunitdbid+"&desc=CV_WPNS_PREP&value="+CV_WPNS_PREP+"&currentRound="+currentRound+"&gameid="+gameid;
+	var url="./save_unit_prep.php?index="+chosenunitdbid+"&desc=CV_WPNS_PREP&value="+CV_WPNS_PREP+"&currentRound="+currentRound+"&gameid="+gameid;
 	window.frames['saveframe'].location.replace(url);
 }
 function increaseMOTIVEA_PREP() {
@@ -1138,7 +1155,7 @@ function increaseMOTIVEA_PREP() {
 		playTapSound();
 	}
 	document.getElementById("label_CV_MOTIVA_PREP").innerHTML = CV_MOTVA_PREP;
-	var url="./save_prep.php?index="+chosenunitdbid+"&desc=CV_MOTVA_PREP&value="+CV_MOTVA_PREP+"&currentRound="+currentRound+"&gameid="+gameid;
+	var url="./save_unit_prep.php?index="+chosenunitdbid+"&desc=CV_MOTVA_PREP&value="+CV_MOTVA_PREP+"&currentRound="+currentRound+"&gameid="+gameid;
 	window.frames['saveframe'].location.replace(url);
 }
 function increaseMOTIVEB_PREP() {
@@ -1150,7 +1167,7 @@ function increaseMOTIVEB_PREP() {
 		playTapSound();
 	}
 	document.getElementById("label_CV_MOTIVB_PREP").innerHTML = CV_MOTVB_PREP;
-	var url="./save_prep.php?index="+chosenunitdbid+"&desc=CV_MOTVB_PREP&value="+CV_MOTVB_PREP+"&currentRound="+currentRound+"&gameid="+gameid;
+	var url="./save_unit_prep.php?index="+chosenunitdbid+"&desc=CV_MOTVB_PREP&value="+CV_MOTVB_PREP+"&currentRound="+currentRound+"&gameid="+gameid;
 	window.frames['saveframe'].location.replace(url);
 }
 function increaseMOTIVEC_PREP() {
@@ -1162,7 +1179,7 @@ function increaseMOTIVEC_PREP() {
 		playTapSound();
 	}
 	document.getElementById("label_CV_MOTIVC_PREP").innerHTML = CV_MOTVC_PREP;
-	var url="./save_prep.php?index="+chosenunitdbid+"&desc=CV_MOTVC_PREP&value="+CV_MOTVC_PREP+"&currentRound="+currentRound+"&gameid="+gameid;
+	var url="./save_unit_prep.php?index="+chosenunitdbid+"&desc=CV_MOTVC_PREP&value="+CV_MOTVC_PREP+"&currentRound="+currentRound+"&gameid="+gameid;
 	window.frames['saveframe'].location.replace(url);
 }
 
@@ -1175,7 +1192,7 @@ function increaseHT_PREP() {
 		playTapSound();
 	}
 	document.getElementById("label_HT_PREP").innerHTML = HT_PREP;
-	var url="./save_prep.php?index="+chosenunitdbid+"&desc=HT_PREP&value="+HT_PREP+"&currentRound="+currentRound+"&gameid="+gameid;
+	var url="./save_unit_prep.php?index="+chosenunitdbid+"&desc=HT_PREP&value="+HT_PREP+"&currentRound="+currentRound+"&gameid="+gameid;
 	window.frames['saveframe'].location.replace(url);
 }
 
@@ -1307,7 +1324,7 @@ function changeWallpaper() {
 
 	if (wallpaperNameRand == 9) {
 		// Set use MUL images to 1 on database (white background + MUL images)
-		var url="./save_UseMULImages.php?playerId="+playerId+"&useMulImages=1";
+		var url="./save_unit_useMulImages.php?playerId="+playerId+"&useMulImages=1";
 		window.frames['saveframe'].location.replace(url);
 		document.getElementById("unitimage").src=unitImageURLMUL;
 		const allDataAreas = document.getElementsByClassName("dataarea");
@@ -1332,7 +1349,7 @@ function changeWallpaper() {
 		}
 	} else {
 		// Set use MUL images to 0 on database (dark background + alternative images)
-		var url="./save_UseMULImages.php?playerId="+playerId+"&useMulImages=0";
+		var url="./save_unit_useMulImages.php?playerId="+playerId+"&useMulImages=0";
 		window.frames['saveframe'].location.replace(url);
 		document.getElementById("unitimage").src=unitImageURL;
 		const allDataAreas = document.getElementsByClassName("dataarea");
@@ -1815,29 +1832,31 @@ function showTopPanels() {
 	var ro = document.getElementById("ROUTED").checked;
 	showTopStatusInfo(na, ta, wa, ro);
 }
-function changeNARCDesc() {
-	var text = document.getElementById("narcDesc").innerHTML;
-	var narcdesc = text;
-	if (text == "NARC") {
-		document.getElementById("narcDesc").innerHTML = "TAG";
-		narcdesc = "TAG";
-	} else if (text == "TAG") {
-		document.getElementById("narcDesc").innerHTML = "BOTH";
-		narcdesc = "BOTH";
-	} else if (text == "BOTH") {
-		document.getElementById("narcDesc").innerHTML = "NARC";
-		narcdesc = "NARC";
-	}
-
-	var url="./save_narcDesc.php?narcdesc="+narcdesc+"&playerid="+playerId+"&gameid="+gameid+"&unitid="+chosenunitdbid+"&round="+currentRound;
-	window.frames['saveframe'].location.replace(url);
-
-	playTCClickSound();
-}
+//function changeNARCDesc() {
+//	var text = document.getElementById("narcDesc").innerHTML;
+//	var narcdesc = text;
+//	if (text == "NARC") {
+//		document.getElementById("narcDesc").innerHTML = "TAG";
+//		narcdesc = "TAG";
+//	} else if (text == "TAG") {
+//		document.getElementById("narcDesc").innerHTML = "BOTH";
+//		narcdesc = "BOTH";
+//	} else if (text == "BOTH") {
+//		document.getElementById("narcDesc").innerHTML = "NARC";
+//		narcdesc = "NARC";
+//	}
+//
+//	var url="./save_narcDesc.php?narcdesc="+narcdesc+"&playerid="+playerId+"&gameid="+gameid+"&unitid="+chosenunitdbid+"&round="+currentRound;
+//	window.frames['saveframe'].location.replace(url);
+//
+//	playTCClickSound();
+//}
 
 $(window).resize(function() {
 	var unitimage = document.getElementById("unitimage");
-	unitimage.style.height="" + $(document).height() * 0.8 + "px";
+	if (unitimage != null) {
+		unitimage.style.height="" + $(document).height() * 0.8 + "px";
+	}
 });
 
 $(document).ready(function() {
@@ -1967,7 +1986,7 @@ $(document).ready(function() {
 	}
 	if (wallpaperName == 9) {
 		// Set use MUL images to 1 on database (white background + MUL images)
-		var url="./save_UseMULImages.php?playerId="+playerId+"&useMulImages=1";
+		var url="./save_unit_useMulImages.php?playerId="+playerId+"&useMulImages=1";
 		window.frames['saveframe'].location.replace(url);
 		document.getElementById("unitimage").src=unitImageURLMUL;
 		const allDataAreas = document.getElementsByClassName("dataarea");
@@ -1992,7 +2011,7 @@ $(document).ready(function() {
 		}
 	} else {
 		// Set use MUL images to 0 on database (dark background + alternative images)
-		var url="./save_UseMULImages.php?playerId="+playerId+"&useMulImages=0";
+		var url="./save_unit_useMulImages.php?playerId="+playerId+"&useMulImages=0";
 		window.frames['saveframe'].location.replace(url);
 		document.getElementById("unitimage").src=unitImageURL;
 		const allDataAreas = document.getElementsByClassName("dataarea");
