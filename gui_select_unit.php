@@ -42,6 +42,7 @@ session_start();
 	if ($deleteunit == "1") {
 		$unitid = isset($_GET["unitid"]) ? $_GET["unitid"] : "";
 		$pilotid = isset($_GET["pilotid"]) ? $_GET["pilotid"] : "";
+		$formationidparam = isset($_GET["formationid"]) ? $_GET["formationid"] : "";
 
 		// delete assignment
 		// only the assignment is deleted
@@ -56,11 +57,25 @@ session_start();
 			echo "Error: " . $sqldeleteassignment . "<br>" . mysqli_error($conn);
 		}
 
+		if ($formationidparam != "") {
+			$sqlresetstartindex = "UPDATE asc_formation set startindex=1 WHERE formationid=".$formationidparam.";";
+			if (mysqli_query($conn, $sqlresetstartindex)) {
+				// Success
+			} else {
+				// Error
+				echo "Error: " . $sqlresetstartindex . "<br>" . mysqli_error($conn);
+			}
+		}
+
 		echo "<meta http-equiv='refresh' content='0;url=./gui_select_unit.php?activebid=0&unitid=".$unitid."'>";
 	}
 
 	if ($togglebid == "1" || $togglebid == "0") {
 		$unitid = isset($_GET["unitid"]) ? $_GET["unitid"] : "";
+		$formationidparam = isset($_GET["formationid"]) ? $_GET["formationid"] : "";
+
+		//var_dump($formationidparam);
+
 		$sqltogglebid = "UPDATE asc_unitstatus set active_bid=".$togglebid." WHERE unitid=".$unitid." and round=".$CURRENTROUND." and gameid=".$gid.";";
 		if (mysqli_query($conn, $sqltogglebid)) {
 			// Success
@@ -69,14 +84,15 @@ session_start();
 			echo "Error: " . $sqltogglebid . "<br>" . mysqli_error($conn);
 		}
 
-//		// TODO: Reset startIndex for formation here, as bid has changed
-//		$sqlresetstartindex = "UPDATE asc_formation set startindex=1 WHERE formationid=". ... .";";
-//		if (mysqli_query($conn, $sqlresetstartindex)) {
-//			// Success
-//		} else {
-//			// Error
-//			echo "Error: " . $sqlresetstartindex . "<br>" . mysqli_error($conn);
-//		}
+		if ($formationidparam != "") {
+			$sqlresetstartindex = "UPDATE asc_formation set startindex=1 WHERE formationid=".$formationidparam.";";
+			if (mysqli_query($conn, $sqlresetstartindex)) {
+				// Success
+			} else {
+				// Error
+				echo "Error: " . $sqlresetstartindex . "<br>" . mysqli_error($conn);
+			}
+		}
 
 		$overallpv = -1;
 		$overalltonnage = -1;
@@ -353,14 +369,18 @@ session_start();
 		<tr>
 <?php
 if (!$playMode) {
-	echo "						<td colspan='4' nowrap style='width:270px;height:30px;text-align:center;' onclick='location.href=\"gui_edit_command.php\"' class='formationselect_button_normal'>\n";
+	echo "						<td colspan='3' nowrap style='width:270px;height:30px;text-align:center;' onclick='location.href=\"gui_edit_command.php\"' class='formationselect_button_normal'>\n";
 	echo "							<a href='gui_edit_command.php'><i class='fas fa-edit'></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;COMMAND</a>\n";
 	echo "						</td>\n";
 } else {
-	echo "						<td colspan='4' nowrap style='width:270px;height:30px;text-align:center;' class='formationselect_button_normal'>\n";
+	echo "						<td colspan='3' nowrap style='width:270px;height:30px;text-align:center;' class='formationselect_button_normal'>\n";
 	echo "							<a href='#'>COMMAND</a>\n";
 	echo "							&nbsp;&nbsp;&nbsp;<span id='bidOverviewCommand'>(PV 10 / 100)</span>\n";
 	echo "						</td>\n";
+}
+if ($playMode) {
+	// FINALIZE ROUND
+	echo "  		<td nowrap onclick='javascript:finalizeRound(".$pid.");' id='FinalizeRoundButton' style='text-align:center;width:100px;background:rgba(81,125,37,1.0);' rowspan='5'><div style='color:#eee;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class='fas fa-redo'></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div></td>\n";
 }
 ?>
 		</tr>
@@ -646,7 +666,7 @@ if (!$playMode) {
 						$unitDetailString = $unitDetailString."							</span>\n";
 						$unitDetailString = $unitDetailString."						</td>\n";
 					} else {
-						$unitDetailString = $unitDetailString."						<td nowrap width='1%' onclick=\"location.href='gui_select_unit.php?activebid=0&unitid=".$assignedUnitID."'\" style='background-color:#121212;text-align:right;'>\n";
+						$unitDetailString = $unitDetailString."						<td nowrap width='1%' onclick=\"location.href='gui_select_unit.php?activebid=0&formationid=".$formationidSelected."&unitid=".$assignedUnitID."'\" style='background-color:#121212;text-align:right;'>\n";
 						$unitDetailString = $unitDetailString."							<span style='font-size:16px;'>\n";
 						$unitDetailString = $unitDetailString."								&nbsp;&nbsp;&nbsp;<i class='fas fa-arrow-circle-left' aria-hidden='true' style='font-size:40;color:#741300;'></i>&nbsp;&nbsp;&nbsp;\n";
 						$unitDetailString = $unitDetailString."							</span>\n";
@@ -660,7 +680,7 @@ if (!$playMode) {
 						$unitDetailString = $unitDetailString."							</span>\n";
 						$unitDetailString = $unitDetailString."						</td>\n";
 					} else {
-						$unitDetailString = $unitDetailString."						<td nowrap width='1%' onclick=\"location.href='gui_select_unit.php?activebid=1&unitid=".$assignedUnitID."'\" style='background-color:#121212;text-align:right;'>\n";
+						$unitDetailString = $unitDetailString."						<td nowrap width='1%' onclick=\"location.href='gui_select_unit.php?activebid=1&formationid=".$formationidSelected."&unitid=".$assignedUnitID."'\" style='background-color:#121212;text-align:right;'>\n";
 						$unitDetailString = $unitDetailString."							<span style='font-size:16px;'>\n";
 						$unitDetailString = $unitDetailString."								&nbsp;&nbsp;&nbsp;<i class='fas fa-arrow-circle-right' aria-hidden='true' style='font-size:40;color:#2f7c2f;'></i>&nbsp;&nbsp;&nbsp;\n";
 						$unitDetailString = $unitDetailString."							</span>\n";
@@ -711,7 +731,7 @@ if (!$playMode) {
 					}
 					$unitDetailString = $unitDetailString."						</td>\n";
 				} else {
-					$unitDetailString = $unitDetailString."						<td onclick='location.href=\"gui_select_unit.php?dm=1&unitid=".$assignedUnitID."&pilotid=".$assignedPilotID."\"' nowrap width='1%' valign='middle' style='background-color:".$bidcolor."text-align:right;'>\n";
+					$unitDetailString = $unitDetailString."						<td onclick='location.href=\"gui_select_unit.php?dm=1&unitid=".$assignedUnitID."&formationid=".$formationidSelected."&pilotid=".$assignedPilotID."\"' nowrap width='1%' valign='middle' style='background-color:".$bidcolor."text-align:right;'>\n";
 					$unitDetailString = $unitDetailString."							<span style='font-size:12px;'>\n";
 					$unitDetailString = $unitDetailString."								<i class='fas fa-minus-square'></i>\n";
 					$unitDetailString = $unitDetailString."							</span>\n";
@@ -727,11 +747,6 @@ if (!$playMode) {
 			array_push($unitsInAllFormations, $unitsInSingleFormation);
 			$formationind++;
 		}
-	}
-
-	if ($playMode) {
-		// FINALIZE ROUND
-		echo "  		<td nowrap onclick='javascript:finalizeRound(".$pid.");' id='FinalizeRoundButton' style='text-align:center;width:100px;background:rgba(81,125,37,1.0);' rowspan='4'><div style='color:#eee;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class='fas fa-redo'></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div></td>\n";
 	}
 
 	echo "		</tr>\n";

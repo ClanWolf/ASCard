@@ -164,7 +164,7 @@ a:hover {
 	top: 0;
 	left: 0;
 	background-color: #000000;
-	/* background-image: url('images/body-bg_1.jpg'); */
+	background-image: url('../images/static.gif');
 	z-index:110;
 }
 #gamemenu {

@@ -17,6 +17,7 @@ session_start();
 	$gid = $_SESSION['gameid'];
 	$pimage = $_SESSION['playerimage'];
 	$hideNotOwnedUnit = $_SESSION['option1'];
+	$fadeOutDuration = isset($_GET["fod"]) ? $_GET["fod"] : 150;
 
 	$isAdmin = $_SESSION['isAdmin'];
 
@@ -274,6 +275,13 @@ session_start();
 	echo "	var WPNS_PREP = $array_WPNS_PREP[$chosenUnitIndex];\n";
 	echo "	var pilotimage = '$array_PILOT_IMG_URL[$chosenUnitIndex]';\n";
 
+	// If the page was reloaded, do not fade anything to speed up things
+	echo "	var fadeOutDuration = ".$fadeOutDuration.";\n";
+	echo "	if (document.referrer === window.location.href) {\n";
+	echo "		// console.log('RELOAD');\n";
+	echo "		fadeOutDuration = 0;\n";
+	echo "	}\n";
+
 	if ($array_CV_ENGN_PREP[$chosenUnitIndex] != null) {
 		echo "	var CV_ENGN_PREP = $array_CV_ENGN_PREP[$chosenUnitIndex];\n";
 	} else {
@@ -404,7 +412,16 @@ session_start();
 	</table>
 </div>
 
-<div id="cover"></div>
+<div id='cover'></div>
+
+<script>
+	if (fadeOutDuration == 0) {
+		document.getElementById("cover").style.background = "none";
+		document.getElementById("cover").style.backgroundColor = "#444444";
+	} else {
+		document.getElementById("cover").style.backgroundColor = "black";
+	}
+</script>
 
 <div id="header">
 	<table style="width:100%;height:60px;border:none;border-collapse:collapse;background:rgba(50,50,50,1.0);" cellspacing="0" cellpadding="0">
@@ -416,32 +433,47 @@ session_start();
 				<div style='vertical-align:middle;font-size:28px;color:#eee;'>&nbsp;&nbsp;&nbsp;G<?php echo $gid ?>&nbsp;R<?php echo $CURRENTROUND ?>&nbsp;&nbsp;&nbsp;</div>
 			</td>
 <?php
-	$size = sizeof($array_UNIT_MODEL);
-	for ($i11 = 1; $i11 <= sizeof($array_UNIT_MODEL); $i11++) {
-		if ($array_ACTIVE_BID[$i11] == "0") {
-			$size = $size - 1;
-		}
-	}
-
-	if ($size == 0) {
-		// No units to display, go back
-		// redirect to gui_select_unit.php
-		//header("Location: ./gui_select_unit.php");
-	}
-
 	$maxNumberOfTabs = 5;
 	$startIndex = intval($array_PLAYER_FORMATION_STARTINDS[$formationid]);
 	$showRightArrow = false;
 
-	// var_dump($size);
-	// var_dump($startIndex);
+	$visibleUnitsCount = 0;
+	$size = sizeof($array_UNIT_MODEL);
+	for ($i11 = 1; $i11 <= sizeof($array_UNIT_MODEL); $i11++) {
+		if ($array_ACTIVE_BID[$i11] == "0") {
+			$size = $size - 1;
+		} else {
+			$visibleUnitsCount++;
+			if ($i11 < $startIndex) {
+				// not yet visible
+			} else if ($i11 >= $startIndex) {
+				// potentially visible
+				if ($i11 == $chosenUnitIndex) {
+					// This is the currently chosen unit
+					if ($visibleUnitsCount <= 5) {
+						// Unit visible
+						echo "<script>console.log('Current unit is visible in top menu.');</script>";
+					}
+				}
+			}
+		}
+	}
 
 
 
 
+//	if ($chosenUnitIndex < $startIndex) {
+//
+//	} else if ($chosenUnitIndex > ($startIndex + 5)) {
+//
+//	}
 
 
 
+//$chosenUnitIndex
+//
+//
+//chosenunitindex
 
 	if ($size > $maxNumberOfTabs) {
 		$width = ceil(100 / $maxNumberOfTabs);
@@ -533,7 +565,7 @@ session_start();
 			$mn = $array_UNIT_NUMBER[$i4];
 		}
 
-		$meli="./gui_play_unit.php?formationid=".$formationid."&chosenunit=".$i4;
+		$meli="./gui_play_unit.php?formationid=".$formationid."&fod=175&chosenunit=".$i4;
 		if ($chosenUnitIndex == $i4) {
 			$locmeli = $meli;
 			$currentUnitStatusImage = $unitstatusimage;
@@ -679,7 +711,7 @@ session_start();
 					echo "		<tr>\n";
 				}
 				if ($array_UNIT_DBID[$chosenUnitIndex] == $item['unitid']) {
-					echo "			<td onclick='location.href=\"gui_play_unit.php?formationid=".$array_PLAYER_FORMATION_IDS[$cc]."&chosenunit=".$count."\"' align='center' valign='top' style='background-color:#293647;padding:4px;border:2px solid #555;animation: glow 1s infinite alternate;'>\n";
+					echo "			<td onclick='location.href=\"gui_play_unit.php?formationid=".$array_PLAYER_FORMATION_IDS[$cc]."&fod=175&chosenunit=".$count."\"' align='center' valign='top' style='background-color:#293647;padding:4px;border:2px solid #555;animation: glow 1s infinite alternate;'>\n";
 //					echo "				<img src='./images/chevron.png' width='32px'>\n";
 //					if ($item['status'] != "destroyed") {
 //						echo "				<br><img style='border:4px solid #111;margin-bottom:15px;' id='pilotimageoverview' src='./".$item['pilot_image']."' width='40px'>\n";
@@ -694,7 +726,7 @@ session_start();
 					echo "				<br><span style='font-size:15px'>".$item['unit_number']."</span>\n";
 					echo "			</td>\n";
 				} else {
-					echo "			<td onclick='location.href=\"gui_play_unit.php?formationid=".$array_PLAYER_FORMATION_IDS[$cc]."&chosenunit=".$count."\"' align='center' valign='top' style='background-color:#333333;padding:4px;border:2px solid #555;'>\n";
+					echo "			<td onclick='location.href=\"gui_play_unit.php?formationid=".$array_PLAYER_FORMATION_IDS[$cc]."&fod=175&chosenunit=".$count."\"' align='center' valign='top' style='background-color:#333333;padding:4px;border:2px solid #555;'>\n";
 //					echo "				<img src='./images/chevron_empty.png' width='32px'>\n";
 //					if ($item['status'] != "destroyed") {
 //						echo "				<br><img style='border:4px solid #111;margin-bottom:15px;' src='./".$item['pilot_image']."' width='40px'>\n";
@@ -720,13 +752,6 @@ session_start();
 	}
 ?>
 		</tr>
-		<!--
-		<tr>
-			<td colspan="4" style='text-align:center;background-color:#444444;' class='unitselect_button_active'>
-				Blue chevron represents currently selected unit.
-			</td>
-		</tr>
-		-->
 	</table>
 </div>
 
@@ -1494,29 +1519,29 @@ if ($showDistancesHexes == 1) {
 	</div>
 </div>
 
-<div id="topmiddlebackground">
-	<img style="visibility:hidden;pointer-events:auto;height:100px;" src='./images/top-middle_01.png' onclick="javascript:hideTopPanels();">
+<div style="display:none;" id="topmiddlebackground">
+	<img style="pointer-events:auto;height:100px;" src='./images/top-middle_01.png' onclick="javascript:hideTopPanels();">
 </div>
-<div id="destroyedIndicator">
-	<img style="visibility:hidden;pointer-events:auto;" src='./images/skull.png' onclick="javascript:hideSkull();" height='250px'>
+<div style="display:none;" id="destroyedIndicator">
+	<img style="pointer-events:auto;" src='./images/skull.png' onclick="javascript:hideSkull();" height='250px'>
 </div>
-<div id="crippledIndicator">
-	<img style="visibility:hidden;pointer-events:auto;height:160px;" src='./images/crippled.png' onclick="javascript:hideCrippled();">
+<div style="display:none;" id="crippledIndicator">
+	<img style="pointer-events:auto;height:160px;" src='./images/crippled.png' onclick="javascript:hideCrippled();">
 </div>
-<div id="shutdownIndicator">
-	<img style="visibility:hidden;pointer-events:auto;" src='./images/heat.png' onclick="javascript:hideShutdownIndicator();" height='250px'>
+<div style="display:none;" id="shutdownIndicator">
+	<img style="pointer-events:auto;" src='./images/heat.png' onclick="javascript:hideShutdownIndicator();" height='250px'>
 </div>
-<div id="narcIndicator">
-	<img style="visibility:hidden;pointer-events:auto;" src='./images/narc.png' onclick="javascript:hideTopPanels();" height='50px'>
+<div style="display:none;" id="narcIndicator">
+	<img style="pointer-events:auto;" src='./images/narc.png' onclick="javascript:hideTopPanels();" height='50px'>
 </div>
-<div id="tagIndicator">
-	<img style="visibility:hidden;pointer-events:auto;" src='./images/tag.png' onclick="javascript:hideTopPanels();" height='50px'>
+<div style="display:none;" id="tagIndicator">
+	<img style="pointer-events:auto;" src='./images/tag.png' onclick="javascript:hideTopPanels();" height='50px'>
 </div>
-<div id="waterIndicator">
-	<img style="visibility:hidden;pointer-events:auto;" src='./images/water.png' onclick="javascript:hideTopPanels();" height='50px'>
+<div style="display:none;" id="waterIndicator">
+	<img style="pointer-events:auto;" src='./images/water.png' onclick="javascript:hideTopPanels();" height='50px'>
 </div>
-<div id="routedIndicator">
-	<img style="visibility:hidden;pointer-events:auto;" src='./images/routed.png' onclick="javascript:hideTopPanels();" height='50px'>
+<div style="display:none;" id="routedIndicator">
+	<img style="pointer-events:auto;" src='./images/routed.png' onclick="javascript:hideTopPanels();" height='50px'>
 </div>
 
 <script type="text/javascript">
@@ -1558,10 +1583,14 @@ if ($showDistancesHexes == 1) {
 <script>
 	document.addEventListener('readystatechange', event => {
 		if (event.target.readyState === "complete") {
-			$("#cover").fadeOut(175, "linear", function() {
-				$("#cover").hide();
-				document.getElementById("cover").style.visibility = "hidden";
-			});
+			if (fadeOutDuration > 0) {
+				$('#cover').fadeOut(".$fadeOutDuration.", 'linear', function() {
+					$('#cover').hide();
+					document.getElementById('cover').style.visibility = 'hidden';
+				});
+			} else {
+				document.getElementById('cover').style.visibility = 'hidden';
+			}
 		}
 	});
 </script>

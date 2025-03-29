@@ -4,7 +4,6 @@ https://github.com/orgs/ClanWolf/projects/6/views/1
 
 // HIGH
 TODO: Finish the crits for CVs
-TODO: Add finalize round for CVs
 
 // NORMAL
 TODO: Alle Schriftarten sollten als em relativ definiert werden
