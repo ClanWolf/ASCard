@@ -396,6 +396,14 @@
 9190;Tortoise II Battle Armor [aSRM] (Sqd6);BA;1;3;2;1284
 9188;Tortoise II Battle Armor [LRM] (Sqd6);BA;1;3;2;1289
 9189;Tortoise II Battle Armor [SRM] (Sqd6);BA;1;3;2;1364
+5605;Ferret Light Scout VTOL "Fermi";CV;1;3;5;108
+2919;Shamash Reconnaissance Vehicle (Flamer);CV;1;2;11;228
+2921;Shamash Reconnaissance Vehicle;CV;1;2;11;504
+2920;Shamash Reconnaissance Vehicle (Interdictor);CV;1;2;11;520
+6704;Celerity CLR-03-OA;BM;1;3;15;275
+8366;Celerity CLR-03-OMM "Rajah";BM;1;3;15;278
+7292;Roadrunner (Emerald Harrier) RD-1R;BM;1;2;15;888
+6708;Celerity CLR-03-OE;BM;1;3;15;919
 5136;Stinger IIC 2;BM;1;2;20;0
 134;Asshur Fast Reconnaissance Vehicle (Proto AC);CV;1;2;20;333
 2316;Odin Scout Tank (Spotter);CV;1;2;20;338
@@ -537,8 +545,8 @@
 722;Crimson Hawk 2;BM;1;2;25;1271
 210;Balac Strike VTOL;CV;1;2;25;1271
 208;Balac Strike VTOL (LRM);CV;1;2;25;1278
-5641;Cephalus E;BM;1;3;25;1284
 5097;Solitaire;BM;1;2;25;1284
+5641;Cephalus E;BM;1;3;25;1284
 721;Crimson Hawk;BM;1;2;25;1285
 1829;Koshi (Mist Lynx) C;BM;1;2;25;1320
 8011;Cheetah IIC;af;1;2;25;1339
@@ -546,8 +554,8 @@
 3936;Chaeronea 2;AF;1;2;25;1384
 7603;Mongoose C;BM;1;2;25;1386
 2655;Raptor RTX1-OR;BM;1;3;25;1393
-5640;Cephalus D;BM;1;3;25;1450
 3937;Chaeronea 3;AF;1;2;25;1450
+5640;Cephalus D;BM;1;3;25;1450
 1070;Fire Falcon Prime;BM;1;2;25;1451
 5655;Solitaire 2;BM;1;2;25;1471
 8367;Gunsmith CH11-NGC "Cinderella";BM;1;3;25;1519
@@ -3199,14 +3207,131 @@
 9190;Tortoise II Battle Armor [aSRM] (Sqd6);BA;1;3;2;1284
 9188;Tortoise II Battle Armor [LRM] (Sqd6);BA;1;3;2;1289
 9189;Tortoise II Battle Armor [SRM] (Sqd6);BA;1;3;2;1364
-5069;Skulker Wheeled Scout Tank Mk. II (Mission);;0;1;20;0
-5070;Skulker Wheeled Scout Tank Mk. II (Sealed);;0;1;20;0
+5538;Ferret Light Scout VTOL (Sensor);;0;1;5;0
+4393;Jeep (MG);;0;1;5;0
+4394;Jeep (SRM);;0;1;5;0
+4395;Jeep;;0;1;5;0
+5105;Speeder;;0;1;5;0
+4134;Escape Pod;;0;1;5;0
+4510;Life Boat;;0;1;5;0
+1059;Ferret Light Scout VTOL (Cargo);CV;1;1;5;17
+1060;Ferret Light Scout VTOL;CV;1;1;5;58
+5065;Skimmer;cv;1;1;5;86
+1058;Ferret Light Scout VTOL (Armor) "Wild Weasel";CV;1;1;5;103
+5605;Ferret Light Scout VTOL "Fermi";CV;1;3;5;108
+2805;Savannah Master Hovercraft (Interdictor);CV;1;1;5;128
+2806;Savannah Master Hovercraft (SL);CV;1;1;5;131
+1164;Gabriel Reconnaissance Hovercraft (ERSL);CV;1;1;5;162
+1166;Gabriel Reconnaissance Hovercraft (TDF);CV;1;1;5;168
+1165;Gabriel Reconnaissance Hovercraft;CV;1;1;5;198
+2807;Savannah Master Hovercraft;CV;1;1;5;215
+9452;Savannah Master Hovercraft (Reflective);CV;1;1;5;294
+5012;Security Robot;;0;1;6;0
+3143;Swift Wind Scout Car (ICE - Speed);CV;1;1;8;39
+3142;Swift Wind Scout Car (ICE - Cargo);CV;1;1;8;81
+3144;Swift Wind Scout Car (ICE);CV;1;1;8;83
+3145;Swift Wind Scout Car;CV;1;1;8;83
+4332;Hover Scout;;0;1;10;0
+1134;Flatbed Truck;CV;1;1;10;34
+1131;Flatbed Truck (Mortar);CV;1;1;10;65
+1133;Flatbed Truck (SRM);CV;1;1;10;67
+3023;Sprint Scout Helicopter (C3i);CV;1;1;10;71
+3027;Sprint Scout Helicopter (Troop Transport);CV;1;1;10;71
+3731;Armored Personnel Carrier (Hover Sensors);CV;1;1;10;78
+3022;Sprint Scout Helicopter (C3);CV;1;1;10;82
+3026;Sprint Scout Helicopter;CV;1;1;10;82
+115;Armored Personnel Carrier (Hover);CV;1;1;10;102
+2720;Ripper Infantry Transport (Infantry);CV;1;1;10;108
+1871;Light Strike Fighter Angel (Upgrade);CF;1;1;10;111
+112;Armored Personnel Carrier (Hover MG);CV;1;1;10;114
+1876;Light Strike Fighter Suzume ("Sparrow");CF;1;1;10;116
+1129;Flatbed Truck (Armor);CV;1;1;10;117
+2722;Ripper Infantry Transport (MG);CV;1;1;10;125
+1870;Light Strike Fighter Angel;CF;1;1;10;129
+1872;Light Strike Fighter Comet;CF;1;1;10;129
+1873;Light Strike Fighter Owl;CF;1;1;10;129
+114;Armored Personnel Carrier (Hover SRM);CV;1;1;10;131
+3024;Sprint Scout Helicopter (Interdictor);CV;1;1;10;139
+120;Armored Personnel Carrier (Tracked);CV;1;1;10;142
+9366;Mobile Long Tom Artillery LT-MOB-25F (Ammunition  Loader Carriage);cv;1;1;10;148
+9367;Mobile Long Tom Artillery LT-MOB-25F (Ammunition Carriage);cv;1;1;10;148
+9368;Mobile Long Tom Artillery LT-MOB-25F (Drone Command Carriage);cv;1;1;10;148
+9369;Mobile Long Tom Artillery LT-MOB-25F (Support Carriage);cv;1;1;10;148
+2203;Mobile Long Tom Artillery Ammunition Carriage LT-MOB-25;CV;1;1;10;152
+2204;Mobile Long Tom Artillery Support Carriage LT-MOB-25;CV;1;1;10;152
+125;Armored Personnel Carrier (Wheeled);CV;1;1;10;157
+117;Armored Personnel Carrier (Tracked MG);CV;1;1;10;157
+6966;Light Strike Fighter Andurien;CF;1;1;10;158
+2724;Ripper Infantry Transport (SPL);CV;1;1;10;160
+119;Armored Personnel Carrier (Tracked SRM);CV;1;1;10;168
+122;Armored Personnel Carrier (Wheeled MG);CV;1;1;10;172
+1130;Flatbed Truck (LRM);CV;1;1;10;172
+124;Armored Personnel Carrier (Wheeled SRM);CV;1;1;10;176
+1874;Light Strike Fighter Owl II;CF;1;1;10;191
+111;Armored Personnel Carrier (Hover LRM);CV;1;1;10;193
+121;Armored Personnel Carrier (Wheeled LRM);CV;1;1;10;194
+116;Armored Personnel Carrier (Tracked LRM);CV;1;1;10;208
+3025;Sprint Scout Helicopter (Laser);CV;1;1;10;220
+2723;Ripper Infantry Transport (Royal);CV;1;1;10;228
+1132;Flatbed Truck (RL);CV;1;1;10;232
+6487;Thang-Ta APC;CV;1;1;10;241
+1875;Light Strike Fighter Owl III;CF;1;1;10;329
+6312;Kruger Combat Car (Original);CV;1;1;10;336
+2725;Ripper Infantry Transport;CV;1;1;10;345
+2721;Ripper Infantry Transport (Light PPC);CV;1;1;10;371
+6311;Kruger Combat Car;CV;1;1;10;429
+2719;Ripper Infantry Transport (ERML);CV;1;1;10;432
+4049;Darter Scout Car "ABC's Folly";;0;1;13;0
+836;Darter Scout Car;CV;1;1;13;125
+833;Darter Scout Car (C3);CV;1;1;13;125
+832;Darter Scout Car (BAP);CV;1;1;13;136
+4050;Darter Scout Car (SRM2);CV;1;1;13;167
+835;Darter Scout Car (SRM);CV;1;1;13;192
+834;Darter Scout Car (ECM);CV;1;1;13;193
+6314;Marten Scout VTOL (Infantry);CV;1;1;15;107
+5553;Celerity CLR-02-X-D;BM;1;1;15;157
+2104;Maultier Hover APC (BA);CV;1;1;15;165
+2108;Maultier Hover APC (MG);CV;1;1;15;170
+3977;Command Van (ICE);CV;1;1;15;178
+6313;Marten Scout VTOL;CV;1;1;15;179
+8411;Crow Scout Helicopter "Dragonfly";CV;1;1;15;186
+6671;Celerity CLR-03-O;BM;1;1;15;187
+9385;Command Van;CV;1;1;15;193
+2105;Maultier Hover APC (Basic);CV;1;1;15;197
+6706;Celerity CLR-03-OC;BM;1;1;15;202
+2109;Maultier Hover APC;CV;1;1;15;209
+2107;Maultier Hover APC (Intermediate);CV;1;1;15;210
+7330;Beagle Hover Scout (LRRP);CV;1;1;15;219
+6710;Celerity CLR-05-X;BM;1;1;15;225
+311;Beagle Hover Scout (Sealed);CV;1;1;15;249
+310;Beagle Hover Scout (C3i);CV;1;1;15;266
+5769;Flea FLE-14;BM;1;1;15;270
+6704;Celerity CLR-03-OA;BM;1;3;15;275
+3978;Command Van (Q-Vehicle);CV;1;1;15;278
+8366;Celerity CLR-03-OMM "Rajah";BM;1;3;15;278
+745;Crow Scout Helicopter (C3);CV;1;1;15;288
+747;Crow Scout Helicopter;CV;1;1;15;288
+313;Beagle Hover Scout (TAG);CV;1;1;15;295
+2106;Maultier Hover APC (Fusion);CV;1;1;15;301
+6707;Celerity CLR-03-OD;BM;1;1;15;304
+2028;Mantis Light Attack VTOL (ECCM);CV;1;1;15;304
+8069;Prey Seeker PY-SR30;BM;1;1;15;331
+312;Beagle Hover Scout;CV;1;1;15;335
+6705;Celerity CLR-03-OB;BM;1;1;15;339
+6709;Celerity CLR-04-R;BM;1;1;15;384
+746;Crow Scout Helicopter (Export);CV;1;1;15;415
+2029;Mantis Light Attack VTOL;CV;1;1;15;434
+6331;Prey Seeker PY-SR10;BM;1;1;15;595
+6708;Celerity CLR-03-OE;BM;1;3;15;919
+8068;Prey Seeker PY-SR20;BM;1;1;15;1060
 4277;Heavy Transport B1;;0;1;20;0
 4279;Heavy Transport B1 (SL);;0;1;20;0
 4280;Heavy Transport B1 (SRM);;0;1;20;0
+5069;Skulker Wheeled Scout Tank Mk. II (Mission);;0;1;20;0
+5070;Skulker Wheeled Scout Tank Mk. II (Sealed);;0;1;20;0
+9202;Heavy Transport B1 (MG);;0;1;20;0
 4782;Packrat LRPV PKR-T5 (Mobile TacOps);;0;1;20;0
 5067;Skulker Wheeled Scout Tank "Matahari";;0;1;20;0
-9202;Heavy Transport B1 (MG);;0;1;20;0
 1646;J-27 Ordnance Transport Trailer;CV;1;1;20;44
 1644;J-27 Ordnance Transport (Fusion);CV;1;1;20;47
 1645;J-27 Ordnance Transport;CV;1;1;20;47
@@ -3261,10 +3386,10 @@
 3065;Stinger STG-5T;BM;1;1;20;341
 3530;Wasp WSP-3W;BM;1;1;20;342
 2399;Packrat LRPV PKR-T5;CV;1;1;20;344
-3061;Stinger STG-3R;BM;1;1;20;359
 3159;Tamerlane Strike Sled 2;CV;1;1;20;359
-2413;Pandion Combat WiGE (C3);CV;1;1;20;373
+3061;Stinger STG-3R;BM;1;1;20;359
 3525;Wasp WSP-1W;BM;1;1;20;373
+2413;Pandion Combat WiGE (C3);CV;1;1;20;373
 3303;Trident TRN-3T;AF;1;1;20;374
 3522;Wasp WSP-1K;BM;1;1;20;376
 1138;Flea FLE-19;BM;1;1;20;381
@@ -3287,14 +3412,14 @@
 1136;Flea FLE-15;BM;1;1;20;430
 513;Centipede Scout Car (SRM);CV;1;1;20;431
 1140;Flea FLE-4;BM;1;1;20;432
-3063;Stinger STG-5M;BM;1;1;20;432
 1901;Locust LCT-1V;BM;1;1;20;432
+3063;Stinger STG-5M;BM;1;1;20;432
 1904;Locust LCT-3D;BM;1;1;20;436
 3156;Tamerlane Strike Sled (Flamer);CV;1;1;20;436
 3532;Wasp WSP-8T;BM;1;1;20;439
+1900;Locust LCT-1S;BM;1;1;20;440
 2880;Seydlitz SYD-Z1;AF;1;1;20;440
 2878;Seydlitz SYD-21;AF;1;1;20;440
-1900;Locust LCT-1S;BM;1;1;20;440
 1454;Heavy Weapons Carrier (PPC);CV;1;1;20;445
 9360;Skulker Wheeled Scout Tank C;CV;1;3;20;445
 5071;Skulker Wheeled Scout Tank Mk. II;CV;1;1;20;454
@@ -3313,8 +3438,8 @@
 3157;Tamerlane Strike Sled (RL);CV;1;1;20;484
 3517;Warrior Attack Helicopter H-9;CV;1;1;20;484
 9333;Kamisori Light Tank B;cv;1;1;20;487
-3531;Wasp WSP-7MAF;BM;1;1;20;488
 1545;Hornet HNT-151;BM;1;1;20;488
+3531;Wasp WSP-7MAF;BM;1;1;20;488
 3060;Stinger STG-3P;BM;1;1;20;489
 1907;Locust LCT-3V;BM;1;1;20;490
 5068;Skulker Wheeled Scout Tank X-5;CV;1;1;20;491
@@ -3330,9 +3455,9 @@
 2414;Pandion Combat WiGE (Infantry);CV;1;1;20;507
 4642;Minion Advanced Tactical Vehicle (Targeting Computer);CV;1;1;20;508
 8199;Locust LCT-5S;BM;1;1;20;509
-2169;Mercury MCY-102;BM;1;1;20;510
-3195;Thorn THE-S;BM;1;1;20;510
 3190;Thorn THE-F;BM;1;1;20;510
+3195;Thorn THE-S;BM;1;1;20;510
+2169;Mercury MCY-102;BM;1;1;20;510
 1137;Flea FLE-17;BM;1;1;20;510
 1547;Hornet HNT-161;BM;1;1;20;511
 8102;Porcupine PRC-3N;BM;1;1;20;511
@@ -3357,8 +3482,8 @@
 6749;Fox Armored Car (Interdictor);CV;1;1;20;547
 1151;Fox Armored Car;CV;1;1;20;549
 7497;Wasp WSP-4W;BM;1;1;20;551
-4624;Mercury MCY-98;BM;1;1;20;553
 1897;Locust LCT-1E;BM;1;1;20;553
+4624;Mercury MCY-98;BM;1;1;20;553
 4907;Red Shift RDS-2B;BM;1;1;20;555
 2185;Minion Advanced Tactical Vehicle "Silver Bullet";CV;1;3;20;560
 1902;Locust LCT-1V2;BM;1;1;20;568
@@ -3421,18 +3546,18 @@
 6768;Vector Combat Support VTOL;CV;1;1;22;512
 3910;Cavalry Attack Helicopter (Two Crewman);;0;1;25;0
 4637;Mining Robot;;0;1;25;0
-5227;Thrush TR-5;;0;1;25;0
 5397;Weapons Carrier A (LL);;0;1;25;0
+5227;Thrush TR-5;;0;1;25;0
 4791;Pathfinder PFF-2T;;0;57;25;0
 1765;Kestrel VTOL (MedEvac);CV;1;1;25;126
 5856;Cheetah II F-12A;AF;1;1;25;154
 1769;Kestrel VTOL;CV;1;1;25;155
 5169;Swift SWF-606R;AF;1;1;25;166
-5775;Kestrel VTOL (Scout);CV;1;1;25;175
 1767;Kestrel VTOL (SL);CV;1;1;25;175
+5775;Kestrel VTOL (Scout);CV;1;1;25;175
 2158;Medium Strike Fighter Kaiseradler (Imperial Eagle);CF;1;1;25;186
-1768;Kestrel VTOL (SRM);CV;1;1;25;192
 6472;Saroyan Jump Bomber;CF;1;1;25;192
+1768;Kestrel VTOL (SRM);CV;1;1;25;192
 573;Cheetah F-11-R;AF;1;1;25;197
 2159;Medium Strike Fighter Steinadler (Golden Eagle);CF;1;1;25;226
 2156;Medium Strike Fighter Defender;CF;1;1;25;226
@@ -3467,8 +3592,8 @@
 1386;Harasser Missile Platform "Leaping Lisa";CV;1;1;25;354
 3202;Thrush TR-7p;AF;1;1;25;362
 5007;Sea Skimmer Hydrofoil (SRM2);CV;1;1;25;363
-9399;Browning Mobile Headquarters;CV;1;1;25;365
 1388;Harasser Missile Platform (Flamer);CV;1;1;25;365
+9399;Browning Mobile Headquarters;CV;1;1;25;365
 2278;Nightshade ECM VTOL;CV;1;1;25;367
 2846;Scorpion Light Tank (SRM);CV;1;1;25;373
 9551;Harasser Missile Platform (iNarc);CV;1;1;25;375
@@ -3480,21 +3605,21 @@
 2200;Mobile Headquarters (LRM);CV;1;1;25;402
 1389;Harasser Missile Platform (LRM);CV;1;1;25;412
 1390;Harasser Missile Platform;CV;1;1;25;413
-1656;Jackrabbit JKR-8T;BM;1;1;25;414
 9559;Scorpion Light Tank (Thunderbolt);CV;1;1;25;414
+1656;Jackrabbit JKR-8T;BM;1;1;25;414
 6654;Shandra Advanced Scout Vehicle;CV;1;1;25;417
 9554;Scorpion Light Tank (Ultra);CV;1;1;25;425
 2842;Scorpion Light Tank (LRM);CV;1;1;25;425
 6751;Harasser Missile Platform (MML);CV;1;1;25;427
 1638;J. Edgar Light Hover Tank (ICE);CV;1;1;25;433
-2199;Mobile Headquarters (LL);CV;1;1;25;435
 6315;JI2A1 Attack APC;CV;1;1;25;435
+2199;Mobile Headquarters (LL);CV;1;1;25;435
 828;Dart DRT-3S;BM;1;1;25;436
 3909;Cavalry Attack Helicopter (Infiltrator);CV;1;1;25;446
 574;Cheetah F-11-RR;AF;1;1;25;448
 571;Cheetah F-10;AF;1;1;25;448
-4996;Scorpion Light Tank (Minesweeper);CV;1;1;25;452
 4790;Pathfinder PFF-2;BM;1;57;25;452
+4996;Scorpion Light Tank (Minesweeper);CV;1;1;25;452
 6437;Luduan Scout Vehicle;CV;1;1;25;453
 668;Commando COM-1C;BM;1;1;25;458
 1637;J. Edgar Light Hover Tank (Flamer);CV;1;1;25;459
@@ -3502,13 +3627,13 @@
 2845;Scorpion Light Tank (MRM);CV;1;1;25;469
 666;Commando COM-1A;BM;1;57;25;475
 3201;Thrush TR-7;AF;1;1;25;476
-5785;Harasser Missile Platform (Fuel Cell);CV;1;1;25;477
 9556;Scorpion Light Tank (Hardened);CV;1;1;25;477
+5785;Harasser Missile Platform (Fuel Cell);CV;1;1;25;477
 1640;J. Edgar Light Hover Tank (MG);CV;1;1;25;482
-504;Cavalry Attack Helicopter (LRM);CV;1;1;25;487
 9553;Harasser Missile Platform (Marian);CV;1;1;25;487
-6698;Hawk Moth II Gunship (Sniper);CV;1;1;25;490
+504;Cavalry Attack Helicopter (LRM);CV;1;1;25;487
 2276;Nightshade ECM VTOL (Light PPC);CV;1;1;25;490
+6698;Hawk Moth II Gunship (Sniper);CV;1;1;25;490
 2651;Raptor RTX1-OD;BM;1;1;25;490
 1427;Hawk Moth Gunship;CV;1;1;25;492
 507;Cavalry Attack Helicopter (TAG);CV;1;1;25;495
@@ -3553,8 +3678,8 @@
 3979;Commando COM-7X;BM;1;1;25;623
 9630;Commando COM-7A;BM;1;1;25;625
 9475;J. Edgar Light Hover Tank (Light PPC);CV;1;1;25;626
-1840;Koto KT-P2;BM;1;1;25;631
 2277;Nightshade ECM VTOL (Royal);CV;1;1;25;631
+1840;Koto KT-P2;BM;1;1;25;631
 7326;Swift SWF-606CA (Aaron);AF;1;1;25;633
 5770;Super-Wasp WSP-2A-X;BM;1;1;25;635
 830;Dart DRT-6S;BM;1;1;25;641
@@ -3571,8 +3696,8 @@
 2879;Seydlitz SYD-45X "Starling";AF;1;1;25;695
 5653;Brigand LDT-X3;BM;1;1;25;695
 1639;J. Edgar Light Hover Tank (Kurita);CV;1;1;25;696
-3162;Tarantula ZPH-3A;BM;1;1;25;702
 2261;Nexus II NXS2-A;BM;1;1;25;702
+3162;Tarantula ZPH-3A;BM;1;1;25;702
 831;Dart DRT-6T;BM;1;1;25;703
 6596;DI Multipurpose Light VTOL (Gunship);CV;1;1;25;711
 2260;Nexus NXS1-B;BM;1;1;25;715
@@ -3583,8 +3708,8 @@
 9627;Commando COM-7Y2 "Blazing Inferno";bm;1;1;25;728
 7721;Hermit Crab HMC-13;BM;1;1;25;731
 2968;Sling SL-1H;BM;1;1;25;731
-935;Duan Gung D9-G9;BM;1;1;25;737
 4656;Mongoose MON-69;BM;1;1;25;737
+935;Duan Gung D9-G9;BM;1;1;25;737
 7316;Brigand LDT-XPR4;BM;1;1;25;739
 2210;Mongoose MON-67;BM;1;1;25;741
 7723;Hermit Crab HMC-15;BM;1;1;25;742
@@ -3616,8 +3741,8 @@
 6488;Red Kite Attack VTOL;CV;1;3;25;835
 7722;Hermit Crab HMC-14;BM;1;1;25;844
 8183;Fire Falcon R;BM;1;3;25;846
-6979;Duan Gung (Vaughn);BM;1;1;25;851
 6697;Hawk Moth II Gunship (MML);CV;1;1;25;851
+6979;Duan Gung (Vaughn);BM;1;1;25;851
 2654;Raptor RTX1-OG;BM;1;1;25;857
 2650;Raptor RTX1-OC;BM;1;1;25;870
 14;Aeron Strike VTOL;CV;1;1;25;875
@@ -3642,8 +3767,8 @@
 9638;Commando COM-7T "Blazing Inferno II";bm;1;1;25;1018
 940;Ebony MEB-10;BM;1;1;25;1020
 2653;Raptor RTX1-OF;BM;1;1;25;1029
-5654;Brigand LDT-X4;BM;1;1;25;1038
 3930;Cephalus Prime;BM;1;3;25;1038
+5654;Brigand LDT-X4;BM;1;1;25;1038
 576;Cheetah F-13;AF;1;1;25;1047
 2762;Sabre SB-27b;AF;1;1;25;1059
 1839;Koto KTO-4A;BM;1;1;25;1073
@@ -3660,28 +3785,28 @@
 2794;Sangihe Shrike-Thrush "Nanook";AF;1;3;25;1592
 6942;Ebony MEB-12;BM;1;1;25;1837
 4384;Jackal JA-KL-1578;;0;1;30;0
-4434;Karnov UR Transport (Missiles);;0;1;30;0
-4435;Karnov UR Transport (Stealth);;0;1;30;0
+5328;UrbanMech UM-R50;;0;1;30;0
 8120;Voidseeker Mk 39-009;;0;1;30;0
+7885;Hipparch Cavalry Tank (MG);;0;1;30;0
+7886;Hipparch Cavalry Tank (SRM);;0;1;30;0
+7887;Hipparch Cavalry Tank Hellhorse;;0;1;30;0
+4168;Firebee WAM-A;;0;57;30;0
+4587;Mantis SA-MN2;;0;1;30;0
 4436;Katya Ground Assault Craft (Fuel);;0;1;30;0
 4437;Katya Ground Assault Craft C-906;;0;1;30;0
 4438;Katya Ground Assault Craft C-905;;0;1;30;0
 4439;Katya Ground Assault Craft C-904;;0;1;30;0
-4587;Mantis SA-MN2;;0;1;30;0
-7885;Hipparch Cavalry Tank (MG);;0;1;30;0
-7886;Hipparch Cavalry Tank (SRM);;0;1;30;0
-7887;Hipparch Cavalry Tank Hellhorse;;0;1;30;0
-5328;UrbanMech UM-R50;;0;1;30;0
+4434;Karnov UR Transport (Missiles);;0;1;30;0
+4435;Karnov UR Transport (Stealth);;0;1;30;0
+5138;Stinger LAM STG-A10;BM;1;1;30;0
+5139;Stinger LAM STG-A5;BM;1;1;30;0
+5140;Stinger LAM Mk I STG-A1;BM;1;1;30;0
 5389;Wasp LAM WSP-105;BM;1;1;30;0
 5390;Wasp LAM WSP-105M;BM;1;1;30;0
 5391;Wasp LAM WSP-110;BM;1;1;30;0
 5392;Wasp LAM Mk I WSP-100;BM;1;1;30;0
 5393;Wasp LAM Mk I WSP-100A;BM;1;1;30;0
 5394;Wasp LAM Mk I WSP-100b;BM;1;1;30;0
-5138;Stinger LAM STG-A10;BM;1;1;30;0
-5139;Stinger LAM STG-A5;BM;1;1;30;0
-5140;Stinger LAM Mk I STG-A1;BM;1;1;30;0
-4168;Firebee WAM-A;;0;57;30;0
 2477;Peregrine Attack VTOL (Cargo);CV;1;1;30;88
 1759;Karnov UR Transport;CV;1;1;30;125
 1754;Karnov UR Transport (3055 Upgrade);CV;1;1;30;152
@@ -3717,8 +3842,8 @@
 4569;Main Gauche Light Support Tank;CV;1;1;30;464
 2991;Sparrowhawk SPR-8H;AF;1;1;30;466
 3355;UrbanMech UM-R60L;BM;1;1;30;470
-4568;Main Gauche Light Support Tank (C3);CV;1;1;30;472
 6717;Revenant UBM-2R7;BM;1;1;30;472
+4568;Main Gauche Light Support Tank (C3);CV;1;1;30;472
 206;Badger Tracked Transport G;CV;1;1;30;474
 6540;Lamprey Transport Helicopter;CV;1;1;30;478
 5103;Sparrowhawk SPR-DH;AF;1;57;30;486
@@ -3743,16 +3868,16 @@
 3924;Centurion CNT-1A;AF;1;57;30;568
 3615;Yellow Jacket Gunship (PPC);CV;1;1;30;582
 3358;UrbanMech UM-R69;BM;1;1;30;589
-1758;Karnov UR Transport (Periphery);CV;1;1;30;590
 1676;Javelin JVN-10P;BM;1;1;30;590
-1675;Javelin JVN-10N;BM;1;1;30;594
+1758;Karnov UR Transport (Periphery);CV;1;1;30;590
 7329;Cyrano Gunship Fury;CV;1;1;30;594
+1675;Javelin JVN-10N;BM;1;1;30;594
 1491;Hermes HER-3S2;BM;1;1;30;600
 1485;Hermes HER-1A;BM;1;1;30;601
 9337;Galleon Light Tank GAL-106M;cv;1;1;30;601
 3353;UrbanMech UM-AIV;BM;1;1;30;603
-1022;Falcon FLC-4N;BM;1;1;30;610
 9498;UrbanMech UM-R27;BM;1;1;30;610
+1022;Falcon FLC-4N;BM;1;1;30;610
 1589;Hussar HSR-400-D;BM;1;1;30;611
 3614;Yellow Jacket Gunship (Arrow IV);CV;1;1;30;612
 2309;Nyx NX-90;BM;1;1;30;613
@@ -3765,12 +3890,12 @@
 3611;Yasha VTOL (Interdictor);CV;1;1;30;631
 1585;Hussar HSR-200-D;BM;1;1;30;636
 2992;Sparrowhawk SPR-H5;AF;1;1;30;637
-3375;Valkyrie VLK-QD2;BM;1;1;30;638
 1368;Hammer HMR-3S "Slammer";BM;1;1;30;638
+3375;Valkyrie VLK-QD2;BM;1;1;30;638
 784;Cyrano Gunship (ML);CV;1;1;30;645
 9340;Galleon Light Tank GAL-300;CV;1;1;30;648
-1027;Falcon FLC-4P;BM;1;1;30;649
 1489;Hermes HER-3S;BM;1;1;30;649
+1027;Falcon FLC-4P;BM;1;1;30;649
 1176;Galleon Light Tank GAL-102;CV;1;1;30;651
 3378;Valkyrie VLK-QF;BM;1;1;30;653
 7429;Javelin JVN-10A;BM;1;1;30;653
@@ -3786,11 +3911,11 @@
 8104;Valkyrie VLK-QD5;BM;1;3;30;690
 3018;Spider SDR-8R;BM;1;1;30;694
 3360;UrbanMech UM-R80;BM;1;1;30;699
-3925;Centurion CNT-1D;AF;1;1;30;701
 3381;Valkyrie VLK-QW5;BM;1;1;30;701
+3925;Centurion CNT-1D;AF;1;1;30;701
 2533;Pinto Attack VTOL (WoB);CV;1;1;30;703
-2027;Mantis SA-MN;BM;1;1;30;704
 7653;Issedone C;;0;3;30;704
+2027;Mantis SA-MN;BM;1;1;30;704
 2532;Pinto Attack VTOL;CV;1;1;30;710
 1121;Flashfire FLS-P4;BM;1;1;30;712
 3999;Corax CRX-OC;AF;1;1;30;714
@@ -3817,11 +3942,11 @@
 6715;Revenant UBM-2R3;BM;1;1;30;770
 275;Battle Hawk BH-K305;BM;1;1;30;771
 7928;SuburbanMech UM-R90;BM;1;1;30;773
-1024;Falcon FLC-4Nb (Saho);BM;1;1;30;774
 3379;Valkyrie VLK-QS5;BM;1;1;30;774
+1024;Falcon FLC-4Nb (Saho);BM;1;1;30;774
 3014;Spider SDR-7Kr;BM;1;1;30;775
-1178;Galleon Light Tank GAL-104;CV;1;1;30;779
 6673;Revenant UBM-2R;BM;1;1;30;779
+1178;Galleon Light Tank GAL-104;CV;1;1;30;779
 3617;Yellow Jacket Gunship;CV;1;1;30;782
 4911;Revenant UBM-1A;BM;1;1;30;784
 6930;Valkyrie VLK-QD8;BM;1;1;30;787
@@ -3837,8 +3962,8 @@
 2986;Spad SPD-502;AF;1;1;30;807
 3373;Valkyrie VLK-QD;BM;1;1;30;807
 1085;Firefly FFL-3PP3;BM;1;1;30;808
-98;Arctic Fox AF1U;BM;1;1;30;821
 5661;Razorback RZK-10S;BM;1;1;30;821
+98;Arctic Fox AF1U;BM;1;1;30;821
 3927;Centurion CNT-3S;AF;1;1;30;822
 1995;Malak C-MK-OA Dominus;BM;1;1;30;823
 2987;Spad SPD-503;AF;1;1;30;824
@@ -3891,8 +4016,8 @@
 1534;Hitman HM-1r;BM;1;1;30;938
 1997;Malak C-MK-OC Comminus;BM;1;1;30;944
 1028;Falcon FLC-5P;BM;1;1;30;945
-1026;Falcon FLC-4Nb-PP2;BM;1;1;30;947
 1023;Falcon FLC-4Nb;BM;1;1;30;947
+1026;Falcon FLC-4Nb-PP2;BM;1;1;30;947
 94;Arctic Fox AF1C;BM;1;1;30;948
 2814;Scarabus SCB-9T;BM;1;1;30;949
 4086;Dola DOL-1A1;BM;1;1;30;950
@@ -3914,8 +4039,8 @@
 9635;Jackalope JLP-BD-L "Harvey";bm;1;3;30;1028
 1655;Jackal JA-KL-55;BM;1;1;30;1034
 33;Anhur (P-Stealth);CV;1;3;30;1035
-6453;Anubis ABS-5Y;BM;1;1;30;1042
 1495;Hermes HER-4WB;BM;1;1;30;1042
+6453;Anubis ABS-5Y;BM;1;1;30;1042
 1996;Malak C-MK-OB Infernus;BM;1;1;30;1047
 3998;Corax CRX-OB;AF;1;1;30;1054
 1998;Malak C-MK-OD Luminos;BM;1;1;30;1055
@@ -3935,8 +4060,8 @@
 3704;Anubis ABS-3T;BM;1;1;30;1150
 692;Copperhead CPR-HD-004;BM;1;1;30;1151
 5808;Javelin JVN-11D (Farrell);BM;1;1;30;1155
-7523;Cricket RWN-01;BM;1;1;30;1169
 9406;Cricket RWN-02;BM;1;1;30;1169
+7523;Cricket RWN-01;BM;1;1;30;1169
 5662;Razorback RZK-10T;BM;1;1;30;1172
 2022;Mantis MTS-L;BM;1;1;30;1176
 9637;Jackalope JLP-NH "Tepoztēcatl";bm;1;3;30;1208
@@ -3963,12 +4088,12 @@
 6258;Wulfen B;BM;1;3;30;1806
 6261;Wulfen E;BM;1;3;30;1839
 7544;Vixen (Incubus) 9;BM;1;3;30;1849
-4797;Pegasus Scout Hover Tank (MG);;0;1;35;0
-5557;Zero ZRO-CX-3;AF;1;1;35;0
-4786;Panther PNT-9R (Darwin);;0;1;35;0
-5865;Panther PNT-10ALAG;;0;1;35;0
-8282;Jenner JR7-D (Webster);BM;1;1;35;0
 7924;Night Hawk NTK-2P;;0;1;35;0
+8282;Jenner JR7-D (Webster);BM;1;1;35;0
+5865;Panther PNT-10ALAG;;0;1;35;0
+5557;Zero ZRO-CX-3;AF;1;1;35;0
+4797;Pegasus Scout Hover Tank (MG);;0;1;35;0
+4786;Panther PNT-9R (Darwin);;0;1;35;0
 6528;Gun Trailer (Ambush);CV;1;1;35;137
 2778;Saladin Assault Hover Tank (Clan Cargo);CV;1;1;35;150
 6527;Gun Trailer (Stronghold);CV;1;1;35;224
@@ -3990,22 +4115,22 @@
 1078;Firebee FRB-1E (WAM-B);BM;1;57;35;514
 5844;Ostscout IIC;BM;1;3;35;520
 2831;Scimitar Medium Hover Tank;CV;1;1;35;532
-3105;Striker Light Tank;CV;1;1;35;564
 6656;MHI Amphibious APC;CV;1;1;35;564
+3105;Striker Light Tank;CV;1;1;35;564
 2809;Saxon APC (Laser);CV;1;1;35;565
 2854;Sea Hunter Maritime Tank;CV;1;1;35;570
 2460;Pegasus Scout Hover Tank (Sensors);CV;1;1;35;571
 3097;Striker Light Tank "Wet Striker";CV;1;1;35;573
 2539;Plainsman Medium Hovertank (Scout);CV;1;1;35;578
 2832;Scimitar Medium Hover Tank (TAG);CV;1;1;35;582
-3104;Striker Light Tank (SRM);CV;1;1;35;583
 3314;Tufana Hovercraft;CV;1;1;35;583
+3104;Striker Light Tank (SRM);CV;1;1;35;583
 579;Chevalier Light Tank (BAP);CV;1;1;35;583
 3103;Striker Light Tank (Sealed);CV;1;1;35;590
 6615;Storm Raider STM-R1;BM;1;1;35;593
 2777;Saladin Assault Hover Tank (Armor);CV;1;1;35;594
-2366;Ostscout OTT-7J;BM;1;1;35;596
 2780;Saladin Assault Hover Tank;CV;1;1;35;596
+2366;Ostscout OTT-7J;BM;1;1;35;596
 1578;Hunter Light Support Tank (LRM15);CV;1;1;35;599
 2541;Plainsman Medium Hovertank;CV;1;1;35;600
 2542;Plainsman Medium Hovertank (Streak);CV;1;1;35;600
@@ -4035,14 +4160,14 @@
 1094;Firestarter FS9-B;BM;1;1;35;668
 1572;Hunter Light Support Tank "Assault Hunter";CV;1;1;35;670
 580;Chevalier Light Tank (MML);CV;1;1;35;671
-6616;Storm Raider STM-R2;BM;1;1;35;671
 3276;Toro TR-A-1;BM;1;57;35;671
+6616;Storm Raider STM-R2;BM;1;1;35;671
 2796;Saracen Medium Hover Tank;CV;1;1;35;673
 1574;Hunter Light Support Tank (Ammo);CV;1;1;35;675
 2795;Saracen Medium Hover Tank (MRM);CV;1;1;35;676
 2457;Pegasus Scout Hover Tank (Missile);CV;1;1;35;678
-2385;Owens OW-1A;BM;1;1;35;680
 2829;Scimitar Medium Hover Tank (C3);CV;1;1;35;680
+2385;Owens OW-1A;BM;1;1;35;680
 9563;Striker Light Tank (Stealth);CV;1;1;35;684
 3098;Striker Light Tank (3053 Upgrade);CV;1;1;35;691
 2665;Raven RVN-3X;BM;1;1;35;691
@@ -4053,8 +4178,8 @@
 1691;Jenner JR7-C4;BM;1;1;35;703
 2830;Scimitar Medium Hover Tank (Missile);CV;1;1;35;704
 2455;Pegasus Scout Hover Tank (3058 Upgrade);CV;1;1;35;706
-2664;Raven RVN-3L;BM;1;1;35;708
 2808;Saxon APC (HQ);CV;1;1;35;708
+2664;Raven RVN-3L;BM;1;1;35;708
 1882;Lightning Attack Hovercraft (RL);CV;1;1;35;709
 5554;Lightning Attack Hovercraft CX-3;CV;1;1;35;710
 1687;Jenner JR7-A;BM;1;1;35;712
@@ -4069,8 +4194,8 @@
 4787;Panther PNT-9R (Tanaka);BM;1;1;35;759
 2779;Saladin Assault Hover Tank (LB-X);CV;1;1;35;760
 1097;Firestarter FS9-K;BM;1;1;35;763
-1689;Jenner JR7-C2;BM;1;1;35;769
 2425;Panther PNT-9R;BM;1;1;35;769
+1689;Jenner JR7-C2;BM;1;1;35;769
 3400;Venom SDR-9KB;BM;1;1;35;769
 1093;Firestarter FS9-A;BM;1;1;35;773
 1095;Firestarter FS9-P;BM;1;1;35;775
@@ -4080,8 +4205,8 @@
 7299;Diggs Drone Control Tank;CV;1;1;35;785
 3565;Wolfhound WLF-3M;BM;1;1;35;786
 5443;Panther PNT-CA;BM;1;1;35;787
-2456;Pegasus Scout Hover Tank (C3);CV;1;1;35;787
 1695;Jenner JR7-K (Grace II);BM;1;1;35;787
+2456;Pegasus Scout Hover Tank (C3);CV;1;1;35;787
 6614;Storm Raider STM-R3;BM;1;1;35;791
 6372;Saladin Mk II HCV (BC3);CV;1;1;35;793
 4785;Panther PNT-10KA;BM;1;1;35;797
@@ -4092,8 +4217,8 @@
 7417;Panther PNT-9ALAG;BM;1;1;35;804
 1079;Firebee FRB-2E;BM;1;1;35;808
 2781;Saladin Assault Hover Tank (Ultra);CV;1;1;35;808
-2669;Raven RVN-4X;BM;1;1;35;820
 1113;Firestarter FS9-S1;BM;1;1;35;820
+2669;Raven RVN-4X;BM;1;1;35;820
 3549;Wight WGT-2LAWC3;BM;1;1;35;821
 2422;Panther PNT-14S;BM;1;1;35;825
 2937;Sholagar SL-22;AF;1;1;35;830
@@ -4107,8 +4232,8 @@
 2370;Ostscout OTT-9S;BM;1;1;35;855
 5131;Stiletto STO-4A;BM;1;1;35;859
 3100;Striker Light Tank (Laser);CV;1;1;35;860
-2364;Ostscout OTT-10CS;BM;1;1;35;862
 6371;Saladin Mk II HCV;CV;1;1;35;862
+2364;Ostscout OTT-10CS;BM;1;1;35;862
 3277;Toro TR-A-6;BM;1;1;35;864
 3399;Venom SDR-9KA;BM;1;1;35;865
 6610;Firestarter FS9-M3;BM;1;1;35;866
@@ -4136,9 +4261,9 @@
 2369;Ostscout OTT-9CS;BM;1;1;35;930
 2390;Owens OW-1F;BM;1;1;35;933
 1191;Garm GRM-01B;BM;1;1;35;934
-9562;Hunter Light Support Tank (Cell);CV;1;3;35;939
-3548;Wight WGT-2LAW;BM;1;1;35;939
 3401;Venom SDR-9KC;BM;1;1;35;939
+3548;Wight WGT-2LAW;BM;1;1;35;939
+9562;Hunter Light Support Tank (Cell);CV;1;3;35;939
 1111;Firestarter FS9-C;BM;1;1;35;940
 5666;Stiletto STO-4C;BM;1;1;35;941
 2668;Raven RVN-4Lr;BM;1;1;35;943
@@ -4147,8 +4272,8 @@
 1536;Hollander BZK-F3;BM;1;1;35;953
 1948;Longshot LNG-3;BM;1;1;35;955
 5567;Saladin Assault Hover Tank Ifrit;CV;1;1;35;955
-3148;Tabanid Light Drone Fighter;AF;1;1;35;956
 1880;Lightning Attack Hovercraft (ERML);CV;1;1;35;956
+3148;Tabanid Light Drone Fighter;AF;1;1;35;956
 2387;Owens OW-1C;BM;1;1;35;964
 3561;Wolfhound WLF-1A;BM;1;1;35;967
 3562;Wolfhound WLF-1B;BM;1;1;35;967
@@ -4207,8 +4332,8 @@
 3003;Spector SPR-5F;BM;1;1;35;1183
 5032;Shade S-HA-OC Comminus;AF;1;1;35;1186
 5134;Stiletto STO-6X;BM;1;1;35;1199
-5031;Shade S-HA-OB Infernus;AF;1;1;35;1209
 7452;Ostscout OTT-12R;BM;1;3;35;1209
+5031;Shade S-HA-OB Infernus;AF;1;1;35;1209
 2391;Owens OW-1R;BM;1;3;35;1215
 1947;Longshot LNG-2;BM;1;1;35;1215
 3002;Spector SPR-4F;BM;1;1;35;1224
@@ -4222,8 +4347,8 @@
 1686;Jenner JR10-X;BM;1;1;35;1269
 6334;Hollander III BZK-D2;BM;1;1;35;1270
 6393;Rokurokubi RK-4K;BM;1;1;35;1286
-6517;Picaroon CSR-F100;AF;1;1;35;1290
 3569;Wolfhound WLF-5;BM;1;1;35;1290
+6517;Picaroon CSR-F100;AF;1;1;35;1290
 8222;Panther PNT-14R;BM;1;3;35;1291
 2554;Poignard PGD-Y3;AF;1;1;35;1292
 391;Blade BLD-XL;BM;1;1;35;1314
@@ -4256,15 +4381,15 @@
 6394;Rokurokubi RK-4X;BM;1;3;35;1858
 9240;Rattlesnake JR7-31R (Gideon);bm;1;3;35;1959
 6927;Morrigan 4;BM;1;3;35;2063
+4094;Dragonfly MM-2;AF;2;1;40;0
 5845;Liberator LIB-4T;;0;1;40;0
-6774;Vali Artillery Vehicle (Original);;0;1;40;0
 7341;Vulcan (John Carras);BM;2;1;40;0
 4042;Daimyo DMO-2KA;;0;1;40;0
 4043;Daimyo DMO-3K;;0;1;40;0
 4320;Hermes II HER-2K "Hermes III";;0;1;40;0
 3684;Air Car;;0;1;40;0
-4094;Dragonfly MM-2;AF;2;1;40;0
 5083;Small Agricultural Robot;;0;1;40;0
+6774;Vali Artillery Vehicle (Original);;0;1;40;0
 990;Engineering Vehicle;CV;2;1;40;194
 989;Engineering Vehicle (Flamer);CV;2;1;40;196
 988;Engineering Vehicle (AC);CV;2;1;40;423
@@ -4319,18 +4444,18 @@
 126;Assassin ASN-101;BM;2;1;40;757
 2862;Sentinel STN-3M;BM;2;1;40;758
 1508;Hetzer Wheeled Assault Gun (LB-X);CV;2;1;40;767
-644;Clint CLNT-2-3T;BM;2;1;40;770
 8057;Shun Transport VTOL (Support);cv;2;1;40;770
+644;Clint CLNT-2-3T;BM;2;1;40;770
 593;Cicada CDA-3C;BM;2;1;40;771
 1511;Hetzer Wheeled Assault Gun (Sealed);CV;2;1;40;775
 4690;Myrmidon Medium Tank P (Tate);CV;2;1;40;780
 1497;Hermes II HER-2S;BM;2;1;40;784
 6664;Scapha Hovertank F;CV;2;1;40;794
-3535;Werewolf WER-LF-004;BM;2;1;40;802
 2730;Rogue RGU-133E;AF;1;1;40;802
+3535;Werewolf WER-LF-004;BM;2;1;40;802
 7182;Swordsman SWD-2;BM;2;1;40;803
-6666;Scapha Hovertank H;CV;2;1;40;811
 3461;Vulcan VT-5M;BM;2;1;40;811
+6666;Scapha Hovertank H;CV;2;1;40;811
 3631;Zephyr Hovertank (Royal);CV;2;1;40;811
 596;Cicada CDA-3M;BM;2;1;40;812
 3164;Targe TRG-1N;BM;2;1;40;813
@@ -4352,22 +4477,22 @@
 3084;Strider SR1-O;BM;2;1;40;867
 3630;Zephyr Hovertank (LRM);CV;2;1;40;867
 1600;Icarus II ICR-1S;BM;2;1;40;869
-3088;Strider SR1-OD;BM;2;1;40;873
 645;Clint CLNT-2-3T (Denton);BM;2;1;40;873
+3088;Strider SR1-OD;BM;2;1;40;873
 3543;Whitworth WTH-3;BM;2;1;40;882
 3462;Vulcan VT-5S;BM;2;1;40;883
 3091;Strider SR1-OG;BM;2;1;40;883
 3093;Strider SR1-OX;BM;2;1;40;889
 4093;Dragonfly MM-1;AF;1;1;40;889
 265;Battle Cobra BTL-C-2OB;BM;2;1;40;895
-2657;Raptor II RPT-2X;BM;2;1;40;896
 5435;Zephyr Hovertank (SRM2);CV;2;1;40;896
+2657;Raptor II RPT-2X;BM;2;1;40;896
 9387;Hetzer Wheeled Assault Gun (Cell);CV;2;1;40;900
-1621;Initiate INI-04;BM;2;1;40;901
 649;Clint CLNT-3-3T;BM;2;1;40;901
+1621;Initiate INI-04;BM;2;1;40;901
 3632;Zephyr Hovertank;CV;2;1;40;904
-1496;Hermes II HER-2M "Mercury";BM;2;1;40;910
 3086;Strider SR1-OB;BM;2;1;40;910
+1496;Hermes II HER-2M "Mercury";BM;2;1;40;910
 3540;Whitworth WTH-1S;BM;2;1;40;917
 1502;Hermes II HER-5SA;BM;2;1;40;924
 129;Assassin ASN-30;BM;2;1;40;925
@@ -4387,8 +4512,8 @@
 3089;Strider SR1-OE;BM;2;1;40;976
 1498;Hermes II HER-4K "Hermes III";BM;2;1;40;976
 3538;Whitworth WTH-1;BM;2;1;40;982
-6660;Scapha Hovertank B;CV;2;1;40;984
 2246;Myrmidon Medium Tank Type 2;CV;2;1;40;984
+6660;Scapha Hovertank B;CV;2;1;40;984
 1601;Icarus II ICR-2S;BM;2;1;40;986
 6922;Cuirass CDR-2BC3;BM;2;1;40;990
 2734;Rogue RGU-133P;AF;1;1;40;991
@@ -4398,8 +4523,8 @@
 6661;Scapha Hovertank C;CV;2;1;40;1002
 2772;Sai S-4;AF;1;1;40;1005
 1664;Jagdpanzer II;CV;2;1;40;1009
-3737;Assassin "Servitor";BM;2;1;40;1019
 9494;Battle Cobra BTL-C-2OI;BM;2;1;40;1019
+3737;Assassin "Servitor";BM;2;1;40;1019
 6674;Night Stalker NSR-K3;BM;2;1;40;1028
 3090;Strider SR1-OF;BM;2;1;40;1032
 1620;Initiate INI-02;BM;2;1;40;1036
@@ -4461,8 +4586,8 @@
 3312;Tsunami TS-P1D;BM;2;1;40;1298
 269;Battle Cobra BTL-C-2OF;BM;2;1;40;1300
 769;Cuirass CDR-1X;BM;2;1;40;1301
-2659;Raptor II RPT-3X;BM;2;1;40;1304
 2776;Sai S-8;AF;1;1;40;1304
+2659;Raptor II RPT-3X;BM;2;1;40;1304
 9493;Battle Cobra BTL-C-2OH;BM;2;1;40;1305
 594;Cicada CDA-3F;BM;2;1;40;1329
 803;Daimyo DMO-1K2 (al-Shahab);BM;2;1;40;1332
@@ -4470,8 +4595,8 @@
 3092;Strider SR1-OR;BM;2;3;40;1339
 9351;Phantom R;BM;2;3;40;1365
 2173;Mercury II MCY-100;BM;2;1;40;1376
-5026;Sha Yu SYU-2B;BM;2;1;40;1379
 6980;Sha Yu (Bulldog);BM;2;1;40;1379
+5026;Sha Yu SYU-2B;BM;2;1;40;1379
 6659;Scapha Hovertank A;CV;2;1;40;1399
 6637;Sternensturm STM-O;AF;1;1;40;1405
 5670;Sha Yu SYU-6B;BM;2;1;40;1422
@@ -4496,15 +4621,15 @@
 6667;Scapha Hovertank I;CV;2;1;40;2096
 5431;Yurei S-YR-1LAM;BM;2;3;40;2106
 7995;Icarus II ICR-2R;BM;2;1;40;2775
+3831;Blackjack BJ-3X;BM;2;1;45;0
+4035;Daedalus "Grimjet";;0;1;45;0
+4819;Phoenix Hawk PXH-1 Upgraded;;0;1;45;0
+4903;Raubvogel Aerobomber AB-18C;;0;1;45;0
+7923;Danai Support Vehicle (Original Arrow);;0;1;45;0
 5875;Wyvern WVE-5Nsl;BM;2;1;45;0
 5872;Phoenix Hawk PXH-1Kk;BM;2;1;45;0
-4819;Phoenix Hawk PXH-1 Upgraded;;0;1;45;0
 5558;Tomahawk CX-11;AF;1;1;45;0
-7923;Danai Support Vehicle (Original Arrow);;0;1;45;0
 6763;Tomahawk THK-63b2;;0;1;45;0
-4035;Daedalus "Grimjet";;0;1;45;0
-4903;Raubvogel Aerobomber AB-18C;;0;1;45;0
-3831;Blackjack BJ-3X;BM;2;1;45;0
 5411;Wildkatze WKT-2S;;0;1;45;0
 5729;Glaive Medium Tank (MFB);CV;2;1;45;277
 1443;Heavy Strike Fighter Bat Hawk;CF;1;1;45;293
@@ -4567,8 +4692,8 @@
 3559;Wolf Trap (Tora) WFT-C;BM;2;1;45;1001
 3599;Wyvern WVE-6N;BM;2;1;45;1005
 5671;Bloodhound B3-HND;BM;2;1;45;1005
-3598;Wyvern WVE-5Nb;BM;2;1;45;1006
 1102;Firestarter FS9-OC;BM;2;1;45;1006
+3598;Wyvern WVE-5Nb;BM;2;1;45;1006
 3425;Vindicator VND-1X;BM;2;1;45;1008
 5445;Hatchetman HCT-5D;BM;2;1;45;1012
 374;Blackjack BJ-1DB;BM;2;1;45;1015
@@ -4577,9 +4702,9 @@
 3558;Wolf Trap (Tora) WFT-B;BM;2;1;45;1021
 3422;Vindicator VND-1R;BM;2;1;45;1024
 3423;Vindicator VND-1R (Vong);BM;2;1;45;1024
+7688;Tomahawk THK-63-EC;;0;3;45;1038
 3271;Tomahawk THK-43;AF;1;1;45;1038
 3273;Tomahawk THK-63;AF;1;1;45;1038
-7688;Tomahawk THK-63-EC;;0;3;45;1038
 946;Eisenfaust EFT-8X;BM;2;1;45;1039
 1413;Hatchetman HCT-5S;BM;2;1;45;1039
 2491;Phoenix Hawk PXH-1;BM;2;1;45;1041
@@ -4588,20 +4713,20 @@
 2580;Preta C-PRT-OU Exanimus;BM;2;1;45;1055
 1106;Firestarter FS9-OG;BM;2;1;45;1063
 389;Blackjack BJ-4;BM;2;1;45;1063
-2573;Preta C-PRT-O Invictus;BM;2;1;45;1067
 3600;Wyvern WVE-9N;BM;2;1;45;1067
+2573;Preta C-PRT-O Invictus;BM;2;1;45;1067
 3270;Tomahawk THK-33;AF;1;1;45;1069
-789;Daedalus DAD-3C;BM;2;1;45;1070
-1101;Firestarter FS9-OB;BM;2;1;45;1070
 1412;Hatchetman HCT-5K;BM;2;1;45;1070
+789;Daedalus DAD-3C;BM;2;1;45;1070
 3554;Wolf Trap (Tora) WFT-1;BM;2;1;45;1070
+1101;Firestarter FS9-OB;BM;2;1;45;1070
 2495;Phoenix Hawk PXH-1K;BM;2;1;45;1073
 2976;Snake SNK-2B;BM;2;1;45;1081
 2494;Phoenix Hawk PXH-1D;BM;2;1;45;1083
 3597;Wyvern WVE-5N;BM;2;1;45;1089
 7506;Fenris (Ice Ferret) I;BM;2;3;45;1096
-3272;Tomahawk THK-53;AF;1;1;45;1105
 3426;Vindicator VND-3L;BM;2;1;45;1105
+3272;Tomahawk THK-53;AF;1;1;45;1105
 333;Bishamon BSN-4K;BM;2;1;45;1105
 5446;Hatchetman HCT-5DD;BM;2;1;45;1112
 4309;Hellspawn HSN-9F;BM;2;1;45;1118
@@ -4629,8 +4754,8 @@
 945;Eisenfaust EFT-7X;BM;2;1;45;1203
 3274;Tomahawk THK-63CS;AF;1;1;45;1204
 7678;Phoenix Hawk PXH-1-EC;BM;2;3;45;1206
-3557;Wolf Trap (Tora) WFT-2X "Bear Trap";BM;2;1;45;1211
 2578;Preta C-PRT-OE Eminus;BM;2;1;45;1211
+3557;Wolf Trap (Tora) WFT-2X "Bear Trap";BM;2;1;45;1211
 2677;Regulator Hovertank;CV;2;1;45;1212
 1538;Hollander II BZK-F5;BM;2;1;45;1214
 4307;Hellspawn HSN-7D;BM;2;1;45;1220
@@ -4680,11 +4805,11 @@
 332;Bishamon BSN-3K;BM;2;1;45;1374
 2504;Phoenix Hawk PXH-4W;BM;2;1;45;1395
 6598;Swallow Attack WiGE (Original);CV;2;1;45;1408
-3429;Vindicator VND-4L;BM;2;1;45;1411
 5674;Hellspawn HSN-10SR;BM;2;1;45;1411
+3429;Vindicator VND-4L;BM;2;1;45;1411
 1811;Komodo KIM-2A;BM;2;1;45;1415
-792;Daedalus DAD-4B;BM;2;1;45;1431
 1478;Hellspawn HSN-7D2 (Halperin);BM;2;1;45;1431
+792;Daedalus DAD-4B;BM;2;1;45;1431
 5415;Wolf Trap (Tora) WFT-2B;BM;2;1;45;1439
 5807;Phoenix Hawk PXH-4L (Sante);BM;2;3;45;1442
 2510;Phoenix Hawk PXH-8CS;BM;2;1;45;1442
@@ -4711,8 +4836,8 @@
 3053;Stealth STH-1D (Anna);BM;2;1;45;1540
 796;Dagger DAR4-XP;AF;1;1;45;1543
 4041;Dagger DARO-1B;AF;1;1;45;1543
-9266;Vindicator VND-7L;BM;2;3;45;1566
 2579;Preta C-PRT-OS Caelestis;BM;2;3;45;1566
+9266;Vindicator VND-7L;BM;2;3;45;1566
 3057;Stealth STH-3S;BM;2;1;45;1577
 2977;Snake SNK-2Br;BM;2;1;45;1577
 3448;Volkh VKH-7;BM;2;1;45;1578
@@ -4736,29 +4861,29 @@
 5130;Stealth STH-5X;BM;2;1;45;2240
 4209;Gestalt D2X-G;BM;2;1;45;2392
 6912;Shadow Cat F;BM;2;3;45;2997
-4973;Sarissa MN1-K;;0;57;50;0
-4470;Lancer LX-1;;0;1;50;0
-3841;Bluehawk Combat Support Fighter MSF-42;CF;2;1;50;0
-4873;Protector Combat Support Fighter ASF-23;CF;2;1;50;0
-5377;Walrus Cargo Hauler;;0;1;50;0
-5378;Walrus II Cargo Hauler;;0;1;50;0
-4821;Phoenix Hawk LAM PHX-HK1RB;BM;2;1;50;0
 4581;Manta Fast Attack Submarine;CV;2;1;50;0
 4582;Manta Fast Attack Submarine (Support);;0;1;50;0
-4342;Huron Warrior HUR-WO-R3L;;0;1;50;0
-4432;Kanga Medium Hovertank KGA-3X;;0;1;50;0
+4821;Phoenix Hawk LAM PHX-HK1RB;BM;2;1;50;0
 4823;Phoenix Hawk LAM PHX-HK2M;BM;2;1;50;0
 4824;Phoenix Hawk LAM Mk I PHX-HK1;BM;2;1;50;0
 4825;Phoenix Hawk LAM Mk I PHX-HK1R;BM;2;1;50;0
+5850;Condor Trans-Track;;0;1;50;0
+5855;Banshee Aerospace Fighter BSE-X2;;0;1;50;0
+4342;Huron Warrior HUR-WO-R3L;;0;1;50;0
+4973;Sarissa MN1-K;;0;57;50;0
 4836;Planetlifter Air Transport Graf-Tengu;;0;1;50;0
 4837;Planetlifter Air Transport Manazuru;;0;1;50;0
 4838;Planetlifter Air Transport Wakusei no Mochiagerumono;;0;1;50;0
 4839;Planetlifter Air Transport Yangtze;;0;1;50;0
+5377;Walrus Cargo Hauler;;0;1;50;0
+5378;Walrus II Cargo Hauler;;0;1;50;0
+3841;Bluehawk Combat Support Fighter MSF-42;CF;2;1;50;0
+4873;Protector Combat Support Fighter ASF-23;CF;2;1;50;0
+4432;Kanga Medium Hovertank KGA-3X;;0;1;50;0
 5879;Hunchback HBK-4G (Gauss Prototype);;0;1;50;0
 5873;Crab CRB-27sl;BM;2;1;50;0
-5850;Condor Trans-Track;;0;1;50;0
-5855;Banshee Aerospace Fighter BSE-X2;;0;1;50;0
 7325;Hellcat II HCT-213BC (Herman);AF;2;1;50;0
+4470;Lancer LX-1;;0;1;50;0
 304;BattleMech Recovery Vehicle;CV;2;1;50;90
 2544;Planetlifter Air Transport;CF;2;1;50;156
 2543;Planetlifter Air Transport "SuperPelican" aka "Waddle";CF;2;1;50;282
@@ -4767,8 +4892,8 @@
 3388;Vedette Medium Tank (AC2);CV;2;1;50;458
 2153;Mechbuster (SRM);CF;2;1;50;465
 2152;Mechbuster (Mary);CF;2;1;50;469
-3395;Vedette Medium Tank;CV;2;1;50;475
 4840;Planetlifter Tactical Support Aircraft;CF;2;1;50;475
+3395;Vedette Medium Tank;CV;2;1;50;475
 2129;Maxim Mk II Transport;CV;2;1;50;476
 3392;Vedette Medium Tank (Light Gauss);CV;2;1;50;478
 6787;Maxim Mk II Transport (ECM);CV;2;1;50;483
@@ -4781,8 +4906,8 @@
 6495;Partisan AA Vehicle (3134 Upgrade);CV;2;1;50;553
 4573;Malaika BAM-1A1;AF;2;57;50;572
 6543;Cardinal Transport (RAF);CV;2;3;50;582
-8297;Daimyo HQ 67-NC;CV;2;1;50;583
 807;Daimyo HQ 67-K;CV;2;1;50;583
+8297;Daimyo HQ 67-NC;CV;2;1;50;583
 3396;Vedette Medium Tank (Ultra);CV;2;1;50;590
 679;Condor Heavy Hover Tank (Davion);CV;2;1;50;592
 6494;Partisan AA Vehicle;CV;2;1;50;597
@@ -4814,8 +4939,8 @@
 5576;Seabuster Strike Fighter (Early);CF;2;1;50;764
 682;Condor Heavy Hover Tank (Liao);CV;2;1;50;765
 7467;Phoenix PX-1KC;BM;2;57;50;766
-3783;Bandit Hovercraft Mk. II;CV;2;1;50;770
 2115;Maxim (I) Heavy Hover Transport;CV;2;1;50;770
+3783;Bandit Hovercraft Mk. II;CV;2;1;50;770
 2122;Maxim Heavy Hover Transport (C3S);CV;2;1;50;773
 9342;Buzzard Hover Tank;CV;2;1;50;780
 2116;Maxim Flanker;CV;2;1;50;781
@@ -4831,9 +4956,9 @@
 558;Chaparral Missile Artillery Tank;CV;2;1;50;812
 554;Chaparral Missile Artillery Tank (CASE);CV;2;1;50;814
 3289;Transit TR-11;AF;2;1;50;815
+6955;Raider JL-1;BM;2;1;50;817
 2120;Maxim Heavy Hover Transport (BA Field Upgrade);CV;2;1;50;817
 2121;Maxim Heavy Hover Transport (C3M);CV;2;1;50;817
-6955;Raider JL-1;BM;2;1;50;817
 4512;Lightning LTN-G14;AF;2;57;50;826
 233;Bandit Hovercraft D;CV;2;1;50;827
 2128;Maxim Mk II Transport (Infantry Support) "Shiloh";CV;2;1;50;828
@@ -4846,8 +4971,8 @@
 3922;Centurion CN9-H;BM;2;57;50;848
 2797;Sarissa MN1-D;BM;2;57;50;850
 418;Bombard BMB-010;BM;2;1;50;850
-2114;Maxim (I) Heavy Hover Transport (Company Command);CV;2;1;50;851
 2898;Shadow Hawk SHD-1R;BM;2;57;50;851
+2114;Maxim (I) Heavy Hover Transport (Company Command);CV;2;1;50;851
 5010;Seabuster Strike Fighter;CF;2;1;50;856
 7470;Phoenix PX-1KT;BM;2;57;50;857
 9454;Harrier Heavy Hover Tank (PPC);CV;2;1;50;859
@@ -4889,18 +5014,18 @@
 3299;Trebuchet TBT-7K;BM;2;1;50;996
 2490;Phoenix PX-4R;BM;2;1;50;996
 2761;Sabaku Kaze Heavy Scout Hover Tank;CV;2;1;50;997
-546;Chameleon TRC-4B;BM;2;1;50;999
 9405;Chameleon TRC-4C;BM;2;1;50;999
+546;Chameleon TRC-4B;BM;2;1;50;999
 8072;Raider Mk II JL-3C;BM;2;1;50;1007
 6599;Schildkröte Line Tank;CV;2;1;50;1009
 6906;Ghost GST-90;BM;2;1;50;1012
 6324;Zibler Fast Strike Tank C;CV;2;1;50;1017
 419;Bombard BMB-013;BM;2;1;50;1019
-6325;Zibler Fast Strike Tank D;CV;2;1;50;1021
 1879;Lightning LTN-G16-P (Branson);AF;2;3;50;1021
+6325;Zibler Fast Strike Tank D;CV;2;1;50;1021
 976;Enforcer ENF-4R;BM;2;1;50;1032
-524;Centurion CN9-Da;BM;2;1;50;1035
 4471;Lancer LX-2;AF;2;1;50;1035
+524;Centurion CN9-Da;BM;2;1;50;1035
 5750;Lancer LX-3;AF;2;1;50;1037
 1552;Hunchback HBK-4G;BM;2;1;50;1041
 1562;Hunchback HBK-5N;BM;2;1;50;1041
@@ -4910,8 +5035,8 @@
 5607;SM Tank Destroyer SM1 "Telos";CV;2;1;50;1055
 1561;Hunchback HBK-5M;BM;2;1;50;1056
 518;Centurion CN9-AL;BM;2;1;50;1057
-6600;Schildkröte Line Tank (HPPC);CV;2;1;50;1057
 4513;Lightning LTN-G15;AF;2;1;50;1057
+6600;Schildkröte Line Tank (HPPC);CV;2;1;50;1057
 6902;Shockwave SKW-8X;BM;2;1;50;1065
 1555;Hunchback HBK-4H;BM;2;1;50;1067
 6323;Zibler Fast Strike Tank B;CV;2;1;50;1072
@@ -4930,8 +5055,8 @@
 1553;Hunchback HBK-4G (Hohiro);BM;2;1;50;1126
 8071;Raider JL-3B;BM;2;1;50;1126
 1866;Legionnaire LGN-2XU;BM;2;1;50;1128
-520;Centurion CN9-D;BM;2;1;50;1130
 4337;Hunchback HBK-6N;BM;2;1;50;1130
+520;Centurion CN9-D;BM;2;1;50;1130
 4472;Lancer LX-2A;AF;2;1;50;1131
 720;Crab CRB-C;BM;2;1;50;1135
 1558;Hunchback HBK-4P;BM;2;1;50;1138
@@ -4947,8 +5072,8 @@
 6344;Centurion CN11-OD;BM;2;1;50;1177
 2739;Ronin SA-RN7;BM;2;1;50;1182
 1156;Fulcrum Heavy Hovertank III;CV;2;1;50;1185
-381;Blackjack BJ2-OC;BM;2;1;50;1189
 5332;Uziel UZL-3S;BM;2;1;50;1189
+381;Blackjack BJ2-OC;BM;2;1;50;1189
 693;Corsair CSR-V12;AF;2;1;50;1190
 3296;Trebuchet TBT-5J;BM;2;1;50;1191
 3297;Trebuchet TBT-5N;BM;2;1;50;1191
@@ -4963,8 +5088,8 @@
 1468;Hellcat II HCT-212;AF;2;1;50;1212
 3387;Vedette Medium Tank "Doris' Delight";CV;2;1;50;1219
 4516;Lightning LTN-G16O;AF;2;1;50;1220
-3397;Vedette Medium Tank V-G7X;CV;2;1;50;1223
 386;Blackjack BJ2-OU;BM;2;1;50;1223
+3397;Vedette Medium Tank V-G7X;CV;2;1;50;1223
 519;Centurion CN9-Ar;BM;2;1;50;1226
 5209;Tessen TSN-C3;BM;2;1;50;1234
 6340;Centurion CN11-O;BM;2;1;50;1236
@@ -4988,8 +5113,8 @@
 8374;Hunchback HBK-LGN-Pin "Anastasia";BM;2;3;50;1307
 1167;Galahad GLH-1D;BM;2;1;50;1307
 978;Enforcer ENF-5D;BM;2;1;50;1308
-1470;Hellcat II HCT-213C;AF;2;1;50;1308
 717;Crab CRB-27b;BM;2;1;50;1308
+1470;Hellcat II HCT-213C;AF;2;1;50;1308
 3301;Trebuchet TBT-8B;BM;2;1;50;1314
 379;Blackjack BJ2-OA;BM;2;1;50;1318
 387;Blackjack BJ2-OX;BM;2;1;50;1320
@@ -5002,10 +5127,10 @@
 4008;Corsair (Bob) "Roswell";AF;2;1;50;1339
 1563;Hunchback HBK-5P;BM;2;1;50;1340
 6399;Avalanche AVL-1OC;BM;2;1;50;1341
-6265;Gravedigger GDR-1C;BM;2;1;50;1342
 1566;Hunchback HBK-5SS;BM;2;1;50;1342
-3295;Trebuchet TBT-3C;BM;2;1;50;1342
 719;Crab CRB-45;BM;2;1;50;1342
+3295;Trebuchet TBT-3C;BM;2;1;50;1342
+6265;Gravedigger GDR-1C;BM;2;1;50;1342
 3300;Trebuchet TBT-7M;BM;2;1;50;1348
 2626;Raijin RJN-101-A;BM;2;1;50;1350
 1564;Hunchback HBK-5S;BM;2;1;50;1350
@@ -5015,14 +5140,14 @@
 977;Enforcer ENF-4R (Daniel);BM;2;1;50;1357
 975;Enfield END-6Sr;BM;2;1;50;1361
 6903;Shockwave SKW-6H;BM;2;1;50;1364
-8416;Raijin RJN-301-B;BM;2;1;50;1365
 3048;Starslayer STY-2C;BM;2;1;50;1365
+8416;Raijin RJN-301-B;BM;2;1;50;1365
 5449;Centurion CN9-D4D;BM;2;1;50;1369
 8373;Ghost GST-10A "Aurora";BM;2;3;50;1371
 5448;Centurion CN9-D3D;BM;2;1;50;1373
 7993;Hunchback HBK-6P;BM;2;1;50;1374
-1471;Hellcat II HCT-214;AF;2;1;50;1375
 382;Blackjack BJ2-OD;BM;2;1;50;1375
+1471;Hellcat II HCT-214;AF;2;1;50;1375
 4515;Lightning LTN-G16L;AF;2;1;50;1376
 5447;Hunchback HBK-6S;BM;2;1;50;1380
 8429;Raijin RJN-101-B;BM;2;1;50;1383
@@ -5039,8 +5164,8 @@
 974;Enfield END-6S;BM;2;1;50;1413
 3923;Centurion CN9-YLW2 "Yen-lo-wang";BM;2;1;50;1415
 972;Enfield END-6J;BM;2;1;50;1417
-2679;Regulator II Hovertank;CV;2;1;50;1426
 9267;Chameleon CLN-8V;BM;2;1;50;1426
+2679;Regulator II Hovertank;CV;2;1;50;1426
 6342;Centurion CN11-OB;BM;2;1;50;1430
 2629;Raijin II RJN-200-B;BM;2;1;50;1439
 6908;Blackjack BJ2-OG;BM;2;1;50;1448
@@ -5083,8 +5208,8 @@
 1583;Huron Warrior HUR-WO-R4O;BM;2;1;50;1585
 9352;Nightsky NGS-7S;BM;2;3;50;1591
 3050;Starslayer STY-3D;BM;2;1;50;1593
-8169;Black Hawk (Nova) R;BM;2;3;50;1597
 6905;Legionnaire LGN-2K;BM;2;1;50;1597
+8169;Black Hawk (Nova) R;BM;2;3;50;1597
 697;Corsair CSR-V18;AF;2;1;50;1602
 981;Enforcer III ENF-6H;BM;2;1;50;1603
 3290;Transit TR-12;AF;2;1;50;1616
@@ -5108,9 +5233,9 @@
 6264;Gravedigger GDR-1D;BM;2;3;50;1707
 985;Enforcer III ENF-6T;BM;2;1;50;1720
 5782;Huron Warrior HUR-WO-R4X;BM;2;1;50;1728
-6507;Sarath SRTH-1OA;BM;2;3;50;1738
 979;Enforcer ENF-5D (Daniel);BM;2;1;50;1738
 522;Centurion CN9-D5;BM;2;1;50;1738
+6507;Sarath SRTH-1OA;BM;2;3;50;1738
 395;Blitzkrieg BTZ-4F;BM;2;1;50;1740
 2630;Raijin II RJN-200-C;BM;2;1;50;1754
 2628;Raijin II RJN-200-A;BM;2;1;50;1763
@@ -5139,24 +5264,24 @@
 9315;Starslayer STY-4C;BM;2;3;50;2218
 8129;Firestorm;BM;2;3;50;2330
 6904;Nobori-nin (Huntsman) F;BM;2;3;50;2367
-5596;Dervish DV-6M (Mauck);;0;1;55;0
-8153;Tiger Medium Tank (Prototype);CV;2;1;55;0
-5129;Starfire SF-1X;AF;2;1;55;0
-5379;Waneta S-WN-1LAM;;0;3;55;0
-4936;Rook NH-2A;;0;1;55;0
+5846;Scorpion LAM SCP-X1;;0;1;55;0
 5039;Shadow Hawk LAM SHD-X1;BM;2;1;55;0
 5040;Shadow Hawk LAM SHD-X2;BM;2;1;55;0
-5418;Wolverine (Victor);;0;1;55;0
-4329;Hoplite HOP-4A;;0;1;55;0
-3881;Bushwacker BSW-X1 (Black);;0;1;55;0
-3693;Alfar AL-D1 "Dökkálfar";BM;2;1;55;0
+5379;Waneta S-WN-1LAM;;0;3;55;0
+8153;Tiger Medium Tank (Prototype);CV;2;1;55;0
 8221;Wolverine WVR-6T;;0;1;55;0
 8276;Scorpion SCP-1N (Wendall 2);BM;2;1;55;0
 8279;Dervish DV-6M (Turner);BM;2;1;55;0
 8285;Kintaro KTO-19 (Omar);BM;2;1;55;0
-6767;Griffin GRF-2N2;BM;2;1;55;0
-5846;Scorpion LAM SCP-X1;;0;1;55;0
+4936;Rook NH-2A;;0;1;55;0
+5418;Wolverine (Victor);;0;1;55;0
+4329;Hoplite HOP-4A;;0;1;55;0
+3693;Alfar AL-D1 "Dökkálfar";BM;2;1;55;0
+5596;Dervish DV-6M (Mauck);;0;1;55;0
+3881;Bushwacker BSW-X1 (Black);;0;1;55;0
 5869;Dervish DV-6Md;BM;2;1;55;0
+6767;Griffin GRF-2N2;BM;2;1;55;0
+5129;Starfire SF-1X;AF;2;1;55;0
 3187;Thor Artillery Vehicle (C3i);CV;2;1;55;482
 6775;Ballista Self-Propelled Artillery Tank;CV;2;1;55;531
 5244;Tiger Medium Tank T-12;CV;2;1;55;574
@@ -5184,8 +5309,8 @@
 2837;Scorpion SCP-1N;BM;2;1;55;1019
 1543;Hoplite HOP-4D;BM;2;1;55;1022
 1198;Gladiator GLD-1R;BM;2;57;55;1027
-5037;Shadow Hawk SHD-3H;bm;2;1;55;1043
 2838;Scorpion SCP-1N (Wendall);BM;2;1;55;1043
+5037;Shadow Hawk SHD-3H;bm;2;1;55;1043
 2900;Shadow Hawk SHD-2D2;BM;2;1;55;1049
 2901;Shadow Hawk SHD-2H;BM;2;1;55;1064
 2839;Scorpion SCP-1O;BM;2;1;55;1098
@@ -5208,8 +5333,8 @@
 9402;Griffin GRF-1RG;BM;2;1;55;1167
 1199;Gladiator GLD-2R;BM;2;1;55;1184
 2840;Scorpion SCP-1TB;BM;2;1;55;1185
-1790;Kintaro KTO-18;BM;2;1;55;1187
 4935;Rook NH-1X "Rook-X";BM;2;57;55;1187
+1790;Kintaro KTO-18;BM;2;1;55;1187
 451;Bushwacker BSW-X2;BM;2;1;55;1193
 2740;Rook NH-1A;BM;2;57;55;1197
 7884;Surtur SUR-T1;BM;2;1;55;1203
@@ -5248,8 +5373,8 @@
 3706;Apollo APL-4M;BM;2;1;55;1302
 2895;Shadow Hawk C;BM;2;3;55;1309
 3591;Wraith TR3;BM;2;1;55;1310
-2088;Marshal MHL-2L;BM;2;1;55;1313
 2910;Shadow Hawk SHD-9D;BM;2;1;55;1313
+2088;Marshal MHL-2L;BM;2;1;55;1313
 3574;Wolverine WVR-7D;BM;2;1;55;1314
 5751;Defiance DFC-OD;AF;2;1;55;1318
 4063;Defiance DFC-OC;AF;2;1;55;1325
@@ -5257,8 +5382,8 @@
 1895;Lineholder KW1-LH8 "Linebreaker";BM;2;1;55;1330
 3575;Wolverine WVR-7K;BM;2;1;55;1331
 4747;Oni ON-1;AF;2;1;55;1332
-4020;Cronus CNS-3M;BM;2;1;55;1339
 449;Bushwacker BSW-S2r;BM;2;1;55;1339
+4020;Cronus CNS-3M;BM;2;1;55;1339
 879;Dervish DV-6Mr;BM;2;1;55;1347
 5681;Lightray LGH-7W;BM;2;1;55;1352
 2902;Shadow Hawk SHD-2Hb;BM;2;1;55;1354
@@ -5285,9 +5410,9 @@
 436;Buccaneer BCN-3R;BM;2;1;55;1434
 2163;Men Shen MS1-OC;BM;2;1;55;1435
 6900;Fennec FEC-5CM;BM;2;3;55;1445
-3694;Alfar AL-A1;BM;2;1;55;1447
 3577;Wolverine WVR-8C;BM;2;1;55;1447
 2908;Shadow Hawk SHD-7M;BM;2;1;55;1447
+3694;Alfar AL-A1;BM;2;1;55;1447
 1295;Griffin GRF-1E "Sparky";BM;2;1;55;1449
 4519;Lightray LGH-4W;BM;2;1;55;1450
 7737;Shadow Hawk SHD-2Ht;BM;2;1;55;1453
@@ -5300,9 +5425,9 @@
 8314;Scorpion SCP-1BR;BM;2;1;55;1473
 3584;Wolverine WVR-9W2;BM;2;1;55;1480
 8254;Wolverine WVR-9R;BM;2;1;55;1481
-1008;Eyleuka EYL-35A;BM;2;1;55;1484
-1896;Lineholder KW2-LHW;BM;2;1;55;1484
 2162;Men Shen MS1-OB;BM;2;1;55;1484
+1896;Lineholder KW2-LHW;BM;2;1;55;1484
+1008;Eyleuka EYL-35A;BM;2;1;55;1484
 3589;Wraith TR2;BM;2;1;55;1485
 6518;Aquila AQA-1M;AF;2;1;55;1489
 8379;Buccaneer BCN-6PX "Pan";BM;2;1;55;1490
@@ -5323,8 +5448,8 @@
 2346;Osprey OSP-26;BM;2;1;55;1541
 1331;Grim Reaper GRM-R-PR62A;BM;2;1;55;1542
 3578;Wolverine WVR-8D;BM;2;1;55;1547
-6981;Men Shen MS1-O (Li);BM;2;1;55;1550
 2160;Men Shen MS1-O;BM;2;1;55;1550
+6981;Men Shen MS1-O (Li);BM;2;1;55;1550
 1037;Fennec FEC-3C;BM;2;1;55;1551
 6383;Kamakiri Attack VTOL (Gauss) "Shi Kamakiri";CV;2;1;55;1552
 1885;Lightray LGH-6W;BM;2;1;55;1554
@@ -5333,8 +5458,8 @@
 2344;Osprey OSP-15;BM;2;1;55;1564
 6675;Kheper KHP-7R;BM;2;1;55;1568
 7785;Shadow Hawk SHD-4H;BM;2;1;55;1569
-1796;Kintaro KTO-K;BM;2;1;55;1571
 1011;Eyleuka EYL-4A;BM;2;1;55;1571
+1796;Kintaro KTO-K;BM;2;1;55;1571
 2897;Shadow Hawk SHD-12C;BM;2;1;55;1574
 6509;Quasimodo QSM-3D;BM;2;1;55;1575
 3579;Wolverine WVR-8K;BM;2;1;55;1576
@@ -5347,8 +5472,8 @@
 1301;Griffin GRF-4N;BM;2;1;55;1591
 5752;Oni ON-2;AF;2;1;55;1597
 5078;Slagmaiden SLG-X;BM;2;3;55;1602
-7996;Lineholder KW2-LH10;BM;2;1;55;1606
 1299;Griffin GRF-2N;BM;2;1;55;1606
+7996;Lineholder KW2-LH10;BM;2;1;55;1606
 4061;Defiance DFC-OA;AF;2;1;55;1610
 6413;Hitotsume Kozo HKZ-1P;BM;2;1;55;1611
 1010;Eyleuka EYL-45B;BM;2;1;55;1615
@@ -5366,8 +5491,8 @@
 2896;Shadow Hawk SHD-11CS;BM;2;1;55;1700
 6895;Marshal MHL-3MC;BM;2;1;55;1714
 882;Dervish DV-8D2 "Lightbringer";BM;2;1;55;1717
-2167;Men Shen MS1-OU;BM;2;1;55;1725
 1968;Lynx LNX-9Q;BM;2;1;55;1725
+2167;Men Shen MS1-OU;BM;2;1;55;1725
 2320;Oni ON-2X;AF;2;1;55;1733
 1304;Griffin GRF-5L;BM;2;1;55;1742
 2743;Rook NH-3X;BM;2;1;55;1746
@@ -5415,23 +5540,23 @@
 7380;Ryoken III-XP (Skinwalker) B;BM;2;3;55;3613
 7379;Ryoken III-XP (Skinwalker) A;BM;2;3;55;3777
 7381;Ryoken III-XP (Skinwalker) C;BM;2;3;55;4387
-5847;Champion LAM CPN-1X1;;0;1;60;0
 5874;Lancelot LNC25-01sl;BM;3;1;60;0
 6765;Champion CHP-1Nb2;;0;1;60;0
-6777;LB-X Carrier (Ultra);CV;3;1;60;0
-6778;LB-X Carrier (Ambush);CV;3;1;60;0
 7930;Rifleman RFL-4DA1;;3;1;60;0
-8217;Tokugawa Heavy Tank (Arrow IV);;0;1;60;0
 8283;Ostsol OTL-5M (Maki);BM;3;1;60;0
 8288;Ostsol OTL-4D (Woo);BM;3;1;60;0
 3940;Champion CHP-1N (Irin);;0;1;60;0
 4294;Helios HEL-2C;;0;1;60;0
-3735;Arrow IV Carrier;CV;3;1;60;0
-4598;Marsden MBT III;;0;1;60;0
 4917;Rifleman RFL-3M;;0;1;60;0
 4918;Rifleman RFL-3N (Rubinsky 1);;0;1;60;0
 4919;Rifleman RFL-3N (Rubinsky 2);;0;1;60;0
+6777;LB-X Carrier (Ultra);CV;3;1;60;0
+6778;LB-X Carrier (Ambush);CV;3;1;60;0
+4598;Marsden MBT III;;0;1;60;0
+3735;Arrow IV Carrier;CV;3;1;60;0
+8217;Tokugawa Heavy Tank (Arrow IV);;0;1;60;0
 5555;Demon Tank CX-2;CV;3;1;60;0
+5847;Champion LAM CPN-1X1;;0;1;60;0
 1532;Hi-Scout Drone Carrier;CV;3;1;60;347
 5;AC/2 Carrier;CV;3;1;60;403
 5733;Morningstar City Command Vehicle (HPG);CV;3;1;60;458
@@ -5479,8 +5604,8 @@
 3261;Tokugawa Heavy Tank (MRM);CV;3;1;60;941
 2521;Pike Support Vehicle (Missile);CV;3;1;60;943
 6701;JES III Missile Carrier (MML);CV;3;1;60;947
-3817;Bellerophon BEL-1X;BM;3;57;60;957
 2015;Manticore Heavy Tank (3055 Upgrade);CV;3;1;60;957
+3817;Bellerophon BEL-1X;BM;3;57;60;957
 2016;Manticore Heavy Tank (C3M);CV;3;1;60;958
 3031;SRM Carrier (WoB);CV;3;1;60;958
 2522;Pike Support Vehicle (RAC) "Assault Pike";CV;3;1;60;961
@@ -5511,25 +5636,25 @@
 1257;Grand Dragon DRG-1G (Douglas);BM;3;1;60;1076
 2087;Marsden MBT II-A (LB-X);CV;3;1;60;1090
 876;Demon Tank;CV;3;1;60;1094
-3070;Stingray F-90S;AF;2;1;60;1108
 6702;JES III Missile Carrier (Speed);CV;3;1;60;1108
+3070;Stingray F-90S;AF;2;1;60;1108
 551;Champion CHP-2N;BM;3;1;60;1116
 2550;Po II Heavy Tank (Arrow IV);CV;3;1;60;1118
 909;Dragon DRG-1N;BM;3;1;60;1125
 3267;Tokugawa Heavy Tank Yumi;CV;3;3;60;1127
 2696;Rifleman RFL-3Cr;BM;3;1;60;1129
 2014;Manticore Heavy Tank "The Ballista";CV;3;1;60;1135
-1263;Grand Dragon DRG-9KC;BM;3;1;60;1147
 7675;Manticore Heavy Tank EC;CV;3;3;60;1147
+1263;Grand Dragon DRG-9KC;BM;3;1;60;1147
 2018;Manticore Heavy Tank (HPPC);CV;3;1;60;1149
 1860;Lancelot LNC25-08;BM;3;1;60;1162
 4296;Hellcat HCT-213D;AF;2;1;60;1169
 2698;Rifleman RFL-4D;BM;3;1;60;1173
 873;Demon Tank (Horned Demon);CV;3;1;60;1179
 2551;Po II Heavy Tank;CV;3;1;60;1181
+9318;Merlin MLN-1P;BM;3;1;60;1181
 2181;Merlin MLN-SX;BM;3;1;60;1181
 4297;Hellcat HCT-213R;AF;2;1;60;1181
-9318;Merlin MLN-1P;BM;3;1;60;1181
 9456;Manticore Heavy Tank (XL);CV;3;1;60;1191
 2610;Quickdraw QKD-4G;BM;3;1;60;1192
 2612;Quickdraw QKD-5A;BM;3;1;60;1196
@@ -5563,8 +5688,8 @@
 2372;Ostsol OTL-4F;BM;3;1;60;1264
 2613;Quickdraw QKD-5K;BM;3;1;60;1265
 2180;Merlin MLN-1C;BM;3;1;60;1267
-3073;Stingray F-94;AF;2;1;60;1268
 3069;Stingray F-90;AF;2;1;60;1268
+3073;Stingray F-94;AF;2;1;60;1268
 1169;Galahad GLH-3D;BM;3;1;60;1268
 4920;Hybrid Rifleman RFL-3N (Sneede);BM;3;1;60;1269
 5539;Hellcat HCT-213S;AF;2;1;60;1271
@@ -5582,8 +5707,8 @@
 872;Demon Tank (HGR);CV;3;1;60;1314
 3618;Yeoman YMN-10-OR;BM;3;1;60;1319
 2349;Ostroc OSR-2C (Michi);BM;3;1;60;1321
-1264;Grand Dragon DRG-C;BM;3;1;60;1322
 4230;Grand Dragon DRG-5K-DC;BM;3;1;60;1322
+1264;Grand Dragon DRG-C;BM;3;1;60;1322
 2355;Ostroc OSR-4C;BM;3;1;60;1325
 2373;Ostsol OTL-5D;BM;3;1;60;1333
 875;Demon Tank (Royal);CV;3;1;60;1333
@@ -5608,8 +5733,8 @@
 1322;Grigori C-GRG-OB Infernus;BM;3;1;60;1408
 6795;Po II Heavy Tank (Stealth);CV;3;1;60;1415
 7144;Voidseeker Mk 39-004 Interceptor;AF;2;1;60;1421
-1318;Grigori C-GRG-O (Rufus);BM;3;1;60;1422
 1853;Lancelot LNC25-01;BM;3;1;60;1422
+1318;Grigori C-GRG-O (Rufus);BM;3;1;60;1422
 1319;Grigori C-GRG-O (Tamiel);BM;3;1;60;1426
 1259;Grand Dragon DRG-5K (Emory);BM;3;1;60;1431
 1250;Gotha GTHA-500;AF;2;1;60;1436
@@ -5638,8 +5763,8 @@
 3071;Stingray F-92;AF;2;1;60;1537
 350;Black Hawk-KU BHKU-OD;BM;3;1;60;1539
 1325;Grigori C-GRG-OE Eminus;BM;3;1;60;1544
-1251;Gotha GTHA-600;AF;2;1;60;1549
 6978;Galahad GLH-3D (Laodices);BM;3;1;60;1549
+1251;Gotha GTHA-600;AF;2;1;60;1549
 8172;Ostsol OTL-8E;BM;3;1;60;1552
 3729;Argus AGS-2D;BM;3;1;60;1566
 1324;Grigori C-GRG-OD Luminos;BM;3;1;60;1568
@@ -5674,8 +5799,8 @@
 6511;Anzu ZU-J70;BM;3;1;60;1680
 50;Anvil ANV-5M;BM;3;1;60;1687
 353;Black Hawk-KU BHKU-OU;BM;3;1;60;1687
-53;Anvil ANV-8M;BM;3;1;60;1690
 6887;Quickdraw QKD-9M;BM;3;1;60;1690
+53;Anvil ANV-8M;BM;3;1;60;1690
 8173;Ostsol OTL-8F;BM;3;1;60;1698
 1260;Grand Dragon DRG-7K;BM;3;1;60;1702
 6890;Black Hawk-KU BHKU-OG;BM;3;1;60;1719
@@ -5718,19 +5843,19 @@
 8446;Grand Dragon DRG-12K;BM;3;3;60;2265
 346;Black Hawk-KU BHKU-O (Albert);BM;3;3;60;2377
 7633;Vulture Mk III (Mad Dog Mk III) BLO;BM;3;3;60;2397
-4388;JagerMech JM6-B;;0;1;65;0
 4672;Morpheus "L'Morte II";;0;1;65;0
+4257;Ha Otoko HR (Refit);;0;3;65;0
+4388;JagerMech JM6-B;;0;1;65;0
 3934;Cestus (Allard-Liao);;0;1;65;0
 4030;Crusader CRD-1R;;0;1;65;0
-5559;Ironsides CX-19;AF;2;3;65;0
-4257;Ha Otoko HR (Refit);;0;3;65;0
-6766;Thunderbolt TDR-5Sb2;BM;3;1;65;0
-7365;Catapult "Butterbee 2";BM;3;1;65;0
-5868;Thunderbolt TDR-5Sd;BM;3;1;65;0
-5187;Tempest TMP-2M;;0;1;65;0
 8280;Crusader CRD-3R (Bear);BM;3;1;65;0
+5187;Tempest TMP-2M;;0;1;65;0
+7365;Catapult "Butterbee 2";BM;3;1;65;0
 7762;Thunderbolt TDR-5L;BM;3;1;65;0
 7763;Thunderbolt TDR-5LS;BM;3;1;65;0
+5868;Thunderbolt TDR-5Sd;BM;3;1;65;0
+6766;Thunderbolt TDR-5Sb2;BM;3;1;65;0
+5559;Ironsides CX-19;AF;2;3;65;0
 2076;Marksman Artillery Vehicle (Light PPC);CV;3;1;65;684
 2077;Marksman Artillery Vehicle;CV;3;1;65;688
 9365;Mobile Long Tom Artillery LT-MOB-25F;cv;3;1;65;726
@@ -5797,8 +5922,8 @@
 1004;Exterminator EXT-4D;BM;3;1;65;1385
 1625;Ironsides IRN-SD2;AF;2;1;65;1388
 1626;Ironsides IRN-SD3;AF;2;1;65;1399
-478;Catapult CPLT-C1;BM;3;1;65;1399
 1959;Lucifer II LCF-R16KR;AF;2;1;65;1399
+478;Catapult CPLT-C1;BM;3;1;65;1399
 754;Crusader CRD-4BR;BM;3;1;65;1407
 759;Crusader CRD-5M;BM;3;1;65;1408
 3240;Thunderbolt TDR-5SE;BM;3;1;65;1414
@@ -5811,8 +5936,8 @@
 2226;Morpheus MRP-3S;BM;3;1;65;1437
 3250;Thunderbolt TDR-9SE;BM;3;1;65;1439
 421;Bombardier BMB-05A;BM;3;1;65;1440
-2449;Patriot PKM-2E;BM;3;1;65;1443
 1955;Lucifer LCF-R16;AF;2;1;65;1443
+2449;Patriot PKM-2E;BM;3;1;65;1443
 760;Crusader CRD-5S;BM;3;1;65;1446
 3242;Thunderbolt TDR-5S-T (Tallman);BM;3;1;65;1447
 5453;Catapult CPLT-C4C;BM;3;1;65;1449
@@ -5875,8 +6000,8 @@
 8191;Thunderbolt TDR-8M;BM;3;1;65;1644
 3246;Thunderbolt TDR-9M;BM;3;1;65;1648
 186;Axman AXM-3S;BM;3;1;65;1649
-8232;Crusader CRD-9BR;BM;3;1;65;1653
 4374;Ironsides IRN-SD1b;AF;2;1;65;1653
+8232;Crusader CRD-9BR;BM;3;1;65;1653
 1710;Jinggau JN-G9CC;BM;3;1;65;1656
 4389;JagerMech JM6-DGr;BM;3;1;65;1661
 6463;Vandal LI-OB;BM;3;1;65;1666
@@ -5886,8 +6011,8 @@
 1005;Exterminator EXT-4Db;BM;3;1;65;1694
 765;Crusader CRD-8S;BM;3;1;65;1698
 2448;Patriot PKM-2D;BM;3;1;65;1699
-764;Crusader CRD-8L;BM;3;1;65;1701
 533;Cestus CTS-6Y;BM;3;1;65;1701
+764;Crusader CRD-8L;BM;3;1;65;1701
 4952;Rusalka S-RSL-OD Luminos;AF;2;1;65;1712
 5454;Catapult CPLT-K2K;BM;3;1;65;1716
 4953;Rusalka S-RSL-OE Eminus;AF;2;1;65;1721
@@ -5955,23 +6080,23 @@
 9502;Jinggau JN-G8Ar;BM;3;3;65;2730
 9501;Jinggau JN-G9B;BM;3;3;65;2747
 3310;Troika CMT-3TV (Viktor);AF;2;1;65;2975
+6781;Dragoon AEM-02;;0;1;70;0
+6782;Dragoon AEM-03;;0;1;70;0
+6783;Dragoon AEM-04;;0;1;70;0
 9496;Warhammer WHM-X7-2 "The Lich";;0;3;70;0
-5385;Warhammer WHM-7M (GioAvanti);;0;3;70;0
-8215;No-Dachi NDA-1KC;;0;1;70;0
-4198;Gallant Urban Assault Tank (Fusion);;0;1;70;0
-4199;Gallant Urban Assault Tank (Original);CV;3;1;70;0
-5059;Shootist (Apollyon);;0;1;70;0
-5382;Warhammer WHM-6L-DC;;0;1;70;0
-5383;Warhammer WHM-6R (Willis);;0;1;70;0
-5384;Warhammer WHM-6R-DC;;0;1;70;0
 4231;Grasshopper GHR-4R;;0;1;70;0
 8274;Archer ARC-2R (Ismail);BM;3;1;70;0
 8275;Archer ARC-4M (Ismail);BM;3;1;70;0
 8290;Guillotine GLT-3N (Estriđsen);BM;3;1;70;0
+5382;Warhammer WHM-6L-DC;;0;1;70;0
+5383;Warhammer WHM-6R (Willis);;0;1;70;0
+5384;Warhammer WHM-6R-DC;;0;1;70;0
+5385;Warhammer WHM-7M (GioAvanti);;0;3;70;0
+8215;No-Dachi NDA-1KC;;0;1;70;0
+5059;Shootist (Apollyon);;0;1;70;0
 7927;Kinnol MBT (Reactive);;3;1;70;0
-6781;Dragoon AEM-02;;0;1;70;0
-6782;Dragoon AEM-03;;0;1;70;0
-6783;Dragoon AEM-04;;0;1;70;0
+4198;Gallant Urban Assault Tank (Fusion);;0;1;70;0
+4199;Gallant Urban Assault Tank (Original);CV;3;1;70;0
 1429;Heavy BattleMech Recovery Vehicle;CV;3;1;70;176
 1706;Transportable Field Repair Unit JI-100;CV;3;1;70;199
 1991;Magi Infantry Support Vehicle;CV;3;1;70;798
@@ -6078,8 +6203,8 @@
 169;Avatar AV1-OI;BM;3;1;70;1606
 9466;Viper VP-1;BM;3;1;70;1609
 7598;Archer ARC-5CS;BM;3;1;70;1609
-5871;Warhammer WHM-6Rk;BM;3;1;70;1621
 6800;Winston Combat Vehicle (XXL);CV;3;3;70;1621
+5871;Warhammer WHM-6Rk;BM;3;1;70;1621
 3496;Warhammer WHM-8M;BM;3;1;70;1631
 1343;Guillotine GLT-6WB2;BM;3;1;70;1635
 1000;Excalibur EXC-C1;BM;3;1;70;1637
@@ -6090,14 +6215,14 @@
 3498;Warhammer WHM-9S;BM;3;1;70;1653
 6868;Warhammer WHM-8D2;BM;3;1;70;1654
 6465;Catapult II CPLT-L7L;BM;3;1;70;1656
-2220;Morgenstern MR-1S;AF;2;1;70;1658
 85;Archer ARC-7S;BM;3;1;70;1658
+2220;Morgenstern MR-1S;AF;2;1;70;1658
 6811;Tatsu MIK-OF;AF;2;1;70;1662
 471;Cataphract CTF-3LL;BM;3;1;70;1664
 1174;Gallant GLT-8-0;BM;3;1;70;1666
 5755;Tatsu MIK-OD;AF;2;1;70;1666
-3791;Barghest BGS-4X;BM;3;1;70;1667
 166;Avatar AV1-OF;BM;3;1;70;1667
+3791;Barghest BGS-4X;BM;3;1;70;1667
 7732;Archer ARC-9R;BM;3;1;70;1668
 6780;Dragoon AEM-01;BM;3;1;70;1669
 6796;Kinnol MBT (RAC);CV;3;1;70;1671
@@ -6114,30 +6239,30 @@
 7563;Warhammer WHM-8R;BM;3;1;70;1697
 3482;Warhammer WHM-11T;BM;3;1;70;1698
 2297;No-Dachi NDA-2KC;BM;3;1;70;1705
-78;Archer ARC-4M;BM;3;1;70;1705
 75;Archer ARC-2Rb;BM;3;1;70;1705
+78;Archer ARC-4M;BM;3;1;70;1705
 5692;No-Dachi NDA-3S;BM;3;1;70;1706
 4730;No-Dachi NDA-1K;BM;3;1;70;1708
 889;Deva C-DVA-OD Luminos;BM;3;1;70;1711
 887;Deva C-DVA-OB Infernus;BM;3;1;70;1713
 999;Excalibur EXC-B2b;BM;3;1;70;1715
 2224;Morgenstern MR-1SD;AF;2;1;70;1722
-2941;Shootist ST-9C;BM;3;1;70;1727
 886;Deva C-DVA-OA Dominus;BM;3;1;70;1727
-4733;No-Dachi NDA-2KO;BM;3;1;70;1728
+2941;Shootist ST-9C;BM;3;1;70;1727
 3479;Warhammer C;BM;3;3;70;1728
+4733;No-Dachi NDA-2KO;BM;3;1;70;1728
 1361;Hachiwara HCA-4T;BM;3;1;70;1731
 472;Cataphract CTF-3X (Sara);BM;3;1;70;1734
 3790;Barghest BGS-4T;BM;3;1;70;1734
 4732;No-Dachi NDA-2K;BM;3;1;70;1739
 458;Caesar CES-4S;BM;3;1;70;1739
 5492;Guillotine GLT-6WB3;BM;3;1;70;1741
-7730;Archer ARC-4M2;BM;3;1;70;1742
 475;Cataphract CTF-5D;BM;3;1;70;1742
+7730;Archer ARC-4M2;BM;3;1;70;1742
 888;Deva C-DVA-OC Comminus;BM;3;1;70;1743
 3483;Warhammer WHM-4L;BM;3;1;70;1743
-7567;Warhammer WHM-9K;BM;3;1;70;1744
 3494;Warhammer WHM-8D;BM;3;1;70;1744
+7567;Warhammer WHM-9K;BM;3;1;70;1744
 3495;Warhammer WHM-8K;BM;3;1;70;1748
 7599;Warhammer WHM-7CS;BM;3;1;70;1751
 7450;Grasshopper GHR-8K;BM;3;1;70;1754
@@ -6155,8 +6280,8 @@
 7990;Hercules HRC-LS-9003;BM;3;1;70;1794
 6512;Carronade CRN-7M;BM;3;1;70;1799
 798;Daikyu DAI-01 (Tabitha);BM;3;3;70;1804
-4234;Grasshopper GHR-7P;BM;3;1;70;1806
 1270;Grasshopper GHR-7K;BM;3;1;70;1806
+4234;Grasshopper GHR-7P;BM;3;1;70;1806
 3499;Warhammer WHM-X7 "The Lich";BM;3;3;70;1807
 90;Archer C;BM;3;3;70;1811
 88;Archer ARC-9M;BM;3;1;70;1811
@@ -6222,20 +6347,20 @@
 6361;Cutlass CUT-01D;AF;2;1;70;2880
 6870;Nova Cat I;BM;3;3;70;2918
 7982;Caesar CES-5D;BM;3;3;70;3123
+4801;Penetrator PTR-4D (Christifori);BM;3;1;75;0
+8471;Helepolis HEP-2X;BM;3;1;75;0
+8278;Orion ON1-K (Muller);BM;3;1;75;0
+8272;Maelstrom MTR-5K (Petrovitch);;0;1;75;0
+4784;Pandarus LFA-2O;;0;1;75;0
+5381;War Dog WR-DG-01;;0;1;75;0
 4090;Dragon Fire DGR-3F (Searcy II);;0;1;75;0
 4091;Dragon Fire DGR-3F (Searcy);;0;1;75;0
-5381;War Dog WR-DG-01;;0;1;75;0
 4590;Marauder MAD-3M-DC;;0;1;75;0
 4591;Marauder MAD-3R (Faber);;0;3;75;0
 4592;Marauder MAD-3R (Wilson);;0;3;75;0
-5603;Warlord BLR-2E;;0;1;75;0
-8471;Helepolis HEP-2X;BM;3;1;75;0
-4784;Pandarus LFA-2O;;0;1;75;0
-4801;Penetrator PTR-4D (Christifori);BM;3;1;75;0
 3844;Bokkusu Support Trailer;CV;3;1;75;0
 5206;Tenmaku Command Trailer;CV;3;1;75;0
-8278;Orion ON1-K (Muller);BM;3;1;75;0
-8272;Maelstrom MTR-5K (Petrovitch);;0;1;75;0
+5603;Warlord BLR-2E;;0;1;75;0
 6779;Pollux ADA Heavy Tank;CV;3;1;75;772
 2219;Monitor Naval Vessel;CV;3;1;75;799
 445;Burke Defense Tank;CV;3;1;75;815
@@ -6285,8 +6410,8 @@
 3454;Von Luckner Heavy Tank VNL-K75N;CV;3;1;75;1350
 2205;Moltke MBT M1;CV;3;1;75;1355
 1370;Hammerhands HMH-4D;BM;3;1;75;1356
-2206;Moltke MBT M2;CV;3;1;75;1363
 2038;Marauder MAD-3R;BM;3;1;75;1363
+2206;Moltke MBT M2;CV;3;1;75;1363
 1463;Helepolis HEP-4H;BM;3;1;75;1366
 1461;Helepolis HEP-2H;BM;3;1;75;1369
 2036;Marauder MAD-3L;BM;3;1;75;1369
@@ -6387,8 +6512,8 @@
 1989;Maelstrom MTR-6E;BM;3;1;75;1806
 7530;Marauder MAD-7C;BM;3;1;75;1810
 4345;Huscarl HSCL-1-O;AF;3;1;75;1811
-7145;Voidseeker Mk 39-007 Striker;AF;3;1;75;1814
 3476;War Dog WR-DG-02FC;BM;3;1;75;1814
+7145;Voidseeker Mk 39-007 Striker;AF;3;1;75;1814
 849;Defiance DFN-3C;BM;3;1;75;1817
 2333;Orion ON1-K (Kerensky);BM;3;1;75;1821
 7402;Tian-zong TNZ-N2 (Jasminda);BM;3;1;75;1826
@@ -6396,8 +6521,8 @@
 2338;Orion ON2-M;BM;3;1;75;1828
 359;Black Knight BL-6-KNT (Ian);BM;3;1;75;1830
 7532;Marauder MAD-7R;BM;3;1;75;1832
-6466;Mortis MS-1A;BM;3;1;75;1834
 2471;Penthesilea PEN-2MAF;BM;3;1;75;1834
+6466;Mortis MS-1A;BM;3;1;75;1834
 2570;Prefect PRF-1R (Veronica);BM;3;1;75;1835
 356;Black Knight BL-12-KNT;BM;3;1;75;1840
 6677;Uraeus UAE-7R;BM;3;1;75;1843
@@ -6410,8 +6535,8 @@
 2339;Orion ON3-MX;BM;3;1;75;1849
 913;Dragon Fire DGR-3F;BM;3;1;75;1855
 7348;Prefect PRF-1C;BM;3;1;75;1857
-5783;Black Knight BL-X-KNT “Red Reaper”;BM;3;1;75;1858
 915;Dragon Fire DGR-6FC;BM;3;1;75;1858
+5783;Black Knight BL-X-KNT “Red Reaper”;BM;3;1;75;1858
 5699;Perseus P1W;BM;3;1;75;1864
 2051;Marauder MAD-9W2;BM;3;1;75;1868
 2048;Marauder MAD-9M2;BM;3;1;75;1875
@@ -6425,8 +6550,8 @@
 6349;Black Knight BLK-NT-3B;BM;3;1;75;1911
 2030;Marauder (Bounty Hunter-3015);BM;3;1;75;1919
 5701;Thanatos TNS-6S;BM;3;1;75;1936
-5167;Suzaku SU-14;AF;3;1;75;1940
 850;Defiance DFN-3S;BM;3;1;75;1940
+5167;Suzaku SU-14;AF;3;1;75;1940
 3826;Black Knight BL-6-RR;BM;3;3;75;1954
 3477;War Dog WR-DG-03FC;BM;3;1;75;1962
 6866;Marauder MAD-9D;BM;3;3;75;1967
@@ -6441,8 +6566,8 @@
 8317;Orion C 2;BM;3;3;75;2026
 6468;Tian-zong TNZ-N3;BM;3;1;75;2072
 7684;Redback;BM;3;3;75;2076
-6565;Jade Hawk JHK-04;BM;3;3;75;2102
 8001;Penetrator PTR-7D;BM;3;1;75;2102
+6565;Jade Hawk JHK-04;BM;3;3;75;2102
 2031;Marauder (Bounty Hunter-3044);BM;3;1;75;2103
 355;Black Knight BL-10-KNT (Ross);BM;3;1;75;2103
 3173;Thanatos TNS-4S (Felix);BM;3;1;75;2122
@@ -6482,12 +6607,12 @@
 7384;Triskelion TRK-4V;BM;3;3;75;2837
 5758;Huscarl HSCL-1-OR;AF;3;3;75;2879
 8445;Flashman FLS-10E;BM;3;3;75;3349
+5609;Deathstalker XF-78;AF;3;1;80;0
 5436;Zeus ZEU-6S1;;0;1;80;0
 7925;Hatamoto-Chi HTM-27T2;;0;1;80;0
 8268;Hatamoto-Ku HTM-26W;;0;1;80;0
 8269;Hatamoto-Kaze HTM-26V;;0;1;80;0
 8284;Hatamoto-Chi HTM-27T (Lowenbrau);BM;4;1;80;0
-5609;Deathstalker XF-78;AF;3;1;80;0
 3767;Awesome AWS-8Q (Barton);;0;1;80;0
 5437;Zeus ZEU-6S-DC;;0;1;80;0
 5556;Fury Command Tank CX-17;CV;4;1;80;0
@@ -6506,8 +6631,8 @@
 2827;Schrek PPC Carrier;CV;4;1;80;935
 1440;Heavy LRM Carrier;CV;4;1;80;948
 9568;Partisan Heavy Tank (Light Gauss);CV;4;1;80;968
-562;Charger CGR-1L;BM;4;1;80;980
 2434;Partisan Air Defense Tank (Cell);CV;4;1;80;980
+562;Charger CGR-1L;BM;4;1;80;980
 559;Charger CGR-1A1;BM;4;1;80;981
 863;Demolisher Heavy Tank Mk. I;;0;1;80;981
 864;Demolisher Heavy Tank Mk. II;CV;4;1;80;981
@@ -6548,8 +6673,8 @@
 1158;Fury Command Tank (C3M);CV;4;1;80;1336
 766;Cudgel CDG-1B;BM;4;1;80;1347
 3642;Zeus ZEU-6S;BM;4;1;80;1348
-4181;Fortune Wheeled Assault Vehicle;CV;4;1;80;1349
 4273;HawkWolf HWK-3F;BM;4;57;80;1349
+4181;Fortune Wheeled Assault Vehicle;CV;4;1;80;1349
 3414;Victor VTR-9S;BM;4;1;80;1360
 3409;Victor VTR-9B;BM;4;1;80;1378
 2962;Slayer SL-15B;AF;3;1;80;1379
@@ -6562,8 +6687,8 @@
 1159;Fury Command Tank (C3S);CV;4;1;80;1413
 2961;Slayer SL-15A;AF;3;1;80;1423
 6576;HawkWolf HWK-4F;BM;4;1;80;1428
-2821;Schiltron Mobile Fire-Support Platform Prime;CV;4;1;80;1434
 9260;Demolisher Heavy Tank (Reinforced);CV;4;1;80;1434
+2821;Schiltron Mobile Fire-Support Platform Prime;CV;4;1;80;1434
 3643;Zeus ZEU-6T;BM;4;1;80;1436
 2816;Schiltron Mobile Fire-Support Platform B;CV;4;1;80;1439
 2681;Rhino Fire Support Tank (Flamer);CV;4;1;80;1439
@@ -6574,10 +6699,10 @@
 4913;Rhino Fire Support Tank;CV;4;1;80;1462
 2685;Rhino Fire Support Tank (SL);CV;4;1;80;1464
 3416;Victor VTR-Cr;BM;4;1;80;1465
-2820;Schiltron Mobile Fire-Support Platform F;CV;4;1;80;1466
 3096;Striker STC-2S;BM;4;1;80;1466
-560;Charger CGR-1A5;BM;4;1;80;1468
+2820;Schiltron Mobile Fire-Support Platform F;CV;4;1;80;1466
 8039;Fensalir Combat WiGE (3137 Upgrade);cv;4;1;80;1468
+560;Charger CGR-1A5;BM;4;1;80;1468
 175;Awesome AWS-8R;BM;4;1;80;1470
 3640;Zeus ZEU-5S;BM;4;1;80;1474
 2683;Rhino Fire Support Tank (ML);CV;4;1;80;1478
@@ -6610,13 +6735,13 @@
 2997;Spartan SPT-NF;BM;4;1;80;1605
 1398;Hatamoto-Chi HTM-27T;BM;4;1;80;1607
 5438;Zeus ZEU-9S-DC;BM;4;1;80;1612
-6603;DI Schmitt Tank (Targeting Computer);CV;4;1;80;1625
 3402;Victor VTR-9B (Li);BM;4;1;80;1625
+6603;DI Schmitt Tank (Targeting Computer);CV;4;1;80;1625
 1403;Hatamoto-Hi HTM-27U;BM;4;1;80;1627
 1404;Hatamoto-Hi HTM-C;BM;4;1;80;1627
 5703;Legacy LGC-05;BM;4;1;80;1628
-8405;Goliath GOL-3M2;BM;4;1;80;1631
 2996;Spartan SPT-N3;BM;4;1;80;1631
+8405;Goliath GOL-3M2;BM;4;1;80;1631
 3644;Zeus ZEU-9S;BM;4;1;80;1639
 3205;Thug THG-11E;BM;4;1;80;1640
 1057;Fensalir Combat WiGE;CV;4;1;80;1643
@@ -6638,9 +6763,9 @@
 1231;Goliath GOL-3L;BM;4;1;80;1708
 2784;Salamander PPR-6S;BM;4;1;80;1714
 3646;Zeus-X ZEU-9WD;BM;4;1;80;1716
-3415;Victor VTR-C;BM;4;1;80;1717
 3410;Victor VTR-9D;BM;4;1;80;1717
 3411;Victor VTR-9K;BM;4;1;80;1717
+3415;Victor VTR-C;BM;4;1;80;1717
 6802;Fury Command Tank (Fury IIIm);CV;4;3;80;1720
 7926;Hatamoto-Kaze HTM-27V2;BM;4;1;80;1725
 3641;Zeus ZEU-5T;BM;4;1;80;1729
@@ -6654,8 +6779,8 @@
 3206;Thug THG-11Eb;BM;4;1;80;1759
 768;Cudgel CDG-2B;BM;4;1;80;1762
 5367;Vulcan VLC-8N;AF;3;1;80;1766
-5459;Zeus ZEU-9S2;BM;4;1;80;1769
 2782;Salamander PPR-5S;BM;4;1;80;1769
+5459;Zeus ZEU-9S2;BM;4;1;80;1769
 8004;Striker STC-2L;BM;4;1;80;1779
 568;Charger CGR-KMZ;BM;4;1;80;1781
 7311;Awesome AWS-8Q (Buck);BM;4;1;80;1787
@@ -6673,15 +6798,15 @@
 7977;Awesome AWS-11V;BM;4;1;80;1855
 4056;Deathstalker F-77A;AF;3;1;80;1866
 179;Awesome AWS-9Q;BM;4;1;80;1875
-3638;Zeus (Leonidas);BM;4;1;80;1878
 7349;Awesome AWS-11R;BM;4;1;80;1878
+3638;Zeus (Leonidas);BM;4;1;80;1878
 8408;Goliath GOL-7R;BM;4;1;80;1888
 8407;Goliath GOL-7K;BM;4;1;80;1894
 3404;Victor VTR-10D;BM;4;1;80;1894
 8430;Grand Crusader GRN-D-01-X;BM;4;1;80;1895
 6419;Hatamoto-Godai HTM-30Z;BM;4;3;80;1899
-4266;Hatamoto-Kaeru HTM-35K;BM;4;1;80;1906
 1406;Hatamoto-Kaeru HTM-35X;BM;4;1;80;1906
+4266;Hatamoto-Kaeru HTM-35K;BM;4;1;80;1906
 1234;Goliath GOL-4S;BM;4;1;80;1912
 6632;Zeus-X ZEU-X2;BM;4;1;80;1915
 3647;Zeus-X ZEU-9WD (Stacy);BM;4;1;80;1921
@@ -6693,8 +6818,8 @@
 4488;Legacy LGC-01;BM;4;1;80;1967
 1235;Goliath GOL-5D;BM;4;1;80;1975
 6969;Victor VTR-9B (Kataga);BM;4;1;80;1991
-1236;Goliath GOL-5W;BM;4;1;80;2006
 3412;Victor VTR-9K2 (St. James);BM;4;1;80;2006
+1236;Goliath GOL-5W;BM;4;1;80;2006
 563;Charger CGR-1X1;BM;4;1;80;2009
 3406;Victor VTR-11D;BM;4;1;80;2021
 2786;Salamander PPR-7S;BM;4;1;80;2023
@@ -6743,11 +6868,11 @@
 8197;Phoenix Hawk IIC 10;BM;4;3;80;2762
 6680;Doloire DLR-OB;BM;4;3;80;2836
 6682;Doloire DLR-OD;BM;4;3;80;3071
-8277;Crockett CRK-5003-0 (Saddleford);BM;4;1;85;0
 4335;Huitzilopochtli Assault Tank "Huey" (Original);;0;1;85;0
+5860;SturmFeur Heavy Tank (Moore);;0;1;85;0
+8277;Crockett CRK-5003-0 (Saddleford);BM;4;1;85;0
 5867;BattleMaster BLR-1Gd;BM;4;1;85;0
 5870;Stalker STK-3Fk;BM;4;1;85;0
-5860;SturmFeur Heavy Tank (Moore);;0;1;85;0
 5877;BattleMaster BLR-1GHE "HellSlinger";BM;4;1;85;0
 2112;Mauna Kea Command Vessel (LRT);CV;4;1;85;872
 2113;Mauna Kea Command Vessel;CV;4;1;85;872
@@ -6773,8 +6898,8 @@
 289;BattleMaster BLR-1S;BM;4;1;85;1507
 283;BattleMaster BLR-1G;BM;4;1;85;1519
 282;BattleMaster BLR-1D;BM;4;1;85;1522
-1763;Katana (Crockett) CRK-5003-CM;BM;4;1;85;1554
 2642;Rapier RPR-100;AF;3;1;85;1554
+1763;Katana (Crockett) CRK-5003-CM;BM;4;1;85;1554
 7476;BattleMaster BLR-6C;BM;4;1;85;1557
 3039;Stalker STK-4N;BM;4;1;85;1558
 3035;Stalker STK-3F;BM;4;1;85;1559
@@ -6782,8 +6907,8 @@
 3036;Stalker STK-3F (Jagawen);BM;4;1;85;1570
 287;BattleMaster BLR-1Gc;BM;4;1;85;1577
 6967;SturmFeur Heavy Tank (WoB);CV;4;1;85;1578
-1761;Katana (Crockett) CRK-5003-C;BM;4;1;85;1618
 1936;Longbow LGB-7Q;BM;4;1;85;1618
+1761;Katana (Crockett) CRK-5003-C;BM;4;1;85;1618
 3038;Stalker STK-3H;BM;4;1;85;1624
 3806;BattleMaster BLR-3M-DC;BM;4;1;85;1627
 1760;Katana (Crockett) CRK-5003-2;BM;4;1;85;1629
@@ -6807,16 +6932,16 @@
 5058;Shogun SHG-2F (Trisha);BM;4;1;85;1733
 6498;Bulwark Assault Vehicle;CV;4;1;85;1737
 3171;Templar TLR1-OU;BM;4;1;85;1747
-4894;Rapier RPR-100b;AF;3;1;85;1751
 6974;Rampage RMP-4G (Benboudaoud);BM;4;1;85;1751
+4894;Rapier RPR-100b;AF;3;1;85;1751
 8336;Longbow LGB-14V;BM;4;1;85;1763
 297;BattleMaster BLR-5M;BM;4;1;85;1766
 3150;Tai-sho TSH-7S;BM;4;1;85;1774
 8334;Longbow LGB-10K;BM;4;1;85;1791
 2869;Seraph C-SRP-O Invictus;BM;4;1;85;1794
 2645;Rapier RPR-200;AF;3;1;85;1797
-2933;Shogun SHG-2F;BM;4;1;85;1804
 1934;Longbow LGB-13NAIS;BM;4;1;85;1804
+2933;Shogun SHG-2F;BM;4;1;85;1804
 5196;Templar TLR1-OB;BM;4;1;85;1806
 2643;Rapier RPR-101;AF;3;1;85;1807
 1938;Longbow LGB-8V;BM;4;1;85;1808
@@ -6824,8 +6949,8 @@
 8330;Longbow LGB-0H;BM;4;1;85;1813
 1937;Longbow LGB-7V;BM;4;1;85;1816
 3805;BattleMaster BLR-3M (Rogers);BM;4;1;85;1818
-9370;SturmFeur Heavy Tank (Cell);CV;4;3;85;1822
 7690;Rapier RPR-100b-EC;;0;3;85;1822
+9370;SturmFeur Heavy Tank (Cell);CV;4;3;85;1822
 2932;Shogun SHG-2E;BM;4;1;85;1823
 285;BattleMaster BLR-1Gb;BM;4;1;85;1825
 286;BattleMaster BLR-1Gbc;BM;4;1;85;1825
@@ -6860,8 +6985,8 @@
 727;Crockett CRK-5003-3;BM;4;1;85;1989
 2799;Sasquatch SQS-TH-002;BM;4;1;85;1993
 6356;Templar III TLR2-OC;BM;4;1;85;1993
-371;Black Watch BKW-7R;BM;4;1;85;1998
 8003;Shogun SHG-3E;BM;4;1;85;1998
+371;Black Watch BKW-7R;BM;4;1;85;1998
 5054;Shiva SHV-OB;AF;3;1;85;1999
 3151;Tai-sho TSH-8S;BM;4;1;85;2001
 4896;Rapier RPR-300X;AF;3;1;85;2007
@@ -6870,12 +6995,12 @@
 5759;Shiva SHV-OD;AF;3;1;85;2019
 3044;Stalker STK-8S;BM;4;1;85;2020
 6353;Templar III TLR2-O;BM;4;1;85;2028
-5121;Stalker STK-6M;BM;4;1;85;2029
-3037;Stalker STK-3Fb;BM;4;1;85;2029
-296;BattleMaster BLR-4S (Calvin);BM;4;1;85;2029
 5709;Templar TLR1-OF;BM;4;1;85;2029
-5191;Templar TLR1-O;BM;4;1;85;2045
+3037;Stalker STK-3Fb;BM;4;1;85;2029
+5121;Stalker STK-6M;BM;4;1;85;2029
+296;BattleMaster BLR-4S (Calvin);BM;4;1;85;2029
 6471;Lu Wei Bing LN-4B;BM;4;1;85;2045
+5191;Templar TLR1-O;BM;4;1;85;2045
 5153;Striga S-STR-OE Eminus;AF;3;1;85;2055
 7637;Templar TRL1-OBLO;BM;4;1;85;2062
 5197;Templar TLR1-OC;BM;4;1;85;2063
@@ -6887,8 +7012,8 @@
 372;Black Watch BKW-9R;BM;4;1;85;2144
 2874;Seraph C-SRP-OE Eminus;BM;4;1;85;2148
 5055;Shiva SHV-OC;AF;3;1;85;2163
-9404;BattleMaster BLR-6R;BM;4;3;85;2181
 2871;Seraph C-SRP-OB Infernus;BM;4;1;85;2181
+9404;BattleMaster BLR-6R;BM;4;3;85;2181
 9372;SturmFeur Heavy Tank (Assault);CV;4;3;85;2199
 5151;Striga S-STR-OC Comminus;AF;3;1;85;2201
 5712;Templar TLR1-OI;BM;4;1;85;2202
@@ -6952,19 +7077,19 @@
 775;Cyclops CP-11-C;BM;4;1;90;1553
 771;Cyclops CP-10-Q;BM;4;1;90;1584
 5460;Mauler MAL-2R;BM;4;1;90;1586
-3124;Sunder SD1-O (Samual);BM;4;1;90;1593
 5312;Typhoon TFN-3M;AF;3;1;90;1593
+3124;Sunder SD1-O (Samual);BM;4;1;90;1593
 3126;Sunder SD1-OB;BM;4;1;90;1597
 586;Chippewa CHP-W7;AF;3;1;90;1613
-2100;Mauler MAL-1K;BM;4;1;90;1622
 9548;Mauler MAL-3K;bm;4;1;90;1622
+2100;Mauler MAL-1K;BM;4;1;90;1622
 588;Chippewa CHP-W8;AF;3;1;90;1662
 9544;Mauler MAL-1KX;bm;4;1;90;1678
 780;Cyclops CP-12-K;BM;4;1;90;1699
 3689;Ajax Assault Tank B;CV;4;1;90;1706
 538;Challenger MBT X;CV;4;1;90;1710
-1713;Juggernaut JG-R9T1;BM;4;1;90;1719
 6388;Narukami Heavy Tank NK-1C;CV;4;1;90;1719
+1713;Juggernaut JG-R9T1;BM;4;1;90;1719
 7385;Lich UABM-2R;BM;4;3;90;1719
 3939;Challenger MBT Mk. XV;CV;4;1;90;1724
 3127;Sunder SD1-OC;BM;4;1;90;1735
@@ -6979,8 +7104,8 @@
 20;Ahab AHB-X;AF;3;1;90;1818
 7323;Rifleman III RF2-A;BM;4;1;90;1819
 583;Chippewa CHP-W10;AF;3;1;90;1820
-539;Challenger MBT XI;CV;4;1;90;1830
 963;Emperor EMP-5A;BM;4;1;90;1830
+539;Challenger MBT XI;CV;4;1;90;1830
 540;Challenger MBT XII;CV;4;1;90;1851
 6846;Sunder SD1-OF;BM;4;3;90;1854
 1518;Highlander HGN-733C;BM;4;1;90;1857
@@ -7061,12 +7186,12 @@
 8440;Alpha Wolf Prime;BM;4;3;90;2966
 9486;Star Adder (Blood Asp) T;BM;4;3;90;3069
 8441;Alpha Wolf A;BM;4;3;90;3359
+4800;Pendragon PDG-2R;BM;4;1;95;0
+8271;Sagittaire SGT-8R (Jamison);;0;1;95;0
+8151;Alacorn Heavy Tank Mk. V;;4;1;95;0
 4879;Puma Assault Tank PAT-001;;0;1;95;0
 4880;Puma Assault Tank PAT-002;;0;1;95;0
-8271;Sagittaire SGT-8R (Jamison);;0;1;95;0
 8281;Banshee BNC-3E (El Guapo);BM;4;1;95;0
-8151;Alacorn Heavy Tank Mk. V;;4;1;95;0
-4800;Pendragon PDG-2R;BM;4;1;95;0
 2331;Ontos Heavy Tank;CV;4;1;95;938
 5623;Alacorn Heavy Tank Mk. II;CV;4;1;95;1017
 4749;Ontos Heavy Tank X All-Aspect Assault Tank;CV;4;1;95;1031
@@ -7075,8 +7200,8 @@
 2328;Ontos Heavy Tank (LRM);CV;4;1;95;1164
 4748;Ontos Heavy Tank HEAT;CV;4;1;95;1173
 6805;JES II Strategic Missile Carrier (Support);CV;4;1;95;1209
-2325;Ontos Heavy Tank (3053 Upgrade);CV;4;1;95;1242
 2823;Schrek II-X PPC Carrier;CV;4;1;95;1242
+2325;Ontos Heavy Tank (3053 Upgrade);CV;4;1;95;1242
 2329;Ontos Heavy Tank (MML);CV;4;1;95;1268
 2327;Ontos Heavy Tank (Light Gauss);CV;4;1;95;1269
 2326;Ontos Heavy Tank (Fusion);CV;4;1;95;1287
@@ -7106,8 +7231,8 @@
 243;Banshee BNC-3Mr;BM;4;1;95;1801
 6422;Tenshi TN-10-OA;BM;4;1;95;1829
 25;Alacorn Heavy Tank Mk. VI;CV;4;1;95;1850
-3787;Banshee BNC-5S (Vandergriff);BM;4;1;95;1853
 7424;Banshee (John Bauer);BM;4;1;95;1853
+3787;Banshee BNC-5S (Vandergriff);BM;4;1;95;1853
 2253;Naginata NG-C3Ar;BM;4;1;95;1879
 9511;Albatross ALB-5U;BM;4;1;95;1885
 248;Banshee BNC-6S;BM;4;1;95;1889
@@ -7149,8 +7274,8 @@
 3294;Trebaruna TR-XL;BM;4;1;95;2244
 3293;Trebaruna TR-XJ;BM;4;1;95;2270
 30;Albatross ALB-5W (Dantalion);BM;4;1;95;2296
-1425;Hauptmann HA1-OE;BM;4;1;95;2298
 4620;Mĕngqín MNG-8L;AF;3;1;95;2298
+1425;Hauptmann HA1-OE;BM;4;1;95;2298
 1421;Hauptmann HA1-OA;BM;4;1;95;2311
 1423;Hauptmann HA1-OC;BM;4;1;95;2322
 1424;Hauptmann HA1-OD;BM;4;1;95;2359
@@ -7170,8 +7295,8 @@
 4116;Eisensturm EST-OA;AF;3;1;95;2636
 663;Colossus CLS-5S;BM;4;1;95;2647
 5761;Eisensturm EST-OD;AF;3;1;95;2712
-4119;Eisensturm EST-R3;AF;3;1;95;2773
 4114;Eisensturm EST-O;AF;3;1;95;2773
+4119;Eisensturm EST-R3;AF;3;1;95;2773
 2452;Peacekeeper PKP-1A;BM;4;1;95;2824
 4723;Nightstar NSR-9J (Brubaker);BM;4;3;95;2838
 6836;Peacekeeper PKP-2K;BM;4;1;95;2863
@@ -7180,24 +7305,24 @@
 2453;Peacekeeper PKP-1B;BM;4;1;95;2981
 6423;Tenshi TN-10-OB;BM;4;1;95;3002
 6837;Hauptmann HA1-OT;BM;4;3;95;3031
-4681;Mówáng-class Courier;;0;1;100;0
-4537;Long-Range Shuttlecraft KR-61;;0;1;100;0
-5060;Shuttle ST-46;;0;1;100;0
-6764;Stuka STU-K5b2;;0;1;100;0
-7761;Mackie MSK-7X;;0;1;100;0
-8291;Atlas AS7-S (Hanssen);BM;4;1;100;0
-8121;Voidseeker Mk. 39-005;;0;1;100;0
+5485;Grand Titan T-IT-N16M (Al-Hawad);;0;1;100;0
+5851;Neptune Hyper;;0;1;100;0
 3879;Bus S-7A;;0;1;100;0
 3964;Close Assault Landing Craft Mark V;;0;1;100;0
 3965;Close Assault Landing Craft Mark VII;;0;1;100;0
 3966;Close Assault Landing Craft Mark VII (Liao);;0;1;100;0
 3967;Close Assault Landing Craft Mark VII (Steiner);;0;1;100;0
+4537;Long-Range Shuttlecraft KR-61;;0;1;100;0
+5060;Shuttle ST-46;;0;1;100;0
+4681;Mówáng-class Courier;;0;1;100;0
+8291;Atlas AS7-S (Hanssen);BM;4;1;100;0
+7761;Mackie MSK-7X;;0;1;100;0
+5876;Mackie MSH-9HKR "Kill-Roy's Little Buddy";BM;4;1;100;0
+6764;Stuka STU-K5b2;;0;1;100;0
+5610;Battle Taxi NL-43;AF;3;1;100;0
+8121;Voidseeker Mk. 39-005;;0;1;100;0
 5155;Stuka STU-K1;;0;1;100;0
 5156;Stuka STU-K2;;0;1;100;0
-5485;Grand Titan T-IT-N16M (Al-Hawad);;0;1;100;0
-5610;Battle Taxi NL-43;AF;3;1;100;0
-5851;Neptune Hyper;;0;1;100;0
-5876;Mackie MSH-9HKR "Kill-Roy's Little Buddy";BM;4;1;100;0
 5790;Mówáng-class Courier (Clandestine);SC;1;1;100;272
 446;Bus S7-P "Scarab";;0;1;100;412
 2258;Neptune Submarine (Hunter-Killer);CV;4;1;100;948
@@ -7279,8 +7404,8 @@
 5564;Atlas AS7-00 (Jurn);BM;4;1;100;2058
 64;Archangel C-ANG-O (Berith);BM;4;1;100;2060
 67;Archangel C-ANG-OB Infernus;BM;4;1;100;2069
-2055;Marauder II MAD-4A;BM;4;1;100;2073
 5339;Vanquisher VQR-2B;BM;4;1;100;2073
+2055;Marauder II MAD-4A;BM;4;1;100;2073
 7342;Vanquisher VQR-7V (Pravuil);BM;4;1;100;2073
 70;Archangel C-ANG-OE Eminus;BM;4;1;100;2097
 143;Atlas AS7-Dr;BM;4;1;100;2101
@@ -7308,8 +7433,8 @@
 1773;King Crab KGC-001;BM;4;1;100;2221
 5338;Vanquisher VQR-2A;BM;4;1;100;2234
 5720;Fafnir FNR-6U;BM;4;1;100;2234
-5604;Grand Titan T-IT-N14R "Vengeance";BM;4;3;100;2237
 65;Archangel C-ANG-O Invictus;BM;4;1;100;2237
+5604;Grand Titan T-IT-N14R "Vengeance";BM;4;3;100;2237
 8067;Kodiak II 3;BM;4;3;100;2238
 3106;Stuka STU-D6;AF;3;1;100;2251
 6635;King Crab KGC-009;BM;4;1;100;2260
@@ -7323,10 +7448,10 @@
 5340;Vanquisher VQR-5V;BM;4;1;100;2332
 1775;King Crab KGC-005r;BM;4;1;100;2335
 867;Demolisher II Heavy Tank (Thunderbolt);CV;4;1;100;2336
-153;Atlas II AS7-D-H2;BM;4;1;100;2340
 3750;Atlas C;BM;4;3;100;2340
-7521;Marauder II MAD-6C;BM;4;1;100;2346
+153;Atlas II AS7-D-H2;BM;4;1;100;2340
 146;Atlas AS7-K3;BM;4;1;100;2346
+7521;Marauder II MAD-6C;BM;4;1;100;2346
 1608;Imp IMP-1B;BM;4;1;100;2349
 331;Berserker BRZ-C3;BM;4;1;100;2354
 1282;Great Turtle GTR-2;BM;4;1;100;2355
@@ -7334,9 +7459,9 @@
 1777;King Crab KGC-008;BM;4;1;100;2369
 5494;King Crab KGC-008B;BM;4;1;100;2374
 2692;Riever F-700b;AF;3;1;100;2377
-5461;Atlas AS7-S3;BM;4;1;100;2378
-2063;Marauder II MAD-6D;BM;4;1;100;2378
 149;Atlas AS7-S2;BM;4;1;100;2378
+2063;Marauder II MAD-6D;BM;4;1;100;2378
+5461;Atlas AS7-S3;BM;4;1;100;2378
 2062;Marauder II MAD-5W;BM;4;1;100;2383
 7514;King Crab KGC-011;BM;4;1;100;2406
 9581;Thunder Hawk TDK-7Z;BM;4;1;100;2419
@@ -7357,8 +7482,8 @@
 1804;Kodiak (Cale);BM;4;3;100;2535
 7331;Marauder II MAD-6S;BM;4;1;100;2546
 3605;Xanthos XNT-4O;BM;4;1;100;2548
-40;Annihilator ANH-2AX;BM;4;1;100;2553
 6830;Grand Titan T-IT-N13M;BM;4;1;100;2553
+40;Annihilator ANH-2AX;BM;4;1;100;2553
 6358;Atlas III AS7-D3;BM;4;3;100;2564
 8436;Atlas AS7-S4;BM;4;1;100;2568
 3222;Thunder Hawk TDK-7X;BM;4;1;100;2577
@@ -7431,11 +7556,11 @@
 6606;Gulltoppr OmniMonitor Prime;CV;4;1;190;3228
 6607;Gulltoppr OmniMonitor A;CV;4;3;190;3704
 6520;Caerleon;;0;1;195;1885
-3726;Ares Attack Craft Mk. IX;;0;1;200;0
-3727;Ares Assault Craft Mk. VII;;0;1;200;0
 7940;Ares Assault Craft Mk. VI;;0;1;200;0
 3802;Battle Taxi NL-42;;0;1;200;0
 4100;Dropshuttle K-1;;0;1;200;0
+3726;Ares Attack Craft Mk. IX;;0;1;200;0
+3727;Ares Assault Craft Mk. VII;;0;1;200;0
 3742;Astrolux StarYacht LC-100;;0;1;200;0
 5592;Ares Landing Craft Mk. I;;0;1;200;0
 5804;Ares Close Assault Landing Craft Mk. II;;0;1;200;0

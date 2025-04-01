@@ -216,6 +216,17 @@ function getUnitList(filter, tech, minTon, maxTon, category, unittypeString) {
 		document.getElementById("PVA").value="";
 		document.getElementById("F_TON").value="";
 		document.getElementById("TECH").value="";
+
+		document.getElementById("RULES").value="";
+		document.getElementById("COST").value="";
+		document.getElementById("BV").value="";
+		document.getElementById("ERAID").value="";
+		document.getElementById("ERASTART").value="";
+		document.getElementById("DATEINTRO").value="";
+		document.getElementById("UNITCLASS").value="";
+		document.getElementById("UNITVARIANT").value="";
+
+		document.getElementById("DMGE").value="";
 	});
 }
 
@@ -237,6 +248,17 @@ function getUnitDetails(id) {
 		document.getElementById("PVA").value="";
 		document.getElementById("F_TON").value="";
 		document.getElementById("TECH").value="";
+
+		document.getElementById("RULES").value="";
+		document.getElementById("COST").value="";
+		document.getElementById("BV").value="";
+		document.getElementById("ERAID").value="";
+		document.getElementById("ERASTART").value="";
+		document.getElementById("DATEINTRO").value="";
+		document.getElementById("UNITCLASS").value="";
+		document.getElementById("UNITVARIANT").value="";
+
+		document.getElementById("DMGE").value="";
 
 		return;
 	}
@@ -274,6 +296,17 @@ function getUnitDetails(id) {
 		document.getElementById("PVA").value=json.BFPointValue;
 		document.getElementById("F_TON").value=json.Tonnage;
 		document.getElementById("TECH").value=json.Technology.Id;
+
+		document.getElementById("RULES").value=json.Rules;
+		document.getElementById("COST").value=json.Cost;
+		document.getElementById("BV").value=json.BattleValue;
+		document.getElementById("ERAID").value=json.EraId;
+		document.getElementById("ERASTART").value=json.EraStart;
+		document.getElementById("DATEINTRO").value=json.DateIntroduced;
+		document.getElementById("UNITCLASS").value=json.Class;
+		document.getElementById("UNITVARIANT").value=json.Variant;
+
+		document.getElementById("DMGE").value=json.BFDamageExtreme;
 	});
 }
 

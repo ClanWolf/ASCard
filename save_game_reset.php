@@ -60,7 +60,7 @@
 		if (mysqli_num_rows($result_selectUnitWithStatus) > 0) {
 			while($row = mysqli_fetch_assoc($result_selectUnitWithStatus)) {
 				$unittype = $row["as_tp"];
-				$unitstatusid = $row["mechstatusid"];
+				$unitstatusid = $row["unitstatusid"];
 
 				$sqlUpdateInitialUnitstatusEntry = "";
 				$sqlUpdateInitialUnitstatusEntry = $sqlUpdateInitialUnitstatusEntry . "UPDATE asc_unitstatus ";
@@ -97,7 +97,7 @@
 				$sqlUpdateInitialUnitstatusEntry = $sqlUpdateInitialUnitstatusEntry . "mounted_unitid = 0, ";
 				$sqlUpdateInitialUnitstatusEntry = $sqlUpdateInitialUnitstatusEntry . "mounted_on_unitid = 0, ";
 				$sqlUpdateInitialUnitstatusEntry = $sqlUpdateInitialUnitstatusEntry . "unit_statusimageurl = 'images/DD_".$unittype."_01.png' ";
-				$sqlUpdateInitialUnitstatusEntry = $sqlUpdateInitialUnitstatusEntry . "WHERE mechstatusid = ".$unitstatusid;
+				$sqlUpdateInitialUnitstatusEntry = $sqlUpdateInitialUnitstatusEntry . "WHERE unitstatusid = ".$unitstatusid;
 
 				echo $sqlUpdateInitialUnitstatusEntry;
 

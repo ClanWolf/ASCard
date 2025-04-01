@@ -100,6 +100,17 @@ session_start();
 
 		$MVTYPE = isset($_GET["MVTYPE"]) ? $_GET["MVTYPE"] : "";
 
+		$RULES = isset($_GET["TECH"]) ? $_GET["TECH"] : "";
+		$COST = isset($_GET["COST"]) ? $_GET["COST"] : "";
+		$BV = isset($_GET["BV"]) ? $_GET["BV"] : "";
+		$ERAID = isset($_GET["ERAID"]) ? $_GET["ERAID"] : "";
+		$ERASTART = isset($_GET["ERASTART"]) ? $_GET["ERASTART"] : "";
+		$DATEINTRO = isset($_GET["DATEINTRO"]) ? $_GET["DATEINTRO"] : "";
+		$UNITCLASS = isset($_GET["UNITCLASS"]) ? $_GET["UNITCLASS"] : "";
+		$UNITVARIANT = isset($_GET["UNITVARIANT"]) ? $_GET["UNITVARIANT"] : "";
+
+		$DMGE = isset($_GET["DMGE"]) ? $_GET["DMGE"] : "";
+
 		$TON = urldecode($TON);
 		$MNU = urldecode($MNU);
 		$UNITNAME = urldecode($UNITNAME);
@@ -162,6 +173,17 @@ session_start();
 			$UNITSTATUSIMAGE = "images/DD_BM_01.png"; // Find another image here
 		}
 
+		$RULES = urldecode($RULES);
+		$COST = urldecode($COST);
+		$BV = urldecode($BV);
+		$ERAID = urldecode($ERAID);
+		$ERASTART = urldecode($ERASTART);
+		$DATEINTRO = urldecode($DATEINTRO);
+		$UNITCLASS = urldecode($UNITCLASS);
+		$UNITVARIANT = urldecode($UNITVARIANT);
+
+		$DMGE = urldecode($DMGE);
+
 		//    UNIT
 		//    ----------------
 		//    unitid
@@ -209,44 +231,54 @@ session_start();
 
 		$sql_insertunit = "";
 		$sql_insertunit = $sql_insertunit."INSERT INTO asc_unit ";
-		$sql_insertunit = $sql_insertunit."(unit_number, unit_name, tech, mulid, unit_tonnage, as_model, as_pv, as_tp, as_sz, as_tmm, as_mv, as_mvj, as_role, as_skill, as_short, as_short_min, as_medium, as_medium_min, as_long, as_long_min, as_extreme, as_extreme_min, as_ov, as_armor, as_structure, as_threshold, as_specials, unit_imageurl, playerid, as_mvtype) ";
+		$sql_insertunit = $sql_insertunit."(unit_number, unit_name, tech, mulid, cost, battlevalue, rules, era_id, era_start, date_introduced, unit_class, unit_variant, unit_tonnage, as_model, as_pv, as_tp, as_sz, as_tmm, as_mv, as_mvj, as_role, as_skill, as_short, as_short_min, as_medium, as_medium_min, as_long, as_long_min, as_extreme, as_extreme_min, as_ov, as_armor, as_structure, as_threshold, as_specials, unit_imageurl, playerid, as_mvtype) ";
 		$sql_insertunit = $sql_insertunit."VALUES (";
-		$sql_insertunit = $sql_insertunit."'".$MNU."', ";           // unit_number
-		$sql_insertunit = $sql_insertunit."'".$UNITNAME."', ";      // unit_name
-		$sql_insertunit = $sql_insertunit."'".$TECH."', ";          // tech
-		$sql_insertunit = $sql_insertunit."'".$MULID."', ";         // mulid
-		$sql_insertunit = $sql_insertunit."'".$TON."', ";           // unit_tonnage
-		$sql_insertunit = $sql_insertunit."'".$MODEL."', ";         // as_model
-		$sql_insertunit = $sql_insertunit."'".$PVA."', ";           // as_pv
-		$sql_insertunit = $sql_insertunit."'".$TP."', ";            // as_tp
-		$sql_insertunit = $sql_insertunit."'".$SZ."', ";            // as_sz
-		$sql_insertunit = $sql_insertunit."'".$TMM."', ";           // as_tmm
-		$sql_insertunit = $sql_insertunit."'".$MVG."', ";           // as_mv
+		$sql_insertunit = $sql_insertunit."'".$MNU."', ";             // unit_number
+		$sql_insertunit = $sql_insertunit."'".$UNITNAME."', ";        // unit_name
+		$sql_insertunit = $sql_insertunit."'".$TECH."', ";            // tech
+		$sql_insertunit = $sql_insertunit."'".$MULID."', ";           // mulid
+
+		$sql_insertunit = $sql_insertunit."".$COST.", ";              // cost
+		$sql_insertunit = $sql_insertunit."".$BV.", ";                // battlevalue
+		$sql_insertunit = $sql_insertunit."'".$RULES."', ";           // rules
+		$sql_insertunit = $sql_insertunit."".$ERAID.", ";             // eraid
+		$sql_insertunit = $sql_insertunit."".$ERASTART.", ";          // erastart
+		$sql_insertunit = $sql_insertunit."'".$DATEINTRO."', ";       // date_introduced
+		$sql_insertunit = $sql_insertunit."'".$UNITCLASS."', ";       // unitclass
+		$sql_insertunit = $sql_insertunit."'".$UNITVARIANT."', ";     // unitvariant
+
+		$sql_insertunit = $sql_insertunit."'".$TON."', ";             // unit_tonnage
+		$sql_insertunit = $sql_insertunit."'".$MODEL."', ";           // as_model
+		$sql_insertunit = $sql_insertunit."'".$PVA."', ";             // as_pv
+		$sql_insertunit = $sql_insertunit."'".$TP."', ";              // as_tp
+		$sql_insertunit = $sql_insertunit."'".$SZ."', ";              // as_sz
+		$sql_insertunit = $sql_insertunit."'".$TMM."', ";             // as_tmm
+		$sql_insertunit = $sql_insertunit."'".$MVG."', ";             // as_mv
 		if ($MVJ == 0) {
-			$sql_insertunit = $sql_insertunit."null, ";             // as_mvj
+			$sql_insertunit = $sql_insertunit."null, ";               // as_mvj
 		} else {
-			$sql_insertunit = $sql_insertunit."'".$MVJ."', ";       // as_mvj
+			$sql_insertunit = $sql_insertunit."'".$MVJ."', ";         // as_mvj
 		}
-		$sql_insertunit = $sql_insertunit."'".$ROLE."', ";          // as_role
-		$sql_insertunit = $sql_insertunit."'".$SKILL."', ";         // as_skill
-		$sql_insertunit = $sql_insertunit."'".$DMGS."', ";          // as_short
-		$sql_insertunit = $sql_insertunit."0, ";                    // as_short_min
-		$sql_insertunit = $sql_insertunit."'".$DMGM."', ";          // as_medium
-		$sql_insertunit = $sql_insertunit."0, ";                    // as_medium_min
-		$sql_insertunit = $sql_insertunit."'".$DMGL."', ";          // as_long
-		$sql_insertunit = $sql_insertunit."0, ";                    // as_long_min
-		$sql_insertunit = $sql_insertunit."0, ";                    // as_extreme
-		$sql_insertunit = $sql_insertunit."0, ";                    // as_extreme_min
-		$sql_insertunit = $sql_insertunit."'".$OV."', ";            // as_ov
-		$sql_insertunit = $sql_insertunit."'".$A."', ";             // as_armor
-		$sql_insertunit = $sql_insertunit."'".$S."', ";             // as_structure
-		$sql_insertunit = $sql_insertunit."0, ";                    // as_threshold
-		$sql_insertunit = $sql_insertunit."'".$SPCL."', ";          // as_specials
-		$sql_insertunit = $sql_insertunit."'".$UNITIMAGE."', ";     // unit_imageurl
+		$sql_insertunit = $sql_insertunit."'".$ROLE."', ";            // as_role
+		$sql_insertunit = $sql_insertunit."'".$SKILL."', ";           // as_skill
+		$sql_insertunit = $sql_insertunit."'".$DMGS."', ";            // as_short
+		$sql_insertunit = $sql_insertunit."0, ";                      // as_short_min
+		$sql_insertunit = $sql_insertunit."'".$DMGM."', ";            // as_medium
+		$sql_insertunit = $sql_insertunit."0, ";                      // as_medium_min
+		$sql_insertunit = $sql_insertunit."'".$DMGL."', ";            // as_long
+		$sql_insertunit = $sql_insertunit."0, ";                      // as_long_min
+		$sql_insertunit = $sql_insertunit."0, ";                      // as_extreme
+		$sql_insertunit = $sql_insertunit."0, ";                      // as_extreme_min
+		$sql_insertunit = $sql_insertunit."'".$OV."', ";              // as_ov
+		$sql_insertunit = $sql_insertunit."'".$A."', ";               // as_armor
+		$sql_insertunit = $sql_insertunit."'".$S."', ";               // as_structure
+		$sql_insertunit = $sql_insertunit."0, ";                      // as_threshold
+		$sql_insertunit = $sql_insertunit."'".$SPCL."', ";            // as_specials
+		$sql_insertunit = $sql_insertunit."'".$UNITIMAGE."', ";       // unit_imageurl
 //		$sql_insertunit = $sql_insertunit."'".$UNITSTATUSIMAGE."', "; // unit_statusimageurl
 
-		$sql_insertunit = $sql_insertunit."'".$pid."', "; // playerid
-		$sql_insertunit = $sql_insertunit."'".$MVTYPE."'"; // as_mvtype h = hover, w = wheeled, t = tracked
+		$sql_insertunit = $sql_insertunit."'".$pid."', ";             // playerid
+		$sql_insertunit = $sql_insertunit."'".$MVTYPE."'";            // as_mvtype h = hover, w = wheeled, t = tracked
 
 		$sql_insertunit = $sql_insertunit.")";
 		if (mysqli_query($conn, $sql_insertunit)) {
@@ -467,6 +499,17 @@ session_start();
 			MODEL = MODEL.replace(/"/g,"&quot;");
 			MODEL = MODEL.replace(/'/g,"&apos;");
 
+			var RULES = document.getElementById("RULES").value;
+			var COST = document.getElementById("COST").value;
+			var BV = document.getElementById("BV").value;
+			var ERAID = document.getElementById("ERAID").value;
+			var ERASTART = document.getElementById("ERASTART").value;
+			var DATEINTRO = document.getElementById("DATEINTRO").value;
+			var UNITCLASS = document.getElementById("UNITCLASS").value;
+			var UNITVARIANT = document.getElementById("UNITVARIANT").value;
+
+			var DMGE = document.getElementById("DMGE").value;
+
 			if (UNITNAME != "") {
 				UNITNAME = UNITNAME.length > 15 ? UNITNAME.substring(0, 12) + "..." : UNITNAME.substring(0, UNITNAME.length);
 			}
@@ -524,6 +567,17 @@ session_start();
 			url=url+"&FORMATIONID="+encodeURIComponent(FORMATIONID);
 			url=url+"&TECH="+encodeURIComponent(TECH);
 			url=url+"&MVTYPE="+encodeURIComponent(MVType);
+
+			url=url+"&RULES="+encodeURIComponent(RULES);
+			url=url+"&COST="+encodeURIComponent(COST);
+			url=url+"&BV="+encodeURIComponent(BV);
+			url=url+"&ERAID="+encodeURIComponent(ERAID);
+			url=url+"&ERASTART="+encodeURIComponent(ERASTART);
+			url=url+"&DATEINTRO="+encodeURIComponent(DATEINTRO);
+			url=url+"&UNITCLASS="+encodeURIComponent(UNITCLASS);
+			url=url+"&UNITVARIANT="+encodeURIComponent(UNITVARIANT);
+
+			url=url+"&DMGE="+encodeURIComponent(DMGE);
 
 			// alert(url);
 			window.location.href = url;
@@ -705,6 +759,16 @@ session_start();
 					<input required type="hidden" id="PI" name="PI">
 					<input required type="hidden" id="F_TON" name="F_TON">
 					<input required type="hidden" id="TECH" name="TECH">
+
+					<input required type="hidden" id="RULES" name="RULES">
+					<input required type="hidden" id="COST" name="COST">
+					<input required type="hidden" id="BV" name="BV">
+					<input required type="hidden" id="ERAID" name="ERAID">
+					<input required type="hidden" id="ERASTART" name="ERASTART">
+					<input required type="hidden" id="DATEINTRO" name="DATEINTRO">
+					<input required type="hidden" id="UNITCLASS" name="UNITCLASS">
+					<input required type="hidden" id="UNITVARIANT" name="UNITVARIANT">
+					<input required type="hidden" id="DMGE" name="DMGE">
 				</td>
 			</tr>
 			<tr>

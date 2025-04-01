@@ -453,6 +453,8 @@ session_start();
 					if ($visibleUnitsCount <= 5) {
 						// Unit visible
 						echo "<script>console.log('Current unit is visible in top menu.');</script>";
+					} else {
+						echo "<script>console.log('Current unit is NOT visible in top menu.');</script>";
 					}
 				}
 			}
