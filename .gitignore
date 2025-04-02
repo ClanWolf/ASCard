@@ -1,5 +1,6 @@
 /.idea/
 /fontawesome/
+/cache/mul/unitdetails
 config.php
 config_neuerServer.php
 createPW.php
