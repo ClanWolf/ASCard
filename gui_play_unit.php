@@ -208,7 +208,7 @@ session_start();
 					document.getElementById("gamemenubutton").innerHTML = "<i style='color:#eee;' class='fa-solid fa-angles-up'></i>";
 				});
 
-				// Synchronize glowing effects
+				// Synchronize css glowing animations
 				let anims = document.getAnimations()    
 				for(let i = 0; i < anims.length; i++) {
 					if (i == 0) {
