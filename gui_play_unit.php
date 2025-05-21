@@ -207,6 +207,15 @@ session_start();
 					document.getElementById("gamemenu").style.display = "block";
 					document.getElementById("gamemenubutton").innerHTML = "<i style='color:#eee;' class='fa-solid fa-angles-up'></i>";
 				});
+
+				// Synchronize glowing effects
+				let anims = document.getAnimations()    
+				for(let i = 0; i < anims.length; i++) {
+					if (i == 0) {
+						pulseStart = anims[i].currentTime;
+					}
+					anims[i].currentTime = pulseStart;
+				}
 			}
 		}
 	</script>
