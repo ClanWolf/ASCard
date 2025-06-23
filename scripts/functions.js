@@ -224,7 +224,9 @@ function readCircles2(index, a_max, s_max, mv_bt_id, f_bt_id) {
 		unitstatusimage = "images/DD_" + unitType + "_04.png";
 	}
 
-	document.getElementById('unitstatusimagemenu').src=unitstatusimage;
+	if (document.getElementById('unitstatusimagemenu') != null) {
+		document.getElementById('unitstatusimagemenu').src=unitstatusimage;
+	}
 	document.getElementById('unitstatusimageoverview').src=unitstatusimage;
 //	if (unitstatusstring == "destroyed") {
 //		document.getElementById('pilotimageoverview').src="./images/skull.png";
@@ -500,7 +502,7 @@ function setCircles(h, heat_PREP_ENGINEHIT_value, a, s, e, fc, mp, w, e_cv, fc_c
 		} else if (e_cv => 1) {
 			if (updatedshortdamage > 0) { updatedshortdamage = Math.ceil(updatedshortdamage / 2); }
 			if (updatedmediumdamage > 0) { updatedmediumdamage = Math.ceil(updatedmediumdamage / 2); }
-			if (updatedlongdamage > 0) { Math.ceil(updatedlongdamage = updatedlongdamage / 2); }
+			if (updatedlongdamage > 0) { updatedlongdamage = Math.ceil(updatedlongdamage / 2); }
 			if (updatedmovementpointsground > 0 ) { updatedmovementpointsground = Math.ceil(updatedmovementpointsground / 2); }
 			if (updatedmovementpointsjump > 0 ) { updatedmovementpointsjump = Math.ceil(updatedmovementpointsjump / 2); }
 		}
@@ -541,6 +543,17 @@ function setCircles(h, heat_PREP_ENGINEHIT_value, a, s, e, fc, mp, w, e_cv, fc_c
 		// movement
 
 
+/*
+[CWG] Meldric Ward: Ich werde für combat vehicle erstmal einen Kompromiss einbauen.
+Da crit Treffer teilweise die Bewegung halbieren und teilweise Punkte abziehen, kommt
+es bei der Berechnung auf die Reihenfolge der Crits an { (x-2)/2 != (x/2)-2 }. Diese
+Reihenfolge habe ich eigentlich, da ich den status der unit rundenweise wegschreibe,
+aber es ist nicht so einfach, da ran zu kommen von da, wo ich das brauche. Daher lege
+ich mal interim fest, dass ich beim Berechnen zuerst engine crit nehme, dann motive 1
+und als letztes motive 2. Die Fehler sollten bei den kleinen Zahlen minimal sein und
+vielleicht reicht das so ja auch schon. Falls nicht, muss ich das später nochmal ändern.
+Was sagen die turnierspieler dazu?
+*/
 
 // 2D6 -->
 // 2–8    No effect

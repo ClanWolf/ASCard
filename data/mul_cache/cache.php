@@ -21,6 +21,13 @@
 	// Types=19: CV, Combat vehicles / Tanks
 	// http://www.masterunitlist.info/Unit/Quicklist?Name=&HasBV=false&MinBV=&MaxBV=&MinIntro=&MaxIntro=&MinCost=&MaxCost=&HasRole=&HasBFAbility=&MinPV=&MaxPV=&Technologies=2&Technologies=3&BookAuto=&FactionAuto=&MinTons=30&MaxTons=30&Types=18
 
+
+
+	// Eras can be checked by this param, but the era data does not show up per unit, the result is limited according to the filtered era
+	// &AvailableEras=11&AvailableEras=1
+
+
+
 	$url_arr = array(
 		'http://www.masterunitlist.info/Unit/QuickList?Name=&HasBV=false&MinBV=&MaxBV=&MinIntro=&MaxIntro=&MinCost=&MaxCost=&HasRole=&HasBFAbility=&MinPV=&MaxPV=&Technologies=2&Technologies=3&BookAuto=&FactionAuto=&Types=21&SubTypes=28',
 		'http://www.masterunitlist.info/Unit/QuickList?Name=&HasBV=false&MinBV=&MaxBV=&MinIntro=&MaxIntro=&MinCost=&MaxCost=&HasRole=&HasBFAbility=&MinPV=&MaxPV=&Technologies=2&Technologies=3&BookAuto=&FactionAuto=&MinTons=20&MaxTons=20&Types=17&Types=18&Types=19',

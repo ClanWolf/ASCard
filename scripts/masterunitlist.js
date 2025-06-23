@@ -69,7 +69,7 @@ function getUnitList(filter, tech, minTon, maxTon, category, unittypeString) {
 		cache_url = cache_url + '.json';
 
 	//console.log("URL: " + url);
-	console.log("Cache: " + cache_url);
+	//console.log("Cache: " + cache_url);
 
 	$.getJSON(cache_url, function (json) {
 		json.Units.sort(function(a, b) {
@@ -97,18 +97,91 @@ function getUnitList(filter, tech, minTon, maxTon, category, unittypeString) {
 			} else {
 				variant = "";
 			}
+
+			//console.log("BFSize: " + unit.BFSize);
+
 			if (unit.BFSize != "0") {
-				var eraUnit = unit.EraId;
-				var eraFilter = document.getElementById("CreateUnitEra").value;
+				var eraIdFilter = document.getElementById("CreateUnitEra").value;
+				var unitIntroducedInYear = unit.DateIntroduced;
+
 				var unitString = unit.Id + "> " + unit.Tonnage + "t | " + unit.Name + variant + unittypename;
 				var unitStringLowerCase = unitString.toLowerCase();
 				var filterLowerCase = filter.toLowerCase();
 
 				if (unitStringLowerCase.includes(filterLowerCase)) {
-					// console.log("Era unit: " + eraUnit);
-					// console.log("Era selected: " + eraFilter);
-					if (eraFilter == 0 || eraUnit == eraFilter) {
+					console.log("---------------------------------------");
+					console.log("Unit introduced in year: " + unitIntroducedInYear);
+					console.log("EraId (from filter): " + eraIdFilter);
+
+					var unitValidInGivenEra = false;
+					switch (eraIdFilter) {
+						case "9":                        // 2005-2570: AGE OF WAR
+							if (unitIntroducedInYear >= 2005 && unitIntroducedInYear <= 2570) {
+								unitValidInGivenEra = true;
+							}
+							break;
+						case "10":                       // 2571-2780: STAR LEAGUE
+							if (unitIntroducedInYear >= 2005 && unitIntroducedInYear <= 2780) {
+								unitValidInGivenEra = true;
+							}
+							break;
+						case "11":                       // 2781-2900: EARLY SUCCESSION WARS
+							if (unitIntroducedInYear >= 2005 && unitIntroducedInYear <= 2900) {
+								unitValidInGivenEra = true;
+							}
+							break;
+						case "255":                      // 2901-3019: LATE SUCCESSION WARS - LOSTECH
+							if (unitIntroducedInYear >= 2005 && unitIntroducedInYear <= 3019) {
+								unitValidInGivenEra = true;
+							}
+							break;
+						case "256":                      // 3020-3049: LATE SUCCESSION WARS - RENAISSANCE
+							if (unitIntroducedInYear >= 2005 && unitIntroducedInYear <= 3049) {
+								unitValidInGivenEra = true;
+							}
+							break;
+						case "13":                       // 3050-3061: CLAN INVASION
+							if (unitIntroducedInYear >= 2005 && unitIntroducedInYear <= 3061) {
+								unitValidInGivenEra = true;
+							}
+							break;
+						case "247":                      // 3062-3067: CIVIL WAR
+							if (unitIntroducedInYear >= 2005 && unitIntroducedInYear <= 3067) {
+								unitValidInGivenEra = true;
+							}
+							break;
+						case "14":                       // 3068-3080: JIHAD
+							if (unitIntroducedInYear >= 2005 && unitIntroducedInYear <= 3080) {
+								unitValidInGivenEra = true;
+							}
+							break;
+						case "15":                       // 3081-3100: EARLY REPUBLIC
+							if (unitIntroducedInYear >= 2005 && unitIntroducedInYear <= 3100) {
+								unitValidInGivenEra = true;
+							}
+							break;
+						case "254":                      // 3101-3130: LATE REPUBLIC
+							if (unitIntroducedInYear >= 2005 && unitIntroducedInYear <= 3130) {
+								unitValidInGivenEra = true;
+							}
+							break;
+						case "16":                       // 3131-3150: DARK AGE
+							if (unitIntroducedInYear >= 2005 && unitIntroducedInYear <= 3150) {
+								unitValidInGivenEra = true;
+							}
+							break;
+						case "257":                      // 3151-9999: ILCLAN
+							if (unitIntroducedInYear >= 2005 && unitIntroducedInYear <= 9999) {
+								unitValidInGivenEra = true;
+							}
+							break;
+					}
+
+					if (eraIdFilter == 0 || unitValidInGivenEra) {
 						optionList = optionList + "<option value=" + unitString + "</option>";
+						console.log("Adding: " + unitString);
+					} else {
+						console.log("NOT Adding: " + unitString);
 					}
 				}
 			}
@@ -143,6 +216,9 @@ function getUnitList(filter, tech, minTon, maxTon, category, unittypeString) {
 
 								// Set filter to new values
 								if (detectedUnitType != "" && detectedUnitSize != "" && detectedUnitTech != "") {
+									if (detectedUnitTech != 1 && detectedUnitTech != 2) {
+										detectedUnitTech = 1;
+									}
 									// All values are set, we can set the filters
 									console.log("Break search, set filter values.");
 
@@ -153,6 +229,7 @@ function getUnitList(filter, tech, minTon, maxTon, category, unittypeString) {
 									document.getElementById("CreateUnitEra").setAttribute("onchange", "");
 
 									document.getElementById("tech").value = detectedUnitTech;
+									document.getElementById("CreateUnitEra").value = 0;
 									document.getElementById("unittype").value = detectedUnitType;
 									if (detectedUnitSize == 1) {
 										document.getElementById("tonnage").value = "LIGHT";
@@ -166,6 +243,7 @@ function getUnitList(filter, tech, minTon, maxTon, category, unittypeString) {
 										document.getElementById("tonnage").value = "SUPERHEAVY";
 									}
 
+									document.getElementById("CreateUnitEra").style.color="#ffa72c";
 									document.getElementById("tonnage").style.color="#ffa72c";
 									document.getElementById("tech").style.color="#ffa72c";
 									document.getElementById("unittype").style.color="#ffa72c";

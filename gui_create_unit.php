@@ -648,6 +648,7 @@ session_start();
 					<select required name='tech' id='tech' size='1'>
 						<option value="2">Clan</option>
 						<option value="1">IS</option>
+						<!-- <option value="3">MIXED</option> -->
 					</select>
 
 					Type: <select required style='width:75px;' name='unittype' id='unittype' size='1'>
@@ -716,18 +717,18 @@ session_start();
 				<td nowrap class="datalabel" style='text-align:left;' colspan='4'>
 					<select required style='width:350px;' name='CreateUnitEra' id='CreateUnitEra' size='1'>
 						<option value="0">ALL</option>
-						<option value="9">2005-2570: AGE OF WAR</option>
-						<option value="10">2571-2780: STAR LEAGUE</option>
-						<option value="11">2781-2900: EARLY SUCCESSION WARS</option>
-						<option value="255">2901-3019: LATE SUCCESSION WARS - LOSTECH</option>
-						<option value="256">3020-3049: LATE SUCCESSION WARS - RENAISSANCE</option>
-						<option value="13">3050-3061: CLAN INVASION</option>
-						<option value="247">3052-3067: CIVIL WAR</option>
-						<option value="14">3068-3080: JIHAD</option>
-						<option value="15">3081-3100: EARLY REPUBLIC</option>
-						<option value="254">3101-3130: LATE REPUBLIC</option>
-						<option value="16">3131-3150: DARK AGE</option>
-						<option value="257">3151-9999: ILCLAN</option>
+						<option value="9">2005-2570: AGE OF WAR</option>                             <!-- ID:   9 -->
+						<option value="10">2571-2780: STAR LEAGUE</option>                           <!-- ID:  10 -->
+						<option value="11">2781-2900: EARLY SUCCESSION WARS</option>                 <!-- ID:  11 -->
+						<option value="255">2901-3019: LATE SUCCESSION WARS - LOSTECH</option>       <!-- ID: 255 -->
+						<option value="256">3020-3049: LATE SUCCESSION WARS - RENAISSANCE</option>   <!-- ID: 256 -->
+						<option value="13">3050-3061: CLAN INVASION</option>                         <!-- ID:  13 -->
+						<option value="247">3062-3067: CIVIL WAR</option>                            <!-- ID: 247 -->
+						<option value="14">3068-3080: JIHAD</option>                                 <!-- ID:  14 -->
+						<option value="15">3081-3100: EARLY REPUBLIC</option>                        <!-- ID:  15 -->
+						<option value="254">3101-3130: LATE REPUBLIC</option>                        <!-- ID: 254 -->
+						<option value="16">3131-3150: DARK AGE</option>                              <!-- ID:  16 -->
+						<option value="257">3151-9999: ILCLAN</option>                               <!-- ID: 257 -->
 					</select>
 				</td>
 			</tr>

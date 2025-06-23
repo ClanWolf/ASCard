@@ -369,13 +369,33 @@ session_start();
 		<tr>
 <?php
 if (!$playMode) {
-	echo "						<td colspan='3' nowrap style='width:270px;height:30px;text-align:center;' onclick='location.href=\"gui_edit_command.php\"' class='formationselect_button_normal'>\n";
-	echo "							<a href='gui_edit_command.php'><i class='fas fa-edit'></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;COMMAND</a>\n";
+	echo "						<td colspan='3' nowrap style='height:30px;text-align:center;padding:0px;' class='formationselect_button_normal'>\n";
+	echo "							<table width='100%' align='center' cellspacing='0' cellpadding='0' border='0'>\n";
+	echo "								<td colspan='1' nowrap style='width:60px;height:30px;text-align:left;' onclick='location.href=\"\"' class='formationselect_button_normal'>\n";
+	echo "									<a href=''>&nbsp;&nbsp;&nbsp;<i class='fa-solid fa-arrow-left'></i></a>\n";
+	echo "								</td>\n";
+	echo "									<td colspan='1' nowrap style='height:30px;text-align:center;' onclick='location.href=\"gui_edit_command.php\"' class='formationselect_button_normal'>\n";
+	echo "									<a href='gui_edit_command.php'><i class='fas fa-edit'></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;COMMAND</a>\n";
+	echo "								</td>\n";
+	echo "								<td colspan='1' nowrap style='width:60px;height:30px;text-align:right;' onclick='location.href=\"\"' class='formationselect_button_normal'>\n";
+	echo "									<a href=''><i class='fa-solid fa-arrow-right'></i>&nbsp;&nbsp;&nbsp;</a>\n";
+	echo "								</td>\n";
+	echo "							</table>\n";
 	echo "						</td>\n";
 } else {
-	echo "						<td colspan='3' nowrap style='width:270px;height:30px;text-align:center;' class='formationselect_button_normal'>\n";
-	echo "							<a href='#'>COMMAND</a>\n";
-	echo "							&nbsp;&nbsp;&nbsp;<span id='bidOverviewCommand'>(PV 10 / 100)</span>\n";
+	echo "						<td colspan='3' nowrap style='height:30px;text-align:center;padding:0px;' class='formationselect_button_normal'>\n";
+	echo "							<table width='100%' align='center' cellspacing='0' cellpadding='0' border='0'>\n";
+	echo "								<td colspan='1' nowrap style='width:60px;height:30px;text-align:left;' onclick='location.href=\"\"' class='formationselect_button_normal'>\n";
+	echo "									<a href=''>&nbsp;&nbsp;&nbsp;<i class='fa-solid fa-arrow-left'></i></a>\n";
+	echo "								</td>\n";
+	echo "									<td colspan='1' nowrap style='height:30px;text-align:center;' onclick='location.href=\"gui_select_command.php\"' class='formationselect_button_normal'>\n";
+	echo "									<a href='gui_select_command.php'>COMMAND</a>\n";
+	echo "									&nbsp;&nbsp;&nbsp;<span id='bidOverviewCommand'>(PV 10 / 100)</span>\n";
+	echo "								</td>\n";
+	echo "								<td colspan='1' nowrap style='width:60px;height:30px;text-align:right;' onclick='location.href=\"\"' class='formationselect_button_normal'>\n";
+	echo "									<a href=''><i class='fa-solid fa-arrow-right'></i>&nbsp;&nbsp;&nbsp;</a>\n";
+	echo "								</td>\n";
+	echo "							</table>\n";
 	echo "						</td>\n";
 }
 if ($playMode) {

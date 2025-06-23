@@ -209,7 +209,7 @@ session_start();
 				});
 
 				// Synchronize css glowing animations
-				let anims = document.getAnimations()    
+				let anims = document.getAnimations()
 				for(let i = 0; i < anims.length; i++) {
 					if (i == 0) {
 						pulseStart = anims[i].currentTime;
@@ -218,6 +218,7 @@ session_start();
 				}
 			}
 		}
+
 	</script>
 <?php
 	$file = file_get_contents('./version.txt', true);
@@ -446,45 +447,60 @@ session_start();
 	$startIndex = intval($array_PLAYER_FORMATION_STARTINDS[$formationid]);
 	$showRightArrow = false;
 
+	$activeUnitsCount = 0;
 	$visibleUnitsCount = 0;
+	$unitIsVisible = false;
+	$unitOutLeft = false;
+	$unitOutRight = false;
 	$size = sizeof($array_UNIT_MODEL);
 	for ($i11 = 1; $i11 <= sizeof($array_UNIT_MODEL); $i11++) {
 		if ($array_ACTIVE_BID[$i11] == "0") {
 			$size = $size - 1;
 		} else {
-			$visibleUnitsCount++;
+			$activeUnitsCount++;
 			if ($i11 < $startIndex) {
 				// not yet visible
+				if ($i11 == $chosenUnitIndex) {
+					$unitOutLeft = true;
+				}
 			} else if ($i11 >= $startIndex) {
+				$visibleUnitsCount++;
 				// potentially visible
 				if ($i11 == $chosenUnitIndex) {
 					// This is the currently chosen unit
-					if ($visibleUnitsCount <= 5) {
+					if ($visibleUnitsCount <= $maxNumberOfTabs) {
 						// Unit visible
-						echo "<script>console.log('Current unit is visible in top menu.');</script>";
+						$unitIsVisible = true;
 					} else {
-						echo "<script>console.log('Current unit is NOT visible in top menu.');</script>";
+						$unitIsVisible = false;
+						$unitOutRight = true;
 					}
 				}
 			}
+		}
+	}
+	if ($unitIsVisible) {
+		echo "<script>console.log('Current unit is visible in top menu.');</script>";
+	} else {
+		echo "<script>console.log('Current unit is NOT visible in top menu.');</script>";
+		if ($unitOutLeft) {
+			echo "<script>console.log('left');</script>";
+		} else if ($unitOutRight) {
+			echo "<script>console.log('right');</script>";
 		}
 	}
 
 
 
 
-//	if ($chosenUnitIndex < $startIndex) {
-//
-//	} else if ($chosenUnitIndex > ($startIndex + 5)) {
-//
-//	}
 
 
 
-//$chosenUnitIndex
-//
-//
-//chosenunitindex
+
+
+
+
+
 
 	if ($size > $maxNumberOfTabs) {
 		$width = ceil(100 / $maxNumberOfTabs);
