@@ -783,7 +783,7 @@ session_start();
 					Pilot: <input type="text" required id="PN" name="PN" style='width:120px'>
 				</td>
 				<td nowrap class="datalabel" style='text-align:left;'>
-					Skill: <select required name='SKILL' id='SKILL' size='1'>
+					Skill: <select required name='SKILL' id='SKILL' size='1' onchange='unitdetailsChanged();'>
 						<option value="0">0</option>
 						<option value="1">1</option>
 						<option value="2">2</option>
@@ -804,7 +804,7 @@ session_start();
 				</td>
 			</tr>
 			<tr>
-				<td nowrap class="datalabel" style='text-align:left;' colspan='4'>Add to formation: <select required name='FORMATIONID' id='FORMATIONID' size='1' style='width:200px;'>
+				<td nowrap class="datalabel" style='text-align:left;' colspan='4'>Add to formation: <select required name='FORMATIONID' id='FORMATIONID' size='1' style='width:200px;' onchange='unitdetailsChanged();'>
 <?php
 	$sql_asc_playersformations = "SELECT SQL_NO_CACHE * FROM asc_formation where playerid=".$pid;
 	$result_asc_playersformations = mysqli_query($conn, $sql_asc_playersformations);
@@ -835,26 +835,29 @@ session_start();
 		let filterWeight = getCookie("UnitFilter_Weight");
 		let filterString = getCookie("UnitFilter_String");
 		let filterEra = getCookie("UnitFilter_Era");
+		let filterFormation = getCookie("UnitFilter_Formation");
+		let filterSkill = getCookie("UnitFilter_Skill");
 
 		if (filterTech != undefined && filterTech != "") {
-			//console.log("Found cookie filter tech: " + filterTech);
 			document.getElementById("tech").value = filterTech;
 		}
 		if (filterType != undefined && filterType != "") {
-			//console.log("Found cookie filter type: " + filterType);
 			document.getElementById("unittype").value = filterType;
 		}
 		if (filterWeight != undefined && filterWeight != "") {
-			//console.log("Found cookie filter weight: " + filterWeight);
 			document.getElementById("tonnage").value = filterWeight;
 		}
 		if (filterString != undefined && filterString != "") {
-			//console.log("Found cookie filter string: " + filterString);
 			document.getElementById("NameFilter").value = filterString;
 		}
 		if (filterEra != undefined && filterEra != "") {
-			//console.log("Found cookie filter era: " + filterEra);
 			document.getElementById("CreateUnitEra").value = filterEra;
+		}
+		if (filterFormation != undefined && filterFormation != "") {
+			document.getElementById("FORMATIONID").value = filterFormation;
+		}
+		if (filterSkill != undefined && filterSkill != "") {
+			document.getElementById("SKILL").value = filterSkill;
 		}
 
 		document.getElementById("tech").setAttribute("onchange", "fetchUnitList();");

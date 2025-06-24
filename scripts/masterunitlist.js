@@ -109,9 +109,9 @@ function getUnitList(filter, tech, minTon, maxTon, category, unittypeString) {
 				var filterLowerCase = filter.toLowerCase();
 
 				if (unitStringLowerCase.includes(filterLowerCase)) {
-					console.log("---------------------------------------");
-					console.log("Unit introduced in year: " + unitIntroducedInYear);
-					console.log("EraId (from filter): " + eraIdFilter);
+					//console.log("---------------------------------------");
+					//console.log("Unit introduced in year: " + unitIntroducedInYear);
+					//console.log("EraId (from filter): " + eraIdFilter);
 
 					var unitValidInGivenEra = false;
 					switch (eraIdFilter) {
@@ -179,9 +179,9 @@ function getUnitList(filter, tech, minTon, maxTon, category, unittypeString) {
 
 					if (eraIdFilter == 0 || unitValidInGivenEra) {
 						optionList = optionList + "<option value=" + unitString + "</option>";
-						console.log("Adding: " + unitString);
+						//console.log("Adding: " + unitString);
 					} else {
-						console.log("NOT Adding: " + unitString);
+						//console.log("NOT Adding: " + unitString);
 					}
 				}
 			}
@@ -384,6 +384,12 @@ function getUnitDetails(id) {
 		document.getElementById("UNITCLASS").value=json.Class;
 		document.getElementById("UNITVARIANT").value=json.Variant;
 
+//		console.log(document.getElementById("UNITCLASS").value);
+//		console.log(document.getElementById("UNITVARIANT").value);
+
+		var unitNameProposal = document.getElementById("UNITCLASS").value + " " + document.getElementById("UNITVARIANT").value;
+		document.getElementById("UNITNAME").value = unitNameProposal;
+
 		document.getElementById("DMGE").value=json.BFDamageExtreme;
 	});
 }
@@ -392,6 +398,11 @@ function unitSelected() {
 	var e = document.getElementById("units");
 	var id = e.options[e.selectedIndex].value;
 	getUnitDetails(id);
+}
+
+function unitdetailsChanged() {
+	setCookie("UnitFilter_Formation", document.getElementById("FORMATIONID").value, 365);
+	setCookie("UnitFilter_Skill", document.getElementById("SKILL").value, 365);
 }
 
 function fetchUnitList() {
@@ -403,6 +414,8 @@ function fetchUnitList() {
 	setCookie("UnitFilter_Weight", document.getElementById("tonnage").value, 365);
 	setCookie("UnitFilter_String", document.getElementById("NameFilter").value, 365);
 	setCookie("UnitFilter_Era", document.getElementById("CreateUnitEra").value, 365);
+	setCookie("UnitFilter_Formation", document.getElementById("FORMATIONID").value, 365);
+	setCookie("UnitFilter_Skill", document.getElementById("SKILL").value, 365);
 
 	var tech = document.getElementById("tech");
 	var techid = tech.options[tech.selectedIndex].value;

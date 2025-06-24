@@ -488,6 +488,9 @@ function setCircles(h, heat_PREP_ENGINEHIT_value, a, s, e, fc, mp, w, e_cv, fc_c
 
 	// -----------------------------------------------------------------------------------------------------------------
 
+	//console.log("TMM ------------>");
+	var tmpTMM = originalTMM;
+
 	if (unitType == "BA") {
 		// No heat, no criticals for BattleArmor
 	}
@@ -500,11 +503,13 @@ function setCircles(h, heat_PREP_ENGINEHIT_value, a, s, e, fc, mp, w, e_cv, fc_c
 		if (e_cv == 0) {
 			//
 		} else if (e_cv => 1) {
-			if (updatedshortdamage > 0) { updatedshortdamage = Math.ceil(updatedshortdamage / 2); }
-			if (updatedmediumdamage > 0) { updatedmediumdamage = Math.ceil(updatedmediumdamage / 2); }
-			if (updatedlongdamage > 0) { updatedlongdamage = Math.ceil(updatedlongdamage / 2); }
-			if (updatedmovementpointsground > 0 ) { updatedmovementpointsground = Math.ceil(updatedmovementpointsground / 2); }
-			if (updatedmovementpointsjump > 0 ) { updatedmovementpointsjump = Math.ceil(updatedmovementpointsjump / 2); }
+			if (updatedshortdamage > 0) { updatedshortdamage = Math.floor(updatedshortdamage / 2); }
+			if (updatedmediumdamage > 0) { updatedmediumdamage = Math.floor(updatedmediumdamage / 2); }
+			if (updatedlongdamage > 0) { updatedlongdamage = Math.floor(updatedlongdamage / 2); }
+			if (updatedmovementpointsground > 0 ) { updatedmovementpointsground = Math.floor(updatedmovementpointsground / 2); }
+			if (updatedmovementpointsjump > 0 ) { updatedmovementpointsjump = Math.floor(updatedmovementpointsjump / 2); }
+
+			if (tmpTMM > 0) { tmpTMM = Math.floor(tmpTMM / 2); }
 		}
 
 		updatedshortvalue = updatedshortvalue + (fc_cv * 2);
@@ -541,33 +546,39 @@ function setCircles(h, heat_PREP_ENGINEHIT_value, a, s, e, fc, mp, w, e_cv, fc_c
 		if (updatedlongdamage < 0) updatedlongdamage = 0;
 
 		// movement
+		if (ma_cv > 0) {
+			updatedmovementpointsground = updatedmovementpointsground - (ma_cv * 2);
+			updatedmovementpointsjump = updatedmovementpointsjump - (ma_cv * 2);
 
+			if (tmpTMM > 0) { tmpTMM = tmpTMM - (ma_cv * 1); }
+		}
+		if (mb_cv > 0) {
+			updatedmovementpointsground = Math.floor(updatedmovementpointsground / (mb_cv * 2));
+			updatedmovementpointsjump = Math.floor(updatedmovementpointsjump / (mb_cv * 2));
 
-/*
-[CWG] Meldric Ward: Ich werde für combat vehicle erstmal einen Kompromiss einbauen.
-Da crit Treffer teilweise die Bewegung halbieren und teilweise Punkte abziehen, kommt
-es bei der Berechnung auf die Reihenfolge der Crits an { (x-2)/2 != (x/2)-2 }. Diese
-Reihenfolge habe ich eigentlich, da ich den status der unit rundenweise wegschreibe,
-aber es ist nicht so einfach, da ran zu kommen von da, wo ich das brauche. Daher lege
-ich mal interim fest, dass ich beim Berechnen zuerst engine crit nehme, dann motive 1
-und als letztes motive 2. Die Fehler sollten bei den kleinen Zahlen minimal sein und
-vielleicht reicht das so ja auch schon. Falls nicht, muss ich das später nochmal ändern.
-Was sagen die turnierspieler dazu?
-*/
+			if (tmpTMM > 0) { tmpTMM = Math.floor(tmpTMM / (mb_cv * 2)); }
+		}
+		if (mc_cv > 0) {
+			updatedmovementpointsground = 0;
+			updatedmovementpointsjump = 0;
 
-// 2D6 -->
-// 2–8    No effect
-// 9–10   −2” Move, −1 TMM*      (* A unit reduced to 0” (or less) Move is immobilized)
-// 11     −50% Move, −50% TMM*†  († If a fractional Move rating results, round it down. There is a minimum Move loss of 2” and TMM loss of 1.)
-// 12+    Unit immobilized
+			tmpTMM = 0;
+		}
+		if (updatedmovementpointsground < 0) { updatedmovementpointsground = 0; }
+		if (updatedmovementpointsjump < 0) { updatedmovementpointsjump = 0; }
+		if (tmpTMM < 0) { tmpTMM = 0; }
 
-//ma_cv
-//mb_cv
-//mc_cv
-
-
-
-
+		/*
+		[CWG] Meldric Ward: Ich werde für combat vehicle erstmal einen Kompromiss einbauen.
+		Da crit Treffer teilweise die Bewegung halbieren und teilweise Punkte abziehen, kommt
+		es bei der Berechnung auf die Reihenfolge der Crits an { (x-2)/2 != (x/2)-2 }. Diese
+		Reihenfolge habe ich eigentlich, da ich den status der unit rundenweise wegschreibe,
+		aber es ist nicht so einfach, da ran zu kommen von da, wo ich das brauche. Daher lege
+		ich mal interim fest, dass ich beim Berechnen zuerst engine crit nehme, dann motive 1
+		und als letztes motive 2. Die Fehler sollten bei den kleinen Zahlen minimal sein und
+		vielleicht reicht das so ja auch schon. Falls nicht, muss ich das später nochmal ändern.
+		Was sagen die turnierspieler dazu?
+		*/
 	}
 
 	// -----------------------------------------------------------------------------------------------------------------
@@ -690,8 +701,6 @@ Was sagen die turnierspieler dazu?
 		document.getElementById("mv_points").innerHTML = mvstring;
 	}
 
-	//console.log("TMM ------------>");
-	var tmpTMM = originalTMM;
 	//console.log("Starting with TMM: " + tmpTMM);
 	if (mvmnt == 0) {                            // -------------- 0:   NOT MOVED YET
 		if (h > 1 && h < 4) { tmpTMM = tmpTMM - 1; }
@@ -966,8 +975,11 @@ Was sagen die turnierspieler dazu?
 		if (document.getElementById('unitroundstatusimagemenu') != null) {
 			document.getElementById('unitroundstatusimagemenu').src="./images/skull.png";
 		}
+	} else if (updatedmovementpointsground == 0) {
+		tmpTMM = -4;
+		document.getElementById("TMM").innerHTML = tmpTMM;
+		document.getElementById('movementtokenimage').src="./images/dice/bd6_-4.png";
 	}
-
 	updateOverAllToHitValue(1);
 }
 
