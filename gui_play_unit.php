@@ -486,23 +486,21 @@ session_start();
 		}
 	}
 
-	console.log("Shift left: " + $moveLeftToMakeUnitVisible);
-	console.log("Shift right: " + $moveRightToMakeUnitVisible);
-
 	if ($unitIsVisible) {
 		echo "<script>console.log('Current unit is visible in top menu.');</script>";
 	} else {
 		echo "<script>console.log('Current unit is NOT visible in top menu.');</script>";
 		if ($unitOutLeft) {
-			echo "<script>console.log('left');</script>";
+			echo "<script>console.log('Chosen unit is out to the left');</script>";
 			// set: style='animation: glow 1s infinite alternate;' to arrow left button
 		} else if ($unitOutRight) {
-			echo "<script>console.log('right');</script>";
+			echo "<script>console.log('Chosen unit is out to the right');</script>";
 			// set: style='animation: glow 1s infinite alternate;' to arrow right button
 		}
 	}
 
-
+	echo "<script>console.log('Shift left to make visible: ".$moveLeftToMakeUnitVisible."');</script>";
+	echo "<script>console.log('Shift right to make visible: ".$moveRightToMakeUnitVisible."');</script>";
 
 
 
