@@ -1376,7 +1376,7 @@ if ($showDistancesHexes == 1) {
 										<td nowrap width="33%" colspan="2" style="text-align:center;" class="datalabel_thin">
 											<table width="100%" cellpadding="0" cellspacing="0">
 												<tr>
-													<td nowrap style="text-align:right;" class="datalabel_thin_small" valign="middle">-2/-1</td>
+													<td nowrap style="text-align:right;" class="datalabel_thin_small" valign="middle">-2</td>
 													<td nowrap style="text-align:right;"><a style="padding-right:5px;" valign="middle" href="javascript:increaseMOTIVEA_PREP();"><i class="fas fa-plus-square"></i></a></td>
 													<td nowrap style="text-align:left;" class="datalabel_thin" id="label_CV_MOTIVA_PREP" valign="middle"><?= $array_CV_MOTV_A_PREP[$chosenUnitIndex] ?></td>
 												</tr>
@@ -1385,7 +1385,7 @@ if ($showDistancesHexes == 1) {
 										<td nowrap width="32%" style="text-align:center;" class="datalabel_thin">
 											<table width="100%" cellpadding="0" cellspacing="0">
 												<tr>
-													<td nowrap style="text-align:right;" class="datalabel_thin_small" valign="middle">½/½</td>
+													<td nowrap style="text-align:right;" class="datalabel_thin_small" valign="middle">½</td>
 													<td nowrap style="text-align:right;"><a style="padding-right:5px;" valign="middle" href="javascript:increaseMOTIVEB_PREP();"><i class="fas fa-plus-square"></i></a></td>
 													<td nowrap style="text-align:left;" class="datalabel_thin" id="label_CV_MOTIVB_PREP" valign="middle"><?= $array_CV_MOTV_B_PREP[$chosenUnitIndex] ?></td>
 												</tr>
@@ -1394,7 +1394,7 @@ if ($showDistancesHexes == 1) {
 										<td nowrap width="33%" style="text-align:center;" class="datalabel_thin">
 											<table width="100%" cellpadding="0" cellspacing="0">
 												<tr>
-													<td nowrap style="text-align:right;" class="datalabel_thin_small" valign="middle">0/0</td>
+													<td nowrap style="text-align:right;" class="datalabel_thin_small" valign="middle">0</td>
 													<td nowrap style="text-align:right;"><a style="padding-right:5px;" valign="middle" href="javascript:increaseMOTIVEC_PREP();"><i class="fas fa-plus-square"></i></a></td>
 													<td nowrap style="text-align:left;" class="datalabel_thin" id="label_CV_MOTIVC_PREP" valign="middle"><?= $array_CV_MOTV_C_PREP[$chosenUnitIndex] ?></td>
 												</tr>
