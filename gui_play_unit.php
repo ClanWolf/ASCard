@@ -485,8 +485,10 @@ session_start();
 		echo "<script>console.log('Current unit is NOT visible in top menu.');</script>";
 		if ($unitOutLeft) {
 			echo "<script>console.log('left');</script>";
+			// set: style='animation: glow 1s infinite alternate;' to arrow left button
 		} else if ($unitOutRight) {
 			echo "<script>console.log('right');</script>";
+			// set: style='animation: glow 1s infinite alternate;' to arrow right button
 		}
 	}
 
