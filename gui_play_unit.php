@@ -453,6 +453,10 @@ session_start();
 	$unitOutLeft = false;
 	$unitOutRight = false;
 	$size = sizeof($array_UNIT_MODEL);
+
+	$moveLeftToMakeUnitVisible = 0;
+	$moveRightToMakeUnitVisible = 0;
+
 	for ($i11 = 1; $i11 <= sizeof($array_UNIT_MODEL); $i11++) {
 		if ($array_ACTIVE_BID[$i11] == "0") {
 			$size = $size - 1;
@@ -461,6 +465,7 @@ session_start();
 			if ($i11 < $startIndex) {
 				// not yet visible
 				if ($i11 == $chosenUnitIndex) {
+					$moveLeftToMakeUnitVisible = $moveLeftToMakeUnitVisible + 1;
 					$unitOutLeft = true;
 				}
 			} else if ($i11 >= $startIndex) {
