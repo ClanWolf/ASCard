@@ -477,6 +477,7 @@ session_start();
 						// Unit visible
 						$unitIsVisible = true;
 					} else {
+						$moveRightToMakeUnitVisible = $moveRightToMakeUnitVisible + 1;
 						$unitIsVisible = false;
 						$unitOutRight = true;
 					}
@@ -484,6 +485,10 @@ session_start();
 			}
 		}
 	}
+
+	console.log("Shift left: " + $moveLeftToMakeUnitVisible);
+	console.log("Shift right: " + $moveRightToMakeUnitVisible);
+
 	if ($unitIsVisible) {
 		echo "<script>console.log('Current unit is visible in top menu.');</script>";
 	} else {
