@@ -978,7 +978,7 @@ function setCircles(h, heat_PREP_ENGINEHIT_value, a, s, e, fc, mp, w, e_cv, fc_c
 	} else if (updatedmovementpointsground == 0) {
 		tmpTMM = -4;
 		document.getElementById("TMM").innerHTML = tmpTMM;
-		document.getElementById('movementtokenimage').src="./images/dice/bd6_-4.png";
+		document.getElementById('movementtokenimage').src="./images/dice/immobile.png";
 	}
 	updateOverAllToHitValue(1);
 }
