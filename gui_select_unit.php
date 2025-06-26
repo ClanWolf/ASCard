@@ -499,7 +499,7 @@ if ($playMode) {
 			}
 
 			if ($formationsFound > 0 && $activeUnitsFound > 0) {
-				echo "			<td nowrap style='width:270px;height:30px;' onclick='location.href=\"gui_play_unit.php?formationid=".$formationidSelected."\"' class='formationselect_button_normal'>\n";
+				echo "			<td nowrap style='width:270px;height:30px;' onclick='location.href=\"gui_play_unit.php?stv=1&formationid=".$formationidSelected."\"' class='formationselect_button_normal'>\n";
 				echo "				<table style='width:100%;' cellspacing=0 cellpadding=0>\n";
 				echo "					<tr>\n";
 				if (!$playMode) {
@@ -508,7 +508,7 @@ if ($playMode) {
 					echo "						</td>\n";
 				}
 				echo "						<td width='98%' style='text-align:center;'>\n";
-				echo "							<a href='gui_play_unit.php?formationid=".$formationidSelected."'>".$formationnameSelected."</a>\n";
+				echo "							<a href='gui_play_unit.php?stv=1&formationid=".$formationidSelected."'>".$formationnameSelected."</a>\n";
 				if (!$playMode) {
 					echo "							&nbsp;&nbsp;&nbsp;<span id='bidOverviewFormation".$formationind."'>&nbsp;</span>\n";
 				} else {
@@ -709,7 +709,7 @@ if ($playMode) {
 				}
 
 				if ($activebid == "1") {
-					$unitDetailString = $unitDetailString."			<td nowrap onclick='location.href=\"gui_play_unit.php?formationid=".$formationidSelected."&chosenunit=".$c."\"' style='background-color:".$bidcolor."' class='unitselect_button_active' align='right' valign='center'><div style='display:inline-block;height:100%;vertical-align:middle;'><img style='vertical-align:middle;' src='".$unitstatusimage."' height='24px'><br><span style='font-size:14px;'>".$numStr."</span></div></td>\n";
+					$unitDetailString = $unitDetailString."			<td nowrap onclick='location.href=\"gui_play_unit.php?stv=1&formationid=".$formationidSelected."&chosenunit=".$c."\"' style='background-color:".$bidcolor."' class='unitselect_button_active' align='right' valign='center'><div style='display:inline-block;height:100%;vertical-align:middle;'><img style='vertical-align:middle;' src='".$unitstatusimage."' height='24px'><br><span style='font-size:14px;'>".$numStr."</span></div></td>\n";
 				} else {
 					$unitDetailString = $unitDetailString."			<td nowrap style='background-color:".$bidcolor."' class='unitselect_button_active' align='right' valign='center'><div style='display:inline-block;height:100%;vertical-align:middle;'><img style='vertical-align:middle;' src='".$unitstatusimage."' height='24px'><br><span style='font-size:14px;'>".$numStr."</span></div></td>\n";
 				}
@@ -718,7 +718,7 @@ if ($playMode) {
 				$unitDetailString = $unitDetailString."					<tr>\n";
 
 				if ($activebid == "1") {
-					$unitDetailString = $unitDetailString."						<td nowrap onclick='location.href=\"gui_play_unit.php?formationid=".$formationidSelected."&chosenunit=".$c."\"' width='99%' align='left' valign='bottom' style='color:#AAAAAA;background-color:".$bidcolor."text-align:left;'><span style='font-size:24px;'>";
+					$unitDetailString = $unitDetailString."						<td nowrap onclick='location.href=\"gui_play_unit.php?stv=1&formationid=".$formationidSelected."&chosenunit=".$c."\"' width='99%' align='left' valign='bottom' style='color:#AAAAAA;background-color:".$bidcolor."text-align:left;'><span style='font-size:24px;'>";
 				} else {
 					$unitDetailString = $unitDetailString."						<td nowrap width='99%' align='left' valign='bottom' style='color:#AAAAAA;background-color:".$bidcolor."text-align:left;overflow:hidden;white-space:nowrap;text-overflow:ellipsis'><span style='font-size:24px;'>";
 				}

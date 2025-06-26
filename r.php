@@ -1,4 +1,3 @@
-
 <?php
 	$formation = isset($_GET["f"]) ? $_GET["f"] : 1;
 	$unit = isset($_GET["u"]) ? $_GET["u"] : -1;

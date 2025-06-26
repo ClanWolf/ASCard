@@ -18,6 +18,7 @@ session_start();
 	$pimage = $_SESSION['playerimage'];
 	$hideNotOwnedUnit = $_SESSION['option1'];
 	$fadeOutDuration = isset($_GET["fod"]) ? $_GET["fod"] : 150;
+	$scrollToView = isset($_GET["stv"]) ? $_GET["stv"] : 0;
 
 	$isAdmin = $_SESSION['isAdmin'];
 
@@ -454,18 +455,15 @@ session_start();
 	$unitOutRight = false;
 	$size = sizeof($array_UNIT_MODEL);
 
-	$moveLeftToMakeUnitVisible = 0;
-	$moveRightToMakeUnitVisible = 0;
-
 	for ($i11 = 1; $i11 <= sizeof($array_UNIT_MODEL); $i11++) {
 		if ($array_ACTIVE_BID[$i11] == "0") {
 			$size = $size - 1;
 		} else {
 			$activeUnitsCount++;
+
 			if ($i11 < $startIndex) {
 				// not yet visible
 				if ($i11 == $chosenUnitIndex) {
-					$moveLeftToMakeUnitVisible = $moveLeftToMakeUnitVisible + 1;
 					$unitOutLeft = true;
 				}
 			} else if ($i11 >= $startIndex) {
@@ -477,7 +475,6 @@ session_start();
 						// Unit visible
 						$unitIsVisible = true;
 					} else {
-						$moveRightToMakeUnitVisible = $moveRightToMakeUnitVisible + 1;
 						$unitIsVisible = false;
 						$unitOutRight = true;
 					}
@@ -486,51 +483,51 @@ session_start();
 		}
 	}
 
-	if ($unitIsVisible) {
-		echo "<script>console.log('Current unit is visible in top menu.');</script>";
-	} else {
-		echo "<script>console.log('Current unit is NOT visible in top menu.');</script>";
+	$moveLeftToMakeUnitVisible = $startIndex - $chosenUnitIndex;
+	$moveRightToMakeUnitVisible = $chosenUnitIndex - ($startIndex + $maxNumberOfTabs) + 1;
+
+
+
+
+
+
+
+
+
+
+$scrollToView = 1;
+
+	if (!$unitIsVisible) {
 		if ($unitOutLeft) {
-			echo "<script>console.log('Chosen unit is out to the left');</script>";
-			// set: style='animation: glow 1s infinite alternate;' to arrow left button
+			if ($scrollToView == 1) {
+				echo "<script>console.log('Shift LEFT to make visible: ".$moveLeftToMakeUnitVisible."');</script>";
+				// $startIndex = $startIndex - $moveLeftToMakeUnitVisible;
+			}
 		} else if ($unitOutRight) {
-			echo "<script>console.log('Chosen unit is out to the right');</script>";
-			// set: style='animation: glow 1s infinite alternate;' to arrow right button
+			if ($scrollToView == 1) {
+				echo "<script>console.log('Shift RIGHT to make visible: ".$moveRightToMakeUnitVisible."');</script>";
+				// $startIndex = $startIndex + $moveRightToMakeUnitVisible;
+			}
 		}
 	}
-
-	echo "<script>console.log('Shift left to make visible: ".$moveLeftToMakeUnitVisible."');</script>";
-	echo "<script>console.log('Shift right to make visible: ".$moveRightToMakeUnitVisible."');</script>";
-
-
-
-
-
-
-
-
-
-
 
 	if ($size > $maxNumberOfTabs) {
 		$width = ceil(100 / $maxNumberOfTabs);
 		if ($startIndex > 1) {
-			echo "			<td nowrap style='background-color:#293647;' onclick='javascript:updateFormationStartIndex(".$formationid.",".$startIndex.",\"down\");' style='width:100px;'>\n";
-			//echo "				<div style='vertical-align:middle;font-size:28px;color:#eee;'>&nbsp;&nbsp;&nbsp;<i class='fa-solid fa-circle-chevron-left'></i>&nbsp;&nbsp;".($startIndex-1)."&nbsp;&nbsp;</div>\n";
-			echo "				<div style='vertical-align:middle;font-size:22px;color:#eee;'>&nbsp;&nbsp;&nbsp;&nbsp;<i class='fa-solid fa-circle-chevron-left'></i>&nbsp;&nbsp;&nbsp;&nbsp;<br><span style='font-size:14px;'>".($startIndex-1)."</span></div>\n";
+			if ($unitOutLeft) {
+				echo "			<td nowrap style='background-color:#293647;animation: glow 1s infinite alternate;' onclick='javascript:updateFormationStartIndex(".$formationid.",".$startIndex.",\"down\");' style='width:100px;'>\n";
+				echo "				<div style='vertical-align:middle;font-size:22px;color:#eee;'>&nbsp;&nbsp;&nbsp;&nbsp;<i class='fa-solid fa-circle-chevron-left'></i>&nbsp;&nbsp;&nbsp;&nbsp;<br><span style='font-size:14px;'>".($startIndex-1)."</span></div>\n";
+			} else {
+				echo "			<td nowrap style='background-color:#293647;' onclick='javascript:updateFormationStartIndex(".$formationid.",".$startIndex.",\"down\");' style='width:100px;'>\n";
+				echo "				<div style='vertical-align:middle;font-size:22px;color:#eee;'>&nbsp;&nbsp;&nbsp;&nbsp;<i class='fa-solid fa-circle-chevron-left'></i>&nbsp;&nbsp;&nbsp;&nbsp;<br><span style='font-size:14px;'>".($startIndex-1)."</span></div>\n";
+			}
 			echo "			</td>\n";
 		}
 	} else {
 		$width = ceil(100 / $size);
 	}
 
-
-
-
-
-
 	echo "			<td style='width:5px;'>&nbsp;</td>\n";
-
 
 	$heatimage = array();
 	$currentUnitStatusImage = "./images/check_red.png";
@@ -542,10 +539,6 @@ session_start();
 	$atLeastOneValidUnitInFormation = 0;
 	$ccount = 1;
 
-
-
-
-	// for ($i4 = 1; $i4 <= sizeof($array_UNIT_MODEL); $i4++) {
 	for ($i4 = $startIndex; $i4 <= sizeof($array_UNIT_MODEL); $i4++) {
 		if ($ccount > $maxNumberOfTabs) {
 			if ($size - $maxNumberOfTabs - ($startIndex - 1)) {
@@ -640,20 +633,16 @@ session_start();
 		header("Location: ./gui_select_unit.php");
 	}
 
-
-
-
-
 	if ($showRightArrow) {
-		echo "			<td nowrap style='background-color:#293647;' onclick='javascript:updateFormationStartIndex(".$formationid.",".$startIndex.",\"up\");' style='width:100px;'>\n";
-		//echo "				<div style='vertical-align:middle;font-size:28px;color:#eee;'>&nbsp;&nbsp;&nbsp;<i class='fa-solid fa-circle-chevron-right'></i>&nbsp;&nbsp;".($size - $maxNumberOfTabs - ($startIndex - 1))."&nbsp;&nbsp;</div>\n";
-		echo "				<div style='vertical-align:middle;font-size:22px;color:#eee;'>&nbsp;&nbsp;&nbsp;&nbsp;<i class='fa-solid fa-circle-chevron-right'></i>&nbsp;&nbsp;&nbsp;&nbsp;<br><span style='font-size:14px;'>".($size - $maxNumberOfTabs - ($startIndex - 1))."</span></div>\n";
+		if ($unitOutRight) {
+			echo "			<td nowrap style='background-color:#293647;animation: glow 1s infinite alternate;' onclick='javascript:updateFormationStartIndex(".$formationid.",".$startIndex.",\"up\");' style='width:100px;'>\n";
+			echo "				<div style='vertical-align:middle;font-size:22px;color:#eee;'>&nbsp;&nbsp;&nbsp;&nbsp;<i class='fa-solid fa-circle-chevron-right'></i>&nbsp;&nbsp;&nbsp;&nbsp;<br><span style='font-size:14px;'>".($size - $maxNumberOfTabs - ($startIndex - 1))."</span></div>\n";
+		} else {
+			echo "			<td nowrap style='background-color:#293647;' onclick='javascript:updateFormationStartIndex(".$formationid.",".$startIndex.",\"up\");' style='width:100px;'>\n";
+			echo "				<div style='vertical-align:middle;font-size:22px;color:#eee;'>&nbsp;&nbsp;&nbsp;&nbsp;<i class='fa-solid fa-circle-chevron-right'></i>&nbsp;&nbsp;&nbsp;&nbsp;<br><span style='font-size:14px;'>".($size - $maxNumberOfTabs - ($startIndex - 1))."</span></div>\n";
+		}
 		echo "			</td>\n";
 	}
-
-
-
-
 
 	if ($playable) {
 		echo "			<td nowrap onclick='javascript:showGameMenu();' width='60px' style='width:60px;min-width:60px;background:rgba(56,87,26,1.0);text-align:center;vertical-align:middle;'>\n";
