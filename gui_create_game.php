@@ -406,6 +406,8 @@ session_start();
 										else if ('<?php echo $GAMEERA; ?>' == '254') { document.getElementById('GameEra').selectedIndex = 10; } // 3101-3130: LATE REPUBLIC
 										else if ('<?php echo $GAMEERA; ?>' == '16')  { document.getElementById('GameEra').selectedIndex = 11; } // 3131-3150: DARK AGE
 										else if ('<?php echo $GAMEERA; ?>' == '257') { document.getElementById('GameEra').selectedIndex = 12; } // 3151-9999: ILCLAN
+
+										// document.getElementById('GameEra').value = '<?php echo $GAMEERA; ?>';
 									</script>
 									<br><br>
 								</td>
