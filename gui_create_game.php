@@ -346,7 +346,7 @@ session_start();
 	<br>
 
 	<div id="header">
-		<table align="center" class="options" cellspacing="4" cellpadding="4" border="0px">
+		<table align="center" class="options" cellspacing="4" cellpadding="4" border="0px" width="80%">
 			<tr>
 				<td valign="top" width="70%">
 					<form>
@@ -378,7 +378,7 @@ session_start();
 								<td></td>
 								<td colspan="2" class='datalabel' nowrap align="left">
 									Era: <select required style='width:180px;' name='GameEra' id='GameEra' size='1' onchange="javascript:saveGameInfo(<?php echo $gid ?>);">
-										<option value="0">ALL</option>
+										<option value="0" selected="selected">ALL</option>
 										<option value="9">2005-2570: AGE OF WAR</option>
 										<option value="10">2571-2780: STAR LEAGUE</option>
 										<option value="11">2781-2900: EARLY SUCCESSION WARS</option>
@@ -393,24 +393,19 @@ session_start();
 										<option value="257">3151-9999: ILCLAN</option>
 									</select>
 									<script type="text/javascript">
-
-										console.log("Era: '<?php echo $GAMEERA; ?>'");
-										
-										if ('<?php echo $GAMEERA; ?>' == 'STAR LEAGUE') {
-											document.getElementById('GameEra').selectedIndex = 0;
-										} else if ('<?php echo $GAMEERA; ?>' == 'SUCCESSION WARS') {
-											document.getElementById('GameEra').selectedIndex = 1;
-										} else if ('<?php echo $GAMEERA; ?>' == 'CLAN INVASION') {
-											document.getElementById('GameEra').selectedIndex = 2;
-										} else if ('<?php echo $GAMEERA; ?>' == 'CIVIL WAR') {
-											document.getElementById('GameEra').selectedIndex = 3;
-										} else if ('<?php echo $GAMEERA; ?>' == 'JIHAD') {
-											document.getElementById('GameEra').selectedIndex = 4;
-										} else if ('<?php echo $GAMEERA; ?>' == 'DARK AGE') {
-											document.getElementById('GameEra').selectedIndex = 5;
-										} else if ('<?php echo $GAMEERA; ?>' == 'ILCLAN') {
-											document.getElementById('GameEra').selectedIndex = 6;
-										}
+										     if ('<?php echo $GAMEERA; ?>' == '0')   { document.getElementById('GameEra').selectedIndex = 0;  } // ALL
+										else if ('<?php echo $GAMEERA; ?>' == '9')   { document.getElementById('GameEra').selectedIndex = 1;  } // 2005-2570: AGE OF WAR
+										else if ('<?php echo $GAMEERA; ?>' == '10')  { document.getElementById('GameEra').selectedIndex = 2;  } // 2571-2780: STAR LEAGUE
+										else if ('<?php echo $GAMEERA; ?>' == '11')  { document.getElementById('GameEra').selectedIndex = 3;  } // 2781-2900: EARLY SUCCESSION WARS
+										else if ('<?php echo $GAMEERA; ?>' == '255') { document.getElementById('GameEra').selectedIndex = 4;  } // 2901-3019: LATE SUCCESSION WARS - LOSTECH
+										else if ('<?php echo $GAMEERA; ?>' == '256') { document.getElementById('GameEra').selectedIndex = 5;  } // 3020-3049: LATE SUCCESSION WARS - RENAISSANCE
+										else if ('<?php echo $GAMEERA; ?>' == '13')  { document.getElementById('GameEra').selectedIndex = 6;  } // 3050-3061: CLAN INVASION
+										else if ('<?php echo $GAMEERA; ?>' == '247') { document.getElementById('GameEra').selectedIndex = 7;  } // 3050-3061: CIVIL WAR
+										else if ('<?php echo $GAMEERA; ?>' == '14')  { document.getElementById('GameEra').selectedIndex = 8;  } // 3068-3080: JIHAD
+										else if ('<?php echo $GAMEERA; ?>' == '15')  { document.getElementById('GameEra').selectedIndex = 9;  } // 3081-3100: EARLY REPUBLIC
+										else if ('<?php echo $GAMEERA; ?>' == '254') { document.getElementById('GameEra').selectedIndex = 10; } // 3101-3130: LATE REPUBLIC
+										else if ('<?php echo $GAMEERA; ?>' == '16')  { document.getElementById('GameEra').selectedIndex = 11; } // 3131-3150: DARK AGE
+										else if ('<?php echo $GAMEERA; ?>' == '257') { document.getElementById('GameEra').selectedIndex = 12; } // 3151-9999: ILCLAN
 									</script>
 									<br><br>
 								</td>
