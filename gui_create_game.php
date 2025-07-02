@@ -393,6 +393,9 @@ session_start();
 										<option value="257">3151-9999: ILCLAN</option>
 									</select>
 									<script type="text/javascript">
+
+										console.log("Era: '<?php echo $GAMEERA; ?>'");
+										
 										if ('<?php echo $GAMEERA; ?>' == 'STAR LEAGUE') {
 											document.getElementById('GameEra').selectedIndex = 0;
 										} else if ('<?php echo $GAMEERA; ?>' == 'SUCCESSION WARS') {
