@@ -203,7 +203,7 @@ session_start();
 			<tr>
 				<td>
 					<p>
-						Concept, Design and development by Meldric 2019-<?php echo date("Y"); ?>.<br>
+						Concept, Design and development by Meldric 2015-<?php echo date("Y"); ?>.<br>
 						<br>
 						This software is a completely free fan project that makes no claim to ownership to any of Catalyst Game Labs or The Topps Company, Inc properties. MechWarrior, BattleMech, ‘Mech and AeroTech are registered trademarks of The Topps Company, Inc. All Rights Reserved. Catalyst Game Labs and the Catalyst Game Labs logo are trademarks of InMediaRes Production, LLC. Neither Topps nor Catalyst Game Labs makes no representation or warranty as to the quality, viability, or suitability for purpose of this product. See additional information on <u><a href="https://bg.battletech.com/?page_id=34">BattleTech - The Board Game Website</a>.</u><br>
 						<br>
