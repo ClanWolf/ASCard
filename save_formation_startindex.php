@@ -38,13 +38,19 @@
 			echo "Record (formation start index) updated successfully.";
 			echo "</p>";
 			mysqli_commit($conn);
-			echo "<script>top.location.reload();</script>";
+
+			echo "<script>\n";
+			echo "	let currentURL = top.location.href;\n";
+			//echo "	console.log('Aktuelle URL: ' + currentURL);\n";
+			echo "	let newURL = currentURL.replace('stv=1','stv=0');\n";
+			//echo "	console.log('Neue URL: ' + newURL);\n";
+			echo "	top.location.replace(newURL);\n";
+			echo "</script>\n";
 		} else {
 			echo "<p style='font-family:Arial,sans-serif;font-size:14px;color:yellow;'>";
 			echo "Error (formation start index) updating record: " . mysqli_error($conn);
 			echo "</p>";
 		}
-
 	}
 	echo "</body>\n";
 	echo "</html>\n";

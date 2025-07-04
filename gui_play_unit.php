@@ -486,27 +486,26 @@ session_start();
 	$moveLeftToMakeUnitVisible = $startIndex - $chosenUnitIndex;
 	$moveRightToMakeUnitVisible = $chosenUnitIndex - ($startIndex + $maxNumberOfTabs) + 1;
 
-
-
-
-
-
-
-
-
-
-$scrollToView = 1;
+	//$scrollToView = 1;
 
 	if (!$unitIsVisible) {
 		if ($unitOutLeft) {
 			if ($scrollToView == 1) {
-				echo "<script>console.log('Shift LEFT to make visible: ".$moveLeftToMakeUnitVisible."');</script>";
-				// $startIndex = $startIndex - $moveLeftToMakeUnitVisible;
+				$startIndex = $startIndex - $moveLeftToMakeUnitVisible;
+				$unitIsVisible = true;
+				$unitOutLeft = false;
+				$unitOutRight = false;
+				// echo "<script>console.log('Shift LEFT to make visible: ".$moveLeftToMakeUnitVisible."');</script>";
+				echo "<script>updateFormationStartIndex(".$formationid.",".$startIndex.",\"none\");</script>";
 			}
 		} else if ($unitOutRight) {
 			if ($scrollToView == 1) {
-				echo "<script>console.log('Shift RIGHT to make visible: ".$moveRightToMakeUnitVisible."');</script>";
-				// $startIndex = $startIndex + $moveRightToMakeUnitVisible;
+				$startIndex = $startIndex + $moveRightToMakeUnitVisible;
+				$unitIsVisible = true;
+				$unitOutLeft = false;
+				$unitOutRight = false;
+				// echo "<script>console.log('Shift RIGHT to make visible: ".$moveRightToMakeUnitVisible."');</script>";
+				echo "<script>updateFormationStartIndex(".$formationid.",".$startIndex.",\"none\");</script>";
 			}
 		}
 	}
@@ -672,6 +671,23 @@ $scrollToView = 1;
 	<table style="margin: 0 auto;" align="center" width="90%" cellspacing=2 cellpadding=2 border=0px>
 		<tr>
 <?php
+	echo "						<td colspan='3' nowrap style='height:30px;text-align:center;padding:0px;' class='formationselect_button_normal'>\n";
+	echo "							<table width='100%' align='center' cellspacing='0' cellpadding='0' border='0'>\n";
+	echo "								<td colspan='1' nowrap style='width:60px;height:30px;text-align:left;' onclick='location.href=\"\"' class='formationselect_button_normal'>\n";
+	echo "									<a href=''>&nbsp;&nbsp;&nbsp;<i class='fa-solid fa-arrow-left'></i></a>\n";
+	echo "								</td>\n";
+	echo "									<td colspan='1' nowrap style='height:30px;text-align:center;' class='formationselect_button_normal'>\n";
+	echo "									<a href='#'>COMMAND</a>\n";
+	echo "								</td>\n";
+	echo "								<td colspan='1' nowrap style='width:60px;height:30px;text-align:right;' onclick='location.href=\"\"' class='formationselect_button_normal'>\n";
+	echo "									<a href=''><i class='fa-solid fa-arrow-right'></i>&nbsp;&nbsp;&nbsp;</a>\n";
+	echo "								</td>\n";
+	echo "							</table>\n";
+	echo "						</td>\n";
+	echo "						<td width='1%' nowrap onclick='location.href=\"save_game_finalizeround.php?pid=".$pid."\"' id='FinalizeRoundButton' style='text-align:center;background:rgba(81,125,37,1.0);' rowspan='3'><div style='color:#eee;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class='fas fa-redo'></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div></td>\n";
+	echo "						</tr>\n";
+	echo "						<tr>\n";
+
 	for ($cc = 0; $cc < sizeof($array_PLAYER_FORMATION_IDS); $cc++) {
 		$currFormId = $array_PLAYER_FORMATION_IDS[$cc];
 		$unitArray = $array_PLAYER_UNITS_IN_FORMATION[$currFormId];
@@ -684,8 +700,8 @@ $scrollToView = 1;
 		}
 
 		if ($unitArray != null && $active_units_found) {
-			echo "			<td width='33%' nowrap style='width:270px;height:30px;vertical-align:middle;' onclick='location.href=\"gui_play_unit.php?formationid=".$array_PLAYER_FORMATION_IDS[$cc]."\"' class='formationselect_button_normal'>\n";
-			echo "				<a href='gui_play_unit.php?formationid=".$array_PLAYER_FORMATION_IDS[$cc]."'>".$array_PLAYER_FORMATION_NAMES[$cc]."</a>\n";
+			echo "			<td width='33%' nowrap style='width:270px;height:30px;vertical-align:middle;' onclick='location.href=\"gui_play_unit.php?stv=1&formationid=".$array_PLAYER_FORMATION_IDS[$cc]."\"' class='formationselect_button_normal'>\n";
+			echo "				<a href='gui_play_unit.php?stv=1&formationid=".$array_PLAYER_FORMATION_IDS[$cc]."'>".$array_PLAYER_FORMATION_NAMES[$cc]."</a>\n";
 			echo "			</td>\n";
 		} else {
 			echo "			<td width='33%' nowrap style='background-color:#444444;width:270px;height:40px;text-align:center;' class='formationselect_button_active'>\n";
@@ -693,7 +709,6 @@ $scrollToView = 1;
 			echo "			</td>\n";
 		}
 	}
-	echo "			<td width='1%' nowrap onclick='location.href=\"save_game_finalizeround.php?pid=".$pid."\"' id='FinalizeRoundButton' style='text-align:center;background:rgba(81,125,37,1.0);' rowspan='2'><div style='color:#eee;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class='fas fa-redo'></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div></td>\n";
 	echo "		</tr>\n";
 	echo "		<tr>\n";
 
@@ -737,7 +752,7 @@ $scrollToView = 1;
 					echo "		<tr>\n";
 				}
 				if ($array_UNIT_DBID[$chosenUnitIndex] == $item['unitid']) {
-					echo "			<td onclick='location.href=\"gui_play_unit.php?formationid=".$array_PLAYER_FORMATION_IDS[$cc]."&fod=175&chosenunit=".$count."\"' align='center' valign='top' style='background-color:#293647;padding:4px;border:2px solid #555;animation: glow 1s infinite alternate;'>\n";
+					echo "			<td onclick='location.href=\"gui_play_unit.php?stv=1&formationid=".$array_PLAYER_FORMATION_IDS[$cc]."&fod=175&chosenunit=".$count."\"' align='center' valign='top' style='background-color:#293647;padding:4px;border:2px solid #555;animation: glow 1s infinite alternate;'>\n";
 //					echo "				<img src='./images/chevron.png' width='32px'>\n";
 //					if ($item['status'] != "destroyed") {
 //						echo "				<br><img style='border:4px solid #111;margin-bottom:15px;' id='pilotimageoverview' src='./".$item['pilot_image']."' width='40px'>\n";
@@ -752,7 +767,7 @@ $scrollToView = 1;
 					echo "				<br><span style='font-size:15px'>".$item['unit_number']."</span>\n";
 					echo "			</td>\n";
 				} else {
-					echo "			<td onclick='location.href=\"gui_play_unit.php?formationid=".$array_PLAYER_FORMATION_IDS[$cc]."&fod=175&chosenunit=".$count."\"' align='center' valign='top' style='background-color:#333333;padding:4px;border:2px solid #555;'>\n";
+					echo "			<td onclick='location.href=\"gui_play_unit.php?stv=1&formationid=".$array_PLAYER_FORMATION_IDS[$cc]."&fod=175&chosenunit=".$count."\"' align='center' valign='top' style='background-color:#333333;padding:4px;border:2px solid #555;'>\n";
 //					echo "				<img src='./images/chevron_empty.png' width='32px'>\n";
 //					if ($item['status'] != "destroyed") {
 //						echo "				<br><img style='border:4px solid #111;margin-bottom:15px;' src='./".$item['pilot_image']."' width='40px'>\n";

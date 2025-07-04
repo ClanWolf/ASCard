@@ -113,11 +113,21 @@
 			}
 		}
 
+		// Get the gameId of the player back to his own gameId
+		if ($leaveCurrentGame) {
+
+		}
+
+
+
 		// Update player
 		$sqlUpdatePlayerRound = "";
 		$sqlUpdatePlayerRound = $sqlUpdatePlayerRound . "UPDATE asc_player ";
 		$sqlUpdatePlayerRound = $sqlUpdatePlayerRound . "SET ";
 		$sqlUpdatePlayerRound = $sqlUpdatePlayerRound . "round=1 ";
+		if ($leaveCurrentGame) {
+
+		}
 		$sqlUpdatePlayerRound = $sqlUpdatePlayerRound . "where playerid=".$pid.";";
 
 		echo $sqlUpdatePlayerRound;

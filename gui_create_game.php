@@ -346,7 +346,7 @@ session_start();
 	<br>
 
 	<div id="header">
-		<table align="center" class="options" cellspacing="4" cellpadding="4" border="0px" width="80%">
+		<table align="center" class="options" cellspacing="4" cellpadding="4" border="0px" width="65%">
 			<tr>
 				<td valign="top" width="70%">
 					<form>
@@ -359,25 +359,33 @@ session_start();
 									echo "<a href='#' onClick='saveGameLock(".$GAMEID.", 1);'><span id='lockstatusicon'><i class='fa-solid fa-lock-open'></i></span></a>";
 								} ?>
 								</td>
-								<td colspan="3" class='datalabel' nowrap align="left">
-									<input onchange="javascript:saveGameInfo(<?php echo $gid ?>);" type="text" id="GameTitle" style="width:250px;">  [ID: <?php echo $GAMEID; ?>]
+								<td colspan="4" class='datalabel' nowrap align="left">
+									<input onchange="javascript:saveGameInfo(<?php echo $gid ?>);" type="text" id="GameTitle" style="width:100%;">
 									<script type="text/javascript">document.getElementById("GameTitle").setAttribute('value','<?php echo $TITLE; ?>');</script>
 								</td>
-							</tr>
-
-							<tr>
-								<td></td>
-								<td colspan="3" class='datalabel' nowrap align="left">
-										<input onchange="javascript:saveGameInfo(<?php echo $gid ?>);" type="text" id="GameBackground" style="width:300px;">
-										<script type="text/javascript">document.getElementById("GameBackground").setAttribute('value','<?php echo $BACKGROUND; ?>');</script>
-									<br><br>
+								<td colspan="1" class='datalabel' nowrap align="right">
+									[ID: <?php echo $GAMEID; ?>]
 								</td>
 							</tr>
 
 							<tr>
-								<td></td>
+								<td rowspan="4"></td>
+								<td colspan="5" class='datalabel' nowrap align="left">
+										<input onchange="javascript:saveGameInfo(<?php echo $gid ?>);" type="text" id="GameBackground" style="width:100%;">
+										<script type="text/javascript">document.getElementById("GameBackground").setAttribute('value','<?php echo $BACKGROUND; ?>');</script>
+								</td>
+							</tr>
+
+							<tr>
+								<td colspan="6">&nbsp;</td>
+							</tr>
+
+							<tr>
+								<td colspan="1" class='datalabel' nowrap align="left">
+									Era:
+								</td>
 								<td colspan="2" class='datalabel' nowrap align="left">
-									Era: <select required style='width:180px;' name='GameEra' id='GameEra' size='1' onchange="javascript:saveGameInfo(<?php echo $gid ?>);">
+									<select required style='width:100%;' name='GameEra' id='GameEra' size='1' onchange="javascript:saveGameInfo(<?php echo $gid ?>);">
 										<option value="0" selected="selected">ALL</option>
 										<option value="9">2005-2570: AGE OF WAR</option>
 										<option value="10">2571-2780: STAR LEAGUE</option>
@@ -409,19 +417,24 @@ session_start();
 
 										// document.getElementById('GameEra').value = '<?php echo $GAMEERA; ?>';
 									</script>
-									<br><br>
 								</td>
 								<td colspan="1" class='datalabel' nowrap align="left">
-									Year: <input onchange="javascript:saveGameInfo(<?php echo $gid ?>);" type="text" id="GameYear" style="width:60px;">
+									Year:
+								</td>
+								<td colspan="1" class='datalabel' nowrap align="left">
+									<input onchange="javascript:saveGameInfo(<?php echo $gid ?>);" type="text" id="GameYear" style="width:60px;">
 									<script type="text/javascript">document.getElementById("GameYear").setAttribute('value','<?php echo $GAMEYEAR; ?>');</script>
-									<br><br>
 								</td>
 							</tr>
 
 							<tr>
+								<td colspan="6">&nbsp;</td>
+							</tr>
+
+							<tr>
 								<td nowrap align="left" width="3%"><a href='#' onClick='javascript:saveGameAccessCode(<?php echo $gid ?>);'><i class="fa-solid fa-rotate-right"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-								<td class='datalabel' nowrap align="left" width="3%">Access code:</td>
-								<td class='datalabel' nowrap align="left" width="94%" id="accesscode">
+								<td class='datalabel' nowrap align="left" width="3%">Code:</td>
+								<td class='datalabel' nowrap align="left" width="94%" colspan="3" id="accesscode">
 									<?php echo $ACCESSCODE; ?>
 								</td>
 								<td class='datalabel' nowrap align="right" width="94%">
@@ -431,14 +444,20 @@ session_start();
 						</table>
 					</form>
 				</td>
+				<td width="15px;">&nbsp;&nbsp;&nbsp;</td>
 				<td class='datalabel' nowrap valign="top" align="left" width="30%" rowspan="1">
 					<div class="scroll-pane">
 						<table width="100%" border="0" cellspacing="0" cellpadding="0">
+
 <?php
+	echo "							<tr><td class='datalabel'>".$pname."</td><td nowrap align='right' width='3%'></td></tr>\n";
 	for($i=1; $i <= count($array_joinedUsers); $i++) {
 		$joinedUserName = $array_joinedUsers[$i];
 		$joinedUserId = $array_joinedUserIds[$i];
-		echo "							<tr><td class='datalabel'>".$joinedUserName."</td><td nowrap align='right' width='3%'>&nbsp;&nbsp;&nbsp;<span style='font-size:16px;color:#ddd;' onclick='javascript:saveRemovedUserFromGame(".$gid.",\"".$joinedUserId."\");'><i class='fas fa-minus-square'></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>\n";
+
+		if ($pname != $joinedUserName) {
+			echo "							<tr><td class='datalabel'>".$joinedUserName."</td><td nowrap align='right' width='3%'>&nbsp;&nbsp;&nbsp;<span style='font-size:16px;color:#ddd;' onclick='javascript:saveRemovedUserFromGame(".$gid.",\"".$joinedUserId."\");'><i class='fas fa-minus-square'></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>\n";
+		}
 	}
 ?>
 						</table>
@@ -446,10 +465,10 @@ session_start();
 				</td>
 			</tr>
 
-			<tr><td colspan="2"><hr></td></tr>
+			<tr><td colspan="3"><hr></td></tr>
 
 			<tr>
-				<td class='datalabel' colspan="2">
+				<td class='datalabel' colspan="3">
 					<form autocomplete="autocomplete_off_hack_xfr4!k">
 						<table cellspacing="0" cellpadding="0" border="0px" width="100%">
 							<?php
@@ -472,7 +491,7 @@ session_start();
 										echo "							</tr>\n";
 									} else {
 										echo "							<tr>\n";
-										echo "								<td colspan='5' class='datalabel' nowrap align='center'>You can not join! There are still players in your game.</td>\n";
+										echo "								<td colspan='5' class='datalabel' nowrap align='center'>You can not join! There are players in your game.</td>\n";
 										echo "							</tr>\n";
 									}
 								} else {
@@ -488,9 +507,9 @@ session_start();
 				</td>
 			</tr>
 
-			<tr><td colspan="2"><hr></td></tr>
+			<tr><td colspan="3"><hr></td></tr>
 
-			<td colspan="2">
+			<td colspan="3">
 				<table align="left" cellspacing="0" cellpadding="0" border="0px">
 					<tr>
 						<td class='datalabel' onclick='javascript:resetGame(<?php echo $pid ?>);'>
