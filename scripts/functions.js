@@ -894,19 +894,25 @@ function setCircles(h, heat_PREP_ENGINEHIT_value, a, s, e, fc, mp, w, e_cv, fc_c
 
 	if (mvmnt == 0 && wpnsf == 0) {
 		document.getElementById('phasebuttonimage').src="./images/top-right_phase01.png";
-		document.getElementById('overviewcurrentunitstatus').src="./images/top-right_phase01.png";
+		if (document.getElementById('overviewcurrentunitstatus') != null) {
+			document.getElementById('overviewcurrentunitstatus').src="./images/top-right_phase01.png";
+		}
 		if (document.getElementById('unitroundstatusimagemenu') != null) {
 			document.getElementById('unitroundstatusimagemenu').src="./images/top-right_phase01.png";
 		}
 	} else if (mvmnt > 0 && wpnsf == 0) {
 		document.getElementById('phasebuttonimage').src="./images/top-right_phase02.png";
-		document.getElementById('overviewcurrentunitstatus').src="./images/top-right_phase02.png";
+		if (document.getElementById('overviewcurrentunitstatus') != null) {
+			document.getElementById('overviewcurrentunitstatus').src="./images/top-right_phase02.png";
+		}
 		if (document.getElementById('unitroundstatusimagemenu') != null) {
 			document.getElementById('unitroundstatusimagemenu').src="./images/top-right_phase02.png";
 		}
 	} else if (mvmnt > 0 && wpnsf > 0) {
 		document.getElementById('phasebuttonimage').src="./images/top-right_phase03.png";
-		document.getElementById('overviewcurrentunitstatus').src="./images/top-right_phase03.png";
+		if (document.getElementById('overviewcurrentunitstatus') != null) {
+			document.getElementById('overviewcurrentunitstatus').src="./images/top-right_phase03.png";
+		}
 		if (document.getElementById('unitroundstatusimagemenu') != null) {
 			document.getElementById('unitroundstatusimagemenu').src="./images/top-right_phase03.png";
 		}
@@ -915,7 +921,9 @@ function setCircles(h, heat_PREP_ENGINEHIT_value, a, s, e, fc, mp, w, e_cv, fc_c
 		document.getElementById("WF6_WEAPONSFIRED2").checked = false;
 		document.getElementById('INFOFIRED').innerHTML = "";
 		document.getElementById('phasebuttonimage').src="./images/top-right_phase01.png";
-		document.getElementById('overviewcurrentunitstatus').src="./images/top-right_phase01.png";
+		if (document.getElementById('overviewcurrentunitstatus') != null) {
+			document.getElementById('overviewcurrentunitstatus').src="./images/top-right_phase01.png";
+		}
 		if (document.getElementById('unitroundstatusimagemenu') != null) {
 			document.getElementById('unitroundstatusimagemenu').src="./images/top-right_phase01.png";
 		}
@@ -938,7 +946,9 @@ function setCircles(h, heat_PREP_ENGINEHIT_value, a, s, e, fc, mp, w, e_cv, fc_c
 
 		document.getElementById('movementtokenimage').src="./images/dice/shutdown.png";
 		document.getElementById('phasebuttonimage').src="./images/heat.png";
-		document.getElementById('overviewcurrentunitstatus').src="./images/heat.png";
+		if (document.getElementById('overviewcurrentunitstatus') != null) {
+			document.getElementById('overviewcurrentunitstatus').src="./images/heat.png";
+		}
 		if (document.getElementById('unitroundstatusimagemenu') != null) {
 			document.getElementById('unitroundstatusimagemenu').src="./images/heat.png";
 		}
@@ -971,7 +981,9 @@ function setCircles(h, heat_PREP_ENGINEHIT_value, a, s, e, fc, mp, w, e_cv, fc_c
 
 		document.getElementById('movementtokenimage').src="./images/dice/destroyed.png";
 		document.getElementById('phasebuttonimage').src="./images/skull.png";
-		document.getElementById('overviewcurrentunitstatus').src="./images/skull.png";
+		if (document.getElementById('overviewcurrentunitstatus') != null) {
+			document.getElementById('overviewcurrentunitstatus').src="./images/skull.png";
+		}
 		if (document.getElementById('unitroundstatusimagemenu') != null) {
 			document.getElementById('unitroundstatusimagemenu').src="./images/skull.png";
 		}

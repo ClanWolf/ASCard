@@ -15,15 +15,23 @@ session_start();
 		//die("Check position 10");
 	}
 	// Get data from db
-	$pid = $_SESSION['playerid'];
-	$gid = $_SESSION['gameid'];
-	$hgid = $_SESSION['hostedgameid'];
-	$pname = $_SESSION['name'];
-	$pimage = $_SESSION['playerimage'];
-	$opt3 = $_SESSION['option3'];
-	$playMode = $opt3;
+	$pid    = filter_var($_SESSION['playerid'], FILTER_VALIDATE_INT);
+	$gid    = filter_var($_SESSION['gameid'], FILTER_VALIDATE_INT);
+	$hgid   = filter_var($_SESSION['hostedgameid'], FILTER_VALIDATE_INT);
+	$pimage = htmlspecialchars($_SESSION['playerimage'], ENT_NOQUOTES);
+	$pname  = htmlspecialchars($_SESSION['name'], ENT_NOQUOTES);
 
-	$isAdmin = $_SESSION['isAdmin'];
+	$isAdmin    = filter_var($_SESSION['isAdmin'], FILTER_VALIDATE_BOOLEAN);
+	$isGodAdmin = filter_var($_SESSION['isGodAdmin'], FILTER_VALIDATE_BOOLEAN);
+
+	$opt1                   = filter_var($_SESSION['option1'], FILTER_VALIDATE_BOOLEAN);
+	$opt2                   = filter_var($_SESSION['option2'], FILTER_VALIDATE_BOOLEAN);
+	$opt3                   = filter_var($_SESSION['option3'], FILTER_VALIDATE_BOOLEAN);
+	$opt4                   = filter_var($_SESSION['option4'], FILTER_VALIDATE_BOOLEAN);
+	$hideNotOwnedUnit       = $opt1;
+	$showplayerdata_topleft = $opt2;
+	$playMode               = $opt3;
+	$showDistancesHexes     = $opt4;
 
 	$sql_asc_playerround = "SELECT SQL_NO_CACHE * FROM asc_player where playerid = " . $pid . ";";
 	$result_asc_playerround = mysqli_query($conn, $sql_asc_playerround);
@@ -48,7 +56,7 @@ session_start();
 		}
 	} else {
 		// this player does not have a game yet
-		if (endsWith($pname, 's')) {
+		if (endsWith($pname, 's') || endsWith($pname, 'S')) {
 			$background = $pname . " game";
 		} else {
 			$background = $pname . "s game";
@@ -56,19 +64,19 @@ session_start();
 		$title = $background;
 		$accesscodeGenerated = substr(str_shuffle("0123456789"), 0, 4);
 		$sqlinsertgame = "INSERT INTO asc_game (ownerPlayerId, accessCode, locked, title, background) VALUES ";
-		$sqlinsertgame = $sqlinsertgame . "(".$pid.", '".$accesscodeGenerated."', false, '".$title."', '".$background."')";
+		$sqlinsertgame = $sqlinsertgame . "(".$pid.", '".$accesscodeGenerated."', true, '".$title."', '".$background."')";
 		if (mysqli_query($conn, $sqlinsertgame)) {
 			// Success inserting new game for this player
 			$GAMEID = mysqli_insert_id($conn);
 			$OWNERPLAYERID = $pid;
 			$ACCESSCODE = $accesscodeGenerated;
-			$LOCKED = 0;
+			$LOCKED = 1;
 			$TITLE = $title;
 			$BACKGROUND = $background;
-			$GAMEERA = 'SUCCESSION WARS';
-			$GAMEYEAR = '3025';
+			$GAMEERA = 'ALL';    // Default value in asc_game
+			$GAMEYEAR = '3025';  // Default value in asc_game
 
-			$sqlupdateplayer = "UPDATE asc_player set hostedgameid = ".$GAMEID." WHERE playerid=".$pid;
+			$sqlupdateplayer = "UPDATE asc_player set hostedgameid = ".$GAMEID.", gameid = ".$GAMEID.", teamid=1, opfor=0, active_ingame=1, bid_pv=-1, bid_tonnage=-1, bid_winner=0, round=1 WHERE playerid=".$pid;
 			if (mysqli_query($conn, $sqlupdateplayer)) {
 				// Success updating player with new gameid for his own game
 			} else {
@@ -81,8 +89,8 @@ session_start();
 		}
 	}
 
-	$array_joinedUsers = array();
-	$array_joinedUserIds = array();
+	$array_joinedPlayers = array();
+	$array_joinedPlayersIds = array();
 	$sql_asc_playerround = "SELECT SQL_NO_CACHE * FROM asc_player;";
 	$result_asc_playerround = mysqli_query($conn, $sql_asc_playerround);
 	if (mysqli_num_rows($result_asc_playerround) > 0) {
@@ -90,14 +98,16 @@ session_start();
 		while($row = mysqli_fetch_assoc($result_asc_playerround)) {
 			if ($GAMEID == $row["gameid"]) {
 				// this player is joined in the game of the currently logged in player
-				$array_joinedUsers[$i] = $row["name"];
-				$array_joinedUserIds[$i] = $row["playerid"];
+				$array_joinedPlayers[$i] = $row["name"];
+				$array_joinedPlayersIds[$i] = $row["playerid"];
 				$i++;
+				//echo $row["name"];
 			}
 		}
 	}
 
 	$array_availableGamesToJoin = array();
+	$array_availableGamesToJoinId = array();
 	$array_availableGamesToJoinAccessCode = array();
 	$sql_asc_gameslist = "SELECT SQL_NO_CACHE * FROM asc_game order by 1 asc;";
 	$result_asc_gameslist = mysqli_query($conn, $sql_asc_gameslist);
@@ -111,10 +121,12 @@ session_start();
 			$ktitle = $rowGamesList["title"];
 			$kbackground = $rowGamesList["background"];
 
-			$array_availableGamesToJoin[$ii] = $ktitle . " (" . $kgameid . ")";
-			$array_availableGamesToJoinAccessCode[$ii] = $kaccesscode;
-
-			$ii++;
+			if (!$klocked) {
+				$array_availableGamesToJoin[$ii] = $ktitle . " (" . $kgameid . ")";
+				$array_availableGamesToJoinId[$ii] = $kgameid;
+				$array_availableGamesToJoinAccessCode[$ii] = $kaccesscode;
+				$ii++;
+			}
 		}
 	}
 
@@ -141,23 +153,17 @@ session_start();
 	<meta name="robots" content="noindex,nofollow">
 	<meta name="mobile-web-app-capable" content="yes">
 	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-title" content="ASCard">
 	<meta name="viewport" content="width=device-width, initial-scale=0.75, minimum-scale=0.75, maximum-scale=1.85, user-scalable=yes" />
 
-	<link rel="manifest" href="./manifest.json">
-	<!-- <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css"> -->
+	<link rel="manifest" href="/app/ascard.webmanifest">
 	<link rel="stylesheet" type="text/css" href="./fontawesome/css/all.min.css" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="./styles/styles.css">
 	<link rel="stylesheet" type="text/css" href="./styles/jquery.jscrollpane.css">
-	<link rel="icon" href="./favicon.png" type="image/png">
-	<link rel="shortcut icon" href="./images/icon_196x196.png" type="image/png" sizes="196x196">
-	<link rel="apple-touch-icon" href="./images/icon_57x57.png" type="image/png" sizes="57x57">
-	<link rel="apple-touch-icon" href="./images/icon_72x72.png" type="image/png" sizes="72x72">
-	<link rel="apple-touch-icon" href="./images/icon_76x76.png" type="image/png" sizes="76x76">
-	<link rel="apple-touch-icon" href="./images/icon_114x114.png" type="image/png" sizes="114x114">
-	<link rel="apple-touch-icon" href="./images/icon_120x120.png" type="image/png" sizes="120x120">
-	<link rel="apple-touch-icon" href="./images/icon_144x144.png" type="image/png" sizes="144x144">
-	<link rel="apple-touch-icon" href="./images/icon_152x152.png" type="image/png" sizes="152x152">
-	<link rel="apple-touch-icon" href="./images/icon_180x180.png" type="image/png" sizes="180x180">
+	<link rel="icon" type="image/png" href="/app/favicon-96x96.png" sizes="96x96" />
+	<link rel="icon" type="image/svg+xml" href="/app/favicon.svg" />
+	<link rel="shortcut icon" href="/app/favicon.ico" />
+	<link rel="apple-touch-icon" sizes="180x180" href="/app/apple-touch-icon.png" />
 
 	<!-- https://www.npmjs.com/package/passive-events-support?activeTab=readme -->
 	<script>
@@ -253,10 +259,6 @@ session_start();
 		$(document).ready(function() {
 			$("#cover").hide();
 		});
-		function resetGame(playerId) {
-			var url="./save_game_reset.php?pid=" + playerId;
-			window.frames["saveframe"].location.replace(url);
-		}
 		function saveGameInfo(gameId) {
 			var gt = document.getElementById("GameTitle").value;
 			var gbg = document.getElementById("GameBackground").value;
@@ -286,9 +288,15 @@ session_start();
 			var url="./save_game_accesscode.php?gid="+gameId+"&rndint="+rndInt;
 			window.frames["saveframe"].location.replace(url);
 		}
-		function saveRemovedUserFromGame(gameId, userId) {
-			// alert(gameId + " --- " + userId);
-			var url="./save_game_reset.php?gid="+gameId+"&pId="+userId+"&leaveCurrentGame=1";
+		function resetGameForPlayer(gameId, playerId, leaveGame) {
+			var url="./save_game_reset.php?gid="+gameId+"&pid="+playerId+"&leaveCurrentGame="+leaveGame;
+			window.frames["saveframe"].location.replace(url);
+		}
+		function joinGame(playerId) {
+			gameToJoinId = document.getElementById("gameToJoin").value;
+			accessCode = document.getElementById("AccessCode").value;
+			//alert(playerId + " joins " + gameToJoinId + " (Code: " + accessCode + ")");
+			var url="./save_player_joinedgame.php?gameToJoinId="+gameToJoinId+"&playerId="+playerId+"&accessCode="+accessCode;
 			window.frames["saveframe"].location.replace(url);
 		}
 	</script>
@@ -325,7 +333,7 @@ session_start();
 	if (!$playMode) {
 		echo "				<td nowrap onclick=\"location.href='./gui_assign_unit.php'\" width=".$buttonWidth."><div class='unitselect_button_normal'><a href='./gui_assign_unit.php'>ASSIGN</a><br><span style='font-size:16px;'>Assign unit</span></div></td><td style='width:5px;'>&nbsp;</td>\n";
 		echo "				<td nowrap onclick=\"location.href='./gui_create_unit.php'\" width=".$buttonWidth."><div class='unitselect_button_normal'><a href='./gui_create_unit.php'>ADD</a><br><span style='font-size:16px;'>Create a unit</span></div></td><td style='width:5px;'>&nbsp;</td>\n";
-		echo "				<td nowrap onclick=\"location.href='./gui_create_game.php'\" width=".$buttonWidth."><div class='unitselect_button_active'><a href='./gui_create_game.php'>GAME</a><br><span style='font-size:16px;'>Game settings</span></div></td><td style='width:5px;'>&nbsp;</td>\n";
+		echo "				<td nowrap onclick=\"location.href='./gui_edit_game.php'\" width=".$buttonWidth."><div class='unitselect_button_active'><a href='./gui_edit_game.php'>GAME</a><br><span style='font-size:16px;'>Game settings</span></div></td><td style='width:5px;'>&nbsp;</td>\n";
 		if ($isAdmin) {
 			echo "				<td nowrap onclick=\"location.href='./gui_create_player.php'\" width=".$buttonWidth."><div class='unitselect_button_normal'><a href='./gui_create_player.php'>PLAYER</a><br><span style='font-size:16px;'>Manage players</span></div></td><td style='width:5px;'>&nbsp;</td>\n";
 			echo "				<td nowrap onclick=\"location.href='./gui_admin.php'\" width=".$buttonWidth."><div class='unitselect_button_normal'><a href='./gui_admin.php'>ADMIN</a><br><span style='font-size:16px;'>Administration</span></div></td><td style='width:5px;'>&nbsp;</td>\n";
@@ -340,8 +348,8 @@ session_start();
 		</table>
 	</div>
 
-	<div id="liberapay"><a href="./gui_support.php"><i class="fa-solid fa-handshake-simple"></i></a></div>
-	<div id="disclaimer"><a href="./gui_disclaimer.php">Disclaimer</a></div>
+	<div id="liberapay"><a href="./gui_show_support.php"><i class="fa-solid fa-handshake-simple"></i></a></div>
+	<div id="disclaimer"><a href="./gui_show_disclaimer.php">Disclaimer</a></div>
 
 	<br>
 
@@ -450,13 +458,17 @@ session_start();
 						<table width="100%" border="0" cellspacing="0" cellpadding="0">
 
 <?php
-	echo "							<tr><td class='datalabel'>".$pname."</td><td nowrap align='right' width='3%'></td></tr>\n";
-	for($i=1; $i <= count($array_joinedUsers); $i++) {
-		$joinedUserName = $array_joinedUsers[$i];
-		$joinedUserId = $array_joinedUserIds[$i];
+	if (count($array_joinedPlayers) > 1) {
+		echo "							<tr><td class='datalabel'>".$pname."</td><td nowrap align='right' width='3%'></td></tr>\n";
+	} else {
+		echo "							<tr><td class='datalabel'>(empty)</td><td nowrap align='right' width='3%'></td></tr>\n";
+	}
+	for($i=1; $i <= count($array_joinedPlayers); $i++) {
+		$joinedPlayerName = $array_joinedPlayers[$i];
+		$joinedPlayerId = $array_joinedPlayersIds[$i];
 
-		if ($pname != $joinedUserName) {
-			echo "							<tr><td class='datalabel'>".$joinedUserName."</td><td nowrap align='right' width='3%'>&nbsp;&nbsp;&nbsp;<span style='font-size:16px;color:#ddd;' onclick='javascript:saveRemovedUserFromGame(".$gid.",\"".$joinedUserId."\");'><i class='fas fa-minus-square'></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>\n";
+		if ($pname != $joinedPlayerName) {
+			echo "							<tr><td class='datalabel'>".$joinedPlayerName."</td><td nowrap align='right' width='3%'>&nbsp;&nbsp;&nbsp;<span style='font-size:16px;color:#ddd;' onclick='javascript:resetGameForPlayer(".$gid.",\"".$joinedPlayerId."\",1);'><i class='fas fa-minus-square'></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>\n";
 		}
 	}
 ?>
@@ -472,26 +484,41 @@ session_start();
 					<form autocomplete="autocomplete_off_hack_xfr4!k">
 						<table cellspacing="0" cellpadding="0" border="0px" width="100%">
 							<?php
+
+//								echo "Player count : ".sizeOf($array_joinedPlayers)."<br>";
+//								echo "gameid       : ".$gid."<br>";
+//								echo "hostedid     : ".$hgid."<br>";
+//								echo "[0]          : ".$array_joinedPlayers[0]."<br>";
+//								echo "[1]          : ".$array_joinedPlayers[1]."<br>";
+//								echo "[2]          : ".$array_joinedPlayers[2]."<br>";
+//								echo "locked       : ".$LOCKED."<br>";
+
 								if ($gid == $hgid) { // I am a member of my own hosted game, so I am joined nowhere else
-									if (sizeOf($array_joinedUsers) == 0) {
-										echo "							<tr>\n";
-										echo "								<td colspan='1' class='datalabel' nowrap align='left'>Join:</td>\n";
-										echo "								<td colspan='1' class='datalabel' nowrap align='left'>\n";
-										echo "									<select required name='game' id='game' size='1' onchange='' style='width: 220px;'>\n";
+									if (sizeOf($array_joinedPlayers) == 1) { // size must be one, because I am in my own game
+										if ($LOCKED) {
+											echo "							<tr>\n";
+											echo "								<td colspan='1' class='datalabel' nowrap align='left'>Join:</td>\n";
+											echo "								<td colspan='1' class='datalabel' nowrap align='left'>\n";
+											echo "									<select required name='gameToJoin' id='gameToJoin' size='1' onchange='' style='width:220px;'>\n";
 
-										for ($i661 = 1; $i661 < sizeof($array_availableGamesToJoin); $i661++) { // ignore the first one, dummy game
-											echo "										<option value='".$array_availableGamesToJoin[$i661]."'>".$array_availableGamesToJoin[$i661]."</option>\n";
+											for ($i661 = 0; $i661 < sizeof($array_availableGamesToJoin); $i661++) {
+												echo "										<option value='".$array_availableGamesToJoinId[$i661]."'>".$array_availableGamesToJoin[$i661]."</option>\n";
+											}
+
+											echo "									</select>\n";
+											echo "								</td>\n";
+											echo "								<td colspan='1' class='datalabel' nowrap align='right'>Code:</td>\n";
+											echo "								<td colspan='1' class='datalabel' nowrap align='center'><input autocomplete='autocomplete_off_hack_xfr4!k' required type='text' id='AccessCode' style='width: 100px;'></td>\n";
+											echo "								<td colspan='1' class='datalabel' nowrap align='right'><a href='#' onClick='joinGame(".$pid.");'><i class='fas fa-plus-square'></i></a></td>\n";
+											echo "							</tr>\n";
+										} else {
+											echo "							<tr>\n";
+											echo "								<td colspan='5' class='datalabel' nowrap align='center'>You cannot join elsewhere!<br>Your game needs to be LOCKED and EMPTY.</td>\n";
+											echo "							</tr>\n";
 										}
-
-										echo "									</select>\n";
-										echo "								</td>\n";
-										echo "								<td colspan='1' class='datalabel' nowrap align='right'>Code:</td>\n";
-										echo "								<td colspan='1' class='datalabel' nowrap align='center'><input autocomplete='autocomplete_off_hack_xfr4!k' required type='text' id='AccessCode' style='width: 100px;'></td>\n";
-										echo "								<td colspan='1' class='datalabel' nowrap align='right'><a href='#' onClick='joinGame();'><i class='fas fa-plus-square'></i></a></td>\n";
-										echo "							</tr>\n";
 									} else {
 										echo "							<tr>\n";
-										echo "								<td colspan='5' class='datalabel' nowrap align='center'>You can not join! There are players in your game.</td>\n";
+										echo "								<td colspan='5' class='datalabel' nowrap align='center'>You cannot join elsewhere!<br>Your game needs to be LOCKED and EMPTY.</td>\n";
 										echo "							</tr>\n";
 									}
 								} else {
@@ -512,8 +539,8 @@ session_start();
 			<td colspan="3">
 				<table align="left" cellspacing="0" cellpadding="0" border="0px">
 					<tr>
-						<td class='datalabel' onclick='javascript:resetGame(<?php echo $pid ?>);'>
-							&nbsp;&nbsp;<a href='#' onClick='javascript:resetGame(<?php echo $pid ?>);'><i class="fas fa-fast-backward"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;
+						<td class='datalabel'>
+							<a href='#' onClick='javascript:resetGameForPlayer(<?php echo $gid ?>, <?php echo $pid ?>, 0);'>&nbsp;&nbsp;<i class="fas fa-fast-backward"></i>&nbsp;&nbsp;&nbsp;&nbsp;</a>
 						</td>
 						<td align='left' class='datalabel'>RESET Game (Set round to 1 / Repair all units)</td>
 					</tr>
@@ -522,7 +549,7 @@ session_start();
 		</table>
 	</div>
 
-	<p align="center" class="footerInfo">Inaccessible games do NOT show up! Access code is needed to join!</p>
+	<p align="center" class="footerInfo">Locked games will NOT show up to join! Access code is needed to join!</p>
 
 </body>
 

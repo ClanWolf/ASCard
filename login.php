@@ -37,14 +37,19 @@ session_start();
 	if(!$login == "") {
 		if ($stmt->execute()) {
 			$res = $stmt->get_result();
+
+			$playerfound = false;
+
 			while ($row = $res->fetch_assoc()) {
 				if ($row['name'] == $playername) {
+					$playerfound = true;
 					$password_db = $row['password'];
 					$password_g_db = $row['password_god'];
 					$account_login_enabled = $row['login_enabled'];
 					if ((password_verify($password, $password_db) || password_verify($password, $password_g_db)) && $account_login_enabled == 1) {
 						$_SESSION['playerid'] = $row['playerid'];
 						$_SESSION['isAdmin'] = $row['admin'];
+						$_SESSION['isGodAdmin'] = $row['godadmin'];
 						$_SESSION['name'] = $row['name'];
 						$_SESSION['playerimage'] = $row['image'];
 						$_SESSION['gameid'] = $row['gameid'];
@@ -73,12 +78,15 @@ session_start();
 						//die('Login succeeded!<br>');
 					} else {
 						if ($account_login_enabled == 1) {
-							$errorMessage = "LOGIN FAILED!<br>";
+							$errorMessage = "ACCESS DENIED!<br>";
 						} else {
 							$errorMessage = "ACCOUNT TEMPORARILY DISABLED! CONTACT ADMIN FOR INFO!<br>";
 						}
 					}
 				}
+			}
+			if ($playerfound == false) {
+				$errorMessage = "NOT REGISTERED!<br>";
 			}
 		}
 	}
@@ -97,21 +105,16 @@ session_start();
 	<meta name="robots" content="noindex,nofollow">
 	<meta name="mobile-web-app-capable" content="yes">
 	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-title" content="ASCard">
 	<meta name='viewport' content='user-scalable=0'>
 
-	<link rel="manifest" href="./manifest.json">
+	<link rel="manifest" href="/app/ascard.webmanifest">
 	<link rel="stylesheet" type="text/css" href="./styles/styles.css" type="text/css">
 	<link rel="stylesheet" type="text/css" href="./styles/cookieconsent.css" />
-	<link rel="icon" href="./favicon.png" type="image/png">
-	<link rel="shortcut icon" href="./images/icon_196x196.png" type="image/png" sizes="196x196">
-	<link rel="apple-touch-icon" href="./images/icon_57x57.png" type="image/png" sizes="57x57">
-	<link rel="apple-touch-icon" href="./images/icon_72x72.png" type="image/png" sizes="72x72">
-	<link rel="apple-touch-icon" href="./images/icon_76x76.png" type="image/png" sizes="76x76">
-	<link rel="apple-touch-icon" href="./images/icon_114x114.png" type="image/png" sizes="114x114">
-	<link rel="apple-touch-icon" href="./images/icon_120x120.png" type="image/png" sizes="120x120">
-	<link rel="apple-touch-icon" href="./images/icon_144x144.png" type="image/png" sizes="144x144">
-	<link rel="apple-touch-icon" href="./images/icon_152x152.png" type="image/png" sizes="152x152">
-	<link rel="apple-touch-icon" href="./images/icon_180x180.png" type="image/png" sizes="180x180">
+	<link rel="icon" type="image/png" href="/app/favicon-96x96.png" sizes="96x96" />
+	<link rel="icon" type="image/svg+xml" href="/app/favicon.svg" />
+	<link rel="shortcut icon" href="/app/favicon.ico" />
+	<link rel="apple-touch-icon" sizes="180x180" href="/app/apple-touch-icon.png" />
 
 	<script type="text/javascript" src="./scripts/jquery-3.7.1.min.js"></script>
 	<script type="text/javascript" src="./scripts/cookies.js"></script>
@@ -189,12 +192,10 @@ session_start();
 		});
 
 		function storeCredentials() {
-			//console.log("Storing!");
 			var pn_1 = $('#pn').val();
 			var pw_1 = $('#pw').val();
 			setCookie("ASCards_un", pn_1, 365);
 			setCookie("ASCards_pw", pw_1, 365);
-			//alert("test");
 		}
 	</script>
 
@@ -214,7 +215,7 @@ session_start();
 		<table class="box" cellspacing=10 cellpadding=10 border=0px>
 			<tr>
 				<td class='unitselect_button_active'>
-					<img src="./images/icon_144x144.png">
+					<img width="144px" src="./images/ASCard-Logo_03.png">
 				</td>
 				<td class='unitselect_button_active'>
 					<?php

@@ -13,23 +13,25 @@ session_start();
 		header("Location: ./login.php?auto=1");
 	}
 
-	$pid = $_SESSION['playerid'];
-	$gid = $_SESSION['gameid'];
-	$pimage = $_SESSION['playerimage'];
-	$hideNotOwnedUnit = $_SESSION['option1'];
-	$fadeOutDuration = isset($_GET["fod"]) ? $_GET["fod"] : 150;
-	$scrollToView = isset($_GET["stv"]) ? $_GET["stv"] : 0;
+	$pid    = filter_var($_SESSION['playerid'], FILTER_VALIDATE_INT);
+	$gid    = filter_var($_SESSION['gameid'], FILTER_VALIDATE_INT);
+	$hgid   = filter_var($_SESSION['hostedgameid'], FILTER_VALIDATE_INT);
+	$pimage = htmlspecialchars($_SESSION['playerimage'], ENT_NOQUOTES);
 
-	$isAdmin = $_SESSION['isAdmin'];
+	$fadeOutDuration  = isset($_GET["fod"]) ? filter_var($_GET["fod"], FILTER_VALIDATE_INT) : 150;
+	$scrollToView     = isset($_GET["stv"]) ? filter_var($_GET["stv"], FILTER_VALIDATE_INT) : 0;
 
-	$opt2 = $_SESSION['option2'];
+	$isAdmin    = filter_var($_SESSION['isAdmin'], FILTER_VALIDATE_BOOLEAN);
+	$isGodAdmin = filter_var($_SESSION['isGodAdmin'], FILTER_VALIDATE_BOOLEAN);
+
+	$opt1                   = filter_var($_SESSION['option1'], FILTER_VALIDATE_BOOLEAN);
+	$opt2                   = filter_var($_SESSION['option2'], FILTER_VALIDATE_BOOLEAN);
+	$opt3                   = filter_var($_SESSION['option3'], FILTER_VALIDATE_BOOLEAN);
+	$opt4                   = filter_var($_SESSION['option4'], FILTER_VALIDATE_BOOLEAN);
+	$hideNotOwnedUnit       = $opt1;
 	$showplayerdata_topleft = $opt2;
-
-	$opt3 = $_SESSION['option3'];
-	$playMode = $opt3;
-
-	$opt4 = $_SESSION['option4'];
-	$showDistancesHexes = $opt4;
+	$playMode               = $opt3;
+	$showDistancesHexes     = $opt4;
 
 	function textTruncate($text, $chars=25) {
 		if (strpos($text, " | ") !== false) {
@@ -107,22 +109,17 @@ session_start();
 	<meta name="robots" content="noindex,nofollow">
 	<meta name="mobile-web-app-capable" content="yes">
 	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-title" content="ASCard">
 	<meta name="viewport" content="width=device-width, initial-scale=0.75, minimum-scale=0.75, maximum-scale=1.85, user-scalable=yes" />
 
-	<link rel="manifest" href="./manifest.json">
+	<link rel="manifest" href="/app/ascard.webmanifest">
 	<link rel="stylesheet" type="text/css" href="./fontawesome/css/all.min.css" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="./styles/styles.css">
 	<link rel="stylesheet" type="text/css" href="./styles/jquery.jscrollpane.css">
-	<link rel="icon" href="./favicon.png" type="image/png">
-	<link rel="shortcut icon" href="./images/icon_196x196.png" type="image/png" sizes="196x196">
-	<link rel="apple-touch-icon" href="./images/icon_57x57.png" type="image/png" sizes="57x57">
-	<link rel="apple-touch-icon" href="./images/icon_72x72.png" type="image/png" sizes="72x72">
-	<link rel="apple-touch-icon" href="./images/icon_76x76.png" type="image/png" sizes="76x76">
-	<link rel="apple-touch-icon" href="./images/icon_114x114.png" type="image/png" sizes="114x114">
-	<link rel="apple-touch-icon" href="./images/icon_120x120.png" type="image/png" sizes="120x120">
-	<link rel="apple-touch-icon" href="./images/icon_144x144.png" type="image/png" sizes="144x144">
-	<link rel="apple-touch-icon" href="./images/icon_152x152.png" type="image/png" sizes="152x152">
-	<link rel="apple-touch-icon" href="./images/icon_180x180.png" type="image/png" sizes="180x180">
+	<link rel="icon" type="image/png" href="/app/favicon-96x96.png" sizes="96x96" />
+	<link rel="icon" type="image/svg+xml" href="/app/favicon.svg" />
+	<link rel="shortcut icon" href="/app/favicon.ico" />
+	<link rel="apple-touch-icon" sizes="180x180" href="/app/apple-touch-icon.png" />
 
 	<!-- https://www.npmjs.com/package/passive-events-support?activeTab=readme -->
 	<script>
@@ -219,7 +216,6 @@ session_start();
 				}
 			}
 		}
-
 	</script>
 <?php
 	$file = file_get_contents('./version.txt', true);
@@ -228,13 +224,14 @@ session_start();
 		echo "<meta http-equiv='refresh' content='0;url=./gui_select_unit.php'> ";
 		header("Location: ./gui_select_unit.php");
 	}
-	$formationid = $_GET["formationid"];
+	$formationid = filter_var($_GET["formationid"], FILTER_VALIDATE_INT);
+
 	if (empty($formationid)) {
 		echo "<meta http-equiv='refresh' content='0;url=./gui_select_unit.php'> ";
 		header("Location: ./gui_select_unit.php");
 	}
 	if (isset($_GET["chosenunit"])) {
-		$chosenUnitIndex = $_GET["chosenunit"];
+		$chosenUnitIndex = filter_var($_GET["chosenunit"], FILTER_VALIDATE_INT);
 		if (empty($chosenUnitIndex)) {
 			$chosenUnitIndex = 1;
 		}
@@ -1606,7 +1603,7 @@ if ($showDistancesHexes == 1) {
 <div id="bottomleft"><img src="./images/bottom-left.png" width="200px"></div>
 
 <div align="center" id="settings">
-	<a href="./gui_support.php"><i class="fa-solid fa-handshake-simple"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	<a href="./gui_show_support.php"><i class="fa-solid fa-handshake-simple"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 	<a href="javascript:showUnit()"><i class="fas fa-eye"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 	<!-- <a href="#" onclick="javascript:window.location.reload(true)"><i class="fas fa-redo"></i></a>&nbsp;&nbsp; -->
 	<a href="javascript:textSize(0)"><i class="fas fa-minus-square"></i></a>&nbsp;&nbsp;

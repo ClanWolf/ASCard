@@ -25,6 +25,10 @@
 		if (mysqli_query($conn, $update_gamelock)) {
 			echo "<br>";
 			echo "Game info updated successfully<br>";
+
+			echo "<script>\n";
+			echo "	top.location.reload();\n";
+			echo "</script>\n";
 		} else {
 			echo "<br>";
 			echo "Error updating game info: " . mysqli_error($conn) . "<br>";

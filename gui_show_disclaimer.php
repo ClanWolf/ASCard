@@ -37,7 +37,7 @@ session_start();
 <html lang="en">
 
 <head>
-	<title>ASCard.net AplhaStrike Card App (clanwolf.net): Support</title>
+	<title>ClanWolf.net: AplhaStrike Card App (ASCard): Disclaimer</title>
 	<meta charset="utf-8">
 	<!-- <meta http-equiv="expires" content="0"> -->
 	<!-- <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"> -->
@@ -46,23 +46,17 @@ session_start();
 	<meta name="robots" content="noindex,nofollow">
 	<meta name="mobile-web-app-capable" content="yes">
 	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-title" content="ASCard">
 	<meta name="viewport" content="width=device-width, initial-scale=0.75, minimum-scale=0.75, maximum-scale=1.85, user-scalable=yes" />
 
-	<link rel="manifest" href="./manifest.json">
-	<!-- <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css"> -->
+	<link rel="manifest" href="/app/ascard.webmanifest">
 	<link rel="stylesheet" type="text/css" href="./fontawesome/css/all.min.css" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="./styles/styles.css">
 	<link rel="stylesheet" type="text/css" href="./styles/jquery.jscrollpane.css">
-	<link rel="icon" href="./favicon.png" type="image/png">
-	<link rel="shortcut icon" href="./images/icon_196x196.png" type="image/png" sizes="196x196">
-	<link rel="apple-touch-icon" href="./images/icon_57x57.png" type="image/png" sizes="57x57">
-	<link rel="apple-touch-icon" href="./images/icon_72x72.png" type="image/png" sizes="72x72">
-	<link rel="apple-touch-icon" href="./images/icon_76x76.png" type="image/png" sizes="76x76">
-	<link rel="apple-touch-icon" href="./images/icon_114x114.png" type="image/png" sizes="114x114">
-	<link rel="apple-touch-icon" href="./images/icon_120x120.png" type="image/png" sizes="120x120">
-	<link rel="apple-touch-icon" href="./images/icon_144x144.png" type="image/png" sizes="144x144">
-	<link rel="apple-touch-icon" href="./images/icon_152x152.png" type="image/png" sizes="152x152">
-	<link rel="apple-touch-icon" href="./images/icon_180x180.png" type="image/png" sizes="180x180">
+	<link rel="icon" type="image/png" href="/app/favicon-96x96.png" sizes="96x96" />
+	<link rel="icon" type="image/svg+xml" href="/app/favicon.svg" />
+	<link rel="shortcut icon" href="/app/favicon.ico" />
+	<link rel="apple-touch-icon" sizes="180x180" href="/app/apple-touch-icon.png" />
 
 	<!-- https://www.npmjs.com/package/passive-events-support?activeTab=readme -->
 	<script>
@@ -178,7 +172,7 @@ session_start();
 	if (!$playMode) {
 		echo "				<td nowrap onclick=\"location.href='./gui_assign_unit.php'\" width=".$buttonWidth."><div class='unitselect_button_normal'><a href='./gui_assign_unit.php'>ASSIGN</a><br><span style='font-size:16px;'>Assign unit</span></div></td><td style='width:5px;'>&nbsp;</td>\n";
 		echo "				<td nowrap onclick=\"location.href='./gui_create_unit.php'\" width=".$buttonWidth."><div class='unitselect_button_normal'><a href='./gui_create_unit.php'>ADD</a><br><span style='font-size:16px;'>Create a unit</span></div></td><td style='width:5px;'>&nbsp;</td>\n";
-		echo "				<td nowrap onclick=\"location.href='./gui_create_game.php'\" width=".$buttonWidth."><div class='unitselect_button_normal'><a href='./gui_create_game.php'>GAME</a><br><span style='font-size:16px;'>Game settings</span></div></td><td style='width:5px;'>&nbsp;</td>\n";
+		echo "				<td nowrap onclick=\"location.href='./gui_edit_game.php'\" width=".$buttonWidth."><div class='unitselect_button_normal'><a href='./gui_edit_game.php'>GAME</a><br><span style='font-size:16px;'>Game settings</span></div></td><td style='width:5px;'>&nbsp;</td>\n";
 		if ($isAdmin) {
 			echo "				<td nowrap onclick=\"location.href='./gui_create_player.php'\" width=".$buttonWidth."><div class='unitselect_button_normal'><a href='./gui_create_player.php'>PLAYER</a><br><span style='font-size:16px;'>Manage players</span></div></td><td style='width:5px;'>&nbsp;</td>\n";
 			echo "				<td nowrap onclick=\"location.href='./gui_admin.php'\" width=".$buttonWidth."><div class='unitselect_button_normal'><a href='./gui_admin.php'>ADMIN</a><br><span style='font-size:16px;'>Administration</span></div></td><td style='width:5px;'>&nbsp;</td>\n";
@@ -193,8 +187,8 @@ session_start();
 		</table>
 	</div>
 
-	<div id="liberapay"><a href="./gui_support.php"><i class="fa-solid fa-handshake-simple"></i></a></div>
-	<div id="disclaimer"><a href="./gui_disclaimer.php">Disclaimer</a></div>
+	<div id="liberapay"><a href="./gui_show_support.php"><i class="fa-solid fa-handshake-simple"></i></a></div>
+	<div id="disclaimer"><a href="./gui_show_disclaimer.php">Disclaimer</a></div>
 
 	<br>
 
@@ -202,13 +196,14 @@ session_start();
 		<table width="80%" align="center" class="options" cellspacing="4" cellpadding="4" border="0px">
 			<tr>
 				<td>
-					<p>This app has been developed by an enthusiast. Countless hours have been given into the concept, design and actual development and testing. If you appreciate using ASCard, you can support me with one of the following options:</p>
 					<p>
-						<a href="https://liberapay.com/WarWolfen/donate" target="_blank"><img alt="Donate using Liberapay" height="40px" src="./images/liberapay.png"></a>&nbsp;&nbsp;&nbsp;
-						<a href="https://www.paypal.com/paypalme/ClanWolf?country.x=DE&locale.x=de_DE" target="_blank"><img alt="Donate using paypal" height="40px" src="./images/paypal.png"></a>
+						Concept, Design and development by Meldric 2015-<?php echo date("Y"); ?>.<br>
+						<br>
+						This software is a completely free fan project that makes no claim to ownership to any of Catalyst Game Labs or The Topps Company, Inc properties. MechWarrior, BattleMech, ‘Mech and AeroTech are registered trademarks of The Topps Company, Inc. All Rights Reserved. Catalyst Game Labs and the Catalyst Game Labs logo are trademarks of InMediaRes Production, LLC. Neither Topps nor Catalyst Game Labs makes no representation or warranty as to the quality, viability, or suitability for purpose of this product. See additional information on <u><a href="https://bg.battletech.com/?page_id=34">BattleTech - The Board Game Website</a>.</u><br>
+						<br>
+						Unit information and images (B&W) are used with friendly permission of <u><a href="http://www.masterunitlist.info">http://www.masterunitlist.info</a></u>.<br>
+						Some images belong to PGI (Piranha Games) / MechWarrior Online or other independant artists.
 					</p>
-					<p>With liberapay you can arrange recurring support and paypal may be used for one time donations. Thank you!</p>
-					<p><img src="https://img.shields.io/liberapay/patrons/WarWolfen.svg?logo=liberapay"></p>
 				</td>
 			</tr>
 		</table>

@@ -9,9 +9,9 @@
 	require('./logger.php');
 	require_once('./db.php');
 
-	$gid = isset($_GET["gid"]) ? $_GET["gid"] : "";
-	$pid = isset($_GET["pid"]) ? $_GET["pid"] : "";
-	$leaveCurrentGame = isset($_GET["leaveCurrentGame"]) ? $_GET["leaveCurrentGame"] : "";
+	$gid = isset($_GET["gid"]) ? filter_var($_GET["gid"], FILTER_VALIDATE_INT) : "";
+	$pid = isset($_GET["pid"]) ? filter_var($_GET["pid"], FILTER_VALIDATE_INT) : "";
+	$leaveCurrentGame = isset($_GET["leaveCurrentGame"]) ? filter_var($_GET["leaveCurrentGame"], FILTER_VALIDATE_BOOLEAN) : "";
 
 	echo "<!DOCTYPE html>\n";
 	echo "<html lang='en'>\n";
@@ -21,7 +21,7 @@
 	echo "RESETING ROUND for playerid ".$pid."...<br>\n";
 	echo "<br>\n";
 
-	if (!empty($pid)) {
+	if (!empty($pid) || !empty($gid)) {
 		echo "<p>\n";
     	if ($leaveCurrentGame) {
 			echo "Leave current game!\n";
@@ -35,6 +35,7 @@
 		$sqlDeleteUnitstatusEntries = "";
 		$sqlDeleteUnitstatusEntries = $sqlDeleteUnitstatusEntries . "DELETE from asc_unitstatus ";
 		$sqlDeleteUnitstatusEntries = $sqlDeleteUnitstatusEntries . "WHERE playerid=".$pid." ";
+		$sqlDeleteUnitstatusEntries = $sqlDeleteUnitstatusEntries . "AND gameid=".$gid." ";
 		$sqlDeleteUnitstatusEntries = $sqlDeleteUnitstatusEntries . "AND initial_status=0; ";
 
 		echo $sqlDeleteUnitstatusEntries;
@@ -52,8 +53,9 @@
 		$sqlSelectUnitWithStatus = "";
 		$sqlSelectUnitWithStatus = $sqlSelectUnitWithStatus . "SELECT * from asc_unitstatus us, asc_unit u ";
 		$sqlSelectUnitWithStatus = $sqlSelectUnitWithStatus . "WHERE u.playerid=".$pid." ";
-		$sqlSelectUnitWithStatus = $sqlSelectUnitWithStatus . "AND us.playerid = u.playerid ";
-		$sqlSelectUnitWithStatus = $sqlSelectUnitWithStatus . "AND us.unitid = u.unitid ";
+		$sqlSelectUnitWithStatus = $sqlSelectUnitWithStatus . "AND us.playerid=u.playerid ";
+		$sqlSelectUnitWithStatus = $sqlSelectUnitWithStatus . "AND us.unitid=u.unitid ";
+		$sqlSelectUnitWithStatus = $sqlSelectUnitWithStatus . "AND us.gameid=".$gid." ";
 		$sqlSelectUnitWithStatus = $sqlSelectUnitWithStatus . "AND initial_status=1;";
 
 		$result_selectUnitWithStatus = mysqli_query($conn, $sqlSelectUnitWithStatus);
@@ -66,6 +68,7 @@
 				$sqlUpdateInitialUnitstatusEntry = $sqlUpdateInitialUnitstatusEntry . "UPDATE asc_unitstatus ";
 				$sqlUpdateInitialUnitstatusEntry = $sqlUpdateInitialUnitstatusEntry . "SET ";
 				$sqlUpdateInitialUnitstatusEntry = $sqlUpdateInitialUnitstatusEntry . "round = 1, ";
+				$sqlUpdateInitialUnitstatusEntry = $sqlUpdateInitialUnitstatusEntry . "gameid = ".$gid.", ";
 				$sqlUpdateInitialUnitstatusEntry = $sqlUpdateInitialUnitstatusEntry . "heat = 0, ";
 				$sqlUpdateInitialUnitstatusEntry = $sqlUpdateInitialUnitstatusEntry . "armor = 0, ";
 				$sqlUpdateInitialUnitstatusEntry = $sqlUpdateInitialUnitstatusEntry . "`structure` = 0, ";
@@ -113,20 +116,17 @@
 			}
 		}
 
-		// Get the gameId of the player back to his own gameId
-		if ($leaveCurrentGame) {
-
-		}
-
-
-
 		// Update player
 		$sqlUpdatePlayerRound = "";
 		$sqlUpdatePlayerRound = $sqlUpdatePlayerRound . "UPDATE asc_player ";
 		$sqlUpdatePlayerRound = $sqlUpdatePlayerRound . "SET ";
-		$sqlUpdatePlayerRound = $sqlUpdatePlayerRound . "round=1 ";
+		$sqlUpdatePlayerRound = $sqlUpdatePlayerRound . "round=1, ";
+		$sqlUpdatePlayerRound = $sqlUpdatePlayerRound . "active_ingame=1, ";
+		$sqlUpdatePlayerRound = $sqlUpdatePlayerRound . "teamid=1, ";
+		$sqlUpdatePlayerRound = $sqlUpdatePlayerRound . "opfor=0 ";
 		if ($leaveCurrentGame) {
-
+			$ownedGame = filter_var($_SESSION['hostedgameid'], FILTER_VALIDATE_INT);
+			$sqlUpdatePlayerRound = $sqlUpdatePlayerRound . ", gamedId=".$ownedGame." ";
 		}
 		$sqlUpdatePlayerRound = $sqlUpdatePlayerRound . "where playerid=".$pid.";";
 
@@ -158,7 +158,6 @@
 			mysqli_commit($conn);
 
 			echo "<script>top.window.location = './gui_message_round_reset.php'</script>";
-			die('ERROR 6');
 		} else {
 			echo "<br>";
 			echo "Error (assignment) updating record: " . mysqli_error($conn) . "<br>";
@@ -166,7 +165,7 @@
 			die('ERROR 7');
 		}
 	} else {
-		echo "Not reseting, no playerid given.";
+		echo "NOT reseting, no playerid and/or gameid";
 	}
 
 	echo "</p>\n";

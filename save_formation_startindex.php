@@ -41,9 +41,7 @@
 
 			echo "<script>\n";
 			echo "	let currentURL = top.location.href;\n";
-			//echo "	console.log('Aktuelle URL: ' + currentURL);\n";
 			echo "	let newURL = currentURL.replace('stv=1','stv=0');\n";
-			//echo "	console.log('Neue URL: ' + newURL);\n";
 			echo "	top.location.replace(newURL);\n";
 			echo "</script>\n";
 		} else {

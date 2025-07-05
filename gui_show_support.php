@@ -12,9 +12,9 @@ session_start();
 		echo "Not logged in... redirecting.<br>";
 		echo "<meta http-equiv='refresh' content='0;url=./login.php?auto=1'>";
 		header("Location: ./login.php?auto=1");
-		//die("Check position 6");
+		//die("Check position 12");
 	}
-
+	// Get data from db
 	$pid = $_SESSION['playerid'];
 	$gid = $_SESSION['gameid'];
 	$pimage = $_SESSION['playerimage'];
@@ -31,11 +31,13 @@ session_start();
 		}
 	}
 ?>
+
 <!DOCTYPE html>
+
 <html lang="en">
 
 <head>
-	<title>ASCard.net AplhaStrike Card App (clanwolf.net): Edit Command</title>
+	<title>ASCard.net AplhaStrike Card App (clanwolf.net): Support</title>
 	<meta charset="utf-8">
 	<!-- <meta http-equiv="expires" content="0"> -->
 	<!-- <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"> -->
@@ -47,11 +49,10 @@ session_start();
 	<meta name="apple-mobile-web-app-title" content="ASCard">
 	<meta name="viewport" content="width=device-width, initial-scale=0.75, minimum-scale=0.75, maximum-scale=1.85, user-scalable=yes" />
 
-	<meta http-equiv="refresh" content="5" />
-
 	<link rel="manifest" href="/app/ascard.webmanifest">
 	<link rel="stylesheet" type="text/css" href="./fontawesome/css/all.min.css" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="./styles/styles.css">
+	<link rel="stylesheet" type="text/css" href="./styles/jquery.jscrollpane.css">
 	<link rel="icon" type="image/png" href="/app/favicon-96x96.png" sizes="96x96" />
 	<link rel="icon" type="image/svg+xml" href="/app/favicon.svg" />
 	<link rel="shortcut icon" href="/app/favicon.ico" />
@@ -84,6 +85,8 @@ session_start();
 	<script type="text/javascript" src="./scripts/passive-events-support/main.js"></script>
 
 	<script type="text/javascript" src="./scripts/jquery-3.7.1.min.js"></script>
+	<script type="text/javascript" src="./scripts/jquery.jscrollpane.min.js"></script>
+	<script type="text/javascript" src="./scripts/jquery.mousewheel.js"></script>
 	<script type="text/javascript" src="./scripts/howler.min.js"></script>
 	<script type="text/javascript" src="./scripts/cookies.js"></script>
 
@@ -95,11 +98,41 @@ session_start();
 			margin-left: auto;
 			margin-right: auto;
 		}
+		input, select {
+			width: 80px;
+			vertical-align: middle;
+			color: #ddd;
+			border-width: 0px;
+			padding: 2px;
+			font-family: 'Pathway Gothic One', sans-serif;
+		}
+		select:focus, textarea:focus, input:focus {
+			outline: none;
+		}
+		select:invalid, input:invalid {
+			background: rgba(40,40,40,0.75);;
+		}
+		select:valid, input:valid {
+			background: rgba(70,70,70,0.75);;
+		}
+		.scroll-pane {
+			width: 100%;
+			height: 200px;
+			overflow: auto;
+		}
+		.horizontal-only {
+			height: auto;
+			max-height: 200px;
+		}
 	</style>
 </head>
 
 <body>
 	<script>
+		$(function() {
+			//$('.scroll-pane').jScrollPane({autoReinitialise: true});
+			$('.scroll-pane').jScrollPane();
+		});
 		$(document).ready(function() {
 			$("#cover").hide();
 		});
@@ -129,7 +162,7 @@ session_start();
 					<div style='vertical-align:middle;font-size:28px;color:#eee;'>&nbsp;&nbsp;&nbsp;G<?php echo $gid ?>&nbsp;R<?php echo $CURRENTROUND ?>&nbsp;&nbsp;&nbsp;</div>
 				</td>
 				<td style="width:5px;">&nbsp;</td>
-				<td nowrap onclick="location.href='./gui_select_unit.php'" width="<?php echo $buttonWidth ?>"><div class='unitselect_button_active'><a href='./gui_select_unit.php'>ROSTER</a><br><span style='font-size:16px;'>Choose a unit</span></div></td>
+				<td nowrap onclick="location.href='./gui_select_unit.php'" width="<?php echo $buttonWidth ?>"><div class='unitselect_button_normal'><a href='./gui_select_unit.php'>ROSTER</a><br><span style='font-size:16px;'>Choose a unit</span></div></td>
 				<td style="width:5px;">&nbsp;</td>
 
 <?php
@@ -159,11 +192,22 @@ session_start();
 
 	<br>
 
-	<table align="center" cellspacing=2 cellpadding=2 border=0px>
+	<div id="header">
+		<table width="80%" align="center" class="options" cellspacing="4" cellpadding="4" border="0px">
+			<tr>
+				<td>
+					<p>This app has been developed by an enthusiast. Countless hours have been given into the concept, design and actual development and testing. If you appreciate using ASCard, you can support me with one of the following options:</p>
+					<p>
+						<a href="https://liberapay.com/WarWolfen/donate" target="_blank"><img alt="Donate using Liberapay" height="40px" src="./images/liberapay.png"></a>&nbsp;&nbsp;&nbsp;
+						<a href="https://www.paypal.com/paypalme/ClanWolf?country.x=DE&locale.x=de_DE" target="_blank"><img alt="Donate using paypal" height="40px" src="./images/paypal.png"></a>
+					</p>
+					<p>With liberapay you can arrange recurring support and paypal may be used for one time donations. Thank you!</p>
+					<p><img src="https://img.shields.io/liberapay/patrons/WarWolfen.svg?logo=liberapay"></p>
+				</td>
+			</tr>
+		</table>
+	</div>
 
-EDIT COMMANDS
-
-	</table>
 </body>
 
 </html>
