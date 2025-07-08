@@ -12,11 +12,40 @@
 	$gid = isset($_GET["gid"]) ? filter_var($_GET["gid"], FILTER_VALIDATE_INT) : "";
 	$pid = isset($_GET["pid"]) ? filter_var($_GET["pid"], FILTER_VALIDATE_INT) : "";
 	$leaveCurrentGame = isset($_GET["leaveCurrentGame"]) ? filter_var($_GET["leaveCurrentGame"], FILTER_VALIDATE_BOOLEAN) : "";
+	$joinGame = isset($_GET["joinGame"]) ? filter_var($_GET["joinGame"], FILTER_VALIDATE_BOOLEAN) : "";
+	$accessCode = isset($_GET["accessCode"]) ? filter_var($_GET["accessCode"], FILTER_VALIDATE_INT) : "";
 
 	echo "<!DOCTYPE html>\n";
 	echo "<html lang='en'>\n";
 	echo "<body>\n";
 	echo "<p style='font-family:Arial,sans-serif;font-size:14px;color:yellow;'>\n";
+
+	echo "GameId:     ".$gid;
+	echo "PlayerId:   ".$pid;
+	echo "LeaveGame:  ".$leaveCurrentGame;
+	echo "JoinGame:   ".$joinGame;
+	echo "AccessCode: ".$accessCode;
+
+	if ($joinGame && $leaveGame) {
+		echo "Raise error! We cannot join and leave at the same time!";
+		die('ERROR 32');
+	}
+
+	if ($joinGame) {
+		// join a new game
+		echo "Player ".$pid." to JOIN game ".$gid.".";
+	} else {
+		if ($leaveGame) {
+			// leave the current game, revert back to the players own game
+			// ATTENTION: select owned game for this userId! It is not always the logged in user!
+			// ...
+			
+			$pog = 1; // the game to revert all units to and reset the given player to
+			echo "Player ".$pid." to LEAVE game ".$gid.", revert to his own game ".$pog.".";
+		} else {
+			// stay in current game, just reset to round 1
+		}
+	}
 
 	echo "RESETING ROUND for playerid ".$pid."...<br>\n";
 	echo "<br>\n";
