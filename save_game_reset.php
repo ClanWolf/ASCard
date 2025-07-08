@@ -84,7 +84,7 @@
 		$sqlSelectUnitWithStatus = $sqlSelectUnitWithStatus . "WHERE u.playerid=".$pid." ";
 		$sqlSelectUnitWithStatus = $sqlSelectUnitWithStatus . "AND us.playerid=u.playerid ";
 		$sqlSelectUnitWithStatus = $sqlSelectUnitWithStatus . "AND us.unitid=u.unitid ";
-		$sqlSelectUnitWithStatus = $sqlSelectUnitWithStatus . "AND us.gameid=".$gid." ";
+		//$sqlSelectUnitWithStatus = $sqlSelectUnitWithStatus . "AND us.gameid=".$gid." "; // delete all unitstatus entries, there is only one game per user
 		$sqlSelectUnitWithStatus = $sqlSelectUnitWithStatus . "AND initial_status=1;";
 
 		$result_selectUnitWithStatus = mysqli_query($conn, $sqlSelectUnitWithStatus);
