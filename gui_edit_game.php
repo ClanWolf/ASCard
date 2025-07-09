@@ -298,10 +298,18 @@ session_start();
 			accessCode = document.getElementById("AccessCode").value;
 			var url="./save_game_reset.php?gid="+gameToJoinId+"&pid="+playerId+"&leaveCurrentGame=0&joinGame=1&accessCode="+accessCode;
 
+			let inputCheckedOk = true;
+			if (gameToJoinId == "") {
+				console.log("Error game");
+				document.getElementById("gameToJoin").style.background = "#AA0000";
+				inputCheckedOk = false;
+			}
 			if (accessCode == "" || accessCode.length != 4) {
 				console.log("Error access code");
 				document.getElementById("AccessCode").style.background = "#AA0000";
-			} else {
+				inputCheckedOk = false;
+			}
+			if (inputCheckedOk) {
 				window.frames["saveframe"].location.replace(url);
 			}
 		}
@@ -531,7 +539,7 @@ session_start();
 									echo "							<tr>\n";
 									echo "								<td colspan='1' class='datalabel' nowrap align='left'>Leave:</td>\n";
 									echo "								<td colspan='3' class='datalabel' nowrap align='left'>Game ".$gid."</td>\n";
-									echo "								<td colspan='1' class='datalabel' nowrap align='right'><a href='#' onClick='leaveGame();'><i class='fas fa-minus-square'></i></a></td>\n";
+									echo "								<td colspan='1' class='datalabel' nowrap align='right'><a href='#' onClick='javascript:resetGameForPlayer(".$gid.",".$pid.",1);'><i class='fas fa-minus-square'></i></a></td>\n";
 									echo "							</tr>\n";
 								}
 							?>

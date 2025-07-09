@@ -55,7 +55,7 @@
 		mysqli_free_result($result_asc_accesscode);
 
 		if ($foundAccessCode == $accessCode) {
-			$newgameid == $gid;
+			$newgameid = $gid;
 			$joinAsOpfor = 1;
 		} else {
 			echo "<br>";
@@ -69,20 +69,19 @@
 			// leave the current game, revert back to the players own game
 			// ATTENTION: select owned game for this userId! It is not always the logged in user (e.g. "-" Button when removing user!)
 			// Get the gameId of the player, set him back to his own gameId
-			if ($leaveCurrentGame) {
-				echo "Player ".$pid." LEAVES game ".$gid.", revert to his own game ".$newgameid.".<br>\n";
-				$ownedGame = 0;
-				$sql_ownedGame = "SELECT SQL_NO_CACHE gameId FROM asc_game where ownerPlayerId".$pid.";";
-				$result_ownedGame = mysqli_query($conn, $sql_ownedGame);
-				if (mysqli_num_rows($result_ownedGame) > 0) {
-					while($row667 = mysqli_fetch_assoc($result_ownedGame)) {
-						$ownedGame = $row667["gameId"];
-					}
+			$ownedGameId = 0;
+			$sql_ownedGame = "SELECT SQL_NO_CACHE gameId FROM asc_game where ownerPlayerId=".$pid.";";
+			$result_ownedGame = mysqli_query($conn, $sql_ownedGame);
+			if (mysqli_num_rows($result_ownedGame) > 0) {
+				while($row667 = mysqli_fetch_assoc($result_ownedGame)) {
+					$ownedGameId = $row667["gameId"];
 				}
-				mysqli_free_result($result_ownedGame);
 			}
+			mysqli_free_result($result_ownedGame);
+
+			echo "Player ".$pid." LEAVES game ".$gid.", revert to his own game ".$ownedGameId.".<br>\n";
 			$joinAsOpfor = 0;
-			$newgameid = $ownedGame; // the game to revert all units to and reset the given player to
+			$newgameid = $ownedGameId; // the game to revert all units to and reset the given player to
 		} else {
 			// stay in current game, just reset to round 1
 			echo "Player ".$pid." stays in the same game ".$gid.", just reset round and units.<br>\n";
@@ -91,13 +90,13 @@
 	}
 	echo "<br>\n";
 	echo "---------------------------------------------<br>\n";
-	echo "newgameid to be stored: ".$newgameid." for player ".$pid."<br>\n";
-	echo "joining as opfor      : ".$joinAsOpfor."<br>\n";
+	echo "newgameid to be stored: ".$newgameid.", for player: ".$pid."<br>\n";
+	echo "joining as opfor: ".$joinAsOpfor."<br>\n";
 	echo "---------------------------------------------<br>\n";
 
 	// ---------------------------------------------------------------------------------------------------------
 
-	exit(0); // doing nothing here, just testing
+	// exit(0); // doing nothing here, just testing
 
 	if (!empty($pid) || !empty($newgameid)) {
 		echo "Reseting playerid ".$pid.".\n";
@@ -196,7 +195,7 @@
 		if ($joinAsOpfor != -1) {
 			$sqlUpdatePlayerRound = $sqlUpdatePlayerRound . "opfor=".$joinAsOpfor.", ";
 		}
-		$sqlUpdatePlayerRound = $sqlUpdatePlayerRound . "gamedId=".$newgameid." ";
+		$sqlUpdatePlayerRound = $sqlUpdatePlayerRound . "gameId=".$newgameid." ";
 		$sqlUpdatePlayerRound = $sqlUpdatePlayerRound . "WHERE playerid=".$pid.";";
 
 		echo $sqlUpdatePlayerRound;
@@ -204,6 +203,9 @@
 		if (mysqli_query($conn, $sqlUpdatePlayerRound)) {
 			echo "<br>";
 			echo "Record (asc_player) updated successfully<br>";
+			if ($_SESSION['playerid'] == $pid) {
+				$_SESSION['gameid'] = $newgameid;
+			}
 		} else {
 			echo "<br>";
 			echo "Error (asc_player) updating record: ".mysqli_error($conn)."<br>";
