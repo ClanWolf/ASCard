@@ -291,6 +291,7 @@ session_start();
 
 <body>
 	<iframe name="saveframe" id="iframe_save"></iframe>
+	<script type="text/javascript" src="./scripts/log_enable.js"></script>
 
 	<div id="cover"></div>
 

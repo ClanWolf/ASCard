@@ -362,6 +362,7 @@ session_start();
 ?>
 
 <iframe name="saveframe" id="iframe_save"></iframe>
+<script type="text/javascript" src="./scripts/log_enable.js"></script>
 
 <div id="specialabilitiescontainer" style="visibility:hidden;" onclick="javascript:closeSpecialAbilities();">
 

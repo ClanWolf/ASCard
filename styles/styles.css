@@ -89,7 +89,7 @@ iframe {
 	display: none; /* none, block */
 	visibility: hidden; /* hidden, visible */
 	position: fixed;
-	background-color: red;
+	background-color: #00217a;
 	left: 5px;
 	bottom: 5px;
 	width: 500px;

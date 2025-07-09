@@ -11,7 +11,7 @@
 
 	$gid = isset($_GET["gid"]) ? filter_var($_GET["gid"], FILTER_VALIDATE_INT) : "";
 	$pid = isset($_GET["pid"]) ? filter_var($_GET["pid"], FILTER_VALIDATE_INT) : "";
-	$leaveCurrentGame = isset($_GET["leaveCurrentGame"]) ? filter_var($_GET["leaveCurrentGame"], FILTER_VALIDATE_BOOLEAN) : "";
+	$leaveGame = isset($_GET["leaveCurrentGame"]) ? filter_var($_GET["leaveCurrentGame"], FILTER_VALIDATE_BOOLEAN) : "";
 	$joinGame = isset($_GET["joinGame"]) ? filter_var($_GET["joinGame"], FILTER_VALIDATE_BOOLEAN) : "";
 	$accessCode = isset($_GET["accessCode"]) ? filter_var($_GET["accessCode"], FILTER_VALIDATE_INT) : "";
 
@@ -20,51 +20,92 @@
 	echo "<body>\n";
 	echo "<p style='font-family:Arial,sans-serif;font-size:14px;color:yellow;'>\n";
 
-	echo "GameId:     ".$gid;
-	echo "PlayerId:   ".$pid;
-	echo "LeaveGame:  ".$leaveCurrentGame;
-	echo "JoinGame:   ".$joinGame;
-	echo "AccessCode: ".$accessCode;
+	echo "GameId:     ".$gid."<br>\n";
+	echo "PlayerId:   ".$pid."<br>\n";
+	echo "LeaveGame:  ".$leaveGame."<br>\n";
+	echo "JoinGame:   ".$joinGame." (boolean)<br>\n";
+	echo "AccessCode: ".$accessCode."<br>\n";
+	echo "---------------------------------------------<br>\n";
 
 	if ($joinGame && $leaveGame) {
-		echo "Raise error! We cannot join and leave at the same time!";
+		echo "Raise error! Cannot join and leave at the same time!<br>\n";
 		die('ERROR 32');
 	}
 
+	if ($joinGame && !$accessCode) {
+		echo "Raise error! Cannot join without access code!<br>\n";
+		die('ERROR 34');
+	}
+
+	$joinAsOpfor = -1;
+	$newgameid = 0;
+
 	if ($joinGame) {
 		// join a new game
-		echo "Player ".$pid." to JOIN game ".$gid.".";
+		echo "Player ".$pid." to JOIN game ".$gid.".<br>\n";
+		// Check access code. If wrong, do nothing, go to error page
+		// Select accessCode from the target game
+		$sql_asc_accesscode = "SELECT SQL_NO_CACHE accessCode FROM asc_game where gameid=".$gid.";";
+		$result_asc_accesscode = mysqli_query($conn, $sql_asc_accesscode);
+		if (mysqli_num_rows($result_asc_accesscode) > 0) {
+			while($row333 = mysqli_fetch_assoc($result_asc_accesscode)) {
+				$foundAccessCode = $row333["accessCode"];
+			}
+		}
+		mysqli_free_result($result_asc_accesscode);
+
+		if ($foundAccessCode == $accessCode) {
+			$newgameid == $gid;
+			$joinAsOpfor = 1;
+		} else {
+			echo "<br>";
+			echo "Accesscode does not match<br>";
+			echo "Raise error! Cannot join without access code!<br>\n";
+			echo "<script>top.window.location = './gui_message_joingame_error_01.php'</script>\n";
+			die('ERROR 38');
+		}
 	} else {
 		if ($leaveGame) {
 			// leave the current game, revert back to the players own game
-			// ATTENTION: select owned game for this userId! It is not always the logged in user!
-			// ...
-			
-			$pog = 1; // the game to revert all units to and reset the given player to
-			echo "Player ".$pid." to LEAVE game ".$gid.", revert to his own game ".$pog.".";
+			// ATTENTION: select owned game for this userId! It is not always the logged in user (e.g. "-" Button when removing user!)
+			// Get the gameId of the player, set him back to his own gameId
+			if ($leaveCurrentGame) {
+				echo "Player ".$pid." LEAVES game ".$gid.", revert to his own game ".$newgameid.".<br>\n";
+				$ownedGame = 0;
+				$sql_ownedGame = "SELECT SQL_NO_CACHE gameId FROM asc_game where ownerPlayerId".$pid.";";
+				$result_ownedGame = mysqli_query($conn, $sql_ownedGame);
+				if (mysqli_num_rows($result_ownedGame) > 0) {
+					while($row667 = mysqli_fetch_assoc($result_ownedGame)) {
+						$ownedGame = $row667["gameId"];
+					}
+				}
+				mysqli_free_result($result_ownedGame);
+			}
+			$joinAsOpfor = 0;
+			$newgameid = $ownedGame; // the game to revert all units to and reset the given player to
 		} else {
 			// stay in current game, just reset to round 1
+			echo "Player ".$pid." stays in the same game ".$gid.", just reset round and units.<br>\n";
+			$newgameid = $gid; // gameId stays the same in this case
 		}
 	}
-
-	echo "RESETING ROUND for playerid ".$pid."...<br>\n";
 	echo "<br>\n";
+	echo "---------------------------------------------<br>\n";
+	echo "newgameid to be stored: ".$newgameid." for player ".$pid."<br>\n";
+	echo "joining as opfor      : ".$joinAsOpfor."<br>\n";
+	echo "---------------------------------------------<br>\n";
 
-	if (!empty($pid) || !empty($gid)) {
-		echo "<p>\n";
-    	if ($leaveCurrentGame) {
-			echo "Leave current game!\n";
-		} else {
-			echo "Stay in game!\n";
-		}
-		echo "</p>\n";
+	// ---------------------------------------------------------------------------------------------------------
 
+	exit(0); // doing nothing here, just testing
+
+	if (!empty($pid) || !empty($newgameid)) {
 		echo "Reseting playerid ".$pid.".\n";
 
 		$sqlDeleteUnitstatusEntries = "";
 		$sqlDeleteUnitstatusEntries = $sqlDeleteUnitstatusEntries . "DELETE from asc_unitstatus ";
 		$sqlDeleteUnitstatusEntries = $sqlDeleteUnitstatusEntries . "WHERE playerid=".$pid." ";
-		$sqlDeleteUnitstatusEntries = $sqlDeleteUnitstatusEntries . "AND gameid=".$gid." ";
+		$sqlDeleteUnitstatusEntries = $sqlDeleteUnitstatusEntries . "AND gameid=".$newgameid." ";
 		$sqlDeleteUnitstatusEntries = $sqlDeleteUnitstatusEntries . "AND initial_status=0; ";
 
 		echo $sqlDeleteUnitstatusEntries;
@@ -84,7 +125,7 @@
 		$sqlSelectUnitWithStatus = $sqlSelectUnitWithStatus . "WHERE u.playerid=".$pid." ";
 		$sqlSelectUnitWithStatus = $sqlSelectUnitWithStatus . "AND us.playerid=u.playerid ";
 		$sqlSelectUnitWithStatus = $sqlSelectUnitWithStatus . "AND us.unitid=u.unitid ";
-		//$sqlSelectUnitWithStatus = $sqlSelectUnitWithStatus . "AND us.gameid=".$gid." "; // delete all unitstatus entries, there is only one game per user
+		//$sqlSelectUnitWithStatus = $sqlSelectUnitWithStatus . "AND us.gameid=".$newgameid." "; // delete all unitstatus entries, there is only one game per user
 		$sqlSelectUnitWithStatus = $sqlSelectUnitWithStatus . "AND initial_status=1;";
 
 		$result_selectUnitWithStatus = mysqli_query($conn, $sqlSelectUnitWithStatus);
@@ -97,7 +138,7 @@
 				$sqlUpdateInitialUnitstatusEntry = $sqlUpdateInitialUnitstatusEntry . "UPDATE asc_unitstatus ";
 				$sqlUpdateInitialUnitstatusEntry = $sqlUpdateInitialUnitstatusEntry . "SET ";
 				$sqlUpdateInitialUnitstatusEntry = $sqlUpdateInitialUnitstatusEntry . "round = 1, ";
-				$sqlUpdateInitialUnitstatusEntry = $sqlUpdateInitialUnitstatusEntry . "gameid = ".$gid.", ";
+				$sqlUpdateInitialUnitstatusEntry = $sqlUpdateInitialUnitstatusEntry . "gameid = ".$newgameid.", ";
 				$sqlUpdateInitialUnitstatusEntry = $sqlUpdateInitialUnitstatusEntry . "heat = 0, ";
 				$sqlUpdateInitialUnitstatusEntry = $sqlUpdateInitialUnitstatusEntry . "armor = 0, ";
 				$sqlUpdateInitialUnitstatusEntry = $sqlUpdateInitialUnitstatusEntry . "`structure` = 0, ";
@@ -138,7 +179,7 @@
 					echo "Records (asc_unitstatus) updated successfully<br>";
 				} else {
 					echo "<br>";
-					echo "Error (asc_unitstatus) updating records: " . mysqli_error($conn) . "<br>";
+					echo "Error (asc_unitstatus) updating records: ".mysqli_error($conn)."<br>";
 					echo "<script>top.window.location = './gui_message_round_reset_error_01.php'</script>";
 					die('ERROR 17');
 				}
@@ -152,12 +193,11 @@
 		$sqlUpdatePlayerRound = $sqlUpdatePlayerRound . "round=1, ";
 		$sqlUpdatePlayerRound = $sqlUpdatePlayerRound . "active_ingame=1, ";
 		$sqlUpdatePlayerRound = $sqlUpdatePlayerRound . "teamid=1, ";
-		$sqlUpdatePlayerRound = $sqlUpdatePlayerRound . "opfor=0 ";
-		if ($leaveCurrentGame) {
-			$ownedGame = filter_var($_SESSION['hostedgameid'], FILTER_VALIDATE_INT);
-			$sqlUpdatePlayerRound = $sqlUpdatePlayerRound . ", gamedId=".$ownedGame." ";
+		if ($joinAsOpfor != -1) {
+			$sqlUpdatePlayerRound = $sqlUpdatePlayerRound . "opfor=".$joinAsOpfor.", ";
 		}
-		$sqlUpdatePlayerRound = $sqlUpdatePlayerRound . "where playerid=".$pid.";";
+		$sqlUpdatePlayerRound = $sqlUpdatePlayerRound . "gamedId=".$newgameid." ";
+		$sqlUpdatePlayerRound = $sqlUpdatePlayerRound . "WHERE playerid=".$pid.";";
 
 		echo $sqlUpdatePlayerRound;
 
@@ -166,7 +206,7 @@
 			echo "Record (asc_player) updated successfully<br>";
 		} else {
 			echo "<br>";
-			echo "Error (asc_player) updating record: " . mysqli_error($conn) . "<br>";
+			echo "Error (asc_player) updating record: ".mysqli_error($conn)."<br>";
 			echo "<script>top.window.location = './gui_message_round_reset_error_01.php'</script>";
 			die('ERROR 7');
 		}
@@ -189,7 +229,7 @@
 			echo "<script>top.window.location = './gui_message_round_reset.php'</script>";
 		} else {
 			echo "<br>";
-			echo "Error (assignment) updating record: " . mysqli_error($conn) . "<br>";
+			echo "Error (assignment) updating record: ".mysqli_error($conn)."<br>";
 			echo "<script>top.window.location = './gui_message_round_reset_error_01.php'</script>";
 			die('ERROR 7');
 		}
