@@ -13,6 +13,7 @@
 	$gid = isset($_SESSION["gameid"]) ? filter_var($_SESSION["gameid"], FILTER_VALIDATE_INT) : "(not found)";
 	$gts_s = isset($_SESSION["gameTimestamp"]) ? filter_var($_SESSION["gameTimestamp"], FILTER_VALIDATE_INT) : "(not found)";
 
+	date_default_timezone_set('Europe/Berlin');
 	$cts=time();
 
 	echo "<!DOCTYPE html>\n";
@@ -45,9 +46,9 @@
 
 	echo "pid: ".$pid."<br>\n";
 	echo "gid: ".$gid."/".$currentGameId."<br>\n";
-	echo "gts_s: ".$gts_s." (session)<br>\n";
-	echo "gts_d: ".$gts_d." (db)<br>\n";
-	echo "cts: ".$cts." (now)<br>\n";
+	echo "".$gts_s." gts_s (session)<br>\n";
+	echo "".$gts_d." gts_d (db)<br>\n";
+	echo "".$cts." cts (now)<br>\n";
 
 	echo "	</p>\n";
 	echo "</body>\n";
