@@ -76,7 +76,10 @@ session_start();
 			$GAMEERA = 'ALL';    // Default value in asc_game
 			$GAMEYEAR = '3025';  // Default value in asc_game
 
-			$sqlupdateplayer = "UPDATE asc_player set hostedgameid = ".$GAMEID.", gameid = ".$GAMEID.", teamid=1, opfor=0, active_ingame=1, bid_pv=-1, bid_tonnage=-1, bid_winner=0, round=1 WHERE playerid=".$pid;
+			$hgid = $GAMEID;
+			$_SESSION['hostedgameid'] = $hgid;
+
+			$sqlupdateplayer = "UPDATE asc_player set hostedgameid = ".$hgid.", gameid = ".$hgid.", teamid=1, opfor=0, active_ingame=1, bid_pv=-1, bid_tonnage=-1, bid_winner=0, round=1 WHERE playerid=".$pid;
 			if (mysqli_query($conn, $sqlupdateplayer)) {
 				// Success updating player with new gameid for his own game
 			} else {
@@ -96,7 +99,7 @@ session_start();
 	if (mysqli_num_rows($result_asc_playerround) > 0) {
 		$i = 1;
 		while($row = mysqli_fetch_assoc($result_asc_playerround)) {
-			if ($GAMEID == $row["gameid"]) {
+			if ($hgid == $row["gameid"]) {
 				// this player is joined in the game of the currently logged in player
 				$array_joinedPlayers[$i] = $row["name"];
 				$array_joinedPlayersIds[$i] = $row["playerid"];
@@ -247,6 +250,7 @@ session_start();
 
 	<div id="cover"></div>
 
+	<iframe name="pollframe" id="iframe_serverpoll" src="server_poll.php"></iframe>
 	<iframe name="saveframe" id="iframe_save"></iframe>
 	<script type="text/javascript" src="./scripts/log_enable.js"></script>
 
@@ -369,31 +373,37 @@ session_start();
 
 	<div id="header">
 		<table align="center" class="options" cellspacing="4" cellpadding="4" border="0px" width="65%">
-			<tr>
+<?php
+		if ($gid != $hgid) {
+			echo "			<tr style='display:none;'>\n";
+		} else {
+			echo "			<tr>\n";
+		}
+?>
 				<td valign="top" width="70%">
 					<form>
 						<table border="0" cellspacing="2" cellpadding="2">
 							<tr>
 								<td class='datalabel' nowrap colspan="1" align="left">
 								<?php if ($LOCKED == 1) {
-									echo "<a href='#' onClick='saveGameLock(".$GAMEID.", 0);'><span id='lockstatusicon'><i class='fa-solid fa-lock'></i></span></a>";
+									echo "<a href='#' onClick='saveGameLock(".$hgid.", 0);'><span id='lockstatusicon'><i class='fa-solid fa-lock'></i></span></a>";
 								} else {
-									echo "<a href='#' onClick='saveGameLock(".$GAMEID.", 1);'><span id='lockstatusicon'><i class='fa-solid fa-lock-open'></i></span></a>";
+									echo "<a href='#' onClick='saveGameLock(".$hgid.", 1);'><span id='lockstatusicon'><i class='fa-solid fa-lock-open'></i></span></a>";
 								} ?>
 								</td>
 								<td colspan="4" class='datalabel' nowrap align="left">
-									<input onchange="javascript:saveGameInfo(<?php echo $gid ?>);" type="text" id="GameTitle" style="width:100%;">
+									<input onchange="javascript:saveGameInfo(<?php echo $hgid ?>);" type="text" id="GameTitle" style="width:100%;">
 									<script type="text/javascript">document.getElementById("GameTitle").setAttribute('value','<?php echo $TITLE; ?>');</script>
 								</td>
 								<td colspan="1" class='datalabel' nowrap align="right">
-									[ID: <?php echo $GAMEID; ?>]
+									[ID: <?php echo $hgid; ?>]
 								</td>
 							</tr>
 
 							<tr>
 								<td rowspan="4"></td>
 								<td colspan="5" class='datalabel' nowrap align="left">
-										<input onchange="javascript:saveGameInfo(<?php echo $gid ?>);" type="text" id="GameBackground" style="width:100%;">
+										<input onchange="javascript:saveGameInfo(<?php echo $hgid ?>);" type="text" id="GameBackground" style="width:100%;">
 										<script type="text/javascript">document.getElementById("GameBackground").setAttribute('value','<?php echo $BACKGROUND; ?>');</script>
 								</td>
 							</tr>
@@ -407,7 +417,7 @@ session_start();
 									Era:
 								</td>
 								<td colspan="2" class='datalabel' nowrap align="left">
-									<select required style='width:100%;' name='GameEra' id='GameEra' size='1' onchange="javascript:saveGameInfo(<?php echo $gid ?>);">
+									<select required style='width:100%;' name='GameEra' id='GameEra' size='1' onchange="javascript:saveGameInfo(<?php echo $hgid ?>);">
 										<option value="0" selected="selected">ALL</option>
 										<option value="9">2005-2570: AGE OF WAR</option>
 										<option value="10">2571-2780: STAR LEAGUE</option>
@@ -444,7 +454,7 @@ session_start();
 									Year:
 								</td>
 								<td colspan="1" class='datalabel' nowrap align="center">
-									<input onchange="javascript:saveGameInfo(<?php echo $gid ?>);" type="text" id="GameYear" style="width:100%;text-align:center;" align="center">
+									<input onchange="javascript:saveGameInfo(<?php echo $hgid ?>);" type="text" id="GameYear" style="width:100%;text-align:center;" align="center">
 									<script type="text/javascript">document.getElementById("GameYear").setAttribute('value','<?php echo $GAMEYEAR; ?>');</script>
 								</td>
 							</tr>
@@ -460,7 +470,7 @@ session_start();
 									<?php echo $ACCESSCODE; ?>
 								</td>
 								<td class='datalabel' nowrap align="right" width="94%">
-									<a href='#' onClick='saveGameInfo(<?php echo $gid ?>);'><i class='fa-solid fa-save'></i></a>&nbsp;&nbsp;&nbsp;
+									<a href='#' onClick='saveGameInfo(<?php echo $hgid ?>);'><i class='fa-solid fa-save'></i></a>&nbsp;&nbsp;&nbsp;
 								</td>
 							</tr>
 						</table>
@@ -482,7 +492,7 @@ session_start();
 		$joinedPlayerId = $array_joinedPlayersIds[$i];
 
 		if ($pname != $joinedPlayerName) {
-			echo "							<tr><td class='datalabel'>".$joinedPlayerName."</td><td nowrap align='right' width='3%'>&nbsp;&nbsp;&nbsp;<span style='font-size:16px;color:#ddd;' onclick='javascript:resetGameForPlayer(".$gid.",\"".$joinedPlayerId."\",1);'><i class='fas fa-minus-square'></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>\n";
+			echo "							<tr><td class='datalabel'>".$joinedPlayerName."</td><td nowrap align='right' width='3%'>&nbsp;&nbsp;&nbsp;<span style='font-size:16px;color:#ddd;' onclick='javascript:resetGameForPlayer(".$hgid.",\"".$joinedPlayerId."\",1);'><i class='fas fa-minus-square'></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>\n";
 		}
 	}
 ?>
@@ -490,9 +500,13 @@ session_start();
 					</div>
 				</td>
 			</tr>
-
-			<tr><td colspan="3"><hr></td></tr>
-
+<?php
+		if ($gid != $hgid) {
+			echo "			<tr style='display:none;'><td colspan='3'><hr></td></tr>\n";
+		} else {
+			echo "			<tr><td colspan='3'><hr></td></tr>\n";
+		}
+?>
 			<tr>
 				<td class='datalabel' colspan="3">
 					<form autocomplete="autocomplete_off_hack_xfr4!k">
@@ -537,9 +551,40 @@ session_start();
 									}
 								} else {
 									echo "							<tr>\n";
-									echo "								<td colspan='1' class='datalabel' nowrap align='left'>Leave:</td>\n";
-									echo "								<td colspan='3' class='datalabel' nowrap align='left'>Game ".$gid."</td>\n";
-									echo "								<td colspan='1' class='datalabel' nowrap align='right'><a href='#' onClick='javascript:resetGameForPlayer(".$gid.",".$pid.",1);'><i class='fas fa-minus-square'></i></a></td>\n";
+									echo "								<td colspan='1' class='datalabel' nowrap align='left'>You are in:</td>\n";
+									echo "								<td colspan='3' class='datalabel' nowrap align='left'>G".$gid.": ".$TITLE."</td>\n";
+									echo "								<td colspan='1' class='datalabel' nowrap align='right'><a href='#' onClick='javascript:resetGameForPlayer(".$gid.",".$pid.",1);'>Leave game&nbsp;&nbsp;&nbsp;<i class='fas fa-minus-square'></i></a></td>\n";
+									echo "							</tr>\n";
+									echo "							<tr>\n";
+									echo "								<td colspan='1' class='datalabel' nowrap align='left'></td>\n";
+									echo "								<td colspan='4' class='datalabel' nowrap align='left'><br>".$BACKGROUND."</td>\n";
+									echo "							</tr>\n";
+									echo "              			<tr><td colspan='5'><hr></td></tr>\n";
+									echo "							<tr>\n";
+									echo "								<td colspan='5' class='datalabel' nowrap align='left'><ul style='margin:0px;'>";
+
+									$op = "{{{host}}}{{{list}}}";
+									$list = "";
+									$sql_asc_players = "SELECT SQL_NO_CACHE * FROM asc_player WHERE gameid=".$gid." ORDER BY opfor ASC, name ASC;";
+									$result_asc_players = mysqli_query($conn, $sql_asc_players);
+									if (mysqli_num_rows($result_asc_players) > 0) {
+										while($row = mysqli_fetch_assoc($result_asc_players)) {
+											if ($row["hostedgameid"] == $gid) {
+												$host = "								<li><i>".$row["name"]." (R".$row["round"].") - Host</i></li>";
+												$op = str_replace("{{{host}}}",$host,$op);
+											} else if ($row["opfor"] == 1) {
+												$player = "								<li>".$row["name"]." (R".$row["round"].") - OpFor</li>";
+												$list = $list.$player;
+											} else {
+												$player = "								<li>".$row["name"]." (R".$row["round"].")</li>";
+												$list = $list.$player;
+											}
+										}
+										$op = str_replace("{{{list}}}",$list,$op);
+										echo $op;
+									}
+
+									echo "								</ul></td>\n";
 									echo "							</tr>\n";
 								}
 							?>

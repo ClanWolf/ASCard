@@ -54,6 +54,16 @@ session_start();
 						$_SESSION['playerimage'] = $row['image'];
 						$_SESSION['gameid'] = $row['gameid'];
 						$_SESSION['hostedgameid'] = $row['hostedgameid'];
+
+						// getting information for the current game
+						$sql_asc_game = "SELECT SQL_NO_CACHE * FROM asc_game WHERE gameid = ".$_SESSION['gameid'];
+						$result_asc_game = mysqli_query($conn, $sql_asc_game);
+						if (mysqli_num_rows($result_asc_game) > 0) {
+							while($row177 = mysqli_fetch_assoc($result_asc_game)) {
+								$_SESSION['gameTimestamp'] = strtotime($row177['Updated']);
+							}
+						}
+
 						// getting options from database
 						$sql_asc_options = "SELECT SQL_NO_CACHE * FROM asc_options WHERE playerid = ".$_SESSION['playerid'];
 						$result_asc_options = mysqli_query($conn, $sql_asc_options);

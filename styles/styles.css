@@ -96,6 +96,17 @@ iframe {
 	height: 100px;
 	z-index: 9999;
 }
+#iframe_serverpoll {
+	display: block; /* none, block */
+	visibility: visible; /* hidden, visible */
+	position: fixed;
+	background-color: #00217a;
+	right: 5px;
+	bottom: 5px;
+	width: 300px;
+	height: 200px;
+	z-index: 9998;
+}
 table {
 	padding: 0;
 	margin: 0;
