@@ -550,14 +550,26 @@ session_start();
 										echo "							</tr>\n";
 									}
 								} else {
+									$sql_asc_game2 = "SELECT SQL_NO_CACHE * FROM asc_game where gameId = " . $gid . ";";
+									$result_asc_game2 = mysqli_query($conn, $sql_asc_game2);
+									if (mysqli_num_rows($result_asc_game2) > 0) {
+										while($rowg2 = mysqli_fetch_assoc($result_asc_game2)) {
+											$joinedGame_ACCESSCODE = $rowg2["accessCode"];
+											$joinedGame_LOCKED = $rowg2["locked"];
+											$joinedGame_TITLE = $rowg2["title"];
+											$joinedGame_BACKGROUND = $rowg2["background"];
+											$joinedGame_GAMEERA = $rowg2["era"];
+											$joinedGame_GAMEYEAR = $rowg2["yearInGame"];
+										}
+									}
 									echo "							<tr>\n";
 									echo "								<td colspan='1' class='datalabel' nowrap align='left'>You are in:</td>\n";
-									echo "								<td colspan='3' class='datalabel' nowrap align='left'>G".$gid.": ".$TITLE."</td>\n";
+									echo "								<td colspan='3' class='datalabel' nowrap align='left'>G".$gid.": ".$joinedGame_TITLE."</td>\n";
 									echo "								<td colspan='1' class='datalabel' nowrap align='right'><a href='#' onClick='javascript:resetGameForPlayer(".$gid.",".$pid.",1);'>Leave game&nbsp;&nbsp;&nbsp;<i class='fas fa-minus-square'></i></a></td>\n";
 									echo "							</tr>\n";
 									echo "							<tr>\n";
 									echo "								<td colspan='1' class='datalabel' nowrap align='left'></td>\n";
-									echo "								<td colspan='4' class='datalabel' nowrap align='left'><br>".$BACKGROUND."</td>\n";
+									echo "								<td colspan='4' class='datalabel' nowrap align='left'><br>".$joinedGame_BACKGROUND."</td>\n";
 									echo "							</tr>\n";
 									echo "              			<tr><td colspan='5'><hr></td></tr>\n";
 									echo "							<tr>\n";
