@@ -37,6 +37,8 @@
 	$array_UNIT_MULID = array();
 	$array_UNIT_NUMBER = array();
 	$array_UNIT_NAME = array();
+	$array_UNIT_NAME_CLAN = array();
+	$array_UNIT_NAME_IS = array();
 	$array_UNIT_CLASS = array();
 	$array_UNIT_VARIANT = array();
 	$array_UNIT_IMG_URL = array();
@@ -389,6 +391,15 @@
 							$array_UNIT_NAME[$unitcount] = $row["unit_name"];
 							$array_UNIT_CLASS[$unitcount] = $row["unit_class"];
 							$array_UNIT_VARIANT[$unitcount] = $row["unit_variant"];
+
+							if (str_contains($array_UNIT_CLASS[$unitcount], '(') && str_contains($array_UNIT_CLASS[$unitcount], ')')) {
+								preg_match('#\((.*?)\)#', $array_UNIT_CLASS[$unitcount], $match);
+								$array_UNIT_NAME_CLAN[$unitcount] = $match[1];
+								$array_UNIT_NAME_IS[$unitcount] = preg_replace("/\([^)]+\)/", "", $array_UNIT_CLASS[$unitcount]);
+							} else {
+								$array_UNIT_NAME_CLAN[$unitcount] = $array_UNIT_CLASS[$unitcount];
+								$array_UNIT_NAME_IS[$unitcount] = $array_UNIT_CLASS[$unitcount];
+							}
 
 							// ----------- Get Clan or IS name for the unit
 							//$array_UNIT_MODEL[$unitcount] = $clan.$row["as_model"];

@@ -1468,6 +1468,10 @@ if ($showDistancesHexes == 1) {
 					<span style="font-size: 18px; color: #eeeeee;"><?php echo "$FORMATION"; ?></span><br>
 					<span style="font-size: 30px; color: #da8e25;"><?php echo "$array_PILOT[$chosenUnitIndex]"; ?></span><br>
 					<span style="font-size: 20px; color: #aaaaaa;"><?php echo "$array_UNIT_MODEL[$chosenUnitIndex]" ?></span><br><br>
+
+					<span style="font-size: 20px; color: #aaaaaa;">Clan name: <?php echo "$array_UNIT_NAME_CLAN[$chosenUnitIndex]" ?></span><br>
+					<span style="font-size: 20px; color: #aaaaaa;">IS name: <?php echo "$array_UNIT_NAME_IS[$chosenUnitIndex]" ?></span><br><br>
+
 					<div id="pilotinfo" valign="bottom" align="right">
 						<table cellspacing="0" cellpadding="0">
 							<tr>
