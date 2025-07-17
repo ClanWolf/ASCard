@@ -37,6 +37,8 @@
 	$array_UNIT_MULID = array();
 	$array_UNIT_NUMBER = array();
 	$array_UNIT_NAME = array();
+	$array_UNIT_CLASS = array();
+	$array_UNIT_VARIANT = array();
 	$array_UNIT_IMG_URL = array();
 	$array_UNIT_IMG_STATUS = array();
 	$array_UNIT_STATUSSTRING = array();
@@ -385,7 +387,22 @@
 							$array_UNIT_MULID[$unitcount] = $row["mulid"];
 							$array_UNIT_NUMBER[$unitcount] = $row["unit_number"];
 							$array_UNIT_NAME[$unitcount] = $row["unit_name"];
-							$array_UNIT_MODEL[$unitcount] = $clan.$row["as_model"];
+							$array_UNIT_CLASS[$unitcount] = $row["unit_class"];
+							$array_UNIT_VARIANT[$unitcount] = $row["unit_variant"];
+
+							// ----------- Get Clan or IS name for the unit
+							//$array_UNIT_MODEL[$unitcount] = $clan.$row["as_model"];
+							if ($_SESSION['factiontype'] == "CLAN") {
+								preg_match('#\((.*?)\)#', $array_UNIT_CLASS[$unitcount], $match);
+								if (array_key_exists(1, $match) && $match[1] != "") {
+									$array_UNIT_MODEL[$unitcount] = $clan.$match[1]." ".$array_UNIT_VARIANT[$unitcount];
+								} else {
+									$array_UNIT_MODEL[$unitcount] = $clan.$array_UNIT_CLASS[$unitcount]." ".$array_UNIT_VARIANT[$unitcount];
+								}
+							} else {
+								$array_UNIT_MODEL[$unitcount] = preg_replace("/\([^)]+\)/", "", $array_UNIT_CLASS[$unitcount])." ".$array_UNIT_VARIANT[$unitcount];
+							}
+
 							$array_UNIT_IMG_URL[$unitcount] = $row["unit_imageurl"];
 							$array_TECH[$unitcount] = $row["tech"];
 							$array_PV[$unitcount] = $row["as_pv"];

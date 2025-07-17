@@ -317,6 +317,12 @@ session_start();
 				window.frames["saveframe"].location.replace(url);
 			}
 		}
+
+		// Reload the polling iFrame every 2 seconds
+		(function(){
+		    document.getElementById("iframe_serverpoll").src="server_poll.php";
+		    setTimeout(arguments.callee, 3000);
+		})();
 	</script>
 
 <?php

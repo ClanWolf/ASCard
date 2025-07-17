@@ -564,7 +564,7 @@ if ($playMode) {
 
 				$sql_asc_unit = "SELECT "
 							."SQL_NO_CACHE "
-							."asc_unit.tech, asc_unit.unit_number, asc_unit.as_model, asc_unit.as_pv, asc_unit.unit_tonnage, asc_unit.as_tp, "
+							."asc_unit.tech, asc_unit.unit_number, asc_unit.as_model, asc_unit.unit_class, asc_unit.unit_variant, asc_unit.as_pv, asc_unit.unit_tonnage, asc_unit.as_tp, "
 							."asc_unit.commander, asc_unit.subcommander, "
 							."asc_unitstatus.active_bid "
 							."FROM "
@@ -586,10 +586,25 @@ if ($playMode) {
 						}
 
 						$unitnumber = $rowUnit['unit_number'];
-						$unitchassisname = $clan.$rowUnit['as_model'];
 						$unitpointvalue = $rowUnit['as_pv'];
 						$unittonnage = $rowUnit['unit_tonnage'];
 						$unittype = $rowUnit['as_tp'];
+
+						$unitclass = $rowUnit['unit_class'];       // Mad Cat (Timber Wolf) --> Extract clan name from here
+						$unitvariant = $rowUnit['unit_variant'];   // Prime
+
+						// ----------- Get Clan or IS name for the unit
+						//$unitchassisname = $clan.$rowUnit['as_model'];
+						if ($_SESSION['factiontype'] == "CLAN") {
+							preg_match('#\((.*?)\)#', $unitclass, $match);
+							if (array_key_exists(1, $match) && $match[1] != "") {
+								$unitchassisname = $clan.$match[1]." ".$unitvariant;
+							} else {
+								$unitchassisname = $clan.$unitclass." ".$unitvariant;
+							}
+						} else {
+							$unitchassisname = (preg_replace("/\([^)]+\)/", "", $unitclass))." ".$unitvariant;
+						}
 
 						$commander = $rowUnit['commander'];
 						$subcommander = $rowUnit['subcommander'];

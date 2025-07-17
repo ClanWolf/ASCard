@@ -19,7 +19,7 @@ session_start();
 	if (!($stmt_all = $conn->prepare("SELECT * FROM asc_player"))) {
 		echo "Prepare failed: (" . $conn->errno . ") " . $conn->error;
 	}
-	if (!($stmt = $conn->prepare("SELECT * FROM asc_player WHERE name = ?"))) {
+	if (!($stmt = $conn->prepare("SELECT * FROM asc_player JOIN asc_faction ON asc_player.factionid = asc_faction.factionid WHERE asc_player.name = ?"))) {
 		echo "Prepare failed: (" . $conn->errno . ") " . $conn->error;
 	}
 	if (!$stmt->bind_param("s", $playername)) {
@@ -54,6 +54,7 @@ session_start();
 						$_SESSION['playerimage'] = $row['image'];
 						$_SESSION['gameid'] = $row['gameid'];
 						$_SESSION['hostedgameid'] = $row['hostedgameid'];
+						$_SESSION['factiontype'] = $row['factiontype'];
 
 						// getting information for the current game
 						$sql_asc_game = "SELECT SQL_NO_CACHE * FROM asc_game WHERE gameid = ".$_SESSION['gameid'];

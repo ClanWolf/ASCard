@@ -20,7 +20,7 @@
 	echo "<html lang='en'>\n";
 	echo "<head>\n";
 	echo "	<title>ASCard Server poll</title>\n";
-	echo "	<meta http-equiv='refresh' content='2'>\n";
+	//echo "	<meta http-equiv='refresh' content='2'>\n";
 	echo "</head>\n";
 	echo "<body>\n";
 	echo "	<p style='font-family:Arial,sans-serif;font-size:14px;color:yellow;'>";
