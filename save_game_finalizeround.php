@@ -72,8 +72,8 @@
 		$sql_allActiveUnitsCount = $sql_allActiveUnitsCount . "AND s.gameid = ".$gameid." "; // gameid
 		$sql_allActiveUnitsCount = $sql_allActiveUnitsCount . "AND s.unit_status != 'destroyed' ";
 		$sql_allActiveUnitsCount = $sql_allActiveUnitsCount . "AND s.active_bid = 1 ";
+		echo "<br><br>".$sql_allActiveUnitsCount."<br><br>";
 
-		echo $sql_allActiveUnitsCount;
 		$result_allActiveUnitsCount = mysqli_query($conn, $sql_allActiveUnitsCount);
 		if (mysqli_num_rows($result_allActiveUnitsCount) > 0) {
 			while($row_allActiveUnitsCount = mysqli_fetch_assoc($result_allActiveUnitsCount)) {
@@ -95,7 +95,8 @@
 		$sql_allActiveUnitsFinishedCount = $sql_allActiveUnitsFinishedCount . "AND s.active_bid = 1 ";
 		$sql_allActiveUnitsFinishedCount = $sql_allActiveUnitsFinishedCount . "AND a.round_moved > 0 ";
 		$sql_allActiveUnitsFinishedCount = $sql_allActiveUnitsFinishedCount . "AND a.round_fired > 0 ";
-		echo $sql_allActiveUnitsFinishedCount;
+		echo "<br><br>".$sql_allActiveUnitsFinishedCount."<br><br>";
+
 		$result_allActiveUnitsFinishedCount = mysqli_query($conn, $sql_allActiveUnitsFinishedCount);
 		if (mysqli_num_rows($result_allActiveUnitsFinishedCount) > 0) {
 			while($row_allActiveUnitsFinishedCount = mysqli_fetch_assoc($result_allActiveUnitsFinishedCount)) {
@@ -191,6 +192,9 @@
 							$CV_MOTB_PREP = $row["crit_CV_motiveB_PREP"];
 							$CV_MOTC_PREP = $row["crit_CV_motiveC_PREP"];
 
+							$crit_hist = $row["crit_hist"];
+							$crit_hist_PREP = $row["crit_hist_PREP"];
+
 							$finalHeat = $heat + $usedOverHeat + $HT_PREP + $HT_PREP_ENGINEHIT;
 							$final_ENGN = $ENGN + $ENGN_PREP;
 							$final_FRCTRL = $FRCTRL + $FRCTRL_PREP;
@@ -252,15 +256,17 @@
 							$sqlInsertNewUnitStatus = "";
 							$sqlInsertNewUnitStatus = $sqlInsertNewUnitStatus . "INSERT INTO asc_unitstatus (unitid,playerid,gameid,round,heat,armor,`structure`,crit_engine,crit_fc,crit_mp,crit_weapons,usedoverheat,";
 							$sqlInsertNewUnitStatus = $sqlInsertNewUnitStatus . "   crit_engine_PREP,crit_fc_PREP,crit_mp_PREP,crit_weapons_PREP,heat_PREP,     crit_CV_engine,crit_CV_firecontrol,crit_CV_weapons,crit_CV_motiveA,crit_CV_motiveB,crit_CV_motiveC,";
-							$sqlInsertNewUnitStatus = $sqlInsertNewUnitStatus . "   crit_CV_engine_PREP,crit_CV_firecontrol_PREP,crit_CV_weapons_PREP,crit_CV_motiveA_PREP,crit_CV_motiveB_PREP,crit_CV_motiveC_PREP, ";
+							$sqlInsertNewUnitStatus = $sqlInsertNewUnitStatus . "   crit_CV_engine_PREP,crit_CV_firecontrol_PREP,crit_CV_weapons_PREP,crit_CV_motiveA_PREP,crit_CV_motiveB_PREP,crit_CV_motiveC_PREP,";
+							$sqlInsertNewUnitStatus = $sqlInsertNewUnitStatus . "   crit_hist,crit_hist_PREP,";
 							$sqlInsertNewUnitStatus = $sqlInsertNewUnitStatus . "   active_bid,active_narc,active_tag,active_water,active_routed,unit_status,unit_statusimageurl,mounted_unitid,mounted_on_unitid) ";
 							$sqlInsertNewUnitStatus = $sqlInsertNewUnitStatus . "VALUES ";
 							$sqlInsertNewUnitStatus = $sqlInsertNewUnitStatus . "(".$unitId.",".$pid.",".$gameid.",".$nextRound.",".$finalHeat.",".$armor.",".$structure.",".$final_ENGN.",".$final_FRCTRL.",".$final_MP.",".$final_WPNS.",0,"; // until currentTMM
 							$sqlInsertNewUnitStatus = $sqlInsertNewUnitStatus . "   0,0,0,0,0,  ".$final_CV_ENGN.",".$final_CV_FRCTRL.",".$final_CV_WPNS.",".$final_CV_MOTA.",".$final_CV_MOTB.",".$final_CV_MOTC.","; // crit PREP (0-5) -> stay 0!, CV Crit (last Block) -> fill with CV values
 							$sqlInsertNewUnitStatus = $sqlInsertNewUnitStatus . "   0,0,0,0,0,0,";  // CV PREP -> stay 0!
+							$sqlInsertNewUnitStatus = $sqlInsertNewUnitStatus . "   '".$crit_hist."','".$crit_hist_PREP."',"; // crit hist
 							$sqlInsertNewUnitStatus = $sqlInsertNewUnitStatus . "   ".$active_bid.",".$active_narc.",".$active_tag.",".$active_water.",".$active_routed.",'".$unit_status."','".$unit_statusimageurl."',".$mounted_unitid.",".$mounted_on_unitid;
 							$sqlInsertNewUnitStatus = $sqlInsertNewUnitStatus . "); ";
-							echo $sqlInsertNewUnitStatus."<br><br>";
+							echo "<br><br>".$sqlInsertNewUnitStatus."<br><br>";
 
 							if (mysqli_query($conn, $sqlInsertNewUnitStatus)) {
 								echo "<br>";

@@ -67,16 +67,18 @@ function setSize(name, value) {
 	});
 }
 
-function readCircles(index3, a_max3, s_max3) {
-	readCircles2(index3, a_max3, s_max3, -1, -1);
+function readCircles(caller, index3, a_max3, s_max3) {
+	readCircles2(caller, index3, a_max3, s_max3, -1, -1);
 }
 
-function readCircles2(index, a_max, s_max, mv_bt_id, f_bt_id) {
+function readCircles2(caller, index, a_max, s_max, mv_bt_id, f_bt_id) {
 	if (context != null) {
 		if (skipTapSample == false) {
 			playTapSound();
 		}
 	}
+
+	// console.log("Called by: " + caller.id);
 
 	var na = "";
 
@@ -135,6 +137,16 @@ function readCircles2(index, a_max, s_max, mv_bt_id, f_bt_id) {
 			if (na.substring(0, 6) == "ROUTED"    && el1.checked) { ROUTed  = 1; }
 		}
 	});
+
+	// Build up the crit history for CV
+	if (e_cv > CD_CV_E) {
+		console.log("Engine crit +1");
+		CD_CV_E = e_cv;
+	}
+	if (e_cv < CD_CV_E) {
+		console.log("Engine crit -1");
+		CD_CV_E = e_cv;
+	}
 
 	var radioMV2_moved2_standstill = document.getElementById("MV2_moved2_standstill");
 	var radioMV10_moved10_hulldown = document.getElementById("MV10_moved10_hulldown");

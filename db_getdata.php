@@ -102,6 +102,9 @@
 	$array_CV_MOTV_B_PREP = array();
 	$array_CV_MOTV_C_PREP = array();
 
+	$array_CRIT_HIST = array();
+	$array_CRIT_HIST_PREP = array();
+
 	$array_MV_MOD = array();
 	$array_DMG_SHORT_MOD = array();
 	$array_DMG_MEDIUM_MOD = array();
@@ -485,7 +488,8 @@
 							$array_CV_MOTV_A_PREP[$unitcount] = $row["crit_CV_motiveA_PREP"];
 							$array_CV_MOTV_B_PREP[$unitcount] = $row["crit_CV_motiveB_PREP"];
 							$array_CV_MOTV_C_PREP[$unitcount] = $row["crit_CV_motiveC_PREP"];
-
+							$array_CRIT_HIST[$unitcount] = $row["crit_hist"];
+							$array_CRIT_HIST_PREP[$unitcount] = $row["crit_hist_PREP"];
 							$array_HT_PREP[$unitcount] = $row["heat_PREP"];
 							$array_HT_PREP_ENGINEHIT[$unitcount] = $row["heat_PREP_ENGINEHIT"];
 							$array_USEDOVERHEAT[$unitcount] = $row["usedoverheat"];

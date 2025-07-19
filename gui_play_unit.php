@@ -275,13 +275,13 @@ session_start();
 
 	echo "	var originalunitimage = '".$array_UNIT_IMG_URL[$chosenUnitIndex]."';\n";
 	echo "	var deadunitimage = 'skull.png';\n";
-	echo "	var originalTMM = $array_TMM[$chosenUnitIndex];\n";
-	echo "	var unitType = '$array_TP[$chosenUnitIndex]';\n";
-	echo "	var ENGN_PREP = $array_ENGN_PREP[$chosenUnitIndex];\n";
-	echo "	var FCTL_PREP = $array_FRCTRL_PREP[$chosenUnitIndex];\n";
-	echo "	var MP_PREP = $array_MP_PREP[$chosenUnitIndex];\n";
-	echo "	var WPNS_PREP = $array_WPNS_PREP[$chosenUnitIndex];\n";
-	echo "	var pilotimage = '$array_PILOT_IMG_URL[$chosenUnitIndex]';\n";
+	echo "	var originalTMM = ".$array_TMM[$chosenUnitIndex].";\n";
+	echo "	var unitType = '".$array_TP[$chosenUnitIndex]."';\n";
+	echo "	var ENGN_PREP = ".$array_ENGN_PREP[$chosenUnitIndex].";\n";
+	echo "	var FCTL_PREP = ".$array_FRCTRL_PREP[$chosenUnitIndex].";\n";
+	echo "	var MP_PREP = ".$array_MP_PREP[$chosenUnitIndex].";\n";
+	echo "	var WPNS_PREP = ".$array_WPNS_PREP[$chosenUnitIndex].";\n";
+	echo "	var pilotimage = '".$array_PILOT_IMG_URL[$chosenUnitIndex]."';\n";
 
 	// If the page was reloaded, do not fade anything to speed up things
 	echo "	var fadeOutDuration = ".$fadeOutDuration.";\n";
@@ -289,6 +289,23 @@ session_start();
 	echo "		// console.log('RELOAD');\n";
 	echo "		fadeOutDuration = 0;\n";
 	echo "	}\n";
+
+	// Build up the crit history for CV
+	if ($array_CV_ENGN[$chosenUnitIndex] != null) {
+		echo "	var CD_CV_E = $array_CV_ENGN[$chosenUnitIndex];\n";
+	}
+	if ($array_CV_WPNS[$chosenUnitIndex] != null) {
+		echo "	var CD_CV_W = $array_CV_WPNS[$chosenUnitIndex];\n";
+	}
+	if ($array_CV_MOTV_A[$chosenUnitIndex] != null) {
+		echo "	var CD_CV_MA = $array_CV_MOTV_A[$chosenUnitIndex];\n";
+	}
+	if ($array_CV_MOTV_B[$chosenUnitIndex] != null) {
+		echo "	var CD_CV_MB = $array_CV_MOTV_B[$chosenUnitIndex];\n";
+	}
+	if ($array_CV_MOTV_C[$chosenUnitIndex] != null) {
+		echo "	var CD_CV_MC = $array_CV_MOTV_C[$chosenUnitIndex];\n";
+	}
 
 	if ($array_CV_ENGN_PREP[$chosenUnitIndex] != null) {
 		echo "	var CV_ENGN_PREP = $array_CV_ENGN_PREP[$chosenUnitIndex];\n";
@@ -320,8 +337,11 @@ session_start();
 	} else {
 		echo "	var CV_MOTVC_PREP = 0;\n";
 	}
-
-	echo "	var HT_PREP = $array_HT_PREP[$chosenUnitIndex];\n";
+	if ($array_HT_PREP[$chosenUnitIndex] != null) {
+		echo "	var HT_PREP = $array_HT_PREP[$chosenUnitIndex];\n";
+	} else {
+		echo "	var HT_PREP = 0;\n";
+	}
 	if ($array_MVTYPE[$chosenUnitIndex] != null) {
 		echo "	var MV_TYPE = '$array_MVTYPE[$chosenUnitIndex]';\n";
 	} else {
@@ -337,13 +357,12 @@ session_start();
 	} else {
 		echo "	var MOUNTED_ON_UNITID = 0;\n";
 	}
-
-	echo "	var playerId = ".$pid.";\n";
 	if ($showDistancesHexes != null) {
 		echo "	var showDistancesHexes = ".$showDistancesHexes.";\n";
 	} else {
 		echo "	var showDistancesHexes = 0;\n";
 	}
+	echo "	var playerId = ".$pid.";\n";
 	echo "</script>\n";
 
 	if ($pid == $formationplayerid) {
@@ -1042,7 +1061,7 @@ if ($showDistancesHexes == 1) {
 								<td nowrap width="25%" class="datalabel_thin">
 <?php
 	for ($i1 = 1; $i1 <= $array_OV[$chosenUnitIndex]; $i1++) {
-		echo "									<label class='bigcheck'><input onchange='readCircles($array_UNIT_DBID[$chosenUnitIndex]);' type='checkbox' class='bigcheck' name='UOV".$i1."' id='UOV".$i1."' value='yes'/><span class='bigcheck-target'></span></label>&nbsp;\r\n";
+		echo "									<label class='bigcheck'><input onchange='readCircles(this, $array_UNIT_DBID[$chosenUnitIndex]);' type='checkbox' class='bigcheck' name='UOV".$i1."' id='UOV".$i1."' value='yes'/><span class='bigcheck-target'></span></label>&nbsp;\r\n";
 	}
 ?>
 								</td>
@@ -1050,10 +1069,10 @@ if ($showDistancesHexes == 1) {
 								<td nowrap width="2%" valign="middle"><a style="padding-right:5px;" valign="middle" href="javascript:increaseHT_PREP();"><i class="fas fa-plus-square"></i></a></td>
 								<td nowrap class="datalabel_thin" width="2%" id="label_HT_PREP" align="center"><?= $array_HT_PREP[$chosenUnitIndex] + $array_HT_PREP_ENGINEHIT[$chosenUnitIndex] ?></td>
 								<td nowrap width="36%" style="text-align: right;" id="ht_field" class="datalabel_thin">
-									<label class="bigcheck"><input onchange="readCircles(<?= $array_UNIT_DBID[$chosenUnitIndex] ?>, <?= $array_A_MAX[$chosenUnitIndex] ?>, <?= $array_S_MAX[$chosenUnitIndex] ?>);" type="checkbox" class="bigcheck" name="H1" id="H1" value="yes"/><span class="bigcheck-target"></span></label>
-									<label class="bigcheck"><input onchange="readCircles(<?= $array_UNIT_DBID[$chosenUnitIndex] ?>, <?= $array_A_MAX[$chosenUnitIndex] ?>, <?= $array_S_MAX[$chosenUnitIndex] ?>);" type="checkbox" class="bigcheck" name="H2" id="H2" value="yes"/><span class="bigcheck-target"></span></label>
-									<label class="bigcheck"><input onchange="readCircles(<?= $array_UNIT_DBID[$chosenUnitIndex] ?>, <?= $array_A_MAX[$chosenUnitIndex] ?>, <?= $array_S_MAX[$chosenUnitIndex] ?>);" type="checkbox" class="bigcheck" name="H3" id="H3" value="yes"/><span class="bigcheck-target"></span></label>
-									<label class="bigcheck"><input onchange="readCircles(<?= $array_UNIT_DBID[$chosenUnitIndex] ?>, <?= $array_A_MAX[$chosenUnitIndex] ?>, <?= $array_S_MAX[$chosenUnitIndex] ?>);" type="checkbox" class="bigcheck" name="H4" id="H4" value="yes"/><span class="bigcheck-target"></span></label>
+									<label class="bigcheck"><input onchange="readCircles(this, <?= $array_UNIT_DBID[$chosenUnitIndex] ?>, <?= $array_A_MAX[$chosenUnitIndex] ?>, <?= $array_S_MAX[$chosenUnitIndex] ?>);" type="checkbox" class="bigcheck" name="H1" id="H1" value="yes"/><span class="bigcheck-target"></span></label>
+									<label class="bigcheck"><input onchange="readCircles(this, <?= $array_UNIT_DBID[$chosenUnitIndex] ?>, <?= $array_A_MAX[$chosenUnitIndex] ?>, <?= $array_S_MAX[$chosenUnitIndex] ?>);" type="checkbox" class="bigcheck" name="H2" id="H2" value="yes"/><span class="bigcheck-target"></span></label>
+									<label class="bigcheck"><input onchange="readCircles(this, <?= $array_UNIT_DBID[$chosenUnitIndex] ?>, <?= $array_A_MAX[$chosenUnitIndex] ?>, <?= $array_S_MAX[$chosenUnitIndex] ?>);" type="checkbox" class="bigcheck" name="H3" id="H3" value="yes"/><span class="bigcheck-target"></span></label>
+									<label class="bigcheck"><input onchange="readCircles(this, <?= $array_UNIT_DBID[$chosenUnitIndex] ?>, <?= $array_A_MAX[$chosenUnitIndex] ?>, <?= $array_S_MAX[$chosenUnitIndex] ?>);" type="checkbox" class="bigcheck" name="H4" id="H4" value="yes"/><span class="bigcheck-target"></span></label>
 								</td>
 							</tr>
 						</table>
@@ -1067,7 +1086,7 @@ if ($showDistancesHexes == 1) {
 								<td nowrap width="95%" class="datalabel_thin">
 <?php
 	for ($i1 = 1; $i1 <= $array_A_MAX[$chosenUnitIndex]; $i1++) {
-		echo "								<label class='bigcheck'><input onchange='readCircles($array_UNIT_DBID[$chosenUnitIndex]);' type='checkbox' class='bigcheck' name='A".$i1."' value='yes'/><span class='bigcheck-target'></span></label>&nbsp;\r\n";
+		echo "								<label class='bigcheck'><input onchange='readCircles(this, $array_UNIT_DBID[$chosenUnitIndex]);' type='checkbox' class='bigcheck' name='A".$i1."' value='yes'/><span class='bigcheck-target'></span></label>&nbsp;\r\n";
 		if ($i1 == 10) {
 			echo "<br>\n";
 		}
@@ -1080,7 +1099,7 @@ if ($showDistancesHexes == 1) {
 								<td nowrap width="95%" class="datalabel_thin">
 <?php
 	for ($i2 = 1; $i2 <= $array_S_MAX[$chosenUnitIndex]; $i2++) {
-		echo "								<label class='bigcheck'><input onchange='readCircles($array_UNIT_DBID[$chosenUnitIndex]);' type='checkbox' class='bigcheck' name='S".$i2."' value='yes'/><span class='bigcheck-target'></span></label>&nbsp;\r\n";
+		echo "								<label class='bigcheck'><input onchange='readCircles(this, $array_UNIT_DBID[$chosenUnitIndex]);' type='checkbox' class='bigcheck' name='S".$i2."' value='yes'/><span class='bigcheck-target'></span></label>&nbsp;\r\n";
 		if ($i2 == 10) {
 			echo "<br>\n";
 		}
@@ -1170,19 +1189,19 @@ if ($showDistancesHexes == 1) {
 						<tr>
 							<td nowrap valign="middle" class="datavalue_thin" style="text-align:right;vertical-align:middle;">NARC:&nbsp;</td>
 							<td nowrap valign="middle" class="datavalue_thin" style="text-align:left;vertical-align:middle;">
-								<label class='bigcheck'><input onchange='readCircles(<?= $array_UNIT_DBID[$chosenUnitIndex] ?>);' type='checkbox' class='bigcheck' name='NARC' id='NARC' value='yes'/><span class='bigcheck-target'></span></label>
+								<label class='bigcheck'><input onchange='readCircles(this, <?= $array_UNIT_DBID[$chosenUnitIndex] ?>);' type='checkbox' class='bigcheck' name='NARC' id='NARC' value='yes'/><span class='bigcheck-target'></span></label>
 							</td>
 							<td nowrap valign="middle" class="datavalue_thin" style="text-align:right;vertical-align:middle;">TAG:&nbsp;</td>
 							<td nowrap valign="middle" class="datavalue_thin" style="text-align:left;vertical-align:middle;">
-								<label class='bigcheck'><input onchange='readCircles(<?= $array_UNIT_DBID[$chosenUnitIndex] ?>);' type='checkbox' class='bigcheck' name='TAG' id='TAG' value='yes'/><span class='bigcheck-target'></span></label>
+								<label class='bigcheck'><input onchange='readCircles(this, <?= $array_UNIT_DBID[$chosenUnitIndex] ?>);' type='checkbox' class='bigcheck' name='TAG' id='TAG' value='yes'/><span class='bigcheck-target'></span></label>
 							</td>
 							<td nowrap valign="middle" class="datavalue_thin" style="text-align:right;vertical-align:middle;">WATER:&nbsp;</td>
 							<td nowrap valign="middle" class="datavalue_thin" style="text-align:left;vertical-align:middle;">
-								<label class='bigcheck'><input onchange='readCircles(<?= $array_UNIT_DBID[$chosenUnitIndex] ?>);' type='checkbox' class='bigcheck' name='WATER' id='WATER' value='yes'/><span class='bigcheck-target'></span></label>
+								<label class='bigcheck'><input onchange='readCircles(this, <?= $array_UNIT_DBID[$chosenUnitIndex] ?>);' type='checkbox' class='bigcheck' name='WATER' id='WATER' value='yes'/><span class='bigcheck-target'></span></label>
 							</td>
 							<td nowrap valign="middle" class="datavalue_thin" style="text-align:right;vertical-align:middle;">ROUTED:&nbsp;</td>
 							<td nowrap valign="middle" class="datavalue_thin" style="text-align:left;vertical-align:middle;">
-								<label class='bigcheck'><input onchange='readCircles(<?= $array_UNIT_DBID[$chosenUnitIndex] ?>);' type='checkbox' class='bigcheck' name='ROUTED' id='ROUTED' value='yes'/><span class='bigcheck-target'></span></label>
+								<label class='bigcheck'><input onchange='readCircles(this, <?= $array_UNIT_DBID[$chosenUnitIndex] ?>);' type='checkbox' class='bigcheck' name='ROUTED' id='ROUTED' value='yes'/><span class='bigcheck-target'></span></label>
 							</td>
 						</tr>
 					</table>
@@ -1214,15 +1233,15 @@ if ($showDistancesHexes == 1) {
 ?>
 									</tr>
 									<tr>
-										<td><label class='bigcheck'><input type='checkbox' onchange='readCircles2(<?= $array_UNIT_DBID[$chosenUnitIndex] ?>, <?= $array_A_MAX[$chosenUnitIndex] ?>, <?= $array_S_MAX[$chosenUnitIndex] ?>, 2, -1);' class='bigcheck' name='MV2_moved2_standstill' id='MV2_moved2_standstill' value='no'/><span class='bigcheck-target'></span></label>&nbsp;</td>
-										<td><label class='bigcheck'><input type='checkbox' onchange='readCircles2(<?= $array_UNIT_DBID[$chosenUnitIndex] ?>, <?= $array_A_MAX[$chosenUnitIndex] ?>, <?= $array_S_MAX[$chosenUnitIndex] ?>, 10,-1);' class='bigcheck' name='MV10_moved10_hulldown' id='MV10_moved10_hulldown' value='no'/><span class='bigcheck-target'></span></label>&nbsp;</td>
-										<td><label class='bigcheck'><input type='checkbox' onchange='readCircles2(<?= $array_UNIT_DBID[$chosenUnitIndex] ?>, <?= $array_A_MAX[$chosenUnitIndex] ?>, <?= $array_S_MAX[$chosenUnitIndex] ?>, 3, -1);' class='bigcheck' name='MV3_moved3_moved' id='MV3_moved3_moved' value='no'/><span class='bigcheck-target'></span></label>&nbsp;</td>
-										<td><label class='bigcheck'><input type='checkbox' onchange='readCircles2(<?= $array_UNIT_DBID[$chosenUnitIndex] ?>, <?= $array_A_MAX[$chosenUnitIndex] ?>, <?= $array_S_MAX[$chosenUnitIndex] ?>, 9, -1);' class='bigcheck' name='MV9_moved9_sprinted' id='MV9_moved9_sprinted' value='no'/><span class='bigcheck-target'></span></label>&nbsp;</td>
+										<td><label class='bigcheck'><input type='checkbox' onchange='readCircles2(this, <?= $array_UNIT_DBID[$chosenUnitIndex] ?>, <?= $array_A_MAX[$chosenUnitIndex] ?>, <?= $array_S_MAX[$chosenUnitIndex] ?>, 2, -1);' class='bigcheck' name='MV2_moved2_standstill' id='MV2_moved2_standstill' value='no'/><span class='bigcheck-target'></span></label>&nbsp;</td>
+										<td><label class='bigcheck'><input type='checkbox' onchange='readCircles2(this, <?= $array_UNIT_DBID[$chosenUnitIndex] ?>, <?= $array_A_MAX[$chosenUnitIndex] ?>, <?= $array_S_MAX[$chosenUnitIndex] ?>, 10,-1);' class='bigcheck' name='MV10_moved10_hulldown' id='MV10_moved10_hulldown' value='no'/><span class='bigcheck-target'></span></label>&nbsp;</td>
+										<td><label class='bigcheck'><input type='checkbox' onchange='readCircles2(this, <?= $array_UNIT_DBID[$chosenUnitIndex] ?>, <?= $array_A_MAX[$chosenUnitIndex] ?>, <?= $array_S_MAX[$chosenUnitIndex] ?>, 3, -1);' class='bigcheck' name='MV3_moved3_moved' id='MV3_moved3_moved' value='no'/><span class='bigcheck-target'></span></label>&nbsp;</td>
+										<td><label class='bigcheck'><input type='checkbox' onchange='readCircles2(this, <?= $array_UNIT_DBID[$chosenUnitIndex] ?>, <?= $array_A_MAX[$chosenUnitIndex] ?>, <?= $array_S_MAX[$chosenUnitIndex] ?>, 9, -1);' class='bigcheck' name='MV9_moved9_sprinted' id='MV9_moved9_sprinted' value='no'/><span class='bigcheck-target'></span></label>&nbsp;</td>
 <?php
 	if ($array_MVJ[$chosenUnitIndex] != null && $array_MVJ[$chosenUnitIndex] > 0) {
-		echo "										<td><label class='bigcheck'><input type='checkbox' onchange='readCircles2(".$array_UNIT_DBID[$chosenUnitIndex].", ".$array_A_MAX[$chosenUnitIndex].", ".$array_S_MAX[$chosenUnitIndex].", 4, -1);' class='bigcheck' name='MV4_moved4_jumped' id='MV4_moved4_jumped' value='no'/><span class='bigcheck-target'></span></label>&nbsp;</td>\n";
+		echo "										<td><label class='bigcheck'><input type='checkbox' onchange='readCircles2(this, ".$array_UNIT_DBID[$chosenUnitIndex].", ".$array_A_MAX[$chosenUnitIndex].", ".$array_S_MAX[$chosenUnitIndex].", 4, -1);' class='bigcheck' name='MV4_moved4_jumped' id='MV4_moved4_jumped' value='no'/><span class='bigcheck-target'></span></label>&nbsp;</td>\n";
 	} else {
-		echo "										<td style='visibility:hidden;'><label class='bigcheck'><input type='checkbox' onchange='readCircles2(".$array_UNIT_DBID[$chosenUnitIndex].", ".$array_A_MAX[$chosenUnitIndex].", ".$array_S_MAX[$chosenUnitIndex].", 4, -1);' class='bigcheck' name='MV4_moved4_jumped' id='MV4_moved4_jumped' value='no'/><span class='bigcheck-target'></span></label>&nbsp;</td>\n";
+		echo "										<td style='visibility:hidden;'><label class='bigcheck'><input type='checkbox' onchange='readCircles2(this, ".$array_UNIT_DBID[$chosenUnitIndex].", ".$array_A_MAX[$chosenUnitIndex].", ".$array_S_MAX[$chosenUnitIndex].", 4, -1);' class='bigcheck' name='MV4_moved4_jumped' id='MV4_moved4_jumped' value='no'/><span class='bigcheck-target'></span></label>&nbsp;</td>\n";
 	}
 ?>
 									</tr>
@@ -1235,8 +1254,8 @@ if ($showDistancesHexes == 1) {
 							<td nowrap width="65%" id="firecontainer" class="datalabel_thin">
 								<table cellspacing="2" cellpadding="0">
 									<tr>
-										<td><label class='bigcheck'><input type='checkbox' onchange='readCircles2(<?= $array_UNIT_DBID[$chosenUnitIndex] ?>, <?= $array_A_MAX[$chosenUnitIndex] ?>, <?= $array_S_MAX[$chosenUnitIndex] ?>, -1, 1);' class='bigcheck' name='WF5_WEAPONSFIRED2' id='WF5_WEAPONSFIRED2' value='no'/><span class='bigcheck-target'></span></label>&nbsp;</td>
-										<td><label class='bigcheck'><input type='checkbox' onchange='readCircles2(<?= $array_UNIT_DBID[$chosenUnitIndex] ?>, <?= $array_A_MAX[$chosenUnitIndex] ?>, <?= $array_S_MAX[$chosenUnitIndex] ?>, -1, 2);' class='bigcheck' name='WF6_WEAPONSFIRED2' id='WF6_WEAPONSFIRED2' value='no'/><span class='bigcheck-target'></span></label>&nbsp;</td>
+										<td><label class='bigcheck'><input type='checkbox' onchange='readCircles2(this, <?= $array_UNIT_DBID[$chosenUnitIndex] ?>, <?= $array_A_MAX[$chosenUnitIndex] ?>, <?= $array_S_MAX[$chosenUnitIndex] ?>, -1, 1);' class='bigcheck' name='WF5_WEAPONSFIRED2' id='WF5_WEAPONSFIRED2' value='no'/><span class='bigcheck-target'></span></label>&nbsp;</td>
+										<td><label class='bigcheck'><input type='checkbox' onchange='readCircles2(this, <?= $array_UNIT_DBID[$chosenUnitIndex] ?>, <?= $array_A_MAX[$chosenUnitIndex] ?>, <?= $array_S_MAX[$chosenUnitIndex] ?>, -1, 2);' class='bigcheck' name='WF6_WEAPONSFIRED2' id='WF6_WEAPONSFIRED2' value='no'/><span class='bigcheck-target'></span></label>&nbsp;</td>
 										<td nowrap rowspan='2' class="datavalue" style="text-align: right;" align="right"><span style="font-family:'Pathway Gothic One',sans-serif;font-size:60%;text-transform:uppercase;color:#999;">&nbsp;&nbsp;&nbsp;WEAPONS</span></td>
 									</tr>
 									<tr>
@@ -1264,8 +1283,8 @@ if ($showDistancesHexes == 1) {
 							<td nowrap class="datalabel_thin" id="label_ENGN_PREP" align="center"><?= $array_ENGN_PREP[$chosenUnitIndex] ?></td>
 							<td nowrap class="datalabel">&nbsp;</td>
 							<td nowrap width="55%" style="text-align: left;" class="datalabel_thin">
-								<label class="bigcheck"><input onchange="readCircles(<?= $array_UNIT_DBID[$chosenUnitIndex] ?>, <?= $array_A_MAX[$chosenUnitIndex] ?>, <?= $array_S_MAX[$chosenUnitIndex] ?>);" type="checkbox" class="bigcheck" name="CD_E_1" id="CD_E_1" value="yes"/><span class="bigcheck-target"></span></label>
-								<label class="bigcheck"><input onchange="readCircles(<?= $array_UNIT_DBID[$chosenUnitIndex] ?>, <?= $array_A_MAX[$chosenUnitIndex] ?>, <?= $array_S_MAX[$chosenUnitIndex] ?>);" type="checkbox" class="bigcheck" name="CD_E_2" id="CD_E_2" value="yes"/><span class="bigcheck-target"></span></label>
+								<label class="bigcheck"><input onchange="readCircles(this, <?= $array_UNIT_DBID[$chosenUnitIndex] ?>, <?= $array_A_MAX[$chosenUnitIndex] ?>, <?= $array_S_MAX[$chosenUnitIndex] ?>);" type="checkbox" class="bigcheck" name="CD_E_1" id="CD_E_1" value="yes"/><span class="bigcheck-target"></span></label>
+								<label class="bigcheck"><input onchange="readCircles(this, <?= $array_UNIT_DBID[$chosenUnitIndex] ?>, <?= $array_A_MAX[$chosenUnitIndex] ?>, <?= $array_S_MAX[$chosenUnitIndex] ?>);" type="checkbox" class="bigcheck" name="CD_E_2" id="CD_E_2" value="yes"/><span class="bigcheck-target"></span></label>
 							</td>
 							<td nowrap class="datalabel_thin_small" width="5%" style="text-align: right;">+1 HT</td>
 						</tr>
@@ -1275,10 +1294,10 @@ if ($showDistancesHexes == 1) {
 							<td nowrap class="datalabel_thin" id="label_FCTL_PREP" align="center"><?= $array_FRCTRL_PREP[$chosenUnitIndex] ?></td>
 							<td nowrap class="datalabel">&nbsp;</td>
 							<td nowrap width="90%" style="text-align: left;" class="datalabel_thin">
-								<label class="bigcheck"><input onchange="readCircles(<?= $array_UNIT_DBID[$chosenUnitIndex] ?>, <?= $array_A_MAX[$chosenUnitIndex] ?>, <?= $array_S_MAX[$chosenUnitIndex] ?>);" type="checkbox" class="bigcheck" name="CD_FC_1" id="CD_FC_1" value="yes"/><span class="bigcheck-target"></span></label>
-								<label class="bigcheck"><input onchange="readCircles(<?= $array_UNIT_DBID[$chosenUnitIndex] ?>, <?= $array_A_MAX[$chosenUnitIndex] ?>, <?= $array_S_MAX[$chosenUnitIndex] ?>);" type="checkbox" class="bigcheck" name="CD_FC_2" id="CD_FC_2" value="yes"/><span class="bigcheck-target"></span></label>
-								<label class="bigcheck"><input onchange="readCircles(<?= $array_UNIT_DBID[$chosenUnitIndex] ?>, <?= $array_A_MAX[$chosenUnitIndex] ?>, <?= $array_S_MAX[$chosenUnitIndex] ?>);" type="checkbox" class="bigcheck" name="CD_FC_3" id="CD_FC_3" value="yes"/><span class="bigcheck-target"></span></label>
-								<label class="bigcheck"><input onchange="readCircles(<?= $array_UNIT_DBID[$chosenUnitIndex] ?>, <?= $array_A_MAX[$chosenUnitIndex] ?>, <?= $array_S_MAX[$chosenUnitIndex] ?>);" type="checkbox" class="bigcheck" name="CD_FC_4" id="CD_FC_4" value="yes"/><span class="bigcheck-target"></span></label>
+								<label class="bigcheck"><input onchange="readCircles(this, <?= $array_UNIT_DBID[$chosenUnitIndex] ?>, <?= $array_A_MAX[$chosenUnitIndex] ?>, <?= $array_S_MAX[$chosenUnitIndex] ?>);" type="checkbox" class="bigcheck" name="CD_FC_1" id="CD_FC_1" value="yes"/><span class="bigcheck-target"></span></label>
+								<label class="bigcheck"><input onchange="readCircles(this, <?= $array_UNIT_DBID[$chosenUnitIndex] ?>, <?= $array_A_MAX[$chosenUnitIndex] ?>, <?= $array_S_MAX[$chosenUnitIndex] ?>);" type="checkbox" class="bigcheck" name="CD_FC_2" id="CD_FC_2" value="yes"/><span class="bigcheck-target"></span></label>
+								<label class="bigcheck"><input onchange="readCircles(this, <?= $array_UNIT_DBID[$chosenUnitIndex] ?>, <?= $array_A_MAX[$chosenUnitIndex] ?>, <?= $array_S_MAX[$chosenUnitIndex] ?>);" type="checkbox" class="bigcheck" name="CD_FC_3" id="CD_FC_3" value="yes"/><span class="bigcheck-target"></span></label>
+								<label class="bigcheck"><input onchange="readCircles(this, <?= $array_UNIT_DBID[$chosenUnitIndex] ?>, <?= $array_A_MAX[$chosenUnitIndex] ?>, <?= $array_S_MAX[$chosenUnitIndex] ?>);" type="checkbox" class="bigcheck" name="CD_FC_4" id="CD_FC_4" value="yes"/><span class="bigcheck-target"></span></label>
 							</td>
 							<td nowrap class="datalabel_thin_small" width="5%" style="text-align: right;">+2 TO-HIT</td>
 						</tr>
@@ -1288,10 +1307,10 @@ if ($showDistancesHexes == 1) {
 							<td nowrap class="datalabel_thin" id="label_MP_PREP" align="center"><?= $array_MP_PREP[$chosenUnitIndex] ?></td>
 							<td nowrap class="datalabel">&nbsp;</td>
 							<td nowrap width="55%" style="text-align: left;" class="datalabel_thin">
-								<label class="bigcheck"><input onchange="readCircles(<?= $array_UNIT_DBID[$chosenUnitIndex] ?>, <?= $array_A_MAX[$chosenUnitIndex] ?>, <?= $array_S_MAX[$chosenUnitIndex] ?>);" type="checkbox" class="bigcheck" name="CD_MP_1" id="CD_MP_1" value="yes"/><span class="bigcheck-target"></span></label>
-								<label class="bigcheck"><input onchange="readCircles(<?= $array_UNIT_DBID[$chosenUnitIndex] ?>, <?= $array_A_MAX[$chosenUnitIndex] ?>, <?= $array_S_MAX[$chosenUnitIndex] ?>);" type="checkbox" class="bigcheck" name="CD_MP_2" id="CD_MP_2" value="yes"/><span class="bigcheck-target"></span></label>
-								<label class="bigcheck"><input onchange="readCircles(<?= $array_UNIT_DBID[$chosenUnitIndex] ?>, <?= $array_A_MAX[$chosenUnitIndex] ?>, <?= $array_S_MAX[$chosenUnitIndex] ?>);" type="checkbox" class="bigcheck" name="CD_MP_3" id="CD_MP_3" value="yes"/><span class="bigcheck-target"></span></label>
-								<label class="bigcheck"><input onchange="readCircles(<?= $array_UNIT_DBID[$chosenUnitIndex] ?>, <?= $array_A_MAX[$chosenUnitIndex] ?>, <?= $array_S_MAX[$chosenUnitIndex] ?>);" type="checkbox" class="bigcheck" name="CD_MP_4" id="CD_MP_4" value="yes"/><span class="bigcheck-target"></span></label>
+								<label class="bigcheck"><input onchange="readCircles(this, <?= $array_UNIT_DBID[$chosenUnitIndex] ?>, <?= $array_A_MAX[$chosenUnitIndex] ?>, <?= $array_S_MAX[$chosenUnitIndex] ?>);" type="checkbox" class="bigcheck" name="CD_MP_1" id="CD_MP_1" value="yes"/><span class="bigcheck-target"></span></label>
+								<label class="bigcheck"><input onchange="readCircles(this, <?= $array_UNIT_DBID[$chosenUnitIndex] ?>, <?= $array_A_MAX[$chosenUnitIndex] ?>, <?= $array_S_MAX[$chosenUnitIndex] ?>);" type="checkbox" class="bigcheck" name="CD_MP_2" id="CD_MP_2" value="yes"/><span class="bigcheck-target"></span></label>
+								<label class="bigcheck"><input onchange="readCircles(this, <?= $array_UNIT_DBID[$chosenUnitIndex] ?>, <?= $array_A_MAX[$chosenUnitIndex] ?>, <?= $array_S_MAX[$chosenUnitIndex] ?>);" type="checkbox" class="bigcheck" name="CD_MP_3" id="CD_MP_3" value="yes"/><span class="bigcheck-target"></span></label>
+								<label class="bigcheck"><input onchange="readCircles(this, <?= $array_UNIT_DBID[$chosenUnitIndex] ?>, <?= $array_A_MAX[$chosenUnitIndex] ?>, <?= $array_S_MAX[$chosenUnitIndex] ?>);" type="checkbox" class="bigcheck" name="CD_MP_4" id="CD_MP_4" value="yes"/><span class="bigcheck-target"></span></label>
 							</td>
 							<td nowrap class="datalabel_thin_small" width="5%" style="text-align: right;">½ MV</td>
 						</tr>
@@ -1301,10 +1320,10 @@ if ($showDistancesHexes == 1) {
 							<td nowrap class="datalabel_thin" id="label_WPNS_PREP" align="center"><?= $array_WPNS_PREP[$chosenUnitIndex] ?></td>
 							<td nowrap class="datalabel">&nbsp;</td>
 							<td nowrap width="55%" style="text-align: left;" class="datalabel_thin">
-								<label class="bigcheck"><input onchange="readCircles(<?= $array_UNIT_DBID[$chosenUnitIndex] ?>, <?= $array_A_MAX[$chosenUnitIndex] ?>, <?= $array_S_MAX[$chosenUnitIndex] ?>);" type="checkbox" class="bigcheck" name="CD_W_1" id="CD_W_1" value="yes"/><span class="bigcheck-target"></span></label>
-								<label class="bigcheck"><input onchange="readCircles(<?= $array_UNIT_DBID[$chosenUnitIndex] ?>, <?= $array_A_MAX[$chosenUnitIndex] ?>, <?= $array_S_MAX[$chosenUnitIndex] ?>);" type="checkbox" class="bigcheck" name="CD_W_2" id="CD_W_2" value="yes"/><span class="bigcheck-target"></span></label>
-								<label class="bigcheck"><input onchange="readCircles(<?= $array_UNIT_DBID[$chosenUnitIndex] ?>, <?= $array_A_MAX[$chosenUnitIndex] ?>, <?= $array_S_MAX[$chosenUnitIndex] ?>);" type="checkbox" class="bigcheck" name="CD_W_3" id="CD_W_3" value="yes"/><span class="bigcheck-target"></span></label>
-								<label class="bigcheck"><input onchange="readCircles(<?= $array_UNIT_DBID[$chosenUnitIndex] ?>, <?= $array_A_MAX[$chosenUnitIndex] ?>, <?= $array_S_MAX[$chosenUnitIndex] ?>);" type="checkbox" class="bigcheck" name="CD_W_4" id="CD_W_4" value="yes"/><span class="bigcheck-target"></span></label>
+								<label class="bigcheck"><input onchange="readCircles(this, <?= $array_UNIT_DBID[$chosenUnitIndex] ?>, <?= $array_A_MAX[$chosenUnitIndex] ?>, <?= $array_S_MAX[$chosenUnitIndex] ?>);" type="checkbox" class="bigcheck" name="CD_W_1" id="CD_W_1" value="yes"/><span class="bigcheck-target"></span></label>
+								<label class="bigcheck"><input onchange="readCircles(this, <?= $array_UNIT_DBID[$chosenUnitIndex] ?>, <?= $array_A_MAX[$chosenUnitIndex] ?>, <?= $array_S_MAX[$chosenUnitIndex] ?>);" type="checkbox" class="bigcheck" name="CD_W_2" id="CD_W_2" value="yes"/><span class="bigcheck-target"></span></label>
+								<label class="bigcheck"><input onchange="readCircles(this, <?= $array_UNIT_DBID[$chosenUnitIndex] ?>, <?= $array_A_MAX[$chosenUnitIndex] ?>, <?= $array_S_MAX[$chosenUnitIndex] ?>);" type="checkbox" class="bigcheck" name="CD_W_3" id="CD_W_3" value="yes"/><span class="bigcheck-target"></span></label>
+								<label class="bigcheck"><input onchange="readCircles(this, <?= $array_UNIT_DBID[$chosenUnitIndex] ?>, <?= $array_A_MAX[$chosenUnitIndex] ?>, <?= $array_S_MAX[$chosenUnitIndex] ?>);" type="checkbox" class="bigcheck" name="CD_W_4" id="CD_W_4" value="yes"/><span class="bigcheck-target"></span></label>
 							</td>
 							<td nowrap class="datalabel_thin_small" width="5%" style="text-align: right;">-1 DMG</td>
 						</tr>
@@ -1326,8 +1345,8 @@ if ($showDistancesHexes == 1) {
 							<td nowrap class="datalabel_thin" id="label_CV_ENGN_PREP" align="center"><?= $array_CV_ENGN_PREP[$chosenUnitIndex] ?></td>
 							<td nowrap class="datalabel">&nbsp;</td>
 							<td nowrap width="55%" style="text-align: left;" class="datalabel_thin">
-								<label class="bigcheck"><input onchange="readCircles(<?= $array_UNIT_DBID[$chosenUnitIndex] ?>, <?= $array_A_MAX[$chosenUnitIndex] ?>, <?= $array_S_MAX[$chosenUnitIndex] ?>);" type="checkbox" class="bigcheck" name="CD_CV-E_1" id="CD_CV-E_1" value="yes"/><span class="bigcheck-target"></span></label>
-								<label class="bigcheck"><input onchange="readCircles(<?= $array_UNIT_DBID[$chosenUnitIndex] ?>, <?= $array_A_MAX[$chosenUnitIndex] ?>, <?= $array_S_MAX[$chosenUnitIndex] ?>);" type="checkbox" class="bigcheck" name="CD_CV-E_2" id="CD_CV-E_2" value="yes"/><span class="bigcheck-target"></span></label>
+								<label class="bigcheck"><input onchange="readCircles(this, <?= $array_UNIT_DBID[$chosenUnitIndex] ?>, <?= $array_A_MAX[$chosenUnitIndex] ?>, <?= $array_S_MAX[$chosenUnitIndex] ?>);" type="checkbox" class="bigcheck" name="CD_CV-E_1" id="CD_CV-E_1" value="yes"/><span class="bigcheck-target"></span></label>
+								<label class="bigcheck"><input onchange="readCircles(this, <?= $array_UNIT_DBID[$chosenUnitIndex] ?>, <?= $array_A_MAX[$chosenUnitIndex] ?>, <?= $array_S_MAX[$chosenUnitIndex] ?>);" type="checkbox" class="bigcheck" name="CD_CV-E_2" id="CD_CV-E_2" value="yes"/><span class="bigcheck-target"></span></label>
 							</td>
 							<td nowrap class="datalabel_thin_small" colspan="2" width="5%" style="text-align: right;">½ MV, ½ DMG</td>
 						</tr>
@@ -1337,10 +1356,10 @@ if ($showDistancesHexes == 1) {
 							<td nowrap class="datalabel_thin" id="label_CV_FCTL_PREP" align="center"><?= $array_CV_FRCTRL_PREP[$chosenUnitIndex] ?></td>
 							<td nowrap class="datalabel">&nbsp;</td>
 							<td nowrap width="90%" colspan='2' style="text-align: left;" class="datalabel_thin">
-								<label class="bigcheck"><input onchange="readCircles(<?= $array_UNIT_DBID[$chosenUnitIndex] ?>, <?= $array_A_MAX[$chosenUnitIndex] ?>, <?= $array_S_MAX[$chosenUnitIndex] ?>);" type="checkbox" class="bigcheck" name="CD_CV-FC_1" id="CD_CV-FC_1" value="yes"/><span class="bigcheck-target"></span></label>
-								<label class="bigcheck"><input onchange="readCircles(<?= $array_UNIT_DBID[$chosenUnitIndex] ?>, <?= $array_A_MAX[$chosenUnitIndex] ?>, <?= $array_S_MAX[$chosenUnitIndex] ?>);" type="checkbox" class="bigcheck" name="CD_CV-FC_2" id="CD_CV-FC_2" value="yes"/><span class="bigcheck-target"></span></label>
-								<label class="bigcheck"><input onchange="readCircles(<?= $array_UNIT_DBID[$chosenUnitIndex] ?>, <?= $array_A_MAX[$chosenUnitIndex] ?>, <?= $array_S_MAX[$chosenUnitIndex] ?>);" type="checkbox" class="bigcheck" name="CD_CV-FC_3" id="CD_CV-FC_3" value="yes"/><span class="bigcheck-target"></span></label>
-								<label class="bigcheck"><input onchange="readCircles(<?= $array_UNIT_DBID[$chosenUnitIndex] ?>, <?= $array_A_MAX[$chosenUnitIndex] ?>, <?= $array_S_MAX[$chosenUnitIndex] ?>);" type="checkbox" class="bigcheck" name="CD_CV-FC_4" id="CD_CV-FC_4" value="yes"/><span class="bigcheck-target"></span></label>
+								<label class="bigcheck"><input onchange="readCircles(this, <?= $array_UNIT_DBID[$chosenUnitIndex] ?>, <?= $array_A_MAX[$chosenUnitIndex] ?>, <?= $array_S_MAX[$chosenUnitIndex] ?>);" type="checkbox" class="bigcheck" name="CD_CV-FC_1" id="CD_CV-FC_1" value="yes"/><span class="bigcheck-target"></span></label>
+								<label class="bigcheck"><input onchange="readCircles(this, <?= $array_UNIT_DBID[$chosenUnitIndex] ?>, <?= $array_A_MAX[$chosenUnitIndex] ?>, <?= $array_S_MAX[$chosenUnitIndex] ?>);" type="checkbox" class="bigcheck" name="CD_CV-FC_2" id="CD_CV-FC_2" value="yes"/><span class="bigcheck-target"></span></label>
+								<label class="bigcheck"><input onchange="readCircles(this, <?= $array_UNIT_DBID[$chosenUnitIndex] ?>, <?= $array_A_MAX[$chosenUnitIndex] ?>, <?= $array_S_MAX[$chosenUnitIndex] ?>);" type="checkbox" class="bigcheck" name="CD_CV-FC_3" id="CD_CV-FC_3" value="yes"/><span class="bigcheck-target"></span></label>
+								<label class="bigcheck"><input onchange="readCircles(this, <?= $array_UNIT_DBID[$chosenUnitIndex] ?>, <?= $array_A_MAX[$chosenUnitIndex] ?>, <?= $array_S_MAX[$chosenUnitIndex] ?>);" type="checkbox" class="bigcheck" name="CD_CV-FC_4" id="CD_CV-FC_4" value="yes"/><span class="bigcheck-target"></span></label>
 							</td>
 							<td nowrap class="datalabel_thin_small" width="5%" style="text-align: right;">+2 TO-HIT</td>
 						</tr>
@@ -1350,10 +1369,10 @@ if ($showDistancesHexes == 1) {
 							<td nowrap class="datalabel_thin" id="label_CV_WPNS_PREP" align="center"><?= $array_CV_WPNS_PREP[$chosenUnitIndex] ?></td>
 							<td nowrap class="datalabel">&nbsp;</td>
 							<td nowrap width="55%" colspan='2' style="text-align: left;" class="datalabel_thin">
-								<label class="bigcheck"><input onchange="readCircles(<?= $array_UNIT_DBID[$chosenUnitIndex] ?>, <?= $array_A_MAX[$chosenUnitIndex] ?>, <?= $array_S_MAX[$chosenUnitIndex] ?>);" type="checkbox" class="bigcheck" name="CD_CV-W_1" id="CD_CV-W_1" value="yes"/><span class="bigcheck-target"></span></label>
-								<label class="bigcheck"><input onchange="readCircles(<?= $array_UNIT_DBID[$chosenUnitIndex] ?>, <?= $array_A_MAX[$chosenUnitIndex] ?>, <?= $array_S_MAX[$chosenUnitIndex] ?>);" type="checkbox" class="bigcheck" name="CD_CV-W_2" id="CD_CV-W_2" value="yes"/><span class="bigcheck-target"></span></label>
-								<label class="bigcheck"><input onchange="readCircles(<?= $array_UNIT_DBID[$chosenUnitIndex] ?>, <?= $array_A_MAX[$chosenUnitIndex] ?>, <?= $array_S_MAX[$chosenUnitIndex] ?>);" type="checkbox" class="bigcheck" name="CD_CV-W_3" id="CD_CV-W_3" value="yes"/><span class="bigcheck-target"></span></label>
-								<label class="bigcheck"><input onchange="readCircles(<?= $array_UNIT_DBID[$chosenUnitIndex] ?>, <?= $array_A_MAX[$chosenUnitIndex] ?>, <?= $array_S_MAX[$chosenUnitIndex] ?>);" type="checkbox" class="bigcheck" name="CD_CV-W_4" id="CD_CV-W_4" value="yes"/><span class="bigcheck-target"></span></label>
+								<label class="bigcheck"><input onchange="readCircles(this, <?= $array_UNIT_DBID[$chosenUnitIndex] ?>, <?= $array_A_MAX[$chosenUnitIndex] ?>, <?= $array_S_MAX[$chosenUnitIndex] ?>);" type="checkbox" class="bigcheck" name="CD_CV-W_1" id="CD_CV-W_1" value="yes"/><span class="bigcheck-target"></span></label>
+								<label class="bigcheck"><input onchange="readCircles(this, <?= $array_UNIT_DBID[$chosenUnitIndex] ?>, <?= $array_A_MAX[$chosenUnitIndex] ?>, <?= $array_S_MAX[$chosenUnitIndex] ?>);" type="checkbox" class="bigcheck" name="CD_CV-W_2" id="CD_CV-W_2" value="yes"/><span class="bigcheck-target"></span></label>
+								<label class="bigcheck"><input onchange="readCircles(this, <?= $array_UNIT_DBID[$chosenUnitIndex] ?>, <?= $array_A_MAX[$chosenUnitIndex] ?>, <?= $array_S_MAX[$chosenUnitIndex] ?>);" type="checkbox" class="bigcheck" name="CD_CV-W_3" id="CD_CV-W_3" value="yes"/><span class="bigcheck-target"></span></label>
+								<label class="bigcheck"><input onchange="readCircles(this, <?= $array_UNIT_DBID[$chosenUnitIndex] ?>, <?= $array_A_MAX[$chosenUnitIndex] ?>, <?= $array_S_MAX[$chosenUnitIndex] ?>);" type="checkbox" class="bigcheck" name="CD_CV-W_4" id="CD_CV-W_4" value="yes"/><span class="bigcheck-target"></span></label>
 							</td>
 							<td nowrap class="datalabel_thin_small" width="5%" style="text-align: right;">-1 DMG</td>
 						</tr>
@@ -1363,15 +1382,15 @@ if ($showDistancesHexes == 1) {
 								<table width="100%" cellpadding="0" cellspacing="0">
 									<tr>
 										<td nowrap colspan="2" width="33%" style="text-align:center;" class="datalabel_thin">
-											<label class="bigcheck"><input onchange="readCircles(<?= $array_UNIT_DBID[$chosenUnitIndex] ?>, <?= $array_A_MAX[$chosenUnitIndex] ?>, <?= $array_S_MAX[$chosenUnitIndex] ?>);" type="checkbox" class="bigcheck" name="CD_CV-MA_1" id="CD_CV-MA_1" value="yes"/><span class="bigcheck-target"></span></label>
-											<label class="bigcheck"><input onchange="readCircles(<?= $array_UNIT_DBID[$chosenUnitIndex] ?>, <?= $array_A_MAX[$chosenUnitIndex] ?>, <?= $array_S_MAX[$chosenUnitIndex] ?>);" type="checkbox" class="bigcheck" name="CD_CV-MA_2" id="CD_CV-MA_2" value="yes"/><span class="bigcheck-target"></span></label>
+											<label class="bigcheck"><input onchange="readCircles(this, <?= $array_UNIT_DBID[$chosenUnitIndex] ?>, <?= $array_A_MAX[$chosenUnitIndex] ?>, <?= $array_S_MAX[$chosenUnitIndex] ?>);" type="checkbox" class="bigcheck" name="CD_CV-MA_1" id="CD_CV-MA_1" value="yes"/><span class="bigcheck-target"></span></label>
+											<label class="bigcheck"><input onchange="readCircles(this, <?= $array_UNIT_DBID[$chosenUnitIndex] ?>, <?= $array_A_MAX[$chosenUnitIndex] ?>, <?= $array_S_MAX[$chosenUnitIndex] ?>);" type="checkbox" class="bigcheck" name="CD_CV-MA_2" id="CD_CV-MA_2" value="yes"/><span class="bigcheck-target"></span></label>
 										</td>
 										<td nowrap width="32%" style="text-align:center;" class="datalabel_thin">
-											<label class="bigcheck"><input onchange="readCircles(<?= $array_UNIT_DBID[$chosenUnitIndex] ?>, <?= $array_A_MAX[$chosenUnitIndex] ?>, <?= $array_S_MAX[$chosenUnitIndex] ?>);" type="checkbox" class="bigcheck" name="CD_CV-MB_1" id="CD_CV-MB_1" value="yes"/><span class="bigcheck-target"></span></label>
-											<label class="bigcheck"><input onchange="readCircles(<?= $array_UNIT_DBID[$chosenUnitIndex] ?>, <?= $array_A_MAX[$chosenUnitIndex] ?>, <?= $array_S_MAX[$chosenUnitIndex] ?>);" type="checkbox" class="bigcheck" name="CD_CV-MB_2" id="CD_CV-MB_2" value="yes"/><span class="bigcheck-target"></span></label>
+											<label class="bigcheck"><input onchange="readCircles(this, <?= $array_UNIT_DBID[$chosenUnitIndex] ?>, <?= $array_A_MAX[$chosenUnitIndex] ?>, <?= $array_S_MAX[$chosenUnitIndex] ?>);" type="checkbox" class="bigcheck" name="CD_CV-MB_1" id="CD_CV-MB_1" value="yes"/><span class="bigcheck-target"></span></label>
+											<label class="bigcheck"><input onchange="readCircles(this, <?= $array_UNIT_DBID[$chosenUnitIndex] ?>, <?= $array_A_MAX[$chosenUnitIndex] ?>, <?= $array_S_MAX[$chosenUnitIndex] ?>);" type="checkbox" class="bigcheck" name="CD_CV-MB_2" id="CD_CV-MB_2" value="yes"/><span class="bigcheck-target"></span></label>
 										</td>
 										<td nowrap width="33%" style="text-align:center;" class="datalabel_thin">
-											<label class="bigcheck"><input onchange="readCircles(<?= $array_UNIT_DBID[$chosenUnitIndex] ?>, <?= $array_A_MAX[$chosenUnitIndex] ?>, <?= $array_S_MAX[$chosenUnitIndex] ?>);" type="checkbox" class="bigcheck" name="CD_CV-MC_1" id="CD_CV-MC_1" value="yes"/><span class="bigcheck-target"></span></label>
+											<label class="bigcheck"><input onchange="readCircles(this, <?= $array_UNIT_DBID[$chosenUnitIndex] ?>, <?= $array_A_MAX[$chosenUnitIndex] ?>, <?= $array_S_MAX[$chosenUnitIndex] ?>);" type="checkbox" class="bigcheck" name="CD_CV-MC_1" id="CD_CV-MC_1" value="yes"/><span class="bigcheck-target"></span></label>
 										</td>
 									</tr>
 									<tr>
@@ -1469,8 +1488,8 @@ if ($showDistancesHexes == 1) {
 					<span style="font-size: 30px; color: #da8e25;"><?php echo "$array_PILOT[$chosenUnitIndex]"; ?></span><br>
 					<span style="font-size: 20px; color: #aaaaaa;"><?php echo "$array_UNIT_MODEL[$chosenUnitIndex]" ?></span><br><br>
 
-					<span style="font-size: 20px; color: #aaaaaa;">Clan name: <?php echo "$array_UNIT_NAME_CLAN[$chosenUnitIndex]" ?></span><br>
-					<span style="font-size: 20px; color: #aaaaaa;">IS name: <?php echo "$array_UNIT_NAME_IS[$chosenUnitIndex]" ?></span><br><br>
+					<span style="font-size: 20px; color: #aaaaaa;">Clan: <?php echo "$array_UNIT_NAME_CLAN[$chosenUnitIndex]" ?></span><br>
+					<span style="font-size: 20px; color: #aaaaaa;">IS: <?php echo "$array_UNIT_NAME_IS[$chosenUnitIndex]" ?></span><br><br>
 
 					<div id="pilotinfo" valign="bottom" align="right">
 						<table cellspacing="0" cellpadding="0">
