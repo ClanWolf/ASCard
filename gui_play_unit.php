@@ -999,7 +999,7 @@ if ($showDistancesHexes == 1) {
 					<div class="dataarea_content">
 						<table width="100%">
 							<tr>
-								<td onclick="toggleTargetingComputer();" nowrap style="text-align:center;" width="5%" id="targetcomp" rowspan="2">&nbsp;&nbsp;&nbsp;<i class="fa-solid fa-circle-left" style="color:#999;font-size:40px;"></i>&nbsp;&nbsp;&nbsp;</td>
+								<td onclick="toggleTargetingComputer();" nowrap style="text-align:center;" width="5%" id="targetcomp" rowspan="2">&nbsp;&nbsp;<i class="fa-solid fa-circle-left" style="color:#999;font-size:35px;"></i>&nbsp;&nbsp;</td>
 								<!-- <td nowrap class="datalabel" width="12%">TP:</td> -->
 								<td nowrap class="datavalue" width="25%" id="unit_type" colspan="4"><?php echo "$array_TP[$chosenUnitIndex]"; ?>/<?php echo "$array_SZ[$chosenUnitIndex]"; ?><span class='datalabel_thin_small' style='text-transform:lowercase;'> (<?php echo "$array_TON[$chosenUnitIndex]"; ?>t)</span></td>
 								<td id="tmmLabel" nowrap class="datalabel" width="12%">TMM:</td>
