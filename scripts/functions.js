@@ -1650,7 +1650,8 @@ function toggleTargetingComputer() {
 	if($('#TargetingComputer').is(':visible')) {
 		$("#TargetingComputer").hide();
 		document.getElementById("TargetingComputer").style.display = "none";
-		document.getElementById("targetcomp").innerHTML = "&nbsp;&nbsp;&nbsp;<i class='fa-solid fa-bullseye' style='color:#999;font-size:40px;'></i>&nbsp;&nbsp;&nbsp;";
+		//document.getElementById("targetcomp").innerHTML = "&nbsp;&nbsp;&nbsp;<i class='fa-solid fa-bullseye' style='color:#999;font-size:40px;'></i>&nbsp;&nbsp;&nbsp;";
+		document.getElementById("targetcomp").innerHTML = "&nbsp;&nbsp;&nbsp;<i class='fa-solid fa-crosshairs' style='color:#999;font-size:40px;'></i>&nbsp;&nbsp;&nbsp;";
 		setCookie("tcmp", 0, 365);
 		playTCCloseSound();
 	} else {
