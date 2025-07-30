@@ -159,11 +159,21 @@ session_start();
 
 	<br>
 
-	<table align="center" cellspacing=2 cellpadding=2 border=0px>
-
-EDIT FORMATION
-
-	</table>
+	<form autocomplete="autocomplete_off_hack_xfr4!k">
+		<table class="options" cellspacing="2" cellpadding="2" border=0px>
+			<tr>
+				<td colspan="1" width='5%' class='datalabel' nowrap align="left">Formation name:</td>
+				<td colspan="1" width='90%' class='datalabel'>
+					<input autocomplete="autocomplete_off_hack_xfr4!k" required type="text" id="FormationName">
+				</td>
+				<td rowspan="2"  width='5%' class='datalabel'>
+					<span style='font-size:16px;'>
+						<a href="#" onClick="save(0,'none');"><i class="fa-solid fa-floppy-disk"></i></a>
+					</span>
+				</td>
+			</tr>
+		</table>
+	</form>
 </body>
 
 </html>
