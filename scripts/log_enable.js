@@ -11,6 +11,17 @@ document.addEventListener('keydown', function(event) {
 				setCookie("showLog", 1, 1);
 			}
 		}
+		if (document.getElementById("iframe_serverpoll") != null) {
+			if (document.getElementById("iframe_serverpoll").style.visibility == "visible") {
+				document.getElementById("iframe_serverpoll").style.visibility = "hidden";
+				document.getElementById("iframe_serverpoll").style.display = "none";
+				setCookie("showLog", 0, 1);
+			} else {
+				document.getElementById("iframe_serverpoll").style.visibility = "visible";
+				document.getElementById("iframe_serverpoll").style.display = "block";
+				setCookie("showLog", 1, 1);
+			}
+		}
 		event.preventDefault();
 	}
 });
@@ -23,10 +34,18 @@ if (showLogCookieValue) {
 			document.getElementById("iframe_save").style.visibility = "visible";
 			document.getElementById("iframe_save").style.display = "block";
 		}
+		if (document.getElementById("iframe_serverpoll") != null) {
+			document.getElementById("iframe_serverpoll").style.visibility = "visible";
+			document.getElementById("iframe_serverpoll").style.display = "block";
+		}
 	} else {
 		if (document.getElementById("iframe_save") != null) {
 			document.getElementById("iframe_save").style.visibility = "hidden";
 			document.getElementById("iframe_save").style.display = "none";
+		}
+		if (document.getElementById("iframe_serverpoll") != null) {
+			document.getElementById("iframe_serverpoll").style.visibility = "hidden";
+			document.getElementById("iframe_serverpoll").style.display = "none";
 		}
 	}
 }

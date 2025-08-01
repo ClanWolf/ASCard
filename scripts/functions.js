@@ -139,14 +139,51 @@ function readCircles2(caller, index, a_max, s_max, mv_bt_id, f_bt_id) {
 	});
 
 	// Build up the crit history for CV
+	let addToHistString = "";
 	if (e_cv > CD_CV_E) {
-		console.log("Engine crit +1");
+		addToHistString += "|E+1";
 		CD_CV_E = e_cv;
 	}
 	if (e_cv < CD_CV_E) {
-		console.log("Engine crit -1");
+		addToHistString += "|E-1";
 		CD_CV_E = e_cv;
 	}
+	if (w_cv > CD_CV_W) {
+		addToHistString += "|W+1";
+		CD_CV_W = w_cv;
+	}
+	if (w_cv < CD_CV_W) {
+		addToHistString += "|W-1";
+		CD_CV_W = w_cv;
+	}
+	if (ma_cv > CD_CV_MA) {
+		addToHistString += "|MA+1";
+		CD_CV_MA = ma_cv;
+	}
+	if (ma_cv < CD_CV_MA) {
+		addToHistString += "|MA-1";
+		CD_CV_MA = ma_cv;
+	}
+	if (mb_cv > CD_CV_MB) {
+		addToHistString += "|MB+1";
+		CD_CV_MB = mb_cv;
+	}
+	if (mb_cv < CD_CV_MB) {
+		addToHistString += "|MB-1";
+		CD_CV_MB = mb_cv;
+	}
+	if (mc_cv > CD_CV_MC) {
+		addToHistString += "|MC+1";
+		CD_CV_MC = mc_cv;
+	}
+	if (mc_cv < CD_CV_MC) {
+		addToHistString += "|MC-1";
+		CD_CV_MC = mc_cv;
+	}
+	if (addToHistString !== "") {
+		console.log(crit_hist + addToHistString);
+	}
+	// ----------------------------------------
 
 	var radioMV2_moved2_standstill = document.getElementById("MV2_moved2_standstill");
 	var radioMV10_moved10_hulldown = document.getElementById("MV10_moved10_hulldown");
@@ -1650,14 +1687,14 @@ function toggleTargetingComputer() {
 	if($('#TargetingComputer').is(':visible')) {
 		$("#TargetingComputer").hide();
 		document.getElementById("TargetingComputer").style.display = "none";
-		//document.getElementById("targetcomp").innerHTML = "&nbsp;&nbsp;&nbsp;<i class='fa-solid fa-bullseye' style='color:#999;font-size:40px;'></i>&nbsp;&nbsp;&nbsp;";
-		document.getElementById("targetcomp").innerHTML = "&nbsp;&nbsp;&nbsp;<i class='fa-solid fa-crosshairs' style='color:#999;font-size:40px;'></i>&nbsp;&nbsp;&nbsp;";
+		//document.getElementById("targetcomp").innerHTML = "&nbsp;<i class='fa-solid fa-bullseye' style='color:#999;font-size:35px;'></i>&nbsp;&nbsp;";
+		document.getElementById("targetcomp").innerHTML = "&nbsp;<i class='fa-solid fa-crosshairs' style='color:#999;font-size:35px;'></i>&nbsp;&nbsp;";
 		setCookie("tcmp", 0, 365);
 		playTCCloseSound();
 	} else {
 		$("#TargetingComputer").show();
 		document.getElementById("TargetingComputer").style.display = "block";
-		document.getElementById("targetcomp").innerHTML = "&nbsp;&nbsp;&nbsp;<i class='fa-solid fa-circle-left' style='color:#999;font-size:40px;'></i>&nbsp;&nbsp;&nbsp;";
+		document.getElementById("targetcomp").innerHTML = "&nbsp;<i class='fa-solid fa-circle-left' style='color:#999;font-size:35px;'></i>&nbsp;&nbsp;";
 		setCookie("tcmp", 1, 365);
 		playTCOpenSound();
 	}

@@ -9,9 +9,14 @@
 	require('./logger.php');
 	require('./db.php');
 
-	$pid = isset($_SESSION["playerid"]) ? filter_var($_SESSION["playerid"], FILTER_VALIDATE_INT) : "(not found)";
-	$gid = isset($_SESSION["gameid"]) ? filter_var($_SESSION["gameid"], FILTER_VALIDATE_INT) : "(not found)";
-	$gts_s = isset($_SESSION["gameTimestamp"]) ? filter_var($_SESSION["gameTimestamp"], FILTER_VALIDATE_INT) : "(not found)";
+	$pid = isset($_SESSION["playerid"]) ? filter_var($_SESSION["playerid"], FILTER_VALIDATE_INT) : "not found";
+	$gid = isset($_SESSION["gameid"]) ? filter_var($_SESSION["gameid"], FILTER_VALIDATE_INT) : "not found";
+	$gts_s = isset($_SESSION["gameTimestamp"]) ? filter_var($_SESSION["gameTimestamp"], FILTER_VALIDATE_INT) : "not found";
+
+	if ($pid === "not found") {
+		echo "LOGIN EXPIRED. REDIRECT TO LOGIN...<br>\n";
+		echo "<script>top.location.assign('./login.php?auto=1');</script>";
+	}
 
 	date_default_timezone_set('Europe/Berlin');
 	$cts=time();
@@ -24,6 +29,8 @@
 	echo "</head>\n";
 	echo "<body>\n";
 	echo "	<p style='font-family:Arial,sans-serif;font-size:14px;color:yellow;'>";
+
+	echo "pid: ".$pid." --- ";
 
 	$currentGameId = -1;
     $sql_currentGame = "SELECT SQL_NO_CACHE gameid FROM asc_player WHERE playerid=".$pid.";";
@@ -44,7 +51,6 @@
     }
     mysqli_free_result($result_currentGameTimestamp);
 
-	echo "pid: ".$pid."<br>\n";
 	echo "gid: ".$gid."/".$currentGameId."<br>\n";
 	echo "".$gts_s." gts_s (session)<br>\n";
 	echo "".$gts_d." gts_d (db)<br>\n";

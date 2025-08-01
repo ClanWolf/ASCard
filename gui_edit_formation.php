@@ -47,8 +47,6 @@ session_start();
 	<meta name="apple-mobile-web-app-title" content="ASCard">
 	<meta name="viewport" content="width=device-width, initial-scale=0.75, minimum-scale=0.75, maximum-scale=1.85, user-scalable=yes" />
 
-	<meta http-equiv="refresh" content="5" />
-
 	<link rel="manifest" href="/app/ascard.webmanifest">
 	<link rel="stylesheet" type="text/css" href="./fontawesome/css/all.min.css" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="./styles/styles.css">
@@ -80,6 +78,10 @@ session_start();
 				}
 			]
 		}
+		function changeResultingName() {
+		}
+		function save() {
+		}
 	</script>
 	<script type="text/javascript" src="./scripts/passive-events-support/main.js"></script>
 
@@ -94,6 +96,32 @@ session_start();
 		table {
 			margin-left: auto;
 			margin-right: auto;
+		}
+		input, select {
+			width: 80px;
+			vertical-align: middle;
+			color: #ddd;
+			border-width: 0px;
+			padding: 2px;
+			font-family: 'Pathway Gothic One', sans-serif;
+		}
+		select:focus, textarea:focus, input:focus {
+			outline: none;
+		}
+		select:invalid, input:invalid {
+			background: rgba(40,40,40,0.75);;
+		}
+		select:valid, input:valid {
+			background: rgba(70,70,70,0.75);;
+		}
+		.scroll-pane {
+			width: 100%;
+			height: 200px;
+			overflow: auto;
+		}
+		.horizontal-only {
+			height: auto;
+			max-height: 200px;
 		}
 	</style>
 </head>
@@ -160,15 +188,64 @@ session_start();
 	<br>
 
 	<form autocomplete="autocomplete_off_hack_xfr4!k">
-		<table class="options" cellspacing="2" cellpadding="2" border=0px>
+		<table width="50%" class="options" cellspacing="2" cellpadding="2" border=0px>
 			<tr>
 				<td colspan="1" width='5%' class='datalabel' nowrap align="left">Formation name:</td>
-				<td colspan="1" width='90%' class='datalabel'>
-					<input autocomplete="autocomplete_off_hack_xfr4!k" required type="text" id="FormationName">
+				<td colspan="1" width='90%' class='datalabel' style="width:100%;">
+					<input autocomplete="autocomplete_off_hack_xfr4!k" required onchange="changeResultingName();" type="text" id="NewFormationName" width="100%" style="width:100%;">
 				</td>
-				<td rowspan="2"  width='5%' class='datalabel'>
+			</tr>
+			<tr>
+				<td colspan="1" width='5%' class='datalabel' nowrap align="left">Formation type:</td>
+				<td colspan="1" width='90%' class='datalabel' style="width:100%;">
+					<select required name='NewFormationType' id='NewFormationType' onchange="changeResultingName();" size='1' style='width:100%;'>
+						<option value="" selected></option>
+						<option value="BATTLE" selected>BATTLE</option>
+						<option value="ASSAULT">ASSAULT</option>
+						<option value="STRIKER">STRIKER/CAVALRY</option>
+						<option value="CAVALRY">STRIKER/CAVALRY</option>
+						<option value="FIRE">FIRE</option>
+						<option value="RECON">RECON</option>
+						<option value="PURSUIT">PURSUIT</option>
+						<option value="COMMAND">COMMAND</option>
+						<option value="SUPPORT">SUPPORT</option>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="1" width='5%' class='datalabel' nowrap align="left">Formation type:</td>
+				<td colspan="1" width='90%' class='datalabel' style="width:100%;">
+					<select required name='NewFormationType' id='NewFormationType' onchange="changeResultingName();" size='1' style='width:100%;'>
+						<option value="STAR" selected>STAR</option>
+						<option value="LANCE">LANCE</option>
+						<option value="LEVEL2">LEVEL2</option>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2" width='5%' class='datalabel' nowrap align="left"><hr></td>
+			</tr>
+			<tr>
+				<td align="left" class='datalabel'>
+					<label class="bigcheck"><input onchange="changeResultingName();" type="checkbox" class="bigcheck" name="AUTOBUILDNAME" value="yes"/><span class="bigcheck-target"></span></label>
+				</td>
+				<td align="left" class="datalabel">
+					Auto build name
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2" width='5%' class='datalabel' nowrap align="left"><hr></td>
+			</tr>
+			<tr>
+				<td colspan="1" width='5%' class='datalabel' nowrap align="left">Resulting name:</td>
+				<td colspan="1" width='90%' class='datalabel' style="width:100%;">
+					Alpha Battle Lance
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2" class='datalabel' align="right">
 					<span style='font-size:16px;'>
-						<a href="#" onClick="save(0,'none');"><i class="fa-solid fa-floppy-disk"></i></a>
+						<a href="#" onClick="save();"><i class="fa-solid fa-floppy-disk"></i></a>
 					</span>
 				</td>
 			</tr>

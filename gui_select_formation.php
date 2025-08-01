@@ -199,7 +199,7 @@ session_start();
 				echo "<tr>\n";
 				if ($jj == 1) {
 					echo "	<td nowrap style='color:#eee;font-size:22;text-align:right;'>\n";
-					echo "		<a href='./gui_play_batchall_sound.php'><i class='fa-solid fa-circle-play'></i>&nbsp;&nbsp;&nbsp;</a>\n";
+					//echo "		<a href='./gui_play_batchall_sound.php'><i class='fa-solid fa-circle-play'></i>&nbsp;&nbsp;&nbsp;</a>\n";
 					echo "		OPFOR&nbsp;&nbsp;&nbsp;\n";
 					echo "	</td>\n";
 				} else {
@@ -272,7 +272,7 @@ session_start();
 				if ($jj == 1) {
 					echo "	<td nowrap style='color:#eee;font-size:22;text-align:left;'>\n";
 					echo "		&nbsp;&nbsp;&nbsp;OPFOR\n";
-					echo "		<a href='./gui_play_batchall_sound.php'>&nbsp;&nbsp;&nbsp;<i class='fa-solid fa-circle-play'></a></i>\n";
+					//echo "		<a href='./gui_play_batchall_sound.php'>&nbsp;&nbsp;&nbsp;<i class='fa-solid fa-circle-play'></a></i>\n";
 					echo "	</td>\n";
 				} else {
 					echo "	<td style='color:#eee;font-size:22;'>&nbsp;&nbsp;&nbsp;</td>\n";

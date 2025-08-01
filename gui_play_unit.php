@@ -13,7 +13,8 @@ session_start();
 		header("Location: ./login.php?auto=1");
 	}
 
-	$pid    = filter_var($_SESSION['playerid'], FILTER_VALIDATE_INT);
+	//$pid    = filter_var($_SESSION['playerid'], FILTER_VALIDATE_INT);
+	$pid = isset($_SESSION["playerid"]) ? filter_var($_SESSION["playerid"], FILTER_VALIDATE_INT) : "not found";
 	$gid    = filter_var($_SESSION['gameid'], FILTER_VALIDATE_INT);
 	$hgid   = filter_var($_SESSION['hostedgameid'], FILTER_VALIDATE_INT);
 	$pimage = htmlspecialchars($_SESSION['playerimage'], ENT_NOQUOTES);
@@ -32,6 +33,11 @@ session_start();
 	$showplayerdata_topleft = $opt2;
 	$playMode               = $opt3;
 	$showDistancesHexes     = $opt4;
+
+	if ($pid === "not found") {
+		echo "LOGIN EXPIRED. REDIRECT TO LOGIN...<br>\n";
+		echo "<script>top.location.assign('./login.php?auto=1');</script>";
+	}
 
 	function textTruncate($text, $chars=25) {
 		if (strpos($text, " | ") !== false) {
@@ -173,6 +179,8 @@ session_start();
 </head>
 
 <body>
+	<iframe name="pollframe" id="iframe_serverpoll" src="server_poll.php"></iframe>
+
 	<script>
 		$(function() {
 			//$('.scroll-pane').jScrollPane({autoReinitialise: true});
@@ -216,6 +224,12 @@ session_start();
 				}
 			}
 		}
+
+		// Reload the polling iFrame every 2 seconds
+		(function(){
+		    document.getElementById("iframe_serverpoll").src="server_poll.php";
+		    setTimeout(arguments.callee, 3000);
+		})();
 	</script>
 <?php
 	$file = file_get_contents('./version.txt', true);
@@ -292,58 +306,64 @@ session_start();
 
 	// Build up the crit history for CV
 	if ($array_CV_ENGN[$chosenUnitIndex] != null) {
-		echo "	var CD_CV_E = $array_CV_ENGN[$chosenUnitIndex];\n";
+		echo "	var CD_CV_E = ".$array_CV_ENGN[$chosenUnitIndex].";\n";
 	}
 	if ($array_CV_WPNS[$chosenUnitIndex] != null) {
-		echo "	var CD_CV_W = $array_CV_WPNS[$chosenUnitIndex];\n";
+		echo "	var CD_CV_W = ".$array_CV_WPNS[$chosenUnitIndex].";\n";
 	}
 	if ($array_CV_MOTV_A[$chosenUnitIndex] != null) {
-		echo "	var CD_CV_MA = $array_CV_MOTV_A[$chosenUnitIndex];\n";
+		echo "	var CD_CV_MA = ".$array_CV_MOTV_A[$chosenUnitIndex].";\n";
 	}
 	if ($array_CV_MOTV_B[$chosenUnitIndex] != null) {
-		echo "	var CD_CV_MB = $array_CV_MOTV_B[$chosenUnitIndex];\n";
+		echo "	var CD_CV_MB = ".$array_CV_MOTV_B[$chosenUnitIndex].";\n";
 	}
 	if ($array_CV_MOTV_C[$chosenUnitIndex] != null) {
-		echo "	var CD_CV_MC = $array_CV_MOTV_C[$chosenUnitIndex];\n";
+		echo "	var CD_CV_MC = ".$array_CV_MOTV_C[$chosenUnitIndex].";\n";
 	}
 
 	if ($array_CV_ENGN_PREP[$chosenUnitIndex] != null) {
-		echo "	var CV_ENGN_PREP = $array_CV_ENGN_PREP[$chosenUnitIndex];\n";
+		echo "	var CV_ENGN_PREP = ".$array_CV_ENGN_PREP[$chosenUnitIndex].";\n";
 	} else {
 		echo "	var CV_ENGN_PREP = 0;\n";
 	}
 	if ($array_CV_FRCTRL_PREP[$chosenUnitIndex] != null) {
-		echo "	var CV_FCTL_PREP = $array_CV_FRCTRL_PREP[$chosenUnitIndex];\n";
+		echo "	var CV_FCTL_PREP = ".$array_CV_FRCTRL_PREP[$chosenUnitIndex].";\n";
 	} else {
 		echo "	var CV_FCTL_PREP = 0;\n";
 	}
 	if ($array_CV_WPNS_PREP[$chosenUnitIndex] != null) {
-		echo "	var CV_WPNS_PREP = $array_CV_WPNS_PREP[$chosenUnitIndex];\n";
+		echo "	var CV_WPNS_PREP = ".$array_CV_WPNS_PREP[$chosenUnitIndex].";\n";
 	} else {
 		echo "	var CV_WPNS_PREP = 0;\n";
 	}
 	if ($array_CV_MOTV_A_PREP[$chosenUnitIndex] != null) {
-		echo "	var CV_MOTVA_PREP = $array_CV_MOTV_A_PREP[$chosenUnitIndex];\n";
+		echo "	var CV_MOTVA_PREP = ".$array_CV_MOTV_A_PREP[$chosenUnitIndex].";\n";
 	} else {
 		echo "	var CV_MOTVA_PREP = 0;\n";
 	}
 	if ($array_CV_MOTV_B_PREP[$chosenUnitIndex] != null) {
-		echo "	var CV_MOTVB_PREP = $array_CV_MOTV_B_PREP[$chosenUnitIndex];\n";
+		echo "	var CV_MOTVB_PREP = ".$array_CV_MOTV_B_PREP[$chosenUnitIndex].";\n";
 	} else {
 		echo "	var CV_MOTVB_PREP = 0;\n";
 	}
 	if ($array_CV_MOTV_C_PREP[$chosenUnitIndex] != null) {
-		echo "	var CV_MOTVC_PREP = $array_CV_MOTV_C_PREP[$chosenUnitIndex];\n";
+		echo "	var CV_MOTVC_PREP = ".$array_CV_MOTV_C_PREP[$chosenUnitIndex].";\n";
 	} else {
 		echo "	var CV_MOTVC_PREP = 0;\n";
 	}
+	if ($array_CRIT_HIST[$chosenUnitIndex] != null) {
+		echo "	var crit_hist = '".$array_CRIT_HIST[$chosenUnitIndex]."';\n";
+	}
+	if ($array_CRIT_HIST_PREP[$chosenUnitIndex] != null) {
+		echo "	var crit_hist_prep = '".$array_CRIT_HIST_PREP[$chosenUnitIndex]."';\n";
+	}
 	if ($array_HT_PREP[$chosenUnitIndex] != null) {
-		echo "	var HT_PREP = $array_HT_PREP[$chosenUnitIndex];\n";
+		echo "	var HT_PREP = ".$array_HT_PREP[$chosenUnitIndex].";\n";
 	} else {
 		echo "	var HT_PREP = 0;\n";
 	}
 	if ($array_MVTYPE[$chosenUnitIndex] != null) {
-		echo "	var MV_TYPE = '$array_MVTYPE[$chosenUnitIndex]';\n";
+		echo "	var MV_TYPE = '".$array_MVTYPE[$chosenUnitIndex]."';\n";
 	} else {
 		echo "	var MV_TYPE = '';\n";
 	}
@@ -999,7 +1019,7 @@ if ($showDistancesHexes == 1) {
 					<div class="dataarea_content">
 						<table width="100%">
 							<tr>
-								<td onclick="toggleTargetingComputer();" nowrap style="text-align:center;" width="5%" id="targetcomp" rowspan="2">&nbsp;&nbsp;<i class="fa-solid fa-circle-left" style="color:#999;font-size:35px;"></i>&nbsp;&nbsp;</td>
+								<td onclick="toggleTargetingComputer();" nowrap style="text-align:center;" width="5%" id="targetcomp" rowspan="2">&nbsp;<i class="fa-solid fa-circle-left" style="color:#999;font-size:35px;"></i>&nbsp;&nbsp;</td>
 								<!-- <td nowrap class="datalabel" width="12%">TP:</td> -->
 								<td nowrap class="datavalue" width="25%" id="unit_type" colspan="4"><?php echo "$array_TP[$chosenUnitIndex]"; ?>/<?php echo "$array_SZ[$chosenUnitIndex]"; ?><span class='datalabel_thin_small' style='text-transform:lowercase;'> (<?php echo "$array_TON[$chosenUnitIndex]"; ?>t)</span></td>
 								<td id="tmmLabel" nowrap class="datalabel" width="12%">TMM:</td>
