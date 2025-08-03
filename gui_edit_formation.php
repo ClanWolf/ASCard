@@ -22,12 +22,20 @@ session_start();
 	$playMode = $opt3;
 
 	$isAdmin = $_SESSION['isAdmin'];
+	$formationId  = isset($_GET["formationid"]) ? filter_var($_GET["formationid"], FILTER_VALIDATE_INT) : -1;
 
 	$sql_asc_playerround = "SELECT SQL_NO_CACHE * FROM asc_player where playerid = " . $pid . ";";
 	$result_asc_playerround = mysqli_query($conn, $sql_asc_playerround);
 	if (mysqli_num_rows($result_asc_playerround) > 0) {
 		while($row = mysqli_fetch_assoc($result_asc_playerround)) {
 			$CURRENTROUND = $row["round"];
+		}
+	}
+	$sql_asc_formation = "SELECT SQL_NO_CACHE * FROM asc_formation where formationid = " . $formationId . ";";
+	$result_asc_formation = mysqli_query($conn, $sql_asc_formation);
+	if (mysqli_num_rows($result_asc_formation) > 0) {
+		while($row444 = mysqli_fetch_assoc($result_asc_formation)) {
+			$FORMATIONNAME = $row444["formationname"];
 		}
 	}
 ?>
@@ -79,6 +87,25 @@ session_start();
 			]
 		}
 		function changeResultingName() {
+			var na = "";
+			var autobuildChecked = 0;
+			var list = document.getElementsByClassName("bigcheck");
+			[].forEach.call(list, function (el1) {
+				na = el1.name;
+				if (typeof na != 'undefined') {
+					if (na.substring(0, 13) == "AUTOBUILDNAME") { autobuildChecked = el1.checked }
+				}
+			})
+
+			let n1 = document.getElementById("NewFormationName").value;
+			let n2 = document.getElementById("NewFormationCategory").value;
+			let n3 = document.getElementById("NewFormationType").value;
+
+			if (autobuildChecked) {
+				document.getElementById("resultingName").innerHTML = n1 + " " + n2 + " " + n3;
+			} else {
+				document.getElementById("resultingName").innerHTML = n1;
+			}
 		}
 		function save() {
 		}
@@ -127,6 +154,9 @@ session_start();
 </head>
 
 <body>
+	<iframe name="saveframe" id="iframe_save"></iframe>
+	<script type="text/javascript" src="./scripts/log_enable.js"></script>
+
 	<script>
 		$(document).ready(function() {
 			$("#cover").hide();
@@ -192,18 +222,18 @@ session_start();
 			<tr>
 				<td colspan="1" width='5%' class='datalabel' nowrap align="left">Formation name:</td>
 				<td colspan="1" width='90%' class='datalabel' style="width:100%;">
-					<input autocomplete="autocomplete_off_hack_xfr4!k" required onchange="changeResultingName();" type="text" id="NewFormationName" width="100%" style="width:100%;">
+					<input autocomplete="autocomplete_off_hack_xfr4!k" required onkeyup="this.value = this.value.toUpperCase();changeResultingName();" onchange="changeResultingName();" type="text" id="NewFormationName" width="100%" style="width:100%;">
 				</td>
 			</tr>
 			<tr>
 				<td colspan="1" width='5%' class='datalabel' nowrap align="left">Formation type:</td>
 				<td colspan="1" width='90%' class='datalabel' style="width:100%;">
-					<select required name='NewFormationType' id='NewFormationType' onchange="changeResultingName();" size='1' style='width:100%;'>
+					<select required name='NewFormationCategory' id='NewFormationCategory' onchange="changeResultingName();" size='1' style='width:100%;'>
 						<option value="" selected></option>
 						<option value="BATTLE" selected>BATTLE</option>
 						<option value="ASSAULT">ASSAULT</option>
-						<option value="STRIKER">STRIKER/CAVALRY</option>
-						<option value="CAVALRY">STRIKER/CAVALRY</option>
+						<option value="STRIKER">STRIKER</option>
+						<option value="CAVALRY">CAVALRY</option>
 						<option value="FIRE">FIRE</option>
 						<option value="RECON">RECON</option>
 						<option value="PURSUIT">PURSUIT</option>
@@ -218,7 +248,7 @@ session_start();
 					<select required name='NewFormationType' id='NewFormationType' onchange="changeResultingName();" size='1' style='width:100%;'>
 						<option value="STAR" selected>STAR</option>
 						<option value="LANCE">LANCE</option>
-						<option value="LEVEL2">LEVEL2</option>
+						<option value="LEVEL II">LEVEL II</option>
 					</select>
 				</td>
 			</tr>
@@ -227,9 +257,9 @@ session_start();
 			</tr>
 			<tr>
 				<td align="left" class='datalabel'>
-					<label class="bigcheck"><input onchange="changeResultingName();" type="checkbox" class="bigcheck" name="AUTOBUILDNAME" value="yes"/><span class="bigcheck-target"></span></label>
+					<label class="bigcheck"><input onchange="changeResultingName();" type="checkbox" class="bigcheck" name="AUTOBUILDNAME" value="yes" checked="true"/><span class="bigcheck-target"></span></label>
 				</td>
-				<td align="left" class="datalabel">
+				<td align="left" nowrap class="datalabel">
 					Auto build name
 				</td>
 			</tr>
@@ -238,8 +268,8 @@ session_start();
 			</tr>
 			<tr>
 				<td colspan="1" width='5%' class='datalabel' nowrap align="left">Resulting name:</td>
-				<td colspan="1" width='90%' class='datalabel' style="width:100%;">
-					Alpha Battle Lance
+				<td colspan="1" width='90%' class='datalabel' nowrap style="width:100%;">
+					<span id="resultingName"><?php echo $FORMATIONNAME ?></span>
 				</td>
 			</tr>
 			<tr>
