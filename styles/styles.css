@@ -192,6 +192,21 @@ a:hover {
 	background-color: rgba(10, 10, 10, 0.90);
 	z-index:1100;
 }
+#formationtypescontainer {
+	text-align: center;
+	position: fixed;
+	display: block; /* none, block */
+	visibility: visible; /* hidden, visible */
+	width: 100%;
+	height: 100%;
+	top: 65px;
+	left: 0px;
+	right: 0px;
+	bottom: 0px;
+	background: transparent;
+	background-color: rgba(10, 10, 10, 0.90);
+	z-index:1060;
+}
 #specialabilitiescontainer {
 	text-align: center;
 	position: fixed;

@@ -36,6 +36,8 @@ session_start();
 	if (mysqli_num_rows($result_asc_formation) > 0) {
 		while($row444 = mysqli_fetch_assoc($result_asc_formation)) {
 			$FORMATIONNAME = $row444["formationname"];
+			$FORMATIONTYPE = $row444["formationtype"];
+			$FORMATION = $row444["formation"];
 		}
 	}
 ?>
@@ -86,6 +88,30 @@ session_start();
 				}
 			]
 		}
+	</script>
+
+	<script type="text/javascript" src="./scripts/passive-events-support/main.js"></script>
+	<script type="text/javascript" src="./scripts/jquery-3.7.1.min.js"></script>
+	<script type="text/javascript" src="./scripts/jquery.jscrollpane.min.js"></script>
+	<script type="text/javascript" src="./scripts/jquery.mousewheel.js"></script>
+	<script type="text/javascript" src="./scripts/howler.min.js"></script>
+	<script type="text/javascript" src="./scripts/cookies.js"></script>
+	<script type="text/javascript" src="./scripts/formationtypes.js"></script>
+
+	<script>
+		let formationName = "<?php echo $FORMATIONNAME; ?>";
+		let formationType = "<?php echo $FORMATIONTYPE; ?>";
+		let formation = "<?php echo $FORMATION; ?>";
+
+		function showFormationTypeInfo(formType) {
+			// If fadeIn is used here, css animation does not work anymore
+			document.getElementById("formationtypescontainer").style.visibility = "visible";
+			showFormationType(formType);
+		}
+		function closeFormationTypeInfo() {
+			// If fadeIn is used here, css animation does not work anymore
+			document.getElementById("formationtypescontainer").style.visibility = "hidden";
+		}
 		function changeResultingName() {
 			var na = "";
 			var autobuildChecked = 0;
@@ -97,9 +123,13 @@ session_start();
 				}
 			})
 
-			let n1 = document.getElementById("NewFormationName").value;
-			let n2 = document.getElementById("NewFormationCategory").value;
-			let n3 = document.getElementById("NewFormationType").value;
+			let n1 = document.getElementById("NewFormationName").value.replace(/[^A-Za-z0-9 ]/g, '').replace(/  +/g, ' ');
+			let n2 = document.getElementById("NewFormationType").value.replace(/[^A-Za-z0-9 ]/g, '').replace(/  +/g, ' ');
+			let n3 = document.getElementById("NewFormation").value.replace(/[^A-Za-z0-9 ]/g, '').replace(/  +/g, ' ');
+
+			document.getElementById("NewFormationName").value = n1;
+			document.getElementById("NewFormationType").value = n2;
+			document.getElementById("NewFormation").value = n3;
 
 			if (autobuildChecked) {
 				document.getElementById("resultingName").innerHTML = n1 + " " + n2 + " " + n3;
@@ -108,13 +138,15 @@ session_start();
 			}
 		}
 		function save() {
+			let n1 = document.getElementById("NewFormationName").value;
+			let n2 = document.getElementById("NewFormationType").value;
+			let n3 = document.getElementById("NewFormation").value;
+
+			if (!n1 || !n2 || !n3) {
+				console.log("Missing data");
+			}
 		}
 	</script>
-	<script type="text/javascript" src="./scripts/passive-events-support/main.js"></script>
-
-	<script type="text/javascript" src="./scripts/jquery-3.7.1.min.js"></script>
-	<script type="text/javascript" src="./scripts/howler.min.js"></script>
-	<script type="text/javascript" src="./scripts/cookies.js"></script>
 
 	<style>
 		html, body {
@@ -143,12 +175,12 @@ session_start();
 		}
 		.scroll-pane {
 			width: 100%;
-			height: 200px;
+			height: 100px;
 			overflow: auto;
 		}
 		.horizontal-only {
 			height: auto;
-			max-height: 200px;
+			max-height: 100px;
 		}
 	</style>
 </head>
@@ -158,8 +190,36 @@ session_start();
 	<script type="text/javascript" src="./scripts/log_enable.js"></script>
 
 	<script>
+//		$(function() {
+//			//$('.scroll-pane').jScrollPane({autoReinitialise: true});
+//			$('.scroll-pane').jScrollPane();
+//		});
 		$(document).ready(function() {
 			$("#cover").hide();
+
+			// console.log("Name: " + formationName);
+			// console.log("Type: " + formationType);
+			// console.log("Formation: " + formation);
+
+			document.getElementById("NewFormationName").value = formationName;
+			document.getElementById("NewFormationType").value = formationType;
+			document.getElementById("NewFormation").value = formation;
+
+			let res = formationName;
+			if (formationType) {
+				res = res + " " + formationType;
+			}
+			if (formation) {
+				res = res + " " + formation;
+			}
+			document.getElementById("resultingName").innerHTML = res;
+
+			let realhightofscrollbar = document.getElementById("scrollcontainer").offsetHeight;
+			console.log(realhightofscrollbar);
+			var scrollcontainerdivs = document.getElementsByClassName("scroll-pane");
+			for(var i=0; i < scrollcontainerdivs.length; i++) {
+				scrollcontainerdivs[i].style.height = realhightofscrollbar+"px";
+			}
 		});
 	</script>
 
@@ -176,6 +236,61 @@ session_start();
 		}
 	}
 ?>
+
+	<div id="formationtypescontainer" style="visibility:hidden;" onclick="javascript:closeFormationTypeInfo();">
+		<div class="hudcenteranimation">
+			<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 1000 1000" style="enable-background:new 0 0 1000 1000;" xml:space="preserve">
+				<circle class="st0" cx="500" cy="500" r="302.8">
+					<animateTransform attributeType="xml" attributeName="transform" type="rotate" from="0 500 500" to="360 500 500" dur="100s" repeatCount="indefinite"></animateTransform>
+				</circle>
+				<circle class="st1" cx="500" cy="500" r="237.7">
+					<animateTransform attributeType="xml" attributeName="transform" type="rotate" from="0 500 500" to="360 500 500" dur="40s" repeatCount="indefinite"></animateTransform>
+				</circle>
+				<circle class="st2" cx="500" cy="500" r="366.8">
+					<animateTransform attributeType="xml" attributeName="transform" type="rotate" from="0 500 500" to="-360 500 500" dur="50s" repeatCount="indefinite"></animateTransform>
+				</circle>
+				<circle class="st3" cx="500" cy="500" r="395.1"></circle>
+			</svg>
+		</div>
+		<br>
+		<br>
+		<table width="100%" height="70%">
+			<tr>
+				<td width="10%" align="right" valign="top" class="datalabel">&nbsp;</td>
+				<td width="80%">
+					<table class="options" width="100%" style="height:100%;" cellspacing=4 cellpadding=8 border=0px>
+						<tr>
+							<td class="datalabel" id="ut_name" align="left" width="90%" style="font-size:1.2em;">...</td><td nowrap class="datalabel" id="ut_variation" align="right" width="10%" style="font-size:1.2em;">...</td>
+						</tr>
+						<tr>
+							<td class="datavalue_thinflow" style="font-size:0.75em;" align="left">
+								<span id="ut_source">...</span>, <span id="ut_page">...</span>
+							</td>
+							<td nowrap class="datavalue_thinflow" id="ut_type">...</td>
+						</tr>
+						<tr>
+							<td class="datavalue_thin" colspan="2"><hr></td>
+						</tr>
+						<tr>
+							<td height="100%" colspan="2" align="left" valign="top" id="scrollcontainer">
+								<div class='scroll-pane' width="100%" style="width:100%;">
+									<table width="100%"><tr><td class="datavalue_thinflow" id="ut_desc">...</td></tr></table>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td class="datavalue_thin" colspan="2"><hr></td>
+						</tr>
+						<tr>
+							<td nowrap class="datavalue_thin" colspan="2" align="center"><a href="javascript:closeFormationTypeInfo();">CLOSE</a></td>
+						</tr>
+					</table>
+				</td>
+				<td width="10%" align="right" valign="top" class="datalabel">&nbsp;</td>
+				<!-- <td width="10%" align="left" valign="top"><a href="javascript:closeSpecialAbilities();">&nbsp;&nbsp;&nbsp;<i class="fa-solid fa-xmark" style="font-size:3em;"></i></a></td> -->
+			</tr>
+		</table>
+	</div>
 
 	<div id="header">
 		<table style="width:100%;height:60px;border:none;border-collapse:collapse;background:rgba(50,50,50,1.0);" cellspacing="0" cellpadding="0">
@@ -224,28 +339,63 @@ session_start();
 				<td colspan="1" width='90%' class='datalabel' style="width:100%;">
 					<input autocomplete="autocomplete_off_hack_xfr4!k" required onkeyup="this.value = this.value.toUpperCase();changeResultingName();" onchange="changeResultingName();" type="text" id="NewFormationName" width="100%" style="width:100%;">
 				</td>
-			</tr>
-			<tr>
-				<td colspan="1" width='5%' class='datalabel' nowrap align="left">Formation type:</td>
-				<td colspan="1" width='90%' class='datalabel' style="width:100%;">
-					<select required name='NewFormationCategory' id='NewFormationCategory' onchange="changeResultingName();" size='1' style='width:100%;'>
-						<option value="" selected></option>
-						<option value="BATTLE" selected>BATTLE</option>
-						<option value="ASSAULT">ASSAULT</option>
-						<option value="STRIKER">STRIKER</option>
-						<option value="CAVALRY">CAVALRY</option>
-						<option value="FIRE">FIRE</option>
-						<option value="RECON">RECON</option>
-						<option value="PURSUIT">PURSUIT</option>
-						<option value="COMMAND">COMMAND</option>
-						<option value="SUPPORT">SUPPORT</option>
-					</select>
-				</td>
+				<td rowspan="3" nowrap valign="middle"><a href="javascript:showFormationTypeInfo(document.getElementById('NewFormationType').value);">&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa-solid fa-circle-info"></i></i>&nbsp;&nbsp;</a></td>
 			</tr>
 			<tr>
 				<td colspan="1" width='5%' class='datalabel' nowrap align="left">Formation type:</td>
 				<td colspan="1" width='90%' class='datalabel' style="width:100%;">
 					<select required name='NewFormationType' id='NewFormationType' onchange="changeResultingName();" size='1' style='width:100%;'>
+						<option value="AEROSPACE SUPERIORITY">AEROSPACE SUPERIORITY</option>
+						<option value="AIR">AIR</option>
+						<option value="ANTI-MECH">ANTI-MECH</option>
+						<option value="ASSAULT">ASSAULT</option>
+						<option value="FAST ASSAULT">FAST ASSAULT</option>
+						<option value="BATTLE" selected>BATTLE</option>
+						<option value="LIGHT BATTLE">LIGHT BATTLE</option>
+						<option value="MEDIUM BATTLE">MEDIUM BATTLE</option>
+						<option value="HEAVY BATTLE">HEAVY BATTLE</option>
+						<option value="BERSERKER">BERSERKER</option>
+						<option value="CAVALRY">CAVALRY</option>
+						<option value="LIGHT CAVALRY">LIGHT CAVALRY</option>
+						<option value="MECHANIZED COMBINED TRANSPORT">MECHANIZED COMBINED TRANSPORT</option>
+						<option value="NOVA COMBINED TRANSPORT">NOVA COMBINED TRANSPORT</option>
+						<option value="COMMAND">COMMAND</option>
+						<option value="VEHICLE COMMAND">VEHICLE COMMAND</option>
+						<option value="ELECTRONIC WARFARE">ELECTRONIC WARFARE</option>
+						<option value="FIRE">FIRE</option>
+						<option value="SUPPORT FIRE">SUPPORT FIRE</option>
+						<option value="ARTILLERY FIRE">ARTILLERY FIRE</option>
+						<option value="DIRECT FIRE">DIRECT FIRE</option>
+						<option value="ANTI-AIR FIRE">ANTI-AIR FIRE</option>
+						<option value="FIRE SUPPORT">FIRE SUPPORT</option>
+						<option value="HORDE">HORDE</option>
+						<option value="HUNTER">HUNTER</option>
+						<option value="INTERCEPTOR">INTERCEPTOR</option>
+						<option value="LIGHT FIRE">LIGHT FIRE</option>
+						<option value="ORDER">ORDER</option>
+						<option value="PHALANX">PHALANX</option>
+						<option value="PURSUIT">PURSUIT</option>
+						<option value="PROBE PURSUIT">PROBE PURSUIT</option>
+						<option value="SWEEP PURSUIT">SWEEP PURSUIT</option>
+						<option value="RECCON">RECCON</option>
+						<option value="LIGHT RECCON">LIGHT RECCON</option>
+						<option value="HEAVY RECCON">HEAVY RECCON</option>
+						<option value="RIFLE">RIFLE</option>
+						<option value="ROGUE">ROGUE</option>
+						<option value="STRATEGIC COMMAND">STRATEGIC COMMAND</option>
+						<option value="STRIKE">STRIKE</option>
+						<option value="STRIKER">STRIKER</option>
+						<option value="LIGHT STRIKER">LIGHT STRIKER</option>
+						<option value="HEAVY STRIKER">HEAVY STRIKER</option>
+						<option value="SUPPORT">SUPPORT</option>
+						<option value="TRANSPORT">TRANSPORT</option>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="1" width='5%' class='datalabel' nowrap align="left">Formation:</td>
+				<td colspan="1" width='90%' class='datalabel' style="width:100%;">
+					<select required name='NewFormation' id='NewFormation' onchange="changeResultingName();" size='1' style='width:100%;'>
 						<option value="STAR" selected>STAR</option>
 						<option value="LANCE">LANCE</option>
 						<option value="LEVEL II">LEVEL II</option>
@@ -253,27 +403,27 @@ session_start();
 				</td>
 			</tr>
 			<tr>
-				<td colspan="2" width='5%' class='datalabel' nowrap align="left"><hr></td>
+				<td colspan="3" width='5%' class='datalabel' nowrap align="left"><hr></td>
 			</tr>
 			<tr>
 				<td align="left" class='datalabel'>
 					<label class="bigcheck"><input onchange="changeResultingName();" type="checkbox" class="bigcheck" name="AUTOBUILDNAME" value="yes" checked="true"/><span class="bigcheck-target"></span></label>
 				</td>
-				<td align="left" nowrap class="datalabel">
+				<td colspan="2" align="left" nowrap class="datalabel">
 					Auto build name
 				</td>
 			</tr>
 			<tr>
-				<td colspan="2" width='5%' class='datalabel' nowrap align="left"><hr></td>
+				<td colspan="3" width='5%' class='datalabel' nowrap align="left"><hr></td>
 			</tr>
 			<tr>
 				<td colspan="1" width='5%' class='datalabel' nowrap align="left">Resulting name:</td>
-				<td colspan="1" width='90%' class='datalabel' nowrap style="width:100%;">
+				<td colspan="2" width='90%' class='datalabel' nowrap style="width:100%;">
 					<span id="resultingName"><?php echo $FORMATIONNAME ?></span>
 				</td>
 			</tr>
 			<tr>
-				<td colspan="2" class='datalabel' align="right">
+				<td colspan="3" class='datalabel' align="right">
 					<span style='font-size:16px;'>
 						<a href="#" onClick="save();"><i class="fa-solid fa-floppy-disk"></i></a>
 					</span>

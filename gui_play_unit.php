@@ -186,6 +186,14 @@ session_start();
 			//$('.scroll-pane').jScrollPane({autoReinitialise: true});
 			$('.scroll-pane').jScrollPane();
 		});
+		$(document).ready(function() {
+			let realhightofscrollbar = document.getElementById("scrollcontainer").offsetHeight;
+			console.log(realhightofscrollbar);
+			var scrollcontainerdivs = document.getElementsByClassName("scroll-pane");
+			for(var i=0; i < scrollcontainerdivs.length; i++) {
+				scrollcontainerdivs[i].style.height = realhightofscrollbar+"px";
+			}
+		});
 		function showSpecialAbility(p) {
 			// If fadeIn is used here, css animation does not work anymore
 			playTapSound();
@@ -283,10 +291,8 @@ session_start();
 	}
 	echo "	var maximalarmorpoints = ".$array_A_MAX[$chosenUnitIndex].";\n";
 	echo "	var maximalstructurepoints = ".$array_S_MAX[$chosenUnitIndex].";\n";
-
 	echo "	var currentA = ".$array_A[$chosenUnitIndex].";\n";
 	echo "	var currentS = ".$array_S[$chosenUnitIndex].";\n";
-
 	echo "	var originalunitimage = '".$array_UNIT_IMG_URL[$chosenUnitIndex]."';\n";
 	echo "	var deadunitimage = 'skull.png';\n";
 	echo "	var originalTMM = ".$array_TMM[$chosenUnitIndex].";\n";
@@ -320,7 +326,6 @@ session_start();
 	if ($array_CV_MOTV_C[$chosenUnitIndex] != null) {
 		echo "	var CD_CV_MC = ".$array_CV_MOTV_C[$chosenUnitIndex].";\n";
 	}
-
 	if ($array_CV_ENGN_PREP[$chosenUnitIndex] != null) {
 		echo "	var CV_ENGN_PREP = ".$array_CV_ENGN_PREP[$chosenUnitIndex].";\n";
 	} else {
@@ -404,7 +409,6 @@ session_start();
 <script type="text/javascript" src="./scripts/log_enable.js"></script>
 
 <div id="specialabilitiescontainer" style="visibility:hidden;" onclick="javascript:closeSpecialAbilities();">
-
 	<div class="hudcenteranimation">
 		<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 1000 1000" style="enable-background:new 0 0 1000 1000;" xml:space="preserve">
 			<circle class="st0" cx="500" cy="500" r="302.8">
@@ -432,7 +436,7 @@ session_start();
 					</tr>
 					<tr>
 						<td class="datavalue_thinflow" style="font-size:0.75em;" align="left">
-							<span  id="sa_source">...</span>, <span id="sa_page">...</span>
+							<span id="sa_source">...</span>, <span id="sa_page">...</span>
 						</td>
 						<td nowrap class="datavalue_thinflow" id="sa_type">...</td>
 					</tr>
@@ -440,7 +444,7 @@ session_start();
 						<td class="datavalue_thin" colspan="2"><hr></td>
 					</tr>
 					<tr>
-						<td height="100%" colspan="2" align="left" valign="top">
+						<td height="100%" colspan="2" align="left" valign="top" id="scrollcontainer">
 							<div class='scroll-pane' width="100%" style="width:100%;">
 								<table width="100%"><tr><td class="datavalue_thinflow" id="sa_rule">...</td></tr></table>
 							</div>
