@@ -786,36 +786,27 @@ a:hover {
 	color: #eeeeee;
 	text-align: center;
 }
-
-
-
 .menu_button_normal {
 	font-size:100%;
-	padding:8px;
+	padding:5px;
 	background-color:#da8e25;
 	color:#000000;
 	text-align:center;
-	height:100%;
 }
 .menu_button_normal:hover {
 	font-size:100%;
-	padding:8px;
+	padding:5px;
 	background-color:#925a0a;
 	color:#000000;
 	text-align:center;
-	height:100%;
 }
 .menu_button_active {
 	font-size:100%;
-	padding:8px;
+	padding:5px;
 	background-color:#694007;
 	color:#ffffff;
 	text-align:center;
-	height:100%;
 }
-
-
-
 .unitselect_button_normal {
 	font-size: 100%;
 	padding: 3px;
@@ -1122,7 +1113,7 @@ input[type='checkbox'].bigcheck:checked + span.bigcheck-target:after {
 .hudcenteranimation {
 	z-index: -50;
 	position: absolute;
-	top: 50px;
+	top: 25px;
 	right: 0px;
 	left: 0px;
 	margin: auto;

@@ -699,7 +699,7 @@ session_start();
 		</tr>
 <?php
 	if ($playMode) {
-		echo "		<tr><td colspan='999' style='background:#050505;height:5px;'></td></tr>\r\n";
+		echo "		<tr><td colspan='999' style='background:rgba(50,50,50,1.0);height:5px;'></td></tr>\r\n";
 	} else {
 		echo "		<tr><td colspan='999' style='background:#da8e25;height:5px;'></td></tr>\r\n";
 	}

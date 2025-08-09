@@ -106,9 +106,11 @@ session_start();
 
 		function showFormationTypeInfo(formType) {
 			// If fadeIn is used here, css animation does not work anymore
-			document.getElementById("formationtypescontainer").style.visibility = "visible";
-			showFormationType(formType);
-			//$('.scroll-pane').jScrollPane();
+			if (formType !== "") {
+				document.getElementById("formationtypescontainer").style.visibility = "visible";
+				showFormationType(formType);
+				//$('.scroll-pane').jScrollPane();
+			}
 		}
 		function closeFormationTypeInfo() {
 			// If fadeIn is used here, css animation does not work anymore
@@ -140,13 +142,21 @@ session_start();
 			}
 		}
 		function save() {
-			let n1 = document.getElementById("NewFormationName").value;
-			let n2 = document.getElementById("NewFormationType").value;
-			let n3 = document.getElementById("NewFormation").value;
+			let n1 = document.getElementById("NewFormationName").value.replace(/[^A-Za-z0-9 ]/g, '').replace(/  +/g, ' ');
+			let n2 = document.getElementById("NewFormationType").value.replace(/[^A-Za-z0-9 ]/g, '').replace(/  +/g, ' ');
+			let n3 = document.getElementById("NewFormation").value.replace(/[^A-Za-z0-9 ]/g, '').replace(/  +/g, ' ');
 
 			if (!n1 || !n2 || !n3) {
 				console.log("Missing data");
 			}
+
+			let param_n1 = encodeURIComponent(n1);
+			let param_n2 = encodeURIComponent(n2);
+			let param_n3 = encodeURIComponent(n3);
+
+			var url="./save_formation_data.php?formationid="+<?php echo $formationId; ?>+"&newformationname="+param_n1+"&newformationtype="+param_n2+"&newformation="+param_n3;
+			alert(url);
+			//window.frames['saveframe'].location.replace(url);
 		}
 	</script>
 
@@ -302,29 +312,29 @@ session_start();
 					<div style='vertical-align:middle;font-size:28px;color:#eee;'>&nbsp;&nbsp;&nbsp;G<?php echo $gid ?>&nbsp;R<?php echo $CURRENTROUND ?>&nbsp;&nbsp;&nbsp;</div>
 				</td>
 				<td style="width:5px;">&nbsp;</td>
-				<td nowrap onclick="location.href='./gui_select_unit.php'" width="<?php echo $buttonWidth ?>"><div class='menu_button_active'><a href='./gui_select_unit.php'>ROSTER</a><br><span style='font-size:16px;'>Choose a unit</span></div></td>
+				<td nowrap onclick="location.href='./gui_select_unit.php'" width="<?php echo $buttonWidth ?>" class='menu_button_active'><a href='./gui_select_unit.php'>ROSTER</a><br><span style='font-size:16px;'>Choose a unit</span></td>
 				<td style="width:5px;">&nbsp;</td>
 
 <?php
 	if ($playMode) {
-		echo "				<td nowrap onclick=\"location.href='./gui_select_formation.php'\" width=".$buttonWidth."><div class='menu_button_normal'><a href='./gui_select_formation.php'>CHALLENGE</a><br><span style='font-size:16px;'>Batchall & bidding</span></div></td><td style='width:5px;'>&nbsp;</td>\n";
+		echo "				<td nowrap onclick=\"location.href='./gui_select_formation.php'\" width=".$buttonWidth." class='menu_button_normal'><a href='./gui_select_formation.php'>CHALLENGE</a><br><span style='font-size:16px;'>Batchall & bidding</span></td><td style='width:5px;'>&nbsp;</td>\n";
 	}
 	if (!$playMode) {
-		echo "				<td nowrap onclick=\"location.href='./gui_assign_unit.php'\" width=".$buttonWidth."><div class='menu_button_normal'><a href='./gui_assign_unit.php'>ASSIGN</a><br><span style='font-size:16px;'>Assign unit</span></div></td><td style='width:5px;'>&nbsp;</td>\n";
-		echo "				<td nowrap onclick=\"location.href='./gui_create_unit.php'\" width=".$buttonWidth."><div class='menu_button_normal'><a href='./gui_create_unit.php'>ADD</a><br><span style='font-size:16px;'>Create a unit</span></div></td><td style='width:5px;'>&nbsp;</td>\n";
-		echo "				<td nowrap onclick=\"location.href='./gui_edit_game.php'\" width=".$buttonWidth."><div class='menu_button_normal'><a href='./gui_edit_game.php'>GAME</a><br><span style='font-size:16px;'>Game settings</span></div></td><td style='width:5px;'>&nbsp;</td>\n";
+		echo "				<td nowrap onclick=\"location.href='./gui_assign_unit.php'\" width=".$buttonWidth." class='menu_button_normal'><a href='./gui_assign_unit.php'>ASSIGN</a><br><span style='font-size:16px;'>Assign unit</span></td><td style='width:5px;'>&nbsp;</td>\n";
+		echo "				<td nowrap onclick=\"location.href='./gui_create_unit.php'\" width=".$buttonWidth." class='menu_button_normal'><a href='./gui_create_unit.php'>ADD</a><br><span style='font-size:16px;'>Create a unit</span></td><td style='width:5px;'>&nbsp;</td>\n";
+		echo "				<td nowrap onclick=\"location.href='./gui_edit_game.php'\" width=".$buttonWidth." class='menu_button_normal'><a href='./gui_edit_game.php'>GAME</a><br><span style='font-size:16px;'>Game settings</span></td><td style='width:5px;'>&nbsp;</td>\n";
 		if ($isAdmin) {
-			echo "				<td nowrap onclick=\"location.href='./gui_create_player.php'\" width=".$buttonWidth."><div class='menu_button_normal'><a href='./gui_create_player.php'>PLAYER</a><br><span style='font-size:16px;'>Manage players</span></div></td><td style='width:5px;'>&nbsp;</td>\n";
-			echo "				<td nowrap onclick=\"location.href='./gui_admin.php'\" width=".$buttonWidth."><div class='menu_button_normal'><a href='./gui_admin.php'>ADMIN</a><br><span style='font-size:16px;'>Administration</span></div></td><td style='width:5px;'>&nbsp;</td>\n";
+			echo "				<td nowrap onclick=\"location.href='./gui_create_player.php'\" width=".$buttonWidth." class='menu_button_normal'><a href='./gui_create_player.php'>PLAYER</a><br><span style='font-size:16px;'>Manage players</span></td><td style='width:5px;'>&nbsp;</td>\n";
+			echo "				<td nowrap onclick=\"location.href='./gui_admin.php'\" width=".$buttonWidth." class='menu_button_normal'><a href='./gui_admin.php'>ADMIN</a><br><span style='font-size:16px;'>Administration</span></td><td style='width:5px;'>&nbsp;</td>\n";
 		}
 	}
 ?>
 
-				<td nowrap onclick="location.href='./gui_edit_option.php'" width="<?php echo $buttonWidth ?>"><div class='menu_button_normal'><a href='./gui_edit_option.php'>OPTIONS</a><br><span style='font-size:16px;'>Change options</span></div></td>
+				<td nowrap onclick="location.href='./gui_edit_option.php'" width="<?php echo $buttonWidth ?>" class='menu_button_normal'><a href='./gui_edit_option.php'>OPTIONS</a><br><span style='font-size:16px;'>Change options</span></td>
 				<td style="width:5px;">&nbsp;</td>
 				<td nowrap onclick="location.href='gui_show_playerlist.php'" style="width: 60px;" nowrap width="60px" style="background: rgba(50,50,50,1.0); text-align: center; vertical-align: middle;"><img src='./images/player/<?=$pimage?>' height='60px' style='height:auto;display:block;' width='60px' height='60px'></td>
 			</tr>
-			<tr><td colspan='999' style='background:#050505;height:5px;'></td></tr>
+			<tr><td colspan='999' style='background:rgba(50,50,50,1.0);height:5px;'></td></tr>
 		</table>
 	</div>
 
@@ -348,7 +358,7 @@ session_start();
 					<select required name='NewFormationType' id='NewFormationType' onchange="changeResultingName();" size='1' style='width:100%;'>
 						<option value="AEROSPACE SUPERIORITY">AEROSPACE SUPERIORITY</option>
 						<option value="AIR">AIR</option>
-						<option value="ANTI-MECH">ANTI-MECH</option>
+						<option value="ANTI MECH">ANTI MECH</option>
 						<option value="ASSAULT">ASSAULT</option>
 						<option value="FAST ASSAULT">FAST ASSAULT</option>
 						<option value="BATTLE" selected>BATTLE</option>
