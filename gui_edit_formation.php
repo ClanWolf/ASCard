@@ -155,8 +155,7 @@ session_start();
 			let param_n3 = encodeURIComponent(n3);
 
 			var url="./save_formation_data.php?formationid="+<?php echo $formationId; ?>+"&newformationname="+param_n1+"&newformationtype="+param_n2+"&newformation="+param_n3;
-			alert(url);
-			//window.frames['saveframe'].location.replace(url);
+			window.frames['saveframe'].location.replace(url);
 		}
 	</script>
 
