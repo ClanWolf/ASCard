@@ -46,6 +46,7 @@ function getSpecialUnitAbilities(sa) {
 			if (document.getElementById("sa_page") != null) {
 				document.getElementById("sa_page").innerHTML = "P. " + match.PAGE;
 			}
+			$('.scroll-pane').jScrollPane();
 		} else {
 			var errortext = "NO DATA FOUND";
 			document.getElementById("sa_abbreviation").innerHTML = errortext;

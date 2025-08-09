@@ -40,6 +40,7 @@ function getFormationTypes(ft) {
 			if (document.getElementById("ut_page") != null) {
 				document.getElementById("ut_page").innerHTML = "P. " + match.PAGE;
 			}
+			$('.scroll-pane').jScrollPane();
 		} else {
 			var errortext = "NO DATA FOUND";
 			document.getElementById("ut_desc").innerHTML = errortext;

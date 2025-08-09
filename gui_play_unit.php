@@ -184,7 +184,7 @@ session_start();
 	<script>
 		$(function() {
 			//$('.scroll-pane').jScrollPane({autoReinitialise: true});
-			$('.scroll-pane').jScrollPane();
+			//$('.scroll-pane').jScrollPane();
 		});
 		$(document).ready(function() {
 			let realhightofscrollbar = document.getElementById("scrollcontainer").offsetHeight;
@@ -425,7 +425,7 @@ session_start();
 	</div>
 
 	<br>
-	<br>
+
 	<table width="100%" height="70%">
 		<tr>
 			<td width="10%" align="right" valign="top" class="datalabel">&nbsp;</td>
