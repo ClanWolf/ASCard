@@ -38,6 +38,9 @@ session_start();
 			$FORMATIONNAME = $row444["formationname"];
 			$FORMATIONTYPE = $row444["formationtype"];
 			$FORMATION = $row444["formation"];
+			$FORMATIONSHORT = $row444["formationshort"];
+			$AUTOBUILDNAME = $row444["autobuildname"];
+			$FACTION = $row444["factionid"];
 		}
 	}
 ?>
@@ -101,20 +104,31 @@ session_start();
 
 	<script>
 		let formationName = "<?php echo $FORMATIONNAME; ?>";
+		let formationShort = "<?php echo $FORMATIONSHORT; ?>";
 		let formationType = "<?php echo $FORMATIONTYPE; ?>";
 		let formation = "<?php echo $FORMATION; ?>";
+		let autobuild = "<?php echo $AUTOBUILDNAME; ?>";
+		let faction = "<?php echo $FACTION; ?>";
 
 		function showFormationTypeInfo(formType) {
 			// If fadeIn is used here, css animation does not work anymore
 			if (formType !== "") {
 				document.getElementById("formationtypescontainer").style.visibility = "visible";
 				showFormationType(formType);
-				//$('.scroll-pane').jScrollPane();
 			}
 		}
 		function closeFormationTypeInfo() {
 			// If fadeIn is used here, css animation does not work anymore
 			document.getElementById("formationtypescontainer").style.visibility = "hidden";
+		}
+		function getFirstLetters(str) {
+			const firstLetters = str
+				.split(' ')
+				.map(word => word.charAt(0))
+				.join('');
+			//console.log(str);
+			//console.log(firstLetters);
+			return firstLetters;
 		}
 		function changeResultingName() {
 			var na = "";
@@ -125,37 +139,62 @@ session_start();
 				if (typeof na != 'undefined') {
 					if (na.substring(0, 13) == "AUTOBUILDNAME") { autobuildChecked = el1.checked }
 				}
-			})
+			});
 
 			let n1 = document.getElementById("NewFormationName").value.replace(/[^A-Za-z0-9 ]/g, '').replace(/  +/g, ' ');
 			let n2 = document.getElementById("NewFormationType").value.replace(/[^A-Za-z0-9 ]/g, '').replace(/  +/g, ' ');
 			let n3 = document.getElementById("NewFormation").value.replace(/[^A-Za-z0-9 ]/g, '').replace(/  +/g, ' ');
+			let fa = document.getElementById("NewFormationFaction").value;
 
 			document.getElementById("NewFormationName").value = n1;
 			document.getElementById("NewFormationType").value = n2;
 			document.getElementById("NewFormation").value = n3;
 
 			if (autobuildChecked) {
-				document.getElementById("resultingName").innerHTML = n1 + " " + n2 + " " + n3;
+				let resultingName = n1 + " " + n2 + " " + n3;
+				let resultingShort = getFirstLetters(resultingName);
+				document.getElementById("resultingName").innerHTML = resultingName;
+				document.getElementById("resultingShort").innerHTML = resultingShort;
+				//console.log(resultingName);
+				//console.log(resultingShort);
 			} else {
+				let resultingName = n1;
+				let resultingShort = getFirstLetters(resultingName);
 				document.getElementById("resultingName").innerHTML = n1;
+				document.getElementById("resultingShort").innerHTML = resultingShort;
+				//console.log(resultingName);
+				//console.log(resultingShort);
 			}
 		}
 		function save() {
 			let n1 = document.getElementById("NewFormationName").value.replace(/[^A-Za-z0-9 ]/g, '').replace(/  +/g, ' ');
 			let n2 = document.getElementById("NewFormationType").value.replace(/[^A-Za-z0-9 ]/g, '').replace(/  +/g, ' ');
 			let n3 = document.getElementById("NewFormation").value.replace(/[^A-Za-z0-9 ]/g, '').replace(/  +/g, ' ');
+			let n4 = document.getElementById("resultingShort").innerHTML;
+			let fa = document.getElementById("NewFormationFaction").value;
 
-			if (!n1 || !n2 || !n3) {
-				console.log("Missing data");
+			var na = "";
+			var autobuildChecked = 0;
+			var list = document.getElementsByClassName("bigcheck");
+			[].forEach.call(list, function (el1) {
+				na = el1.name;
+				if (typeof na != 'undefined') {
+					if (na.substring(0, 13) == "AUTOBUILDNAME") { autobuildChecked = el1.checked }
+				}
+			});
+
+			//if (!n1 || !n2 || !n3 || !n4) {
+			if (!n1) {
+				alert("Enter valid name!");
+			} else {
+				let param_n1 = encodeURIComponent(n1);
+				let param_n2 = encodeURIComponent(n2);
+				let param_n3 = encodeURIComponent(n3);
+				let param_n4 = encodeURIComponent(n4);
+
+				var url="./save_formation_data.php?formationid="+<?php echo $formationId; ?>+"&newformationname="+param_n1+"&newformationtype="+param_n2+"&newformation="+param_n3+"&formationshort="+param_n4+"&autobuild="+autobuildChecked+"&factionid="+fa;
+				window.frames['saveframe'].location.replace(url);
 			}
-
-			let param_n1 = encodeURIComponent(n1);
-			let param_n2 = encodeURIComponent(n2);
-			let param_n3 = encodeURIComponent(n3);
-
-			var url="./save_formation_data.php?formationid="+<?php echo $formationId; ?>+"&newformationname="+param_n1+"&newformationtype="+param_n2+"&newformation="+param_n3;
-			window.frames['saveframe'].location.replace(url);
 		}
 	</script>
 
@@ -211,19 +250,43 @@ session_start();
 			document.getElementById("NewFormationName").value = formationName;
 			document.getElementById("NewFormationType").value = formationType;
 			document.getElementById("NewFormation").value = formation;
+			document.getElementById("resultingShort").value = formationShort;
+			document.getElementById("NewFormationFaction").value = faction;
+
+			var na = "";
+			var list = document.getElementsByClassName("bigcheck");
+			[].forEach.call(list, function (el1) {
+				na = el1.name;
+				if (typeof na != 'undefined') {
+					if (na.substring(0, 13) == "AUTOBUILDNAME") {
+						if (autobuild === "1") {
+							//console.log("autobuild true");
+							el1.checked = true;
+						} else {
+							//console.log("autobuild false");
+							el1.checked = false;
+						}
+					}
+				}
+			});
 
 			let res = formationName;
-			if (formationType) {
-				res = res + " " + formationType;
+			if (autobuild === "1") {
+				if (formationType) {
+					res = res + " " + formationType;
+				}
+				if (formation) {
+					res = res + " " + formation;
+				}
 			}
-			if (formation) {
-				res = res + " " + formation;
-			}
+
+			let resultingShort = getFirstLetters(res);
+
 			document.getElementById("resultingName").innerHTML = res;
+			document.getElementById("resultingShort").innerHTML = resultingShort;
 
 			// Set the height of the local scrollbars to the real height of the container elements (reload only)
 			let realhightofscrollbar = document.getElementById("scrollcontainer").offsetHeight;
-			console.log(realhightofscrollbar);
 			var scrollcontainerdivs = document.getElementsByClassName("scroll-pane");
 			for(var i=0; i < scrollcontainerdivs.length; i++) {
 				scrollcontainerdivs[i].style.height = realhightofscrollbar+"px";
@@ -343,18 +406,19 @@ session_start();
 	<br>
 
 	<form autocomplete="autocomplete_off_hack_xfr4!k">
-		<table width="50%" class="options" cellspacing="2" cellpadding="2" border=0px>
+		<table width="60%" class="options" cellspacing="2" cellpadding="2" border=0px>
 			<tr>
 				<td colspan="1" width='5%' class='datalabel' nowrap align="left">Formation name:</td>
 				<td colspan="1" width='90%' class='datalabel' style="width:100%;">
 					<input autocomplete="autocomplete_off_hack_xfr4!k" required onkeyup="this.value = this.value.toUpperCase();changeResultingName();" onchange="changeResultingName();" type="text" id="NewFormationName" width="100%" style="width:100%;">
 				</td>
-				<td rowspan="3" nowrap valign="middle"><a href="javascript:showFormationTypeInfo(document.getElementById('NewFormationType').value);">&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa-solid fa-circle-info"></i></i>&nbsp;&nbsp;</a></td>
+				<td rowspan="4" nowrap valign="middle"><a href="javascript:showFormationTypeInfo(document.getElementById('NewFormationType').value);">&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa-solid fa-circle-info"></i></i>&nbsp;&nbsp;</a></td>
 			</tr>
 			<tr>
 				<td colspan="1" width='5%' class='datalabel' nowrap align="left">Formation type:</td>
 				<td colspan="1" width='90%' class='datalabel' style="width:100%;">
 					<select required name='NewFormationType' id='NewFormationType' onchange="changeResultingName();" size='1' style='width:100%;'>
+						<option value=""></option>
 						<option value="AEROSPACE SUPERIORITY">AEROSPACE SUPERIORITY</option>
 						<option value="AIR">AIR</option>
 						<option value="ANTI MECH">ANTI MECH</option>
@@ -406,6 +470,7 @@ session_start();
 				<td colspan="1" width='5%' class='datalabel' nowrap align="left">Formation:</td>
 				<td colspan="1" width='90%' class='datalabel' style="width:100%;">
 					<select required name='NewFormation' id='NewFormation' onchange="changeResultingName();" size='1' style='width:100%;'>
+						<option value=""></option>
 						<option value="STAR" selected>STAR</option>
 						<option value="LANCE">LANCE</option>
 						<option value="LEVEL II">LEVEL II</option>
@@ -413,11 +478,34 @@ session_start();
 				</td>
 			</tr>
 			<tr>
+				<td width='5%' class='datalabel' colspan="1" align="left">Faction:</td>
+				<td width='90%' class='datalabel' colspan="1" style="width:100%;">
+					<select required name='NewFormationFaction' id='NewFormationFaction' size='1' style='width:100%;'>
+						<option  value="3" selected>ComStar [CS]</option>
+						<option  value="1">Clan Wolf [CW]</option>
+						<option value="13">Clan Wolf in Exile [CWiE]</option>
+						<option  value="9">Clan Jade Falcon [CJF]</option>
+						<option  value="5">Clan Ghostbear [CGB]</option>
+						<option value="12">Clan Smoke Jaguar [CSJ]</option>
+						<option value="14">Clan Snow Raven [CSR]</option>
+						<option value="15">Clan Nova Cat [CNC]</option>
+						<option  value="2">Lyran Alliance [LA]</option>
+						<option  value="7">Lyran Commonwealth [LC]</option>
+						<option  value="4">Draconis Combine [DC]</option>
+						<option  value="8">Federated Suns [FS]</option>
+						<option value="10">Free Worlds League [FWL]</option>
+						<option value="11">Capellan Confederation [CC]</option>
+						<option  value="6">Wolfs Dragoons [M-WD]</option>
+					</select>
+				</td>
+				<td width='10px'></td>
+			</tr>
+			<tr>
 				<td colspan="3" width='5%' class='datalabel' nowrap align="left"><hr></td>
 			</tr>
 			<tr>
 				<td align="left" class='datalabel'>
-					<label class="bigcheck"><input onchange="changeResultingName();" type="checkbox" class="bigcheck" name="AUTOBUILDNAME" value="yes" checked="true"/><span class="bigcheck-target"></span></label>
+					<label class="bigcheck"><input onchange="changeResultingName();" type="checkbox" class="bigcheck" name="AUTOBUILDNAME" value="false" checked="false"/><span class="bigcheck-target"></span></label>
 				</td>
 				<td colspan="2" align="left" nowrap class="datalabel">
 					Auto build name
@@ -427,9 +515,10 @@ session_start();
 				<td colspan="3" width='5%' class='datalabel' nowrap align="left"><hr></td>
 			</tr>
 			<tr>
-				<td colspan="1" width='5%' class='datalabel' nowrap align="left">Resulting name:</td>
-				<td colspan="2" width='90%' class='datalabel' nowrap style="width:100%;">
-					<span id="resultingName"><?php echo $FORMATIONNAME ?></span>
+				<td colspan="1" width='5%' class='datalabel' nowrap align="left" valign="top" style="vertical-align:top;">Resulting name:<br>Short:</td>
+				<td colspan="2" width='90%' class='datalabel' nowrap valign="top" style="width:100%;">
+					<span id="resultingName"><?php echo $FORMATIONNAME ?></span><br>
+					<span id="resultingShort"><?php echo $FORMATIONSHORT ?></span>
 				</td>
 			</tr>
 			<tr>

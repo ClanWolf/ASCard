@@ -22,6 +22,7 @@ session_start();
 	$pimage = $_SESSION['playerimage'];
 	$opt3 = $_SESSION['option3'];
 	$playMode = $opt3;
+	$currentcommandid = $_SESSION['commandid'];
 
 	$isAdmin = $_SESSION['isAdmin'];
 
@@ -292,11 +293,25 @@ session_start();
 	<iframe name="saveframe" id="iframe_save"></iframe>
 	<script type="text/javascript" src="./scripts/log_enable.js"></script>
 
+	<div id="heightmeasure"></div>
+	<!-- <div id="heightmeasure_right"></div> -->
 	<div id="cover"></div>
 
 	<script>
 		$(document).ready(function() {
 			$("#cover").hide();
+
+			// Set the height of the local scrollbars to the real height of the container elements (reload only)
+			let scrollcontainerstartrow = document.getElementById("scrollcontainertopborder");
+			const rect = scrollcontainerstartrow.getBoundingClientRect();
+			const hmd = document.getElementById("heightmeasure");
+			hmd.style.top = rect.y+"px";
+			const resultingHeight = hmd.clientHeight;
+			//console.log("Height: " + resultingHeight);
+			var scrollcontainerdivs = document.getElementsByClassName("scroll-pane");
+			for(var i=0; i < scrollcontainerdivs.length; i++) {
+				scrollcontainerdivs[i].style.height = resultingHeight+"px";
+			}
 		});
 		$(function() {
 			//$('.scroll-pane').jScrollPane({autoReinitialise: true});
@@ -363,6 +378,21 @@ session_start();
 	<table align="center" width="90%" cellspacing=2 cellpadding=2 border=0px>
 		<tr>
 <?php
+// Select faction logo
+if ($currentcommandid == -1) {
+	// no command selected -> error
+}
+if (!($stmtCommandFactionLogo = $conn->prepare("SELECT SQL_NO_CACHE * FROM asc_command co, asc_faction fa WHERE co.commandid = ".$currentcommandid." AND co.factionid = fa.factionid"))) {
+	echo "Prepare failed: (" . $conn->errno . ")" . $conn->error;
+}
+if ($stmtCommandFactionLogo->execute()) {
+	$resCommandFactionLogo = $stmtCommandFactionLogo->get_result();
+	while ($rowCommandFactionLogo = $resCommandFactionLogo->fetch_assoc()) {
+		$commandfactionlogo = $rowCommandFactionLogo['factionimage'];
+		$commandName = $rowCommandFactionLogo['commandname'];
+	}
+}
+
 if (!$playMode) {
 	echo "						<td colspan='3' nowrap style='height:30px;text-align:center;padding:0px;' class='formationselect_button_normal'>\n";
 	echo "							<table width='100%' align='center' cellspacing='0' cellpadding='0' border='0'>\n";
@@ -371,6 +401,7 @@ if (!$playMode) {
 	echo "								</td>\n";
 	echo "									<td colspan='1' nowrap style='height:30px;text-align:center;' onclick='location.href=\"gui_edit_command.php\"' class='formationselect_button_normal'>\n";
 	echo "									<a href='gui_edit_command.php'><i class='fas fa-edit'></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;COMMAND</a>\n";
+	echo "									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src='./images/factions/".$commandfactionlogo."' width='20px' style='border:1px solid #000000;vertical-align:middle;'>\n";
 	echo "								</td>\n";
 	echo "								<td colspan='1' nowrap style='width:60px;height:30px;text-align:right;' onclick='location.href=\"\"' class='formationselect_button_normal'>\n";
 	echo "									<a href=''><i class='fa-solid fa-arrow-right'></i>&nbsp;&nbsp;&nbsp;</a>\n";
@@ -385,6 +416,7 @@ if (!$playMode) {
 	echo "								</td>\n";
 	echo "									<td colspan='1' nowrap style='height:30px;text-align:center;' onclick='location.href=\"gui_select_command.php\"' class='formationselect_button_normal'>\n";
 	echo "									<a href='gui_select_command.php'>COMMAND</a>\n";
+	echo "									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src='./images/factions/".$commandfactionlogo."' width='20px' style='border:1px solid #000000;vertical-align:middle;'>\n";
 	echo "									&nbsp;&nbsp;&nbsp;<span id='bidOverviewCommand'>(PV 10 / 100)</span>\n";
 	echo "								</td>\n";
 	echo "								<td colspan='1' nowrap style='width:60px;height:30px;text-align:right;' onclick='location.href=\"\"' class='formationselect_button_normal'>\n";
@@ -422,7 +454,8 @@ if ($playMode) {
 		while ($rowFormation = $resFormations->fetch_assoc()) {
 			$formationidSelected = $rowFormation['formationid'];
 			$factionidSelected = $rowFormation['factionid'];
-			$formationnameSelected = $rowFormation['formationname'];
+			$formationnameSelected = $rowFormation['formationlong'];
+			//$formationnameSelected = $rowFormation['formationname'];
 
 			$tonnageformation[$formationind] = 0;
 			$pvformation[$formationind] = 0;
@@ -499,7 +532,7 @@ if ($playMode) {
 				echo "					<tr>\n";
 				if (!$playMode) {
 					echo "						<td width='1%' style='text-align:left;'>\n";
-					echo "							<a href='gui_edit_formation.php?formationid=".$formationidSelected."'><i class='fas fa-edit'></i></a>\n";
+					echo "							<a href='gui_edit_formation.php?formationid=".$formationidSelected."'><i class='fas fa-edit'></i>&nbsp;&nbsp;&nbsp;</a>\n";
 					echo "						</td>\n";
 				}
 				echo "						<td width='98%' style='text-align:center;'>\n";
@@ -511,7 +544,7 @@ if ($playMode) {
 				}
 				echo "						</td>\n";
 				echo "						<td width='1%' style='text-align:right;'>\n";
-				echo "							<img src='./images/factions/".$factionlogo."' width='20px' style='border:1px solid #000000;'>\n";
+				echo "							<img src='./images/factions/".$factionlogo."' width='20px' style='border:1px solid #000000;vertical-align:middle;'>&nbsp;&nbsp;\n";
 				echo "						</td>\n";
 				echo "					</tr>\n";
 				echo "				</table>\n";
@@ -529,7 +562,7 @@ if ($playMode) {
 				}
 				echo "						</td>\n";
 				echo "						<td width='1%' style='text-align:right;'>\n";
-				echo "							<img src='./images/factions/".$factionlogo."' width='20px' style='border:1px solid #000000;'>\n";
+				echo "							<img src='./images/factions/".$factionlogo."' width='20px' style='border:1px solid #000000;vertical-align:middle;'>&nbsp;&nbsp;\n";
 				echo "						</td>\n";
 				echo "					</tr>\n";
 				echo "				</table>\n";
@@ -796,12 +829,12 @@ if ($playMode) {
 //		echo "			</td>\n";
 //		echo "		</tr>\n";
 //	}
-	echo "		<tr>\n";
+	echo "		<tr id='scrollcontainertopborder'>\n";
 
 	foreach ($unitsInAllFormations as &$unitsInSingleFormation) {
-		echo "			<td width='33%' style='background-color:#333333;' valign='top'>\n";
+		echo "			<td width='33%' style='background-color:#444;' valign='top'>\n";
 		echo "				<div class='scroll-pane'>\n";
-		echo "					<table cellspacing=2 cellpadding=0 border=0px>\n"; // style='border-collapse:collapse;'
+		echo "					<table cellspacing=0 cellpadding=0 border=0px style='background-color:#444;'>\n"; // style='border-collapse:collapse;'
 		foreach ($unitsInSingleFormation as &$unit) {
 			echo "						<tr>\n";
 			echo "							".$unit."\n";

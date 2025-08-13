@@ -178,6 +178,26 @@ a:hover {
 	background-image: url('../images/static.gif');
 	z-index:110;
 }
+#heightmeasure {
+	position: fixed;
+	width: 5px;
+	top: 100px;
+	bottom: 100px;
+	left: 0;
+	background-color: #444;
+	/* background-color: transparent; */
+	z-index:1;
+}
+#heightmeasure_right {
+	position: fixed;
+	width: 5px;
+	top: 100px;
+	bottom: 100px;
+	right: 0;
+	background-color: #444;
+	/* background-color: transparent; */
+	z-index:1;
+}
 #gamemenu {
 	position: fixed;
 	display: none; /* none, block */

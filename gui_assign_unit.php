@@ -301,8 +301,11 @@ session_start();
 	<form autocomplete="off">
 		<table class="options" cellspacing=4 cellpadding=4 border=0px>
 			<tr>
-				<td nowrap class="datalabel" style='text-align:left;' colspan='4'>
-					Existing units: <select required name='existingUnits' id='existingUnits' size='1' onchange="" style='width:400px;'>
+				<td nowrap class="datalabel" style='text-align:left;' colspan='1'>
+					Existing units:
+				</td>
+				<td nowrap class="datalabel" style='text-align:left;' colspan='3'>
+					<select required name='existingUnits' id='existingUnits' size='1' onchange="" style='width:400px;'>
 						<option value="0"><<< Select a unit >>></option>
 <?php
 	$sql_asc_units = "select u.unitid, u.unit_number, u.as_model, p.name from asc_assign a, asc_unit u, asc_pilot p where a.formationid is null and a.unitid = u.unitid and a.pilotid = p.pilotid and u.playerid=".$pid;
@@ -326,14 +329,16 @@ session_start();
 				</td>
 			</tr>
 			<tr>
-				<td nowrap class="datalabel" style='text-align:left;' colspan='3'>Assign to formation: <select required name='FORMATIONID' id='FORMATIONID' size='1' style='width:250px;'>
+				<td nowrap class="datalabel" style='text-align:left;' colspan='1'>Assign to formation:</td>
+				<td nowrap class="datalabel" style='text-align:left;' colspan='2'><select required name='FORMATIONID' id='FORMATIONID' size='1' style='width:100%;'>
 <?php
 	$sql_asc_playersformations = "SELECT SQL_NO_CACHE * FROM asc_formation where playerid=".$pid;
 	$result_asc_playersformations = mysqli_query($conn, $sql_asc_playersformations);
 	if (mysqli_num_rows($result_asc_playersformations) > 0) {
 		while($rowFormation = mysqli_fetch_assoc($result_asc_playersformations)) {
 			$formationid = $rowFormation['formationid'];
-			$formationname = $rowFormation['formationname'];
+			//$formationname = $rowFormation['formationname'];
+			$formationname = $rowFormation['formationlong'];
 			if ($paramformationid == $formationid) {
 				echo "										<option value='".$formationid."' selected>".$formationname."</option>\n";
 			} else {

@@ -55,6 +55,7 @@ session_start();
 						$_SESSION['gameid'] = $row['gameid'];
 						$_SESSION['hostedgameid'] = $row['hostedgameid'];
 						$_SESSION['factiontype'] = $row['factiontype'];
+						$_SESSION['commandid'] = $row['commandid'];
 
 						// getting information for the current game
 						$sql_asc_game = "SELECT SQL_NO_CACHE * FROM asc_game WHERE gameid = ".$_SESSION['gameid'];

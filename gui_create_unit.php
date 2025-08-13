@@ -794,19 +794,27 @@ session_start();
 				</td>
 			</tr>
 			<tr>
-				<td nowrap colspan="5" class="datalabel" style='text-align:left;'>
-					Unitname: <input required type="text" id="UNITNAME" name="UNITNAME" style='width:250px'> (max. 15)
+				<td nowrap colspan="1" class="datalabel" style='text-align:left;'>
+					Unitname:
+				</td>
+				<td nowrap colspan="4" class="datalabel" style='text-align:left;'>
+					<input required type="text" id="UNITNAME" name="UNITNAME" style='width:250px'> (max. 15)
 				</td>
 			</tr>
 			<tr>
-				<td nowrap class="datalabel" style='text-align:left;' colspan='4'>Add to formation: <select required name='FORMATIONID' id='FORMATIONID' size='1' style='width:200px;' onchange='unitdetailsChanged();'>
+				<td nowrap class="datalabel" style='text-align:left;' colspan='1'>
+					Add to formation:
+				</td>
+				<td nowrap class="datalabel" style='text-align:left;' colspan='3'>
+					<select required name='FORMATIONID' id='FORMATIONID' size='1' style='width:100%;' onchange='unitdetailsChanged();'>
 <?php
 	$sql_asc_playersformations = "SELECT SQL_NO_CACHE * FROM asc_formation where playerid=".$pid;
 	$result_asc_playersformations = mysqli_query($conn, $sql_asc_playersformations);
 	if (mysqli_num_rows($result_asc_playersformations) > 0) {
 		while($rowFormations = mysqli_fetch_assoc($result_asc_playersformations)) {
 			$formationid = $rowFormations['formationid'];
-			$formationname = $rowFormations['formationname'];
+			//$formationname = $rowFormations['formationname'];
+			$formationname = $rowFormations['formationlong'];
 			if ($paramformationid == $formationid) {
 				echo "										<option value='".$formationid."' selected>".$formationname."</option>\n";
 			} else {

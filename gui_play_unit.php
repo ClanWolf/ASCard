@@ -849,10 +849,10 @@ session_start();
 	if ($useMULImages == 0) {
 		echo "<div id='unit'><img id='unitimage' src='" . $array_UNIT_IMG_URL[$chosenUnitIndex] . "'></div>\n";
 	} else if ($useMULImages == 1) {
-		echo "<div id='unit'><img id='unitimage' src='" . getMULImageByName($array_UNIT_MODEL[$chosenUnitIndex]) . "'></div>\n";
+		echo "<div id='unit'><img id='unitimage' src='" . getMULImageByName($array_UNIT_MULNAME[$chosenUnitIndex]) . "'></div>\n";
 	}
 	echo "<script>var unitImageURL='".$array_UNIT_IMG_URL[$chosenUnitIndex]."';</script>\n";
-	echo "<script>var unitImageURLMUL='".getMULImageByName($array_UNIT_MODEL[$chosenUnitIndex])."';</script>\n";
+	echo "<script>var unitImageURLMUL='".getMULImageByName($array_UNIT_MULNAME[$chosenUnitIndex])."';</script>\n";
 ?>
 
 <div id="topleft">

@@ -39,6 +39,8 @@
 	$array_UNIT_NAME = array();
 	$array_UNIT_NAME_CLAN = array();
 	$array_UNIT_NAME_IS = array();
+	$array_UNIT_MODEL = array();
+	$array_UNIT_MULNAME = array();
 	$array_UNIT_CLASS = array();
 	$array_UNIT_VARIANT = array();
 	$array_UNIT_IMG_URL = array();
@@ -160,7 +162,8 @@
 			$array_PLAYER_FORMATION_IDS[$formationscount] = $foid;
 			$array_PLAYER_FORMATION_FACTIONIDS[$formationscount] = $row["factionid"];
 			$array_PLAYER_FORMATION_COMMANDIDS[$formationscount] = $row["commandid"];
-			$array_PLAYER_FORMATION_NAMES[$formationscount] = $row["formationname"];
+			//$array_PLAYER_FORMATION_NAMES[$formationscount] = $row["formationname"];
+			$array_PLAYER_FORMATION_NAMES[$formationscount] = $row["formationlong"];
 
 			$array_PLAYER_FORMATION_STARTINDS[$foid] = $row["startindex"];
 
@@ -405,7 +408,7 @@
 							}
 
 							// ----------- Get Clan or IS name for the unit
-							//$array_UNIT_MODEL[$unitcount] = $clan.$row["as_model"];
+							$array_UNIT_MULNAME[$unitcount] = $clan.$row["as_model"];
 							if ($_SESSION['factiontype'] == "CLAN") {
 								preg_match('#\((.*?)\)#', $array_UNIT_CLASS[$unitcount], $match);
 								if (array_key_exists(1, $match) && $match[1] != "") {

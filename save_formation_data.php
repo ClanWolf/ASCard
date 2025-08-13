@@ -9,50 +9,45 @@
 	require('./logger.php');
 	require_once('./db.php');
 
-	$formationid  = isset($_GET["formationid"]) ? $_GET["formationid"] : "";
+	$formationid = isset($_GET["formationid"]) ? filter_var($_GET['formationid'], FILTER_VALIDATE_INT) : "";
 	$newformationname = isset($_GET["newformationname"]) ? $_GET["newformationname"] : "";
 	$newformationtype = isset($_GET["newformationtype"]) ? $_GET["newformationtype"] : "";
 	$newformation = isset($_GET["newformation"]) ? $_GET["newformation"] : "";
+	$formationshort = isset($_GET["formationshort"]) ? $_GET["formationshort"] : "";
+	$autobuild = isset($_GET["autobuild"]) ? $_GET["autobuild"] : "";
+	$factionid = isset($_GET["factionid"]) ? $_GET["factionid"] : "";
 
 	echo "<!DOCTYPE html>\n";
 	echo "<html lang='en'>\n";
 	echo "<body>\n";
 	echo "<p style='font-family:Arial,sans-serif;font-size:14px;color:yellow;'>\n";
 
-	echo "FormationId:        " . $formationid . "<br>";
-	echo "New formation name: " . $newformationname . "<br>";
-	echo "New formation type: " . $newformationtype . "<br>";
-	echo "New formation:      " . $newformation . "<br>";
+	echo "FormationId:        ".$formationid."<br>";
+	echo "New formation name: ".$newformationname."<br>";
+	echo "New formation type: ".$newformationtype."<br>";
+	echo "New formation:      ".$newformation."<br>";
+	echo "FormationShort:     ".$formationshort."<br>";
+	echo "Autobuild name:     ".$autobuild."<br>";
+	echo "FactionId:          ".$factionid."<br>";
 
 	echo "Saving Formation info...";
 
-//	if (!empty($formationid)) {
-//		$newindex = $currentindex;
-//		if ($op == "up") {
-//			$newindex++;
-//		} else if ($op == "down") {
-//			$newindex--;
-//		}
-//		$sql = "UPDATE asc_formation SET startindex='".$newindex."' WHERE formationid=".$formationid.";";
-//		echo $sql;
-//
-//		if (mysqli_query($conn, $sql)) {
-//			echo "<p style='font-family:Arial,sans-serif;font-size:14px;color:yellow;'>";
-//			echo "Record (formation start index) updated successfully.";
-//			echo "</p>";
-//			mysqli_commit($conn);
-//
-//			echo "<script>\n";
-//			echo "	let currentURL = top.location.href;\n";
-//			echo "	let newURL = currentURL.replace('stv=1','stv=0');\n";
-//			echo "	top.location.replace(newURL);\n";
-//			echo "</script>\n";
-//		} else {
-//			echo "<p style='font-family:Arial,sans-serif;font-size:14px;color:yellow;'>";
-//			echo "Error (formation start index) updating record: " . mysqli_error($conn);
-//			echo "</p>";
-//		}
-//	}
+	if ($autobuild === "true") {
+		$formationlong = $newformationname." ".$newformationtype." ".$newformation;
+	} else {
+		$formationlong = $newformationname;
+	}
+	if (!empty($newformationname)) {
+		$sql = "UPDATE asc_formation SET formationname='".$newformationname."',formationtype='".$newformationtype."',formation='".$newformation."',formationshort='".$formationshort."',formationlong='".$formationlong."',autobuildname=".$autobuild.",factionid=".$factionid." WHERE formationid=".$formationid.";";
+		echo "<br><br>".$sql;
+
+		if (mysqli_query($conn, $sql)) {
+			echo "<br><br>Formation updated successfully.";
+			mysqli_commit($conn);
+		} else {
+			echo "<br><br>ERROR while updating formation: " . mysqli_error($conn);
+		}
+	}
 
 	echo "</p>\n";
 	echo "</body>\n";

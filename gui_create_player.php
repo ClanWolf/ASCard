@@ -419,23 +419,23 @@ session_start();
 			<tr>
 				<td class='datalabel' colspan="1" align="right">Faction:</td>
 				<td class='datalabel' colspan="1">
-				<select required name='NewPlayerFaction' id='NewPlayerFaction' size='1' style='width:220px;'>
-					<option  value="3" selected>ComStar [CS]</option>
-					<option  value="1">Clan Wolf [CW]</option>
-					<option value="13">Clan Wolf in Exile [CWiE]</option>
-					<option  value="9">Clan Jade Falcon [CJF]</option>
-					<option  value="5">Clan Ghostbear [CGB]</option>
-					<option value="12">Clan Smoke Jaguar [CSJ]</option>
-					<option value="14">Clan Snow Raven [CSR]</option>
-					<option value="15">Clan Nova Cat [CNC]</option>
-					<option  value="2">Lyran Alliance [LA]</option>
-					<option  value="7">Lyran Commonwealth [LC]</option>
-					<option  value="4">Draconis Combine [DC]</option>
-					<option  value="8">Federated Suns [FS]</option>
-					<option value="10">Free Worlds League [FWL]</option>
-					<option value="11">Capellan Confederation [CC]</option>
-					<option  value="6">Wolfs Dragoons [M-WD]</option>
-				</select>
+					<select required name='NewPlayerFaction' id='NewPlayerFaction' size='1' style='width:220px;'>
+						<option  value="3" selected>ComStar [CS]</option>
+						<option  value="1">Clan Wolf [CW]</option>
+						<option value="13">Clan Wolf in Exile [CWiE]</option>
+						<option  value="9">Clan Jade Falcon [CJF]</option>
+						<option  value="5">Clan Ghostbear [CGB]</option>
+						<option value="12">Clan Smoke Jaguar [CSJ]</option>
+						<option value="14">Clan Snow Raven [CSR]</option>
+						<option value="15">Clan Nova Cat [CNC]</option>
+						<option  value="2">Lyran Alliance [LA]</option>
+						<option  value="7">Lyran Commonwealth [LC]</option>
+						<option  value="4">Draconis Combine [DC]</option>
+						<option  value="8">Federated Suns [FS]</option>
+						<option value="10">Free Worlds League [FWL]</option>
+						<option value="11">Capellan Confederation [CC]</option>
+						<option  value="6">Wolfs Dragoons [M-WD]</option>
+					</select>
 				</td>
 				<td width='10px'></td>
 			</tr>
