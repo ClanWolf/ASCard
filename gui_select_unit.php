@@ -399,8 +399,8 @@ if (!$playMode) {
 	echo "								<td colspan='1' nowrap style='width:60px;height:30px;text-align:left;' onclick='location.href=\"\"' class='formationselect_button_normal'>\n";
 	echo "									<a href=''>&nbsp;&nbsp;&nbsp;<i class='fa-solid fa-arrow-left'></i></a>\n";
 	echo "								</td>\n";
-	echo "									<td colspan='1' nowrap style='height:30px;text-align:center;' onclick='location.href=\"gui_edit_command.php\"' class='formationselect_button_normal'>\n";
-	echo "									<a href='gui_edit_command.php'><i class='fas fa-edit'></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;COMMAND</a>\n";
+	echo "									<td colspan='1' nowrap style='height:30px;text-align:center;' onclick='location.href=\"gui_edit_command.php?commandid=".$currentcommandid."\"' class='formationselect_button_normal'>\n";
+	echo "									<a href='gui_edit_command.php?commandid=".$currentcommandid."'><i class='fas fa-edit'></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;COMMAND</a>\n";
 	echo "									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src='./images/factions/".$commandfactionlogo."' width='20px' style='border:1px solid #000000;vertical-align:middle;'>\n";
 	echo "								</td>\n";
 	echo "								<td colspan='1' nowrap style='width:60px;height:30px;text-align:right;' onclick='location.href=\"\"' class='formationselect_button_normal'>\n";

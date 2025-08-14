@@ -22,6 +22,7 @@ session_start();
 	$playMode = $opt3;
 
 	$isAdmin = $_SESSION['isAdmin'];
+	$commandId  = isset($_GET["commandid"]) ? filter_var($_GET["commandid"], FILTER_VALIDATE_INT) : -1;
 
 	$sql_asc_playerround = "SELECT SQL_NO_CACHE * FROM asc_player where playerid = " . $pid . ";";
 	$result_asc_playerround = mysqli_query($conn, $sql_asc_playerround);
@@ -30,6 +31,16 @@ session_start();
 			$CURRENTROUND = $row["round"];
 		}
 	}
+	$sql_asc_command = "SELECT SQL_NO_CACHE * FROM asc_command where commandid = " . $commandId . ";";
+	$result_asc_command = mysqli_query($conn, $sql_asc_command);
+	if (mysqli_num_rows($result_asc_command) > 0) {
+		while($row352 = mysqli_fetch_assoc($result_asc_command)) {
+			$COMMANDNAME = $row352["commandname"];
+			$COMMANDTYPE = $row352["type"];
+			$COMMANDFACTIONID = $row352["factionid"];
+			$COMMANDBACKGROUND = $row352["commandbackground"];
+		}
+   	}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -79,11 +90,38 @@ session_start();
 			]
 		}
 	</script>
-	<script type="text/javascript" src="./scripts/passive-events-support/main.js"></script>
 
+	<script type="text/javascript" src="./scripts/passive-events-support/main.js"></script>
 	<script type="text/javascript" src="./scripts/jquery-3.7.1.min.js"></script>
 	<script type="text/javascript" src="./scripts/howler.min.js"></script>
 	<script type="text/javascript" src="./scripts/cookies.js"></script>
+
+	<script>
+		let commandName = "<?php echo $COMMANDNAME; ?>";
+		let commandType = "<?php echo $COMMANDTYPE; ?>";
+		let commandFactionId = "<?php echo $COMMANDFACTIONID; ?>";
+		let commandbackground = "<?php echo $COMMANDBACKGROUND; ?>";
+
+		function save() {
+			let n1 = document.getElementById("NewCommandName").value.replace(/[^A-Za-z0-9 -_|]/g, '').replace(/  +/g, ' ');
+			let n2 = document.getElementById("NewCommandType").value;
+			let n3 = document.getElementById("NewCommandFaction").value;
+			let n4 = document.getElementById("NewCommandBackground").value.replace(/[^A-Za-z0-9 ]/g, '').replace(/  +/g, ' ');
+
+			//if (!n1 || !n2 || !n3 || !n4) {
+			if (!n1) {
+				alert("Enter valid name!");
+			} else {
+				let param_n1 = encodeURIComponent(n1);
+				let param_n2 = encodeURIComponent(n2);
+				let param_n3 = encodeURIComponent(n3);
+				let param_n4 = encodeURIComponent(n4);
+
+				var url="./save_command_data.php?commandid="+<?php echo $commandId; ?>+"&newcommandname="+param_n1+"&newcommandtype="+param_n2+"&newcommandfaction="+param_n3+"&newcommandbackground="+param_n4;
+				window.frames['saveframe'].location.replace(url);
+			}
+		}
+	</script>
 
 	<style>
 		html, body {
@@ -123,9 +161,17 @@ session_start();
 </head>
 
 <body>
+	<iframe name="saveframe" id="iframe_save"></iframe>
+	<script type="text/javascript" src="./scripts/log_enable.js"></script>
+
 	<script>
 		$(document).ready(function() {
 			$("#cover").hide();
+
+			document.getElementById("NewCommandName").value = commandName;
+			document.getElementById("NewCommandFaction").value = commandFactionId;
+			document.getElementById("NewCommandType").value = commandType;
+			document.getElementById("NewCommandBackground").value = commandbackground;
 		});
 	</script>
 
@@ -219,7 +265,8 @@ session_start();
 				<td width='5%' class='datalabel' colspan="1" align="left">Type:</td>
 				<td width='90%' class='datalabel' colspan="1" style="width:100%;">
 					<select required name='NewCommandType' id='NewCommandType' size='1' style='width:100%;'>
-						<option value="3" selected>CUSTOM</option>
+						<option value="custom" selected>custom</option>
+						<option value="official">official</option>
 					</select>
 				</td>
 				<td width='10px'></td>
@@ -227,7 +274,7 @@ session_start();
 			<tr>
 				<td width='5%' class='datalabel' colspan="1" valign="top" align="left" style="vertical-align:top;">Background:</td>
 				<td width='90%' class='datalabel' colspan="1" style="width:100%;">
-					<textarea name="NewFormationBackground" id="NewFormationBackground" cols="40" rows="5" required width="100%" style="width:100%;resize:none;"></textarea>
+					<textarea name="NewCommandBackground" id="NewCommandBackground" cols="40" rows="5" required width="100%" style="width:100%;resize:none;"></textarea>
 				</td>
 				<td width='10px'></td>
 			</tr>
