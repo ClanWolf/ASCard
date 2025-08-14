@@ -218,7 +218,7 @@ session_start();
 			outline: none;
 		}
 		select:invalid, input:invalid {
-			background: rgba(40,40,40,0.75);
+			background: rgba(60,60,60,0.95);
 		}
 		select:valid, input:valid {
 			background: rgba(70,70,70,0.75);
@@ -383,7 +383,7 @@ session_start();
 	}
 	if (!$playMode) {
 		echo "				<td nowrap onclick=\"location.href='./gui_assign_unit.php'\" width=".$buttonWidth." class='menu_button_normal'><a href='./gui_assign_unit.php'>ASSIGN</a><br><span style='font-size:16px;'>Assign unit</span></td><td style='width:5px;'>&nbsp;</td>\n";
-		echo "				<td nowrap onclick=\"location.href='./gui_create_unit.php'\" width=".$buttonWidth." class='menu_button_normal'><a href='./gui_create_unit.php'>ADD</a><br><span style='font-size:16px;'>Create a unit</span></td><td style='width:5px;'>&nbsp;</td>\n";
+		echo "				<td nowrap onclick=\"location.href='./gui_create_unit.php'\" width=".$buttonWidth." class='menu_button_normal'><a href='./gui_create_unit.php'>CREATE</a><br><span style='font-size:16px;'>Command / Unit</span></td><td style='width:5px;'>&nbsp;</td>\n";
 		echo "				<td nowrap onclick=\"location.href='./gui_edit_game.php'\" width=".$buttonWidth." class='menu_button_normal'><a href='./gui_edit_game.php'>GAME</a><br><span style='font-size:16px;'>Game settings</span></td><td style='width:5px;'>&nbsp;</td>\n";
 		if ($isAdmin) {
 			echo "				<td nowrap onclick=\"location.href='./gui_create_player.php'\" width=".$buttonWidth." class='menu_button_normal'><a href='./gui_create_player.php'>PLAYER</a><br><span style='font-size:16px;'>Manage players</span></td><td style='width:5px;'>&nbsp;</td>\n";
@@ -515,9 +515,14 @@ session_start();
 				<td colspan="3" width='5%' class='datalabel' nowrap align="left"><hr></td>
 			</tr>
 			<tr>
-				<td colspan="1" width='5%' class='datalabel' nowrap align="left" valign="top" style="vertical-align:top;">Resulting name:<br>Short:</td>
+				<td colspan="1" width='5%' class='datalabel' nowrap align="left" valign="top" style="vertical-align:top;">Resulting name:</td>
 				<td colspan="2" width='90%' class='datalabel' nowrap valign="top" style="width:100%;">
 					<span id="resultingName"><?php echo $FORMATIONNAME ?></span><br>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="1" width='5%' class='datalabel' nowrap align="left" valign="top" style="vertical-align:top;">Short:</td>
+				<td colspan="2" width='90%' class='datalabel' nowrap valign="top" style="width:100%;">
 					<span id="resultingShort"><?php echo $FORMATIONSHORT ?></span>
 				</td>
 			</tr>

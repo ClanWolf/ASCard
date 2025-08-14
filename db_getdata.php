@@ -152,6 +152,18 @@
 	}
 	mysqli_free_result($result_asc_formation);
 
+	// Command
+	$sql_asc_command = "SELECT SQL_NO_CACHE * FROM asc_command;";
+	$result_asc_command = mysqli_query($conn, $sql_asc_command);
+	if (mysqli_num_rows($result_asc_command) > 0) {
+		while($row = mysqli_fetch_assoc($result_asc_command)) {
+			if ($row["commandid"] == $currentcommandid) {
+				$COMMANDNAME = $row["commandname"];
+			}
+		}
+	}
+	mysqli_free_result($result_asc_command);
+
 	// Player formations
 	$formationscount = 0;
 	$sql_asc_playerformations = "SELECT SQL_NO_CACHE * FROM asc_formation where playerid = ".$pid." ORDER BY formationid;";
@@ -163,7 +175,8 @@
 			$array_PLAYER_FORMATION_FACTIONIDS[$formationscount] = $row["factionid"];
 			$array_PLAYER_FORMATION_COMMANDIDS[$formationscount] = $row["commandid"];
 			//$array_PLAYER_FORMATION_NAMES[$formationscount] = $row["formationname"];
-			$array_PLAYER_FORMATION_NAMES[$formationscount] = $row["formationlong"];
+			//$array_PLAYER_FORMATION_NAMES[$formationscount] = $row["formationlong"];
+			$array_PLAYER_FORMATION_NAMES[$formationscount] = $row["formationshort"];
 
 			$array_PLAYER_FORMATION_STARTINDS[$foid] = $row["startindex"];
 

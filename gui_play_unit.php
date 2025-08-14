@@ -14,7 +14,7 @@ session_start();
 	}
 
 	//$pid    = filter_var($_SESSION['playerid'], FILTER_VALIDATE_INT);
-	$pid = isset($_SESSION["playerid"]) ? filter_var($_SESSION["playerid"], FILTER_VALIDATE_INT) : "not found";
+	$pid    = isset($_SESSION["playerid"]) ? filter_var($_SESSION["playerid"], FILTER_VALIDATE_INT) : "not found";
 	$gid    = filter_var($_SESSION['gameid'], FILTER_VALIDATE_INT);
 	$hgid   = filter_var($_SESSION['hostedgameid'], FILTER_VALIDATE_INT);
 	$pimage = htmlspecialchars($_SESSION['playerimage'], ENT_NOQUOTES);
@@ -33,6 +33,7 @@ session_start();
 	$showplayerdata_topleft = $opt2;
 	$playMode               = $opt3;
 	$showDistancesHexes     = $opt4;
+	$currentcommandid       = $_SESSION['commandid'];
 
 	if ($pid === "not found") {
 		echo "LOGIN EXPIRED. REDIRECT TO LOGIN...<br>\n";
@@ -718,7 +719,7 @@ session_start();
 	echo "									<a href=''>&nbsp;&nbsp;&nbsp;<i class='fa-solid fa-arrow-left'></i></a>\n";
 	echo "								</td>\n";
 	echo "									<td colspan='1' nowrap style='height:30px;text-align:center;' class='formationselect_button_normal'>\n";
-	echo "									<a href='#'>COMMAND</a>\n";
+	echo "									<a href='#'>".$COMMANDNAME."</a>\n";
 	echo "								</td>\n";
 	echo "								<td colspan='1' nowrap style='width:60px;height:30px;text-align:right;' onclick='location.href=\"\"' class='formationselect_button_normal'>\n";
 	echo "									<a href=''><i class='fa-solid fa-arrow-right'></i>&nbsp;&nbsp;&nbsp;</a>\n";

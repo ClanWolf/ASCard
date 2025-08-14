@@ -272,7 +272,7 @@ session_start();
 			outline: none;
 		}
 		select:invalid, input:invalid {
-			background: rgba(40,40,40,0.75);
+			background: rgba(60,60,60,0.95);
 		}
 		select:valid, input:valid {
 			background: rgba(70,70,70,0.75);
@@ -354,7 +354,7 @@ session_start();
 	}
 	if (!$playMode) {
 		echo "				<td nowrap onclick=\"location.href='./gui_assign_unit.php'\" width=".$buttonWidth." class='menu_button_normal'><a href='./gui_assign_unit.php'>ASSIGN</a><br><span style='font-size:16px;'>Assign unit</span></td><td style='width:5px;'>&nbsp;</td>\n";
-		echo "				<td nowrap onclick=\"location.href='./gui_create_unit.php'\" width=".$buttonWidth." class='menu_button_normal'><a href='./gui_create_unit.php'>ADD</a><br><span style='font-size:16px;'>Create a unit</span></td><td style='width:5px;'>&nbsp;</td>\n";
+		echo "				<td nowrap onclick=\"location.href='./gui_create_unit.php'\" width=".$buttonWidth." class='menu_button_normal'><a href='./gui_create_unit.php'>CREATE</a><br><span style='font-size:16px;'>Command / Unit</span></td><td style='width:5px;'>&nbsp;</td>\n";
 		echo "				<td nowrap onclick=\"location.href='./gui_edit_game.php'\" width=".$buttonWidth." class='menu_button_normal'><a href='./gui_edit_game.php'>GAME</a><br><span style='font-size:16px;'>Game settings</span></td><td style='width:5px;'>&nbsp;</td>\n";
 		if ($isAdmin) {
 			echo "				<td nowrap onclick=\"location.href='./gui_create_player.php'\" width=".$buttonWidth." class='menu_button_normal'><a href='./gui_create_player.php'>PLAYER</a><br><span style='font-size:16px;'>Manage players</span></td><td style='width:5px;'>&nbsp;</td>\n";
@@ -378,7 +378,7 @@ session_start();
 	<table align="center" width="90%" cellspacing=2 cellpadding=2 border=0px>
 		<tr>
 <?php
-// Select faction logo
+// Select faction logo for command and command data
 if ($currentcommandid == -1) {
 	// no command selected -> error
 }
@@ -400,7 +400,7 @@ if (!$playMode) {
 	echo "									<a href=''>&nbsp;&nbsp;&nbsp;<i class='fa-solid fa-arrow-left'></i></a>\n";
 	echo "								</td>\n";
 	echo "									<td colspan='1' nowrap style='height:30px;text-align:center;' onclick='location.href=\"gui_edit_command.php?commandid=".$currentcommandid."\"' class='formationselect_button_normal'>\n";
-	echo "									<a href='gui_edit_command.php?commandid=".$currentcommandid."'><i class='fas fa-edit'></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;COMMAND</a>\n";
+	echo "									<a href='gui_edit_command.php?commandid=".$currentcommandid."'><i class='fas fa-edit'></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;".$commandName."</a>\n";
 	echo "									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src='./images/factions/".$commandfactionlogo."' width='20px' style='border:1px solid #000000;vertical-align:middle;'>\n";
 	echo "								</td>\n";
 	echo "								<td colspan='1' nowrap style='width:60px;height:30px;text-align:right;' onclick='location.href=\"\"' class='formationselect_button_normal'>\n";
@@ -415,7 +415,7 @@ if (!$playMode) {
 	echo "									<a href=''>&nbsp;&nbsp;&nbsp;<i class='fa-solid fa-arrow-left'></i></a>\n";
 	echo "								</td>\n";
 	echo "									<td colspan='1' nowrap style='height:30px;text-align:center;' onclick='location.href=\"gui_select_command.php\"' class='formationselect_button_normal'>\n";
-	echo "									<a href='gui_select_command.php'>COMMAND</a>\n";
+	echo "									<a href='gui_select_command.php'>".$commandName."</a>\n";
 	echo "									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src='./images/factions/".$commandfactionlogo."' width='20px' style='border:1px solid #000000;vertical-align:middle;'>\n";
 	echo "									&nbsp;&nbsp;&nbsp;<span id='bidOverviewCommand'>(PV 10 / 100)</span>\n";
 	echo "								</td>\n";
@@ -454,7 +454,7 @@ if ($playMode) {
 		while ($rowFormation = $resFormations->fetch_assoc()) {
 			$formationidSelected = $rowFormation['formationid'];
 			$factionidSelected = $rowFormation['factionid'];
-			$formationnameSelected = $rowFormation['formationlong'];
+			$formationnameSelected = $rowFormation['formationshort']; // $rowFormation['formationlong'];
 			//$formationnameSelected = $rowFormation['formationname'];
 
 			$tonnageformation[$formationind] = 0;
@@ -527,7 +527,8 @@ if ($playMode) {
 			}
 
 			if ($formationsFound > 0 && $activeUnitsFound > 0) {
-				echo "			<td nowrap style='width:270px;height:30px;' onclick='location.href=\"gui_play_unit.php?stv=1&formationid=".$formationidSelected."\"' class='formationselect_button_normal'>\n";
+				//echo "			<td nowrap style='width:270px;height:30px;' onclick='location.href=\"gui_play_unit.php?stv=1&formationid=".$formationidSelected."\"' class='formationselect_button_normal'>\n";
+				echo "			<td nowrap style='width:270px;height:30px;' onclick='location.href=\"gui_edit_formation.php?formationid=".$formationidSelected."\"' class='formationselect_button_normal'>\n";
 				echo "				<table style='width:100%;' cellspacing=0 cellpadding=0>\n";
 				echo "					<tr>\n";
 				if (!$playMode) {
@@ -536,7 +537,8 @@ if ($playMode) {
 					echo "						</td>\n";
 				}
 				echo "						<td width='98%' style='text-align:center;'>\n";
-				echo "							<a href='gui_play_unit.php?stv=1&formationid=".$formationidSelected."'>".$formationnameSelected."</a>\n";
+				//echo "							<a href='gui_play_unit.php?stv=1&formationid=".$formationidSelected."'>".$formationnameSelected."</a>\n";
+				echo "							<a href='gui_edit_formation.php?formationid=".$formationidSelected."'>".$formationnameSelected."</a>\n";
 				if (!$playMode) {
 					echo "							&nbsp;&nbsp;&nbsp;<span id='bidOverviewFormation".$formationind."'>&nbsp;</span>\n";
 				} else {

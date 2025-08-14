@@ -428,10 +428,10 @@ session_start();
 			outline: none;
 		}
 		select:invalid, input:invalid {
-			background: rgba(40,40,40,0.75);;
+			background: rgba(60,60,60,0.95);
 		}
 		select:valid, input:valid {
-			background: rgba(70,70,70,0.75);;
+			background: rgba(70,70,70,0.75);
 		}
 	</style>
 </head>
@@ -454,11 +454,14 @@ session_start();
 			document.getElementById("units").selectedIndex = "1";
 		});
 
+		function storeNewCommand() {
+			// Store new command
+			alert("Not yet implemented!");
+		}
+
 		function storeNewUnit() {
-			var url="./gui_create_unit.php?am=1";
-
 			// Store new unit
-
+			var url="./gui_create_unit.php?am=1";
 			var TON = document.getElementById("F_TON").value;
 			var TECH = document.getElementById("TECH").value;
 			//var TON = document.getElementById('tonnage').value;
@@ -611,7 +614,7 @@ session_start();
 	}
 	if (!$playMode) {
 		echo "				<td nowrap onclick=\"location.href='./gui_assign_unit.php'\" width=".$buttonWidth." class='menu_button_normal'><a href='./gui_assign_unit.php'>ASSIGN</a><br><span style='font-size:16px;'>Assign unit</span></td><td style='width:5px;'>&nbsp;</td>\n";
-		echo "				<td nowrap onclick=\"location.href='./gui_create_unit.php'\" width=".$buttonWidth." class='menu_button_active'><a href='./gui_create_unit.php'>ADD</a><br><span style='font-size:16px;'>Create a unit</span></td><td style='width:5px;'>&nbsp;</td>\n";
+		echo "				<td nowrap onclick=\"location.href='./gui_create_unit.php'\" width=".$buttonWidth." class='menu_button_active'><a href='./gui_create_unit.php'>CREATE</a><br><span style='font-size:16px;'>Command / Unit</span></td><td style='width:5px;'>&nbsp;</td>\n";
 		echo "				<td nowrap onclick=\"location.href='./gui_edit_game.php'\" width=".$buttonWidth." class='menu_button_normal'><a href='./gui_edit_game.php'>GAME</a><br><span style='font-size:16px;'>Game settings</span></td><td style='width:5px;'>&nbsp;</td>\n";
 		if ($isAdmin) {
 			echo "				<td nowrap onclick=\"location.href='./gui_create_player.php'\" width=".$buttonWidth." class='menu_button_normal'><a href='./gui_create_player.php'>PLAYER</a><br><span style='font-size:16px;'>Manage players</span></td><td style='width:5px;'>&nbsp;</td>\n";
@@ -634,7 +637,23 @@ session_start();
 	<br>
 
 	<form autocomplete="off">
-		<table class="options" cellspacing=4 cellpadding=4 border=0px>
+		<table width="80%" class="options" cellspacing=4 cellpadding=4 border=0px>
+			<tr>
+				<td nowrap width="1%" class="datalabel" style='text-align:left;' colspan='1'>
+					Create new command:&nbsp;&nbsp;&nbsp;
+				</td>
+				<td nowrap width="99%" class="datalabel" style='text-align:left;' colspan='1'>
+					<input required style='width:100%;' type="text" id="NewCommandName" name="NewCommandName">
+				</td>
+				<td nowrap width="1%" align="right">
+					<a href='#' onClick='storeNewCommand();'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class='fas fa-plus-square'></i></a>
+				</td>
+			</tr>
+		</table>
+
+		<br>
+
+		<table width="80%" class="options" cellspacing=4 cellpadding=4 border=0px>
 			<tr>
 				<td nowrap class="datalabel" style='text-align:left;' colspan='1'>
 					Tech:
