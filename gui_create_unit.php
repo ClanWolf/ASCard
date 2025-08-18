@@ -655,24 +655,32 @@ session_start();
 
 		<table width="80%" class="options" cellspacing=4 cellpadding=4 border=0px>
 			<tr>
-				<td nowrap class="datalabel" style='text-align:left;' colspan='1'>
+				<td width="5%" nowrap class="datalabel" style='text-align:right;' colspan='1'>
 					Tech:
 				</td>
-				<td nowrap class="datalabel" style='text-align:left;' colspan='4'>
-					<select required name='tech' id='tech' size='1'>
+				<td width="20%" nowrap class="datalabel" style='text-align:left;' colspan='1'>
+					<select required name='tech' style='width:100%;' id='tech' size='1'>
 						<option value="2">Clan</option>
 						<option value="1">IS</option>
 						<!-- <option value="3">MIXED</option> -->
 					</select>
-
-					Type: <select required style='width:75px;' name='unittype' id='unittype' size='1'>
+				</td>
+				<td width="5%" nowrap class="datalabel" style='text-align:right;' colspan='1'>
+                    Type:
+                </td>
+				<td width="20%" nowrap class="datalabel" style='text-align:left;' colspan='1'>
+					<select required style='width:100%;' name='unittype' id='unittype' size='1'>
 						<option value="BA">BA</option>
 						<option value="BM" selected="selected">BM</option>
 						<option value="CV">CV</option>
 						<!-- <option value="AF">AF</option> -->
 					</select>
-
-					<span id='weightBlock'>Weight: <select required style='width:145px;' name='tonnage' id='tonnage' size='1'>
+				</td>
+				<td width="5%" nowrap id='weightLabel'class="datalabel" style='text-align:right;' colspan='1'>
+                    Weight:
+                </td>
+				<td width="20%" id='weightBlock' nowrap class="datalabel" style='text-align:left;' colspan='1'>
+					<select required style='width:100%;' name='tonnage' id='tonnage' size='1'>
 						<option value="LIGHT">LIGHT</option>
 						<option value="MEDIUM">MEDIUM</option>
 						<option value="HEAVY" selected="selected">HEAVY</option>
@@ -719,17 +727,24 @@ session_start();
 						<!-- <option value="190">190</option> -->
 						<!-- <option value="195">195</option> -->
 						<!-- <option value="200">200</option> -->
-					</select></span>
-
-					Filter: <input required style='width:150px;' type="text" id="NameFilter" name="NameFilter">
+					</select>
+				</td>
+				<td width="5%" nowrap class="datalabel" style='text-align:right;' colspan='1'>
+					Filter:
+				</td>
+				<td width="20%" nowrap class="datalabel" style='text-align:left;' colspan='1'>
+					<input required style='width:100%;' type="text" id="NameFilter" name="NameFilter">
+				</td>
+				<td nowrap class="datalabel" style='text-align:left;vertical-align:bottom;' valign="bottom" colspan='1' rowspan="7">
+					<a href='#' onClick='storeNewUnit();'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class='fas fa-plus-square'></i></a>
 				</td>
 			</tr>
 			<tr>
-				<td nowrap class="datalabel" style='text-align:left;' colspan='1'>
+				<td width="5%" nowrap class="datalabel" style='text-align:right;' colspan='1'>
 					Era:
 				</td>
-				<td nowrap class="datalabel" style='text-align:left;' colspan='4'>
-					<select required style='width:350px;' name='CreateUnitEra' id='CreateUnitEra' size='1'>
+				<td width="95%" nowrap class="datalabel" style='text-align:left;' colspan='7'>
+					<select required style='width:100%;' name='CreateUnitEra' id='CreateUnitEra' size='1'>
 						<option value="0">ALL</option>
 						<option value="9">2005-2570: AGE OF WAR</option>                             <!-- ID:   9 -->
 						<option value="10">2571-2780: STAR LEAGUE</option>                           <!-- ID:  10 -->
@@ -747,16 +762,16 @@ session_start();
 				</td>
 			</tr>
 			<tr>
-				<td nowrap class="datalabel" style='text-align:left;' colspan='1'>
+				<td width="5%" nowrap class="datalabel" style='text-align:left;' colspan='1'>
 				</td>
-				<td nowrap class="datalabel" style='text-align:left;' colspan='4'>
+				<td width="95%" nowrap class="datalabel" style='text-align:left;' colspan='7'>
 					<br>
 					<!-- will be filled by 'fetchUnitList();' -->
-					<select required name='units' id='units' size='1' onchange="unitSelected();" style="width:350px"></select>
+					<select required name='units' id='units' size='1' onchange="unitSelected();" style="width:100%"></select>
 				</td>
 			</tr>
 			<tr>
-				<td nowrap class="datalabel" style='text-align:left;' colspan='5'>
+				<td width="100%" nowrap class="datalabel" style='text-align:left;' colspan='8'>
 					<hr>
 					<input required type="hidden" id="TP" name="TP">
 					<input required type="hidden" id="SZ" name="SZ">
@@ -787,17 +802,23 @@ session_start();
 				</td>
 			</tr>
 			<tr>
-				<td nowrap class="datalabel" style='text-align:left;'>
-					#: <input required type="text" id="MNU" name="MNU" style='width:60px'>
+				<td width="5%" nowrap class="datalabel" style='text-align:right;' colspan='1' colspan='1'>
+					#:
 				</td>
-				<td nowrap class="datalabel" style='text-align:left;'>
-					<img id="newpilotimage" src="" width="50px" height="50px">
+				<td nowrap class="datalabel" style='text-align:left;' colspan='1'>
+					<input required type="text" id="MNU" name="MNU" style='width:100%;'>
 				</td>
-				<td nowrap class="datalabel" style='text-align:left;'>
-					Pilot: <input type="text" required id="PN" name="PN" style='width:120px'>
+				<td width="5%" nowrap class="datalabel" style='text-align:right;' colspan='1'>
+					Pilot:
 				</td>
-				<td nowrap class="datalabel" style='text-align:left;'>
-					Skill: <select required name='SKILL' id='SKILL' size='1' onchange='unitdetailsChanged();'>
+				<td nowrap class="datalabel" style='text-align:left;' colspan='1'>
+					<input type="text" required id="PN" name="PN" style='width:100%;'>
+				</td>
+				<td width="5%" nowrap class="datalabel" style='text-align:right;' colspan='1'>
+					Skill:
+				</td>
+				<td nowrap class="datalabel" style='text-align:left;' colspan='1'>
+					<select required name='SKILL' id='SKILL' size='1' onchange='unitdetailsChanged();' style="width:100%;">
 						<option value="0">0</option>
 						<option value="1">1</option>
 						<option value="2">2</option>
@@ -808,23 +829,18 @@ session_start();
 						<option value="7">7</option>
 					</select>
 				</td>
-				<td>
+				<td width="5%" nowrap class="datalabel" style='text-align:right;' rowspan="3" colspan='1'>
 					<a href='#' onClick='createPilot();'><i class="fas fa-redo"></i></a>
 				</td>
-			</tr>
-			<tr>
-				<td nowrap colspan="1" class="datalabel" style='text-align:left;'>
-					Unitname:
-				</td>
-				<td nowrap colspan="4" class="datalabel" style='text-align:left;'>
-					<input required type="text" id="UNITNAME" name="UNITNAME" style='width:250px'> (max. 15)
+				<td width="20%" nowrap class="datalabel" style='text-align:left;' rowspan="3" colspan='1'>
+					<img id="newpilotimage" src="" height="100px" width="100px" style="height:auto;">
 				</td>
 			</tr>
 			<tr>
-				<td nowrap class="datalabel" style='text-align:left;' colspan='1'>
-					Add to formation:
+				<td nowrap class="datalabel" style='text-align:right;' colspan='1'>
+					Assign to:
 				</td>
-				<td nowrap class="datalabel" style='text-align:left;' colspan='3'>
+				<td nowrap class="datalabel" style='text-align:left;' colspan='5'>
 					<select required name='FORMATIONID' id='FORMATIONID' size='1' style='width:100%;' onchange='unitdetailsChanged();'>
 <?php
 	$sql_asc_playersformations = "SELECT SQL_NO_CACHE * FROM asc_formation where playerid=".$pid;
@@ -844,9 +860,15 @@ session_start();
 ?>
 					</select>
 				</td>
-				<td align="right">
-					<a href='#' onClick='storeNewUnit();'><i class='fas fa-plus-square'></i></a>
+			</tr>
+			<tr>
+				<td width="5%" nowrap colspan="1" class="datalabel" style='text-align:right;'>
+					Unitname:
 				</td>
+				<td nowrap colspan="4" class="datalabel" style='text-align:left;'>
+					<input required type="text" id="UNITNAME" name="UNITNAME" style='width:100%;'>
+				</td>
+				<td width="20%" nowrap colspan="1" class="datalabel" style='text-align:left;'>(max. 15)</td>
 			</tr>
 		</table>
 	</form>

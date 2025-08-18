@@ -388,6 +388,21 @@ function getUnitDetails(id) {
 //		console.log(document.getElementById("UNITVARIANT").value);
 
 		var unitNameProposal = document.getElementById("UNITCLASS").value + " " + document.getElementById("UNITVARIANT").value;
+
+
+
+
+
+
+		let string = 'FirstName LastName ( myemail@address.org )';
+        const regExp = /(?<=\().*?(?=\))/g;
+        let email = string.match(regExp);
+        console.log(email[0].trim());
+
+
+
+
+
 		document.getElementById("UNITNAME").value = unitNameProposal;
 
 		document.getElementById("DMGE").value=json.BFDamageExtreme;
@@ -421,6 +436,7 @@ function fetchUnitList() {
 	var techid = tech.options[tech.selectedIndex].value;
 	var unittype = document.getElementById("unittype");
 	var tonnage = document.getElementById("tonnage");
+	var weightLabel = document.getElementById("weightLabel");
 	var weightBlock = document.getElementById("weightBlock");
 	var unittypevalue = unittype.options[unittype.selectedIndex].value;
 	var tonnagevalue = tonnage.options[tonnage.selectedIndex].value;
@@ -433,11 +449,13 @@ function fetchUnitList() {
 	if (unittypevalue == "BA") {
 		tonnage.disabled = true;
 		weightBlock.style.visibility='hidden';
-		weightBlock.style.display='none';
+		weightLabel.style.visibility='hidden';
+		//weightBlock.style.display='none';
 	} else {
 		tonnage.disabled = false;
 		weightBlock.style.visibility='visible';
-		weightBlock.style.display='inline';
+		weightLabel.style.visibility='visible';
+		//weightBlock.style.display='inline';
 	}
 
 	// console.log(unittypevalue);
