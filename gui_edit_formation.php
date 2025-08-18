@@ -152,7 +152,7 @@ session_start();
 
 			if (autobuildChecked) {
 				let resultingName = n1 + " " + n2 + " " + n3;
-				let resultingShort = getFirstLetters(resultingName);
+				let resultingShort = n1 + " " + getFirstLetters(n2 + " " + n3);
 				document.getElementById("resultingName").innerHTML = resultingName;
 				document.getElementById("resultingShort").innerHTML = resultingShort;
 				//console.log(resultingName);
@@ -280,7 +280,7 @@ session_start();
 				}
 			}
 
-			let resultingShort = getFirstLetters(res);
+			let resultingShort = formationName + " " + getFirstLetters(formationType + " " + formation);
 
 			document.getElementById("resultingName").innerHTML = res;
 			document.getElementById("resultingShort").innerHTML = resultingShort;

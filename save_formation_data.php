@@ -44,6 +44,9 @@
 		if (mysqli_query($conn, $sql)) {
 			echo "<br><br>Formation updated successfully.";
 			mysqli_commit($conn);
+
+			echo "<script>top.window.location = './gui_select_unit.php'</script>";
+			die('ERROR 3');
 		} else {
 			echo "<br><br>ERROR while updating formation: " . mysqli_error($conn);
 		}

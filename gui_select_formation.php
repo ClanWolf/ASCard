@@ -221,7 +221,7 @@ session_start();
 					while ($rowFormation = $resFormations->fetch_assoc()) {
 						$formationidSelected = $rowFormation['formationid'];
 						$factionidSelected = $rowFormation['factionid'];
-						$formationnameSelected = $rowFormation['formationname'];
+						$formationnameSelected = $rowFormation['formationshort'];
 
 						// Select faction logo
 						if (!($stmtFactionLogo = $conn->prepare("SELECT SQL_NO_CACHE * FROM asc_faction where factionid = ".$factionidSelected." ORDER BY factionid;"))) {

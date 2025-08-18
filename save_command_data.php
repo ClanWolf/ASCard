@@ -35,6 +35,9 @@
 		if (mysqli_query($conn, $sql)) {
 			echo "<br><br>Command updated successfully.";
 			mysqli_commit($conn);
+
+			echo "<script>top.window.location = './gui_select_unit.php'</script>";
+			die('ERROR 3');
 		} else {
 			echo "<br><br>ERROR while updating command: " . mysqli_error($conn);
 		}

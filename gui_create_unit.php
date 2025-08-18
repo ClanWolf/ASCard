@@ -508,7 +508,7 @@ session_start();
 			var DMGE = document.getElementById("DMGE").value;
 
 			if (UNITNAME != "") {
-				UNITNAME = UNITNAME.length > 15 ? UNITNAME.substring(0, 12) + "..." : UNITNAME.substring(0, UNITNAME.length);
+				UNITNAME = UNITNAME.length > 53 ? UNITNAME.substring(0, 50) + "..." : UNITNAME.substring(0, UNITNAME.length);
 			}
 
 			if ("<<< Select unit >>>" == MODEL) {
@@ -868,7 +868,7 @@ session_start();
 				<td nowrap colspan="4" class="datalabel" style='text-align:left;'>
 					<input required type="text" id="UNITNAME" name="UNITNAME" style='width:100%;'>
 				</td>
-				<td width="20%" nowrap colspan="1" class="datalabel" style='text-align:left;'>(max. 15)</td>
+				<td width="20%" nowrap colspan="1" class="datalabel" style='text-align:left;'>(max. 30)</td>
 			</tr>
 		</table>
 	</form>
