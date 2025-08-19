@@ -508,6 +508,9 @@ session_start();
 			var DMGE = document.getElementById("DMGE").value;
 
 			if (UNITNAME != "") {
+//				const regExp = /(?<=\().*?(?=\))/g;
+//				UNTINAME = UNITNAME.match(regExp);
+//				console.log(UNITNAME.trim());
 				UNITNAME = UNITNAME.length > 53 ? UNITNAME.substring(0, 50) + "..." : UNITNAME.substring(0, UNITNAME.length);
 			}
 
@@ -849,7 +852,7 @@ session_start();
 		while($rowFormations = mysqli_fetch_assoc($result_asc_playersformations)) {
 			$formationid = $rowFormations['formationid'];
 			//$formationname = $rowFormations['formationname'];
-			$formationname = $rowFormations['formationlong'];
+			$formationname = $rowFormations['formationshort'];
 			if ($paramformationid == $formationid) {
 				echo "										<option value='".$formationid."' selected>".$formationname."</option>\n";
 			} else {
@@ -868,7 +871,7 @@ session_start();
 				<td nowrap colspan="4" class="datalabel" style='text-align:left;'>
 					<input required type="text" id="UNITNAME" name="UNITNAME" style='width:100%;'>
 				</td>
-				<td width="20%" nowrap colspan="1" class="datalabel" style='text-align:left;'>(max. 30)</td>
+				<td width="20%" nowrap colspan="1" class="datalabel" style='text-align:left;'>(max. 30)<a href="javascript:switchNameProposal();">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa-solid fa-shuffle"></i></a></td>
 			</tr>
 		</table>
 	</form>

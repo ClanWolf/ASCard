@@ -6,6 +6,11 @@ var corsproxyprefix3 = "https://yacdn.org/proxy/";
 var corsproxyprefix4 = "https://api.allorigins.win/get?url=";
 var corsproxyprefix5 = "https://jsonp.afeld.me/?url=";
 
+var showingClanNameProposal = false;
+var unitNameProposal_clan = "";
+var unitNameProposal_is = "";
+var unitVariantProposal = "";
+
 var corsproxyprefix = corsproxyprefix5;
 
 function getUnitList(filter, tech, minTon, maxTon, category, unittypeString) {
@@ -387,26 +392,34 @@ function getUnitDetails(id) {
 //		console.log(document.getElementById("UNITCLASS").value);
 //		console.log(document.getElementById("UNITVARIANT").value);
 
-		var unitNameProposal = document.getElementById("UNITCLASS").value + " " + document.getElementById("UNITVARIANT").value;
+		var unitNameProposal = document.getElementById("UNITCLASS").value
+		unitVariantProposal = document.getElementById("UNITVARIANT").value;
 
+//		console.log("showingClanNameProposal: " + showingClanNameProposal);
 
+		if (unitNameProposal.indexOf("(") !== -1) {
+			const regExp = /(?<=\().*?(?=\))/g;
+			unitNameProposal_clan = unitNameProposal.match(regExp);
+			unitNameProposal_is = unitNameProposal.replace("(" + unitNameProposal_clan + ")", "").trim();
 
-
-
-
-		let string = 'FirstName LastName ( myemail@address.org )';
-        const regExp = /(?<=\().*?(?=\))/g;
-        let email = string.match(regExp);
-        console.log(email[0].trim());
-
-
-
-
-
-		document.getElementById("UNITNAME").value = unitNameProposal;
+			unitNameProposal = unitNameProposal_is;
+		}
+		document.getElementById("UNITNAME").value = unitNameProposal + " " + unitVariantProposal;
 
 		document.getElementById("DMGE").value=json.BFDamageExtreme;
 	});
+}
+
+function switchNameProposal() {
+	if (showingClanNameProposal) {
+//		console.log("Switch to clan proposal");
+		document.getElementById("UNITNAME").value = unitNameProposal_is + " " + unitVariantProposal;
+		showingClanNameProposal = false;
+	} else {
+//		console.log("Switch to is proposal");
+		document.getElementById("UNITNAME").value = unitNameProposal_clan + " " + unitVariantProposal;
+		showingClanNameProposal = true;
+	}
 }
 
 function unitSelected() {

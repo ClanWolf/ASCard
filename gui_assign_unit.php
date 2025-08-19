@@ -339,7 +339,7 @@ session_start();
 		while($rowFormation = mysqli_fetch_assoc($result_asc_playersformations)) {
 			$formationid = $rowFormation['formationid'];
 			//$formationname = $rowFormation['formationname'];
-			$formationname = $rowFormation['formationlong'];
+			$formationname = $rowFormation['formationshort'];
 			if ($paramformationid == $formationid) {
 				echo "										<option value='".$formationid."' selected>".$formationname."</option>\n";
 			} else {
