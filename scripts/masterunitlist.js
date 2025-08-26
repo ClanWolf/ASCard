@@ -383,6 +383,7 @@ function getUnitDetails(id) {
 		document.getElementById("RULES").value=json.Rules;
 		document.getElementById("COST").value=json.Cost;
 		document.getElementById("BV").value=json.BattleValue;
+		document.getElementById("PV").value=json.BFPointValue;
 		document.getElementById("ERAID").value=json.EraId;
 		document.getElementById("ERASTART").value=json.EraStart;
 		document.getElementById("DATEINTRO").value=json.DateIntroduced;

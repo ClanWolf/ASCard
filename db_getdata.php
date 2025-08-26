@@ -47,6 +47,7 @@
 	$array_UNIT_IMG_STATUS = array();
 	$array_UNIT_STATUSSTRING = array();
 	$array_TECH = array();
+	$array_PV_BASE = array();
 	$array_PV = array();
 	$array_TP = array();
 	$array_SZ = array();
@@ -436,6 +437,7 @@
 							$array_UNIT_IMG_URL[$unitcount] = $row["unit_imageurl"];
 							$array_TECH[$unitcount] = $row["tech"];
 							$array_PV[$unitcount] = $row["as_pv"];
+							$array_PV_BASE[$unitcount] = $row["pointvalue"];
 							$array_TP[$unitcount] = $row["as_tp"];
 							$array_SZ[$unitcount] = $row["as_sz"];
 							$array_TON[$unitcount] = $row["unit_tonnage"];

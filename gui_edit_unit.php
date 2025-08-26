@@ -22,12 +22,35 @@ session_start();
 	$playMode = $opt3;
 
 	$isAdmin = $_SESSION['isAdmin'];
+	$unitId  = isset($_GET["unitid"]) ? filter_var($_GET["unitid"], FILTER_VALIDATE_INT) : -1;
 
 	$sql_asc_playerround = "SELECT SQL_NO_CACHE * FROM asc_player where playerid = " . $pid . ";";
 	$result_asc_playerround = mysqli_query($conn, $sql_asc_playerround);
 	if (mysqli_num_rows($result_asc_playerround) > 0) {
 		while($row = mysqli_fetch_assoc($result_asc_playerround)) {
 			$CURRENTROUND = $row["round"];
+		}
+	}
+	$sql_asc_unit = "SELECT SQL_NO_CACHE * FROM asc_assign a, asc_unit u, asc_pilot p WHERE a.unitid = ".$unitId." AND u.unitid = a.unitid AND a.pilotid = p.pilotid;";
+	$result_asc_unit = mysqli_query($conn, $sql_asc_unit);
+	if (mysqli_num_rows($result_asc_unit) > 0) {
+		while($row452 = mysqli_fetch_assoc($result_asc_unit)) {
+			$ASSIGNID = $row452["assignid"];
+			$ASSIGNCOMMANDID = $row452["command"];
+			$ASSIGNFORMATIONID = $row452["formation"];
+			$UNITNUMBER = $row452["unit_number"];
+			$UNITNAME = $row452["unit_name"];
+			$UNITCOMMANDER = $row452["commander"];
+			$UNITSUBCOMMANDER = $row452["subcommander"];
+			$UNITSKILL = $row452["as_skill"];
+			$UNITBASEPV = $row452["pointvalue"];
+			$UNITPV = $row452["as_pv"];
+			$PILOTID = $row452["pilotid"];
+			$PILOTNAME = $row452["name"];
+			$PILOTRANK = $row452["rank"];
+			$PILOTIMAGEURL = $row452["pilot_imageurl"];
+			$PILOTSPA = $row452["SPA"];
+			$PILOTSPACOSTSUM = $row452["SPA_cost_sum"];
 		}
 	}
 ?>
@@ -46,8 +69,6 @@ session_start();
 	<meta name="apple-mobile-web-app-capable" content="yes">
 	<meta name="apple-mobile-web-app-title" content="ASCard">
 	<meta name="viewport" content="width=device-width, initial-scale=0.75, minimum-scale=0.75, maximum-scale=1.85, user-scalable=yes" />
-
-	<meta http-equiv="refresh" content="5" />
 
 	<link rel="manifest" href="/app/ascard.webmanifest">
 	<link rel="stylesheet" type="text/css" href="./fontawesome/css/all.min.css" rel="stylesheet">
@@ -81,11 +102,30 @@ session_start();
 			]
 		}
 	</script>
-	<script type="text/javascript" src="./scripts/passive-events-support/main.js"></script>
 
+	<script type="text/javascript" src="./scripts/passive-events-support/main.js"></script>
 	<script type="text/javascript" src="./scripts/jquery-3.7.1.min.js"></script>
 	<script type="text/javascript" src="./scripts/howler.min.js"></script>
 	<script type="text/javascript" src="./scripts/cookies.js"></script>
+
+	<script>
+		let assignId = "<?php echo $ASSIGNID; ?>";
+		let assignCommandId = "<?php echo $ASSIGNCOMMANDID; ?>";
+		let assignFormationId = "<?php echo $ASSIGNFORMATIONID; ?>";
+		let unitNumber = "<?php echo $UNITNUMBER; ?>";
+		let unitName = "<?php echo $UNITNAME; ?>";
+		let unitCommander = "<?php echo $UNITCOMMANDER; ?>";
+		let unitSubCommander = "<?php echo $UNITSUBCOMMANDER; ?>";
+		let unitSkill = "<?php echo $UNITSKILL; ?>";
+		let unitBasePv = "<?php echo $UNITBASEPV; ?>";
+		let unitPv = "<?php echo $UNITPV; ?>";
+		let pilotId = "<?php echo $PILOTID; ?>";
+		let pilotName = "<?php echo $PILOTNAME; ?>";
+		let pilotRank = "<?php echo $PILOTRANK; ?>";
+		let pilotImageUrl = "<?php echo $PILOTIMAGEURL; ?>";
+		let pilotSpa = "<?php echo $PILOTSPA; ?>";
+		let pilotSpaCostSum = "<?php echo $PILOTSPACOSTSUM; ?>";
+	</script>
 
 	<style>
 		html, body {
@@ -95,13 +135,45 @@ session_start();
 			margin-left: auto;
 			margin-right: auto;
 		}
+		input, select {
+			width: 80px;
+			vertical-align: middle;
+			color: #ddd;
+			border-width: 0px;
+			padding: 2px;
+			font-family: 'Pathway Gothic One', sans-serif;
+		}
+		select:focus, textarea:focus, input:focus {
+			outline: none;
+		}
+		select:invalid, input:invalid {
+			background: rgba(60,60,60,0.95);
+		}
+		select:valid, input:valid {
+			background: rgba(70,70,70,0.75);
+		}
+		.scroll-pane {
+			width: 100%;
+			height: 100px;
+			overflow: auto;
+		}
+		.horizontal-only {
+			height: auto;
+			max-height: 100px;
+		}
 	</style>
 </head>
 
 <body>
+	<iframe name="saveframe" id="iframe_save"></iframe>
+	<script type="text/javascript" src="./scripts/log_enable.js"></script>
+
 	<script>
 		$(document).ready(function() {
 			$("#cover").hide();
+
+			document.getElementById("NewUnitName").value = unitName;
+
 		});
 	</script>
 
@@ -160,11 +232,225 @@ session_start();
 
 	<br>
 
-	<table align="center" cellspacing=2 cellpadding=2 border=0px>
-
-EDIT COMMANDS
-
-	</table>
+	<form autocomplete="autocomplete_off_hack_xfr4!k">
+		<table width="70%" class="options" cellspacing="2" cellpadding="2" border=0px>
+			<tr>
+				<td nowrap class="datalabel" style='text-align:right;' colspan='1'>
+					Assign to:
+				</td>
+				<td nowrap class="datalabel" style='text-align:left;' colspan='6'>
+					<select required name='FORMATIONID' id='FORMATIONID' size='1' style='width:100%;' onchange='unitdetailsChanged();'>
+<?php
+	$sql_asc_playersformations = "SELECT SQL_NO_CACHE * FROM asc_formation fo, asc_faction fa WHERE playerid=".$pid." AND fo.factionid = fa.factionid;";
+	$result_asc_playersformations = mysqli_query($conn, $sql_asc_playersformations);
+	if (mysqli_num_rows($result_asc_playersformations) > 0) {
+		while($rowFormations = mysqli_fetch_assoc($result_asc_playersformations)) {
+			$formationid = $rowFormations['formationid'];
+			$formationname = $rowFormations['formationshort'];
+			$formationfactionid = $rowFormations['factionid'];
+			if ($paramformationid == $formationid) {
+				echo "										<option value='".$formationid."' selected>".$formationname."</option>\n";
+			} else {
+				echo "										<option value='".$formationid."'>".$formationname."</option>\n";
+			}
+			$formationfactionlogo = $rowFormations['factionimage'];
+			$formationfactionname = $rowFormations['factionname'];
+		}
+	}
+?>
+					</select>
+				</td>
+				<td nowrap class="datalabel" style='text-align:right;' colspan='1' id="factionname">
+					<?php echo $formationfactionname; ?>
+				</td>
+				<td nowrap class="datalabel" style='text-align:right;vertical-align:top;' colspan='1' rowspan="7">
+					&nbsp;&nbsp;&nbsp;&nbsp;<img id="factionlogo" src='./images/factions/<?php echo $formationfactionlogo; ?>' width='50px' style='border:1px solid #000000;vertical-align:middle;'>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="8" width='100%' class='datalabel' nowrap align="right"><hr></td>
+			</tr>
+			<tr>
+				<td colspan="1" width='5%' class='datalabel' nowrap align="right">Unit name:</td>
+				<td colspan="7" width='90%' class='datalabel'>
+					<input autocomplete="autocomplete_off_hack_xfr4!k" required onkeyup="" onchange="" type="text" id="NewUnitName" width="100%" style="width:100%;">
+				</td>
+			</tr>
+			<tr>
+				<td colspan="1" width='5%' class='datalabel' nowrap align="right">#:</td>
+				<td colspan="1" width='20%' class='datalabel'>
+					<input autocomplete="autocomplete_off_hack_xfr4!k" required onkeyup="" onchange="" type="text" id="NewUnitNumber" width="100%" style="width:100%;">
+				</td>
+				<td colspan="1" width='5%' class='datalabel' nowrap align="right">Pilot:</td>
+				<td colspan="1" width='20%' class='datalabel'>
+					<input autocomplete="autocomplete_off_hack_xfr4!k" required onkeyup="" onchange="" type="text" id="NewPilotName" width="100%" style="width:100%;">
+				</td>
+				<td colspan="1" width='5%' class='datalabel' nowrap align="right">Skill:</td>
+				<td colspan="1" width='20%' class='datalabel'>
+					<select required name='NewUnitSkill' id='NewUnitSkill' onchange="" size='1' style='width:100%;'>
+						<option value="0">0</option>
+						<option value="1">1</option>
+						<option value="2">2</option>
+						<option value="3">3</option>
+						<option value="4">4</option>
+						<option value="5">5</option>
+						<option value="6">6</option>
+						<option value="7">7</option>
+					</select>
+				</td>
+				<td colspan="1" width='5%' class='datalabel' nowrap align="right">New PV:</td>
+				<td colspan="1" width='20%' class='datalabel' align="right" id="newPV">
+					xx
+				</td>
+			</tr>
+			<tr>
+				<td colspan="1" width='5%' class='datalabel' nowrap align="right">Image m.:</td>
+				<td colspan="1" width='20%' class='datalabel'>
+					<select required name='malePilotImage' id='malePilotImage' onchange="" size='1' style='width:100%;'>
+						<option value="1">1</option>
+						<option value="2">2</option>
+						<option value="3">3</option>
+					</select>
+				</td>
+				<td colspan="1" width='5%' class='datalabel' nowrap align="right">f.:</td>
+				<td colspan="1" width='20%' class='datalabel'>
+					<select required name='femalePilotImage' id='femalePilotImage' onchange="" size='1' style='width:100%;'>
+						<option value="1">1</option>
+						<option value="2">2</option>
+						<option value="3">3</option>
+					</select>
+				</td>
+				<td colspan="1" width='5%' class='datalabel' nowrap align="right">Rank:</td>
+				<td colspan="3" width='40%' class='datalabel'>
+					<select required name='rank' id='rank' onchange="" size='1' style='width:100%;'>
+						<option value="1">1</option>
+						<option value="2">2</option>
+						<option value="3">3</option>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="8" width='100%' class='datalabel' nowrap align="right">&nbsp;</td>
+			</tr>
+			<tr>
+				<td colspan="2" width='50' class='datalabel' nowrap align="right">
+					<img src="./images/factions/CW.png" width="50px" id="newpilotimage">
+				</td>
+				<td colspan="2" width='50%' class='datalabel' nowrap align="left">
+					<img src="./images/factions/CW.png" width="50px" id="newpilotrank">
+				</td>
+				<td colspan="1" width='5%' class='datalabel' nowrap align="right" valign="top">Chain:</td>
+				<td colspan="3" width='40%' class='datalabel' valign="top">
+					<select required name='newChain' id='newChain' onchange="" size='1' style='width:100%;'>
+						<option value="Commander">Commander</option>
+						<option value="Subcommander">Subcommander</option>
+						<option value="Warrior">Warrior</option>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="9" width='100%' class='datalabel' nowrap align="right"><hr></td>
+			</tr>
+			<tr>
+				<td colspan="1" width='5%' class='datalabel' nowrap align="right">SPAs:</td>
+				<td colspan="6" width='90%' class='datalabel' id="newSPAs">
+					Blood Stalker [2], Headhunter [2]
+				</td>
+				<td colspan="1" width='5%' id="spa_sum" nowrap class="datalabel" style='text-align:center;vertical-align:top;' colspan='1' rowspan="1">
+					Sum:
+				</td>
+				<td nowrap class="datalabel" style='text-align:right;vertical-align:top;' colspan='1' rowspan="2" valign="top">
+					<!-- <a href="">&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa-solid fa-circle-info"></i></a> -->
+				</td>
+			</tr>
+			<tr>
+				<td colspan="1" width='5%' class='datalabel' nowrap align="right">Add SPA:</td>
+				<td colspan="5" width='90%' class='datalabel' style="width:100%;">
+					<select required name='addNewSPA' id='addNewSPA' onchange="" size='1' style='width:100%;'>
+						<option value=""></option>
+						<option value="Animal Mimicry [2]">Animal Mimicry [2]</option>
+						<option value="Antagonizer [3]">Antagonizer [3]</option>
+						<option value="Blood Stalker [2]">Blood Stalker [2]</option>
+						<option value="Cluster Hitter [2]">Cluster Hitter [2]</option>
+						<option value="Combat Intuition [3]">Combat Intuition [3]</option>
+						<option value="Cross-Country [2]">Cross-Country [2]</option>
+						<option value="Demoralizer [3]">Demoralizer [3]</option>
+						<option value="Dodge [2]">Dodge [2]</option>
+						<option value="Dust-Off [2]">Dust-Off [2]</option>
+						<option value="Eagle’s Eyes [2]">Eagle’s Eyes [2]</option>
+						<option value="Environmental Specialist [2]">Environmental Specialist [2]</option>
+						<option value="Fist Fire [2]">Fist Fire [2]</option>
+						<option value="Float Like a Butterfly [1]">Float Like a Butterfly [1]</option>
+						<option value="Float Like a Butterfly [2]">Float Like a Butterfly [2]</option>
+						<option value="Float Like a Butterfly [3]">Float Like a Butterfly [3]</option>
+						<option value="Float Like a Butterfly [4]">Float Like a Butterfly [4]</option>
+						<option value="Forward Observer [1]">Forward Observer [1]</option>
+						<option value="Golden Goose [3]">Golden Goose [3]</option>
+						<option value="Ground-Hugger [2]">Ground-Hugger [2]</option>
+						<option value="Headhunter [2]">Headhunter [2]</option>
+						<option value="Heavy Lifter [1]">Heavy Lifter [1]</option>
+						<option value="Hopper [1]">Hopper [1]</option>
+						<option value="Hot Dog [2]">Hot Dog [2]</option>
+						<option value="Human TRO [1]">Human TRO [1]</option>
+						<option value="Iron Will [1]">Iron Will [1]</option>
+						<option value="Jumping Jack [2]">Jumping Jack [2]</option>
+						<option value="Lucky [1]">Lucky [1]</option>
+						<option value="Lucky [2]">Lucky [2]</option>
+						<option value="Lucky [3]">Lucky [3]</option>
+						<option value="Lucky [4]">Lucky [4]</option>
+						<option value="Maneuvering Ace [2]">Maneuvering Ace [2]</option>
+						<option value="Marksman [2]">Marksman [2]</option>
+						<option value="Melee Master [2]">Melee Master [2]</option>
+						<option value="Melee Specialist [1]">Melee Specialist [1]</option>
+						<option value="Multi-Tasker [2]">Multi-Tasker [2]</option>
+						<option value="Natural Grace [3]">Natural Grace [3]</option>
+						<option value="Oblique Artilleryman [1]">Oblique Artilleryman [1]</option>
+						<option value="Oblique Attacker [1]">Oblique Attacker [1]</option>
+						<option value="Range Master [2]">Range Master [2]</option>
+						<option value="Ride the Wash [4]">Ride the Wash [4]</option>
+						<option value="Sandblaster [2]">Sandblaster [2]</option>
+						<option value="Shaky Stick [2]">Shaky Stick [2]</option>
+						<option value="Sharpshooter [4]">Sharpshooter [4]</option>
+						<option value="Slugger [1]">Slugger [1]</option>
+						<option value="Sniper [3]">Sniper [3]</option>
+						<option value="Speed Demon [2]">Speed Demon [2]</option>
+						<option value="Stand-Aside [1]">Stand-Aside [1]</option>
+						<option value="Street Fighter [2]">Street Fighter [2]</option>
+						<option value="Sure-Footed [2]">Sure-Footed [2]</option>
+						<option value="Swordsman [2]">Swordsman [2]</option>
+						<option value="Tactical Genius [3]">Tactical Genius [3]</option>
+						<option value="Terrain Master (Drag Racer) [3]">Terrain Master (Drag Racer) [3]</option>
+						<option value="Terrain Master (Forest Ranger) [3]">Terrain Master (Forest Ranger) [3]</option>
+						<option value="Terrain Master (Frogman) [3]">Terrain Master (Frogman) [3]</option>
+						<option value="Terrain Master (Mountaineer) [3]">Terrain Master (Mountaineer) [3]</option>
+						<option value="Terrain Master (Nightwalker) [3]">Terrain Master (Nightwalker) [3]</option>
+						<option value="Terrain Master (Sea Monster) [3]">Terrain Master (Sea Monster) [3]</option>
+						<option value="Terrain Master (Swamp Beast) [3]">Terrain Master (Swamp Beast) [3]</option>
+						<option value="Weapon Specialist [3]">Weapon Specialist [3]</option>
+						<option value="Wind Walker [2]">Wind Walker [2]</option>
+						<option value="Zweihander [2]">Zweihander [2]</option>
+						<option value="Light Horseman [2]">Light Horseman [2]</option>
+						<option value="Heavy Horse [2]">Heavy Horse [2]</option>
+						<option value="Foot Cavalry [1]">Foot Cavalry [1]</option>
+						<option value="Urban Guerrilla [1]">Urban Guerrilla [1]</option>
+					</select>
+				</td>
+				<td nowrap class="datalabel" style='text-align:left;' colspan='1'>
+					&nbsp;&nbsp;<i class='fas fa-plus-square'></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+				</td>
+				<td colspan="1" width='5%' id="spa_sum" nowrap class="datalabel" style='text-align:center;vertical-align:middle;' colspan='1' rowspan="1">
+					<b>4</b>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="9" class='datalabel' align="right">
+					<span style='font-size:16px;'>
+						<a href="#" onClick="save();"><i class="fa-solid fa-floppy-disk"></i></a>
+					</span>
+				</td>
+			</tr>
+		</table>
+	</form>
 </body>
 
 </html>

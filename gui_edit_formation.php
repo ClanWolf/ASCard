@@ -408,14 +408,14 @@ session_start();
 	<form autocomplete="autocomplete_off_hack_xfr4!k">
 		<table width="60%" class="options" cellspacing="2" cellpadding="2" border=0px>
 			<tr>
-				<td colspan="1" width='5%' class='datalabel' nowrap align="left">Formation name:</td>
+				<td colspan="1" width='5%' class='datalabel' nowrap align="right">Formation name:</td>
 				<td colspan="1" width='90%' class='datalabel' style="width:100%;">
 					<input autocomplete="autocomplete_off_hack_xfr4!k" required onkeyup="this.value = this.value.toUpperCase();changeResultingName();" onchange="changeResultingName();" type="text" id="NewFormationName" width="100%" style="width:100%;">
 				</td>
-				<td rowspan="4" nowrap valign="middle"><a href="javascript:showFormationTypeInfo(document.getElementById('NewFormationType').value);">&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa-solid fa-circle-info"></i></i>&nbsp;&nbsp;</a></td>
+				<td rowspan="4" nowrap valign="middle"><a href="javascript:showFormationTypeInfo(document.getElementById('NewFormationType').value);">&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa-solid fa-circle-info"></i>&nbsp;&nbsp;</a></td>
 			</tr>
 			<tr>
-				<td colspan="1" width='5%' class='datalabel' nowrap align="left">Formation type:</td>
+				<td colspan="1" width='5%' class='datalabel' nowrap align="right">Formation type:</td>
 				<td colspan="1" width='90%' class='datalabel' style="width:100%;">
 					<select required name='NewFormationType' id='NewFormationType' onchange="changeResultingName();" size='1' style='width:100%;'>
 						<option value=""></option>
@@ -467,7 +467,7 @@ session_start();
 				</td>
 			</tr>
 			<tr>
-				<td colspan="1" width='5%' class='datalabel' nowrap align="left">Formation:</td>
+				<td colspan="1" width='5%' class='datalabel' nowrap align="right">Formation:</td>
 				<td colspan="1" width='90%' class='datalabel' style="width:100%;">
 					<select required name='NewFormation' id='NewFormation' onchange="changeResultingName();" size='1' style='width:100%;'>
 						<option value=""></option>
@@ -478,7 +478,7 @@ session_start();
 				</td>
 			</tr>
 			<tr>
-				<td width='5%' class='datalabel' colspan="1" align="left">Faction:</td>
+				<td width='5%' class='datalabel' colspan="1" align="right">Faction:</td>
 				<td width='90%' class='datalabel' colspan="1" style="width:100%;">
 					<select required name='NewFormationFaction' id='NewFormationFaction' size='1' style='width:100%;'>
 						<option  value="3" selected>ComStar [CS]</option>
@@ -515,13 +515,13 @@ session_start();
 				<td colspan="3" width='5%' class='datalabel' nowrap align="left"><hr></td>
 			</tr>
 			<tr>
-				<td colspan="1" width='5%' class='datalabel' nowrap align="left" valign="top" style="vertical-align:top;">Resulting name:</td>
+				<td colspan="1" width='5%' class='datalabel' nowrap align="right" valign="top" style="vertical-align:top;">Resulting name:</td>
 				<td colspan="2" width='90%' class='datalabel' nowrap valign="top" style="width:100%;">
 					<span id="resultingName"><?php echo $FORMATIONNAME ?></span><br>
 				</td>
 			</tr>
 			<tr>
-				<td colspan="1" width='5%' class='datalabel' nowrap align="left" valign="top" style="vertical-align:top;">Short:</td>
+				<td colspan="1" width='5%' class='datalabel' nowrap align="right" valign="top" style="vertical-align:top;">Short:</td>
 				<td colspan="2" width='90%' class='datalabel' nowrap valign="top" style="width:100%;">
 					<span id="resultingShort"><?php echo $FORMATIONSHORT ?></span>
 				</td>

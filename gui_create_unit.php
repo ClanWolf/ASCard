@@ -103,6 +103,7 @@ session_start();
 		$RULES = isset($_GET["TECH"]) ? $_GET["TECH"] : "";
 		$COST = isset($_GET["COST"]) ? $_GET["COST"] : "";
 		$BV = isset($_GET["BV"]) ? $_GET["BV"] : "";
+		$PV = isset($_GET["PV"]) ? $_GET["PV"] : "";
 		$ERAID = isset($_GET["ERAID"]) ? $_GET["ERAID"] : "";
 		$ERASTART = isset($_GET["ERASTART"]) ? $_GET["ERASTART"] : "";
 		$DATEINTRO = isset($_GET["DATEINTRO"]) ? $_GET["DATEINTRO"] : "";
@@ -176,6 +177,7 @@ session_start();
 		$RULES = urldecode($RULES);
 		$COST = urldecode($COST);
 		$BV = urldecode($BV);
+		$PV = urldecode($PV);
 		$ERAID = urldecode($ERAID);
 		$ERASTART = urldecode($ERASTART);
 		$DATEINTRO = urldecode($DATEINTRO);
@@ -231,7 +233,7 @@ session_start();
 
 		$sql_insertunit = "";
 		$sql_insertunit = $sql_insertunit."INSERT INTO asc_unit ";
-		$sql_insertunit = $sql_insertunit."(unit_number, unit_name, tech, mulid, cost, battlevalue, rules, era_id, era_start, date_introduced, unit_class, unit_variant, unit_tonnage, as_model, as_pv, as_tp, as_sz, as_tmm, as_mv, as_mvj, as_role, as_skill, as_short, as_short_min, as_medium, as_medium_min, as_long, as_long_min, as_extreme, as_extreme_min, as_ov, as_armor, as_structure, as_threshold, as_specials, unit_imageurl, playerid, as_mvtype) ";
+		$sql_insertunit = $sql_insertunit."(unit_number, unit_name, tech, mulid, cost, battlevalue, pointvalue, rules, era_id, era_start, date_introduced, unit_class, unit_variant, unit_tonnage, as_model, as_pv, as_tp, as_sz, as_tmm, as_mv, as_mvj, as_role, as_skill, as_short, as_short_min, as_medium, as_medium_min, as_long, as_long_min, as_extreme, as_extreme_min, as_ov, as_armor, as_structure, as_threshold, as_specials, unit_imageurl, playerid, as_mvtype) ";
 		$sql_insertunit = $sql_insertunit."VALUES (";
 		$sql_insertunit = $sql_insertunit."'".$MNU."', ";             // unit_number
 		$sql_insertunit = $sql_insertunit."'".$UNITNAME."', ";        // unit_name
@@ -240,6 +242,7 @@ session_start();
 
 		$sql_insertunit = $sql_insertunit."".$COST.", ";              // cost
 		$sql_insertunit = $sql_insertunit."".$BV.", ";                // battlevalue
+		$sql_insertunit = $sql_insertunit."".$PV.", ";                // pointvalue
 		$sql_insertunit = $sql_insertunit."'".$RULES."', ";           // rules
 		$sql_insertunit = $sql_insertunit."".$ERAID.", ";             // eraid
 		$sql_insertunit = $sql_insertunit."".$ERASTART.", ";          // erastart
@@ -499,6 +502,7 @@ session_start();
 			var RULES = document.getElementById("RULES").value;
 			var COST = document.getElementById("COST").value;
 			var BV = document.getElementById("BV").value;
+			var PV = document.getElementById("PV").value;
 			var ERAID = document.getElementById("ERAID").value;
 			var ERASTART = document.getElementById("ERASTART").value;
 			var DATEINTRO = document.getElementById("DATEINTRO").value;
@@ -571,6 +575,7 @@ session_start();
 			url=url+"&RULES="+encodeURIComponent(RULES);
 			url=url+"&COST="+encodeURIComponent(COST);
 			url=url+"&BV="+encodeURIComponent(BV);
+			url=url+"&PV="+encodeURIComponent(PV);
 			url=url+"&ERAID="+encodeURIComponent(ERAID);
 			url=url+"&ERASTART="+encodeURIComponent(ERASTART);
 			url=url+"&DATEINTRO="+encodeURIComponent(DATEINTRO);
@@ -796,6 +801,7 @@ session_start();
 					<input required type="hidden" id="RULES" name="RULES">
 					<input required type="hidden" id="COST" name="COST">
 					<input required type="hidden" id="BV" name="BV">
+					<input required type="hidden" id="PV" name="PV">
 					<input required type="hidden" id="ERAID" name="ERAID">
 					<input required type="hidden" id="ERASTART" name="ERASTART">
 					<input required type="hidden" id="DATEINTRO" name="DATEINTRO">
