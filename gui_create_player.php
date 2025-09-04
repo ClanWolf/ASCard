@@ -207,6 +207,7 @@ session_start();
 	<link rel="manifest" href="/app/ascard.webmanifest">
 	<link rel="stylesheet" type="text/css" href="./fontawesome/css/all.min.css" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="./styles/styles.css">
+	<link rel="stylesheet" type="text/css" href="./styles/editorstyles.css">
 	<link rel="stylesheet" type="text/css" href="./styles/jquery.jscrollpane.css">
 	<link rel="icon" type="image/png" href="/app/favicon-96x96.png" sizes="96x96" />
 	<link rel="icon" type="image/svg+xml" href="/app/favicon.svg" />
@@ -252,23 +253,6 @@ session_start();
 		table {
 			margin-left: auto;
 			margin-right: auto;
-		}
-		input, select {
-			width: 80px;
-			vertical-align: middle;
-			color: #ddd;
-			border-width: 0px;
-			padding: 2px;
-			font-family: 'Pathway Gothic One', sans-serif;
-		}
-		select:focus, textarea:focus, input:focus {
-			outline: none;
-		}
-		select:invalid, input:invalid {
-			background: rgba(60,60,60,0.95);
-		}
-		select:valid, input:valid {
-			background: rgba(70,70,70,0.75);
 		}
 		.scroll-pane {
 			width: 100%;

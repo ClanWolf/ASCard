@@ -230,37 +230,37 @@ session_start();
 	<br>
 
 	<div>
-		<table class="options" cellspacing=4 cellpadding=4 border=0px>
+		<table width="40%" class="options" cellspacing=4 cellpadding=4 border=0px>
 			<tr>
-				<td align="left" class='datalabel'>
+				<td nowrap width="10%" align="left" class='datalabel'>
 					<label class="bigcheck"><input onchange="changeOption();" type="checkbox" class="bigcheck" name="OPT1" value="yes"/><span class="bigcheck-target"></span></label>&nbsp;&nbsp;
 				</td>
-				<td align="left" class="datalabel">
+				<td nowrap width="90%" align="left" class="datalabel">
 					Block other players units
 				</td>
 			</tr>
 			<tr>
-				<td align="left" class='datalabel'>
+				<td nowrap width="10%" align="left" class='datalabel'>
 					<label class="bigcheck"><input onchange="changeOption();" type="checkbox" class="bigcheck" name="OPT2" value="yes"/><span class="bigcheck-target"></span></label>&nbsp;&nbsp;
 				</td>
-				<td align="left" class="datalabel">
+				<td nowrap width="90%" align="left" class="datalabel">
 					Show pilot info in playmode (top left)
 				</td>
 			</tr>
 			<tr>
-				<td align="left" class='datalabel'>
+				<td nowrap width="10%" align="left" class='datalabel'>
 					<label class="bigcheck"><input onchange="changeOption();" type="checkbox" class="bigcheck" name="OPT4" value="yes"/><span class="bigcheck-target"></span></label>&nbsp;&nbsp;
 				</td>
-				<td align="left" class="datalabel">
+				<td nowrap width="90%" align="left" class="datalabel">
 					Show distances in hexes
 				</td>
 			</tr>
 			<tr><td colspan="2"><hr></td></tr>
 			<tr>
-				<td align="left" class='datalabel'>
+				<td nowrap width="10%" align="left" class='datalabel'>
 					<label class="bigcheck"><input onchange="changeOption();" type="checkbox" class="bigcheck" name="OPT3" value="yes"/><span class="bigcheck-target"></span></label>&nbsp;&nbsp;
 				</td>
-				<td align="left" class="datalabel">
+				<td nowrap width="90%" align="left" class="datalabel">
 					Play mode (deactivate for unit editing)
 				</td>
 			</tr>

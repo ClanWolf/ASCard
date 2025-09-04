@@ -260,23 +260,6 @@ session_start();
 			margin-left: auto;
 			margin-right: auto;
 		}
-		input, select {
-			width: 80px;
-			vertical-align: middle;
-			color: #ddd;
-			border-width: 0px;
-			padding: 2px;
-			font-family: 'Pathway Gothic One', sans-serif;
-		}
-		select:focus, textarea:focus, input:focus {
-			outline: none;
-		}
-		select:invalid, input:invalid {
-			background: rgba(60,60,60,0.95);
-		}
-		select:valid, input:valid {
-			background: rgba(70,70,70,0.75);
-		}
 		.scroll-pane {
 			width: 100%;
 			height: 280px;

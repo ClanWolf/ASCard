@@ -31,14 +31,16 @@ session_start();
 			$CURRENTROUND = $row["round"];
 		}
 	}
-	$sql_asc_unit = "SELECT SQL_NO_CACHE * FROM asc_assign a, asc_unit u, asc_pilot p WHERE a.unitid = ".$unitId." AND u.unitid = a.unitid AND a.pilotid = p.pilotid;";
+	$sql_asc_unit = "SELECT SQL_NO_CACHE * FROM asc_assign a, asc_unit u, asc_pilot p, asc_formation fo, asc_faction fa WHERE a.unitid = ".$unitId." AND u.unitid = a.unitid AND a.pilotid = p.pilotid AND fo.formationid = a.formationid AND fa.factionid = fo.factionid;";
 	$result_asc_unit = mysqli_query($conn, $sql_asc_unit);
 	if (mysqli_num_rows($result_asc_unit) > 0) {
 		while($row452 = mysqli_fetch_assoc($result_asc_unit)) {
 			$ASSIGNID = $row452["assignid"];
-			$ASSIGNCOMMANDID = $row452["command"];
-			$ASSIGNFORMATIONID = $row452["formation"];
+			$ASSIGNCOMMANDID = $row452["commandid"];
+			$ASSIGNFORMATIONID = $row452["formationid"];
 			$UNITNUMBER = $row452["unit_number"];
+			$UNITCLASS = $row452["unit_class"];
+			$UNITVARIANT = $row452["unit_variant"];
 			$UNITNAME = $row452["unit_name"];
 			$UNITCOMMANDER = $row452["commander"];
 			$UNITSUBCOMMANDER = $row452["subcommander"];
@@ -51,6 +53,11 @@ session_start();
 			$PILOTIMAGEURL = $row452["pilot_imageurl"];
 			$PILOTSPA = $row452["SPA"];
 			$PILOTSPACOSTSUM = $row452["SPA_cost_sum"];
+			$FORMATIONID = $row452["formationid"];
+			$FORMATIONFACTIONID = $row452["factionid"];
+			$FORMATIONSHORT = $row452["formationshort"];
+			$FACTIONSHORT = $row452["factionshort"];
+			$FACTIONIMAGE = $row452["factionimage"];
 		}
 	}
 ?>
@@ -73,6 +80,7 @@ session_start();
 	<link rel="manifest" href="/app/ascard.webmanifest">
 	<link rel="stylesheet" type="text/css" href="./fontawesome/css/all.min.css" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="./styles/styles.css">
+	<link rel="stylesheet" type="text/css" href="./styles/editorstyles.css">
 	<link rel="icon" type="image/png" href="/app/favicon-96x96.png" sizes="96x96" />
 	<link rel="icon" type="image/svg+xml" href="/app/favicon.svg" />
 	<link rel="shortcut icon" href="/app/favicon.ico" />
@@ -107,6 +115,7 @@ session_start();
 	<script type="text/javascript" src="./scripts/jquery-3.7.1.min.js"></script>
 	<script type="text/javascript" src="./scripts/howler.min.js"></script>
 	<script type="text/javascript" src="./scripts/cookies.js"></script>
+	<script type="text/javascript" src="./scripts/adjustPointValue.js"></script>
 
 	<script>
 		let assignId = "<?php echo $ASSIGNID; ?>";
@@ -114,6 +123,8 @@ session_start();
 		let assignFormationId = "<?php echo $ASSIGNFORMATIONID; ?>";
 		let unitNumber = "<?php echo $UNITNUMBER; ?>";
 		let unitName = "<?php echo $UNITNAME; ?>";
+		let unitClass = "<?php echo $UNITCLASS; ?>";
+		let unitVariant = "<?php echo $UNITVARIANT; ?>";
 		let unitCommander = "<?php echo $UNITCOMMANDER; ?>";
 		let unitSubCommander = "<?php echo $UNITSUBCOMMANDER; ?>";
 		let unitSkill = "<?php echo $UNITSKILL; ?>";
@@ -125,6 +136,11 @@ session_start();
 		let pilotImageUrl = "<?php echo $PILOTIMAGEURL; ?>";
 		let pilotSpa = "<?php echo $PILOTSPA; ?>";
 		let pilotSpaCostSum = "<?php echo $PILOTSPACOSTSUM; ?>";
+		let formationId = "<?php echo $FORMATIONID; ?>";
+		let formationFactionId = "<?php echo $FORMATIONFACTIONID; ?>";
+		let formationshort = "<?php echo $FORMATIONSHORT; ?>";
+		let factionshort = "<?php echo $FACTIONSHORT; ?>";
+		let factionimage = "<?php echo $FACTIONIMAGE; ?>";
 	</script>
 
 	<style>
@@ -134,23 +150,6 @@ session_start();
 		table {
 			margin-left: auto;
 			margin-right: auto;
-		}
-		input, select {
-			width: 80px;
-			vertical-align: middle;
-			color: #ddd;
-			border-width: 0px;
-			padding: 2px;
-			font-family: 'Pathway Gothic One', sans-serif;
-		}
-		select:focus, textarea:focus, input:focus {
-			outline: none;
-		}
-		select:invalid, input:invalid {
-			background: rgba(60,60,60,0.95);
-		}
-		select:valid, input:valid {
-			background: rgba(70,70,70,0.75);
 		}
 		.scroll-pane {
 			width: 100%;
@@ -169,11 +168,29 @@ session_start();
 	<script type="text/javascript" src="./scripts/log_enable.js"></script>
 
 	<script>
+		function fillValues() {
+			document.getElementById("unitnameToEdit").innerHTML = unitClass + " " + unitVariant + " '" + unitName + "' - PV: " + unitPv + " (" + unitBasePv + ")";
+			document.getElementById("factionname").value = factionshort;
+			document.getElementById("factionlogo").src = "./images/factions/" + factionimage;
+			document.getElementById("NewUnitName").value = unitName;
+			document.getElementById("NewUnitNumber").value = unitNumber;
+			document.getElementById("FORMATIONID").value = formationId;
+
+			document.getElementById("NewPilotName").value = pilotName;
+			document.getElementById("newpilotimage").src = pilotImageUrl;
+			document.getElementById("newpilotrank").src = "./images/ranks/" + formationFactionId + "/" + pilotRank + ".png";
+
+			document.getElementById("NewUnitSkill").value = unitSkill;
+
+
+
+			let newPV = adjustPointValue(unitBasePv, unitSkill);
+			document.getElementById("newPV").innerHTML = newPV;
+		}
+
 		$(document).ready(function() {
 			$("#cover").hide();
-
-			document.getElementById("NewUnitName").value = unitName;
-
+			fillValues();
 		});
 	</script>
 
@@ -233,12 +250,20 @@ session_start();
 	<br>
 
 	<form autocomplete="autocomplete_off_hack_xfr4!k">
-		<table width="70%" class="options" cellspacing="2" cellpadding="2" border=0px>
+		<table width="85%" class="options" cellspacing="2" cellpadding="2" border=0px>
 			<tr>
-				<td nowrap class="datalabel" style='text-align:right;' colspan='1'>
+				<td colspan="9" width='100%' class='datalabel' nowrap align="left" id="unitnameToEdit">
+					Unitname
+				</td>
+			</tr>
+			<tr>
+				<td colspan="9" width='100%' class='datalabel' nowrap align="right"><hr></td>
+			</tr>
+			<tr>
+				<td nowrap width='5%' class="datalabel" style='text-align:right;' colspan='1'>
 					Assign to:
 				</td>
-				<td nowrap class="datalabel" style='text-align:left;' colspan='6'>
+				<td nowrap width='85%' class="datalabel" style='text-align:left;' colspan='5'>
 					<select required name='FORMATIONID' id='FORMATIONID' size='1' style='width:100%;' onchange='unitdetailsChanged();'>
 <?php
 	$sql_asc_playersformations = "SELECT SQL_NO_CACHE * FROM asc_formation fo, asc_faction fa WHERE playerid=".$pid." AND fo.factionid = fa.factionid;";
@@ -255,26 +280,25 @@ session_start();
 			}
 			$formationfactionlogo = $rowFormations['factionimage'];
 			$formationfactionname = $rowFormations['factionname'];
+			$formationfactionshort = $rowFormations['factionshort'];
 		}
 	}
 ?>
 					</select>
 				</td>
-				<td nowrap class="datalabel" style='text-align:right;' colspan='1' id="factionname">
-					<?php echo $formationfactionname; ?>
+				<td nowrap width='5%' class="datalabel" style='text-align:left;' colspan='2' id="factionname">
+					<?php echo $formationfactionshort; ?>
 				</td>
-				<td nowrap class="datalabel" style='text-align:right;vertical-align:top;' colspan='1' rowspan="7">
-					&nbsp;&nbsp;&nbsp;&nbsp;<img id="factionlogo" src='./images/factions/<?php echo $formationfactionlogo; ?>' width='50px' style='border:1px solid #000000;vertical-align:middle;'>
+				<td nowrap width='5%' class="datalabel" style='text-align:center;vertical-align:top;' colspan='1' rowspan="2">
+					<img id="factionlogo" src='./images/factions/<?php echo $formationfactionlogo; ?>' width='50px' style='border:1px solid #000000;vertical-align:top;'>
 				</td>
-			</tr>
-			<tr>
-				<td colspan="8" width='100%' class='datalabel' nowrap align="right"><hr></td>
 			</tr>
 			<tr>
 				<td colspan="1" width='5%' class='datalabel' nowrap align="right">Unit name:</td>
-				<td colspan="7" width='90%' class='datalabel'>
+				<td colspan="5" width='90%' class='datalabel'>
 					<input autocomplete="autocomplete_off_hack_xfr4!k" required onkeyup="" onchange="" type="text" id="NewUnitName" width="100%" style="width:100%;">
 				</td>
+				<td colspan="2" width='5%' class='datalabel' nowrap align="right">&nbsp;</td>
 			</tr>
 			<tr>
 				<td colspan="1" width='5%' class='datalabel' nowrap align="right">#:</td>
@@ -298,9 +322,9 @@ session_start();
 						<option value="7">7</option>
 					</select>
 				</td>
-				<td colspan="1" width='5%' class='datalabel' nowrap align="right">New PV:</td>
-				<td colspan="1" width='20%' class='datalabel' align="right" id="newPV">
-					xx
+				<td colspan="2" width='5%' class='datalabel' nowrap align="left">*PV:</td>
+				<td colspan="2" width='50' class='datalabel' style='text-align:center;vertical-align:top;' nowrap align="right" valign="top" rowspan="2">
+					<img src="./images/factions/CW.png" width="50px" id="newpilotimage">
 				</td>
 			</tr>
 			<tr>
@@ -321,46 +345,27 @@ session_start();
 					</select>
 				</td>
 				<td colspan="1" width='5%' class='datalabel' nowrap align="right">Rank:</td>
-				<td colspan="3" width='40%' class='datalabel'>
+				<td colspan="1" width='20%' class='datalabel'>
 					<select required name='rank' id='rank' onchange="" size='1' style='width:100%;'>
 						<option value="1">1</option>
 						<option value="2">2</option>
 						<option value="3">3</option>
 					</select>
 				</td>
+				<td colspan="2" width='5%' class='datalabel' nowrap id="newPV" align="left">xx</td>
 			</tr>
 			<tr>
-				<td colspan="8" width='100%' class='datalabel' nowrap align="right">&nbsp;</td>
-			</tr>
-			<tr>
-				<td colspan="2" width='50' class='datalabel' nowrap align="right">
-					<img src="./images/factions/CW.png" width="50px" id="newpilotimage">
-				</td>
-				<td colspan="2" width='50%' class='datalabel' nowrap align="left">
-					<img src="./images/factions/CW.png" width="50px" id="newpilotrank">
-				</td>
-				<td colspan="1" width='5%' class='datalabel' nowrap align="right" valign="top">Chain:</td>
-				<td colspan="3" width='40%' class='datalabel' valign="top">
+				<td colspan="1" width='5%' class='datalabel' nowrap align="right">Chain:</td>
+				<td colspan="5" width='40%' class='datalabel' valign="top">
 					<select required name='newChain' id='newChain' onchange="" size='1' style='width:100%;'>
 						<option value="Commander">Commander</option>
 						<option value="Subcommander">Subcommander</option>
 						<option value="Warrior">Warrior</option>
 					</select>
 				</td>
-			</tr>
-			<tr>
-				<td colspan="9" width='100%' class='datalabel' nowrap align="right"><hr></td>
-			</tr>
-			<tr>
-				<td colspan="1" width='5%' class='datalabel' nowrap align="right">SPAs:</td>
-				<td colspan="6" width='90%' class='datalabel' id="newSPAs">
-					Blood Stalker [2], Headhunter [2]
-				</td>
-				<td colspan="1" width='5%' id="spa_sum" nowrap class="datalabel" style='text-align:center;vertical-align:top;' colspan='1' rowspan="1">
-					Sum:
-				</td>
-				<td nowrap class="datalabel" style='text-align:right;vertical-align:top;' colspan='1' rowspan="2" valign="top">
-					<!-- <a href="">&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa-solid fa-circle-info"></i></a> -->
+				<td colspan="2" width='5%' class='datalabel' nowrap align="right">&nbsp;</td>
+				<td colspan="2" width='20%' class='datalabel' style='text-align:center;vertical-align:top;' nowrap align="right" valign="top" rowspan="2">
+					<img src="./images/factions/CW.png" width="25px" id="newpilotrank">
 				</td>
 			</tr>
 			<tr>
@@ -435,11 +440,22 @@ session_start();
 						<option value="Urban Guerrilla [1]">Urban Guerrilla [1]</option>
 					</select>
 				</td>
-				<td nowrap class="datalabel" style='text-align:left;' colspan='1'>
-					&nbsp;&nbsp;<i class='fas fa-plus-square'></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+				<td nowrap class="datalabel" style='text-align:left;' colspan='2'>
+					&nbsp;<i class='fas fa-plus-square'></i></a>
 				</td>
-				<td colspan="1" width='5%' id="spa_sum" nowrap class="datalabel" style='text-align:center;vertical-align:middle;' colspan='1' rowspan="1">
-					<b>4</b>
+			</tr>
+			<tr>
+				<td colspan="9">&nbsp;</td>
+			</tr>
+			<tr>
+				<td colspan="1" width='5%' id="spa_sum" nowrap class="datalabel" style='text-align:left;vertical-align:middle;' colspan='1' rowspan="1">
+					&nbsp;&nbsp;&nbsp;&nbsp;∑ <b><span id="sumlabel">4</span></b>
+				</td>
+				<td colspan="7" width='95%' class='datalabel' id="newSPAs">
+					Blood Stalker [2], Headhunter [2]
+				</td>
+				<td nowrap class="datalabel" style='text-align:right;vertical-align:top;' colspan='1' rowspan="1" valign="top">
+					<!-- <a href="">&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa-solid fa-circle-info"></i></a> -->
 				</td>
 			</tr>
 			<tr>

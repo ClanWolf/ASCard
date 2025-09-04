@@ -135,6 +135,23 @@ session_start();
 		html, body {
 			background-image: url('./images/body-bg_2.jpg');
 		}
+		input, select {
+			width: 80px;
+			vertical-align: middle;
+			color: #000;
+			border-width: 0px;
+			padding: 2px;
+			font-family: 'Pathway Gothic One', sans-serif;
+		}
+		select:focus, textarea:focus, input:focus {
+			outline: none;
+		}
+		select:invalid, input:invalid {
+			background: #ffffff;
+		}
+		select:valid, input:valid {
+			background: #ffffff;
+		}
 		table {
 			margin-left: auto;
 			margin-right: auto;

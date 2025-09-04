@@ -140,6 +140,7 @@ session_start();
 	<link rel="manifest" href="/app/ascard.webmanifest">
 	<link rel="stylesheet" type="text/css" href="./fontawesome/css/all.min.css" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="./styles/styles.css">
+	<link rel="stylesheet" type="text/css" href="./styles/editorstyles.css">
 	<link rel="icon" type="image/png" href="/app/favicon-96x96.png" sizes="96x96" />
 	<link rel="icon" type="image/svg+xml" href="/app/favicon.svg" />
 	<link rel="shortcut icon" href="/app/favicon.ico" />
@@ -300,13 +301,13 @@ session_start();
 	<br>
 
 	<form autocomplete="off">
-		<table class="options" cellspacing=4 cellpadding=4 border=0px>
+		<table width="50%" class="options" cellspacing=4 cellpadding=4 border=0px>
 			<tr>
-				<td nowrap class="datalabel" style='text-align:left;' colspan='1'>
+				<td width="20%" nowrap class="datalabel" style='text-align:right;' colspan='1'>
 					Existing units:
 				</td>
-				<td nowrap class="datalabel" style='text-align:left;' colspan='3'>
-					<select required name='existingUnits' id='existingUnits' size='1' onchange="" style='width:400px;'>
+				<td width="80%" nowrap class="datalabel" style='text-align:left;' colspan='2'>
+					<select required name='existingUnits' id='existingUnits' size='1' onchange="" style='width:100%;'>
 						<option value="0"><<< Select a unit >>></option>
 <?php
 	$sql_asc_units = "select u.unitid, u.unit_number, u.as_model, p.name from asc_assign a, asc_unit u, asc_pilot p where a.formationid is null and a.unitid = u.unitid and a.pilotid = p.pilotid and u.playerid=".$pid;
@@ -328,10 +329,11 @@ session_start();
 ?>
 					</select>
 				</td>
+				<td width="20%" nowrap class="datalabel" style='text-align:right;' colspan='1'>&nbsp;</td>
 			</tr>
 			<tr>
-				<td nowrap class="datalabel" style='text-align:left;' colspan='1'>Assign to formation:</td>
-				<td nowrap class="datalabel" style='text-align:left;' colspan='2'><select required name='FORMATIONID' id='FORMATIONID' size='1' style='width:100%;'>
+				<td width="20%" nowrap class="datalabel" style='text-align:right;' colspan='1'>Assign to formation:</td>
+				<td width="80%" nowrap class="datalabel" style='text-align:left;' colspan='2'><select required name='FORMATIONID' id='FORMATIONID' size='1' style='width:100%;'>
 <?php
 	$sql_asc_playersformations = "SELECT SQL_NO_CACHE * FROM asc_formation where playerid=".$pid;
 	$result_asc_playersformations = mysqli_query($conn, $sql_asc_playersformations);

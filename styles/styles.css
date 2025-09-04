@@ -8,9 +8,6 @@
 *::-moz-selection {
 	background-color:transparent;
 }
-input[type="text"]::selection {
-	background-color:green;
-}
 * {
 	font-family: 'Pathway Gothic One', sans-serif;
 	/* font-family: 'Russo One', sans-serif; */
@@ -72,7 +69,6 @@ body {
 	height: 100%;
 }
 iframe {
-
 	border: none;
 }
 #iframe_specialabilities {

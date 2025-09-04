@@ -1,0 +1,29 @@
+input[type="text"]::selection {
+	background-color:green;
+}
+input, select, textarea {
+    -webkit-box-sizing: border-box;
+       -moz-box-sizing: border-box;
+            box-sizing: border-box;
+}
+input, select {
+	/* width: 80px; */
+	vertical-align: middle;
+	color: #ddd;
+	border-width: 0px;
+	padding: 2px;
+	font-family: 'Pathway Gothic One', sans-serif;
+	box-shadow: 0 0 0px #000000;
+	/* border-color: transparent; */
+	border: 0px solid rgba(55,55,55,0.85) !important;
+}
+select:focus, textarea:focus, input:focus {
+	outline: none;
+}
+select:invalid, input:invalid {
+	background: rgba(55,55,55,0.85);
+	/* background-image: repeating-linear-gradient(315deg, #222 0px, #222 15px, #ffa72c 15px, #ffa72c 30px, #222 30px); */
+}
+select:valid, input:valid {
+	background: rgba(70,70,70,0.85);
+}
