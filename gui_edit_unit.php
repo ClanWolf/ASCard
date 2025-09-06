@@ -56,6 +56,7 @@ session_start();
 			$FORMATIONID = $row452["formationid"];
 			$FORMATIONFACTIONID = $row452["factionid"];
 			$FORMATIONSHORT = $row452["formationshort"];
+			$FACTIONID = $row452["factionid"];
 			$FACTIONSHORT = $row452["factionshort"];
 			$FACTIONIMAGE = $row452["factionimage"];
 		}
@@ -139,6 +140,7 @@ session_start();
 		let formationId = "<?php echo $FORMATIONID; ?>";
 		let formationFactionId = "<?php echo $FORMATIONFACTIONID; ?>";
 		let formationshort = "<?php echo $FORMATIONSHORT; ?>";
+		let factionid = "<?php echo $FACTIONID; ?>";
 		let factionshort = "<?php echo $FACTIONSHORT; ?>";
 		let factionimage = "<?php echo $FACTIONIMAGE; ?>";
 	</script>
@@ -268,19 +270,31 @@ session_start();
 <?php
 	$sql_asc_playersformations = "SELECT SQL_NO_CACHE * FROM asc_formation fo, asc_faction fa WHERE playerid=".$pid." AND fo.factionid = fa.factionid;";
 	$result_asc_playersformations = mysqli_query($conn, $sql_asc_playersformations);
+
+	$formationcount = 0;
+
+	$array_formationFactionIds = array();
+	$array_formationFactionLogos = array();
+	$array_formationFactionShorts = array();
+	$array_formationFactionNames = array();
+
 	if (mysqli_num_rows($result_asc_playersformations) > 0) {
 		while($rowFormations = mysqli_fetch_assoc($result_asc_playersformations)) {
 			$formationid = $rowFormations['formationid'];
 			$formationname = $rowFormations['formationshort'];
 			$formationfactionid = $rowFormations['factionid'];
-			if ($paramformationid == $formationid) {
-				echo "										<option value='".$formationid."' selected>".$formationname."</option>\n";
-			} else {
-				echo "										<option value='".$formationid."'>".$formationname."</option>\n";
-			}
 			$formationfactionlogo = $rowFormations['factionimage'];
 			$formationfactionname = $rowFormations['factionname'];
 			$formationfactionshort = $rowFormations['factionshort'];
+
+			$array_formationFactionIds[$formationcount] = $formationfactionid;
+			$array_formationFactionLogos[$formationcount] = $formationfactionlogo;
+			$array_formationFactionShorts[$formationcount] = $formationfactionshort;
+			$array_formationFactionNames[$formationcount] = $formationfactionname;
+
+			echo "										<option value='".$formationid."'>".$formationname."</option>\n";
+
+			$formationcount++;
 		}
 	}
 ?>
@@ -331,25 +345,45 @@ session_start();
 				<td colspan="1" width='5%' class='datalabel' nowrap align="right">Image m.:</td>
 				<td colspan="1" width='20%' class='datalabel'>
 					<select required name='malePilotImage' id='malePilotImage' onchange="" size='1' style='width:100%;'>
-						<option value="1">1</option>
-						<option value="2">2</option>
-						<option value="3">3</option>
+						<option value='0'></option>
+<?php
+	$directory = './images/pilots';
+	$scanned_directory = array_diff(scandir($directory, SCANDIR_SORT_ASCENDING), array('..', '.'));
+	foreach ($scanned_directory as $key => $value) {
+		if (str_starts_with($value, 'm_')) {
+			echo "<option value='".$value."'>".substr($value,2,-4)."</option>\n";
+		}
+	}
+?>
 					</select>
 				</td>
 				<td colspan="1" width='5%' class='datalabel' nowrap align="right">f.:</td>
 				<td colspan="1" width='20%' class='datalabel'>
 					<select required name='femalePilotImage' id='femalePilotImage' onchange="" size='1' style='width:100%;'>
-						<option value="1">1</option>
-						<option value="2">2</option>
-						<option value="3">3</option>
+						<option value='0'></option>
+<?php
+	$directory = './images/pilots';
+	$scanned_directory = array_diff(scandir($directory, SCANDIR_SORT_ASCENDING), array('..', '.'));
+	foreach ($scanned_directory as $key => $value) {
+		if (str_starts_with($value, 'f_')) {
+			echo "<option value='".$value."'>".substr($value,2,-4)."</option>\n";
+		}
+	}
+?>
 					</select>
 				</td>
 				<td colspan="1" width='5%' class='datalabel' nowrap align="right">Rank:</td>
 				<td colspan="1" width='20%' class='datalabel'>
 					<select required name='rank' id='rank' onchange="" size='1' style='width:100%;'>
-						<option value="1">1</option>
-						<option value="2">2</option>
-						<option value="3">3</option>
+<?php
+	$directory = './images/ranks/'.$FACTIONID;
+	$scanned_directory = array_diff(scandir($directory, SCANDIR_SORT_ASCENDING), array('..', '.'));
+	foreach ($scanned_directory as $key => $value) {
+		if (str_starts_with($value, '')) {
+			echo "<option value='".$value."'>".substr($value,3,-4)."</option>\n";
+		}
+	}
+?>
 					</select>
 				</td>
 				<td colspan="2" width='5%' class='datalabel' nowrap id="newPV" align="left">xx</td>
@@ -467,6 +501,17 @@ session_start();
 			</tr>
 		</table>
 	</form>
+
+	<script type="text/javascript">
+		var formationFactionIdArray = <?php echo json_encode($array_formationFactionIds); ?>;
+		var formationFactionLogosArray = <?php echo json_encode($array_formationFactionLogos); ?>;
+		var formationFactionShortsArray = <?php echo json_encode($array_formationFactionShorts); ?>;
+		var formationFactionNamesArray = <?php echo json_encode($array_formationFactionNames); ?>;
+
+		for(var i=0;i<3;i++){
+			//alert(formationFactionShortsArray[i]);
+		}
+	</script>
 </body>
 
 </html>
