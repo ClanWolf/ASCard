@@ -1,11 +1,11 @@
 1	x Clan Wolf
-2	  Lyran Alliance
+2	x Lyran Alliance
 3	x ComStar
 4	x Draconis Combine
 5	x Clan Ghostbear
 6	  Wolfs Dragoons
-7	  Lyran Commonwealth
-8	  Federated Suns
+7	x Lyran Commonwealth
+8	x Federated Suns
 9	x Clan Jade Falcon
 10	x Free Worlds League
 11	x Capellan Confederation
