@@ -277,6 +277,7 @@ session_start();
 	$array_formationFactionLogos = array();
 	$array_formationFactionShorts = array();
 	$array_formationFactionNames = array();
+	$array_formationFactionRankOptions = array();
 
 	if (mysqli_num_rows($result_asc_playersformations) > 0) {
 		while($rowFormations = mysqli_fetch_assoc($result_asc_playersformations)) {
@@ -292,7 +293,18 @@ session_start();
 			$array_formationFactionShorts[$formationcount] = $formationfactionshort;
 			$array_formationFactionNames[$formationcount] = $formationfactionname;
 
-			echo "										<option value='".$formationid."'>".$formationname."</option>\n";
+			echo "						<option value='".$formationid."'>".$formationname."</option>\n";
+
+// https://stackoverflow.com/questions/6364748/change-the-options-array-of-a-select-list
+
+			$ranksdir = './images/ranks/'.$formationfactionid;
+			$scanned_directory = array_diff(scandir($ranksdir, SCANDIR_SORT_ASCENDING), array('..', '.'));
+			foreach ($scanned_directory as $key => $value) {
+				if (str_starts_with($value, '')) {
+					$opt = "<option value='".$value."'>".substr($value,3,-4)."</option>\n";
+					$array_formationFactionRankOptions[$formationcount] = $array_formationFactionRankOptions[$formationcount].$opt;
+				}
+			}
 
 			$formationcount++;
 		}
@@ -342,7 +354,7 @@ session_start();
 				</td>
 			</tr>
 			<tr>
-				<td colspan="1" width='5%' class='datalabel' nowrap align="right">Image m.:</td>
+				<td colspan="1" width='5%' class='datalabel' nowrap align="right">Img (m):</td>
 				<td colspan="1" width='20%' class='datalabel'>
 					<select required name='malePilotImage' id='malePilotImage' onchange="" size='1' style='width:100%;'>
 						<option value='0'></option>
@@ -351,13 +363,13 @@ session_start();
 	$scanned_directory = array_diff(scandir($directory, SCANDIR_SORT_ASCENDING), array('..', '.'));
 	foreach ($scanned_directory as $key => $value) {
 		if (str_starts_with($value, 'm_')) {
-			echo "<option value='".$value."'>".substr($value,2,-4)."</option>\n";
+			echo "						<option value='".$value."'>".substr($value,2,-4)."</option>\n";
 		}
 	}
 ?>
 					</select>
 				</td>
-				<td colspan="1" width='5%' class='datalabel' nowrap align="right">f.:</td>
+				<td colspan="1" width='5%' class='datalabel' nowrap align="right">Img (f):</td>
 				<td colspan="1" width='20%' class='datalabel'>
 					<select required name='femalePilotImage' id='femalePilotImage' onchange="" size='1' style='width:100%;'>
 						<option value='0'></option>
@@ -366,7 +378,7 @@ session_start();
 	$scanned_directory = array_diff(scandir($directory, SCANDIR_SORT_ASCENDING), array('..', '.'));
 	foreach ($scanned_directory as $key => $value) {
 		if (str_starts_with($value, 'f_')) {
-			echo "<option value='".$value."'>".substr($value,2,-4)."</option>\n";
+			echo "						<option value='".$value."'>".substr($value,2,-4)."</option>\n";
 		}
 	}
 ?>
@@ -380,7 +392,7 @@ session_start();
 	$scanned_directory = array_diff(scandir($directory, SCANDIR_SORT_ASCENDING), array('..', '.'));
 	foreach ($scanned_directory as $key => $value) {
 		if (str_starts_with($value, '')) {
-			echo "<option value='".$value."'>".substr($value,3,-4)."</option>\n";
+			echo "						<option value='".$value."'>".substr($value,3,-4)."</option>\n";
 		}
 	}
 ?>
@@ -502,14 +514,15 @@ session_start();
 		</table>
 	</form>
 
-	<script type="text/javascript">
+	<script>
 		var formationFactionIdArray = <?php echo json_encode($array_formationFactionIds); ?>;
 		var formationFactionLogosArray = <?php echo json_encode($array_formationFactionLogos); ?>;
 		var formationFactionShortsArray = <?php echo json_encode($array_formationFactionShorts); ?>;
 		var formationFactionNamesArray = <?php echo json_encode($array_formationFactionNames); ?>;
+		var formationFactionRankOptions = <?php echo json_encode($array_formationFactionRankOptions); ?>;
 
 		for(var i=0;i<3;i++){
-			//alert(formationFactionShortsArray[i]);
+			alert(formationFactionRankOptions[i]);
 		}
 	</script>
 </body>

@@ -1,34 +1,15 @@
-1    x Clan Wolf
-2      Lyran Alliance
-3      ComStar
-4    x Draconis Combine
-5    x Clan Ghostbear
-6      Wolfs Dragoons
-7      Lyran Commonwealth
-8      Federated Suns
-9    x Clan Jade Falcon
-10   x Free Worlds League
-11   x Capellan Confederation
-12   x Clan Smoke Jaguar
-13   x Clan Wolf in Exile
-14   x Clan Snow Raven
-15   x Clan Nova Cat
-
-CW       DC        CS                    DC      WD      LC      FS      FWL                 CC
---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-MW       Heishi    Acolyte               DC      WD      LC      FS      Private             Shia-ben-bing
-SCom     Gunjin    Adept                                                 Private First       San-ben-bing
-SCpt     Go-cho    Demi-Precentor                                        Corporal            Si-ben-bing
-SCol     Gunsho    Precentor                                             Sergeant            Yi-si-ben-bing
-GCom     Shujin    Senior-Precentor                                      Staff Sergeant      Sao-wei
-saKhan   Kashira   Precentor Martialum                                   Master Sergeant     Sang-wei
-Khan     Sho-ko                                                          Sergeant Major      Sao-shao
-         Chu-i                                                           Lieutenant Junior   Zhong-shao
-         Tai-i                                                           Lieutenant Senior   Sang-shao
-         Sho-sa                                                          Captain             Jiang-jun
-         Chu-sa                                                          Force Commander     Sang-jiang-jun
-         Tai-sa                                                          Lieutenant Colonel
-         Sho-sho                                                         Colonel
-         Tai-sho                                                         General
-         Tai-shu                                                         Marshal
-                                                                         Captain-General
+1	x Clan Wolf
+2	  Lyran Alliance
+3	x ComStar
+4	x Draconis Combine
+5	x Clan Ghostbear
+6	  Wolfs Dragoons
+7	  Lyran Commonwealth
+8	  Federated Suns
+9	x Clan Jade Falcon
+10	x Free Worlds League
+11	x Capellan Confederation
+12	x Clan Smoke Jaguar
+13	x Clan Wolf in Exile
+14	x Clan Snow Raven
+15	x Clan Nova Cat
