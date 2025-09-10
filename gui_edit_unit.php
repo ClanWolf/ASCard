@@ -24,6 +24,9 @@ session_start();
 	$isAdmin = $_SESSION['isAdmin'];
 	$unitId  = isset($_GET["unitid"]) ? filter_var($_GET["unitid"], FILTER_VALIDATE_INT) : -1;
 
+	$stringMalePilotImages = "";
+	$stringFemalePilotImages = "";
+
 	$sql_asc_playerround = "SELECT SQL_NO_CACHE * FROM asc_player where playerid = " . $pid . ";";
 	$result_asc_playerround = mysqli_query($conn, $sql_asc_playerround);
 	if (mysqli_num_rows($result_asc_playerround) > 0) {
@@ -133,7 +136,7 @@ session_start();
 		let unitPv = "<?php echo $UNITPV; ?>";
 		let pilotId = "<?php echo $PILOTID; ?>";
 		let pilotName = "<?php echo $PILOTNAME; ?>";
-		let pilotRank = "<?php echo $PILOTRANK; ?>";
+		let pilotRank = "<?php echo $PILOTRANK.'.png'; ?>";
 		let pilotImageUrl = "<?php echo $PILOTIMAGEURL; ?>";
 		let pilotSpa = "<?php echo $PILOTSPA; ?>";
 		let pilotSpaCostSum = "<?php echo $PILOTSPACOSTSUM; ?>";
@@ -170,6 +173,41 @@ session_start();
 	<script type="text/javascript" src="./scripts/log_enable.js"></script>
 
 	<script>
+		function formationChanged() {
+			alert("new formation selected");
+		}
+
+		function maleImageSelected() {
+			let newImage = document.getElementById("malePilotImage").value;
+			document.getElementById("femalePilotImage").value = "";
+			document.getElementById("newpilotimage").src = "images/pilots/" + newImage;
+		}
+
+		function femaleImageSelected() {
+			let newImage = document.getElementById("femalePilotImage").value;
+			document.getElementById("malePilotImage").value = "";
+			document.getElementById("newpilotimage").src = "images/pilots/" + newImage;
+		}
+
+		function newRankSelected() {
+			alert("new rank");
+			//document.getElementById("newpilotrank").src = "./images/ranks/" + formationFactionId + "/" + pilotRank;
+		}
+
+		function skillChanged() {
+			let newUnitSkill = document.getElementById("NewUnitSkill").value;
+			let newPV = adjustPointValue(unitBasePv, newUnitSkill);
+			document.getElementById("newPV").innerHTML = newPV;
+		}
+
+		function addSpecialPilotAbility() {
+			alert("addSpecialPilotAbility");
+		}
+
+		function save() {
+			alert("save");
+		}
+
 		function fillValues() {
 			document.getElementById("unitnameToEdit").innerHTML = unitClass + " " + unitVariant + " '" + unitName + "' - PV: " + unitPv + " (" + unitBasePv + ")";
 			document.getElementById("factionname").value = factionshort;
@@ -177,14 +215,13 @@ session_start();
 			document.getElementById("NewUnitName").value = unitName;
 			document.getElementById("NewUnitNumber").value = unitNumber;
 			document.getElementById("FORMATIONID").value = formationId;
-
 			document.getElementById("NewPilotName").value = pilotName;
 			document.getElementById("newpilotimage").src = pilotImageUrl;
-			document.getElementById("newpilotrank").src = "./images/ranks/" + formationFactionId + "/" + pilotRank + ".png";
-
+			document.getElementById("newpilotrank").src = "./images/ranks/" + formationFactionId + "/" + pilotRank;
 			document.getElementById("NewUnitSkill").value = unitSkill;
-
-
+			document.getElementById("newSPAs").innerHTML = pilotSpa;
+			document.getElementById("sumlabel").innerHTML = pilotSpaCostSum;
+			document.getElementById("rank").value = pilotRank;
 
 			let newPV = adjustPointValue(unitBasePv, unitSkill);
 			document.getElementById("newPV").innerHTML = newPV;
@@ -266,7 +303,7 @@ session_start();
 					Assign to:
 				</td>
 				<td nowrap width='85%' class="datalabel" style='text-align:left;' colspan='5'>
-					<select required name='FORMATIONID' id='FORMATIONID' size='1' style='width:100%;' onchange='unitdetailsChanged();'>
+					<select required name='FORMATIONID' id='FORMATIONID' size='1' style='width:100%;' onchange='formationChanged();'>
 <?php
 	$sql_asc_playersformations = "SELECT SQL_NO_CACHE * FROM asc_formation fo, asc_faction fa WHERE playerid=".$pid." AND fo.factionid = fa.factionid;";
 	$result_asc_playersformations = mysqli_query($conn, $sql_asc_playersformations);
@@ -295,7 +332,7 @@ session_start();
 
 			echo "						<option value='".$formationid."'>".$formationname."</option>\n";
 
-// https://stackoverflow.com/questions/6364748/change-the-options-array-of-a-select-list
+			// https://stackoverflow.com/questions/6364748/change-the-options-array-of-a-select-list
 
 			$ranksdir = './images/ranks/'.$formationfactionid;
 			$scanned_directory = array_diff(scandir($ranksdir, SCANDIR_SORT_ASCENDING), array('..', '.'));
@@ -337,7 +374,7 @@ session_start();
 				</td>
 				<td colspan="1" width='5%' class='datalabel' nowrap align="right">Skill:</td>
 				<td colspan="1" width='20%' class='datalabel'>
-					<select required name='NewUnitSkill' id='NewUnitSkill' onchange="" size='1' style='width:100%;'>
+					<select required name='NewUnitSkill' id='NewUnitSkill' onchange="skillChanged();" size='1' style='width:100%;'>
 						<option value="0">0</option>
 						<option value="1">1</option>
 						<option value="2">2</option>
@@ -356,7 +393,7 @@ session_start();
 			<tr>
 				<td colspan="1" width='5%' class='datalabel' nowrap align="right">Img (m):</td>
 				<td colspan="1" width='20%' class='datalabel'>
-					<select required name='malePilotImage' id='malePilotImage' onchange="" size='1' style='width:100%;'>
+					<select required name='malePilotImage' id='malePilotImage' onchange="maleImageSelected();" size='1' style='width:100%;'>
 						<option value='0'></option>
 <?php
 	$directory = './images/pilots';
@@ -364,6 +401,7 @@ session_start();
 	foreach ($scanned_directory as $key => $value) {
 		if (str_starts_with($value, 'm_')) {
 			echo "						<option value='".$value."'>".substr($value,2,-4)."</option>\n";
+			$stringMalePilotImages = $stringMalePilotImages."<tr><td><img loading='lazy' src='./images/pilots/".$value."'></td><td>".substr($value,2,-4)."</td></tr>";
 		}
 	}
 ?>
@@ -371,7 +409,7 @@ session_start();
 				</td>
 				<td colspan="1" width='5%' class='datalabel' nowrap align="right">Img (f):</td>
 				<td colspan="1" width='20%' class='datalabel'>
-					<select required name='femalePilotImage' id='femalePilotImage' onchange="" size='1' style='width:100%;'>
+					<select required name='femalePilotImage' id='femalePilotImage' onchange="femaleImageSelected();" size='1' style='width:100%;'>
 						<option value='0'></option>
 <?php
 	$directory = './images/pilots';
@@ -379,6 +417,7 @@ session_start();
 	foreach ($scanned_directory as $key => $value) {
 		if (str_starts_with($value, 'f_')) {
 			echo "						<option value='".$value."'>".substr($value,2,-4)."</option>\n";
+			$stringFemalePilotImages = $stringFemalePilotImages."<tr><td><img loading='lazy' src='./images/pilots/".$value."'></td><td>".substr($value,2,-4)."</td></tr>";
 		}
 	}
 ?>
@@ -386,7 +425,7 @@ session_start();
 				</td>
 				<td colspan="1" width='5%' class='datalabel' nowrap align="right">Rank:</td>
 				<td colspan="1" width='20%' class='datalabel'>
-					<select required name='rank' id='rank' onchange="" size='1' style='width:100%;'>
+					<select required name='rank' id='rank' onchange="newRankSelected();" size='1' style='width:100%;'>
 <?php
 	$directory = './images/ranks/'.$FACTIONID;
 	$scanned_directory = array_diff(scandir($directory, SCANDIR_SORT_ASCENDING), array('..', '.'));
@@ -486,7 +525,7 @@ session_start();
 						<option value="Urban Guerrilla [1]">Urban Guerrilla [1]</option>
 					</select>
 				</td>
-				<td nowrap class="datalabel" style='text-align:left;' colspan='2'>
+				<td nowrap class="datalabel" style='text-align:left;' colspan='2' onclick='addSpecialPilotAbility();'>
 					&nbsp;<i class='fas fa-plus-square'></i></a>
 				</td>
 			</tr>
@@ -498,7 +537,7 @@ session_start();
 					&nbsp;&nbsp;&nbsp;&nbsp;∑ <b><span id="sumlabel">4</span></b>
 				</td>
 				<td colspan="7" width='95%' class='datalabel' id="newSPAs">
-					Blood Stalker [2], Headhunter [2]
+					---
 				</td>
 				<td nowrap class="datalabel" style='text-align:right;vertical-align:top;' colspan='1' rowspan="1" valign="top">
 					<!-- <a href="">&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa-solid fa-circle-info"></i></a> -->
@@ -514,6 +553,18 @@ session_start();
 		</table>
 	</form>
 
+	<div>
+		<table>
+			<?php echo $stringMalePilotImages."\n"; ?>
+		</table>
+	</div>
+
+	<div>
+		<table>
+			<?php echo $stringFemalePilotImages."\n"; ?>
+		</table>
+	</div>
+
 	<script>
 		var formationFactionIdArray = <?php echo json_encode($array_formationFactionIds); ?>;
 		var formationFactionLogosArray = <?php echo json_encode($array_formationFactionLogos); ?>;
@@ -521,9 +572,9 @@ session_start();
 		var formationFactionNamesArray = <?php echo json_encode($array_formationFactionNames); ?>;
 		var formationFactionRankOptions = <?php echo json_encode($array_formationFactionRankOptions); ?>;
 
-		for(var i=0;i<3;i++){
-			alert(formationFactionRankOptions[i]);
-		}
+		//for(var i=0;i<3;i++){
+		//	alert(formationFactionRankOptions[i]);
+		//}
 	</script>
 </body>
 
