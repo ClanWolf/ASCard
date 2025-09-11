@@ -177,6 +177,26 @@ session_start();
 			alert("new formation selected");
 		}
 
+		function showMaleImageSelectorDiv() {
+			document.getElementById("maleSelectorDiv").style.visibility = "visible";
+		}
+
+		function showFemaleImageSelectorDiv() {
+			document.getElementById("femaleSelectorDiv").style.visibility = "visible";
+		}
+
+		function selectNewMaleImage(imgName) {
+			document.getElementById("malePilotImage").value = imgName;
+			maleImageSelected();
+			document.getElementById("maleSelectorDiv").style.visibility = "hidden";
+		}
+
+		function selectNewFemaleImage(imgName) {
+			document.getElementById("femalePilotImage").value = imgName;
+			femaleImageSelected();
+			document.getElementById("femaleSelectorDiv").style.visibility = "hidden";
+		}
+
 		function maleImageSelected() {
 			let newImage = document.getElementById("malePilotImage").value;
 			document.getElementById("femalePilotImage").value = "";
@@ -387,37 +407,54 @@ session_start();
 				</td>
 				<td colspan="2" width='5%' class='datalabel' nowrap align="left">*PV:</td>
 				<td colspan="2" width='50' class='datalabel' style='text-align:center;vertical-align:top;' nowrap align="right" valign="top" rowspan="2">
-					<img src="./images/factions/CW.png" width="50px" id="newpilotimage">
+					<img src="./images/factions/CW.png" width="60px" id="newpilotimage">
 				</td>
 			</tr>
 			<tr>
-				<td colspan="1" width='5%' class='datalabel' nowrap align="right">Img (m):</td>
+				<td colspan="1" width='5%' class='datalabel' nowrap align="right" onclick="showMaleImageSelectorDiv();">&nbsp;&nbsp;<i class="fa-solid fa-image-portrait"></i>&nbsp;&nbsp;male:</td>
 				<td colspan="1" width='20%' class='datalabel'>
 					<select required name='malePilotImage' id='malePilotImage' onchange="maleImageSelected();" size='1' style='width:100%;'>
 						<option value='0'></option>
 <?php
 	$directory = './images/pilots';
 	$scanned_directory = array_diff(scandir($directory, SCANDIR_SORT_ASCENDING), array('..', '.'));
+	$count = 0;
+	$stringMalePilotImages = $stringMalePilotImages."<table><tr>";
 	foreach ($scanned_directory as $key => $value) {
 		if (str_starts_with($value, 'm_')) {
 			echo "						<option value='".$value."'>".substr($value,2,-4)."</option>\n";
-			$stringMalePilotImages = $stringMalePilotImages."<tr><td><img loading='lazy' src='./images/pilots/".$value."'></td><td>".substr($value,2,-4)."</td></tr>";
+			$stringMalePilotImages = $stringMalePilotImages."<td onclick='selectNewMaleImage(\"".$value."\");'><img loading='lazy' width='75px' src='./images/pilots/".$value."'></td>";
+			if ($count > 3) {
+				$stringMalePilotImages = $stringMalePilotImages."</tr><tr>";
+				$count = 0;
+			} else {
+				$count++;
+			}
 		}
 	}
+	$stringMalePilotImages = $stringMalePilotImages."</tr></table>";
 ?>
 					</select>
 				</td>
-				<td colspan="1" width='5%' class='datalabel' nowrap align="right">Img (f):</td>
+				<td colspan="1" width='5%' class='datalabel' nowrap align="right" onclick="showFemaleImageSelectorDiv();">&nbsp;&nbsp;<i class="fa-solid fa-image-portrait"></i>&nbsp;&nbsp;female:</td>
 				<td colspan="1" width='20%' class='datalabel'>
 					<select required name='femalePilotImage' id='femalePilotImage' onchange="femaleImageSelected();" size='1' style='width:100%;'>
 						<option value='0'></option>
 <?php
 	$directory = './images/pilots';
 	$scanned_directory = array_diff(scandir($directory, SCANDIR_SORT_ASCENDING), array('..', '.'));
+	$count = 0;
+	$stringFemalePilotImages = $stringFemalePilotImages."<table><tr>";
 	foreach ($scanned_directory as $key => $value) {
 		if (str_starts_with($value, 'f_')) {
 			echo "						<option value='".$value."'>".substr($value,2,-4)."</option>\n";
-			$stringFemalePilotImages = $stringFemalePilotImages."<tr><td><img loading='lazy' src='./images/pilots/".$value."'></td><td>".substr($value,2,-4)."</td></tr>";
+			$stringFemalePilotImages = $stringFemalePilotImages."<td onclick='selectNewFemaleImage(\"".$value."\");'><img loading='lazy' width='75px' src='./images/pilots/".$value."'></td>";
+			if ($count > 3) {
+				$stringFemalePilotImages = $stringFemalePilotImages."</tr><tr>";
+				$count = 0;
+			} else {
+				$count++;
+			}
 		}
 	}
 ?>
@@ -533,7 +570,7 @@ session_start();
 				<td colspan="9">&nbsp;</td>
 			</tr>
 			<tr>
-				<td colspan="1" width='5%' id="spa_sum" nowrap class="datalabel" style='text-align:left;vertical-align:middle;' colspan='1' rowspan="1">
+				<td colspan="1" width='5%' id="spa_sum" nowrap class="datalabel" style='text-align:center;vertical-align:middle;' colspan='1' rowspan="1">
 					&nbsp;&nbsp;&nbsp;&nbsp;∑ <b><span id="sumlabel">4</span></b>
 				</td>
 				<td colspan="7" width='95%' class='datalabel' id="newSPAs">
@@ -553,16 +590,12 @@ session_start();
 		</table>
 	</form>
 
-	<div>
-		<table>
-			<?php echo $stringMalePilotImages."\n"; ?>
-		</table>
+	<div id="maleSelectorDiv" style="visibility:hidden;">
+		<?php echo $stringMalePilotImages."\n"; ?>
 	</div>
 
-	<div>
-		<table>
-			<?php echo $stringFemalePilotImages."\n"; ?>
-		</table>
+	<div id="femaleSelectorDiv" style="visibility:hidden;">
+		<?php echo $stringFemalePilotImages."\n"; ?>
 	</div>
 
 	<script>
