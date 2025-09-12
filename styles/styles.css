@@ -176,7 +176,7 @@ a:hover {
 }
 #heightmeasure {
 	position: fixed;
-	width: 5px;
+	width: 2px;
 	top: 100px;
 	bottom: 100px;
 	left: 0;
@@ -805,21 +805,24 @@ a:hover {
 .menu_button_normal {
 	font-size:100%;
 	padding:5px;
-	background-color:#da8e25;
+	/* background-color:#da8e25; */
+	background-color:#222222; /* #44260e */
 	color:#000000;
 	text-align:center;
 }
 .menu_button_normal:hover {
 	font-size:100%;
 	padding:5px;
-	background-color:#925a0a;
+	/* background-color:#925a0a; */
+	background-color:#de8c34; /* #666666 */
 	color:#000000;
 	text-align:center;
 }
 .menu_button_active {
 	font-size:100%;
 	padding:5px;
-	background-color:#694007;
+	/* background-color:#694007; */
+	background-color:#9f5c1d; /* #444444 */
 	color:#ffffff;
 	text-align:center;
 }

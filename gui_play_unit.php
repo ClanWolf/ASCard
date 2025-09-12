@@ -482,7 +482,7 @@ session_start();
 			<td nowrap onclick="location.href='./index.html'" width="60px" style="width:100px;background:rgba(50,50,50,1.0);text-align:center;vertical-align:middle;">
 				<div><a style="color:#eee;" href="./index.html">&nbsp;&nbsp;&nbsp;<i class="fa fa-arrow-left" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;</a></div>
 			</td>
-			<td nowrap onclick="location.href='./gui_select_unit.php'" style="width:100px;background:rgba(56,87,26,1.0);">
+			<td nowrap onclick="location.href='./gui_edit_game.php'" style="width:100px;background:rgba(56,87,26,1.0);">
 				<div style='vertical-align:middle;font-size:28px;color:#eee;'>&nbsp;&nbsp;&nbsp;G<?php echo $gid ?>&nbsp;R<?php echo $CURRENTROUND ?>&nbsp;&nbsp;&nbsp;</div>
 			</td>
 <?php
@@ -699,11 +699,11 @@ session_start();
 			<td nowrap onclick="location.href='gui_show_playerlist.php'" style="width: 60px;" width="60px" style="background: rgba(50,50,50,1.0); text-align: center; vertical-align: middle;"><img src='./images/player/<?=$pimage?>' style='height:auto;display:block;' width='60px' height='60px'></td>
 		</tr>
 <?php
-	if ($playMode) {
+	//if ($playMode) {
 		echo "		<tr><td colspan='999' style='background:rgba(50,50,50,1.0);height:5px;'></td></tr>\r\n";
-	} else {
-		echo "		<tr><td colspan='999' style='background:#da8e25;height:5px;'></td></tr>\r\n";
-	}
+	//} else {
+	//	echo "		<tr><td colspan='999' style='background:#da8e25;height:5px;'></td></tr>\r\n";
+	//}
 ?>
 	</table>
 </div>
