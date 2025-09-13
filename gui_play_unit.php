@@ -153,7 +153,6 @@ session_start();
 		}
 	</script>
 	<script type="text/javascript" src="./scripts/passive-events-support/main.js"></script>
-
 	<script type="text/javascript" src="./scripts/jquery-3.7.1.min.js"></script>
 	<script type="text/javascript" src="./scripts/jquery.jscrollpane.min.js"></script>
 	<script type="text/javascript" src="./scripts/jquery.mousewheel.js"></script>

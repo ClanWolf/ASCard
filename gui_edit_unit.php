@@ -85,6 +85,7 @@ session_start();
 	<link rel="stylesheet" type="text/css" href="./fontawesome/css/all.min.css" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="./styles/styles.css">
 	<link rel="stylesheet" type="text/css" href="./styles/editorstyles.css">
+	<link rel="stylesheet" type="text/css" href="./styles/jquery.jscrollpane.css">
 	<link rel="icon" type="image/png" href="/app/favicon-96x96.png" sizes="96x96" />
 	<link rel="icon" type="image/svg+xml" href="/app/favicon.svg" />
 	<link rel="shortcut icon" href="/app/favicon.ico" />
@@ -117,6 +118,8 @@ session_start();
 
 	<script type="text/javascript" src="./scripts/passive-events-support/main.js"></script>
 	<script type="text/javascript" src="./scripts/jquery-3.7.1.min.js"></script>
+	<script type="text/javascript" src="./scripts/jquery.jscrollpane.min.js"></script>
+	<script type="text/javascript" src="./scripts/jquery.mousewheel.js"></script>
 	<script type="text/javascript" src="./scripts/howler.min.js"></script>
 	<script type="text/javascript" src="./scripts/cookies.js"></script>
 	<script type="text/javascript" src="./scripts/adjustPointValue.js"></script>
@@ -173,6 +176,11 @@ session_start();
 	<script type="text/javascript" src="./scripts/log_enable.js"></script>
 
 	<script>
+		$(function() {
+			//$('.scroll-pane').jScrollPane({autoReinitialise: true});
+			$('.scroll-pane').jScrollPane();
+		});
+
 		function formationChanged() {
 			alert("new formation selected");
 		}
@@ -589,11 +597,27 @@ session_start();
 	</form>
 
 	<div id="maleSelectorDiv" style="visibility:hidden;">
-		<?php echo $stringMalePilotImages."\n"; ?>
+		<table class="options" cellspacing="2" cellpadding="2" border=0px width="50%">
+			<tr>
+				<td>
+					<div class='scroll-pane' width="100%" style="width:100%;">
+						<?php echo $stringMalePilotImages."\n"; ?>
+					</div>
+				</td>
+			</tr>
+		</table>
 	</div>
 
 	<div id="femaleSelectorDiv" style="visibility:hidden;">
-		<?php echo $stringFemalePilotImages."\n"; ?>
+		<table class="options" cellspacing="2" cellpadding="2" border=0px width="50%">
+			<tr>
+				<td>
+					<div class='scroll-pane' width="100%" style="width:100%;">
+						<?php echo $stringFemalePilotImages."\n"; ?>
+					</div>
+				</td>
+			</tr>
+		</table>
 	</div>
 
 	<script>
