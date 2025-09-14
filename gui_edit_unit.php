@@ -123,6 +123,7 @@ session_start();
 	<script type="text/javascript" src="./scripts/howler.min.js"></script>
 	<script type="text/javascript" src="./scripts/cookies.js"></script>
 	<script type="text/javascript" src="./scripts/adjustPointValue.js"></script>
+	<script type="text/javascript" src="./scripts/spa.js"></script>
 
 	<script>
 		let assignId = "<?php echo $ASSIGNID; ?>";
@@ -175,6 +176,9 @@ session_start();
 	<iframe name="saveframe" id="iframe_save"></iframe>
 	<script type="text/javascript" src="./scripts/log_enable.js"></script>
 
+	<div id="heightmeasure"></div>
+	<div id="cover"></div>
+
 	<script>
 		$(function() {
 			//$('.scroll-pane').jScrollPane({autoReinitialise: true});
@@ -187,10 +191,12 @@ session_start();
 
 		function showMaleImageSelectorDiv() {
 			document.getElementById("maleSelectorDiv").style.visibility = "visible";
+			$('.scroll-pane').jScrollPane();
 		}
 
 		function showFemaleImageSelectorDiv() {
 			document.getElementById("femaleSelectorDiv").style.visibility = "visible";
+			$('.scroll-pane').jScrollPane();
 		}
 
 		function selectNewMaleImage(imgName) {
@@ -232,6 +238,28 @@ session_start();
 			alert("addSpecialPilotAbility");
 		}
 
+		function showSpaInfo(spa) {
+			if (spa !== "") {
+				document.getElementById("spaInfoContainer").style.visibility = "visible";
+				showSpa(spa);
+			}
+		}
+
+		function closeSpaInfo() {
+			// If fadeIn is used here, css animation does not work anymore
+			document.getElementById("spaInfoContainer").style.visibility = "hidden";
+		}
+
+		function closeMaleSelector() {
+			// If fadeIn is used here, css animation does not work anymore
+			document.getElementById("maleSelectorDiv").style.visibility = "hidden";
+		}
+
+		function closeFemaleSelector() {
+			// If fadeIn is used here, css animation does not work anymore
+			document.getElementById("femaleSelectorDiv").style.visibility = "hidden";
+		}
+
 		function save() {
 			alert("save");
 		}
@@ -258,10 +286,21 @@ session_start();
 		$(document).ready(function() {
 			$("#cover").hide();
 			fillValues();
+
+			// Set the height of the local scrollbars to the real height of the container elements (reload only)
+			let scrollcontainerstartrow = document.getElementById("scrollcontainertopborder");
+			const rect = scrollcontainerstartrow.getBoundingClientRect();
+			const hmd = document.getElementById("heightmeasure");
+			hmd.style.top = rect.y+"px";
+			const resultingHeight = hmd.clientHeight;
+			//console.log("Height: " + resultingHeight);
+			var scrollcontainerdivs = document.getElementsByClassName("scroll-pane");
+			for(var i=0; i < scrollcontainerdivs.length; i++) {
+				scrollcontainerdivs[i].style.height = resultingHeight+"px";
+				console.log(scrollcontainerdivs[i]);
+			}
 		});
 	</script>
-
-	<div id="cover"></div>
 
 <?php
 	if ($playMode) {
@@ -497,7 +536,7 @@ session_start();
 				</td>
 			</tr>
 			<tr>
-				<td colspan="1" width='5%' class='datalabel' nowrap align="right">Add SPA:</td>
+				<td colspan="1" width='5%' class='datalabel' nowrap align="right" onclick="javascript:showSpaInfo(document.getElementById('addNewSPA').value);"><i class="fa-solid fa-circle-info"></i>&nbsp;&nbsp;&nbsp;Add SPA:</td>
 				<td colspan="5" width='90%' class='datalabel' style="width:100%;">
 					<select required name='addNewSPA' id='addNewSPA' onchange="" size='1' style='width:100%;'>
 						<option value=""></option>
@@ -583,7 +622,6 @@ session_start();
 					---
 				</td>
 				<td nowrap class="datalabel" style='text-align:right;vertical-align:top;' colspan='1' rowspan="1" valign="top">
-					<!-- <a href="">&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa-solid fa-circle-info"></i></a> -->
 				</td>
 			</tr>
 			<tr>
@@ -596,9 +634,10 @@ session_start();
 		</table>
 	</form>
 
-	<div id="maleSelectorDiv" style="visibility:hidden;">
-		<table class="options" cellspacing="2" cellpadding="2" border=0px width="50%">
-			<tr>
+	<div id="maleSelectorDiv" style="visibility:hidden;" onclick="javascript:closeMaleSelector();">
+		<br>
+		<table class="options" cellspacing="2" cellpadding="2" border=0px width="70%" height="70%">
+			<tr id='scrollcontainertopborder'>
 				<td>
 					<div class='scroll-pane' width="100%" style="width:100%;">
 						<?php echo $stringMalePilotImages."\n"; ?>
@@ -608,14 +647,71 @@ session_start();
 		</table>
 	</div>
 
-	<div id="femaleSelectorDiv" style="visibility:hidden;">
-		<table class="options" cellspacing="2" cellpadding="2" border=0px width="50%">
-			<tr>
+	<div id="femaleSelectorDiv" style="visibility:hidden;" onclick="javascript:closeFemaleSelector();">
+		<br>
+		<table class="options" cellspacing="2" cellpadding="2" border=0px width="70%" height="70%">
+			<tr id='scrollcontainertopborder'>
 				<td>
 					<div class='scroll-pane' width="100%" style="width:100%;">
 						<?php echo $stringFemalePilotImages."\n"; ?>
 					</div>
 				</td>
+			</tr>
+		</table>
+	</div>
+
+	<div id="spaInfoContainer" style="visibility:hidden;" onclick="javascript:closeSpaInfo();">
+		<div class="hudcenteranimation">
+			<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 1000 1000" style="enable-background:new 0 0 1000 1000;" xml:space="preserve">
+				<circle class="st0" cx="500" cy="500" r="302.8">
+					<animateTransform attributeType="xml" attributeName="transform" type="rotate" from="0 500 500" to="360 500 500" dur="100s" repeatCount="indefinite"></animateTransform>
+				</circle>
+				<circle class="st1" cx="500" cy="500" r="237.7">
+					<animateTransform attributeType="xml" attributeName="transform" type="rotate" from="0 500 500" to="360 500 500" dur="40s" repeatCount="indefinite"></animateTransform>
+				</circle>
+				<circle class="st2" cx="500" cy="500" r="366.8">
+					<animateTransform attributeType="xml" attributeName="transform" type="rotate" from="0 500 500" to="-360 500 500" dur="50s" repeatCount="indefinite"></animateTransform>
+				</circle>
+				<circle class="st3" cx="500" cy="500" r="395.1"></circle>
+			</svg>
+		</div>
+
+		<br>
+
+		<table width="100%" height="70%">
+			<tr>
+				<td width="10%" align="right" valign="top" class="datalabel">&nbsp;</td>
+				<td width="80%">
+					<table class="options" width="100%" style="height:100%;" cellspacing=4 cellpadding=8 border=0px>
+						<tr>
+							<td class="datalabel" id="ut_name" align="left" width="90%" style="font-size:1.2em;">...</td><td nowrap class="datalabel" id="ut_variation" align="right" width="10%" style="font-size:1.2em;">...</td>
+						</tr>
+						<tr>
+							<td class="datavalue_thinflow" style="font-size:0.75em;" align="left">
+								<span id="ut_source">...</span>, <span id="ut_page">...</span>
+							</td>
+							<td nowrap class="datavalue_thinflow" id="ut_type">...</td>
+						</tr>
+						<tr>
+							<td class="datavalue_thin" colspan="2"><hr></td>
+						</tr>
+						<tr>
+							<td height="100%" colspan="2" align="left" valign="top" id="scrollcontainer">
+								<div class='scroll-pane' width="100%" style="width:100%;">
+									<table width="100%"><tr><td class="datavalue_thinflow" id="ut_desc">...</td></tr></table>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td class="datavalue_thin" colspan="2"><hr></td>
+						</tr>
+						<tr>
+							<td nowrap class="datavalue_thin" colspan="2" align="center"><a href="javascript:closeSpaInfo();">CLOSE</a></td>
+						</tr>
+					</table>
+				</td>
+				<td width="10%" align="right" valign="top" class="datalabel">&nbsp;</td>
+				<!-- <td width="10%" align="left" valign="top"><a href="javascript:closeSpecialAbilities();">&nbsp;&nbsp;&nbsp;<i class="fa-solid fa-xmark" style="font-size:3em;"></i></a></td> -->
 			</tr>
 		</table>
 	</div>
