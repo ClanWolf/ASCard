@@ -147,6 +147,12 @@ session_start();
 			let n3 = document.getElementById("NewFormation").value.replace(/[^A-Za-z0-9 ]/g, '').replace(/  +/g, ' ');
 			let fa = document.getElementById("NewFormationFaction").value;
 
+			if (n2 !== "") {
+				document.getElementById("showFormationInfoControl").style.visibility = "visible";
+			} else {
+				document.getElementById("showFormationInfoControl").style.visibility = "hidden";
+			}
+
 			document.getElementById("NewFormationName").value = n1;
 			document.getElementById("NewFormationType").value = n2;
 			document.getElementById("NewFormation").value = n3;
@@ -236,6 +242,12 @@ session_start();
 			document.getElementById("NewFormation").value = formation;
 			document.getElementById("resultingShort").value = formationShort;
 			document.getElementById("NewFormationFaction").value = faction;
+
+			if (formationType !== "") {
+				document.getElementById("showFormationInfoControl").style.visibility = "visible";
+			} else {
+				document.getElementById("showFormationInfoControl").style.visibility = "hidden";
+			}
 
 			var na = "";
 			var list = document.getElementsByClassName("bigcheck");
@@ -394,7 +406,7 @@ session_start();
 				<td colspan="1" width='90%' class='datalabel' style="width:100%;">
 					<input autocomplete="autocomplete_off_hack_xfr4!k" required onkeyup="this.value = this.value.toUpperCase();changeResultingName();" onchange="changeResultingName();" type="text" id="NewFormationName" width="100%" style="width:100%;">
 				</td>
-				<td rowspan="4" nowrap valign="middle"><a href="javascript:showFormationTypeInfo(document.getElementById('NewFormationType').value);">&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa-solid fa-circle-info"></i>&nbsp;&nbsp;</a></td>
+				<td rowspan="4" nowrap valign="middle"><a href="javascript:showFormationTypeInfo(document.getElementById('NewFormationType').value);"><span id="showFormationInfoControl" style="visibility:hidden;">&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa-solid fa-circle-info"></i>&nbsp;&nbsp;</span></a></td>
 			</tr>
 			<tr>
 				<td colspan="1" width='5%' class='datalabel' nowrap align="right">Formation type:</td>

@@ -1,31 +1,24 @@
-function getFormationTypes(ft) {
+function getSpecialPilotAbilities(spa) {
 	// Read special abilities from json file
-	var cache_url = 'https://www.ascard.net/app/data/specialabilities/formationtypes.json';
+	var cache_url = 'https://www.ascard.net/app/data/specialabilities/specialpilotabilities.json';
 	var match = null;
-	var alphabetNavigation = "";
-	var subNavigation = "";
-	var currentLetter = "#";
 
-	// console.log("Searching: " + ft);
+	//console.log("Searching: " + spa);
 
 	$.getJSON(cache_url, function (json) {
-		json.formationtypes.sort(function(a, b) {
+		json.specialpilotabilities.sort(function(a, b) {
 			if (a.NAME < b.NAME) return -1;
 			if (a.NAME > b.NAME) return 1;
 		});
-		$.each(json.formationtypes, function (i, formationtype) {
-			let fullName = "";
-			let formationtypeName = formationtype.NAME;
-			let formationtypeVariation = formationtype.VARIATION;
+		$.each(json.specialpilotabilities, function (i, specialpilotability) {
+			let specialpilotabilityName = specialpilotability.NAME.toUpperCase();
 
-			if (formationtypeVariation !== "NONE" && formationtypeVariation) {
-				fullName = formationtypeVariation + " ";
-			}
-			if (formationtypeName) {
-				fullName = fullName + formationtypeName;
-			}
-			if (ft === fullName) {
-				match = formationtype;
+			//console.log("1: " + spa);
+			//console.log("2: " + specialpilotabilityName);
+
+			if (spa.toUpperCase().startsWith(specialpilotabilityName)) {
+				match = specialpilotability;
+				//console.log("Found: " + match.NAME);
 			}
 		});
 	}).then(function data() {
@@ -58,5 +51,5 @@ function getFormationTypes(ft) {
 }
 
 function showSpa(spa) {
-	getFormationTypes(spa);
+	getSpecialPilotAbilities(spa);
 }

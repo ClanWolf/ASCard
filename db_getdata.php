@@ -412,10 +412,15 @@
 							$array_UNIT_CLASS[$unitcount] = $row["unit_class"];
 							$array_UNIT_VARIANT[$unitcount] = $row["unit_variant"];
 
-							if (str_contains($array_UNIT_CLASS[$unitcount], '(') && str_contains($array_UNIT_CLASS[$unitcount], ')')) {
-								preg_match('#\((.*?)\)#', $array_UNIT_CLASS[$unitcount], $match);
-								$array_UNIT_NAME_CLAN[$unitcount] = $match[1];
-								$array_UNIT_NAME_IS[$unitcount] = preg_replace("/\([^)]+\)/", "", $array_UNIT_CLASS[$unitcount]);
+							if ($row["tech"] == "2") {
+								if (str_contains($array_UNIT_CLASS[$unitcount], '(') && str_contains($array_UNIT_CLASS[$unitcount], ')')) {
+									preg_match('#\((.*?)\)#', $array_UNIT_CLASS[$unitcount], $match);
+									$array_UNIT_NAME_CLAN[$unitcount] = $match[1];
+									$array_UNIT_NAME_IS[$unitcount] = preg_replace("/\([^)]+\)/", "", $array_UNIT_CLASS[$unitcount]);
+								} else {
+									$array_UNIT_NAME_CLAN[$unitcount] = $array_UNIT_CLASS[$unitcount];
+									$array_UNIT_NAME_IS[$unitcount] = $array_UNIT_CLASS[$unitcount];
+								}
 							} else {
 								$array_UNIT_NAME_CLAN[$unitcount] = $array_UNIT_CLASS[$unitcount];
 								$array_UNIT_NAME_IS[$unitcount] = $array_UNIT_CLASS[$unitcount];

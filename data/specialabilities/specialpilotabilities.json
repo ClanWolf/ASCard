@@ -1,4 +1,4 @@
-{ "SpecialPilotAbilities": [
+{ "specialpilotabilities": [
 	{
 		"NAME": "ANIMAL MIMICRY",
 		"UNITTYPE": "'Mechs, ProtoMechs (only if the model has four legs)",

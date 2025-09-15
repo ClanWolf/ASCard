@@ -180,6 +180,9 @@ session_start();
 	<div id="cover"></div>
 
 	<script>
+		var pilotSpaArray;
+		let rx = /\[(-?\d+)\]/ // Extract the number from []
+
 		$(function() {
 			//$('.scroll-pane').jScrollPane({autoReinitialise: true});
 			$('.scroll-pane').jScrollPane();
@@ -224,8 +227,9 @@ session_start();
 		}
 
 		function newRankSelected() {
-			alert("new rank");
-			//document.getElementById("newpilotrank").src = "./images/ranks/" + formationFactionId + "/" + pilotRank;
+			//alert("new rank");
+			let newRank = document.getElementById("rank").value;
+			document.getElementById("newpilotrank").src = "./images/ranks/" + formationFactionId + "/" + newRank;
 		}
 
 		function skillChanged() {
@@ -234,8 +238,13 @@ session_start();
 			document.getElementById("newPV").innerHTML = newPV;
 		}
 
-		function addSpecialPilotAbility() {
-			alert("addSpecialPilotAbility");
+		function showSpaInfoControl() {
+			let newSpaSelected = document.getElementById("addNewSPA").value;
+			if (newSpaSelected !== "") {
+				document.getElementById("showSpaInfo").style.visibility = "visible";
+			} else {
+				document.getElementById("showSpaInfo").style.visibility = "hidden";
+			}
 		}
 
 		function showSpaInfo(spa) {
@@ -264,7 +273,63 @@ session_start();
 			alert("save");
 		}
 
+		function addSpecialPilotAbility() {
+			let newPilotSpaSelected = document.getElementById("addNewSPA").value;
+			let existingSpas = document.getElementById("newSPAs").innerHTML;
+			if (newPilotSpaSelected !== "") {
+				if (!existingSpas.includes(newPilotSpaSelected)) {
+					pilotSpaArray.push(newPilotSpaSelected.trim());
+					let indexCounter = 0;
+					let spaCalculatedSum = 0;
+					let spaStringList = "";
+					for (var i = 0; i < pilotSpaArray.length; i++) {
+						spaElement = pilotSpaArray[i].trim();
+						spaCostElement = Number(spaElement.match(rx)[1]);
+						spaStringList = spaStringList + "<span onclick='javascript:removeSpa("+ indexCounter + ");'>" + spaElement + "&nbsp;<i class='fas fa-minus-square'></i></span>&nbsp;&nbsp;&nbsp;";
+						spaCalculatedSum = spaCalculatedSum + spaCostElement;
+						indexCounter++;
+					}
+					document.getElementById("newSPAs").innerHTML = spaStringList;
+					document.getElementById("sumlabel").innerHTML = spaCalculatedSum;
+					document.getElementById("addNewSPA").value = "";
+					document.getElementById("showSpaInfo").style.visibility = "hidden";
+				}
+			}
+		}
+
+		function removeSpa(index) {
+			let indexCounter = 0;
+			let spaCalculatedSum = 0;
+			let spaStringList = "";
+			let newPilotSpaArray = [];
+			for (var i = 0; i < pilotSpaArray.length; i++) {
+				if (i !== index) {
+					spaElement = pilotSpaArray[i].trim();
+					spaCostElement = Number(spaElement.match(rx)[1]);
+					spaStringList = spaStringList + "<span onclick='javascript:removeSpa("+ indexCounter + ");'>" + spaElement + "&nbsp;<i class='fas fa-minus-square'></i></span>&nbsp;&nbsp;&nbsp;";
+					spaCalculatedSum = spaCalculatedSum + spaCostElement;
+					indexCounter++;
+					newPilotSpaArray.push(spaElement);
+				}
+			}
+			pilotSpaArray = newPilotSpaArray;
+			document.getElementById("newSPAs").innerHTML = spaStringList;
+			document.getElementById("sumlabel").innerHTML = spaCalculatedSum;
+		}
+
 		function fillValues() {
+			pilotSpaArray = pilotSpa.split(",");
+			let indexCounter = 0;
+			let spaCalculatedSum = 0;
+			let spaStringList = "";
+			for (var i = 0; i < pilotSpaArray.length; i++) {
+				spaElement = pilotSpaArray[i].trim();
+				spaCostElement = Number(spaElement.match(rx)[1]);
+				spaStringList = spaStringList + "<span onclick='javascript:removeSpa("+ indexCounter + ");'>" + spaElement + "&nbsp;<i class='fas fa-minus-square'></i></span>&nbsp;&nbsp;&nbsp;";
+				spaCalculatedSum = spaCalculatedSum + spaCostElement;
+				indexCounter++;
+			}
+
 			document.getElementById("unitnameToEdit").innerHTML = unitClass + " " + unitVariant + " '" + unitName + "' - PV: " + unitPv + " (" + unitBasePv + ")";
 			document.getElementById("factionname").value = factionshort;
 			document.getElementById("factionlogo").src = "./images/factions/" + factionimage;
@@ -275,8 +340,8 @@ session_start();
 			document.getElementById("newpilotimage").src = pilotImageUrl;
 			document.getElementById("newpilotrank").src = "./images/ranks/" + formationFactionId + "/" + pilotRank;
 			document.getElementById("NewUnitSkill").value = unitSkill;
-			document.getElementById("newSPAs").innerHTML = pilotSpa;
-			document.getElementById("sumlabel").innerHTML = pilotSpaCostSum;
+			document.getElementById("newSPAs").innerHTML = spaStringList;
+			document.getElementById("sumlabel").innerHTML = pilotSpaCostSum; // spaCalculatedSum
 			document.getElementById("rank").value = pilotRank;
 
 			let newPV = adjustPointValue(unitBasePv, unitSkill);
@@ -296,8 +361,10 @@ session_start();
 			//console.log("Height: " + resultingHeight);
 			var scrollcontainerdivs = document.getElementsByClassName("scroll-pane");
 			for(var i=0; i < scrollcontainerdivs.length; i++) {
-				scrollcontainerdivs[i].style.height = resultingHeight+"px";
-				console.log(scrollcontainerdivs[i]);
+				if (scrollcontainerdivs[i].id !== "spaInfo") {
+					scrollcontainerdivs[i].style.height = resultingHeight+"px";
+					//console.log(scrollcontainerdivs[i]);
+				}
 			}
 		});
 	</script>
@@ -536,9 +603,9 @@ session_start();
 				</td>
 			</tr>
 			<tr>
-				<td colspan="1" width='5%' class='datalabel' nowrap align="right" onclick="javascript:showSpaInfo(document.getElementById('addNewSPA').value);"><i class="fa-solid fa-circle-info"></i>&nbsp;&nbsp;&nbsp;Add SPA:</td>
+				<td colspan="1" width='5%' class='datalabel' nowrap align="right" onclick="javascript:showSpaInfo(document.getElementById('addNewSPA').value);"><span id="showSpaInfo" style="visibility:hidden;"><i class="fa-solid fa-circle-info"></i>&nbsp;&nbsp;&nbsp;</span>Add SPA:</td>
 				<td colspan="5" width='90%' class='datalabel' style="width:100%;">
-					<select required name='addNewSPA' id='addNewSPA' onchange="" size='1' style='width:100%;'>
+					<select required name='addNewSPA' id='addNewSPA' onchange="javascript:showSpaInfoControl();" size='1' style='width:100%;'>
 						<option value=""></option>
 						<option value="Animal Mimicry [2]">Animal Mimicry [2]</option>
 						<option value="Antagonizer [3]">Antagonizer [3]</option>
@@ -697,7 +764,7 @@ session_start();
 						</tr>
 						<tr>
 							<td height="100%" colspan="2" align="left" valign="top" id="scrollcontainer">
-								<div class='scroll-pane' width="100%" style="width:100%;">
+								<div class='scroll-pane' id="spaInfo" width="100%" style="width:100%;">
 									<table width="100%"><tr><td class="datavalue_thinflow" id="ut_desc">...</td></tr></table>
 								</div>
 							</td>

@@ -1122,7 +1122,7 @@ input[type='checkbox'].bigcheck:checked + span.bigcheck-target:after {
 	left: 0px;
 	margin: auto;
 	width: 100%;
-	opacity: 0.6;
+	opacity: 0.8;
 }
 svg {
 	height: 400px;
@@ -1138,7 +1138,7 @@ svg {
 }
 .st0, .st1, .st2, .st3 {
 	fill: none;
-	stroke: rgba(120, 120, 120, 0.35);
+	stroke: rgba(160, 160, 160, 0.75);
 	stroke-width: 42;
 	stroke-miterlimit: 10;
 }

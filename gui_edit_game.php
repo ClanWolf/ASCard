@@ -554,7 +554,11 @@ session_start();
 									echo "							<tr>\n";
 									echo "								<td colspan='1' class='datalabel' nowrap align='left'>You are in:</td>\n";
 									echo "								<td colspan='3' class='datalabel' nowrap align='left'>G".$gid.": ".$joinedGame_TITLE."</td>\n";
-									echo "								<td colspan='1' class='datalabel' nowrap align='right'><a href='#' onClick='javascript:resetGameForPlayer(".$gid.",".$pid.",1);'>Leave game&nbsp;&nbsp;&nbsp;<i class='fas fa-minus-square'></i></a></td>\n";
+									if ($playMode) {
+										echo "								<td colspan='1' class='datalabel' nowrap align='right'>&nbsp;</td>\n";
+									} else {
+										echo "								<td colspan='1' class='datalabel' nowrap align='right'><a href='#' onClick='javascript:resetGameForPlayer(".$gid.",".$pid.",1);'>Leave game&nbsp;&nbsp;&nbsp;<i class='fas fa-minus-square'></i></a></td>\n";
+									}
 									echo "							</tr>\n";
 									echo "							<tr>\n";
 									echo "								<td colspan='1' class='datalabel' nowrap align='left'></td>\n";
@@ -594,18 +598,30 @@ session_start();
 				</td>
 			</tr>
 
-			<tr><td colspan="3"><hr></td></tr>
-
-			<td colspan="3">
-				<table align="left" cellspacing="0" cellpadding="0" border="0px">
-					<tr>
-						<td class='datalabel'>
-							<a href='#' onClick='javascript:resetGameForPlayer(<?php echo $gid ?>, <?php echo $pid ?>, 0);'>&nbsp;&nbsp;<i class="fas fa-fast-backward"></i>&nbsp;&nbsp;&nbsp;&nbsp;</a>
-						</td>
-						<td align='left' class='datalabel'>RESET Game (Set round to 1 / Repair all units)</td>
-					</tr>
-				</table>
-			</td>
+<?php
+	if ($playMode) {
+//		echo "			<tr><td colspan='3'><hr></td></tr>\n";
+//		echo "			<tr>\n";
+//		echo "				<td colspan='3'>\n";
+//		echo "					&nbsp;\n";
+//		echo "				</td>\n";
+//		echo "			</tr>\n";
+	} else {
+		echo "			<tr><td colspan='3'><hr></td></tr>\n";
+		echo "			<tr>\n";
+		echo "				<td colspan='3'>\n";
+		echo "					<table align='left' cellspacing='0' cellpadding='0' border='0px'>\n";
+		echo "						<tr>\n";
+		echo "							<td class='datalabel'>\n";
+		echo "								<a href='#' onClick='javascript:resetGameForPlayer(".$gid.",".$pid.", 0);'>&nbsp;&nbsp;<i class='fas fa-fast-backward'></i>&nbsp;&nbsp;&nbsp;&nbsp;</a>\n";
+		echo "							</td>\n";
+		echo "							<td align='left' class='datalabel'>RESET Game (Set round to 1 / Repair all units)</td>\n";
+		echo "						</tr>\n";
+		echo "					</table>\n";
+		echo "				</td>\n";
+		echo "			</tr>\n";
+	}
+?>
 		</table>
 	</div>
 
