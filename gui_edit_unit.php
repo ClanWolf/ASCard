@@ -150,6 +150,8 @@ session_start();
 		let factionid = "<?php echo $FACTIONID; ?>";
 		let factionshort = "<?php echo $FACTIONSHORT; ?>";
 		let factionimage = "<?php echo $FACTIONIMAGE; ?>";
+
+		var api;
 	</script>
 
 	<style>
@@ -185,7 +187,11 @@ session_start();
 
 		$(function() {
 			//$('.scroll-pane').jScrollPane({autoReinitialise: true});
-			$('.scroll-pane').jScrollPane();
+			//$('.scroll-pane').jScrollPane();
+			//api = $('.scroll-pane').jScrollPane().data('jsp');
+
+			// do not initialize here already because that leads to scrollbars even if the content is smaller than
+			// the scrollcontainer
 		});
 
 		function formationChanged() {
@@ -364,6 +370,11 @@ session_start();
 				if (scrollcontainerdivs[i].id !== "spaInfo") {
 					scrollcontainerdivs[i].style.height = resultingHeight+"px";
 					//console.log(scrollcontainerdivs[i]);
+				} else {
+					// This is the scroll-pane in the spa detail pane
+					let ch = document.getElementById("scrollcont").offsetHeight;
+					//console.log("Height: " + ch);
+					scrollcontainerdivs[i].style.height = ch+"px";
 				}
 			}
 		});
@@ -616,13 +627,13 @@ session_start();
 						<option value="Demoralizer [3]">Demoralizer [3]</option>
 						<option value="Dodge [2]">Dodge [2]</option>
 						<option value="Dust-Off [2]">Dust-Off [2]</option>
-						<option value="Eagle’s Eyes [2]">Eagle’s Eyes [2]</option>
+						<option value="Eagle's Eyes [2]">Eagle’s Eyes [2]</option>
 						<option value="Environmental Specialist [2]">Environmental Specialist [2]</option>
 						<option value="Fist Fire [2]">Fist Fire [2]</option>
-						<option value="Float Like a Butterfly [1]">Float Like a Butterfly [1]</option>
-						<option value="Float Like a Butterfly [2]">Float Like a Butterfly [2]</option>
-						<option value="Float Like a Butterfly [3]">Float Like a Butterfly [3]</option>
-						<option value="Float Like a Butterfly [4]">Float Like a Butterfly [4]</option>
+						<option value="Float Like a Butterfly 1 [1]">Float Like a Butterfly 1 [1]</option>
+						<option value="Float Like a Butterfly 2 [2]">Float Like a Butterfly 2 [2]</option>
+						<option value="Float Like a Butterfly 3 [3]">Float Like a Butterfly 3 [3]</option>
+						<option value="Float Like a Butterfly 4 [4]">Float Like a Butterfly 4 [4]</option>
 						<option value="Forward Observer [1]">Forward Observer [1]</option>
 						<option value="Golden Goose [3]">Golden Goose [3]</option>
 						<option value="Ground-Hugger [2]">Ground-Hugger [2]</option>
@@ -633,10 +644,10 @@ session_start();
 						<option value="Human TRO [1]">Human TRO [1]</option>
 						<option value="Iron Will [1]">Iron Will [1]</option>
 						<option value="Jumping Jack [2]">Jumping Jack [2]</option>
-						<option value="Lucky [1]">Lucky [1]</option>
-						<option value="Lucky [2]">Lucky [2]</option>
-						<option value="Lucky [3]">Lucky [3]</option>
-						<option value="Lucky [4]">Lucky [4]</option>
+						<option value="Lucky 1 [1]">Lucky 1 [1]</option>
+						<option value="Lucky 2 [2]">Lucky 2 [2]</option>
+						<option value="Lucky 3 [3]">Lucky 3 [3]</option>
+						<option value="Lucky 4 [4]">Lucky 4 [4]</option>
 						<option value="Maneuvering Ace [2]">Maneuvering Ace [2]</option>
 						<option value="Marksman [2]">Marksman [2]</option>
 						<option value="Melee Master [2]">Melee Master [2]</option>
@@ -754,15 +765,17 @@ session_start();
 							<td class="datalabel" id="ut_name" align="left" width="90%" style="font-size:1.2em;">...</td><td nowrap class="datalabel" id="ut_variation" align="right" width="10%" style="font-size:1.2em;">...</td>
 						</tr>
 						<tr>
-							<td class="datavalue_thinflow" style="font-size:0.75em;" align="left">
+							<td class="datavalue_thinflow" style="font-size:0.75em;" colspan="2" align="left">
 								<span id="ut_source">...</span>, <span id="ut_page">...</span>
 							</td>
-							<td nowrap class="datavalue_thinflow" id="ut_type">...</td>
+						</tr>
+						<tr>
+							<td nowrap class="datavalue_thinflow" colspan="2" id="ut_type">...</td>
 						</tr>
 						<tr>
 							<td class="datavalue_thin" colspan="2"><hr></td>
 						</tr>
-						<tr>
+						<tr id="scrollcont">
 							<td height="100%" colspan="2" align="left" valign="top" id="scrollcontainer">
 								<div class='scroll-pane' id="spaInfo" width="100%" style="width:100%;">
 									<table width="100%"><tr><td class="datavalue_thinflow" id="ut_desc">...</td></tr></table>
@@ -778,7 +791,7 @@ session_start();
 					</table>
 				</td>
 				<td width="10%" align="right" valign="top" class="datalabel">&nbsp;</td>
-				<!-- <td width="10%" align="left" valign="top"><a href="javascript:closeSpecialAbilities();">&nbsp;&nbsp;&nbsp;<i class="fa-solid fa-xmark" style="font-size:3em;"></i></a></td> -->
+				<!-- <td width="10%" align="left" valign="top"><a href="javascript:closeSpaInfo();">&nbsp;&nbsp;&nbsp;<i class="fa-solid fa-xmark" style="font-size:3em;"></i></a></td> -->
 			</tr>
 		</table>
 	</div>

@@ -498,7 +498,7 @@ session_start();
 				<td colspan="3" width='5%' class='datalabel' nowrap align="left"><hr></td>
 			</tr>
 			<tr>
-				<td align="left" class='datalabel'>
+				<td align="center" class='datalabel'>
 					<label class="bigcheck"><input onchange="changeResultingName();" type="checkbox" class="bigcheck" name="AUTOBUILDNAME" value="false" checked="false"/><span class="bigcheck-target"></span></label>
 				</td>
 				<td colspan="2" align="left" nowrap class="datalabel">

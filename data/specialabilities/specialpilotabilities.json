@@ -330,8 +330,8 @@
 		"UNITTYPE": "Any",
 		"SPACOST": "1 point",
 		"BRIEF_DESCRIPTION":"Improves accuracy and reduces scatter for all artillery weapon attacks",
-		"RULE": "The Oblique Artilleryman SPA represents a gunner whose accuracy with indirect artillery weapons is downright uncanny. A unit that possesses this special pilot ability receives a -1 Target Number modifier for indirect and off-board attacks using the ART special ability.",
-		"SOURCE": "Alpha Strike Commanders Edition 7th<br>If the Oblique Artilleryman is delivering counter-battery fire against an off-board artillery position—see Artillery Counter-Battery Fire, page 153—this ability ensures that the artillery weapon will deliver its full damage to its off-board target even if the attack misses by a MoF of 1. If the MoF for a counter-battery attack against an off-board position is 2 or 3, the weapon will deliver half its normal damage (round up) to the off-board target instead. If Oblique Artilleryman misses by 4 points or more, damage (round up) shells miss the off-board target entirely.",
+		"RULE": "The Oblique Artilleryman SPA represents a gunner whose accuracy with indirect artillery weapons is downright uncanny. A unit that possesses this special pilot ability receives a -1 Target Number modifier for indirect and off-board attacks using the ART special ability. If the Oblique Artilleryman is delivering counter-battery fire against an off-board artillery position—see Artillery Counter-Battery Fire, page 153—this ability ensures that the artillery weapon will deliver its full damage to its off-board target even if the attack misses by a MoF of 1. If the MoF for a counter-battery attack against an off-board position is 2 or 3, the weapon will deliver half its normal damage (round up) to the off-board target instead. If Oblique Artilleryman misses by 4 points or more, damage (round up) shells miss the off-board target entirely.",
+		"SOURCE": "Alpha Strike Commanders Edition 7th",
 		"PAGE": "98"
 	},
 	{
