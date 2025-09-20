@@ -183,7 +183,8 @@ session_start();
 
 	<script>
 		var pilotSpaArray;
-		let rx = /\[(-?\d+)\]/ // Extract the number from []
+		var oldRank;
+		var rx = /\[(-?\d+)\]/ // Extract the number from []
 
 		$(function() {
 			//$('.scroll-pane').jScrollPane({autoReinitialise: true});
@@ -195,7 +196,49 @@ session_start();
 		});
 
 		function formationChanged() {
-			alert("new formation selected");
+			let selectObject = document.getElementById("FORMATIONID");
+			let index = selectObject.selectedIndex;
+			if (document.getElementById("rank").value != "") {
+				oldRank = document.getElementById("rank").value;
+			}
+
+			//console.log("Old rank: " + oldRank);
+
+			formationFactionId = formationFactionIdArray[index];
+			document.getElementById("rank").innerHTML = formationFactionRankOptions[index];
+
+			document.getElementById("factionname").innerHTML = formationFactionShortsArray[index];
+			document.getElementById("factionlogo").src = "./images/factions/" + formationFactionLogosArray[index];
+			let oldRankWasFound = false;
+			for (i = 0; i < document.getElementById("rank").length; ++i) {
+				if (document.getElementById("rank").options[i].value == oldRank) {
+					document.getElementById("rank").value = oldRank;
+					oldRankWasFound = true;
+				}
+			}
+
+			let newRank = document.getElementById("rank").value;
+			if (oldRankWasFound) {
+				document.getElementById("newpilotrank").src = "./images/ranks/" + formationFactionId + "/" + newRank;
+			} else {
+				document.getElementById("newpilotrank").src = "./images/ranks/notFound.png";
+			}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 		}
 
 		function showMaleImageSelectorDiv() {
@@ -233,9 +276,9 @@ session_start();
 		}
 
 		function newRankSelected() {
-			//alert("new rank");
 			let newRank = document.getElementById("rank").value;
 			document.getElementById("newpilotrank").src = "./images/ranks/" + formationFactionId + "/" + newRank;
+			oldRank = newRank;
 		}
 
 		function skillChanged() {
@@ -328,12 +371,15 @@ session_start();
 			let indexCounter = 0;
 			let spaCalculatedSum = 0;
 			let spaStringList = "";
+
 			for (var i = 0; i < pilotSpaArray.length; i++) {
 				spaElement = pilotSpaArray[i].trim();
-				spaCostElement = Number(spaElement.match(rx)[1]);
-				spaStringList = spaStringList + "<span onclick='javascript:removeSpa("+ indexCounter + ");'>" + spaElement + "&nbsp;<i class='fas fa-minus-square'></i></span>&nbsp;&nbsp;&nbsp;";
-				spaCalculatedSum = spaCalculatedSum + spaCostElement;
-				indexCounter++;
+				if (spaElement !== "") {
+					spaCostElement = Number(spaElement.match(rx)[1]);
+					spaStringList = spaStringList + "<span onclick='javascript:removeSpa("+ indexCounter + ");'>" + spaElement + "&nbsp;<i class='fas fa-minus-square'></i></span>&nbsp;&nbsp;&nbsp;";
+					spaCalculatedSum = spaCalculatedSum + spaCostElement;
+					indexCounter++;
+				}
 			}
 
 			document.getElementById("unitnameToEdit").innerHTML = unitClass + " " + unitVariant + " '" + unitName + "' - PV: " + unitPv + " (" + unitBasePv + ")";
@@ -443,7 +489,7 @@ session_start();
 			</tr>
 			<tr>
 				<td nowrap width='5%' class="datalabel" style='text-align:right;' colspan='1'>
-					Assign to:
+					Assigned to:
 				</td>
 				<td nowrap width='85%' class="datalabel" style='text-align:left;' colspan='5'>
 					<select required name='FORMATIONID' id='FORMATIONID' size='1' style='width:100%;' onchange='formationChanged();'>
@@ -479,6 +525,7 @@ session_start();
 
 			$ranksdir = './images/ranks/'.$formationfactionid;
 			$scanned_directory = array_diff(scandir($ranksdir, SCANDIR_SORT_ASCENDING), array('..', '.'));
+			$array_formationFactionRankOptions[$formationcount] = $array_formationFactionRankOptions[$formationcount]."<option disabled=\"\" selected=\"\" value=\"\">Select one...</option>";
 			foreach ($scanned_directory as $key => $value) {
 				if (str_starts_with($value, '')) {
 					$opt = "<option value='".$value."'>".substr($value,3,-4)."</option>\n";
@@ -586,6 +633,7 @@ session_start();
 				<td colspan="1" width='5%' class='datalabel' nowrap align="right">Rank:</td>
 				<td colspan="1" width='20%' class='datalabel'>
 					<select required name='rank' id='rank' onchange="newRankSelected();" size='1' style='width:100%;'>
+						<option disabled="" selected="" value="">Select one...</option>
 <?php
 	$directory = './images/ranks/'.$FACTIONID;
 	$scanned_directory = array_diff(scandir($directory, SCANDIR_SORT_ASCENDING), array('..', '.'));

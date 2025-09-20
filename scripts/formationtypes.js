@@ -6,7 +6,7 @@ function getFormationTypes(ft) {
 	var subNavigation = "";
 	var currentLetter = "#";
 
-	// console.log("Searching: " + ft);
+	console.log("Searching for: " + ft);
 
 	$.getJSON(cache_url, function (json) {
 		json.formationtypes.sort(function(a, b) {
@@ -24,8 +24,12 @@ function getFormationTypes(ft) {
 			if (formationtypeName) {
 				fullName = fullName + formationtypeName;
 			}
-			if (ft === fullName) {
+
+			//console.log("C: '" + ft + "' with '" + fullName + "'");
+
+			if (ft == fullName) {
 				match = formationtype;
+				//console.log("Found: " + match.NAME);
 			}
 		});
 	}).then(function data() {

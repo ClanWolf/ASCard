@@ -142,9 +142,9 @@ session_start();
 				}
 			});
 
-			let n1 = document.getElementById("NewFormationName").value.replace(/[^A-Za-z0-9 ]/g, '').replace(/  +/g, ' ');
-			let n2 = document.getElementById("NewFormationType").value.replace(/[^A-Za-z0-9 ]/g, '').replace(/  +/g, ' ');
-			let n3 = document.getElementById("NewFormation").value.replace(/[^A-Za-z0-9 ]/g, '').replace(/  +/g, ' ');
+			let n1 = document.getElementById("NewFormationName").value.replace(/[^A-Za-z0-9 -]/g, '').replace(/  +/g, ' ');
+			let n2 = document.getElementById("NewFormationType").value.replace(/[^A-Za-z0-9 -]/g, '').replace(/  +/g, ' ');
+			let n3 = document.getElementById("NewFormation").value.replace(/[^A-Za-z0-9 -]/g, '').replace(/  +/g, ' ');
 			let fa = document.getElementById("NewFormationFaction").value;
 
 			if (n2 !== "") {
@@ -406,16 +406,15 @@ session_start();
 				<td colspan="1" width='90%' class='datalabel' style="width:100%;">
 					<input autocomplete="autocomplete_off_hack_xfr4!k" required onkeyup="this.value = this.value.toUpperCase();changeResultingName();" onchange="changeResultingName();" type="text" id="NewFormationName" width="100%" style="width:100%;">
 				</td>
-				<td rowspan="4" nowrap valign="middle"><a href="javascript:showFormationTypeInfo(document.getElementById('NewFormationType').value);"><span id="showFormationInfoControl" style="visibility:hidden;">&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa-solid fa-circle-info"></i>&nbsp;&nbsp;</span></a></td>
 			</tr>
 			<tr>
-				<td colspan="1" width='5%' class='datalabel' nowrap align="right">Formation type:</td>
+				<td colspan="1" width='5%' class='datalabel' nowrap align="right"><span id="showFormationInfoControl" style="visibility:hidden;"><a href="javascript:showFormationTypeInfo(document.getElementById('NewFormationType').value);">&nbsp;&nbsp;<i class="fa-solid fa-circle-info"></i>&nbsp;&nbsp;&nbsp;&nbsp;</a></span>Formation type:</td>
 				<td colspan="1" width='90%' class='datalabel' style="width:100%;">
 					<select required name='NewFormationType' id='NewFormationType' onchange="changeResultingName();" size='1' style='width:100%;'>
 						<option value=""></option>
 						<option value="AEROSPACE SUPERIORITY">AEROSPACE SUPERIORITY</option>
 						<option value="AIR">AIR</option>
-						<option value="ANTI MECH">ANTI MECH</option>
+						<option value="ANTI-MECH">ANTI-MECH</option>
 						<option value="ASSAULT">ASSAULT</option>
 						<option value="FAST ASSAULT">FAST ASSAULT</option>
 						<option value="BATTLE" selected>BATTLE</option>
@@ -495,7 +494,7 @@ session_start();
 				<td width='10px'></td>
 			</tr>
 			<tr>
-				<td colspan="3" width='5%' class='datalabel' nowrap align="left"><hr></td>
+				<td colspan="2" width='5%' class='datalabel' nowrap align="left"><hr></td>
 			</tr>
 			<tr>
 				<td align="center" class='datalabel'>
@@ -506,22 +505,22 @@ session_start();
 				</td>
 			</tr>
 			<tr>
-				<td colspan="3" width='5%' class='datalabel' nowrap align="left"><hr></td>
+				<td colspan="2" width='5%' class='datalabel' nowrap align="left"><hr></td>
 			</tr>
 			<tr>
 				<td colspan="1" width='5%' class='datalabel' nowrap align="right" valign="top" style="vertical-align:top;">Resulting name:</td>
-				<td colspan="2" width='90%' class='datalabel' nowrap valign="top" style="width:100%;">
+				<td colspan="1" width='90%' class='datalabel' nowrap valign="top" style="width:100%;">
 					<span id="resultingName"><?php echo $FORMATIONNAME ?></span><br>
 				</td>
 			</tr>
 			<tr>
 				<td colspan="1" width='5%' class='datalabel' nowrap align="right" valign="top" style="vertical-align:top;">Short:</td>
-				<td colspan="2" width='90%' class='datalabel' nowrap valign="top" style="width:100%;">
+				<td colspan="1" width='90%' class='datalabel' nowrap valign="top" style="width:100%;">
 					<span id="resultingShort"><?php echo $FORMATIONSHORT ?></span>
 				</td>
 			</tr>
 			<tr>
-				<td colspan="3" class='datalabel' align="right">
+				<td colspan="2" class='datalabel' align="right">
 					<span style='font-size:16px;'>
 						<a href="#" onClick="save();"><i class="fa-solid fa-floppy-disk"></i></a>
 					</span>

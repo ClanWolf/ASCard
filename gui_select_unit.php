@@ -186,10 +186,29 @@ session_start();
 			return $text;
 		}
 		$text = $text." ";
-        $textb = mb_convert_encoding($text, 'UTF-8', mb_list_encodings());
-		$textc = html_entity_decode($textb, ENT_QUOTES | ENT_HTML5, 'UTF-8');
-		$text = mb_substr($textc,0,$chars,'ASCII');
+        $text = mb_convert_encoding($text, 'UTF-8', mb_list_encodings());
+		$text = html_entity_decode($text, ENT_QUOTES | ENT_HTML5, 'UTF-8');
+		$text = mb_substr($text, 0, $chars, 'ASCII');
 		$text = $text."...";
+
+		return $text;
+	}
+
+	function textShorten($text) {
+		if (strpos($text, " | ") !== false) {
+			$parts = explode(" | ", $text);
+			$text = $parts[1];
+		}
+
+		$text = $text." ";
+        $text = mb_convert_encoding($text, 'UTF-8', mb_list_encodings());
+		$text = html_entity_decode($text, ENT_QUOTES | ENT_HTML5, 'UTF-8');
+		$text = str_replace("Prime", "", $text);
+		$text = str_replace("(Squad5)", "(Sq3)", $text);
+		$text = str_replace("(Squad5)", "(Sq4)", $text);
+		$text = str_replace("(Squad5)", "(Sq5)", $text);
+		$text = str_replace("(Squad5)", "(Sq6)", $text);
+		$text = str_replace("(Squad5)", "(Sq7)", $text);
 
 		return $text;
 	}
@@ -280,7 +299,8 @@ session_start();
 	<!-- <div id="heightmeasure_right"></div> -->
 	<div id="cover"></div>
 
-	<script>
+	<script type="text/javascript" on-content-loaded="true">
+//		$(window).on("load", function() {
 		$(document).ready(function() {
 			$("#cover").hide();
 
@@ -295,6 +315,15 @@ session_start();
 			for(var i=0; i < scrollcontainerdivs.length; i++) {
 				scrollcontainerdivs[i].style.height = resultingHeight+"px";
 			}
+
+			let widthOfUnitCell = document.getElementById("selectWidthMeasure").getBoundingClientRect().width;
+			//console.info("Width of unit cell: " + widthOfUnitCell);
+
+			let cellArray = document.getElementsByName("unitCell");
+			for (var i = 0; i < cellArray.length; i++) {
+				cellArray[i].style.width = (widthOfUnitCell-30)+"px";
+			}
+			//console.log("Page ready.");
 		});
 		$(function() {
 			//$('.scroll-pane').jScrollPane({autoReinitialise: true});
@@ -745,22 +774,63 @@ if ($playMode) {
 				$unitDetailString = $unitDetailString."				<table width='100%' height='100%' cellspacing=0 cellpadding=0 border=0px>\n";
 				$unitDetailString = $unitDetailString."					<tr>\n";
 
+
+
+
+//				if ($activebid == "1") {
+//					$unitDetailString = $unitDetailString."						<td nowrap onclick='location.href=\"gui_play_unit.php?stv=1&formationid=".$formationidSelected."&chosenunit=".$c."\"' align='left' valign='bottom' style='color:#AAAAAA;background-color:".$bidcolor."text-align:left;overflow:hidden;white-space:nowrap;text-overflow:ellipsis'><span style='font-size:24px;'>\n";
+//				} else {
+//					$unitDetailString = $unitDetailString."						<td nowrap align='left' valign='bottom' style='color:#AAAAAA;background-color:".$bidcolor."text-align:left;overflow:hidden;white-space:nowrap;text-overflow:ellipsis'><span style='font-size:24px;'>\n";
+//				}
+//				$unitDetailString = $unitDetailString."						".textTruncate($unitchassisname, 10)."</span><span style='font-weight:normal;font-size:20px;color:#ffc677;'>&nbsp;&nbsp;PV&nbsp;".$unitpointvalue."</span> <span style='font-weight:normal;font-size:20px;color:#aaaaaa;'>(".$unittonnage."t)</span>\n";
+//				$unitDetailString = $unitDetailString."						<br>";
+//				if ($commander == 1) {
+//					$unitDetailString = $unitDetailString."						<div style='font-size:18px;top:0px;bottom:0px;left:0px;right:0px;'><img style='vertical-align:bottom;padding-top:3px' src='./images/command.png' width='16px' height='16px'>&nbsp;&nbsp;<img style='vertical-align:bottom;padding-top:3px' src='./images/ranks/".$factionidSelected."/".$pilotrank.".png' width='16px' height='16px'>&nbsp;&nbsp;".$pilotname."</div>\n";
+//				} else if ($subcommander == 1) {
+//					$unitDetailString = $unitDetailString."						<div style='font-size:18px;top:0px;bottom:0px;left:0px;right:0px;'><img style='vertical-align:bottom;padding-top:3px' src='./images/subcommand.png' width='16px' height='16px'>&nbsp;&nbsp;<img style='vertical-align:bottom;padding-top:3px' src='./images/ranks/".$factionidSelected."/".$pilotrank.".png' width='16px' height='16px'>&nbsp;&nbsp;".$pilotname."</div>\n";
+//				} else {
+//					$unitDetailString = $unitDetailString."						<div style='font-size:18px;top:0px;bottom:0px;left:0px;right:0px;'><img style='vertical-align:bottom;padding-top:3px' src='./images/ranks/".$factionidSelected."/".$pilotrank.".png' width='16px' height='16px'>&nbsp;&nbsp;".$pilotname."</div>\n";
+//				}
+//				$unitDetailString = $unitDetailString."						</td>\n";
+
+
+
+
+
 				if ($activebid == "1") {
-					$unitDetailString = $unitDetailString."						<td nowrap onclick='location.href=\"gui_play_unit.php?stv=1&formationid=".$formationidSelected."&chosenunit=".$c."\"' width='99%' align='left' valign='bottom' style='color:#AAAAAA;background-color:".$bidcolor."text-align:left;'><span style='font-size:24px;'>";
+					$unitDetailString = $unitDetailString."						<td nowrap onclick='location.href=\"gui_play_unit.php?stv=1&formationid=".$formationidSelected."&chosenunit=".$c."\"' align='left' valign='bottom' style='font-size:24px;color:#AAAAAA;background-color:".$bidcolor."text-align:left;overflow:hidden;white-space:nowrap;text-overflow:ellipsis'>\n";
+					$unitDetailString = $unitDetailString."						<table width='100%'><tr><td id='selectWidthMeasure' width='95%'><div name='unitCell' style='display:block;width:50px;height:25px;text-align:left;overflow:hidden;white-space:nowrap;text-overflow:ellipsis'>\n";
 				} else {
-					$unitDetailString = $unitDetailString."						<td nowrap width='99%' align='left' valign='bottom' style='color:#AAAAAA;background-color:".$bidcolor."text-align:left;overflow:hidden;white-space:nowrap;text-overflow:ellipsis'><span style='font-size:24px;'>";
+					$unitDetailString = $unitDetailString."						<td nowrap align='left' valign='bottom' style='font-size:24px;color:#AAAAAA;background-color:".$bidcolor."text-align:left;overflow:hidden;white-space:nowrap;text-overflow:ellipsis'>\n";
+					$unitDetailString = $unitDetailString."						<table width='100%'><tr><td id='selectWidthMeasure' width='95%'><div name='unitCell' style='display:block;width:50px;height:25px;text-align:left;overflow:hidden;white-space:nowrap;text-overflow:ellipsis'>\n";
 				}
-				//$unitDetailString = $unitDetailString."						".textTruncate($unitchassisname, 15)."</span><span style='font-weight:normal;font-size:20px;color:#ffc677;'> ".$unitpointvalue."/".$unittonnage."t</span>\n";
-				$unitDetailString = $unitDetailString."						".textTruncate($unitchassisname, 10)."</span><span style='font-weight:normal;font-size:20px;color:#ffc677;'>&nbsp;&nbsp;PV&nbsp;".$unitpointvalue."</span> <span style='font-weight:normal;font-size:20px;color:#aaaaaa;'>(".$unittonnage."t)</span>\n";
-				$unitDetailString = $unitDetailString."						<br>";
+				//$unitDetailString = $unitDetailString."						".textTruncate($unitchassisname, 10)."</span><span style='font-weight:normal;font-size:20px;color:#ffc677;'>&nbsp;&nbsp;PV&nbsp;".$unitpointvalue."</span> <span style='font-weight:normal;font-size:20px;color:#aaaaaa;'>(".$unittonnage."t)</span>\n";
+				$unitDetailString = $unitDetailString."						".textShorten($unitchassisname)."</div></td><td width='5%' align='right'><span style='font-weight:normal;font-size:20px;color:#ffc677;'>&nbsp;&nbsp;PV&nbsp;".$unitpointvalue."</span> <span style='font-weight:normal;font-size:20px;color:#aaaaaa;'>(".$unittonnage."t)</span></td>\n";
+				$unitDetailString = $unitDetailString."						</tr><tr><td colspan='2'>";
 				if ($commander == 1) {
-					$unitDetailString = $unitDetailString."						<div style='font-size:18px;top:0px;bottom:0px;left:0px;right:0px;'><img style='vertical-align:bottom;padding-top:3px' src='./images/command.png' width='16px' height='16px'>&nbsp;&nbsp;<img style='vertical-align:bottom;padding-top:3px' src='./images/ranks/".$factionidSelected."/".$pilotrank.".png' width='16px' height='16px'>&nbsp;&nbsp;".$pilotname."</div>\n";
+					$unitDetailString = $unitDetailString."						<div style='font-size:18px;top:0px;bottom:0px;left:0px;right:0px;'><img style='vertical-align:bottom;padding-top:3px' src='./images/ranks/".$factionidSelected."/".$pilotrank.".png' width='16px' height='16px'>&nbsp;&nbsp;".$pilotname."&nbsp;&nbsp;<img style='vertical-align:bottom;padding-top:3px' src='./images/command.png' width='16px' height='16px'></div>\n";
 				} else if ($subcommander == 1) {
-					$unitDetailString = $unitDetailString."						<div style='font-size:18px;top:0px;bottom:0px;left:0px;right:0px;'><img style='vertical-align:bottom;padding-top:3px' src='./images/subcommand.png' width='16px' height='16px'>&nbsp;&nbsp;<img style='vertical-align:bottom;padding-top:3px' src='./images/ranks/".$factionidSelected."/".$pilotrank.".png' width='16px' height='16px'>&nbsp;&nbsp;".$pilotname."</div>\n";
+					$unitDetailString = $unitDetailString."						<div style='font-size:18px;top:0px;bottom:0px;left:0px;right:0px;'><img style='vertical-align:bottom;padding-top:3px' src='./images/ranks/".$factionidSelected."/".$pilotrank.".png' width='16px' height='16px'>&nbsp;&nbsp;".$pilotname."&nbsp;&nbsp;<img style='vertical-align:bottom;padding-top:3px' src='./images/subcommand.png' width='16px' height='16px'></div>\n";
 				} else {
 					$unitDetailString = $unitDetailString."						<div style='font-size:18px;top:0px;bottom:0px;left:0px;right:0px;'><img style='vertical-align:bottom;padding-top:3px' src='./images/ranks/".$factionidSelected."/".$pilotrank.".png' width='16px' height='16px'>&nbsp;&nbsp;".$pilotname."</div>\n";
 				}
+				$unitDetailString = $unitDetailString."						</td></tr></table>\n";
 				$unitDetailString = $unitDetailString."						</td>\n";
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 				if ($playMode) {
 					if ($activenarc == "1") {
@@ -770,18 +840,18 @@ if ($playMode) {
 					}
 					if ($activebid == "1") {
 						$unitDetailString = $unitDetailString."							<span style='font-size:12px;'>\n";
-						$unitDetailString = $unitDetailString."								&nbsp;&nbsp;<img width='25px' src='".$unitRoundStatusImage."'>\n";
+						$unitDetailString = $unitDetailString."								&nbsp;&nbsp;&nbsp;&nbsp;<img width='25px' src='".$unitRoundStatusImage."'>\n";
 						$unitDetailString = $unitDetailString."							</span>\n";
 					} else {
 						$unitDetailString = $unitDetailString."							<span style='font-size:12px;'>\n";
-						$unitDetailString = $unitDetailString."								&nbsp;&nbsp;\n";
+						$unitDetailString = $unitDetailString."								&nbsp;&nbsp;&nbsp;&nbsp;\n";
 						$unitDetailString = $unitDetailString."							</span>\n";
 					}
 					$unitDetailString = $unitDetailString."						</td>\n";
 				} else {
 					$unitDetailString = $unitDetailString."						<td onclick='location.href=\"gui_select_unit.php?dm=1&unitid=".$assignedUnitID."&formationid=".$formationidSelected."&pilotid=".$assignedPilotID."\"' nowrap width='1%' valign='middle' style='background-color:".$bidcolor."text-align:right;'>\n";
 					$unitDetailString = $unitDetailString."							<span style='font-size:12px;'>\n";
-					$unitDetailString = $unitDetailString."								<i class='fas fa-minus-square'></i>\n";
+					$unitDetailString = $unitDetailString."								&nbsp;&nbsp;&nbsp;&nbsp;<i class='fas fa-minus-square'></i>\n";
 					$unitDetailString = $unitDetailString."							</span>\n";
 					$unitDetailString = $unitDetailString."						</td>\n";
 				}
