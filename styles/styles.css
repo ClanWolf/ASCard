@@ -858,7 +858,8 @@ a:hover {
 .unitselect_button_normal_play_left {
 	font-size: 100%;
 	padding: 3px;
-	background-color: #556b8f;
+	/* background-color: #556b8f; */
+	background-color:#222222; /* #44260e */
 	color: #ffffff;
 	text-align: left;
 }

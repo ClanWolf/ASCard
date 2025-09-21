@@ -58,6 +58,25 @@ session_start();
 		return $text;
 	}
 
+	function textShorten($text) {
+		if (strpos($text, " | ") !== false) {
+			$parts = explode(" | ", $text);
+			$text = $parts[1];
+		}
+
+		$text = $text." ";
+        $text = mb_convert_encoding($text, 'UTF-8', mb_list_encodings());
+		$text = html_entity_decode($text, ENT_QUOTES | ENT_HTML5, 'UTF-8');
+		$text = str_replace("Prime", "", $text);
+		$text = str_replace("(Squad5)", "(Sqd3)", $text);
+		$text = str_replace("(Squad5)", "(Sqd4)", $text);
+		$text = str_replace("(Squad5)", "(Sqd5)", $text);
+		$text = str_replace("(Squad5)", "(Sqd6)", $text);
+		$text = str_replace("(Squad5)", "(Sqd7)", $text);
+
+		return $text;
+	}
+
 	function getMULImageByName($unitname) {
 		$image = "images/units/Generic_Mech.gif";
 
@@ -188,7 +207,7 @@ session_start();
 		});
 		$(document).ready(function() {
 			let realhightofscrollbar = document.getElementById("scrollcontainer").offsetHeight;
-			console.log(realhightofscrollbar);
+			//console.log(realhightofscrollbar);
 			var scrollcontainerdivs = document.getElementsByClassName("scroll-pane");
 			for(var i=0; i < scrollcontainerdivs.length; i++) {
 				scrollcontainerdivs[i].style.height = realhightofscrollbar+"px";
@@ -555,7 +574,7 @@ session_start();
 		$width = ceil(100 / $maxNumberOfTabs);
 		if ($startIndex > 1) {
 			if ($unitOutLeft) {
-				echo "			<td nowrap style='background-color:#293647;animation: glow 1s infinite alternate;' onclick='javascript:updateFormationStartIndex(".$formationid.",".$startIndex.",\"down\");' style='width:100px;'>\n";
+				echo "			<td nowrap style='background-color:#293647;animation: glow 2s infinite alternate;' onclick='javascript:updateFormationStartIndex(".$formationid.",".$startIndex.",\"down\");' style='width:100px;'>\n";
 				echo "				<div style='vertical-align:middle;font-size:22px;color:#eee;'>&nbsp;&nbsp;&nbsp;&nbsp;<i class='fa-solid fa-circle-chevron-left'></i>&nbsp;&nbsp;&nbsp;&nbsp;<br><span style='font-size:14px;'>".($startIndex-1)."</span></div>\n";
 			} else {
 				echo "			<td nowrap style='background-color:#293647;' onclick='javascript:updateFormationStartIndex(".$formationid.",".$startIndex.",\"down\");' style='width:100px;'>\n";
@@ -618,8 +637,10 @@ session_start();
 			$phaseButton = "./images/top-right_phase00.png";
 		}
 
-		$memodel = $array_UNIT_MODEL[$i4];
-		$maxLength = 30;
+		//$memodel = $array_UNIT_MODEL[$i4];
+		$memodel = $array_UNIT_NAME_CLAN[$i4];
+
+		$maxLength = 100;
 		if (strlen($memodel) > $maxLength) {
 			$memodel = substr($memodel, 0, $maxLength - 3);
 			$memodel = $memodel . "...";
@@ -646,24 +667,19 @@ session_start();
 			$currentUnitFired = $wpnsfired;
 
 			if ($array_ACTIVE_BID[$i4] == "1") {
-				// echo "			<td width='".$width."%' nowrap><table width='100%' height='100%' cellspacing='0' cellpadding='0' class='unitselect_button_active_play_left' style='animation: glow 1s infinite alternate;'><tr><td nowrap width='30px' align='center' valign='center'><div style='display:inline-block;height:100%;vertical-align:middle;'><img id='unitstatusimagemenu' style='vertical-align:middle;' src='".$array_UNIT_IMG_STATUS[$i4]."' height='25px' width='23px'><br><span style='color:#ccffff;font-size:15px;'>&nbsp;&nbsp;".$mn."&nbsp;&nbsp;</span></div></td><td>&nbsp;</td><td nowrap><div><img src='./images/ranks/".$factionid."/".$array_PILOT_RANK[$i4].".png' width='18px' height='18px'>&nbsp;<span style='font-size:24px'>".$array_PILOT[$i4]."</span><br><span style='font-size:14px;'>".textTruncate($memodel, 18)."</span></div></td><td align='right' style='align:right;' width='100%'><img id='unitroundstatusimagemenu' src='".$unitstatusimage."' height='21px'><br><img src='images/chevron.png' height='21px;'></td><td>".$heatimage[$i4]."</td></tr></table></td>\r\n";
-				// <td valign='top'>".$heatimage[$i4]."</td>
 				//<img src='images/chevron.png' height='21px;'>
-				echo "			<td width='".$width."%' nowrap><table height='100%' cellspacing='0' cellpadding='0' class='unitselect_button_active_play_left' style='animation: glow 1s infinite alternate;'><tr><td nowrap width='30px' align='center' valign='center'><div style='display:inline-block;height:100%;vertical-align:middle;'><img id='unitstatusimagemenu' style='vertical-align:middle;' src='".$array_UNIT_IMG_STATUS[$i4]."' height='25px' width='23px'><br><span style='color:#ccffff;font-size:18px;'>&nbsp;&nbsp;".$mn."&nbsp;&nbsp;</span></div></td><td>&nbsp;</td><td nowrap><div><span style='font-size:24px'>".textTruncate($memodel, 9)."</span><br><span style='font-size:18px;'>".$array_PILOT[$i4]."</span></div></td><td align='left' valign='middle' style='align:left;' width='100%'>&nbsp;&nbsp;<img id='unitroundstatusimagemenu' src='".$unitstatusimage."' height='24px'></td></tr></table></td>\r\n";
+				echo "			<td width='".$width."%' nowrap><table height='100%' cellspacing='0' cellpadding='0' class='unitselect_button_active_play_left' style='animation: glow 2s infinite alternate;'><tr><td nowrap width='30px' align='center' valign='center'><div style='display:inline-block;height:100%;vertical-align:middle;'><img id='unitstatusimagemenu' style='vertical-align:middle;' src='".$array_UNIT_IMG_STATUS[$i4]."' height='25px' width='23px'><br><span style='color:#ccffff;font-size:18px;'>&nbsp;&nbsp;".$mn."&nbsp;&nbsp;</span></div></td><td>&nbsp;</td><td width='90%' nowrap><table width='100%'><tr><td id='selectWidthMeasure'><div name='unitCell' style='display:block;font-size:26px;width:50px;height:28px;text-align:left;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;'>".textShorten($memodel)."   </div>        </td></tr><tr><td style='font-size:18px;'>".$array_PILOT[$i4]."</td></tr></table>     </td><td width='5%' align='right' valign='middle' style='align:left;' width='100%'>&nbsp;&nbsp;<img id='unitroundstatusimagemenu' src='".$unitstatusimage."' height='24px'></td></tr></table></td>\r\n";
 				echo "			<td style='width:5px;'>&nbsp;</td>\r\n";
 				$atLeastOneValidUnitInFormation = $atLeastOneValidUnitInFormation + 1;
 				$ccount++;
 			}
 		} else {
 			if ($array_ACTIVE_BID[$i4] == "1") {
-				// echo "			<td width='".$width."%' nowrap onclick=\"location.href='".$meli."'\"><table width='100%' height='100%' cellspacing='0' cellpadding='0' class='unitselect_button_normal_play_left'><tr><td nowrap width='30px' align='center' valign='center'><div style='display:inline-block;height:100%;vertical-align:middle;'><img style='vertical-align:middle;' src='".$array_UNIT_IMG_STATUS[$i4]."' height='25px' width='23px'><br><span style='color:#ccffff;font-size:15px;'>&nbsp;&nbsp;".$mn."&nbsp;&nbsp;</span></div></td><td>&nbsp;</td><td nowrap width='100%'><div><img src='./images/ranks/".$factionid."/".$array_PILOT_RANK[$i4].".png' width='18px' height='18px'>&nbsp;<a style='font-size:24px' href='".$meli."'>".$array_PILOT[$i4]."</a><br><span style='font-size:14px;'>".textTruncate($memodel, 18)."</span></div></td><td align='right' style='align:right;' width='100%'><img id='unitroundstatusimagemenuinactiveunit' src='".$unitstatusimage."' height='21px'></td><td>".$heatimage[$i4]."</td></tr></table></td>\r\n";
-				// <td valign='top'>".$heatimage[$i4]."</td>
-				echo "			<td width='".$width."%' nowrap onclick=\"location.href='".$meli."'\"><table height='100%' cellspacing='0' cellpadding='0' class='unitselect_button_normal_play_left'><tr><td nowrap width='30px' align='center' valign='center'><div style='display:inline-block;height:100%;vertical-align:middle;'><img style='vertical-align:middle;' src='".$array_UNIT_IMG_STATUS[$i4]."' height='25px' width='23px'><br><span style='color:#ccffff;font-size:18px;'>&nbsp;&nbsp;".$mn."&nbsp;&nbsp;</span></div></td><td>&nbsp;</td><td nowrap><div><a style='font-size:24px' href='".$meli."'>".textTruncate($memodel, 9)."</a><br><span style='font-size:18px;'>".$array_PILOT[$i4]."</span></div></td><td align='left' valign='middle' style='align:left;' width='100%'>&nbsp;&nbsp;<img id='unitroundstatusimagemenuinactiveunit' src='".$unitstatusimage."' height='24px'></td></tr></table></td>\r\n";
+				echo "			<td width='".$width."%' nowrap onclick=\"location.href='".$meli."'\"><table height='100%' cellspacing='0' cellpadding='0' class='unitselect_button_normal_play_left'><tr><td nowrap width='30px' align='center' valign='center'><div style='display:inline-block;height:100%;vertical-align:middle;'><img style='vertical-align:middle;' src='".$array_UNIT_IMG_STATUS[$i4]."' height='25px' width='23px'><br><span style='color:#ccffff;font-size:18px;'>&nbsp;&nbsp;".$mn."&nbsp;&nbsp;</span></div></td><td>&nbsp;</td><td width='90%' nowrap><table width='100%'><tr><td id='selectWidthMeasure'><div name='unitCell' style='display:block;font-size:26px;width:50px;height:28px;text-align:left;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;'>".textShorten($memodel)."   </div>        </td></tr><tr><td style='font-size:18px;'>".$array_PILOT[$i4]."</td></tr></table>     <td width='5%' align='right' valign='middle' style='align:left;' width='100%'>&nbsp;&nbsp;<img id='unitroundstatusimagemenuinactiveunit' src='".$unitstatusimage."' height='24px'></td></tr></table></td>\r\n";
 				echo "			<td style='width:5px;'>&nbsp;</td>\r\n";
 				$atLeastOneValidUnitInFormation = $atLeastOneValidUnitInFormation + 1;
 				$ccount++;
 			} else {
-				//echo "			<td style='display:none;visibility:hidden;' width='".$width."%' nowrap onclick=\"location.href='".$meli."'\"><table width='100%' cellspacing='0' cellpadding='0' class='unitselect_button_normal_play_left'><tr><td nowrap width='30px' align='center' valign='center'><div style='display:inline-block;height:100%;vertical-align:middle;'><img style='vertical-align:middle;' src='".$array_UNIT_IMG_STATUS[$i4]."' height='25px' width='23px'><br><span style='color:#ccffff;font-size:15px;'>&nbsp;&nbsp;".$mn."&nbsp;&nbsp;</span></div></td><td>&nbsp;</td><td nowrap width='100%'><div><img src='./images/ranks/".$factionid."/".$array_PILOT_RANK[$i4].".png' width='18px' height='18px'>&nbsp;<a style='font-size:24px' href='".$meli."'>".$array_PILOT[$i4]."</a>&nbsp;&nbsp;<img src='".$unitstatusimage."' height='21px'>".$heatimage[$i4]."<br><span style='font-size:14px;'>".textTruncate($memodel, 18)."</span></div></td></tr></table></td>\r\n";
 				echo "			<td style='display:none;visibility:hidden;' width='".$width."%' nowrap>&nbsp;</td>\r\n";
 			}
 		}
@@ -675,7 +691,7 @@ session_start();
 
 	if ($showRightArrow) {
 		if ($unitOutRight) {
-			echo "			<td nowrap style='background-color:#293647;animation: glow 1s infinite alternate;' onclick='javascript:updateFormationStartIndex(".$formationid.",".$startIndex.",\"up\");' style='width:100px;'>\n";
+			echo "			<td nowrap style='background-color:#293647;animation: glow 2s infinite alternate;' onclick='javascript:updateFormationStartIndex(".$formationid.",".$startIndex.",\"up\");' style='width:100px;'>\n";
 			echo "				<div style='vertical-align:middle;font-size:22px;color:#eee;'>&nbsp;&nbsp;&nbsp;&nbsp;<i class='fa-solid fa-circle-chevron-right'></i>&nbsp;&nbsp;&nbsp;&nbsp;<br><span style='font-size:14px;'>".($size - $maxNumberOfTabs - ($startIndex - 1))."</span></div>\n";
 		} else {
 			echo "			<td nowrap style='background-color:#293647;' onclick='javascript:updateFormationStartIndex(".$formationid.",".$startIndex.",\"up\");' style='width:100px;'>\n";
@@ -712,22 +728,22 @@ session_start();
 	<table style="margin: 0 auto;" align="center" width="90%" cellspacing=2 cellpadding=2 border=0px>
 		<tr>
 <?php
-	echo "						<td colspan='3' nowrap style='height:30px;text-align:center;padding:0px;' class='formationselect_button_normal'>\n";
-	echo "							<table width='100%' align='center' cellspacing='0' cellpadding='0' border='0'>\n";
-	echo "								<td colspan='1' nowrap style='width:60px;height:30px;text-align:left;' onclick='location.href=\"\"' class='formationselect_button_normal'>\n";
-	echo "									<a href=''>&nbsp;&nbsp;&nbsp;<i class='fa-solid fa-arrow-left'></i></a>\n";
-	echo "								</td>\n";
-	echo "									<td colspan='1' nowrap style='height:30px;text-align:center;' class='formationselect_button_normal'>\n";
-	echo "									<a href='#'>".$COMMANDNAME."</a>\n";
-	echo "								</td>\n";
-	echo "								<td colspan='1' nowrap style='width:60px;height:30px;text-align:right;' onclick='location.href=\"\"' class='formationselect_button_normal'>\n";
-	echo "									<a href=''><i class='fa-solid fa-arrow-right'></i>&nbsp;&nbsp;&nbsp;</a>\n";
-	echo "								</td>\n";
-	echo "							</table>\n";
-	echo "						</td>\n";
-	echo "						<td width='1%' nowrap onclick='location.href=\"save_game_finalizeround.php?pid=".$pid."\"' id='FinalizeRoundButton' style='text-align:center;background:rgba(81,125,37,1.0);' rowspan='3'><div style='color:#eee;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class='fas fa-redo'></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div></td>\n";
-	echo "						</tr>\n";
-	echo "						<tr>\n";
+	echo "			<td colspan='3' nowrap style='height:30px;text-align:center;padding:0px;' class='formationselect_button_normal'>\n";
+	echo "				<table width='100%' align='center' cellspacing='0' cellpadding='0' border='0'>\n";
+	echo "					<td colspan='1' nowrap style='width:60px;height:30px;text-align:left;' onclick='location.href=\"\"' class='formationselect_button_normal'>\n";
+	echo "						<a href=''>&nbsp;&nbsp;&nbsp;<i class='fa-solid fa-arrow-left'></i></a>\n";
+	echo "					</td>\n";
+	echo "						<td colspan='1' nowrap style='height:30px;text-align:center;' class='formationselect_button_normal'>\n";
+	echo "						<a href='#'>".$COMMANDNAME."</a>\n";
+	echo "					</td>\n";
+	echo "					<td colspan='1' nowrap style='width:60px;height:30px;text-align:right;' onclick='location.href=\"\"' class='formationselect_button_normal'>\n";
+	echo "						<a href=''><i class='fa-solid fa-arrow-right'></i>&nbsp;&nbsp;&nbsp;</a>\n";
+	echo "					</td>\n";
+	echo "				</table>\n";
+	echo "			</td>\n";
+	echo "			<td width='1%' nowrap onclick='location.href=\"save_game_finalizeround.php?pid=".$pid."\"' id='FinalizeRoundButton' style='text-align:center;background:rgba(81,125,37,1.0);' rowspan='3'><div style='color:#eee;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class='fas fa-redo'></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div></td>\n";
+	echo "		</tr>\n";
+	echo "		<tr>\n";
 
 	for ($cc = 0; $cc < sizeof($array_PLAYER_FORMATION_IDS); $cc++) {
 		$currFormId = $array_PLAYER_FORMATION_IDS[$cc];
@@ -793,38 +809,20 @@ session_start();
 					echo "		<tr>\n";
 				}
 				if ($array_UNIT_DBID[$chosenUnitIndex] == $item['unitid']) {
-					echo "			<td onclick='location.href=\"gui_play_unit.php?stv=1&formationid=".$array_PLAYER_FORMATION_IDS[$cc]."&fod=175&chosenunit=".$count."\"' align='center' valign='top' style='background-color:#293647;padding:4px;border:2px solid #555;animation: glow 1s infinite alternate;'>\n";
-//					echo "				<img src='./images/chevron.png' width='32px'>\n";
-//					if ($item['status'] != "destroyed") {
-//						echo "				<br><img style='border:4px solid #111;margin-bottom:15px;' id='pilotimageoverview' src='./".$item['pilot_image']."' width='40px'>\n";
-//					} else {
-//						echo "				<br><img style='border:0px solid #111;margin-bottom:15px;' id='pilotimageoverview' src='./images/skull.png' width='40px'>\n";
-//					}
-//					echo "				<br>".$sizeString."<br>\n";
-//					echo "				<br>\n";
-					echo "				<img id='unitstatusimageoverview' src='https://www.ascard.net/app/".$item["status_image"]."' width='32px'><br>\n";
-					echo "				<span style='display:inline-block;width:40px;align:center;'><img id='overviewcurrentunitstatus' style='display:block;margin-left:auto;margin-right:auto;height:auto;' src='".$currentPhaseButton."' width='24px'></span>\n";
-					//echo "				<br><div style='transform:rotate(90deg);width:60px;text-align:right;'>".$item['unit_number']."</div>\n";
-					echo "				<br><span style='font-size:15px'>".$item['unit_number']."</span>\n";
-					echo "			</td>\n";
+					echo "						<td onclick='location.href=\"gui_play_unit.php?stv=1&formationid=".$array_PLAYER_FORMATION_IDS[$cc]."&fod=175&chosenunit=".$count."\"' align='center' valign='top' style='background-color:#293647;padding:4px;border:2px solid #555;animation: glow 2s infinite alternate;'>\n";
+					echo "							<img id='unitstatusimageoverview' src='https://www.ascard.net/app/".$item["status_image"]."' width='32px'><br>\n";
+					echo "							<span style='display:inline-block;width:40px;align:center;'><img id='overviewcurrentunitstatus' style='display:block;margin-left:auto;margin-right:auto;height:auto;' src='".$currentPhaseButton."' width='24px'></span>\n";
+					echo "							<br><span style='font-size:15px'>".$item['unit_number']."</span>\n";
+					echo "						</td>\n";
 				} else {
-					echo "			<td onclick='location.href=\"gui_play_unit.php?stv=1&formationid=".$array_PLAYER_FORMATION_IDS[$cc]."&fod=175&chosenunit=".$count."\"' align='center' valign='top' style='background-color:#333333;padding:4px;border:2px solid #555;'>\n";
-//					echo "				<img src='./images/chevron_empty.png' width='32px'>\n";
-//					if ($item['status'] != "destroyed") {
-//						echo "				<br><img style='border:4px solid #111;margin-bottom:15px;' src='./".$item['pilot_image']."' width='40px'>\n";
-//					} else {
-//						echo "				<br><img style='border:0px solid #111;margin-bottom:15px;' src='./images/skull.png' width='40px'>\n";
-//					}
-//					echo "				<br>".$sizeString."<br>\n";
-//					echo "				<br>\n";
-					echo "				<img src='https://www.ascard.net/app/".$item["status_image"]."' width='32px'><br>\n";
-					echo "				<span style='display:inline-block;width:40px;align:center;'><img style='display:block;margin-left:auto;margin-right:auto;height:auto;' src='".$imagestatuslnk."' width='24px'></span>\n";
-					//echo "				<br><div style='transform:rotate(90deg);width:60px;text-align:right;'>".$item['unit_number']."</div>\n";
-					echo "				<br><span style='font-size:15px'>".$item['unit_number']."</span>\n";
-					echo "			</td>\n";
+					echo "						<td onclick='location.href=\"gui_play_unit.php?stv=1&formationid=".$array_PLAYER_FORMATION_IDS[$cc]."&fod=175&chosenunit=".$count."\"' align='center' valign='top' style='background-color:#333333;padding:4px;border:2px solid #555;'>\n";
+					echo "							<img src='https://www.ascard.net/app/".$item["status_image"]."' width='32px'><br>\n";
+					echo "							<span style='display:inline-block;width:40px;align:center;'><img style='display:block;margin-left:auto;margin-right:auto;height:auto;' src='".$imagestatuslnk."' width='24px'></span>\n";
+					echo "							<br><span style='font-size:15px'>".$item['unit_number']."</span>\n";
+					echo "						</td>\n";
 				}
 			}
-			echo " <td>&nbsp;</td>\n";
+			echo "						<td>&nbsp;</td>\n";
 			$count++;
 		}
 
@@ -1510,7 +1508,8 @@ if ($showDistancesHexes == 1) {
 				<td id='pilotinfo' align="right" valign="bottom">
 					<span style="font-size: 18px; color: #eeeeee;"><?php echo "$FORMATION"; ?></span><br>
 					<span style="font-size: 30px; color: #da8e25;"><?php echo "$array_PILOT[$chosenUnitIndex]"; ?></span><br>
-					<span style="font-size: 20px; color: #aaaaaa;"><?php echo "$array_UNIT_MODEL[$chosenUnitIndex]" ?></span><br><br>
+					<span style="font-size: 20px; color: #aaaaaa;"><?php echo "$array_UNIT_CLASS[$chosenUnitIndex]" ?></span><br>
+					<span style="font-size: 20px; color: #aaaaaa;"><?php echo "$array_UNIT_VARIANT[$chosenUnitIndex]" ?>&nbsp;(<?php echo "$array_TON[$chosenUnitIndex]" ?>t&nbsp;<?php echo "$array_TP[$chosenUnitIndex]" ?>)</span><br><br>
 
 					<span style="font-size: 20px; color: #aaaaaa;">Clan: <?php echo "$array_UNIT_NAME_CLAN[$chosenUnitIndex]" ?></span><br>
 					<span style="font-size: 20px; color: #aaaaaa;">IS: <?php echo "$array_UNIT_NAME_IS[$chosenUnitIndex]" ?></span><br><br>
@@ -1677,6 +1676,14 @@ if ($showDistancesHexes == 1) {
 			} else {
 				document.getElementById('cover').style.visibility = 'hidden';
 			}
+
+			let widthOfUnitCell = document.getElementById("selectWidthMeasure").getBoundingClientRect().width;
+			//console.info("Width of unit cell: " + widthOfUnitCell);
+			let cellArray = document.getElementsByName("unitCell");
+			for (var i = 0; i < cellArray.length; i++) {
+				cellArray[i].style.width = (widthOfUnitCell-30)+"px";
+			}
+			//console.log("Page ready.");
 		}
 	});
 </script>

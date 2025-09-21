@@ -410,10 +410,16 @@
 							$array_UNIT_NUMBER[$unitcount] = $row["unit_number"];
 							$array_UNIT_NAME[$unitcount] = $row["unit_name"];
 							$array_UNIT_CLASS[$unitcount] = $row["unit_class"];
+							$array_UNIT_MODEL[$unitcount] = $row["as_model"];
 							$array_UNIT_VARIANT[$unitcount] = $row["unit_variant"];
 
-							if ($row["tech"] == "2") {
-								if (str_contains($array_UNIT_CLASS[$unitcount], '(') && str_contains($array_UNIT_CLASS[$unitcount], ')')) {
+							// ----------- Get Clan or IS name for the unit
+							if (($row["tech"] == "2") && ($row["as_tp"] == "BM")) {
+								if (        str_contains($array_UNIT_CLASS[$unitcount], '(')
+										&&  str_contains($array_UNIT_CLASS[$unitcount], ')')
+										&& !str_contains($array_UNIT_CLASS[$unitcount], '(Standard)')
+										&& !str_contains($array_UNIT_CLASS[$unitcount], '(Omni)')
+								) {
 									preg_match('#\((.*?)\)#', $array_UNIT_CLASS[$unitcount], $match);
 									$array_UNIT_NAME_CLAN[$unitcount] = $match[1];
 									$array_UNIT_NAME_IS[$unitcount] = preg_replace("/\([^)]+\)/", "", $array_UNIT_CLASS[$unitcount]);
@@ -426,18 +432,18 @@
 								$array_UNIT_NAME_IS[$unitcount] = $array_UNIT_CLASS[$unitcount];
 							}
 
-							// ----------- Get Clan or IS name for the unit
-							$array_UNIT_MULNAME[$unitcount] = $clan.$row["as_model"];
-							if ($_SESSION['factiontype'] == "CLAN") {
-								preg_match('#\((.*?)\)#', $array_UNIT_CLASS[$unitcount], $match);
-								if (array_key_exists(1, $match) && $match[1] != "") {
-									$array_UNIT_MODEL[$unitcount] = $clan.$match[1]." ".$array_UNIT_VARIANT[$unitcount];
-								} else {
-									$array_UNIT_MODEL[$unitcount] = $clan.$array_UNIT_CLASS[$unitcount]." ".$array_UNIT_VARIANT[$unitcount];
-								}
-							} else {
-								$array_UNIT_MODEL[$unitcount] = preg_replace("/\([^)]+\)/", "", $array_UNIT_CLASS[$unitcount])." ".$array_UNIT_VARIANT[$unitcount];
-							}
+//							// ----------- Get Clan or IS name for the unit
+//							$array_UNIT_MULNAME[$unitcount] = $clan.$row["as_model"];
+//							if ($_SESSION['factiontype'] == "CLAN") {
+//								preg_match('#\((.*?)\)#', $array_UNIT_CLASS[$unitcount], $match);
+//								if (array_key_exists(1, $match) && $match[1] != "") {
+//									$array_UNIT_MODEL[$unitcount] = $clan.$match[1]." ".$array_UNIT_VARIANT[$unitcount];
+//								} else {
+//									$array_UNIT_MODEL[$unitcount] = $clan.$array_UNIT_CLASS[$unitcount]." ".$array_UNIT_VARIANT[$unitcount];
+//								}
+//							} else {
+//								$array_UNIT_MODEL[$unitcount] = preg_replace("/\([^)]+\)/", "", $array_UNIT_CLASS[$unitcount])." ".$array_UNIT_VARIANT[$unitcount];
+//							}
 
 							$array_UNIT_IMG_URL[$unitcount] = $row["unit_imageurl"];
 							$array_TECH[$unitcount] = $row["tech"];

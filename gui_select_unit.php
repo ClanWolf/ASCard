@@ -204,11 +204,11 @@ session_start();
         $text = mb_convert_encoding($text, 'UTF-8', mb_list_encodings());
 		$text = html_entity_decode($text, ENT_QUOTES | ENT_HTML5, 'UTF-8');
 		$text = str_replace("Prime", "", $text);
-		$text = str_replace("(Squad5)", "(Sq3)", $text);
-		$text = str_replace("(Squad5)", "(Sq4)", $text);
-		$text = str_replace("(Squad5)", "(Sq5)", $text);
-		$text = str_replace("(Squad5)", "(Sq6)", $text);
-		$text = str_replace("(Squad5)", "(Sq7)", $text);
+		$text = str_replace("(Squad5)", "(Sqd3)", $text);
+		$text = str_replace("(Squad5)", "(Sqd4)", $text);
+		$text = str_replace("(Squad5)", "(Sqd5)", $text);
+		$text = str_replace("(Squad5)", "(Sqd6)", $text);
+		$text = str_replace("(Squad5)", "(Sqd7)", $text);
 
 		return $text;
 	}
@@ -316,13 +316,12 @@ session_start();
 				scrollcontainerdivs[i].style.height = resultingHeight+"px";
 			}
 
-			let widthOfUnitCell = document.getElementById("selectWidthMeasure").getBoundingClientRect().width;
-			//console.info("Width of unit cell: " + widthOfUnitCell);
-
-			let cellArray = document.getElementsByName("unitCell");
-			for (var i = 0; i < cellArray.length; i++) {
-				cellArray[i].style.width = (widthOfUnitCell-30)+"px";
-			}
+//			let widthOfUnitCell = document.getElementById("selectWidthMeasure").getBoundingClientRect().width;
+//			//console.info("Width of unit cell: " + widthOfUnitCell);
+//			let cellArray = document.getElementsByName("unitCell");
+//			for (var i = 0; i < cellArray.length; i++) {
+//				cellArray[i].style.width = (widthOfUnitCell-30)+"px";
+//			}
 			//console.log("Page ready.");
 		});
 		$(function() {
@@ -643,14 +642,27 @@ if ($playMode) {
 						// ----------- Get Clan or IS name for the unit
 						//$unitchassisname = $clan.$rowUnit['as_model'];
 						if ($_SESSION['factiontype'] == "CLAN") {
-							preg_match('#\((.*?)\)#', $unitclass, $match);
-							if (array_key_exists(1, $match) && $match[1] != "") {
-								$unitchassisname = $clan.$match[1]." ".$unitvariant;
+							if ($rowUnit["tech"] == "2" && $unittype == "BM") {
+								if (        str_contains($unitclass, '(')
+										&&  str_contains($unitclass, ')')
+										&& !str_contains($unitclass, '(Standard)')
+										&& !str_contains($unitclass, '(Omni)')
+								) {
+									preg_match('#\((.*?)\)#', $unitclass, $match);
+									if (array_key_exists(1, $match) && $match[1] != "") {
+										$unitchassisname = $clan.$match[1]." ".$unitvariant;
+									} else {
+										$unitchassisname = $clan.$unitclass." ".$unitvariant;
+									}
+								} else {
+									$unitchassisname = $clan.$rowUnit['as_model'];
+								}
 							} else {
-								$unitchassisname = $clan.$unitclass." ".$unitvariant;
+								$unitchassisname = $clan.$rowUnit['as_model'];
 							}
 						} else {
-							$unitchassisname = (preg_replace("/\([^)]+\)/", "", $unitclass))." ".$unitvariant;
+							$unitchassisname = $clan.$rowUnit['as_model'];
+							//$unitchassisname = (preg_replace("/\([^)]+\)/", "", $unitclass))." ".$unitvariant;
 						}
 
 						$commander = $rowUnit['commander'];
@@ -766,16 +778,15 @@ if ($playMode) {
 				}
 
 				if ($activebid == "1") {
-					$unitDetailString = $unitDetailString."			<td nowrap onclick='location.href=\"gui_play_unit.php?stv=1&formationid=".$formationidSelected."&chosenunit=".$c."\"' style='background-color:".$bidcolor."' class='unitselect_button_active' align='right' valign='center'><div style='display:inline-block;height:100%;vertical-align:middle;'><img style='vertical-align:middle;' src='".$unitstatusimage."' height='24px'><br><span style='font-size:14px;'>".$numStr."</span></div></td>\n";
+					$unitDetailString = $unitDetailString."			<td nowrap onclick='location.href=\"gui_play_unit.php?stv=1&formationid=".$formationidSelected."&chosenunit=".$c."\"' style='background-color:".$bidcolor."' class='unitselect_button_active' align='right' valign='center'><div style='display:inline-block;height:100%;vertical-align:middle;'><img style='vertical-align:middle;' src='".$unitstatusimage."' height='24px'><br><span style='font-size:18px;'>".$numStr."</span></div></td>\n";
 				} else {
-					$unitDetailString = $unitDetailString."			<td nowrap style='background-color:".$bidcolor."' class='unitselect_button_active' align='right' valign='center'><div style='display:inline-block;height:100%;vertical-align:middle;'><img style='vertical-align:middle;' src='".$unitstatusimage."' height='24px'><br><span style='font-size:14px;'>".$numStr."</span></div></td>\n";
+					$unitDetailString = $unitDetailString."			<td nowrap style='background-color:".$bidcolor."' class='unitselect_button_active' align='right' valign='center'><div style='display:inline-block;height:100%;vertical-align:middle;'><img style='vertical-align:middle;' src='".$unitstatusimage."' height='24px'><br><span style='font-size:18px;'>".$numStr."</span></div></td>\n";
 				}
 				$unitDetailString = $unitDetailString."			<td nowrap style='width:100%;background-color:".$bidcolor."' class='unitselect_button_active'>\n";
 				$unitDetailString = $unitDetailString."				<table width='100%' height='100%' cellspacing=0 cellpadding=0 border=0px>\n";
 				$unitDetailString = $unitDetailString."					<tr>\n";
 
-
-
+				// -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 //				if ($activebid == "1") {
 //					$unitDetailString = $unitDetailString."						<td nowrap onclick='location.href=\"gui_play_unit.php?stv=1&formationid=".$formationidSelected."&chosenunit=".$c."\"' align='left' valign='bottom' style='color:#AAAAAA;background-color:".$bidcolor."text-align:left;overflow:hidden;white-space:nowrap;text-overflow:ellipsis'><span style='font-size:24px;'>\n";
@@ -793,16 +804,12 @@ if ($playMode) {
 //				}
 //				$unitDetailString = $unitDetailString."						</td>\n";
 
-
-
-
-
 				if ($activebid == "1") {
-					$unitDetailString = $unitDetailString."						<td nowrap onclick='location.href=\"gui_play_unit.php?stv=1&formationid=".$formationidSelected."&chosenunit=".$c."\"' align='left' valign='bottom' style='font-size:24px;color:#AAAAAA;background-color:".$bidcolor."text-align:left;overflow:hidden;white-space:nowrap;text-overflow:ellipsis'>\n";
-					$unitDetailString = $unitDetailString."						<table width='100%'><tr><td id='selectWidthMeasure' width='95%'><div name='unitCell' style='display:block;width:50px;height:25px;text-align:left;overflow:hidden;white-space:nowrap;text-overflow:ellipsis'>\n";
+					$unitDetailString = $unitDetailString."						<td nowrap onclick='location.href=\"gui_play_unit.php?stv=1&formationid=".$formationidSelected."&chosenunit=".$c."\"' align='left' valign='bottom' style='color:#AAAAAA;background-color:".$bidcolor."text-align:left;overflow:hidden;white-space:nowrap;text-overflow:ellipsis'>\n";
+					$unitDetailString = $unitDetailString."						<table width='100%'><tr><td id='selectWidthMeasure' width='95%'><div name='unitCell' style='display:block;font-size:22px;width:50px;height:24px;text-align:left;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;'>\n";
 				} else {
-					$unitDetailString = $unitDetailString."						<td nowrap align='left' valign='bottom' style='font-size:24px;color:#AAAAAA;background-color:".$bidcolor."text-align:left;overflow:hidden;white-space:nowrap;text-overflow:ellipsis'>\n";
-					$unitDetailString = $unitDetailString."						<table width='100%'><tr><td id='selectWidthMeasure' width='95%'><div name='unitCell' style='display:block;width:50px;height:25px;text-align:left;overflow:hidden;white-space:nowrap;text-overflow:ellipsis'>\n";
+					$unitDetailString = $unitDetailString."						<td nowrap align='left' valign='bottom' style='color:#AAAAAA;background-color:".$bidcolor."text-align:left;overflow:hidden;white-space:nowrap;text-overflow:ellipsis'>\n";
+					$unitDetailString = $unitDetailString."						<table width='100%'><tr><td id='selectWidthMeasure' width='95%'><div name='unitCell' style='display:block;font-size:22px;width:50px;height:24px;text-align:left;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;'>\n";
 				}
 				//$unitDetailString = $unitDetailString."						".textTruncate($unitchassisname, 10)."</span><span style='font-weight:normal;font-size:20px;color:#ffc677;'>&nbsp;&nbsp;PV&nbsp;".$unitpointvalue."</span> <span style='font-weight:normal;font-size:20px;color:#aaaaaa;'>(".$unittonnage."t)</span>\n";
 				$unitDetailString = $unitDetailString."						".textShorten($unitchassisname)."</div></td><td width='5%' align='right'><span style='font-weight:normal;font-size:20px;color:#ffc677;'>&nbsp;&nbsp;PV&nbsp;".$unitpointvalue."</span> <span style='font-weight:normal;font-size:20px;color:#aaaaaa;'>(".$unittonnage."t)</span></td>\n";
@@ -817,20 +824,7 @@ if ($playMode) {
 				$unitDetailString = $unitDetailString."						</td></tr></table>\n";
 				$unitDetailString = $unitDetailString."						</td>\n";
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+				// -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 				if ($playMode) {
 					if ($activenarc == "1") {
@@ -956,6 +950,21 @@ if ($playMode) {
 		echo "<p align='center' class='footerInfo'>Check your bid. Disable playmode to unassign units.</p>\n";
 	}
 ?>
+
+<script>
+	document.addEventListener('readystatechange', event => {
+		if (event.target.readyState === "complete") {
+			let widthOfUnitCell = document.getElementById("selectWidthMeasure").getBoundingClientRect().width;
+			//console.info("Width of unit cell: " + widthOfUnitCell);
+			let cellArray = document.getElementsByName("unitCell");
+			for (var i = 0; i < cellArray.length; i++) {
+				cellArray[i].style.width = (widthOfUnitCell-30)+"px";
+			}
+			//console.log("Page ready.");
+		}
+	});
+</script>
+
 </body>
 
 </html>
