@@ -1,5 +1,7 @@
 /.idea/
 /fontawesome/
 /cache/mul/unitdetails
+/install/data/**
+/db_backup/**
 config.php
 createPW.php

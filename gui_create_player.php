@@ -86,6 +86,15 @@ session_start();
 					echo "Error: " . $sqlinsertoptions . "<br>" . mysqli_error($conn);
 				}
 
+				// Update commandid in player table
+				$sqlupdatecommandforplayer = "UPDATE asc_player SET commandid=".$newcommandid." WHERE playerid=".$newplayerid.";";
+				if (mysqli_query($conn, $sqlupdatecommandforplayer)) {
+					// Success updating player (adding commandid)
+				} else {
+					// Error
+					echo "Error: " . $sqlupdatecommandforplayer . "<br>" . mysqli_error($conn);
+				}
+
 				echo "<meta http-equiv='refresh' content='0;url=./gui_create_player.php'>";
 			} else {
 				// Error

@@ -858,7 +858,7 @@ session_start();
 	<br>
 	<span style="font-size: 30px; color: #da8e25;"><?php echo "$array_PILOT[$chosenUnitIndex]"; ?></span>
 	<br>
-	<span style="font-size: 20px; color: #aaaaaa;"><?php echo "$array_UNIT_MODEL[$chosenUnitIndex]" ?></span>
+	<span style="font-size: 20px; color: #aaaaaa;"><?php echo $array_UNIT_CLASS[$chosenUnitIndex]." ".$array_UNIT_VARIANT[$chosenUnitIndex]; ?></span>
 </div>
 
 <div id="topright_showbutton" onclick='javascript:showTopStatusInfo2();'>
@@ -1136,71 +1136,74 @@ if ($showDistancesHexes == 1) {
 
 					<div class="dataarea_content">
 						<table width="100%">
-							<tr>
-								<td nowrap width="90%" class="datavalue_thin" style="text-align: left;" colspan="2">
-									<table>
-										<tr>
-											<td nowrap width="99%" class="datavalue_thin" style="text-align: left;" id="sa_field" colspan="2">
-												<?php
-													$allSpecialAbilities = "";
-													$parts = explode(',', $array_SPCL[$chosenUnitIndex]);
-													if (sizeof($parts) >= 1) {
-														$i = 1;
-														foreach ($parts as $part) {
+							<tr style="line-height: 24px;">
+								<td class="datavalue_thin" style="text-align:left;margin-top:5px;" id="sa_field">
+									<?php
+										$allSpecialAbilities = "";
+										$parts = explode(',', $array_SPCL[$chosenUnitIndex]);
+										if (sizeof($parts) >= 1) {
+											$i = 1;
+											foreach ($parts as $part) {
 
-															// These special abilities are special, because they have "-" or "("
-															// in the name so that the regular expression down there does not
-															// catch them correctly. Remove this if the re is fixed
-															$saParameter = "";
-															if (substr($part, 0, 3) === "ART") {
-																$saParameter = "ART";
-															} else if (substr($part, 0, 3) === "BIM") {
-																$saParameter = "BIM";
-															} else if (substr($part, 0, 3) === "LAM") {
-																$saParameter = "LAM";
-															} else if (substr($part, 0, 5) === "I-TSM") {
-																$saParameter = "I-TSM";
-															} else if (substr($part, 0, 5) === "SDS-C") {
-																$saParameter = "SDS-C";
-															} else if (substr($part, 0, 6) === "SDS-CM") {
-																$saParameter = "SDS-CM";
-															} else if (substr($part, 0, 6) === "SDS-SC") {
-																$saParameter = "SDS-SC";
-															} else {
-																// This re removed all "#" and "/" from the names
-																// also all "-" and "(", ")" should be removed to match
-																// them in the javascript to display the ability
-																$re = '/^[A-Z][A-Z3][A-Z]*/m';
-																preg_match($re, $part, $matches);
-																$saParameter = $matches[0];
-															}
+												// These special abilities are special, because they have "-" or "("
+												// in the name so that the regular expression down there does not
+												// catch them correctly. Remove this if the re is fixed
+												$saParameter = "";
+												if (substr($part, 0, 3) === "ART") {
+													$saParameter = "ART";
+												} else if (substr($part, 0, 3) === "BIM") {
+													$saParameter = "BIM";
+												} else if (substr($part, 0, 3) === "LAM") {
+													$saParameter = "LAM";
+												} else if (substr($part, 0, 5) === "I-TSM") {
+													$saParameter = "I-TSM";
+												} else if (substr($part, 0, 5) === "SDS-C") {
+													$saParameter = "SDS-C";
+												} else if (substr($part, 0, 6) === "SDS-CM") {
+													$saParameter = "SDS-CM";
+												} else if (substr($part, 0, 6) === "SDS-SC") {
+													$saParameter = "SDS-SC";
+												} else {
+													// This re removed all "#" and "/" from the names
+													// also all "-" and "(", ")" should be removed to match
+													// them in the javascript to display the ability
+													$re = '/^[A-Z][A-Z3][A-Z]*/m';
+													preg_match($re, $part, $matches);
+													$saParameter = $matches[0];
+												}
 
-															if ($i > 1) {
-																echo ", ";
-															}
+												//if ($i > 1) {
+												//	echo ", ";
+												//}
 
-															if ($saParameter != null) {
-																$pos = strpos($allSpecialAbilities, $saParameter);
-																if ($pos !== false) {
-																	// String is already in the list
-																} else {
-																	if ($i > 1) {
-																		$allSpecialAbilities = $allSpecialAbilities."|";
-																	}
-																	$allSpecialAbilities = $allSpecialAbilities.$saParameter;
-																}
-																if ($i == 8) {
-																	echo "<br>";
-																}
-																echo "<span class='datavalue_thin' onclick='javascript:showSpecialAbility(\"".$saParameter."\");'>".$part."</span>";
-																$i++;
-															}
+												if ($saParameter != null) {
+													$pos = strpos($allSpecialAbilities, $saParameter);
+													if ($pos !== false) {
+														// String is already in the list
+													} else {
+														if ($i > 1) {
+															$allSpecialAbilities = $allSpecialAbilities."|";
 														}
+														$allSpecialAbilities = $allSpecialAbilities.$saParameter;
 													}
-												?>
-											</td>
-										</tr>
-									</table>
+													//if ($i == 8) {
+													//	echo "<br><br>\n";
+													//}
+													//echo "<span class='datavalue_thin' onclick='javascript:showSpecialAbility(\"".$saParameter."\");'>".$part."</span>\n";
+													echo "<span class='unitSpecialAbility' onclick='javascript:showSpecialAbility(\"".$saParameter."\");'>".$part."</span>\n";
+
+													$i++;
+												}
+											}
+										}
+										echo "<span class='pilotSpecialAbility' onclick=''>TestPilotAbility</span>\n";
+										echo "<span class='pilotSpecialAbility' onclick=''>TestPilotAbility</span>\n";
+										echo "<span class='pilotSpecialAbility' onclick=''>TestPilotAbility</span>\n";
+										echo "<span class='pilotSpecialAbility' onclick=''>TestPilotAbility</span>\n";
+										echo "<span class='pilotSpecialAbility' onclick=''>TestPilotAbility</span>\n";
+										echo "<span class='pilotSpecialAbility' onclick=''>TestPilotAbility</span>\n";
+										echo "<span class='pilotSpecialAbility' onclick=''>TestPilotAbility</span>\n";
+									?>
 								</td>
 							</tr>
 						</table>
@@ -1231,7 +1234,7 @@ if ($showDistancesHexes == 1) {
 			</td>
 			<td width="40%" valign="bottom" align="left">
 				<div id="movementtoken" width="100%" valign="top" align="left">
-					<img valign="top" id="movementtokenimage" src="./images/dice/yd6_4.png" height="100px">
+					<img valign="top" id="movementtokenimage" src="./images/dice/yd6_4.png" height="80px">
 				</div>
 				<div class="dataarea">
 					<table width="100%" cellpadding="0" cellspacing="0">

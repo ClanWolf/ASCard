@@ -47,11 +47,10 @@ session_start();
 	<meta name="apple-mobile-web-app-title" content="ASCard">
 	<meta name="viewport" content="width=device-width, initial-scale=0.75, minimum-scale=0.75, maximum-scale=1.85, user-scalable=yes" />
 
-	<meta http-equiv="refresh" content="5" />
-
 	<link rel="manifest" href="/app/ascard.webmanifest">
 	<link rel="stylesheet" type="text/css" href="./fontawesome/css/all.min.css" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="./styles/styles.css">
+	<link rel="stylesheet" type="text/css" href="./styles/editorstyles.css">
 	<link rel="icon" type="image/png" href="/app/favicon-96x96.png" sizes="96x96" />
 	<link rel="icon" type="image/svg+xml" href="/app/favicon.svg" />
 	<link rel="shortcut icon" href="/app/favicon.ico" />
@@ -158,11 +157,79 @@ session_start();
 
 	<br>
 
-	<table align="center" cellspacing=2 cellpadding=2 border=0px>
+	<form autocomplete="autocomplete_off_hack_xfr4!k">
+		<table width="60%" class="options" cellspacing="2" cellpadding="2" border=0px>
+			<tr>
+				<td colspan="1" width='5%' class='datalabel' nowrap align="right">Player name:</td>
+				<td colspan="1" width='90%' class='datalabel' style="width:100%;">
+					<input autocomplete="autocomplete_off_hack_xfr4!k" required onchange="changeResultingName();" type="text" id="NewFormationName" width="100%" style="width:100%;">
+				</td>
+				<td rowspan="4" width='10%' class='datalabel'>
+					<img width="120px" align="right" valign="top" src="./images/player/Meldric.png">
+				</td>
+			</tr>
+			<tr>
+				<td colspan="1" width='5%' class='datalabel' nowrap align="right">Email:</td>
+				<td colspan="1" width='90%' class='datalabel' style="width:100%;">
+					<input autocomplete="autocomplete_off_hack_xfr4!k" required onchange="changeResultingName();" type="text" id="NewFormationName" width="100%" style="width:100%;">
+				</td>
+			</tr>
+			<tr>
+				<td colspan="1" width='5%' class='datalabel' nowrap align="right">New password:</td>
+				<td colspan="1" width='90%' class='datalabel' style="width:100%;">
+					<input autocomplete="autocomplete_off_hack_xfr4!k" required onchange="changeResultingName();" type="text" id="NewFormationName" width="100%" style="width:100%;">
+				</td>
+			</tr>
+			<tr>
+				<td colspan="1" width='5%' class='datalabel' nowrap align="right">Password confirm:</td>
+				<td colspan="1" width='90%' class='datalabel' style="width:100%;">
+					<input autocomplete="autocomplete_off_hack_xfr4!k" required onchange="changeResultingName();" type="text" id="NewFormationName" width="100%" style="width:100%;">
+				</td>
+			</tr>
+			<tr>
+				<td colspan="3" width='5%' class='datalabel' nowrap align="left"><hr></td>
+			</tr>
 
-EDIT PLAYER
+			<tr>
+				<td colspan="1" width='5%' class='datalabel' nowrap align="right">Image:</td>
+				<td colspan="1" width='100%' class='datalabel'>
+					<select required name='femalePilotImage' id='femalePilotImage' onchange="femaleImageSelected();" size='1' style='width:100%;'>
+						<option value='0'></option>
+<?php
+	$directory = './images/player';
+	$scanned_directory = array_diff(scandir($directory, SCANDIR_SORT_ASCENDING), array('..', '.'));
+	$count = 0;
+	foreach ($scanned_directory as $key => $value) {
+		echo "						<option value='".$value."'>".$value."</option>\n";
+		if ($count > 3) {
+			$count = 0;
+		} else {
+			$count++;
+		}
+	}
+?>
+					</select>
+				</td>
+				<td colspan="1" align="center"><i class="fa-solid fa-cloud-arrow-up"></i></td>
 
-	</table>
+
+				<!-- https://www.w3schools.com/php/php_file_upload.asp -->
+
+
+			</tr>
+			<tr>
+				<td colspan="3" width='5%' class='datalabel' nowrap align="left"><hr></td>
+			</tr>
+
+			<tr>
+				<td colspan="3" class='datalabel' align="right">
+					<span style='font-size:16px;'>
+						<a href="#" onClick="save();"><i class="fa-solid fa-floppy-disk"></i></a>
+					</span>
+				</td>
+			</tr>
+		</table>
+	</form>
 </body>
 
 </html>

@@ -8,7 +8,7 @@ var fontsizeLabelthinFactor = 0.7;
 var fontsizeLabelthinSmallFactor = 0.7;
 var fontsizeValueFactor = 1.10;
 var fontsizeValueThinFactor = 0.7;
-var fontsizeCircleFactor = 0.6;
+var fontsizeCircleFactor = 0.9;
 
 var fontsizeLabelBig = fontsizeLabel * fontsizeLabelBigFactor;
 var fontsizeLabelthin = fontsizeLabel * fontsizeLabelthinFactor;

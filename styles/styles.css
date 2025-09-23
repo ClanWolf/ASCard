@@ -208,6 +208,30 @@ a:hover {
 	background-color: rgba(10, 10, 10, 0.90);
 	z-index:1100;
 }
+.unitSpecialAbility {
+  border-radius: 5px;
+  color: #222;
+  background-color: #abe772;
+  padding-left: 4px;
+  padding-right: 4px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  margin-left: 0px;
+  margin-right: 2px;
+  font-size: 16px;
+}
+.pilotSpecialAbility {
+  border-radius: 5px;
+  color: #222;
+  background-color: #73c4e9;
+  padding-left: 4px;
+  padding-right: 4px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  margin-left: 0px;
+  margin-right: 2px;
+  font-size: 16px;
+}
 #formationtypescontainer, #spaInfoContainer, #maleSelectorDiv, #femaleSelectorDiv, #specialabilitiescontainer {
 	text-align: center;
 	position: fixed;
