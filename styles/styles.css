@@ -279,14 +279,15 @@ a:hover {
 	left: -150px;
 	padding-top: 15px;
 	padding-bottom: 15px;
-	border-top: 5px solid #000000;
-	border-bottom: 5px solid #000000;
+	border-top: 0px solid rgba(0, 0, 0, 0.30);
+	border-bottom: 0px solid rgba(0, 0, 0, 0.30);
 	text-align: center;
-	color:#ff0000;
+	color: rgba(255, 0, 0, 0.30);
 	font-size: 36px;
 	pointer-events:none;
 	transform: rotateY(0deg) rotate(-45deg);
-	background-image: repeating-linear-gradient(315deg, #222 0%, #222 15%, #ffa72c 15%, #ffa72c 30%, #222 30%);
+	/* background-image: repeating-linear-gradient(315deg, #222 0%, #222 15%, #ffa72c 15%, #ffa72c 30%, #222 30%); */
+	background-image: repeating-linear-gradient(315deg, rgba(34, 34, 34, 0.30) 0%, rgba(34, 34, 34, 0.30) 15%, rgba(255, 147, 44, 0.30) 15%, rgba(255, 147, 44, 0.30) 30%, rgba(34, 34, 34, 0.30) 30%);
 	z-index:2;
 }
 #destroyedIndicator {
@@ -399,8 +400,16 @@ a:hover {
 	z-index: 3;
 	position: absolute;
 	padding: 20px;
-	top: 52px;
-	left: 140px;
+	top: 72px;
+	left: 150px;
+	border-radius: 5px;
+	background-color: rgba(34,34,34,0.75);
+	padding-left: 10px;
+	padding-right: 10px;
+	padding-top: 6px;
+	padding-bottom: 6px;
+	margin-left: 5px;
+	margin-right: 5px;
 }
 #unitname {
 	position: absolute;
@@ -778,7 +787,7 @@ a:hover {
 	font-size: 12px;
 	font-weight: normal;
 	bottom: 3px;
-	right: 300px;
+	right: 280px;
 }
 #settings {
 	font-family: FontAwesome;

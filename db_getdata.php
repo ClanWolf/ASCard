@@ -22,6 +22,7 @@
 	$array_PILOT = array();
 	$array_PILOT_RANK = array();
 	$array_PILOT_IMG_URL = array();
+	$array_PILOT_SPA = array();
 
 	$array_PLAYER_FORMATION_IDS = array();
 	$array_PLAYER_FORMATION_FACTIONIDS = array();
@@ -432,8 +433,9 @@
 								$array_UNIT_NAME_IS[$unitcount] = $array_UNIT_CLASS[$unitcount];
 							}
 
+							$array_UNIT_MULNAME[$unitcount] = $clan.$row["as_model"];
+
 //							// ----------- Get Clan or IS name for the unit
-//							$array_UNIT_MULNAME[$unitcount] = $clan.$row["as_model"];
 //							if ($_SESSION['factiontype'] == "CLAN") {
 //								preg_match('#\((.*?)\)#', $array_UNIT_CLASS[$unitcount], $match);
 //								if (array_key_exists(1, $match) && $match[1] != "") {
@@ -544,6 +546,7 @@
 							$array_PILOT_RANK[$unitcount] = $row["rank"];
 							$array_PILOT[$unitcount] = $row["name"];
 							$array_PILOT_IMG_URL[$unitcount] = $row["pilot_imageurl"];
+							$array_PILOT_SPA[$unitcount] = $row["SPA"];
 						}
 					}
 				}

@@ -82,7 +82,7 @@ session_start();
 
 		$arr = explode('t | ', $unitname);
 		$unitname = $arr[1];
-		// echo "<script>console.log('SEARCHING: >>".$unitname."<<');</script>";
+		//echo "<script>console.log('SEARCHING: >>".$unitname."<<');</script>";
 
 		$dir = 'images/units_mul/';
 		$startChar = mb_substr($unitname, 0, 3); // use first 3 chars to list files to keep the result list as small as possible
@@ -93,12 +93,12 @@ session_start();
 
 		$files = glob($dir."{$startChar}*.png");
 		foreach ($files as &$img) {
-			// echo "<script>console.log('>>" . trim($img) . "<<');</script>";
+			//echo "<script>console.log('>>" . trim($img) . "<<');</script>";
 
 			$imagenametrimmed_a = basename(strtolower(str_replace(' ', '', trim($img))), ".png");
 			$imagenametrimmed = str_replace("'", "", $imagenametrimmed_a);
 
-			// echo "<script>console.log('UNITNAME: >>" . $unitname . "<<');</script>";
+			//echo "<script>console.log('UNITNAME: >>" . $unitname . "<<');</script>";
 
 			$unitnametrimmed_a = str_replace('ELE ', 'Elemental ', trim($unitname));
 			$unitnametrimmed_b = str_replace('BA ', 'Battle Armor ', trim($unitnametrimmed_a));
@@ -111,10 +111,10 @@ session_start();
 			$unitnametrimmed_i = str_replace('Veh.', 'Vehicle', trim($unitnametrimmed_h));
 			$unitnametrimmed = strtolower($unitnametrimmed_i);
 
-			// echo "<script>console.log('SEARCHING: >>" . $imagenametrimmed . " ? " . $unitnametrimmed . "<<');</script>";
+			//echo "<script>console.log('SEARCHING: >>" . $imagenametrimmed . " ? " . $unitnametrimmed . "<<');</script>";
 
 			if (strpos($imagenametrimmed,$unitnametrimmed) !== false) {
-				// echo "<script>console.log('FOUND: >>" . $imagenametrimmed . " ? " . $unitnametrimmed . "<<');</script>";
+				//echo "<script>console.log('FOUND: >>" . $imagenametrimmed . " ? " . $unitnametrimmed . "<<');</script>";
 				$image = str_replace(' ', '%20', trim($img));
 				break;
 			}
@@ -183,6 +183,7 @@ session_start();
 	<script type="text/javascript" src="./scripts/functions_BM.js"></script>
 	<script type="text/javascript" src="./scripts/functions_CV.js"></script>
 	<script type="text/javascript" src="./scripts/specialunitabilities.js"></script>
+	<script type="text/javascript" src="./scripts/spa.js"></script>
 
 	<style>
 		.scroll-pane {
@@ -224,6 +225,18 @@ session_start();
 			// If fadeIn is used here, css animation does not work anymore
 			playTCCloseSound();
 			document.getElementById("specialabilitiescontainer").style.visibility = "hidden";
+		}
+		function showSpaInfo(spa) {
+			if (spa !== "") {
+				playTapSound();
+				document.getElementById("spaInfoContainer").style.visibility = "visible";
+				showSpa(spa);
+			}
+		}
+		function closeSpaInfo() {
+			// If fadeIn is used here, css animation does not work anymore
+			playTCCloseSound();
+			document.getElementById("spaInfoContainer").style.visibility = "hidden";
 		}
 		function showGameMenu() {
 			if (document.getElementById("gamemenu").style.visibility == "visible") {
@@ -479,6 +492,64 @@ session_start();
 			</td>
 			<td width="10%" align="right" valign="top" class="datalabel">&nbsp;</td>
 			<!-- <td width="10%" align="left" valign="top"><a href="javascript:closeSpecialAbilities();">&nbsp;&nbsp;&nbsp;<i class="fa-solid fa-xmark" style="font-size:3em;"></i></a></td> -->
+		</tr>
+	</table>
+</div>
+
+<div id="spaInfoContainer" style="visibility:hidden;" onclick="javascript:closeSpaInfo();">
+	<div class="hudcenteranimation">
+		<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 1000 1000" style="enable-background:new 0 0 1000 1000;" xml:space="preserve">
+			<circle class="st0" cx="500" cy="500" r="302.8">
+				<animateTransform attributeType="xml" attributeName="transform" type="rotate" from="0 500 500" to="360 500 500" dur="100s" repeatCount="indefinite"></animateTransform>
+			</circle>
+			<circle class="st1" cx="500" cy="500" r="237.7">
+				<animateTransform attributeType="xml" attributeName="transform" type="rotate" from="0 500 500" to="360 500 500" dur="40s" repeatCount="indefinite"></animateTransform>
+			</circle>
+			<circle class="st2" cx="500" cy="500" r="366.8">
+				<animateTransform attributeType="xml" attributeName="transform" type="rotate" from="0 500 500" to="-360 500 500" dur="50s" repeatCount="indefinite"></animateTransform>
+			</circle>
+			<circle class="st3" cx="500" cy="500" r="395.1"></circle>
+		</svg>
+	</div>
+
+	<br>
+
+	<table width="100%" height="70%">
+		<tr>
+			<td width="10%" align="right" valign="top" class="datalabel">&nbsp;</td>
+			<td width="80%">
+				<table class="options" width="100%" style="height:100%;" cellspacing=4 cellpadding=8 border=0px>
+					<tr>
+						<td class="datalabel" id="utspa_name" align="left" width="90%" style="font-size:1.2em;">...</td><td nowrap class="datalabel" id="utspa_variation" align="right" width="10%" style="font-size:1.2em;">...</td>
+					</tr>
+					<tr>
+						<td class="datavalue_thinflow" style="font-size:0.75em;" colspan="2" align="left">
+							<span id="utspa_source">...</span>, <span id="utspa_page">...</span>
+						</td>
+					</tr>
+					<tr>
+						<td nowrap class="datavalue_thinflow" colspan="2" id="utspa_type">...</td>
+					</tr>
+					<tr>
+						<td class="datavalue_thin" colspan="2"><hr></td>
+					</tr>
+					<tr id="scrollcont">
+						<td height="100%" colspan="2" align="left" valign="top" id="scrollcontainer">
+							<div class='scroll-pane' id="spaInfo" width="100%" style="width:100%;">
+								<table width="100%"><tr><td class="datavalue_thinflow" id="utspa_desc">...</td></tr></table>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td class="datavalue_thin" colspan="2"><hr></td>
+					</tr>
+					<tr>
+						<td nowrap class="datavalue_thin" colspan="2" align="center"><a href="javascript:closeSpaInfo();">CLOSE</a></td>
+					</tr>
+				</table>
+			</td>
+			<td width="10%" align="right" valign="top" class="datalabel">&nbsp;</td>
+			<!-- <td width="10%" align="left" valign="top"><a href="javascript:closeSpaInfo();">&nbsp;&nbsp;&nbsp;<i class="fa-solid fa-xmark" style="font-size:3em;"></i></a></td> -->
 		</tr>
 	</table>
 </div>
@@ -844,13 +915,17 @@ session_start();
 		echo "		<div id='roundsyncmessage'>ROUNDS ARE OUT OF SYNC!</div>\n";
 	}
 
+	$tempUnitImageURL = $array_UNIT_IMG_URL[$chosenUnitIndex];
+	$tempUnitImageURLMUL = getMULImageByName($array_UNIT_MULNAME[$chosenUnitIndex]);
+
+	echo "<script>var unitImageURL='".$tempUnitImageURL."';</script>\n";
+	echo "<script>var unitImageURLMUL='".$tempUnitImageURLMUL."';</script>\n";
+
 	if ($useMULImages == 0) {
-		echo "<div id='unit'><img id='unitimage' src='" . $array_UNIT_IMG_URL[$chosenUnitIndex] . "'></div>\n";
+		echo "<div id='unit'><img id='unitimage' src='".$tempUnitImageURL."'></div>\n";
 	} else if ($useMULImages == 1) {
-		echo "<div id='unit'><img id='unitimage' src='" . getMULImageByName($array_UNIT_MULNAME[$chosenUnitIndex]) . "'></div>\n";
+		echo "<div id='unit'><img id='unitimage' src='".$tempUnitImageURLMUL."'></div>\n";
 	}
-	echo "<script>var unitImageURL='".$array_UNIT_IMG_URL[$chosenUnitIndex]."';</script>\n";
-	echo "<script>var unitImageURLMUL='".getMULImageByName($array_UNIT_MULNAME[$chosenUnitIndex])."';</script>\n";
 ?>
 
 <div id="topleft">
@@ -1196,13 +1271,16 @@ if ($showDistancesHexes == 1) {
 												}
 											}
 										}
-										echo "<span class='pilotSpecialAbility' onclick=''>TestPilotAbility</span>\n";
-										echo "<span class='pilotSpecialAbility' onclick=''>TestPilotAbility</span>\n";
-										echo "<span class='pilotSpecialAbility' onclick=''>TestPilotAbility</span>\n";
-										echo "<span class='pilotSpecialAbility' onclick=''>TestPilotAbility</span>\n";
-										echo "<span class='pilotSpecialAbility' onclick=''>TestPilotAbility</span>\n";
-										echo "<span class='pilotSpecialAbility' onclick=''>TestPilotAbility</span>\n";
-										echo "<span class='pilotSpecialAbility' onclick=''>TestPilotAbility</span>\n";
+
+										$spaParts = explode(',', $array_PILOT_SPA[$chosenUnitIndex]);
+										if (count($spaParts) >= 1) {
+											foreach ($spaParts as $spaPart) {
+												if ($spaPart !== "") {
+													$spaPart = preg_replace("/\[[^)]+\]/","",$spaPart); // Remove costs: "[2]" from String to save space in gui
+													echo "<span class='pilotSpecialAbility' onclick='javascript:showSpaInfo(\"".trim($spaPart)."\");'>".trim($spaPart)."</span>\n";
+												}
+											}
+										}
 									?>
 								</td>
 							</tr>
@@ -1653,11 +1731,11 @@ if ($showDistancesHexes == 1) {
 <div id="bottomleft"><img src="./images/bottom-left.png" width="200px"></div>
 
 <div align="center" id="settings">
-	<a href="./gui_show_support.php"><i class="fa-solid fa-handshake-simple"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	<a href="javascript:showUnit()"><i class="fas fa-eye"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	<a href="./gui_show_support.php"><i class="fa-solid fa-handshake-simple"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	<a href="javascript:showUnit()"><i class="fas fa-eye"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;
 	<!-- <a href="#" onclick="javascript:window.location.reload(true)"><i class="fas fa-redo"></i></a>&nbsp;&nbsp; -->
 	<a href="javascript:textSize(0)"><i class="fas fa-minus-square"></i></a>&nbsp;&nbsp;
-	<a href="javascript:textSize(1)"><i class="fas fa-plus-square"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	<a href="javascript:textSize(1)"><i class="fas fa-plus-square"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;
 	<a href="javascript:changeWallpaper()"><i class="fas fa-image"></i></a>&nbsp;&nbsp;
 	<a href="./gui_edit_option.php"><i class="fas fa-cog"></i></a>
 </div>

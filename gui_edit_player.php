@@ -157,6 +157,37 @@ session_start();
 
 	<br>
 
+	<script>
+		function getFile() {
+			document.getElementById("fileToUpload").click();
+		}
+
+		function sub(obj) {
+			var file = obj.value;
+			var fileName = file.split("\\");
+			document.getElementById("yourBtn").innerHTML = fileName[fileName.length - 1];
+			document.uploadPlayerImage.submit();
+			event.preventDefault();
+		}
+	</script>
+
+	<form action="gui_upload_image.php" method="post" enctype="multipart/form-data" name="uploadPlayerImage">
+		<div style='height: 0px;width: 0px; overflow:hidden;'>
+			<input id="fileToUpload" name="fileToUpload" type="file" value="upload" onchange="sub(this)" />
+		</div>
+
+		<table width="60%" class="options" cellspacing="2" cellpadding="2" border="0px">
+			<tr>
+				<td class='datalabel' nowrap align="left" width="80%">Upload image (square, max 200x200px):</td>
+				<td class='datalabel' nowrap align="right" width="20%">
+					<div id="yourBtn" onclick="getFile();"><i style="color: #dcdcdc;" class='fa-solid fa-cloud-arrow-up'></i></div>
+				</td>
+			</tr>
+		</table>
+	</form>
+
+	<br>
+
 	<form autocomplete="autocomplete_off_hack_xfr4!k">
 		<table width="60%" class="options" cellspacing="2" cellpadding="2" border=0px>
 			<tr>
@@ -187,12 +218,8 @@ session_start();
 				</td>
 			</tr>
 			<tr>
-				<td colspan="3" width='5%' class='datalabel' nowrap align="left"><hr></td>
-			</tr>
-
-			<tr>
 				<td colspan="1" width='5%' class='datalabel' nowrap align="right">Image:</td>
-				<td colspan="1" width='100%' class='datalabel'>
+				<td colspan="2" width='100%' class='datalabel'>
 					<select required name='femalePilotImage' id='femalePilotImage' onchange="femaleImageSelected();" size='1' style='width:100%;'>
 						<option value='0'></option>
 <?php
@@ -210,17 +237,10 @@ session_start();
 ?>
 					</select>
 				</td>
-				<td colspan="1" align="center"><i class="fa-solid fa-cloud-arrow-up"></i></td>
-
-
-				<!-- https://www.w3schools.com/php/php_file_upload.asp -->
-
-
 			</tr>
 			<tr>
 				<td colspan="3" width='5%' class='datalabel' nowrap align="left"><hr></td>
 			</tr>
-
 			<tr>
 				<td colspan="3" class='datalabel' align="right">
 					<span style='font-size:16px;'>

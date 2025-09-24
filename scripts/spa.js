@@ -32,15 +32,15 @@ function getSpecialPilotAbilities(spa) {
 			//	"SOURCE": "Alpha Strike Commanders Edition 7th",
 			//	"PAGE": "92"
 
-			document.getElementById("ut_desc").innerHTML = match.BRIEF_DESCRIPTION + "<br><br>" + match.RULE;
-			document.getElementById("ut_name").innerHTML = match.NAME;
-			document.getElementById("ut_variation").innerHTML = match.SPACOST;
-			document.getElementById("ut_type").innerHTML = match.UNITTYPE;
-			if (document.getElementById("ut_source") != null) {
-				document.getElementById("ut_source").innerHTML = match.SOURCE;
+			document.getElementById("utspa_desc").innerHTML = match.BRIEF_DESCRIPTION + "<br><br>" + match.RULE;
+			document.getElementById("utspa_name").innerHTML = match.NAME;
+			document.getElementById("utspa_variation").innerHTML = match.SPACOST;
+			document.getElementById("utspa_type").innerHTML = match.UNITTYPE;
+			if (document.getElementById("utspa_source") != null) {
+				document.getElementById("utspa_source").innerHTML = match.SOURCE;
 			}
-			if (document.getElementById("ut_page") != null) {
-				document.getElementById("ut_page").innerHTML = "P. " + match.PAGE;
+			if (document.getElementById("utspa_page") != null) {
+				document.getElementById("utspa_page").innerHTML = "P. " + match.PAGE;
 			}
 //			var scrollcontainerdivs = document.getElementsByClassName("scroll-pane");
 //			for(var i=0; i < scrollcontainerdivs.length; i++) {
@@ -55,15 +55,15 @@ function getSpecialPilotAbilities(spa) {
 			$('.scroll-pane').jScrollPane();
 		} else {
 			var errortext = "NO DATA FOUND";
-			document.getElementById("ut_desc").innerHTML = errortext;
-			document.getElementById("ut_name").innerHTML = errortext;
-			document.getElementById("ut_variation").innerHTML = errortext;
-			document.getElementById("ut_type").innerHTML = errortext;
-			if (document.getElementById("ut_source") != null) {
-				document.getElementById("ut_source").innerHTML = errortext;
+			document.getElementById("utspa_desc").innerHTML = errortext;
+			document.getElementById("utspa_name").innerHTML = errortext;
+			document.getElementById("utspa_variation").innerHTML = errortext;
+			document.getElementById("utspa_type").innerHTML = errortext;
+			if (document.getElementById("utspa_source") != null) {
+				document.getElementById("utspa_source").innerHTML = errortext;
 			}
-			if (document.getElementById("ut_page") != null) {
-				document.getElementById("ut_page").innerHTML = "P. " + errortext;
+			if (document.getElementById("utspa_page") != null) {
+				document.getElementById("utspa_page").innerHTML = "P. " + errortext;
 			}
 		}
 	});

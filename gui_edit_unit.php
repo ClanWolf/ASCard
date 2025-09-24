@@ -223,22 +223,6 @@ session_start();
 			} else {
 				document.getElementById("newpilotrank").src = "./images/ranks/notFound.png";
 			}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 		}
 
 		function showMaleImageSelectorDiv() {
@@ -810,15 +794,15 @@ session_start();
 				<td width="80%">
 					<table class="options" width="100%" style="height:100%;" cellspacing=4 cellpadding=8 border=0px>
 						<tr>
-							<td class="datalabel" id="ut_name" align="left" width="90%" style="font-size:1.2em;">...</td><td nowrap class="datalabel" id="ut_variation" align="right" width="10%" style="font-size:1.2em;">...</td>
+							<td class="datalabel" id="utspa_name" align="left" width="90%" style="font-size:1.2em;">...</td><td nowrap class="datalabel" id="utspa_variation" align="right" width="10%" style="font-size:1.2em;">...</td>
 						</tr>
 						<tr>
 							<td class="datavalue_thinflow" style="font-size:0.75em;" colspan="2" align="left">
-								<span id="ut_source">...</span>, <span id="ut_page">...</span>
+								<span id="utspa_source">...</span>, <span id="utspa_page">...</span>
 							</td>
 						</tr>
 						<tr>
-							<td nowrap class="datavalue_thinflow" colspan="2" id="ut_type">...</td>
+							<td nowrap class="datavalue_thinflow" colspan="2" id="utspa_type">...</td>
 						</tr>
 						<tr>
 							<td class="datavalue_thin" colspan="2"><hr></td>
@@ -826,7 +810,7 @@ session_start();
 						<tr id="scrollcont">
 							<td height="100%" colspan="2" align="left" valign="top" id="scrollcontainer">
 								<div class='scroll-pane' id="spaInfo" width="100%" style="width:100%;">
-									<table width="100%"><tr><td class="datavalue_thinflow" id="ut_desc">...</td></tr></table>
+									<table width="100%"><tr><td class="datavalue_thinflow" id="utspa_desc">...</td></tr></table>
 								</div>
 							</td>
 						</tr>
