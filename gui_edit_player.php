@@ -23,11 +23,19 @@ session_start();
 
 	$isAdmin = $_SESSION['isAdmin'];
 
+	$playerToEdit = isset($_GET["pid"]) ? $_GET["pid"] : "";
+	$newImage = isset($_GET["ni"]) ? $_GET["ni"] : "";
+
 	$sql_asc_playerround = "SELECT SQL_NO_CACHE * FROM asc_player where playerid = " . $pid . ";";
 	$result_asc_playerround = mysqli_query($conn, $sql_asc_playerround);
 	if (mysqli_num_rows($result_asc_playerround) > 0) {
 		while($row = mysqli_fetch_assoc($result_asc_playerround)) {
 			$CURRENTROUND = $row["round"];
+
+			$PLAYERNAME = $row["name"];
+			$PLAYERFACTIONID = $row["factionid"];
+			$PLAYEREMAIL = $row["email"];
+			$PLAYERIMAGE = $row["image"];
 		}
 	}
 ?>
@@ -171,7 +179,7 @@ session_start();
 		}
 	</script>
 
-	<form action="gui_upload_image.php" method="post" enctype="multipart/form-data" name="uploadPlayerImage">
+	<form action="gui_upload_image.php?pid=<?php echo $playerToEdit; ?>" method="post" enctype="multipart/form-data" name="uploadPlayerImage">
 		<div style='height: 0px;width: 0px; overflow:hidden;'>
 			<input id="fileToUpload" name="fileToUpload" type="file" value="upload" onchange="sub(this)" />
 		</div>
@@ -196,13 +204,35 @@ session_start();
 					<input autocomplete="autocomplete_off_hack_xfr4!k" required onchange="changeResultingName();" type="text" id="NewFormationName" width="100%" style="width:100%;">
 				</td>
 				<td rowspan="4" width='10%' class='datalabel'>
-					<img width="120px" align="right" valign="top" src="./images/player/Meldric.png">
+					<img width="120px" align="right" valign="top" id="playImg" name="playImg" src="./images/player/Meldric.png">
 				</td>
 			</tr>
 			<tr>
 				<td colspan="1" width='5%' class='datalabel' nowrap align="right">Email:</td>
 				<td colspan="1" width='90%' class='datalabel' style="width:100%;">
 					<input autocomplete="autocomplete_off_hack_xfr4!k" required onchange="changeResultingName();" type="text" id="NewFormationName" width="100%" style="width:100%;">
+				</td>
+			</tr>
+			<tr>
+				<td class='datalabel' colspan="1" align="right">Faction:</td>
+				<td class='datalabel' colspan="1">
+					<select required name='NewPlayerFaction' id='NewPlayerFaction' size='1' style='width:100%;'>
+						<option  value="3" selected>ComStar [CS]</option>
+						<option  value="1">Clan Wolf [CW]</option>
+						<option value="13">Clan Wolf in Exile [CWiE]</option>
+						<option  value="9">Clan Jade Falcon [CJF]</option>
+						<option  value="5">Clan Ghostbear [CGB]</option>
+						<option value="12">Clan Smoke Jaguar [CSJ]</option>
+						<option value="14">Clan Snow Raven [CSR]</option>
+						<option value="15">Clan Nova Cat [CNC]</option>
+						<option  value="2">Lyran Alliance [LA]</option>
+						<option  value="7">Lyran Commonwealth [LC]</option>
+						<option  value="4">Draconis Combine [DC]</option>
+						<option  value="8">Federated Suns [FS]</option>
+						<option value="10">Free Worlds League [FWL]</option>
+						<option value="11">Capellan Confederation [CC]</option>
+						<option  value="6">Wolfs Dragoons [M-WD]</option>
+					</select>
 				</td>
 			</tr>
 			<tr>
@@ -220,7 +250,7 @@ session_start();
 			<tr>
 				<td colspan="1" width='5%' class='datalabel' nowrap align="right">Image:</td>
 				<td colspan="2" width='100%' class='datalabel'>
-					<select required name='femalePilotImage' id='femalePilotImage' onchange="femaleImageSelected();" size='1' style='width:100%;'>
+					<select required name='playerImage' id='playerImage' onchange="playerImageSelected();" size='1' style='width:100%;'>
 						<option value='0'></option>
 <?php
 	$directory = './images/player';
@@ -250,6 +280,12 @@ session_start();
 			</tr>
 		</table>
 	</form>
+
+	<script>
+		//console.log('<?php echo $newImage ?>');
+		document.getElementById("playImg").src="images/player/<?php echo $newImage; ?>";
+		document.getElementById("playerImage").value = '<?php echo $newImage; ?>';
+	</script>
 </body>
 
 </html>

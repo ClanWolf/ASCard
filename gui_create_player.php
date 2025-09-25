@@ -410,7 +410,7 @@ session_start();
 			<tr>
 				<td class='datalabel' colspan="1" align="right">Faction:</td>
 				<td class='datalabel' colspan="1">
-					<select required name='NewPlayerFaction' id='NewPlayerFaction' size='1' style='width:220px;'>
+					<select required name='NewPlayerFaction' id='NewPlayerFaction' size='1' style='width:100%;'>
 						<option  value="3" selected>ComStar [CS]</option>
 						<option  value="1">Clan Wolf [CW]</option>
 						<option value="13">Clan Wolf in Exile [CWiE]</option>
@@ -447,7 +447,7 @@ session_start();
 			$filename = "./images/player/".$row['image'];
 
 			echo "							<tr>\n";
-			echo "								<td nowrap onclick='location.href=\"gui_edit_player.php?playerid=".$row['playerid']."\"' class='datalabel' style='text-align:left;';><i class='fas fa-edit'></i>&nbsp;&nbsp;&nbsp;".$row['playerid']."</td>\n";
+			echo "								<td nowrap onclick='location.href=\"gui_edit_player.php?pid=".$row['playerid']."\"' class='datalabel' style='text-align:left;';><i class='fas fa-edit'></i>&nbsp;&nbsp;&nbsp;".$row['playerid']."</td>\n";
 			echo "								<td nowrap class='datalabel' style='text-align:left;vertical-align:middle;' valign='middle'>\n";
 			if (file_exists($filename)) {
 				echo "										<img src='./images/player/".$row['image']."' width='30px' height='30px'>\n";
