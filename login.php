@@ -135,6 +135,12 @@ session_start();
 		html, body {
 			background-image: url('./images/body-bg_2.jpg');
 		}
+		*::selection {
+			background-color:lightgreen;
+		}
+		*::-moz-selection {
+			background-color:lightgreen;
+		}
 		input, select {
 			width: 80px;
 			vertical-align: middle;

@@ -385,8 +385,8 @@ session_start();
 		}
 
 		$(document).ready(function() {
-			$("#cover").hide();
 			fillValues();
+			$("#cover").hide();
 
 			// Set the height of the local scrollbars to the real height of the container elements (reload only)
 			let scrollcontainerstartrow = document.getElementById("scrollcontainertopborder");

@@ -23,7 +23,7 @@ session_start();
 
 	$isAdmin = $_SESSION['isAdmin'];
 
-	$playerToEdit = isset($_GET["pid"]) ? $_GET["pid"] : "";
+	$playerToEdit = isset($_GET["pid"]) ? $_GET["pid"] : ""; // there are 2 playerids! The player logged in and the player that is edited
 	$newImage = isset($_GET["ni"]) ? $_GET["ni"] : "";
 
 	$sql_asc_playerround = "SELECT SQL_NO_CACHE * FROM asc_player where playerid = " . $pid . ";";
@@ -93,6 +93,15 @@ session_start();
 	<script type="text/javascript" src="./scripts/jquery-3.7.1.min.js"></script>
 	<script type="text/javascript" src="./scripts/howler.min.js"></script>
 	<script type="text/javascript" src="./scripts/cookies.js"></script>
+	<script type="text/javascript" src="./scripts/bCrypt.js" ></script>
+
+	<script>
+		let pidToSave = "<?php echo $playerToEdit; ?>";
+		let playername = "<?php echo $PLAYERNAME; ?>";
+		let playerfactionid = "<?php echo $PLAYERFACTIONID; ?>";
+		let playermail = "<?php echo $PLAYEREMAIL; ?>";
+		let playerimage = "<?php echo $PLAYERIMAGE; ?>";
+	</script>
 
 	<style>
 		html, body {
@@ -106,10 +115,55 @@ session_start();
 </head>
 
 <body>
+	<iframe name="saveframe" id="iframe_save"></iframe>
+	<script type="text/javascript" src="./scripts/log_enable.js"></script>
+
 	<script>
+		function fillValues() {
+			document.getElementById("NewPlayerName").value = playername;
+			document.getElementById("NewEmail").value = playermail;
+			document.getElementById("NewPlayerFaction").value = playerfactionid;
+			document.getElementById("playImg").src="images/player/" + playerimage;
+			document.getElementById("playerImage").value = playerimage;
+		}
+
 		$(document).ready(function() {
+			fillValues();
 			$("#cover").hide();
 		});
+
+		function checkInput() {
+			let p1 = document.getElementById("NewPlayerPassword").value;
+			let p2 = document.getElementById("NewPlayerPasswordConfirm").value;
+			let pok = true;
+
+			if (p1 === "" && p2 === "") {
+				save("");
+			} else {
+				if (p1 === p2) {
+					pok = true;
+				} else {
+					pok = false;
+				}
+
+				if (pok) {
+					var salt = "$2a$08$b0MHMsT3ErLoTRjpjzsCie";
+					hashpw(p1, salt, save, function() {});
+				} else {
+					console.log("Check fields!");
+				}
+			}
+		}
+
+		function save(pwhash) {
+			pn = document.getElementById("NewPlayerName").value;     // playername
+			em = document.getElementById("NewEmail").value;          // pemail
+			ni = document.getElementById("playerImage").value;       // new image
+			nf = document.getElementById("NewPlayerFaction").value;  // new faction
+
+			var url="./save_player.php?pidts="+pidToSave+"&pn="+pn+"&em="+em+"&np="+pwhash+"&ni="+ni+"&nf="+nf;
+			window.frames["saveframe"].location.replace(url);
+		}
 	</script>
 
 	<div id="cover"></div>
@@ -173,7 +227,7 @@ session_start();
 		function sub(obj) {
 			var file = obj.value;
 			var fileName = file.split("\\");
-			document.getElementById("yourBtn").innerHTML = fileName[fileName.length - 1];
+			document.getElementById("btn").innerHTML = fileName[fileName.length - 1];
 			document.uploadPlayerImage.submit();
 			event.preventDefault();
 		}
@@ -188,7 +242,7 @@ session_start();
 			<tr>
 				<td class='datalabel' nowrap align="left" width="80%">Upload image (square, max 200x200px):</td>
 				<td class='datalabel' nowrap align="right" width="20%">
-					<div id="yourBtn" onclick="getFile();"><i style="color: #dcdcdc;" class='fa-solid fa-cloud-arrow-up'></i></div>
+					<div id="btn" onclick="getFile();"><i style="color: #dcdcdc;" class='fa-solid fa-cloud-arrow-up'></i></div>
 				</td>
 			</tr>
 		</table>
@@ -201,7 +255,7 @@ session_start();
 			<tr>
 				<td colspan="1" width='5%' class='datalabel' nowrap align="right">Player name:</td>
 				<td colspan="1" width='90%' class='datalabel' style="width:100%;">
-					<input autocomplete="autocomplete_off_hack_xfr4!k" required onchange="changeResultingName();" type="text" id="NewFormationName" width="100%" style="width:100%;">
+					<input autocomplete="autocomplete_off_hack_xfr4!k" required onchange="" type="text" id="NewPlayerName" width="100%" style="width:100%;">
 				</td>
 				<td rowspan="4" width='10%' class='datalabel'>
 					<img width="120px" align="right" valign="top" id="playImg" name="playImg" src="./images/player/Meldric.png">
@@ -210,7 +264,7 @@ session_start();
 			<tr>
 				<td colspan="1" width='5%' class='datalabel' nowrap align="right">Email:</td>
 				<td colspan="1" width='90%' class='datalabel' style="width:100%;">
-					<input autocomplete="autocomplete_off_hack_xfr4!k" required onchange="changeResultingName();" type="text" id="NewFormationName" width="100%" style="width:100%;">
+					<input autocomplete="autocomplete_off_hack_xfr4!k" required onchange="" type="text" id="NewEmail" width="100%" style="width:100%;">
 				</td>
 			</tr>
 			<tr>
@@ -238,13 +292,13 @@ session_start();
 			<tr>
 				<td colspan="1" width='5%' class='datalabel' nowrap align="right">New password:</td>
 				<td colspan="1" width='90%' class='datalabel' style="width:100%;">
-					<input autocomplete="autocomplete_off_hack_xfr4!k" required onchange="changeResultingName();" type="text" id="NewFormationName" width="100%" style="width:100%;">
+					<input autocomplete="autocomplete_off_hack_xfr4!k" required onchange="" type="password" id="NewPlayerPassword" width="100%" style="width:100%;">
 				</td>
 			</tr>
 			<tr>
 				<td colspan="1" width='5%' class='datalabel' nowrap align="right">Password confirm:</td>
 				<td colspan="1" width='90%' class='datalabel' style="width:100%;">
-					<input autocomplete="autocomplete_off_hack_xfr4!k" required onchange="changeResultingName();" type="text" id="NewFormationName" width="100%" style="width:100%;">
+					<input autocomplete="autocomplete_off_hack_xfr4!k" required onchange="" type="password" id="NewPlayerPasswordConfirm" width="100%" style="width:100%;">
 				</td>
 			</tr>
 			<tr>
@@ -274,7 +328,7 @@ session_start();
 			<tr>
 				<td colspan="3" class='datalabel' align="right">
 					<span style='font-size:16px;'>
-						<a href="#" onClick="save();"><i class="fa-solid fa-floppy-disk"></i></a>
+						<a href="#" onClick="checkInput();"><i class="fa-solid fa-floppy-disk"></i></a>
 					</span>
 				</td>
 			</tr>

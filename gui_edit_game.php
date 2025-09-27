@@ -629,16 +629,16 @@ session_start();
 	if ($gid == $hgid) {
 		$host = true; // in my own game: I am the host or not joined anywhere else
 		if ($playMode) {
-			echo "<p align='center' class='footerInfo'>Hosting a game!</p>
+			echo "<p align='center' class='footerInfo'>Hosting a game!</p>\n";
 		} else {
-			echo "<p align='center' class='footerInfo'>Players can join your game with your code!</p>
+			echo "<p align='center' class='footerInfo'>Players can join your game with your code!</p>\n";
 		}
 	} else {
 		$host = false; // gameid is not equal my own game id: I joined another players game
 		if ($playMode) {
-			echo "<p align='center' class='footerInfo'>Joined in a game!</p>
+			echo "<p align='center' class='footerInfo'>Joined in a game!</p>\n";
 		} else {
-			echo "<p align='center' class='footerInfo'>Locked games will NOT show up to join! Access code is needed to join!</p>
+			echo "<p align='center' class='footerInfo'>Locked games will NOT show up to join! Access code is needed to join!</p>\n";
 		}
 	}
 

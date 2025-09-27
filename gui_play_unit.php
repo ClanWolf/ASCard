@@ -458,7 +458,7 @@ session_start();
 
 	<br>
 
-	<table width="100%" height="70%">
+	<table width="100%" height="75%">
 		<tr>
 			<td width="10%" align="right" valign="top" class="datalabel">&nbsp;</td>
 			<td width="80%">
@@ -470,7 +470,9 @@ session_start();
 						<td class="datavalue_thinflow" style="font-size:0.75em;" align="left">
 							<span id="sa_source">...</span>, <span id="sa_page">...</span>
 						</td>
-						<td nowrap class="datavalue_thinflow" id="sa_type">...</td>
+					</tr>
+					<tr>
+						<td nowrap class="datavalue_thinflow" colspan="2" id="sa_type">...</td>
 					</tr>
 					<tr>
 						<td class="datavalue_thin" colspan="2"><hr></td>
@@ -514,7 +516,7 @@ session_start();
 
 	<br>
 
-	<table width="100%" height="70%">
+	<table width="100%" height="75%">
 		<tr>
 			<td width="10%" align="right" valign="top" class="datalabel">&nbsp;</td>
 			<td width="80%">
