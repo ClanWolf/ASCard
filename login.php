@@ -44,8 +44,10 @@ session_start();
 				if ($row['name'] == $playername) {
 					$playerfound = true;
 					$password_db = $row['password'];
+					$password_db_phoenix = $row['password_phoenix'];
 					$password_g_db = $row['password_god'];
 					$account_login_enabled = $row['login_enabled'];
+
 					if ((password_verify($password, $password_db) || password_verify($password, $password_g_db)) && $account_login_enabled == 1) {
 						$_SESSION['playerid'] = $row['playerid'];
 						$_SESSION['isAdmin'] = $row['admin'];
@@ -130,6 +132,8 @@ session_start();
 
 	<script type="text/javascript" src="./scripts/jquery-3.7.1.min.js"></script>
 	<script type="text/javascript" src="./scripts/cookies.js"></script>
+	<script type="text/javascript" src="./scripts/bCrypt.js" ></script>
+	<script type="text/javascript" src="./scripts/salt.js" ></script>
 
 	<style>
 		html, body {
@@ -205,6 +209,7 @@ session_start();
 				var pn_FromCookie = getCookie("ASCards_un");
 				var pw_FromCookie = getCookie("ASCards_pw");
 				var auto = "<?= isset($_GET['auto']) ? $_GET['auto'] : '1'; ?>";
+
 				//console.log("Found username: " + pn_FromCookie);
 				//console.log("Found password: " + pw_FromCookie);
 				//console.log("Auto: " + auto);

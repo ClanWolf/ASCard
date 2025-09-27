@@ -15,6 +15,7 @@
 	$playerName = isset($_GET["pn"]) ? $_GET["pn"] : "";
 	$pemail     = isset($_GET["em"]) ? $_GET["em"] : "";
 	$newPw      = isset($_GET["np"]) ? $_GET["np"] : "";
+	$newPwHash  = isset($_GET["nph"]) ? $_GET["nph"] : "";
 	$newImage   = isset($_GET["ni"]) ? $_GET["ni"] : "";
 	$newFaction = isset($_GET["nf"]) ? $_GET["nf"] : "";
 
@@ -61,7 +62,8 @@
 //			Updated
 
 		if ($newPw !== "") {
-			$sql = "UPDATE asc_player SET name='".$playerName."',email='".$pemail."',password_phoenix='".$newPw."',image='".$newImage."',factionid=".$newFaction." WHERE playerid=".$pidtosave;
+			$hashedpw = password_hash($newPw, PASSWORD_DEFAULT);
+			$sql = "UPDATE asc_player SET name='".$playerName."',email='".$pemail."',password='".$hashedpw."',password_phoenix='".$newPwHash."',image='".$newImage."',factionid=".$newFaction." WHERE playerid=".$pidtosave;
 		} else {
 			$sql = "UPDATE asc_player SET name='".$playerName."',email='".$pemail."',image='".$newImage."',factionid=".$newFaction." WHERE playerid=".$pidtosave;
 		}
@@ -72,6 +74,8 @@
 			echo "<br>";
 			echo "Record (asc_player) updated successfully";
 			mysqli_commit($conn);
+
+			echo "<script>top.window.location = './gui_show_playerlist.php'</script>";
 		} else {
 			echo "<br>";
 			echo "Error (asc_player) updating record: " . mysqli_error($conn);

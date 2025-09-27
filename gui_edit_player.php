@@ -94,6 +94,7 @@ session_start();
 	<script type="text/javascript" src="./scripts/howler.min.js"></script>
 	<script type="text/javascript" src="./scripts/cookies.js"></script>
 	<script type="text/javascript" src="./scripts/bCrypt.js" ></script>
+	<script type="text/javascript" src="./scripts/salt.js" ></script>
 
 	<script>
 		let pidToSave = "<?php echo $playerToEdit; ?>";
@@ -127,6 +128,12 @@ session_start();
 			document.getElementById("playerImage").value = playerimage;
 		}
 
+		function playerImageSelected() {
+			//alert("image selected");
+			let img = document.getElementById("playerImage").value;
+			document.getElementById("playImg").src="images/player/" + img;
+		}
+
 		$(document).ready(function() {
 			fillValues();
 			$("#cover").hide();
@@ -147,7 +154,7 @@ session_start();
 				}
 
 				if (pok) {
-					var salt = "$2a$08$b0MHMsT3ErLoTRjpjzsCie";
+					var salt = getSalt();
 					hashpw(p1, salt, save, function() {});
 				} else {
 					//console.log("Check fields!");
@@ -157,13 +164,14 @@ session_start();
 			}
 		}
 
-		function save(pwhash) {
+		function save(ph) {
+			p1 = document.getElementById("NewPlayerPassword").value;
 			pn = document.getElementById("NewPlayerName").value;     // playername
 			em = document.getElementById("NewEmail").value;          // pemail
 			ni = document.getElementById("playerImage").value;       // new image
 			nf = document.getElementById("NewPlayerFaction").value;  // new faction
 
-			var url="./save_player.php?pidts="+pidToSave+"&pn="+pn+"&em="+em+"&np="+pwhash+"&ni="+ni+"&nf="+nf;
+			var url="./save_player_changes.php?pidts="+pidToSave+"&pn="+pn+"&em="+em+"&np="+p1+"&nph="+ph+"&ni="+ni+"&nf="+nf;
 			window.frames["saveframe"].location.replace(url);
 		}
 	</script>

@@ -42,6 +42,7 @@ function getSpecialPilotAbilities(spa) {
 			if (document.getElementById("utspa_page") != null) {
 				document.getElementById("utspa_page").innerHTML = "P. " + match.PAGE;
 			}
+
 //			var scrollcontainerdivs = document.getElementsByClassName("scroll-pane");
 //			for(var i=0; i < scrollcontainerdivs.length; i++) {
 //				if (scrollcontainerdivs[i].id === "spaInfo") {

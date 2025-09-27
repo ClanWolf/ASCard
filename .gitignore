@@ -3,5 +3,6 @@
 /cache/mul/unitdetails
 /install/data/**
 /db_backup/**
+/scripts/salt.js
 config.php
 createPW.php
