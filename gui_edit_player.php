@@ -150,7 +150,9 @@ session_start();
 					var salt = "$2a$08$b0MHMsT3ErLoTRjpjzsCie";
 					hashpw(p1, salt, save, function() {});
 				} else {
-					console.log("Check fields!");
+					//console.log("Check fields!");
+					document.getElementById("NewPlayerPassword").style.color="#f00";
+					document.getElementById("NewPlayerPasswordConfirm").style.color="#f00";
 				}
 			}
 		}
