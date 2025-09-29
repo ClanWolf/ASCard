@@ -41,6 +41,7 @@ session_start();
 			$ASSIGNID = $row452["assignid"];
 			$ASSIGNCOMMANDID = $row452["commandid"];
 			$ASSIGNFORMATIONID = $row452["formationid"];
+			$UNITID = $row452["unitid"];
 			$UNITNUMBER = $row452["unit_number"];
 			$UNITCLASS = $row452["unit_class"];
 			$UNITVARIANT = $row452["unit_variant"];
@@ -126,6 +127,7 @@ session_start();
 	<script type="text/javascript" src="./scripts/spa.js"></script>
 
 	<script>
+		let unitId = "<?php echo $UNITID; ?>";
 		let assignId = "<?php echo $ASSIGNID; ?>";
 		let assignCommandId = "<?php echo $ASSIGNCOMMANDID; ?>";
 		let assignFormationId = "<?php echo $ASSIGNFORMATIONID; ?>";
@@ -223,6 +225,7 @@ session_start();
 			} else {
 				document.getElementById("newpilotrank").src = "./images/ranks/notFound.png";
 			}
+			document.getElementById("rank").style.color="#ddd";
 		}
 
 		function showMaleImageSelectorDiv() {
@@ -303,7 +306,58 @@ session_start();
 		}
 
 		function save() {
-			alert("save");
+			let newUnitName = document.getElementById("NewUnitName").value;
+			let newUnitSkill = document.getElementById("NewUnitSkill").value;
+			let newPV = document.getElementById("newPV").innerHTML;
+			let newUnitNUmber = document.getElementById("NewUnitNumber").value;
+			let newFormationId = document.getElementById("FORMATIONID").value;
+			let newPilotName = document.getElementById("NewPilotName").value;
+			let newRank = document.getElementById("rank").value;
+			let newSPASum = document.getElementById("sumlabel").innerHTML;
+			let newChain = document.getElementById("newChain").value;
+
+			let newRankShortened = newRank.substring(0, newRank.length - 4);
+
+			let newPilotImage = document.getElementById("malePilotImage").value;
+			if (newPilotImage === null || newPilotImage === undefined || newPilotImage === "" || newPilotImage == 0) {
+				newPilotImage = document.getElementById("femalePilotImage").value;
+			}
+
+			let newSPAs = "";
+			for (var i = 0; i < pilotSpaArray.length; i++) {
+				spaElement = pilotSpaArray[i].trim();
+				newSPAs = newSPAs + spaElement;
+				if (i < pilotSpaArray.length - 1) {
+					newSPAs = newSPAs + ","
+				}
+			}
+
+			if (newRankShortened === "") {
+				//console.log("Check fields!");
+				document.getElementById("rank").style.color="#f00";
+			} else {
+				var url="./save_unit_changes.php";
+				url = url + "?unitId=" + encodeURIComponent(unitId);
+				url = url + "&assignId=" + encodeURIComponent(assignId);
+				url = url + "&pilotId=" + encodeURIComponent(pilotId);
+				url = url + "&nun=" + encodeURIComponent(newUnitName.trim());
+				url = url + "&nus=" + encodeURIComponent(newUnitSkill);
+				url = url + "&npv=" + encodeURIComponent(newPV);
+				url = url + "&nunbr=" + encodeURIComponent(newUnitNUmber.trim());
+				url = url + "&nf=" + encodeURIComponent(newFormationId);
+				url = url + "&npn=" + encodeURIComponent(newPilotName.trim());
+				if (newPilotImage === null || newPilotImage === undefined || newPilotImage === "" || newPilotImage == 0) {
+					//url = url + "&npi=";
+				} else {
+					url = url + "&npi=" + encodeURIComponent(newPilotImage.trim());
+				}
+				url = url + "&nr=" + encodeURIComponent(newRankShortened.trim());
+				url = url + "&nspa=" + encodeURIComponent(newSPAs.trim());
+				url = url + "&nspasum=" + encodeURIComponent(newSPASum);
+				url = url + "&nch=" + encodeURIComponent(newChain.trim());
+				//alert(url);
+				window.frames["saveframe"].location.replace(url);
+			}
 		}
 
 		function addSpecialPilotAbility() {
@@ -380,6 +434,13 @@ session_start();
 			document.getElementById("sumlabel").innerHTML = pilotSpaCostSum; // spaCalculatedSum
 			document.getElementById("rank").value = pilotRank;
 
+			document.getElementById("newChain").value = "Warrior";
+			if (unitCommander == 1) {
+				document.getElementById("newChain").value = "Commander";
+			} else if (unitSubCommander == 1) {
+				document.getElementById("newChain").value = "Subcommander";
+			}
+
 			let newPV = adjustPointValue(unitBasePv, unitSkill);
 			document.getElementById("newPV").innerHTML = newPV;
 		}
@@ -426,7 +487,7 @@ session_start();
 		<table style="width:100%;height:60px;border:none;border-collapse:collapse;background:rgba(50,50,50,1.0);" cellspacing="0" cellpadding="0">
 			<tr>
 				<td nowrap onclick="location.href='./logout.php'" style="width: 80px;background: rgba(50,50,50,1.0); text-align: center; vertical-align: middle;">
-					<div><a style="color: #eee;" href="./logout.php">&nbsp;&nbsp;&nbsp;<i class="fas fa-power-off" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;</a></div>
+					<div><a style="color:#eee;" href="./logout.php">&nbsp;&nbsp;&nbsp;<i class="fas fa-power-off" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;</a></div>
 				</td>
 				<td nowrap onclick="location.href='./gui_edit_game.php'" style="width: 100px;background:rgba(56,87,26,1.0);">
 					<div style='vertical-align:middle;font-size:28px;color:#eee;'>&nbsp;&nbsp;&nbsp;G<?php echo $gid ?>&nbsp;R<?php echo $CURRENTROUND ?>&nbsp;&nbsp;&nbsp;</div>

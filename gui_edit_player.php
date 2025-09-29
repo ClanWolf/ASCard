@@ -26,7 +26,7 @@ session_start();
 	$playerToEdit = isset($_GET["pid"]) ? $_GET["pid"] : ""; // there are 2 playerids! The player logged in and the player that is edited
 	$newImage = isset($_GET["ni"]) ? $_GET["ni"] : "";
 
-	$sql_asc_playerround = "SELECT SQL_NO_CACHE * FROM asc_player where playerid = " . $pid . ";";
+	$sql_asc_playerround = "SELECT SQL_NO_CACHE * FROM asc_player where playerid = " . $playerToEdit . ";";
 	$result_asc_playerround = mysqli_query($conn, $sql_asc_playerround);
 	if (mysqli_num_rows($result_asc_playerround) > 0) {
 		while($row = mysqli_fetch_assoc($result_asc_playerround)) {
@@ -171,7 +171,15 @@ session_start();
 			ni = document.getElementById("playerImage").value;       // new image
 			nf = document.getElementById("NewPlayerFaction").value;  // new faction
 
-			var url="./save_player_changes.php?pidts="+pidToSave+"&pn="+pn+"&em="+em+"&np="+p1+"&nph="+ph+"&ni="+ni+"&nf="+nf;
+			var url="./save_player_changes.php";
+			url = url + "?pidts=" + encodeURIComponent(pidToSave);
+			url = url + "&pn=" + encodeURIComponent(pn);
+			url = url + "&em=" + encodeURIComponent(em);
+			url = url + "&np=" + encodeURIComponent(p1);
+			url = url + "&nph=" + encodeURIComponent(ph);
+			url = url + "&ni=" + encodeURIComponent(ni);
+			url = url + "&nf=" + encodeURIComponent(nf);
+			//alert(url);
 			window.frames["saveframe"].location.replace(url);
 		}
 	</script>
