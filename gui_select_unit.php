@@ -812,8 +812,8 @@ if ($playMode) {
 					$unitDetailString = $unitDetailString."						<table width='100%'><tr><td id='selectWidthMeasure' width='95%'><div name='unitCell' style='display:block;font-size:22px;width:50px;height:24px;text-align:left;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;'>\n";
 				}
 				//$unitDetailString = $unitDetailString."						".textTruncate($unitchassisname, 10)."</span><span style='font-weight:normal;font-size:20px;color:#ffc677;'>&nbsp;&nbsp;PV&nbsp;".$unitpointvalue."</span> <span style='font-weight:normal;font-size:20px;color:#aaaaaa;'>(".$unittonnage."t)</span>\n";
-				$unitDetailString = $unitDetailString."						".textShorten($unitchassisname)."</div></td><td width='5%' align='right'><span style='font-weight:normal;font-size:20px;color:#ffc677;'>&nbsp;&nbsp;PV&nbsp;".$unitpointvalue."</span> <span style='font-weight:normal;font-size:20px;color:#aaaaaa;'>(".$unittonnage."t)</span></td>\n";
-				$unitDetailString = $unitDetailString."						</tr><tr><td colspan='2'>";
+				$unitDetailString = $unitDetailString."						".textShorten($unitchassisname)."</div></td><td width='5%' align='right'><span style='font-weight:normal;font-size:20px;color:#ffc677;'>&nbsp;PV&nbsp;".$unitpointvalue."</span></td>\n";
+				$unitDetailString = $unitDetailString."						</tr><tr><td colspan='1'>";
 				if ($commander == 1) {
 					$unitDetailString = $unitDetailString."						<div style='font-size:18px;top:0px;bottom:0px;left:0px;right:0px;'><img style='vertical-align:bottom;padding-top:3px' src='./images/ranks/".$factionidSelected."/".$pilotrank.".png' width='16px' height='16px'>&nbsp;&nbsp;".$pilotname."&nbsp;&nbsp;<img style='vertical-align:bottom;padding-top:3px' src='./images/command.png' width='16px' height='16px'></div>\n";
 				} else if ($subcommander == 1) {
@@ -821,31 +821,31 @@ if ($playMode) {
 				} else {
 					$unitDetailString = $unitDetailString."						<div style='font-size:18px;top:0px;bottom:0px;left:0px;right:0px;'><img style='vertical-align:bottom;padding-top:3px' src='./images/ranks/".$factionidSelected."/".$pilotrank.".png' width='16px' height='16px'>&nbsp;&nbsp;".$pilotname."</div>\n";
 				}
-				$unitDetailString = $unitDetailString."						</td></tr></table>\n";
+				$unitDetailString = $unitDetailString."						</td><td width='5%' align='right'><span style='font-weight:normal;font-size:20px;color:#aaaaaa;'>".$unittonnage."t</span></td></tr></table>\n";
 				$unitDetailString = $unitDetailString."						</td>\n";
 
 				// -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 				if ($playMode) {
 					if ($activenarc == "1") {
-						$unitDetailString = $unitDetailString."						<td nowrap width='1%' class='datalabel_disabled_dashed' style='vertical-align:middle;text-align:right;'>\n";
+						$unitDetailString = $unitDetailString."						<td nowrap width='1%' class='datalabel_disabled_dashed' style='vertical-align:middle;text-align:center;'>\n";
 					} else {
-						$unitDetailString = $unitDetailString."						<td nowrap width='1%' style='background-color:".$bidcolor.";vertical-align:middle;text-align:right;'>\n";
+						$unitDetailString = $unitDetailString."						<td nowrap width='1%' style='background-color:".$bidcolor.";vertical-align:middle;text-align:center;'>\n";
 					}
 					if ($activebid == "1") {
 						$unitDetailString = $unitDetailString."							<span style='font-size:12px;'>\n";
-						$unitDetailString = $unitDetailString."								&nbsp;&nbsp;&nbsp;&nbsp;<img width='25px' src='".$unitRoundStatusImage."'>\n";
+						$unitDetailString = $unitDetailString."								&nbsp;<img width='25px' src='".$unitRoundStatusImage."'>&nbsp;\n";
 						$unitDetailString = $unitDetailString."							</span>\n";
 					} else {
 						$unitDetailString = $unitDetailString."							<span style='font-size:12px;'>\n";
-						$unitDetailString = $unitDetailString."								&nbsp;&nbsp;&nbsp;&nbsp;\n";
+						$unitDetailString = $unitDetailString."								&nbsp;<img width='25px' src='images/lock.png'>&nbsp;\n";
 						$unitDetailString = $unitDetailString."							</span>\n";
 					}
 					$unitDetailString = $unitDetailString."						</td>\n";
 				} else {
 					$unitDetailString = $unitDetailString."						<td onclick='location.href=\"gui_select_unit.php?dm=1&unitid=".$assignedUnitID."&formationid=".$formationidSelected."&pilotid=".$assignedPilotID."\"' nowrap width='1%' valign='middle' style='background-color:".$bidcolor."text-align:right;'>\n";
 					$unitDetailString = $unitDetailString."							<span style='font-size:12px;'>\n";
-					$unitDetailString = $unitDetailString."								&nbsp;&nbsp;&nbsp;&nbsp;<i class='fas fa-minus-square'></i>\n";
+					$unitDetailString = $unitDetailString."								&nbsp;<i class='fas fa-minus-square'></i>&nbsp;\n";
 					$unitDetailString = $unitDetailString."							</span>\n";
 					$unitDetailString = $unitDetailString."						</td>\n";
 				}

@@ -153,6 +153,8 @@ session_start();
 		let factionshort = "<?php echo $FACTIONSHORT; ?>";
 		let factionimage = "<?php echo $FACTIONIMAGE; ?>";
 
+		//console.log(factionshort);
+
 		var api;
 	</script>
 
@@ -266,6 +268,8 @@ session_start();
 			let newRank = document.getElementById("rank").value;
 			document.getElementById("newpilotrank").src = "./images/ranks/" + formationFactionId + "/" + newRank;
 			oldRank = newRank;
+
+			document.getElementById("rank").style.color="#ddd";
 		}
 
 		function skillChanged() {
@@ -420,8 +424,10 @@ session_start();
 				}
 			}
 
+			//console.log("Rank: " + "./images/ranks/" + formationFactionId + "/" + pilotRank + "--");
+
 			document.getElementById("unitnameToEdit").innerHTML = unitClass + " " + unitVariant + " '" + unitName + "' - PV: " + unitPv + " (" + unitBasePv + ")";
-			document.getElementById("factionname").value = factionshort;
+			document.getElementById("factionname").innerHTML = factionshort;
 			document.getElementById("factionlogo").src = "./images/factions/" + factionimage;
 			document.getElementById("NewUnitName").value = unitName;
 			document.getElementById("NewUnitNumber").value = unitNumber;
@@ -433,6 +439,11 @@ session_start();
 			document.getElementById("newSPAs").innerHTML = spaStringList;
 			document.getElementById("sumlabel").innerHTML = pilotSpaCostSum; // spaCalculatedSum
 			document.getElementById("rank").value = pilotRank;
+
+			if (document.getElementById("rank").value === "") {
+				document.getElementById("newpilotrank").src = "./images/ranks/notFound.png";
+				document.getElementById("rank").selectedIndex = 0;
+			}
 
 			document.getElementById("newChain").value = "Warrior";
 			if (unitCommander == 1) {

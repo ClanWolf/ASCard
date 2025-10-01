@@ -18,25 +18,28 @@
 	echo "<!DOCTYPE html>\n";
 	echo "<html lang='en'>\n";
 	echo "<body>\n";
+	echo "<p style='font-family:Arial,sans-serif;font-size:14px;color:yellow;'>";
 
-	echo "Saving Description...";
+	// -----------------------------------------------------------------------------------------------------------------
+	// https://www.php.net/manual/en/mysqli.begin-transaction.php
 
 	if (!empty($gameId) && !empty($unitId) && !empty($roundNo)) {
+		echo "SAVING DATA...<br><br>";
+
 		$sql = "UPDATE asc_unitstatus SET narc_desc='".$narcDesc."' WHERE playerid=".$playerId." AND gameid=".$gameId." AND unitid=".$unitId." AND round=".$roundNo;
 		echo $sql;
 
 		if (mysqli_query($conn, $sql)) {
-			echo "<p style='font-family:Arial,sans-serif;font-size:14px;color:yellow;'>";
 			echo "Record (asc_unitstatus) updated successfully.";
 			echo "</p>";
 			mysqli_commit($conn);
 			//echo "<script>top.location.reload();</script>";
 		} else {
-			echo "<p style='font-family:Arial,sans-serif;font-size:14px;color:yellow;'>";
 			echo "Error (asc_options) updating record: " . mysqli_error($conn);
 			echo "</p>";
 		}
-
+	} else {
+		echo "Missing data! Nothing was stored!<br>";
 	}
 	echo "</body>\n";
 	echo "</html>\n";

@@ -34,129 +34,122 @@
 	if (!empty($unitId) && !empty($assignId) && !empty($pilotId)) {
 		echo "SAVING DATA...<br><br>";
 
-		echo "UnitId: " . $unitId."<br>";
-		echo "AssignId: " . $assignId."<br>";
-		echo "PilotId: " . $pilotId."<br>";
-		echo "UnitName: " . $newUnitName."<br>";
-		echo "UnitSkill: " . $newUnitSkill."<br>";
-		echo "PV: " . $newPV."<br>";
-		echo "UnitNumber: " . $newUnitNUmber."<br>";
-		echo "FormationId: " . $newFormationId."<br>";
-		echo "PilotName: " . $newPilotName."<br>";
-		echo "PilotImage: " . $newPilotImage."<br>";
-		echo "Rank: " . $newRank."<br>";
-		echo "SPAs: " . $newSPAs."<br>";
-		echo "SPASum: " . $newSPASum."<br>";
-		echo "Chain: " . $newChain ."<br>";
+		echo "UnitId: ".$unitId."<br>";
+		echo "AssignId: ".$assignId."<br>";
+		echo "PilotId: ".$pilotId."<br>";
+		echo "UnitName: ".$newUnitName."<br>";
+		echo "UnitSkill: ".$newUnitSkill."<br>";
+		echo "PV: ".$newPV."<br>";
+		echo "UnitNumber: ".$newUnitNUmber."<br>";
+		echo "FormationId: ".$newFormationId."<br>";
+		echo "PilotName: ".$newPilotName."<br>";
+		echo "PilotImage: ".$newPilotImage."<br>";
+		echo "Rank: ".$newRank."<br>";
+		echo "SPAs: ".$newSPAs."<br>";
+		echo "SPASum: ".$newSPASum."<br>";
+		echo "Chain: ".$newChain ."<br>";
 
 		// -------------------------------------------------------------------------------------------------------------
+		// https://www.php.net/manual/en/mysqli.begin-transaction.php
 
-		$sql_assign = "UPDATE asc_assign SET formationid=".$newFormationId." WHERE assignid=".$assignId.";";
-		echo "<br><br>Statement: " . $sql_assign;
+		try {
+			mysqli_begin_transaction($conn);
+			echo "<br>Transaction started...";
+			// ---------------------------------------------------------------------------------------------------------
+			// Saving assign
+			echo "<br>Saving assign...";
 
-		if (mysqli_query($conn, $sql_assign)) {
-			echo "<br>";
-			echo "Record (asc_assign) updated successfully";
+			$sql_assign = 'UPDATE asc_assign SET formationid=? WHERE assignid=?';
+			$stmt_assign = mysqli_prepare($conn, $sql_assign);
+
+			echo "<br><br>Statement: ".$sql_assign;
+			echo "<br>- newFormationId: ".$newFormationId;
+			echo "<br>- assignId: ".$assignId;
+
+			mysqli_stmt_bind_param($stmt_assign, 'ii', $newFormationId, $assignId);
+			mysqli_stmt_execute($stmt_assign);
+			mysqli_stmt_close($stmt_assign);
+
+			// ---------------------------------------------------------------------------------------------------------
+			// Saving pilot
+			echo "<br>Saving pilot...";
+
+			if ($newPilotImage != "") {
+				echo "<br>New Pilot image found.";
+
+				$sql_pilot = 'UPDATE asc_pilot SET name=?,rank=?,pilot_imageurl=?,SPA=?,SPA_cost_sum=? WHERE pilotid=?';
+				$stmt_pilot = mysqli_prepare($conn, $sql_pilot);
+
+				echo "<br><br>Statement: ".$sql_pilot;
+				echo "<br>- newPilotName: ".$newPilotName;
+				echo "<br>- newRank: ".$newRank;
+				echo "<br>- pilot_imageurl: "."images/pilots/".$newPilotImage;
+				echo "<br>- SPA: ".$newSPAs;
+				echo "<br>- SPA_cost_sum: ".$newRank;
+				echo "<br>- pilotId: ".$pilotId;
+
+				mysqli_stmt_bind_param($stmt_pilot, 'ssssii', $newPilotName, $newRank, "images/pilots/".$newPilotImage, $newSPAs, $newSPASum, $pilotId);
+			} else {
+				echo "<br>NO new Pilot image found.";
+
+				$sql_pilot = 'UPDATE asc_pilot SET name=?,rank=?,SPA=?,SPA_cost_sum=? WHERE pilotid=?';
+				$stmt_pilot = mysqli_prepare($conn, $sql_pilot);
+
+				echo "<br><br>Statement: ".$sql_pilot;
+				echo "<br>- newPilotName: ".$newPilotName;
+				echo "<br>- newRank: ".$newRank;
+				echo "<br>- SPA: ".$newSPAs;
+				echo "<br>- SPA_cost_sum: ".$newRank;
+				echo "<br>- pilotId: ".$pilotId;
+
+				mysqli_stmt_bind_param($stmt_pilot, 'sssii', $newPilotName, $newRank, $newSPAs, $newSPASum, $pilotId);
+			}
+
+			mysqli_stmt_execute($stmt_pilot);
+			mysqli_stmt_close($stmt_pilot);
+
+			// ---------------------------------------------------------------------------------------------------------
+			// Saving unit
+			echo "<br>Saving unit...";
+
+			$sql_unit = 'UPDATE asc_unit SET unit_name=?,as_skill=?,as_pv=?,unit_number=?,commander=?,subcommander=? WHERE unitid=?';
+			$stmt_unit = mysqli_prepare($conn, $sql_unit);
+
+			echo "<br><br>Statement: ".$sql_unit;
+			echo "<br>- unit_name: ".$newUnitName;
+			echo "<br>- as_skill: ".$newUnitSkill;
+			echo "<br>- as_pv: ".$newPV;
+			echo "<br>- unit_number: ".$newUnitNUmber;
+			echo "<br>- chain: ".$newChain;
+
+			if (strtolower($newChain) === "commander") {
+				$commander = 1;
+				$subcommander = 0;
+			} else if (strtolower($newChain) === "subcommander") {
+				$commander = 0;
+				$subcommander = 1;
+			} else {
+				$commander = 0;
+				$subcommander = 0;
+			}
+
+			mysqli_stmt_bind_param($stmt_unit, 'siisiii', $newUnitName, $newUnitSkill, $newPV, $newUnitNUmber, $commander, $subcommander, $unitId);
+			mysqli_stmt_execute($stmt_unit);
+			mysqli_stmt_close($stmt_unit);
+
+			// ---------------------------------------------------------------------------------------------------------
 			mysqli_commit($conn);
-		} else {
-			echo "<br>";
-			echo "Error (asc_assign) updating record: " . mysqli_error($conn);
+			echo "<br>... committed.";
+
+			echo "<script>top.window.location = './gui_select_unit.php'</script>";
+		} catch (mysqli_sql_exception $exception) {
+			echo "<br>... ERROR. Rolling back changes!";
+			mysqli_rollback($conn);
+			throw $exception;
 		}
-
-		// -------------------------------------------------------------------------------------------------------------
-
-		if ($newPilotImage != "") {
-			$sql_pilot = "UPDATE asc_pilot SET name='".$newPilotName."',rank='".$newRank."',pilot_imageurl='images/pilots/".$newPilotImage."',SPA='".$newSPAs."',SPA_cost_sum=".$newSPASum." WHERE pilotid=".$pilotId.";";
-		} else {
-			$sql_pilot = "UPDATE asc_pilot SET name='".$newPilotName."',rank='".$newRank."',SPA='".$newSPAs."',SPA_cost_sum=".$newSPASum." WHERE pilotid=".$pilotId.";";
-		}
-		echo "<br><br>Statement: " . $sql_pilot;
-
-		if (mysqli_query($conn, $sql_pilot)) {
-			echo "<br>";
-			echo "Record (asc_pilot) updated successfully";
-			mysqli_commit($conn);
-		} else {
-			echo "<br>";
-			echo "Error (asc_pilot) updating record: " . mysqli_error($conn);
-		}
-
-		// -------------------------------------------------------------------------------------------------------------
-
-		// Check if all units are destroyed
-//		$sql4 = "SELECT SQL_NO_CACHE * FROM asc_unitstatus WHERE playerid=".$pid." AND active_bid=1 AND gameid=".$gameid." AND round=".$currRound." AND unit_status NOT LIKE '%destroyed%'";
-//		echo "Statement: " . $sql4;
-//		$result4 = mysqli_query($conn, $sql4);
-//		if (mysqli_num_rows($result4) > 0) {
-//			// There are units left that are not destroyed so the player is still in game
-//			$sql7 = "UPDATE asc_player SET active_ingame=1 WHERE playerid=".$pid;
-//			echo "Statement: " . $sql7;
-
-//			if (mysqli_query($conn, $sql7)) {
-//				echo "<br>";
-//				echo "Record (player active in game) updated successfully";
-//				mysqli_commit($conn);
-//			} else {
-//				echo "<br>";
-//				echo "Error (player active in game) updating record: " . mysqli_error($conn);
-//			}
-//		} else {
-//			// All units of this player in this game have been destroyed
-//			$sql5 = "UPDATE asc_player SET active_ingame=0 WHERE playerid=".$pid;
-//			echo "Statement: " . $sql5;
-
-//			if (mysqli_query($conn, $sql5)) {
-//				echo "<br>";
-//				echo "Record (player active in game) updated successfully";
-//				mysqli_commit($conn);
-//			} else {
-//				echo "<br>";
-//				echo "Error (player active in game) updating record: " . mysqli_error($conn);
-//			}
-//		}
 	} else {
-		echo "WAITING FOR SAVE OPERATION...<br>";
+		echo "Missing data! Nothing was stored!<br>";
 	}
-
-
-
-//https://www.php.net/manual/en/mysqli.begin-transaction.php
-
-//<?php
-//
-///* Tell mysqli to throw an exception if an error occurs */
-//mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
-//
-//$mysqli = mysqli_connect("localhost", "my_user", "my_password", "world");
-//
-///* The table engine has to support transactions */
-//mysqli_query($mysqli, "CREATE TABLE IF NOT EXISTS language (
-//    Code text NOT NULL,
-//    Speakers int(11) NOT NULL
-//    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;");
-//
-///* Start transaction */
-//mysqli_begin_transaction($mysqli);
-//
-//try {
-//    /* Insert some values */
-//    mysqli_query($mysqli, "INSERT INTO language(Code, Speakers) VALUES ('DE', 42000123)");
-//
-//    /* Try to insert invalid values */
-//    $language_code = 'FR';
-//    $native_speakers = 'Unknown';
-//    $stmt = mysqli_prepare($mysqli, 'INSERT INTO language(Code, Speakers) VALUES (?,?)');
-//    mysqli_stmt_bind_param($stmt, 'ss', $language_code, $native_speakers);
-//    mysqli_stmt_execute($stmt);
-//
-//    /* If code reaches this point without errors then commit the data in the database */
-//    mysqli_commit($mysqli);
-//} catch (mysqli_sql_exception $exception) {
-//    mysqli_rollback($mysqli);
-//
-//    throw $exception;
-//}
-
 
 	echo "</p>\n";
 	echo "</body>\n";
