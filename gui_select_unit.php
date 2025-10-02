@@ -822,7 +822,7 @@ if ($playMode) {
 					$unitDetailString = $unitDetailString."						<div style='font-size:18px;top:0px;bottom:0px;left:0px;right:0px;'><img style='vertical-align:bottom;padding-top:3px' src='./images/ranks/".$factionidSelected."/".$pilotrank.".png' width='16px' height='16px'>&nbsp;&nbsp;".$pilotname."</div>\n";
 				}
 				$unitDetailString = $unitDetailString."						</td><td width='5%' align='right'><span style='font-weight:normal;font-size:20px;color:#aaaaaa;'>".$unittonnage."t</span></td></tr></table>\n";
-				$unitDetailString = $unitDetailString."						</td>\n";
+				$unitDetailString = $unitDetailString."						</td><td>&nbsp;&nbsp;&nbsp;</td>\n";
 
 				// -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 

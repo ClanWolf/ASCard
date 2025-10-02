@@ -85,10 +85,12 @@
 				echo "<br>- newRank: ".$newRank;
 				echo "<br>- pilot_imageurl: "."images/pilots/".$newPilotImage;
 				echo "<br>- SPA: ".$newSPAs;
-				echo "<br>- SPA_cost_sum: ".$newRank;
+				echo "<br>- SPA_cost_sum: ".$newSPASum;
 				echo "<br>- pilotId: ".$pilotId;
 
-				mysqli_stmt_bind_param($stmt_pilot, 'ssssii', $newPilotName, $newRank, "images/pilots/".$newPilotImage, $newSPAs, $newSPASum, $pilotId);
+				$pim = "images/pilots/".$newPilotImage;
+
+				mysqli_stmt_bind_param($stmt_pilot, 'ssssii', $newPilotName, $newRank, $pim, $newSPAs, $newSPASum, $pilotId);
 			} else {
 				echo "<br>NO new Pilot image found.";
 
@@ -99,7 +101,7 @@
 				echo "<br>- newPilotName: ".$newPilotName;
 				echo "<br>- newRank: ".$newRank;
 				echo "<br>- SPA: ".$newSPAs;
-				echo "<br>- SPA_cost_sum: ".$newRank;
+				echo "<br>- SPA_cost_sum: ".$newSPASum;
 				echo "<br>- pilotId: ".$pilotId;
 
 				mysqli_stmt_bind_param($stmt_pilot, 'sssii', $newPilotName, $newRank, $newSPAs, $newSPASum, $pilotId);
