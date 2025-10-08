@@ -12,6 +12,7 @@ function getSpecialPilotAbilities(spa) {
 		});
 		$.each(json.specialpilotabilities, function (i, specialpilotability) {
 			let specialpilotabilityName = specialpilotability.NAME.toUpperCase();
+			specialpilotabilityName = specialpilotabilityName.replace(/['"]+/g, '');
 
 			//console.log("1: " + spa);
 			//console.log("2: " + specialpilotabilityName);

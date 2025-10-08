@@ -1215,75 +1215,70 @@ if ($showDistancesHexes == 1) {
 						<table width="100%">
 							<tr style="line-height: 24px;">
 								<td class="datavalue_thin" style="text-align:left;margin-top:5px;" id="sa_field">
-									<?php
-										$allSpecialAbilities = "";
-										$parts = explode(',', $array_SPCL[$chosenUnitIndex]);
-										if (sizeof($parts) >= 1) {
-											$i = 1;
-											foreach ($parts as $part) {
+<?php
+	$allSpecialAbilities = "";
+	$parts = explode(',', $array_SPCL[$chosenUnitIndex]);
+	if (sizeof($parts) >= 1) {
+		$i = 1;
+		foreach ($parts as $part) {
 
-												// These special abilities are special, because they have "-" or "("
-												// in the name so that the regular expression down there does not
-												// catch them correctly. Remove this if the re is fixed
-												$saParameter = "";
-												if (substr($part, 0, 3) === "ART") {
-													$saParameter = "ART";
-												} else if (substr($part, 0, 3) === "BIM") {
-													$saParameter = "BIM";
-												} else if (substr($part, 0, 3) === "LAM") {
-													$saParameter = "LAM";
-												} else if (substr($part, 0, 5) === "I-TSM") {
-													$saParameter = "I-TSM";
-												} else if (substr($part, 0, 5) === "SDS-C") {
-													$saParameter = "SDS-C";
-												} else if (substr($part, 0, 6) === "SDS-CM") {
-													$saParameter = "SDS-CM";
-												} else if (substr($part, 0, 6) === "SDS-SC") {
-													$saParameter = "SDS-SC";
-												} else {
-													// This re removed all "#" and "/" from the names
-													// also all "-" and "(", ")" should be removed to match
-													// them in the javascript to display the ability
-													$re = '/^[A-Z][A-Z3][A-Z]*/m';
-													preg_match($re, $part, $matches);
-													$saParameter = $matches[0];
-												}
+			// These special abilities are special, because they have "-" or "("
+			// in the name so that the regular expression down there does not
+			// catch them correctly. Remove this if the re is fixed
+			$saParameter = "";
+			if (substr($part, 0, 3) === "ART") {
+				$saParameter = "ART";
+			} else if (substr($part, 0, 3) === "BIM") {
+				$saParameter = "BIM";
+			} else if (substr($part, 0, 3) === "LAM") {
+				$saParameter = "LAM";
+			} else if (substr($part, 0, 5) === "I-TSM") {
+				$saParameter = "I-TSM";
+			} else if (substr($part, 0, 5) === "SDS-C") {
+				$saParameter = "SDS-C";
+			} else if (substr($part, 0, 6) === "SDS-CM") {
+				$saParameter = "SDS-CM";
+			} else if (substr($part, 0, 6) === "SDS-SC") {
+				$saParameter = "SDS-SC";
+			} else {
+				// This re removed all "#" and "/" from the names
+				// also all "-" and "(", ")" should be removed to match
+				// them in the javascript to display the ability
+				$re = '/^[A-Z][A-Z3][A-Z]*/m';
+				preg_match($re, $part, $matches);
+				$saParameter = $matches[0];
+			}
 
-												//if ($i > 1) {
-												//	echo ", ";
-												//}
+			if ($saParameter != null) {
+				$pos = strpos($allSpecialAbilities, $saParameter);
+				if ($pos !== false) {
+					// String is already in the list
+				} else {
+					if ($i > 1) {
+						$allSpecialAbilities = $allSpecialAbilities."|";
+					}
+					$allSpecialAbilities = $allSpecialAbilities.$saParameter;
+				}
+				echo "									<span class='unitSpecialAbility' onclick='javascript:showSpecialAbility(\"".$saParameter."\");'>".$part."</span>\n";
 
-												if ($saParameter != null) {
-													$pos = strpos($allSpecialAbilities, $saParameter);
-													if ($pos !== false) {
-														// String is already in the list
-													} else {
-														if ($i > 1) {
-															$allSpecialAbilities = $allSpecialAbilities."|";
-														}
-														$allSpecialAbilities = $allSpecialAbilities.$saParameter;
-													}
-													//if ($i == 8) {
-													//	echo "<br><br>\n";
-													//}
-													//echo "<span class='datavalue_thin' onclick='javascript:showSpecialAbility(\"".$saParameter."\");'>".$part."</span>\n";
-													echo "									<span class='unitSpecialAbility' onclick='javascript:showSpecialAbility(\"".$saParameter."\");'>".$part."</span>\n";
+				$i++;
+			}
+		}
+	}
 
-													$i++;
-												}
-											}
-										}
-
-										$spaParts = explode(',', $array_PILOT_SPA[$chosenUnitIndex]);
-										if (count($spaParts) >= 1) {
-											foreach ($spaParts as $spaPart) {
-												if ($spaPart !== "") {
-													$spaPart = preg_replace("/\[[^)]+\]/","",$spaPart); // Remove costs: "[2]" from String to save space in gui
-													echo "									<span class='pilotSpecialAbility' onclick='javascript:showSpaInfo(\"".trim($spaPart)."\");'>".trim($spaPart)."</span>\n";
-												}
-											}
-										}
-									?>
+	$spaParts = explode(',', $array_PILOT_SPA[$chosenUnitIndex]);
+	if (count($spaParts) >= 1) {
+		foreach ($spaParts as $spaPart) {
+			if ($spaPart !== "") {
+				$spaPart = preg_replace("/\[[^)]+\]/","",$spaPart); // Remove costs: "[2]" from String to save space in gui
+				$order = array("\"", "'");
+				$replace = "";
+                $spaPartClean = str_replace($order, $replace, $spaPart);
+				echo "									<span class='pilotSpecialAbility' onclick='javascript:showSpaInfo(\"".trim($spaPartClean)."\");'>".trim($spaPart)."</span>\n";
+			}
+		}
+	}
+?>
 								</td>
 							</tr>
 						</table>
