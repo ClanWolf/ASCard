@@ -1267,7 +1267,7 @@ if ($showDistancesHexes == 1) {
 													//	echo "<br><br>\n";
 													//}
 													//echo "<span class='datavalue_thin' onclick='javascript:showSpecialAbility(\"".$saParameter."\");'>".$part."</span>\n";
-													echo "<span class='unitSpecialAbility' onclick='javascript:showSpecialAbility(\"".$saParameter."\");'>".$part."</span>\n";
+													echo "									<span class='unitSpecialAbility' onclick='javascript:showSpecialAbility(\"".$saParameter."\");'>".$part."</span>\n";
 
 													$i++;
 												}
@@ -1279,7 +1279,7 @@ if ($showDistancesHexes == 1) {
 											foreach ($spaParts as $spaPart) {
 												if ($spaPart !== "") {
 													$spaPart = preg_replace("/\[[^)]+\]/","",$spaPart); // Remove costs: "[2]" from String to save space in gui
-													echo "<span class='pilotSpecialAbility' onclick='javascript:showSpaInfo(\"".trim($spaPart)."\");'>".trim($spaPart)."</span>\n";
+													echo "									<span class='pilotSpecialAbility' onclick='javascript:showSpaInfo(\"".trim($spaPart)."\");'>".trim($spaPart)."</span>\n";
 												}
 											}
 										}
