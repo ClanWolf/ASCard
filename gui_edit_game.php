@@ -566,7 +566,7 @@ session_start();
 									echo "							</tr>\n";
 									echo "              			<tr><td colspan='5'><hr></td></tr>\n";
 									echo "							<tr>\n";
-									echo "								<td colspan='5' class='datalabel' nowrap align='left'><ul style='margin:0px;'>";
+									echo "								<td colspan='5' class='datalabel' nowrap align='left'><table style='margin:0px;' width='100%'>";
 
 									$op = "{{{host}}}{{{list}}}";
 									$list = "";
@@ -574,14 +574,32 @@ session_start();
 									$result_asc_players = mysqli_query($conn, $sql_asc_players);
 									if (mysqli_num_rows($result_asc_players) > 0) {
 										while($row = mysqli_fetch_assoc($result_asc_players)) {
+
+											$current_pid = $row['playerid'];
+											$current_round = $row["round"];
+											$current_units_status_list = "";
+
+											$sql_asc_players_units = "SELECT SQL_NO_CACHE * FROM asc_unitstatus WHERE gameid=".$gid." AND round=".$current_round." AND playerid=".$current_pid." AND active_bid=1;";
+											$result_asc_players_units = mysqli_query($conn, $sql_asc_players_units);
+											if (mysqli_num_rows($result_asc_players_units) > 0) {
+												while($row_status = mysqli_fetch_assoc($result_asc_players_units)) {
+													$current_unit_statusimage = $row_status["unit_statusimageurl"];
+													$current_units_status_list = $current_units_status_list."<img width='22px' src='".$current_unit_statusimage."'>";
+												}
+											}
+
+											// https://www.ascard.net/app/images/top-right_phase01.png
+											// https://www.ascard.net/app/images/top-right_phase02.png
+											// https://www.ascard.net/app/images/top-right_phase03.png
+
 											if ($row["hostedgameid"] == $gid) {
-												$host = "								<li><i>".$row["name"]." (R".$row["round"].") - Host</i></li>";
+												$host = "								<tr><td width='10%'>●&nbsp;<i>".$row["name"]." (R".$current_round.") - Host</i>&nbsp;&nbsp;&nbsp;</td><td align='left'><img width='22px' src='./images/top-right_phase01.png'></td><td align='left'><img width='22px' src='./images/top-right_phase02.png'></td><td align='left'><img width='22px' src='./images/top-right_phase03.png'></td><td width='80%' align='right'>".$current_units_status_list."</td></tr>";
 												$op = str_replace("{{{host}}}",$host,$op);
 											} else if ($row["opfor"] == 1) {
-												$player = "								<li>".$row["name"]." (R".$row["round"].") - OpFor</li>";
+												$player = "								<tr><td width='10%'>●&nbsp;".$row["name"]." (R".$current_round.") - OpFor&nbsp;&nbsp;&nbsp;</td><td align='left'><img width='22px' src='./images/top-right_phase01.png'></td><td align='left'><img width='22px' src='./images/top-right_phase02.png'></td><td align='left'><img width='22px' src='./images/top-right_phase03.png'></td><td width='80%' align='right'>".$current_units_status_list."</td></tr>";
 												$list = $list.$player;
 											} else {
-												$player = "								<li>".$row["name"]." (R".$row["round"].")</li>";
+												$player = "								<tr><td width='10%'>●&nbsp;".$row["name"]." (R".$current_round.")&nbsp;&nbsp;&nbsp;</td><td align='left'><img width='22px' src='./images/top-right_phase01.png'></td><td align='left'><img width='22px' src='./images/top-right_phase02.png'></td><td align='left'><img width='22px' src='./images/top-right_phase03.png'></td><td width='80%' align='right'>".$current_units_status_list."</td></tr>";
 												$list = $list.$player;
 											}
 										}
@@ -589,7 +607,7 @@ session_start();
 										echo $op;
 									}
 
-									echo "								</ul></td>\n";
+									echo "								</table></td>\n";
 									echo "							</tr>\n";
 								}
 							?>
