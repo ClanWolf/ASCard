@@ -710,6 +710,11 @@ session_start();
 			$phaseButton = "./images/top-right_phase00.png";
 		}
 
+		if ($array_UNIT_STATUSSTRING[$i4] == "destroyed") {
+			$unitstatusimage = "./images/skull.png";
+			$phaseButton = "./images/skull.png";
+		}
+
 		//$memodel = $array_UNIT_MODEL[$i4];
 		$memodel = $array_UNIT_NAME_CLAN[$i4];
 
@@ -863,6 +868,9 @@ session_start();
 			}
 			if ($item['round_moved'] > 0 && $item['round_fired'] > 0) {
 				$imagestatuslnk = "./images/top-right_phase03.png";
+			}
+			if ($item['status'] == "destroyed") {
+				$imagestatuslnk = "./images/skull.png";
 			}
 
 			if ($item['size'] == 1) {

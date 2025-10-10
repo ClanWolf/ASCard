@@ -1036,6 +1036,9 @@ function setCircles(h, heat_PREP_ENGINEHIT_value, a, s, e, fc, mp, w, e_cv, fc_c
 		if (document.getElementById('unitroundstatusimagemenu') != null) {
 			document.getElementById('unitroundstatusimagemenu').src="./images/skull.png";
 		}
+//		if (document.getElementById('unitroundstatusimagemenuinactiveunit') != null) {
+//			document.getElementById('unitroundstatusimagemenuinactiveunit').src="./images/skull.png";
+//		}
 	} else if (updatedmovementpointsground == 0) {
 		tmpTMM = -4;
 		document.getElementById("TMM").innerHTML = tmpTMM;

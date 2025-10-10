@@ -481,7 +481,11 @@ session_start();
 		$joinedPlayerId = $array_joinedPlayersIds[$i];
 
 		if ($pname != $joinedPlayerName) {
-			echo "							<tr><td class='datalabel'>".$joinedPlayerName."</td><td nowrap align='right' width='3%'>&nbsp;&nbsp;&nbsp;<span style='font-size:16px;color:#ddd;' onclick='javascript:resetGameForPlayer(".$hgid.",\"".$joinedPlayerId."\",1);'><i class='fas fa-minus-square'></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>\n";
+			if ($playMode) {
+				echo "							<tr><td class='datalabel'>".$joinedPlayerName."</td><td nowrap align='right' width='3%'>&nbsp;&nbsp;&nbsp;<span style='font-size:16px;color:#ddd;' onclick=''></span></td></tr>\n";
+			} else {
+				echo "							<tr><td class='datalabel'>".$joinedPlayerName."</td><td nowrap align='right' width='3%'>&nbsp;&nbsp;&nbsp;<span style='font-size:16px;color:#ddd;' onclick='javascript:resetGameForPlayer(".$hgid.",\"".$joinedPlayerId."\",1);'><i class='fas fa-minus-square'></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>\n";
+			}
 		}
 	}
 ?>
@@ -510,7 +514,7 @@ session_start();
 //								echo "[2]          : ".$array_joinedPlayers[2]."<br>";
 //								echo "locked       : ".$LOCKED."<br>";
 
-								if ($gid == $hgid) { // I am a member of my own hosted game, so I am joined nowhere else
+								if ($gid == $hgid) { // I am a member of my own hosted game, so I am joined no-where else
 									if (sizeOf($array_joinedPlayers) == 1) { // size must be one, because I am in my own game
 										if ($LOCKED) {
 											echo "							<tr>\n";
@@ -530,16 +534,16 @@ session_start();
 											echo "							</tr>\n";
 										} else {
 											echo "							<tr>\n";
-											echo "								<td colspan='5' class='datalabel' nowrap align='center'>You cannot join elsewhere!<br>Your game needs to be LOCKED and EMPTY.</td>\n";
+											echo "								<td colspan='5' class='datalabel' nowrap align='center'>Your game needs to be LOCKED and EMPTY to join another game.</td>\n";
 											echo "							</tr>\n";
 										}
 									} else {
 										echo "							<tr>\n";
-										echo "								<td colspan='5' class='datalabel' nowrap align='center'>You cannot join elsewhere!<br>Your game needs to be LOCKED and EMPTY.</td>\n";
+										echo "								<td colspan='5' class='datalabel' nowrap align='center'>Your game needs to be LOCKED and EMPTY to join another game.</td>\n";
 										echo "							</tr>\n";
 									}
-								} else {
-									$sql_asc_game2 = "SELECT SQL_NO_CACHE * FROM asc_game where gameId = " . $gid . ";";
+								} else { // I am joined in someone elses game
+									$sql_asc_game2 = "SELECT SQL_NO_CACHE * FROM asc_game where gameId = ".$gid.";";
 									$result_asc_game2 = mysqli_query($conn, $sql_asc_game2);
 									if (mysqli_num_rows($result_asc_game2) > 0) {
 										while($rowg2 = mysqli_fetch_assoc($result_asc_game2)) {
@@ -551,7 +555,7 @@ session_start();
 											$joinedGame_GAMEYEAR = $rowg2["yearInGame"];
 										}
 									}
-									echo "							<tr>\n";
+									echo "<tr>\n";
 									echo "								<td colspan='1' class='datalabel' nowrap align='left'>You are in:</td>\n";
 									echo "								<td colspan='3' class='datalabel' nowrap align='left'>G".$gid.": ".$joinedGame_TITLE."</td>\n";
 									if ($playMode) {
@@ -564,86 +568,90 @@ session_start();
 									echo "								<td colspan='1' class='datalabel' nowrap align='left'></td>\n";
 									echo "								<td colspan='4' class='datalabel' nowrap align='left'><br>".$joinedGame_BACKGROUND."</td>\n";
 									echo "							</tr>\n";
-									echo "              			<tr><td colspan='5'><hr></td></tr>\n";
-									echo "							<tr>\n";
-									echo "								<td colspan='5' class='datalabel' nowrap align='left'><table style='margin:0px;' width='100%'>";
+								}
 
-									$op = "{{{host}}}{{{list}}}";
-									$list = "";
-									$sql_asc_players = "SELECT SQL_NO_CACHE * FROM asc_player WHERE gameid=".$gid." ORDER BY opfor ASC, name ASC;";
-									$result_asc_players = mysqli_query($conn, $sql_asc_players);
-									if (mysqli_num_rows($result_asc_players) > 0) {
-										while($row = mysqli_fetch_assoc($result_asc_players)) {
+								// Playerlist of my current game
+								echo "							<tr><td colspan='5'><hr></td></tr>\n";
+								echo "							<tr>\n";
+								echo "								<td colspan='5' class='datalabel' nowrap align='left'>\n";
+								echo "									<table style='margin:0px;' width='100%'>\n";
 
-											$current_pid = $row['playerid'];
-											$current_round = $row["round"];
+								$op = "{{{host}}}{{{list}}}";
+								$list = "";
+								$sql_asc_players = "SELECT SQL_NO_CACHE * FROM asc_player WHERE gameid=".$gid." ORDER BY opfor ASC, name ASC;";
+								$result_asc_players = mysqli_query($conn, $sql_asc_players);
+								if (mysqli_num_rows($result_asc_players) > 0) {
+									while($row = mysqli_fetch_assoc($result_asc_players)) {
 
-											$units_toMoveCount = 0;
-											$units_toFireCount = 0;
-											$units_finishedCount = 0;
-											$units_operationalCount = 0;
-											$units_destroyedCount = 0;
-											$units_allCount = 0;
+										$current_pid = $row['playerid'];
+										$current_round = $row["round"];
 
-											$sql_asc_players_units = "SELECT SQL_NO_CACHE * FROM asc_unitstatus us, asc_assign a WHERE us.gameid=".$gid." AND us.round=".$current_round." AND us.playerid=".$current_pid." AND a.unitid = us.unitid AND us.active_bid=1;";
-											$result_asc_players_units = mysqli_query($conn, $sql_asc_players_units);
-											if (mysqli_num_rows($result_asc_players_units) > 0) {
-												while($row_status = mysqli_fetch_assoc($result_asc_players_units)) {
-													$current_unit_status = $row_status["unit_status"];
-													$current_unit_move = $row_status["round_moved"];
-													$current_unit_fire = $row_status["round_fired"];
+										$units_toMoveCount = 0;
+										$units_toFireCount = 0;
+										$units_finishedCount = 0;
+										$units_operationalCount = 0;
+										$units_destroyedCount = 0;
+										$units_allCount = 0;
 
-													if ($current_unit_status !== "destroyed") {
-														$units_operationalCount = $units_operationalCount + 1;
-														$units_allCount = $units_allCount + 1;
+										$sql_asc_players_units = "SELECT SQL_NO_CACHE * FROM asc_unitstatus us, asc_assign a WHERE us.gameid=".$gid." AND us.round=".$current_round." AND us.playerid=".$current_pid." AND a.unitid = us.unitid AND us.active_bid=1;";
+										$result_asc_players_units = mysqli_query($conn, $sql_asc_players_units);
+										if (mysqli_num_rows($result_asc_players_units) > 0) {
+											while($row_status = mysqli_fetch_assoc($result_asc_players_units)) {
+												$current_unit_status = $row_status["unit_status"];
+												$current_unit_move = $row_status["round_moved"];
+												$current_unit_fire = $row_status["round_fired"];
 
-														if ($current_unit_move == 0 && $current_unit_fire == 0) {
-															$units_toMoveCount = $units_toMoveCount + 1;
-														} else if ($current_unit_move > 0 && $current_unit_fire == 0) {
-															$units_toFireCount = $units_toFireCount + 1;
-														} else if ($current_unit_move > 0 && $current_unit_fire > 0) {
-															$units_finishedCount = $units_finishedCount + 1;
-														}
-													} else {
-														$units_destroyedCount = $units_destroyedCount + 1;
-														$units_allCount = $units_allCount + 1;
+												if ($current_unit_status !== "destroyed") {
+													$units_operationalCount = $units_operationalCount + 1;
+													$units_allCount = $units_allCount + 1;
+
+													if ($current_unit_move == 0 && $current_unit_fire == 0) {
+														$units_toMoveCount = $units_toMoveCount + 1;
+													} else if ($current_unit_move > 0 && $current_unit_fire == 0) {
+														$units_toFireCount = $units_toFireCount + 1;
+													} else if ($current_unit_move > 0 && $current_unit_fire > 0) {
+														$units_finishedCount = $units_finishedCount + 1;
 													}
+												} else {
+													$units_destroyedCount = $units_destroyedCount + 1;
+													$units_allCount = $units_allCount + 1;
 												}
 											}
-
-											if ($row["hostedgameid"] == $gid) {
-												$host = "								<tr><td width='40%'>●&nbsp;".$row["name"]." (R".$current_round.") - <span style='color:blue;'>BluFor (Host)</span>&nbsp;&nbsp;&nbsp;</td>";
-												$host = $host."<td align='left'><img width='22px' src='./images/top-right_phase01.png'></td><td width='1%'>".$units_toMoveCount."</td>";
-												$host = $host."<td align='left'><img width='22px' src='./images/top-right_phase02.png'></td><td width='1%'>".$units_toFireCount."</td>";
-												$host = $host."<td align='left'><img width='22px' src='./images/top-right_phase03.png'></td><td width='1%'>".$units_finishedCount."</td>";
-												$host = $host."<td width='80%' align='right'>".$units_destroyedCount." / ".$units_allCount."&nbsp;&nbsp;<img width='22px' src='./images/skull.png'></td>";
-												$host = $host."</tr>\n";
-												$op = str_replace("{{{host}}}",$host,$op);
-											} else if ($row["opfor"] == 1) {
-												$player = "								<tr><td width='40%'>●&nbsp;".$row["name"]." (R".$current_round.") - <span style='color:red;'>OpFor</span>&nbsp;&nbsp;&nbsp;</td>";
-												$player = $player."<td align='left'><img width='22px' src='./images/top-right_phase01.png'></td><td width='1%'>".$units_toMoveCount."</td>";
-												$player = $player."<td align='left'><img width='22px' src='./images/top-right_phase02.png'></td><td width='1%'>".$units_toFireCount."</td>";
-												$player = $player."<td align='left'><img width='22px' src='./images/top-right_phase03.png'></td><td width='1%'>".$units_finishedCount."</td>";
-												$player = $player."<td width='80%' align='right'>".$units_destroyedCount." / ".$units_allCount."&nbsp;&nbsp;<img width='22px' src='./images/skull.png'></td>";
-												$player = $player."</tr>\n";
-												$list = $list.$player;
-											} else {
-												$player = "								<tr><td width='40%'>●&nbsp;".$row["name"]." (R".$current_round.") - <span style='color:blue;'>BluFor</span>&nbsp;&nbsp;&nbsp;</td>";
-												$player = $player."<td align='left'><img width='22px' src='./images/top-right_phase01.png'></td><td width='1%'>".$units_toMoveCount."</td>";
-												$player = $player."<td align='left'><img width='22px' src='./images/top-right_phase02.png'></td><td width='1%'>".$units_toFireCount."</td>";
-												$player = $player."<td align='left'><img width='22px' src='./images/top-right_phase03.png'></td><td width='1%'>".$units_finishedCount."</td>";
-												$player = $player."<td width='80%' align='right'>".$units_destroyedCount." / ".$units_allCount."&nbsp;&nbsp;<img width='22px' src='./images/skull.png'></td>";
-												$player = $player."</tr>\n";
-												$list = $list.$player;
-											}
 										}
-										$op = str_replace("{{{list}}}",$list,$op);
-										echo $op;
-									}
 
-									echo "								</table></td>\n";
-									echo "							</tr>\n";
+										if ($row["hostedgameid"] == $gid) {
+											$host = "										<tr><td width='40%'>●&nbsp;".$row["name"]." (R".$current_round.") - <span style='color:blue;'>BluFor (Host)</span>&nbsp;&nbsp;&nbsp;</td>";
+											$host = $host."<td align='left'><img width='22px' src='./images/top-right_phase01.png'></td><td width='1%'>".$units_toMoveCount."</td>";
+											$host = $host."<td align='left'><img width='22px' src='./images/top-right_phase02.png'></td><td width='1%'>".$units_toFireCount."</td>";
+											$host = $host."<td align='left'><img width='22px' src='./images/top-right_phase03.png'></td><td width='1%'>".$units_finishedCount."</td>";
+											$host = $host."<td width='80%' align='right'>".$units_destroyedCount." / ".$units_allCount."&nbsp;&nbsp;<img width='22px' src='./images/skull.png'></td>";
+											$host = $host."</tr>\n";
+											$op = str_replace("{{{host}}}",$host,$op);
+										} else if ($row["opfor"] == 1) {
+											$player = "										<tr><td width='40%'>●&nbsp;".$row["name"]." (R".$current_round.") - <span style='color:red;'>OpFor</span>&nbsp;&nbsp;&nbsp;</td>";
+											$player = $player."<td align='left'><img width='22px' src='./images/top-right_phase01.png'></td><td width='1%'>".$units_toMoveCount."</td>";
+											$player = $player."<td align='left'><img width='22px' src='./images/top-right_phase02.png'></td><td width='1%'>".$units_toFireCount."</td>";
+											$player = $player."<td align='left'><img width='22px' src='./images/top-right_phase03.png'></td><td width='1%'>".$units_finishedCount."</td>";
+											$player = $player."<td width='80%' align='right'>".$units_destroyedCount." / ".$units_allCount."&nbsp;&nbsp;<img width='22px' src='./images/skull.png'></td>";
+											$player = $player."</tr>\n";
+											$list = $list.$player;
+										} else {
+											$player = "										<tr><td width='40%'>●&nbsp;".$row["name"]." (R".$current_round.") - <span style='color:blue;'>BluFor</span>&nbsp;&nbsp;&nbsp;</td>";
+											$player = $player."<td align='left'><img width='22px' src='./images/top-right_phase01.png'></td><td width='1%'>".$units_toMoveCount."</td>";
+											$player = $player."<td align='left'><img width='22px' src='./images/top-right_phase02.png'></td><td width='1%'>".$units_toFireCount."</td>";
+											$player = $player."<td align='left'><img width='22px' src='./images/top-right_phase03.png'></td><td width='1%'>".$units_finishedCount."</td>";
+											$player = $player."<td width='80%' align='right'>".$units_destroyedCount." / ".$units_allCount."&nbsp;&nbsp;<img width='22px' src='./images/skull.png'></td>";
+											$player = $player."</tr>\n";
+											$list = $list.$player;
+										}
+									}
+									$op = str_replace("{{{list}}}",$list,$op);
+									echo $op;
 								}
+
+								echo "									</table>\n";
+								echo "								</td>\n";
+								echo "							</tr>\n";
 							?>
 						</table>
 					</form>
@@ -683,17 +691,16 @@ session_start();
 		if ($playMode) {
 			echo "<p align='center' class='footerInfo'>Hosting a game!</p>\n";
 		} else {
-			echo "<p align='center' class='footerInfo'>Players can join your game with your code!</p>\n";
+			echo "<p align='center' class='footerInfo'>Players can join a game with the code!<br>Locked games will NOT show up!</p>\n";
 		}
 	} else {
 		$host = false; // gameid is not equal my own game id: I joined another players game
 		if ($playMode) {
 			echo "<p align='center' class='footerInfo'>Joined in a game!</p>\n";
 		} else {
-			echo "<p align='center' class='footerInfo'>Locked games will NOT show up to join! Access code is needed to join!</p>\n";
+			echo "<p align='center' class='footerInfo'>Joined in a game!</p>\n";
 		}
 	}
-
 ?>
 </body>
 
