@@ -211,7 +211,7 @@ session_start();
 		}
 		.scroll-pane {
 			width: 100%;
-			height: 180px;
+			height: 140px;
 			overflow: auto;
 		}
 		.horizontal-only {
@@ -229,13 +229,14 @@ session_start();
 		});
 		$(document).ready(function() {
 			$("#cover").hide();
+			window.frames["saveframe"].location.replace("./version.txt");
 		});
 	</script>
 
 	<div id="cover"></div>
 
 	<iframe name="pollframe" id="iframe_serverpoll" src="server_poll.php"></iframe>
-	<iframe name="saveframe" id="iframe_save"></iframe>
+	<iframe name="saveframe" id="iframe_save" src="./version.txt"></iframe>
 	<script type="text/javascript" src="./scripts/log_enable.js"></script>
 
 	<script>
@@ -397,9 +398,11 @@ session_start();
 								</td>
 							</tr>
 
+							<!--
 							<tr>
 								<td colspan="6">&nbsp;</td>
 							</tr>
+							-->
 
 							<tr>
 								<td colspan="1" class='datalabel' nowrap align="left">
@@ -449,16 +452,15 @@ session_start();
 							</tr>
 
 							<tr>
-								<td colspan="6">&nbsp;</td>
-							</tr>
-
-							<tr>
 								<td nowrap align="left" width="3%"><a href='#' onClick='javascript:saveGameAccessCode(<?php echo $gid ?>);'><i class="fa-solid fa-rotate-right"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
 								<td class='datalabel' nowrap align="left" width="3%">Code:</td>
 								<td class='datalabel' nowrap align="left" width="94%" colspan="3" id="accesscode">
 									<?php echo $ACCESSCODE; ?>
 								</td>
-								<td class='datalabel' nowrap align="right" width="94%">
+							</tr>
+
+							<tr>
+								<td colspan="6" class='datalabel' nowrap align="right" valign="bottom" width="100%">
 									<a href='#' onClick='saveGameInfo(<?php echo $hgid ?>);'><i class='fa-solid fa-save'></i></a>&nbsp;&nbsp;&nbsp;
 								</td>
 							</tr>
@@ -494,11 +496,11 @@ session_start();
 				</td>
 			</tr>
 <?php
-		if ($gid != $hgid) {
-			echo "			<tr style='display:none;'><td colspan='3'><hr></td></tr>\n";
-		} else {
-			echo "			<tr><td colspan='3'><hr></td></tr>\n";
-		}
+//		if ($gid != $hgid) {
+//			echo "			<tr style='display:none;'><td colspan='3'><hr></td></tr>\n";
+//		} else {
+//			echo "			<tr><td colspan='3'><hr></td></tr>\n";
+//		}
 ?>
 			<tr>
 				<td class='datalabel' colspan="3">
@@ -517,6 +519,9 @@ session_start();
 								if ($gid == $hgid) { // I am a member of my own hosted game, so I am joined no-where else
 									if (sizeOf($array_joinedPlayers) == 1) { // size must be one, because I am in my own game
 										if ($LOCKED) {
+
+											echo "							<tr><td colspan='5'><hr></td></tr>\n";
+
 											echo "							<tr>\n";
 											echo "								<td width='5%' colspan='1' class='datalabel' nowrap align='left'>Join:</td>\n";
 											echo "								<td width='60%' colspan='1' class='datalabel' nowrap align='left'>\n";
@@ -533,14 +538,14 @@ session_start();
 											echo "								<td width='5%' colspan='1' class='datalabel' nowrap align='right'><a href='#' onClick='joinGame(".$pid.");'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class='fas fa-plus-square'></i></a></td>\n";
 											echo "							</tr>\n";
 										} else {
-											echo "							<tr>\n";
-											echo "								<td colspan='5' class='datalabel' nowrap align='center'>Your game needs to be LOCKED and EMPTY to join another game.</td>\n";
-											echo "							</tr>\n";
+//											echo "							<tr>\n";
+//											echo "								<td colspan='5' class='datalabel' nowrap align='center'>Your game needs to be LOCKED and EMPTY to join another game.</td>\n";
+//											echo "							</tr>\n";
 										}
 									} else {
-										echo "							<tr>\n";
-										echo "								<td colspan='5' class='datalabel' nowrap align='center'>Your game needs to be LOCKED and EMPTY to join another game.</td>\n";
-										echo "							</tr>\n";
+//										echo "							<tr>\n";
+//										echo "								<td colspan='5' class='datalabel' nowrap align='center'>Your game needs to be LOCKED and EMPTY to join another game.</td>\n";
+//										echo "							</tr>\n";
 									}
 								} else { // I am joined in someone elses game
 									$sql_asc_game2 = "SELECT SQL_NO_CACHE * FROM asc_game where gameId = ".$gid.";";
@@ -571,16 +576,17 @@ session_start();
 								}
 
 								// Playerlist of my current game
-								echo "							<tr><td colspan='5'><hr></td></tr>\n";
-								echo "							<tr>\n";
-								echo "								<td colspan='5' class='datalabel' nowrap align='left'>\n";
-								echo "									<table style='margin:0px;' width='100%'>\n";
-
 								$op = "{{{host}}}{{{list}}}";
 								$list = "";
 								$sql_asc_players = "SELECT SQL_NO_CACHE * FROM asc_player WHERE gameid=".$gid." ORDER BY opfor ASC, name ASC;";
 								$result_asc_players = mysqli_query($conn, $sql_asc_players);
-								if (mysqli_num_rows($result_asc_players) > 0) {
+								if (mysqli_num_rows($result_asc_players) > 1) {
+
+									echo "							<tr><td colspan='5'><hr></td></tr>\n";
+									echo "							<tr>\n";
+									echo "								<td colspan='5' class='datalabel' nowrap align='left'>\n";
+									echo "									<table style='margin:0px;' width='100%'>\n";
+
 									while($row = mysqli_fetch_assoc($result_asc_players)) {
 
 										$current_pid = $row['playerid'];
@@ -647,11 +653,12 @@ session_start();
 									}
 									$op = str_replace("{{{list}}}",$list,$op);
 									echo $op;
+									echo "									</table>\n";
+									echo "								</td>\n";
+									echo "							</tr>\n";
 								}
 
-								echo "									</table>\n";
-								echo "								</td>\n";
-								echo "							</tr>\n";
+
 							?>
 						</table>
 					</form>
@@ -686,21 +693,21 @@ session_start();
 	</div>
 
 <?php
-	if ($gid == $hgid) {
-		$host = true; // in my own game: I am the host or not joined anywhere else
-		if ($playMode) {
-			echo "<p align='center' class='footerInfo'>Hosting a game!</p>\n";
-		} else {
-			echo "<p align='center' class='footerInfo'>Players can join a game with the code!<br>Locked games will NOT show up!</p>\n";
-		}
-	} else {
-		$host = false; // gameid is not equal my own game id: I joined another players game
-		if ($playMode) {
-			echo "<p align='center' class='footerInfo'>Joined in a game!</p>\n";
-		} else {
-			echo "<p align='center' class='footerInfo'>Joined in a game!</p>\n";
-		}
-	}
+//	if ($gid == $hgid) {
+//		$host = true; // in my own game: I am the host or not joined anywhere else
+//		if ($playMode) {
+//			echo "<p align='center' class='footerInfo'>Hosting a game!</p>\n";
+//		} else {
+//			echo "<p align='center' class='footerInfo'>Players can join a game with the code!<br>Locked games will NOT show up!</p>\n";
+//		}
+//	} else {
+//		$host = false; // gameid is not equal my own game id: I joined another players game
+//		if ($playMode) {
+//			echo "<p align='center' class='footerInfo'>Joined in a game!</p>\n";
+//		} else {
+//			echo "<p align='center' class='footerInfo'>Joined in a game!</p>\n";
+//		}
+//	}
 ?>
 </body>
 

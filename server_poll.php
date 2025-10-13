@@ -51,10 +51,20 @@
     }
     mysqli_free_result($result_currentGameTimestamp);
 
-	echo "gid: ".$gid."/".$currentGameId."<br>\n";
+	echo "gid: ".$gid." (session) / ".$currentGameId." (db)<br>\n";
 	echo "".$gts_s." gts_s (session)<br>\n";
 	echo "".$gts_d." gts_d (db)<br>\n";
 	echo "".$cts." cts (now)<br>\n";
+
+	if ($gid != $currentGameId) {
+		// The gameid from the db and in the current session are not the same
+		// The logged in user might have been kicked from a game!
+
+		// Set the gameid in the session to the id that came from the database
+		$_SESSION['gameid'] = $currentGameId;
+		//echo ("<script>alert('Changed game id to ".$currentGameId."');</script>");
+		echo "<script>top.window.location = './gui_message_removed_from_game.php'</script>\n";
+	}
 
 	echo "	</p>\n";
 	echo "</body>\n";

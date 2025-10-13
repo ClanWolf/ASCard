@@ -11,20 +11,24 @@
 
 	$gid = isset($_GET["gid"]) ? filter_var($_GET["gid"], FILTER_VALIDATE_INT) : "";
 	$pid = isset($_GET["pid"]) ? filter_var($_GET["pid"], FILTER_VALIDATE_INT) : "";
-	$leaveGame = isset($_GET["leaveCurrentGame"]) ? filter_var($_GET["leaveCurrentGame"], FILTER_VALIDATE_BOOLEAN) : "";
-	$joinGame = isset($_GET["joinGame"]) ? filter_var($_GET["joinGame"], FILTER_VALIDATE_BOOLEAN) : "";
+	$leaveGame = isset($_GET["leaveCurrentGame"]) ? filter_var($_GET["leaveCurrentGame"], FILTER_VALIDATE_BOOLEAN) : 0;
+	$joinGame = isset($_GET["joinGame"]) ? filter_var($_GET["joinGame"], FILTER_VALIDATE_BOOLEAN) : 0;
 	$accessCode = isset($_GET["accessCode"]) ? filter_var($_GET["accessCode"], FILTER_VALIDATE_INT) : "";
+
+	$currentPlayerId = $_SESSION['playerid'];
+	$hgameid = $_SESSION['hostedgameid'];
 
 	echo "<!DOCTYPE html>\n";
 	echo "<html lang='en'>\n";
 	echo "<body>\n";
 	echo "<p style='font-family:Arial,sans-serif;font-size:14px;color:yellow;'>\n";
 
-	echo "GameId:     ".$gid."<br>\n";
-	echo "PlayerId:   ".$pid."<br>\n";
-	echo "LeaveGame:  ".$leaveGame."<br>\n";
-	echo "JoinGame:   ".$joinGame." (boolean)<br>\n";
-	echo "AccessCode: ".$accessCode."<br>\n";
+	echo "GameId:       ".$gid."<br>\n";
+	echo "Current hgid: ".$hgameid."<br>\n";
+	echo "PlayerId:     ".$pid."<br>\n";
+	echo "LeaveGame:    ".$leaveGame."<br>\n";
+	echo "JoinGame:     ".$joinGame." (boolean)<br>\n";
+	echo "AccessCode:   ".$accessCode."<br>\n";
 	echo "---------------------------------------------<br>\n";
 
 	if ($joinGame && $leaveGame) {
@@ -213,6 +217,34 @@
 			die('ERROR 7');
 		}
 
+
+
+
+
+//		// Update game timestamp
+//		$sqlUpdateGame = "";
+//		$sqlUpdateGame = $sqlUpdateGame . "UPDATE asc_game ";
+//		$sqlUpdateGame = $sqlUpdateGame . "SET ";
+//		$sqlUpdateGame = $sqlUpdateGame . "Updated=now(), ";
+//		$sqlUpdateGame = $sqlUpdateGame . "where gameid=".$newgameid.";";
+//
+//		echo $sqlUpdateGame;
+//
+//		if (mysqli_query($conn, $sqlUpdateGame)) {
+//		    echo "<br>";
+//		    echo "Record (game) updated successfully<br>";
+//		    mysqli_commit($conn);
+//		} else {
+//		    echo "<br>";
+//		    echo "Error (game) updating record: ".mysqli_error($conn)."<br>";
+//			die('ERROR 17');
+//		}
+
+
+
+
+
+
 		// Update Assignment
 		$sqlUpdateAssignment = "";
 		$sqlUpdateAssignment = $sqlUpdateAssignment . "UPDATE asc_assign ";
@@ -228,7 +260,13 @@
 			echo "Record (assignment) updated successfully<br>";
 			mysqli_commit($conn);
 
-			echo "<script>top.window.location = './gui_message_round_reset.php'</script>";
+			//echo "<script>alert(".$joinGame.");</script>\n";
+
+			if ($joinGame == 0) { // && $currentPlayerId == $pid) {
+				echo "<script>top.window.location = './gui_message_round_reset.php'</script>";
+			} else {
+				echo "<script>top.window.location = './gui_message_joined_game.php'</script>";
+			}
 		} else {
 			echo "<br>";
 			echo "Error (assignment) updating record: ".mysqli_error($conn)."<br>";

@@ -21,17 +21,29 @@
 	echo "<br>\n";
 
 	if (!empty($gid)) {
-		$update_gamelock = "UPDATE asc_game SET locked = ".$locked." WHERE gameid=".$gid;
-		if (mysqli_query($conn, $update_gamelock)) {
-			echo "<br>";
-			echo "Game info updated successfully<br>";
+		$sql_asc_lockcheck = "SELECT SQL_NO_CACHE locked FROM asc_game where gameid=".$gid;
+		$result_asc_lockcheck = mysqli_query($conn, $sql_asc_lockcheck);
+		if (mysqli_num_rows($result_asc_lockcheck) > 0) {
+		    while($row3331 = mysqli_fetch_assoc($result_asc_lockcheck)) {
+		        $foundvalue = $row3331["locked"];
+		    }
+		}
+		mysqli_free_result($result_asc_lockcheck);
 
-			echo "<script>\n";
-			echo "	top.location.reload();\n";
-			echo "</script>\n";
-		} else {
-			echo "<br>";
-			echo "Error updating game info: " . mysqli_error($conn) . "<br>";
+		if ($foundvalue != $locked) {
+			$update_gamelock = "UPDATE asc_game SET locked = ".$locked." WHERE gameid=".$gid;
+			if (mysqli_query($conn, $update_gamelock)) {
+				echo "<br>";
+				echo "Game info updated successfully<br>";
+
+				echo "<script>\n";
+				//echo "	window.parent.location.reload();\n";
+				echo "	top.location.reload();\n";
+				echo "</script>\n";
+			} else {
+				echo "<br>";
+				echo "Error updating game info: " . mysqli_error($conn) . "<br>";
+			}
 		}
 	}
 

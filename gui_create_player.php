@@ -65,10 +65,10 @@ session_start();
 				}
 				$newcommandid = mysqli_insert_id($conn);
 
-				$sqlinsertformation = "INSERT INTO asc_formation (factionid, commandid, formationname, playerid) VALUES ";
-				$sqlinsertformation = $sqlinsertformation . "(".$newplayerfactionid.", ".$newcommandid.", 'Command', ".$newplayerid."), ";
-				$sqlinsertformation = $sqlinsertformation . "(".$newplayerfactionid.", ".$newcommandid.", 'Battle', ".$newplayerid."), ";
-				$sqlinsertformation = $sqlinsertformation . "(".$newplayerfactionid.", ".$newcommandid.", 'Striker', ".$newplayerid.")";
+				$sqlinsertformation = "INSERT INTO asc_formation (factionid, commandid, formationname, formationshort, playerid) VALUES ";
+				$sqlinsertformation = $sqlinsertformation . "(".$newplayerfactionid.", ".$newcommandid.", 'Command', 'Command', ".$newplayerid."), ";
+				$sqlinsertformation = $sqlinsertformation . "(".$newplayerfactionid.", ".$newcommandid.", 'Battle', 'Battle', ".$newplayerid."), ";
+				$sqlinsertformation = $sqlinsertformation . "(".$newplayerfactionid.", ".$newcommandid.", 'Striker', 'Striker', ".$newplayerid.")";
 				if (mysqli_query($conn, $sqlinsertformation)) {
 					// Success inserting formations for new player
 				} else {

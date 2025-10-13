@@ -37,5 +37,5 @@
 	"background_color": "#323232",
 	"theme_color": "#282828",
 	"display": "fullscreen",
-	"orientation": "landscape"
+	"orientation": "landscape-primary"
 }
