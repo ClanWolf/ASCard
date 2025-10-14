@@ -68,7 +68,10 @@
 	}
 
 	if ($gts_d > $gts_s) {
-		echo "<script>alert('new game found, refresh!');</script>\n";
+		$_SESSION["gameTimestamp"] = $gts_d;
+
+		//echo "<script>alert('new game found, refresh!');</script>\n";
+		echo "<script>top.location.reload();</script>";
 	}
 
 	echo "	</p>\n";

@@ -377,10 +377,12 @@
 					let spaStringList = "";
 					for (var i = 0; i < pilotSpaArray.length; i++) {
 						spaElement = pilotSpaArray[i].trim();
-						spaCostElement = Number(spaElement.match(rx)[1]);
-						spaStringList = spaStringList + "<span onclick='javascript:removeSpa("+ indexCounter + ");'>" + spaElement + "&nbsp;<i class='fas fa-minus-square'></i></span>&nbsp;&nbsp;&nbsp;";
-						spaCalculatedSum = spaCalculatedSum + spaCostElement;
-						indexCounter++;
+						if (spaElement !== '') {
+							spaCostElement = Number(spaElement.match(rx)[1]);
+							spaStringList = spaStringList + "<span onclick='javascript:removeSpa("+ indexCounter + ");'>" + spaElement + "&nbsp;<i class='fas fa-minus-square'></i></span>&nbsp;&nbsp;&nbsp;";
+							spaCalculatedSum = spaCalculatedSum + spaCostElement;
+							indexCounter++;
+						}
 					}
 					document.getElementById("newSPAs").innerHTML = spaStringList;
 					document.getElementById("sumlabel").innerHTML = spaCalculatedSum;
