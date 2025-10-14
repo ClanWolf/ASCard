@@ -1,4 +1,6 @@
 <?php
+	date_default_timezone_set('Europe/Berlin');
+
 	function getUnitImageByName($unitname) {
 		$image = "Generic.png";
 		$dir = 'images/units/';

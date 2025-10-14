@@ -1,8 +1,10 @@
 <?php
 
-//	ini_set('display_errors', 1);
-//	ini_set('display_startup_errors', 1);
-//	error_reporting(E_ALL);
+	//	ini_set('display_errors', 1);
+	//	ini_set('display_startup_errors', 1);
+	//	error_reporting(E_ALL);
+
+	date_default_timezone_set('Europe/Berlin');
 
 	session_start();
 
@@ -65,7 +67,7 @@
 			echo "<br>";
 			echo "Accesscode does not match<br>";
 			echo "Raise error! Cannot join without access code!<br>\n";
-			echo "<script>top.window.location = './gui_message_joingame_error_01.php'</script>\n";
+			echo "<script>top.window.location = './gui_message_game_joined_error_01.php'</script>\n";
 			die('ERROR 38');
 		}
 	} else {
@@ -217,33 +219,24 @@
 			die('ERROR 7');
 		}
 
+		// Update game timestamp
+		$sqlUpdateGame = "";
+		$sqlUpdateGame = $sqlUpdateGame . "UPDATE asc_game ";
+		$sqlUpdateGame = $sqlUpdateGame . "SET ";
+		$sqlUpdateGame = $sqlUpdateGame . "Updated=now() ";
+		$sqlUpdateGame = $sqlUpdateGame . "WHERE gameid=".$newgameid.";";
 
+		echo $sqlUpdateGame;
 
-
-
-//		// Update game timestamp
-//		$sqlUpdateGame = "";
-//		$sqlUpdateGame = $sqlUpdateGame . "UPDATE asc_game ";
-//		$sqlUpdateGame = $sqlUpdateGame . "SET ";
-//		$sqlUpdateGame = $sqlUpdateGame . "Updated=now(), ";
-//		$sqlUpdateGame = $sqlUpdateGame . "where gameid=".$newgameid.";";
-//
-//		echo $sqlUpdateGame;
-//
-//		if (mysqli_query($conn, $sqlUpdateGame)) {
-//		    echo "<br>";
-//		    echo "Record (game) updated successfully<br>";
-//		    mysqli_commit($conn);
-//		} else {
-//		    echo "<br>";
-//		    echo "Error (game) updating record: ".mysqli_error($conn)."<br>";
-//			die('ERROR 17');
-//		}
-
-
-
-
-
+		if (mysqli_query($conn, $sqlUpdateGame)) {
+		    echo "<br>";
+		    echo "Record (game) updated successfully<br>";
+		    mysqli_commit($conn);
+		} else {
+		    echo "<br>";
+		    echo "Error (game) updating record: ".mysqli_error($conn)."<br>";
+			die('ERROR 17');
+		}
 
 		// Update Assignment
 		$sqlUpdateAssignment = "";
@@ -265,7 +258,7 @@
 			if ($joinGame == 0) { // && $currentPlayerId == $pid) {
 				echo "<script>top.window.location = './gui_message_round_reset.php'</script>";
 			} else {
-				echo "<script>top.window.location = './gui_message_joined_game.php'</script>";
+				echo "<script>top.window.location = './gui_message_game_joined.php'</script>";
 			}
 		} else {
 			echo "<br>";

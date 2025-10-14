@@ -1,8 +1,10 @@
 <?php
 
-//	ini_set('display_errors', 1);
-//	ini_set('display_startup_errors', 1);
-//	error_reporting(E_ALL);
+	//	ini_set('display_errors', 1);
+	//	ini_set('display_startup_errors', 1);
+	//	error_reporting(E_ALL);
+
+	date_default_timezone_set('Europe/Berlin');
 
 	session_start();
 
@@ -18,7 +20,6 @@
 		echo "<script>top.location.assign('./login.php?auto=1');</script>";
 	}
 
-	date_default_timezone_set('Europe/Berlin');
 	$cts=time();
 
 	echo "<!DOCTYPE html>\n";
@@ -63,7 +64,11 @@
 		// Set the gameid in the session to the id that came from the database
 		$_SESSION['gameid'] = $currentGameId;
 		//echo ("<script>alert('Changed game id to ".$currentGameId."');</script>");
-		echo "<script>top.window.location = './gui_message_removed_from_game.php'</script>\n";
+		echo "<script>top.window.location = './gui_message_game_removed.php'</script>\n";
+	}
+
+	if ($gts_d > $gts_s) {
+		echo "<script>alert('new game found, refresh!');</script>\n";
 	}
 
 	echo "	</p>\n";

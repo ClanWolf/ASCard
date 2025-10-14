@@ -1,11 +1,13 @@
 <?php
 
-//ini_set('display_errors', 1);
-//ini_set('display_startup_errors', 1);
-//error_reporting(E_ALL);
+	//	ini_set('display_errors', 1);
+	//	ini_set('display_startup_errors', 1);
+	//	error_reporting(E_ALL);
 
-session_start();
-// https://www.php-einfach.de/php-tutorial/php-sessions/
+	date_default_timezone_set('Europe/Berlin');
+
+	session_start();
+	// https://www.php-einfach.de/php-tutorial/php-sessions/
 	require('./logger.php');
 	require('./db.php');
 	if (!isset($_SESSION['playerid'])) {
