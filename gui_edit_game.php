@@ -693,7 +693,7 @@
 		echo "							<td align='left' width='40%' class='datalabel'>RESET Game (Set round to 1 / Repair all units)</td>\n";
 		echo "							<td align='right' width='40%' class='datalabel'>CLOSE Game (mark as finished)</td>\n";
 		echo "							<td align='center' width='10%' class='datalabel'>\n";
-		echo "								<a href='#' onClick='javascript:finalizeGame(".$gid.");'>&nbsp;&nbsp;<i class='fas fa-fast-backward'></i>&nbsp;&nbsp;&nbsp;&nbsp;</a>\n";
+		echo "								<a href='#' onClick='javascript:finalizeGame(".$gid.");'>&nbsp;&nbsp;<i class="fa-solid fa-flag-checkered"></i>&nbsp;&nbsp;&nbsp;&nbsp;</a>\n";
 		echo "							</td>\n";
 		echo "						</tr>\n";
 		echo "					</table>\n";
