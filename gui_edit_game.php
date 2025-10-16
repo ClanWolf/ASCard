@@ -627,8 +627,10 @@
 											}
 										}
 
+										$linemarker = "●<i class='fa-solid fa-chevron-right'></i>";
+
 										if ($row["hostedgameid"] == $gid) {
-											$host = "										<tr><td width='40%'>●&nbsp;".$row["name"]." (R".$current_round.") - <span style='color:blue;'>BluFor (Host)</span>&nbsp;&nbsp;&nbsp;</td>";
+											$host = "										<tr><td width='40%'>".$linemarker."&nbsp;".$row["name"]." (R".$current_round.") - <span style='color:blue;'>BluFor (Host)</span>&nbsp;&nbsp;&nbsp;</td>";
 											$host = $host."<td align='left'><img width='22px' src='./images/top-right_phase01.png'></td><td width='1%'>".$units_toMoveCount."</td>";
 											$host = $host."<td align='left'><img width='22px' src='./images/top-right_phase02.png'></td><td width='1%'>".$units_toFireCount."</td>";
 											$host = $host."<td align='left'><img width='22px' src='./images/top-right_phase03.png'></td><td width='1%'>".$units_finishedCount."</td>";
@@ -636,7 +638,7 @@
 											$host = $host."</tr>\n";
 											$op = str_replace("{{{host}}}",$host,$op);
 										} else if ($row["opfor"] == 1) {
-											$player = "										<tr><td width='40%'>●&nbsp;".$row["name"]." (R".$current_round.") - <span style='color:red;'>OpFor</span>&nbsp;&nbsp;&nbsp;</td>";
+											$player = "										<tr><td width='40%'>".$linemarker."&nbsp;".$row["name"]." (R".$current_round.") - <span style='color:red;'>OpFor</span>&nbsp;&nbsp;&nbsp;</td>";
 											$player = $player."<td align='left'><img width='22px' src='./images/top-right_phase01.png'></td><td width='1%'>".$units_toMoveCount."</td>";
 											$player = $player."<td align='left'><img width='22px' src='./images/top-right_phase02.png'></td><td width='1%'>".$units_toFireCount."</td>";
 											$player = $player."<td align='left'><img width='22px' src='./images/top-right_phase03.png'></td><td width='1%'>".$units_finishedCount."</td>";
@@ -644,7 +646,7 @@
 											$player = $player."</tr>\n";
 											$list = $list.$player;
 										} else {
-											$player = "										<tr><td width='40%'>●&nbsp;".$row["name"]." (R".$current_round.") - <span style='color:blue;'>BluFor</span>&nbsp;&nbsp;&nbsp;</td>";
+											$player = "										<tr><td width='40%'>".$linemarker."&nbsp;".$row["name"]." (R".$current_round.") - <span style='color:blue;'>BluFor</span>&nbsp;&nbsp;&nbsp;</td>";
 											$player = $player."<td align='left'><img width='22px' src='./images/top-right_phase01.png'></td><td width='1%'>".$units_toMoveCount."</td>";
 											$player = $player."<td align='left'><img width='22px' src='./images/top-right_phase02.png'></td><td width='1%'>".$units_toFireCount."</td>";
 											$player = $player."<td align='left'><img width='22px' src='./images/top-right_phase03.png'></td><td width='1%'>".$units_finishedCount."</td>";
