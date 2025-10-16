@@ -284,6 +284,10 @@
 			var url="./save_game_reset.php?gid="+gameId+"&pid="+playerId+"&leaveCurrentGame="+leaveGame;
 			window.frames["saveframe"].location.replace(url);
 		}
+		function finalizeGame(gameId) {
+			var url="./save_game_finalize.php?gid="+gameId;
+			window.frames["saveframe"].location.replace(url);
+		}
 		function joinGame(playerId) {
 			gameToJoinId = document.getElementById("gameToJoin").value;
 			accessCode = document.getElementById("AccessCode").value;
