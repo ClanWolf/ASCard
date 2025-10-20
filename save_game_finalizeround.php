@@ -48,6 +48,24 @@
 		echo "Currentround: " . $currentRound . "<br>";
 		echo "Nextround: " . $nextRound . "<br><br>";
 
+		$gamestartedtimestamp = "";
+		$sql_asc_game = "SELECT SQL_NO_CACHE * FROM asc_game where gameid = ".$gameid.";";
+		$result_asc_game = mysqli_query($conn, $sql_asc_game);
+		if (mysqli_num_rows($result_asc_game) > 0) {
+			while($row22 = mysqli_fetch_assoc($result_asc_game)) {
+				$temptimestamp = $row22["started"];
+				$gamestartedtimestamp = strtotime($temptimestamp);
+			}
+		}
+
+		echo "Currentgame id: " . $gameid . "<br>";
+		echo "Currentgame start timestamp: " . $gamestartedtimestamp . "<br>";
+
+		echo "<script>alert('".$gamestartedtimestamp."');</script>";
+
+
+
+
 		$formationIds = "";
 		$sql_asc_formation = "SELECT SQL_NO_CACHE * FROM asc_formation where playerid = ".$pid.";";
 		$result_asc_formation = mysqli_query($conn, $sql_asc_formation);

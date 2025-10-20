@@ -132,9 +132,9 @@
 		$buttonWidth = "33.3%"; // 3 columns in the middle
 	} else {
 		if ($isAdmin) {
-			$buttonWidth = "14.5%"; // 7 columns
+			$buttonWidth = "17%"; // 6 columns
 		} else {
-			$buttonWidth = "20.4%"; // 5 columns
+			$buttonWidth = "25%"; // 4 columns
 		}
 	}
 ?>

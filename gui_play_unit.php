@@ -827,22 +827,29 @@
 
 	for ($cc = 0; $cc < sizeof($array_PLAYER_FORMATION_IDS); $cc++) {
 		$currFormId = $array_PLAYER_FORMATION_IDS[$cc];
-		$unitArray = $array_PLAYER_UNITS_IN_FORMATION[$currFormId];
 
-		$active_units_found = false;
-		foreach($unitArray as $item) {
-			if ($item['active_bid'] == 1) {
-				$active_units_found = true;
+		if (array_key_exists($currFormId, $array_PLAYER_UNITS_IN_FORMATION)) {
+			$unitArray = $array_PLAYER_UNITS_IN_FORMATION[$currFormId];
+
+			$active_units_found = false;
+			foreach($unitArray as $item) {
+				if ($item['active_bid'] == 1) {
+					$active_units_found = true;
+				}
 			}
-		}
 
-		if ($unitArray != null && $active_units_found) {
-			echo "			<td width='33%' nowrap style='width:270px;height:30px;vertical-align:middle;' onclick='location.href=\"gui_play_unit.php?stv=1&formationid=".$array_PLAYER_FORMATION_IDS[$cc]."\"' class='formationselect_button_normal'>\n";
-			echo "				<a href='gui_play_unit.php?stv=1&formationid=".$array_PLAYER_FORMATION_IDS[$cc]."'>".$array_PLAYER_FORMATION_NAMES[$cc]."</a>\n";
-			echo "			</td>\n";
+			if ($unitArray != null && $active_units_found) {
+				echo "			<td width='33%' nowrap style='width:270px;height:30px;vertical-align:middle;' onclick='location.href=\"gui_play_unit.php?stv=1&formationid=".$array_PLAYER_FORMATION_IDS[$cc]."\"' class='formationselect_button_normal'>\n";
+				echo "				<a href='gui_play_unit.php?stv=1&formationid=".$array_PLAYER_FORMATION_IDS[$cc]."'>".$array_PLAYER_FORMATION_NAMES[$cc]."</a>\n";
+				echo "			</td>\n";
+			} else {
+				echo "			<td width='33%' nowrap style='background-color:#444444;width:270px;height:40px;text-align:center;' class='formationselect_button_active'>\n";
+				echo "				".$array_PLAYER_FORMATION_NAMES[$cc]."\n";
+				echo "			</td>\n";
+			}
 		} else {
-			echo "			<td width='33%' nowrap style='background-color:#444444;width:270px;height:40px;text-align:center;' class='formationselect_button_active'>\n";
-			echo "				".$array_PLAYER_FORMATION_NAMES[$cc]."\n";
+			echo "			<td width='33%' nowrap style='background-color:#222222;width:270px;height:30px;vertical-align:middle;' class='formationselect_button_normal'>\n";
+			echo "				\n";
 			echo "			</td>\n";
 		}
 	}
@@ -851,62 +858,71 @@
 
 	for ($cc = 0; $cc < sizeof($array_PLAYER_FORMATION_IDS); $cc++) {
 		$currFormId = $array_PLAYER_FORMATION_IDS[$cc];
-		$unitArray = $array_PLAYER_UNITS_IN_FORMATION[$currFormId];
 
-		echo "			<td style='text-align:center;background-color:#444444;' align='center' valign='top' class='unitselect_button_active'>\n";
-		echo "				<table style='margin:auto;border-collapse:collapse;' cellspacing=4 cellpadding=4>\n";
-		echo "					<tr>\n";
+		if (array_key_exists($currFormId, $array_PLAYER_UNITS_IN_FORMATION)) {
+			$unitArray = $array_PLAYER_UNITS_IN_FORMATION[$currFormId];
 
-		$count = 1;
-		foreach($unitArray as $item) {
-			if ($item['round_moved'] == 0 && $item['round_fired'] == 0) {
-				$imagestatuslnk = "./images/top-right_phase01.png";
-			}
-			if ($item['round_moved'] > 0 && $item['round_fired'] == 0) {
-				$imagestatuslnk = "./images/top-right_phase02.png";
-			}
-			if ($item['round_moved'] == 0 && $item['round_fired'] > 0) { // impossible state
-				$imagestatuslnk = "./images/top-right_phase02.png";
-			}
-			if ($item['round_moved'] > 0 && $item['round_fired'] > 0) {
-				$imagestatuslnk = "./images/top-right_phase03.png";
-			}
-			if ($item['status'] == "destroyed") {
-				$imagestatuslnk = "./images/skull.png";
-			}
+			echo "			<td style='text-align:center;background-color:#444444;' align='center' valign='top' class='unitselect_button_active'>\n";
+			echo "				<table style='margin:auto;border-collapse:collapse;' cellspacing=4 cellpadding=4>\n";
+			echo "					<tr>\n";
 
-			if ($item['size'] == 1) {
-				$sizeString = "L";
-			} else if ($item['size'] == 2) {
-				$sizeString = "M";
-			} else if ($item['size'] == 3) {
-				$sizeString = "H";
-			} else if ($item['size'] == 4) {
-				$sizeString = "A";
-			} else if ($item['size'] == 5) {
-				$sizeString = "SH";
-			}
-			if ($item['active_bid'] == 1) {
-				if ($count == 6 || $count == 11) {
-					echo "		</tr>\n";
-					echo "		<tr>\n";
+			$count = 1;
+			foreach($unitArray as $item) {
+				if ($item['round_moved'] == 0 && $item['round_fired'] == 0) {
+					$imagestatuslnk = "./images/top-right_phase01.png";
 				}
-				if ($array_UNIT_DBID[$chosenUnitIndex] == $item['unitid']) {
-					echo "						<td onclick='location.href=\"gui_play_unit.php?stv=1&formationid=".$array_PLAYER_FORMATION_IDS[$cc]."&fod=175&chosenunit=".$count."\"' align='center' valign='top' style='background-color:#293647;padding:4px;border:2px solid #555;animation: glow 2s infinite alternate;'>\n";
-					echo "							<img id='unitstatusimageoverview' src='https://www.ascard.net/app/".$item["status_image"]."' width='32px'><br>\n";
-					echo "							<span style='display:inline-block;width:40px;align:center;'><img id='overviewcurrentunitstatus' style='display:block;margin-left:auto;margin-right:auto;height:auto;' src='".$currentPhaseButton."' width='24px'></span>\n";
-					echo "							<br><span style='font-size:15px'>".$item['unit_number']."</span>\n";
-					echo "						</td>\n";
-				} else {
-					echo "						<td onclick='location.href=\"gui_play_unit.php?stv=1&formationid=".$array_PLAYER_FORMATION_IDS[$cc]."&fod=175&chosenunit=".$count."\"' align='center' valign='top' style='background-color:#333333;padding:4px;border:2px solid #555;'>\n";
-					echo "							<img src='https://www.ascard.net/app/".$item["status_image"]."' width='32px'><br>\n";
-					echo "							<span style='display:inline-block;width:40px;align:center;'><img style='display:block;margin-left:auto;margin-right:auto;height:auto;' src='".$imagestatuslnk."' width='24px'></span>\n";
-					echo "							<br><span style='font-size:15px'>".$item['unit_number']."</span>\n";
-					echo "						</td>\n";
+				if ($item['round_moved'] > 0 && $item['round_fired'] == 0) {
+					$imagestatuslnk = "./images/top-right_phase02.png";
 				}
+				if ($item['round_moved'] == 0 && $item['round_fired'] > 0) { // impossible state
+					$imagestatuslnk = "./images/top-right_phase02.png";
+				}
+				if ($item['round_moved'] > 0 && $item['round_fired'] > 0) {
+					$imagestatuslnk = "./images/top-right_phase03.png";
+				}
+				if ($item['status'] == "destroyed") {
+					$imagestatuslnk = "./images/skull.png";
+				}
+
+				if ($item['size'] == 1) {
+					$sizeString = "L";
+				} else if ($item['size'] == 2) {
+					$sizeString = "M";
+				} else if ($item['size'] == 3) {
+					$sizeString = "H";
+				} else if ($item['size'] == 4) {
+					$sizeString = "A";
+				} else if ($item['size'] == 5) {
+					$sizeString = "SH";
+				}
+				if ($item['active_bid'] == 1) {
+					if ($count == 6 || $count == 11) {
+						echo "		</tr>\n";
+						echo "		<tr>\n";
+					}
+					if ($array_UNIT_DBID[$chosenUnitIndex] == $item['unitid']) {
+						echo "						<td onclick='location.href=\"gui_play_unit.php?stv=1&formationid=".$array_PLAYER_FORMATION_IDS[$cc]."&fod=175&chosenunit=".$count."\"' align='center' valign='top' style='background-color:#293647;padding:4px;border:2px solid #555;animation: glow 2s infinite alternate;'>\n";
+						echo "							<img id='unitstatusimageoverview' src='https://www.ascard.net/app/".$item["status_image"]."' width='32px'><br>\n";
+						echo "							<span style='display:inline-block;width:40px;align:center;'><img id='overviewcurrentunitstatus' style='display:block;margin-left:auto;margin-right:auto;height:auto;' src='".$currentPhaseButton."' width='24px'></span>\n";
+						echo "							<br><span style='font-size:15px'>".$item['unit_number']."</span>\n";
+						echo "						</td>\n";
+					} else {
+						echo "						<td onclick='location.href=\"gui_play_unit.php?stv=1&formationid=".$array_PLAYER_FORMATION_IDS[$cc]."&fod=175&chosenunit=".$count."\"' align='center' valign='top' style='background-color:#333333;padding:4px;border:2px solid #555;'>\n";
+						echo "							<img src='https://www.ascard.net/app/".$item["status_image"]."' width='32px'><br>\n";
+						echo "							<span style='display:inline-block;width:40px;align:center;'><img style='display:block;margin-left:auto;margin-right:auto;height:auto;' src='".$imagestatuslnk."' width='24px'></span>\n";
+						echo "							<br><span style='font-size:15px'>".$item['unit_number']."</span>\n";
+						echo "						</td>\n";
+					}
+				}
+				echo "						<td>&nbsp;</td>\n";
+				$count++;
 			}
-			echo "						<td>&nbsp;</td>\n";
-			$count++;
+		} else {
+			echo "			<td style='text-align:center;background-color:#222222;' align='center' valign='top' class='unitselect_button_active'>\n";
+			echo "				<table style='margin:auto;border-collapse:collapse;' cellspacing=4 cellpadding=4>\n";
+			echo "					<tr>\n";
+			echo "						<td align='center' valign='top'>\n";
+			echo "						</td>\n";
 		}
 
 		echo "					</tr>\n";

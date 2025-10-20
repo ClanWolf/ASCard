@@ -524,7 +524,7 @@
 							$array_HT_PREP[$unitcount] = $row["heat_PREP"];
 							$array_HT_PREP_ENGINEHIT[$unitcount] = $row["heat_PREP_ENGINEHIT"];
 							$array_USEDOVERHEAT[$unitcount] = $row["usedoverheat"];
-							$array_CURRENTTMM[$unitcount] = $row["currenttmm"];
+							$array_CURRENTTMM[$unitcount] = $row["current_tmm"];
 
 							$array_MOUNTED_UNITID[$unitcount] = $row["mounted_unitid"];
 							$array_MOUNTED_ON_UNITID[$unitcount] = $row["mounted_on_unitid"];

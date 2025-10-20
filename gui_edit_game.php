@@ -321,9 +321,9 @@
 		$buttonWidth = "33.3%"; // 3 columns in the middle
 	} else {
 		if ($isAdmin) {
-			$buttonWidth = "14.5%"; // 7 columns
+			$buttonWidth = "17%"; // 6 columns
 		} else {
-			$buttonWidth = "20.4%"; // 5 columns
+			$buttonWidth = "25%"; // 4 columns
 		}
 	}
 ?>
@@ -687,13 +687,13 @@
 		echo "				<td colspan='3'>\n";
 		echo "					<table align='left' cellspacing='0' cellpadding='0' border='0px'>\n";
 		echo "						<tr>\n";
-		echo "							<td align='center' width='10%' class='datalabel'>\n";
-		echo "								<a href='#' onClick='javascript:resetGameForPlayer(".$gid.",".$pid.", 0);'>&nbsp;&nbsp;<i class='fas fa-fast-backward'></i>&nbsp;&nbsp;&nbsp;&nbsp;</a>\n";
+		echo "							<td align='center' nowrap width='1%' class='datalabel'>\n";
+		echo "								<a href='#' onClick='javascript:resetGameForPlayer(".$gid.",".$pid.", 0);'><i class='fas fa-fast-backward'></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>\n";
 		echo "							</td>\n";
-		echo "							<td align='left' width='40%' class='datalabel'>RESET Game (Set round to 1 / Repair all units)</td>\n";
-		echo "							<td align='right' width='40%' class='datalabel'>CLOSE Game (mark as finished)</td>\n";
-		echo "							<td align='center' width='10%' class='datalabel'>\n";
-		echo "								<a href='#' onClick='javascript:finalizeGame(".$gid.");'>&nbsp;&nbsp;<i class="fa-solid fa-flag-checkered"></i>&nbsp;&nbsp;&nbsp;&nbsp;</a>\n";
+		echo "							<td align='left' nowrap width='49%' class='datalabel'>RESET (Round to 1 / Repair all)&nbsp;&nbsp;&nbsp;&nbsp;</td>\n";
+		echo "							<td align='right' nowrap width='49%' class='datalabel'>&nbsp;&nbsp;&nbsp;&nbsp;CLOSE (mark as finished)</td>\n";
+		echo "							<td align='center' nowrap width='1%' class='datalabel'>\n";
+		echo "								<a href='#' onClick='javascript:finalizeGame(".$gid.");'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class='fa-solid fa-flag-checkered'></i></a>\n";
 		echo "							</td>\n";
 		echo "						</tr>\n";
 		echo "					</table>\n";

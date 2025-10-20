@@ -329,12 +329,16 @@
 				newPilotImage = document.getElementById("femalePilotImage").value;
 			}
 
+			//alert(pilotSpaArray);
+
 			let newSPAs = "";
 			for (var i = 0; i < pilotSpaArray.length; i++) {
 				spaElement = pilotSpaArray[i].trim();
-				newSPAs = newSPAs + spaElement;
-				if (i < pilotSpaArray.length - 1) {
-					newSPAs = newSPAs + ","
+				if (spaElement !== "") {
+					newSPAs = newSPAs + spaElement;
+					if (i < pilotSpaArray.length - 1) {
+						newSPAs = newSPAs + ","
+					}
 				}
 			}
 
@@ -400,11 +404,13 @@
 			for (var i = 0; i < pilotSpaArray.length; i++) {
 				if (i !== index) {
 					spaElement = pilotSpaArray[i].trim();
-					spaCostElement = Number(spaElement.match(rx)[1]);
-					spaStringList = spaStringList + "<span onclick='javascript:removeSpa("+ indexCounter + ");'>" + spaElement + "&nbsp;<i class='fas fa-minus-square'></i></span>&nbsp;&nbsp;&nbsp;";
-					spaCalculatedSum = spaCalculatedSum + spaCostElement;
-					indexCounter++;
-					newPilotSpaArray.push(spaElement);
+					if (spaElement !== "") {
+						spaCostElement = Number(spaElement.match(rx)[1]);
+						spaStringList = spaStringList + "<span onclick='javascript:removeSpa("+ indexCounter + ");'>" + spaElement + "&nbsp;<i class='fas fa-minus-square'></i></span>&nbsp;&nbsp;&nbsp;";
+						spaCalculatedSum = spaCalculatedSum + spaCostElement;
+						indexCounter++;
+						newPilotSpaArray.push(spaElement);
+					}
 				}
 			}
 			pilotSpaArray = newPilotSpaArray;
@@ -491,9 +497,9 @@
 		$buttonWidth = "33.3%"; // 3 columns in the middle
 	} else {
 		if ($isAdmin) {
-			$buttonWidth = "14.5%"; // 7 columns
+			$buttonWidth = "17%"; // 6 columns
 		} else {
-			$buttonWidth = "20.4%"; // 5 columns
+			$buttonWidth = "25%"; // 4 columns
 		}
 	}
 ?>
@@ -565,6 +571,8 @@
 	$array_formationFactionNames = array();
 	$array_formationFactionRankOptions = array();
 
+	array_push($array_formationFactionRankOptions, "", "", "");
+
 	if (mysqli_num_rows($result_asc_playersformations) > 0) {
 		while($rowFormations = mysqli_fetch_assoc($result_asc_playersformations)) {
 			$formationid = $rowFormations['formationid'];
@@ -585,9 +593,10 @@
 
 			$ranksdir = './images/ranks/'.$formationfactionid;
 			$scanned_directory = array_diff(scandir($ranksdir, SCANDIR_SORT_ASCENDING), array('..', '.'));
+
 			$array_formationFactionRankOptions[$formationcount] = $array_formationFactionRankOptions[$formationcount]."<option disabled=\"\" selected=\"\" value=\"\">Select one...</option>";
 			foreach ($scanned_directory as $key => $value) {
-				if (str_starts_with($value, '')) {
+				if (!str_starts_with($value, 'MW')) {
 					$opt = "<option value='".$value."'>".substr($value,3,-4)."</option>\n";
 					$array_formationFactionRankOptions[$formationcount] = $array_formationFactionRankOptions[$formationcount].$opt;
 				}

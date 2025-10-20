@@ -296,9 +296,10 @@
 
 		$sql_insertpilot = "";
 		$sql_insertpilot = $sql_insertpilot."INSERT INTO asc_pilot ";
-		$sql_insertpilot = $sql_insertpilot."(name, pilot_imageurl, playerid) ";
+		$sql_insertpilot = $sql_insertpilot."(name, rank, pilot_imageurl, playerid) ";
 		$sql_insertpilot = $sql_insertpilot."VALUES (";
 		$sql_insertpilot = $sql_insertpilot."'".$PN."',";      // Pilotname
+		$sql_insertpilot = $sql_insertpilot."'MW',";           // Default rank
 		$sql_insertpilot = $sql_insertpilot."'".$PI."',";      // Pilot image
 		$sql_insertpilot = $sql_insertpilot."".$pid."";        // Player id
 		$sql_insertpilot = $sql_insertpilot.")";
@@ -582,9 +583,9 @@
 		$buttonWidth = "33.3%"; // 3 columns in the middle
 	} else {
 		if ($isAdmin) {
-			$buttonWidth = "14.5%"; // 7 columns
+			$buttonWidth = "17%"; // 6 columns
 		} else {
-			$buttonWidth = "20.4%"; // 5 columns
+			$buttonWidth = "25%"; // 4 columns
 		}
 	}
 ?>
