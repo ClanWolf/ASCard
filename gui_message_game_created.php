@@ -166,7 +166,7 @@
 		<table class="options" cellspacing=4 cellpadding=4 border=0px>
 			<tr>
 				<td align="center" class='datalabel'>
-					<p>You joined a game.</p>
+					<p>A game has been created.</p>
 				</td>
 			</tr>
 		</table>

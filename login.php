@@ -89,9 +89,15 @@
 						$update_query = "UPDATE asc_player SET last_login=now() WHERE playerid = ".$_SESSION['playerid'];
 						$result_update_query = mysqli_query($conn, $update_query);
 
-						echo "<meta http-equiv='refresh' content='0;url=./gui_select_unit.php'>";
-						header("Location: ./gui_select_unit.php");
-						//die('Login succeeded!<br>');
+						if ($_SESSION['gameid'] > 0) {
+							echo "<meta http-equiv='refresh' content='0;url=./gui_select_unit.php'>";
+							header("Location: ./gui_select_unit.php");
+							//die('Login succeeded!<br>');
+						} else {
+							echo "<meta http-equiv='refresh' content='0;url=./gui_edit_game.php'>";
+							header("Location: ./gui_edit_game.php");
+							//die('Login succeeded - Creating new game for player!<br>');
+						}
 					} else {
 						if ($account_login_enabled == 1) {
 							$errorMessage = "ACCESS DENIED!<br>";

@@ -58,14 +58,6 @@
 			}
 		}
 
-		echo "Currentgame id: " . $gameid . "<br>";
-		echo "Currentgame start timestamp: " . $gamestartedtimestamp . "<br>";
-
-		echo "<script>alert('".$gamestartedtimestamp."');</script>";
-
-
-
-
 		$formationIds = "";
 		$sql_asc_formation = "SELECT SQL_NO_CACHE * FROM asc_formation where playerid = ".$pid.";";
 		$result_asc_formation = mysqli_query($conn, $sql_asc_formation);
@@ -345,6 +337,33 @@
 				}
 			}
 
+			if ($gamestartedtimestamp == NULL) {
+				echo "Saving games start timestamp";
+
+				// Update startdate in game
+				$sqlUpdateGameStartedTimestamp = "";
+				$sqlUpdateGameStartedTimestamp = $sqlUpdateGameStartedTimestamp . "UPDATE asc_game ";
+				$sqlUpdateGameStartedTimestamp = $sqlUpdateGameStartedTimestamp . "SET ";
+				$sqlUpdateGameStartedTimestamp = $sqlUpdateGameStartedTimestamp . "started=now() ";
+				$sqlUpdateGameStartedTimestamp = $sqlUpdateGameStartedTimestamp . "where gameid=".$gameid.";";
+
+				echo $sqlUpdateGameStartedTimestamp;
+
+				if (mysqli_query($conn, $sqlUpdateGameStartedTimestamp)) {
+					echo "<br>";
+					echo "Record (asc_game) updated successfully<br>";
+					//mysqli_commit($conn);
+				} else {
+					echo "<br>";
+					echo "Error (asc_game) updating record: " . mysqli_error($conn) . "<br>";
+
+					echo "<script>top.window.location = './gui_message_round_finalized_error_01.php'</script>";
+					die('ERROR 2');
+				}
+			} else {
+				echo "Not updating start of the game.";
+			}
+
 			$sqlUpdatePlayerRound = "";
 			$sqlUpdatePlayerRound = $sqlUpdatePlayerRound . "UPDATE asc_player ";
 			$sqlUpdatePlayerRound = $sqlUpdatePlayerRound . "SET ";
@@ -357,7 +376,6 @@
 				echo "<br>";
 				echo "Record (asc_player) updated successfully<br>";
 				mysqli_commit($conn);
-
 				echo "<script>top.window.location = './gui_message_round_finalized.php'</script>";
 				die('ERROR 3');
 			} else {

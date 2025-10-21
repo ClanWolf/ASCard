@@ -84,6 +84,7 @@
 			$sqlupdateplayer = "UPDATE asc_player set hostedgameid = ".$hgid.", gameid = ".$hgid.", teamid=1, opfor=0, active_ingame=1, bid_pv=-1, bid_tonnage=-1, bid_winner=0, round=1 WHERE playerid=".$pid;
 			if (mysqli_query($conn, $sqlupdateplayer)) {
 				// Success updating player with new gameid for his own game
+				//echo "<script>top.location.reload();</script>";
 			} else {
 				// Error
 				echo "Error: " . $sqlupdateplayer . "<br>" . mysqli_error($conn);
@@ -480,9 +481,9 @@
 
 <?php
 	if (count($array_joinedPlayers) > 1) {
-		echo "							<tr><td class='datalabel'>".$pname."</td><td nowrap align='right' width='3%'></td></tr>\n";
+		echo "							<tr><td width='1%' class='datalabel'>&nbsp;</td><td class='datalabel'>".$pname."</td><td nowrap align='right' width='3%'></td></tr>\n";
 	} else {
-		echo "							<tr><td class='datalabel'>(empty)</td><td nowrap align='right' width='3%'></td></tr>\n";
+		echo "							<tr><td width='1%' class='datalabel'>&nbsp;</td><td class='datalabel'>(empty)</td><td nowrap align='right' width='3%'></td></tr>\n";
 	}
 	for($i=1; $i <= count($array_joinedPlayers); $i++) {
 		$joinedPlayerName = $array_joinedPlayers[$i];
@@ -490,9 +491,9 @@
 
 		if ($pname != $joinedPlayerName) {
 			if ($playMode) {
-				echo "							<tr><td class='datalabel'>".$joinedPlayerName."</td><td nowrap align='right' width='3%'>&nbsp;&nbsp;&nbsp;<span style='font-size:16px;color:#ddd;' onclick=''></span></td></tr>\n";
+				echo "							<tr><td width='1%' class='datalabel'>&nbsp;</td><td class='datalabel'>".$joinedPlayerName."</td><td nowrap align='right' width='3%'>&nbsp;&nbsp;&nbsp;<span style='font-size:16px;color:#ddd;' onclick=''></span></td></tr>\n";
 			} else {
-				echo "							<tr><td class='datalabel'>".$joinedPlayerName."</td><td nowrap align='right' width='3%'>&nbsp;&nbsp;&nbsp;<span style='font-size:16px;color:#ddd;' onclick='javascript:resetGameForPlayer(".$hgid.",\"".$joinedPlayerId."\",1);'><i class='fas fa-minus-square'></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>\n";
+				echo "							<tr><td width='1%' class='datalabel'><span style='font-size:16px;color:#ddd;' onclick='javascript:switchForceForPlayer(".$joinedPlayerId.");'><i class='fa-solid fa-arrow-right-arrow-left'></i>&nbsp;&nbsp;</span></td><td class='datalabel'>".$joinedPlayerName."</td><td nowrap align='right' width='3%'>&nbsp;&nbsp;&nbsp;<span style='font-size:16px;color:#ddd;' onclick='javascript:resetGameForPlayer(".$hgid.",\"".$joinedPlayerId."\",1);'><i class='fas fa-minus-square'></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>\n";
 			}
 		}
 	}
@@ -631,30 +632,37 @@
 											}
 										}
 
-										$linemarker = "●<i class='fa-solid fa-chevron-right'></i>";
+										if ($pid == $current_pid) {
+											$linemarker = "<i class='fa-solid fa-chevron-right'></i>";
+										} else {
+											$linemarker = "";
+										}
 
 										if ($row["hostedgameid"] == $gid) {
-											$host = "										<tr><td width='40%'>".$linemarker."&nbsp;".$row["name"]." (R".$current_round.") - <span style='color:blue;'>BluFor (Host)</span>&nbsp;&nbsp;&nbsp;</td>";
-											$host = $host."<td align='left'><img width='22px' src='./images/top-right_phase01.png'></td><td width='1%'>".$units_toMoveCount."</td>";
-											$host = $host."<td align='left'><img width='22px' src='./images/top-right_phase02.png'></td><td width='1%'>".$units_toFireCount."</td>";
-											$host = $host."<td align='left'><img width='22px' src='./images/top-right_phase03.png'></td><td width='1%'>".$units_finishedCount."</td>";
-											$host = $host."<td width='80%' align='right'>".$units_destroyedCount." / ".$units_allCount."&nbsp;&nbsp;<img width='22px' src='./images/skull.png'></td>";
+											$host = "										<tr><td width='1%'>".$linemarker."&nbsp;</td><td width='20%'>".$row["name"]." (R".$current_round.")</td>";
+											$host = $host."<td width='20%'><span style='color:blue;'>BluFor (Host)&nbsp;</span></td>";
+											$host = $host."<td width='1%' align='left'><img width='22px' src='./images/top-right_phase01.png'></td><td width='2%'>".$units_toMoveCount."</td>";
+											$host = $host."<td width='1%' align='left'><img width='22px' src='./images/top-right_phase02.png'></td><td width='2%'>".$units_toFireCount."</td>";
+											$host = $host."<td width='1%' align='left'><img width='22px' src='./images/top-right_phase03.png'></td><td width='2%'>".$units_finishedCount."</td>";
+											$host = $host."<td width='50%' align='right'>".$units_destroyedCount." / ".$units_allCount."&nbsp;&nbsp;<img width='22px' src='./images/skull.png'></td>";
 											$host = $host."</tr>\n";
 											$op = str_replace("{{{host}}}",$host,$op);
 										} else if ($row["opfor"] == 1) {
-											$player = "										<tr><td width='40%'>".$linemarker."&nbsp;".$row["name"]." (R".$current_round.") - <span style='color:red;'>OpFor</span>&nbsp;&nbsp;&nbsp;</td>";
-											$player = $player."<td align='left'><img width='22px' src='./images/top-right_phase01.png'></td><td width='1%'>".$units_toMoveCount."</td>";
-											$player = $player."<td align='left'><img width='22px' src='./images/top-right_phase02.png'></td><td width='1%'>".$units_toFireCount."</td>";
-											$player = $player."<td align='left'><img width='22px' src='./images/top-right_phase03.png'></td><td width='1%'>".$units_finishedCount."</td>";
-											$player = $player."<td width='80%' align='right'>".$units_destroyedCount." / ".$units_allCount."&nbsp;&nbsp;<img width='22px' src='./images/skull.png'></td>";
+											$player = "										<tr><td width='1%'>".$linemarker."&nbsp;</td><td width='20%'>".$row["name"]." (R".$current_round.")</td>";
+											$player = $player."<td width='20%'><span style='color:red;'>OpFor&nbsp;</span></td>";
+											$player = $player."<td width='1%' align='left'><img width='22px' src='./images/top-right_phase01.png'></td><td width='2%'>".$units_toMoveCount."</td>";
+											$player = $player."<td width='1%' align='left'><img width='22px' src='./images/top-right_phase02.png'></td><td width='2%'>".$units_toFireCount."</td>";
+											$player = $player."<td width='1%' align='left'><img width='22px' src='./images/top-right_phase03.png'></td><td width='2%'>".$units_finishedCount."</td>";
+											$player = $player."<td width='50%' align='right'>".$units_destroyedCount." / ".$units_allCount."&nbsp;&nbsp;<img width='22px' src='./images/skull.png'></td>";
 											$player = $player."</tr>\n";
 											$list = $list.$player;
 										} else {
-											$player = "										<tr><td width='40%'>".$linemarker."&nbsp;".$row["name"]." (R".$current_round.") - <span style='color:blue;'>BluFor</span>&nbsp;&nbsp;&nbsp;</td>";
-											$player = $player."<td align='left'><img width='22px' src='./images/top-right_phase01.png'></td><td width='1%'>".$units_toMoveCount."</td>";
-											$player = $player."<td align='left'><img width='22px' src='./images/top-right_phase02.png'></td><td width='1%'>".$units_toFireCount."</td>";
-											$player = $player."<td align='left'><img width='22px' src='./images/top-right_phase03.png'></td><td width='1%'>".$units_finishedCount."</td>";
-											$player = $player."<td width='80%' align='right'>".$units_destroyedCount." / ".$units_allCount."&nbsp;&nbsp;<img width='22px' src='./images/skull.png'></td>";
+											$player = "										<tr><td width='1%'>".$linemarker."&nbsp;</td><td width='20%'>".$row["name"]." (R".$current_round.")</td>";
+											$player = $player."<td width='20%'><span style='color:blue;'>BluFor&nbsp;</span></td>";
+											$player = $player."<td width='1%' align='left'><img width='22px' src='./images/top-right_phase01.png'></td><td width='2%'>".$units_toMoveCount."</td>";
+											$player = $player."<td width='1%' align='left'><img width='22px' src='./images/top-right_phase02.png'></td><td width='2%'>".$units_toFireCount."</td>";
+											$player = $player."<td width='1%' align='left'><img width='22px' src='./images/top-right_phase03.png'></td><td width='2%'>".$units_finishedCount."</td>";
+											$player = $player."<td width='50%' align='right'>".$units_destroyedCount." / ".$units_allCount."&nbsp;&nbsp;<img width='22px' src='./images/skull.png'></td>";
 											$player = $player."</tr>\n";
 											$list = $list.$player;
 										}

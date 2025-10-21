@@ -57,7 +57,13 @@
 	echo "".$gts_d." gts_d (db)<br>\n";
 	echo "".$cts." cts (now)<br>\n";
 
-	if ($gid != $currentGameId) {
+	if ($gid == 0) {
+		$_SESSION['gameid'] = $currentGameId;
+		//echo "<script>alert('A game has been created for you!');</script>\n";
+		echo "<script>top.window.location = './gui_message_game_created.php'</script>\n";
+	}
+
+	if ($gid != 0 && $gid != $currentGameId) {
 		// The gameid from the db and in the current session are not the same
 		// The logged in user might have been kicked from a game!
 
