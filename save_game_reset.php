@@ -224,7 +224,7 @@
 		$sqlUpdateGame = $sqlUpdateGame . "UPDATE asc_game ";
 		$sqlUpdateGame = $sqlUpdateGame . "SET ";
 		$sqlUpdateGame = $sqlUpdateGame . "Updated=now() ";
-		$sqlUpdateGame = $sqlUpdateGame . "WHERE gameid=".$newgameid.";";
+		$sqlUpdateGame = $sqlUpdateGame . "WHERE gameid in (".$newgameid.",".$gid.");";
 
 		echo $sqlUpdateGame;
 

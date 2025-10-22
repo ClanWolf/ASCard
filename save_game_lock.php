@@ -38,10 +38,7 @@
 				echo "<br>";
 				echo "Game info updated successfully<br>";
 
-				echo "<script>\n";
-				//echo "	window.parent.location.reload();\n";
-				echo "	top.location.reload();\n";
-				echo "</script>\n";
+				echo "<script>top.location.reload();</script>\n";
 			} else {
 				echo "<br>";
 				echo "Error updating game info: " . mysqli_error($conn) . "<br>";

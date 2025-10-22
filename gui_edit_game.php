@@ -84,7 +84,7 @@
 			$sqlupdateplayer = "UPDATE asc_player set hostedgameid = ".$hgid.", gameid = ".$hgid.", teamid=1, opfor=0, active_ingame=1, bid_pv=-1, bid_tonnage=-1, bid_winner=0, round=1 WHERE playerid=".$pid;
 			if (mysqli_query($conn, $sqlupdateplayer)) {
 				// Success updating player with new gameid for his own game
-				//echo "<script>top.location.reload();</script>";
+				echo "<script>top.location.reload();</script>";
 			} else {
 				// Error
 				echo "Error: " . $sqlupdateplayer . "<br>" . mysqli_error($conn);
@@ -97,6 +97,7 @@
 
 	$array_joinedPlayers = array();
 	$array_joinedPlayersIds = array();
+	$array_joinedPlayerOpforFlag = array();
 	$sql_asc_playerround = "SELECT SQL_NO_CACHE * FROM asc_player;";
 	$result_asc_playerround = mysqli_query($conn, $sql_asc_playerround);
 	if (mysqli_num_rows($result_asc_playerround) > 0) {
@@ -106,6 +107,7 @@
 				// this player is joined in the game of the currently logged in player
 				$array_joinedPlayers[$i] = $row["name"];
 				$array_joinedPlayersIds[$i] = $row["playerid"];
+				$array_joinedPlayerOpforFlag[$i] = $row["opfor"];
 				$i++;
 				//echo $row["name"];
 			}
@@ -283,6 +285,10 @@
 		}
 		function resetGameForPlayer(gameId, playerId, leaveGame) {
 			var url="./save_game_reset.php?gid="+gameId+"&pid="+playerId+"&leaveCurrentGame="+leaveGame;
+			window.frames["saveframe"].location.replace(url);
+		}
+		function switchForceForPlayer(playerId, value) {
+			var url="./save_player_force.php?pidts="+playerId+"&of="+value;
 			window.frames["saveframe"].location.replace(url);
 		}
 		function finalizeGame(gameId) {
@@ -488,12 +494,17 @@
 	for($i=1; $i <= count($array_joinedPlayers); $i++) {
 		$joinedPlayerName = $array_joinedPlayers[$i];
 		$joinedPlayerId = $array_joinedPlayersIds[$i];
+		$opforflag = $array_joinedPlayerOpforFlag[$i];
+		$newOpforFlagValue = 0;
+		if ($opforflag == 0) {
+			$newOpforFlagValue = 1;
+		}
 
 		if ($pname != $joinedPlayerName) {
 			if ($playMode) {
 				echo "							<tr><td width='1%' class='datalabel'>&nbsp;</td><td class='datalabel'>".$joinedPlayerName."</td><td nowrap align='right' width='3%'>&nbsp;&nbsp;&nbsp;<span style='font-size:16px;color:#ddd;' onclick=''></span></td></tr>\n";
 			} else {
-				echo "							<tr><td width='1%' class='datalabel'><span style='font-size:16px;color:#ddd;' onclick='javascript:switchForceForPlayer(".$joinedPlayerId.");'><i class='fa-solid fa-arrow-right-arrow-left'></i>&nbsp;&nbsp;</span></td><td class='datalabel'>".$joinedPlayerName."</td><td nowrap align='right' width='3%'>&nbsp;&nbsp;&nbsp;<span style='font-size:16px;color:#ddd;' onclick='javascript:resetGameForPlayer(".$hgid.",\"".$joinedPlayerId."\",1);'><i class='fas fa-minus-square'></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>\n";
+				echo "							<tr><td width='1%' class='datalabel'><span style='font-size:16px;color:#ddd;' onclick='javascript:switchForceForPlayer(".$joinedPlayerId.",".$newOpforFlagValue.");'><i class='fa-solid fa-arrow-right-arrow-left'></i>&nbsp;&nbsp;</span></td><td class='datalabel'>".$joinedPlayerName."</td><td nowrap align='right' width='3%'>&nbsp;&nbsp;&nbsp;<span style='font-size:16px;color:#ddd;' onclick='javascript:resetGameForPlayer(".$hgid.",\"".$joinedPlayerId."\",1);'><i class='fas fa-minus-square'></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>\n";
 			}
 		}
 	}
@@ -606,7 +617,7 @@
 										$units_destroyedCount = 0;
 										$units_allCount = 0;
 
-										$sql_asc_players_units = "SELECT SQL_NO_CACHE * FROM asc_unitstatus us, asc_assign a WHERE us.gameid=".$gid." AND us.round=".$current_round." AND us.playerid=".$current_pid." AND a.unitid = us.unitid AND us.active_bid=1;";
+										$sql_asc_players_units = "SELECT SQL_NO_CACHE * FROM asc_unitstatus us, asc_assign a WHERE us.gameid=".$gid." AND us.round=".$current_round." AND us.playerid=".$current_pid." AND a.unitid = us.unitid AND us.active_bid=1 AND a.formationid is not null;";
 										$result_asc_players_units = mysqli_query($conn, $sql_asc_players_units);
 										if (mysqli_num_rows($result_asc_players_units) > 0) {
 											while($row_status = mysqli_fetch_assoc($result_asc_players_units)) {
@@ -640,7 +651,7 @@
 
 										if ($row["hostedgameid"] == $gid) {
 											$host = "										<tr><td width='1%'>".$linemarker."&nbsp;</td><td width='20%'>".$row["name"]." (R".$current_round.")</td>";
-											$host = $host."<td width='20%'><span style='color:blue;'>BluFor (Host)&nbsp;</span></td>";
+											$host = $host."<td width='20%'><span style='color:blue;'>BluFor</span>&nbsp;(Host)</td>";
 											$host = $host."<td width='1%' align='left'><img width='22px' src='./images/top-right_phase01.png'></td><td width='2%'>".$units_toMoveCount."</td>";
 											$host = $host."<td width='1%' align='left'><img width='22px' src='./images/top-right_phase02.png'></td><td width='2%'>".$units_toFireCount."</td>";
 											$host = $host."<td width='1%' align='left'><img width='22px' src='./images/top-right_phase03.png'></td><td width='2%'>".$units_finishedCount."</td>";
