@@ -286,6 +286,7 @@
 		$sql_insertunit = $sql_insertunit."'".$MVTYPE."'";            // as_mvtype h = hover, w = wheeled, t = tracked
 
 		$sql_insertunit = $sql_insertunit.")";
+
 		if (mysqli_query($conn, $sql_insertunit)) {
 			// Success
 			$newunitid = mysqli_insert_id($conn);
@@ -457,6 +458,8 @@
 			//var TON = document.getElementById('tonnage').value;
 			var MNU = document.getElementById('MNU').value;
 			var UNITNAME = document.getElementById('UNITNAME').value;
+			UNITNAME = UNITNAME.replace(/"/g,"&quot;");
+			UNITNAME = UNITNAME.replace(/'/g,"&apos;");
 			var TP = document.getElementById('TP').value;
 			var SZ = document.getElementById('SZ').value;
 			var TMM = document.getElementById('TMM').value;
@@ -494,6 +497,9 @@
 			var ERASTART = document.getElementById("ERASTART").value;
 			var DATEINTRO = document.getElementById("DATEINTRO").value;
 			var UNITCLASS = document.getElementById("UNITCLASS").value;
+			UNITCLASS = UNITCLASS.replace(/"/g,"&quot;");
+			UNITCLASS = UNITCLASS.replace(/'/g,"&apos;");
+
 			var UNITVARIANT = document.getElementById("UNITVARIANT").value;
 
 			var DMGE = document.getElementById("DMGE").value;

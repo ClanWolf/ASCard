@@ -2068,7 +2068,7 @@ $(document).ready(function() {
 		// A wallpaperName was found in the cookie
 	} else {
 		// A wallpaperName was NOT found, go with the default
-		wallpaperName = 1;
+		wallpaperName = 6;
 	}
 
 	if (wallpaperName > 0 && wallpaperName < 10) {

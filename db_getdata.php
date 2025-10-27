@@ -260,14 +260,15 @@
 			."AND asc_unit.unitid=asc_assign.unitid "
 			."AND asc_unit.unitid=asc_unitstatus.unitid "
 			."AND asc_unitstatus.round=".$CURRENTROUND." "
-			."AND asc_unitstatus.gameid=".$GAMEID." "
-			."ORDER BY "
-			."  asc_unitstatus.active_bid DESC, "
-			."  asc_unit.commander DESC, "
-			."  asc_unit.subcommander DESC, "
-			."  asc_unitsortorder.sortorder ASC, "
-			."  asc_unit.unit_tonnage DESC, "
-			."  asc_unit.unitid ASC;";
+			."AND asc_unitstatus.gameid=".$GAMEID." ";
+			// NICHT sortieren! Sonst stimmen die Einsprungkoordinaten beim Öffnen einer Unit nicht!
+			//."ORDER BY "
+			//."  asc_unitstatus.active_bid DESC, "
+			//."  asc_unit.commander DESC, "
+			//."  asc_unit.subcommander DESC, "
+			//."  asc_unitsortorder.sortorder ASC, "
+			//."  asc_unit.unit_tonnage DESC, "
+			//."  asc_unit.unitid ASC;";
 
 		$result_asc_playerunitsinformation = mysqli_query($conn, $sql_asc_playerunitsinformation);
 		if (mysqli_num_rows($result_asc_playerunitsinformation) > 0) {
@@ -367,14 +368,15 @@
 		."AND asc_unit.unitid=asc_assign.unitid "
 		."AND asc_unit.unitid=asc_unitstatus.unitid "
 		."AND asc_unitstatus.round=".$CURRENTROUND." "
-		."AND asc_unitstatus.gameid=".$GAMEID." "
-		."ORDER BY "
-		."  asc_unitstatus.active_bid DESC, "
-		."  asc_unit.commander DESC, "
-		."  asc_unit.subcommander DESC, "
-		."  asc_unitsortorder.sortorder ASC, "
-		."  asc_unit.unit_tonnage DESC, "
-		."  asc_unit.unitid ASC;";
+		."AND asc_unitstatus.gameid=".$GAMEID." ";
+		// NICHT sortieren! Sonst stimmen die Einsprungkoordinaten beim Öffnen einer Unit nicht!
+		//."ORDER BY "
+		//."  asc_unitstatus.active_bid DESC, "
+		//."  asc_unit.commander DESC, "
+		//."  asc_unit.subcommander DESC, "
+		//."  asc_unitsortorder.sortorder ASC, "
+		//."  asc_unit.unit_tonnage DESC, "
+		//."  asc_unit.unitid ASC;";
 
 	$result_asc = mysqli_query($conn, $sql_asc);
 	if (mysqli_num_rows($result_asc) > 0) {

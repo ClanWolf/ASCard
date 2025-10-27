@@ -513,14 +513,15 @@ if ($playMode) {
 				."AND asc_unit.unitid=asc_assign.unitid "
 				."AND asc_unit.unitid=asc_unitstatus.unitid "
 				."AND asc_unitstatus.round=".$CURRENTROUND." "
-				."AND asc_unitstatus.gameid=".$gid." "
-				."ORDER BY "
-				."  asc_unitstatus.active_bid DESC, "
-				."  asc_unit.commander DESC, "
-				."  asc_unit.subcommander DESC, "
-				."  asc_unitsortorder.sortorder ASC, "
-				."  asc_unit.unit_tonnage DESC, "
-				."  asc_unit.unitid ASC;";
+				."AND asc_unitstatus.gameid=".$gid." ";
+				// NICHT sortieren! Sonst stimmen die Einsprungkoordinaten beim Öffnen einer Unit nicht!
+				//."ORDER BY "
+				//."  asc_unitstatus.active_bid DESC, "
+				//."  asc_unit.commander DESC, "
+				//."  asc_unit.subcommander DESC, "
+				//."  asc_unitsortorder.sortorder ASC, "
+				//."  asc_unit.unit_tonnage DESC, "
+				//."  asc_unit.unitid ASC;";
 			$result_asc_checkformationassignments = mysqli_query($conn, $sql_asc_checkformationassignments);
 
 			$formationsFound = 0;
