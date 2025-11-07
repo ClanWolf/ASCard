@@ -75,44 +75,44 @@
 	}
 
 	if ($addunit == 1) {
-		$TON = isset($_GET["TON"]) ? $_GET["TON"] : "";
-		$MNU = isset($_GET["MNU"]) ? $_GET["MNU"] : "";
-		$UNITNAME = isset($_GET["UNITNAME"]) ? $_GET["UNITNAME"] : "";
-		$TP = isset($_GET["TP"]) ? $_GET["TP"] : "";
-		$SZ = isset($_GET["SZ"]) ? $_GET["SZ"] : "";
-		$TMM = isset($_GET["TMM"]) ? $_GET["TMM"] : "";
-		$MVG = isset($_GET["MVG"]) ? $_GET["MVG"] : "";
-		$MVJ = isset($_GET["MVJ"]) ? $_GET["MVJ"] : "";
-		$ROLE = isset($_GET["ROLE"]) ? $_GET["ROLE"] : "";
-		$DMGS = isset($_GET["DMGS"]) ? $_GET["DMGS"] : "";
-		$DMGM = isset($_GET["DMGM"]) ? $_GET["DMGM"] : "";
-		$DMGL = isset($_GET["DMGL"]) ? $_GET["DMGL"] : "";
-		$OV = isset($_GET["OV"]) ? $_GET["OV"] : "";
-		$A = isset($_GET["A"]) ? $_GET["A"] : "";
-		$S = isset($_GET["S"]) ? $_GET["S"] : "";
-		$PVA = isset($_GET["PVA"]) ? $_GET["PVA"] : "";
-		$SPCL = isset($_GET["SPCL"]) ? $_GET["SPCL"] : "";
-		$PN = isset($_GET["PN"]) ? $_GET["PN"] : "";
-		$PI = isset($_GET["PI"]) ? $_GET["PI"] : "";
-		$SKILL = isset($_GET["SKILL"]) ? $_GET["SKILL"] : "";
-		$FORMATIONID = isset($_GET["FORMATIONID"]) ? $_GET["FORMATIONID"] : "";
-		$MULID = isset($_GET["MULID"]) ? $_GET["MULID"] : "";
-		$MODEL = isset($_GET["MODEL"]) ? $_GET["MODEL"] : "";
-		$TECH = isset($_GET["TECH"]) ? $_GET["TECH"] : "";
+		$TON = isset($_POST["TON"]) ? $_POST["TON"] : "";
+		$MNU = isset($_POST["MNU"]) ? $_POST["MNU"] : "";
+		$UNITNAME = isset($_POST["UNITNAME"]) ? $_POST["UNITNAME"] : "";
+		$TP = isset($_POST["TP"]) ? $_POST["TP"] : "";
+		$SZ = isset($_POST["SZ"]) ? $_POST["SZ"] : "";
+		$TMM = isset($_POST["TMM"]) ? $_POST["TMM"] : "";
+		$MVG = isset($_POST["MVG"]) ? $_POST["MVG"] : "";
+		$MVJ = isset($_POST["MVJ"]) ? $_POST["MVJ"] : "";
+		$ROLE = isset($_POST["ROLE"]) ? $_POST["ROLE"] : "";
+		$DMGS = isset($_POST["DMGS"]) ? $_POST["DMGS"] : "";
+		$DMGM = isset($_POST["DMGM"]) ? $_POST["DMGM"] : "";
+		$DMGL = isset($_POST["DMGL"]) ? $_POST["DMGL"] : "";
+		$OV = isset($_POST["OV"]) ? $_POST["OV"] : "";
+		$A = isset($_POST["A"]) ? $_POST["A"] : "";
+		$S = isset($_POST["S"]) ? $_POST["S"] : "";
+		$PVA = isset($_POST["PVA"]) ? $_POST["PVA"] : "";
+		$SPCL = isset($_POST["SPCL"]) ? $_POST["SPCL"] : "";
+		$PN = isset($_POST["PN"]) ? $_POST["PN"] : "";
+		$PI = isset($_POST["PI"]) ? $_POST["PI"] : "";
+		$SKILL = isset($_POST["SKILL"]) ? $_POST["SKILL"] : "";
+		$FORMATIONID = isset($_POST["FORMATIONID"]) ? $_POST["FORMATIONID"] : "";
+		$MULID = isset($_POST["MULID"]) ? $_POST["MULID"] : "";
+		$MODEL = isset($_POST["MODEL"]) ? $_POST["MODEL"] : "";
+		$TECH = isset($_POST["TECH"]) ? $_POST["TECH"] : "";
 
-		$MVTYPE = isset($_GET["MVTYPE"]) ? $_GET["MVTYPE"] : "";
+		$MVTYPE = isset($_POST["MVTYPE"]) ? $_POST["MVTYPE"] : "";
 
-		$RULES = isset($_GET["TECH"]) ? $_GET["TECH"] : "";
-		$COST = isset($_GET["COST"]) ? $_GET["COST"] : "";
-		$BV = isset($_GET["BV"]) ? $_GET["BV"] : "";
-		$PV = isset($_GET["PV"]) ? $_GET["PV"] : "";
-		$ERAID = isset($_GET["ERAID"]) ? $_GET["ERAID"] : "";
-		$ERASTART = isset($_GET["ERASTART"]) ? $_GET["ERASTART"] : "";
-		$DATEINTRO = isset($_GET["DATEINTRO"]) ? $_GET["DATEINTRO"] : "";
-		$UNITCLASS = isset($_GET["UNITCLASS"]) ? $_GET["UNITCLASS"] : "";
-		$UNITVARIANT = isset($_GET["UNITVARIANT"]) ? $_GET["UNITVARIANT"] : "";
+		$RULES = isset($_POST["TECH"]) ? $_POST["TECH"] : "";
+		$COST = isset($_POST["COST"]) ? $_POST["COST"] : "";
+		$BV = isset($_POST["BV"]) ? $_POST["BV"] : "";
+		$PV = isset($_POST["PV"]) ? $_POST["PV"] : "";
+		$ERAID = isset($_POST["ERAID"]) ? $_POST["ERAID"] : "";
+		$ERASTART = isset($_POST["ERASTART"]) ? $_POST["ERASTART"] : "";
+		$DATEINTRO = isset($_POST["DATEINTRO"]) ? $_POST["DATEINTRO"] : "";
+		$UNITCLASS = isset($_POST["UNITCLASS"]) ? $_POST["UNITCLASS"] : "";
+		$UNITVARIANT = isset($_POST["UNITVARIANT"]) ? $_POST["UNITVARIANT"] : "";
 
-		$DMGE = isset($_GET["DMGE"]) ? $_GET["DMGE"] : "";
+		$DMGE = isset($_POST["DMGE"]) ? $_POST["DMGE"] : "";
 
 		$TON = urldecode($TON);
 		$MNU = urldecode($MNU);
@@ -429,6 +429,27 @@
 
 <body>
 	<script>
+
+	function postRedirect(url, data) {
+		const form = document.createElement('form');
+		form.method = 'POST';
+		form.action = url;
+	
+		for (const key in data) {
+			if (data.hasOwnProperty(key)) {
+				const input = document.createElement('input');
+				input.type = 'hidden';
+				input.name = key;
+				input.value = data[key];
+				form.appendChild(input);
+			}
+		}
+	
+		document.body.appendChild(form);
+		form.submit();
+		}
+
+		
 <?php
 	$randomPilotPictureMale = random_pic("m");
 	$randomPilotPictureFemale = random_pic("f");
@@ -452,7 +473,6 @@
 
 		function storeNewUnit() {
 			// Store new unit
-			var url="./gui_create_unit.php?am=1";
 			var TON = document.getElementById("F_TON").value;
 			var TECH = document.getElementById("TECH").value;
 			//var TON = document.getElementById('tonnage').value;
@@ -539,46 +559,47 @@
 				MVG = MV.match(/\d+/)[0];
 				MVJ = 0;
 			}
-			url=url+"&TON="+encodeURIComponent(TON);
-			url=url+"&MNU="+encodeURIComponent(MNU);
-			url=url+"&UNITNAME="+encodeURIComponent(UNITNAME);
-			url=url+"&TP="+encodeURIComponent(TP);
-			url=url+"&SZ="+encodeURIComponent(SZ);
-			url=url+"&TMM="+encodeURIComponent(TMM);
-			url=url+"&MVG="+encodeURIComponent(MVG);
-			url=url+"&MVJ="+encodeURIComponent(MVJ);
-			url=url+"&ROLE="+encodeURIComponent(ROLE);
-			url=url+"&DMGS="+encodeURIComponent(DMGS);
-			url=url+"&DMGM="+encodeURIComponent(DMGM);
-			url=url+"&DMGL="+encodeURIComponent(DMGL);
-			url=url+"&OV="+encodeURIComponent(OV);
-			url=url+"&A="+encodeURIComponent(A);
-			url=url+"&S="+encodeURIComponent(S);
-			url=url+"&PVA="+encodeURIComponent(adjustedPV);
-			url=url+"&SPCL="+encodeURIComponent(SPCL);
-			url=url+"&PN="+encodeURIComponent(PN);
-			url=url+"&PI="+encodeURIComponent(PI);
-			url=url+"&SKILL="+encodeURIComponent(SKILL);
-			url=url+"&MULID="+encodeURIComponent(MULID);
-			url=url+"&MODEL="+encodeURIComponent(MODEL);
-			url=url+"&FORMATIONID="+encodeURIComponent(FORMATIONID);
-			url=url+"&TECH="+encodeURIComponent(TECH);
-			url=url+"&MVTYPE="+encodeURIComponent(MVType);
-
-			url=url+"&RULES="+encodeURIComponent(RULES);
-			url=url+"&COST="+encodeURIComponent(COST);
-			url=url+"&BV="+encodeURIComponent(BV);
-			url=url+"&PV="+encodeURIComponent(PV);
-			url=url+"&ERAID="+encodeURIComponent(ERAID);
-			url=url+"&ERASTART="+encodeURIComponent(ERASTART);
-			url=url+"&DATEINTRO="+encodeURIComponent(DATEINTRO);
-			url=url+"&UNITCLASS="+encodeURIComponent(UNITCLASS);
-			url=url+"&UNITVARIANT="+encodeURIComponent(UNITVARIANT);
-
-			url=url+"&DMGE="+encodeURIComponent(DMGE);
+			const unitData = {
+				TON:TON,
+				MNU:MNU,
+				UNITNAME:UNITNAME,
+				TP:TP,
+				SZ:SZ,
+				TMM:TMM,
+				MVG:MVG,
+				MVJ:MVJ,
+				ROLE:ROLE,
+				DMGS:DMGS,
+				DMGM:DMGM,
+				DMGL:DMGL,
+				OV:OV,
+				A:A,
+				S:S,
+				PVA:adjustedPV,
+				SPCL:SPCL,
+				PN:PN,
+				PI:PI,
+				SKILL:SKILL,
+				MULID:MULID,
+				MODEL:MODEL,
+				FORMATIONID:FORMATIONID,
+				TECH:TECH,
+				MVTYPE:MVType,
+	
+				RULES:RULES,
+				COST:COST,
+				BV:BV,
+				PV:PV,
+				ERAID:ERAID,
+				ERASTART:ERASTART,
+				DATEINTRO:DATEINTRO,
+				UNITCLASS:UNITCLASS,
+				UNITVARIANT:UNITVARIANT,
+				DMGE:DMGE
+		    };
 
 			// alert(url);
-			window.location.href = url;
+			postRedirect(`./gui_create_unit.php?am=1&formationid=${encodeURIComponent(FORMATIONID)}`, unitData);
 		}
 	</script>
 
