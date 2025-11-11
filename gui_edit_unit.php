@@ -47,7 +47,12 @@
 			$UNITNUMBER = $row452["unit_number"];
 			$UNITCLASS = $row452["unit_class"];
 			$UNITVARIANT = $row452["unit_variant"];
+
 			$UNITNAME = $row452["unit_name"];
+			//$UNITNAME = str_replace("&quot;", "-", $UNITNAME);
+			//$UNITNAME = str_replace("&apos;", "-", $UNITNAME);
+			//$UNITNAME = html_entity_decode($UNITNAME);
+
 			$UNITCOMMANDER = $row452["commander"];
 			$UNITSUBCOMMANDER = $row452["subcommander"];
 			$UNITSKILL = $row452["as_skill"];
@@ -129,35 +134,31 @@
 	<script type="text/javascript" src="./scripts/spa.js"></script>
 
 	<script>
-		let unitId = "<?php echo $UNITID; ?>";
-		let assignId = "<?php echo $ASSIGNID; ?>";
-		let assignCommandId = "<?php echo $ASSIGNCOMMANDID; ?>";
-		let assignFormationId = "<?php echo $ASSIGNFORMATIONID; ?>";
-		let unitNumber = "<?php echo $UNITNUMBER; ?>";
-		let unitName = "<?php echo $UNITNAME; ?>";
-		let unitClass = "<?php echo $UNITCLASS; ?>";
-		let unitVariant = "<?php echo $UNITVARIANT; ?>";
-		let unitCommander = "<?php echo $UNITCOMMANDER; ?>";
-		let unitSubCommander = "<?php echo $UNITSUBCOMMANDER; ?>";
-		let unitSkill = "<?php echo $UNITSKILL; ?>";
-		let unitBasePv = "<?php echo $UNITBASEPV; ?>";
-		let unitPv = "<?php echo $UNITPV; ?>";
-		let pilotId = "<?php echo $PILOTID; ?>";
-		let pilotName = "<?php echo $PILOTNAME; ?>";
-		let pilotRank = "<?php echo $PILOTRANK.'.png'; ?>";
-		let pilotImageUrl = "<?php echo $PILOTIMAGEURL; ?>";
-		let pilotSpa = "<?php echo $PILOTSPA; ?>";
-		let pilotSpaCostSum = "<?php echo $PILOTSPACOSTSUM; ?>";
-		let formationId = "<?php echo $FORMATIONID; ?>";
-		let formationFactionId = "<?php echo $FORMATIONFACTIONID; ?>";
-		let formationshort = "<?php echo $FORMATIONSHORT; ?>";
-		let factionid = "<?php echo $FACTIONID; ?>";
-		let factionshort = "<?php echo $FACTIONSHORT; ?>";
-		let factionimage = "<?php echo $FACTIONIMAGE; ?>";
-
-		//console.log(factionshort);
-
-		var api;
+		var unitId = "<?php echo $UNITID; ?>";
+		var assignId = "<?php echo $ASSIGNID; ?>";
+		var assignCommandId = "<?php echo $ASSIGNCOMMANDID; ?>";
+		var assignFormationId = "<?php echo $ASSIGNFORMATIONID; ?>";
+		var unitNumber = "<?php echo $UNITNUMBER; ?>";
+		var unitName = "<?php echo $UNITNAME; ?>";
+		var unitClass = "<?php echo $UNITCLASS; ?>";
+		var unitVariant = "<?php echo $UNITVARIANT; ?>";
+		var unitCommander = "<?php echo $UNITCOMMANDER; ?>";
+		var unitSubCommander = "<?php echo $UNITSUBCOMMANDER; ?>";
+		var unitSkill = "<?php echo $UNITSKILL; ?>";
+		var unitBasePv = "<?php echo $UNITBASEPV; ?>";
+		var unitPv = "<?php echo $UNITPV; ?>";
+		var pilotId = "<?php echo $PILOTID; ?>";
+		var pilotName = "<?php echo $PILOTNAME; ?>";
+		var pilotRank = "<?php echo $PILOTRANK.'.png'; ?>";
+		var pilotImageUrl = "<?php echo $PILOTIMAGEURL; ?>";
+		var pilotSpa = "<?php echo $PILOTSPA; ?>";
+		var pilotSpaCostSum = "<?php echo $PILOTSPACOSTSUM; ?>";
+		var formationId = "<?php echo $FORMATIONID; ?>";
+		var formationFactionId = "<?php echo $FORMATIONFACTIONID; ?>";
+		var formationshort = "<?php echo $FORMATIONSHORT; ?>";
+		var factionid = "<?php echo $FACTIONID; ?>";
+		var factionshort = "<?php echo $FACTIONSHORT; ?>";
+		var factionimage = "<?php echo $FACTIONIMAGE; ?>";
 	</script>
 
 	<style>
@@ -418,11 +419,23 @@
 			document.getElementById("sumlabel").innerHTML = spaCalculatedSum;
 		}
 
-		function fillValues() {
+		function correctStrings() {
+			let f1 = document.getElementById("NewUnitName").value.replace(/\"/g, "").replace(/'/g, "");
+			let f2 = document.getElementById("NewPilotName").value.replace(/\"/g, "").replace(/'/g, "");
+			let f3 = document.getElementById("NewUnitNumber").value.replace(/\"/g, "").replace(/'/g, "");
+
+			document.getElementById("NewUnitName").value = f1;
+			document.getElementById("NewPilotName").value = f2;
+			document.getElementById("NewUnitNumber").value = f3;
+		}
+
+		$(document).ready(function() {
+			var api;
+			var spaStringList = "";
+
 			pilotSpaArray = pilotSpa.split(",");
 			let indexCounter = 0;
 			let spaCalculatedSum = 0;
-			let spaStringList = "";
 
 			for (var i = 0; i < pilotSpaArray.length; i++) {
 				spaElement = pilotSpaArray[i].trim();
@@ -436,7 +449,7 @@
 
 			//console.log("Rank: " + "./images/ranks/" + formationFactionId + "/" + pilotRank + "--");
 
-			document.getElementById("unitnameToEdit").innerHTML = unitClass + " " + unitVariant + " '" + unitName + "' - PV: " + unitPv + " (" + unitBasePv + ")";
+			document.getElementById("unitnameToEdit").innerHTML = unitClass + " " + unitVariant + " - " + unitName + " - PV: " + unitPv + " (" + unitBasePv + ")";
 			document.getElementById("factionname").innerHTML = factionshort;
 			document.getElementById("factionlogo").src = "./images/factions/" + factionimage;
 			document.getElementById("NewUnitName").value = unitName;
@@ -464,10 +477,7 @@
 
 			let newPV = adjustPointValue(unitBasePv, unitSkill);
 			document.getElementById("newPV").innerHTML = newPV;
-		}
 
-		$(document).ready(function() {
-			fillValues();
 			$("#cover").hide();
 
 			// Set the height of the local scrollbars to the real height of the container elements (reload only)
@@ -618,18 +628,18 @@
 			<tr>
 				<td colspan="1" width='5%' class='datalabel' nowrap align="right">Unit name:</td>
 				<td colspan="5" width='90%' class='datalabel'>
-					<input autocomplete="autocomplete_off_hack_xfr4!k" required onkeyup="" onchange="" type="text" id="NewUnitName" width="100%" style="width:100%;">
+					<input autocomplete="autocomplete_off_hack_xfr4!k" required onkeyup="correctStrings();" onchange="" type="text" id="NewUnitName" width="100%" style="width:100%;">
 				</td>
 				<td colspan="2" width='5%' class='datalabel' nowrap align="right">&nbsp;</td>
 			</tr>
 			<tr>
 				<td colspan="1" width='5%' class='datalabel' nowrap align="right">#:</td>
 				<td colspan="1" width='20%' class='datalabel'>
-					<input autocomplete="autocomplete_off_hack_xfr4!k" required onkeyup="" onchange="" type="text" id="NewUnitNumber" width="100%" style="width:100%;">
+					<input autocomplete="autocomplete_off_hack_xfr4!k" required onkeyup="correctStrings();" onchange="" type="text" id="NewUnitNumber" width="100%" style="width:100%;">
 				</td>
 				<td colspan="1" width='5%' class='datalabel' nowrap align="right">Pilot:</td>
 				<td colspan="1" width='20%' class='datalabel'>
-					<input autocomplete="autocomplete_off_hack_xfr4!k" required onkeyup="" onchange="" type="text" id="NewPilotName" width="100%" style="width:100%;">
+					<input autocomplete="autocomplete_off_hack_xfr4!k" required onkeyup="correctStrings();" onchange="" type="text" id="NewPilotName" width="100%" style="width:100%;">
 				</td>
 				<td colspan="1" width='5%' class='datalabel' nowrap align="right">Skill:</td>
 				<td colspan="1" width='20%' class='datalabel'>

@@ -105,11 +105,19 @@
 		let commandFactionId = "<?php echo $COMMANDFACTIONID; ?>";
 		let commandbackground = "<?php echo $COMMANDBACKGROUND; ?>";
 
+		function correctStrings() {
+			let f1 = document.getElementById("NewCommandName").value.replace(/[^A-Za-z0-9 -_|]/g, '').replace(/\"/g, "").replace(/'/g, "");
+			let f2 = document.getElementById("NewCommandBackground").value.replace(/[^A-Za-z0-9 -_|]/g, '').replace(/\"/g, "").replace(/'/g, "");
+
+			document.getElementById("NewCommandName").value = f1;
+			document.getElementById("NewCommandBackground").value = f2;
+		}
+
 		function save() {
-			let n1 = document.getElementById("NewCommandName").value.replace(/[^A-Za-z0-9 -_|]/g, '').replace(/  +/g, ' ');
+			let n1 = document.getElementById("NewCommandName").value.replace(/[^A-Za-z0-9 -_|]/g, '').replace(/  +/g, ' ').replace(/\"/g, "").replace(/'/g, "");
 			let n2 = document.getElementById("NewCommandType").value;
 			let n3 = document.getElementById("NewCommandFaction").value;
-			let n4 = document.getElementById("NewCommandBackground").value.replace(/[^A-Za-z0-9 ]/g, '').replace(/  +/g, ' ');
+			let n4 = document.getElementById("NewCommandBackground").value.replace(/[^A-Za-z0-9 ]/g, '').replace(/  +/g, ' ').replace(/\"/g, "").replace(/'/g, "");
 
 			//if (!n1 || !n2 || !n3 || !n4) {
 			if (!n1) {
@@ -236,7 +244,7 @@
 			<tr>
 				<td colspan="1" width='5%' class='datalabel' nowrap align="left">Command name:</td>
 				<td colspan="1" width='90%' class='datalabel' style="width:100%;">
-					<input autocomplete="autocomplete_off_hack_xfr4!k" required onkeyup="this.value = this.value.toUpperCase();" type="text" id="NewCommandName" width="100%" style="width:100%;">
+					<input autocomplete="autocomplete_off_hack_xfr4!k" required onkeyup="correctStrings();" type="text" id="NewCommandName" width="100%" style="width:100%;">
 				</td>
 			</tr>
 			<tr>
@@ -275,7 +283,7 @@
 			<tr>
 				<td width='5%' class='datalabel' colspan="1" valign="top" align="left" style="vertical-align:top;">Background:</td>
 				<td width='90%' class='datalabel' colspan="1" style="width:100%;">
-					<textarea name="NewCommandBackground" id="NewCommandBackground" cols="40" rows="5" required width="100%" style="width:100%;resize:none;"></textarea>
+					<textarea name="NewCommandBackground" id="NewCommandBackground" onkeyup="correctStrings();" cols="40" rows="5" required width="100%" style="width:100%;resize:none;"></textarea>
 				</td>
 				<td width='10px'></td>
 			</tr>

@@ -403,10 +403,9 @@ function getUnitDetails(id) {
 			unitNameProposal_clan = unitNameProposal.match(regExp);
 			unitNameProposal_is = unitNameProposal.replace("(" + unitNameProposal_clan + ")", "").trim();
 
-			unitNameProposal = unitNameProposal_is;
+			unitNameProposal = unitNameProposal_clan;
 		}
 		document.getElementById("UNITNAME").value = unitNameProposal + " " + unitVariantProposal;
-
 		document.getElementById("DMGE").value=json.BFDamageExtreme;
 	});
 }

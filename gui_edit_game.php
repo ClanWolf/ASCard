@@ -232,10 +232,21 @@
 			//$('.scroll-pane').jScrollPane({autoReinitialise: true});
 			$('.scroll-pane').jScrollPane();
 		});
+
 		$(document).ready(function() {
 			$("#cover").hide();
 			window.frames["saveframe"].location.replace("./version.txt");
 		});
+
+		function correctStrings() {
+			let f1 = document.getElementById("GameTitle").value.replace(/[^A-Za-z0-9 -_|]/g, '').replace(/\"/g, "").replace(/'/g, "");
+			let f2 = document.getElementById("GameBackground").value.replace(/[^A-Za-z0-9 -_|]/g, '').replace(/\"/g, "").replace(/'/g, "");
+			let f3 = document.getElementById("GameYear").value.replace(/[^A-Za-z0-9 -_|]/g, '').replace(/\"/g, "").replace(/'/g, "");
+
+			document.getElementById("GameTitle").value = f1;
+			document.getElementById("GameBackground").value = f2;
+			document.getElementById("GameYear").value = f3;
+		}
 	</script>
 
 	<div id="cover"></div>
@@ -395,7 +406,7 @@
 								} ?>
 								</td>
 								<td colspan="4" class='datalabel' nowrap align="left">
-									<input onchange="javascript:saveGameInfo(<?php echo $hgid ?>);" type="text" id="GameTitle" style="width:100%;">
+									<input onchange="javascript:saveGameInfo(<?php echo $hgid ?>);" onkeyup="correctStrings();" type="text" id="GameTitle" style="width:100%;">
 									<script type="text/javascript">document.getElementById("GameTitle").setAttribute('value','<?php echo $TITLE; ?>');</script>
 								</td>
 								<td colspan="1" class='datalabel' nowrap align="right">
@@ -406,7 +417,7 @@
 							<tr>
 								<td rowspan="4"></td>
 								<td colspan="5" class='datalabel' nowrap align="left">
-										<input onchange="javascript:saveGameInfo(<?php echo $hgid ?>);" type="text" id="GameBackground" style="width:100%;">
+										<input onchange="javascript:saveGameInfo(<?php echo $hgid ?>);" onkeyup="correctStrings();" type="text" id="GameBackground" style="width:100%;">
 										<script type="text/javascript">document.getElementById("GameBackground").setAttribute('value','<?php echo $BACKGROUND; ?>');</script>
 								</td>
 							</tr>
@@ -459,7 +470,7 @@
 									Year:
 								</td>
 								<td colspan="1" class='datalabel' nowrap align="center">
-									<input onchange="javascript:saveGameInfo(<?php echo $hgid ?>);" type="text" id="GameYear" style="width:100%;text-align:center;" align="center">
+									<input onchange="javascript:saveGameInfo(<?php echo $hgid ?>);" onkeyup="correctStrings();" type="text" id="GameYear" style="width:100%;text-align:center;" align="center">
 									<script type="text/javascript">document.getElementById("GameYear").setAttribute('value','<?php echo $GAMEYEAR; ?>');</script>
 								</td>
 							</tr>

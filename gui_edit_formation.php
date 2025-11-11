@@ -144,9 +144,9 @@
 				}
 			});
 
-			let n1 = document.getElementById("NewFormationName").value.replace(/[^A-Za-z0-9 -]/g, '').replace(/  +/g, ' ');
-			let n2 = document.getElementById("NewFormationType").value.replace(/[^A-Za-z0-9 -]/g, '').replace(/  +/g, ' ');
-			let n3 = document.getElementById("NewFormation").value.replace(/[^A-Za-z0-9 -]/g, '').replace(/  +/g, ' ');
+			let n1 = document.getElementById("NewFormationName").value.replace(/[^A-Za-z0-9 -]/g, '').replace(/  +/g, ' ').replace(/\"/g, "").replace(/'/g, "");
+			let n2 = document.getElementById("NewFormationType").value.replace(/[^A-Za-z0-9 -]/g, '').replace(/  +/g, ' ').replace(/\"/g, "").replace(/'/g, "");
+			let n3 = document.getElementById("NewFormation").value.replace(/[^A-Za-z0-9 -]/g, '').replace(/  +/g, ' ').replace(/\"/g, "").replace(/'/g, "");
 			let fa = document.getElementById("NewFormationFaction").value;
 
 			if (n2 !== "") {
@@ -175,6 +175,7 @@
 				//console.log(resultingShort);
 			}
 		}
+
 		function save() {
 			let n1 = document.getElementById("NewFormationName").value.replace(/[^A-Za-z0-9 ]/g, '').replace(/  +/g, ' ');
 			let n2 = document.getElementById("NewFormationType").value.replace(/[^A-Za-z0-9 ]/g, '').replace(/  +/g, ' ');

@@ -434,7 +434,7 @@
 		const form = document.createElement('form');
 		form.method = 'POST';
 		form.action = url;
-	
+
 		for (const key in data) {
 			if (data.hasOwnProperty(key)) {
 				const input = document.createElement('input');
@@ -444,12 +444,12 @@
 				form.appendChild(input);
 			}
 		}
-	
+
 		document.body.appendChild(form);
 		form.submit();
 		}
 
-		
+
 <?php
 	$randomPilotPictureMale = random_pic("m");
 	$randomPilotPictureFemale = random_pic("f");
@@ -477,9 +477,11 @@
 			var TECH = document.getElementById("TECH").value;
 			//var TON = document.getElementById('tonnage').value;
 			var MNU = document.getElementById('MNU').value;
+
 			var UNITNAME = document.getElementById('UNITNAME').value;
-			UNITNAME = UNITNAME.replace(/"/g,"&quot;");
-			UNITNAME = UNITNAME.replace(/'/g,"&apos;");
+			UNITNAME = UNITNAME.replace(/"/g,"");
+			UNITNAME = UNITNAME.replace(/'/g,"");
+
 			var TP = document.getElementById('TP').value;
 			var SZ = document.getElementById('SZ').value;
 			var TMM = document.getElementById('TMM').value;
@@ -505,6 +507,7 @@
 			var selValue = unitslistbox.options[selIndex].value;
 			var selText = unitslistbox.options[selIndex].text;
 			var MULID = selValue;
+
 			var MODEL = selText;
 			MODEL = MODEL.replace(/"/g,"&quot;");
 			MODEL = MODEL.replace(/'/g,"&apos;");
@@ -516,11 +519,14 @@
 			var ERAID = document.getElementById("ERAID").value;
 			var ERASTART = document.getElementById("ERASTART").value;
 			var DATEINTRO = document.getElementById("DATEINTRO").value;
+
 			var UNITCLASS = document.getElementById("UNITCLASS").value;
 			UNITCLASS = UNITCLASS.replace(/"/g,"&quot;");
 			UNITCLASS = UNITCLASS.replace(/'/g,"&apos;");
 
 			var UNITVARIANT = document.getElementById("UNITVARIANT").value;
+			UNITVARIANT = UNITVARIANT.replace(/"/g,"&quot;");
+			UNITVARIANT = UNITVARIANT.replace(/'/g,"&apos;");
 
 			var DMGE = document.getElementById("DMGE").value;
 
@@ -585,7 +591,7 @@
 				FORMATIONID:FORMATIONID,
 				TECH:TECH,
 				MVTYPE:MVType,
-	
+
 				RULES:RULES,
 				COST:COST,
 				BV:BV,

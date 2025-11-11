@@ -166,6 +166,18 @@
 			}
 		}
 
+		function correctStrings() {
+			let f1 = document.getElementById("NewPlayerName").value.replace(/[^A-Za-z0-9 -_|]/g, '').replace(/\"/g, "").replace(/'/g, "");
+			let f2 = document.getElementById("NewEmail").value.replace(/[^A-Za-z0-9 -_|]/g, '').replace(/\"/g, "").replace(/'/g, "");
+			let f3 = document.getElementById("NewPlayerPassword").value.replace(/[^A-Za-z0-9 -_|]/g, '').replace(/\"/g, "").replace(/'/g, "");
+			let f4 = document.getElementById("NewPlayerPasswordConfirm").value.replace(/[^A-Za-z0-9 -_|]/g, '').replace(/\"/g, "").replace(/'/g, "");
+
+			document.getElementById("NewPlayerName").value = f1;
+			document.getElementById("NewEmail").value = f2;
+			document.getElementById("NewPlayerPassword").value = f3;
+			document.getElementById("NewPlayerPasswordConfirm").value = f4;
+		}
+
 		function save(ph) {
 			p1 = document.getElementById("NewPlayerPassword").value;
 			pn = document.getElementById("NewPlayerName").value;     // playername
@@ -275,7 +287,7 @@
 			<tr>
 				<td colspan="1" width='5%' class='datalabel' nowrap align="right">Player name:</td>
 				<td colspan="1" width='90%' class='datalabel' style="width:100%;">
-					<input autocomplete="autocomplete_off_hack_xfr4!k" required onchange="" type="text" id="NewPlayerName" width="100%" style="width:100%;">
+					<input autocomplete="autocomplete_off_hack_xfr4!k" required onkeyup="correctStrings();" onchange="" type="text" id="NewPlayerName" width="100%" style="width:100%;">
 				</td>
 				<td rowspan="4" width='10%' class='datalabel'>
 					<img width="120px" align="right" valign="top" id="playImg" name="playImg" src="./images/player/Meldric.png">
@@ -284,7 +296,7 @@
 			<tr>
 				<td colspan="1" width='5%' class='datalabel' nowrap align="right">Email:</td>
 				<td colspan="1" width='90%' class='datalabel' style="width:100%;">
-					<input autocomplete="autocomplete_off_hack_xfr4!k" required onchange="" type="text" id="NewEmail" width="100%" style="width:100%;">
+					<input autocomplete="autocomplete_off_hack_xfr4!k" required onkeyup="correctStrings();" onchange="" type="text" id="NewEmail" width="100%" style="width:100%;">
 				</td>
 			</tr>
 			<tr>
@@ -312,13 +324,13 @@
 			<tr>
 				<td colspan="1" width='5%' class='datalabel' nowrap align="right">New password:</td>
 				<td colspan="1" width='90%' class='datalabel' style="width:100%;">
-					<input autocomplete="autocomplete_off_hack_xfr4!k" required onchange="" type="password" id="NewPlayerPassword" width="100%" style="width:100%;">
+					<input autocomplete="autocomplete_off_hack_xfr4!k" required onkeyup="correctStrings();" onchange="" type="password" id="NewPlayerPassword" width="100%" style="width:100%;">
 				</td>
 			</tr>
 			<tr>
 				<td colspan="1" width='5%' class='datalabel' nowrap align="right">Password confirm:</td>
 				<td colspan="1" width='90%' class='datalabel' style="width:100%;">
-					<input autocomplete="autocomplete_off_hack_xfr4!k" required onchange="" type="password" id="NewPlayerPasswordConfirm" width="100%" style="width:100%;">
+					<input autocomplete="autocomplete_off_hack_xfr4!k" required onkeyup="correctStrings();" onchange="" type="password" id="NewPlayerPasswordConfirm" width="100%" style="width:100%;">
 				</td>
 			</tr>
 			<tr>
