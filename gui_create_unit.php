@@ -447,7 +447,7 @@
 
 		document.body.appendChild(form);
 		form.submit();
-		}
+	}
 
 
 <?php
@@ -469,6 +469,20 @@
 		function storeNewCommand() {
 			// Store new command
 			alert("Not yet implemented!");
+		}
+
+		function correctStrings() {
+			let f1 = document.getElementById("NewCommandName").value.replace(/\"/g, "").replace(/'/g, "");
+			let f2 = document.getElementById("MNU").value.replace(/\"/g, "").replace(/'/g, "");
+			let f3 = document.getElementById("PN").value.replace(/\"/g, "").replace(/'/g, "");
+			let f4 = document.getElementById("UNITNAME").value.replace(/\"/g, "").replace(/'/g, "");
+			let f5 = document.getElementById("NameFilter").value.replace(/\"/g, "").replace(/'/g, "");
+
+			document.getElementById("NewCommandName").value = f1;
+			document.getElementById("MNU").value = f2;
+			document.getElementById("PN").value = f3;
+			document.getElementById("UNITNAME").value = f4;
+			document.getElementById("NameFilter").value = f5;
 		}
 
 		function storeNewUnit() {
@@ -633,7 +647,7 @@
 					<div style='vertical-align:middle;font-size:28px;color:#eee;'>&nbsp;&nbsp;&nbsp;G<?php echo $gid ?>&nbsp;R<?php echo $CURRENTROUND ?>&nbsp;&nbsp;&nbsp;</div>
 				</td>
 				<td style="width:5px;">&nbsp;</td>
-				<td nowrap onclick="location.href='./gui_select_unit.php'" width="<?php echo $buttonWidth ?>" class='menu_button_normal'><a href='./gui_select_unit.php'>ROSTER</a></td>
+				<td nowrap onclick="location.href='./gui_select_unit.php'" width="<?php echo $buttonWidth ?>" class='menu_button_normal'><a href='./gui_select_unit.php'><i class="fa-solid fa-list"></i>&nbsp;&nbsp;&nbsp;ROSTER</a></td>
 				<td style="width:5px;">&nbsp;</td>
 <?php
 	if ($playMode) {
@@ -669,7 +683,7 @@
 					Create new command:&nbsp;&nbsp;&nbsp;
 				</td>
 				<td nowrap width="99%" class="datalabel" style='text-align:left;' colspan='1'>
-					<input required style='width:100%;' type="text" id="NewCommandName" name="NewCommandName">
+					<input required style='width:100%;' onkeyup="correctStrings();" type="text" id="NewCommandName" name="NewCommandName">
 				</td>
 				<td nowrap width="1%" align="right">
 					<a href='#' onClick='storeNewCommand();'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class='fas fa-plus-square'></i></a>
@@ -759,7 +773,7 @@
 					Filter:
 				</td>
 				<td width="20%" nowrap class="datalabel" style='text-align:left;' colspan='1'>
-					<input required style='width:100%;' type="text" id="NameFilter" name="NameFilter">
+					<input required style='width:100%;' onkeyup="correctStrings();" type="text" id="NameFilter" name="NameFilter">
 				</td>
 				<td nowrap class="datalabel" style='text-align:left;vertical-align:bottom;' valign="bottom" colspan='1' rowspan="7">
 					<a href='#' onClick='storeNewUnit();'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class='fas fa-plus-square'></i></a>
@@ -833,13 +847,13 @@
 					#:
 				</td>
 				<td nowrap class="datalabel" style='text-align:left;' colspan='1'>
-					<input required type="text" id="MNU" name="MNU" style='width:100%;'>
+					<input required type="text" onkeyup="correctStrings();" id="MNU" name="MNU" style='width:100%;'>
 				</td>
 				<td width="5%" nowrap class="datalabel" style='text-align:right;' colspan='1'>
 					Pilot:
 				</td>
 				<td nowrap class="datalabel" style='text-align:left;' colspan='1'>
-					<input type="text" required id="PN" name="PN" style='width:100%;'>
+					<input type="text" required onkeyup="correctStrings();" id="PN" name="PN" style='width:100%;'>
 				</td>
 				<td width="5%" nowrap class="datalabel" style='text-align:right;' colspan='1'>
 					Skill:
@@ -893,7 +907,7 @@
 					Unitname:
 				</td>
 				<td nowrap colspan="4" class="datalabel" style='text-align:left;'>
-					<input required type="text" id="UNITNAME" name="UNITNAME" style='width:100%;'>
+					<input required type="text" onkeyup="correctStrings();" id="UNITNAME" name="UNITNAME" style='width:100%;'>
 				</td>
 				<td width="20%" nowrap colspan="1" class="datalabel" style='text-align:left;'>(max. 30)<a href="javascript:switchNameProposal();">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa-solid fa-shuffle"></i></a></td>
 			</tr>

@@ -895,11 +895,11 @@
 				} else if ($item['size'] == 5) {
 					$sizeString = "SH";
 				}
+				if ($count == 6 || $count == 11) {
+					echo "		</tr>\n";
+					echo "		<tr>\n";
+				}
 				if ($item['active_bid'] == 1) {
-					if ($count == 6 || $count == 11) {
-						echo "		</tr>\n";
-						echo "		<tr>\n";
-					}
 					if ($array_UNIT_DBID[$chosenUnitIndex] == $item['unitid']) {
 						echo "						<td onclick='location.href=\"gui_play_unit.php?stv=1&formationid=".$array_PLAYER_FORMATION_IDS[$cc]."&fod=175&chosenunit=".$count."\"' align='center' valign='top' style='background-color:#293647;padding:4px;border:2px solid #555;animation: glow 2s infinite alternate;'>\n";
 						echo "							<img id='unitstatusimageoverview' src='https://www.ascard.net/app/".$item["status_image"]."' width='32px'><br>\n";
@@ -913,6 +913,12 @@
 						echo "							<br><span style='font-size:15px'>".$item['unit_number']."</span>\n";
 						echo "						</td>\n";
 					}
+				} else {
+					echo "						<td align='center' valign='top' style='background-color:#550000;padding:4px;border:2px solid #555;'>\n";
+					echo "							<img src='https://www.ascard.net/app/".$item["status_image"]."' width='32px'><br>\n";
+					echo "							<span style='display:inline-block;width:40px;align:center;'><img style='display:block;margin-left:auto;margin-right:auto;height:auto;' src='images/lock.png' width='24px'></span>\n";
+					echo "							<br><span style='font-size:15px'>".$item['unit_number']."</span>\n";
+					echo "						</td>\n";
 				}
 				echo "						<td>&nbsp;</td>\n";
 				$count++;

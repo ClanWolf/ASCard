@@ -314,6 +314,16 @@
 				window.location = url;
 			}
 		}
+
+		function correctStrings() {
+			let f1 = document.getElementById("NewPlayerName").value.replace(/[^A-Za-z0-9 -_|]/g, '').replace(/\"/g, "").replace(/'/g, "");
+			let f2 = document.getElementById("NewPlayerPassword").value.replace(/[^A-Za-z0-9 -_|]/g, '').replace(/\"/g, "").replace(/'/g, "");
+			let f3 = document.getElementById("NewPlayerPasswordConfirm").value.replace(/[^A-Za-z0-9 -_|]/g, '').replace(/\"/g, "").replace(/'/g, "");
+
+			document.getElementById("NewPlayerName").value = f1;
+			document.getElementById("NewPlayerPassword").value = f2;
+			document.getElementById("NewPlayerPasswordConfirm").value = f3;
+		}
 	</script>
 
 	<div id="cover"></div>
@@ -340,7 +350,7 @@
 					<div style='vertical-align:middle;font-size:28px;color:#eee;'>&nbsp;&nbsp;&nbsp;G<?php echo $gid ?>&nbsp;R<?php echo $CURRENTROUND ?>&nbsp;&nbsp;&nbsp;</div>
 				</td>
 				<td style="width:5px;">&nbsp;</td>
-				<td nowrap onclick="location.href='./gui_select_unit.php'" width="<?php echo $buttonWidth ?>" class='menu_button_normal'><a href='./gui_select_unit.php'>ROSTER</a></td>
+				<td nowrap onclick="location.href='./gui_select_unit.php'" width="<?php echo $buttonWidth ?>" class='menu_button_normal'><a href='./gui_select_unit.php'><i class="fa-solid fa-list"></i>&nbsp;&nbsp;&nbsp;ROSTER</a></td>
 				<td style="width:5px;">&nbsp;</td>
 <?php
 	if ($playMode) {
@@ -381,7 +391,7 @@
 					<!-- <input autocomplete="off" required type="text" id="NewPlayerName" name="NewPlayerName" style="width: 220px;"><br> -->
 					<!-- <input autocomplete="nope" required type="text" id="NewPlayerName" style="width: 220px;"><br> -->
 
-					<input autocomplete="autocomplete_off_hack_xfr4!k" required type="text" id="NewPlayerName" style="width:100%;"><br>
+					<input autocomplete="autocomplete_off_hack_xfr4!k" onkeyup="correctStrings();" required type="text" id="NewPlayerName" style="width:100%;"><br>
 				</td>
 				<td class='datalabel' width='10px'>
 					<span style='font-size:16px;'>
@@ -396,7 +406,7 @@
 				<td class='datalabel' colspan="1" align="right">PW:</td>
 				<td class='datalabel' colspan="1">
 					<!-- <input autocomplete="new-password" required type="password" id="NewPlayerPassword" style="width:100%;"><br> -->
-					<input autocomplete="new-password" required type="text" id="NewPlayerPassword" style="width:100%;"><br>
+					<input autocomplete="new-password" required onkeyup="correctStrings();" type="text" id="NewPlayerPassword" style="width:100%;"><br>
 				</td>
 				<td class='datalabel' width='10px'></td>
 			</tr>
@@ -404,7 +414,7 @@
 				<td class='datalabel' colspan="1" align="right">Confirm PW:</td>
 				<td class='datalabel' colspan="1">
 					<!-- <input autocomplete="new-password" required type="password" id="NewPlayerPasswordConfirm" style="width:100%;"><br> -->
-					<input autocomplete="new-password" required type="text" id="NewPlayerPasswordConfirm" style="width: 100%;"><br>
+					<input autocomplete="new-password" required onkeyup="correctStrings();" type="text" id="NewPlayerPasswordConfirm" style="width: 100%;"><br>
 				</td>
 				<td width='10px'></td>
 			</tr>

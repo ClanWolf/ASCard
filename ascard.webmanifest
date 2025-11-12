@@ -36,7 +36,7 @@
 	"scope": "/app/",
 	"background_color": "#323232",
 	"theme_color": "#282828",
-	"orientation": "landscape-primary",
-	"display_override": ["fullscreen", "minimal-ui"],
+	"orientation": "landscape",
+	"display_override": ["fullscreen", "standalone"],
 	"display": "fullscreen"
 }
