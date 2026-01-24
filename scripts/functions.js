@@ -783,22 +783,24 @@ function setCircles(h, heat_PREP_ENGINEHIT_value, a, s, e, fc, mp, w, e_cv, fc_c
 		// JMPW# -# from TMM
 		// JMPS# +# to TMM
 		if (document.getElementById('sa_field').innerText.indexOf('JMPS') !== -1 || document.getElementById('sa_field').innerText.indexOf('JMPW') !== -1) {
-			const myArray = document.getElementById('sa_field').innerText.split(",");
+			const myArray = document.getElementById('sa_field').innerText.split(" ");
 			for (let index = 0; index < myArray.length; ++index) {
 				const element = myArray[index];
 				var value = 0;
 				if (element.indexOf('JMPS') !== -1) {
 					var num = element.replace(/[^0-9]/g,'');
 					var value = parseInt(num, 10);
-					//console.log("Found JMPS. Value: " + value);
-					//console.log("+" + value + " TMM modifier (strong JJs)");
+					// console.log("element: " + element);
+					// console.log("Found JMPS. Value: " + value);
+					// console.log("+" + value + " TMM modifier (strong JJs)");
 					tmpTMM = tmpTMM + value;
 				}
 				if (element.indexOf('JMPW') !== -1) {
 					var num = element.replace(/[^0-9]/g,'');
 					var value = parseInt(num, 10);
-					//console.log("Found JMPW. Value: " + value);
-					//console.log("-" + value + " TMM modifier (weak JJs)");
+					// console.log("element: " + element);
+					// console.log("Found JMPW. Value: " + value);
+					// console.log("-" + value + " TMM modifier (weak JJs)");
 					tmpTMM = tmpTMM - value;
 				}
 			}
