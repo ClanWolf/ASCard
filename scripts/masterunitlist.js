@@ -105,7 +105,7 @@ function getUnitList(filter, tech, minTon, maxTon, category, unittypeString) {
 
 			//console.log("BFSize: " + unit.BFSize);
 
-			if (unit.BFSize != "0") {
+			if (unit.BFSize !== "0") {
 				var eraIdFilter = document.getElementById("CreateUnitEra").value;
 				var unitIntroducedInYear = unit.DateIntroduced;
 
@@ -182,7 +182,7 @@ function getUnitList(filter, tech, minTon, maxTon, category, unittypeString) {
 							break;
 					}
 
-					if (eraIdFilter == 0 || unitValidInGivenEra) {
+					if (eraIdFilter === 0 || unitValidInGivenEra) {
 						optionList = optionList + "<option value=" + unitString + "</option>";
 						//console.log("Adding: " + unitString);
 					} else {
@@ -192,11 +192,11 @@ function getUnitList(filter, tech, minTon, maxTon, category, unittypeString) {
 			}
 		});
 	}).then(function data() {
-		if (filter != "" && filter.length >= 3) { // If filter is set, user is looking for a specific unit
+		if (filter !== "" && filter.length >= 3) { // If filter is set, user is looking for a specific unit
 
 			document.getElementById("NameFilter").style.color="#fff";
 
-			if (optionList == "<option><<< Select unit >>></option>") {
+			if (optionList === "<option><<< Select unit >>></option>") {
 				// The unit in the filter did not return any matches. Search other brackets!
 				console.log(filter + " has not returned any matches in category " + category + "!");
 
@@ -206,7 +206,7 @@ function getUnitList(filter, tech, minTon, maxTon, category, unittypeString) {
 					const lines = data.split("\n");
 					let i = 0;
 					while (i < lines.length) {
-						if (lines[i] != "") {
+						if (lines[i] !== "") {
 							const line = lines[i].split(";");
 							// console.log(line[1]);
 							if (filter.length >= 3 && line[1] !== undefined && line[1].includes(filter)) {
@@ -220,8 +220,8 @@ function getUnitList(filter, tech, minTon, maxTon, category, unittypeString) {
 								console.log("Tech: " + detectedUnitTech);
 
 								// Set filter to new values
-								if (detectedUnitType != "" && detectedUnitSize != "" && detectedUnitTech != "") {
-									if (detectedUnitTech != 1 && detectedUnitTech != 2) {
+								if (detectedUnitType !== "" && detectedUnitSize !== "" && detectedUnitTech !== "") {
+									if (detectedUnitTech !== 1 && detectedUnitTech !== 2) {
 										detectedUnitTech = 1;
 									}
 									// All values are set, we can set the filters
@@ -236,15 +236,15 @@ function getUnitList(filter, tech, minTon, maxTon, category, unittypeString) {
 									document.getElementById("tech").value = detectedUnitTech;
 									document.getElementById("CreateUnitEra").value = 0;
 									document.getElementById("unittype").value = detectedUnitType;
-									if (detectedUnitSize == 1) {
+									if (detectedUnitSize === 1) {
 										document.getElementById("tonnage").value = "LIGHT";
-									} else if (detectedUnitSize == 2) {
+									} else if (detectedUnitSize === 2) {
 										document.getElementById("tonnage").value = "MEDIUM";
-									} else if (detectedUnitSize == 3) {
+									} else if (detectedUnitSize === 3) {
 										document.getElementById("tonnage").value = "HEAVY";
-									} else if (detectedUnitSize == 4) {
+									} else if (detectedUnitSize === 4) {
 										document.getElementById("tonnage").value = "ASSAULT";
-									} else if (detectedUnitSize == 5) {
+									} else if (detectedUnitSize === 5) {
 										document.getElementById("tonnage").value = "SUPERHEAVY";
 									}
 
@@ -314,7 +314,7 @@ function getUnitList(filter, tech, minTon, maxTon, category, unittypeString) {
 }
 
 function getUnitDetails(id) {
-	if (id == "<<< Select unit >>>") {
+	if (id === "<<< Select unit >>>") {
 		document.getElementById("TP").value="";
 		document.getElementById("SZ").value="";
 		document.getElementById("TMM").value="";

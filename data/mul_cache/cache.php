@@ -1,8 +1,8 @@
 <?php
 
-	//	ini_set('display_errors', 1);
-	//	ini_set('display_startup_errors', 1);
-	//	error_reporting(E_ALL);
+	ini_set('display_errors', 1);
+	ini_set('display_startup_errors', 1);
+	error_reporting(E_ALL);
 
 	set_time_limit(600);
 	ob_end_flush();
@@ -32,8 +32,8 @@
 
 
 
-	$mulURL = "http://www.masterunitlist.info/";
-	//$mulURL = "https://masterunitlist.azurewebsites.net/";
+	//$mulURL = "http://www.masterunitlist.info/";
+	$mulURL = "https://masterunitlist.azurewebsites.net/";
 
 	//	0              ALL
 	//	9   2005-2570: AGE OF WAR
