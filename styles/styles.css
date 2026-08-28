@@ -154,15 +154,13 @@ a:hover {
 	color: #ddd;
 	border-color: #aaa;
 }
-.box {
+.loginbox {
 	width: 500px;
-	height: 200px;
 	background-color: #694007;
-	position: fixed;
-	margin-left: -250px;
-	margin-top: -100px;
-	top: 50%;
-	left: 50%;
+}
+.registerbox {
+	width: 500px;
+	background-color: #694007;
 }
 #cover {
 	position: fixed;
@@ -795,6 +793,18 @@ a:hover {
 	position: absolute;
 	bottom: 4px;
 	width: 100%;
+}
+ #submitbutton, #registerbutton, #loginbutton {
+     width:115px;
+     height:60px;
+     color:#fff;
+     background-color:#222222;
+ }
+#submitbutton:hover, #registerbutton:hover, #loginbutton:hover {
+    background-color:#e28a3e;
+}
+#submitbutton:active, #registerbutton:active, #loginbutton:hover {
+    background-color:#a25a25;
 }
 .phase_button_normal {
 	font-size: 100%;

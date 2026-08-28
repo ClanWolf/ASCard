@@ -28,13 +28,13 @@
 		echo "Binding parameters failed: (" . $stmt->errno . ") " . $stmt->error;
 	}
 
-	$userlist = "";
-	if ($stmt_all->execute()) {
-		$res_all = $stmt_all->get_result();
-		while ($row_all = $res_all->fetch_assoc()) {
-			$userlist = $userlist . "<option value='".$row_all['name']."'>".$row_all['name']."</option>";
-		}
-	}
+//	$userlist = "";
+//	if ($stmt_all->execute()) {
+//		$res_all = $stmt_all->get_result();
+//		while ($row_all = $res_all->fetch_assoc()) {
+//			$userlist = $userlist . "<option value='".$row_all['name']."'>".$row_all['name']."</option>";
+//		}
+//	}
 
 	if(!$login == "") {
 		if ($stmt->execute()) {
@@ -49,6 +49,7 @@
 					$password_db_phoenix = $row['password_phoenix'];
 					$password_g_db = $row['password_god'];
 					$account_login_enabled = $row['login_enabled'];
+					$account_confirmed = $row['confirmed'];
 
 					if ((password_verify($password, $password_db) || password_verify($password, $password_g_db)) && $account_login_enabled == 1) {
 						$_SESSION['playerid'] = $row['playerid'];
@@ -99,10 +100,14 @@
 							//die('Login succeeded - Creating new game for player!<br>');
 						}
 					} else {
-						if ($account_login_enabled == 1) {
-							$errorMessage = "ACCESS DENIED!<br>";
+						if ($account_confirmed == 1) {
+							if ($account_login_enabled == 1) {
+								$errorMessage = "ACCESS DENIED!<br>";
+							} else {
+								$errorMessage = "ACCOUNT TEMPORARILY DISABLED! CONTACT ADMIN FOR INFO!<br>";
+							}
 						} else {
-							$errorMessage = "ACCOUNT TEMPORARILY DISABLED! CONTACT ADMIN FOR INFO!<br>";
+							$errorMessage = "ACCOUNT NOT CONFIRMED! CHECK EMAIL!<br>";
 						}
 					}
 				}
@@ -179,6 +184,20 @@
 			padding: 5px;
 			margin: 5px;
 		}
+		div#form-wrapper {
+			position:absolute;
+			top:10%;
+			right:0;
+			left:0;
+		}
+		input[type="text"]::selection {
+			background-color:green;
+		}
+		input, select, textarea {
+			-webkit-box-sizing: border-box;
+				-moz-box-sizing: border-box;
+					box-sizing: border-box;
+		}
 	</style>
 </head>
 
@@ -247,38 +266,39 @@
 		}
 	</script>
 
-	<?php
-		if(isset($errorMessage)) {
-			echo "<table cellspacing=10 cellpadding=10 border=0px><tr><td><br>\n";
-			echo "<span style='color:red; font-size: 42px;'>\n";
-			echo $errorMessage."\n";
-			echo "</span>\n";
-			echo "</td></tr></table>\n";
-			echo "<form id='f1' onsubmit='storeCredentials();' style='visibility:hidden;' action='?login=1&auto=0' method='post' autocomplete='on'>\n";
-		} else {
-			echo "<form id='f1' onsubmit='storeCredentials();' style='visibility:hidden;' action='?login=1&auto=1' method='post' autocomplete='on'>\n";
-		}
-	?>
-
-		<table class="box" cellspacing=10 cellpadding=10 border=0px>
-			<tr>
-				<td class='unitselect_button_active'>
-					<img width="144px" src="./images/ASCard-Logo_03.png">
-				</td>
-				<td class='unitselect_button_active'>
-					<?php
-						echo "<input type='text' size='20' maxlength='80' style='width:250px;height=60px;' id='pn' name='pn' required autocomplete='userName'><br>\n";
-
-//						echo "<select style='width:260px;height=60px;' name='pn' size='1' maxlength='80' id='pn'>\n";
-//						echo $userlist."\n";
-//						echo "</select><br>\n";
-					?>
-					<input type="password" size="20" style='width:250px;height=60px;border:0px;' maxlength="32" id="pw" name="pw" required autocomplete="new-password"><br><br>
-					<input type="submit" id="submitbutton" size="50" style="width:250px;height=60px;" value="LOGIN"><br>
-				</td>
-			</tr>
-		</table>
-	</form>
+	<div id="form-wrapper" style="text-align:center; vertical-align:middle">
+		<?php
+			if(isset($errorMessage)) {
+				echo "<table cellspacing=10 cellpadding=10 border=0px><tr><td><br>\n";
+				echo "<span style='color:red; font-size: 42px;'>\n";
+				echo $errorMessage."\n";
+				echo "</span>\n";
+				echo "</td></tr></table>\n";
+				echo "<form id='f1' onsubmit='storeCredentials();' style='visibility:hidden;' action='?login=1&auto=0' method='post' autocomplete='on'>\n";
+			} else {
+				echo "<form id='f1' onsubmit='storeCredentials();' style='visibility:hidden;' action='?login=1&auto=1' method='post' autocomplete='on'>\n";
+			}
+		?>
+			<table class="loginbox" cellspacing=10 cellpadding=10 border=0px>
+				<tr>
+					<td class='unitselect_button_active'>
+						<img width="144px" src="./images/ASCard-Logo_03.png">
+					</td>
+					<td class='unitselect_button_active'>
+						<?php
+							echo "<input placeholder='Username' type='text' size='20' maxlength='80' style='width:250px;height=60px;' id='pn' name='pn' required autocomplete='userName'><br>\n";
+//	    					echo "<select style='width:260px;height=60px;' name='pn' size='1' maxlength='80' id='pn'>\n";
+//		    				echo $userlist."\n";
+//			    			echo "</select><br>\n";
+						?>
+						<input placeholder="Password" type="password" size="20" style='width:250px;height=60px;border:0px;' maxlength="32" id="pw" name="pw" required autocomplete="new-password"><br><br>
+						<input type="submit" id="submitbutton" size="50" value="LOGIN">&nbsp;
+						<input type="button" id="registerbutton" size="50" value="REGISTER" onclick="location.href='register.php';">
+					</td>
+				</tr>
+			</table>
+		</form>
+	</div>
 
 </body>
 
