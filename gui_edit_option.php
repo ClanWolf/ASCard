@@ -88,6 +88,7 @@
 	<link rel="manifest" href="/app/ascard.webmanifest">
 	<link rel="stylesheet" type="text/css" href="./fontawesome/css/all.min.css" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="./styles/styles.css">
+	<link rel="stylesheet" type="text/css" href="./styles/editorstyles.css">
 	<link rel="icon" type="image/png" href="/app/favicon-96x96.png" sizes="96x96" />
 	<link rel="icon" type="image/svg+xml" href="/app/favicon.svg" />
 	<link rel="shortcut icon" href="/app/favicon.ico" />
@@ -262,6 +263,31 @@
 				</td>
 				<td nowrap width="90%" align="left" class="datalabel">
 					Play mode (deactivate for unit editing)
+				</td>
+			</tr>
+			<tr><td colspan="2"><hr></td></tr>
+			<tr>
+				<td nowrap width="90%" align="left" class="datalabel">
+					Faction
+				</td>
+				<td>
+					<select required name='OPTFACTION' id='OPTFACTION' size='1' style='width:250px;height=60px;border:0px;'>
+						<option  value="3" selected>ComStar [CS]</option>
+						<option  value="1">Clan Wolf [CW]</option>
+						<option value="13">Clan Wolf in Exile [CWiE]</option>
+						<option  value="9">Clan Jade Falcon [CJF]</option>
+						<option  value="5">Clan Ghostbear [CGB]</option>
+						<option value="12">Clan Smoke Jaguar [CSJ]</option>
+						<option value="14">Clan Snow Raven [CSR]</option>
+						<option value="15">Clan Nova Cat [CNC]</option>
+						<option  value="2">Lyran Alliance [LA]</option>
+						<option  value="7">Lyran Commonwealth [LC]</option>
+						<option  value="4">Draconis Combine [DC]</option>
+						<option  value="8">Federated Suns [FS]</option>
+						<option value="10">Free Worlds League [FWL]</option>
+						<option value="11">Capellan Confederation [CC]</option>
+						<option  value="6">Wolfs Dragoons [M-WD]</option>
+					</select>
 				</td>
 			</tr>
 		</table>
