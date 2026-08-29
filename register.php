@@ -145,9 +145,8 @@
 								$subject = "ASCard account confirmation";
 
 								$message  = "Greetings MechWarrior!\r\n\r\n";
-								$message .= "This email was used to create an account for ASCard.net.\r\n";
-								$message .= "If you do not know about that, you can ignore this mail!\r\n\r\n";
-								$message .= "If you have created the account, you need to confirm your email by clicking this link:\r\n";
+								$message .= "This email adress was used to create an account for ASCard.net.\r\n";
+								$message .= "If you created the account, you need to confirm your email by clicking this link:\r\n";
 								$message .= $confirmationlink . "\r\n\r\n";
 								$message .= "Good hunting!";
 
