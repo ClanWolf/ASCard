@@ -3,17 +3,17 @@
 	// ini_set('display_startup_errors', 1);
 	// error_reporting(E_ALL);
 
-	session_start();
+	// session_start();
 
 	if (!file_exists('logs')) {
 		mkdir('logs', 0777, true);
 	}
 
 	$pid    = isset($_SESSION["playerid"]) ? filter_var($_SESSION["playerid"], FILTER_VALIDATE_INT) : "-";
-	$gid    = filter_var($_SESSION['gameid'], FILTER_VALIDATE_INT);
-	$hgid   = filter_var($_SESSION['hostedgameid'], FILTER_VALIDATE_INT);
+	$gid    = isset($_SESSION["gameid"]) ? filter_var($_SESSION['gameid'], FILTER_VALIDATE_INT) : "-";
+	$hgid   = isset($_SESSION["hostedgameid"]) ? filter_var($_SESSION['hostedgameid'], FILTER_VALIDATE_INT) : "-";
 
-	$pre    = "[".$pid."|".$gid."|".$hgid."] : ";
+	$pre    = "[".sprintf("%3s", $pid)."|".sprintf("%3s", $gid)."|".sprintf("%3s", $hgid)."] ";
 
 	$logfilename = "logs/ascard_logfile";
 	$logfileext = ".txt";
@@ -69,7 +69,7 @@
 		$logfile = fopen($logfilename.$logfileext, "a");
 		fputs($logfile,
 			$pre.
-			date("d.m.Y, H:i:s", time()).
+			date("d.m.Y H:i:s", time()).
 			" ".
 			$msg."\n"
 		);
@@ -86,15 +86,15 @@
 			$ref = "no referer";
 		}
 
-		$refererStr = ", ".$_SERVER['REMOTE_ADDR'].
-			", ".$_SERVER['REQUEST_METHOD'].
-			", ".$_SERVER['PHP_SELF'].
-			", ".$_SERVER['HTTP_USER_AGENT'].
-			", ".$ref."\n";
+		$refererStr = " ".sprintf("%15s", $_SERVER['REMOTE_ADDR']).
+			" ".$_SERVER['REQUEST_METHOD'].
+			" ".$_SERVER['PHP_SELF'].
+			// " ".$_SERVER['HTTP_USER_AGENT'].
+			" ".$ref."\n";
 
 		fputs($logfile,
 			$pre.
-			date("d.m.Y, H:i:s", time()).
+			date("d.m.Y H:i:s", time()).
 			$refererStr
 		);
 		fclose($logfile);

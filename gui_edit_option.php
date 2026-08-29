@@ -198,7 +198,7 @@
 					<div><a style="color: #eee;" href="./logout.php">&nbsp;&nbsp;&nbsp;<i class="fas fa-power-off" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;</a></div>
 				</td>
 				<td nowrap onclick="location.href='./gui_edit_game.php'" style="width: 100px;background:rgba(56,87,26,1.0);">
-					<div style='vertical-align:middle;font-size:28px;color:#eee;'>&nbsp;&nbsp;&nbsp;G<?php echo $gid ?>&nbsp;R<?php echo $CURRENTROUND ?>&nbsp;&nbsp;&nbsp;</div>
+					<div style='vertical-align:middle;font-size:28px;color:#eee;'>&nbsp;&nbsp;<?php echo $gid ?>:<?php echo $CURRENTROUND ?>&nbsp;&nbsp;</div>
 				</td>
 				<td style="width:5px;">&nbsp;</td>
 				<td nowrap onclick="location.href='./gui_select_unit.php'" width="<?php echo $buttonWidth ?>" class='menu_button_normal'><a href='./gui_select_unit.php'><i class="fa-solid fa-list"></i>&nbsp;&nbsp;&nbsp;ROSTER</a></td>
@@ -271,7 +271,7 @@
 					Faction
 				</td>
 				<td>
-					<select required name='OPTFACTION' id='OPTFACTION' size='1' style='width:250px;height=60px;border:0px;'>
+					<select required name='OPTFACTION'  id='OPTFACTION' size='1' style='width:250px;height=60px;border:0px;'>
 						<option  value="3" selected>ComStar [CS]</option>
 						<option  value="1">Clan Wolf [CW]</option>
 						<option value="13">Clan Wolf in Exile [CWiE]</option>

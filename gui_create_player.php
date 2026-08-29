@@ -45,6 +45,7 @@
 		$hashedpw = password_hash($newplayerpassword, PASSWORD_DEFAULT);
 
 		$sql_asc_checkusername = "SELECT SQL_NO_CACHE * FROM asc_player where name='".$newplayername."'";
+		logMsg("Select: " . $sql_asc_checkusername);
 		echo "Select: " . $sql_asc_checkusername;
 
 		$result_asc_checkusername = mysqli_query($conn, $sql_asc_checkusername);
@@ -347,7 +348,7 @@
 					<div><a style="color: #eee;" href="./logout.php">&nbsp;&nbsp;&nbsp;<i class="fas fa-power-off" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;</a></div>
 				</td>
 				<td nowrap onclick="location.href='./gui_edit_game.php'" style="width: 100px;background:rgba(56,87,26,1.0);">
-					<div style='vertical-align:middle;font-size:28px;color:#eee;'>&nbsp;&nbsp;&nbsp;G<?php echo $gid ?>&nbsp;R<?php echo $CURRENTROUND ?>&nbsp;&nbsp;&nbsp;</div>
+					<div style='vertical-align:middle;font-size:28px;color:#eee;'>&nbsp;&nbsp;<?php echo $gid ?>:<?php echo $CURRENTROUND ?>&nbsp;&nbsp;</div>
 				</td>
 				<td style="width:5px;">&nbsp;</td>
 				<td nowrap onclick="location.href='./gui_select_unit.php'" width="<?php echo $buttonWidth ?>" class='menu_button_normal'><a href='./gui_select_unit.php'><i class="fa-solid fa-list"></i>&nbsp;&nbsp;&nbsp;ROSTER</a></td>

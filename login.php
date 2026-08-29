@@ -107,7 +107,7 @@
 								$errorMessage = "ACCOUNT TEMPORARILY DISABLED! CONTACT ADMIN FOR INFO!<br>";
 							}
 						} else {
-							$errorMessage = "ACCOUNT NOT CONFIRMED! CHECK EMAIL!<br>";
+							$errorMessage = "ACCOUNT NOT CONFIRMED! CHECK EMAIL (AND SPAM-FOLDER)!<br>";
 						}
 					}
 				}
@@ -186,7 +186,7 @@
 		}
 		div#form-wrapper {
 			position:absolute;
-			top:10%;
+			top:5%;
 			right:0;
 			left:0;
 		}
@@ -269,10 +269,11 @@
 	<div id="form-wrapper" style="text-align:center; vertical-align:middle">
 		<?php
 			if(isset($errorMessage)) {
-				echo "<table cellspacing=10 cellpadding=10 border=0px><tr><td><br>\n";
-				echo "<span style='color:red; font-size: 42px;'>\n";
+				echo "<table cellspacing=10 cellpadding=10 border=0px><tr><td>\n";
+				echo "<span style='color:red;font-size:32px;'>\n";
 				echo $errorMessage."\n";
 				echo "</span>\n";
+				echo "<br>\n";
 				echo "</td></tr></table>\n";
 				echo "<form id='f1' onsubmit='storeCredentials();' style='visibility:hidden;' action='?login=1&auto=0' method='post' autocomplete='on'>\n";
 			} else {

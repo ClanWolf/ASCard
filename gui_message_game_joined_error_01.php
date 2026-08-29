@@ -131,7 +131,7 @@
 					<div><a style="color:#eee;" href="./logout.php">&nbsp;&nbsp;&nbsp;<i class="fas fa-power-off" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;</a></div>
 				</td>
 				<td nowrap onclick="location.href='./gui_edit_game.php'" style="width: 100px;background:rgba(81,125,37,1.0);">
-					<div style='vertical-align:middle;font-size:28px;color:#fff;'>&nbsp;&nbsp;&nbsp;G<?php echo $gid ?>&nbsp;R<?php echo $CURRENTROUND ?>&nbsp;&nbsp;&nbsp;</div>
+					<div style='vertical-align:middle;font-size:28px;color:#eee;'>&nbsp;&nbsp;<?php echo $gid ?>:<?php echo $CURRENTROUND ?>&nbsp;&nbsp;</div>
 				</td>
 				<td style="width:5px;">&nbsp;</td>
 				<td nowrap onclick="location.href='./gui_select_unit.php'" width="<?php echo $buttonWidth ?>" class='menu_button_normal'><a href='./gui_select_unit.php'><i class="fa-solid fa-list"></i>&nbsp;&nbsp;&nbsp;ROSTER</a></td>

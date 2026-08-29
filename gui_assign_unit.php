@@ -48,17 +48,18 @@
 			// Success
 		} else {
 			// Error
-			echo "Error: " . $sql_update_assignment . "<br>" . mysqli_error($conn);
 			logMsg("Error: " . $sql_update_assignment . ": " . mysqli_error($conn));
+			echo "Error: " . $sql_update_assignment . "<br>" . mysqli_error($conn);
 		}
 		$sql_update_unitstatus = "UPDATE asc_unitstatus set round = ".$CURRENTROUND." where initial_status=1 and unitid = ".$UNITID;
 		if (mysqli_query($conn, $sql_update_unitstatus)) {
 			// Success
 		} else {
 			// Error
-			echo "Error: " . $sql_update_unitstatus . "<br>" . mysqli_error($conn);
 			logMsg("Error: " . $sql_update_unitstatus . ": " . mysqli_error($conn));
+			echo "Error: " . $sql_update_unitstatus . "<br>" . mysqli_error($conn);
 		}
+		logMsg("Referring to: <meta http-equiv='refresh' content='0;url=./gui_select_unit.php?activebid=1&unitid=" . $UNITID . "'>");
 		echo "<meta http-equiv='refresh' content='0;url=./gui_select_unit.php?activebid=1&unitid=" . $UNITID . "'>";
 	}
 
@@ -86,8 +87,8 @@
 			logMsg("Deleted unit: ".$UNITID);
 		} else {
 			// Error
-			echo "Error: " . $sqldeleteunit . "<br>" . mysqli_error($conn);
 			logMsg("Error: " . $sqldeleteunit . ": " . mysqli_error($conn));
+			echo "Error: " . $sqldeleteunit . "<br>" . mysqli_error($conn);
 		}
 
 		$sqldeleteunitstatus = "DELETE FROM asc_unitstatus WHERE unitid = ".$UNITID;
@@ -96,8 +97,8 @@
 			logMsg("Deleted status for unit: ".$UNITID);
 		} else {
 			// Error
-			echo "Error: " . $sqldeleteunitstatus . "<br>" . mysqli_error($conn);
 			logMsg("Error: " . $sqldeleteunitstatus . ": " . mysqli_error($conn));
+			echo "Error: " . $sqldeleteunitstatus . "<br>" . mysqli_error($conn);
 		}
 
 		$sqldeletepilot = "DELETE FROM asc_pilot WHERE pilotid = ".$PILOTID;
@@ -106,8 +107,8 @@
 			logMsg("Deleted Pilot: ".$PILOTID);
 		} else {
 			// Error
-			echo "Error: " . $sqldeletepilot . "<br>" . mysqli_error($conn);
 			logMsg("Error: " . $sqldeletepilot . ": " . mysqli_error($conn));
+			echo "Error: " . $sqldeletepilot . "<br>" . mysqli_error($conn);
 		}
 
 		$sqldeleteassign = "DELETE FROM asc_assign WHERE pilotid = ".$PILOTID." and unitid = ".$UNITID;
@@ -116,8 +117,8 @@
 			logMsg("Deleted assignment for unit: ".$UNITID." and pilot: ".$PILOTID);
 		} else {
 			// Error
-			echo "Error: " . $sqldeleteassign . "<br>" . mysqli_error($conn);
 			logMsg("Error: " . $sqldeleteassign . ": " . mysqli_error($conn));
+			echo "Error: " . $sqldeleteassign . "<br>" . mysqli_error($conn);
 		}
 	}
 ?>
@@ -270,7 +271,7 @@
 					<div><a style="color: #eee;" href="./logout.php">&nbsp;&nbsp;&nbsp;<i class="fas fa-power-off" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;</a></div>
 				</td>
 				<td nowrap onclick="location.href='./gui_edit_game.php'" style="width: 100px;background:rgba(56,87,26,1.0);">
-					<div style='vertical-align:middle;font-size:28px;color:#eee;'>&nbsp;&nbsp;&nbsp;G<?php echo $gid ?>&nbsp;R<?php echo $CURRENTROUND ?>&nbsp;&nbsp;&nbsp;</div>
+					<div style='vertical-align:middle;font-size:28px;color:#eee;'>&nbsp;&nbsp;<?php echo $gid ?>:<?php echo $CURRENTROUND ?>&nbsp;&nbsp;</div>
 				</td>
 				<td style="width:5px;">&nbsp;</td>
 				<td nowrap onclick="location.href='./gui_select_unit.php'" width="<?php echo $buttonWidth ?>" class='menu_button_normal'><a href='./gui_select_unit.php'><i class="fa-solid fa-list"></i>&nbsp;&nbsp;&nbsp;ROSTER</a></td>

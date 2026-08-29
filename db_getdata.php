@@ -124,8 +124,8 @@
 		// Success
 	} else {
 		// Error
-		echo "Error: " . $sql_update_last_visited_unit . "<br>" . mysqli_error($conn);
 		logMsg("Error: " . $sql_update_last_visited_unit . ": " . mysqli_error($conn));
+		echo "Error: " . $sql_update_last_visited_unit . "<br>" . mysqli_error($conn);
 	}
 
 //	// Game
