@@ -11,14 +11,17 @@
 	require('./logger.php');
 	require_once('./db.php');
 
-	$gid = isset($_GET["gid"]) ? filter_var($_GET["gid"], FILTER_VALIDATE_INT) : "";
-	$pid = isset($_GET["pid"]) ? filter_var($_GET["pid"], FILTER_VALIDATE_INT) : "";
-	$leaveGame = isset($_GET["leaveCurrentGame"]) ? filter_var($_GET["leaveCurrentGame"], FILTER_VALIDATE_BOOLEAN) : 0;
-	$joinGame = isset($_GET["joinGame"]) ? filter_var($_GET["joinGame"], FILTER_VALIDATE_BOOLEAN) : 0;
-	$accessCode = isset($_GET["accessCode"]) ? filter_var($_GET["accessCode"], FILTER_VALIDATE_INT) : "";
+	$gid                    = isset($_GET["gid"]) ? filter_var($_GET["gid"], FILTER_VALIDATE_INT) : "";
+	$pid                    = isset($_GET["pid"]) ? filter_var($_GET["pid"], FILTER_VALIDATE_INT) : "";
+	$leaveGame              = isset($_GET["leaveCurrentGame"]) ? filter_var($_GET["leaveCurrentGame"], FILTER_VALIDATE_BOOLEAN) : 0;
+	$joinGame               = isset($_GET["joinGame"]) ? filter_var($_GET["joinGame"], FILTER_VALIDATE_BOOLEAN) : 0;
+	$accessCode             = isset($_GET["accessCode"]) ? filter_var($_GET["accessCode"], FILTER_VALIDATE_INT) : "";
 
-	$currentPlayerId = $_SESSION['playerid'];
-	$hgameid = $_SESSION['hostedgameid'];
+	$opt5                   = filter_var($_SESSION['option5'], FILTER_VALIDATE_BOOLEAN);
+
+	$currentPlayerId        = $_SESSION['playerid'];
+	$hgameid                = $_SESSION['hostedgameid'];
+	$autoRepairOnResetRound = $opt5; // Disabled for PCon 2026 (0 is always written)
 
 	echo "<!DOCTYPE html>\n";
 	echo "<html lang='en'>\n";
@@ -144,13 +147,18 @@
 				$sqlUpdateInitialUnitstatusEntry = $sqlUpdateInitialUnitstatusEntry . "SET ";
 				$sqlUpdateInitialUnitstatusEntry = $sqlUpdateInitialUnitstatusEntry . "round = 1, ";
 				$sqlUpdateInitialUnitstatusEntry = $sqlUpdateInitialUnitstatusEntry . "gameid = ".$newgameid.", ";
+				$sqlUpdateInitialUnitstatusEntry = $sqlUpdateInitialUnitstatusEntry . "gameResetCounter = gameResetCounter + 1, ";
 				$sqlUpdateInitialUnitstatusEntry = $sqlUpdateInitialUnitstatusEntry . "heat = 0, ";
-				$sqlUpdateInitialUnitstatusEntry = $sqlUpdateInitialUnitstatusEntry . "armor = 0, ";
-				$sqlUpdateInitialUnitstatusEntry = $sqlUpdateInitialUnitstatusEntry . "`structure` = 0, ";
-				$sqlUpdateInitialUnitstatusEntry = $sqlUpdateInitialUnitstatusEntry . "crit_engine = 0, ";
-				$sqlUpdateInitialUnitstatusEntry = $sqlUpdateInitialUnitstatusEntry . "crit_fc = 0, ";
-				$sqlUpdateInitialUnitstatusEntry = $sqlUpdateInitialUnitstatusEntry . "crit_mp = 0, ";
-				$sqlUpdateInitialUnitstatusEntry = $sqlUpdateInitialUnitstatusEntry . "crit_weapons = 0, ";
+				if ($autoRepairOnResetRound) {
+					$sqlUpdateInitialUnitstatusEntry = $sqlUpdateInitialUnitstatusEntry . "armor = 0, ";
+					$sqlUpdateInitialUnitstatusEntry = $sqlUpdateInitialUnitstatusEntry . "`structure` = 0, ";
+					$sqlUpdateInitialUnitstatusEntry = $sqlUpdateInitialUnitstatusEntry . "crit_engine = 0, ";
+					$sqlUpdateInitialUnitstatusEntry = $sqlUpdateInitialUnitstatusEntry . "crit_fc = 0, ";
+					$sqlUpdateInitialUnitstatusEntry = $sqlUpdateInitialUnitstatusEntry . "crit_mp = 0, ";
+					$sqlUpdateInitialUnitstatusEntry = $sqlUpdateInitialUnitstatusEntry . "crit_weapons = 0, ";
+					$sqlUpdateInitialUnitstatusEntry = $sqlUpdateInitialUnitstatusEntry . "unit_status = 'fresh', ";
+					$sqlUpdateInitialUnitstatusEntry = $sqlUpdateInitialUnitstatusEntry . "unit_statusimageurl = 'images/DD_".$unittype."_01.png', ";
+				}
 				$sqlUpdateInitialUnitstatusEntry = $sqlUpdateInitialUnitstatusEntry . "usedoverheat = 0, ";
 				$sqlUpdateInitialUnitstatusEntry = $sqlUpdateInitialUnitstatusEntry . "crit_engine_PREP = 0, ";
 				$sqlUpdateInitialUnitstatusEntry = $sqlUpdateInitialUnitstatusEntry . "crit_fc_PREP = 0, ";
@@ -171,10 +179,8 @@
 				$sqlUpdateInitialUnitstatusEntry = $sqlUpdateInitialUnitstatusEntry . "crit_CV_motiveC_PREP = 0, ";
 				$sqlUpdateInitialUnitstatusEntry = $sqlUpdateInitialUnitstatusEntry . "active_bid = 1, ";
 				$sqlUpdateInitialUnitstatusEntry = $sqlUpdateInitialUnitstatusEntry . "active_narc = 0, ";
-				$sqlUpdateInitialUnitstatusEntry = $sqlUpdateInitialUnitstatusEntry . "unit_status = 'fresh', ";
 				$sqlUpdateInitialUnitstatusEntry = $sqlUpdateInitialUnitstatusEntry . "mounted_unitid = 0, ";
-				$sqlUpdateInitialUnitstatusEntry = $sqlUpdateInitialUnitstatusEntry . "mounted_on_unitid = 0, ";
-				$sqlUpdateInitialUnitstatusEntry = $sqlUpdateInitialUnitstatusEntry . "unit_statusimageurl = 'images/DD_".$unittype."_01.png' ";
+				$sqlUpdateInitialUnitstatusEntry = $sqlUpdateInitialUnitstatusEntry . "mounted_on_unitid = 0 ";
 				$sqlUpdateInitialUnitstatusEntry = $sqlUpdateInitialUnitstatusEntry . "WHERE unitstatusid = ".$unitstatusid;
 
 				echo $sqlUpdateInitialUnitstatusEntry;

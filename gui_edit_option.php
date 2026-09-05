@@ -28,8 +28,9 @@
 	$opt2 = isset($_GET["opt2"]) ? $_GET["opt2"] : "";
 	$opt3 = isset($_GET["opt3"]) ? $_GET["opt3"] : "";
 	$opt4 = isset($_GET["opt4"]) ? $_GET["opt4"] : "";
+	$opt5 = isset($_GET["opt5"]) ? $_GET["opt5"] : "";
 
-	$sql_asc_playerround = "SELECT SQL_NO_CACHE * FROM asc_player where playerid = " . $pid . ";";
+	$sql_asc_playerround = "SELECT SQL_NO_CACHE * FROM asc_player where playerid = ".$pid.";";
 	$result_asc_playerround = mysqli_query($conn, $sql_asc_playerround);
 	if (mysqli_num_rows($result_asc_playerround) > 0) {
 		while($row = mysqli_fetch_assoc($result_asc_playerround)) {
@@ -37,9 +38,12 @@
 		}
 	}
 
-	if ($opt1 == true || $opt2 == true || $opt3 == true || $opt4 == true) {
+	if ($opt1 == true || $opt2 == true || $opt3 == true || $opt4 == true || $opt5 == true) {
 		// storing changed options to database
-		$sql_update_options = "UPDATE asc_options SET OPTION1=".$opt1.", OPTION2=".$opt2.", OPTION3=".$opt3.", OPTION4=".$opt4." WHERE playerid = ".$pid;
+
+		$opt5 = 0; // Disabled for PCon 2026
+
+		$sql_update_options = "UPDATE asc_options SET OPTION1=".$opt1.", OPTION2=".$opt2.", OPTION3=".$opt3.", OPTION4=".$opt4.", OPTION5=".$opt5." WHERE playerid = ".$pid;
 		$result_update_options = mysqli_query($conn, $sql_update_options);
 		$playMode = $opt3;
 		$distancesHexes = $opt4;
@@ -56,10 +60,12 @@
 				$opt2 = $row["option2"];
 				$opt3 = $row["option3"];
 				$opt4 = $row["option4"];
+				$opt5 = $row["option5"];
 				$_SESSION['option1'] = $opt1;
 				$_SESSION['option2'] = $opt2;
 				$_SESSION['option3'] = $opt3;
 				$_SESSION['option4'] = $opt4;
+				$_SESSION['option5'] = $opt5;
 			}
 		}
 	}
@@ -147,6 +153,7 @@
 			var opt2 = 0;
 			var opt3 = 0;
 			var opt4 = 0;
+			var opt5 = 0;
 			var list = document.getElementsByClassName("bigcheck");
 			[].forEach.call(list, function (el1) {
 				na = el1.name;
@@ -155,9 +162,11 @@
 					if (na.substring(0, 4) == "OPT2") { opt2 = el1.checked }
 					if (na.substring(0, 4) == "OPT3") { opt3 = el1.checked }
 					if (na.substring(0, 4) == "OPT4") { opt4 = el1.checked }
+					if (na.substring(0, 4) == "OPT5") { opt5 = el1.checked }
 				}
-			})
-			var url="./gui_edit_option.php?opt1="+opt1+"&opt2="+opt2+"&opt3="+opt3+"&opt4="+opt4;
+			});
+
+			var url="./gui_edit_option.php?opt1="+opt1+"&opt2="+opt2+"&opt3="+opt3+"&opt4="+opt4+"&opt5="+opt5;
 			// alert (url);
 			window.location.href = url;
 		}
@@ -172,6 +181,7 @@
 					if (na.substring(0, 4) == "OPT2") { el1.checked = <?php echo $opt2 ?> }
 					if (na.substring(0, 4) == "OPT3") { el1.checked = <?php echo $opt3 ?> }
 					if (na.substring(0, 4) == "OPT4") { el1.checked = <?php echo $opt4 ?> }
+					if (na.substring(0, 4) == "OPT5") { el1.checked = <?php echo $opt5 ?> }
 				}
 			})
 		}
@@ -198,10 +208,10 @@
 					<div><a style="color: #eee;" href="./logout.php">&nbsp;&nbsp;&nbsp;<i class="fas fa-power-off" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;</a></div>
 				</td>
 				<td nowrap onclick="location.href='./gui_edit_game.php'" style="width: 100px;background:rgba(56,87,26,1.0);">
-					<div style='vertical-align:middle;font-size:28px;color:#eee;'>&nbsp;&nbsp;<?php echo $gid ?>:<?php echo $CURRENTROUND ?>&nbsp;&nbsp;</div>
+					<div style='vertical-align:middle;font-size:28px;color:#eee;'>&nbsp;&nbsp;<?php echo $gid ?>/<?php echo $CURRENTROUND ?>&nbsp;&nbsp;</div>
 				</td>
 				<td style="width:5px;">&nbsp;</td>
-				<td nowrap onclick="location.href='./gui_select_unit.php'" width="<?php echo $buttonWidth ?>" class='menu_button_normal'><a href='./gui_select_unit.php'><i class="fa-solid fa-list"></i>&nbsp;&nbsp;&nbsp;ROSTER</a></td>
+				<td nowrap onclick="location.href='./gui_select_unit.php'" width="<?php echo $buttonWidth ?>" class='menu_button_normal'><a href='./gui_select_unit.php'>ROSTER</a></td>
 				<td style="width:5px;">&nbsp;</td>
 <?php
 	if ($playMode) {
@@ -259,37 +269,32 @@
 			<tr><td colspan="2"><hr></td></tr>
 			<tr>
 				<td nowrap width="10%" align="left" class='datalabel'>
+					<!-- <label class="bigcheck"><input onchange="changeOption();" type="checkbox" class="bigcheck" name="OPT5" value="yes"/><span class="bigcheck-target"></span></label>&nbsp;&nbsp; -->
+					Disabled for PCon2026&nbsp;&nbsp;
+				</td>
+				<td nowrap width="90%" align="left" class="datalabel">
+					Auto-repair units (on round reset)
+				</td>
+			</tr>
+			<tr><td colspan="2"><hr></td></tr>
+			<tr>
+				<td nowrap width="10%" align="left" class='datalabel'>
 					<label class="bigcheck"><input onchange="changeOption();" type="checkbox" class="bigcheck" name="OPT3" value="yes"/><span class="bigcheck-target"></span></label>&nbsp;&nbsp;
 				</td>
 				<td nowrap width="90%" align="left" class="datalabel">
 					Play mode (deactivate for unit editing)
 				</td>
 			</tr>
-			<tr><td colspan="2"><hr></td></tr>
-			<tr>
-				<td nowrap width="90%" align="left" class="datalabel">
-					Faction
-				</td>
-				<td>
-					<select required name='OPTFACTION'  id='OPTFACTION' size='1' style='width:250px;height=60px;border:0px;'>
-						<option  value="3" selected>ComStar [CS]</option>
-						<option  value="1">Clan Wolf [CW]</option>
-						<option value="13">Clan Wolf in Exile [CWiE]</option>
-						<option  value="9">Clan Jade Falcon [CJF]</option>
-						<option  value="5">Clan Ghostbear [CGB]</option>
-						<option value="12">Clan Smoke Jaguar [CSJ]</option>
-						<option value="14">Clan Snow Raven [CSR]</option>
-						<option value="15">Clan Nova Cat [CNC]</option>
-						<option  value="2">Lyran Alliance [LA]</option>
-						<option  value="7">Lyran Commonwealth [LC]</option>
-						<option  value="4">Draconis Combine [DC]</option>
-						<option  value="8">Federated Suns [FS]</option>
-						<option value="10">Free Worlds League [FWL]</option>
-						<option value="11">Capellan Confederation [CC]</option>
-						<option  value="6">Wolfs Dragoons [M-WD]</option>
-					</select>
-				</td>
-			</tr>
+<?php
+	if (!$playMode) {
+			echo "			<tr><td colspan='2'><hr></td></tr>\n";
+			echo "			<tr>\n";
+			echo "				<td nowrap width=\"90%\" align=\"center\" class=\"datalabel\" colspan=\"2\">\n";
+			echo "					<a href=\"./gui_edit_player.php?pid=".$pid."\">Edit player profile</a>\n";
+			echo "				</td>\n";
+			echo "			</tr>\n";
+	}
+?>
 		</table>
 	</div>
 

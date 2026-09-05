@@ -17,7 +17,7 @@
 
 	$logfilename = "logs/ascard_logfile";
 	$logfileext = ".txt";
-	$log_access = true;
+	$log_access = false;
 
 	// roll over
 	function rollover() {
@@ -64,6 +64,8 @@
 	// write a line to log
 	function logMsg($msg) {
 		global $pre;
+		global $logfilename;
+		global $logfileext;
 
 		rollover();
 		$logfile = fopen($logfilename.$logfileext, "a");

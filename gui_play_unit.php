@@ -31,10 +31,12 @@
 	$opt2                   = filter_var($_SESSION['option2'], FILTER_VALIDATE_BOOLEAN);
 	$opt3                   = filter_var($_SESSION['option3'], FILTER_VALIDATE_BOOLEAN);
 	$opt4                   = filter_var($_SESSION['option4'], FILTER_VALIDATE_BOOLEAN);
+	$opt5                   = filter_var($_SESSION['option5'], FILTER_VALIDATE_BOOLEAN);
 	$hideNotOwnedUnit       = $opt1;
 	$showplayerdata_topleft = $opt2;
 	$playMode               = $opt3;
 	$showDistancesHexes     = $opt4;
+	$autoRepairOnReset      = $opt5;
 	$currentcommandid       = $_SESSION['commandid'];
 
 	if ($pid === "not found") {
@@ -576,7 +578,7 @@
 				<div><a style="color:#eee;" href="./index.html">&nbsp;&nbsp;&nbsp;<i class="fa fa-arrow-left" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;</a></div>
 			</td>
 			<td nowrap onclick="location.href='./gui_edit_game.php'" style="width:100px;background:rgba(56,87,26,1.0);">
-				<div style='vertical-align:middle;font-size:28px;color:#eee;'>&nbsp;&nbsp;<?php echo $gid ?>:<?php echo $CURRENTROUND ?>&nbsp;&nbsp;</div>
+				<div style='vertical-align:middle;font-size:28px;color:#eee;'>&nbsp;&nbsp;<?php echo $gid ?>/<?php echo $CURRENTROUND ?>&nbsp;&nbsp;</div>
 			</td>
 <?php
 	$maxNumberOfTabs = 5;

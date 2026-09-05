@@ -53,6 +53,7 @@
 		$result_asc_game = mysqli_query($conn, $sql_asc_game);
 		if (mysqli_num_rows($result_asc_game) > 0) {
 			while($row22 = mysqli_fetch_assoc($result_asc_game)) {
+				$gameResetCounter = $row22["gameResetCounter"];
 				$temptimestamp = $row22["started"];
 				$gamestartedtimestamp = strtotime($temptimestamp);
 			}
@@ -266,13 +267,13 @@
 							}
 
 							$sqlInsertNewUnitStatus = "";
-							$sqlInsertNewUnitStatus = $sqlInsertNewUnitStatus . "INSERT INTO asc_unitstatus (unitid,playerid,gameid,round,heat,armor,`structure`,crit_engine,crit_fc,crit_mp,crit_weapons,usedoverheat,";
+							$sqlInsertNewUnitStatus = $sqlInsertNewUnitStatus . "INSERT INTO asc_unitstatus (unitid,playerid,gameid,gameResetCounter,round,heat,armor,`structure`,crit_engine,crit_fc,crit_mp,crit_weapons,usedoverheat,";
 							$sqlInsertNewUnitStatus = $sqlInsertNewUnitStatus . "   crit_engine_PREP,crit_fc_PREP,crit_mp_PREP,crit_weapons_PREP,heat_PREP,     crit_CV_engine,crit_CV_firecontrol,crit_CV_weapons,crit_CV_motiveA,crit_CV_motiveB,crit_CV_motiveC,";
 							$sqlInsertNewUnitStatus = $sqlInsertNewUnitStatus . "   crit_CV_engine_PREP,crit_CV_firecontrol_PREP,crit_CV_weapons_PREP,crit_CV_motiveA_PREP,crit_CV_motiveB_PREP,crit_CV_motiveC_PREP,";
 							$sqlInsertNewUnitStatus = $sqlInsertNewUnitStatus . "   crit_hist,crit_hist_PREP,";
 							$sqlInsertNewUnitStatus = $sqlInsertNewUnitStatus . "   active_bid,active_narc,active_tag,active_water,active_routed,unit_status,unit_statusimageurl,mounted_unitid,mounted_on_unitid) ";
 							$sqlInsertNewUnitStatus = $sqlInsertNewUnitStatus . "VALUES ";
-							$sqlInsertNewUnitStatus = $sqlInsertNewUnitStatus . "(".$unitId.",".$pid.",".$gameid.",".$nextRound.",".$finalHeat.",".$armor.",".$structure.",".$final_ENGN.",".$final_FRCTRL.",".$final_MP.",".$final_WPNS.",0,"; // until currentTMM
+							$sqlInsertNewUnitStatus = $sqlInsertNewUnitStatus . "(".$unitId.",".$pid.",".$gameid.",".$gameResetCounter.",".$nextRound.",".$finalHeat.",".$armor.",".$structure.",".$final_ENGN.",".$final_FRCTRL.",".$final_MP.",".$final_WPNS.",0,"; // until currentTMM
 							$sqlInsertNewUnitStatus = $sqlInsertNewUnitStatus . "   0,0,0,0,0,  ".$final_CV_ENGN.",".$final_CV_FRCTRL.",".$final_CV_WPNS.",".$final_CV_MOTA.",".$final_CV_MOTB.",".$final_CV_MOTC.","; // crit PREP (0-5) -> stay 0!, CV Crit (last Block) -> fill with CV values
 							$sqlInsertNewUnitStatus = $sqlInsertNewUnitStatus . "   0,0,0,0,0,0,";  // CV PREP -> stay 0!
 							$sqlInsertNewUnitStatus = $sqlInsertNewUnitStatus . "   '".$crit_hist."','".$crit_hist_PREP."',"; // crit hist
@@ -303,6 +304,39 @@
 								echo "<script>top.window.location = './gui_message_round_finalized_error_01.php'</script>";
 								die('ERROR 1');
 							}
+
+							// Update initialstatus to keep damage values for the unit between games
+							$sqlUpdateUnitInitialStatus = "";
+							$sqlUpdateUnitInitialStatus = $sqlUpdateUnitInitialStatus . "UPDATE asc_unitstatus set ";
+							$sqlUpdateUnitInitialStatus = $sqlUpdateUnitInitialStatus . "   armor=".$armor.", ";
+							$sqlUpdateUnitInitialStatus = $sqlUpdateUnitInitialStatus . "   `structure`=".$structure.", ";
+							$sqlUpdateUnitInitialStatus = $sqlUpdateUnitInitialStatus . "   crit_engine=".$final_ENGN.", ";
+							$sqlUpdateUnitInitialStatus = $sqlUpdateUnitInitialStatus . "   crit_fc=".$final_FRCTRL.", ";
+							$sqlUpdateUnitInitialStatus = $sqlUpdateUnitInitialStatus . "   crit_mp=".$final_MP.", ";
+							$sqlUpdateUnitInitialStatus = $sqlUpdateUnitInitialStatus . "   crit_weapons=".$final_WPNS.", ";
+							$sqlUpdateUnitInitialStatus = $sqlUpdateUnitInitialStatus . "   crit_CV_engine=".$final_CV_ENGN.", ";
+							$sqlUpdateUnitInitialStatus = $sqlUpdateUnitInitialStatus . "   crit_CV_firecontrol=".$final_CV_FRCTRL.", ";
+							$sqlUpdateUnitInitialStatus = $sqlUpdateUnitInitialStatus . "   crit_CV_weapons=".$final_CV_WPNS.", ";
+							$sqlUpdateUnitInitialStatus = $sqlUpdateUnitInitialStatus . "   crit_CV_motiveA=".$final_CV_MOTA.", ";
+							$sqlUpdateUnitInitialStatus = $sqlUpdateUnitInitialStatus . "   crit_CV_motiveB=".$final_CV_MOTB.", ";
+							$sqlUpdateUnitInitialStatus = $sqlUpdateUnitInitialStatus . "   crit_CV_motiveC=".$final_CV_MOTC.", ";
+							$sqlUpdateUnitInitialStatus = $sqlUpdateUnitInitialStatus . "   unit_status='".$unit_status."', ";
+							$sqlUpdateUnitInitialStatus = $sqlUpdateUnitInitialStatus . "   unit_statusimageurl='".$unit_statusimageurl."' ";
+							$sqlUpdateUnitInitialStatus = $sqlUpdateUnitInitialStatus . "WHERE unitid=".$unitId." ";
+							$sqlUpdateUnitInitialStatus = $sqlUpdateUnitInitialStatus . "   AND playerid=".$pid." ";
+							$sqlUpdateUnitInitialStatus = $sqlUpdateUnitInitialStatus . "   AND gameid=".$gameid." ";
+							$sqlUpdateUnitInitialStatus = $sqlUpdateUnitInitialStatus . "   AND initial_status=1;";
+
+							if (mysqli_query($conn, $sqlUpdateUnitInitialStatus)) {
+								echo "<br>";
+								echo "Record unitINITIALstatus updated successfully<br>";
+								//mysqli_commit($conn);
+							} else {
+								echo "<br>";
+								echo "Error unitINITIALstatus update record: " . mysqli_error($conn) . "<br>";
+								echo "<script>top.window.location = './gui_message_round_finalized_error_01.php'</script>";
+								die('ERROR 1');
+							}
 						}
 					}
 
@@ -319,7 +353,7 @@
 					$sqlUpdateUnitMovementFiresStatus = $sqlUpdateUnitMovementFiresStatus . "UPDATE asc_assign ";
 					$sqlUpdateUnitMovementFiresStatus = $sqlUpdateUnitMovementFiresStatus . "SET ";
 					$sqlUpdateUnitMovementFiresStatus = $sqlUpdateUnitMovementFiresStatus . "round_moved=".$savemoved.", round_fired=".$savefired." ";
-					$sqlUpdateUnitMovementFiresStatus = $sqlUpdateUnitMovementFiresStatus . "where unitid=".$unitId.";";
+					$sqlUpdateUnitMovementFiresStatus = $sqlUpdateUnitMovementFiresStatus . "WHERE unitid=".$unitId.";";
 
 					echo $sqlUpdateUnitMovementFiresStatus;
 

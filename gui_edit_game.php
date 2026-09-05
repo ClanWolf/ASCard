@@ -30,10 +30,12 @@
 	$opt2                   = filter_var($_SESSION['option2'], FILTER_VALIDATE_BOOLEAN);
 	$opt3                   = filter_var($_SESSION['option3'], FILTER_VALIDATE_BOOLEAN);
 	$opt4                   = filter_var($_SESSION['option4'], FILTER_VALIDATE_BOOLEAN);
+	$opt5                   = filter_var($_SESSION['option5'], FILTER_VALIDATE_BOOLEAN);
 	$hideNotOwnedUnit       = $opt1;
 	$showplayerdata_topleft = $opt2;
 	$playMode               = $opt3;
 	$showDistancesHexes     = $opt4;
+	$autoRepairOnResetRound = $opt5; // Disabled for PCon 2026 (0 is always written)
 
 	$sql_asc_playerround = "SELECT SQL_NO_CACHE * FROM asc_player where playerid = " . $pid . ";";
 	$result_asc_playerround = mysqli_query($conn, $sql_asc_playerround);
@@ -353,10 +355,10 @@
 					<div><a style="color: #eee;" href="./logout.php">&nbsp;&nbsp;&nbsp;<i class="fas fa-power-off" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;</a></div>
 				</td>
 				<td nowrap onclick="location.href='./gui_edit_game.php'" style="width: 100px;background:rgba(81,125,37,1.0);">
-					<div style='vertical-align:middle;font-size:28px;color:#eee;'>&nbsp;&nbsp;<?php echo $gid ?>:<?php echo $CURRENTROUND ?>&nbsp;&nbsp;</div>
+					<div style='vertical-align:middle;font-size:28px;color:#eee;'>&nbsp;&nbsp;<?php echo $gid ?>/<?php echo $CURRENTROUND ?>&nbsp;&nbsp;</div>
 				</td>
 				<td style="width:5px;">&nbsp;</td>
-				<td nowrap onclick="location.href='./gui_select_unit.php'" width="<?php echo $buttonWidth ?>" class='menu_button_normal'><a href='./gui_select_unit.php'><i class="fa-solid fa-list"></i>&nbsp;&nbsp;&nbsp;ROSTER</a></td>
+				<td nowrap onclick="location.href='./gui_select_unit.php'" width="<?php echo $buttonWidth ?>" class='menu_button_normal'><a href='./gui_select_unit.php'>ROSTER</a></td>
 				<td style="width:5px;">&nbsp;</td>
 <?php
 	if ($playMode) {
@@ -720,7 +722,11 @@
 		echo "							<td align='center' nowrap width='1%' class='datalabel'>\n";
 		echo "								<a href='#' onClick='javascript:resetGameForPlayer(".$gid.",".$pid.", 0);'><i class='fas fa-fast-backward'></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>\n";
 		echo "							</td>\n";
-		echo "							<td align='left' nowrap width='49%' class='datalabel'>RESET (Round to 1 / Repair all)&nbsp;&nbsp;&nbsp;&nbsp;</td>\n";
+		if ($autoRepairOnResetRound) {
+			echo "							<td align='left' nowrap width='49%' class='datalabel'>RESET (Round to 1 / Auto-repair all)&nbsp;&nbsp;&nbsp;&nbsp;</td>\n";
+		} else {
+			echo "							<td align='left' nowrap width='49%' class='datalabel'>RESET (Round to 1 / Repairs disabled)&nbsp;&nbsp;&nbsp;&nbsp;</td>\n";
+		}
 		echo "							<td align='right' nowrap width='49%' class='datalabel'>&nbsp;&nbsp;&nbsp;&nbsp;CLOSE (mark as finished)</td>\n";
 		echo "							<td align='center' nowrap width='1%' class='datalabel'>\n";
 		echo "								<a href='#' onClick='javascript:finalizeGame(".$gid.");'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class='fa-solid fa-flag-checkered'></i></a>\n";

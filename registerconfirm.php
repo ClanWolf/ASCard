@@ -44,6 +44,7 @@
 						if (mysqli_query($conn, $sqlupdateconfirmplayer)) {
 							// Success updating confirmation (registration)
 							logMsg("Success: Confirmed player with id ".$pid);
+							$errorMessage .= "<br>SUCCESS!";
 						} else {
 							// Error
 							logMsg("Error: " . $sqlupdateconfirmplayer . "<br>" . mysqli_error($conn));
