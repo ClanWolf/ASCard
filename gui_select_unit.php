@@ -860,24 +860,24 @@ if ($playMode) {
 				// -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 				if ($playMode) {
-					if ($activebid == "1" && $unitstatus !== "fresh") {
-						if ($repairMode == 1) {
+					if ($activebid == "1") {
+						if ($repairMode == 1 && $unitstatus !== "fresh") {
 							if ($activenarc == "1") {
-								$unitDetailString = $unitDetailString."						<td onclick='' nowrap width='1%' class='datalabel_disabled_dashed' style='vertical-align:middle;text-align:center;'>\n";
+								$unitDetailString = $unitDetailString."						<td onclick='' nowrap width='30px' class='datalabel_disabled_dashed' style='vertical-align:middle;text-align:center;'>\n";
 							} else {
-								$unitDetailString = $unitDetailString."						<td onclick='' nowrap width='1%' style='background-color:".$bidcolor.";vertical-align:middle;text-align:center;'>\n";
+								$unitDetailString = $unitDetailString."						<td onclick='' nowrap width='30px' style='background-color:".$bidcolor.";vertical-align:middle;text-align:center;'>\n";
 							}
 							$unitDetailString = $unitDetailString."							<span style='font-size:12px;'>\n";
 							$unitDetailString = $unitDetailString."								&nbsp;<i class='fa-solid fa-wrench'></i>&nbsp;\n";
 							$unitDetailString = $unitDetailString."							</span>\n";
 						} else {
 							if ($activenarc == "1") {
-								$unitDetailString = $unitDetailString."						<td nowrap width='1%' class='datalabel_disabled_dashed' style='vertical-align:middle;text-align:center;'>\n";
+								$unitDetailString = $unitDetailString."						<td nowrap width='30px' class='datalabel_disabled_dashed' style='vertical-align:middle;text-align:center;'>\n";
 							} else {
-								$unitDetailString = $unitDetailString."						<td nowrap width='1%' style='background-color:".$bidcolor.";vertical-align:middle;text-align:center;'>\n";
+								$unitDetailString = $unitDetailString."						<td nowrap width='30px' style='background-color:".$bidcolor.";vertical-align:middle;text-align:center;'>\n";
 							}
 							$unitDetailString = $unitDetailString."							<span style='font-size:12px;'>\n";
-							$unitDetailString = $unitDetailString."								&nbsp;<img width='25px' src='".$unitRoundStatusImage."'>&nbsp;\n";
+							$unitDetailString = $unitDetailString."								&nbsp;<i class=\"fa-solid fa-check\"></i>&nbsp;\n";
 							$unitDetailString = $unitDetailString."							</span>\n";
 						}
 					} else {
