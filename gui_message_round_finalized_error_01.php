@@ -10,11 +10,21 @@
 	// https://www.php-einfach.de/php-tutorial/php-sessions/
 	require('./logger.php');
 	require('./db.php');
-	if (!isset($_SESSION['playerid'])) {
+
+	if (
+		(isset($_SESSION['playerid']) && $_SESSION['playerid'] > 0) &&
+		(isset($_SESSION['gameid']) && $_SESSION['gameid'] > 0)
+	 ) {
+		// playerid and gameid are present and set, continue
+		logMsg("check playerid: ".$_SESSION['playerid']);
+		logMsg("check gameid: ".$_SESSION['gameid']);
+	} else {
+		header("Location: ./login.php?auto=1");
+		logMsg("Not logged in... redirecting.");
 		echo "Not logged in... redirecting.<br>";
 		echo "<meta http-equiv='refresh' content='0;url=./login.php?auto=1'>";
-		header("Location: ./login.php?auto=1");
-		//die("Check position 8");
+		exit;
+		//die("Check position 3");
 	}
 
 	// Get data on units from db

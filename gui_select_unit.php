@@ -10,14 +10,24 @@
 	// https://www.php-einfach.de/php-tutorial/php-sessions/
 	require('./logger.php');
 	require('./db.php');
-	if (!isset($_SESSION['playerid'])) {
+
+	if (
+		(isset($_SESSION['playerid']) && $_SESSION['playerid'] > 0) &&
+		(isset($_SESSION['gameid']) && $_SESSION['gameid'] > 0)
+	 ) {
+		// playerid and gameid are present and set, continue
+		logMsg("check playerid: ".$_SESSION['playerid']);
+		logMsg("check gameid: ".$_SESSION['gameid']);
+	} else {
+		header("Location: ./login.php?auto=1");
+		logMsg("Not logged in... redirecting.");
 		echo "Not logged in... redirecting.<br>";
 		echo "<meta http-equiv='refresh' content='0;url=./login.php?auto=1'>";
-		header("Location: ./login.php?auto=1");
+		exit;
 		//die("Check position 3");
 	}
 
-	// Get data from db
+	// Get data from the session (db)
 	$pid = $_SESSION['playerid'];
 	$gid = $_SESSION['gameid'];
 	$pname = $_SESSION['name'];
@@ -27,6 +37,15 @@
 	$currentcommandid = $_SESSION['commandid'];
 
 	$isAdmin = $_SESSION['isAdmin'];
+	$repairMode = 0;
+
+	$selectRepairMode = "SELECT * FROM asc_game WHERE gameid = ".$gid.";";
+	$result_selectRepairMode = mysqli_query($conn, $selectRepairMode);
+	if (mysqli_num_rows($result_selectRepairMode) > 0) {
+		while($row77 = mysqli_fetch_assoc($result_selectRepairMode)) {
+			$repairMode = $row77["repairActive"];
+		}
+	}
 
 	$update_logintime = "UPDATE asc_player SET last_login=now() WHERE playerid = ".$pid;
 	$result_update_logintime = mysqli_query($conn, $update_logintime);
@@ -296,9 +315,15 @@
 <body>
 	<iframe name="saveframe" id="iframe_save"></iframe>
 	<script type="text/javascript" src="./scripts/log_enable.js"></script>
-
-	<div id="heightmeasure"></div>
-	<!-- <div id="heightmeasure_right"></div> -->
+<?php
+	//if ($repairMode == 1) {
+	//	echo "	<div id=\"heightmeasure\" class=\"formationselect_button_normal\" style=\"width:40px;\"><br><br>🔧<br><br><span style=\"color:yellow;writing-mode:vertical-lr;\">REPAIRMODE - 4000 / 7650 SP</span><br><br></div>\n";
+	//	echo "	<!-- <div id=\"heightmeasure_right\"></div> -->\n";
+	//} else {
+		echo "	<div id=\"heightmeasure\"></div>\n";
+		echo "	<!-- <div id=\"heightmeasure_right\"></div> -->\n";
+	//}
+?>
 	<div id="cover"></div>
 
 	<script type="text/javascript" on-content-loaded="true">
@@ -439,8 +464,13 @@ if (!$playMode) {
 	echo "						</td>\n";
 }
 if ($playMode) {
-	// FINALIZE ROUND
-	echo "  		<td nowrap onclick='javascript:finalizeRound(".$pid.");' id='FinalizeRoundButton' style='text-align:center;width:100px;background:rgba(81,125,37,1.0);' rowspan='5'><div style='color:#eee;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class='fas fa-redo'></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div></td>\n";
+	if ($repairMode == 1) {
+		// REPAIR INDICATOR
+		echo "  		<td nowrap id='FinalizeRoundButton' style='text-align:center;width:100px;background:rgba(197,107,19,1.0);' rowspan='5'><div style='color:#eee;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class='fa-solid fa-wrench'></i></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div></td>\n";
+	} else {
+		// FINALIZE ROUND
+		echo "  		<td nowrap onclick='javascript:finalizeRound(".$pid.");' id='FinalizeRoundButton' style='text-align:center;width:100px;background:rgba(81,125,37,1.0);' rowspan='5'><div style='color:#eee;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class='fas fa-redo'></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div></td>\n";
+	}
 }
 ?>
 		</tr>
@@ -830,16 +860,32 @@ if ($playMode) {
 				// -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 				if ($playMode) {
-					if ($activenarc == "1") {
-						$unitDetailString = $unitDetailString."						<td nowrap width='1%' class='datalabel_disabled_dashed' style='vertical-align:middle;text-align:center;'>\n";
+					if ($activebid == "1" && $unitstatus !== "fresh") {
+						if ($repairMode == 1) {
+							if ($activenarc == "1") {
+								$unitDetailString = $unitDetailString."						<td onclick='' nowrap width='1%' class='datalabel_disabled_dashed' style='vertical-align:middle;text-align:center;'>\n";
+							} else {
+								$unitDetailString = $unitDetailString."						<td onclick='' nowrap width='1%' style='background-color:".$bidcolor.";vertical-align:middle;text-align:center;'>\n";
+							}
+							$unitDetailString = $unitDetailString."							<span style='font-size:12px;'>\n";
+							$unitDetailString = $unitDetailString."								&nbsp;<i class='fa-solid fa-wrench'></i>&nbsp;\n";
+							$unitDetailString = $unitDetailString."							</span>\n";
+						} else {
+							if ($activenarc == "1") {
+								$unitDetailString = $unitDetailString."						<td nowrap width='1%' class='datalabel_disabled_dashed' style='vertical-align:middle;text-align:center;'>\n";
+							} else {
+								$unitDetailString = $unitDetailString."						<td nowrap width='1%' style='background-color:".$bidcolor.";vertical-align:middle;text-align:center;'>\n";
+							}
+							$unitDetailString = $unitDetailString."							<span style='font-size:12px;'>\n";
+							$unitDetailString = $unitDetailString."								&nbsp;<img width='25px' src='".$unitRoundStatusImage."'>&nbsp;\n";
+							$unitDetailString = $unitDetailString."							</span>\n";
+						}
 					} else {
-						$unitDetailString = $unitDetailString."						<td nowrap width='1%' style='background-color:".$bidcolor.";vertical-align:middle;text-align:center;'>\n";
-					}
-					if ($activebid == "1") {
-						$unitDetailString = $unitDetailString."							<span style='font-size:12px;'>\n";
-						$unitDetailString = $unitDetailString."								&nbsp;<img width='25px' src='".$unitRoundStatusImage."'>&nbsp;\n";
-						$unitDetailString = $unitDetailString."							</span>\n";
-					} else {
+						if ($activenarc == "1") {
+							$unitDetailString = $unitDetailString."						<td nowrap width='1%' class='datalabel_disabled_dashed' style='vertical-align:middle;text-align:center;'>\n";
+						} else {
+							$unitDetailString = $unitDetailString."						<td nowrap width='1%' style='background-color:".$bidcolor.";vertical-align:middle;text-align:center;'>\n";
+						}
 						$unitDetailString = $unitDetailString."							<span style='font-size:12px;'>\n";
 						$unitDetailString = $unitDetailString."								&nbsp;<img width='25px' src='images/lock.png'>&nbsp;\n";
 						$unitDetailString = $unitDetailString."							</span>\n";
@@ -919,9 +965,9 @@ if ($playMode) {
 
 	if ($playMode) {
 		// if ($readyToFinalizeRound == 1) {
-			echo "		<script>\n";
-			echo "			document.getElementById('FinalizeRoundButton').style.backgroundColor = '#517d25';";
-			echo "		</script>\n";
+		//	echo "		<script>\n";
+		//	echo "			document.getElementById('FinalizeRoundButton').style.backgroundColor = '#517d25';";
+		//	echo "		</script>\n";
 		// } else {
 		//	echo "		<script>\n";
 		//	echo "			document.getElementById('FinalizeRoundButton').style.backgroundColor = '#5c0700';";

@@ -9,11 +9,12 @@
 
 	ini_set('session.gc_maxlifetime', 36000);
 	session_set_cookie_params(36000);
-	session_start();
 
+	session_start();
 	// https://www.php-einfach.de/php-tutorial/php-sessions/
 	require('./logger.php');
 	require('./db.php');
+
 	$register = isset($_GET['register']) ? $_GET['register'] : "";
 	$newplayername = isset($_POST['pn']) ? $_POST['pn'] : "";
 	$password = isset($_POST['pw']) ? $_POST['pw'] : "";
@@ -66,6 +67,7 @@
 
 				$playernamefound = false;
 				$playeremailfound = false;
+				$playeremail = "";
 				$passwordok = false;
 
 				if ($password == $password_repeat) {
@@ -78,6 +80,7 @@
 					}
 					if ($row['email'] == $mail) {
 						$playeremailfound = true;
+						$playeremail = $mail;
 					}
 					$userlist = $userlist.$row['name']." [".$row['email']."];";
 				}
@@ -141,7 +144,7 @@
 
 								// send email.
 								$from = "admin@ascard.net";
-								$to = "warwolfen@gmail.com";
+								$to = $playeremail;
 								$subject = "ASCard account confirmation";
 
 								$message  = "Greetings MechWarrior!\r\n\r\n";

@@ -9,10 +9,22 @@
 	session_start();
 	// https://www.php-einfach.de/php-tutorial/php-sessions/
 	require('./logger.php');
-	if (!isset($_SESSION['playerid'])) {
+	require('./db.php');
+
+	if (
+		(isset($_SESSION['playerid']) && $_SESSION['playerid'] > 0) &&
+		(isset($_SESSION['gameid']) && $_SESSION['gameid'] > 0)
+	 ) {
+		// playerid and gameid are present and set, continue
+		logMsg("check playerid: ".$_SESSION['playerid']);
+		logMsg("check gameid: ".$_SESSION['gameid']);
+	} else {
+		header("Location: ./login.php?auto=1");
+		logMsg("Not logged in... redirecting.");
 		echo "Not logged in... redirecting.<br>";
 		echo "<meta http-equiv='refresh' content='0;url=./login.php?auto=1'>";
-		header("Location: ./login.php?auto=1");
+		exit;
+		//die("Check position 3");
 	}
 
 	//$pid    = filter_var($_SESSION['playerid'], FILTER_VALIDATE_INT);
@@ -42,6 +54,16 @@
 	if ($pid === "not found") {
 		echo "LOGIN EXPIRED. REDIRECT TO LOGIN...<br>\n";
 		echo "<script>top.location.assign('./login.php?auto=1');</script>";
+	}
+
+	$repairMode = 0;
+
+	$selectRepairMode = "SELECT * FROM asc_game WHERE gameid = ".$gid.";";
+	$result_selectRepairMode = mysqli_query($conn, $selectRepairMode);
+	if (mysqli_num_rows($result_selectRepairMode) > 0) {
+		while($row77 = mysqli_fetch_assoc($result_selectRepairMode)) {
+			$repairMode = $row77["repairActive"];
+		}
 	}
 
 	function textTruncate($text, $chars=25) {
@@ -823,7 +845,11 @@
 	echo "					</td>\n";
 	echo "				</table>\n";
 	echo "			</td>\n";
-	echo "			<td width='1%' nowrap onclick='location.href=\"save_game_finalizeround.php?pid=".$pid."\"' id='FinalizeRoundButton' style='text-align:center;background:rgba(81,125,37,1.0);' rowspan='3'><div style='color:#eee;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class='fas fa-redo'></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div></td>\n";
+	if ($repairMode == 1) {
+		echo "			<td width='1%' nowrap id='FinalizeRoundButton' style='text-align:center;background:rgba(197,107,19,1.0);' rowspan='3'><div style='color:#eee;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class='fa-solid fa-wrench'></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div></td>\n";
+	} else {
+		echo "			<td width='1%' nowrap onclick='location.href=\"save_game_finalizeround.php?pid=".$pid."\"' id='FinalizeRoundButton' style='text-align:center;background:rgba(81,125,37,1.0);' rowspan='3'><div style='color:#eee;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class='fas fa-redo'></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div></td>\n";
+	}
 	echo "		</tr>\n";
 	echo "		<tr>\n";
 
@@ -991,11 +1017,17 @@
 	echo "<div id='pilotrank'>\n";
 	echo "  <img src='./images/ranks/".$factionid."/".$array_PILOT_RANK[$chosenUnitIndex].".png' width='30px' height='30px'>\n";
 	echo "</div>\n";
+
 	if (!$playable) {
 		if ($hideNotOwnedUnit && !$owned) {
 			echo "<div id='blockNotOwnedUnits'></div>\r\n";
 		}
 	}
+
+	if ($repairMode == 1) {
+		echo "<div id='blockUnitBecauseOfRepairMode'></div>\r\n";
+	}
+
 	echo "<script type='text/javascript'>\r\n";
 	if ($showplayerdata_topleft == 1) {
 		// show top left pilot info

@@ -184,7 +184,7 @@ a:hover {
 }
 #heightmeasure_right {
 	position: fixed;
-	width: 5px;
+	width: 2px;
 	top: 100px;
 	bottom: 100px;
 	right: 0;
@@ -561,6 +561,17 @@ a:hover {
 	background-image: url('../images/block.png');
 	opacity: 1.00;
 	background-size: cover;
+}
+#blockUnitBecauseOfRepairMode {
+    z-index: 2300;
+    position: absolute;
+    top: 65px;
+    bottom: 40px;
+    left: 0px;
+    right: 0px;
+    background-image: url('../images/block_repairs.png');
+    opacity: 1.00;
+    background-size: cover;
 }
 #editMovementValues {
 	z-index: 200;

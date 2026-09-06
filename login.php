@@ -80,10 +80,12 @@
 								$opt2 = $row11["option2"];
 								$opt3 = $row11["option3"];
 								$opt4 = $row11["option4"];
+								$opt5 = $row11["option5"];
 								$_SESSION['option1'] = $opt1;
 								$_SESSION['option2'] = $opt2;
 								$_SESSION['option3'] = $opt3;
 								$_SESSION['option4'] = $opt4;
+								$_SESSION['option5'] = $opt5;
 							}
 						}
 
