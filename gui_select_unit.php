@@ -882,9 +882,9 @@ if ($playMode) {
 						}
 					} else {
 						if ($activenarc == "1") {
-							$unitDetailString = $unitDetailString."						<td nowrap width='1%' class='datalabel_disabled_dashed' style='vertical-align:middle;text-align:center;'>\n";
+							$unitDetailString = $unitDetailString."						<td nowrap width='30px' class='datalabel_disabled_dashed' style='vertical-align:middle;text-align:center;'>\n";
 						} else {
-							$unitDetailString = $unitDetailString."						<td nowrap width='1%' style='background-color:".$bidcolor.";vertical-align:middle;text-align:center;'>\n";
+							$unitDetailString = $unitDetailString."						<td nowrap width='30px' style='background-color:".$bidcolor.";vertical-align:middle;text-align:center;'>\n";
 						}
 						$unitDetailString = $unitDetailString."							<span style='font-size:12px;'>\n";
 						$unitDetailString = $unitDetailString."								&nbsp;<img width='25px' src='images/lock.png'>&nbsp;\n";
