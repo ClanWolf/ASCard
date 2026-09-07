@@ -970,7 +970,7 @@
 
 <div><?php echo "<img src='".$array_PILOT_IMG_URL[$chosenUnitIndex]."' id='pilotimage' width='80px' height='80px'>" ?></div>
 <div id="faction" align="center"><?php echo "<img src='./images/factions/".$FACTION_IMG_URL."' width='50px' height='50px'>" ?></div>
-<div id="unit_number" align="center" onclick='javascript:hideTopPanels();'>#<?= $array_UNIT_NUMBER[$chosenUnitIndex] ?><br><?= strtoupper($FORMATION) ?></div>
+<div id="unit_number" style="text-overflow:ellipsis;font-size:20px;" align="center" onclick='javascript:hideTopPanels();'>#<?= $array_UNIT_NUMBER[$chosenUnitIndex] ?><br><?= strtoupper($FORMATIONSHORT) ?></div>
 
 <?php
 	if ($ROUNDSOUTOFSYNC == 1) {

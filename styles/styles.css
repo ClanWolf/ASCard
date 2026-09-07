@@ -13,7 +13,7 @@
 	/* font-family: 'Russo One', sans-serif; */
 	/* font-family: 'Anton', sans-serif; */
 
-	font-size: 24px;
+	font-size: 22px;
 
 	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 	-webkit-touch-callout: none; /* iOS Safari */
@@ -703,10 +703,10 @@ a:hover {
 	vertical-align: middle;
 	padding: 0px;
 	/* background-size: cover; */
-	width: 140px;
+	width: 130px;
 	/* height: 80px; */
 	/* line-height: 30px; */
-	right: 15px;
+	right: 5px;
 	top: 70px;
 	color: #fff;
 	font-size: 28px;

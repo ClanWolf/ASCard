@@ -147,6 +147,7 @@
 		while($row = mysqli_fetch_assoc($result_asc_formation)) {
 			if ($row["formationid"] == $formationid) {
 				$FORMATION = $row["formationname"];
+				$FORMATIONSHORT = $row["formationshort"];
 				$factionid = $row["factionid"];
 				$formationplayerid = $row["playerid"];
 			}
