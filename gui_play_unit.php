@@ -24,7 +24,6 @@
 		echo "Not logged in... redirecting.<br>";
 		echo "<meta http-equiv='refresh' content='0;url=./login.php?auto=1'>";
 		exit;
-		//die("Check position 3");
 	}
 
 	//$pid    = filter_var($_SESSION['playerid'], FILTER_VALIDATE_INT);
@@ -600,7 +599,7 @@
 				<div><a style="color:#eee;" href="./index.html">&nbsp;&nbsp;&nbsp;<i class="fa fa-arrow-left" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;</a></div>
 			</td>
 			<td nowrap onclick="location.href='./gui_edit_game.php'" style="width:100px;background:rgba(56,87,26,1.0);">
-				<div style='vertical-align:middle;font-size:28px;color:#eee;'>&nbsp;&nbsp;<?php echo $gid ?>/<?php echo $CURRENTROUND ?>&nbsp;&nbsp;</div>
+					<div style='vertical-align:middle;font-size:28px;color:#eee;'>&nbsp;&nbsp;&nbsp;<?php echo $gid ?>&nbsp;/&nbsp;<?php echo $CURRENTROUND ?>&nbsp;&nbsp;&nbsp;</div>
 			</td>
 <?php
 	$maxNumberOfTabs = 5;

@@ -24,7 +24,6 @@
 		echo "Not logged in... redirecting.<br>";
 		echo "<meta http-equiv='refresh' content='0;url=./login.php?auto=1'>";
 		exit;
-		//die("Check position 3");
 	}
 
 	// Get data from db
@@ -218,7 +217,7 @@
 					<div><a style="color: #eee;" href="./logout.php">&nbsp;&nbsp;&nbsp;<i class="fas fa-power-off" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;</a></div>
 				</td>
 				<td nowrap onclick="location.href='./gui_edit_game.php'" style="width: 100px;background:rgba(56,87,26,1.0);">
-					<div style='vertical-align:middle;font-size:28px;color:#eee;'>&nbsp;&nbsp;<?php echo $gid ?>/<?php echo $CURRENTROUND ?>&nbsp;&nbsp;</div>
+					<div style='vertical-align:middle;font-size:28px;color:#eee;'>&nbsp;&nbsp;&nbsp;<?php echo $gid ?>&nbsp;/&nbsp;<?php echo $CURRENTROUND ?>&nbsp;&nbsp;&nbsp;</div>
 				</td>
 				<td style="width:5px;">&nbsp;</td>
 				<td nowrap onclick="location.href='./gui_select_unit.php'" width="<?php echo $buttonWidth ?>" class='menu_button_normal'><a href='./gui_select_unit.php'>ROSTER</a></td>
@@ -280,7 +279,7 @@
 			<tr>
 				<td nowrap width="10%" align="left" class='datalabel'>
 					<!-- <label class="bigcheck"><input onchange="changeOption();" type="checkbox" class="bigcheck" name="OPT5" value="yes"/><span class="bigcheck-target"></span></label>&nbsp;&nbsp; -->
-					Disabled for PCon2026&nbsp;&nbsp;
+					<i class="fa-solid fa-circle-xmark"></i>
 				</td>
 				<td nowrap width="90%" align="left" class="datalabel">
 					Auto-repair units (on round reset)
