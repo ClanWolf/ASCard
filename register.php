@@ -85,6 +85,10 @@
 					$userlist = $userlist.$row['name']." [".$row['email']."];";
 				}
 				if ($playernamefound == false) {
+
+					// Emailcheck disabled for now
+					$playeremailfound = false;
+
 					if ($playeremailfound == false) {
 						if ($passwordok) {
 							// Register the player

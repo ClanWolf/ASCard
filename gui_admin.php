@@ -30,8 +30,9 @@
 	$pid = $_SESSION['playerid'];
 	$gid = $_SESSION['gameid'];
 	$pimage = $_SESSION['playerimage'];
-
 	$isAdmin = $_SESSION['isAdmin'];
+
+	require('./db_getvars.php');
 
 	$opt1 = isset($_GET["opt1"]) ? $_GET["opt1"] : "";
 	$opt2 = isset($_GET["opt2"]) ? $_GET["opt2"] : "";
@@ -174,7 +175,7 @@
 					<div style='vertical-align:middle;font-size:28px;color:#eee;'>&nbsp;&nbsp;&nbsp;<?php echo $gid ?>&nbsp;/&nbsp;<?php echo $CURRENTROUND ?>&nbsp;&nbsp;&nbsp;</div>
 				</td>
 				<td style="width:5px;">&nbsp;</td>
-				<td nowrap onclick="location.href='./gui_select_unit.php'" width="<?php echo $buttonWidth ?>" class='menu_button_normal'><a href='./gui_select_unit.php'>ROSTER</a></td>
+				<td nowrap onclick="location.href='./gui_select_unit.php'" width="<?php echo $buttonWidth ?>" class='menu_button_normal'><a href='./gui_select_unit.php'>ROSTER&nbsp;&nbsp;&nbsp;[<span style='color:#64c7fc;'><?php echo $currentlyAvailableSupportPoints ?> SP</span>]</a></td>
 				<td style="width:5px;">&nbsp;</td>
 <?php
 	if ($playMode) {
@@ -215,6 +216,12 @@
 					//echo "		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class='fa-solid fa-cloud-arrow-down'></i>\n";
 					echo "		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Disabled because of MUL2.0\n";
 					echo "	</td>\n";
+					echo "</tr>\n";
+					echo "<tr>\n";
+					echo "  <td align='center' class='datalabel' colspan='2'><hr></td>\n";
+					echo "</tr>\n";
+					echo "<tr>\n";
+					echo "  <td align='center' class='datalabel' colspan='2'><a href='https://www.ascard.net/app/adm.php'>Campaign admin</a></td>\n";
 					echo "</tr>\n";
 				}
 			?>

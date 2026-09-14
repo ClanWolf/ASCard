@@ -317,9 +317,9 @@
 						$unitdata['status_image'] = $row["unit_statusimageurl"];
 						$unitdata['active_bid'] = $row["active_bid"];
 						$unitdata['status'] = $row["unit_status"];
+						$unitdata['heat'] = $row["heat"];
 					}
 				}
-
 				$units_in_formation[$unitdata['unitid']] = $unitdata;
 			}
 			$array_PLAYER_UNITS_IN_FORMATION[$currentformationid] = $units_in_formation;

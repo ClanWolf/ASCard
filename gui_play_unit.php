@@ -31,12 +31,12 @@
 	$gid    = filter_var($_SESSION['gameid'], FILTER_VALIDATE_INT);
 	$hgid   = filter_var($_SESSION['hostedgameid'], FILTER_VALIDATE_INT);
 	$pimage = htmlspecialchars($_SESSION['playerimage'], ENT_NOQUOTES);
-
 	$fadeOutDuration  = isset($_GET["fod"]) ? filter_var($_GET["fod"], FILTER_VALIDATE_INT) : 150;
 	$scrollToView     = isset($_GET["stv"]) ? filter_var($_GET["stv"], FILTER_VALIDATE_INT) : 0;
-
 	$isAdmin    = filter_var($_SESSION['isAdmin'], FILTER_VALIDATE_BOOLEAN);
 	$isGodAdmin = filter_var($_SESSION['isGodAdmin'], FILTER_VALIDATE_BOOLEAN);
+
+	require('./db_getvars.php');
 
 	$opt1                   = filter_var($_SESSION['option1'], FILTER_VALIDATE_BOOLEAN);
 	$opt2                   = filter_var($_SESSION['option2'], FILTER_VALIDATE_BOOLEAN);
@@ -734,7 +734,10 @@
 		if ($array_UNIT_IMG_STATUS[$i4] == "images/DD_BM_04.png") {
 			$phaseButton = "./images/top-right_phase00.png";
 		}
-
+		if ($array_HT[$i4] == 4) {
+			$unitstatusimage = "./images/heat.png";
+			$phaseButton = "./images/heat.png";
+		}
 		if ($array_UNIT_STATUSSTRING[$i4] == "destroyed") {
 			$unitstatusimage = "./images/skull.png";
 			$phaseButton = "./images/skull.png";
@@ -845,7 +848,7 @@
 	echo "				</table>\n";
 	echo "			</td>\n";
 	if ($repairMode == 1) {
-		echo "			<td width='1%' nowrap id='FinalizeRoundButton' style='text-align:center;background:rgba(197,107,19,1.0);' rowspan='3'><div style='color:#eee;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class='fa-solid fa-wrench'></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div></td>\n";
+		echo "			<td width='1%' nowrap id='FinalizeRoundButton' style='text-align:center;background:#64c7fc;' rowspan='3'><div style='color:#eee;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class='fa-solid fa-wrench'></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div></td>\n";
 	} else {
 		echo "			<td width='1%' nowrap onclick='location.href=\"save_game_finalizeround.php?pid=".$pid."\"' id='FinalizeRoundButton' style='text-align:center;background:rgba(81,125,37,1.0);' rowspan='3'><div style='color:#eee;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class='fas fa-redo'></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div></td>\n";
 	}
@@ -906,6 +909,9 @@
 				}
 				if ($item['round_moved'] > 0 && $item['round_fired'] > 0) {
 					$imagestatuslnk = "./images/top-right_phase03.png";
+				}
+				if ($item['heat'] == 4) {
+					$imagestatuslnk = "./images/heat.png";
 				}
 				if ($item['status'] == "destroyed") {
 					$imagestatuslnk = "./images/skull.png";

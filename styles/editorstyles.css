@@ -7,15 +7,13 @@ input, select, textarea {
             box-sizing: border-box;
 }
 input, select {
-	/* width: 80px; */
 	vertical-align: middle;
 	color: #ddd;
-	border-width: 0px;
 	padding: 2px;
 	font-family: 'Pathway Gothic One', sans-serif;
-	box-shadow: 0 0 0px #000000;
+	box-shadow: 0 0 0 #000000;
 	/* border-color: transparent; */
-	border: 0px solid rgba(55,55,55,0.85) !important;
+	border: 0 solid rgba(55,55,55,0.85) !important;
 }
 select:focus, textarea:focus, input:focus {
 	outline: none;

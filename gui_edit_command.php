@@ -31,9 +31,10 @@
 	$pimage = $_SESSION['playerimage'];
 	$opt3 = $_SESSION['option3'];
 	$playMode = $opt3;
-
 	$isAdmin = $_SESSION['isAdmin'];
 	$commandId  = isset($_GET["commandid"]) ? filter_var($_GET["commandid"], FILTER_VALIDATE_INT) : -1;
+
+	require('./db_getvars.php');
 
 	$sql_asc_playerround = "SELECT SQL_NO_CACHE * FROM asc_player where playerid = " . $pid . ";";
 	$result_asc_playerround = mysqli_query($conn, $sql_asc_playerround);
@@ -219,7 +220,7 @@
 					<div style='vertical-align:middle;font-size:28px;color:#eee;'>&nbsp;&nbsp;&nbsp;<?php echo $gid ?>&nbsp;/&nbsp;<?php echo $CURRENTROUND ?>&nbsp;&nbsp;&nbsp;</div>
 				</td>
 				<td style="width:5px;">&nbsp;</td>
-				<td nowrap onclick="location.href='./gui_select_unit.php'" width="<?php echo $buttonWidth ?>" class='menu_button_active'><a href='./gui_select_unit.php'>ROSTER</a></td>
+				<td nowrap onclick="location.href='./gui_select_unit.php'" width="<?php echo $buttonWidth ?>" class='menu_button_active'><a href='./gui_select_unit.php'>ROSTER&nbsp;&nbsp;&nbsp;[<span style='color:#64c7fc;'><?php echo $currentlyAvailableSupportPoints ?> SP</span>]</a></td>
 				<td style="width:5px;">&nbsp;</td>
 <?php
 	if ($playMode) {

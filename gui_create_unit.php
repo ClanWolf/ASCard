@@ -29,8 +29,9 @@
 	// Get data from db
 	$opt3 = $_SESSION['option3'];
 	$playMode = $opt3;
-
 	$isAdmin = $_SESSION['isAdmin'];
+
+	require('./db_getvars.php');
 
 	function random_pic($male) {
 		$dir = 'images/pilots/';
@@ -656,7 +657,7 @@
 					<div style='vertical-align:middle;font-size:28px;color:#eee;'>&nbsp;&nbsp;&nbsp;<?php echo $gid ?>&nbsp;/&nbsp;<?php echo $CURRENTROUND ?>&nbsp;&nbsp;&nbsp;</div>
 				</td>
 				<td style="width:5px;">&nbsp;</td>
-				<td nowrap onclick="location.href='./gui_select_unit.php'" width="<?php echo $buttonWidth ?>" class='menu_button_normal'><a href='./gui_select_unit.php'>ROSTER</a></td>
+				<td nowrap onclick="location.href='./gui_select_unit.php'" width="<?php echo $buttonWidth ?>" class='menu_button_normal'><a href='./gui_select_unit.php'>ROSTER&nbsp;&nbsp;&nbsp;[<span style='color:#64c7fc;'><?php echo $currentlyAvailableSupportPoints ?> SP</span>]</a></td>
 				<td style="width:5px;">&nbsp;</td>
 <?php
 	if ($playMode) {

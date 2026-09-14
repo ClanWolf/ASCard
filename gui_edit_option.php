@@ -30,8 +30,9 @@
 	$pid = $_SESSION['playerid'];
 	$gid = $_SESSION['gameid'];
 	$pimage = $_SESSION['playerimage'];
-
 	$isAdmin = $_SESSION['isAdmin'];
+
+	require('./db_getvars.php');
 
 	$opt1 = isset($_GET["opt1"]) ? $_GET["opt1"] : "";
 	$opt2 = isset($_GET["opt2"]) ? $_GET["opt2"] : "";
@@ -220,7 +221,7 @@
 					<div style='vertical-align:middle;font-size:28px;color:#eee;'>&nbsp;&nbsp;&nbsp;<?php echo $gid ?>&nbsp;/&nbsp;<?php echo $CURRENTROUND ?>&nbsp;&nbsp;&nbsp;</div>
 				</td>
 				<td style="width:5px;">&nbsp;</td>
-				<td nowrap onclick="location.href='./gui_select_unit.php'" width="<?php echo $buttonWidth ?>" class='menu_button_normal'><a href='./gui_select_unit.php'>ROSTER</a></td>
+				<td nowrap onclick="location.href='./gui_select_unit.php'" width="<?php echo $buttonWidth ?>" class='menu_button_normal'><a href='./gui_select_unit.php'>ROSTER&nbsp;&nbsp;&nbsp;[<span style='color:#64c7fc;'><?php echo $currentlyAvailableSupportPoints ?> SP</span>]</a></td>
 				<td style="width:5px;">&nbsp;</td>
 <?php
 	if ($playMode) {
@@ -279,7 +280,7 @@
 			<tr>
 				<td nowrap width="10%" align="left" class='datalabel'>
 					<!-- <label class="bigcheck"><input onchange="changeOption();" type="checkbox" class="bigcheck" name="OPT5" value="yes"/><span class="bigcheck-target"></span></label>&nbsp;&nbsp; -->
-					<i class="fa-solid fa-circle-xmark"></i>
+					<i style="color:orange;" class="fa-solid fa-circle-xmark"></i>
 				</td>
 				<td nowrap width="90%" align="left" class="datalabel">
 					Auto-repair units (on round reset)

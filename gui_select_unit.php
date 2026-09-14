@@ -34,17 +34,9 @@
 	$opt3 = $_SESSION['option3'];
 	$playMode = $opt3;
 	$currentcommandid = $_SESSION['commandid'];
-
 	$isAdmin = $_SESSION['isAdmin'];
-	$repairMode = 0;
 
-	$selectRepairMode = "SELECT * FROM asc_game WHERE gameid = ".$gid.";";
-	$result_selectRepairMode = mysqli_query($conn, $selectRepairMode);
-	if (mysqli_num_rows($result_selectRepairMode) > 0) {
-		while($row77 = mysqli_fetch_assoc($result_selectRepairMode)) {
-			$repairMode = $row77["repairActive"];
-		}
-	}
+	require('./db_getglobalvars.php');
 
 	$update_logintime = "UPDATE asc_player SET last_login=now() WHERE playerid = ".$pid;
 	$result_update_logintime = mysqli_query($conn, $update_logintime);
@@ -372,7 +364,6 @@
 		}
 	}
 ?>
-
 	<div id="header">
 		<table style="width:100%;height:60px;border:none;border-collapse:collapse;background:rgba(50,50,50,1.0);" cellspacing="0" cellpadding="0">
 			<tr>
@@ -383,7 +374,7 @@
 					<div style='vertical-align:middle;font-size:28px;color:#eee;'>&nbsp;&nbsp;&nbsp;<?php echo $gid ?>&nbsp;/&nbsp;<?php echo $CURRENTROUND ?>&nbsp;&nbsp;&nbsp;</div>
 				</td>
 				<td style="width:5px;">&nbsp;</td>
-				<td nowrap onclick="location.href='./gui_select_unit.php'" width="<?php echo $buttonWidth ?>" class='menu_button_active'><a href='./gui_select_unit.php'>ROSTER</a></td>
+				<td nowrap onclick="location.href='./gui_select_unit.php'" width="<?php echo $buttonWidth ?>" class='menu_button_active'><a href='./gui_select_unit.php'>ROSTER&nbsp;&nbsp;&nbsp;[<span style='color:#64c7fc;'><?php echo $currentlyAvailableSupportPoints ?> SP</span>]</a></td>
 				<td style="width:5px;">&nbsp;</td>
 <?php
 	if ($playMode) {
@@ -465,7 +456,7 @@ if (!$playMode) {
 if ($playMode) {
 	if ($repairMode == 1) {
 		// REPAIR INDICATOR
-		echo "  		<td nowrap id='FinalizeRoundButton' style='text-align:center;width:100px;background:rgba(197,107,19,1.0);' rowspan='5'><div style='color:#eee;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class='fa-solid fa-wrench'></i></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div></td>\n";
+		echo "  		<td nowrap id='FinalizeRoundButton' style='text-align:center;width:100px;background:#64c7fc;' rowspan='5'><div style='color:#eee;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class='fa-solid fa-wrench'></i></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div></td>\n";
 	} else {
 		// FINALIZE ROUND
 		echo "  		<td nowrap onclick='javascript:finalizeRound(".$pid.");' id='FinalizeRoundButton' style='text-align:center;width:100px;background:rgba(81,125,37,1.0);' rowspan='5'><div style='color:#eee;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class='fas fa-redo'></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div></td>\n";
@@ -841,7 +832,20 @@ if ($playMode) {
 					$unitDetailString = $unitDetailString."						<td nowrap align='left' valign='bottom' style='color:#AAAAAA;background-color:".$bidcolor."text-align:left;overflow:hidden;white-space:nowrap;text-overflow:ellipsis'>\n";
 					$unitDetailString = $unitDetailString."						<table width='100%'><tr><td id='selectWidthMeasure' width='95%'><div name='unitCell' style='display:block;font-size:22px;width:50px;height:24px;text-align:left;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;'>\n";
 				}
-				$unitDetailString = $unitDetailString."						".textShorten($unitchassisname)."</div></td><td width='5%' align='right'><span style='font-weight:normal;font-size:20px;color:#ffc677;'>&nbsp;PV&nbsp;".$unitpointvalue."</span></td>\n";
+				$unitDetailString = $unitDetailString."						".textShorten($unitchassisname)."</div></td>";
+				if ($unitstatus !== "fresh") {
+					if ($repairMode == 1) {
+						$unitDetailString = $unitDetailString."						<td width='5%' align='right'><span style='font-weight:normal;font-size:20px;color:#64c7fc;'>-23 SP</span></td>\n";
+					} else {
+						$unitDetailString = $unitDetailString."						<td width='5%' align='right'><span style='font-weight:normal;font-size:20px;color:#ffc677;'>&nbsp;PV&nbsp;".$unitpointvalue."</span></td>\n";
+					}
+				} else {
+					if ($repairMode == 1) {
+						$unitDetailString = $unitDetailString."						<td width='5%' align='right'><span style='font-weight:normal;font-size:20px;color:#64c7fc;'>/</span></td>\n";
+					} else {
+						$unitDetailString = $unitDetailString."						<td width='5%' align='right'><span style='font-weight:normal;font-size:20px;color:#ffc677;'>&nbsp;PV&nbsp;".$unitpointvalue."</span></td>\n";
+					}
+				}
 				$unitDetailString = $unitDetailString."						</tr><tr><td colspan='1'>";
 				if ($commander == 1) {
 					$unitDetailString = $unitDetailString."						<div style='font-size:16px;top:0px;bottom:0px;left:0px;right:0px;'><img style='vertical-align:bottom;padding-top:3px' src='./images/ranks/".$factionidSelected."/".$pilotrank.".png' width='16px' height='16px'>&nbsp;&nbsp;".$pilotname."&nbsp;&nbsp;<img style='vertical-align:bottom;padding-top:3px' src='./images/command.png' width='16px' height='16px'></div>\n";
@@ -850,7 +854,19 @@ if ($playMode) {
 				} else {
 					$unitDetailString = $unitDetailString."						<div style='font-size:16px;top:0px;bottom:0px;left:0px;right:0px;'><img style='vertical-align:bottom;padding-top:3px' src='./images/ranks/".$factionidSelected."/".$pilotrank.".png' width='16px' height='16px'>&nbsp;&nbsp;".$pilotname."</div>\n";
 				}
-				$unitDetailString = $unitDetailString."						</td><td width='5%' align='right'><span style='font-weight:normal;font-size:16px;color:#aaaaaa;'>".$unittonnage."t</span></td></tr></table>\n";
+				if ($unitstatus !== "fresh") {
+					if ($repairMode == 1) {
+						$unitDetailString = $unitDetailString."						</td><td width='5%' align='right'><span style='font-weight:normal;font-size:16px;color:#aaaaaa;'>Repair cost</span></td></tr></table>\n";
+					} else {
+						$unitDetailString = $unitDetailString."						</td><td width='5%' align='right'><span style='font-weight:normal;font-size:16px;color:#aaaaaa;'>".$unittonnage."t</span></td></tr></table>\n";
+					}
+				} else {
+					if ($repairMode == 1) {
+						$unitDetailString = $unitDetailString."						</td><td width='5%' align='right'><span style='font-weight:normal;font-size:16px;color:#aaaaaa;'>FMC</span></td></tr></table>\n";
+					} else {
+						$unitDetailString = $unitDetailString."						</td><td width='5%' align='right'><span style='font-weight:normal;font-size:16px;color:#aaaaaa;'>".$unittonnage."t</span></td></tr></table>\n";
+					}
+				}
 				$unitDetailString = $unitDetailString."						</td><td>&nbsp;&nbsp;&nbsp;</td>\n";
 
 				// -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------

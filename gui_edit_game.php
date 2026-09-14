@@ -32,9 +32,10 @@
 	$hgid   = filter_var($_SESSION['hostedgameid'], FILTER_VALIDATE_INT);
 	$pimage = htmlspecialchars($_SESSION['playerimage'], ENT_NOQUOTES);
 	$pname  = htmlspecialchars($_SESSION['name'], ENT_NOQUOTES);
-
 	$isAdmin    = filter_var($_SESSION['isAdmin'], FILTER_VALIDATE_BOOLEAN);
 	$isGodAdmin = filter_var($_SESSION['isGodAdmin'], FILTER_VALIDATE_BOOLEAN);
+
+	require('./db_getvars.php');
 
 	$opt1                   = filter_var($_SESSION['option1'], FILTER_VALIDATE_BOOLEAN);
 	$opt2                   = filter_var($_SESSION['option2'], FILTER_VALIDATE_BOOLEAN);
@@ -368,7 +369,7 @@
 					<div style='vertical-align:middle;font-size:28px;color:#eee;'>&nbsp;&nbsp;&nbsp;<?php echo $gid ?>&nbsp;/&nbsp;<?php echo $CURRENTROUND ?>&nbsp;&nbsp;&nbsp;</div>
 				</td>
 				<td style="width:5px;">&nbsp;</td>
-				<td nowrap onclick="location.href='./gui_select_unit.php'" width="<?php echo $buttonWidth ?>" class='menu_button_normal'><a href='./gui_select_unit.php'>ROSTER</a></td>
+				<td nowrap onclick="location.href='./gui_select_unit.php'" width="<?php echo $buttonWidth ?>" class='menu_button_normal'><a href='./gui_select_unit.php'>ROSTER&nbsp;&nbsp;&nbsp;[<span style='color:#64c7fc;'><?php echo $currentlyAvailableSupportPoints ?> SP</span>]</a></td>
 				<td style="width:5px;">&nbsp;</td>
 <?php
 	if ($playMode) {
@@ -751,6 +752,10 @@
 	</div>
 
 <?php
+	if ($playMode) {
+		echo "	<p align=\"center\" class=\"footerInfo\">To leave the game: disable play mode!</p>\n";
+	}
+
 //	if ($gid == $hgid) {
 //		$host = true; // in my own game: I am the host or not joined anywhere else
 //		if ($playMode) {

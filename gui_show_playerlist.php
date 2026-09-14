@@ -31,8 +31,9 @@
 	$pimage = $_SESSION['playerimage'];
 	$opt3 = $_SESSION['option3'];
 	$playMode = $opt3;
-
 	$isAdmin = $_SESSION['isAdmin'];
+
+	require('./db_getvars.php');
 
 	$sql_asc_playerround = "SELECT SQL_NO_CACHE * FROM asc_player where playerid = " . $pid . ";";
 	$result_asc_playerround = mysqli_query($conn, $sql_asc_playerround);
