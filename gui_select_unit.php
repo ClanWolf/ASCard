@@ -626,7 +626,7 @@ if ($playMode) {
 
 				$sql_asc_unit = "SELECT "
 							."SQL_NO_CACHE "
-							."asc_unit.tech, asc_unit.unit_number, asc_unit.as_model, asc_unit.unit_class, asc_unit.unit_variant, asc_unit.as_pv, asc_unit.unit_tonnage, asc_unit.as_tp, asc_unit.as_sz, "
+							."asc_unit.tech, asc_unit.unitid, asc_unit.unit_number, asc_unit.as_model, asc_unit.unit_class, asc_unit.unit_variant, asc_unit.as_pv, asc_unit.unit_tonnage, asc_unit.as_tp, asc_unit.as_sz, "
 							."asc_unit.commander, asc_unit.subcommander, "
 							."asc_unitstatus.active_bid "
 							."FROM "
@@ -647,12 +647,12 @@ if ($playMode) {
 							$clan = "";
 						}
 
+						$unitid = $rowUnit['unitid'];
 						$unitnumber = $rowUnit['unit_number'];
 						$unitpointvalue = $rowUnit['as_pv'];
 						$unittonnage = $rowUnit['unit_tonnage'];
 						$unittype = $rowUnit['as_tp'];
 						$unitsize = $rowUnit['as_sz'];
-
 						$unitclass = $rowUnit['unit_class'];       // Mad Cat (Timber Wolf) --> Extract clan name from here
 						$unitvariant = $rowUnit['unit_variant'];   // Prime
 
@@ -801,11 +801,11 @@ if ($playMode) {
 								if ($unitstatus == "fresh") {
 									$unitRepairCost = 0;
 								} else if ($unitstatus == "damaged") {
-									$unitRepairCost = $RepairCost_Heavy_Armor_Damaged;
+									$unitRepairCost = $RepairCost_Heavy_Mech_Damaged;
 								} else if ($unitstatus == "crippled") {
-									$unitRepairCost = $RepairCost_Heavy_Armor_Crippled;
+									$unitRepairCost = $RepairCost_Heavy_Mech_Crippled;
 								} else if ($unitstatus == "destroyed") {
-									$unitRepairCost = $RepairCost_Heavy_Armor_Destroyed;
+									$unitRepairCost = $RepairCost_Heavy_Mech_Destroyed;
 								}
 							} else if ($unitsize == 4) { // Assault BattleMech
 								if ($unitstatus == "fresh") {
@@ -964,9 +964,17 @@ if ($playMode) {
 								} else {
 									$unitDetailString = $unitDetailString."						<td onclick='' nowrap width='30px' style='background-color:".$bidcolor.";vertical-align:middle;text-align:center;'>\n";
 								}
-								$unitDetailString = $unitDetailString."							<span style='font-size:10px;'>\n";
-								$unitDetailString = $unitDetailString."								&nbsp;<i class='fa-solid fa-wrench'></i>&nbsp;\n";
-								$unitDetailString = $unitDetailString."							</span>\n";
+
+								// TODO: Repair unit
+								if ($currentlyAvailableSupportPoints + $unitRepairCost > 0) {
+									$unitDetailString = $unitDetailString."							<span style='font-size:10px;' onclick='alert(\"Repair unit: ".$unitid.", ".$unitRepairCost."\");'>\n";
+									$unitDetailString = $unitDetailString."								&nbsp;<i class='fa-solid fa-wrench'></i>&nbsp;\n";
+									$unitDetailString = $unitDetailString."							</span>\n";
+								} else {
+									$unitDetailString = $unitDetailString."							<span style='font-size:10px;'>\n";
+									$unitDetailString = $unitDetailString."								&nbsp;<i class='fa-solid fa-ban' style='color:#666;'></i>&nbsp;\n";
+									$unitDetailString = $unitDetailString."							</span>\n";
+								}
 							} else {
 								if ($activenarc == "1") {
 									$unitDetailString = $unitDetailString."						<td nowrap width='30px' class='datalabel_disabled_dashed' style='vertical-align:middle;text-align:center;'>\n";

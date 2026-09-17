@@ -16,33 +16,33 @@
 	$CW_FactionID    = 36; // Clan Wolf in C3 DB
 	$CJF_FactionID   = 32; // Clan Jade Falcon in C3 DB
 
-	$RepairCost_Light_Mech_Damaged    = 15;
-	$RepairCost_Light_Armor_Damaged   = 3;
-	$RepairCost_Light_Mech_Crippled   = 30;
-	$RepairCost_Light_Armor_Crippled  = 6;
-	$RepairCost_Light_Mech_Destroyed  = 45;
-	$RepairCost_Light_Armor_Destroyed = 9;
+	$RepairCost_Light_Mech_Damaged    = -15;
+	$RepairCost_Light_Armor_Damaged   = -3;
+	$RepairCost_Light_Mech_Crippled   = -30;
+	$RepairCost_Light_Armor_Crippled  = -6;
+	$RepairCost_Light_Mech_Destroyed  = -45;
+	$RepairCost_Light_Armor_Destroyed = -9;
 
-	$RepairCost_Medium_Mech_Damaged    = 30;
-	$RepairCost_Medium_Armor_Damaged   = 6;
-	$RepairCost_Medium_Mech_Crippled   = 45;
-	$RepairCost_Medium_Armor_Crippled  = 15;
-	$RepairCost_Medium_Mech_Destroyed  = 60;
-	$RepairCost_Medium_Armor_Destroyed = 25;
+	$RepairCost_Medium_Mech_Damaged    = -30;
+	$RepairCost_Medium_Armor_Damaged   = -6;
+	$RepairCost_Medium_Mech_Crippled   = -45;
+	$RepairCost_Medium_Armor_Crippled  = -15;
+	$RepairCost_Medium_Mech_Destroyed  = -60;
+	$RepairCost_Medium_Armor_Destroyed = -25;
 
-	$RepairCost_Heavy_Mech_Damaged    = 60;
-	$RepairCost_Heavy_Armor_Damaged   = 15;
-	$RepairCost_Heavy_Mech_Crippled   = 75;
-	$RepairCost_Heavy_Armor_Crippled  = 25;
-	$RepairCost_Heavy_Mech_Destroyed  = 80;
-	$RepairCost_Heavy_Armor_Destroyed = 40;
+	$RepairCost_Heavy_Mech_Damaged    = -60;
+	$RepairCost_Heavy_Armor_Damaged   = -15;
+	$RepairCost_Heavy_Mech_Crippled   = -75;
+	$RepairCost_Heavy_Armor_Crippled  = -25;
+	$RepairCost_Heavy_Mech_Destroyed  = -80;
+	$RepairCost_Heavy_Armor_Destroyed = -40;
 
-	$RepairCost_Assault_Mech_Damaged    = 80;
-	$RepairCost_Assault_Armor_Damaged   = 20;
-	$RepairCost_Assault_Mech_Crippled   = 100;
-	$RepairCost_Assault_Armor_Crippled  = 40;
-	$RepairCost_Assault_Mech_Destroyed  = 125;
-	$RepairCost_Assault_Armor_Destroyed = 75;
+	$RepairCost_Assault_Mech_Damaged    = -80;
+	$RepairCost_Assault_Armor_Damaged   = -20;
+	$RepairCost_Assault_Mech_Crippled   = -100;
+	$RepairCost_Assault_Armor_Crippled  = -40;
+	$RepairCost_Assault_Mech_Destroyed  = -125;
+	$RepairCost_Assault_Armor_Destroyed = -75;
 
 	$playerFactionId = -1;
 	if (isset($gid) && isset($pid)) {
@@ -71,19 +71,17 @@
 				$c3FactionId = 32; // 9,32: CJF
 			}
 
-			// Select the PCP only from the PREVIOUS rounds! Current round PCP are not yet Support Points
-
-
-			// RUNDE FEHLT NOCH!
-
-
-			$selectPlanetaryControlPoints  = "SELECT * FROM c3_PLANETARY_CONTROL_POINTS ";
+			// Select the PCP only from the PREVIOUS rounds (and the entries where attack == null)!
+			// Current round PCP are not yet Support Points
+			$selectPlanetaryControlPoints  = "SELECT SUM(PCP) supportPoints FROM c3_SCORE ";
 			$selectPlanetaryControlPoints .= "WHERE SeasonID=".$C3_SeasonId." ";
+			$selectPlanetaryControlPoints .= "AND PCP IS NOT NULL ";
+			$selectPlanetaryControlPoints .= "AND VP IS NULL ";
 			$selectPlanetaryControlPoints .= "AND FactionID=".$c3FactionId.";";
 			$result_selectPlanetaryControlPoints = mysqli_query($conn, $selectPlanetaryControlPoints);
 			if (mysqli_num_rows($result_selectPlanetaryControlPoints) > 0) {
 				while($row89a = mysqli_fetch_assoc($result_selectPlanetaryControlPoints)) {
-					$currentlyAvailableSupportPoints += $row89a["Points"];
+					$currentlyAvailableSupportPoints = $row89a["supportPoints"];
 				}
 			}
 		}
