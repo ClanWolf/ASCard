@@ -36,7 +36,7 @@
 	$currentcommandid = $_SESSION['commandid'];
 	$isAdmin = $_SESSION['isAdmin'];
 
-	require('./db_getglobalvars.php');
+	require('./db_getvars.php');
 
 	$update_logintime = "UPDATE asc_player SET last_login=now() WHERE playerid = ".$pid;
 	$result_update_logintime = mysqli_query($conn, $update_logintime);
@@ -307,13 +307,8 @@
 	<iframe name="saveframe" id="iframe_save"></iframe>
 	<script type="text/javascript" src="./scripts/log_enable.js"></script>
 <?php
-	//if ($repairMode == 1) {
-	//	echo "	<div id=\"heightmeasure\" class=\"formationselect_button_normal\" style=\"width:40px;\"><br><br>🔧<br><br><span style=\"color:yellow;writing-mode:vertical-lr;\">REPAIRMODE - 4000 / 7650 SP</span><br><br></div>\n";
-	//	echo "	<!-- <div id=\"heightmeasure_right\"></div> -->\n";
-	//} else {
-		echo "	<div id=\"heightmeasure\"></div>\n";
-		echo "	<!-- <div id=\"heightmeasure_right\"></div> -->\n";
-	//}
+	echo "	<div id=\"heightmeasure\"></div>\n";
+	// echo "	<div id=\"heightmeasure_right\"></div>\n";
 ?>
 	<div id="cover"></div>
 
@@ -631,7 +626,7 @@ if ($playMode) {
 
 				$sql_asc_unit = "SELECT "
 							."SQL_NO_CACHE "
-							."asc_unit.tech, asc_unit.unit_number, asc_unit.as_model, asc_unit.unit_class, asc_unit.unit_variant, asc_unit.as_pv, asc_unit.unit_tonnage, asc_unit.as_tp, "
+							."asc_unit.tech, asc_unit.unit_number, asc_unit.as_model, asc_unit.unit_class, asc_unit.unit_variant, asc_unit.as_pv, asc_unit.unit_tonnage, asc_unit.as_tp, asc_unit.as_sz, "
 							."asc_unit.commander, asc_unit.subcommander, "
 							."asc_unitstatus.active_bid "
 							."FROM "
@@ -656,6 +651,7 @@ if ($playMode) {
 						$unitpointvalue = $rowUnit['as_pv'];
 						$unittonnage = $rowUnit['unit_tonnage'];
 						$unittype = $rowUnit['as_tp'];
+						$unitsize = $rowUnit['as_sz'];
 
 						$unitclass = $rowUnit['unit_class'];       // Mad Cat (Timber Wolf) --> Extract clan name from here
 						$unitvariant = $rowUnit['unit_variant'];   // Prime
@@ -734,6 +730,94 @@ if ($playMode) {
 						}
 						if ($heat == 4) {
 							$unitRoundStatusImage = "./images/heat.png";
+						}
+
+						// fresh, damaged, crippled, destroyed
+						$unitRepairCost = -1;
+						if ($unittype === "CV") {
+							if ($unitsize == 1) { // Light Armor
+								if ($unitstatus == "fresh") {
+									$unitRepairCost = 0;
+								} else if ($unitstatus == "damaged") {
+									$unitRepairCost = $RepairCost_Light_Armor_Damaged;
+								} else if ($unitstatus == "crippled") {
+									$unitRepairCost = $RepairCost_Light_Armor_Crippled;
+								} else if ($unitstatus == "destroyed") {
+									$unitRepairCost = $RepairCost_Light_Armor_Destroyed;
+								}
+							} else if ($unitsize == 2) { // Medium Armor
+								if ($unitstatus == "fresh") {
+									$unitRepairCost = 0;
+								} else if ($unitstatus == "damaged") {
+									$unitRepairCost = $RepairCost_Medium_Armor_Damaged;
+								} else if ($unitstatus == "crippled") {
+									$unitRepairCost = $RepairCost_Medium_Armor_Crippled;
+								} else if ($unitstatus == "destroyed") {
+									$unitRepairCost = $RepairCost_Medium_Armor_Destroyed;
+								}
+							} else if ($unitsize == 3) { // Heavy Armor
+								if ($unitstatus == "fresh") {
+									$unitRepairCost = 0;
+								} else if ($unitstatus == "damaged") {
+									$unitRepairCost = $RepairCost_Heavy_Armor_Damaged;
+								} else if ($unitstatus == "crippled") {
+									$unitRepairCost = $RepairCost_Heavy_Armor_Crippled;
+								} else if ($unitstatus == "destroyed") {
+									$unitRepairCost = $RepairCost_Heavy_Armor_Destroyed;
+								}
+							} else if ($unitsize == 4) { // Assault Armor
+								if ($unitstatus == "fresh") {
+									$unitRepairCost = 0;
+								} else if ($unitstatus == "damaged") {
+									$unitRepairCost = $RepairCost_Assault_Armor_Damaged;
+								} else if ($unitstatus == "crippled") {
+									$unitRepairCost = $RepairCost_Assault_Armor_Crippled;
+								} else if ($unitstatus == "destroyed") {
+									$unitRepairCost = $RepairCost_Assault_Armor_Destroyed;
+								}
+							}
+						} else if ($unittype === "BM") {
+							if ($unitsize == 1) { // Light BattleMech
+								if ($unitstatus == "fresh") {
+									$unitRepairCost = 0;
+								} else if ($unitstatus == "damaged") {
+									$unitRepairCost = $RepairCost_Light_Mech_Damaged;
+								} else if ($unitstatus == "crippled") {
+									$unitRepairCost = $RepairCost_Light_Mech_Crippled;
+								} else if ($unitstatus == "destroyed") {
+									$unitRepairCost = $RepairCost_Light_Mech_Destroyed;
+								}
+							} else if ($unitsize == 2) { // Medium BattleMech
+								if ($unitstatus == "fresh") {
+									$unitRepairCost = 0;
+								} else if ($unitstatus == "damaged") {
+									$unitRepairCost = $RepairCost_Medium_Mech_Damaged;
+								} else if ($unitstatus == "crippled") {
+									$unitRepairCost = $RepairCost_Medium_Mech_Crippled;
+								} else if ($unitstatus == "destroyed") {
+									$unitRepairCost = $RepairCost_Medium_Mech_Destroyed;
+								}
+							} else if ($unitsize == 3) { // Heavy BattleMech
+								if ($unitstatus == "fresh") {
+									$unitRepairCost = 0;
+								} else if ($unitstatus == "damaged") {
+									$unitRepairCost = $RepairCost_Heavy_Armor_Damaged;
+								} else if ($unitstatus == "crippled") {
+									$unitRepairCost = $RepairCost_Heavy_Armor_Crippled;
+								} else if ($unitstatus == "destroyed") {
+									$unitRepairCost = $RepairCost_Heavy_Armor_Destroyed;
+								}
+							} else if ($unitsize == 4) { // Assault BattleMech
+								if ($unitstatus == "fresh") {
+									$unitRepairCost = 0;
+								} else if ($unitstatus == "damaged") {
+									$unitRepairCost = $RepairCost_Assault_Mech_Damaged;
+								} else if ($unitstatus == "crippled") {
+									$unitRepairCost = $RepairCost_Assault_Mech_Crippled;
+								} else if ($unitstatus == "destroyed") {
+									$unitRepairCost = $RepairCost_Assault_Mech_Destroyed;
+								}
+							}
 						}
 					}
 				}
@@ -835,7 +919,7 @@ if ($playMode) {
 				$unitDetailString = $unitDetailString."						".textShorten($unitchassisname)."</div></td>";
 				if ($unitstatus !== "fresh") {
 					if ($repairMode == 1) {
-						$unitDetailString = $unitDetailString."						<td width='5%' align='right'><span style='font-weight:normal;font-size:20px;color:#64c7fc;'>-23 SP</span></td>\n";
+						$unitDetailString = $unitDetailString."						<td width='5%' align='right'><span style='font-weight:normal;font-size:20px;color:#64c7fc;'>".$unitRepairCost." SP</span></td>\n";
 					} else {
 						$unitDetailString = $unitDetailString."						<td width='5%' align='right'><span style='font-weight:normal;font-size:20px;color:#ffc677;'>&nbsp;PV&nbsp;".$unitpointvalue."</span></td>\n";
 					}
