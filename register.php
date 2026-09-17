@@ -86,7 +86,9 @@
 				}
 				if ($playernamefound == false) {
 
-					// Emailcheck disabled for now
+					// !!!
+					// !!! Emailcheck disabled for now !!!
+					// !!!
 					$playeremailfound = false;
 
 					if ($playeremailfound == false) {
