@@ -157,7 +157,7 @@
 					<div style='vertical-align:middle;font-size:28px;color:#eee;'>&nbsp;&nbsp;&nbsp;&nbsp;<i class='fa-solid fa-folder'></i>&nbsp;&nbsp;<span style='color:#eee;'>G<?php echo $gid ?>&nbsp;R<?php echo $CURRENTROUND ?></span>&nbsp;&nbsp;&nbsp;</div>
 				</td>
 				<td style="width:5px;">&nbsp;</td>
-				<td nowrap onclick="location.href='./gui_select_unit.php'" width="<?php echo $buttonWidth ?>" class='menu_button_normal'><a href='./gui_select_unit.php'><i class='fa-solid fa-table-list'></i></a></td>
+				<td nowrap onclick="location.href='./gui_select_unit.php'" width="<?php echo $buttonWidth ?>" class='menu_button_normal'><a href='./gui_select_unit.php'><i class='fa-solid fa-table-list'></i>&nbsp;&nbsp;&nbsp;[<span style='color:#64c7fc;'><?php echo $currentlyAvailableSupportPoints ?> SP</span>]</a></td>
 				<td style="width:5px;">&nbsp;</td>
 <?php
 	if ($playMode) {

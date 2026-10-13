@@ -107,7 +107,7 @@
 
 		$arr = explode('t | ', $unitname);
 		$unitname = $arr[1];
-		echo "<script>console.log('SEARCHING: >>".$unitname."<<');</script>";
+		//echo "<script>console.log('SEARCHING: >>" . $unitname . "<<');</script>";
 
 		$dir = 'images/units_mul/';
 		$startChar = mb_substr($unitname, 0, 3); // use first 3 chars to list files to keep the result list as small as possible
@@ -361,10 +361,14 @@
 	echo "	var pilotimage = '".$array_PILOT_IMG_URL[$chosenUnitIndex]."';\n";
 
 	// If the page was reloaded, do not fade anything to speed up things
+	// Ignore stv (scroll to view) here, because that is a reload
 	echo "	var fadeOutDuration = ".$fadeOutDuration.";\n";
-	echo "	if (document.referrer === window.location.href) {\n";
-	echo "		// console.log('RELOAD');\n";
+	echo "	const ref1 = document.referrer.replaceAll('stv=1&', '').replaceAll('stv=0&', '');\n";
+	echo "	const loc1 = window.location.href.replaceAll('stv=1&', '').replaceAll('stv=0&', '');\n";
+	//echo "	console.log('RELOAD-Check: ' + ref1 + ' / ' + loc1);\n";
+	echo "	if (ref1 === loc1 || document.referrer === window.location.href) {\n";
 	echo "		fadeOutDuration = 0;\n";
+	//echo "		console.log('RELOAD');\n";
 	echo "	}\n";
 
 	// Build up the crit history for CV
@@ -643,6 +647,9 @@
 
 	//$scrollToView = 1;
 
+	//echo "<script>console.log('--------');</script>\n";
+	//echo "<script>console.log('Current start index: ".$startIndex."');</script>\n";
+
 	if (!$unitIsVisible) {
 		if ($unitOutLeft) {
 			if ($scrollToView == 1) {
@@ -650,7 +657,7 @@
 				$unitIsVisible = true;
 				$unitOutLeft = false;
 				$unitOutRight = false;
-				// echo "<script>console.log('Shift LEFT to make visible: ".$moveLeftToMakeUnitVisible."');</script>";
+				//echo "<script>console.log('Shift LEFT to make visible by: ".$moveLeftToMakeUnitVisible."');</script>";
 				echo "<script>updateFormationStartIndex(".$formationid.",".$startIndex.",\"none\");</script>";
 			}
 		} else if ($unitOutRight) {
@@ -659,11 +666,14 @@
 				$unitIsVisible = true;
 				$unitOutLeft = false;
 				$unitOutRight = false;
-				// echo "<script>console.log('Shift RIGHT to make visible: ".$moveRightToMakeUnitVisible."');</script>";
+				//echo "<script>console.log('Shift RIGHT to make visible by: ".$moveRightToMakeUnitVisible."');</script>";
 				echo "<script>updateFormationStartIndex(".$formationid.",".$startIndex.",\"none\");</script>";
 			}
 		}
 	}
+
+	//echo "<script>console.log('Updated start index: ".$startIndex."');</script>\n";
+	//echo "<script>console.log('--------');</script>\n";
 
 	if ($size > $maxNumberOfTabs) {
 		$width = ceil(100 / $maxNumberOfTabs);

@@ -1109,7 +1109,7 @@ function showTopStatusInfo(NARCed, TAGed, WATERed, ROUTed) {
 }
 
 function textSize(dec) {
-	fontsizeLabel += (dec==1) ? 1 : (-1);
+	fontsizeLabel += (dec===1) ? 1 : (-1);
 
 	if (fontsizeLabel < minSize) {
 		fontsizeLabel = minSize;
@@ -1148,9 +1148,32 @@ function textSize(dec) {
 	setCookie("savedBefore", "true", 365);
 }
 
+// function updateFormationStartIndex(formationid, currentindex, op) {
+// 	var url="./save_formation_startindex.php?formationid="+formationid+"&currentindex="+currentindex+"&op="+op;
+// 	console.log("Updating start index: " + op + " (now: " + currentindex + ")");
+// 	window.frames['saveframe'].location.replace(url);
+// }
+
+let formationPromise = Promise.resolve();
 function updateFormationStartIndex(formationid, currentindex, op) {
-	var url="./save_formation_startindex.php?formationid="+formationid+"&currentindex="+currentindex+"&op="+op;
-	window.frames['saveframe'].location.replace(url);
+	// Debounce / queue: only one request at a time
+	formationPromise = formationPromise.then(() => {
+		return fetch(
+			`./save_formation_startindex.php?formationid=${formationid}&currentindex=${currentindex}&op=${op}`,
+			{ method: 'GET', credentials: 'include' }
+		).then(r => {
+			if (!r.ok) throw new Error('save failed');
+			return r.json();
+		}).then(data => {
+			if (data.status === 'ok') {
+				// Reload only once, after the server confirms success
+				let url = window.location.href.replace('stv=1', 'stv=0');
+				window.location.replace(url);
+			}
+		}).catch(err => {
+			console.error('Formation start-index save error:', err);
+		});
+	});
 }
 
 function increaseENGN_PREP() {

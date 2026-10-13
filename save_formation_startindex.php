@@ -11,47 +11,36 @@
 	require('./logger.php');
 	require_once('./db.php');
 
-	$formationid  = isset($_GET["formationid"]) ? $_GET["formationid"] : "";
-	$currentindex = isset($_GET["currentindex"]) ? $_GET["currentindex"] : "";
-	$op           = isset($_GET["op"]) ? $_GET["op"] : "";
+	$formationid  = isset($_GET["formationid"]) ? (int)$_GET["formationid"] : 0;
+	$currentindex = isset($_GET["currentindex"]) ? (int)$_GET["currentindex"] : 0;
+	$op           = isset($_GET["op"]) ? $_GET["op"] : "none";
 
-	echo "<!DOCTYPE html>\n";
-	echo "<html lang='en'>\n";
-	echo "<body>\n";
+	// echo "FormationId:  ".$formationid."<br>\n";
+	// echo "CurrentIndex: ".$currentindex."<br>\n";
+	// echo "Operation:    ".$op."<br>\n";
 
-	echo "FormationId:  " . $formationid . "<br>";
-	echo "CurrentIndex: " . $currentindex . "<br>";
-	echo "Operation:    " . $op . "<br>";
-
-	echo "Saving Formation start index...";
-
-	if (!empty($formationid)) {
+	if (!empty($formationid) && !empty($currentindex)) {
 		$newindex = $currentindex;
-		if ($op == "up") {
+		if ($op === "up") {
 			$newindex++;
-		} else if ($op == "down") {
+		} else if ($op === "down") {
 			$newindex--;
 		}
-		$sql = "UPDATE asc_formation SET startindex='".$newindex."' WHERE formationid=".$formationid.";";
-		echo $sql;
+		if ($newindex < 0) $newindex = 0;
 
-		if (mysqli_query($conn, $sql)) {
-			echo "<p style='font-family:Arial,sans-serif;font-size:14px;color:yellow;'>";
-			echo "Record (formation start index) updated successfully.";
-			echo "</p>";
-			mysqli_commit($conn);
+		$stmt = $conn->prepare("UPDATE asc_formation SET startindex=? WHERE formationid=?");
+		$stmt->bind_param("ii", $newindex, $formationid);
+		$ok = $stmt->execute();
 
-			echo "<script>\n";
-			echo "	let currentURL = top.location.href;\n";
-			echo "	let newURL = currentURL.replace('stv=1','stv=0');\n";
-			echo "	top.location.replace(newURL);\n";
-			echo "</script>\n";
+		header('Content-Type: application/json');
+
+		if ($ok && $stmt->affected_rows > 0) {
+			// Success - return only JSON, no page reload
+			echo json_encode(['status' => 'ok', 'newindex' => $newindex]);
 		} else {
-			echo "<p style='font-family:Arial,sans-serif;font-size:14px;color:yellow;'>";
-			echo "Error (formation start index) updating record: " . mysqli_error($conn);
-			echo "</p>";
+			http_response_code(500);
+			logMsg("FormationStartIndex save failed: fid=$formationid new=$newindex");
+			echo json_encode(['status' => 'error', 'message' => mysqli_error($conn)]);
 		}
 	}
-	echo "</body>\n";
-	echo "</html>\n";
 ?>

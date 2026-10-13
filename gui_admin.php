@@ -217,12 +217,12 @@
 					echo "		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Disabled because of MUL2.0\n";
 					echo "	</td>\n";
 					echo "</tr>\n";
-					echo "<tr>\n";
-					echo "  <td align='center' class='datalabel' colspan='2'><hr></td>\n";
-					echo "</tr>\n";
-					echo "<tr>\n";
-					echo "  <td align='center' class='datalabel' colspan='2'><a href='https://www.ascard.net/app/adm.php'>Campaign admin</a></td>\n";
-					echo "</tr>\n";
+//					echo "<tr>\n";
+//					echo "  <td align='center' class='datalabel' colspan='2'><hr></td>\n";
+//					echo "</tr>\n";
+//					echo "<tr>\n";
+//					echo "  <td align='center' class='datalabel' colspan='2'><a href='https://www.ascard.net/app/adm.php'>Campaign admin</a></td>\n";
+//					echo "</tr>\n";
 				}
 			?>
 		</table>

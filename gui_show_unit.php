@@ -69,7 +69,7 @@
 
 		$arr = explode('t | ', $unitname);
 		$unitname = $arr[1];
-		//echo "<script>console.log('SEARCHING: >>".$unitname."<<');</script>";
+		//echo "<script>console.log('SEARCHING: >>" . $unitname . "<<');</script>";
 
 		$dir = 'images/units_mul/';
 		$startChar = mb_substr($unitname, 0, 3); // use first 3 chars to list files to keep the result list as small as possible
@@ -528,7 +528,7 @@
 <div id='cover'></div>
 
 <script>
-	if (fadeOutDuration == 0) {
+	if (fadeOutDuration === 0) {
 		document.getElementById("cover").style.background = "none";
 		document.getElementById("cover").style.backgroundColor = "#444444";
 	} else {
