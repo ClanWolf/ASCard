@@ -10,39 +10,85 @@
 		}
 	}
 
-	$currentlyAvailableSupportPoints = 0;
-	$C3_SeasonId     = 1;
-	$C3_CurrentRound = -1;
-	$CW_FactionID    = 36; // Clan Wolf in C3 DB
-	$CJF_FactionID   = 32; // Clan Jade Falcon in C3 DB
+	$currentlyAvailableSupportPoints    = 0;
+	$C3_SeasonId                        = 1;
+	$C3_CurrentRound                    = -1;
+	$CW_FactionID                       = 36; // Clan Wolf in C3 DB
+	$CJF_FactionID                      = 32; // Clan Jade Falcon in C3 DB
 
-	$RepairCost_Light_Mech_Damaged    = -15;
-	$RepairCost_Light_Armor_Damaged   = -3;
-	$RepairCost_Light_Mech_Crippled   = -30;
-	$RepairCost_Light_Armor_Crippled  = -6;
-	$RepairCost_Light_Mech_Destroyed  = -45;
-	$RepairCost_Light_Armor_Destroyed = -9;
+	$VictoryPoints                      =  0;
+	$VictoryPointsCaptialWorld          =  0;
 
-	$RepairCost_Medium_Mech_Damaged    = -30;
-	$RepairCost_Medium_Armor_Damaged   = -6;
-	$RepairCost_Medium_Mech_Crippled   = -45;
-	$RepairCost_Medium_Armor_Crippled  = -15;
-	$RepairCost_Medium_Mech_Destroyed  = -60;
-	$RepairCost_Medium_Armor_Destroyed = -25;
+	$RepairCost_Light_Mech_Destroyed    = -0;
+	$RepairCost_Medium_Mech_Destroyed   = -0;
+	$RepairCost_Heavy_Mech_Destroyed    = -0;
+	$RepairCost_Assault_Mech_Destroyed  = -0;
+	$RepairCost_Light_Mech_Crippled     = -0;
+	$RepairCost_Medium_Mech_Crippled    = -0;
+	$RepairCost_Heavy_Mech_Crippled     = -0;
+	$RepairCost_Assault_Mech_Crippled   = -0;
+	$RepairCost_Light_Mech_Damaged      = -0;
+	$RepairCost_Medium_Mech_Damaged     = -0;
+	$RepairCost_Heavy_Mech_Damaged      = -0;
+	$RepairCost_Assault_Mech_Damaged    = -0;
 
-	$RepairCost_Heavy_Mech_Damaged    = -60;
-	$RepairCost_Heavy_Armor_Damaged   = -15;
-	$RepairCost_Heavy_Mech_Crippled   = -75;
-	$RepairCost_Heavy_Armor_Crippled  = -25;
-	$RepairCost_Heavy_Mech_Destroyed  = -80;
-	$RepairCost_Heavy_Armor_Destroyed = -40;
+	$RepairCost_Light_Armor_Destroyed   = -0;
+	$RepairCost_Medium_Armor_Destroyed  = -0;
+	$RepairCost_Heavy_Armor_Destroyed   = -0;
+	$RepairCost_Assault_Armor_Destroyed = -0;
+	$RepairCost_Light_Armor_Crippled    = -0;
+	$RepairCost_Medium_Armor_Crippled   = -0;
+	$RepairCost_Heavy_Armor_Crippled    = -0;
+	$RepairCost_Assault_Armor_Crippled  = -0;
+	$RepairCost_Light_Armor_Damaged     = -0;
+	$RepairCost_Medium_Armor_Damaged    = -0;
+	$RepairCost_Heavy_Armor_Damaged     = -0;
+	$RepairCost_Assault_Armor_Damaged   = -0;
 
-	$RepairCost_Assault_Mech_Damaged    = -80;
-	$RepairCost_Assault_Armor_Damaged   = -20;
-	$RepairCost_Assault_Mech_Crippled   = -100;
-	$RepairCost_Assault_Armor_Crippled  = -40;
-	$RepairCost_Assault_Mech_Destroyed  = -125;
-	$RepairCost_Assault_Armor_Destroyed = -75;
+	$PCP_Aux                            =  0;
+	$PCP_GGM                            =  0;
+	$PCP_GME                            =  0;
+
+	$selectCampaignVars = "SELECT * FROM c3_SCORE_REFERENCE WHERE SeasonId = ".$C3_SeasonId.";";
+	$result_selectCampaignVars = mysqli_query($conn, $selectCampaignVars);
+	if (mysqli_num_rows($result_selectCampaignVars) > 0) {
+		while($row78f = mysqli_fetch_assoc($result_selectCampaignVars)) {
+			$key = $row78f["Key"];
+			$value = $row78f["Value"];
+
+			if ($key === "VP")                { $VictoryPoints                      = $value; }
+			if ($key === "VP_CW")             { $VictoryPointsCaptialWorld          = $value; }
+
+			if ($key === "RC_BM_L_DESTROYED") { $RepairCost_Light_Mech_Destroyed    = $value; }
+			if ($key === "RC_BM_M_DESTROYED") { $RepairCost_Medium_Mech_Destroyed   = $value; }
+			if ($key === "RC_BM_H_DESTROYED") { $RepairCost_Heavy_Mech_Destroyed    = $value; }
+			if ($key === "RC_BM_A_DESTROYED") { $RepairCost_Assault_Mech_Destroyed  = $value; }
+			if ($key === "RC_BM_L_CRIPPLED")  { $RepairCost_Light_Mech_Crippled     = $value; }
+			if ($key === "RC_BM_M_CRIPPLED")  { $RepairCost_Medium_Mech_Crippled    = $value; }
+			if ($key === "RC_BM_H_CRIPPLED")  { $RepairCost_Heavy_Mech_Crippled     = $value; }
+			if ($key === "RC_BM_A_CRIPPLED")  { $RepairCost_Assault_Mech_Crippled   = $value; }
+			if ($key === "RC_BM_L_DAMAGED")   { $RepairCost_Light_Mech_Damaged      = $value; }
+			if ($key === "RC_BM_M_DAMAGED")   { $RepairCost_Medium_Mech_Damaged     = $value; }
+			if ($key === "RC_BM_H_DAMAGED")   { $RepairCost_Heavy_Mech_Damaged      = $value; }
+			if ($key === "RC_BM_A_DAMAGED")   { $RepairCost_Assault_Mech_Damaged    = $value; }
+			if ($key === "RC_CV_L_DESTROYED") { $RepairCost_Light_Armor_Destroyed   = $value; }
+			if ($key === "RC_CV_M_DESTROYED") { $RepairCost_Medium_Armor_Destroyed  = $value; }
+			if ($key === "RC_CV_H_DESTROYED") { $RepairCost_Heavy_Armor_Destroyed   = $value; }
+			if ($key === "RC_CV_A_DESTROYED") { $RepairCost_Assault_Armor_Destroyed = $value; }
+			if ($key === "RC_CV_L_CRIPPLED")  { $RepairCost_Light_Armor_Crippled    = $value; }
+			if ($key === "RC_CV_M_CRIPPLED")  { $RepairCost_Medium_Armor_Crippled   = $value; }
+			if ($key === "RC_CV_H_CRIPPLED")  { $RepairCost_Heavy_Armor_Crippled    = $value; }
+			if ($key === "RC_CV_A_CRIPPLED")  { $RepairCost_Assault_Armor_Crippled  = $value; }
+			if ($key === "RC_CV_L_DAMAGED")   { $RepairCost_Light_Armor_Damaged     = $value; }
+			if ($key === "RC_CV_M_DAMAGED")   { $RepairCost_Medium_Armor_Damaged    = $value; }
+			if ($key === "RC_CV_H_DAMAGED")   { $RepairCost_Heavy_Armor_Damaged     = $value; }
+			if ($key === "RC_CV_A_DAMAGED")   { $RepairCost_Assault_Armor_Damaged   = $value; }
+
+			if ($key === "PCP_AUX")           { $PCP_Aux                            = $value; }
+			if ($key === "PCP_GGM")           { $PCP_GGM                            = $value; }
+			if ($key === "PCP_GME")           { $PCP_GME                            = $value; }
+		}
+	}
 
 	$playerFactionId = -1;
 	if (isset($gid) && isset($pid)) {

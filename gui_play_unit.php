@@ -65,23 +65,23 @@
 		}
 	}
 
-	function textTruncate($text, $chars=25) {
-		if (strpos($text, " | ") !== false) {
-			$parts = explode(" | ", $text);
-			$text = $parts[1];
-		}
-
-		if (strlen($text) <= $chars) {
-			return $text;
-		}
-		$text = $text." ";
-        $textb = mb_convert_encoding($text, 'UTF-8', mb_list_encodings());
-		$textc = html_entity_decode($textb, ENT_QUOTES | ENT_HTML5, 'UTF-8');
-		$text = mb_substr($textc,0,$chars,'ASCII');
-		$text = $text."...";
-
-		return $text;
-	}
+//	function textTruncate($text, $chars=25) {
+//		if (strpos($text, " | ") !== false) {
+//			$parts = explode(" | ", $text);
+//			$text = $parts[1];
+//		}
+//
+//		if (strlen($text) <= $chars) {
+//			return $text;
+//		}
+//		$text = $text." ";
+//        $textb = mb_convert_encoding($text, 'UTF-8', mb_list_encodings());
+//		$textc = html_entity_decode($textb, ENT_QUOTES | ENT_HTML5, 'UTF-8');
+//		$text = mb_substr($textc,0,$chars,'ASCII');
+//		$text = $text."...";
+//
+//		return $text;
+//	}
 
 	function textShorten($text) {
 		if (strpos($text, " | ") !== false) {
@@ -269,14 +269,14 @@
 				$("#gamemenu").fadeOut(300, "linear", function() {
 					document.getElementById("gamemenu").style.visibility = "hidden";
 					document.getElementById("gamemenu").style.display = "none";
-					document.getElementById("gamemenubutton").innerHTML = "<i style='color:#eee;' class='fa-solid fa-angles-down'></i>";
+					document.getElementById("gamemenubutton").innerHTML = "<i style='color:#eee;' class='fa-solid fa-angles-down'></i><br><span style='font-size:14px;'>&nbsp;&nbsp;&nbsp;G"+gameid+"&nbsp;&nbsp;R"+currentRound+"&nbsp;&nbsp;&nbsp;</span>";
 				});
 			} else {
 				playTapSound();
 				document.getElementById("gamemenu").style.visibility = "visible";
 				$("#gamemenu").fadeIn(300, "linear", function() {
 					document.getElementById("gamemenu").style.display = "block";
-					document.getElementById("gamemenubutton").innerHTML = "<i style='color:#eee;' class='fa-solid fa-angles-up'></i>";
+					document.getElementById("gamemenubutton").innerHTML = "<i style='color:#eee;' class='fa-solid fa-angles-up'></i><br><span style='font-size:14px;'>&nbsp;&nbsp;&nbsp;G"+gameid+"&nbsp;&nbsp;R"+currentRound+"&nbsp;&nbsp;&nbsp;</span>";
 				});
 
 				// Synchronize css glowing animations
@@ -596,10 +596,7 @@
 	<table style="width:100%;height:60px;border:none;border-collapse:collapse;background:rgba(50,50,50,1.0);" cellspacing="0" cellpadding="0">
 		<tr>
 			<td nowrap onclick="location.href='./index.html'" width="60px" style="width:100px;background:rgba(50,50,50,1.0);text-align:center;vertical-align:middle;">
-				<div><a style="color:#eee;" href="./index.html">&nbsp;&nbsp;&nbsp;<i class="fa fa-arrow-left" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;</a></div>
-			</td>
-			<td nowrap onclick="location.href='./gui_edit_game.php'" style="width:100px;background:rgba(56,87,26,1.0);">
-					<div style='vertical-align:middle;font-size:28px;color:#eee;'>&nbsp;&nbsp;&nbsp;<?php echo $gid ?>&nbsp;/&nbsp;<?php echo $CURRENTROUND ?>&nbsp;&nbsp;&nbsp;</div>
+				<div><a style="color:#eee;" href="./index.html">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class='fa-solid fa-table-list'></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></div>
 			</td>
 <?php
 	$maxNumberOfTabs = 5;
@@ -746,11 +743,11 @@
 		//$memodel = $array_UNIT_MODEL[$i4];
 		$memodel = $array_UNIT_NAME_CLAN[$i4];
 
-		$maxLength = 100;
-		if (strlen($memodel) > $maxLength) {
-			$memodel = substr($memodel, 0, $maxLength - 3);
-			$memodel = $memodel . "...";
-		}
+//		$maxLength = 100;
+//		if (strlen($memodel) > $maxLength) {
+//			$memodel = substr($memodel, 0, $maxLength - 3);
+//			$memodel = $memodel . "...";
+//		}
 
 		if ($array_ACTIVE_BID[$i4] == "0") {
 			$memodel = "--- BIDDEN AWAY ---";
@@ -808,11 +805,11 @@
 
 	if ($playable) {
 		echo "			<td nowrap onclick='javascript:showGameMenu();' width='60px' style='width:60px;min-width:60px;background:rgba(56,87,26,1.0);text-align:center;vertical-align:middle;'>\n";
-		echo "				<div id='gamemenubutton'><i style='color:#eee;' class='fa-solid fa-angles-down'></i></div>\n";
+		echo "				<div id='gamemenubutton' style='vertical-align:middle;font-size:22px;color:#eee;'><i style='color:#eee;' class='fa-solid fa-angles-down'></i><br><span style='font-size:14px;'>&nbsp;&nbsp;&nbsp;G".$gid."&nbsp;&nbsp;R".$CURRENTROUND."&nbsp;&nbsp;&nbsp;</span></div>\n";
 		echo "			</td>\n";
 	} else {
 		echo "			<td nowrap width='60px' style='width:60px;min-width:60px;background:rgba(56,87,26,1.0);text-align:center;vertical-align:middle;'>\n";
-		echo "				<div id='gamemenubutton'><i style='color:#eee;' class='fa-regular fa-circle'></i></div>\n";
+		echo "				<div id='gamemenubutton' style='vertical-align:middle;font-size:22px;color:#eee;'><i style='color:#eee;' class='fa-regular fa-circle'></i><br><span style='font-size:14px;'>&nbsp;&nbsp;&nbsp;G".$gid."&nbsp;&nbsp;R".$CURRENTROUND."&nbsp;&nbsp;&nbsp;</span></div>\n";
 		echo "			</td>\n";
 	}
 ?>

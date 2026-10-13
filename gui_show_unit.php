@@ -225,32 +225,32 @@
 			playTCCloseSound();
 			document.getElementById("spaInfoContainer").style.visibility = "hidden";
 		}
-		function showGameMenu() {
-			if (document.getElementById("gamemenu").style.visibility == "visible") {
-				playTCCloseSound();
-				$("#gamemenu").fadeOut(300, "linear", function() {
-					document.getElementById("gamemenu").style.visibility = "hidden";
-					document.getElementById("gamemenu").style.display = "none";
-					document.getElementById("gamemenubutton").innerHTML = "<i style='color:#eee;' class='fa-solid fa-angles-down'></i>";
-				});
-			} else {
-				playTapSound();
-				document.getElementById("gamemenu").style.visibility = "visible";
-				$("#gamemenu").fadeIn(300, "linear", function() {
-					document.getElementById("gamemenu").style.display = "block";
-					document.getElementById("gamemenubutton").innerHTML = "<i style='color:#eee;' class='fa-solid fa-angles-up'></i>";
-				});
-
-				// Synchronize css glowing animations
-				let anims = document.getAnimations()
-				for(let i = 0; i < anims.length; i++) {
-					if (i == 0) {
-						pulseStart = anims[i].currentTime;
-					}
-					anims[i].currentTime = pulseStart;
-				}
-			}
-		}
+//		function showGameMenu() {
+//			if (document.getElementById("gamemenu").style.visibility == "visible") {
+//				playTCCloseSound();
+//				$("#gamemenu").fadeOut(300, "linear", function() {
+//					document.getElementById("gamemenu").style.visibility = "hidden";
+//					document.getElementById("gamemenu").style.display = "none";
+//					document.getElementById("gamemenubutton").innerHTML = "<i style='color:#eee;' class='fa-solid fa-angles-down'></i>";
+//				});
+//			} else {
+//				playTapSound();
+//				document.getElementById("gamemenu").style.visibility = "visible";
+//				$("#gamemenu").fadeIn(300, "linear", function() {
+//					document.getElementById("gamemenu").style.display = "block";
+//					document.getElementById("gamemenubutton").innerHTML = "<i style='color:#eee;' class='fa-solid fa-angles-up'></i>";
+//				});
+//
+//				// Synchronize css glowing animations
+//				let anims = document.getAnimations()
+//				for(let i = 0; i < anims.length; i++) {
+//					if (i == 0) {
+//						pulseStart = anims[i].currentTime;
+//					}
+//					anims[i].currentTime = pulseStart;
+//				}
+//			}
+//		}
 
 		// Reload the polling iFrame every 2 seconds
 		(function(){
@@ -543,7 +543,7 @@
 											<div><a style="color:#eee;" href="./index.html">&nbsp;&nbsp;&nbsp;<i class="fa fa-arrow-left" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;</a></div>
 										</td>
 										<td nowrap onclick="location.href='./gui_edit_game.php'" style="width:100px;background:rgba(56,87,26,1.0);">
-											<div style='vertical-align:middle;font-size:28px;color:#eee;'>&nbsp;&nbsp;&nbsp;<?php echo $gid ?>&nbsp;/&nbsp;<?php echo $CURRENTROUND ?>&nbsp;&nbsp;&nbsp;</div>
+											<div style='vertical-align:middle;font-size:28px;color:#eee;'>&nbsp;&nbsp;&nbsp;&nbsp;<i class='fa-solid fa-folder'></i>&nbsp;&nbsp;<span style='color:#eee;'>G<?php echo $gid ?>&nbsp;R<?php echo $CURRENTROUND ?></span>&nbsp;&nbsp;&nbsp;</div>
 										</td>
 							<?php
 								$maxNumberOfTabs = 5;
