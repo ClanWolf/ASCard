@@ -378,7 +378,7 @@ function setCircles(h, heat_PREP_ENGINEHIT_value, a, s, e, fc, mp, w, e_cv, fc_c
 	tc_heat = h;
 	if (unitType == "CV") {
 		tc_firecontrolDamage = fc_cv * 2;
-	} else if (unitType == "BM" || unitType == "BA") {
+	} else if (unitType == "BM" || unitType == "BA" || unitType == "CI") {
 		tc_firecontrolDamage = fc * 2;
 	}
 
@@ -1831,15 +1831,15 @@ function updateOverAllToHitValue(skipTap) {
 	var result = 0;
 	tc_skill = parseInt(document.getElementById("skillfield").innerText);
 
-	//console.log("tc_enemyTMM          : " + tc_enemyTMM);
-	//console.log("tc_amm               : " + tc_amm);
-	//console.log("tc_skill             : " + tc_skill);
-	//console.log("tc_rangeValue        : " + tc_rangeValue);
-	//console.log("tc_partialCover      : " + tc_partialCover);
-	//console.log("tc_wood              : " + tc_wood);
-	//console.log("tc_heat              : " + tc_heat);
-	//console.log("tc_other             : " + tc_other);
-	//console.log("tc_firecontrolDamage : " + tc_firecontrolDamage);
+	// console.log("tc_enemyTMM          : " + tc_enemyTMM);
+	// console.log("tc_amm               : " + tc_amm);
+	// console.log("tc_skill             : " + tc_skill);
+	// console.log("tc_rangeValue        : " + tc_rangeValue);
+	// console.log("tc_partialCover      : " + tc_partialCover);
+	// console.log("tc_wood              : " + tc_wood);
+	// console.log("tc_heat              : " + tc_heat);
+	// console.log("tc_other             : " + tc_other);
+	// console.log("tc_firecontrolDamage : " + tc_firecontrolDamage);
 
 	result += tc_enemyTMM;
 	result += tc_amm;

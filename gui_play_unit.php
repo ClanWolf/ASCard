@@ -103,7 +103,7 @@
 	}
 
 	function getMULImageByName($unitname) {
-		$image = "images/units/Generic_Mech.gif";
+		$image = "images/units_mul/_empty.png";
 
 		$arr = explode('t | ', $unitname);
 		$unitname = $arr[1];
@@ -134,13 +134,15 @@
 			$unitnametrimmed_g = str_replace('[BM]', '', trim($unitnametrimmed_f));
 			$unitnametrimmed_h = str_replace('Rec.', 'Reconnaissance', trim($unitnametrimmed_g));
 			$unitnametrimmed_i = str_replace('Veh.', 'Vehicle', trim($unitnametrimmed_h));
-			$unitnametrimmed = strtolower($unitnametrimmed_i);
+			$unitnametrimmed_j = str_replace('[CI]', '', trim($unitnametrimmed_i));
+			$unitnametrimmed = strtolower($unitnametrimmed_j);
 
 			//echo "<script>console.log('SEARCHING: >>" . $imagenametrimmed . " ? " . $unitnametrimmed . "<<');</script>";
 
 			if (strpos($imagenametrimmed,$unitnametrimmed) !== false) {
-				//echo "<script>console.log('FOUND: >>" . $imagenametrimmed . " ? " . $unitnametrimmed . "<<');</script>";
 				$image = str_replace(' ', '%20', trim($img));
+				//echo "<script>console.log('FOUND: >>" . $imagenametrimmed . " ? " . $unitnametrimmed . "<<');</script>";
+				//echo "<script>console.log('".$image."');</script>";
 				break;
 			}
 		}
@@ -205,6 +207,7 @@
 	<script type="text/javascript" src="./scripts/functions.js"></script>
 	<script type="text/javascript" src="./scripts/functions_AF.js"></script>
 	<script type="text/javascript" src="./scripts/functions_BA.js"></script>
+	<script type="text/javascript" src="./scripts/functions_CI.js"></script>
 	<script type="text/javascript" src="./scripts/functions_BM.js"></script>
 	<script type="text/javascript" src="./scripts/functions_CV.js"></script>
 	<script type="text/javascript" src="./scripts/specialunitabilities.js"></script>
@@ -714,7 +717,7 @@
 		$mvmt = $array_MVMT[$i4];
 		$wpnsfired = $array_WPNSFIRED[$i4];
 
-		if ($array_TP[$i4] == "BA") {
+		if ($array_TP[$i4] == "BA" || $array_TP[$i4] == "CI") {
 			$heatimage[$i4] = "<img id='heatimage_".$i4."' src='./images/temp_".$array_HT[$i4].".png' height='42px' width='0px'>";
 		} else {
 			$heatimage[$i4] = "<img id='heatimage_".$i4."' src='./images/temp_".$array_HT[$i4].".png' height='42px'>";
@@ -1225,7 +1228,7 @@ if ($showDistancesHexes == 1) {
 						<div class="dataarea_divider_horizontal"></div>
 					</div>
 <?php
-	if ($array_TP[$chosenUnitIndex] == "BA" || $array_TP[$chosenUnitIndex] == "CV") {
+	if ($array_TP[$chosenUnitIndex] == "BA" || $array_TP[$chosenUnitIndex] == "CV" || $array_TP[$chosenUnitIndex] == "CI") {
 		// Do not show the heat block for all Battle Armor and combat vehicle units
 		echo "					<div class='dataarea_content' style='display:none;'>\r\n";
 	} else {
@@ -1447,7 +1450,7 @@ if ($showDistancesHexes == 1) {
 					</table>
 				</div>
 <?php
-	if ($array_TP[$chosenUnitIndex] == "BA" || $array_TP[$chosenUnitIndex] == "CV") {
+	if ($array_TP[$chosenUnitIndex] == "BA" || $array_TP[$chosenUnitIndex] == "CV" || $array_TP[$chosenUnitIndex] == "CI") {
 		// Do not show the normal critical block for all Battle Armor and combat vehicle units
 		echo "				<div class='dataarea' style='display:none;'>\r\n";
 	} else {
@@ -1735,16 +1738,16 @@ if ($showDistancesHexes == 1) {
 			<tr>
 				<td align="right" valign="bottom">
 <?php
-	if ($array_TP[$chosenUnitIndex] != "BA") {
+	if ($array_TP[$chosenUnitIndex] != "BA" || $array_TP[$chosenUnitIndex] == "CI") {
 		echo "					<div id='criticalhit'>CRIT:<br>-</div>\r\n";
 	} else {
 		echo "					<div id='criticalhit' style='display:none;'>CRIT:<br>-</div>\r\n";
 	}
 
-		echo "					<div id='dice' valign='middle' align='center'>\r\n";
-		echo "						<img id='die1' src='./images/dice/d6_0.png' width='65px' height='65px'>\r\n";
-		echo "						<img id='die2' src='./images/dice/d6_0.png' width='65px' height='65px'>\r\n";
-		echo "					</div>\r\n";
+	echo "					<div id='dice' valign='middle' align='center'>\r\n";
+	echo "						<img id='die1' src='./images/dice/d6_0.png' width='65px' height='65px'>\r\n";
+	echo "						<img id='die2' src='./images/dice/d6_0.png' width='65px' height='65px'>\r\n";
+	echo "					</div>\r\n";
 
 	if ($array_TP[$chosenUnitIndex] == "CV") {
 		echo "					<br><div id='motivehit'>MOTV:<br>-</div>\r\n";

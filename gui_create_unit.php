@@ -46,11 +46,13 @@
 		return $data;
 	}
 
-	function getUnitImageByName($unitname, $unittype) { // BM, BA=BattleArmor, CV=CombatVehicle
+	function getUnitImageByName($unitname, $unittype) { // BM, BA=BattleArmor, CV=CombatVehicle, CI=ConventionalInfantry
 		if ($unittype == "CV") {
 			$image = "images/units/Generic_Tank.gif";
 		} else if ($unittype == "BA") {
 			$image = "images/units/Generic_Battlearmor.gif";
+		} else if ($unittype == "CI") {
+			$image = "images/units/Generic_Infantry.gif";
 		} else {
 			$image = "images/units/Generic_Mech.gif";
 		}
@@ -163,6 +165,10 @@
 			$MODEL = str_replace("Reconnaissance", "Rec.", $MODEL);
             $MODEL = str_replace(" [BA]", "", $MODEL);
 			$UNITSTATUSIMAGE = "images/DD_BA_01.png";
+		} else if($TP == "CI") { // CI
+			$MODEL = str_replace("Reconnaissance", "Rec.", $MODEL);
+			$MODEL = str_replace(" [CI]", "", $MODEL);
+			$UNITSTATUSIMAGE = "images/DD_CI_01.png";
 		} else if($TP == "BM") { // BM
 			$MODEL = str_replace("Reconnaissance", "Rec.", $MODEL);
             $MODEL = str_replace(" [BM]", "", $MODEL);
@@ -179,10 +185,11 @@
 		} else {
 			// Anything else
 			$MODEL = str_replace("Reconnaissance", "Rec.", $MODEL);
-            $MODEL = str_replace(" [BA]", "", $MODEL);
-            $MODEL = str_replace(" [BM]", "", $MODEL);
-            $MODEL = str_replace(" [CV]", "", $MODEL);
-            $MODEL = str_replace(" [AF]", "", $MODEL);
+			$MODEL = str_replace(" [CI]", "", $MODEL);
+			$MODEL = str_replace(" [BA]", "", $MODEL);
+			$MODEL = str_replace(" [BM]", "", $MODEL);
+			$MODEL = str_replace(" [CV]", "", $MODEL);
+			$MODEL = str_replace(" [AF]", "", $MODEL);
 			$UNITSTATUSIMAGE = "images/DD_BM_01.png"; // Find another image here
 		}
 
@@ -720,13 +727,14 @@
                 </td>
 				<td width="20%" nowrap class="datalabel" style='text-align:left;' colspan='1'>
 					<select required style='width:100%;' name='unittype' id='unittype' size='1'>
+						<option value="CI">CI</option>
 						<option value="BA">BA</option>
 						<option value="BM" selected="selected">BM</option>
 						<option value="CV">CV</option>
 						<!-- <option value="AF">AF</option> -->
 					</select>
 				</td>
-				<td width="5%" nowrap id='weightLabel'class="datalabel" style='text-align:right;' colspan='1'>
+				<td width="5%" nowrap id='weightLabel' class="datalabel" style='text-align:right;' colspan='1'>
                     Weight:
                 </td>
 				<td width="20%" id='weightBlock' nowrap class="datalabel" style='text-align:left;' colspan='1'>
@@ -958,7 +966,7 @@
 		document.getElementById("tech").setAttribute("onchange", "fetchUnitList();");
 		document.getElementById("unittype").setAttribute("onchange", "fetchUnitList();");
 		document.getElementById("tonnage").setAttribute("onchange", "fetchUnitList();");
-		document.getElementById("NameFilter").setAttribute("onchange", "fetchUnitList();");
+		document.getElementById("NameFilter").setAttribute("oninput", "fetchUnitList();");
 		document.getElementById("CreateUnitEra").setAttribute("onchange", "fetchUnitList();");
 
 		var finalPilotName = "";

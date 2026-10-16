@@ -12,6 +12,7 @@ var unitNameProposal_is = "";
 var unitVariantProposal = "";
 
 var corsproxyprefix = corsproxyprefix5;
+var lastSearchedFilter = "";
 
 function getUnitList(filter, tech, minTon, maxTon, category, unittypeString) {
 
@@ -68,7 +69,7 @@ function getUnitList(filter, tech, minTon, maxTon, category, unittypeString) {
 		} else {
 			cache_url = cache_url + maxTon;
 		}
-		if (unittypeString != 'BA') {
+		if (unittypeString != 'BA' && unittypeString != 'CI') {
 			cache_url = cache_url + '_' + unittypeString;
 		}
 		cache_url = cache_url + '.json';
@@ -120,6 +121,9 @@ function getUnitList(filter, tech, minTon, maxTon, category, unittypeString) {
 
 					var unitValidInGivenEra = false;
 					switch (eraIdFilter) {
+						case "0":
+							unitValidInGivenEra = true;
+							break;
 						case "9":                        // 2005-2570: AGE OF WAR
 							if (unitIntroducedInYear >= 2005 && unitIntroducedInYear <= 2570) {
 								unitValidInGivenEra = true;
@@ -198,7 +202,7 @@ function getUnitList(filter, tech, minTon, maxTon, category, unittypeString) {
 
 			if (optionList === "<option><<< Select unit >>></option>") {
 				// The unit in the filter did not return any matches. Search other brackets!
-				console.log(filter + " has not returned any matches in category " + category + "!");
+				//console.log(filter + " has not returned any matches in category " + category + "!");
 
 				(async () => {
 					const response = await fetch("https://www.ascard.net/app/cache/mul/catalog.csv");
@@ -214,37 +218,37 @@ function getUnitList(filter, tech, minTon, maxTon, category, unittypeString) {
 								let detectedUnitSize = line[3];
 								let detectedUnitTech = line[4];
 
-								console.log("Found matching entry in catalog: " + lines[i]);
-								console.log("Type: " + detectedUnitType);
-								console.log("Size: " + detectedUnitSize);
-								console.log("Tech: " + detectedUnitTech);
+								//console.log("Found matching entry in catalog: " + lines[i]);
+								//console.log("Type: " + detectedUnitType);
+								//console.log("Size: " + detectedUnitSize);
+								//console.log("Tech: " + detectedUnitTech);
 
 								// Set filter to new values
 								if (detectedUnitType !== "" && detectedUnitSize !== "" && detectedUnitTech !== "") {
-									if (detectedUnitTech !== 1 && detectedUnitTech !== 2) {
-										detectedUnitTech = 1;
+									if (detectedUnitTech !== "1" && detectedUnitTech !== "2") {
+										detectedUnitTech = "1";
 									}
 									// All values are set, we can set the filters
-									console.log("Break search, set filter values.");
+									//console.log("Break search, set filter values.");
 
 									document.getElementById("tech").setAttribute("onchange", "");
 									document.getElementById("unittype").setAttribute("onchange", "");
 									document.getElementById("tonnage").setAttribute("onchange", "");
-									document.getElementById("NameFilter").setAttribute("onchange", "");
+									document.getElementById("NameFilter").setAttribute("oninput", "");
 									document.getElementById("CreateUnitEra").setAttribute("onchange", "");
 
-									document.getElementById("tech").value = detectedUnitTech;
-									document.getElementById("CreateUnitEra").value = 0;
-									document.getElementById("unittype").value = detectedUnitType;
-									if (detectedUnitSize === 1) {
+									document.getElementById("tech").value = String(detectedUnitTech);
+									document.getElementById("CreateUnitEra").value = String(0);
+									document.getElementById("unittype").value = String(detectedUnitType);
+									if (detectedUnitSize === "1") {
 										document.getElementById("tonnage").value = "LIGHT";
-									} else if (detectedUnitSize === 2) {
+									} else if (detectedUnitSize === "2") {
 										document.getElementById("tonnage").value = "MEDIUM";
-									} else if (detectedUnitSize === 3) {
+									} else if (detectedUnitSize === "3") {
 										document.getElementById("tonnage").value = "HEAVY";
-									} else if (detectedUnitSize === 4) {
+									} else if (detectedUnitSize === "4") {
 										document.getElementById("tonnage").value = "ASSAULT";
-									} else if (detectedUnitSize === 5) {
+									} else if (detectedUnitSize === "5") {
 										document.getElementById("tonnage").value = "SUPERHEAVY";
 									}
 
@@ -256,14 +260,17 @@ function getUnitList(filter, tech, minTon, maxTon, category, unittypeString) {
 									document.getElementById("tech").setAttribute("onchange", "fetchUnitList();");
 									document.getElementById("unittype").setAttribute("onchange", "fetchUnitList();");
 									document.getElementById("tonnage").setAttribute("onchange", "fetchUnitList();");
-									document.getElementById("NameFilter").setAttribute("onchange", "fetchUnitList();");
+									document.getElementById("NameFilter").setAttribute("oninput", "fetchUnitList();");
 									document.getElementById("CreateUnitEra").setAttribute("onchange", "fetchUnitList();");
 
-									fetchUnitList();
+									if (filter !== lastSearchedFilter) {
+										lastSearchedFilter = filter;
+										fetchUnitList();
+									}
 
 									break;
 								} else {
-									console.log("Not viable unit found, continue search.");
+									//console.log("Not viable unit found, continue search.");
 								}
 							}
 						}
@@ -272,13 +279,14 @@ function getUnitList(filter, tech, minTon, maxTon, category, unittypeString) {
 				})();
 			} else {
 				// Units where found with this filter
-				console.log(filter + " matched!");
+				//console.log(filter + " matched!");
 			}
 		} else {
 			document.getElementById("NameFilter").style.color="#f00";
 			document.getElementById("tonnage").style.color="#fff";
 			document.getElementById("tech").style.color="#fff";
 			document.getElementById("unittype").style.color="#fff";
+			document.getElementById("CreateUnitEra").style.color="#fff";
 		}
 
 		document.getElementById("units").innerHTML = optionList;
@@ -459,7 +467,7 @@ function fetchUnitList() {
 		tonnagevalue = '';
 	}
 
-	if (unittypevalue == "BA") {
+	if (unittypevalue == "BA" || unittypevalue == "CI" ) {
 		tonnage.disabled = true;
 		weightBlock.style.visibility='hidden';
 		weightLabel.style.visibility='hidden';
@@ -476,6 +484,8 @@ function fetchUnitList() {
 
 	if (unittypevalue == "BA") {
 		getUnitList(filter, techid, 0, 2, 'BA', unittypevalue);
+	} else if (unittypevalue == "CI") {
+		getUnitList(filter, techid, 0, 1, 'CI', unittypevalue);
 	} else if (tonnagevalue == 'LIGHT') {
 		getUnitList(filter, techid, 20, 35, 'LIGHT', unittypevalue);
 	} else if (tonnagevalue == 'MEDIUM') {
