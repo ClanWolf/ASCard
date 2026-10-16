@@ -131,5 +131,8 @@
 				}
 			}
 		}
+		if ($currentlyAvailableSupportPoints < 0) {
+			$currentlyAvailableSupportPoints = 0;
+		}
 	}
 ?>

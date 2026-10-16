@@ -272,14 +272,14 @@
 				$("#gamemenu").fadeOut(300, "linear", function() {
 					document.getElementById("gamemenu").style.visibility = "hidden";
 					document.getElementById("gamemenu").style.display = "none";
-					document.getElementById("gamemenubutton").innerHTML = "<i style='color:#eee;' class='fa-solid fa-angles-down'></i><br><span style='font-size:14px;'>&nbsp;&nbsp;&nbsp;G"+gameid+"&nbsp;&nbsp;R"+currentRound+"&nbsp;&nbsp;&nbsp;</span>";
+					document.getElementById("gamemenubutton").innerHTML = "<span style='font-size:14px;'><i style='color:#eee;font-size:14px;' class='fa-solid fa-angles-down' style='font-size:14px;'></i></span><br><span style='font-size:20px;'>&nbsp;&nbsp;&nbsp;G"+gameid+"&nbsp;&nbsp;R"+currentRound+"&nbsp;&nbsp;&nbsp;</span>";
 				});
 			} else {
 				playTapSound();
 				document.getElementById("gamemenu").style.visibility = "visible";
 				$("#gamemenu").fadeIn(300, "linear", function() {
 					document.getElementById("gamemenu").style.display = "block";
-					document.getElementById("gamemenubutton").innerHTML = "<i style='color:#eee;' class='fa-solid fa-angles-up'></i><br><span style='font-size:14px;'>&nbsp;&nbsp;&nbsp;G"+gameid+"&nbsp;&nbsp;R"+currentRound+"&nbsp;&nbsp;&nbsp;</span>";
+					document.getElementById("gamemenubutton").innerHTML = "<span style='font-size:14px;'><i style='color:#eee;font-size:14px;' class='fa-solid fa-angles-up' style='font-size:14px;'></i></span><br><span style='font-size:20px;'>&nbsp;&nbsp;&nbsp;G"+gameid+"&nbsp;&nbsp;R"+currentRound+"&nbsp;&nbsp;&nbsp;</span>";
 				});
 
 				// Synchronize css glowing animations
@@ -818,11 +818,11 @@
 
 	if ($playable) {
 		echo "			<td nowrap onclick='javascript:showGameMenu();' width='60px' style='width:60px;min-width:60px;background:rgba(56,87,26,1.0);text-align:center;vertical-align:middle;'>\n";
-		echo "				<div id='gamemenubutton' style='vertical-align:middle;font-size:22px;color:#eee;'><i style='color:#eee;' class='fa-solid fa-angles-down'></i><br><span style='font-size:14px;'>&nbsp;&nbsp;&nbsp;G".$gid."&nbsp;&nbsp;R".$CURRENTROUND."&nbsp;&nbsp;&nbsp;</span></div>\n";
+		echo "				<div id='gamemenubutton' style='vertical-align:middle;font-size:10px;color:#eee;'><span style='font-size:14px;'><i style='color:#eee;font-size:14px;' class='fa-solid fa-angles-down' style='font-size:14px;'></i></span><br><span style='font-size:20px;'>&nbsp;&nbsp;&nbsp;G".$gid."&nbsp;&nbsp;R".$CURRENTROUND."&nbsp;&nbsp;&nbsp;</span></div>\n";
 		echo "			</td>\n";
 	} else {
 		echo "			<td nowrap width='60px' style='width:60px;min-width:60px;background:rgba(56,87,26,1.0);text-align:center;vertical-align:middle;'>\n";
-		echo "				<div id='gamemenubutton' style='vertical-align:middle;font-size:22px;color:#eee;'><i style='color:#eee;' class='fa-regular fa-circle'></i><br><span style='font-size:14px;'>&nbsp;&nbsp;&nbsp;G".$gid."&nbsp;&nbsp;R".$CURRENTROUND."&nbsp;&nbsp;&nbsp;</span></div>\n";
+		echo "				<div id='gamemenubutton' style='vertical-align:middle;font-size:10px;color:#eee;'><span style='font-size:14px;'><i style='color:#eee;font-size:14px;' class='fa-regular fa-circle' style='font-size:14px;'></i></span><br><span style='font-size:20px;'>&nbsp;&nbsp;&nbsp;G".$gid."&nbsp;&nbsp;R".$CURRENTROUND."&nbsp;&nbsp;&nbsp;</span></div>\n";
 		echo "			</td>\n";
 	}
 ?>
