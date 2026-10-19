@@ -26,15 +26,15 @@
 		exit;
 	}
 
-	//$pid    = filter_var($_SESSION['playerid'], FILTER_VALIDATE_INT);
-	$pid    = isset($_SESSION["playerid"]) ? filter_var($_SESSION["playerid"], FILTER_VALIDATE_INT) : "not found";
-	$gid    = filter_var($_SESSION['gameid'], FILTER_VALIDATE_INT);
-	$hgid   = filter_var($_SESSION['hostedgameid'], FILTER_VALIDATE_INT);
-	$pimage = htmlspecialchars($_SESSION['playerimage'], ENT_NOQUOTES);
+	//$pid              = filter_var($_SESSION['playerid'], FILTER_VALIDATE_INT);
+	$pid              = isset($_SESSION["playerid"]) ? filter_var($_SESSION["playerid"], FILTER_VALIDATE_INT) : "not found";
+	$gid              = filter_var($_SESSION['gameid'], FILTER_VALIDATE_INT);
+	$hgid             = filter_var($_SESSION['hostedgameid'], FILTER_VALIDATE_INT);
+	$pimage           = htmlspecialchars($_SESSION['playerimage'], ENT_NOQUOTES);
 	$fadeOutDuration  = isset($_GET["fod"]) ? filter_var($_GET["fod"], FILTER_VALIDATE_INT) : 150;
 	$scrollToView     = isset($_GET["stv"]) ? filter_var($_GET["stv"], FILTER_VALIDATE_INT) : 0;
-	$isAdmin    = filter_var($_SESSION['isAdmin'], FILTER_VALIDATE_BOOLEAN);
-	$isGodAdmin = filter_var($_SESSION['isGodAdmin'], FILTER_VALIDATE_BOOLEAN);
+	$isAdmin          = filter_var($_SESSION['isAdmin'], FILTER_VALIDATE_BOOLEAN);
+	$isGodAdmin       = filter_var($_SESSION['isGodAdmin'], FILTER_VALIDATE_BOOLEAN);
 
 	require('./db_getvars.php');
 
@@ -148,6 +148,30 @@
 		}
 		return $image;
 	}
+
+	// Check formation and unit data early to check if unit is visible
+	if (!isset($_GET["formationid"])) {
+		echo "<meta http-equiv='refresh' content='0;url=./gui_select_unit.php'> ";
+		header("Location: ./gui_select_unit.php");
+	}
+	$formationid = filter_var($_GET["formationid"], FILTER_VALIDATE_INT);
+
+	if (empty($formationid)) {
+		echo "<meta http-equiv='refresh' content='0;url=./gui_select_unit.php'> ";
+		header("Location: ./gui_select_unit.php");
+	}
+	if (isset($_GET["chosenunit"])) {
+		$chosenUnitIndex = filter_var($_GET["chosenunit"], FILTER_VALIDATE_INT);
+		if (empty($chosenUnitIndex)) {
+			$chosenUnitIndex = 1;
+		}
+	} else {
+		$chosenUnitIndex = 1;
+	}
+
+	// Store latest unit opened
+	$latestUnitUrl = basename($_SERVER['REQUEST_URI']);
+	require('./db_getdata.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -226,6 +250,81 @@
 	</style>
 </head>
 
+<?php
+	// This needs to be after functions.js has been loaded!
+	// Checking if the unit is visible or not to
+	// maybe reload with the correct startindex
+	$maxNumberOfTabs = 5;
+	$startIndex = intval($array_PLAYER_FORMATION_STARTINDS[$formationid]);
+	$showRightArrow = false;
+
+	$activeUnitsCount = 0;
+	$visibleUnitsCount = 0;
+	$unitIsVisible = false;
+	$unitOutLeft = false;
+	$unitOutRight = false;
+	$size = sizeof($array_UNIT_MODEL);
+
+	for ($i11 = 1; $i11 <= sizeof($array_UNIT_MODEL); $i11++) {
+		if ($array_ACTIVE_BID[$i11] == "0") {
+			$size = $size - 1;
+		} else {
+			$activeUnitsCount++;
+
+			if ($i11 < $startIndex) {
+				// not yet visible
+				if ($i11 == $chosenUnitIndex) {
+					$unitOutLeft = true;
+				}
+			} else if ($i11 >= $startIndex) {
+				$visibleUnitsCount++;
+				// potentially visible
+				if ($i11 == $chosenUnitIndex) {
+					// This is the currently chosen unit
+					if ($visibleUnitsCount <= $maxNumberOfTabs) {
+						// Unit visible
+						$unitIsVisible = true;
+					} else {
+						$unitIsVisible = false;
+						$unitOutRight = true;
+					}
+				}
+			}
+		}
+	}
+
+	$moveLeftToMakeUnitVisible = $startIndex - $chosenUnitIndex;
+	$moveRightToMakeUnitVisible = $chosenUnitIndex - ($startIndex + $maxNumberOfTabs) + 1;
+
+	//echo "<script>console.log('--------');</script>\n";
+	//echo "<script>console.log('Current start index: ".$startIndex."');</script>\n";
+	if (!$unitIsVisible) {
+		if ($unitOutLeft) {
+			if ($scrollToView == 1) {
+				$startIndex = $startIndex - $moveLeftToMakeUnitVisible;
+				$unitIsVisible = true;
+				$unitOutLeft = false;
+				$unitOutRight = false;
+				//echo "<script>console.log('Shift LEFT to make visible by: ".$moveLeftToMakeUnitVisible." / ".$scrollToView."');</script>";
+				echo "<script>updateFormationStartIndex(".$formationid.",".$startIndex.",\"none\");</script>";
+				exit(0);
+			}
+		} else if ($unitOutRight) {
+			if ($scrollToView == 1) {
+				$startIndex = $startIndex + $moveRightToMakeUnitVisible;
+				$unitIsVisible = true;
+				$unitOutLeft = false;
+				$unitOutRight = false;
+				//echo "<script>console.log('Shift RIGHT to make visible by: ".$moveRightToMakeUnitVisible." / ".$scrollToView."');</script>";
+				echo "<script>updateFormationStartIndex(".$formationid.",".$startIndex.",\"none\");</script>";
+				exit(0);
+			}
+		}
+	}
+	//echo "<script>console.log('Updated start index: ".$startIndex."');</script>\n";
+	//echo "<script>console.log('--------');</script>\n";
+?>
+
 <body>
 	<iframe name="pollframe" id="iframe_serverpoll" src="server_poll.php"></iframe>
 
@@ -302,28 +401,6 @@
 <?php
 	$file = file_get_contents('./version.txt', true);
 	$version = $file;
-	if (!isset($_GET["formationid"])) {
-		echo "<meta http-equiv='refresh' content='0;url=./gui_select_unit.php'> ";
-		header("Location: ./gui_select_unit.php");
-	}
-	$formationid = filter_var($_GET["formationid"], FILTER_VALIDATE_INT);
-
-	if (empty($formationid)) {
-		echo "<meta http-equiv='refresh' content='0;url=./gui_select_unit.php'> ";
-		header("Location: ./gui_select_unit.php");
-	}
-	if (isset($_GET["chosenunit"])) {
-		$chosenUnitIndex = filter_var($_GET["chosenunit"], FILTER_VALIDATE_INT);
-		if (empty($chosenUnitIndex)) {
-			$chosenUnitIndex = 1;
-		}
-	} else {
-		$chosenUnitIndex = 1;
-	}
-
-	// Store latest unit opened
-	$latestUnitUrl = basename($_SERVER['REQUEST_URI']);
-	require('./db_getdata.php');
 
 	if ($array_ACTIVE_BID[$chosenUnitIndex] == 0) { // check if the chosen index is active bid. Advance if not
 		for ($x = 1; $x <= 20; $x++) {
@@ -606,77 +683,73 @@
 				<div><a style="color:#eee;" href="./index.html">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class='fa-solid fa-table-list'></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></div>
 			</td>
 <?php
-	$maxNumberOfTabs = 5;
-	$startIndex = intval($array_PLAYER_FORMATION_STARTINDS[$formationid]);
-	$showRightArrow = false;
-
-	$activeUnitsCount = 0;
-	$visibleUnitsCount = 0;
-	$unitIsVisible = false;
-	$unitOutLeft = false;
-	$unitOutRight = false;
-	$size = sizeof($array_UNIT_MODEL);
-
-	for ($i11 = 1; $i11 <= sizeof($array_UNIT_MODEL); $i11++) {
-		if ($array_ACTIVE_BID[$i11] == "0") {
-			$size = $size - 1;
-		} else {
-			$activeUnitsCount++;
-
-			if ($i11 < $startIndex) {
-				// not yet visible
-				if ($i11 == $chosenUnitIndex) {
-					$unitOutLeft = true;
-				}
-			} else if ($i11 >= $startIndex) {
-				$visibleUnitsCount++;
-				// potentially visible
-				if ($i11 == $chosenUnitIndex) {
-					// This is the currently chosen unit
-					if ($visibleUnitsCount <= $maxNumberOfTabs) {
-						// Unit visible
-						$unitIsVisible = true;
-					} else {
-						$unitIsVisible = false;
-						$unitOutRight = true;
-					}
-				}
-			}
-		}
-	}
-
-	$moveLeftToMakeUnitVisible = $startIndex - $chosenUnitIndex;
-	$moveRightToMakeUnitVisible = $chosenUnitIndex - ($startIndex + $maxNumberOfTabs) + 1;
-
-	//$scrollToView = 1;
-
-	//echo "<script>console.log('--------');</script>\n";
-	//echo "<script>console.log('Current start index: ".$startIndex."');</script>\n";
-
-	if (!$unitIsVisible) {
-		if ($unitOutLeft) {
-			if ($scrollToView == 1) {
-				$startIndex = $startIndex - $moveLeftToMakeUnitVisible;
-				$unitIsVisible = true;
-				$unitOutLeft = false;
-				$unitOutRight = false;
-				//echo "<script>console.log('Shift LEFT to make visible by: ".$moveLeftToMakeUnitVisible."');</script>";
-				echo "<script>updateFormationStartIndex(".$formationid.",".$startIndex.",\"none\");</script>";
-			}
-		} else if ($unitOutRight) {
-			if ($scrollToView == 1) {
-				$startIndex = $startIndex + $moveRightToMakeUnitVisible;
-				$unitIsVisible = true;
-				$unitOutLeft = false;
-				$unitOutRight = false;
-				//echo "<script>console.log('Shift RIGHT to make visible by: ".$moveRightToMakeUnitVisible."');</script>";
-				echo "<script>updateFormationStartIndex(".$formationid.",".$startIndex.",\"none\");</script>";
-			}
-		}
-	}
-
-	//echo "<script>console.log('Updated start index: ".$startIndex."');</script>\n";
-	//echo "<script>console.log('--------');</script>\n";
+//	$maxNumberOfTabs = 5;
+//	$startIndex = intval($array_PLAYER_FORMATION_STARTINDS[$formationid]);
+//	$showRightArrow = false;
+//
+//	$activeUnitsCount = 0;
+//	$visibleUnitsCount = 0;
+//	$unitIsVisible = false;
+//	$unitOutLeft = false;
+//	$unitOutRight = false;
+//	$size = sizeof($array_UNIT_MODEL);
+//
+//	for ($i11 = 1; $i11 <= sizeof($array_UNIT_MODEL); $i11++) {
+//		if ($array_ACTIVE_BID[$i11] == "0") {
+//			$size = $size - 1;
+//		} else {
+//			$activeUnitsCount++;
+//
+//			if ($i11 < $startIndex) {
+//				// not yet visible
+//				if ($i11 == $chosenUnitIndex) {
+//					$unitOutLeft = true;
+//				}
+//			} else if ($i11 >= $startIndex) {
+//				$visibleUnitsCount++;
+//				// potentially visible
+//				if ($i11 == $chosenUnitIndex) {
+//					// This is the currently chosen unit
+//					if ($visibleUnitsCount <= $maxNumberOfTabs) {
+//						// Unit visible
+//						$unitIsVisible = true;
+//					} else {
+//						$unitIsVisible = false;
+//						$unitOutRight = true;
+//					}
+//				}
+//			}
+//		}
+//	}
+//
+//	$moveLeftToMakeUnitVisible = $startIndex - $chosenUnitIndex;
+//	$moveRightToMakeUnitVisible = $chosenUnitIndex - ($startIndex + $maxNumberOfTabs) + 1;
+//
+//	//echo "<script>console.log('--------');</script>\n";
+//	//echo "<script>console.log('Current start index: ".$startIndex."');</script>\n";
+//	if (!$unitIsVisible) {
+//		if ($unitOutLeft) {
+//			if ($scrollToView == 1) {
+//				$startIndex = $startIndex - $moveLeftToMakeUnitVisible;
+//				$unitIsVisible = true;
+//				$unitOutLeft = false;
+//				$unitOutRight = false;
+//				//echo "<script>console.log('Shift LEFT to make visible by: ".$moveLeftToMakeUnitVisible."');</script>";
+//				echo "<script>updateFormationStartIndex(".$formationid.",".$startIndex.",\"none\");</script>";
+//			}
+//		} else if ($unitOutRight) {
+//			if ($scrollToView == 1) {
+//				$startIndex = $startIndex + $moveRightToMakeUnitVisible;
+//				$unitIsVisible = true;
+//				$unitOutLeft = false;
+//				$unitOutRight = false;
+//				//echo "<script>console.log('Shift RIGHT to make visible by: ".$moveRightToMakeUnitVisible."');</script>";
+//				echo "<script>updateFormationStartIndex(".$formationid.",".$startIndex.",\"none\");</script>";
+//			}
+//		}
+//	}
+//	//echo "<script>console.log('Updated start index: ".$startIndex."');</script>\n";
+//	//echo "<script>console.log('--------');</script>\n";
 
 	if ($size > $maxNumberOfTabs) {
 		$width = ceil(100 / $maxNumberOfTabs);
@@ -827,7 +900,7 @@
 	}
 ?>
 			<td style='width:5px;'>&nbsp;</td>
-			<td nowrap onclick="location.href='gui_show_playerlist.php'" style="width: 60px;" width="60px" style="background: rgba(50,50,50,1.0); text-align: center; vertical-align: middle;"><img src='./images/player/<?=$pimage?>' style='height:auto;display:block;' width='60px' height='60px'></td>
+			<td nowrap onclick="location.href='gui_show_playerlist.php'" style="width:60px;" width="60px" style="background:rgba(50,50,50,1.0);text-align:center;vertical-align:middle;"><img src='./images/player/<?=$pimage?>' style='height:auto;display:block;' width='60px' height='60px'></td>
 		</tr>
 <?php
 	//if ($playMode) {

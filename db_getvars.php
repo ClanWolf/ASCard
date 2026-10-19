@@ -124,6 +124,9 @@
 			$selectPlanetaryControlPoints .= "AND PCP IS NOT NULL ";
 			$selectPlanetaryControlPoints .= "AND VP IS NULL ";
 			$selectPlanetaryControlPoints .= "AND FactionID=".$c3FactionId.";";
+
+			//echo "<script>console.log('SQL: ".$selectPlanetaryControlPoints."');</script>";
+
 			$result_selectPlanetaryControlPoints = mysqli_query($conn, $selectPlanetaryControlPoints);
 			if (mysqli_num_rows($result_selectPlanetaryControlPoints) > 0) {
 				while($row89a = mysqli_fetch_assoc($result_selectPlanetaryControlPoints)) {

@@ -60,6 +60,8 @@ var sound_Batchall = null;
 var showingUnit = false;
 var skipTapSample = false;
 
+var loadingAborted = false;
+
 function setSize(name, value) {
 	var list = document.getElementsByClassName(name);
 	[].forEach.call(list, function (el) {
@@ -1157,6 +1159,7 @@ function textSize(dec) {
 let formationPromise = Promise.resolve();
 function updateFormationStartIndex(formationid, currentindex, op) {
 	// Debounce / queue: only one request at a time
+	loadingAborted = true;
 	formationPromise = formationPromise.then(() => {
 		return fetch(
 			`./save_formation_startindex.php?formationid=${formationid}&currentindex=${currentindex}&op=${op}`,
@@ -1975,179 +1978,182 @@ $(window).resize(function() {
 });
 
 $(document).ready(function() {
-	//	$("#cover").click(function(event) {
-	//		$("#cover").fadeOut(350, "linear", function() {
-	//			$("#cover").hide();
-	//			document.getElementById("cover").style.visibility = "hidden";
-	//		});
-	//	});
+	//console.log("Loading aborted: " + loadingAborted);
+	if (!loadingAborted) {
+		//	$("#cover").click(function(event) {
+		//		$("#cover").fadeOut(350, "linear", function() {
+		//			$("#cover").hide();
+		//			document.getElementById("cover").style.visibility = "hidden";
+		//		});
+		//	});
 
-	if (getCookie("tcmp") === "0") {
-		$("#TargetingComputer").hide();
-		document.getElementById("TargetingComputer").style.display = "none";
-		document.getElementById("targetcomp").innerHTML = "&nbsp;&nbsp;&nbsp;<i class='fa-solid fa-bullseye' style='color:#999;font-size:40px;'></i>&nbsp;&nbsp;&nbsp;";
-	}
-	document.getElementById("ToHitShort").checked = false;
-	document.getElementById("ToHitMedium").checked = true;
-	document.getElementById("ToHitLong").checked = false;
+		if (getCookie("tcmp") === "0") {
+			$("#TargetingComputer").hide();
+			document.getElementById("TargetingComputer").style.display = "none";
+			document.getElementById("targetcomp").innerHTML = "&nbsp;&nbsp;&nbsp;<i class='fa-solid fa-bullseye' style='color:#999;font-size:40px;'></i>&nbsp;&nbsp;&nbsp;";
+		}
+		document.getElementById("ToHitShort").checked = false;
+		document.getElementById("ToHitMedium").checked = true;
+		document.getElementById("ToHitLong").checked = false;
 
-	var unitimage = document.getElementById("unitimage");
-	unitimage.style.height="" + ($(document).height() * 0.8 + "px");
+		var unitimage = document.getElementById("unitimage");
+		unitimage.style.height = "" + ($(document).height() * 0.8 + "px");
 
-	var list = document.getElementsByClassName("bigcheck");
-	[].forEach.call(list, function (el1) {
-		el1.addEventListener('click', function() {
-			if (context != null ) {
+		var list = document.getElementsByClassName("bigcheck");
+		[].forEach.call(list, function (el1) {
+			el1.addEventListener('click', function () {
+				if (context != null) {
+					context.resume().then(() => {
+					});
+				} else {
+					context = new AudioContext();
+				}
+			});
+		});
+
+		var infoButton = document.getElementById("InfoButton");
+		infoButton.addEventListener('click', function () {
+			if (context != null) {
 				context.resume().then(() => {
 				});
 			} else {
 				context = new AudioContext();
 			}
 		});
-	});
 
-	var infoButton = document.getElementById("InfoButton");
-	infoButton.addEventListener('click', function() {
-		if (context != null ) {
-			context.resume().then(() => {
-			});
-		} else {
-			context = new AudioContext();
-		}
-	});
-
-	var diceButton = document.getElementById("DiceButton");
-	diceButton.addEventListener('click', function() {
-		if (context != null ) {
-			context.resume().then(() => {
-			});
-		} else {
-			context = new AudioContext();
-		}
-	});
-
-	var moveButton = document.getElementById("MoveButton");
-	moveButton.addEventListener('click', function() {
-		if (context != null ) {
-			context.resume().then(() => {
-				//console.log('Playback resumed successfully');
-			});
-		} else {
-			context = new AudioContext();
-		}
-	});
-
-	$("#dice").click(function(event) {
-		if (rolling === 0) {
-			playDiceSound();
-			for (i = 1; i < 12; i++) {
-				rolling++;
-				setTimeout("rolldice(i)", i * 80);
+		var diceButton = document.getElementById("DiceButton");
+		diceButton.addEventListener('click', function () {
+			if (context != null) {
+				context.resume().then(() => {
+				});
+			} else {
+				context = new AudioContext();
 			}
-		}
-	});
+		});
 
-	$("#motivedice").click(function(event) {
-		if (rolling === 0) {
-			playDiceSound();
-			for (i = 1; i < 12; i++) {
-				rolling++;
-				setTimeout("rolldice(i)", i * 80);
+		var moveButton = document.getElementById("MoveButton");
+		moveButton.addEventListener('click', function () {
+			if (context != null) {
+				context.resume().then(() => {
+					//console.log('Playback resumed successfully');
+				});
+			} else {
+				context = new AudioContext();
 			}
-		}
-	});
+		});
 
-	if (getCookie("savedBefore") === "true") {
-		fontsizeLabel = parseInt(getCookie("fontsizeLabel"));
-		if (fontsizeLabel < minSize) {
-			fontsizeLabel = minSize;
-		}
-		if (fontsizeLabel > maxSize) {
-			fontsizeLabel = maxSize;
-		}
-		fontsizeLabelBig = fontsizeLabel * fontsizeLabelBigFactor;
-		fontsizeLabelthin = fontsizeLabel * fontsizeLabelthinFactor;
-		fontsizeLabelthinSmall = fontsizeLabel * fontsizeLabelthinSmallFactor;
-		fontsizeValue = fontsizeLabel * fontsizeValueFactor;
-		fontsizeValueThin = fontsizeLabel * fontsizeValueThinFactor;
-		fontsizeCircle = fontsizeLabel * fontsizeCircleFactor;
+		$("#dice").click(function (event) {
+			if (rolling === 0) {
+				playDiceSound();
+				for (i = 1; i < 12; i++) {
+					rolling++;
+					setTimeout("rolldice(i)", i * 80);
+				}
+			}
+		});
 
-		setSize("datalabel", fontsizeLabel);
-		setSize("datalabel_big", fontsizeLabelBig);
-		setSize("datalabel_button", fontsizeLabel);
-		setSize("datalabel_disabled_solid", fontsizeLabel);
-		setSize("datalabel_disabled_dashed", fontsizeLabel);
-		setSize("datalabel_thin", fontsizeLabelthin);
-		setSize("datalabel_thin_small", fontsizeLabelthinSmall);
-		setSize("datalabel_thin_disabled", fontsizeLabelthin);
-		setSize("datavalue", fontsizeValue);
-		setSize("datavalue_small", fontsizeValue);
-		setSize("datavalue_small_special", fontsizeLabelthin);
-		setSize("datavalue_thin", fontsizeValueThin);
-		setSize("datavalue_special", fontsizeLabel);
-		setSize("bigcheck-target", fontsizeCircle);
-	}
+		$("#motivedice").click(function (event) {
+			if (rolling === 0) {
+				playDiceSound();
+				for (i = 1; i < 12; i++) {
+					rolling++;
+					setTimeout("rolldice(i)", i * 80);
+				}
+			}
+		});
 
-	var wallpaperName = getCookie("wallpaper");
-	if ((wallpaperName !== null) && (typeof wallpaperName != 'undefined')) {
-		// A wallpaperName was found in the cookie
-	} else {
-		// A wallpaperName was NOT found, go with the default
-		wallpaperName = 6;
-	}
+		if (getCookie("savedBefore") === "true") {
+			fontsizeLabel = parseInt(getCookie("fontsizeLabel"));
+			if (fontsizeLabel < minSize) {
+				fontsizeLabel = minSize;
+			}
+			if (fontsizeLabel > maxSize) {
+				fontsizeLabel = maxSize;
+			}
+			fontsizeLabelBig = fontsizeLabel * fontsizeLabelBigFactor;
+			fontsizeLabelthin = fontsizeLabel * fontsizeLabelthinFactor;
+			fontsizeLabelthinSmall = fontsizeLabel * fontsizeLabelthinSmallFactor;
+			fontsizeValue = fontsizeLabel * fontsizeValueFactor;
+			fontsizeValueThin = fontsizeLabel * fontsizeValueThinFactor;
+			fontsizeCircle = fontsizeLabel * fontsizeCircleFactor;
 
-	if (wallpaperName > 0 && wallpaperName < 10) {
-		document.body.style.backgroundImage = "url('./images/body-bg_" + wallpaperName + ".jpg')";
-	}
-	if (wallpaperName == 9) {
-		// Set use MUL images to 1 on database (white background + MUL images)
-		var url="./save_unit_useMulImages.php?playerId="+playerId+"&useMulImages=1";
-		window.frames['saveframe'].location.replace(url);
-		document.getElementById("unitimage").src=unitImageURLMUL;
-		const allDataAreas = document.getElementsByClassName("dataarea");
-		for (let i = 0; i < allDataAreas.length; i++) {
-			allDataAreas[i].style.backgroundColor="rgba(255,255,255,0.90)";
+			setSize("datalabel", fontsizeLabel);
+			setSize("datalabel_big", fontsizeLabelBig);
+			setSize("datalabel_button", fontsizeLabel);
+			setSize("datalabel_disabled_solid", fontsizeLabel);
+			setSize("datalabel_disabled_dashed", fontsizeLabel);
+			setSize("datalabel_thin", fontsizeLabelthin);
+			setSize("datalabel_thin_small", fontsizeLabelthinSmall);
+			setSize("datalabel_thin_disabled", fontsizeLabelthin);
+			setSize("datavalue", fontsizeValue);
+			setSize("datavalue_small", fontsizeValue);
+			setSize("datavalue_small_special", fontsizeLabelthin);
+			setSize("datavalue_thin", fontsizeValueThin);
+			setSize("datavalue_special", fontsizeLabel);
+			setSize("bigcheck-target", fontsizeCircle);
 		}
-		const allDataValues = document.getElementsByClassName("datavalue");
-		for (let i = 0; i < allDataValues.length; i++) {
-			allDataValues[i].style.color="#000"
+
+		var wallpaperName = getCookie("wallpaper");
+		if ((wallpaperName !== null) && (typeof wallpaperName != 'undefined')) {
+			// A wallpaperName was found in the cookie
+		} else {
+			// A wallpaperName was NOT found, go with the default
+			wallpaperName = 6;
 		}
-		const allDataValueThins = document.getElementsByClassName("datavalue_thin");
-		for (let i = 0; i < allDataValueThins.length; i++) {
-			allDataValueThins[i].style.color="#000"
+
+		if (wallpaperName > 0 && wallpaperName < 10) {
+			document.body.style.backgroundImage = "url('./images/body-bg_" + wallpaperName + ".jpg')";
 		}
-		const allDataAreaReds = document.getElementsByClassName("dataarea_red");
-		for (let i = 0; i < allDataAreaReds.length; i++) {
-			allDataAreaReds[i].style.backgroundColor="rgba(10,10,10,0.65)";
-		}
-		const allDataValueSmallSpecials = document.getElementsByClassName("datavalue_small_special");
-		for (let i = 0; i < allDataValueSmallSpecials.length; i++) {
-		    allDataValueSmallSpecials[i].style.color="#000"
-		}
-	} else {
-		// Set use MUL images to 0 on database (dark background + alternative images)
-		var url="./save_unit_useMulImages.php?playerId="+playerId+"&useMulImages=0";
-		window.frames['saveframe'].location.replace(url);
-		document.getElementById("unitimage").src=unitImageURL;
-		const allDataAreas = document.getElementsByClassName("dataarea");
-		for (let i = 0; i < allDataAreas.length; i++) {
-			allDataAreas[i].style.backgroundColor="rgba(70,70,70,0.85)";
-		}
-		const allDataValues = document.getElementsByClassName("datavalue");
-		for (let i = 0; i < allDataValues.length; i++) {
-			allDataValues[i].style.color="#ccc"
-		}
-		const allDataValueThins = document.getElementsByClassName("datavalue_thin");
-		for (let i = 0; i < allDataValueThins.length; i++) {
-			allDataValueThins[i].style.color="#ccc"
-		}
-		const allDataAreaReds = document.getElementsByClassName("dataarea_red");
-		for (let i = 0; i < allDataAreaReds.length; i++) {
-			allDataAreaReds[i].style.backgroundColor="rgba(70,0,0,0.60)";
-		}
-		const allDataValueSmallSpecials = document.getElementsByClassName("datavalue_small_special");
-		for (let i = 0; i < allDataValueSmallSpecials.length; i++) {
-		    allDataValueSmallSpecials[i].style.color="#ccc"
+		if (wallpaperName == 9) {
+			// Set use MUL images to 1 on database (white background + MUL images)
+			var url = "./save_unit_useMulImages.php?playerId=" + playerId + "&useMulImages=1";
+			window.frames['saveframe'].location.replace(url);
+			document.getElementById("unitimage").src = unitImageURLMUL;
+			const allDataAreas = document.getElementsByClassName("dataarea");
+			for (let i = 0; i < allDataAreas.length; i++) {
+				allDataAreas[i].style.backgroundColor = "rgba(255,255,255,0.90)";
+			}
+			const allDataValues = document.getElementsByClassName("datavalue");
+			for (let i = 0; i < allDataValues.length; i++) {
+				allDataValues[i].style.color = "#000"
+			}
+			const allDataValueThins = document.getElementsByClassName("datavalue_thin");
+			for (let i = 0; i < allDataValueThins.length; i++) {
+				allDataValueThins[i].style.color = "#000"
+			}
+			const allDataAreaReds = document.getElementsByClassName("dataarea_red");
+			for (let i = 0; i < allDataAreaReds.length; i++) {
+				allDataAreaReds[i].style.backgroundColor = "rgba(10,10,10,0.65)";
+			}
+			const allDataValueSmallSpecials = document.getElementsByClassName("datavalue_small_special");
+			for (let i = 0; i < allDataValueSmallSpecials.length; i++) {
+				allDataValueSmallSpecials[i].style.color = "#000"
+			}
+		} else {
+			// Set use MUL images to 0 on database (dark background + alternative images)
+			var url = "./save_unit_useMulImages.php?playerId=" + playerId + "&useMulImages=0";
+			window.frames['saveframe'].location.replace(url);
+			document.getElementById("unitimage").src = unitImageURL;
+			const allDataAreas = document.getElementsByClassName("dataarea");
+			for (let i = 0; i < allDataAreas.length; i++) {
+				allDataAreas[i].style.backgroundColor = "rgba(70,70,70,0.85)";
+			}
+			const allDataValues = document.getElementsByClassName("datavalue");
+			for (let i = 0; i < allDataValues.length; i++) {
+				allDataValues[i].style.color = "#ccc"
+			}
+			const allDataValueThins = document.getElementsByClassName("datavalue_thin");
+			for (let i = 0; i < allDataValueThins.length; i++) {
+				allDataValueThins[i].style.color = "#ccc"
+			}
+			const allDataAreaReds = document.getElementsByClassName("dataarea_red");
+			for (let i = 0; i < allDataAreaReds.length; i++) {
+				allDataAreaReds[i].style.backgroundColor = "rgba(70,0,0,0.60)";
+			}
+			const allDataValueSmallSpecials = document.getElementsByClassName("datavalue_small_special");
+			for (let i = 0; i < allDataValueSmallSpecials.length; i++) {
+				allDataValueSmallSpecials[i].style.color = "#ccc"
+			}
 		}
 	}
 });
