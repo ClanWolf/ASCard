@@ -113,7 +113,7 @@
 		if ($playerFactionId > 0) {
 			if ($playerFactionId == 1) {
 				$c3FactionId = 36; // 1,36: CW
-			} else {
+			} else if ($playerFactionId == 9) {
 				$c3FactionId = 32; // 9,32: CJF
 			}
 

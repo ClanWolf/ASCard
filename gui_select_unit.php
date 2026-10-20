@@ -346,6 +346,11 @@
 			//window.frames["saveframe"].location.replace(url);
 			window.location.href = url;
 		}
+		function repairUnit(unitid, unitRepairCost) {
+			//alert("Repair unit " + unitid + " " + unitRepairCost + ".");
+			var url="./save_unit_repairs.php?uid=" + unitid + "&unitrepaircost=" + unitRepairCost;
+			window.frames["saveframe"].location.replace(url);
+		}
 	</script>
 
 <?php
@@ -966,8 +971,8 @@ if ($playMode) {
 								}
 
 								// TODO: Repair unit
-								if ($currentlyAvailableSupportPoints + $unitRepairCost > 0) {
-									$unitDetailString = $unitDetailString."							<span style='font-size:10px;' onclick='alert(\"Repair unit: ".$unitid.", ".$unitRepairCost."\");'>\n";
+								if ($currentlyAvailableSupportPoints + $unitRepairCost > 0 && $CURRENTROUND == 1) {
+									$unitDetailString = $unitDetailString."							<span style='font-size:10px;' onclick='repairUnit(".$unitid.", ".$unitRepairCost.");'>\n";
 									$unitDetailString = $unitDetailString."								&nbsp;<i class='fa-solid fa-wrench'></i>&nbsp;\n";
 									$unitDetailString = $unitDetailString."							</span>\n";
 								} else {

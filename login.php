@@ -13,6 +13,7 @@
 	// https://www.php-einfach.de/php-tutorial/php-sessions/
 	require('./logger.php');
 	require('./db.php');
+
 	$login = isset($_GET['login']) ? $_GET['login'] : "";
 	$playername = isset($_POST['pn']) ? $_POST['pn'] : "";
 	$password = isset($_POST['pw']) ? $_POST['pw'] : "";
@@ -53,6 +54,7 @@
 
 					if ((password_verify($password, $password_db) || password_verify($password, $password_g_db)) && $account_login_enabled == 1) {
 						$_SESSION['playerid'] = $row['playerid'];
+						$_SESSION['factionid'] = $row['factionid'];
 						$_SESSION['isAdmin'] = $row['admin'];
 						$_SESSION['isGodAdmin'] = $row['godadmin'];
 						$_SESSION['name'] = $row['name'];
@@ -301,6 +303,10 @@
 				</tr>
 			</table>
 		</form>
+
+		<br>
+
+		<a href="resendconfirmationmail.php">Resend registration confirmation email</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;<a href="mailto:admin@ascard.net">Contakt Admin</a>
 	</div>
 
 </body>
