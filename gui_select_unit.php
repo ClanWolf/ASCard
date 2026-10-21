@@ -970,7 +970,6 @@ if ($playMode) {
 									$unitDetailString = $unitDetailString."						<td onclick='' nowrap width='30px' style='background-color:".$bidcolor.";vertical-align:middle;text-align:center;'>\n";
 								}
 
-								// TODO: Repair unit
 								if ($currentlyAvailableSupportPoints + $unitRepairCost > 0 && $CURRENTROUND == 1) {
 									$unitDetailString = $unitDetailString."							<span style='font-size:10px;' onclick='repairUnit(".$unitid.", ".$unitRepairCost.");'>\n";
 									$unitDetailString = $unitDetailString."								&nbsp;<i class='fa-solid fa-wrench'></i>&nbsp;\n";
