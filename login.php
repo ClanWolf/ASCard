@@ -100,7 +100,8 @@
 							//die('Login succeeded!<br>');
 						} else {
 							echo "<meta http-equiv='refresh' content='0;url=./gui_edit_game.php'>";
-							header("Location: ./gui_edit_game.php");
+							header("Location: ./gui_select_unit");
+							//header("Location: ./gui_edit_game.php");
 							//die('Login succeeded - Creating new game for player!<br>');
 						}
 					} else {
@@ -239,11 +240,11 @@
 
 				var pn_FromCookie = getCookie("ASCards_un");
 				var pw_FromCookie = getCookie("ASCards_pw");
-				var auto = "<?= isset($_GET['auto']) ? $_GET['auto'] : '1'; ?>";
-
-				//console.log("Found username: " + pn_FromCookie);
-				//console.log("Found password: " + pw_FromCookie);
-				//console.log("Auto: " + auto);
+				if ((pn_FromCookie && pn_FromCookie !== "") && (pw_FromCookie && pw_FromCookie !== "")) {
+					var auto = "<?= isset($_GET['auto']) ? $_GET['auto'] : '1'; ?>";
+				} else {
+					var auto = "0";
+				}
 
 				$('#pn').focus();
 				$("#pn").val(pn_FromCookie);
@@ -251,12 +252,18 @@
 				$("#pw").val(pw_FromCookie);
 				$("#submitbutton").focus();
 
-				var errorOccured = "<?php if(isset($errormessage)) { echo '1'; } else { echo '0'; } ?>";
+				var errorOccured = "<?= isset($errormessage) ? '1' : '0'; ?>";
 				var usernameFilled = document.getElementById("pn").value;
 				var passwordFilled = document.getElementById("pw").value;
-				//console.log(errorOccured);
-				if (auto == '1' && errorOccured == 0 && usernameFilled != "" && passwordFilled != "") {
-					//console.log("autologin");
+				var maskedPW = passwordFilled.substring(0,3) + "******************";
+
+				console.log("Found username    : " + usernameFilled);
+				console.log("Found password    : " + maskedPW);
+				console.log("Error occured     : " + errorOccured + " (" + (errorOccured === '1').toString() + ")");
+				console.log("Autologin enabled : " + auto + " (" + (auto === '1').toString() + ")");
+
+				if (auto === "1" && errorOccured === "0" && usernameFilled !== "" && passwordFilled !== "") {
+					console.log("Setting autologin = " + auto + " - Submitting form...");
 					document.getElementById("f1").submit();
 				}
 			},75);

@@ -110,6 +110,7 @@
 
 		// FactionId ASCard CW:  1
 		// FactionId ASCard CJF: 9
+		$c3FactionId = -1;
 		if ($playerFactionId > 0) {
 			if ($playerFactionId == 1) {
 				$c3FactionId = 36; // 1,36: CW
@@ -134,8 +135,9 @@
 				}
 			}
 		}
-		if ($currentlyAvailableSupportPoints < 0) {
+		if ($currentlyAvailableSupportPoints == null || $currentlyAvailableSupportPoints < 0) {
 			$currentlyAvailableSupportPoints = 0;
 		}
+		//echo "<script>console.log('SupportPoints: ".$currentlyAvailableSupportPoints."');</script>";
 	}
 ?>

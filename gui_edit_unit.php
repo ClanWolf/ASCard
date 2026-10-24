@@ -13,7 +13,7 @@
 
 	if (
 		(isset($_SESSION['playerid']) && $_SESSION['playerid'] > 0) &&
-		(isset($_SESSION['gameid']) && $_SESSION['gameid'] > 0)
+		(isset($_SESSION['gameid']) && $_SESSION['gameid'] >= 0)
 	 ) {
 		// playerid and gameid are present and set, continue
 		logMsg("check playerid: ".$_SESSION['playerid']);

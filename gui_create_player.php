@@ -13,7 +13,7 @@
 
 	if (
 		(isset($_SESSION['playerid']) && $_SESSION['playerid'] > 0) &&
-		(isset($_SESSION['gameid']) && $_SESSION['gameid'] > 0)
+		(isset($_SESSION['gameid']) && $_SESSION['gameid'] >= 0)
 	 ) {
 		// playerid and gameid are present and set, continue
 		logMsg("check playerid: ".$_SESSION['playerid']);
@@ -57,7 +57,7 @@
 
 		$sql_asc_checkusername = "SELECT SQL_NO_CACHE * FROM asc_player where name='".$newplayername."'";
 		logMsg("Select: " . $sql_asc_checkusername);
-		echo "Select: " . $sql_asc_checkusername;
+		//echo "Select: " . $sql_asc_checkusername;
 
 		$result_asc_checkusername = mysqli_query($conn, $sql_asc_checkusername);
 		if (mysqli_num_rows($result_asc_checkusername) > 0) {
@@ -100,13 +100,31 @@
 					echo "Error: " . $sqlinsertoptions . "<br>" . mysqli_error($conn);
 				}
 
-				// Update commandid in player table
-				$sqlupdatecommandforplayer = "UPDATE asc_player SET commandid=".$newcommandid." WHERE playerid=".$newplayerid.";";
-				if (mysqli_query($conn, $sqlupdatecommandforplayer)) {
-					// Success updating player (adding commandid)
+				// Create game for new user
+				if (endsWith($newplayername, 's') || endsWith($newplayername, 'S')) {
+					$background = $newplayername . " game";
+				} else {
+					$background = $newplayername . "s game";
+				}
+				$title = $background;
+				$accesscodeGenerated = substr(str_shuffle("0123456789"), 0, 4);
+				$sqlinsertgame = "INSERT INTO asc_game (ownerPlayerId, accesscode, locked, title, background) VALUES ";
+				$sqlinsertgame = $sqlinsertgame . "(".$newplayerid.", '".$accesscodeGenerated."', true, '".$title."', '".$background."')";
+				if (mysqli_query($conn, $sqlinsertgame)) {
+					// Success inserting game for new player
+					$newgameid = mysqli_insert_id($conn);
 				} else {
 					// Error
-					echo "Error: " . $sqlupdatecommandforplayer . "<br>" . mysqli_error($conn);
+					echo "Error: " . $sqlinsertgame . "<br>" . mysqli_error($conn);
+				}
+
+				// Update commandid in player table
+				$sqlupdateplayer = "UPDATE asc_player SET commandid=".$newcommandid.", hostedgameid=".$newgameid.", gameid=".$newgameid." WHERE playerid=".$newplayerid.";";
+				if (mysqli_query($conn, $sqlupdateplayer)) {
+					// Success updating player
+				} else {
+					// Error
+					echo "Error: " . $sqlupdateplayer . "<br>" . mysqli_error($conn);
 				}
 
 				echo "<meta http-equiv='refresh' content='0;url=./gui_create_player.php'>";
@@ -207,6 +225,14 @@
 		}
 
 		echo "<meta http-equiv='refresh' content='0;url=./gui_create_player.php'>";
+	}
+
+	function endsWith( $haystack, $needle ) {
+		$length = strlen( $needle );
+		if( !$length ) {
+			return true;
+		}
+		return substr( $haystack, -$length ) === $needle;
 	}
 ?>
 

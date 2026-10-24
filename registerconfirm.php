@@ -51,8 +51,8 @@
 							echo "Error: " . $sqlupdateconfirmplayer . "<br>" . mysqli_error($conn);
 						}
 
-						logMsg("Referring to: <meta http-equiv='refresh' content='0;url=./login.php?auto=0'>");
-						echo "<meta http-equiv='refresh' content='0;url=./login.php?auto=0'>";
+						logMsg("Referring to: <meta http-equiv='refresh' content='5;url=./login.php?auto=0'>");
+						echo "<meta http-equiv='refresh' content='5;url=./login.php?auto=0'>";
 					}
 				}
 			}
